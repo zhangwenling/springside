@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="mini-service" soapui-version="2.0.2" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="ProjectSettings@projectRoot">C:\springside\springside3\examples\mini-service\src\test\soapui</con:setting></con:settings><con:interface name="UserWebServiceSoapBinding" bindingName="{http://miniservice.examples.springside.org}UserWebServiceSoapBinding" soapVersion="1_1" definition="http://localhost:8080/mini-service/services/UserService?wsdl"><con:settings/><con:endpoints><con:endpoint>http://localhost:8080/mini-service/services/UserService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="authUser" bindingOperationName="authUser" inputName="authUser" outputName="authUserResponse" receivesAttachments="false" sendsAttachments="false"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/mini-service/services/UserService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:min="http://miniservice.examples.springside.org">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <min:authUser>
+         <loginName>admin</loginName><password>admin</password></min:authUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request></con:call></con:operation><con:operation isOneWay="false" action="" name="createUser" bindingOperationName="createUser" inputName="createUser" outputName="createUserResponse" receivesAttachments="false" sendsAttachments="false"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/mini-service/services/UserService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:min="http://miniservice.examples.springside.org">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <min:createUser>
+         <user><loginName>user884247157</loginName><name>User</name><password>user</password></user></min:createUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request></con:call></con:operation><con:operation isOneWay="false" action="" name="getAllUser" bindingOperationName="getAllUser" inputName="getAllUser" outputName="getAllUserResponse" receivesAttachments="false" sendsAttachments="false"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/mini-service/services/UserService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:min="http://miniservice.examples.springside.org">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <min:getAllUser/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request></con:call></con:operation><con:definitionCache rootPart="http://localhost:8080/mini-service/services/UserService?wsdl" type="TEXT"><con:part><con:url>http://localhost:8080/mini-service/services/UserService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="UserWebService" targetNamespace="http://miniservice.examples.springside.org" xmlns:ns1="http://cxf.apache.org/bindings/xformat" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://miniservice.examples.springside.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://miniservice.examples.springside.org" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="authUser" type="tns:authUser"/>
+      <xs:element name="authUserResponse" type="tns:authUserResponse"/>
+      <xs:element name="createUser" type="tns:createUser"/>
+      <xs:element name="createUserResponse" type="tns:createUserResponse"/>
+      <xs:element name="getAllUser" type="tns:getAllUser"/>
+      <xs:element name="getAllUserResponse" type="tns:getAllUserResponse"/>
+      <xs:complexType name="authUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="loginName" type="xs:string"/>
+          <xs:element minOccurs="0" name="password" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="authUserResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:WSResult"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WSResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" type="xs:string"/>
+          <xs:element minOccurs="0" name="message" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getAllUser">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="getAllUserResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:GetAllUserResult"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetAllUserResult">
+        <xs:complexContent>
+          <xs:extension base="tns:WSResult">
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" minOccurs="0" name="userList" nillable="true" type="tns:User"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="User">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="loginName" type="xs:string"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="password" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="roles" nillable="true" type="tns:Role"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Role">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user" type="tns:User"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createUserResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:CreateUserResult"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CreateUserResult">
+        <xs:complexContent>
+          <xs:extension base="tns:WSResult">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="userId" type="xs:long"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="createUser">
+    <wsdl:part element="tns:createUser" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="authUser">
+    <wsdl:part element="tns:authUser" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllUser">
+    <wsdl:part element="tns:getAllUser" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createUserResponse">
+    <wsdl:part element="tns:createUserResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllUserResponse">
+    <wsdl:part element="tns:getAllUserResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="authUserResponse">
+    <wsdl:part element="tns:authUserResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="UserService">
+    <wsdl:operation name="authUser">
+      <wsdl:input message="tns:authUser" name="authUser"></wsdl:input>
+      <wsdl:output message="tns:authUserResponse" name="authUserResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllUser">
+      <wsdl:input message="tns:getAllUser" name="getAllUser"></wsdl:input>
+      <wsdl:output message="tns:getAllUserResponse" name="getAllUserResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createUser">
+      <wsdl:input message="tns:createUser" name="createUser"></wsdl:input>
+      <wsdl:output message="tns:createUserResponse" name="createUserResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserWebServiceSoapBinding" type="tns:UserService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="authUser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="authUser">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="authUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllUser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAllUser">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createUser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createUser">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserWebService">
+    <wsdl:port binding="tns:UserWebServiceSoapBinding" name="UserWebServicePort">
+      <soap:address location="http://localhost:8080/mini-service/services/UserService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache></con:interface><con:testSuite name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="ModifyTest" searchProperties="true" id="a940225b-f1dc-4c8d-b439-9d2bb1d3abdc"><con:settings/><con:testStep type="groovy" name="Random LoginName"><con:settings/><con:config><script>"user"+Math.round(Math.random()*1000000000)</script></con:config></con:testStep><con:testStep type="transfer" name="PropertyTransfer"><con:settings/><con:config xsi:type="con:TransferValuesStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false"><con:name>loginName</con:name><con:sourceType>result</con:sourceType><con:sourceStep>Random LoginName</con:sourceStep><con:sourcePath/><con:targetType>Request</con:targetType><con:targetStep>createUser - Request 1</con:targetStep><con:targetPath>declare namespace min='http://miniservice.examples.springside.org';
+//min:createUser[1]/user[1]/loginName[1]</con:targetPath></con:transfers></con:config></con:testStep><con:testStep type="request" name="createUser - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>UserWebServiceSoapBinding</con:interface><con:operation>createUser</con:operation><con:request name="createUser - Request 1" outgoingWss="" incomingWss="" wssPasswordType=""><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/mini-service/services/UserService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:min="http://miniservice.examples.springside.org">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <min:createUser>
+         <user>
+            <loginName>user404156069</loginName>
+            <name>User</name>
+            <password>user</password>
+         </user>
+      </min:createUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="SOAP Fault Assertion"/><con:assertion type="XPath Match" name="Match content of [code]"><con:configuration><path>declare namespace ns2='http://miniservice.examples.springside.org';
+//ns2:createUserResponse[1]/return[1]/code[1]/text()</path><content>0</content><allowWildcards>false</allowWildcards></con:configuration></con:assertion></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="AuthTest" searchProperties="true" id="786e3a9e-69fd-4d3a-935e-26e11cea7f3b"><con:settings/><con:testStep type="request" name="authUser - success"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>UserWebServiceSoapBinding</con:interface><con:operation>authUser</con:operation><con:request name="authUser - success" outgoingWss="" incomingWss="" wssPasswordType=""><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/mini-service/services/UserService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:min="http://miniservice.examples.springside.org">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <min:authUser>
+         <!--Optional:-->
+         
+         <!--Optional:-->
+         <loginName>admin</loginName>
+      <password>admin</password></min:authUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="SOAP Fault Assertion"/><con:assertion type="XPath Match" name="Match content of [return]"><con:configuration><path>declare namespace ns2='http://miniservice.examples.springside.org';
+//ns2:authUserResponse[1]/return[1]/code[1]</path><content>0</content><allowWildcards>false</allowWildcards></con:configuration></con:assertion></con:request></con:config></con:testStep><con:testStep type="request" name="authUser - wrong passwd"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>UserWebServiceSoapBinding</con:interface><con:operation>authUser</con:operation><con:request name="authUser - wrong passwd" outgoingWss="" incomingWss="" wssPasswordType=""><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/mini-service/services/UserService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:min="http://miniservice.examples.springside.org">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <min:authUser>
+         <!--Optional:-->
+         
+         <!--Optional:-->
+         <loginName>admin</loginName>
+      <password>user</password></min:authUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="SOAP Fault Assertion"/><con:assertion type="XPath Match" name="Match content of [return]"><con:configuration><path>declare namespace ns2='http://miniservice.examples.springside.org';
+//ns2:authUserResponse[1]/return[1]/code[1]</path><content>-1</content><allowWildcards>false</allowWildcards></con:configuration></con:assertion></con:request></con:config></con:testStep><con:testStep type="request" name="authUser - miss loginName"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>UserWebServiceSoapBinding</con:interface><con:operation>authUser</con:operation><con:request name="authUser - miss loginName" outgoingWss="" incomingWss="" wssPasswordType=""><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/mini-service/services/UserService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:min="http://miniservice.examples.springside.org">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <min:authUser>
+         <!--Optional:-->
+         
+         <!--Optional:-->
+      <password>user</password></min:authUser>
+ </min:authUser>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="SOAP Fault Assertion"/><con:assertion type="XPath Match" name="Match content of [return]"><con:configuration><path>declare namespace ns2='http://miniservice.examples.springside.org';
+//ns2:authUserResponse[1]/return[1]/code[1]</path><content>101</content><allowWildcards>false</allowWildcards></con:configuration></con:assertion></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="GetAllTest" searchProperties="true" id="cf054a84-ba4d-4ce4-9d0b-91ab4396993d"><con:settings/><con:testStep type="request" name="getAllUser - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>UserWebServiceSoapBinding</con:interface><con:operation>getAllUser</con:operation><con:request name="getAllUser - Request 1" outgoingWss="" incomingWss="" wssPasswordType=""><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/mini-service/services/UserService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:min="http://miniservice.examples.springside.org">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <min:getAllUser/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="SOAP Fault Assertion"/><con:assertion type="XPath Match" name="Check count of [return]"><con:configuration><path>declare namespace ns2='http://miniservice.examples.springside.org';
+count( //ns2:getAllUserResponse/return/userList)>0</path><content>true</content><allowWildcards>false</allowWildcards></con:configuration></con:assertion><con:assertion type="XPath Match" name="Match content of [loginName]"><con:configuration><path>declare namespace ns2='http://miniservice.examples.springside.org';
+//ns2:getAllUserResponse[1]/return[1]/userList[1]/loginName[1]/text()</path><content>admin</content><allowWildcards>false</allowWildcards></con:configuration></con:assertion></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:requirements/><con:properties/><con:wssContainer/></con:soapui-project>

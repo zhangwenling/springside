@@ -1,0 +1,8 @@
+#Thu Mar 05 14:47:55 CST 2009
+eclipse.preferences.version=1
+encoding//bin/copy-jar.bat=GBK
+encoding//bin/deploy.bat=GBK
+encoding//bin/init-db.bat=GBK
+encoding//bin/ws-bin/build-client.bat=GBK
+encoding//bin/ws-bin/save-wsdl.bat=GBK
+encoding/<project>=UTF-8
