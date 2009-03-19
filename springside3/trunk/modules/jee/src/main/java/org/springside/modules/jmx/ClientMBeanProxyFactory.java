@@ -76,4 +76,20 @@ public class ClientMBeanProxyFactory {
 		}
 		return null;
 	}
+	
+	/**
+	 * 创建MXBean代理. 
+	 */
+	public <T> T getMXBeanProxy(final String mbeanName, final Class<T> mBeanInterface) throws IOException {
+		try {
+			ObjectName objectName = new ObjectName(mbeanName);
+			MBeanServerConnection connection = connector.getMBeanServerConnection();
+			return JMX.newMXBeanProxy(connection, objectName, mBeanInterface);
+		} catch (MalformedObjectNameException e) {
+			new IllegalArgumentException("mbeanName:" + mbeanName + "不正确", e);
+		} catch (NullPointerException e) {
+			new IllegalArgumentException("mbeanName为空");
+		}
+		return null;
+	}
 }

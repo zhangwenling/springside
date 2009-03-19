@@ -35,7 +35,8 @@
 </head>
 <body>
 	<h3>JMX & Ajax演示用例</h3>
-	<p>注:1.亦可使用JConsole访问JMX Server, URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase<br/></p>
+	<p>说明：演示JMX配置系统变量并监控系统运行状态，同时演示基于JQuery的标准Ajax用法。<br/>
+	亦可使用JConsole访问JMX Server, URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase<br/></p>
 	<h4>服务器配置</h4>
 	<form id="configForm">
 	<table>

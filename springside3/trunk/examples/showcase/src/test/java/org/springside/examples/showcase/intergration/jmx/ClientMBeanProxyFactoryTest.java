@@ -1,7 +1,7 @@
 package org.springside.examples.showcase.intergration.jmx;
 
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.examples.showcase.jmx.server.ServerMBean;
+import org.springside.examples.showcase.jmx.server.ServerMXBean;
 import org.springside.modules.jmx.ClientMBeanProxyFactory;
 import org.springside.modules.test.junit38.SpringContextTestCase;
 
@@ -16,12 +16,12 @@ public class ClientMBeanProxyFactoryTest extends SpringContextTestCase {
 
 	private ClientMBeanProxyFactory mbeanFactory;
 
-	private ServerMBean mbean;
+	private ServerMXBean mbean;
 
 	@Override
 	public void setUp() throws Exception {
 		mbeanFactory = new ClientMBeanProxyFactory("service:jmx:rmi:///jndi/rmi://localhost:1099/showcase");
-		mbean = mbeanFactory.getMBeanProxy("org.springside.showcase:name=Server", ServerMBean.class);
+		mbean = mbeanFactory.getMBeanProxy("org.springside.showcase:name=Server", ServerMXBean.class);
 	}
 
 	@Override
@@ -39,6 +39,6 @@ public class ClientMBeanProxyFactoryTest extends SpringContextTestCase {
 	}
 
 	public void testGetQueryAllUsersHitCount() throws Exception {
-		assertEquals(0, mbean.getQueryAllUsersCount());
+		assertEquals(0, mbean.getServerStatistics().getQueryAllUsersCount());
 	}
 }

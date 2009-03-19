@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
-import org.springside.examples.showcase.jmx.server.Statistics;
+import org.springside.examples.showcase.jmx.server.ServerStatistics;
 import org.springside.modules.orm.hibernate.DefaultEntityManager;
 
 /**
@@ -27,6 +27,8 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 
 	@Autowired
 	private ServerConfig serverConfig; //系统配置
+	@Autowired
+	private ServerStatistics  serverStatistics;//系统统计
 
 	/**
 	 * 重载getAll函数,在载入用户列表时,根据系统配置统计查询次数.
@@ -35,7 +37,7 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 	@Transactional(readOnly = true)
 	public List<User> getAll() {
 		if (serverConfig.isStatisticsEnabled()) {
-			Statistics.incQueryAllUsersCount();
+			serverStatistics.incQueryAllUsersCount();
 		}
 		return entityDao.getAll();
 	}

@@ -5,12 +5,18 @@ package org.springside.examples.showcase.jmx.server;
  *  
  * @author calvin
  */
-public class ServerMBeanImpl implements ServerMBean {
+public class ServerMXBeanImpl implements ServerMXBean {
 
 	private ServerConfig serverConfig;
+	
+	private ServerStatistics  serverStatistics;
 
 	public void setServerConfig(ServerConfig serverConfig) {
 		this.serverConfig = serverConfig;
+	}
+	
+	public void setServerStatistics(ServerStatistics serverStatistics) {
+		this.serverStatistics = serverStatistics;
 	}
 
 	// 配置系统属性 //
@@ -34,9 +40,13 @@ public class ServerMBeanImpl implements ServerMBean {
 	// 监控系统运行状态 //
 
 	/**
-	 * 获取系统执行查询用户列表的次数.
+	 * 获取系统执行情况次数.
 	 */
-	public int getQueryAllUsersCount() {
-		return Statistics.getQueryAllUsersCount();
+	public ServerStatistics getServerStatistics() {	
+		return serverStatistics;
+	}
+	
+	public ServerStatistics getServerStatisticssss() {	
+		return serverStatistics;
 	}
 }

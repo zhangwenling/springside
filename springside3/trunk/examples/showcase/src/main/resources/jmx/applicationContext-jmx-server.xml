@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
-	
+
 	<description>JMX服务端配置文件</description>
 
 	<!-- 配置RMI注册服务器 -->
@@ -29,26 +29,16 @@
 		<!-- 定义导出的MBean -->
 		<property name="beans">
 			<map>
-				<entry key="org.springside.showcase:name=Server" value-ref="serverMbean" />
+				<entry key="org.springside.showcase:name=Server" value-ref="serverMXBean" />
 			</map>
-		</property>
-		<!-- 定义MBean接口,如省略则默认导出全部方法 -->
-		<property name="assembler">
-			<bean class="org.springframework.jmx.export.assembler.InterfaceBasedMBeanInfoAssembler">
-				<property name="managedInterfaces">
-					<list>
-						<value>org.springside.examples.showcase.jmx.server.ServerMBean
-						</value>
-					</list>
-				</property>
-			</bean>
 		</property>
 		<property name="exposeManagedResourceClassLoader" value="true" />
 	</bean>
 
 	<!-- ServerMBean定义-->
-	<bean id="serverMbean" class="org.springside.examples.showcase.jmx.server.ServerMBeanImpl">
+	<bean id="serverMXBean" class="org.springside.examples.showcase.jmx.server.ServerMXBeanImpl">
 		<property name="serverConfig" ref="serverConfig" />
+		<property name="serverStatistics" ref="serverStatistics" />
 	</bean>
 
 	<!-- 系统属性配置 -->
@@ -56,4 +46,7 @@
 		<property name="nodeName" value="node1" />
 		<property name="statisticsEnabled" value="true" />
 	</bean>
+
+	<!-- 系统状态统计 -->
+	<bean id="serverStatistics" class="org.springside.examples.showcase.jmx.server.ServerStatistics" />
 </beans>

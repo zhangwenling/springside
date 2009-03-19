@@ -5,7 +5,7 @@ package org.springside.examples.showcase.jmx.server;
  * 
  * @author calvin
  */
-public interface ServerMBean {
+public interface ServerMXBean {
 
 	// 系统属性配置 //
 
@@ -18,10 +18,6 @@ public interface ServerMBean {
 	void setStatisticsEnabled(boolean statisticsEnabled);
 
 	// 监控系统运行状态 //
-
-	/**
-	 * 获取系统执行getAllUsers()函数的次数.
-	 */
-	int getQueryAllUsersCount();
-
+	
+	ServerStatistics getServerStatistics();
 }

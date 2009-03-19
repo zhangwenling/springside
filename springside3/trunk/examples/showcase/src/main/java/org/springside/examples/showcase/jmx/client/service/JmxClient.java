@@ -8,7 +8,7 @@ import javax.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
-import org.springside.examples.showcase.jmx.server.ServerMBean;
+import org.springside.examples.showcase.jmx.server.ServerMXBean;
 import org.springside.modules.jmx.ClientMBeanProxyFactory;
 
 /**
@@ -22,9 +22,9 @@ public class JmxClient {
 	private static Logger logger = LoggerFactory.getLogger(JmxClient.class);
 
 	private ClientMBeanProxyFactory mbeanFactory;
-	private ServerMBean mbean;
+	private ServerMXBean mbean;
 
-	// 可注入的连接参数
+	//可注入的连接参数
 	private String ip;
 	private String port;
 	private String userName;
@@ -43,7 +43,7 @@ public class JmxClient {
 			mbeanFactory = new ClientMBeanProxyFactory(serviceUrl, userName, passwd);
 
 			String serverMBeanName = "org.springside.showcase:name=Server";
-			mbean = mbeanFactory.getMBeanProxy(serverMBeanName, ServerMBean.class);
+			mbean = mbeanFactory.getMXBeanProxy(serverMBeanName, ServerMXBean.class);
 		} catch (Exception e) {
 			logger.error("连接Jmx Server 或 创建Mbean Proxy时失败", e);
 		}
@@ -58,7 +58,7 @@ public class JmxClient {
 		mbeanFactory.close();
 	}
 
-	// JMX操作函数
+	// JMX操作函数 //
 
 	public String getNodeName() {
 		return mbean.getNodeName();
@@ -77,10 +77,10 @@ public class JmxClient {
 	}
 
 	public int getQueryAllUsersCount() {
-		return mbean.getQueryAllUsersCount();
+		return mbean.getServerStatistics().getQueryAllUsersCount();
 	}
 
-	// 参数设定函数
+	// 参数设定函数 //
 
 	public void setIp(String ip) {
 		this.ip = ip;

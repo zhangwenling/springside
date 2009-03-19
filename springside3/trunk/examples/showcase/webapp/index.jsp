@@ -8,7 +8,7 @@
 </head>
 <body>
 <h2>Showcase示例</h2>
-<h3><a href="common/user.action">CRUD简约版用例</a></h3>
+<h3><a href="common/user.action">CRUD增强版用例</a></h3>
 
 <h3><a href="jmx/jmx-client.action">JMX演示用例</a></h3>
 
