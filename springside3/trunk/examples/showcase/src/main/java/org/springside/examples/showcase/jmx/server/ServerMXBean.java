@@ -18,6 +18,6 @@ public interface ServerMXBean {
 	void setStatisticsEnabled(boolean statisticsEnabled);
 
 	// 监控系统运行状态 //
-	
+
 	ServerStatistics getServerStatistics();
 }

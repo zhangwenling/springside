@@ -28,14 +28,14 @@
 		//动态获取服务器最新状态,返回普通文本.
 		function updateStatics(){
 			$.get("jmx-client!updateStatics.action", function(data) {
-				$('#queryAllUsersCount').val(data);
+				$('#queryUsersCount').val(data);
 			});
 		}
 	</script>
 </head>
 <body>
 	<h3>JMX & Ajax演示用例</h3>
-	<p>说明：演示JMX配置系统变量并监控系统运行状态，同时演示基于JQuery的标准Ajax用法。<br/>
+	<p>说明：演示JMX配置系统变量并监控系统运行状态，同时演示基于JQuery的标准Ajax应用。<br/>
 	亦可使用JConsole访问JMX Server, URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase<br/></p>
 	<h4>服务器配置</h4>
 	<form id="configForm">
@@ -64,7 +64,7 @@
 		<tr>
 			<td>查询用户列表次数:</td>
 			<td>
-				<input name="queryAllUsersCount" id="queryAllUsersCount" value="${queryAllUsersCount}" readonly="readonly"/> 
+				<input name="queryUsersCount" id="queryUsersCount" value="${queryUsersCount}" readonly="readonly"/> 
 				<input type="button" value="刷新状态" onclick="updateStatics();" />
 			</td>
 		</tr>

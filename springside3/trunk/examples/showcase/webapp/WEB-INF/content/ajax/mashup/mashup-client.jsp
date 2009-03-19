@@ -21,7 +21,9 @@
 </head>
 <body>
 	<h3>Mashup演示用例</h3>
-	<p>请先将本页另存为本地html文件, 打开本地文件访问应用服务器即为跨域访问的场景</p>
+	<p>说明：演示绕过浏览器对Ajax访问跨域名网站内容的限制的方法。<br/>
+	        请先将本页另存为本地html文件, 打开本地文件访问应用服务器即为跨域访问的场景。</p>
+	
 
 	<input type="button" value="获取内容" onclick="getMashupContent();" />
 

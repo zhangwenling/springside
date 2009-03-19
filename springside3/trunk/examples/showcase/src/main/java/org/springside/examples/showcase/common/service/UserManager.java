@@ -28,7 +28,7 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 	@Autowired
 	private ServerConfig serverConfig; //系统配置
 	@Autowired
-	private ServerStatistics  serverStatistics;//系统统计
+	private ServerStatistics serverStatistics;//系统统计
 
 	/**
 	 * 重载getAll函数,在载入用户列表时,根据系统配置统计查询次数.
@@ -37,7 +37,7 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 	@Transactional(readOnly = true)
 	public List<User> getAll() {
 		if (serverConfig.isStatisticsEnabled()) {
-			serverStatistics.incQueryAllUsersCount();
+			serverStatistics.incQueryUsersCount();
 		}
 		return entityDao.getAll();
 	}

@@ -76,8 +76,8 @@ public class JmxClient {
 		mbean.setStatisticsEnabled(statisticsEnabled);
 	}
 
-	public int getQueryAllUsersCount() {
-		return mbean.getServerStatistics().getQueryAllUsersCount();
+	public int getQueryUsersCount() {
+		return mbean.getServerStatistics().getQueryUsersCount();
 	}
 
 	// 参数设定函数 //

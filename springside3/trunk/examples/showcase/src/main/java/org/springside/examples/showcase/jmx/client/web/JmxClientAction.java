@@ -18,11 +18,10 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author ben
  * @author calvin
  */
+@SuppressWarnings("serial")
 //因为没有按Convention Plugin默认的Pacakge命名规则,因此用annotation重新指定Namespace.
 @Namespace("/jmx")
 public class JmxClientAction extends ActionSupport {
-
-	private static final long serialVersionUID = 1077146717287222112L;
 
 	private static Logger logger = LoggerFactory.getLogger(JmxClientAction.class);
 
@@ -32,7 +31,7 @@ public class JmxClientAction extends ActionSupport {
 	// 页面属性
 	private String nodeName;
 	private boolean statisticsEnabled;
-	private int queryAllUsersCount;
+	private int queryUsersCount;
 
 	// 属性访问函数 //
 
@@ -52,8 +51,8 @@ public class JmxClientAction extends ActionSupport {
 		this.statisticsEnabled = statisticsEnabled;
 	}
 
-	public int getQueryAllUsersCount() {
-		return queryAllUsersCount;
+	public int getQueryUsersCount() {
+		return queryUsersCount;
 	}
 
 	// Action 函数 //
@@ -65,7 +64,7 @@ public class JmxClientAction extends ActionSupport {
 	public String execute() {
 		nodeName = jmxClient.getNodeName();
 		statisticsEnabled = jmxClient.isStatisticsEnabled();
-		queryAllUsersCount = jmxClient.getQueryAllUsersCount();
+		queryUsersCount = jmxClient.getQueryUsersCount();
 
 		return SUCCESS;
 	}
@@ -112,7 +111,7 @@ public class JmxClientAction extends ActionSupport {
 	 */
 	public String updateStatics() {
 		try {
-			String count = String.valueOf(jmxClient.getQueryAllUsersCount());
+			String count = String.valueOf(jmxClient.getQueryUsersCount());
 			Struts2Utils.renderText(count);
 		} catch (Exception e) {
 			Struts2Utils.renderText("获取统计数据失败.");

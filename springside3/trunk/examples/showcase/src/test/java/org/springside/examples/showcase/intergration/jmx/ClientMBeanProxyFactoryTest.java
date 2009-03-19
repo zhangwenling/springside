@@ -21,7 +21,7 @@ public class ClientMBeanProxyFactoryTest extends SpringContextTestCase {
 	@Override
 	public void setUp() throws Exception {
 		mbeanFactory = new ClientMBeanProxyFactory("service:jmx:rmi:///jndi/rmi://localhost:1099/showcase");
-		mbean = mbeanFactory.getMBeanProxy("org.springside.showcase:name=Server", ServerMXBean.class);
+		mbean = mbeanFactory.getMXBeanProxy("org.springside.showcase:name=Server", ServerMXBean.class);
 	}
 
 	@Override
@@ -39,6 +39,6 @@ public class ClientMBeanProxyFactoryTest extends SpringContextTestCase {
 	}
 
 	public void testGetQueryAllUsersHitCount() throws Exception {
-		assertEquals(0, mbean.getServerStatistics().getQueryAllUsersCount());
+		assertEquals(0, mbean.getServerStatistics().getQueryUsersCount());
 	}
 }

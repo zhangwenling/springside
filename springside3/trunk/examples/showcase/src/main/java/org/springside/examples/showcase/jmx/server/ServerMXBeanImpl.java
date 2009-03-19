@@ -8,13 +8,13 @@ package org.springside.examples.showcase.jmx.server;
 public class ServerMXBeanImpl implements ServerMXBean {
 
 	private ServerConfig serverConfig;
-	
-	private ServerStatistics  serverStatistics;
+
+	private ServerStatistics serverStatistics;
 
 	public void setServerConfig(ServerConfig serverConfig) {
 		this.serverConfig = serverConfig;
 	}
-	
+
 	public void setServerStatistics(ServerStatistics serverStatistics) {
 		this.serverStatistics = serverStatistics;
 	}
@@ -42,11 +42,11 @@ public class ServerMXBeanImpl implements ServerMXBean {
 	/**
 	 * 获取系统执行情况次数.
 	 */
-	public ServerStatistics getServerStatistics() {	
+	public ServerStatistics getServerStatistics() {
 		return serverStatistics;
 	}
-	
-	public ServerStatistics getServerStatisticssss() {	
+
+	public ServerStatistics getServerStatisticssss() {
 		return serverStatistics;
 	}
 }

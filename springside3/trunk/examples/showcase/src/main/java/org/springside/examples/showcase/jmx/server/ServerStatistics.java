@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class ServerStatistics {
 
-	private  AtomicInteger queryAllUsersCount = new AtomicInteger(0);//查询用户列表的次数
+	private AtomicInteger queryUsersCount = new AtomicInteger(0);//查询用户列表的次数
 
 	public ServerStatistics() {
 	}
@@ -18,16 +18,16 @@ public class ServerStatistics {
 	/**
 	 * 用于从CompositeData构造ServerStatistics实例的构造函数
 	 */
-	@ConstructorProperties({"queryAllUsersCount"})
-	public ServerStatistics(int queryAllUsersCount) {
-		this.queryAllUsersCount = new AtomicInteger(queryAllUsersCount);
-	}
-	
-	public  void incQueryAllUsersCount() {
-		queryAllUsersCount.incrementAndGet();
+	@ConstructorProperties( { "queryUsersCount" })
+	public ServerStatistics(int queryUsersCount) {
+		this.queryUsersCount = new AtomicInteger(queryUsersCount);
 	}
 
-	public  int getQueryAllUsersCount() {
-		return queryAllUsersCount.get();
+	public void incQueryUsersCount() {
+		queryUsersCount.incrementAndGet();
+	}
+
+	public int getQueryUsersCount() {
+		return queryUsersCount.get();
 	}
 }
