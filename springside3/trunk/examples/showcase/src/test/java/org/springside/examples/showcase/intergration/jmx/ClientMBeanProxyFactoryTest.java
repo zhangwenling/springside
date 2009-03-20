@@ -39,6 +39,6 @@ public class ClientMBeanProxyFactoryTest extends SpringContextTestCase {
 	}
 
 	public void testGetQueryAllUsersHitCount() throws Exception {
-		assertEquals(0, mbean.getServerStatistics().getQueryUsersCount());
+		assertEquals(0, mbean.getServerStatistics().getQueryUserCount());
 	}
 }

@@ -37,7 +37,7 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 	@Transactional(readOnly = true)
 	public List<User> getAll() {
 		if (serverConfig.isStatisticsEnabled()) {
-			serverStatistics.incQueryUsersCount();
+			serverStatistics.incQueryUserCount();
 		}
 		return entityDao.getAll();
 	}

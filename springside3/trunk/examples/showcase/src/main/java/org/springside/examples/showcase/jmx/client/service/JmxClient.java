@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 import org.springside.examples.showcase.jmx.server.ServerMXBean;
+import org.springside.examples.showcase.jmx.server.ServerStatistics;
 import org.springside.modules.jmx.ClientMBeanProxyFactory;
 
 /**
@@ -76,8 +77,8 @@ public class JmxClient {
 		mbean.setStatisticsEnabled(statisticsEnabled);
 	}
 
-	public int getQueryUsersCount() {
-		return mbean.getServerStatistics().getQueryUsersCount();
+	public ServerStatistics getServerStatistics() {
+		return mbean.getServerStatistics();
 	}
 
 	// 参数设定函数 //

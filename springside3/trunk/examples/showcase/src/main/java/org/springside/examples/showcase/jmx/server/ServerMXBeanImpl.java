@@ -45,8 +45,4 @@ public class ServerMXBeanImpl implements ServerMXBean {
 	public ServerStatistics getServerStatistics() {
 		return serverStatistics;
 	}
-
-	public ServerStatistics getServerStatisticssss() {
-		return serverStatistics;
-	}
 }

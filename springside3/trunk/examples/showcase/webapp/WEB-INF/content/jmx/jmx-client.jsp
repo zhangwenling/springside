@@ -6,7 +6,7 @@
 <head>
 	<title>JMX演示用例</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet">
+	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet"/>
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		//动态提交表单保存服务器配置.
@@ -27,15 +27,15 @@
 	
 		//动态获取服务器最新状态,返回普通文本.
 		function updateStatics(){
-			$.get("jmx-client!updateStatics.action", function(data) {
-				$('#queryUsersCount').val(data);
+			$.getJSON("jmx-client!updateStatics.action", function(data) {
+				$('#queryUserCount').val(data.queryUserCount);
 			});
 		}
 	</script>
 </head>
 <body>
-	<h3>JMX & Ajax演示用例</h3>
-	<p>说明：演示JMX配置系统变量并监控系统运行状态，同时演示基于JQuery的标准Ajax应用。<br/>
+	<h3>JMX演示用例</h3>
+	<p>说明：演示JMX配置系统变量并监控系统运行状态。<br/>
 	亦可使用JConsole访问JMX Server, URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase<br/></p>
 	<h4>服务器配置</h4>
 	<form id="configForm">
@@ -64,7 +64,7 @@
 		<tr>
 			<td>查询用户列表次数:</td>
 			<td>
-				<input name="queryUsersCount" id="queryUsersCount" value="${queryUsersCount}" readonly="readonly"/> 
+				<input name="queryUserCount" id="queryUserCount" value="${serverStatistics.queryUserCount}" readonly="readonly"/> 
 				<input type="button" value="刷新状态" onclick="updateStatics();" />
 			</td>
 		</tr>

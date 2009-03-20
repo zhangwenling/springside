@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.jmx.client.service.JmxClient;
+import org.springside.examples.showcase.jmx.server.ServerStatistics;
 import org.springside.modules.web.struts2.Struts2Utils;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -31,7 +32,7 @@ public class JmxClientAction extends ActionSupport {
 	// 页面属性
 	private String nodeName;
 	private boolean statisticsEnabled;
-	private int queryUsersCount;
+	private ServerStatistics serverStatistics;
 
 	// 属性访问函数 //
 
@@ -51,8 +52,8 @@ public class JmxClientAction extends ActionSupport {
 		this.statisticsEnabled = statisticsEnabled;
 	}
 
-	public int getQueryUsersCount() {
-		return queryUsersCount;
+	public ServerStatistics getServerStatistics() {
+		return serverStatistics;
 	}
 
 	// Action 函数 //
@@ -64,7 +65,7 @@ public class JmxClientAction extends ActionSupport {
 	public String execute() {
 		nodeName = jmxClient.getNodeName();
 		statisticsEnabled = jmxClient.isStatisticsEnabled();
-		queryUsersCount = jmxClient.getQueryUsersCount();
+		serverStatistics = jmxClient.getServerStatistics();
 
 		return SUCCESS;
 	}
@@ -111,8 +112,8 @@ public class JmxClientAction extends ActionSupport {
 	 */
 	public String updateStatics() {
 		try {
-			String count = String.valueOf(jmxClient.getQueryUsersCount());
-			Struts2Utils.renderText(count);
+			serverStatistics = jmxClient.getServerStatistics();
+			Struts2Utils.renderJson(serverStatistics);
 		} catch (Exception e) {
 			Struts2Utils.renderText("获取统计数据失败.");
 			logger.error(e.getMessage(), e);
