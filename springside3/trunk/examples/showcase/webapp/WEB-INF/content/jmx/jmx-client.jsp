@@ -36,8 +36,8 @@
 </head>
 <body>
 	<h3>JMX演示用例</h3>
-	<p>说明：演示JMX配置系统变量并监控系统运行状态。<br/>
-	亦可使用JConsole访问JMX Server, URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase<br/></p>
+	<p>说明：演示JMX配置系统变量并监控系统运行状态,包括MBean代理、MXBean代理及直接读取属性三种模式。<br/>
+	客户端亦可直接使用JConsole, 远程连接URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase<br/></p>
 	<h4>服务器配置</h4>
 	<form id="configForm">
 	<table>
