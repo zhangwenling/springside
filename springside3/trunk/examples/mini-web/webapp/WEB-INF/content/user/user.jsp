@@ -8,6 +8,12 @@
 	<title>Mini-Web 帐号管理</title>
 	<%@ include file="/common/meta.jsp"%>
 	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet">
+	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
+	<script  src="${ctx}/js/form.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	var modifyAction = 'user!input.action';
+	var deleteAction = 'user!delete.action';
+	</script>
 </head>
 
 <body>
@@ -22,26 +28,24 @@
 <div id="message"><s:actionmessage theme="mytheme"/></div>
 
 <div id="filter">
-<form action="user!search.action" method="post">
+<form id="searchForm" action="user!search.action" method="get">
 	你好,<%=SpringSecurityUtils.getCurrentUserName()%>.&nbsp;&nbsp;
- 	登录名: <input type="text" name="filter_EQUAL_loginName" value="${param['filter_EQUAL_loginName']}"  size="8"/> 
-          姓名或Email: <input type="text" name="filter_LIKE_name|email" value="${param['filter_LIKE_name|email']}" size="8"/>
+ 	登录名: <input type="text" name="filter_EQUAL_loginName" value="${param['filter_EQUAL_loginName']}"  size="9"/> 
+          姓名或Email: <input type="text" name="filter_LIKE_name|email" value="${param['filter_LIKE_name|email']}" size="9"/>
 	<input type="submit" value="搜索" />
 </form>
 </div> 
-
+<form id="mainForm" action="user.action" method="get">
+<input type="hidden" name="page.pageNo" id="pageNo" value="${page.pageNo}"/>
+<input type="hidden" name="page.orderBy" id="orderBy" value="${page.orderBy}"/>
+<input type="hidden" name="page.order" id="order" value="${page.order}" />
+<input type="hidden" name="id" id="id" />
 <div id="listContent">
 <table>
 	<tr>
-		<th><a href="user.action?page.orderBy=loginName&page.order=
-		<s:if test="page.orderBy=='loginName'">${page.inverseOrder}</s:if><s:else>desc</s:else>">
-		<b>登录名</b></a></th>
-		<th><a href="user.action?page.orderBy=name&page.order=
-		<s:if test="page.orderBy=='name'">${page.inverseOrder}</s:if><s:else>desc</s:else>">
-		<b>姓名</b></a></th>
-		<th><a href="user.action?page.orderBy=email&page.order=
-		<s:if test="page.orderBy=='email'">${page.inverseOrder}</s:if><s:else>desc</s:else>">
-		<b>电邮</b></a></th>
+		<th><a href="#" onclick="order('loginName','asc')"><b>登录名</b></a></th>
+		<th><a href="#" onclick="order('name','asc')""><b>姓名</b></a></th>
+		<th><a href="#" onclick="order('email','asc')"><b>电邮</b></a></th>
 		<th><b>角色</b></th>
 		<th><b>操作</b></th>
 	</tr>
@@ -54,8 +58,8 @@
 			<td>${roleNames}&nbsp;</td>
 			<td>&nbsp; 
 				<security:authorize ifAnyGranted="A_MODIFY_USER">
-					<a href="user!input.action?id=${id}&page.pageRequest=${page.pageRequest}">修改</a>、
-					<a href="user!delete.action?id=${id}&page.pageRequest=${page.pageRequest}">删除</a>
+					<a href="#" onclick="modifyItem(${id})">修改</a>、
+					<a href="#" onclick="deleteItem(${id})">删除</a>
 				</security:authorize>
 			</td>
 		</tr>
@@ -66,16 +70,15 @@
 <div id="footer">
 	第${page.pageNo}页, 共${page.totalPages}页 
 	<s:if test="page.hasPre">
-		<a href="user.action?page.pageNo=${page.prePage}&page.orderBy=${page.orderBy}&page.order=${page.order}">上一页</a>
+		<a href="#" onclick="jumpPage(${page.prePage})">上一页</a>
 	</s:if>
 	<s:if test="page.hasNext">
-		<a href="user.action?page.pageNo=${page.nextPage}&page.orderBy=${page.orderBy}&page.order=${page.order}">下一页</a>
+		<a href="#" onclick="jumpPage(${page.nextPage})">下一页</a>
 	</s:if>
 	<security:authorize ifAnyGranted="A_MODIFY_USER">
 		<a href="user!input.action">增加新用户</a>
 	</security:authorize>
 </div>
-
-<div id="comment">本页面为单纯的白板,各式Table Grid组件的应用见Showcase项目(开发中).</div>
+</form>
 </body>
 </html>

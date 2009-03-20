@@ -5,11 +5,11 @@
 <head>
 	<title>Ajax演示 示例</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet">
+	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 <h2>Ajax演示</h2>
-<h3><a href="${ctx}/jmx/jmx-client.action">标准Ajax演示</a></h3>
+<p>说明：在JMX示例中已演示标准的Ajax获取内容与表单提交。</p>
 <h3><a href="${ctx}/ajax/mashup/mashup-client.action">跨域Mashup演示</a></h3>
 </body>
 </html>

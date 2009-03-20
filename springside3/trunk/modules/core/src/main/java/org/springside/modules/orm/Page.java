@@ -23,7 +23,7 @@ public class Page<T> {
 	protected int pageNo = 1;
 	protected int pageSize = MIN_PAGESIZE;
 	protected String orderBy = null;
-	protected String order = ASC;
+	protected String order = null;
 	protected boolean autoCount = true;
 
 	//返回结果
@@ -257,22 +257,5 @@ public class Page<T> {
 			return pageNo - 1;
 		else
 			return pageNo;
-	}
-
-	/**
-	 * 取得反转的排序方向.
-	 * 如果有以','分隔的多个排序方向,逐一进行反转.
-	 */
-	public String getInverseOrder() {
-		String[] orders = StringUtils.split(order, ',');
-
-		for (int i = 0; i < orders.length; i++) {
-			if (DESC.equals(orders[i])) {
-				orders[i] = ASC;
-			} else {
-				orders[i] = DESC;
-			}
-		}
-		return StringUtils.join(orders);
 	}
 }
