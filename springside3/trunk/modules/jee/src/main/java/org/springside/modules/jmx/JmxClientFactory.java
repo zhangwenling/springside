@@ -23,7 +23,7 @@ import org.springframework.util.Assert;
  * 职责有：
  * 1.负责连接和关闭远程JMX Server,并持有连接.
  * 2.创建可操作远程MBean的本地MBean代理.
- * 3.直接读取或设置远程MBean属性(无MBean的Class文件时使用).
+ * 3.按属性名直接读取或设置远程MBean属性(无MBean的Class文件时使用).
  * 
  * @author ben
  * @author calvin
@@ -94,7 +94,7 @@ public class JmxClientFactory {
 	}
 
 	/**
-	 * 直接读取MBean属性(无MBean的Class文件时使用).
+	 * 按属性名直接读取MBean属性(无MBean的Class文件时使用).
 	 */
 	public Object getAttribute(final String mbeanName, final String attributeName) {
 		Assert.hasText(mbeanName, "mbeanName为空");
@@ -111,7 +111,7 @@ public class JmxClientFactory {
 	}
 
 	/**
-	 * 直接设置MBean属性(无MBean的Class文件时使用).
+	 * 按属性名直接设置MBean属性(无MBean的Class文件时使用).
 	 */
 	public void setAttribute(final String mbeanName, final String attributeName, final Object value) {
 		Assert.hasText(mbeanName, "mbeanName为空");

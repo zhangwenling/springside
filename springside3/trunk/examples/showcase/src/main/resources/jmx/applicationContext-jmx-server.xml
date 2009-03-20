@@ -12,7 +12,7 @@
 
 	<!-- 配置JMX远程连接 -->
 	<bean id="serverConnector" class="org.springframework.jmx.support.ConnectorServerFactoryBean" lazy-init="false">
-		<property name="serviceUrl" value="service:jmx:rmi:///jndi/rmi://${server.ip}:${jmx.rmi_port}/showcase" />
+		<property name="serviceUrl" value="service:jmx:rmi:///jndi/rmi://${server.host}:${jmx.rmi_port}/showcase" />
 		<property name="environment">
 			<map>
 				<!-- 认证配置,使用绝对路径 -->

@@ -45,7 +45,7 @@
 			</tr>
 		</table>
 	</form>
-	<p>（管理员<b>admin/admin</b> ,普通用户<b>user/user</b>）<a href="${ctx}/">返回首页</a></p>
+	<p>（管理员<b>admin/admin</b> ,普通用户<b>user/user</b>）<a href="${ctx}/j_spring_security_logout">退出登录</a>、<a href="${ctx}/">返回首页</a></p>
 </body>
 </html>
 

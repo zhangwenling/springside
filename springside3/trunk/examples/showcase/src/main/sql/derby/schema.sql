@@ -8,7 +8,11 @@ ID integer primary key GENERATED ALWAYS AS IDENTITY,
 LOGIN_NAME varchar(20) not null unique,
 PASSWORD varchar(20),
 NAME varchar(20),
-EMAIL varchar(30)
+EMAIL varchar(30),
+CREATE_TIME timestamp,
+CREATE_BY varchar(20),
+LAST_MODIFY_TIME timestamp,
+LAST_MODIFY_BY varchar(20)
 );
 
 create table ROLES (

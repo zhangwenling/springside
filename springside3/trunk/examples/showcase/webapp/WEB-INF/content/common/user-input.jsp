@@ -23,6 +23,18 @@
 		<td>用户名:</td>
 		<td><input type="text" name="name" size="40" value="${name}"/></td>
 	</tr>
+		<tr>
+		<td>密码:</td>
+		<td><input type="password" name="password" size="40" value="${password}"/></td>
+	</tr>
+	<tr>
+		<td>创建:</td>
+		<td>${createBy} ${createTime}</td>
+	</tr>
+	<tr>
+		<td>最后修改:</td>
+		<td>${lastModifyBy} ${lastModifyTime}</td>
+	</tr>
 	<tr>
 		<td colspan="2">
 			<input type="submit" value="提交" />&nbsp; 

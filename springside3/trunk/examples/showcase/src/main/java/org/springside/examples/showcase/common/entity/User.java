@@ -26,7 +26,7 @@ import org.springside.modules.utils.ReflectionUtils;
 @Entity
 //表名与类名不相同时重新定义表名.
 @Table(name = "USERS")
-public class User extends IdEntity {
+public class User extends AuditableEntity {
 
 	private String loginName;
 	private String password;
