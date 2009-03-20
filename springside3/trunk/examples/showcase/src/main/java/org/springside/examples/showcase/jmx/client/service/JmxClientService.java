@@ -60,7 +60,7 @@ public class JmxClientService {
 	}
 
 	/**
-	 * 连接JMX Server 并创建本地的MBean Proxy.
+	 * 连接JMX Server并创建本地的MBean代理.
 	 */
 	//Spring在所有属性注入后自动执行的函数.
 	@PostConstruct
@@ -89,20 +89,29 @@ public class JmxClientService {
 	}
 
 	/**
-	 * 读取节点名,标准MBean代理操作的演示,下同.
+	 * 获取服务节点名,标准MBean代理操作的演示.
 	 */
 	public String getNodeName() {
 		return configuratorMBean.getNodeName();
 	}
 
+	/**
+	 * 设置服务节点名,标准MBean代理操作的演示.
+	 */
 	public void setNodeName(String nodeName) {
 		configuratorMBean.setNodeName(nodeName);
 	}
 
+	/**
+	 * 获取是否记录统计信息,标准MBean代理操作的演示.
+	 */
 	public boolean isStatisticsEnabled() {
 		return configuratorMBean.isStatisticsEnabled();
 	}
 
+	/**
+	 * 设置是否记录统计信息,标准MBean代理操作的演示.
+	 */
 	public void setStatisticsEnabled(boolean statisticsEnabled) {
 		configuratorMBean.setStatisticsEnabled(statisticsEnabled);
 	}

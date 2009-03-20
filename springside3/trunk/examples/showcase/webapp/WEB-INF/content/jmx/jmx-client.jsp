@@ -36,9 +36,9 @@
 </head>
 <body>
 	<h3>JMX演示用例</h3>
-	<p>说明：演示JMX配置系统变量并监控系统运行状态,包括MBean代理、MXBean代理及直接读取属性三种模式。<br/>
-	客户端亦可直接使用JConsole, 远程连接URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase<br/></p>
-	<h4>服务器配置</h4>
+	<p>说明：演示JMX配置系统变量并监控系统运行统计,包括MBean代理、MXBean代理及直接读取属性三种模式。<br/>
+	客户端亦可使用JConsole, 远程连接URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase<br/></p>
+	<h4>系统配置</h4>
 	<form id="configForm">
 	<table>
 		<tr>
@@ -60,7 +60,7 @@
 	</table>
 	</form>
 
-	<h4>服务器状态</h4>
+	<h4>系统运行统计</h4>
 	<table>
 		<tr>
 			<td>查询用户列表次数:</td>
@@ -79,7 +79,7 @@
 		</tr>
 	</table>
 	
-	<h4>Hibernate状态</h4>
+	<h4>Hibernate运行统计</h4>
 	<table>
 		<tr>
 			<td>打开数据库连接次数:</td>

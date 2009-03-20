@@ -1,7 +1,7 @@
 package org.springside.examples.showcase.jmx.server;
 
 /**
- * 监控其运行状态的MBean实现,演示MXBean的使用.
+ * 监控系统运行统计信息的MXBean实现.
  *  
  * @author calvin
  */

@@ -4,7 +4,7 @@ import java.beans.ConstructorProperties;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 系统运行情况统计信息.
+ * 系统运行统计信息.
  * 
  * @author calvin
  */

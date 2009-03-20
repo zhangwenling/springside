@@ -8,7 +8,7 @@ package org.springside.examples.showcase.jmx.server;
 public class ServerConfig {
 
 	private String nodeName;//服务器节点名
-	private boolean statisticsEnabled = false;//是否收集服务运行的统计信息
+	private boolean statisticsEnabled = false;//是否统计服务运行信息
 
 	public String getNodeName() {
 		return nodeName;

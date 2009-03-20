@@ -27,7 +27,7 @@ public class JmxClientAction extends ActionSupport {
 	private static Logger logger = LoggerFactory.getLogger(JmxClientAction.class);
 
 	@Autowired
-	private JmxClientService jmxClient;
+	private JmxClientService jmxClientService;
 
 	// 页面属性
 	private String nodeName;
@@ -68,10 +68,10 @@ public class JmxClientAction extends ActionSupport {
 	 */
 	@Override
 	public String execute() {
-		nodeName = jmxClient.getNodeName();
-		statisticsEnabled = jmxClient.isStatisticsEnabled();
-		serverStatistics = jmxClient.getServerStatistics();
-		sessionOpenCount = jmxClient.getSessionOpenCount();
+		nodeName = jmxClientService.getNodeName();
+		statisticsEnabled = jmxClientService.isStatisticsEnabled();
+		serverStatistics = jmxClientService.getServerStatistics();
+		sessionOpenCount = jmxClientService.getSessionOpenCount();
 		return SUCCESS;
 	}
 
@@ -80,8 +80,8 @@ public class JmxClientAction extends ActionSupport {
 	 */
 	public String saveConfig() {
 		try {
-			jmxClient.setNodeName(nodeName);
-			jmxClient.setStatisticsEnabled(statisticsEnabled);
+			jmxClientService.setNodeName(nodeName);
+			jmxClientService.setStatisticsEnabled(statisticsEnabled);
 			Struts2Utils.renderText("保存配置成功.");
 		} catch (Exception e) {
 			Struts2Utils.renderText("保存配置失败.");
@@ -98,8 +98,8 @@ public class JmxClientAction extends ActionSupport {
 	public String updateConfig() {
 		Map map = new HashMap();
 		try {
-			nodeName = jmxClient.getNodeName();
-			statisticsEnabled = jmxClient.isStatisticsEnabled();
+			nodeName = jmxClientService.getNodeName();
+			statisticsEnabled = jmxClientService.isStatisticsEnabled();
 			map.put("nodeName", nodeName);
 			map.put("statisticsEnabled", String.valueOf(statisticsEnabled));
 			map.put("message", "获取配置成功.");
@@ -113,14 +113,13 @@ public class JmxClientAction extends ActionSupport {
 	}
 
 	/**
-	 * 获取最新运行状态统计数据的Ajax请求.
+	 * 获取最新系统运行统计信息的Ajax请求.
 	 */
 	public String updateStatics() {
 		try {
-			serverStatistics = jmxClient.getServerStatistics();
+			serverStatistics = jmxClientService.getServerStatistics();
 			Struts2Utils.renderJson(serverStatistics);
 		} catch (Exception e) {
-			Struts2Utils.renderText("获取统计数据失败.");
 			logger.error(e.getMessage(), e);
 		}
 

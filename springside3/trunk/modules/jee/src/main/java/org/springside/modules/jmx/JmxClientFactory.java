@@ -21,7 +21,7 @@ import org.springframework.util.Assert;
  * JMX客户端工厂.
  * 
  * 职责有：
- * 1.负责连接和关闭远程JMX服务
+ * 1.负责连接和关闭远程JMX Server,并持有连接.
  * 2.创建可操作远程MBean的本地MBean代理.
  * 3.直接读取或设置远程MBean属性(无MBean的Class文件时使用).
  * 
@@ -42,7 +42,7 @@ public class JmxClientFactory {
 	}
 
 	/**
-	 * 连接远程JMX服务.
+	 * 连接远程JMX Server.
 	 */
 	@SuppressWarnings("unchecked")
 	private void initConnector(final String serviceUrl, final String userName, final String passwd) throws IOException {
@@ -68,7 +68,7 @@ public class JmxClientFactory {
 	}
 
 	/**
-	 * 创建MBean代理. 
+	 * 创建标准MBean代理. 
 	 */
 	public <T> T getMBeanProxy(final String mbeanName, final Class<T> mBeanInterface) throws IOException {
 		Assert.hasText(mbeanName, "mbeanName为空");
