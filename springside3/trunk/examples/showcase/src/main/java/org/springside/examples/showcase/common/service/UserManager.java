@@ -25,9 +25,9 @@ import org.springside.modules.orm.hibernate.DefaultEntityManager;
 @Transactional
 public class UserManager extends DefaultEntityManager<User, Long> {
 
-	@Autowired
+	@Autowired(required = false)
 	private ServerConfig serverConfig; //系统配置
-	@Autowired
+	@Autowired(required = false)
 	private ServerStatistics serverStatistics;//系统统计
 
 	/**
@@ -36,12 +36,14 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 	@Override
 	@Transactional(readOnly = true)
 	public List<User> getAll() {
-		if (serverConfig.isStatisticsEnabled()) {
+		boolean incStatistics = (serverConfig != null && serverConfig.isStatisticsEnabled() && serverStatistics != null);
+		if (incStatistics) {
 			serverStatistics.incQueryUserCount();
 		}
 		return entityDao.getAll();
 	}
 
+	@Transactional(readOnly = true)
 	public User loadByLoginName(String loginName) {
 		return entityDao.findUniqueByProperty("loginName", loginName);
 	}

@@ -21,7 +21,6 @@
 				<!-- <value>file:/var/myapp/application.server.properties</value> -->
 			</list>
 		</property>
-
 	</bean>
 
 	<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->

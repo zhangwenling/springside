@@ -45,7 +45,7 @@
 	<bean id="monitorMXBean" class="org.springside.examples.showcase.jmx.server.MonitorMXBeanImpl">
 		<property name="serverStatistics" ref="serverStatistics" />
 	</bean>
-	
+
 	<!-- 系统属性配置 -->
 	<bean id="serverConfig" class="org.springside.examples.showcase.jmx.server.ServerConfig">
 		<property name="nodeName" value="node1" />
@@ -54,9 +54,9 @@
 
 	<!-- 系统状态统计 -->
 	<bean id="serverStatistics" class="org.springside.examples.showcase.jmx.server.ServerStatistics" />
-	
-	<!-- Hibernate StatisticsMBean定义 -->	
+
+	<!-- Hibernate StatisticsMBean定义 -->
 	<bean id="hibernateStatisticsMBean" class="org.hibernate.jmx.StatisticsService">
 		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>	
+	</bean>
 </beans>

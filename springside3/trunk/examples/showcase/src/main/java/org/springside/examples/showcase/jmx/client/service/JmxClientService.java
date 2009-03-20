@@ -36,15 +36,15 @@ public class JmxClientService {
 	private MonitorMXBean monitorMXBean;
 
 	//可注入的连接参数
-	private String ip;
+	private String host;
 	private String port;
 	private String userName;
 	private String passwd;
 
 	// 连接参数设定函数 //
 
-	public void setIp(String ip) {
-		this.ip = ip;
+	public void setHost(String host) {
+		this.host = host;
 	}
 
 	public void setPort(String port) {
@@ -65,11 +65,11 @@ public class JmxClientService {
 	//Spring在所有属性注入后自动执行的函数.
 	@PostConstruct
 	public void init() {
-		Assert.hasText(ip);
+		Assert.hasText(host);
 		Assert.hasText(port);
 
 		try {
-			String serviceUrl = "service:jmx:rmi:///jndi/rmi://" + ip + ":" + port + "/showcase";
+			String serviceUrl = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/showcase";
 			clientFactory = new JmxClientFactory(serviceUrl, userName, passwd);
 
 			configuratorMBean = clientFactory.getMBeanProxy(configuratorMBeanName, ConfiguratorMBean.class);
