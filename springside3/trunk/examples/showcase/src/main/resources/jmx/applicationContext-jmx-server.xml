@@ -29,18 +29,23 @@
 		<!-- 定义导出的MBean -->
 		<property name="beans">
 			<map>
-				<entry key="org.springside.showcase:name=Server" value-ref="serverMXBean" />
+				<entry key="org.springside.showcase:type=Configurator" value-ref="configuratorMBean" />
+				<entry key="org.springside.showcase:type=Monitor" value-ref="monitorMXBean" />
+				<entry key="org.hibernate:type=Statistics" value-ref="hibernateStatisticsMBean" />
 			</map>
 		</property>
-		<property name="exposeManagedResourceClassLoader" value="true" />
 	</bean>
 
-	<!-- ServerMBean定义-->
-	<bean id="serverMXBean" class="org.springside.examples.showcase.jmx.server.ServerMXBeanImpl">
+	<!-- ConfiguratoMBean定义-->
+	<bean id="configuratorMBean" class="org.springside.examples.showcase.jmx.server.ConfiguratorMBeanImpl">
 		<property name="serverConfig" ref="serverConfig" />
+	</bean>
+
+	<!-- MonitorMXBean定义-->
+	<bean id="monitorMXBean" class="org.springside.examples.showcase.jmx.server.MonitorMXBeanImpl">
 		<property name="serverStatistics" ref="serverStatistics" />
 	</bean>
-
+	
 	<!-- 系统属性配置 -->
 	<bean id="serverConfig" class="org.springside.examples.showcase.jmx.server.ServerConfig">
 		<property name="nodeName" value="node1" />
@@ -49,4 +54,9 @@
 
 	<!-- 系统状态统计 -->
 	<bean id="serverStatistics" class="org.springside.examples.showcase.jmx.server.ServerStatistics" />
+	
+	<!-- Hibernate StatisticsMBean定义 -->	
+	<bean id="hibernateStatisticsMBean" class="org.hibernate.jmx.StatisticsService">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
 </beans>

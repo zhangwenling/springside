@@ -1,22 +1,16 @@
 package org.springside.examples.showcase.jmx.server;
 
 /**
- * 配置系统属性,并监控其运行状态的MBean实现.
+ * 配置系统属性的标准MBean实现,演示标准MBean的使用.
  *  
  * @author calvin
  */
-public class ServerMXBeanImpl implements ServerMXBean {
+public class ConfiguratorMBeanImpl implements ConfiguratorMBean {
 
 	private ServerConfig serverConfig;
 
-	private ServerStatistics serverStatistics;
-
 	public void setServerConfig(ServerConfig serverConfig) {
 		this.serverConfig = serverConfig;
-	}
-
-	public void setServerStatistics(ServerStatistics serverStatistics) {
-		this.serverStatistics = serverStatistics;
 	}
 
 	// 配置系统属性 //
@@ -35,14 +29,5 @@ public class ServerMXBeanImpl implements ServerMXBean {
 
 	public void setNodeName(String nodeName) {
 		serverConfig.setNodeName(nodeName);
-	}
-
-	// 监控系统运行状态 //
-
-	/**
-	 * 获取系统执行情况次数.
-	 */
-	public ServerStatistics getServerStatistics() {
-		return serverStatistics;
 	}
 }

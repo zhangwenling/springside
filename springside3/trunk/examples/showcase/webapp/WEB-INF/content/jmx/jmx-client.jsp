@@ -25,10 +25,11 @@
 			});
 		}
 	
-		//动态获取服务器最新状态,返回普通文本.
+		//动态获取服务器最新状态,返回JSON对象.
 		function updateStatics(){
 			$.getJSON("jmx-client!updateStatics.action", function(data) {
 				$('#queryUserCount').val(data.queryUserCount);
+				$('#modifyUserCount').val(data.modifyUserCount);
 			});
 		}
 	</script>
@@ -60,12 +61,30 @@
 	</form>
 
 	<h4>服务器状态</h4>
-	<table class="inputView">
+	<table>
 		<tr>
 			<td>查询用户列表次数:</td>
 			<td>
-				<input name="queryUserCount" id="queryUserCount" value="${serverStatistics.queryUserCount}" readonly="readonly"/> 
-				<input type="button" value="刷新状态" onclick="updateStatics();" />
+				<input id="queryUserCount" value="${serverStatistics.queryUserCount}" readonly="readonly"/> 
+			</td>
+		</tr>
+		<tr>
+			<td>修改用户次数:</td>
+			<td>
+				<input id="modifyUserCount" value="${serverStatistics.modifyUserCount}" readonly="readonly"/> 
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><input type="button" value="刷新状态" onclick="updateStatics();" /></td>
+		</tr>
+	</table>
+	
+	<h4>Hibernate状态</h4>
+	<table>
+		<tr>
+			<td>打开数据库连接次数:</td>
+			<td>
+				<input id="sessionOpenCount" value="${sessionOpenCount}" readonly="readonly"/> 
 			</td>
 		</tr>
 	</table>
