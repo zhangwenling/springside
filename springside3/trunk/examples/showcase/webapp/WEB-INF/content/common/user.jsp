@@ -5,12 +5,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>CRUD 简略写法示例</title>
+	<title>综合演示用例</title>
 	<%@ include file="/common/meta.jsp"%>
 	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
+
+<h3>综合演示用例</h3>
+
 <div id="listContent">
 <table>
 	<tr>
@@ -18,6 +21,7 @@
 		<th><b>姓名</b></th>
 		<th><b>电邮</b></th>
 		<th><b>角色</b></th>
+		<th><b>操作</b></th>
 	</tr>
 
 	<s:iterator value="allUsers">
@@ -26,6 +30,7 @@
 			<td>${name}&nbsp;</td>
 			<td>${email}&nbsp;</td>
 			<td>${roleNames}&nbsp;</td>
+			<td><a href="user!input.action?id=${id}">修改</a></td>
 		</tr>
 	</s:iterator>
 </table>

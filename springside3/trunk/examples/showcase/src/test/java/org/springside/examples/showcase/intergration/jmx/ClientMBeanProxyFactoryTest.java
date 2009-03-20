@@ -18,14 +18,15 @@ public class ClientMBeanProxyFactoryTest extends SpringContextTestCase {
 	private JmxClientFactory mbeanFactory;
 
 	private ConfiguratorMBean configuratorMbean;
-	
+
 	private MonitorMXBean monitorMXBean;
 
 	@Override
 	public void setUp() throws Exception {
 		mbeanFactory = new JmxClientFactory("service:jmx:rmi:///jndi/rmi://localhost:1099/showcase");
-		configuratorMbean = mbeanFactory.getMBeanProxy("org.springside.showcase:type=Configurator", ConfiguratorMBean.class);
-		monitorMXBean =  mbeanFactory.getMXBeanProxy("org.springside.showcase:type=Monitor", MonitorMXBean.class);
+		configuratorMbean = mbeanFactory.getMBeanProxy("org.springside.showcase:type=Configurator",
+				ConfiguratorMBean.class);
+		monitorMXBean = mbeanFactory.getMXBeanProxy("org.springside.showcase:type=Monitor", MonitorMXBean.class);
 	}
 
 	@Override

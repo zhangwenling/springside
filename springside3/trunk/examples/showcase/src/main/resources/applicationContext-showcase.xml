@@ -6,6 +6,10 @@
 
 	<description>导入ShowCase中的applicationContext文件列表</description>
 
+	<import resource="applicationContext-security.xml" />
+	
 	<import resource="jmx/applicationContext-jmx-server.xml" />
 	<import resource="jmx/applicationContext-jmx-client.xml" />
+	
+
 </beans>

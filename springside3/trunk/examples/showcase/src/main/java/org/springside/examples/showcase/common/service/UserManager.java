@@ -41,4 +41,8 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 		}
 		return entityDao.getAll();
 	}
+
+	public User loadByLoginName(String loginName) {
+		return entityDao.findUniqueByProperty("loginName", loginName);
+	}
 }

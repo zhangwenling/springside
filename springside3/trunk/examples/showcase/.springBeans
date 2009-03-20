@@ -5,11 +5,12 @@
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
-	<enableImports><![CDATA[false]]></enableImports>
+	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
+		<config>src/main/resources/applicationContext.xml</config>
 		<config>src/main/resources/jmx/applicationContext-jmx-client.xml</config>
 		<config>src/main/resources/jmx/applicationContext-jmx-server.xml</config>
-		<config>src/main/resources/applicationContext.xml</config>
+		<config>src/main/resources/applicationContext-security.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

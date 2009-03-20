@@ -155,6 +155,12 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 		<!-- web end -->
+		
+		<!-- spring security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core-tiger</artifactId>
+		</dependency>
 
 		<!-- logging begin -->
 		<dependency>
