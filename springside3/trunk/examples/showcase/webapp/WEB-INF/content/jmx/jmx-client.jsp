@@ -36,8 +36,9 @@
 </head>
 <body>
 	<h3>JMX演示用例</h3>
-	<p>说明：演示JMX配置系统变量并监控系统运行统计,包括MBean代理、MXBean代理及直接读取属性三种模式。<br/>
+	<p>技术说明：演示MBean代理、MXBean代理及直接读取属性三种模式。<br/>
 	客户端亦可使用JConsole, 远程连接URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase<br/></p>
+	<p>用户故事：使用JMX动态配置系统变量并实时监控系统运行统计。</p>
 	<h4>系统配置</h4>
 	<form id="configForm">
 	<table>

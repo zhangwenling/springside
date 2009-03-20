@@ -8,12 +8,23 @@
 </head>
 <body>
 <h2>Showcase示例</h2>
-<h3><a href="common/user.action">综合演示用例</a></h3>
+<h3><a href="common/user.action">综合演示</a></h3>
 
-<h3><a href="jmx/jmx-client.action">JMX演示用例</a></h3>
+<h3><a href="jms/index.action">JMS演示(开发中)</a></h3>
 
-<h3><a href="ajax/index.action">Ajax演示用例</a></h3>
+<h3><a href="jmx/jmx-client.action">JMX演示</a></h3>
 
-<h3><a href="security/login.action">SpringSecurity增强演示用例</a></h3>
+<h3><a href="security/login.action">安全演示(开发中)</a></h3>
+
+<h3><a href="schedule/index.action">定时任务演示(开发中)</a></h3>
+
+<h3><a href="ajax/index.action">Ajax演示</a></h3>
+
+<h3><a href="email/index.action">邮件演示(开发中)</a></h3>
+
+<h3>工作流演示</h3>
+<h3>搜索引擎演示</h3>
+<h3>规则引擎演示</h3>
+
 </body>
 </html>

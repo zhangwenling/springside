@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Mashup演示用例</title>
+	<title>跨域Mashup演示</title>
 	<%@ include file="/common/meta.jsp"%>
 	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet"/>
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
@@ -20,10 +20,9 @@
 	</script>
 </head>
 <body>
-	<h3>Mashup演示用例</h3>
-	<p>说明：演示绕过浏览器对Ajax访问跨域名网站内容的限制。<br/>
-	        请先将本页另存为本地html文件, 打开本地文件访问应用服务器即为跨域访问的场景。</p>
-	
+	<h3>Mashup演示</h3>
+	<p>技术说明：演示基于JQuery，绕过浏览器对Ajax访问跨域名网站内容的限制。<br/>
+	        请先将本页另存为本地html文件，打开本地文件访问应用服务器即为跨域访问的场景。</p>
 
 	<input type="button" value="获取内容" onclick="getMashupContent();" />
 

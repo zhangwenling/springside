@@ -20,7 +20,7 @@
 		}
 	%>
 	<h2>Showcase登录页</h2>
-	
+	<p>说明：在Mini-Web Example的RBAC基础上，演示与验证码的整合。在未来版本中还将演示数据级访问控制(ACL)。</p>
 	<form id="loginForm" action="${ctx}/j_spring_security_check" method="post">
 		<table class="inputView">
 			<tr>
@@ -45,7 +45,7 @@
 			</tr>
 		</table>
 	</form>
-	<p>（管理员<b>admin/admin</b> ,普通用户<b>user/user</b>）</p>
+	<p>（管理员<b>admin/admin</b> ,普通用户<b>user/user</b>）<a href="${ctx}/">返回首页</a></p>
 </body>
 </html>
 
