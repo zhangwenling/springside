@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * 默认的领域对象业务管理类基类,提供默认的范型DAO成员变量.
@@ -30,8 +31,10 @@ public class DefaultEntityManager<T, PK extends Serializable> extends EntityMana
 	/**
 	 * 通过注入的sessionFactory初始化Default DAO.
 	 */
+	@SuppressWarnings("unchecked")
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
+		Class<T> entityClass = ReflectionUtils.getSuperClassGenricType(getClass());
 		entityDao = new HibernateDao<T, PK>(sessionFactory, entityClass);
 	}
 }

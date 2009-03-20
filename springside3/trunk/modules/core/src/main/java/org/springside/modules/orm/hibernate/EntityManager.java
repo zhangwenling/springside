@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
-import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * 领域对象的业务管理类基类.
@@ -24,19 +23,6 @@ import org.springside.modules.utils.ReflectionUtils;
 public abstract class EntityManager<T, PK extends Serializable> {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
-
-	protected Class<T> entityClass;
-
-	/**
-	 * 通过子类的范型定义取得领域对象类型Class.
-	 * 
-	 * eg.
-	 * public class UserManager extends EntityManager<User, Long>
-	 */
-	@SuppressWarnings("unchecked")
-	public EntityManager() {
-		this.entityClass = ReflectionUtils.getSuperClassGenricType(getClass());
-	}
 
 	/**
 	 * 在子类实现的回调函数,为EntityManager提供默认CRUD操作所需的DAO.
