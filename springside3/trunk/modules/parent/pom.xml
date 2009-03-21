@@ -44,10 +44,8 @@
 				</configuration>
 			</plugin>
 
-			<!-- 
-				surefire插件.
-				mvn test单元测试时忽略integration目录下的集成测试用例,
-				mvn integration-test集成测试时忽略其他目录下的单元测试用例.
+			<!--
+				surefire插件. mvn test单元测试时忽略integration目录下的集成测试用例, mvn integration-test集成测试时忽略其他目录下的单元测试用例.
 			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -141,6 +139,17 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		<repository>
+		    <id>3party-snapshot</id>
+		    <name>SpringSide Repository for 3rd-party artifacts</name>
+		    <url>http://www.springside.org.cn/repository/</url>
+		    <releases>
+		      <enabled>false</enabled>
+		    </releases>
+		    <snapshots>
+		      <enabled>true</enabled>
+		    </snapshots>
+		  </repository>
 	</repositories>
 
 	<pluginRepositories>
@@ -369,7 +378,7 @@
 			</dependency>
 			<!-- webservice end -->
 
-			<!-- spring security begin -->
+			<!-- security begin -->
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-core-tiger</artifactId>
@@ -407,9 +416,23 @@
 						<artifactId>spring-jdbc</artifactId>
 					</exclusion>
 				</exclusions>
-
 			</dependency>
-			<!-- spring security end -->
+
+			<dependency>
+				<artifactId>jcaptcha-api</artifactId>
+				<groupId>com.octo.captcha</groupId>
+				<version>1.0</version>
+			</dependency>
+
+			<dependency>
+				<artifactId>jcaptcha</artifactId>
+				<groupId>com.octo.captcha</groupId>
+				<version>2.0-alpha-1-SNAPSHOT</version>
+			</dependency>
+			<!-- security end -->
+
+
+
 
 			<!-- logging begin-->
 			<!-- slf4j -->

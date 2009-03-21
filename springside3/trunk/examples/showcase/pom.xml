@@ -156,23 +156,16 @@
 		</dependency>
 		<!-- web end -->
 
-		<!-- spring security -->
+		<!-- security begin -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core-tiger</artifactId>
 		</dependency>
-		
 		<dependency>
-    		<artifactId>jcaptcha-api</artifactId>
-    		<groupId>com.octo.captcha</groupId>
-    		<version>1.0</version>
+			<artifactId>jcaptcha</artifactId>
+			<groupId>com.octo.captcha</groupId>
 		</dependency>
-		
-		<dependency>
-			<groupId>com.jhlabs</groupId>
-			<artifactId>filters</artifactId>
-			<version>2.0.235</version>
-		</dependency>
+		<!-- security end -->
 
 		<!-- logging begin -->
 		<dependency>
