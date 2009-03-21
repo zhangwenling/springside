@@ -69,12 +69,11 @@
 
 <div id="footer">
 	第${page.pageNo}页, 共${page.totalPages}页 
-	<s:if test="page.hasPre">
-		<a href="#" onclick="jumpPage(${page.prePage})">上一页</a>
-	</s:if>
-	<s:if test="page.hasNext">
-		<a href="#" onclick="jumpPage(${page.nextPage})">下一页</a>
-	</s:if>
+	<a href="#" onclick="jumpPage(1)">首页</a>
+	<s:if test="page.hasPre"><a href="#" onclick="jumpPage(${page.prePage})">上一页</a></s:if>
+	<s:if test="page.hasNext"><a href="#" onclick="jumpPage(${page.nextPage})">下一页</a></s:if>
+	<a href="#" onclick="jumpPage(${page.totalPages})">末页</a>
+	
 	<security:authorize ifAnyGranted="A_MODIFY_USER">
 		<a href="user!input.action">增加新用户</a>
 	</security:authorize>

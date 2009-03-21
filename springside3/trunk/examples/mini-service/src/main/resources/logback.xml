@@ -4,9 +4,6 @@
 	<!-- 定义日志文件路径变量 -->
 	<substitutionProperty name="log.base" value="../logs/mini-service" />
 
-	<!-- 支持JMX动态设置Log级别 -->
-	<jmxConfigurator />
-
 	<!-- stdout appender定义 -->
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">

@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.springside.examples.showcase.orm.AuditableEntity;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
