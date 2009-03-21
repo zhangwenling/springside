@@ -30,7 +30,7 @@ public abstract class EntityManager<T, PK extends Serializable> {
 	protected abstract HibernateDao<T, PK> getEntityDao();
 
 	// CRUD函数 //
-	
+
 	@Transactional(readOnly = true)
 	public T get(PK id) {
 		return getEntityDao().get(id);

@@ -20,8 +20,8 @@
 		}
 	%>
 	<h2>Showcase登录页</h2>
-	<p>用户故事：在Mini-Web的基础上，演示与验证码的整合。未来的版本还将演示数据级访问控制。</p>
-	<p>技术说明：采基于JCaptcha2.0生成GMail式的验证码，与SpringSecurity处理相同的登录Form地址实现集成。</p>
+	<p>用户故事：在Mini-Web的基础上，演示与验证码的整合。</p>
+	<p>技术说明：采基于JCaptcha2.0生成GMail式的验证码，通过JCaptchaFilter与SpringSecurity简单集成。</p>
 	<form id="loginForm" action="${ctx}/j_spring_security_check" method="post">
 		<table class="inputView">
 			<tr>

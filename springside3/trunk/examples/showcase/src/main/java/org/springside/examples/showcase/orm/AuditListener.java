@@ -21,7 +21,7 @@ public class AuditListener implements SaveOrUpdateEventListener {
 		Object object = event.getObject();
 		if (object instanceof AuditableEntity) {
 			AuditableEntity entity = (AuditableEntity) object;
-			
+
 			if (entity.getId() == null) {
 				entity.setCreateTime(new Date());
 				entity.setCreateBy(SpringSecurityUtils.getCurrentUserName());
