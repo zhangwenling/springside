@@ -33,4 +33,6 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
+	
+	<beans:bean id="captchaService" class="com.octo.captcha.service.image.DefaultManageableImageCaptchaService"/>
 </beans:beans>

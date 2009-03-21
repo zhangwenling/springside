@@ -20,20 +20,26 @@
 		}
 	%>
 	<h2>Showcase登录页</h2>
-	<p>说明：在Mini-Web Example的RBAC基础上，演示与验证码的整合。在未来版本中还将演示数据级访问控制(ACL)。</p>
+	<p>说明：在Mini-Web的基础上，演示与验证码的整合。在未来版本中还将演示数据级访问控制。</p>
 	<form id="loginForm" action="${ctx}/j_spring_security_check" method="post">
 		<table class="inputView">
 			<tr>
 				<td>用户名:</td>
-				<td>
+				<td colspan='2'>
 					<input type='text' name='j_username'
 					<s:if test="not empty param.error"> value='<%=session.getAttribute(AuthenticationProcessingFilter.SPRING_SECURITY_LAST_USERNAME_KEY)%>'</s:if>/>
 				</td>
 			</tr>
 			<tr>
 				<td>密码:</td>
-				<td><input type='password' name='j_password' /></td>
+				<td  colspan='2'><input type='password' name='j_password' /></td>
 			</tr>
+				<tr>
+				<td>验证码:</td>
+				<td><input type='text' name='j_captcha'/></td>
+				<td><img src="${ctx}/security/captcha.jpg" /></td>
+			</tr>
+			
 			<tr>
 				<td>
 					<input type="checkbox" name="_spring_security_remember_me" />
@@ -41,7 +47,7 @@
 				<td>两周内记住我</td>
 			</tr>
 			<tr>
-				<td colspan='2'><input value="登录" type="submit" /></td>
+				<td colspan='3'><input value="登录" type="submit" /></td>
 			</tr>
 		</table>
 	</form>

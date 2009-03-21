@@ -155,11 +155,16 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 		<!-- web end -->
-		
+
 		<!-- spring security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core-tiger</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.octo.captcha</groupId>
+			<artifactId>jcaptcha</artifactId>
+			<version>1.0</version>
 		</dependency>
 
 		<!-- logging begin -->
