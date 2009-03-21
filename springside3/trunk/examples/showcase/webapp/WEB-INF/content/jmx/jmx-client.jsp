@@ -30,6 +30,7 @@
 			$.getJSON("jmx-client!updateStatics.action", function(data) {
 				$('#queryUserCount').val(data.queryUserCount);
 				$('#modifyUserCount').val(data.modifyUserCount);
+				$('#deleteUserCount').val(data.deleteUserCount);
 			});
 		}
 	</script>
@@ -66,13 +67,19 @@
 		<tr>
 			<td>查询用户列表次数:</td>
 			<td>
-				<input id="queryUserCount" value="${serverStatistics.queryUserCount}" readonly="readonly"/> 
+				<input id="queryUserCount" value="${serverStatistics.queryUserCount}" readonly="readonly" size="5"/> 
 			</td>
 		</tr>
 		<tr>
-			<td>修改用户次数:</td>
+			<td>更改用户次数:</td>
 			<td>
-				<input id="modifyUserCount" value="${serverStatistics.modifyUserCount}" readonly="readonly"/> 
+				<input id="modifyUserCount" value="${serverStatistics.modifyUserCount}" readonly="readonly" size="5"/> 
+			</td>
+		</tr>
+		<tr>
+			<td>删除用户次数:</td>
+			<td>
+				<input id="deleteUserCount" value="${serverStatistics.deleteUserCount}" readonly="readonly" size="5"/> 
 			</td>
 		</tr>
 		<tr>
@@ -81,14 +88,10 @@
 	</table>
 	
 	<h4>Hibernate运行统计</h4>
-	<table>
-		<tr>
-			<td>打开数据库连接次数:</td>
-			<td>
-				<input id="sessionOpenCount" value="${sessionOpenCount}" readonly="readonly"/> 
-			</td>
-		</tr>
-	</table>
+	<p>
+		打开数据库连接:${hibernateStatistics.sessionOpenCount}<br/>
+		关闭数据库连接:${hibernateStatistics.sessionCloseCount}
+	</p>
 
 	<p><a href="#/" target="_blank">打开新窗口并行操作</a>、<a href="${ctx}/">返回首页</a></p>
 </body>

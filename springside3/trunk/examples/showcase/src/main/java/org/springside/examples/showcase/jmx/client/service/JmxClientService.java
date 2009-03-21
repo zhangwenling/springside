@@ -124,9 +124,12 @@ public class JmxClientService {
 	}
 
 	/**
-	 * 获取Hibernate打开数据库连接数,无MBean的Class文件时直接读取属性的演示.
+	 * 获取Hibernate统计数据,无MBean的Class文件时直接读取属性的演示.
 	 */
-	public Long getSessionOpenCount() {
-		return (Long) clientFactory.getAttribute(hibernteMBeanName, "SessionOpenCount");
+	public HibernateStatistics getHibernateStatistics() {
+		HibernateStatistics statistics = new HibernateStatistics();
+		statistics.setSessionOpenCount((Long) clientFactory.getAttribute(hibernteMBeanName, "SessionOpenCount"));
+		statistics.setSessionCloseCount((Long) clientFactory.getAttribute(hibernteMBeanName, "SessionCloseCount"));
+		return statistics ;
 	}
 }

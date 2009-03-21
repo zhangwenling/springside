@@ -36,15 +36,34 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 	@Override
 	@Transactional(readOnly = true)
 	public List<User> getAll() {
-		boolean incStatistics = (serverConfig != null && serverConfig.isStatisticsEnabled() && serverStatistics != null);
-		if (incStatistics) {
+		if (isStatisticsEnabled()) {
 			serverStatistics.incQueryUserCount();
 		}
-		return entityDao.getAll();
+		return super.getAll();
+	}
+
+	@Override
+	public void save(User user) {
+		if (isStatisticsEnabled()) {
+			serverStatistics.incModifyUserCount();
+		}
+		super.save(user);
+	}
+
+	@Override
+	public void delete(Long id) {
+		if (isStatisticsEnabled()) {
+			serverStatistics.incDeleteUserCount();
+		}
+		super.delete(id);
 	}
 
 	@Transactional(readOnly = true)
 	public User loadByLoginName(String loginName) {
 		return entityDao.findUniqueByProperty("loginName", loginName);
+	}
+
+	private boolean isStatisticsEnabled() {
+		return (serverConfig != null && serverConfig.isStatisticsEnabled() && serverStatistics != null);
 	}
 }

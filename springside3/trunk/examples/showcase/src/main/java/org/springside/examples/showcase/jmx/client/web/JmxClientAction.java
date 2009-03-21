@@ -7,6 +7,7 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springside.examples.showcase.jmx.client.service.HibernateStatistics;
 import org.springside.examples.showcase.jmx.client.service.JmxClientService;
 import org.springside.examples.showcase.jmx.server.ServerStatistics;
 import org.springside.modules.web.struts2.Struts2Utils;
@@ -33,7 +34,7 @@ public class JmxClientAction extends ActionSupport {
 	private String nodeName;
 	private boolean statisticsEnabled;
 	private ServerStatistics serverStatistics;
-	private long sessionOpenCount;
+	private HibernateStatistics hibernateStatistics;
 
 	// 属性访问函数 //
 
@@ -57,8 +58,8 @@ public class JmxClientAction extends ActionSupport {
 		return serverStatistics;
 	}
 
-	public long getSessionOpenCount() {
-		return sessionOpenCount;
+	public HibernateStatistics getHibernateStatistics() {
+		return hibernateStatistics;
 	}
 
 	// Action 函数 //
@@ -71,7 +72,7 @@ public class JmxClientAction extends ActionSupport {
 		nodeName = jmxClientService.getNodeName();
 		statisticsEnabled = jmxClientService.isStatisticsEnabled();
 		serverStatistics = jmxClientService.getServerStatistics();
-		sessionOpenCount = jmxClientService.getSessionOpenCount();
+		hibernateStatistics = jmxClientService.getHibernateStatistics();
 		return SUCCESS;
 	}
 
