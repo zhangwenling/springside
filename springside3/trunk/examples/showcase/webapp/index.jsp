@@ -14,7 +14,7 @@
 
 <h3><a href="jmx/jmx-client.action">JMX演示</a></h3>
 
-<h3><a href="security/login.action">安全演示(开发中)</a></h3>
+<h3><a href="security/login.action">安全演示</a></h3>
 
 <h3><a href="schedule/index.action">定时任务演示(开发中)</a></h3>
 

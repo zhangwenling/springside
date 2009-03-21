@@ -36,7 +36,7 @@
 		<filter-class>org.springside.examples.showcase.security.CaptchaFilter</filter-class>
 		<init-param>
 			<param-name>imageUrl</param-name>
-			<param-value>/security/captcha.jpg</param-value>
+			<param-value>/security/jcaptcha.jpg</param-value>
 		</init-param>
 		<init-param>
 			<param-name>failureUrl</param-name>
@@ -68,7 +68,7 @@
 
 	<filter-mapping>
 		<filter-name>captchaFilter</filter-name>
-		<url-pattern>/security/captcha.jpg</url-pattern>
+		<url-pattern>/security/jcaptcha.jpg</url-pattern>
 	</filter-mapping>
 
 	<filter-mapping>
