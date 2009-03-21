@@ -24,17 +24,21 @@ import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 /**
- * Servlet Filter implementation class CaptchaFilter
+ * 集成JCaptcha的Filter.
+ * 
+ * 通过与SpringSecurity处理相同的filterProcessesUrl实现集成.
+ * filterProcessesUrl的默认值为/j_spring_security_check
+ * 
+ * @author calvin
  */
 public class CaptchaFilter implements Filter {
 
-	private static final String DEFAULT_LOGIN_URL = "/j_spring_security_check";
+	private static final String DEFAULT_FILTER_PROCESSES_URL = "/j_spring_security_check";
 	private static final String DEFAULT_CAPTCHA_SERVICE_ID = "captchaService";
 	private static final String DEFAULT_CAPTCHA_PARAMTER_NAME = "j_captcha";
 
-	private String imageUrl;
-	private String loginUrl;
-	private String errorUrl;
+	private String filterProcessesUrl;
+	private String failureUrl;
 	private String captchaServiceId;
 	private String captchaParamterName;
 
@@ -46,21 +50,29 @@ public class CaptchaFilter implements Filter {
 	}
 
 	/**
-	 * 初始化filter参数
+	 * 初始化web.xml中定义的filter init-param.
 	 */
 	private void initParameters(FilterConfig fConfig) {
-		imageUrl = fConfig.getInitParameter("imageUrl");
-		errorUrl = fConfig.getInitParameter("errorUrl");
+		failureUrl = fConfig.getInitParameter("failureUrl");
+		if (StringUtils.isBlank(failureUrl)) {
+			throw new IllegalArgumentException("CaptchaFilter缺少failureUrl参数");
+		}
+		failureUrl = fConfig.getServletContext().getContextPath() + failureUrl;
 
-		if (StringUtils.isBlank(imageUrl) || StringUtils.isBlank(errorUrl)) {
-			throw new IllegalArgumentException("CaptchaFilter缺少imageUrl或errorUrl参数");
+		filterProcessesUrl = fConfig.getInitParameter("filterProcessesUrl");
+		if (StringUtils.isBlank(filterProcessesUrl)) {
+			filterProcessesUrl = DEFAULT_FILTER_PROCESSES_URL;
 		}
 
-		loginUrl = StringUtils.defaultIfEmpty(fConfig.getInitParameter("loginUrl"), DEFAULT_LOGIN_URL);
-		captchaServiceId = StringUtils.defaultIfEmpty(fConfig.getInitParameter("captchaServiceId"),
-				DEFAULT_CAPTCHA_SERVICE_ID);
-		captchaParamterName = StringUtils.defaultIfEmpty(fConfig.getInitParameter("captchaParamterName"),
-				DEFAULT_CAPTCHA_PARAMTER_NAME);
+		captchaServiceId = fConfig.getInitParameter("captchaServiceId");
+		if (StringUtils.isBlank(captchaServiceId)) {
+			captchaServiceId = DEFAULT_CAPTCHA_SERVICE_ID;
+		}
+
+		captchaParamterName = fConfig.getInitParameter("captchaParamterName");
+		if (StringUtils.isBlank(captchaParamterName)) {
+			captchaParamterName = DEFAULT_CAPTCHA_PARAMTER_NAME;
+		}
 	}
 
 	/**
@@ -79,12 +91,11 @@ public class CaptchaFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) theRequest;
 		HttpServletResponse response = (HttpServletResponse) theResponse;
 
-		String path = request.getServletPath();		
-		if (StringUtils.startsWith(path, imageUrl)) {
-			genCaptchaImage(request, response);
-		}
-		if (StringUtils.startsWith(path, loginUrl)) {
+		String path = request.getServletPath();
+		if (StringUtils.startsWith(path, filterProcessesUrl)) {
 			verifyCaptchaChallenge(request, response, chain);
+		} else {
+			genCaptchaImage(request, response);
 		}
 	}
 
@@ -92,7 +103,7 @@ public class CaptchaFilter implements Filter {
 	 * 生成验证码图片.
 	 */
 	public void genCaptchaImage(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		byte[] captchaChallengeAsJpeg = null;
+
 		ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
 		try {
 			String captchaId = request.getSession().getId();
@@ -106,9 +117,8 @@ public class CaptchaFilter implements Filter {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			return;
 		}
-		captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
+		byte[] captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
 
-		// flush it in the response
 		response.setHeader("Cache-Control", "no-store");
 		response.setHeader("Pragma", "no-cache");
 		response.setDateHeader("Expires", 0);
@@ -124,14 +134,14 @@ public class CaptchaFilter implements Filter {
 	 */
 	private boolean verifyCaptchaChallenge(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		boolean passed = false;
 		String captchaID = request.getSession().getId();
 		String challengeResponse = request.getParameter(captchaParamterName);
-		passed = captchaService.validateResponseForID(captchaID, challengeResponse);
+
+		boolean passed = captchaService.validateResponseForID(captchaID, challengeResponse);
 		if (passed) {
 			chain.doFilter(request, response);
 		} else {
-			response.sendRedirect(request.getContextPath() + errorUrl);
+			response.sendRedirect(failureUrl);
 		}
 		return false;
 	}

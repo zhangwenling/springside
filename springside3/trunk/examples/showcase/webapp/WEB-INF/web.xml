@@ -39,7 +39,7 @@
 			<param-value>/security/captcha.jpg</param-value>
 		</init-param>
 		<init-param>
-			<param-name>errorUrl</param-name>
+			<param-name>failureUrl</param-name>
 			<param-value>/security/login.action?error=true</param-value>
 		</init-param>
 	</filter>

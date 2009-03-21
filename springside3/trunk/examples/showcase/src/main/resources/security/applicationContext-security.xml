@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd"
-	default-autowire="byType" default-lazy-init="true">
+	default-lazy-init="true">
 
 	<beans:description>使用SpringSecurity的安全配置文件</beans:description>
 
@@ -20,8 +20,6 @@
 		<password-encoder hash="plaintext" />
 	</authentication-provider>
 
-	<beans:bean id="userDetailsService" class="org.springside.examples.showcase.security.UserDetailServiceImpl" />
-
 	<!-- 将授权的默认前缀由ROLE_改为A_ -->
 	<beans:bean id="accessDecisionManager" class="org.springframework.security.vote.AffirmativeBased">
 		<beans:property name="decisionVoters">
@@ -33,6 +31,7 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
-	
-	<beans:bean id="captchaService" class="com.octo.captcha.service.image.DefaultManageableImageCaptchaService"/>
+
+	<!-- 用户查询实现配置  -->
+	<beans:bean id="userDetailsService" class="org.springside.examples.showcase.security.UserDetailServiceImpl" />
 </beans:beans>
