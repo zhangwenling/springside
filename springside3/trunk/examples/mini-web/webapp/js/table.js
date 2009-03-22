@@ -5,12 +5,12 @@ function jumpPage(pageNo){
 	
 	function order(orderBy,defaultOrder){
 		if($("#orderBy").val()==orderBy){
-			if($("#order").val()=="")
-				$("#order").val(defaultOrder);
-			if($("#order").val()=="desc")
-				$("#order").val("asc");
-			if($("#order").val()=="asc")
-				$("#order").val("desc");
+			if($("#order").val()==""){
+			$("#order").val(defaultOrder);}
+			else if($("#order").val()=="desc"){
+			$("#order").val("asc");}
+			else if($("#order").val()=="asc"){
+			$("#order").val("desc");}
 		}
 		else{
 			$("#orderBy").val(orderBy);

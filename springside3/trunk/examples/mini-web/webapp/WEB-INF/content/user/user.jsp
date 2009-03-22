@@ -9,7 +9,7 @@
 	<%@ include file="/common/meta.jsp"%>
 	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet">
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
-	<script  src="${ctx}/js/form.js" type="text/javascript"></script>
+	<script  src="${ctx}/js/table.js" type="text/javascript"></script>
 	<script type="text/javascript">
 	var modifyAction = 'user!input.action';
 	var deleteAction = 'user!delete.action';
