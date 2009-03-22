@@ -25,10 +25,10 @@ import org.springside.modules.orm.PropertyFilter.MatchType;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
- * 封装SpringSide扩展功能的Hibernat范型基类.
+ * 封装SpringSide扩展功能的Hibernat泛型基类.
  * 
  * 扩展功能包括分页查询,按属性过滤条件列表查询等.
- * 可在Service层直接使用,也可以扩展范型DAO子类使用.
+ * 可在Service层直接使用,也可以扩展泛型DAO子类使用,见两个构造函数的注释.
  * 
  * @param <T> DAO操作的对象类型
  * @param <PK> 主键类型
@@ -39,20 +39,21 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 用于扩展的DAO子类使用的构造函数.
 	 * 
-	 * 通过子类的范型定义取得对象类型Class.
+	 * 通过子类的泛型定义取得对象类型Class.
 	 * eg.
-	 * public class UserDao extends SimpleHibernateDao<User, Long>
+	 * public class UserDao extends HibernateDao<User, Long>{
+	 * }
 	 */
 	public HibernateDao() {
 		super();
 	}
 
 	/**
-	 * 用于Service层直接使用SimpleHibernateDAO的构造函数.
+	 * 用于Service层直接使用HibernateDAO的构造函数.
 	 * eg.
-	 * SimpleHibernateDao<User, Long> userDao = new SimpleHibernateDao<User, Long>(sessionFactory, User.class);
+	 * HibernateDao<User, Long> userDao = new HibernateDao<User, Long>(sessionFactory, User.class);
 	 */
-	public HibernateDao(SessionFactory sessionFactory, Class<T> entityClass) {
+	public HibernateDao(final SessionFactory sessionFactory, final Class<T> entityClass) {
 		super(sessionFactory, entityClass);
 	}
 
@@ -77,7 +78,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 */
 	@SuppressWarnings("unchecked")
 	public Page<T> find(final Page<T> page, final String hql, final Object... values) {
-		Assert.notNull(page);
+		Assert.notNull(page, "page不能为空");
 
 		Query q = createQuery(hql, values);
 		setPageParameter(q, page);
@@ -97,7 +98,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 */
 	@SuppressWarnings("unchecked")
 	public Page<T> findByCriteria(final Page<T> page, final Criterion... criterions) {
-		Assert.notNull(page);
+		Assert.notNull(page, "page不能为空");
 
 		Criteria c = createCriteria(criterions);
 
@@ -192,7 +193,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 
 	 * @param matchType 目前支持的取值为"EQUAL"与"LIKE".
 	 */
-	public List<T> findByProperty(final String propertyName, final Object value, String matchTypeStr) {
+	public List<T> findByProperty(final String propertyName, final Object value, final String matchTypeStr) {
 		MatchType matchType = Enum.valueOf(MatchType.class, matchTypeStr);
 		Criterion criterion = buildPropertyCriterion(propertyName, value, matchType);
 		return findByCriteria(criterion);
@@ -217,7 +218,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按属性条件列表创建Criterion数组,辅助函数.
 	 */
-	protected Criterion[] buildPropertyFilterCriterions(List<PropertyFilter> filters) {
+	protected Criterion[] buildPropertyFilterCriterions(final List<PropertyFilter> filters) {
 		List<Criterion> criterionList = new ArrayList<Criterion>();
 		for (PropertyFilter filter : filters) {
 			String propertyName = filter.getPropertyName();
@@ -243,8 +244,8 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按属性条件参数创建Criterion,辅助函数.
 	 */
-	protected Criterion buildPropertyCriterion(final String propertyName, final Object value, MatchType matchType) {
-		Assert.hasText(propertyName);
+	protected Criterion buildPropertyCriterion(final String propertyName, final Object value, final MatchType matchType) {
+		Assert.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = null;
 
 		if (MatchType.EQUAL.equals(matchType)) {

@@ -8,11 +8,11 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
 /**
- * Struts2中典型CRUD Action的规范基类.
+ * Struts2中典型CRUD Action的抽象基类.
  * 
- * 声明对Preparable,ModelDriven接口的使用,并规范了CRUD函数和返回值的命名.
+ * 主要定义了对Preparable,ModelDriven接口的使用,以及CRUD函数和返回值的命名.
  *
- * @param <T> CRUD所管理的对象类型.
+ * @param <T> CRUDAction所管理的对象类型.
  * 
  * @author calvin
  */

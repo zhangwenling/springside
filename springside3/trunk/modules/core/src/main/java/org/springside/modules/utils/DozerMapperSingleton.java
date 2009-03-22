@@ -4,7 +4,7 @@ import net.sf.dozer.util.mapping.DozerBeanMapper;
 import net.sf.dozer.util.mapping.MapperIF;
 
 /**
- * 辅助DTO复制的Dozer工具类的单例wrapper.
+ * DTO复制辅助工具Dozer的单例wrapper.
  * 
  * Dozer在同一JVM里使用单例即可,无需重复创建.
  * 但Dozer4自带的DozerBeanMapperSingletonWrapper必须使用dozerBeanMapping.xml作参数初始化,因此重新实现无配置文件的版本.

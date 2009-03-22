@@ -62,7 +62,11 @@
 	</table>
 	</form>
 
+	<table  cellspacing="20">
+	<tr>
+	<td>
 	<h4>系统运行统计</h4>
+	
 	<table>
 		<tr>
 			<td>查询用户列表次数:</td>
@@ -86,13 +90,17 @@
 			<td colspan="2"><input type="button" value="刷新状态" onclick="updateStatics();" /></td>
 		</tr>
 	</table>
-	
+	</td>
+	<td valign="top">
 	<h4>Hibernate运行统计</h4>
 	<p>
 		打开数据库连接:${hibernateStatistics.sessionOpenCount}<br/>
 		关闭数据库连接:${hibernateStatistics.sessionCloseCount}
 	</p>
+	</td>
+	</tr>
+	</table>
 
-	<p><a href="#/" target="_blank">打开新窗口并行操作</a>、<a href="${ctx}/">返回首页</a></p>
+	<div><a href="#/" target="_blank">打开新窗口并行操作</a>、<a href="${ctx}/">返回首页</a></div>
 </body>
 </html>

@@ -43,7 +43,7 @@ public class HibernateWebUtils {
 	 * 因此需采用如此的整合算法：在源集合中删除id不在ID集合中的对象,根据ID集合中的id创建对象并添加到源集合中.
 	 * 
 	 * @param srcObjects 源对象集合
-	 * @param checkedIds  目标集合
+	 * @param checkedIds  目标ID集合
 	 * @param clazz  集合中对象的类型
 	 * @param idName 对象主键的名称
 	 */
@@ -51,9 +51,9 @@ public class HibernateWebUtils {
 			final Class<T> clazz, final String idName) throws Exception {
 
 		//参数校验
-		Assert.notNull(srcObjects);
-		Assert.hasText(idName);
-		Assert.notNull(clazz);
+		Assert.notNull(srcObjects, "scrObjects不能为空");
+		Assert.hasText(idName, "idName不能为空");
+		Assert.notNull(clazz, "clazz不能为空");
 
 		//目标ID集合为空,删除源集合中所有对象后直接返回.
 		if (checkedIds == null) {
@@ -89,7 +89,7 @@ public class HibernateWebUtils {
 	 * 
 	 * @see #buildPropertyFilters(HttpServletRequest, String)
 	 */
-	public static List<PropertyFilter> buildPropertyFilters(HttpServletRequest request) {
+	public static List<PropertyFilter> buildPropertyFilters(final HttpServletRequest request) {
 		return buildPropertyFilters(request, "filter_");
 	}
 
@@ -102,7 +102,7 @@ public class HibernateWebUtils {
 	 * filter_LIKE_name|email	
 	 */
 	@SuppressWarnings("unchecked")
-	public static List<PropertyFilter> buildPropertyFilters(HttpServletRequest request, String filterPrefix) {
+	public static List<PropertyFilter> buildPropertyFilters(final HttpServletRequest request, final String filterPrefix) {
 		List<PropertyFilter> filterList = new ArrayList<PropertyFilter>();
 
 		//从request中获取含属性前缀名的参数,构造去除前缀名后的参数Map.

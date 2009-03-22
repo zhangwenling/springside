@@ -9,7 +9,7 @@ import org.springside.modules.orm.hibernate.DefaultEntityManager;
  * 授权管理类.
  * 
  * 实现领域对象授权的所有业务管理函数.
- * 通过范型声明继承DefaultEntityManager,默认拥有CRUD管理函数及HibernateDao<Authority,Long> entityDao成员变量.
+ * 通过泛型声明继承DefaultEntityManager,默认拥有CRUD管理函数及HibernateDao<Authority,Long> entityDao成员变量.
  * 
  * @author calvin
  */

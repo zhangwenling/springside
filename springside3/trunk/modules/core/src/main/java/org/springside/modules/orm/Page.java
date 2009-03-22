@@ -27,7 +27,7 @@ public class Page<T> {
 	protected boolean autoCount = true;
 
 	//返回结果
-	protected List<T> result = null;
+	protected List<T> result = Collections.emptyList();
 	protected int totalCount = -1;
 
 	// 构造函数
@@ -57,7 +57,7 @@ public class Page<T> {
 	/**
 	 * 设置当前页的页号,序号从1开始,低于1时自动调整为1.
 	 */
-	public void setPageNo(int pageNo) {
+	public void setPageNo(final int pageNo) {
 		this.pageNo = pageNo;
 
 		if (pageNo < 1) {
@@ -130,13 +130,13 @@ public class Page<T> {
 	 */
 	public void setOrder(final String order) {
 		//检查order字符串的合法值
-		String[] orders = StringUtils.split(order, ',');
+		String[] orders = StringUtils.split(StringUtils.lowerCase(order), ',');
 		for (String orderStr : orders) {
-			if (!StringUtils.equalsIgnoreCase(DESC, orderStr) && !StringUtils.equalsIgnoreCase(ASC, orderStr))
+			if (!StringUtils.equals(DESC, orderStr) && !StringUtils.equals(ASC, orderStr))
 				throw new IllegalArgumentException("排序方向" + orderStr + "不是合法值");
 		}
 
-		this.order = order.toLowerCase();
+		this.order = StringUtils.lowerCase(order);
 	}
 
 	/**
@@ -191,8 +191,6 @@ public class Page<T> {
 	 * 取得页内的记录列表.
 	 */
 	public List<T> getResult() {
-		if (result == null)
-			return Collections.emptyList();
 		return result;
 	}
 

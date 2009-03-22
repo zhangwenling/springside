@@ -14,7 +14,7 @@ public class SpringSecurityUtils {
 	}
 
 	/**
-	 * 取得当前用户的登录名,如果无已登录用户则返回null.
+	 * 取得当前用户的登录名,如果当前用户未登录则返回null.
 	 */
 	public static String getCurrentUserName() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

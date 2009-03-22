@@ -3,6 +3,7 @@ package org.springside.modules.jmx;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.management.Attribute;
 import javax.management.JMException;
@@ -32,6 +33,7 @@ public class JmxClientFactory {
 
 	private JMXConnector connector;
 	private MBeanServerConnection mbsc;
+	private AtomicBoolean connected = new AtomicBoolean(false);
 
 	public JmxClientFactory(final String serviceUrl) throws IOException {
 		initConnector(serviceUrl, null, null);
@@ -49,15 +51,16 @@ public class JmxClientFactory {
 		JMXServiceURL url = new JMXServiceURL(serviceUrl);
 
 		boolean hasCredentlals = StringUtils.isNotBlank(userName);
-		if (!hasCredentlals) {
-			connector = JMXConnectorFactory.connect(url);
-		} else {
+		if (hasCredentlals) {
 			Map environment = new HashMap();
 			environment.put(JMXConnector.CREDENTIALS, new String[] { userName, passwd });
 			connector = JMXConnectorFactory.connect(url, environment);
+		} else {
+			connector = JMXConnectorFactory.connect(url);
 		}
 
 		mbsc = connector.getMBeanServerConnection();
+		connected.set(true);
 	}
 
 	/**
@@ -65,48 +68,46 @@ public class JmxClientFactory {
 	 */
 	public void close() throws IOException {
 		connector.close();
+		connected.set(false);
 	}
 
 	/**
 	 * 创建标准MBean代理. 
 	 */
 	public <T> T getMBeanProxy(final String mbeanName, final Class<T> mBeanInterface) throws IOException {
-		Assert.hasText(mbeanName, "mbeanName为空");
-		try {
-			ObjectName objectName = new ObjectName(mbeanName);
-			return JMX.newMBeanProxy(mbsc, objectName, mBeanInterface);
-		} catch (MalformedObjectNameException e) {
-			throw new IllegalArgumentException("mbeanName:" + mbeanName + "不正确", e);
-		}
+		Assert.hasText(mbeanName, "mbeanName不能为空");
+		assertConnected();
+
+		ObjectName objectName = buildObjectName(mbeanName);
+		return JMX.newMBeanProxy(mbsc, objectName, mBeanInterface);
 	}
 
 	/**
 	 * 创建MXBean代理. 
 	 */
 	public <T> T getMXBeanProxy(final String mbeanName, final Class<T> mBeanInterface) throws IOException {
-		Assert.hasText(mbeanName, "mbeanName为空");
-		try {
-			ObjectName objectName = new ObjectName(mbeanName);
-			return JMX.newMXBeanProxy(mbsc, objectName, mBeanInterface);
-		} catch (MalformedObjectNameException e) {
-			throw new IllegalArgumentException("mbeanName:" + mbeanName + "不正确", e);
-		}
+		Assert.hasText(mbeanName, "mbeanName不能为空");
+		assertConnected();
+
+		ObjectName objectName = buildObjectName(mbeanName);
+		return JMX.newMXBeanProxy(mbsc, objectName, mBeanInterface);
 	}
 
 	/**
 	 * 按属性名直接读取MBean属性(无MBean的Class文件时使用).
 	 */
 	public Object getAttribute(final String mbeanName, final String attributeName) {
-		Assert.hasText(mbeanName, "mbeanName为空");
-		Assert.hasText(attributeName, "attributeName为空");
+		Assert.hasText(mbeanName, "mbeanName不能为空");
+		Assert.hasText(attributeName, "attributeName不能为空");
+		assertConnected();
 
 		try {
-			ObjectName objectName = new ObjectName(mbeanName);
+			ObjectName objectName = buildObjectName(mbeanName);
 			return mbsc.getAttribute(objectName, attributeName);
 		} catch (JMException e) {
 			throw new IllegalArgumentException("参数不正确", e);
 		} catch (IOException e) {
-			throw new RuntimeException("连接出错", e);
+			throw new IllegalStateException("连接出错", e);
 		}
 	}
 
@@ -114,17 +115,37 @@ public class JmxClientFactory {
 	 * 按属性名直接设置MBean属性(无MBean的Class文件时使用).
 	 */
 	public void setAttribute(final String mbeanName, final String attributeName, final Object value) {
-		Assert.hasText(mbeanName, "mbeanName为空");
-		Assert.hasText(attributeName, "attributeName为空");
+		Assert.hasText(mbeanName, "mbeanName不能为空");
+		Assert.hasText(attributeName, "attributeName不能为空");
+		assertConnected();
 
 		try {
-			ObjectName objectName = new ObjectName(mbeanName);
+			ObjectName objectName = buildObjectName(mbeanName);
 			Attribute attribute = new Attribute(attributeName, value);
 			mbsc.setAttribute(objectName, attribute);
 		} catch (JMException e) {
 			throw new IllegalArgumentException("参数不正确", e);
 		} catch (IOException e) {
-			throw new RuntimeException("连接出错", e);
+			throw new IllegalStateException("连接出错", e);
+		}
+	}
+
+	/**
+	 * 确保连接未关闭.
+	 */
+	private void assertConnected() {
+		if (!connected.get())
+			throw new IllegalStateException("connector已关闭");
+	}
+
+	/**
+	 * 转换ObjectName构造函数抛出的异常为unchecked exception.
+	 */
+	private ObjectName buildObjectName(final String mbeanName) {
+		try {
+			return new ObjectName(mbeanName);
+		} catch (MalformedObjectNameException e) {
+			throw new IllegalArgumentException("mbeanName:" + mbeanName + "不正确", e);
 		}
 	}
 }

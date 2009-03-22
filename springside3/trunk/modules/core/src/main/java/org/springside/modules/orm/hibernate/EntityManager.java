@@ -12,10 +12,19 @@ import org.springside.modules.orm.PropertyFilter;
 /**
  * 领域对象的业务管理类基类.
  * 
- * 提供了领域对象的简单CRUD方法.
+ * 提供了领域对象的简单CRUD方法,子类需实现getEntityDao()函数提供操作该对象的泛型DAO.
  *
  * @param <T> 领域对象类型
  * @param <PK> 领域对象的主键类型
+ * 
+ * eg.
+ * public class UserManager extends EntityManager<User, Long>{
+ * 	@Autowired
+ *	private UserDao userDao;
+ *	protected UserDao getEntityDao() {
+		return userDao;
+	}
+ * } 
  * 
  * @author calvin
  */
@@ -32,12 +41,12 @@ public abstract class EntityManager<T, PK extends Serializable> {
 	// CRUD函数 //
 
 	@Transactional(readOnly = true)
-	public T get(PK id) {
+	public T get(final PK id) {
 		return getEntityDao().get(id);
 	}
 
 	@Transactional(readOnly = true)
-	public Page<T> getAll(Page<T> page) {
+	public Page<T> getAll(final Page<T> page) {
 		return getEntityDao().getAll(page);
 	}
 
@@ -47,15 +56,15 @@ public abstract class EntityManager<T, PK extends Serializable> {
 	}
 
 	@Transactional(readOnly = true)
-	public Page<T> search(Page<T> page, List<PropertyFilter> filters) {
+	public Page<T> search(final Page<T> page, final List<PropertyFilter> filters) {
 		return getEntityDao().findByFilters(page, filters);
 	}
 
-	public void save(T entity) {
+	public void save(final T entity) {
 		getEntityDao().save(entity);
 	}
 
-	public void delete(PK id) {
+	public void delete(final PK id) {
 		getEntityDao().delete(id);
 	}
 }

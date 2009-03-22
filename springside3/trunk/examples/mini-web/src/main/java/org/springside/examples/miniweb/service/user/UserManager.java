@@ -17,7 +17,7 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
  * 实现领域对象用户的所有业务管理函数.
  * 演示派生DAO层子类的模式,由注入的UserDao封装数据库访问.
  *  
- * 通过范型声明继承EntityManager,默认拥有CRUD管理方法.
+ * 通过泛型声明继承EntityManager,默认拥有CRUD管理方法.
  * 使用Spring annotation定义事务管理.
  * 
  * @author calvin

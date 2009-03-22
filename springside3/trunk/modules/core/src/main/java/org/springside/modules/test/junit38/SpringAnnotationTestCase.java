@@ -4,7 +4,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 
 /**
- * 支持Spring Test annotation扩展的JUnit3.8 TestCase基类,但不载入Spring Context.
+ * Spring的支持Test annotation扩展的JUnit3.8 TestCase基类简写,但不载入Spring AplicationContext.
  * 
  * @author calvin
  */

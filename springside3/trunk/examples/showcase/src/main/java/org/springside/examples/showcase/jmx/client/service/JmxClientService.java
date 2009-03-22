@@ -65,8 +65,8 @@ public class JmxClientService {
 	//Spring在所有属性注入后自动执行的函数.
 	@PostConstruct
 	public void init() {
-		Assert.hasText(host);
-		Assert.hasText(port);
+		Assert.hasText(host,"host参数不能为空");
+		Assert.hasText(port,"port参数不能为空");
 
 		try {
 			String serviceUrl = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/showcase";
@@ -130,6 +130,6 @@ public class JmxClientService {
 		HibernateStatistics statistics = new HibernateStatistics();
 		statistics.setSessionOpenCount((Long) clientFactory.getAttribute(hibernteMBeanName, "SessionOpenCount"));
 		statistics.setSessionCloseCount((Long) clientFactory.getAttribute(hibernteMBeanName, "SessionCloseCount"));
-		return statistics ;
+		return statistics;
 	}
 }

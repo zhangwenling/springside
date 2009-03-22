@@ -66,8 +66,7 @@ public class Struts2Utils {
 	 * render("text/plain", "hello", "no-cache:false");
 	 * render("text/plain", "hello", "encoding:GBK", "no-cache:false");
 	 * 
-	 * @param headers 可变的header数组，目前接受的值为"encoding:"或"no-cache:",见示例代码.
-	 *                不设置时默认值分别为UTF-8和true.                 
+	 * @param headers 可变的header数组，目前接受的值为"encoding:"或"no-cache:",默认值分别为UTF-8和true.                 
 	 */
 	public static void render(final String contentType, final String content, final String... headers) {
 		try {

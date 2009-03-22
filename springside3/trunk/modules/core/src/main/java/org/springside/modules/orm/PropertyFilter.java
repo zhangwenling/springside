@@ -24,7 +24,7 @@ public class PropertyFilter {
 	public PropertyFilter() {
 	}
 
-	public PropertyFilter(String propertyName, Object value, MatchType matchType) {
+	public PropertyFilter(final String propertyName, final Object value, final MatchType matchType) {
 		this.propertyName = propertyName;
 		this.value = value;
 		this.matchType = matchType;

@@ -12,7 +12,7 @@ import org.springside.modules.orm.hibernate.DefaultEntityManager;
  * 实现领域对象用户的所有业务管理函数.
  * 演示没有DAO层子类的模式,通过默认的DAO基类完成数据访问,HQL语句统一定义于领域对象.
  * 
- * 通过范型声明继承DefaultEntityManager,默认拥有CRUD管理函数及HibernateDao<User,Long> entityDao成员变量.
+ * 通过泛型声明继承DefaultEntityManager,默认拥有CRUD管理函数及HibernateDao<User,Long> entityDao成员变量.
  * 使用Spring annotation定义事务管理.
  * 
  * @author calvin

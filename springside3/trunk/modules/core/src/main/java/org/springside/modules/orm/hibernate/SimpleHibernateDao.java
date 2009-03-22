@@ -17,9 +17,9 @@ import org.springframework.util.Assert;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
- * 封装Hibernate原生API的CRUD范型基类.
+ * 封装Hibernate原生API的CRUD泛型基类.
  * 
- * 可在Service层直接使用,也可以扩展范型DAO子类使用.
+ * 可在Service层直接使用,也可以扩展泛型DAO子类使用.
  * 参考Spring2.5自带的Petlinc例子,取消了HibernateTemplate,直接使用Hibernate原生API.
  * 
  * @param <T> DAO操作的对象类型
@@ -39,7 +39,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	/**
 	 * 用于扩展的DAO子类使用的构造函数.
 	 * 
-	 * 通过子类的范型定义取得对象类型Class.
+	 * 通过子类的泛型定义取得对象类型Class.
 	 * eg.
 	 * public class UserDao extends SimpleHibernateDao<User, Long>
 	 */
@@ -66,7 +66,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * @param sessionFactory
 	 */
 	@Autowired
-	public void setSessionFactory(SessionFactory sessionFactory) {
+	public void setSessionFactory(final SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
@@ -78,7 +78,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 保存新增或修改的对象.
 	 */
 	public void save(final T entity) {
-		Assert.notNull(entity);
+		Assert.notNull(entity, "entity不能为空");
 		getSession().saveOrUpdate(entity);
 		logger.debug("save entity: {}", entity);
 	}
@@ -89,7 +89,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * @param entity 对象必须是session中的对象或含id属性的transient对象.
 	 */
 	public void delete(final T entity) {
-		Assert.notNull(entity);
+		Assert.notNull(entity, "entity不能为空");
 		getSession().delete(entity);
 		logger.debug("delete entity: {}", entity);
 	}
@@ -98,7 +98,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 按id删除对象.
 	 */
 	public void delete(final PK id) {
-		Assert.notNull(id);
+		Assert.notNull(id, "id不能为空");
 		delete(get(id));
 		logger.debug("delete entity {},id is {}", entityClass.getSimpleName(), id);
 	}
@@ -107,7 +107,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 按id获取对象.
 	 */
 	public T get(final PK id) {
-		Assert.notNull(id);
+		Assert.notNull(id, "id不能为空");
 		return (T) getSession().load(entityClass, id);
 	}
 
@@ -122,7 +122,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 按属性查找对象列表,匹配方式为相等.
 	 */
 	public List<T> findByProperty(final String propertyName, final Object value) {
-		Assert.hasText(propertyName);
+		Assert.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = Restrictions.eq(propertyName, value);
 		return findByCriteria(criterion);
 	}
@@ -131,7 +131,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 按属性查找唯一对象,匹配方式为相等.
 	 */
 	public T findUniqueByProperty(final String propertyName, final Object value) {
-		Assert.hasText(propertyName);
+		Assert.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = Restrictions.eq(propertyName, value);
 		return (T) createCriteria(criterion).uniqueResult();
 	}
@@ -174,7 +174,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * @param values 数量可变的参数
 	 */
 	public Query createQuery(final String queryString, final Object... values) {
-		Assert.hasText(queryString);
+		Assert.hasText(queryString, "queryString不能为空");
 		Query query = getSession().createQuery(queryString);
 		if (values != null) {
 			for (int i = 0; i < values.length; i++) {

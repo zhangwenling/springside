@@ -7,7 +7,7 @@ import org.springside.examples.miniweb.entity.user.User;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
 /**
- * 继承于HibernateDao的范型DAO子类.
+ * 继承于HibernateDao的泛型DAO子类.
  * 
  * 用于集中定义HQL,封装DAO细节,在Service间解耦并共享DAO操作.
  * 
