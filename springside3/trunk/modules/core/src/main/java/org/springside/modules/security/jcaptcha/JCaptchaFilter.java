@@ -46,10 +46,10 @@ public class JCaptchaFilter implements Filter {
 
 	private static Logger logger = LoggerFactory.getLogger(JCaptchaFilter.class);
 
-	private String filterProcessesUrl;
 	private String failureUrl;
-	private String captchaServiceId;
-	private String captchaParamterName;
+	private String filterProcessesUrl = DEFAULT_FILTER_PROCESSES_URL;;
+	private String captchaServiceId = DEFAULT_CAPTCHA_SERVICE_ID;
+	private String captchaParamterName = DEFAULT_CAPTCHA_PARAMTER_NAME;
 
 	private CaptchaService captchaService = null;
 
@@ -62,23 +62,20 @@ public class JCaptchaFilter implements Filter {
 	 * 初始化web.xml中定义的filter init-param.
 	 */
 	protected void initParameters(FilterConfig fConfig) {
-		failureUrl = fConfig.getInitParameter("failureUrl");
-		if (StringUtils.isBlank(failureUrl))
+		if (StringUtils.isBlank(fConfig.getInitParameter("failureUrl")))
 			throw new IllegalArgumentException("CaptchaFilter缺少failureUrl参数");
+		failureUrl = fConfig.getInitParameter("failureUrl");
 
-		filterProcessesUrl = fConfig.getInitParameter("filterProcessesUrl");
-		if (StringUtils.isBlank(filterProcessesUrl)) {
-			filterProcessesUrl = DEFAULT_FILTER_PROCESSES_URL;
+		if (StringUtils.isNotBlank(fConfig.getInitParameter("filterProcessesUrl"))) {
+			filterProcessesUrl = fConfig.getInitParameter("filterProcessesUrl");
 		}
 
-		captchaServiceId = fConfig.getInitParameter("captchaServiceId");
-		if (StringUtils.isBlank(captchaServiceId)) {
-			captchaServiceId = DEFAULT_CAPTCHA_SERVICE_ID;
+		if (StringUtils.isNotBlank(fConfig.getInitParameter("captchaServiceId"))) {
+			captchaServiceId = fConfig.getInitParameter("captchaServiceId");
 		}
 
-		captchaParamterName = fConfig.getInitParameter("captchaParamterName");
-		if (StringUtils.isBlank(captchaParamterName)) {
-			captchaParamterName = DEFAULT_CAPTCHA_PARAMTER_NAME;
+		if (StringUtils.isNotBlank(fConfig.getInitParameter("captchaParamterName"))) {
+			captchaParamterName = fConfig.getInitParameter("captchaParamterName");
 		}
 	}
 

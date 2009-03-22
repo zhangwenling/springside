@@ -24,10 +24,14 @@
 		</init-param>
 	</filter>
 
-	<!-- Hibernate Open Session In View filter-->
+	<!-- SpringSide's Hibernate Open Session In View filter-->
 	<filter>
 		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
-		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<filter-class>org.springside.modules.orm.hibernate.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>excludeSuffixs</param-name>
+			<param-value>js,css,jpg,gif</param-value>
+		</init-param>
 	</filter>
 
 	<!-- SpringSecurity filter-->
@@ -82,7 +86,7 @@
 		<location>/common/500.jsp</location>
 	</error-page>
 	<error-page>
-        <exception-type>java.lang.Exception</exception-type>
+        <exception-type>java.lang.Throwable</exception-type>
         <location>/common/500.jsp</location>
     </error-page>
 	<error-page>
