@@ -5,9 +5,9 @@ package org.springside.examples.showcase.jmx.server;
  *  
  * @author calvin
  */
-public class MonitorMXBeanImpl implements MonitorMXBean {
+public class ServerMonitor implements MonitorMXBean {
 
-	private ServerStatistics serverStatistics;
+	private ServerStatistics serverStatistics = new ServerStatistics();
 
 	public void setServerStatistics(ServerStatistics serverStatistics) {
 		this.serverStatistics = serverStatistics;

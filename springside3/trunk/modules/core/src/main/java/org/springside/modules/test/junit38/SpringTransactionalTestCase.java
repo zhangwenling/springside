@@ -28,7 +28,7 @@ public class SpringTransactionalTestCase extends AbstractTransactionalJUnit38Spr
 	 * 
 	 * @param sessionFactoryName applicationContext中sessionFactory的名称.
 	 */
-	public void flush(String sessionFactoryName) {
+	public void flush(final String sessionFactoryName) {
 		((SessionFactory) applicationContext.getBean(sessionFactoryName)).getCurrentSession().flush();
 	}
 }

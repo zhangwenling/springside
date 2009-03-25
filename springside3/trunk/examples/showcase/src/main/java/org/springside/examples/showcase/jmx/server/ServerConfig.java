@@ -5,7 +5,7 @@ package org.springside.examples.showcase.jmx.server;
  * 
  * @author calvin
  */
-public class ServerConfig {
+public class ServerConfig implements ConfiguratorMBean {
 
 	private String nodeName;//服务器节点名
 	private boolean statisticsEnabled = false;//是否统计服务运行信息

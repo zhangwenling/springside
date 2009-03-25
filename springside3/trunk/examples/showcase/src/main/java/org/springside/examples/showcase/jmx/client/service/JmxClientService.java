@@ -65,8 +65,8 @@ public class JmxClientService {
 	//Spring在所有属性注入后自动执行的函数.
 	@PostConstruct
 	public void init() {
-		Assert.hasText(host,"host参数不能为空");
-		Assert.hasText(port,"port参数不能为空");
+		Assert.hasText(host, "host参数不能为空");
+		Assert.hasText(port, "port参数不能为空");
 
 		try {
 			String serviceUrl = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/showcase";
