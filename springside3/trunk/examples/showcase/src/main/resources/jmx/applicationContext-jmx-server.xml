@@ -42,7 +42,7 @@
 	</bean>
 
 	<!-- 系统状态监控MXBean-->
-	<bean id="serverMonitor" class="org.springside.examples.showcase.jmx.server.ServerMonitor"/>
+	<bean id="serverMonitor" class="org.springside.examples.showcase.jmx.server.ServerMonitor" />
 
 	<!-- Hibernate StatisticsMBean-->
 	<bean id="hibernateStatistics" class="org.hibernate.jmx.StatisticsService">

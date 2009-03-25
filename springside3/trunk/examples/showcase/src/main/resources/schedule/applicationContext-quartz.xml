@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 	default-lazy-init="true">
 
-	<description>计划任务配置</description>
+	<description>定时任务配置</description>
 
 	<!-- Triggers组装 -->
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
@@ -17,7 +17,7 @@
 
 	<!-- Timer式 Trigger -->
 	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
-		<property name="jobDetail" ref="jobDetail" />
+		<property name="jobDetail" ref="timerJob" />
 		<!-- 10 seconds -->
 		<property name="startDelay" value="10000" />
 		<!-- repeat every 60 seconds -->
@@ -26,17 +26,23 @@
 
 	<!-- Cron式 Trigger -->
 	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="jobDetail" ref="jobDetail" />
+		<property name="jobDetail" ref="cronJob" />
 		<!-- run every morning at 6 AM -->
 		<property name="cronExpression" value="0 0 6 * * ?" />
 	</bean>
 
-	<!-- Quartz Job -->
-	<bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<!-- Quartz Timer Job -->
+	<bean id="timerJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="exampleJob" />
-		<property name="targetMethod" value="execute" />
+		<property name="targetMethod" value="executeTimerLog" />
 	</bean>
 
-	<!-- Job业务类 -->
+	<!-- Quartz Cron Job -->
+	<bean id="cronJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="exampleJob" />
+		<property name="targetMethod" value="executeCronLog" />
+	</bean>
+
+	<!-- 定期运行的业务类 -->
 	<bean id="exampleJob" class="org.springside.examples.showcase.schedule.ExampleJob" />
 </beans>

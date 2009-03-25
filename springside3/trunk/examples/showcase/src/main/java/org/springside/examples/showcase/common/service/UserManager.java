@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.showcase.common.entity.User;
+import org.springside.examples.showcase.email.SimpleMailManager;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
 import org.springside.examples.showcase.jmx.server.ServerMonitor;
 import org.springside.modules.orm.hibernate.DefaultEntityManager;
@@ -29,6 +30,8 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 	private ServerConfig serverConfig; //系统配置
 	@Autowired(required = false)
 	private ServerMonitor serverMonitor;//系统统计
+	@Autowired(required = false)
+	private SimpleMailManager mailManager;//邮件发送
 
 	/**
 	 * 重载getAll函数,在载入用户列表时,根据系统配置统计查询次数.
@@ -48,6 +51,10 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 			serverMonitor.getServerStatistics().incModifyUserCount();
 		}
 		super.save(user);
+
+		if (mailManager != null) {
+			mailManager.sendNotifyMail("springside3.demo@gmail.com");
+		}
 	}
 
 	@Override
