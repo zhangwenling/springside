@@ -11,6 +11,7 @@
 		<config>src/main/resources/jmx/applicationContext-jmx-client.xml</config>
 		<config>src/main/resources/jmx/applicationContext-jmx-server.xml</config>
 		<config>src/main/resources/security/applicationContext-security.xml</config>
+		<config>src/main/resources/schedule/applicationContext-quartz.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

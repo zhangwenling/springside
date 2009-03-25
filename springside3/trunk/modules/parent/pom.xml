@@ -431,8 +431,12 @@
 			</dependency>
 			<!-- security end -->
 
-
-
+			<!-- quartz -->
+			<dependency>
+				<artifactId>quartz</artifactId>
+				<groupId>org.opensymphony.quartz</groupId>
+				<version>1.6.1</version>
+			</dependency>
 
 			<!-- logging begin-->
 			<!-- slf4j -->
