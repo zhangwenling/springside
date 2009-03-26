@@ -9,8 +9,9 @@
 </head>
 <body>
 <h2>邮件演示</h2>
-<p>技术说明：演示群发简单文本邮件,和发送HTML带附件的邮件,HTML内容由Freemaker创建.
-<p>用户故事：在综合演示用例中创建用户时，发送通知邮件。</p>
+<p>技术说明：演示群发简单文本邮件,和带附件的由Freemaker模板创建的HTML邮件.</p>
+<p>用户故事：在综合演示用例中保存用户时，发送通知邮件.<br/>
+演示邮箱名为springside3.demo@gmail.com，密码为demoforyou</p>
 
 <div id="footer">
 	<a href="${ctx}/">返回首页</a>
