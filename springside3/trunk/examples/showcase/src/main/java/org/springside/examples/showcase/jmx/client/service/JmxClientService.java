@@ -124,6 +124,13 @@ public class JmxClientService {
 	}
 
 	/**
+	 * 重置系统运行统计数据,MXBean代理操作的演示.
+	 */
+	public boolean resetServerStatistics(String statisticsName) {
+		return monitorMXBean.reset(statisticsName);
+	}
+
+	/**
 	 * 获取Hibernate统计数据,无MBean的Class文件时直接读取属性的演示.
 	 */
 	public HibernateStatistics getHibernateStatistics() {

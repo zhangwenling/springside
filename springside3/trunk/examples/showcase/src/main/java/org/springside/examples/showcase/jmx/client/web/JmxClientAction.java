@@ -116,7 +116,7 @@ public class JmxClientAction extends ActionSupport {
 	/**
 	 * 获取最新系统运行统计信息的Ajax请求.
 	 */
-	public String updateStatics() {
+	public String updateStatistics() {
 		try {
 			serverStatistics = jmxClientService.getServerStatistics();
 			Struts2Utils.renderJson(serverStatistics);
@@ -124,6 +124,19 @@ public class JmxClientAction extends ActionSupport {
 			logger.error(e.getMessage(), e);
 		}
 
+		return null;
+	}
+
+	/**
+	 * 重置系统运行统计信息的Ajax请求.
+	 */
+	public String resetStatistics() {
+		try {
+			String statisticsName = Struts2Utils.getParameter("statisticsName");
+			jmxClientService.resetServerStatistics(statisticsName);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 		return null;
 	}
 }

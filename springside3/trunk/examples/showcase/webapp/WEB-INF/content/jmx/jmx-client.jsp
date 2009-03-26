@@ -26,11 +26,18 @@
 		}
 	
 		//动态获取服务器最新状态,返回JSON对象.
-		function updateStatics(){
-			$.getJSON("jmx-client!updateStatics.action", function(data) {
+		function updateStatistics(){
+			$.getJSON("jmx-client!updateStatistics.action", function(data) {
 				$('#queryUserCount').val(data.queryUserCount);
 				$('#modifyUserCount').val(data.modifyUserCount);
 				$('#deleteUserCount').val(data.deleteUserCount);
+			});
+		}
+
+		//动态获取服务器最新状态,返回JSON对象.
+		function resetStatistics(){
+			$.get("jmx-client!resetStatistics.action?statisticsName="+$('#statisticsName').val(), function(data) {
+				updateStatistics();
 			});
 		}
 	</script>
@@ -38,9 +45,9 @@
 <body>
 	<h3>JMX演示用例</h3>
 	<p>技术说明：演示MBean代理、MXBean代理及直接读取属性三种模式。<br/>
-	客户端亦可使用JConsole, 远程连接URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase<br/></p>
+	客户端亦使用JConsole, 远程连接URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase<br/></p>
 	<p>用户故事：使用JMX动态配置系统变量并实时监控系统运行统计。</p>
-	<h4>系统配置</h4>
+	<h4>系统配置(MBean)</h4>
 	<form id="configForm">
 	<table>
 		<tr>
@@ -65,7 +72,7 @@
 	<table  cellspacing="20">
 	<tr>
 	<td>
-	<h4>系统运行统计</h4>
+	<h4>系统运行统计(MXBean)</h4>
 	
 	<table>
 		<tr>
@@ -83,16 +90,25 @@
 		<tr>
 			<td>删除用户次数:</td>
 			<td>
-				<input id="deleteUserCount" value="${serverStatistics.deleteUserCount}" readonly="readonly" size="5"/> 
+				<input id="deleteUserCount" value="${serverStatistics.deleteUserCount}" readonly="readonly" size="5"/>
+				<input type="button" value="刷新统计数据" onclick="updateStatistics();" /> 
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type="button" value="刷新状态" onclick="updateStatics();" /></td>
+			<td>属性名:</td>
+			<td>
+				<select id="statisticsName">
+					<option value="queryUserCount">查询用户列表次数</option>
+					<option value="modifyUserCount">更改用户次数</option>
+					<option value="deleteUserCount">删除用户次数</option>
+				</select>
+				<input type="button" value="重置统计数据" onclick="resetStatistics();" />
+			</td>
 		</tr>
 	</table>
 	</td>
 	<td valign="top">
-	<h4>Hibernate运行统计</h4>
+	<h4>Hibernate运行统计(直接读取属性)</h4>
 	<p>
 		打开数据库连接:${hibernateStatistics.sessionOpenCount}<br/>
 		关闭数据库连接:${hibernateStatistics.sessionCloseCount}

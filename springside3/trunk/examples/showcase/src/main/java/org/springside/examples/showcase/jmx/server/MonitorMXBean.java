@@ -7,5 +7,13 @@ package org.springside.examples.showcase.jmx.server;
  */
 public interface MonitorMXBean {
 
+	/**
+	 * 获取统计数据,ServerStatistics将被转化为CompositeData.
+	 */
 	ServerStatistics getServerStatistics();
+
+	/**
+	 * 重置计数器为0.
+	 */
+	boolean reset(String statisticsName);
 }

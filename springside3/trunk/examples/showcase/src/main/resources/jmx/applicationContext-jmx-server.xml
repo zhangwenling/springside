@@ -33,6 +33,10 @@
 				<entry key="org.hibernate:type=Statistics" value-ref="hibernateStatistics" />
 			</map>
 		</property>
+		<!-- 定义按bean实现的接口导出  -->
+		<property name="assembler">
+			<bean class="org.springframework.jmx.export.assembler.InterfaceBasedMBeanInfoAssembler" />
+		</property>
 	</bean>
 
 	<!-- 系统属性配置MBean -->

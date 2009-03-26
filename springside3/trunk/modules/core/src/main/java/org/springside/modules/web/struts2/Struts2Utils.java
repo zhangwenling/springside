@@ -55,6 +55,13 @@ public class Struts2Utils {
 	public static HttpServletResponse getResponse() {
 		return ServletActionContext.getResponse();
 	}
+	
+	/**
+	 * 取得Request Parameter的简化方法.
+	 */
+	public static String getParameter(String name) {
+		return getRequest().getParameter(name);
+	}
 
 	// 绕过jsp/freemaker直接输出文本的函数 //
 

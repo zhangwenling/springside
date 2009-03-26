@@ -27,27 +27,39 @@ public class ServerStatistics {
 		this.deleteUserCount = new AtomicInteger(deleteUserCount);
 	}
 
-	public void incQueryUserCount() {
-		queryUserCount.incrementAndGet();
-	}
-
 	public int getQueryUserCount() {
 		return queryUserCount.get();
 	}
 
-	public void incModifyUserCount() {
-		modifyUserCount.incrementAndGet();
+	public void incQueryUserCount() {
+		queryUserCount.incrementAndGet();
+	}
+
+	public void resetQueryUserCount() {
+		queryUserCount.set(0);
 	}
 
 	public int getModifyUserCount() {
 		return modifyUserCount.get();
 	}
 
-	public void incDeleteUserCount() {
-		deleteUserCount.incrementAndGet();
+	public void incModifyUserCount() {
+		modifyUserCount.incrementAndGet();
+	}
+
+	public void resetModifyUserCount() {
+		modifyUserCount.set(0);
 	}
 
 	public int getDeleteUserCount() {
 		return deleteUserCount.get();
+	}
+
+	public void incDeleteUserCount() {
+		deleteUserCount.incrementAndGet();
+	}
+
+	public void resetDeleteUserCount() {
+		deleteUserCount.set(0);
 	}
 }
