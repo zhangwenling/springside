@@ -11,6 +11,7 @@
 <h2>Ajax演示</h2>
 <p>说明：在JMX示例中已演示基于JQuery的标准Ajax获取内容与表单提交。</p>
 <h4><a href="${ctx}/ajax/mashup/mashup-client.action">跨域Mashup演示</a></h4>
+<h4>DWR演示(计划中)</h4>
 
 <div id="footer">
 	<a href="${ctx}/">返回首页</a>

@@ -5,14 +5,17 @@
 
 	<description>定时任务配置</description>
 
-	<!-- Triggers组装 -->
+	<!-- Quartz集成工厂 -->
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
+		<!-- Triggers组装 -->
 		<property name="triggers">
 			<list>
 				<ref bean="simpleTrigger" />
 				<ref bean="cronTrigger" />
 			</list>
 		</property>
+		<!-- Quartz配置文件 -->
+		<!-- <property name="configLocation" value="classpath*:/schedule/quartz.properties"/> -->
 	</bean>
 
 	<!-- Timer式 Trigger -->
@@ -27,8 +30,8 @@
 	<!-- Cron式 Trigger -->
 	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="cronJob" />
-		<!-- run every morning at 6 AM -->
-		<property name="cronExpression" value="0 0 6 * * ?" />
+		<!-- 朝九晚五工作时间内每半小时执行一次 -->
+		<property name="cronExpression" value="0 0/30 9-17 *,* * ?" />
 	</bean>
 
 	<!-- Quartz Timer Job -->

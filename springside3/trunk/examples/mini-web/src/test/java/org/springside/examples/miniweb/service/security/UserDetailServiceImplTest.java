@@ -71,6 +71,6 @@ public class UserDetailServiceImplTest extends SpringAnnotationTestCase {
 		EasyMock.expect(userDao.loadByLoginName("userNameNotExist")).andReturn(null);
 		EasyMock.replay(userDao);
 		//执行测试
-		userDetailService.loadUserByUsername("userNotExist");
+		userDetailService.loadUserByUsername("userNameNotExist");
 	}
 }

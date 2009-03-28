@@ -166,7 +166,7 @@
 		<spring.version>2.5.6</spring.version>
 		<hibernate.version>3.3.1.GA</hibernate.version>
 		<struts2.version>2.1.6</struts2.version>
-		<cxf.version>2.1.4</cxf.version>
+		<cxf.version>2.2</cxf.version>
 		<spring-security.version>2.0.4</spring-security.version>
 
 		<!-- Plugin的属性定义 -->
@@ -364,17 +364,6 @@
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-transports-http</artifactId>
 				<version>${cxf.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.sun.xml.bind</groupId>
-				<artifactId>jaxb-impl</artifactId>
-				<version>2.1.9</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.xml.bind</groupId>
-				<artifactId>jaxb-xjc</artifactId>
-				<version>2.1.9</version>
 			</dependency>
 			<!-- webservice end -->
 
