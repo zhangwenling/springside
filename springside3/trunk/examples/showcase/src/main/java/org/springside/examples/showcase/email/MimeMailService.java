@@ -22,15 +22,16 @@ import freemarker.template.TemplateException;
 /**
  * MIME邮件服务类.
  * 
- * 由Freemarker引擎生成html格式的内容.
- * 含附件.
+ * 演示由Freemarker引擎生成html格式的内容及加入附件.
  * 
  * @author calvin
  */
 public class MimeMailService {
 
 	private static final String ENCODING = "utf-8";
+	
 	private static Logger logger = LoggerFactory.getLogger(MimeMailService.class);
+	
 	private JavaMailSender mailSender;
 	private Configuration configuration = new Configuration();
 
@@ -72,10 +73,11 @@ public class MimeMailService {
 	 */
 	@SuppressWarnings("unchecked")
 	public void buildContent(MimeMessageHelper helper, String userName) throws MessagingException {
-		Map context = new HashMap();
-		context.put("userName", userName);
-
+		
 		try {
+			Map context = new HashMap();
+			context.put("userName", userName);
+
 			Template template = configuration.getTemplate("mailTemplate.ftl", ENCODING);
 			String content = FreeMarkerTemplateUtils.processTemplateIntoString(template, context);
 			helper.setText(content, true);
