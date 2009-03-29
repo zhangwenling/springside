@@ -5,7 +5,7 @@
 
 	<description>Email配置</description>
 
-	<!-- 邮件发送者 -->
+	<!-- 邮件发送器 -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="username" value="springside3.demo" />
@@ -19,7 +19,7 @@
 		</property>
 	</bean>
 
-	<!-- 群发文本邮件服务类 -->
+	<!-- 文本邮件服务类 -->
 	<bean id="simpleMailService" class="org.springside.examples.showcase.email.SimpleMailService">
 		<property name="mailSender" ref="mailSender" />
 		<property name="executor" ref="executor"/>
@@ -31,7 +31,7 @@
 		<property name="configuration" ref="freemarkerConfiguration"></property>
 	</bean>
 
-	<!-- 用于生成HTML邮件内容的Freemarker引擎 -->
+	<!-- 用于生成HTML邮件内容的Freemarker配置 -->
 	<bean id="freemarkerConfiguration" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
 		<property name="templateLoaderPath" value="classpath:/email" />
 	</bean>

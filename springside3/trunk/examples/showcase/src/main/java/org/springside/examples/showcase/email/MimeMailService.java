@@ -22,7 +22,7 @@ import freemarker.template.TemplateException;
 /**
  * MIME邮件服务类.
  * 
- * 演示由Freemarker引擎生成html格式的内容及加入附件.
+ * 演示由Freemarker引擎生成html格式的内容.
  * 
  * @author calvin
  */
@@ -89,7 +89,7 @@ public class MimeMailService {
 	}
 
 	/**
-	 * 加入附件.
+	 * 添加附件.
 	 */
 	public void buildAttachment(MimeMessageHelper helper) throws MessagingException {
 		try {

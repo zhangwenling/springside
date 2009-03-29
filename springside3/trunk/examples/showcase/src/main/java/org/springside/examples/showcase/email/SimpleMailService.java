@@ -35,34 +35,41 @@ public class SimpleMailService {
 	 * 发送纯文本的用户修改通知邮件.
 	 */
 	public void sendNotifyMail(String userName) {
-		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setFrom("springside3.demo@gmail.com");
-		msg.setSubject("用户修改通知");
-		msg.setText(userName + "被修改.");
-		
+
 		//演示用Executor多线程群发邮件
 		for (int i = 0; i < 2; i++) {
 			//简化演示,发送两封地址相同的邮件.
-			msg.setTo("springside3.demo@gmail.com");
-			executor.execute(new MailTask(msg));
+			String to = "springside3.demo@gmail.com";
+			String text = userName + "被修改.";
+			executor.execute(new MailTask(mailSender, to, text));
 		}
 	}
 
 	/**
-	 * 群发任务类.
+	 * 群发邮件任务类.
 	 */
-	private class MailTask implements Runnable {
+	private static class MailTask implements Runnable {
 
-		private SimpleMailMessage msg;
+		private JavaMailSender mailSender;
+		private String to;
+		private String text;
 
-		public MailTask(SimpleMailMessage msg) {
-			this.msg = msg;
+		public MailTask(JavaMailSender mailSender, String to, String text) {
+			this.mailSender = mailSender;
+			this.to = to;
+			this.text = text;
 		}
 
 		public void run() {
 			try {
+				SimpleMailMessage msg = new SimpleMailMessage();
+				msg.setFrom("springside3.demo@gmail.com");
+				msg.setSubject("用户修改通知");
+				msg.setText(text);
+				msg.setTo(to);
+
 				mailSender.send(msg);
-				logger.info("纯文本邮件已发送至springside3.demo@gmail.com");
+				logger.info("纯文本邮件已发送至" + to);
 			} catch (MailException e) {
 				logger.error("发送邮件失败", e);
 			}
