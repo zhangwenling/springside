@@ -29,9 +29,9 @@ import freemarker.template.TemplateException;
 public class MimeMailService {
 
 	private static final String ENCODING = "utf-8";
-	
+
 	private static Logger logger = LoggerFactory.getLogger(MimeMailService.class);
-	
+
 	private JavaMailSender mailSender;
 	private Configuration configuration = new Configuration();
 
@@ -73,7 +73,7 @@ public class MimeMailService {
 	 */
 	@SuppressWarnings("unchecked")
 	public void buildContent(MimeMessageHelper helper, String userName) throws MessagingException {
-		
+
 		try {
 			Map context = new HashMap();
 			context.put("userName", userName);

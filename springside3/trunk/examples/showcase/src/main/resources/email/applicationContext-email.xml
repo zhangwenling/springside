@@ -19,9 +19,10 @@
 		</property>
 	</bean>
 
-	<!-- 文本邮件服务类 -->
+	<!-- 群发文本邮件服务类 -->
 	<bean id="simpleMailService" class="org.springside.examples.showcase.email.SimpleMailService">
 		<property name="mailSender" ref="mailSender" />
+		<property name="executor" ref="executor"/>
 	</bean>
 
 	<!-- MIME邮件服务类 -->
@@ -33,5 +34,10 @@
 	<!-- 用于生成HTML邮件内容的Freemarker引擎 -->
 	<bean id="freemarkerConfiguration" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
 		<property name="templateLoaderPath" value="classpath:/email" />
+	</bean>
+
+	<!-- 用于群发邮件的线程池 -->
+	<bean id="executor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="5" />
 	</bean>
 </beans>
