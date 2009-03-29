@@ -131,6 +131,26 @@ public class JmxClientFactory {
 	}
 
 	/**
+	 * 按方法名直接调用MBean方法(无MBean的Class文件时使用).
+	 * 
+	 * @param signature 所有参数的类名集合.
+	 */
+	public void invoke(final String mbeanName, final String methodName, final Object[] params, final String[] signature) {
+		Assert.hasText(mbeanName, "mbeanName不能为空");
+		Assert.hasText(methodName, "methodName不能为空");
+		assertConnected();
+			
+		try {
+			ObjectName objectName = buildObjectName(mbeanName);
+			mbsc.invoke(objectName, methodName, params, signature);
+		} catch (JMException e) {
+			throw new IllegalArgumentException("参数不正确", e);
+		} catch (IOException e) {
+			throw new IllegalStateException("连接出错", e);
+		}
+	}
+
+	/**
 	 * 确保连接未关闭.
 	 */
 	private void assertConnected() {

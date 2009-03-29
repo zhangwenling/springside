@@ -77,6 +77,11 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 	public User loadByLoginName(String loginName) {
 		return entityDao.findUniqueByProperty("loginName", loginName);
 	}
+	
+	@Transactional(readOnly = true)
+	public long getUsersCount(){
+		return (Long)entityDao.findUnique("select count(u) from User u");
+	}
 
 	private boolean isStatisticsEnabled() {
 		return (serverConfig != null && serverConfig.isStatisticsEnabled() && serverMonitor != null);

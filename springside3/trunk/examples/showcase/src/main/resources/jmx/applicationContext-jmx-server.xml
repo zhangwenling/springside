@@ -6,12 +6,12 @@
 
 	<!-- 配置RMI注册服务器 -->
 	<bean id="registry" class="org.springframework.remoting.rmi.RmiRegistryFactoryBean" lazy-init="false">
-		<property name="port" value="${jmx.rmi_port}" />
+		<property name="port" value="1099" />
 	</bean>
 
 	<!-- 配置JMX远程连接 -->
 	<bean id="serverConnector" class="org.springframework.jmx.support.ConnectorServerFactoryBean" lazy-init="false">
-		<property name="serviceUrl" value="service:jmx:rmi:///jndi/rmi://${server.host}:${jmx.rmi_port}/showcase" />
+		<property name="serviceUrl" value="service:jmx:rmi:///jndi/rmi://${server.host}:1099/showcase" />
 		<property name="environment">
 			<map>
 				<!-- 认证配置,使用绝对路径 -->
@@ -33,7 +33,7 @@
 				<entry key="org.hibernate:type=Statistics" value-ref="hibernateStatistics" />
 			</map>
 		</property>
-		<!-- 定义按bean实现的接口导出  -->
+		<!-- 按bean实现的所有接口导出  -->
 		<property name="assembler">
 			<bean class="org.springframework.jmx.export.assembler.InterfaceBasedMBeanInfoAssembler" />
 		</property>

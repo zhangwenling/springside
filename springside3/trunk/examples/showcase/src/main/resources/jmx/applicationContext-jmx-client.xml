@@ -7,6 +7,6 @@
 
 	<bean id="jmxClient" class="org.springside.examples.showcase.jmx.client.service.JmxClientService">
 		<property name="host" value="${server.host}" />
-		<property name="port" value="${jmx.rmi_port}" />
+		<property name="port" value="1099" />
 	</bean>
 </beans>

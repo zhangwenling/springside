@@ -93,8 +93,8 @@ public class MimeMailService {
 	 */
 	public void buildAttachment(MimeMessageHelper helper) throws MessagingException {
 		try {
-			ClassPathResource attachment = new ClassPathResource("/email/attachment.txt");
-			helper.addAttachment("attachment.txt", attachment.getFile());
+			ClassPathResource attachment = new ClassPathResource("/email/mailAttachment.txt");
+			helper.addAttachment("mailAttachment.txt", attachment.getFile());
 		} catch (IOException e) {
 			logger.error("构造邮件失败,附件文件不存在", e);
 		}

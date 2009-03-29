@@ -9,8 +9,14 @@
 </head>
 <body>
 <h2>定时任务演示</h2>
-<p>技术说明：演示基于Quartz的定时任务，包括Timer与Cron两种Trigger，多线程任务及Quartz在集群环境的使用。</p>
+<p>技术说明：<br/>
+Cron式任务定义：基于Quartz的实现。<br/>
+Timer式任务定义:基于Quartz与JDK5.0 ScheduledExecutorService的两种实现。如果执行长时间任务，前次执行还没结束而下次执行时间已到，Quartz会并发执行而ScheduledExecutorService不会。
+
+
+</p>
 <p>用户故事：简单的定时打印日志。</p>
+<p>未来版本：Quartz的高级配置及在集群中的使用。</p>
 
 <div id="footer">
 	<a href="${ctx}/">返回首页</a>
