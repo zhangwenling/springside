@@ -7,15 +7,19 @@
 
 	<!-- Quartz集成工厂 -->
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
-		<!-- Triggers组装 -->
+		<!-- Triggers集成 -->
 		<property name="triggers">
 			<list>
 				<ref bean="cronTrigger" />
 				<ref bean="simpleTrigger" />
 			</list>
 		</property>
-		<!-- Quartz配置文件 -->
-		<!-- <property name="configLocation" value="classpath*:/schedule/quartz.properties"/> -->
+		<!-- Quartz配置 -->
+		<property name="quartzProperties">
+			<props>
+				<prop key="org.quartz.threadPool.threadCount">5</prop>
+			</props>
+		</property>
 	</bean>
 
 	<!-- Cron式Trigger定义 -->
