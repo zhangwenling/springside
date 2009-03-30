@@ -15,20 +15,28 @@ public class ServerMonitor implements MonitorMXBean {
 	Logger logger = LoggerFactory.getLogger(ServerMonitor.class);
 
 	private ServerStatistics serverStatistics = new ServerStatistics();
+	private EmailStatistics emailStatistics = new EmailStatistics();
 
 	public void setServerStatistics(ServerStatistics serverStatistics) {
 		this.serverStatistics = serverStatistics;
 	}
 
 	/**
-	 * 获取统计数据,ServerStatistics将被转化为CompositeData.
+	 * 获取服务统计数据,ServerStatistics将被转化为CompositeData.
 	 */
 	public ServerStatistics getServerStatistics() {
 		return serverStatistics;
 	}
 
 	/**
-	 * 重置计数器为0.
+	 * 获取Email发送统计数据.
+	 */
+	public EmailStatistics getEmailStatistics() {
+		return emailStatistics;
+	}
+
+	/**
+	 * 重置服务计数器为0.
 	 */
 	public boolean reset(String statisticsName) {
 		try {
@@ -40,4 +48,5 @@ public class ServerMonitor implements MonitorMXBean {
 			return false;
 		}
 	}
+
 }

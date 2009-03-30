@@ -40,6 +40,11 @@
 				updateStatistics();
 			});
 		}
+
+		//动态调用JMX函数logsummary().
+		function logSummary(){
+			$.get("jmx-client!logSummary.action");
+		}
 	</script>
 </head>
 <body>
@@ -108,10 +113,11 @@
 	</table>
 	</td>
 	<td valign="top">
-	<h4>Hibernate运行统计(直接读取属性)</h4>
+	<h4>Hibernate运行统计(直接读取属性/调用方法)</h4>
 	<p>
 		打开数据库连接:${hibernateStatistics.sessionOpenCount}<br/>
-		关闭数据库连接:${hibernateStatistics.sessionCloseCount}
+		关闭数据库连接:${hibernateStatistics.sessionCloseCount}<br/>
+		<input type="button" value="打印Hibernate统计信息日志" onclick="logSummary();" />
 	</p>
 	</td>
 	</tr>

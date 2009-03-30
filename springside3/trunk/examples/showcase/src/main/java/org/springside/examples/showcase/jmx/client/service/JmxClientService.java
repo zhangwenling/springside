@@ -139,4 +139,11 @@ public class JmxClientService {
 		statistics.setSessionCloseCount((Long) clientFactory.getAttribute(hibernteMBeanName, "SessionCloseCount"));
 		return statistics;
 	}
+
+	/**
+	 * 调用Hibernate JMX的logSummary函数,无MBean的Class文件时直接调用方法的演示.
+	 */
+	public void logSummary() {
+		clientFactory.inoke(hibernteMBeanName, "logSummary");
+	}
 }

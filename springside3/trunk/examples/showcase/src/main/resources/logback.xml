@@ -44,5 +44,10 @@
 	<logger name="org.hibernate.cache">
 		<level value="ERROR" />
 	</logger> 
+	
+	<!-- 演示hibenate JMX的logSummary()方法 -->
+	<logger name="org.hibernate.stat">
+		<level value="INFO" />
+	</logger> 
 </configuration>
 

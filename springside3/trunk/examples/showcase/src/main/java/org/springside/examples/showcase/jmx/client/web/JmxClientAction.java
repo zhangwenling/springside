@@ -139,4 +139,11 @@ public class JmxClientAction extends ActionSupport {
 		}
 		return null;
 	}
+
+	/**
+	 * 打印Hibernate统计信息日志.
+	 */
+	public void logSummary() {
+		jmxClientService.logSummary();
+	}
 }

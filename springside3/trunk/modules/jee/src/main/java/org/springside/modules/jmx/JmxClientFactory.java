@@ -133,13 +133,22 @@ public class JmxClientFactory {
 	/**
 	 * 按方法名直接调用MBean方法(无MBean的Class文件时使用).
 	 * 
+	 * 所调用方法无参数时的简写函数.
+	 */
+	public void inoke(final String mbeanName, final String methodName) {
+		invoke(mbeanName, methodName, new Object[] {}, new String[] {});
+	}
+	
+	/**
+	 * 按方法名直接调用MBean方法(无MBean的Class文件时使用).
+	 * 
 	 * @param signature 所有参数的类名集合.
 	 */
 	public void invoke(final String mbeanName, final String methodName, final Object[] params, final String[] signature) {
 		Assert.hasText(mbeanName, "mbeanName不能为空");
 		Assert.hasText(methodName, "methodName不能为空");
 		assertConnected();
-			
+
 		try {
 			ObjectName objectName = buildObjectName(mbeanName);
 			mbsc.invoke(objectName, methodName, params, signature);
@@ -150,8 +159,9 @@ public class JmxClientFactory {
 		}
 	}
 
+
 	/**
-	 * 确保连接未关闭.
+	 * 确保Connection已连接.
 	 */
 	private void assertConnected() {
 		if (!connected.get())

@@ -10,11 +10,11 @@
 <h2>Showcase示例</h2>
 <h3><a href="common/user.action">综合演示</a></h3>
 <h3><a href="jmx/jmx-client.action">JMX演示</a></h3>
+<h3><a href="schedule/index.action">定时任务演示</a></h3>
+<h3><a href="email/index.action">邮件演示</a></h3>
 <h3><a href="ajax/index.action">Ajax演示</a></h3>
 <h3><a href="security/login.action">安全高级演示</a></h3>
 <h3><a href="jms/index.action">JMS演示(开发中)</a></h3>
-<h3><a href="schedule/index.action">定时任务演示(开发中)</a></h3>
-<h3><a href="email/index.action">邮件演示(开发中)</a></h3>
 <h3><a href="rest/index.action">REST演示(计划中)</a></h3>
 <h3><a href="search/index.action">搜索引擎演示(计划中)</a></h3>
 <h3><a href="rule/index.action">规则引擎演示(计划中)</a></h3>
