@@ -9,8 +9,9 @@ import org.springframework.security.ConfigAttributeEditor;
 import org.springframework.security.intercept.web.RequestKey;
 
 /**
- * RequestMap工厂,为DefaultFilterInvocationDefinitionSource提供存放于数据库或其它地方的URL-授权关系定义.
+ * RequestMap工厂.
  * 
+ * 为DefaultFilterInvocationDefinitionSource提供存放于数据库或其它地方的URL-授权关系定义.
  * 根据用户的RequestMapService类返回的LinkedHashMap<String, String>生成LinkedHashMap<RequestKey, ConfigAttributeDefinition>RequestMap.
  * 
  * @see org.springframework.security.intercept.web.DefaultFilterInvocationDefinitionSource

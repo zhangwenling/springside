@@ -10,7 +10,7 @@ import org.springside.examples.miniweb.entity.security.Resource;
 import org.springside.modules.security.springsecurity.RequestMapService;
 
 /**
- * 从数据库查询URL--授权定义的实现类.
+ * 从数据库查询URL--授权定义的RequestMapService实现类.
  * 
  * @author calvin
  */
@@ -20,6 +20,9 @@ public class RequestMapServiceImpl implements RequestMapService {
 	@Autowired
 	private ResourceDao resourceDao;
 
+	/**
+	 * @see RequestMapService#getRequestMap()
+	 */
 	public LinkedHashMap<String, String> getRequestMap() throws Exception {
 		LinkedHashMap<String, String> requestMap = new LinkedHashMap<String, String>();
 		List<Resource> resourceList = resourceDao.findByProperty("type", Resource.URL_TYPE);
