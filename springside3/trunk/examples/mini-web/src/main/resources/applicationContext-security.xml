@@ -39,12 +39,12 @@
 	</bean>
 
 	<bean id="databaseRequestMap" class="org.springside.modules.security.springsecurity.RequestMapFactoryBean">
-		<property name="definitionService">
+		<property name="requestMapService">
 			<bean class="org.springside.examples.miniweb.service.security.RequestMapServiceImpl" />
 		</property>
 	</bean>
 	<!-- 自定义过滤器,在数据库存储URL-授权  end -->
-	
+
 
 	<!-- 自定义授权判断器, 将授权名称的默认前缀由ROLE_改为A_. -->
 	<bean id="accessDecisionManager" class="org.springframework.security.vote.AffirmativeBased">

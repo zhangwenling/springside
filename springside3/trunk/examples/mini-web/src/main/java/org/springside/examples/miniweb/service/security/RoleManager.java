@@ -19,9 +19,7 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
  * 
  * @author calvin
  */
-//Spring Service Bean的标识.
 @Service
-//默认将类中的所有函数纳入事务管理.
 @Transactional
 public class RoleManager extends EntityManager<Role, Long> {
 
@@ -45,5 +43,4 @@ public class RoleManager extends EntityManager<Role, Long> {
 
 		roldDao.delete(id);
 	}
-
 }

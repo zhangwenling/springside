@@ -18,10 +18,7 @@ import org.springside.examples.miniweb.entity.IdEntity;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
- * 资源.
- * 
- * 使用JPA annotation定义ORM关系.
- * 使用Hibernate annotation定义二级缓存. 
+ * 受保护的资源.
  * 
  * @author calvin
  */
@@ -30,11 +27,14 @@ import org.springside.modules.utils.ReflectionUtils;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Resource extends IdEntity {
 
-	private String type; //资源类型,可为url,menu,method等
+	public static final String URL_TYPE = "url";
+	public static final String MENU_TYPE = "menu";
+
+	private String type; //资源类型
 
 	private String value;
 
-	private Set<Authority> auths = new LinkedHashSet<Authority>(); //有序的关联对象集合
+	private Set<Authority> authorities = new LinkedHashSet<Authority>();
 
 	public String getType() {
 		return type;
@@ -56,16 +56,16 @@ public class Resource extends IdEntity {
 	@JoinTable(name = "RESOURCES_AUTHORITIES", joinColumns = { @JoinColumn(name = "RESOURCE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
 	@OrderBy("id")
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-	public Set<Authority> getAuths() {
-		return auths;
+	public Set<Authority> getAuthorities() {
+		return authorities;
 	}
 
-	public void setAuths(Set<Authority> auths) {
-		this.auths = auths;
+	public void setAuthorities(Set<Authority> authorities) {
+		this.authorities = authorities;
 	}
 
 	@Transient
 	public String getAuthNames() throws Exception {
-		return ReflectionUtils.fetchElementPropertyToString(auths, "name", ",");
+		return ReflectionUtils.fetchElementPropertyToString(authorities, "name", ",");
 	}
 }

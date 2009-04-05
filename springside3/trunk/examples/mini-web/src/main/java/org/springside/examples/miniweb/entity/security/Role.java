@@ -28,9 +28,7 @@ import org.springside.modules.utils.ReflectionUtils;
  * @author calvin
  */
 @Entity
-//表名与类名不相同时重新定义表名.
 @Table(name = "ROLES")
-//默认的缓存策略.
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Role extends IdEntity {
 
@@ -46,13 +44,9 @@ public class Role extends IdEntity {
 		this.name = name;
 	}
 
-	//避免定义CascadeType.REMOVE, 否则删除权限时会连带删除拥有它的角色.
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	//多对多定义.
 	@JoinTable(name = "ROLES_AUTHORITIES", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
-	//集合按id排序.
 	@OrderBy("id")
-	//集合中对象的id的缓存.
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public Set<Authority> getAuths() {
 		return auths;
@@ -62,13 +56,11 @@ public class Role extends IdEntity {
 		this.auths = auths;
 	}
 
-	//非持久化属性.
 	@Transient
 	public String getAuthNames() throws Exception {
 		return ReflectionUtils.fetchElementPropertyToString(auths, "displayName", ", ");
 	}
 
-	//非持久化属性.
 	@Transient
 	@SuppressWarnings("unchecked")
 	public List<Long> getAuthIds() throws Exception {

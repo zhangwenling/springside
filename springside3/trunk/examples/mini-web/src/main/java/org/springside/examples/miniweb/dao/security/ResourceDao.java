@@ -6,5 +6,4 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 
 @Repository
 public class ResourceDao extends HibernateDao<Resource, Long> {
-
 }

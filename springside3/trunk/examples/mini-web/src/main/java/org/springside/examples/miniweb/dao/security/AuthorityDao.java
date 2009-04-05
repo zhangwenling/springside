@@ -6,5 +6,4 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 
 @Repository
 public class AuthorityDao extends HibernateDao<Authority, Long> {
-
 }
