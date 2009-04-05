@@ -1,9 +1,11 @@
 package org.springside.examples.miniweb.service.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.examples.miniweb.dao.security.AuthorityDao;
 import org.springside.examples.miniweb.entity.security.Authority;
-import org.springside.modules.orm.hibernate.DefaultEntityManager;
+import org.springside.modules.orm.hibernate.EntityManager;
 
 /**
  * 授权管理类.
@@ -17,5 +19,12 @@ import org.springside.modules.orm.hibernate.DefaultEntityManager;
 @Service
 //默认将类中的所有函数纳入事务管理.
 @Transactional
-public class AuthorityManager extends DefaultEntityManager<Authority, Long> {
+public class AuthorityManager extends EntityManager<Authority, Long> {
+	@Autowired
+	private AuthorityDao authorityDao;
+
+	@Override
+	protected AuthorityDao getEntityDao() {
+		return authorityDao;
+	}
 }

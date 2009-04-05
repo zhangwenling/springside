@@ -1,8 +1,11 @@
+drop table RESOURCES_AUTHORITIES;
 drop table ROLES_AUTHORITIES;
 drop table USERS_ROLES;
+drop table RESOURCES;
+drop table AUTHORITIES;
 drop table USERS;
 drop table ROLES;
-drop table AUTHORITIES;
+
 
 
 create table USERS (
@@ -36,4 +39,17 @@ ROLE_ID integer not null,
 AUTHORITY_ID integer not null,
 FOREIGN KEY (ROLE_ID) references ROLES(ID),
 FOREIGN KEY (AUTHORITY_ID) references AUTHORITIES(ID)
+);
+
+CREATE TABLE RESOURCES (
+ID integer primary key GENERATED ALWAYS AS IDENTITY,
+TYPE varchar(20) not null,
+VALUE varchar(255) not null
+);
+
+create table RESOURCES_AUTHORITIES (
+AUTHORITY_ID integer not null,
+RESOURCE_ID integer not null,
+FOREIGN KEY (AUTHORITY_ID) references AUTHORITIES(ID),
+FOREIGN KEY (RESOURCE_ID) references RESOURCES(ID)
 );

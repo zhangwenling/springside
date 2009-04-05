@@ -10,6 +10,7 @@ import org.springframework.security.GrantedAuthorityImpl;
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UserDetailsService;
 import org.springframework.security.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.dao.security.UserDao;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
@@ -20,6 +21,7 @@ import org.springside.examples.miniweb.entity.security.User;
  * 
  * @author calvin
  */
+@Transactional(readOnly=true)
 public class UserDetailServiceImpl implements UserDetailsService {
 	@Autowired
 	private UserDao userDao;

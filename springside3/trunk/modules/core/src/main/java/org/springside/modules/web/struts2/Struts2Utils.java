@@ -55,7 +55,7 @@ public class Struts2Utils {
 	public static HttpServletResponse getResponse() {
 		return ServletActionContext.getResponse();
 	}
-	
+
 	/**
 	 * 取得Request Parameter的简化方法.
 	 */
