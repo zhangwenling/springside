@@ -23,7 +23,7 @@ public class RequestMapFactoryBean implements FactoryBean {
 
 	RequestMapService requestMapService;
 
-	public void setRequestMapService(RequestMapService requestMapService) {
+	public RequestMapFactoryBean(RequestMapService requestMapService) {
 		this.requestMapService = requestMapService;
 	}
 

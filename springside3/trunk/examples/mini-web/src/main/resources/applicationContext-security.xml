@@ -39,9 +39,9 @@
 	</bean>
 
 	<bean id="databaseRequestMap" class="org.springside.modules.security.springsecurity.RequestMapFactoryBean">
-		<property name="requestMapService">
+		<constructor-arg>
 			<bean class="org.springside.examples.miniweb.service.security.RequestMapServiceImpl" />
-		</property>
+		</constructor-arg>
 	</bean>
 	<!-- 自定义过滤器,在数据库存储URL-授权  end -->
 
