@@ -9,27 +9,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.dao.security.ResourceDao;
 import org.springside.examples.miniweb.entity.security.Resource;
-import org.springside.modules.security.springsecurity.DefinitionService;
+import org.springside.modules.security.springsecurity.RequestMapService;
 
 @Transactional(readOnly = true)
-public class DefinitionServiceImpl implements DefinitionService {
+public class RequestMapServiceImpl implements RequestMapService {
 
-	private static Logger logger = LoggerFactory.getLogger(DefinitionServiceImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(RequestMapServiceImpl.class);
 
 	@Autowired
 	private ResourceDao resourceDao;
 
-	public LinkedHashMap<String, String> getDefinitionMap() {
-		LinkedHashMap<String, String> definitionMap = new LinkedHashMap<String, String>();
+	public LinkedHashMap<String, String> getRequestMap() {
+		LinkedHashMap<String, String> requestMap = new LinkedHashMap<String, String>();
 		List<Resource> resourceList = resourceDao.getAll();
 		try {
 			for (Resource resource : resourceList) {
-				definitionMap.put(resource.getValue(), resource.getAuthNames());
+				requestMap.put(resource.getValue(), resource.getAuthNames());
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
 
-		return definitionMap;
+		return requestMap;
 	}
 }

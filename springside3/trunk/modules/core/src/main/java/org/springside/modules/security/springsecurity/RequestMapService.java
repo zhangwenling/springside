@@ -2,7 +2,7 @@ package org.springside.modules.security.springsecurity;
 
 import java.util.LinkedHashMap;
 
-public interface DefinitionService {
+public interface RequestMapService {
 
-	LinkedHashMap<String, String> getDefinitionMap();
+	LinkedHashMap<String, String> getRequestMap();
 }

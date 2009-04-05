@@ -21,7 +21,7 @@ import org.springside.examples.miniweb.entity.security.User;
  * 
  * @author calvin
  */
-@Transactional(readOnly=true)
+@Transactional(readOnly = true)
 public class UserDetailServiceImpl implements UserDetailsService {
 	@Autowired
 	private UserDao userDao;

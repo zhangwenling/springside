@@ -10,21 +10,22 @@ import org.springframework.security.intercept.web.RequestKey;
 
 public class RequestMapFactoryBean implements FactoryBean {
 
-	DefinitionService definitionService;
+	RequestMapService requestMapService;
 
-	public void setDefinitionService(DefinitionService definitionService) {
-		this.definitionService = definitionService;
+	public void setDefinitionService(RequestMapService requestMapService) {
+		this.requestMapService = requestMapService;
 	}
 
 	public Object getObject() throws Exception {
-		LinkedHashMap<String, String> definitionMap = definitionService.getDefinitionMap();
+
+		LinkedHashMap<String, String> srcMap = requestMapService.getRequestMap();
 		LinkedHashMap<RequestKey, ConfigAttributeDefinition> requestMap = new LinkedHashMap<RequestKey, ConfigAttributeDefinition>();
 		ConfigAttributeEditor editor = new ConfigAttributeEditor();
 
-		Set<String> paths = definitionMap.keySet();
+		Set<String> paths = srcMap.keySet();
 		for (String path : paths) {
 			RequestKey key = new RequestKey(path, null);
-			editor.setAsText(definitionMap.get(path));
+			editor.setAsText(srcMap.get(path));
 			requestMap.put(key, (ConfigAttributeDefinition) editor.getValue());
 		}
 

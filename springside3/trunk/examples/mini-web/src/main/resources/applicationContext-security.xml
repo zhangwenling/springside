@@ -7,7 +7,7 @@
 
 	<description>使用SpringSecurity的安全配置文件</description>
 
-	<!-- http安全整体配置. -->
+	<!-- http安全配置 -->
 	<security:http auto-config="true" access-decision-manager-ref="accessDecisionManager">
 		<security:form-login login-page="/login.action" default-target-url="/"
 			authentication-failure-url="/login.action?error=true" />
@@ -15,39 +15,36 @@
 		<security:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66" />
 	</security:http>
 
-	<!-- 认证整体配置. -->
+	<!-- 认证配置 -->
 	<security:authentication-provider user-service-ref="userDetailsService">
 		<!-- 可设置hash使用sha1或md5散列密码后再存入数据库 -->
 		<security:password-encoder hash="plaintext" />
 	</security:authentication-provider>
 
-	<security:authentication-manager alias="authenticationManager" />
-
-	<!-- 自定义用户查询服务. -->
+	<!-- 自实现的用户查询服务 -->
 	<bean id="userDetailsService" class="org.springside.examples.miniweb.service.security.UserDetailServiceImpl" />
 
-	<!-- 自定义URL授权过滤器. -->
-	<bean id="urlSecurityInterceptor" class="org.springframework.security.intercept.web.FilterSecurityInterceptor">
+	<!-- 自定义过滤器,在数据库存储URL-授权  begin -->
+	<bean id="filterSecurityInterceptor" class="org.springframework.security.intercept.web.FilterSecurityInterceptor">
 		<security:custom-filter before="FILTER_SECURITY_INTERCEPTOR" />
 		<property name="accessDecisionManager" ref="accessDecisionManager" />
-		<property name="authenticationManager" ref="authenticationManager" />
 		<property name="objectDefinitionSource" ref="databaseDefinitionSource" />
 	</bean>
 
-	<!-- 自定义过滤规则存储, 使用自定义的RequestMap. -->
 	<bean id="databaseDefinitionSource" class="org.springframework.security.intercept.web.DefaultFilterInvocationDefinitionSource">
 		<constructor-arg>
 			<bean class="org.springframework.security.util.AntUrlPathMatcher" />
 		</constructor-arg>
-		<constructor-arg ref="requestMap" />
+		<constructor-arg ref="databaseRequestMap" />
 	</bean>
 
-	<!-- 实现从数据库读取URL-授权的requestMap -->
-	<bean id="requestMap" class="org.springside.modules.security.springsecurity.RequestMapFactoryBean">
+	<bean id="databaseRequestMap" class="org.springside.modules.security.springsecurity.RequestMapFactoryBean">
 		<property name="definitionService">
-			<bean class="org.springside.examples.miniweb.service.security.DefinitionServiceImpl" />
+			<bean class="org.springside.examples.miniweb.service.security.RequestMapServiceImpl" />
 		</property>
 	</bean>
+	<!-- 自定义过滤器,在数据库存储URL-授权  end -->
+	
 
 	<!-- 自定义授权判断器, 将授权名称的默认前缀由ROLE_改为A_. -->
 	<bean id="accessDecisionManager" class="org.springframework.security.vote.AffirmativeBased">
