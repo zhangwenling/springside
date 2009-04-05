@@ -1,8 +1,8 @@
-package org.springside.examples.miniweb.service.user;
+package org.springside.examples.miniweb.service.security;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springside.examples.miniweb.entity.user.Role;
+import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.modules.orm.hibernate.DefaultEntityManager;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;

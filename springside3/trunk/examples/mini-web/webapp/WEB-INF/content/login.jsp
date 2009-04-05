@@ -9,7 +9,7 @@
 <head>
 	<title>Mini-Web 登录页</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet">
+	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/jquery.validate.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/messages_cn.js" type="text/javascript"></script>

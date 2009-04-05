@@ -13,8 +13,8 @@
 <body>
 <div id="menu">
 <h3>
-	<a href="${ctx}/user/user.action">帐号列表</a>
-	<a href="${ctx}/user/role.action">角色列表</a> 
+	<a href="${ctx}/security/user.action">帐号列表</a>
+	<a href="${ctx}/security/role.action">角色列表</a> 
 	<a href="${ctx}/j_spring_security_logout">退出登录</a>
 </h3>
 </div>

@@ -1,12 +1,12 @@
-package org.springside.examples.miniweb.service.user;
+package org.springside.examples.miniweb.service.security;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springside.examples.miniweb.dao.user.UserDao;
-import org.springside.examples.miniweb.entity.user.User;
+import org.springside.examples.miniweb.dao.security.UserDao;
+import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.modules.orm.hibernate.EntityManager;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;

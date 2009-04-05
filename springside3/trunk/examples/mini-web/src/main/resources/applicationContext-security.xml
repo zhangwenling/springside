@@ -9,13 +9,13 @@
 
 	<!-- 在此定义URL与授权的关系. 而用户、角色、授权及三者的关系则保存在数据库中. -->
 	<http auto-config="true" access-decision-manager-ref="accessDecisionManager">
-		<intercept-url pattern="/user/user!save*" access="A_MODIFY_USER" />
-		<intercept-url pattern="/user/user!delete*" access="A_MODIFY_USER" />
-		<intercept-url pattern="/user/user*" access="A_VIEW_USER" />
-		<intercept-url pattern="/user/role!save*" access="A_MODIFY_ROLE" />
-		<intercept-url pattern="/user/role!delete*" access="A_MODIFY_ROLE" />
-		<intercept-url pattern="/user/role*" access="A_VIEW_ROLE" />
-		<form-login login-page="/login.action" default-target-url="/user/user.action" authentication-failure-url="/login.action?error=true" />
+		<intercept-url pattern="/security/user!save*" access="A_MODIFY_USER" />
+		<intercept-url pattern="/security/user!delete*" access="A_MODIFY_USER" />
+		<intercept-url pattern="/security/user*" access="A_VIEW_USER" />
+		<intercept-url pattern="/security/role!save*" access="A_MODIFY_ROLE" />
+		<intercept-url pattern="/security/role!delete*" access="A_MODIFY_ROLE" />
+		<intercept-url pattern="/security/role*" access="A_VIEW_ROLE" />
+		<form-login login-page="/login.action" default-target-url="/" authentication-failure-url="/login.action?error=true" />
 		<logout logout-success-url="/" />
 		<remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66" />
 	</http>

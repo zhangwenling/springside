@@ -1,15 +1,15 @@
-package org.springside.examples.miniweb.web.user;
+package org.springside.examples.miniweb.web.security;
 
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springside.examples.miniweb.entity.user.Authority;
-import org.springside.examples.miniweb.entity.user.Role;
+import org.springside.examples.miniweb.entity.security.Authority;
+import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.service.ServiceException;
-import org.springside.examples.miniweb.service.user.AuthorityManager;
-import org.springside.examples.miniweb.service.user.RoleManager;
+import org.springside.examples.miniweb.service.security.AuthorityManager;
+import org.springside.examples.miniweb.service.security.RoleManager;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;
 import org.springside.modules.web.struts2.CRUDActionSupport;
 

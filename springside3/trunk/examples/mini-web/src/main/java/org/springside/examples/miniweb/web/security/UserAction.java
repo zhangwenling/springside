@@ -1,4 +1,4 @@
-package org.springside.examples.miniweb.web.user;
+package org.springside.examples.miniweb.web.security;
 
 import java.util.List;
 
@@ -8,11 +8,11 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springside.examples.miniweb.entity.user.Role;
-import org.springside.examples.miniweb.entity.user.User;
+import org.springside.examples.miniweb.entity.security.Role;
+import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.ServiceException;
-import org.springside.examples.miniweb.service.user.RoleManager;
-import org.springside.examples.miniweb.service.user.UserManager;
+import org.springside.examples.miniweb.service.security.RoleManager;
+import org.springside.examples.miniweb.service.security.UserManager;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;

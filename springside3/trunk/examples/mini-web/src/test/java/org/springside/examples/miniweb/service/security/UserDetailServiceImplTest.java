@@ -5,10 +5,10 @@ import org.springframework.security.GrantedAuthorityImpl;
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.test.annotation.ExpectedException;
-import org.springside.examples.miniweb.dao.user.UserDao;
-import org.springside.examples.miniweb.entity.user.Authority;
-import org.springside.examples.miniweb.entity.user.Role;
-import org.springside.examples.miniweb.entity.user.User;
+import org.springside.examples.miniweb.dao.security.UserDao;
+import org.springside.examples.miniweb.entity.security.Authority;
+import org.springside.examples.miniweb.entity.security.Role;
+import org.springside.examples.miniweb.entity.security.User;
 import org.springside.modules.test.junit38.SpringAnnotationTestCase;
 import org.springside.modules.utils.ReflectionUtils;
 

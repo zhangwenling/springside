@@ -9,14 +9,21 @@
 <head>
 	<title>Showcase 登录页</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet">
+	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 	<%
 		if (session.getAttribute(AbstractProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY) != null) {
+			if("1".equals(request.getParameter("error"))){
 	%>
 			<span style="color:red"> 登录失败，请重试.</span>
 	<%
+			}
+			if("3".equals(request.getParameter("error"))){
+	%>
+			<span style="color:red"> 此帐号已从别处登录.</span>
+	<%
+			}
 		}
 	%>
 	<h2>Showcase登录页</h2>

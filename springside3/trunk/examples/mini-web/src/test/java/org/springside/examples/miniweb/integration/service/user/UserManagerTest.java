@@ -5,9 +5,9 @@ import java.util.List;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.ExpectedException;
-import org.springside.examples.miniweb.entity.user.Role;
-import org.springside.examples.miniweb.entity.user.User;
-import org.springside.examples.miniweb.service.user.UserManager;
+import org.springside.examples.miniweb.entity.security.Role;
+import org.springside.examples.miniweb.entity.security.User;
+import org.springside.examples.miniweb.service.security.UserManager;
 import org.springside.modules.test.junit38.SpringTransactionalTestCase;
 
 /**

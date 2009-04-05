@@ -1,4 +1,4 @@
-package org.springside.examples.miniweb.entity.user;
+package org.springside.examples.miniweb.entity.security;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

@@ -7,20 +7,20 @@
 <head>
 	<title>Mini-Web 帐号管理</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet">
+	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script  src="${ctx}/js/table.js" type="text/javascript"></script>
 	<script type="text/javascript">
-	var modifyAction = 'user!input.action';
-	var deleteAction = 'user!delete.action';
+		var modifyAction = 'user!input.action';
+		var deleteAction = 'user!delete.action';
 	</script>
 </head>
 
 <body>
 <div id="menu">
 	<h3>
-	<a href="${ctx}/user/user.action">帐号列表</a>
-	<a href="${ctx}/user/role.action">角色列表</a> 
+	<a href="${ctx}/security/user.action">帐号列表</a>
+	<a href="${ctx}/security/role.action">角色列表</a> 
 	<a href="${ctx}/j_spring_security_logout">退出登录</a>
 	</h3> 
 </div>
