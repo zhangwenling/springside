@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springside.examples.showcase.orm.AuditableEntity;
 import org.springside.modules.utils.ReflectionUtils;
 
@@ -72,6 +74,8 @@ public class User extends AuditableEntity {
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	//多对多定义
 	@JoinTable(name = "USERS_ROLES", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
+	//Fecth定义
+	@Fetch(FetchMode.SUBSELECT)
 	//集合按id排序
 	@OrderBy("id")
 	public Set<Role> getRoles() {
