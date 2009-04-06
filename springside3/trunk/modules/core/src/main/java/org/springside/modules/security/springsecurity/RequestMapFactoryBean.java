@@ -1,7 +1,7 @@
 package org.springside.modules.security.springsecurity;
 
 import java.util.LinkedHashMap;
-import java.util.Set;
+import java.util.Map;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.security.ConfigAttributeDefinition;
@@ -21,7 +21,7 @@ import org.springframework.security.intercept.web.RequestKey;
  */
 public class RequestMapFactoryBean implements FactoryBean {
 
-	RequestMapService requestMapService;
+	private RequestMapService requestMapService;
 
 	public RequestMapFactoryBean(RequestMapService requestMapService) {
 		this.requestMapService = requestMapService;
@@ -33,10 +33,9 @@ public class RequestMapFactoryBean implements FactoryBean {
 		LinkedHashMap<RequestKey, ConfigAttributeDefinition> requestMap = new LinkedHashMap<RequestKey, ConfigAttributeDefinition>();
 		ConfigAttributeEditor editor = new ConfigAttributeEditor();
 
-		Set<String> paths = srcMap.keySet();
-		for (String path : paths) {
-			RequestKey key = new RequestKey(path, null);
-			editor.setAsText(srcMap.get(path));
+		for (Map.Entry<String, String> entry : srcMap.entrySet()) {
+			RequestKey key = new RequestKey(entry.getKey(), null);
+			editor.setAsText(entry.getValue());
 			requestMap.put(key, (ConfigAttributeDefinition) editor.getValue());
 		}
 

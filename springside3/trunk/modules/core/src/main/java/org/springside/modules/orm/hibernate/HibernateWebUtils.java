@@ -106,25 +106,25 @@ public class HibernateWebUtils {
 		List<PropertyFilter> filterList = new ArrayList<PropertyFilter>();
 
 		//从request中获取含属性前缀名的参数,构造去除前缀名后的参数Map.
-		Map filterParamMap = WebUtils.getParametersStartingWith(request, filterPrefix);
+		Map<String, String> filterParamMap = WebUtils.getParametersStartingWith(request, filterPrefix);
 
 		//分析参数Map,构造PropertyFilter列表
-		for (Object filterName : filterParamMap.keySet()) {
-			Object value = filterParamMap.get(filterName);
-
+		for (Map.Entry<String, String> entry : filterParamMap.entrySet()) {
+			String filterName = entry.getKey();
+			String value = entry.getValue();
 			//如果value值为空,则忽略此filter.
-			boolean omit = StringUtils.isBlank((String) value);
+			boolean omit = StringUtils.isBlank(value);
 			if (!omit) {
 
 				//分析filterName,获取matchType与propertyName
 				MatchType matchType;
-				String matchTypeCode = StringUtils.substringBefore((String) filterName, "_");
+				String matchTypeCode = StringUtils.substringBefore(filterName, "_");
 				try {
 					matchType = Enum.valueOf(MatchType.class, matchTypeCode);
 				} catch (RuntimeException e) {
 					throw new IllegalArgumentException("filter名称没有按规则编写,无法得到属性比较类型.", e);
 				}
-				String propertyName = StringUtils.substringAfter((String) filterName, "_");
+				String propertyName = StringUtils.substringAfter(filterName, "_");
 
 				PropertyFilter filter = new PropertyFilter(propertyName, value, matchType);
 				filterList.add(filter);

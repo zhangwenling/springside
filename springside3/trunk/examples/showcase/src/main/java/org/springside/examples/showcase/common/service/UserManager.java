@@ -27,7 +27,7 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 	private ServerConfig serverConfig; //系统配置
 	@Autowired(required = false)
 	private ServerMonitor serverMonitor;//系统统计
-	
+
 	@Autowired(required = false)
 	private SimpleMailService simpleMailService;//邮件发送
 	@Autowired(required = false)

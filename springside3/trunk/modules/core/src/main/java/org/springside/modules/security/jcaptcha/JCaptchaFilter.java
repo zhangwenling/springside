@@ -47,9 +47,9 @@ public class JCaptchaFilter implements Filter {
 	private static final String FAILURE_URL_NAME = "failureUrl";
 
 	//默认值定义
-	public static final String DEFAULT_FILTER_PROCESSES_URL = "/j_spring_security_check";
-	public static final String DEFAULT_CAPTCHA_SERVICE_ID = "captchaService";
-	public static final String DEFAULT_CAPTCHA_PARAMTER = "j_captcha";
+	private static final String DEFAULT_FILTER_PROCESSES_URL = "/j_spring_security_check";
+	private static final String DEFAULT_CAPTCHA_SERVICE_ID = "captchaService";
+	private static final String DEFAULT_CAPTCHA_PARAMTER = "j_captcha";
 
 	private static Logger logger = LoggerFactory.getLogger(JCaptchaFilter.class);
 

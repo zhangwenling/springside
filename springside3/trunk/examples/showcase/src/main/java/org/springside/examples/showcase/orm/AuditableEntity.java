@@ -14,10 +14,10 @@ import org.springside.examples.showcase.common.entity.IdEntity;
  */
 @MappedSuperclass
 public class AuditableEntity extends IdEntity {
-	Date createTime; //创建时间
-	String createBy; //创建操作员的登录名
-	Date lastModifyTime; //最后修改时间
-	String lastModifyBy; //最后修改操作员的登录名
+	private Date createTime; //创建时间
+	private String createBy; //创建操作员的登录名
+	private Date lastModifyTime; //最后修改时间
+	private String lastModifyBy; //最后修改操作员的登录名
 
 	//本属性只在save时有效,update时无效.
 	@Column(updatable = false)

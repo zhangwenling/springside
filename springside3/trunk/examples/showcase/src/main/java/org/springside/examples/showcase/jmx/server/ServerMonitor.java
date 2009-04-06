@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ServerMonitor implements MonitorMXBean {
 
-	Logger logger = LoggerFactory.getLogger(ServerMonitor.class);
+	private static final Logger logger = LoggerFactory.getLogger(ServerMonitor.class);
 
 	private ServerStatistics serverStatistics = new ServerStatistics();
 	private EmailStatistics emailStatistics = new EmailStatistics();

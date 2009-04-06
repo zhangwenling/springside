@@ -85,7 +85,6 @@
    <rule ref="rulesets/design.xml/InstantiationToGetClass"/>
    <rule ref="rulesets/design.xml/IdempotentOperations"/>
    <rule ref="rulesets/design.xml/SimpleDateFormatNeedsLocale"/>
-   <rule ref="rulesets/design.xml/ImmutableField"/>
    <rule ref="rulesets/design.xml/UseLocaleWithCaseConversions"/>
    <rule ref="rulesets/design.xml/AvoidProtectedFieldInFinalClass"/>
    <rule ref="rulesets/design.xml/AssignmentToNonFinalStatic"/>
@@ -124,7 +123,6 @@
    <rule ref="rulesets/j2ee.xml/RemoteInterfaceNamingConvention"/>
    <rule ref="rulesets/j2ee.xml/DoNotCallSystemExit"/>
    <rule ref="rulesets/j2ee.xml/StaticEJBFieldShouldBeFinal"/>
-   <rule ref="rulesets/j2ee.xml/DoNotUseThreads"/>
    <rule ref="rulesets/logging-java.xml/MoreThanOneLogger"/>
    <rule ref="rulesets/logging-java.xml/SystemPrintln"/>
    <rule ref="rulesets/logging-java.xml/AvoidPrintStackTrace"/>
