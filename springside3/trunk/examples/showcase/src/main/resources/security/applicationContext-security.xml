@@ -7,33 +7,22 @@
 
 	<description>使用SpringSecurity的安全配置文件</description>
 
-	<!-- 在此定义URL与授权的关系. 而用户、角色、授权及三者的关系则保存在数据库中. -->
-	<security:http auto-config="true" access-decision-manager-ref="accessDecisionManager">
-		<security:intercept-url pattern="/common/user!input*" access="A_用户" />
+	<!-- 简版定义,在此定义URL与角色的关系. -->
+	<security:http auto-config="true">
+		<security:intercept-url pattern="/common/user!input*" access="ROLE_用户" />
 		<security:form-login login-page="/security/login.action" default-target-url="/"
 			authentication-failure-url="/security/login.action?error=1" />
 		<security:logout logout-success-url="/" />
 		<security:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66" />
-		<security:concurrent-session-control max-sessions="1" exception-if-maximum-exceeded="false" expired-url="/login.jsp?error=3"/>
+		<security:concurrent-session-control max-sessions="1"
+			exception-if-maximum-exceeded="false" expired-url="/login.jsp?error=3" />
 	</security:http>
 
 	<security:authentication-provider user-service-ref="userDetailsService">
 		<!-- 可设置hash使用sha1或md5散列密码后再存入数据库 -->
 		<security:password-encoder hash="plaintext" />
 	</security:authentication-provider>
-
-	<!-- 将授权的默认前缀由ROLE_改为A_ -->
-	<bean id="accessDecisionManager" class="org.springframework.security.vote.AffirmativeBased">
-		<property name="decisionVoters">
-			<list>
-				<bean class="org.springframework.security.vote.RoleVoter">
-					<property name="rolePrefix" value="A_" />
-				</bean>
-				<bean class="org.springframework.security.vote.AuthenticatedVoter" />
-			</list>
-		</property>
-	</bean>
-
+	
 	<!-- 用户查询服务  -->
 	<bean id="userDetailsService" class="org.springside.examples.showcase.security.UserDetailServiceImpl" />
 

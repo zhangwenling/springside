@@ -74,7 +74,6 @@ public class UserAction extends CRUDActionSupport<User> {
 
 	@Override
 	public String delete() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("delete操作暂时未支持");
 	}
 }

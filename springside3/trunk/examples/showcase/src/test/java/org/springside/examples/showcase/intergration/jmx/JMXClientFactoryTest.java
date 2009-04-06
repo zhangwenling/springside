@@ -13,9 +13,9 @@ import org.springside.modules.test.junit38.SpringContextTestCase;
  */
 //载入/jmx/applicationContext-jmx-server.xml和父类中定义的applicationContext.xml.
 @ContextConfiguration(locations = { "/jmx/applicationContext-jmx-server.xml" })
-public class ClientMBeanProxyFactoryTest extends SpringContextTestCase {
+public class JMXClientFactoryTest extends SpringContextTestCase {
 
-	private JmxClientFactory mbeanFactory;
+	private JmxClientFactory jmxClientFactory;
 
 	private ConfiguratorMBean configuratorMbean;
 
@@ -23,27 +23,35 @@ public class ClientMBeanProxyFactoryTest extends SpringContextTestCase {
 
 	@Override
 	public void setUp() throws Exception {
-		mbeanFactory = new JmxClientFactory("service:jmx:rmi:///jndi/rmi://localhost:1099/showcase");
-		configuratorMbean = mbeanFactory.getMBeanProxy("org.springside.showcase:type=Configurator",
+		jmxClientFactory = new JmxClientFactory("service:jmx:rmi:///jndi/rmi://localhost:1099/showcase");
+		configuratorMbean = jmxClientFactory.getMBeanProxy("org.springside.showcase:type=Configurator",
 				ConfiguratorMBean.class);
-		monitorMXBean = mbeanFactory.getMXBeanProxy("org.springside.showcase:type=Monitor", MonitorMXBean.class);
+		monitorMXBean = jmxClientFactory.getMXBeanProxy("org.springside.showcase:type=Monitor", MonitorMXBean.class);
 	}
 
 	@Override
 	public void tearDown() throws Exception {
-		mbeanFactory.close();
+		jmxClientFactory.close();
 	}
 
-	public void testGetNodeName() throws Exception {
+	public void testGetMBeanAttribute() throws Exception {
 		assertEquals("node1", configuratorMbean.getNodeName());
 	}
 
-	public void testSetNodeName() throws Exception {
+	public void testSetMBeanAttribute() throws Exception {
 		configuratorMbean.setNodeName("foo");
 		assertEquals("foo", configuratorMbean.getNodeName());
 	}
 
-	public void testGetQueryAllUsersHitCount() throws Exception {
+	public void testGetMXBeanAttribute() throws Exception {
 		assertEquals(0, monitorMXBean.getServerStatistics().getQueryUserCount());
+	}
+
+	public void testGetMBeanAttributeByReflection() throws Exception {
+		assertEquals(0L, jmxClientFactory.getAttribute("org.hibernate:type=Statistics", "SessionOpenCount"));
+	}
+
+	public void testInvokeMBeanMethodByReflection() throws Exception {
+		jmxClientFactory.inoke("org.hibernate:type=Statistics", "logSummary");
 	}
 }

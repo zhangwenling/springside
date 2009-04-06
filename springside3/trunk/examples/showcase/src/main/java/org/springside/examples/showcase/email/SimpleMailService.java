@@ -41,7 +41,7 @@ public class SimpleMailService {
 			msg.setTo("springside3.demo@gmail.com");
 			msg.setSubject("用户修改通知");
 			msg.setText(userName + "被修改.");
-			
+
 			executor.execute(new MailTask(mailSender, msg));
 		}
 	}

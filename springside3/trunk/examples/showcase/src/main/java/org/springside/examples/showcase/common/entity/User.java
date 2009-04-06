@@ -27,7 +27,6 @@ import org.springside.modules.utils.ReflectionUtils;
  * @author calvin
  */
 @Entity
-//表名与类名不相同时重新定义表名.
 @Table(name = "USERS")
 public class User extends AuditableEntity {
 

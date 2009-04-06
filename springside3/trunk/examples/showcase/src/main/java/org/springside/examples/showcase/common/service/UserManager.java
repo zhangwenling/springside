@@ -15,10 +15,6 @@ import org.springside.modules.orm.hibernate.DefaultEntityManager;
 /**
  * 用户管理类.
  * 
- * 实现领域对象用户的所有业务管理函数.
- * 通过泛型声明继承DefaultEntityManager,默认拥有CRUD管理函数及HibernateDao<User,Long> entityDao成员变量.
- * 使用Spring annotation定义事务管理.
- * 
  * @author calvin
  */
 //Spring Service Bean的标识.
@@ -31,14 +27,14 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 	private ServerConfig serverConfig; //系统配置
 	@Autowired(required = false)
 	private ServerMonitor serverMonitor;//系统统计
+	
 	@Autowired(required = false)
 	private SimpleMailService simpleMailService;//邮件发送
-
 	@Autowired(required = false)
 	private MimeMailService mimeMailService;//邮件发送
 
 	/**
-	 * 重载getAll函数,在载入用户列表时,根据系统配置统计查询次数.
+	 * 重载函数,在载入用户列表时,根据系统配置统计查询次数.
 	 */
 	@Override
 	@Transactional(readOnly = true)
@@ -49,6 +45,9 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 		return super.getAll();
 	}
 
+	/**
+	 * 重载函数,在保存用户时,发送通知邮件.
+	 */
 	@Override
 	public void save(User user) {
 		if (isStatisticsEnabled()) {
@@ -65,6 +64,9 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 		}
 	}
 
+	/**
+	 * 重载函数,在删除用户时,根据系统配置统计查询次数.
+	 */
 	@Override
 	public void delete(Long id) {
 		if (isStatisticsEnabled()) {
