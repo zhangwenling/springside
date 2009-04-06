@@ -31,7 +31,7 @@
 				<configuration>
 					<username>APP</username>
 					<password>APP</password>
-					<url>jdbc:derby://localhost:1527/springside-example;create=true
+					<url>jdbc:derby://localhost:1527/springside-miniweb;create=true
 					</url>
 					<driver>org.apache.derby.jdbc.ClientDriver</driver>
 				</configuration>

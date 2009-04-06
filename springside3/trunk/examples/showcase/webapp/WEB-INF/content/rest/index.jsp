@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>RESTful Web Service演示</h2>
-<p>技术说明：基于CXF实现的JAX-RS，主要目的是简化Web Service的提供与使用，因此对GET/PUT/POST的定义等REST概念并不严格遵循。
+<p>技术说明：主要目的是简化Web Service的提供与使用，因此对GET/PUT/POST的定义等REST概念并不严格遵循。
 </p>
 
 <div id="footer">
