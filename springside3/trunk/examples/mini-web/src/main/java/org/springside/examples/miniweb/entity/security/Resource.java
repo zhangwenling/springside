@@ -28,22 +28,24 @@ import org.springside.modules.utils.ReflectionUtils;
 @Table(name = "RESOURCES")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Resource extends IdEntity {
-
+	//resourceType常量
 	public static final String URL_TYPE = "url";
 	public static final String MENU_TYPE = "menu";
 
-	private String type; //资源类型
+	private String resourceType; //资源类型
 
-	private String value;
+	private String value; //资源标识
 
-	private Set<Authority> authorities = new LinkedHashSet<Authority>();
+	private double orderNum; //资源排序字段
 
-	public String getType() {
-		return type;
+	private Set<Authority> authorities = new LinkedHashSet<Authority>(); //可访问该资源的授权
+
+	public String getResourceType() {
+		return resourceType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setResourceType(String resourceType) {
+		this.resourceType = resourceType;
 	}
 
 	public String getValue() {
@@ -52,6 +54,14 @@ public class Resource extends IdEntity {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public double getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(double orderNum) {
+		this.orderNum = orderNum;
 	}
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })

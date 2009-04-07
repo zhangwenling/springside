@@ -14,12 +14,12 @@ insert into AUTHORITIES (NAME,DISPLAY_NAME) values('A_MODIFY_USER','管理用户
 insert into AUTHORITIES (NAME,DISPLAY_NAME) values('A_VIEW_ROLE','查看角色');
 insert into AUTHORITIES (NAME,DISPLAY_NAME) values('A_MODIFY_ROLE','管理角色');
 
-insert into RESOURCES (TYPE,VALUE) values('url','/security/user!save*');
-insert into RESOURCES (TYPE,VALUE) values('url','/security/user!delete*');
-insert into RESOURCES (TYPE,VALUE) values('url','/security/user*');
-insert into RESOURCES (TYPE,VALUE) values('url','/security/role!save*');
-insert into RESOURCES (TYPE,VALUE) values('url','/security/role!delete*');
-insert into RESOURCES (TYPE,VALUE) values('url','/security/role*');
+insert into RESOURCES (RESOURCE_TYPE,VALUE,ORDER_NUM) values('url','/security/user!save*',1.0);
+insert into RESOURCES (RESOURCE_TYPE,VALUE,ORDER_NUM) values('url','/security/user!delete*',2.0);
+insert into RESOURCES (RESOURCE_TYPE,VALUE,ORDER_NUM) values('url','/security/user*',3.0);
+insert into RESOURCES (RESOURCE_TYPE,VALUE,ORDER_NUM) values('url','/security/role!save*',4.0);
+insert into RESOURCES (RESOURCE_TYPE,VALUE,ORDER_NUM) values('url','/security/role!delete*',5.0);
+insert into RESOURCES (RESOURCE_TYPE,VALUE,ORDER_NUM) values('url','/security/role*',6.0);
 
 insert into USERS_ROLES values(1,1);
 insert into USERS_ROLES values(1,2);

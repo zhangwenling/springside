@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.email.MimeMailService;
 import org.springside.examples.showcase.email.SimpleMailService;
-import org.springside.examples.showcase.jmx.server.ServerConfig;
-import org.springside.examples.showcase.jmx.server.ServerMonitor;
+import org.springside.examples.showcase.jmx.server.mbean.ServerConfig;
+import org.springside.examples.showcase.jmx.server.mxbean.ServerMonitor;
 import org.springside.modules.orm.hibernate.DefaultEntityManager;
 
 /**

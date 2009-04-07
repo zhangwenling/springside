@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.jmx.server;
+package org.springside.examples.showcase.jmx.server.mxbean;
 
 import org.apache.commons.beanutils.MethodUtils;
 import org.apache.commons.lang.StringUtils;

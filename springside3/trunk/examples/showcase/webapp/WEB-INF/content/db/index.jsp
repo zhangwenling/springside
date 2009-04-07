@@ -9,8 +9,8 @@
 </head>
 <body>
 <h2>数据库访问高级演示</h2>
-<p>技术说明：Hibernate envers，自动记录对象的修改历史。
-</p>
+<p>技术说明：Hibernate Event演示，自动在修改User对象时加入审计信息.</p>
+<p>未来版本：Hibernate envers，自动记录对象的修改历史。(等待Hibernate 3.5)</p>
 
 <div id="footer">
 	<a href="${ctx}/">返回首页</a>

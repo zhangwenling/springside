@@ -30,7 +30,7 @@
 <div id="filter">
 <form id="searchForm" action="user!search.action" method="get">
 	你好,<%=SpringSecurityUtils.getCurrentUserName()%>.&nbsp;&nbsp;
- 	登录名: <input type="text" name="filter_EQUAL_loginName" value="${param['filter_EQUAL_loginName']}"  size="9"/> 
+ 	登录名: <input type="text" name="filter_EQ_loginName" value="${param['filter_EQ_loginName']}"  size="9"/> 
           姓名或Email: <input type="text" name="filter_LIKE_name|email" value="${param['filter_LIKE_name|email']}" size="9"/>
 	<input type="submit" value="搜索" />
 </form>

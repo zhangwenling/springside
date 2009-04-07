@@ -31,20 +31,12 @@
 		<property name="objectDefinitionSource" ref="databaseDefinitionSource" />
 	</bean>
 
-	<bean id="databaseDefinitionSource" class="org.springframework.security.intercept.web.DefaultFilterInvocationDefinitionSource">
-		<constructor-arg>
-			<bean class="org.springframework.security.util.AntUrlPathMatcher" />
-		</constructor-arg>
-		<constructor-arg ref="databaseRequestMap" />
-	</bean>
-
-	<bean id="databaseRequestMap" class="org.springside.modules.security.springsecurity.RequestMapFactoryBean">
+	<bean id="databaseDefinitionSource" class="org.springside.modules.security.springsecurity.DefinitionSourceFactoryBean">
 		<constructor-arg>
 			<bean class="org.springside.examples.miniweb.service.security.RequestMapServiceImpl" />
 		</constructor-arg>
 	</bean>
 	<!-- 自定义过滤器,在数据库存储URL-授权  end -->
-
 
 	<!-- 自定义授权判断器, 将授权名称的默认前缀由ROLE_改为A_. -->
 	<bean id="accessDecisionManager" class="org.springframework.security.vote.AffirmativeBased">

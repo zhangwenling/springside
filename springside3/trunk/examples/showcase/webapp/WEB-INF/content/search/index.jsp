@@ -11,8 +11,8 @@
 <h2>搜索引擎演示</h2>
 <p>技术说明：<br/>
 同时演示Solr与Hibernate Search，满足不同情形的需求<br/>
-1.<b>Solr</b>：松耦合的独立的搜索引擎服务器集群。<br/>
-2.<b>Hibernate Search</b>:搜索实体的数据库操作全部基于Hibernate Search时的选择。
+<b>Solr</b>：松耦合的独立的搜索引擎服务器集群。<br/>
+<b>Hibernate Search</b>:搜索实体的数据库操作全部基于Hibernate Search时的选择。
 </p>
 
 <div id="footer">

@@ -9,6 +9,8 @@
 	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet"/>
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script type="text/javascript">
+
+		//系统配置(MBean)
 		//动态提交表单保存服务器配置.
 		function saveConfig(){
 			$.get("jmx-client!saveConfig.action?" + $("form").serialize(), function(data){
@@ -24,7 +26,8 @@
 				$('#updateMessage').text(data.message).show().fadeOut(2000);
 			});
 		}
-	
+
+		//系统运行统计(MXBean)
 		//动态获取服务器最新状态,返回JSON对象.
 		function updateStatistics(){
 			$.getJSON("jmx-client!updateStatistics.action", function(data) {
@@ -34,6 +37,7 @@
 			});
 		}
 
+		//Hibernate运行统计(直接读取属性/调用方法)
 		//动态获取服务器最新状态,返回JSON对象.
 		function resetStatistics(){
 			$.get("jmx-client!resetStatistics.action?statisticsName="+$('#statisticsName').val(), function(data) {
@@ -49,9 +53,13 @@
 </head>
 <body>
 	<h3>JMX演示用例</h3>
-	<p>技术说明：演示MBean代理、MXBean代理及直接读取属性三种模式。<br/>
-	客户端亦使用JConsole, 远程连接URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase<br/></p>
+	<p>技术说明：演示MBean代理、MXBean代理及直接读取属性三种模式。</p>
 	<p>用户故事：使用JMX动态配置系统变量并实时监控系统运行统计。</p>
+	
+	<p>客户端可使用JConsole, 远程进程URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase , <a href="${ctx}/">返回首页</a></p>
+	<table  cellspacing="10">
+	<tr>
+	<td colspan="2">
 	<h4>系统配置(MBean)</h4>
 	<form id="configForm">
 	<table>
@@ -73,8 +81,9 @@
 		</tr>
 	</table>
 	</form>
+	</td>
+	</tr>
 
-	<table  cellspacing="20">
 	<tr>
 	<td>
 	<h4>系统运行统计(MXBean)</h4>
@@ -122,7 +131,5 @@
 	</td>
 	</tr>
 	</table>
-
-	<div><a href="#/" target="_blank">打开新窗口并行操作</a>、<a href="${ctx}/">返回首页</a></div>
 </body>
 </html>

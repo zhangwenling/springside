@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.jmx.client.service.HibernateStatistics;
 import org.springside.examples.showcase.jmx.client.service.JmxClientService;
-import org.springside.examples.showcase.jmx.server.ServerStatistics;
+import org.springside.examples.showcase.jmx.server.mxbean.ServerStatistics;
 import org.springside.modules.web.struts2.Struts2Utils;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -76,6 +76,8 @@ public class JmxClientAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	// 系统配置(MBean) //
+	
 	/**
 	 * 修改系统配置的Ajax请求.
 	 */
@@ -113,6 +115,8 @@ public class JmxClientAction extends ActionSupport {
 		return null;
 	}
 
+	// 系统运行统计(MXBean) //
+	
 	/**
 	 * 获取最新系统运行统计信息的Ajax请求.
 	 */
@@ -139,7 +143,9 @@ public class JmxClientAction extends ActionSupport {
 		}
 		return null;
 	}
-
+	
+	// Hibernate运行统计(直接读取属性/调用方法) //
+	
 	/**
 	 * 打印Hibernate统计信息日志.
 	 */

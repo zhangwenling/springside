@@ -3,13 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>报表演示</title>
+	<title>RESTful Web Service演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-<h2>报表演示</h2>
-<p>技术说明：BI、JasperReport都还不是满意的选择时，可以DIY html表格，用POI输出excel文件，用Flash Chart画图。
+<h2>RESTful Web Service演示</h2>
+<p>技术说明：主要目的是简化Web Service的提供与使用，因此并不严格遵循GET/POST/PUT等REST概念。
 </p>
 
 <div id="footer">

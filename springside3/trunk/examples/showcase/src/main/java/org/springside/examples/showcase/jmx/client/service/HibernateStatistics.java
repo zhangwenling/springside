@@ -1,7 +1,7 @@
 package org.springside.examples.showcase.jmx.client.service;
 
 /**
- * 封装Hibernate统计数据的DTO.
+ * 封装Hibernate统计数据的本地DTO.
  */
 public class HibernateStatistics {
 	private long sessionOpenCount;

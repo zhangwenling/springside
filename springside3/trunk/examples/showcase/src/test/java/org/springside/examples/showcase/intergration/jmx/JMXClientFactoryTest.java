@@ -1,8 +1,8 @@
 package org.springside.examples.showcase.intergration.jmx;
 
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.examples.showcase.jmx.server.ConfiguratorMBean;
-import org.springside.examples.showcase.jmx.server.MonitorMXBean;
+import org.springside.examples.showcase.jmx.server.mbean.ConfiguratorMBean;
+import org.springside.examples.showcase.jmx.server.mxbean.MonitorMXBean;
 import org.springside.modules.jmx.JmxClientFactory;
 import org.springside.modules.test.junit38.SpringContextTestCase;
 

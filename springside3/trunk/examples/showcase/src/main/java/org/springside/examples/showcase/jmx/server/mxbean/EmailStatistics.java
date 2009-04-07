@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.jmx.server;
+package org.springside.examples.showcase.jmx.server.mxbean;
 
 import java.beans.ConstructorProperties;
 import java.util.concurrent.atomic.AtomicInteger;

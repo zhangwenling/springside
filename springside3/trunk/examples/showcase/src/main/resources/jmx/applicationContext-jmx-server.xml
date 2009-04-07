@@ -40,15 +40,15 @@
 	</bean>
 
 	<!-- 系统属性配置MBean -->
-	<bean id="serverConfig" class="org.springside.examples.showcase.jmx.server.ServerConfig">
+	<bean id="serverConfig" class="org.springside.examples.showcase.jmx.server.mbean.ServerConfig">
 		<property name="nodeName" value="node1" />
 		<property name="statisticsEnabled" value="true" />
 	</bean>
 
 	<!-- 系统状态监控MXBean-->
-	<bean id="serverMonitor" class="org.springside.examples.showcase.jmx.server.ServerMonitor" />
+	<bean id="serverMonitor" class="org.springside.examples.showcase.jmx.server.mxbean.ServerMonitor" />
 
-	<!-- Hibernate StatisticsMBean-->
+	<!-- Hibernate Statistics MBean-->
 	<bean id="hibernateStatistics" class="org.hibernate.jmx.StatisticsService">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>

@@ -9,12 +9,12 @@
 	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet"/>
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script type="text/javascript">
-    	var crossDomainUrl ="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}";	
+    	var remoteUrl ="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}";	
 
 		//使用JQuery.getJSON(url?callback=?)方式跨域访问内容
 		function getMashupContent() {
-			$.getJSON(crossDomainUrl+"/ajax/mashup/mashup-server.action?callback=?",function(data){
-				$('#mashupContnt').html(data.html);
+			$.getJSON(remoteUrl+"/ajax/mashup/mashup-server.action?callback=?",function(data){
+				$('#mashupContnt').html(data.content);
 			});
 		}
 	</script>

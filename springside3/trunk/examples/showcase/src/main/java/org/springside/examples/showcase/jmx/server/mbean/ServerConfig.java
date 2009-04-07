@@ -1,4 +1,7 @@
-package org.springside.examples.showcase.jmx.server;
+package org.springside.examples.showcase.jmx.server.mbean;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+
 
 /**
  * 系统属性配置.
@@ -8,7 +11,7 @@ package org.springside.examples.showcase.jmx.server;
 public class ServerConfig implements ConfiguratorMBean {
 
 	private String nodeName;//服务器节点名
-	private volatile boolean statisticsEnabled = false;//是否统计服务运行信息
+	private AtomicBoolean statisticsEnabled = new AtomicBoolean(false);//是否统计服务运行信息
 
 	public String getNodeName() {
 		return nodeName;
@@ -19,10 +22,10 @@ public class ServerConfig implements ConfiguratorMBean {
 	}
 
 	public boolean isStatisticsEnabled() {
-		return statisticsEnabled;
+		return statisticsEnabled.get();
 	}
 
 	public void setStatisticsEnabled(boolean statisticsEnabled) {
-		this.statisticsEnabled = statisticsEnabled;
+		this.statisticsEnabled.set(statisticsEnabled);
 	}
 }

@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>工作流演示</h2>
-<p>技术说明：基于JBPM实现。</p>
+<p>技术说明：基于JBPM实现，尽量等待改变颇大的JBPM4.0正式版出来才动工。</p>
 
 <div id="footer">
 	<a href="${ctx}/">返回首页</a>

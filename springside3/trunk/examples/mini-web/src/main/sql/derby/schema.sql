@@ -6,18 +6,18 @@ drop table AUTHORITIES;
 drop table USERS;
 drop table ROLES;
 
-
-
 create table USERS (
-ID integer primary key GENERATED ALWAYS AS IDENTITY,
+ID integer primary key GENERATED ALWAYS as IDENTITY,
 LOGIN_NAME varchar(20) not null unique,
 PASSWORD varchar(20),
 NAME varchar(20),
 EMAIL varchar(30)
 );
 
+create unique index USERS_LOGIN_NAME_INDEX on USERS(LOGIN_NAME);
+
 create table ROLES (
-ID integer primary key GENERATED ALWAYS AS IDENTITY,
+ID integer primary key GENERATED ALWAYS as IDENTITY,
 NAME varchar(20) not null unique
 );
 
@@ -29,7 +29,7 @@ FOREIGN KEY (USER_ID) references USERS(ID)
 );
 
 CREATE TABLE AUTHORITIES (
-ID integer primary key GENERATED ALWAYS AS IDENTITY,
+ID integer primary key GENERATED ALWAYS as IDENTITY,
 NAME varchar(20) not null,
 DISPLAY_NAME varchar(20) not null
 );
@@ -42,9 +42,10 @@ FOREIGN KEY (AUTHORITY_ID) references AUTHORITIES(ID)
 );
 
 CREATE TABLE RESOURCES (
-ID integer primary key GENERATED ALWAYS AS IDENTITY,
-TYPE varchar(20) not null,
-VALUE varchar(255) not null
+ID integer primary key GENERATED ALWAYS as IDENTITY,
+RESOURCE_TYPE varchar(20) not null,
+VALUE varchar(255) not null,
+ORDER_NUM float not null
 );
 
 create table RESOURCES_AUTHORITIES (

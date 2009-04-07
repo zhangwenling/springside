@@ -8,20 +8,31 @@
 </head>
 <body>
 <h2>Showcase示例</h2>
-<h3><a href="common/user.action">综合演示</a></h3>
-<h3><a href="jmx/jmx-client.action">JMX演示</a></h3>
-<h3><a href="schedule/index.action">定时任务演示</a></h3>
-<h3><a href="email/index.action">邮件演示</a></h3>
-<h3><a href="ajax/index.action">Ajax演示</a></h3>
-<h3><a href="security/login.action">安全高级演示</a></h3>
-<h3><a href="jms/index.action">JMS演示(计划中)</a></h3>
-<h3><a href="rest/index.action">REST演示(计划中)</a></h3>
-<h3><a href="search/index.action">搜索引擎演示(计划中)</a></h3>
-<h3><a href="rule/index.action">规则引擎演示(计划中)</a></h3>
-<h3><a href="workflow/index.action">工作流演示(计划中)</a></h3>
-<h3><a href="report/index.action">报表演示(计划中)</a></h3>
-<h3><a href="db/index.action">数据库高级演示(计划中)</a></h3>
-<h3><a href="webservice/index.action">Web服务高级演示(计划中)</a></h3>
-<h3><a href="log/index.action">日志高级演示(计划中)</a></h3>
+<table cellspacing="20">
+	<tr>
+		<th align="left">(部分)完成特性</th>
+		<th align="left">计划中特性</th>
+	</tr>
+	<tr>
+		<td>
+		<h3><a href="common/user.action">综合演示</a></h3>
+		<h3><a href="jmx/jmx-client.action">JMX演示</a></h3>
+		<h3><a href="schedule/index.action">定时任务演示</a></h3>
+		<h3><a href="email/index.action">邮件演示</a></h3>
+		<h3><a href="ajax/index.action">Ajax演示</a></h3>
+			<h3><a href="db/index.action">数据库高级演示</a></h3>
+		<h3><a href="security/login.action">安全高级演示</a></h3>
+		</td>
+		<td>
+		<h3><a href="jms/index.action">JMS演示</a></h3>
+		<h3><a href="search/index.action">搜索引擎演示</a></h3>
+		<h3><a href="rule/index.action">规则引擎演示</a></h3>
+		<h3><a href="workflow/index.action">工作流演示</a></h3>
+		<h3><a href="report/index.action">报表演示</a></h3>
+		<h3><a href="webservice/index.action">Web服务高级演示</a></h3>
+		<h3><a href="log/index.action">日志高级演示(计划中)</a></h3>
+		</td>
+	</tr>
+</table>
 </body>
 </html>

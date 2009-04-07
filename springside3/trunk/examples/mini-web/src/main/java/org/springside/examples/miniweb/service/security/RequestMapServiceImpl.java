@@ -24,13 +24,12 @@ public class RequestMapServiceImpl implements RequestMapService {
 	 * @see RequestMapService#getRequestMap()
 	 */
 	public LinkedHashMap<String, String> getRequestMap() throws Exception {
+		List<Resource> resourceList = resourceDao.findResource(Resource.URL_TYPE);
 		LinkedHashMap<String, String> requestMap = new LinkedHashMap<String, String>();
-		List<Resource> resourceList = resourceDao.findByProperty("type", Resource.URL_TYPE);
-
 		for (Resource resource : resourceList) {
 			requestMap.put(resource.getValue(), resource.getAuthNames());
 		}
-
 		return requestMap;
 	}
+
 }

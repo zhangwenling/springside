@@ -248,7 +248,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		Assert.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = null;
 
-		if (MatchType.EQUAL.equals(matchType)) {
+		if (MatchType.EQ.equals(matchType)) {
 			criterion = Restrictions.eq(propertyName, value);
 		}
 		if (MatchType.LIKE.equals(matchType)) {

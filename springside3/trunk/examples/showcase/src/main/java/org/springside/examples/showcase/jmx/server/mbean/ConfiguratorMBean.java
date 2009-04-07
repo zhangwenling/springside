@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.jmx.server;
+package org.springside.examples.showcase.jmx.server.mbean;
 
 /**
  * 配置系统属性的标准MBean接口. 

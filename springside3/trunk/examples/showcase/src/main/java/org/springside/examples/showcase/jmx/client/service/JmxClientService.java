@@ -8,9 +8,9 @@ import javax.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
-import org.springside.examples.showcase.jmx.server.ConfiguratorMBean;
-import org.springside.examples.showcase.jmx.server.MonitorMXBean;
-import org.springside.examples.showcase.jmx.server.ServerStatistics;
+import org.springside.examples.showcase.jmx.server.mbean.ConfiguratorMBean;
+import org.springside.examples.showcase.jmx.server.mxbean.MonitorMXBean;
+import org.springside.examples.showcase.jmx.server.mxbean.ServerStatistics;
 import org.springside.modules.jmx.JmxClientFactory;
 
 /**
@@ -23,7 +23,7 @@ import org.springside.modules.jmx.JmxClientFactory;
  */
 public class JmxClientService {
 
-	private static Logger logger = LoggerFactory.getLogger(JmxClientService.class);
+	protected static Logger logger = LoggerFactory.getLogger(JmxClientService.class);
 
 	//ObjectName定义
 	private static String configuratorMBeanName = "org.springside.showcase:type=Configurator";
@@ -59,10 +59,10 @@ public class JmxClientService {
 		this.passwd = passwd;
 	}
 
+	// 连接与断开远程连接 //
 	/**
 	 * 连接JMX Server并创建本地的MBean代理.
 	 */
-	//Spring在所有属性注入后自动执行的函数.
 	@PostConstruct
 	public void init() {
 		Assert.hasText(host, "host参数不能为空");
@@ -82,56 +82,61 @@ public class JmxClientService {
 	/**
 	 * 断开JMX连接.
 	 */
-	//Spring在销毁对象时自动执行的函数.
 	@PreDestroy
 	public void close() throws IOException {
 		clientFactory.close();
 	}
+	
+	// 标准MBean代理操作演示 、、
 
 	/**
-	 * 获取服务节点名,标准MBean代理操作的演示.
+	 * 获取服务节点名.
 	 */
 	public String getNodeName() {
 		return configuratorMBean.getNodeName();
 	}
 
 	/**
-	 * 设置服务节点名,标准MBean代理操作的演示.
+	 * 设置服务节点名.
 	 */
 	public void setNodeName(String nodeName) {
 		configuratorMBean.setNodeName(nodeName);
 	}
 
 	/**
-	 * 获取是否记录统计信息,标准MBean代理操作的演示.
+	 * 获取是否记录统计信息.
 	 */
 	public boolean isStatisticsEnabled() {
 		return configuratorMBean.isStatisticsEnabled();
 	}
 
 	/**
-	 * 设置是否记录统计信息,标准MBean代理操作的演示.
+	 * 设置是否记录统计信息.
 	 */
 	public void setStatisticsEnabled(boolean statisticsEnabled) {
 		configuratorMBean.setStatisticsEnabled(statisticsEnabled);
 	}
 
+	// MXBean代理操作的演示 //
+	
 	/**
-	 * 获取系统运行统计数据,MXBean代理操作的演示.
+	 * 获取系统运行统计数据.
 	 */
 	public ServerStatistics getServerStatistics() {
 		return monitorMXBean.getServerStatistics();
 	}
 
 	/**
-	 * 重置系统运行统计数据,MXBean代理操作的演示.
+	 * 重置系统运行统计数据.
 	 */
 	public boolean resetServerStatistics(String statisticsName) {
 		return monitorMXBean.reset(statisticsName);
 	}
 
+	// 无MBean的Class文件时直接访问属性调用方法的演示 //
+	
 	/**
-	 * 获取Hibernate统计数据,无MBean的Class文件时直接读取属性的演示.
+	 * 获取Hibernate统计数据.
 	 */
 	public HibernateStatistics getHibernateStatistics() {
 		HibernateStatistics statistics = new HibernateStatistics();
@@ -141,7 +146,7 @@ public class JmxClientService {
 	}
 
 	/**
-	 * 调用Hibernate JMX的logSummary函数,无MBean的Class文件时直接调用方法的演示.
+	 * 调用Hibernate JMX的logSummary函数.
 	 */
 	public void logSummary() {
 		clientFactory.inoke(hibernteMBeanName, "logSummary");

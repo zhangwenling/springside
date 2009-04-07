@@ -14,12 +14,12 @@ public class PropertyFilter {
 	 * 属性比较类型.
 	 */
 	public enum MatchType {
-		EQUAL, LIKE;
+		EQ, LIKE;
 	}
 
 	private String propertyName;
 	private Object value;
-	private MatchType matchType = MatchType.EQUAL;
+	private MatchType matchType = MatchType.EQ;
 
 	public PropertyFilter() {
 	}

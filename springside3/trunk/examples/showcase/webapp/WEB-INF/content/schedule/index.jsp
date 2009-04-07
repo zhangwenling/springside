@@ -11,7 +11,7 @@
 <h2>定时任务演示</h2>
 <p>技术说明：<br/>
 Cron式任务定义：基于Quartz的实现。<br/>
-Timer式任务定义:基于Quartz与JDK5.0 ScheduledExecutorService的两种实现。<br/>
+Timer式任务定义:基于Quartz与JDK5.0 ScheduledExecutorService的两种实现。<br/><br/>
 如果执行执行时间长于间隔时间的长时间任务，Quartz会并发执行下一任务而ScheduledExecutorService会等到前一任务执行完才立刻补回之前拖延执行的所有任务。
 
 
