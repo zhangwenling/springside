@@ -20,7 +20,7 @@
 		<h3><a href="schedule/index.action">定时任务演示</a></h3>
 		<h3><a href="email/index.action">邮件演示</a></h3>
 		<h3><a href="ajax/index.action">Ajax演示</a></h3>
-			<h3><a href="db/index.action">数据库高级演示</a></h3>
+		<h3><a href="db/index.action">数据库高级演示</a></h3>
 		<h3><a href="security/login.action">安全高级演示</a></h3>
 		</td>
 		<td>
@@ -30,7 +30,7 @@
 		<h3><a href="workflow/index.action">工作流演示</a></h3>
 		<h3><a href="report/index.action">报表演示</a></h3>
 		<h3><a href="webservice/index.action">Web服务高级演示</a></h3>
-		<h3><a href="log/index.action">日志高级演示(计划中)</a></h3>
+		<h3><a href="log/index.action">日志高级演示</a></h3>
 		</td>
 	</tr>
 </table>

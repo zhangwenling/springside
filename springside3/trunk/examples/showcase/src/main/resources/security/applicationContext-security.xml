@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:security="http://www.springframework.org/schema/security"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:s="http://www.springframework.org/schema/security"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd"
@@ -7,23 +7,24 @@
 
 	<description>使用SpringSecurity的安全配置文件</description>
 
-	<!-- 简版定义,在此定义URL与角色的关系. -->
-	<security:http auto-config="true">
-		<security:intercept-url pattern="/common/user!input*" access="ROLE_用户" />
-		<security:form-login login-page="/security/login.action" default-target-url="/"
+	<!-- 此处采用原版的配置方式,数据库piezihi1方式见mini-web. -->
+	<s:http auto-config="true">
+		<s:intercept-url pattern="/common/user!input*" access="ROLE_用户" />
+		<s:form-login login-page="/security/login.action" default-target-url="/"
 			authentication-failure-url="/security/login.action?error=1" />
-		<security:logout logout-success-url="/" />
-		<security:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66" />
-		<security:concurrent-session-control max-sessions="1"
+		<s:logout logout-success-url="/" />
+		<s:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66" />
+		<s:concurrent-session-control max-sessions="1"
 			exception-if-maximum-exceeded="false" expired-url="/login.jsp?error=3" />
-	</security:http>
+	</s:http>
 
-	<security:authentication-provider user-service-ref="userDetailsService">
+	<!-- 认证配置 -->
+	<s:authentication-provider user-service-ref="userDetailsService">
 		<!-- 可设置hash使用sha1或md5散列密码后再存入数据库 -->
-		<security:password-encoder hash="plaintext" />
-	</security:authentication-provider>
+		<s:password-encoder hash="plaintext" />
+	</s:authentication-provider>
 	
-	<!-- 用户查询服务  -->
+	<!-- 项目实现的用户查询服务  -->
 	<bean id="userDetailsService" class="org.springside.examples.showcase.security.UserDetailServiceImpl" />
 
 	<!--JCaptcha验证码服务 -->

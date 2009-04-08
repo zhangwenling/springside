@@ -15,7 +15,7 @@ import javax.persistence.MappedSuperclass;
  */
 //JPA Entity基类的标识
 @MappedSuperclass
-public class IdEntity {
+public abstract class IdEntity {
 
 	private Long id;
 

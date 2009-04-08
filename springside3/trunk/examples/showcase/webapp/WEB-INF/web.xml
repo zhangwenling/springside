@@ -37,10 +37,10 @@
 	<!-- SpringSide's JCaptcha filter -->
 	<filter>
 		<filter-name>jcaptchaFilter</filter-name>
-		<filter-class>org.springside.modules.security.jcaptcha.JCaptchaSpringFilter</filter-class>
+		<filter-class>org.springside.modules.security.jcaptcha.JCaptchaFilter</filter-class>
 		<init-param>
 			<param-name>failureUrl</param-name>
-			<param-value>/security/login.action?error=true</param-value>
+			<param-value>/security/login.action?error=2</param-value>
 		</init-param>
 	</filter>
 

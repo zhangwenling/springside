@@ -37,7 +37,20 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 				requestMap);
 		return definitionSource;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Class getObjectType() {
+		return FilterInvocationDefinitionSource.class;
+	}
 
+	public boolean isSingleton() {
+		return true;
+	}
+
+	private UrlMatcher getUrlMatcher() {
+		return new AntUrlPathMatcher();
+	}
+	
 	private LinkedHashMap<RequestKey, ConfigAttributeDefinition> getRequestMap() throws Exception {
 		LinkedHashMap<String, String> srcMap = requestMapService.getRequestMap();
 		LinkedHashMap<RequestKey, ConfigAttributeDefinition> requestMap = new LinkedHashMap<RequestKey, ConfigAttributeDefinition>();
@@ -49,18 +62,5 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 			requestMap.put(key, (ConfigAttributeDefinition) editor.getValue());
 		}
 		return requestMap;
-	}
-
-	private UrlMatcher getUrlMatcher() {
-		return new AntUrlPathMatcher();
-	}
-
-	@SuppressWarnings("unchecked")
-	public Class getObjectType() {
-		return FilterInvocationDefinitionSource.class;
-	}
-
-	public boolean isSingleton() {
-		return true;
 	}
 }

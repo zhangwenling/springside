@@ -13,10 +13,14 @@
 </head>
 <body>
 	<%
-		if (session.getAttribute(AbstractProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY) != null) {
 			if("1".equals(request.getParameter("error"))){
 	%>
-			<span style="color:red"> 登录失败，请重试.</span>
+			<span style="color:red"> 用户名密码错误,请重试.</span>
+	<%
+			}
+			if("2".equals(request.getParameter("error"))){	
+	%>
+			<span style="color:red"> 验证码错误,请重试.</span>
 	<%
 			}
 			if("3".equals(request.getParameter("error"))){
@@ -24,7 +28,6 @@
 			<span style="color:red"> 此帐号已从别处登录.</span>
 	<%
 			}
-		}
 	%>
 	<h2>Showcase登录页</h2>
 	<p>用户故事：在Mini-Web的基础上，演示与验证码的整合。</p>

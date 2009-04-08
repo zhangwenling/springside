@@ -159,6 +159,8 @@ public class JCaptchaFilter implements Filter {
 
 	/**
 	 * 跳转到失败页面.
+	 * 
+	 * 可在子类进行扩展，比如在session中放入SpringSecurity的Exception.
 	 */
 	protected void redirectFailureUrl(final HttpServletRequest request, final HttpServletResponse response)
 			throws IOException {
