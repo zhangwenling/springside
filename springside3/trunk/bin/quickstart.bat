@@ -10,14 +10,11 @@ cd ..\servers\derby
 start start-db.bat
 cd ..\..\
 
-echo [INFO] 暂停若干秒等待derby启动
-ping -n 4 127.0.0.1>null
-
 echo [Step 3] 安装SpringSide3 modules 和archetypes到本地Maven仓库.
 call mvn dependency:copy-dependencies -DoutputDirectory=lib -Pmodules
 call mvn clean install -Pmodules
 
-echo [Step 4] 初始化Jar包，编译、测试、打包、部署三个Examles项目到tomcat
+echo [Step 4] 初始化依赖Jar包，初始化数据库，编译、打包、部署三个Examles项目到tomcat
 call mvn dependency:copy-dependencies -DoutputDirectory=lib -DexcludeScope=runtime -Pexamples
 call mvn dependency:copy-dependencies -DoutputDirectory=webapp/WEB-INF/lib  -DincludeScope=runtime -Pexamples
 call mvn tomcat:undeploy -Pexamples
