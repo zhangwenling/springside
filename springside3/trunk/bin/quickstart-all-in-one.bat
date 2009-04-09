@@ -10,8 +10,8 @@ set MAVEN_BAT="%cd%\..\tools\maven\apache-maven-2.1.0\bin\mvn.bat"
 cd ..\
 
 echo [Step 1] 复制tools/maven/下的central-repository 与springside-repository 到 %userprofile%\.m2\repository
-xcopy /s/e/i/h/y/q tools\maven\central-repository %USERPROFILE%\.m2\repository
-xcopy /s/e/i/h/y/q tools\maven\springside-repository %USERPROFILE%\.m2\repository
+xcopy /s/e/i/h/d tools\maven\central-repository %USERPROFILE%\.m2\repository
+xcopy /s/e/i/h/d tools\maven\springside-repository %USERPROFILE%\.m2\repository
 
 echo [Step 2] 执行servers/derby/start-db.bat 以Standalone形式启动Derby数据库
 cd servers\derby
@@ -28,8 +28,8 @@ call %MAVEN_BAT% -o dependency:copy-dependencies -DoutputDirectory=lib -Pmodules
 call %MAVEN_BAT% -o clean install  -Pmodules
  
 echo [Step 5] 初始化依赖Jar包，初始化数据库，编译、测试、打包、部署三个Examles项目到tomcat。
-call %MAVEN_BAT% -o dependency:copy-dependencies -DoutputDirectory=lib -DexcludeScope=runtime -Pexamples
-call %MAVEN_BAT% -o dependency:copy-dependencies -DoutputDirectory=webapp/WEB-INF/lib  -DincludeScope=runtime -Pexamples
+call %MAVEN_BAT% -o dependency:copy-dependencies -DoutputDirectory=lib -DexcludeScope=runtime -Dsilent=true -Pexamples
+call %MAVEN_BAT% -o dependency:copy-dependencies -DoutputDirectory=webapp/WEB-INF/lib -DincludeScope=runtime -Dsilent=true -Pexamples
 call %MAVEN_BAT% -o tomcat:undeploy -Pexamples
 call %MAVEN_BAT% -o clean compile war:exploded tomcat:exploded -Pinitdb -Pnotest -Pexamples
 
