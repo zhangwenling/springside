@@ -2,7 +2,7 @@
 echo [INFO] 确保默认JDK版本为JDK6.0.
 echo [INFO] 确保设置PATH系统变量包含maven2.0.9或以上版本的bin目录.
 
-echo [Step 1] 请将servers/tomcat/ci-config-sample/conf/tomcat-user.xml 复制到你的tomcat目录，然后手工启动tomcat(端口为8080)，完成后请按任意键继续
+echo [Step 1] 请将servers/tomcat/config-sample-ci/conf/tomcat-user.xml 复制到你的tomcat目录，然后手工启动tomcat(端口为8080)，完成后请按任意键继续
 pause
 
 echo [Step 2] 执行servers/derby/start-db.bat 以Standalone形式启动Derby数据库
