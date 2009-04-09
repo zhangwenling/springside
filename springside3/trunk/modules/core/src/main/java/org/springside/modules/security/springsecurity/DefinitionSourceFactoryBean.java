@@ -37,7 +37,7 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 				requestMap);
 		return definitionSource;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Class getObjectType() {
 		return FilterInvocationDefinitionSource.class;
@@ -50,7 +50,7 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 	private UrlMatcher getUrlMatcher() {
 		return new AntUrlPathMatcher();
 	}
-	
+
 	private LinkedHashMap<RequestKey, ConfigAttributeDefinition> getRequestMap() throws Exception {
 		LinkedHashMap<String, String> srcMap = requestMapService.getRequestMap();
 		LinkedHashMap<RequestKey, ConfigAttributeDefinition> requestMap = new LinkedHashMap<RequestKey, ConfigAttributeDefinition>();

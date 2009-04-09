@@ -9,9 +9,8 @@ goto end
 set MAVEN_BAT="%cd%\..\tools\maven\apache-maven-2.1.0\bin\mvn.bat"
 cd ..\
 
-echo [Step 1] 复制tools/maven/下的central-repository 与springside-repository 到 %userprofile%\.m2\repository
+echo [Step 1] 复制tools/maven/central-repository 到 %userprofile%\.m2\repository
 xcopy /s/e/i/h/d tools\maven\central-repository %USERPROFILE%\.m2\repository
-xcopy /s/e/i/h/d tools\maven\springside-repository %USERPROFILE%\.m2\repository
 
 echo [Step 2] 执行servers/derby/start-db.bat 以Standalone形式启动Derby数据库
 cd servers\derby

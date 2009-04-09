@@ -31,7 +31,7 @@ public class SimpleMailService {
 	/**
 	 * 发送纯文本的用户修改通知邮件.
 	 */
-	public void sendNotifyMail(String userName) {
+	public void sendNotificationMail(String userName) {
 
 		//演示用Executor多线程群发邮件
 		for (int i = 0; i < 3; i++) {

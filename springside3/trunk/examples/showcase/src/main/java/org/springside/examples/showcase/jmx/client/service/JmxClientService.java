@@ -8,10 +8,8 @@ import javax.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
-import org.springside.examples.showcase.jmx.server.mbean.ConfiguratorMBean;
-import org.springside.examples.showcase.jmx.server.mxbean.MonitorMXBean;
-import org.springside.examples.showcase.jmx.server.mxbean.ServerStatistics;
-import org.springside.modules.jmx.JmxClientFactory;
+import org.springside.examples.showcase.jmx.server.ConfiguratorMBean;
+import org.springside.modules.jmx.MBeanClientFactory;
 
 /**
  * JMX客户端服务的封装.
@@ -27,13 +25,11 @@ public class JmxClientService {
 
 	//ObjectName定义
 	private static String configuratorMBeanName = "org.springside.showcase:type=Configurator";
-	private static String monitorMXBeanName = "org.springside.showcase:type=Monitor";
 	private static String hibernteMBeanName = "org.hibernate:type=Statistics";
 
 	//jmx客户端工厂及mbean代理
-	private JmxClientFactory clientFactory;
+	private MBeanClientFactory clientFactory;
 	private ConfiguratorMBean configuratorMBean;
-	private MonitorMXBean monitorMXBean;
 
 	//可注入的连接参数
 	private String host;
@@ -70,10 +66,9 @@ public class JmxClientService {
 
 		try {
 			String serviceUrl = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/showcase";
-			clientFactory = new JmxClientFactory(serviceUrl, userName, passwd);
+			clientFactory = new MBeanClientFactory(serviceUrl, userName, passwd);
 
 			configuratorMBean = clientFactory.getMBeanProxy(configuratorMBeanName, ConfiguratorMBean.class);
-			monitorMXBean = clientFactory.getMXBeanProxy(monitorMXBeanName, MonitorMXBean.class);
 		} catch (Exception e) {
 			logger.error("连接Jmx Server 或 创建Mbean Proxy时失败", e);
 		}
@@ -86,55 +81,27 @@ public class JmxClientService {
 	public void close() throws IOException {
 		clientFactory.close();
 	}
-	
+
 	// 标准MBean代理操作演示 、、
 
-	/**
-	 * 获取服务节点名.
-	 */
 	public String getNodeName() {
 		return configuratorMBean.getNodeName();
 	}
 
-	/**
-	 * 设置服务节点名.
-	 */
 	public void setNodeName(String nodeName) {
 		configuratorMBean.setNodeName(nodeName);
 	}
 
-	/**
-	 * 获取是否记录统计信息.
-	 */
-	public boolean isStatisticsEnabled() {
-		return configuratorMBean.isStatisticsEnabled();
+	public boolean isNotificationMailEnabled() {
+		return configuratorMBean.isNotificationMailEnabled();
 	}
 
-	/**
-	 * 设置是否记录统计信息.
-	 */
-	public void setStatisticsEnabled(boolean statisticsEnabled) {
-		configuratorMBean.setStatisticsEnabled(statisticsEnabled);
-	}
-
-	// MXBean代理操作的演示 //
-	
-	/**
-	 * 获取系统运行统计数据.
-	 */
-	public ServerStatistics getServerStatistics() {
-		return monitorMXBean.getServerStatistics();
-	}
-
-	/**
-	 * 重置系统运行统计数据.
-	 */
-	public boolean resetServerStatistics(String statisticsName) {
-		return monitorMXBean.reset(statisticsName);
+	public void setNotificationMailEnabled(boolean notificationMailEnabled) {
+		configuratorMBean.setNotificationMailEnabled(notificationMailEnabled);
 	}
 
 	// 无MBean的Class文件时直接访问属性调用方法的演示 //
-	
+
 	/**
 	 * 获取Hibernate统计数据.
 	 */
@@ -146,7 +113,7 @@ public class JmxClientService {
 	}
 
 	/**
-	 * 调用Hibernate JMX的logSummary函数.
+	 * 调用Hibernate MBean的logSummary函数.
 	 */
 	public void logSummary() {
 		clientFactory.inoke(hibernteMBeanName, "logSummary");

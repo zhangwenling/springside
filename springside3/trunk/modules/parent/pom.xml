@@ -86,7 +86,7 @@
 					<url>http://localhost:8080/manager</url>
 				</configuration>
 			</plugin>
-			
+
 			<!-- enforcer插件,检查JDK版本1.6 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -101,14 +101,14 @@
 						<configuration>
 							<rules>
 								<requireJavaVersion>
-									<version>1.6</version>
+									<version>1.5</version>
 								</requireJavaVersion>
 							</rules>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<!-- resource插件,设定编码 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -128,7 +128,7 @@
 					<skip>${sql-maven-plugin.skip}</skip>
 				</configuration>
 			</plugin>
-			
+
 			<!-- archetype插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -151,32 +151,24 @@
 		<repository>
 			<id>nexus</id>
 			<name>local nexus server</name>
-			<url>http://local_nexus_server:8081/nexus/content/groups/public</url>
+			<url>http://localhost:8081/nexus/content/groups/public</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</repository>
-		 -->
-		<repository>
-			<id>springside-3party-snapshot</id>
-			<name>SpringSide Repository for 3rd-party snapshot</name>
-			<url>http://www.springside.org.cn/repository/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
+		 </repository>
+		-->
 	</repositories>
 
 	<pluginRepositories>
 		<!--
-		<pluginRepository>
+		<repository>
 			<id>nexus</id>
 			<name>local nexus server</name>
-			<url>http://nexus_server_address:8081/nexus/content/groups/public</url>
-		</pluginRepository>
+			<url>http://localhost:8081/nexus/content/groups/public</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		 </repository>
 		-->
 	</pluginRepositories>
 
@@ -231,6 +223,11 @@
 				<groupId>cglib</groupId>
 				<artifactId>cglib-nodep</artifactId>
 				<version>2.1_3</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.annotation</groupId>
+				<artifactId>jsr250-api</artifactId>
+				<version>1.0</version>
 			</dependency>
 			<!-- spring end -->
 
@@ -340,7 +337,7 @@
 			<dependency>
 				<groupId>org.json</groupId>
 				<artifactId>json</artifactId>
-				<version>20090211</version>
+				<version>20080701</version>
 			</dependency>
 
 			<!-- j2ee web spec -->
@@ -436,8 +433,9 @@
 			<dependency>
 				<groupId>com.octo.captcha</groupId>
 				<artifactId>jcaptcha</artifactId>
-				<version>2.0-alpha-1-SNAPSHOT</version>
+				<version>1.0</version>
 			</dependency>
+
 			<!-- security end -->
 
 			<!-- quartz -->

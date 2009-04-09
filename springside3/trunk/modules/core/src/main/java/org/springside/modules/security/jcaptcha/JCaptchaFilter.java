@@ -27,6 +27,7 @@ import com.octo.captcha.service.CaptchaServiceException;
  * 集成JCaptcha的Filter.
  * 
  * 可通过配置与SpringSecurity相同的登录表单处理URL与身份验证失败URL,实现与SpringSecurity的集成.
+ * 另,本filter主要演示集成的方式，用户可参考本filter将其他验证码方案与SpringSecurity进行集成.
  * 
  * 在web.xml中配置的参数包括：
  * 1.failureUrl -- 身份验证失败后跳转的URL,与SpringSecurity中的配置保持一致,无默认值必须配置.

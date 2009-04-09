@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.jmx.client.service.HibernateStatistics;
 import org.springside.examples.showcase.jmx.client.service.JmxClientService;
-import org.springside.examples.showcase.jmx.server.mxbean.ServerStatistics;
 import org.springside.modules.web.struts2.Struts2Utils;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -32,8 +31,7 @@ public class JmxClientAction extends ActionSupport {
 
 	// 页面属性
 	private String nodeName;
-	private boolean statisticsEnabled;
-	private ServerStatistics serverStatistics;
+	private boolean notificationMailEnabled;
 	private HibernateStatistics hibernateStatistics;
 
 	// 属性访问函数 //
@@ -46,16 +44,12 @@ public class JmxClientAction extends ActionSupport {
 		this.nodeName = nodeName;
 	}
 
-	public boolean isStatisticsEnabled() {
-		return statisticsEnabled;
+	public boolean isNotificationEnabled() {
+		return notificationMailEnabled;
 	}
 
-	public void setStatisticsEnabled(boolean statisticsEnabled) {
-		this.statisticsEnabled = statisticsEnabled;
-	}
-
-	public ServerStatistics getServerStatistics() {
-		return serverStatistics;
+	public void setNotificationMailEnabled(boolean notificationMailEnabled) {
+		this.notificationMailEnabled = notificationMailEnabled;
 	}
 
 	public HibernateStatistics getHibernateStatistics() {
@@ -70,21 +64,20 @@ public class JmxClientAction extends ActionSupport {
 	@Override
 	public String execute() {
 		nodeName = jmxClientService.getNodeName();
-		statisticsEnabled = jmxClientService.isStatisticsEnabled();
-		serverStatistics = jmxClientService.getServerStatistics();
+		notificationMailEnabled = jmxClientService.isNotificationMailEnabled();
 		hibernateStatistics = jmxClientService.getHibernateStatistics();
 		return SUCCESS;
 	}
 
 	// 系统配置(MBean) //
-	
+
 	/**
 	 * 修改系统配置的Ajax请求.
 	 */
 	public String saveConfig() {
 		try {
 			jmxClientService.setNodeName(nodeName);
-			jmxClientService.setStatisticsEnabled(statisticsEnabled);
+			jmxClientService.setNotificationMailEnabled(notificationMailEnabled);
 			Struts2Utils.renderText("保存配置成功.");
 		} catch (Exception e) {
 			Struts2Utils.renderText("保存配置失败.");
@@ -102,9 +95,9 @@ public class JmxClientAction extends ActionSupport {
 		Map map = new HashMap();
 		try {
 			nodeName = jmxClientService.getNodeName();
-			statisticsEnabled = jmxClientService.isStatisticsEnabled();
+			notificationMailEnabled = jmxClientService.isNotificationMailEnabled();
 			map.put("nodeName", nodeName);
-			map.put("statisticsEnabled", String.valueOf(statisticsEnabled));
+			map.put("notificationMailEnabled", String.valueOf(notificationMailEnabled));
 			map.put("message", "获取配置成功.");
 		} catch (Exception e) {
 			map.put("message", "获取配置失败.");
@@ -115,37 +108,8 @@ public class JmxClientAction extends ActionSupport {
 		return null;
 	}
 
-	// 系统运行统计(MXBean) //
-	
-	/**
-	 * 获取最新系统运行统计信息的Ajax请求.
-	 */
-	public String updateStatistics() {
-		try {
-			serverStatistics = jmxClientService.getServerStatistics();
-			Struts2Utils.renderJson(serverStatistics);
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-
-		return null;
-	}
-
-	/**
-	 * 重置系统运行统计信息的Ajax请求.
-	 */
-	public String resetStatistics() {
-		try {
-			String statisticsName = Struts2Utils.getParameter("statisticsName");
-			jmxClientService.resetServerStatistics(statisticsName);
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-		return null;
-	}
-	
 	// Hibernate运行统计(直接读取属性/调用方法) //
-	
+
 	/**
 	 * 打印Hibernate统计信息日志.
 	 */

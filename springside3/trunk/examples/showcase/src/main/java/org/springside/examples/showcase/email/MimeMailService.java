@@ -47,7 +47,7 @@ public class MimeMailService {
 	/**
 	 * 发送MIME格式的用户修改通知邮件.
 	 */
-	public void sendNotifyMail(String userName) {
+	public void sendNotificationMail(String userName) {
 		MimeMessage msg = mailSender.createMimeMessage();
 
 		try {

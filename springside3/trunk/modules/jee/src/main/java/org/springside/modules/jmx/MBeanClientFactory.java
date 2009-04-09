@@ -7,8 +7,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.management.Attribute;
 import javax.management.JMException;
-import javax.management.JMX;
 import javax.management.MBeanServerConnection;
+import javax.management.MBeanServerInvocationHandler;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 import javax.management.remote.JMXConnector;
@@ -29,17 +29,17 @@ import org.springframework.util.Assert;
  * @author ben
  * @author calvin
  */
-public class JmxClientFactory {
+public class MBeanClientFactory {
 
 	private JMXConnector connector;
 	private MBeanServerConnection mbsc;
 	private AtomicBoolean connected = new AtomicBoolean(false);
 
-	public JmxClientFactory(final String serviceUrl) throws IOException {
+	public MBeanClientFactory(final String serviceUrl) throws IOException {
 		initConnector(serviceUrl, null, null);
 	}
 
-	public JmxClientFactory(final String serviceUrl, final String userName, final String passwd) throws IOException {
+	public MBeanClientFactory(final String serviceUrl, final String userName, final String passwd) throws IOException {
 		initConnector(serviceUrl, userName, passwd);
 	}
 
@@ -74,23 +74,13 @@ public class JmxClientFactory {
 	/**
 	 * 创建标准MBean代理. 
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> T getMBeanProxy(final String mbeanName, final Class<T> mBeanInterface) throws IOException {
 		Assert.hasText(mbeanName, "mbeanName不能为空");
 		assertConnected();
 
 		ObjectName objectName = buildObjectName(mbeanName);
-		return JMX.newMBeanProxy(mbsc, objectName, mBeanInterface);
-	}
-
-	/**
-	 * 创建MXBean代理. 
-	 */
-	public <T> T getMXBeanProxy(final String mbeanName, final Class<T> mBeanInterface) throws IOException {
-		Assert.hasText(mbeanName, "mbeanName不能为空");
-		assertConnected();
-
-		ObjectName objectName = buildObjectName(mbeanName);
-		return JMX.newMXBeanProxy(mbsc, objectName, mBeanInterface);
+		return (T)MBeanServerInvocationHandler.newProxyInstance(mbsc, objectName, mBeanInterface,false);
 	}
 
 	/**

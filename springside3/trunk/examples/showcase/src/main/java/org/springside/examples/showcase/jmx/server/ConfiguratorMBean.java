@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.jmx.server.mbean;
+package org.springside.examples.showcase.jmx.server;
 
 /**
  * 配置系统属性的标准MBean接口. 
@@ -11,7 +11,7 @@ public interface ConfiguratorMBean {
 
 	void setNodeName(String nodeName);
 
-	boolean isStatisticsEnabled();
+	boolean isNotificationMailEnabled();
 
-	void setStatisticsEnabled(boolean statisticsEnabled);
+	void setNotificationMailEnabled(boolean notificationMailEnabled);
 }
