@@ -22,7 +22,6 @@
 	<classpathentry kind="lib" path="lib/dozer-4.4.jar"/>
 	<classpathentry kind="lib" path="lib/ejb3-persistence-1.0.2.GA.jar"/>
 	<classpathentry kind="lib" path="lib/freemarker-2.3.13.jar"/>
-	<classpathentry kind="lib" path="lib/geronimo-annotation_1.0_spec-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/geronimo-jaxws_2.1_spec-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/geronimo-stax-api_1.0_spec-1.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/geronimo-ws-metadata_2.0_spec-1.1.2.jar"/>
@@ -59,5 +58,6 @@
 	<classpathentry kind="lib" path="lib/XmlSchema-1.4.4.jar"/>
 	<classpathentry kind="lib" path="lib/xwork-2.1.2.jar"/>
 	<classpathentry kind="lib" path="lib/json-20080701.jar"/>
+	<classpathentry kind="lib" path="lib/jsr250-api-1.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -29,6 +29,7 @@
 		<h3><a href="rule/index.action">规则引擎演示</a></h3>
 		<h3><a href="workflow/index.action">工作流演示</a></h3>
 		<h3><a href="report/index.action">报表演示</a></h3>
+		<h3><a href="cache/index.action">缓存演示</a></h3>
 		<h3><a href="webservice/index.action">Web服务高级演示</a></h3>
 		<h3><a href="log/index.action">日志高级演示</a></h3>
 		</td>

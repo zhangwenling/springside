@@ -30,15 +30,19 @@ public class SimpleMailService {
 
 	/**
 	 * 发送纯文本的用户修改通知邮件.
+	 * 
+	 * 用Executor多线程群发邮件演示.
 	 */
 	public void sendNotificationMail(String userName) {
 
-		//演示用Executor多线程群发邮件
-		for (int i = 0; i < 3; i++) {
-			//简化演示,发送三封地址相同的邮件.
+		//简化演示,发送三封地址相同的邮件.
+		String[] receviers = new String[] { "springside3.demo@gmail.com", "springside3.demo@gmail.com",
+				"springside3.demo@gmail.com" };
+
+		for (String receiver : receviers) {
 			SimpleMailMessage msg = new SimpleMailMessage();
 			msg.setFrom("springside3.demo@gmail.com");
-			msg.setTo("springside3.demo@gmail.com");
+			msg.setTo(receiver);
 			msg.setSubject("用户修改通知");
 			msg.setText(userName + "被修改.");
 

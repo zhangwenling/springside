@@ -148,27 +148,17 @@
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
 	<repositories>
 		<!--
-		<repository>
-			<id>nexus</id>
-			<name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		 </repository>
+			<repository> <id>nexus</id> <name>local nexus server</name>
+			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
+			</repository>
 		-->
 	</repositories>
 
 	<pluginRepositories>
 		<!--
-		<repository>
-			<id>nexus</id>
-			<name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		 </repository>
+			<repository> <id>nexus</id> <name>local nexus server</name>
+			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
+			</repository>
 		-->
 	</pluginRepositories>
 
@@ -371,11 +361,35 @@
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-core</artifactId>
 				<version>${cxf.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.geronimo.specs</groupId>
+						<artifactId>geronimo-javamail_1.4_spec</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.apache.geronimo.specs</groupId>
+						<artifactId>geronimo-javamail_1.4_spec</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-frontend-jaxws</artifactId>
 				<version>${cxf.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.geronimo.specs</groupId>
+						<artifactId>geronimo-annotation_1.0_spec</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.apache.geronimo.specs</groupId>
+						<artifactId>geronimo-javamail_1.4_spec</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.apache.geronimo.specs</groupId>
+						<artifactId>geronimo-activation_1.1_spec</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
