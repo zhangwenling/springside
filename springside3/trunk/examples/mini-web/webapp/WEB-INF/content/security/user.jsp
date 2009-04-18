@@ -38,9 +38,9 @@
 <div id="listContent">
 <table>
 	<tr>
-		<th><a href="#" onclick="sort('loginName','asc')"><b>登录名</b></a></th>
-		<th><a href="#" onclick="sort('name','asc')""><b>姓名</b></a></th>
-		<th><a href="#" onclick="sort('email','asc')"><b>电邮</b></a></th>
+		<th><a href="javascript:sort('loginName','asc')"><b>登录名</b></a></th>
+		<th><a href="javascript:sort('name','asc')""><b>姓名</b></a></th>
+		<th><a href="javascript:sort('email','asc')"><b>电邮</b></a></th>
 		<th><b>角色</b></th>
 		<th><b>操作</b></th>
 	</tr>
@@ -64,10 +64,10 @@
 
 <div id="footer">
 	第${page.pageNo}页, 共${page.totalPages}页 
-	<a href="#" onclick="jumpPage(1)">首页</a>
-	<s:if test="page.hasPre"><a href="#" onclick="jumpPage(${page.prePage})">上一页</a></s:if>
-	<s:if test="page.hasNext"><a href="#" onclick="jumpPage(${page.nextPage})">下一页</a></s:if>
-	<a href="#" onclick="jumpPage(${page.totalPages})">末页</a>
+	<a href="javascript:jumpPage(1)">首页</a>
+	<s:if test="page.hasPre"><a href="javascript:jumpPage(${page.prePage})">上一页</a></s:if>
+	<s:if test="page.hasNext"><a href="javascript:jumpPage(${page.nextPage})">下一页</a></s:if>
+	<a href="javascript:jumpPage(${page.totalPages})">末页</a>
 	
 	<security:authorize ifAnyGranted="A_MODIFY_USER">
 		<a href="user!input.action">增加新用户</a>
