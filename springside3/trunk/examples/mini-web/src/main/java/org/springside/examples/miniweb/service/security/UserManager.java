@@ -1,7 +1,5 @@
 package org.springside.examples.miniweb.service.security;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.entity.security.User;

@@ -3,8 +3,8 @@ function jumpPage(pageNo){
 		$("#mainForm").submit();
 	}
 	
-	function order(orderBy,defaultOrder){
-		if($("#orderBy").val()==orderBy){
+function sort(orderBy,defaultOrder){
+	if($("#orderBy").val()==orderBy){
 			if($("#order").val()==""){
 			$("#order").val(defaultOrder);}
 			else if($("#order").val()=="desc"){
@@ -17,17 +17,5 @@ function jumpPage(pageNo){
 			$("#order").val(defaultOrder);
 		}
 
-		$("#mainForm").submit();
-	}
-
-	function modifyItem(id){
-		$("#id").val(id);
-		$("#mainForm").attr("action",modifyAction);
-		$("#mainForm").submit();
-	}
-	
-	function deleteItem(id){
-		$("#id").val(id);
-		$("#mainForm").attr("action",deleteAction);
 		$("#mainForm").submit();
 	}

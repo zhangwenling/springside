@@ -10,10 +10,6 @@
 	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script  src="${ctx}/js/table.js" type="text/javascript"></script>
-	<script type="text/javascript">
-		var modifyAction = 'user!input.action';
-		var deleteAction = 'user!delete.action';
-	</script>
 </head>
 
 <body>
@@ -39,13 +35,12 @@
 <input type="hidden" name="page.pageNo" id="pageNo" value="${page.pageNo}"/>
 <input type="hidden" name="page.orderBy" id="orderBy" value="${page.orderBy}"/>
 <input type="hidden" name="page.order" id="order" value="${page.order}" />
-<input type="hidden" name="id" id="id" />
 <div id="listContent">
 <table>
 	<tr>
-		<th><a href="#" onclick="order('loginName','asc')"><b>登录名</b></a></th>
-		<th><a href="#" onclick="order('name','asc')""><b>姓名</b></a></th>
-		<th><a href="#" onclick="order('email','asc')"><b>电邮</b></a></th>
+		<th><a href="#" onclick="sort('loginName','asc')"><b>登录名</b></a></th>
+		<th><a href="#" onclick="sort('name','asc')""><b>姓名</b></a></th>
+		<th><a href="#" onclick="sort('email','asc')"><b>电邮</b></a></th>
 		<th><b>角色</b></th>
 		<th><b>操作</b></th>
 	</tr>
@@ -58,8 +53,8 @@
 			<td>${roleNames}&nbsp;</td>
 			<td>&nbsp; 
 				<security:authorize ifAnyGranted="A_MODIFY_USER">
-					<a href="#" onclick="modifyItem(${id})">修改</a>、
-					<a href="#" onclick="deleteItem(${id})">删除</a>
+					<a href="user!input.action?id=${id}">修改</a>、
+					<a href="user!delete.action?id=${id}">删除</a>
 				</security:authorize>
 			</td>
 		</tr>

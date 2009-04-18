@@ -27,7 +27,7 @@ import org.springside.modules.web.struts2.Struts2Utils;
  * @author calvin
  */
 @SuppressWarnings("serial")
-@Results( { @Result(name = CRUDActionSupport.RELOAD, location = "user.action?page.pageRequest=${page.pageRequest}", type = "redirect") })
+@Results( { @Result(name = CRUDActionSupport.RELOAD, location = "user.action", type = "redirect") })
 public class UserAction extends CRUDActionSupport<User> {
 
 	@Autowired

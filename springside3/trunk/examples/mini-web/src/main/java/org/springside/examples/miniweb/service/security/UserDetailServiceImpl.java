@@ -24,18 +24,18 @@ import org.springside.modules.orm.hibernate.HibernateDao;
  */
 @Transactional(readOnly = true)
 public class UserDetailServiceImpl implements UserDetailsService {
-	private HibernateDao<User,Long> userDao;
-	
+	private HibernateDao<User, Long> userDao;
+
 	@Autowired
 	public void init(final SessionFactory sessionFactory) {
-		userDao = new HibernateDao<User,Long>(sessionFactory, User.class);
+		userDao = new HibernateDao<User, Long>(sessionFactory, User.class);
 	}
 
 	/**
 	 * 获取用户Detail信息的回调函数.
 	 */
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
-		
+
 		User user = userDao.findUniqueByProperty("loginName", userName);
 		if (user == null)
 			throw new UsernameNotFoundException("用户" + userName + " 不存在");

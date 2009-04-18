@@ -140,38 +140,6 @@ public class Page<T> {
 	}
 
 	/**
-	 * 取得分页参数的组合字符串.
-	 * 将多个分页参数组合成一个字符串方便在页面上的传递,格式为pageNo|orderBy|order.
-	 */
-	public String getPageRequest() {
-		return getPageNo() + "|" + StringUtils.defaultString(getOrderBy()) + "|" + getOrder();
-	}
-
-	/**
-	 * 设置分页参数的组合字符串.
-	 * 将多个分页参数组合成一个字符串方便在页面上的传递,格式为pageNo|orderBy|order.
-	 */
-	public void setPageRequest(final String pageRequest) {
-
-		if (StringUtils.isBlank(pageRequest))
-			return;
-
-		String[] params = StringUtils.splitPreserveAllTokens(pageRequest, '|');
-
-		if (StringUtils.isNumeric(params[0])) {
-			setPageNo(Integer.valueOf(params[0]));
-		}
-
-		if (StringUtils.isNotBlank(params[1])) {
-			setOrderBy(params[1]);
-		}
-
-		if (StringUtils.isNotBlank(params[2])) {
-			setOrder(params[2]);
-		}
-	}
-
-	/**
 	 * 查询对象时是否自动另外执行count查询获取总记录数,默认为false,仅在Criterion查询时有效.
 	 */
 	public boolean isAutoCount() {

@@ -50,7 +50,6 @@
 <div id="inputContent">
 <form id="inputForm" action="user!save.action" method="post">
 <input type="hidden" name="id" value="${id}" />
-<input type="hidden" name="page.pageRequest" value="${page.pageRequest}" />
 <table class="inputView">
 	<tr>
 		<td>登录名:</td>
