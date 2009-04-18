@@ -3,7 +3,6 @@
 	<name>mini-service</name>
 	<comment></comment>
 	<projects>
-		<project>springside3-core</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

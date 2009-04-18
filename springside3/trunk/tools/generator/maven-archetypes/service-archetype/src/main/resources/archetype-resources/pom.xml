@@ -31,7 +31,7 @@
 				<configuration>
 					<username>APP</username>
 					<password>APP</password>
-					<url>jdbc:derby://localhost:1527/springside-example;create=true</url>
+					<url>jdbc:derby://localhost:1527/springside-miniservice;create=true</url>
 					<driver>org.apache.derby.jdbc.ClientDriver</driver>
 				</configuration>
 
@@ -43,6 +43,7 @@
 							<goal>execute</goal>
 						</goals>
 						<configuration>
+							<onError>continue</onError>
 							<encoding>UTF-8</encoding>
 							<srcFiles>
 								<srcFile>src/main/sql/derby/schema.sql</srcFile>

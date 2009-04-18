@@ -37,7 +37,7 @@
 		<property name="username" value="${symbol_dollar}{jdbc.username}" />
 		<property name="password" value="${symbol_dollar}{jdbc.password}" />
 
-		<!-- Connection Pooling DBCP -->
+		<!-- Connection Pooling Info -->
 		<property name="initialSize" value="5" />
 		<property name="maxActive" value="100" />
 		<property name="maxIdle" value="30" />

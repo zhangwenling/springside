@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import ${package}.entity.IdEntity;
 
 /**
@@ -81,6 +83,8 @@ public class User extends IdEntity {
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	//多对多定义.
 	@JoinTable(name = "USERS_ROLES", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
+	//Fecth定义
+	@Fetch(FetchMode.SUBSELECT)
 	//集合按id排序.
 	@OrderBy("id")
 	//集合中对象的id的缓存.

@@ -17,6 +17,12 @@
         <include>**/*.properties</include>
       </includes>
     </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>src/main/sql</directory>
+      <includes>
+        <include>**/*.sql</include>
+      </includes>
+    </fileSet>
     <fileSet filtered="true" packaged="true" encoding="UTF-8">
       <directory>src/test/java</directory>
       <includes>
@@ -24,7 +30,19 @@
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="UTF-8">
+      <directory>.settings</directory>
+      <includes>
+        <include>**/*.xml</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
       <directory>webapp/WEB-INF</directory>
+      <includes>
+        <include>**/*.xml</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>bin/ws-bin</directory>
       <includes>
         <include>**/*.xml</include>
       </includes>
@@ -36,15 +54,13 @@
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="UTF-8">
-      <directory>bin/ws-bin</directory>
-      <includes>
-        <include>**/*.xml</include>
-      </includes>
-    </fileSet>
-    <fileSet filtered="true" encoding="UTF-8">
       <directory>.settings</directory>
       <includes>
-        <include>**/*.xml</include>
+        <include>**/*.jsdtscope</include>
+        <include>**/*.component</include>
+        <include>**/*.container</include>
+        <include>**/*.prefs</include>
+        <include>**/*.name</include>
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="GBK">
@@ -56,26 +72,22 @@
     <fileSet filtered="true" encoding="GBK">
       <directory>bin</directory>
       <includes>
-        <include>**/*.bat</include>
         <include>**/*.sh</include>
-      </includes>
-    </fileSet>
-    <fileSet filtered="true" encoding="UTF-8">
-      <directory>.settings</directory>
-      <includes>
-        <include>**/*.prefs</include>
-        <include>**/*.component</include>
-        <include>**/*.container</include>
-        <include>**/*.name</include>
-        <include>**/*.jsdtscope</include>
+        <include>**/*.bat</include>
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="UTF-8">
       <directory></directory>
       <includes>
         <include>.classpath</include>
-        <include>.project</include>
         <include>pom-parent.xml</include>
+        <include>.project</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>.springBeans</include>
       </includes>
     </fileSet>
   </fileSets>
