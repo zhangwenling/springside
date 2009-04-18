@@ -28,6 +28,8 @@ import org.springside.modules.utils.ReflectionUtils;
 @Table(name = "RESOURCES")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Resource extends IdEntity {
+	
+	public static final String QUERY_BY_URL_TYPE="FROM Resource WHERE resourceType=? ORDER BY orderNum ASC";
 	//resourceType常量
 	public static final String URL_TYPE = "url";
 	public static final String MENU_TYPE = "menu";

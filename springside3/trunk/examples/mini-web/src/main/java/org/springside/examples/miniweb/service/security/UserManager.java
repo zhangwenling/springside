@@ -2,13 +2,11 @@ package org.springside.examples.miniweb.service.security;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springside.examples.miniweb.dao.security.UserDao;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.ServiceException;
-import org.springside.modules.orm.hibernate.EntityManager;
+import org.springside.modules.orm.hibernate.DefaultEntityManager;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
@@ -26,17 +24,7 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 @Service
 //默认将类中的所有函数纳入事务管理.
 @Transactional
-public class UserManager extends EntityManager<User, Long> {
-	@Autowired
-	private UserDao userDao;
-
-	/**
-	 * 实现回调函数,为EntityManager基类的CRUD操作提供DAO.
-	 */
-	@Override
-	protected UserDao getEntityDao() {
-		return userDao;
-	}
+public class UserManager extends DefaultEntityManager<User, Long> {
 
 	/**
 	 * 重载delte函数,演示异常处理及用户行为日志.
@@ -48,7 +36,7 @@ public class UserManager extends EntityManager<User, Long> {
 			throw new ServiceException("不能删除超级管理员用户");
 		}
 
-		userDao.delete(id);
+		entityDao.delete(id);
 	}
 
 	/**
@@ -58,14 +46,6 @@ public class UserManager extends EntityManager<User, Long> {
 	 */
 	@Transactional(readOnly = true)
 	public boolean isLoginNameUnique(String loginName, String orgLoginName) {
-		return userDao.isPropertyUnique("loginName", loginName, orgLoginName);
-	}
-
-	/**
-	 * 查找拥有指定角色的用户.
-	 */
-	@Transactional(readOnly = true)
-	public List<User> getUsersByRole(String roleName) {
-		return userDao.getUsersByRole(roleName);
+		return entityDao.isPropertyUnique("loginName", loginName, orgLoginName);
 	}
 }
