@@ -9,11 +9,12 @@
 </head>
 <body>
 <h2>搜索引擎演示</h2>
-<p>技术说明：<br/>
-同时演示Solr与Hibernate Search，满足不同情形的需求<br/>
-<b>Solr</b>：松耦合的独立的搜索引擎服务器集群。<br/>
-<b>Hibernate Search</b>:搜索实体的数据库操作全部基于Hibernate Search时的选择。
-</p>
+技术说明：同时演示Solr与Hibernate Search，满足不同情形的需求。
+<ul>
+<li>Solr--松耦合的独立的搜索引擎服务器集群。</li>
+<li>Hibernate Search--搜索实体的数据库操作全部基于Hibernate Search时的选择。</li>
+</ul>
+
 
 <div id="footer">
 	<a href="${ctx}/">返回首页</a>

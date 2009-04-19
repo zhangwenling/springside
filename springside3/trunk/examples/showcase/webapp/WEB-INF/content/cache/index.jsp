@@ -9,10 +9,11 @@
 </head>
 <body>
 <h2>缓存演示</h2>
-<p>技术说明：<br/>
-1.Memcached集中式缓存演示<br/>
-2.分布式集群缓存演示，使用JBossCache 还是 Ehcache仍待选型。</p>
-
+技术说明：
+<ul>
+<li>Memcached集中式缓存演示</li>
+<li>JBossCache分布式集群缓存演示</li>
+</ul>
 <div id="footer">
 	<a href="${ctx}/">返回首页</a>
 </div>
