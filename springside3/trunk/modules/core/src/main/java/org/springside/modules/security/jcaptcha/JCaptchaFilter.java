@@ -144,7 +144,7 @@ public class JCaptchaFilter implements Filter {
 	/**
 	 * 验证验证码. 
 	 */
-	private boolean validateCaptchaChallenge(final HttpServletRequest request) throws IOException, ServletException {
+	private boolean validateCaptchaChallenge(final HttpServletRequest request) {
 		if (request.getSession(false) == null)
 			return false;
 

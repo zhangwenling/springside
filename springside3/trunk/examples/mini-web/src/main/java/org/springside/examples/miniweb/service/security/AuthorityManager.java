@@ -3,7 +3,7 @@ package org.springside.examples.miniweb.service.security;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.entity.security.Authority;
-import org.springside.modules.orm.hibernate.DefaultEntityManager;
+import org.springside.modules.orm.hibernate.EntityManager;
 
 /**
  * 授权管理类.
@@ -12,5 +12,5 @@ import org.springside.modules.orm.hibernate.DefaultEntityManager;
  */
 @Service
 @Transactional
-public class AuthorityManager extends DefaultEntityManager<Authority, Long> {
+public class AuthorityManager extends EntityManager<Authority, Long> {
 }

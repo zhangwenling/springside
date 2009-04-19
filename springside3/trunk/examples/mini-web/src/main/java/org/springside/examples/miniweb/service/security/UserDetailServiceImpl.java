@@ -16,6 +16,7 @@ import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.modules.orm.hibernate.HibernateDao;
+import org.springside.modules.orm.hibernate.SimpleHibernateDao;
 
 /**
  * 实现SpringSecurity的UserDetailsService接口,实现获取用户Detail信息的回调函数.
@@ -24,7 +25,8 @@ import org.springside.modules.orm.hibernate.HibernateDao;
  */
 @Transactional(readOnly = true)
 public class UserDetailServiceImpl implements UserDetailsService {
-	private HibernateDao<User, Long> userDao;
+
+	private SimpleHibernateDao<User, Long> userDao;
 
 	@Autowired
 	public void init(final SessionFactory sessionFactory) {
@@ -36,7 +38,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	 */
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
-		User user = userDao.findUniqueByProperty("loginName", userName);
+		User user = userDao.findByUnique("loginName", userName);
 		if (user == null)
 			throw new UsernameNotFoundException("用户" + userName + " 不存在");
 

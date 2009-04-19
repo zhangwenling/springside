@@ -71,7 +71,10 @@ public class UserAction extends CRUDActionSupport<User> {
 
 	@Override
 	public String list() throws Exception {
-		page = userManager.getAll(page);
+		HttpServletRequest request = Struts2Utils.getRequest();
+		List<PropertyFilter> filters = HibernateWebUtils.buildPropertyFilters(request);
+
+		page = userManager.search(page, filters);
 		return SUCCESS;
 	}
 
@@ -116,20 +119,6 @@ public class UserAction extends CRUDActionSupport<User> {
 
 	public void setCheckedRoleIds(List<Long> checkedRoleIds) {
 		this.checkedRoleIds = checkedRoleIds;
-	}
-
-	/**
-	 * 根据属性过滤条件搜索用户. 
-	 */
-	public String search() throws Exception {
-		//因为搜索时不保存分页参数,因此将页面大小设到最大.
-		page.setPageSize(Page.MAX_PAGESIZE);
-
-		HttpServletRequest request = Struts2Utils.getRequest();
-		List<PropertyFilter> filters = HibernateWebUtils.buildPropertyFilters(request);
-
-		page = userManager.search(page, filters);
-		return SUCCESS;
 	}
 
 	/**

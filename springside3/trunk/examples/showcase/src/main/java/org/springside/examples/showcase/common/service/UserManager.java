@@ -7,7 +7,7 @@ import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.email.MimeMailService;
 import org.springside.examples.showcase.email.SimpleMailService;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
-import org.springside.modules.orm.hibernate.DefaultEntityManager;
+import org.springside.modules.orm.hibernate.EntityManager;
 
 /**
  * 用户管理类.
@@ -18,7 +18,7 @@ import org.springside.modules.orm.hibernate.DefaultEntityManager;
 @Service
 //默认将类中的所有函数纳入事务管理.
 @Transactional
-public class UserManager extends DefaultEntityManager<User, Long> {
+public class UserManager extends EntityManager<User, Long> {
 
 	@Autowired(required = false)
 	private ServerConfig serverConfig; //系统配置
@@ -47,7 +47,7 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 
 	@Transactional(readOnly = true)
 	public User loadByLoginName(String loginName) {
-		return entityDao.findUniqueByProperty("loginName", loginName);
+		return entityDao.findByUnique("loginName", loginName);
 	}
 
 	@Transactional(readOnly = true)

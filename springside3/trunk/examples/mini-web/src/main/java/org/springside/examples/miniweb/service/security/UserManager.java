@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.ServiceException;
-import org.springside.modules.orm.hibernate.DefaultEntityManager;
+import org.springside.modules.orm.hibernate.EntityManager;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
@@ -22,7 +22,7 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 @Service
 //默认将类中的所有函数纳入事务管理.
 @Transactional
-public class UserManager extends DefaultEntityManager<User, Long> {
+public class UserManager extends EntityManager<User, Long> {
 
 	/**
 	 * 重载delte函数,演示异常处理及用户行为日志.

@@ -25,7 +25,7 @@ import org.springside.modules.utils.ReflectionUtils;
  * @author calvin
  */
 @Transactional
-public class DefaultEntityManager<T, PK extends Serializable> {
+public class EntityManager<T, PK extends Serializable> {
 
 	protected HibernateDao<T, PK> entityDao;//默认的泛型DAO成员变量.
 

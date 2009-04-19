@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.service.ServiceException;
-import org.springside.modules.orm.hibernate.DefaultEntityManager;
+import org.springside.modules.orm.hibernate.EntityManager;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
@@ -18,7 +18,7 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
  */
 @Service
 @Transactional
-public class RoleManager extends DefaultEntityManager<Role, Long> {
+public class RoleManager extends EntityManager<Role, Long> {
 
 	/**
 	 * 重载delte函数,演示异常处理及用户行为日志.

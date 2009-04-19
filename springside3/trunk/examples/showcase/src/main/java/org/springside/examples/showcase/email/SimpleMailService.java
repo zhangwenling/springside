@@ -18,7 +18,7 @@ import org.springframework.mail.javamail.JavaMailSender;
  */
 public class SimpleMailService {
 
-	private static Logger logger = LoggerFactory.getLogger(SimpleMailService.class);
+	static Logger logger = LoggerFactory.getLogger(SimpleMailService.class);
 
 	private JavaMailSender mailSender;
 
@@ -54,7 +54,8 @@ public class SimpleMailService {
 	 * 群发邮件任务类.
 	 */
 	private static class MailTask implements Runnable {
-
+		
+	
 		private JavaMailSender mailSender;
 		private SimpleMailMessage msg;
 

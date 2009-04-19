@@ -115,22 +115,22 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 *	获取全部对象. 
 	 */
 	public List<T> getAll() {
-		return findByCriteria();
+		return find();
 	}
 
 	/**
 	 * 按属性查找对象列表,匹配方式为相等.
 	 */
-	public List<T> findByProperty(final String propertyName, final Object value) {
+	public List<T> findBy(final String propertyName, final Object value) {
 		Assert.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = Restrictions.eq(propertyName, value);
-		return findByCriteria(criterion);
+		return find(criterion);
 	}
 
 	/**
 	 * 按属性查找唯一对象,匹配方式为相等.
 	 */
-	public T findUniqueByProperty(final String propertyName, final Object value) {
+	public T findByUnique(final String propertyName, final Object value) {
 		Assert.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = Restrictions.eq(propertyName, value);
 		return (T) createCriteria(criterion).uniqueResult();
@@ -189,7 +189,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 
 	 * @param criterions 数量可变的Criterion.
 	 */
-	public List<T> findByCriteria(final Criterion... criterions) {
+	public List<T> find(final Criterion... criterions) {
 		return createCriteria(criterions).list();
 	}
 
@@ -216,7 +216,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	public boolean isPropertyUnique(final String propertyName, final Object newValue, final Object orgValue) {
 		if (newValue == null || newValue.equals(orgValue))
 			return true;
-		Object object = findUniqueByProperty(propertyName, newValue);
+		Object object = findByUnique(propertyName, newValue);
 		return (object == null);
 	}
 

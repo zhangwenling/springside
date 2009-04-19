@@ -27,7 +27,7 @@ import org.springside.modules.utils.ReflectionUtils;
 /**
  * 封装SpringSide扩展功能的Hibernat泛型基类.
  * 
- * 扩展功能包括分页查询,按属性过滤条件列表查询等.
+ * 扩展功能包括分页查询,按属性过滤条件列表查询.
  * 可在Service层直接使用,也可以扩展泛型DAO子类使用,见两个构造函数的注释.
  * 
  * @param <T> DAO操作的对象类型
@@ -196,40 +196,40 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	public List<T> findByProperty(final String propertyName, final Object value, final String matchTypeStr) {
 		MatchType matchType = Enum.valueOf(MatchType.class, matchTypeStr);
 		Criterion criterion = buildPropertyCriterion(propertyName, value, matchType);
-		return findByCriteria(criterion);
+		return find(criterion);
 	}
 
 	/**
 	 * 按属性过滤条件列表查找对象列表.
 	 */
 	public List<T> findByFilters(final List<PropertyFilter> filters) {
-		Criterion[] criterions = buildPropertyFilterCriterions(filters);
-		return findByCriteria(criterions);
+		Criterion[] criterions = buildFilterCriterions(filters);
+		return find(criterions);
 	}
 
 	/**
 	 * 按属性过滤条件列表分页查找对象.
 	 */
 	public Page<T> findByFilters(final Page<T> page, final List<PropertyFilter> filters) {
-		Criterion[] criterions = buildPropertyFilterCriterions(filters);
+		Criterion[] criterions = buildFilterCriterions(filters);
 		return findByCriteria(page, criterions);
 	}
 
 	/**
 	 * 按属性条件列表创建Criterion数组,辅助函数.
 	 */
-	protected Criterion[] buildPropertyFilterCriterions(final List<PropertyFilter> filters) {
+	protected Criterion[] buildFilterCriterions(final List<PropertyFilter> filters) {
 		List<Criterion> criterionList = new ArrayList<Criterion>();
 		for (PropertyFilter filter : filters) {
 			String propertyName = filter.getPropertyName();
 
-			boolean multiProperty = StringUtils.contains(propertyName, "|");
+			boolean multiProperty = StringUtils.contains(propertyName, PropertyFilter.separator);
 			if (!multiProperty) { //properNameName中只有一个属性的情况.
 				Criterion criterion = buildPropertyCriterion(propertyName, filter.getValue(), filter.getMatchType());
 				criterionList.add(criterion);
 			} else {//properName中包含多个属性的情况,进行or处理.
 				Disjunction disjunction = Restrictions.disjunction();
-				String[] params = StringUtils.split(propertyName, '|');
+				String[] params = StringUtils.split(propertyName, PropertyFilter.separator);
 
 				for (String param : params) {
 					Criterion criterion = buildPropertyCriterion(param, filter.getValue(), filter.getMatchType());
