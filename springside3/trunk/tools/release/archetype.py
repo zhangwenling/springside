@@ -1,42 +1,44 @@
-import os,shutil,re
+## 制作maven archetype的自动化脚本
+import os,shutil
+from common import rmdir,rmfile,move,replaceinfile
 
 def prepare():
-    rmdir(home_dir+'\\examples\\mini-service\\target')
-    move(home_dir+'\\examples\\mini-service\\lib',home_dir+'\\examples\\mini-service\\target\\tmp\\lib')
-    move(home_dir+'\\examples\\mini-service\\webapp\\WEB-INF\\lib',home_dir+'\\examples\\mini-service\\target\\tmp\\WEB-INF-lib')
-    move(home_dir+'\\examples\\mini-service\\webapp\\WEB-INF\\classes',home_dir+'\\examples\\mini-service\\target\\tmp\\WEB-INF-classes')
+    rmdir(base_dir+'\\examples\\mini-service\\target')
+    move(base_dir+'\\examples\\mini-service\\lib',base_dir+'\\examples\\mini-service\\target\\tmp\\lib')
+    move(base_dir+'\\examples\\mini-service\\webapp\\WEB-INF\\lib',base_dir+'\\examples\\mini-service\\target\\tmp\\WEB-INF-lib')
+    move(base_dir+'\\examples\\mini-service\\webapp\\WEB-INF\\classes',base_dir+'\\examples\\mini-service\\target\\tmp\\WEB-INF-classes')
    
-    rmdir(home_dir+'\\examples\\mini-web\\target')
-    move(home_dir+'\\examples\\mini-web\\lib',home_dir+'\\examples\\mini-web\\target\\tmp\\lib')
-    move(home_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\lib',home_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-lib')
-    move(home_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\classes',home_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-classes')
+    rmdir(base_dir+'\\examples\\mini-web\\target')
+    move(base_dir+'\\examples\\mini-web\\lib',base_dir+'\\examples\\mini-web\\target\\tmp\\lib')
+    move(base_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\lib',base_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-lib')
+    move(base_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\classes',base_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-classes')
 
-    move(home_dir+'\\examples\\mini-service\\webapp\\wsdl\\mini-service.wsdl',home_dir+'\\examples\\mini-web\\target\\tmp\\mini-service.wsdl')
-    move(home_dir+'\\examples\\mini-service\\src\\test\\soapui\\mini-service-soapui-project.xml',home_dir+'\\examples\\mini-web\\target\\tmp\\mini-service-soapui-project.xml')
+    move(base_dir+'\\examples\\mini-service\\webapp\\wsdl\\mini-service.wsdl',base_dir+'\\examples\\mini-web\\target\\tmp\\mini-service.wsdl')
+    move(base_dir+'\\examples\\mini-service\\src\\test\\soapui\\mini-service-soapui-project.xml',base_dir+'\\examples\\mini-web\\target\\tmp\\mini-service-soapui-project.xml')
 
-    shutil.copyfile(home_dir+"\\modules\\parent\\pom.xml",home_dir+"\\examples\\mini-service\\pom-parent.xml")
-    shutil.copyfile(home_dir+"\\modules\\parent\\pom.xml",home_dir+"\\examples\\mini-web\\pom-parent.xml")
+    shutil.copyfile(base_dir+"\\modules\\parent\\pom.xml",base_dir+"\\examples\\mini-service\\pom-parent.xml")
+    shutil.copyfile(base_dir+"\\modules\\parent\\pom.xml",base_dir+"\\examples\\mini-web\\pom-parent.xml")
 
     print 'prepared example projects.'
 
 def createArchetypes():
-    os.chdir(home_dir+'\\examples\\mini-service')
+    os.chdir(base_dir+'\\examples\\mini-service')
     os.system('mvn archetype:create-from-project -DpackageName=org.springside.examples.miniservice')
 
-    os.chdir(home_dir+'\\examples\\mini-web')
+    os.chdir(base_dir+'\\examples\\mini-web')
     os.system('mvn archetype:create-from-project -DpackageName=org.springside.examples.miniweb')
     print 'created archetypes.'
 
 def copyArchetypes():  
-    os.system('xcopy /s/e/i/y '+home_dir+'\\examples\\mini-service\\target\\tmp\\generated-sources\\archetype\\src\\main\\resources\\archetype-resources '+home_dir+'\\tools\\generator\\maven-archetypes\\service-archetype\\src\\main\\resources\\archetype-resources')
-    os.system('xcopy /s/e/i/y '+home_dir+'\\examples\\mini-web\\target\\tmp\\generated-sources\\archetype\\src\\main\\resources\\archetype-resources '+home_dir+'\\tools\\generator\\maven-archetypes\\web-archetype\\src\\main\\resources\\archetype-resources')
+    os.system('xcopy /s/e/i/y '+base_dir+'\\examples\\mini-service\\target\\tmp\\generated-sources\\archetype\\src\\main\\resources\\archetype-resources '+base_dir+'\\tools\\generator\\maven-archetypes\\service-archetype\\src\\main\\resources\\archetype-resources')
+    os.system('xcopy /s/e/i/y '+base_dir+'\\examples\\mini-web\\target\\tmp\\generated-sources\\archetype\\src\\main\\resources\\archetype-resources '+base_dir+'\\tools\\generator\\maven-archetypes\\web-archetype\\src\\main\\resources\\archetype-resources')
     print 'copied archetypes.'
 
 def modifyArchetypes():
-    commonModifyArchetype(home_dir+'/tools/generator/maven-archetypes/service-archetype/src/main/resources/archetype-resources')
-    commonModifyArchetype(home_dir+'/tools/generator/maven-archetypes/web-archetype/src/main/resources/archetype-resources')
+    commonModifyArchetype(base_dir+'/tools/generator/maven-archetypes/service-archetype/src/main/resources/archetype-resources')
+    commonModifyArchetype(base_dir+'/tools/generator/maven-archetypes/web-archetype/src/main/resources/archetype-resources')
 
-    os.chdir(home_dir+'/tools/generator/maven-archetypes/service-archetype/src/main/resources/archetype-resources')
+    os.chdir(base_dir+'/tools/generator/maven-archetypes/service-archetype/src/main/resources/archetype-resources')
     replaceinfile('bin/ws-bin/build-client.bat','mini-service','${artifactId}')
     replaceinfile('bin/ws-bin/save-wsdl.bat','mini-service','${artifactId}')
     replaceinfile('bin/ws-bin/build-client-binding.xml','http://miniservice.examples.springside.org','${webservice-namespace}')
@@ -63,51 +65,29 @@ def commonModifyArchetype(path):
     replaceinfile('.settings/org.eclipse.wst.common.component','<dependent-module archiveName="springside3-core.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/springside3-core/springside3-core">\n<dependency-type>uses</dependency-type>\n</dependent-module>','')
 
 def clean():
-    rmfile(home_dir+'\\examples\\mini-service\\pom-parent.xml')
-    rmfile(home_dir+'\\examples\\mini-web\\pom-parent.xml')
+    rmfile(base_dir+'\\examples\\mini-service\\pom-parent.xml')
+    rmfile(base_dir+'\\examples\\mini-web\\pom-parent.xml')
 
-    rmdir(home_dir+'\\examples\\mini-service\\target\\generated-sources')
-    rmdir(home_dir+'\\examples\\mini-web\\target\\generated-sources')
+    rmdir(base_dir+'\\examples\\mini-service\\target\\generated-sources')
+    rmdir(base_dir+'\\examples\\mini-web\\target\\generated-sources')
 
-    move(home_dir+'\\examples\\mini-service\\target\\tmp\\lib', home_dir+'\\examples\\mini-service\\lib')
-    move(home_dir+'\\examples\\mini-service\\target\\tmp\\WEB-INF-lib', home_dir+'\\examples\\mini-service\\webapp\\WEB-INF\\lib')
-    move(home_dir+'\\examples\\mini-service\\target\\tmp\\WEB-INF-classes', home_dir+'\\examples\\mini-service\\webapp\\WEB-INF\\classes')
+    move(base_dir+'\\examples\\mini-service\\target\\tmp\\lib', base_dir+'\\examples\\mini-service\\lib')
+    move(base_dir+'\\examples\\mini-service\\target\\tmp\\WEB-INF-lib', base_dir+'\\examples\\mini-service\\webapp\\WEB-INF\\lib')
+    move(base_dir+'\\examples\\mini-service\\target\\tmp\\WEB-INF-classes', base_dir+'\\examples\\mini-service\\webapp\\WEB-INF\\classes')
 
-    move(home_dir+'\\examples\\mini-web\\target\\tmp\\lib', home_dir+'\\examples\\mini-web\\lib')
-    move(home_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-lib', home_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\lib')
-    move(home_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-classes', home_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\classes')
+    move(base_dir+'\\examples\\mini-web\\target\\tmp\\lib', base_dir+'\\examples\\mini-web\\lib')
+    move(base_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-lib', base_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\lib')
+    move(base_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-classes', base_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\classes')
 
-    move(home_dir+'\\examples\\mini-web\\target\\tmp\\mini-service.wsdl', home_dir+'\\examples\\mini-service\\webapp\\wsdl\\mini-service.wsdl')
-    move(home_dir+'\\examples\\mini-web\\target\\tmp\\mini-service-soapui-project.xml', home_dir+'\\examples\\mini-service\\src\\test\\soapui\\mini-service-soapui-project.xml')
+    move(base_dir+'\\examples\\mini-web\\target\\tmp\\mini-service.wsdl', base_dir+'\\examples\\mini-service\\webapp\\wsdl\\mini-service.wsdl')
+    move(base_dir+'\\examples\\mini-web\\target\\tmp\\mini-service-soapui-project.xml', base_dir+'\\examples\\mini-service\\src\\test\\soapui\\mini-service-soapui-project.xml')
  
     print 'cleaned temp files.'
-
-def rmdir(path):
-    if os.path.exists(path):
-        shutil.rmtree(path)
-
-def rmfile(path):
-    if os.path.exists(path):
-        os.remove(path)
-        
-def move(src,dest):
-    if os.path.exists(src):
-        shutil.move(src,dest)
-
-def replaceinfile(path,src,target):
-    srcre = re.compile(src,re.DOTALL);
-    f = open(path,'r')
-    readlines = f.read()
-    re.sub
-    writelines = re.sub(srcre,target,readlines,0)
-    f.close()
-    f = open(path,'w')
-    f.write(writelines)
-    f.close()
     
-        
+## 制作maven archetype的自动化脚本        
 springside_version='3.1.3'
-home_dir = os.path.abspath("../../")
+base_dir = os.path.abspath("../../")
+
 prepare()
 createArchetypes()
 copyArchetypes()
