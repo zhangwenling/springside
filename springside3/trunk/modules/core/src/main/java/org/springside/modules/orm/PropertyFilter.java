@@ -10,7 +10,10 @@ package org.springside.modules.orm;
  */
 public class PropertyFilter {
 
-	public static final String separator = "__";
+	/**
+	 * 多个属性间OR关系的分隔符.
+	 */
+	public static final String OR_SEPARATOR = "__";
 	
 	/**
 	 * 属性比较类型.
@@ -19,7 +22,6 @@ public class PropertyFilter {
 		EQ, LIKE;
 	}
 	
-
 	private String propertyName;
 	private Object value;
 	private MatchType matchType = MatchType.EQ;

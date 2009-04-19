@@ -2,14 +2,14 @@ import os,shutil,re
 
 def prepare():
     rmdir(home_dir+'\\examples\\mini-service\\target')
-    rmdir(home_dir+'\\examples\\mini-service\\webapp\\WEB-INF\\classes')
     move(home_dir+'\\examples\\mini-service\\lib',home_dir+'\\examples\\mini-service\\target\\tmp\\lib')
     move(home_dir+'\\examples\\mini-service\\webapp\\WEB-INF\\lib',home_dir+'\\examples\\mini-service\\target\\tmp\\WEB-INF-lib')
+    move(home_dir+'\\examples\\mini-service\\webapp\\WEB-INF\\classes',home_dir+'\\examples\\mini-service\\target\\tmp\\WEB-INF-classes')
    
     rmdir(home_dir+'\\examples\\mini-web\\target')
-    rmdir(home_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\classes')
     move(home_dir+'\\examples\\mini-web\\lib',home_dir+'\\examples\\mini-web\\target\\tmp\\lib')
     move(home_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\lib',home_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-lib')
+    move(home_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\classes',home_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-classes')
 
     move(home_dir+'\\examples\\mini-service\\webapp\\wsdl\\mini-service.wsdl',home_dir+'\\examples\\mini-web\\target\\tmp\\mini-service.wsdl')
     move(home_dir+'\\examples\\mini-service\\src\\test\\soapui\\mini-service-soapui-project.xml',home_dir+'\\examples\\mini-web\\target\\tmp\\mini-service-soapui-project.xml')
@@ -66,14 +66,16 @@ def clean():
     rmfile(home_dir+'\\examples\\mini-service\\pom-parent.xml')
     rmfile(home_dir+'\\examples\\mini-web\\pom-parent.xml')
 
-    rmdir(home_dir+'\\examples\\mini-service\\target\\tmp\\generated-sources')
-    rmdir(home_dir+'\\examples\\mini-web\\target\\tmp\\generated-sources')
+    rmdir(home_dir+'\\examples\\mini-service\\target\\generated-sources')
+    rmdir(home_dir+'\\examples\\mini-web\\target\\generated-sources')
 
     move(home_dir+'\\examples\\mini-service\\target\\tmp\\lib', home_dir+'\\examples\\mini-service\\lib')
     move(home_dir+'\\examples\\mini-service\\target\\tmp\\WEB-INF-lib', home_dir+'\\examples\\mini-service\\webapp\\WEB-INF\\lib')
+    move(home_dir+'\\examples\\mini-service\\target\\tmp\\WEB-INF-classes', home_dir+'\\examples\\mini-service\\webapp\\WEB-INF\\classes')
 
     move(home_dir+'\\examples\\mini-web\\target\\tmp\\lib', home_dir+'\\examples\\mini-web\\lib')
     move(home_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-lib', home_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\lib')
+    move(home_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-classes', home_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\classes')
 
     move(home_dir+'\\examples\\mini-web\\target\\tmp\\mini-service.wsdl', home_dir+'\\examples\\mini-service\\webapp\\wsdl\\mini-service.wsdl')
     move(home_dir+'\\examples\\mini-web\\target\\tmp\\mini-service-soapui-project.xml', home_dir+'\\examples\\mini-service\\src\\test\\soapui\\mini-service-soapui-project.xml')

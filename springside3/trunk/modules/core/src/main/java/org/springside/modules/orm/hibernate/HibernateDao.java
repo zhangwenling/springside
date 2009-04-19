@@ -193,7 +193,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 
 	 * @param matchType 目前支持的取值为"EQUAL"与"LIKE".
 	 */
-	public List<T> findByProperty(final String propertyName, final Object value, final String matchTypeStr) {
+	public List<T> findBy(final String propertyName, final Object value, final String matchTypeStr) {
 		MatchType matchType = Enum.valueOf(MatchType.class, matchTypeStr);
 		Criterion criterion = buildPropertyCriterion(propertyName, value, matchType);
 		return find(criterion);
@@ -202,7 +202,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按属性过滤条件列表查找对象列表.
 	 */
-	public List<T> findByFilters(final List<PropertyFilter> filters) {
+	public List<T> find(final List<PropertyFilter> filters) {
 		Criterion[] criterions = buildFilterCriterions(filters);
 		return find(criterions);
 	}
@@ -210,7 +210,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按属性过滤条件列表分页查找对象.
 	 */
-	public Page<T> findByFilters(final Page<T> page, final List<PropertyFilter> filters) {
+	public Page<T> find(final Page<T> page, final List<PropertyFilter> filters) {
 		Criterion[] criterions = buildFilterCriterions(filters);
 		return findByCriteria(page, criterions);
 	}
@@ -223,13 +223,13 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		for (PropertyFilter filter : filters) {
 			String propertyName = filter.getPropertyName();
 
-			boolean multiProperty = StringUtils.contains(propertyName, PropertyFilter.separator);
+			boolean multiProperty = StringUtils.contains(propertyName, PropertyFilter.OR_SEPARATOR);
 			if (!multiProperty) { //properNameName中只有一个属性的情况.
 				Criterion criterion = buildPropertyCriterion(propertyName, filter.getValue(), filter.getMatchType());
 				criterionList.add(criterion);
 			} else {//properName中包含多个属性的情况,进行or处理.
 				Disjunction disjunction = Restrictions.disjunction();
-				String[] params = StringUtils.split(propertyName, PropertyFilter.separator);
+				String[] params = StringUtils.split(propertyName, PropertyFilter.OR_SEPARATOR);
 
 				for (String param : params) {
 					Criterion criterion = buildPropertyCriterion(param, filter.getValue(), filter.getMatchType());

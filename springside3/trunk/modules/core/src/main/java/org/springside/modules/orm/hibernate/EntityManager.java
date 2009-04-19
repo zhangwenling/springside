@@ -64,7 +64,7 @@ public class EntityManager<T, PK extends Serializable> {
 
 	@Transactional(readOnly = true)
 	public Page<T> search(final Page<T> page, final List<PropertyFilter> filters) {
-		return getEntityDao().findByFilters(page, filters);
+		return getEntityDao().find(page, filters);
 	}
 
 	public void save(final T entity) {
