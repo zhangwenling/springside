@@ -103,7 +103,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		Criteria c = createCriteria(criterions);
 
 		if (page.isAutoCount()) {
-			int totalCount = countCriteriaResult(c, page);
+			int totalCount = countCriteriaResult(c);
 			page.setTotalCount(totalCount);
 		}
 
@@ -150,7 +150,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 执行count查询获得本次Criteria查询所能获得的对象总数.
 	 */
 	@SuppressWarnings("unchecked")
-	protected int countCriteriaResult(final Criteria c, final Page<T> page) {
+	protected int countCriteriaResult(final Criteria c) {
 		CriteriaImpl impl = (CriteriaImpl) c;
 
 		// 先把Projection、ResultTransformer、OrderBy取出来,清空三者后再执行Count操作
