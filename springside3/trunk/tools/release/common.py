@@ -1,4 +1,3 @@
-# 公共方法模块
 import os,shutil,re
 
 def rmdir(path):

@@ -1,12 +1,12 @@
 /*
- * jQuery validation plug-in 1.5.1
+ * jQuery validation plug-in 1.5.2
  *
  * http://bassistance.de/jquery-plugins/jquery-plugin-validation/
  * http://docs.jquery.com/Plugins/Validation
  *
  * Copyright (c) 2006 - 2008 Jörn Zaefferer
  *
- * $Id: jquery.validate.js 6096 2009-01-12 14:12:04Z joern.zaefferer $
+ * $Id: jquery.validate.js 6243 2009-02-19 11:40:49Z joern.zaefferer $
  *
  * Dual licensed under the MIT and GPL licenses:
  *   http://www.opensource.org/licenses/mit-license.php
@@ -468,7 +468,7 @@ $.extend($.validator, {
 			for( method in rules ) {
 				var rule = { method: method, parameters: rules[method] };
 				try {
-					var result = $.validator.methods[method].call( this, element.value, element, rule.parameters );
+					var result = $.validator.methods[method].call( this, element.value.replace(/\r/g, ""), element, rule.parameters );
 					
 					// if a method indicates that the field is optional and therefore valid,
 					// don't mark it as valid when there are no other rules

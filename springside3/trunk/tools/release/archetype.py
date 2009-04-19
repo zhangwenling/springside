@@ -30,8 +30,8 @@ def createArchetypes():
     print 'created archetypes.'
 
 def copyArchetypes():  
-    os.system('xcopy /s/e/i/y '+base_dir+'\\examples\\mini-service\\target\\tmp\\generated-sources\\archetype\\src\\main\\resources\\archetype-resources '+base_dir+'\\tools\\generator\\maven-archetypes\\service-archetype\\src\\main\\resources\\archetype-resources')
-    os.system('xcopy /s/e/i/y '+base_dir+'\\examples\\mini-web\\target\\tmp\\generated-sources\\archetype\\src\\main\\resources\\archetype-resources '+base_dir+'\\tools\\generator\\maven-archetypes\\web-archetype\\src\\main\\resources\\archetype-resources')
+    os.system('xcopy /s/e/i/y '+base_dir+'\\examples\\mini-service\\target\\generated-sources\\archetype\\src\\main\\resources\\archetype-resources '+base_dir+'\\tools\\generator\\maven-archetypes\\service-archetype\\src\\main\\resources\\archetype-resources')
+    os.system('xcopy /s/e/i/y '+base_dir+'\\examples\\mini-web\\target\\generated-sources\\archetype\\src\\main\\resources\\archetype-resources '+base_dir+'\\tools\\generator\\maven-archetypes\\web-archetype\\src\\main\\resources\\archetype-resources')
     print 'copied archetypes.'
 
 def modifyArchetypes():

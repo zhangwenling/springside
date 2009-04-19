@@ -24,16 +24,16 @@
 					loginName: { 
         				required: true, 
         				remote: "user!checkLoginName.action?orgLoginName="+encodeURIComponent('${symbol_dollar}{loginName}')
-    				},
-            		name: "required",
-            		password: {
+    			},
+          name: "required",
+          password: {
     					required: true,
     					minlength:3
-    				}, 
-    				passwordConfirm: {
+    			}, 
+    			passwordConfirm: {
     					equalTo:"${symbol_pound}password"
-    				},
-    				email:"email"
+    			},
+    			email:"email"
 				},
 				messages: {
 					loginName: {
