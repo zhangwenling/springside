@@ -2,7 +2,6 @@ import os,shutil,zipfile
 from os.path import join
 from common import zipfolder,rmdir,zipfolder
 
-
 def prepare():
    os.system('TortoiseProc.exe /command:export /path:"'+base_dir+'"')
    os.chdir(export_dir)

@@ -26,12 +26,11 @@ def createArchetypes():
 
     os.chdir(base_dir+'\\examples\\mini-web')
     os.system('mvn archetype:create-from-project -DpackageName=org.springside.examples.miniweb')
-    print 'created archetypes.'
-
-def copyArchetypes():  
+    
     os.system('xcopy /s/e/i/y '+base_dir+'\\examples\\mini-service\\target\\generated-sources\\archetype\\src\\main\\resources\\archetype-resources '+base_dir+'\\tools\\generator\\maven-archetypes\\service-archetype\\src\\main\\resources\\archetype-resources')
     os.system('xcopy /s/e/i/y '+base_dir+'\\examples\\mini-web\\target\\generated-sources\\archetype\\src\\main\\resources\\archetype-resources '+base_dir+'\\tools\\generator\\maven-archetypes\\web-archetype\\src\\main\\resources\\archetype-resources')
-    print 'copied archetypes.'
+
+    print 'created archetypes.'
 
 def modifyArchetypes():
     commonModifyArchetype(base_dir+'/tools/generator/maven-archetypes/service-archetype/src/main/resources/archetype-resources')
@@ -88,6 +87,5 @@ base_dir = os.path.abspath("../../")
 
 prepare()
 createArchetypes()
-copyArchetypes()
 modifyArchetypes()
 clean()
