@@ -3,8 +3,6 @@
 #set( $symbol_escape = '\' )
 package ${package}.integration.service.user;
 
-import java.util.List;
-
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.ExpectedException;

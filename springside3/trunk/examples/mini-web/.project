@@ -3,6 +3,7 @@
 	<name>mini-web</name>
 	<comment></comment>
 	<projects>
+		<project>springside3-core</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

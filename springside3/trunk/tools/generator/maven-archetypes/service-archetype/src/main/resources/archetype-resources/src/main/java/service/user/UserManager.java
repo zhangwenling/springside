@@ -7,7 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ${package}.entity.user.User;
-import org.springside.modules.orm.hibernate.DefaultEntityManager;
+import org.springside.modules.orm.hibernate.EntityManager;
 
 /**
  * 用户管理类.
@@ -24,7 +24,7 @@ import org.springside.modules.orm.hibernate.DefaultEntityManager;
 @Service
 //默认将类中的所有函数纳入事务管理.
 @Transactional
-public class UserManager extends DefaultEntityManager<User, Long> {
+public class UserManager extends EntityManager<User, Long> {
 
 	/**
 	 * 验证用户名密码. 

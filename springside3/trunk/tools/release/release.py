@@ -28,7 +28,6 @@ def prepare():
    rmdir(springside_dir)
    rmdir(springside_all_dir)
 
-
 def release_source():
    os.rename('springside3',springside_dir)
    zipfolder(springside_dir,springside_dir+'.zip')

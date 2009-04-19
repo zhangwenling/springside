@@ -6,7 +6,7 @@ package ${package}.service.security;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ${package}.entity.security.Authority;
-import org.springside.modules.orm.hibernate.DefaultEntityManager;
+import org.springside.modules.orm.hibernate.EntityManager;
 
 /**
  * 授权管理类.
@@ -15,5 +15,5 @@ import org.springside.modules.orm.hibernate.DefaultEntityManager;
  */
 @Service
 @Transactional
-public class AuthorityManager extends DefaultEntityManager<Authority, Long> {
+public class AuthorityManager extends EntityManager<Authority, Long> {
 }
