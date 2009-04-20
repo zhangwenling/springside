@@ -10,7 +10,7 @@
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script type="text/javascript">
 
-		//系统配置(MBean)
+		//系统配置(MBean代理)
 		//动态提交表单保存服务器配置.
 		function saveConfig(){
 			$.get("jmx-client!saveConfig.action?" + $("form").serialize(), function(data){
@@ -47,7 +47,7 @@
 	<p>用户故事：使用JMX动态配置系统变量并实时监控系统运行统计。</p>
 	
 	<p>客户端可使用JConsole, 远程进程URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase  <a href="${ctx}/">返回首页</a></p>
-	<h4>系统配置(MBean)</h4>
+	<h4>系统配置(MBean代理)</h4>
 	<form id="configForm">
 	<table>
 		<tr>
@@ -55,7 +55,7 @@
 			<td><input id="nodeName" name="nodeName" value="${nodeName}" /></td>
 		</tr>
 		<tr>
-			<td>是否收集统计信息:</td>
+			<td>是否发送通知邮件:</td>
 			<td><s:radio id="notificationMailEnabled" name="notificationMailEnabled" value="notificationMailEnabled" list="#{'true':'是', 'false':'否'}" theme="simple"/>
 			</td>
 		</tr>

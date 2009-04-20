@@ -44,7 +44,7 @@ public class JmxClientAction extends ActionSupport {
 		this.nodeName = nodeName;
 	}
 
-	public boolean isNotificationEnabled() {
+	public boolean isNotificationMailEnabled() {
 		return notificationMailEnabled;
 	}
 
