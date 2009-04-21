@@ -14,14 +14,14 @@ public class PropertyFilter {
 	 * 多个属性间OR关系的分隔符.
 	 */
 	public static final String OR_SEPARATOR = "__";
-	
+
 	/**
 	 * 属性比较类型.
 	 */
 	public enum MatchType {
 		EQ, LIKE;
 	}
-	
+
 	private String propertyName;
 	private Object value;
 	private MatchType matchType = MatchType.EQ;

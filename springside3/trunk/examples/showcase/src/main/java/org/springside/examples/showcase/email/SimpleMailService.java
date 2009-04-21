@@ -54,8 +54,7 @@ public class SimpleMailService {
 	 * 群发邮件任务类.
 	 */
 	private static class MailTask implements Runnable {
-		
-	
+
 		private JavaMailSender mailSender;
 		private SimpleMailMessage msg;
 
