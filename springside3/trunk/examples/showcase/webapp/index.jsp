@@ -4,36 +4,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
 <title>Showcase 示例</title>
 </head>
 <body>
-<h2>Showcase示例</h2>
-<table cellspacing="20">
-	<tr>
-		<th align="left">(部分)完成特性</th>
-		<th align="left">计划中特性</th>
-	</tr>
-	<tr>
-		<td valign="top">
-		<h3><a href="common/user.action">综合演示</a></h3>
-		<h3><a href="jmx/jmx-client.action">JMX演示</a></h3>
-		<h3><a href="schedule/index.action">定时任务演示</a></h3>
-		<h3><a href="email/index.action">邮件演示</a></h3>
-		<h3><a href="ajax/index.action">Ajax演示</a></h3>
-		<h3><a href="db/index.action">数据库高级演示</a></h3>
-		<h3><a href="security/login.action">安全高级演示</a></h3>
-		</td>
-		<td valign="top">
-		<h3><a href="jms/index.action">JMS演示</a></h3>
-		<h3><a href="search/index.action">搜索引擎演示</a></h3>
-		<h3><a href="rule/index.action">规则引擎演示</a></h3>
-		<h3><a href="workflow/index.action">工作流演示</a></h3>
-		<h3><a href="report/index.action">报表演示</a></h3>
-		<h3><a href="cache/index.action">缓存演示</a></h3>
-		<h3><a href="webservice/index.action">Web服务高级演示</a></h3>
-		<h3><a href="log/index.action">日志高级演示</a></h3>
-		</td>
-	</tr>
-</table>
+<div id="content">
+<%@ include file="/common/left.jsp"%>
+<div id="mainbar">
+<h1>Showcase示例</h1>
+<p>各式主流的、实用的、好玩的开源项目大派对。</p>
+</div>
+</div>
 </body>
 </html>

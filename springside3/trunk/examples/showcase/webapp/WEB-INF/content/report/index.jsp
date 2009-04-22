@@ -5,14 +5,20 @@
 <head>
 <title>报表演示</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
+<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<div id="content">
+<%@ include file="/common/left.jsp"%>
+<div id="mainbar">
 <h2>报表演示</h2>
-<p>技术说明：<br />
-DIY html表格，用POI输出excel文件，用AmCharts画Flash图。<br />
-</p>
-
-<div id="footer"><a href="${ctx}/">返回首页</a></div>
+<h4>技术说明：</h4>
+<ul>
+<li>DIY html表格</li>
+<li>POI输出Excel文件</li>
+<li>AmCharts渲染Flash图表</li>
+</ul>
+</div>
+</div>
 </body>
 </html>

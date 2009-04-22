@@ -5,15 +5,18 @@
 <head>
 	<title>WebService高级演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
+	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<div id="content">
+<%@ include file="/common/left.jsp"%>
+<div id="mainbar">
 <h2>Web Service高级演示</h2>
-<h4><a href="${ctx}/webservice/ws/index.action">WS-*高级特性演示(安全、附件、异步)</a></h4>
-<h4><a href="${ctx}/webservice/rest/index.action">RESTful Web Service演示</a></h4>
-
-<div id="footer">
-	<a href="${ctx}/">返回首页</a>
+<ul>
+<li><a href="${ctx}/webservice/ws/index.action">WS-*高级协议演示(安全、附件、异步)</a></li>
+<li><a href="${ctx}/webservice/rest/index.action">RESTful Web Service演示</a></li>
+</ul>
+</div>
 </div>
 </body>
 </html>

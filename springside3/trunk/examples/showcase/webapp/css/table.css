@@ -9,7 +9,7 @@ a:link,a:visited,a:active,a:hover {
 div#listContent,div#footer {
 	margin-top:10px
 }
-	
+
 div#listContent table {
 	border-collapse: collapse;
 	border: none;
@@ -17,14 +17,11 @@ div#listContent table {
 
 div#listContent th,div#listContent td {
 	border: solid #999 1px;
+	padding: 3px 4px 3px 4px;
 }
 
 .actionMessage {
 	font-weight: bold;
-}
-
-div#comment {
-	margin-top:20px
 }
 
 input {
@@ -47,3 +44,4 @@ input [type=submit] {
 	border: 1px solid #728c40;
 	margin-bottom: 2px;
 }
+

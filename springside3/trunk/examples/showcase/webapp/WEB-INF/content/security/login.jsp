@@ -9,9 +9,12 @@
 <head>
 	<title>Showcase 登录页</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
+	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<div id="content">
+<%@ include file="/common/left.jsp"%>
+<div id="mainbar">
 	<%
 			if("1".equals(request.getParameter("error"))){
 	%>
@@ -30,12 +33,12 @@
 			}
 	%>
 	<h2>Showcase登录页</h2>
-	<p>用户故事：在Mini-Web的基础上，演示与验证码的整合。</p>
-	<p>技术说明：采基于JCaptcha1.0验证码方案，通过JCaptchaFilter与SpringSecurity简单集成。</p>
-	<p>未来版本：<br/>
-	1.采用JCaptcha2.0生成GMail式的验证码。<br/>
-	2.演示用于界面集成的简单SSO。<br/>
-	3.演示数据级别的权限控制。</p>
+	<h4>技术说明：</h4>基于JCaptcha1.0的验证码方案，通过Filter与SpringSecurity简单集成。
+	<h4>未来版本：</h4>
+	<ul>
+	<li>演示用于界面集成的简单SSO。</li>
+	<li>演示数据级别的权限控制。</li>
+	</ul>
 	<form id="loginForm" action="${ctx}/j_spring_security_check" method="post">
 		<table class="inputView">
 			<tr>
@@ -49,24 +52,30 @@
 				<td>密码:</td>
 				<td  colspan='2'><input type='password' name='j_password' /></td>
 			</tr>
-				<tr>
+			<tr>
 				<td>验证码:</td>
-				<td><input type='text' name='j_captcha'/></td>
+				<td><input type='text' name='j_captcha'/><br/>
+				(可更换较美观的JCaptcha2.0)</td>
 				<td><img src="${ctx}/security/jcaptcha.jpg" /></td>
+			</tr>
+			<tr>
+				<td colspan='3'></td>
 			</tr>
 			
 			<tr>
 				<td>
 					<input type="checkbox" name="_spring_security_remember_me" />
 				</td>
-				<td>两周内记住我</td>
+				<td colspan='2'>两周内记住我</td>
 			</tr>
 			<tr>
 				<td colspan='3'><input value="登录" type="submit" /></td>
 			</tr>
 		</table>
 	</form>
-	<p>（管理员<b>admin/admin</b> ,普通用户<b>user/user</b>）<a href="${ctx}/j_spring_security_logout">退出登录</a>、<a href="${ctx}/">返回首页</a></p>
+	<p>（管理员<b>admin/admin</b> ,普通用户<b>user/user</b>）<a href="${ctx}/j_spring_security_logout">退出登录</a></p>
+	</div>
+	</div>
 </body>
 </html>
 

@@ -13,21 +13,21 @@ import org.springframework.security.util.AntUrlPathMatcher;
 import org.springframework.security.util.UrlMatcher;
 
 /**
- * DefinitionSource工厂,可在数据库或其它地方定义URL-授权关系.
+ * DefinitionSource工厂,可读取在数据库或其它地方中定义的URL-授权关系.
  * 
- * 由注入的requestMapService提供LinkedHashMap<String, String>形式的URL及授权关系定义.
+ * 由注入的resourceDetailService提供LinkedHashMap<String, String>形式的URL及授权关系定义.
  * 
  * @see org.springframework.security.intercept.web.DefaultFilterInvocationDefinitionSource
- * @see RequestMapService
+ * @see ResourceDetailService
  * 
  * @author calvin
  */
 public class DefinitionSourceFactoryBean implements FactoryBean {
 
-	private RequestMapService requestMapService;
+	private ResourceDetailService resourceDetailService;
 
-	public void setRequestMapService(RequestMapService requestMapService) {
-		this.requestMapService = requestMapService;
+	public void setResourceDetailService(ResourceDetailService requestMapService) {
+		this.resourceDetailService = requestMapService;
 	}
 
 	public Object getObject() throws Exception {
@@ -52,7 +52,7 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 	}
 
 	private LinkedHashMap<RequestKey, ConfigAttributeDefinition> getRequestMap() throws Exception {
-		LinkedHashMap<String, String> srcMap = requestMapService.getRequestMap();
+		LinkedHashMap<String, String> srcMap = resourceDetailService.getRequestMap();
 		LinkedHashMap<RequestKey, ConfigAttributeDefinition> requestMap = new LinkedHashMap<RequestKey, ConfigAttributeDefinition>();
 		ConfigAttributeEditor editor = new ConfigAttributeEditor();
 
@@ -61,6 +61,7 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 			editor.setAsText(entry.getValue());
 			requestMap.put(key, (ConfigAttributeDefinition) editor.getValue());
 		}
+		
 		return requestMap;
 	}
 }

@@ -5,21 +5,23 @@
 <head>
 	<title>邮件演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
+	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<div id="content">
+<%@ include file="/common/left.jsp"%>
+<div id="mainbar">
 <h2>邮件演示</h2>
-技术说明：
+<h4>技术说明：</h4>
 <ul>
-<li>使用线程池群发简单文本邮件演示。</li>
-<li>使用Freemarker模板创建HTML邮件演示。</li>
+<li>使用JDK5.0 Executor线程池群发简单文本邮件演示。</li>
+<li>使用Freemarker模板创建HTML内容，并带附件的MIME邮件演示。</li>
 </ul>
-<p>用户故事：<br/>
+<h4>用户故事：</h4>
 在综合演示用例中保存用户时，发送分别发送两种邮件。<br/>
-演示邮箱名为springside3.demo@gmail.com, 密码为demoforyou。</p>
+演示邮箱名为springside3.demo@gmail.com, 密码为demoforyou。
 
-<div id="footer">
-	<a href="${ctx}/">返回首页</a>
+</div>
 </div>
 </body>
 </html>

@@ -6,7 +6,8 @@
 <head>
 	<title>综合演示用例</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet">
+	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet">
+	<link href="${ctx}/css/table.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>

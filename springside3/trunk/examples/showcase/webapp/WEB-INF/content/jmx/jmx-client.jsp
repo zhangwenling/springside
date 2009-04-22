@@ -6,7 +6,7 @@
 <head>
 	<title>JMX演示用例</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet"/>
+	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet"/>
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script type="text/javascript">
 
@@ -42,11 +42,15 @@
 	</script>
 </head>
 <body>
-	<h3>JMX演示用例</h3>
-	<p>技术说明：演示MBean代理及直接读取属性两种模式。</p>
-	<p>用户故事：使用JMX动态配置系统变量并实时监控系统运行统计。</p>
+<div id="content">
+<%@ include file="/common/left.jsp"%>
+<div id="mainbar">
+	<h2>JMX演示用例</h2>
+	<h4>技术说明：</h4>演示JMX MBean代理及直接读取属性两种模式。
+	<h4>用户故事：</h4>
+	使用JMX动态配置服务节点的系统变量并实时监控系统运行统计。<br/>
 	
-	<p>客户端可使用JConsole, 远程进程URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase  <a href="${ctx}/">返回首页</a></p>
+	客户端可使用JConsole, 远程进程URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase
 	<h4>系统配置(MBean代理)</h4>
 	<form id="configForm">
 	<table>
@@ -74,5 +78,8 @@
 		关闭数据库连接:${hibernateStatistics.sessionCloseCount}<br/>
 		<input type="button" value="打印Hibernate统计信息日志" onclick="logSummary();" />
 	</p>
+	
+</div>
+</div>
 </body>
 </html>

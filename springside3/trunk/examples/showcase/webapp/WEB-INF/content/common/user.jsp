@@ -7,12 +7,15 @@
 <head>
 	<title>综合演示用例</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet">
+	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet">
+	<link href="${ctx}/css/table.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
-
-<h3>综合演示用例</h3>
+<div id="content">
+<%@ include file="/common/left.jsp"%>
+<div id="mainbar">
+<h2>综合演示用例</h2>
 
 <div id="listContent">
 <table>
@@ -35,8 +38,7 @@
 	</s:iterator>
 </table>
 </div>
-<div id="footer">
-	<a href="${ctx}/">返回首页</a>
+</div>
 </div>
 </body>
 </html>

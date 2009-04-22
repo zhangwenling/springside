@@ -26,3 +26,24 @@ div#listContent th,div#listContent td {
 div#comment {
 	margin-top:20px
 }
+
+input {
+	background-color: #ffffff;
+	padding: 3px;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 10px;
+	color: #ffffff;
+	border: 1px solid #728c40;
+	background-color: #94ae62;
+	margin-bottom: 2px;
+}
+
+input [type=submit] {
+	background-color: #ffffff;
+	padding: 3px;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 10px;
+	color: #666666;
+	border: 1px solid #728c40;
+	margin-bottom: 2px;
+}

@@ -5,15 +5,16 @@
 <head>
 	<title>数据库访问高级演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
+	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<div id="content">
+<%@ include file="/common/left.jsp"%>
+<div id="mainbar">
 <h2>数据库访问高级演示</h2>
-<p>技术说明：Hibernate Event演示，在综合演示示例中自动在修改User对象时加入审计信息.</p>
-<p>未来版本：Hibernate envers，自动记录对象的修改历史。(等待Hibernate 3.5)</p>
-
-<div id="footer">
-	<a href="${ctx}/">返回首页</a>
+<h4>技术说明：</h4>Hibernate Event演示，在综合演示示例中自动在修改User对象时加入审计信息。
+<h4>未来版本：</h4>Hibernate Envers演示，自动记录对象的修改历史。(等待Hibernate 3.5)
+</div>
 </div>
 </body>
 </html>

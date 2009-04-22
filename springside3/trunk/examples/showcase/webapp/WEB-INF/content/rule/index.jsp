@@ -5,12 +5,15 @@
 <head>
 <title>规则引擎演示</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
+<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<div id="content">
+<%@ include file="/common/left.jsp"%>
+<div id="mainbar">
 <h2>规则引擎演示</h2>
-<p>技术说明：基于JBossRule(Drools)，用于复杂业务规则处理、工作流的流程判断和数据级ACL安全判断。</p>
-
-<div id="footer"><a href="${ctx}/">返回首页</a></div>
+<h4>技术说明：</h4>基于JBossRule(Drools)，用于复杂业务规则处理、工作流的流程判断和数据级ACL安全判断。
+</div>
+</div>
 </body>
 </html>

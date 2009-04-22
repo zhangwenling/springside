@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
  * 
  * @author calvin
  */
-public interface RequestMapService {
+public interface ResourceDetailService {
 
 	/**
 	 * 获取RequestMap.

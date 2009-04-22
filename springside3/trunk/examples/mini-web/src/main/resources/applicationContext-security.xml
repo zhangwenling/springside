@@ -24,20 +24,20 @@
 	<!-- 项目实现的用户查询服务 -->
 	<bean id="userDetailsService" class="org.springside.examples.miniweb.service.security.UserDetailServiceImpl" />
 
-	<!-- 自定义过滤器,在数据库存储URL-授权  begin -->
+	<!-- 重新定义的FilterSecurityInterceptor,使用databaseDefinitionSource提供的url-授权关系定义 -->
 	<bean id="filterSecurityInterceptor" class="org.springframework.security.intercept.web.FilterSecurityInterceptor">
 		<s:custom-filter before="FILTER_SECURITY_INTERCEPTOR" />
 		<property name="accessDecisionManager" ref="accessDecisionManager" />
 		<property name="objectDefinitionSource" ref="databaseDefinitionSource" />
 	</bean>
 
+	<!-- DefinitionSource工厂,使用resourceDetailService提供的URL-授权关系. -->
 	<bean id="databaseDefinitionSource" class="org.springside.modules.security.springsecurity.DefinitionSourceFactoryBean">
-		<property name="requestMapService" ref="requestMapService" />
+		<property name="resourceDetailService" ref="resourceDetailService" />
 	</bean>
 	
 	<!-- 项目实现的URL-授权查询服务 -->
-	<bean id="requestMapService" class="org.springside.examples.miniweb.service.security.RequestMapServiceImpl" />
-	<!-- 自定义过滤器,在数据库存储URL-授权  end -->
+	<bean id="resourceDetailService" class="org.springside.examples.miniweb.service.security.ResourceDetailServiceImpl" />
 
 	<!-- 授权判断配置, 将授权名称的默认前缀由ROLE_改为A_. -->
 	<bean id="accessDecisionManager" class="org.springframework.security.vote.AffirmativeBased">

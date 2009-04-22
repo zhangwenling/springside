@@ -5,17 +5,19 @@
 <head>
 	<title>缓存演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
+	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<div id="content">
+<%@ include file="/common/left.jsp"%>
+<div id="mainbar">
 <h2>缓存演示</h2>
-技术说明：
+<h4>技术说明：</h4>
 <ul>
-<li>Memcached集中式缓存演示</li>
-<li>JBossCache分布式集群缓存演示</li>
+<li>Memcached中央服务器式缓存演示。</li>
+<li>JBossCache分布式集群缓存演示。</li>
 </ul>
-<div id="footer">
-	<a href="${ctx}/">返回首页</a>
+</div>
 </div>
 </body>
 </html>
