@@ -40,19 +40,16 @@
 
 	<!-- Cron Job -->
 	<bean id="cronJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="exampleJob" />
+		<property name="targetObject" ref="quartzJob" />
 		<property name="targetMethod" value="executeCronLog" />
-		<property name="concurrent" value="true" />
 	</bean>
 
 	<!-- Timer Job -->
 	<bean id="timerJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="exampleJob" />
+		<property name="targetObject" ref="quartzJob" />
 		<property name="targetMethod" value="executeTimerLog" />
 	</bean>
 
 	<!-- 被执行的业务类 -->
-	<bean id="exampleJob" class="org.springside.examples.showcase.schedule.QuartzJob">
-		<property name="manager" ref="userManager" />
-	</bean>
+	<bean id="quartzJob" class="org.springside.examples.showcase.schedule.QuartzJob"/>
 </beans>

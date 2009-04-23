@@ -27,7 +27,5 @@
 	</bean>
 
 	<!-- 定期执行的业务类 -->
-	<bean id="executorJob" class="org.springside.examples.showcase.schedule.ExecutorJob">
-		<property name="manager" ref="userManager" />
-	</bean>
+	<bean id="executorJob" class="org.springside.examples.showcase.schedule.ExecutorJob"/>
 </beans>

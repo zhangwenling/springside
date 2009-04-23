@@ -3,7 +3,6 @@ package org.springside.examples.miniweb.service.security;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.GrantedAuthority;
@@ -12,11 +11,10 @@ import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UserDetailsService;
 import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.examples.miniweb.dao.security.UserDao;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
-import org.springside.modules.orm.hibernate.HibernateDao;
-import org.springside.modules.orm.hibernate.SimpleHibernateDao;
 
 /**
  * 实现SpringSecurity的UserDetailsService接口,实现获取用户Detail信息的回调函数.
@@ -26,12 +24,8 @@ import org.springside.modules.orm.hibernate.SimpleHibernateDao;
 @Transactional(readOnly = true)
 public class UserDetailServiceImpl implements UserDetailsService {
 
-	private SimpleHibernateDao<User, Long> userDao;
-
 	@Autowired
-	public void init(final SessionFactory sessionFactory) {
-		userDao = new HibernateDao<User, Long>(sessionFactory, User.class);
-	}
+	private UserDao userDao;
 
 	/**
 	 * 获取用户Detail信息的回调函数.

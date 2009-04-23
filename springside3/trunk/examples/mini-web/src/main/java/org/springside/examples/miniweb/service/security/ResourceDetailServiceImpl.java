@@ -3,12 +3,10 @@ package org.springside.examples.miniweb.service.security;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.examples.miniweb.dao.security.ResourceDao;
 import org.springside.examples.miniweb.entity.security.Resource;
-import org.springside.modules.orm.hibernate.HibernateDao;
-import org.springside.modules.orm.hibernate.SimpleHibernateDao;
 import org.springside.modules.security.springsecurity.ResourceDetailService;
 
 /**
@@ -18,13 +16,8 @@ import org.springside.modules.security.springsecurity.ResourceDetailService;
  */
 @Transactional(readOnly = true)
 public class ResourceDetailServiceImpl implements ResourceDetailService {
-
-	private SimpleHibernateDao<Resource, Long> resourceDao;
-
 	@Autowired
-	public void init(final SessionFactory sessionFactory) {
-		resourceDao = new HibernateDao<Resource, Long>(sessionFactory, Resource.class);
-	}
+	private ResourceDao resourceDao;
 
 	/**
 	 * @see ResourceDetailService#getRequestMap()

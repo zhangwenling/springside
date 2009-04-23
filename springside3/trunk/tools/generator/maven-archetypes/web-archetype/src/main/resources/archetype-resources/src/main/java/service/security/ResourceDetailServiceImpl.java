@@ -6,12 +6,10 @@ package ${package}.service.security;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import ${package}.dao.security.ResourceDao;
 import ${package}.entity.security.Resource;
-import org.springside.modules.orm.hibernate.HibernateDao;
-import org.springside.modules.orm.hibernate.SimpleHibernateDao;
 import org.springside.modules.security.springsecurity.ResourceDetailService;
 
 /**
@@ -21,13 +19,8 @@ import org.springside.modules.security.springsecurity.ResourceDetailService;
  */
 @Transactional(readOnly = true)
 public class ResourceDetailServiceImpl implements ResourceDetailService {
-
-	private SimpleHibernateDao<Resource, Long> resourceDao;
-
 	@Autowired
-	public void init(final SessionFactory sessionFactory) {
-		resourceDao = new HibernateDao<Resource, Long>(sessionFactory, Resource.class);
-	}
+	private ResourceDao resourceDao;
 
 	/**
 	 * @see ResourceDetailService${symbol_pound}getRequestMap()

@@ -30,6 +30,8 @@ import org.springside.modules.utils.ReflectionUtils;
 @Table(name = "USERS")
 public class User extends AuditableEntity {
 
+	public static final String COUNT_USER = "select count(u) from User u";
+
 	private String loginName;
 	private String password;
 	private String name;

@@ -3,8 +3,10 @@
 #set( $symbol_escape = '\' )
 package ${package}.service.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ${package}.dao.security.RoleDao;
 import ${package}.entity.security.Role;
 import ${package}.service.ServiceException;
 import org.springside.modules.orm.hibernate.EntityManager;
@@ -23,6 +25,14 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 @Transactional
 public class RoleManager extends EntityManager<Role, Long> {
 
+	@Autowired
+	RoleDao roleDao;
+
+	@Override
+	protected RoleDao getEntityDao() {
+		return roleDao;
+	}
+
 	/**
 	 * 重载delte函数,演示异常处理及用户行为日志.
 	 */
@@ -33,6 +43,6 @@ public class RoleManager extends EntityManager<Role, Long> {
 			throw new ServiceException("不能删除超级管理员角色");
 		}
 
-		entityDao.delete(id);
+		roleDao.delete(id);
 	}
 }

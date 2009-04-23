@@ -3,6 +3,7 @@ package org.springside.examples.showcase.common.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.email.MimeMailService;
 import org.springside.examples.showcase.email.SimpleMailService;
@@ -19,14 +20,19 @@ import org.springside.modules.orm.hibernate.EntityManager;
 //默认将类中的所有函数纳入事务管理.
 @Transactional
 public class UserManager extends EntityManager<User, Long> {
-
+	@Autowired
+	UserDao userDao;
 	@Autowired(required = false)
 	private ServerConfig serverConfig; //系统配置
-
 	@Autowired(required = false)
 	private SimpleMailService simpleMailService;//邮件发送
 	@Autowired(required = false)
 	private MimeMailService mimeMailService;//邮件发送
+
+	@Override
+	protected UserDao getEntityDao() {
+		return userDao;
+	}
 
 	/**
 	 * 重载函数,在保存用户时,发送通知邮件.
@@ -43,15 +49,5 @@ public class UserManager extends EntityManager<User, Long> {
 				mimeMailService.sendNotificationMail(user.getName());
 			}
 		}
-	}
-
-	@Transactional(readOnly = true)
-	public User loadByLoginName(String loginName) {
-		return entityDao.findByUnique("loginName", loginName);
-	}
-
-	@Transactional(readOnly = true)
-	public long getUsersCount() {
-		return (Long) entityDao.findUnique("select count(u) from User u");
 	}
 }

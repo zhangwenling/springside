@@ -3,8 +3,10 @@
 #set( $symbol_escape = '\' )
 package ${package}.service.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ${package}.dao.security.UserDao;
 import ${package}.entity.security.User;
 import ${package}.service.ServiceException;
 import org.springside.modules.orm.hibernate.EntityManager;
@@ -26,6 +28,13 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 //默认将类中的所有函数纳入事务管理.
 @Transactional
 public class UserManager extends EntityManager<User, Long> {
+	@Autowired
+	UserDao userDao;
+
+	@Override
+	protected UserDao getEntityDao() {
+		return userDao;
+	}
 
 	/**
 	 * 重载delte函数,演示异常处理及用户行为日志.
@@ -37,7 +46,7 @@ public class UserManager extends EntityManager<User, Long> {
 			throw new ServiceException("不能删除超级管理员用户");
 		}
 
-		entityDao.delete(id);
+		userDao.delete(id);
 	}
 
 	/**
@@ -47,6 +56,6 @@ public class UserManager extends EntityManager<User, Long> {
 	 */
 	@Transactional(readOnly = true)
 	public boolean isLoginNameUnique(String loginName, String orgLoginName) {
-		return entityDao.isPropertyUnique("loginName", loginName, orgLoginName);
+		return userDao.isPropertyUnique("loginName", loginName, orgLoginName);
 	}
 }

@@ -10,9 +10,9 @@ import org.springframework.security.GrantedAuthorityImpl;
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UserDetailsService;
 import org.springframework.security.userdetails.UsernameNotFoundException;
+import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.Role;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.common.service.UserManager;
 
 /**
  * 实现SpringSecurity的UserDetailsService接口,实现获取用户Detail信息的回调函数.
@@ -21,14 +21,14 @@ import org.springside.examples.showcase.common.service.UserManager;
  */
 public class UserDetailServiceImpl implements UserDetailsService {
 	@Autowired
-	private UserManager userManager;
+	private UserDao userDao;
 
 	/**
 	 * 获取用户Detail信息的回调函数.
 	 */
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
-		User user = userManager.loadByLoginName(userName);
+		User user = userDao.findByUnique("loginName", userName);
 		if (user == null)
 			throw new UsernameNotFoundException("用户" + userName + " 不存在");
 

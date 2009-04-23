@@ -5,6 +5,7 @@ package ${package}.service.security;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ${package}.dao.security.AuthorityDao;
 import ${package}.entity.security.Authority;
 import org.springside.modules.orm.hibernate.EntityManager;
 
@@ -16,4 +17,11 @@ import org.springside.modules.orm.hibernate.EntityManager;
 @Service
 @Transactional
 public class AuthorityManager extends EntityManager<Authority, Long> {
+
+	AuthorityDao authorityDao;
+
+	@Override
+	protected AuthorityDao getEntityDao() {
+		return authorityDao;
+	}
 }
