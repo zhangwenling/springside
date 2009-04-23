@@ -5,12 +5,14 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
 
 /**
  * 被ScheduledThreadPoolExecutor定时执行的任务类.
  */
+@Transactional(readOnly = true)
 public class ExecutorJob implements Runnable {
 
 	private static Logger logger = LoggerFactory.getLogger(ExecutorJob.class);

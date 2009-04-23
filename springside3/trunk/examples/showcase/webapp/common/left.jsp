@@ -9,8 +9,9 @@
 		<a href="${ctx}/schedule/index.action">定时任务演示</a>
 		<a href="${ctx}/email/index.action">邮件演示</a>
 		<a href="${ctx}/ajax/index.action">Ajax演示</a>
+		<a href="${ctx}/security/index.action">安全高级演示</a>
 		<a href="${ctx}/db/index.action">数据库高级演示</a>
-		<a href="${ctx}/security/login.action">安全高级演示</a>
+
     </div>
     
     <h2>计划中特性</h2>

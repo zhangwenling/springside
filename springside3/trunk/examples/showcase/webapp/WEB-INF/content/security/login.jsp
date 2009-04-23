@@ -34,11 +34,7 @@
 	%>
 	<h2>Showcase登录页</h2>
 	<h4>技术说明：</h4>基于JCaptcha1.0的验证码方案，通过Filter与SpringSecurity简单集成。
-	<h4>未来版本：</h4>
-	<ul>
-	<li>演示用于界面集成的简单SSO。</li>
-	<li>演示数据级别的权限控制。</li>
-	</ul>
+	
 	<form id="loginForm" action="${ctx}/j_spring_security_check" method="post">
 		<table class="inputView">
 			<tr>
