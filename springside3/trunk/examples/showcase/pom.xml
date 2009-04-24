@@ -5,7 +5,8 @@
 		<artifactId>springside-parent</artifactId>
 		<groupId>org.springside</groupId>
 		<version>3.1.3</version>
-		<relativePath>../../modules/parent/pom.xml</relativePath>
+		<relativePath>../../modules/parent/pom.xml
+		</relativePath>
 	</parent>
 	<groupId>org.springside</groupId>
 	<artifactId>showcase</artifactId>
@@ -33,7 +34,8 @@
 					<password>APP</password>
 					<url>jdbc:derby://localhost:1527/springside-showcase;create=true
 					</url>
-					<driver>org.apache.derby.jdbc.ClientDriver</driver>
+					<driver>org.apache.derby.jdbc.ClientDriver
+					</driver>
 				</configuration>
 
 				<executions>
@@ -47,8 +49,10 @@
 							<onError>continue</onError>
 							<encoding>UTF-8</encoding>
 							<srcFiles>
-								<srcFile>src/main/sql/derby/schema.sql</srcFile>
-								<srcFile>src/main/sql/derby/load-data.sql</srcFile>
+								<srcFile>src/main/sql/derby/schema.sql
+								</srcFile>
+								<srcFile>src/main/sql/derby/load-data.sql
+								</srcFile>
 							</srcFiles>
 						</configuration>
 					</execution>
@@ -132,7 +136,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
-			<artifactId>struts2-convention-plugin</artifactId>
+			<artifactId>struts2-convention-plugin
+			</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
@@ -162,8 +167,10 @@
 
 		<!-- security begin -->
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core-tiger</artifactId>
+			<groupId>org.springframework.security
+			</groupId>
+			<artifactId>spring-security-core-tiger
+			</artifactId>
 		</dependency>
 		<dependency>
 			<artifactId>jcaptcha</artifactId>
@@ -188,8 +195,12 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
 		</dependency>
 		<!-- logging end -->
 
