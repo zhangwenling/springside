@@ -12,8 +12,8 @@ def prepare():
     move(base_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\lib',base_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-lib')
     move(base_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\classes',base_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-classes')
 
-    move(base_dir+'\\examples\\mini-service\\webapp\\wsdl\\mini-service.wsdl',base_dir+'\\examples\\mini-web\\target\\tmp\\mini-service.wsdl')
-    move(base_dir+'\\examples\\mini-service\\src\\test\\soapui\\mini-service-soapui-project.xml',base_dir+'\\examples\\mini-web\\target\\tmp\\mini-service-soapui-project.xml')
+    move(base_dir+'\\examples\\mini-service\\webapp\\wsdl\\mini-service.wsdl',base_dir+'\\examples\\mini-service\\target\\tmp\\mini-service.wsdl')
+    move(base_dir+'\\examples\\mini-service\\src\\test\\soapui\\mini-service-soapui-project.xml',base_dir+'\\examples\\mini-service\\target\\tmp\\mini-service-soapui-project.xml')
 
     shutil.copyfile(base_dir+"\\modules\\parent\\pom.xml",base_dir+"\\examples\\mini-service\\pom-parent.xml")
     shutil.copyfile(base_dir+"\\modules\\parent\\pom.xml",base_dir+"\\examples\\mini-web\\pom-parent.xml")
@@ -84,7 +84,7 @@ def clean():
     move(base_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-lib', base_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\lib')
     move(base_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-classes', base_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\classes')
 
-    move(base_dir+'\\examples\\mini-service\\target\\tmp\\mini-service.wsdl', base_dir+'\\examples\\mini-service\\webapp\\wsdl\\mini-service.wsdl')
+    move(base_dir+'\\examples\\mini-service\\target\\tmp\\mini-service.wsdl',base_dir+'\\examples\\mini-service\\webapp\\wsdl\\mini-service.wsdl')
     move(base_dir+'\\examples\\mini-service\\target\\tmp\\mini-service-soapui-project.xml', base_dir+'\\examples\\mini-service\\src\\test\\soapui\\mini-service-soapui-project.xml')
  
     print 'cleaned temp files.'
