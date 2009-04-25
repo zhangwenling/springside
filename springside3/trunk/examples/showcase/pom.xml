@@ -117,10 +117,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-		</dependency>
 
 		<!-- jdbc driver,参考parent/pom.xml使用实际的jdbc driver -->
 		<dependency>
