@@ -475,27 +475,13 @@
 				<artifactId>jcl-over-slf4j</artifactId>
 				<version>1.5.6</version>
 			</dependency>
-			<!-- 替代log4j -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>log4j-over-slf4j</artifactId>
-				<version>1.5.6</version>
-			</dependency>
 			<!-- 替代java.util.logging -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>jul-to-slf4j</artifactId>
 				<version>1.5.6</version>
 			</dependency>
-
-			<!-- logback -->
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-classic</artifactId>
-				<version>0.9.15</version>
-			</dependency>
-
-			<!-- commons-logging已被logback代替 -->
+			<!-- commons-logging已被logback代替,设为provided级别 -->
 			<dependency>
 				<groupId>commons-logging</groupId>
 				<artifactId>commons-logging</artifactId>
@@ -503,12 +489,17 @@
 				<scope>provided</scope>
 			</dependency>
 
-			<!-- log4j已被slf4j代替 -->
+			<!-- log4j -->
 			<dependency>
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
 				<version>1.2.14</version>
-				<scope>provided</scope>
+			</dependency>			
+			<!-- slf4j-log4j绑定 -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>1.5.6</version>
 			</dependency>
 			<!-- logging end-->
 

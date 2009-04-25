@@ -11,7 +11,7 @@
 	<artifactId>${artifactId}</artifactId>
 	<version>${version}</version>
 	<packaging>war</packaging>
-	<name>mini-web</name>
+	<name>${artifactId}</name>
 
 	<build>
 		<plugins>
@@ -31,7 +31,7 @@
 				<configuration>
 					<username>APP</username>
 					<password>APP</password>
-					<url>jdbc:derby://localhost:1527/springside-miniweb;create=true</url>
+					<url>jdbc:derby://localhost:1527/${artifactId};create=true</url>
 					<driver>org.apache.derby.jdbc.ClientDriver</driver>
 				</configuration>
 
@@ -170,8 +170,12 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
 		</dependency>
 		<!-- logging end -->
 

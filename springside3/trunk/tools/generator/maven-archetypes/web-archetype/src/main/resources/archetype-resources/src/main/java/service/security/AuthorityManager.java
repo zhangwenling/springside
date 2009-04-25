@@ -3,6 +3,7 @@
 #set( $symbol_escape = '\' )
 package ${package}.service.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ${package}.dao.security.AuthorityDao;
@@ -17,7 +18,7 @@ import org.springside.modules.orm.hibernate.EntityManager;
 @Service
 @Transactional
 public class AuthorityManager extends EntityManager<Authority, Long> {
-
+	@Autowired
 	AuthorityDao authorityDao;
 
 	@Override

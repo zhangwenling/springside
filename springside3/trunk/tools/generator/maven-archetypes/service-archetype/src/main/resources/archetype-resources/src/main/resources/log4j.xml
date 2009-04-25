@@ -1,9 +1,12 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
 	<!-- 日志文件  appender定义 -->
 	<appender name="LOGFILE" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="../logs/mini-web.log" />
+		<param name="File" value="../logs/${artifactId}.log" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="[%t] %-5p %c - %m%n" />
 		</layout>
@@ -17,7 +20,7 @@
 	</appender>
 
 	<!-- 业务信息默认为INFO级别  -->
-	<logger name="org.springside.examples.miniweb">
+	<logger name="${package}">
 		<level value="INFO" />
 	</logger>
 
@@ -37,5 +40,4 @@
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="LOGFILE" />
 	</root>
-
 </log4j:configuration>
