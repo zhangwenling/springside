@@ -70,7 +70,7 @@ public class Resource extends IdEntity {
 	}
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "RESOURCES_AUTHORITIES", joinColumns = { @JoinColumn(name = "RESOURCE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
+	@JoinTable(joinColumns = { @JoinColumn(name = "RESOURCE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
 	@Fetch(FetchMode.JOIN)
 	@OrderBy("id")
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

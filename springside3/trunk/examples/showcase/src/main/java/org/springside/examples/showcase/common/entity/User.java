@@ -71,11 +71,11 @@ public class User extends AuditableEntity {
 		this.email = email;
 	}
 
-	//避免定义CascadeType.REMOVE, 否则删除角色时会连带删除拥有它的用户
+	//多对多定义，cascade操作避免定义CascadeType.REMOVE
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	//多对多定义
-	@JoinTable(name = "USERS_ROLES", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
-	//Fecth定义
+	//中间表定义,表名采用默认命名规则
+	@JoinTable(joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
+	//Fecth策略定义
 	@Fetch(FetchMode.SUBSELECT)
 	//集合按id排序
 	@OrderBy("id")

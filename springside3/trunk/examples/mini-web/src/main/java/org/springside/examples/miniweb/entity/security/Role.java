@@ -47,15 +47,15 @@ public class Role extends IdEntity {
 	}
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "ROLES_AUTHORITIES", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
+	@JoinTable(joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
 	@Fetch(FetchMode.SUBSELECT)
 	@OrderBy("id")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public Set<Authority> getAuths() {
+	public Set<Authority> getAuthorities() {
 		return auths;
 	}
 
-	public void setAuths(Set<Authority> auths) {
+	public void setAuthorities(Set<Authority> auths) {
 		this.auths = auths;
 	}
 

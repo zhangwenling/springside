@@ -52,7 +52,7 @@ public class UserDetailServiceImplTest extends SpringAnnotationTestCase {
 		user.getRoles().add(role);
 		Authority auth = new Authority();
 		auth.setName(authName);
-		role.getAuths().add(auth);
+		role.getAuthorities().add(auth);
 
 		//录制脚本
 		EasyMock.expect(userDao.findByUnique("loginName", loginName)).andReturn(user);
