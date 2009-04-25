@@ -5,10 +5,10 @@ import org.springframework.security.GrantedAuthorityImpl;
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.test.annotation.ExpectedException;
+import org.springside.examples.miniweb.dao.security.UserDao;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
-import org.springside.modules.orm.hibernate.HibernateDao;
 import org.springside.modules.test.junit38.SpringAnnotationTestCase;
 import org.springside.modules.utils.ReflectionUtils;
 
@@ -21,12 +21,12 @@ import org.springside.modules.utils.ReflectionUtils;
  */
 public class UserDetailServiceImplTest extends SpringAnnotationTestCase {
 	private UserDetailServiceImpl userDetailService = new UserDetailServiceImpl();
-	private HibernateDao<User,Long> userDao = null;
+	private UserDao userDao = null;
 
 	@Override
 	public void setUp() {
 		//创建mock对象
-		userDao = EasyMock.createMock(HibernateDao.class);
+		userDao = EasyMock.createMock(UserDao.class);
 		ReflectionUtils.setFieldValue(userDetailService, "userDao", userDao);
 	}
 
