@@ -40,6 +40,7 @@ public class Role extends IdEntity {
 	private String name;
 
 	private Set<Authority> auths = new LinkedHashSet<Authority>(); //有序的关联对象集合
+	private Set<User> users = new LinkedHashSet<User>();
 
 	public String getName() {
 		return name;
@@ -60,6 +61,15 @@ public class Role extends IdEntity {
 
 	public void setAuthorities(Set<Authority> auths) {
 		this.auths = auths;
+	}
+	
+	@ManyToMany(mappedBy = "roles")
+	public Set<User> getUsers() {
+		return users;
+	}
+	
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 	@Transient
