@@ -6,7 +6,7 @@
 	<artifactId>springside-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>SpringSide's Parent pom.xml</name>
-	<version>3.1.3</version>
+	<version>3.1.4</version>
 	<organization>
 		<name>SpringSide</name>
 		<url>http://www.springside.org.cn</url>
@@ -45,7 +45,8 @@
 			</plugin>
 
 			<!--
-				surefire插件. mvn test单元测试时忽略integration目录下的集成测试用例, mvn integration-test集成测试时忽略其他目录下的单元测试用例.
+				surefire插件. mvn test单元测试时忽略integration目录下的集成测试用例, mvn
+				integration-test集成测试时忽略其他目录下的单元测试用例.
 			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -149,26 +150,34 @@
 	<repositories>
 		<!--
 			<repository> <id>nexus</id> <name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
-			</repository>
+			<url>http://localhost:8081/nexus/content/groups/public</url>
+			<snapshots> <enabled>false</enabled> </snapshots> </repository>
 		-->
+		<repository>
+			<id>jboss</id>
+			<name>jboss repository</name>
+			<url>http://repository.jboss.com/maven2/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 
 	<pluginRepositories>
 		<!--
 			<repository> <id>nexus</id> <name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
-			</repository>
+			<url>http://localhost:8081/nexus/content/groups/public</url>
+			<snapshots> <enabled>false</enabled> </snapshots> </repository>
 		-->
 	</pluginRepositories>
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<springside.version>3.1.3</springside.version>
+		<springside.version>3.1.4</springside.version>
 		<spring.version>2.5.6</spring.version>
 		<hibernate.version>3.3.1.GA</hibernate.version>
 		<struts2.version>2.1.6</struts2.version>
-		<cxf.version>2.2</cxf.version>
+		<cxf.version>2.2.1</cxf.version>
 		<spring-security.version>2.0.4</spring-security.version>
 
 		<!-- Plugin的属性定义 -->
@@ -456,7 +465,7 @@
 			<dependency>
 				<groupId>org.opensymphony.quartz</groupId>
 				<artifactId>quartz</artifactId>
-				<version>1.6.1</version>
+				<version>1.6.5</version>
 			</dependency>
 
 			<!-- logging begin-->
@@ -466,37 +475,31 @@
 				<artifactId>slf4j-api</artifactId>
 				<version>1.5.6</version>
 			</dependency>
-			<!-- 替代common-logging 1.1.1 -->
+
+			<!-- slf4j-log4j绑定 -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
-				<artifactId>jcl-over-slf4j</artifactId>
+				<artifactId>slf4j-log4j12</artifactId>
 				<version>1.5.6</version>
 			</dependency>
+
 			<!-- 替代java.util.logging -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>jul-to-slf4j</artifactId>
 				<version>1.5.6</version>
 			</dependency>
-			<!-- commons-logging已被logback代替,设为provided级别 -->
+
 			<dependency>
 				<groupId>commons-logging</groupId>
 				<artifactId>commons-logging</artifactId>
 				<version>1.1.1</version>
-				<scope>provided</scope>
 			</dependency>
 
-			<!-- log4j -->
 			<dependency>
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
 				<version>1.2.14</version>
-			</dependency>			
-			<!-- slf4j-log4j绑定 -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>1.5.6</version>
 			</dependency>
 			<!-- logging end-->
 
