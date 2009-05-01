@@ -5,16 +5,26 @@
 	<appender name="LOGFILE" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="File" value="../logs/showcase.log" />
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="[%t] %-5p %c - %m%n" />
+			<param name="ConversionPattern" value="%d [%t] %-5p %c - %m%n" />
 		</layout>
 	</appender>
 
 	<!-- 屏幕输出  appender定义 -->
 	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="[%t] %-5p %c - %m%n" />
+			<param name="ConversionPattern" value="%d [%t] %-5p %c - %m%n" />
 		</layout>
 	</appender>
+
+
+	<appender name="dbAsync" class="org.springside.modules.log.AsyncAppender">
+		<param name="QueueName" value="dblog" />
+	</appender>
+
+	<logger name="org.springside.examples.showcase.log.dbLogExample">
+		<level value="INFO" />
+		<appender-ref ref="dbAsync" />
+	</logger>
 
 	<!-- 业务信息默认为INFO级别  -->
 	<logger name="org.springside.examples.showcase">

@@ -12,4 +12,5 @@
 	<import resource="schedule/applicationContext-quartz.xml" />
 	<import resource="schedule/applicationContext-executor.xml" />
 	<import resource="security/applicationContext-security.xml" />
+	<import resource="log/applicationContext-log.xml" />
 </beans>

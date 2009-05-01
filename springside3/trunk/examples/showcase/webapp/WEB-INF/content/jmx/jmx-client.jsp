@@ -46,7 +46,8 @@
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
 	<h2>JMX演示用例</h2>
-	<h4>技术说明：</h4>演示JMX MBean代理及直接读取属性两种模式。
+	<h4>技术说明：</h4>
+	演示JMX MBean代理及直接读取属性两种模式。
 	<h4>用户故事：</h4>
 	使用JMX动态配置服务节点的系统变量并实时监控系统运行统计。<br/>
 	

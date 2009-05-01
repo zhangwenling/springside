@@ -45,8 +45,7 @@
 			</plugin>
 
 			<!--
-				surefire插件. mvn test单元测试时忽略integration目录下的集成测试用例, mvn
-				integration-test集成测试时忽略其他目录下的单元测试用例.
+				surefire插件. mvn test单元测试时忽略integration目录下的集成测试用例, mvn integration-test集成测试时忽略其他目录下的单元测试用例.
 			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -150,8 +149,8 @@
 	<repositories>
 		<!--
 			<repository> <id>nexus</id> <name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url>
-			<snapshots> <enabled>false</enabled> </snapshots> </repository>
+			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled>
+			</snapshots> </repository>
 		-->
 		<repository>
 			<id>jboss</id>
@@ -166,8 +165,8 @@
 	<pluginRepositories>
 		<!--
 			<repository> <id>nexus</id> <name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url>
-			<snapshots> <enabled>false</enabled> </snapshots> </repository>
+			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled>
+			</snapshots> </repository>
 		-->
 	</pluginRepositories>
 
@@ -207,6 +206,12 @@
 				<artifactId>spring-core</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
 			<!-- spring aop -->
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -499,7 +504,29 @@
 			<dependency>
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
-				<version>1.2.14</version>
+				<version>1.2.15</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.mail</groupId>
+						<artifactId>mail</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.jms</groupId>
+						<artifactId>jms</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.sun.jdmk</groupId>
+						<artifactId>jmxtools</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>com.sun.jmx</groupId>
+						<artifactId>jmxri</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>oro</groupId>
+						<artifactId>oro</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<!-- logging end-->
 

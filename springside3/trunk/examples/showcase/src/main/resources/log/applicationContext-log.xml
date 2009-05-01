@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<description>日志异步处理任务配置</description>
+
+	<bean class="org.springside.modules.log.queue.QueueManager" lazy-init="false">
+		<property name="tasks">
+			<list>
+				<ref bean="dbLogTask" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dbLogTask" class="org.springside.modules.log.JdbcAppenderTask">
+		<property name="queueName" value="dblog" />
+		<property name="threadCount" value="2" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="sql"
+			value="insert into LOGS(THREAD_NAME,LOGGER_NAME,TIMESTAMP,LEVEL,MESSAGE) values(:threadName,:loggerName,:timestamp,:level,:message)" />
+	</bean>
+</beans>

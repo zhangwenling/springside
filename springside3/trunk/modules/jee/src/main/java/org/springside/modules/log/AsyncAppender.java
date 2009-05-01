@@ -1,0 +1,56 @@
+package org.springside.modules.log;
+
+import java.util.concurrent.BlockingQueue;
+
+import org.apache.log4j.spi.LoggingEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springside.modules.log.queue.QueueManager;
+
+/**
+ * 轻量级的异步Appender.
+ * 
+ * 将所有消息放入QueueManager所管理的Blocking Queue中.
+ * 
+ * @see QueueManager
+ * 
+ * @author calvin
+ *
+ */
+public class AsyncAppender extends org.apache.log4j.AppenderSkeleton {
+	private static Logger logger = LoggerFactory.getLogger(AsyncAppender.class);
+
+	protected String queueName;
+
+	@Override
+	public void append(LoggingEvent event) {
+		boolean sucess = getQueue().offer(event);
+		if (sucess) {
+			if (logger.isDebugEnabled()) {
+				logger.debug("put event ,{}", Log4jUtils.convertEventToString(event));
+			}
+		} else {
+			logger.error("Put event in queue fail ,{}", Log4jUtils.convertEventToString(event));
+		}
+	}
+
+	public void close() {
+	}
+
+	public boolean requiresLayout() {
+		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	protected BlockingQueue<LoggingEvent> getQueue() {
+		return QueueManager.getQueue(queueName);
+	}
+
+	public String getQueueName() {
+		return queueName;
+	}
+
+	public void setQueueName(String queueName) {
+		this.queueName = queueName;
+	}
+}
