@@ -7,6 +7,11 @@ import java.util.Map;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.spi.LoggingEvent;
 
+/**
+ * Log4j 工具类，转换Logging Event到字符串或Map.
+ * 
+ * @author calvin
+ */
 public class Log4jUtils {
 
 	public static final String MESSAGE = "message";

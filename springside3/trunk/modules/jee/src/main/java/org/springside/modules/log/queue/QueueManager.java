@@ -17,7 +17,7 @@ import org.apache.log4j.spi.LoggingEvent;
 /**
  * 管理BlockingQueue Map与消费它们的任务.
  * 
- * @author ehuaxio
+ * @author calvin
  */
 public class QueueManager {
 
@@ -28,7 +28,7 @@ public class QueueManager {
 
 	protected List<ExecutorService> executorList = new ArrayList<ExecutorService>();
 
-	public void setTasks(List<QueueConsumerTask> taskList) {
+	public void setTaskList(List<QueueConsumerTask> taskList) {
 		this.taskList = taskList;
 	}
 

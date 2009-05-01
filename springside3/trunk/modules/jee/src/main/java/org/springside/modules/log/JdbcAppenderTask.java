@@ -14,6 +14,8 @@ import org.springside.modules.log.queue.QueueConsumerTask;
 
 /**
  * 将Queue中的Event写入数据库的Appender.
+ * 
+ * @author calvin
  */
 public class JdbcAppenderTask extends QueueConsumerTask {
 
