@@ -74,13 +74,12 @@ public class MBeanClientFactory {
 	/**
 	 * 创建标准MBean代理. 
 	 */
-	@SuppressWarnings("unchecked")
 	public <T> T getMBeanProxy(final String mbeanName, final Class<T> mBeanInterface) {
 		Assert.hasText(mbeanName, "mbeanName不能为空");
 		assertConnected();
 
 		ObjectName objectName = buildObjectName(mbeanName);
-		return (T)MBeanServerInvocationHandler.newProxyInstance(mbsc, objectName, mBeanInterface,false);
+		return MBeanServerInvocationHandler.newProxyInstance(mbsc, objectName, mBeanInterface,false);
 	}
 
 	/**
@@ -128,7 +127,7 @@ public class MBeanClientFactory {
 	public void inoke(final String mbeanName, final String methodName) {
 		invoke(mbeanName, methodName, new Object[] {}, new String[] {});
 	}
-	
+
 	/**
 	 * 按方法名直接调用MBean方法(无MBean的Class文件时使用).
 	 * 
@@ -148,7 +147,6 @@ public class MBeanClientFactory {
 			throw new IllegalStateException("连接出错", e);
 		}
 	}
-
 
 	/**
 	 * 确保Connection已连接.

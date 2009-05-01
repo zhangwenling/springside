@@ -40,8 +40,11 @@ public class MimeMailService {
 		this.mailSender = mailSender;
 	}
 
-	public void setConfiguration(Configuration configuration) throws IOException {
-		template = configuration.getTemplate("mailTemplate.ftl", ENCODING);
+	/**
+	 * 注入Freemarker引擎配置.
+	 */
+	public void setFreemarkerConfiguration(Configuration freemarkerConfiguration) throws IOException {
+		template = freemarkerConfiguration.getTemplate("mailTemplate.ftl", ENCODING);
 	}
 
 	/**
@@ -52,9 +55,11 @@ public class MimeMailService {
 
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(msg, true, ENCODING);
+
 			helper.setTo("springside3.demo@gmail.com");
 			helper.setFrom("springside3.demo@gmail.com");
 			helper.setSubject("用户修改通知");
+
 			buildContent(helper, userName);
 			buildAttachment(helper);
 		} catch (MessagingException e) {
@@ -92,6 +97,7 @@ public class MimeMailService {
 	 */
 	public void buildAttachment(MimeMessageHelper helper) throws MessagingException {
 		try {
+			//使用Spring的Resource Loader获取打包在classpath中的附件.
 			ClassPathResource attachment = new ClassPathResource("/email/mailAttachment.txt");
 			helper.addAttachment("mailAttachment.txt", attachment.getFile());
 		} catch (IOException e) {

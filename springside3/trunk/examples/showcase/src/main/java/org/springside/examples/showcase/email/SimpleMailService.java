@@ -18,11 +18,13 @@ import org.springframework.mail.javamail.JavaMailSender;
  */
 public class SimpleMailService {
 
-	static Logger logger = LoggerFactory.getLogger(SimpleMailService.class);
-
+	private static final int THREAD_POOL_SIZE = 2;
+		
 	private JavaMailSender mailSender;
 
-	private Executor executor = Executors.newFixedThreadPool(2);
+	private Executor executor = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+
+	static Logger logger = LoggerFactory.getLogger(SimpleMailService.class);
 
 	public void setMailSender(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
@@ -35,7 +37,7 @@ public class SimpleMailService {
 	 */
 	public void sendNotificationMail(String userName) {
 
-		//简化演示,发送三封地址相同的邮件.
+		//为简化演示,发送三封地址相同的邮件.
 		String[] receviers = new String[] { "springside3.demo@gmail.com", "springside3.demo@gmail.com",
 				"springside3.demo@gmail.com" };
 

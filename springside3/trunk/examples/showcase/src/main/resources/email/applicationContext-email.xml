@@ -27,7 +27,7 @@
 	<!-- MIME邮件服务类 -->
 	<bean id="mimeMailService" class="org.springside.examples.showcase.email.MimeMailService">
 		<property name="mailSender" ref="mailSender" />
-		<property name="configuration" ref="freemarkerConfiguration"></property>
+		<property name="freemarkerConfiguration" ref="freemarkerConfiguration"></property>
 	</bean>
 
 	<!-- 用于生成HTML邮件内容的Freemarker配置 -->
