@@ -59,12 +59,12 @@ public class Role extends IdEntity {
 	public void setAuthorities(Set<Authority> auths) {
 		this.auths = auths;
 	}
-	
+
 	@ManyToMany(mappedBy = "roles")
 	public Set<User> getUsers() {
 		return users;
 	}
-	
+
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}

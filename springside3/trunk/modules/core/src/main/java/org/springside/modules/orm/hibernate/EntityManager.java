@@ -24,10 +24,9 @@ import org.springside.modules.orm.PropertyFilter;
 @Transactional
 public abstract class EntityManager<T, PK extends Serializable> {
 
-
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
-	protected abstract HibernateDao<T, PK> getEntityDao(); 
+	protected abstract HibernateDao<T, PK> getEntityDao();
 
 	// CRUD函数 //
 

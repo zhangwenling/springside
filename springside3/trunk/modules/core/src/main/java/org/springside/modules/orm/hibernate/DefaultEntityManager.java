@@ -19,9 +19,9 @@ import org.springside.modules.utils.ReflectionUtils;
  *  * @author calvin
  */
 public class DefaultEntityManager<T, PK extends Serializable> extends EntityManager<T, PK> {
-	
+
 	protected HibernateDao<T, PK> entityDao;//默认的泛型DAO成员变量.
-	
+
 	/**
 	 * 通过注入的sessionFactory初始化默认的泛型DAO成员变量.
 	 */
@@ -36,6 +36,5 @@ public class DefaultEntityManager<T, PK extends Serializable> extends EntityMana
 	protected HibernateDao<T, PK> getEntityDao() {
 		return entityDao;
 	}
-
 
 }

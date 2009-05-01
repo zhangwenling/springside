@@ -19,7 +19,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 public class SimpleMailService {
 
 	private static final int THREAD_POOL_SIZE = 2;
-		
+
 	private JavaMailSender mailSender;
 
 	private Executor executor = Executors.newFixedThreadPool(THREAD_POOL_SIZE);

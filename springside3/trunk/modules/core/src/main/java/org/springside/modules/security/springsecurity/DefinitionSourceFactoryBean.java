@@ -26,8 +26,8 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 
 	private ResourceDetailService resourceDetailService;
 
-	public void setResourceDetailService(ResourceDetailService requestMapService) {
-		this.resourceDetailService = requestMapService;
+	public void setResourceDetailService(ResourceDetailService resourceDetailService) {
+		this.resourceDetailService = resourceDetailService;
 	}
 
 	public Object getObject() throws Exception {

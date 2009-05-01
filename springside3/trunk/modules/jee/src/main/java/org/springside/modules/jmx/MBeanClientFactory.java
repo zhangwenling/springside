@@ -79,7 +79,7 @@ public class MBeanClientFactory {
 		assertConnected();
 
 		ObjectName objectName = buildObjectName(mbeanName);
-		return MBeanServerInvocationHandler.newProxyInstance(mbsc, objectName, mBeanInterface,false);
+		return MBeanServerInvocationHandler.newProxyInstance(mbsc, objectName, mBeanInterface, false);
 	}
 
 	/**
