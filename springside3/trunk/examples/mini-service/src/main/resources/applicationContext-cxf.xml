@@ -19,5 +19,5 @@
 	<bean id="userWebService" class="org.springside.examples.miniservice.ws.user.UserWebServiceImpl" />
 
 	<!-- 设定由slf4j处理cxf中java.util.logging打印的日志 -->
-	<bean id="JulOverSlf4j" class="org.springside.modules.utils.JulOverSlf4jProcessor" lazy-init="false" />
+	<bean id="JulOverSlf4j" class="org.springside.modules.utils.JulOverSlf4j" lazy-init="false" />
 </beans>

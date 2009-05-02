@@ -9,7 +9,7 @@ import org.slf4j.bridge.SLF4JBridgeHandler;
  * 
  * @author calvin
  */
-public class JulOverSlf4jProcessor {
+public class JulOverSlf4j {
 
 	//Spring在所有属性注入后自动执行的函数.
 	@PostConstruct
