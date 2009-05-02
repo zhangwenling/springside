@@ -10,16 +10,16 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 
 @Repository
 public class RoleDao extends HibernateDao<Role, Long> {
-	
+
 	/**
 	 * 重载delte，在删除角色时删除与用户关联的中间表.
 	 */
 	@Override
 	public void delete(Long id) {
-		Role role = this.get(id);
+		Role role = get(id);
 		for (User user : role.getUsers()) {
 			user.getRoles().remove(role);
 		}
-		super.delete(role);			
+		super.delete(role);
 	}
 }

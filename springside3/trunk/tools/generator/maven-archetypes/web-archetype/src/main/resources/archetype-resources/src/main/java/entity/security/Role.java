@@ -39,7 +39,7 @@ public class Role extends IdEntity {
 
 	private String name;
 
-	private Set<Authority> auths = new LinkedHashSet<Authority>(); //有序的关联对象集合
+	private Set<Authority> authorities = new LinkedHashSet<Authority>(); //有序的关联对象集合
 	private Set<User> users = new LinkedHashSet<User>();
 
 	public String getName() {
@@ -56,31 +56,31 @@ public class Role extends IdEntity {
 	@OrderBy("id")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public Set<Authority> getAuthorities() {
-		return auths;
+		return authorities;
 	}
 
-	public void setAuthorities(Set<Authority> auths) {
-		this.auths = auths;
+	public void setAuthorities(Set<Authority> authorities) {
+		this.authorities = authorities;
 	}
-	
+
 	@ManyToMany(mappedBy = "roles")
 	public Set<User> getUsers() {
 		return users;
 	}
-	
+
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
 
 	@Transient
 	public String getAuthNames() throws Exception {
-		return ReflectionUtils.fetchElementPropertyToString(auths, "displayName", ", ");
+		return ReflectionUtils.fetchElementPropertyToString(authorities, "displayName", ", ");
 	}
 
 	@Transient
 	@SuppressWarnings("unchecked")
 	public List<Long> getAuthIds() throws Exception {
-		return ReflectionUtils.fetchElementPropertyToList(auths, "id");
+		return ReflectionUtils.fetchElementPropertyToList(authorities, "id");
 	}
 
 	@Override
