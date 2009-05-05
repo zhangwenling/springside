@@ -5,6 +5,7 @@
 <head>
 <title>报表演示</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<script type="text/javascript" src="${ctx}/report/swfobject.js"></script>
 <link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
@@ -12,11 +13,11 @@
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
 <h2>报表演示</h2>
-<h4>技术说明：</h4>
+<p>说明：演示DIY报表所需技术。</p>
 <ul>
-<li>DIY html表格</li>
-<li>POI输出Excel文件</li>
-<li>AmCharts渲染Flash图表</li>
+<li><a href="flashchart/index.action">amCharts渲染Flash图表</a></li>
+<li>POI导出Excel文件(计划中)</li>
+<li>iText导出Pdf文件(计划中)</li>
 </ul>
 </div>
 </div>
