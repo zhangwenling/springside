@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 /**
- * 以静态变量保存ApplicationContext.
+ * 以静态变量保存Spring的ApplicationContext.
  * 
  * @author calvin
  */

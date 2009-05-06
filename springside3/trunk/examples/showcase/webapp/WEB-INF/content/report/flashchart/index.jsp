@@ -16,8 +16,8 @@
 <h4>技术说明：</h4>
 <p>使用AmCharts渲染Flash图表</p>
 <ul>
-<li>演示XML与CSV格式的数据文件。</li>
-<li>演示完整版与精简版的配置文件。</li>
+<li>曲线图：演示精简版配置文件与CSV格式数据文件。</li>
+<li>柱状图：演示完整版配置文件与XML格式数据文件，可点击条柱跳转到跳转到子报表页面。</li>
 </ul>
 	<div id="report1Content"></div>
 
@@ -34,7 +34,7 @@
 
 	<script type="text/javascript">
 		// <![CDATA[		
-		var so = new SWFObject("${ctx}/report/amline.swf", "report2", "640", "420", "8", "#FFFFFF");
+		var so = new SWFObject("${ctx}/report/amcolumn.swf", "report2", "640", "420", "8", "#FFFFFF");
 		so.addVariable("settings_file", encodeURIComponent("${ctx}/report/report2-settings.xml"));
 		so.addVariable("data_file", encodeURIComponent("${ctx}/report/flashchart/report2-data.action"));
 		so.write("report2Content");

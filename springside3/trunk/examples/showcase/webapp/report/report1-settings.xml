@@ -2,7 +2,7 @@
 	<data_type>csv</data_type>
 	<font>Tahoma</font>
 	<text_size>15</text_size>
-	<hide_bullets_count>18</hide_bullets_count>
+	<hide_bullets_count>30</hide_bullets_count>
 	<decimals_separator>.</decimals_separator>
 	<background>
 		<border_color>#000000</border_color>
@@ -57,11 +57,11 @@
 	</indicator>
 
 	<legend>
-		<text_color_hover>#666666</text_color_hover>
+		<text_color_hover>#FF6600</text_color_hover>
 	</legend>
 
 	<zoom_out_button>
-		<text_color_hover>#FF0F00</text_color_hover>
+		<text_color_hover>#FF6600</text_color_hover>
 	</zoom_out_button>
 
 	<labels>
@@ -69,9 +69,9 @@
 			<x>0</x>
 			<y>25</y>
 			<align>center</align>
-			<text_size>13</text_size>
+			<text_size></text_size>
 			<text>                                 
-        <![CDATA[<b>访问量年表</b>]]>
+        <![CDATA[<b>网站流量报表</b>]]>
 			</text>
 		</label>
 
@@ -91,22 +91,23 @@
 
 	<graphs>
 		<graph gid="1">
-			<title>Page View</title>
+			<title>页面浏览量</title>
 			<unit>亿</unit>
 			<color>#0D8ECF</color>
-			<color_hover>#666666</color_hover>
-			<selected>false</selected>
+			<color_hover>#FF6600</color_hover>
+			<line_width>2</line_width>
+			<bullet>round_outline</bullet>
+			<selected>true</selected>
 		</graph>
 
 		<graph gid="2">
-			<title>Visitor</title>
+			<title>独立访客量</title>
 			<unit>亿</unit>
 			<color>#B0DE09</color>
-			<color_hover>#666666</color_hover>
+			<color_hover>#FF6600</color_hover>
 			<line_width>2</line_width>
 			<fill_alpha>30</fill_alpha>
-			<bullet>round</bullet>
-			<selected>true</selected>
+			<selected>false</selected>
 		</graph>
 	</graphs>
 </settings>
