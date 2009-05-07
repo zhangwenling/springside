@@ -30,11 +30,11 @@
 	</tr>
 	<tr>
 		<td>创建:</td>
-		<td>${createBy} ${createTime}</td>
+		<td>${createBy} <fmt:formatDate value="${createTime}" type="both"/></td>
 	</tr>
 	<tr>
 		<td>最后修改:</td>
-		<td>${lastModifyBy} ${lastModifyTime}</td>
+		<td>${lastModifyBy} <fmt:formatDate value="${lastModifyTime}" type="both"/></td>
 	</tr>
 	<tr>
 		<td colspan="2">
