@@ -88,13 +88,13 @@ public class User extends AuditableEntity {
 	}
 
 	@Transient
-	public String getRoleNames() throws Exception {
+	public String getRoleNames() {
 		return ReflectionUtils.fetchElementPropertyToString(roles, "name", ", ");
 	}
 
 	@SuppressWarnings("unchecked")
 	@Transient
-	public List<Long> getRoleIds() throws Exception {
+	public List<Long> getRoleIds() {
 		return ReflectionUtils.fetchElementPropertyToList(roles, "id");
 	}
 

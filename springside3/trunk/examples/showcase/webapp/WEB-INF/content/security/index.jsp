@@ -14,7 +14,6 @@
 <h2>安全高级演示</h2>
 <ul>
 <li><a href="${ctx}/security/login.action">认证码集成演示</a></li>
-<li>用于界面集成的简单SSO(计划中)</li>
 <li>数据级别的权限控制(计划中)</li>
 </ul>
 </div>

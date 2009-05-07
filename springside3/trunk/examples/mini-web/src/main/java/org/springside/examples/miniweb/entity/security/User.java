@@ -95,14 +95,14 @@ public class User extends IdEntity {
 
 	//非持久化属性.
 	@Transient
-	public String getRoleNames() throws Exception {
+	public String getRoleNames() {
 		return ReflectionUtils.fetchElementPropertyToString(roles, "name", ", ");
 	}
 
 	//非持久化属性.
 	@Transient
 	@SuppressWarnings("unchecked")
-	public List<Long> getRoleIds() throws Exception {
+	public List<Long> getRoleIds() {
 		return ReflectionUtils.fetchElementPropertyToList(roles, "id");
 	}
 

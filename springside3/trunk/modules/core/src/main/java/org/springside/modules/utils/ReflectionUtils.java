@@ -150,13 +150,15 @@ public class ReflectionUtils {
 	 * @param propertityName 要提取的属性名.
 	 */
 	@SuppressWarnings("unchecked")
-	public static List fetchElementPropertyToList(final Collection collection, final String propertyName)
-			throws Exception {
+	public static List fetchElementPropertyToList(final Collection collection, final String propertyName) {
 
 		List list = new ArrayList();
-
-		for (Object obj : collection) {
-			list.add(PropertyUtils.getProperty(obj, propertyName));
+		try {
+			for (Object obj : collection) {
+				list.add(PropertyUtils.getProperty(obj, propertyName));
+			}
+		} catch (Exception e) {
+			handleException(e);
 		}
 
 		return list;
@@ -171,8 +173,19 @@ public class ReflectionUtils {
 	 */
 	@SuppressWarnings("unchecked")
 	public static String fetchElementPropertyToString(final Collection collection, final String propertyName,
-			final String separator) throws Exception {
+			final String separator) {
 		List list = fetchElementPropertyToList(collection, propertyName);
 		return StringUtils.join(list, separator);
+	}
+
+	/**
+	 * 将反射时的checked exception转换为unchecked exception。
+	 */
+	public static void handleException(Exception e) throws IllegalArgumentException {
+		if (e instanceof IllegalAccessException || e instanceof IllegalArgumentException
+				|| e instanceof NoSuchMethodException)
+			throw new IllegalArgumentException("Refelction Error", e);
+		else
+			throw new IllegalArgumentException(e);
 	}
 }

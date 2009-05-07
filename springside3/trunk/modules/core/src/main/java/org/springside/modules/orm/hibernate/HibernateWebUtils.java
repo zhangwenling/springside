@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.util.WebUtils;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.PropertyFilter.MatchType;
+import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * Hibernate针对Web应用的Utils函数集合.
@@ -29,10 +30,10 @@ public class HibernateWebUtils {
 	 * 根据对象ID集合,整理合并集合.
 	 * 
 	 * 默认对象主键的名称名为"id".
-	 * @see #mergeByCheckedIds(Collection, Collection, Class, String) 
+	 * @see #mergeByCheckedIds(Collection, Collection, Class, String)
 	 */
 	public static <T, ID> void mergeByCheckedIds(final Collection<T> srcObjects, final Collection<ID> checkedIds,
-			final Class<T> clazz) throws Exception {
+			final Class<T> clazz) {
 		mergeByCheckedIds(srcObjects, checkedIds, clazz, "id");
 	}
 
@@ -48,7 +49,7 @@ public class HibernateWebUtils {
 	 * @param idName 对象主键的名称
 	 */
 	public static <T, ID> void mergeByCheckedIds(final Collection<T> srcObjects, final Collection<ID> checkedIds,
-			final Class<T> clazz, final String idName) throws Exception {
+			final Class<T> clazz, final String idName) {
 
 		//参数校验
 		Assert.notNull(srcObjects, "scrObjects不能为空");
@@ -64,22 +65,29 @@ public class HibernateWebUtils {
 		//遍历源集合,如果其id不在目标ID集合中的对象,进行删除.
 		//同时,在目标ID集合中删除已在源集合中的id,使得目标ID集合中剩下的id均为源集合中没有的ID.
 		Iterator<T> srcIterator = srcObjects.iterator();
+		try {
 
-		while (srcIterator.hasNext()) {
-			T element = srcIterator.next();
-			Object id = PropertyUtils.getProperty(element, idName);
-			if (!checkedIds.contains(id)) {
-				srcIterator.remove();
-			} else {
-				checkedIds.remove(id);
+			while (srcIterator.hasNext()) {
+				T element = srcIterator.next();
+				Object id;
+				id = PropertyUtils.getProperty(element, idName);
+
+				if (!checkedIds.contains(id)) {
+					srcIterator.remove();
+				} else {
+					checkedIds.remove(id);
+				}
 			}
-		}
 
-		//ID集合目前剩余的id均不在源集合中,创建对象,为id属性赋值并添加到源集合中.
-		for (ID id : checkedIds) {
-			T obj = clazz.newInstance();
-			PropertyUtils.setProperty(obj, idName, id);
-			srcObjects.add(obj);
+			//ID集合目前剩余的id均不在源集合中,创建对象,为id属性赋值并添加到源集合中.
+			for (ID id : checkedIds) {
+				T obj = clazz.newInstance();
+				PropertyUtils.setProperty(obj, idName, id);
+				srcObjects.add(obj);
+			}
+
+		} catch (Exception e) {
+			ReflectionUtils.handleException(e);
 		}
 	}
 
@@ -99,7 +107,7 @@ public class HibernateWebUtils {
 	 * 
 	 * eg.
 	 * filter_EQUAL_name
-	 * filter_LIKE_name|email	
+	 * filter_LIKE_name|email
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<PropertyFilter> buildPropertyFilters(final HttpServletRequest request, final String filterPrefix) {
