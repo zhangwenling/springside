@@ -88,10 +88,10 @@
     <border_color></border_color>                             <!-- [#000000] (hex color code) -->                                        
     <border_alpha></border_alpha>                             <!-- [0] (0 - 100) -->                                            
     <margins>                                                 <!-- plot area margins -->
-      <left>70</left>                                         <!-- [60](Number / Number%) --> 
+      <left>50</left>                                         <!-- [60](Number / Number%) --> 
       <top>60</top>                                           <!-- [60](Number / Number%) --> 
       <right>40</right>                                       <!-- [60](Number / Number%) -->
-      <bottom>10</bottom>                                     <!-- [80](Number / Number%) -->
+      <bottom>65</bottom>                                     <!-- [80](Number / Number%) -->
     </margins>
   </plot_area>
   
@@ -173,7 +173,7 @@
   </balloon>
     
   <legend>                                                    <!-- LEGEND -->
-    <enabled>false</enabled>                                  <!-- [true] (true / false) -->
+    <enabled>true</enabled>                                  <!-- [true] (true / false) -->
     <x></x>                                                   <!-- [] (Number / Number% / !Number) if empty, will be equal to left margin -->
     <y></y>                                                   <!-- [] (Number / Number% / !Number) if empty, will be below plot area -->
     <width></width>                                           <!-- [] (Number / Number%) if empty, will be equal to plot area width -->
@@ -255,6 +255,17 @@
         <![CDATA[<b>Temperature anomaly</b>]]>
       </text>        
     </label>
+    <label>
+		<x>0</x>
+		<y>390</y>
+		<width>607</width>
+		<align>right</align>
+		<text_color>#999999</text_color>
+		<text_size>12</text_size>
+		<text>                   
+        <![CDATA[Amcharts柱状图演示]]>
+			</text>
+		</label>
   </labels>
 
   
@@ -265,7 +276,7 @@
     <graph gid="1">                                            <!-- if you are using XML data file, graph "gid" must match graph "gid" in data file -->
       <type>column</type>                                      <!-- [column] (column/line) -->                  
       <title>Anomaly</title>                                   <!-- [] (graph title) -->
-      <color>B92F2F</color>                                    <!-- [] (hex color code) -->
+      <color>DB4C3C</color>                                    <!-- [] (hex color code) -->
       <alpha></alpha>                                          <!-- [column.alpha (line.alpha)] (0 - 100) -->
       <data_labels>
         <![CDATA[]]>                                           <!-- [column.data_labels (line.data_labels)] ({title} {value} {series} {percents} {start} {difference} {total}) You can format any data label: {title} will be replaced with real title, {value} - with value and so on. You can add your own text or html code too. -->
@@ -290,7 +301,7 @@
     <graph gid="2">
       <type>line</type>                                     
       <title>Smoothed</title>                               
-      <color></color>                                   
+      <color>FEC514</color>                                   
       <alpha></alpha>
       <balloon_text>
         <![CDATA[Smoothed Anomaly in {series}: {value}C ]]>  <!-- [column(line).balloon.text] ({title} {value} {series} {description} {percents}) You can format any balloon text: {title} will be replaced with real title, {value} - with value and so on. You can add your own text or html code too. -->
@@ -302,14 +313,14 @@
 	<max_min></max_min>                                        <!-- [false] (true / false) whether to include guides' values when calculating min and max of a chart -->
 	 <guide>                                                   <!-- there can be any number of quides. guides can also be set in data xml file, using the same syntax as here -->
   	 <behind></behind>                                       <!-- [false] (true / false) whether your guides should appear in front of columns or behind them -->
-	   <start_value></start_value>                             <!-- (number) value at which guide should be placed -->
-	   <end_value></end_value>                                 <!-- (number) if you set value here too, another quide will be drawn. If you set fill alpha > 0, then the area between these quides will be filled with color -->
+	   <start_value>0</start_value>                             <!-- (number) value at which guide should be placed -->
+	   <end_value>0.8</end_value>                                 <!-- (number) if you set value here too, another quide will be drawn. If you set fill alpha > 0, then the area between these quides will be filled with color -->
 	   <title></title>                                         <!-- (string) text which will be displayed near the guide -->
 	   <width></width>                                         <!-- [0] (Number) width of a guide line (0 for hairline) -->
 	   <color></color>                                         <!-- [#000000] (hex color code) color of guide line -->   
-	   <alpha></alpha>                                         <!-- [100] (0 - 100) opacity of guide line -->
-	   <fill_color></fill_color>                               <!-- [guide.color] (hex color code) fill color. If not defined, color of a guide will be used. Separate color codes with comas for gradient -->
-	   <fill_alpha></fill_alpha>                               <!-- [0] (0 - 100) opacity of a fill -->                                  
+	   <alpha>0</alpha>                                         <!-- [100] (0 - 100) opacity of guide line -->
+	   <fill_color>#FFFFFF,#CC0000</fill_color>                               <!-- [guide.color] (hex color code) fill color. If not defined, color of a guide will be used. Separate color codes with comas for gradient -->
+	   <fill_alpha>20</fill_alpha>                               <!-- [0] (0 - 100) opacity of a fill -->                                  
 	   <inside></inside>                                       <!-- [values.value.inside] whether to place title inside plot area -->
 	   <centered></centered>                                   <!-- [true] (true / false) if you have start and end values defined, title can be placed in the middle between these values. If false, it will be placed near start_value -->
 	   <rotate></rotate>                                       <!-- [values.value.rotate] (0 - 90) angle of rotation of title. -->
@@ -317,7 +328,14 @@
 	   <text_color></text_color>                               <!-- [values.value.color] (hex color code) -->
      <dashed></dashed>                                       <!-- [false] (true / false) -->
      <dash_length></dash_length>                             <!-- [5] (Number) -->     	   
-	 </guide>  
+	 </guide>
+	 <guide>
+		<start_value>0</start_value>
+		<end_value>-0.4</end_value>
+		<alpha>0</alpha>
+		<fill_color>#FFFFFF,#0000CC</fill_color>
+		<fill_alpha>20</fill_alpha>
+	</guide>  
 	</guides>
 	
 	<!-- DATA can also be set in settings file. Just place data in CSV or XML format between <data></data> -->
