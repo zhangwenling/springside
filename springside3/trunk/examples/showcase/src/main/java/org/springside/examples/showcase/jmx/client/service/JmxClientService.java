@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 import org.springside.examples.showcase.jmx.server.ConfiguratorMBean;
-import org.springside.modules.jmx.MBeanClientFactory;
+import org.springside.modules.jmx.JmxTemplate;
 
 /**
  * JMX客户端服务的封装.
@@ -28,7 +28,7 @@ public class JmxClientService {
 	private static String hibernteMBeanName = "org.hibernate:type=Statistics";
 
 	//jmx客户端工厂及mbean代理
-	private MBeanClientFactory clientFactory;
+	private JmxTemplate jmxTemplate;
 	private ConfiguratorMBean configuratorMBean;
 
 	//可注入的连接参数
@@ -66,9 +66,9 @@ public class JmxClientService {
 
 		try {
 			String serviceUrl = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/showcase";
-			clientFactory = new MBeanClientFactory(serviceUrl, userName, passwd);
+			jmxTemplate = new JmxTemplate(serviceUrl, userName, passwd);
 
-			configuratorMBean = clientFactory.getMBeanProxy(configuratorMBeanName, ConfiguratorMBean.class);
+			configuratorMBean = jmxTemplate.getMBeanProxy(configuratorMBeanName, ConfiguratorMBean.class);
 		} catch (Exception e) {
 			logger.error("连接Jmx Server 或 创建Mbean Proxy时失败", e);
 		}
@@ -79,7 +79,7 @@ public class JmxClientService {
 	 */
 	@PreDestroy
 	public void close() throws IOException {
-		clientFactory.close();
+		jmxTemplate.close();
 	}
 
 	// 标准MBean代理操作演示 、、
@@ -107,8 +107,8 @@ public class JmxClientService {
 	 */
 	public HibernateStatistics getHibernateStatistics() {
 		HibernateStatistics statistics = new HibernateStatistics();
-		statistics.setSessionOpenCount((Long) clientFactory.getAttribute(hibernteMBeanName, "SessionOpenCount"));
-		statistics.setSessionCloseCount((Long) clientFactory.getAttribute(hibernteMBeanName, "SessionCloseCount"));
+		statistics.setSessionOpenCount((Long) jmxTemplate.getAttribute(hibernteMBeanName, "SessionOpenCount"));
+		statistics.setSessionCloseCount((Long) jmxTemplate.getAttribute(hibernteMBeanName, "SessionCloseCount"));
 		return statistics;
 	}
 
@@ -116,6 +116,6 @@ public class JmxClientService {
 	 * 调用Hibernate MBean的logSummary函数.
 	 */
 	public void logSummary() {
-		clientFactory.inoke(hibernteMBeanName, "logSummary");
+		jmxTemplate.inoke(hibernteMBeanName, "logSummary");
 	}
 }
