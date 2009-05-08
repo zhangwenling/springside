@@ -3,6 +3,7 @@ package org.springside.modules.security.springsecurity;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.security.ConfigAttributeDefinition;
 import org.springframework.security.ConfigAttributeEditor;
@@ -31,7 +32,7 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 	}
 
 	public Object getObject() throws Exception {
-		LinkedHashMap<RequestKey, ConfigAttributeDefinition> requestMap = getRequestMap();
+		LinkedHashMap<RequestKey, ConfigAttributeDefinition> requestMap = buildRequestMap();
 		UrlMatcher matcher = getUrlMatcher();
 		DefaultFilterInvocationDefinitionSource definitionSource = new DefaultFilterInvocationDefinitionSource(matcher,
 				requestMap);
@@ -51,17 +52,21 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 		return new AntUrlPathMatcher();
 	}
 
-	private LinkedHashMap<RequestKey, ConfigAttributeDefinition> getRequestMap() throws Exception {
+	private LinkedHashMap<RequestKey, ConfigAttributeDefinition> buildRequestMap() throws Exception {
 		LinkedHashMap<String, String> srcMap = resourceDetailService.getRequestMap();
 		LinkedHashMap<RequestKey, ConfigAttributeDefinition> requestMap = new LinkedHashMap<RequestKey, ConfigAttributeDefinition>();
 		ConfigAttributeEditor editor = new ConfigAttributeEditor();
 
 		for (Map.Entry<String, String> entry : srcMap.entrySet()) {
 			RequestKey key = new RequestKey(entry.getKey(), null);
-			editor.setAsText(entry.getValue());
-			requestMap.put(key, (ConfigAttributeDefinition) editor.getValue());
+			if (StringUtils.isNotBlank(entry.getValue())) {
+				editor.setAsText(entry.getValue());
+				requestMap.put(key, (ConfigAttributeDefinition) editor.getValue());
+			} else {
+				requestMap.put(key, ConfigAttributeDefinition.NO_ATTRIBUTES);
+			}
 		}
-		
+
 		return requestMap;
 	}
 }
