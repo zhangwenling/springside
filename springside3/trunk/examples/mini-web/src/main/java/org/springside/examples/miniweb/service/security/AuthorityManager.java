@@ -16,7 +16,7 @@ import org.springside.modules.orm.hibernate.EntityManager;
 @Transactional
 public class AuthorityManager extends EntityManager<Authority, Long> {
 	@Autowired
-	AuthorityDao authorityDao;
+	private AuthorityDao authorityDao;
 
 	@Override
 	protected AuthorityDao getEntityDao() {

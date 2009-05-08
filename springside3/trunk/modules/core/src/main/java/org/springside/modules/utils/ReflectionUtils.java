@@ -158,7 +158,7 @@ public class ReflectionUtils {
 				list.add(PropertyUtils.getProperty(obj, propertyName));
 			}
 		} catch (Exception e) {
-			handleException(e);
+			convertToUncheckedException(e);
 		}
 
 		return list;
@@ -181,10 +181,10 @@ public class ReflectionUtils {
 	/**
 	 * 将反射时的checked exception转换为unchecked exception。
 	 */
-	public static void handleException(Exception e) throws IllegalArgumentException {
+	public static void convertToUncheckedException(Exception e) throws IllegalArgumentException {
 		if (e instanceof IllegalAccessException || e instanceof IllegalArgumentException
 				|| e instanceof NoSuchMethodException)
-			throw new IllegalArgumentException("Refelction Error", e);
+			throw new IllegalArgumentException("Refelction Exception.", e);
 		else
 			throw new IllegalArgumentException(e);
 	}

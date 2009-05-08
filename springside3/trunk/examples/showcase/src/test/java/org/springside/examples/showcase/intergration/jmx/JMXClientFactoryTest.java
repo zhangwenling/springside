@@ -30,20 +30,20 @@ public class JMXClientFactoryTest extends SpringContextTestCase {
 		jmxClientFactory.close();
 	}
 
-	public void testGetMBeanAttribute() throws Exception {
+	public void testGetMBeanAttribute() {
 		assertEquals("node1", configuratorMbean.getNodeName());
 	}
 
-	public void testSetMBeanAttribute() throws Exception {
+	public void testSetMBeanAttribute() {
 		configuratorMbean.setNodeName("foo");
 		assertEquals("foo", configuratorMbean.getNodeName());
 	}
 
-	public void testGetMBeanAttributeByReflection() throws Exception {
+	public void testGetMBeanAttributeByReflection() {
 		assertEquals(0L, jmxClientFactory.getAttribute("org.hibernate:type=Statistics", "SessionOpenCount"));
 	}
 
-	public void testInvokeMBeanMethodByReflection() throws Exception {
+	public void testInvokeMBeanMethodByReflection() {
 		jmxClientFactory.inoke("org.hibernate:type=Statistics", "logSummary");
 	}
 }

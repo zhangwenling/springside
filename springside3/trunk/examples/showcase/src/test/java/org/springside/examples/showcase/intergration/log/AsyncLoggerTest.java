@@ -14,8 +14,7 @@ import org.springside.modules.test.junit38.SpringContextTestCase;
 @ContextConfiguration(locations = { "/log/applicationContext-log.xml" })
 public class AsyncLoggerTest extends SpringContextTestCase {
 
-
-	public void testDBLogger() throws Exception {
+	public void testDBLogger() {
 		Logger logger = LoggerFactory.getLogger("org.springside.examples.showcase.log.dbLogExample");
 		int logCount = 10;
 		for (int i = 1; i <= logCount; i++) {

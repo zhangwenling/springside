@@ -33,13 +33,13 @@ public class QueueManager {
 	}
 
 	@PostConstruct
-	void init() {
+	public void init() {
 		initQueues();
 		runTasks();
 	}
 
 	@PreDestroy
-	void close() {
+	public void close() {
 		stopTasks();
 	}
 

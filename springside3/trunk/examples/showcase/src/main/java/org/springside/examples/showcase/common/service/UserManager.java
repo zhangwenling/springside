@@ -21,7 +21,7 @@ import org.springside.modules.orm.hibernate.EntityManager;
 @Transactional
 public class UserManager extends EntityManager<User, Long> {
 	@Autowired
-	UserDao userDao;
+	private UserDao userDao;
 	@Autowired(required = false)
 	private ServerConfig serverConfig; //系统配置
 	@Autowired(required = false)
@@ -49,5 +49,9 @@ public class UserManager extends EntityManager<User, Long> {
 				mimeMailService.sendNotificationMail(user.getName());
 			}
 		}
+	}
+
+	public long getUserCount() {
+		return userDao.findLong(User.COUNT_USER);
 	}
 }

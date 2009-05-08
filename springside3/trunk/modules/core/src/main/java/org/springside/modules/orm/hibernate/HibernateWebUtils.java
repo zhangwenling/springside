@@ -87,7 +87,7 @@ public class HibernateWebUtils {
 			}
 
 		} catch (Exception e) {
-			ReflectionUtils.handleException(e);
+			ReflectionUtils.convertToUncheckedException(e);
 		}
 	}
 
