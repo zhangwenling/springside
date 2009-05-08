@@ -81,8 +81,8 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<artifactId>jcaptcha-api</artifactId>
 			<groupId>com.octo.captcha</groupId>
+			<artifactId>jcaptcha</artifactId>
 			<optional>true</optional>
 		</dependency>
 

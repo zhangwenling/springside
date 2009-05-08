@@ -29,10 +29,10 @@
 
 	<!--JCaptcha验证码服务 -->
 	<bean id="captchaService" class="com.octo.captcha.service.image.DefaultManageableImageCaptchaService">
-		<!-- 2.0 snapshot版可选用GmailEngine, 可选HotmailEngine或Hotmail2008Engine
 		<property name="captchaEngine">
-			<bean class="com.octo.captcha.engine.image.gimpy.GmailEngine" />
+			<bean class="org.springside.modules.security.jcaptcha.GMailEngine" />
 		</property>
+	<!-- 
 		默认生成的图片180秒过期 , 可另行设置
 		<property name="minGuarantedStorageDelayInSeconds" value="180" />
 		-->

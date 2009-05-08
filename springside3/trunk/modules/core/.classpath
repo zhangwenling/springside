@@ -59,5 +59,7 @@
 	<classpathentry kind="lib" path="lib/xwork-2.1.2.jar"/>
 	<classpathentry kind="lib" path="lib/json-20080701.jar"/>
 	<classpathentry kind="lib" path="lib/jsr250-api-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jcaptcha-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/imaging-01012005.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
