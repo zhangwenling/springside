@@ -1,7 +1,7 @@
 package org.springside.examples.showcase.intergration.jmx;
 
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.examples.showcase.jmx.server.ConfiguratorMBean;
+import org.springside.examples.showcase.jmx.server.ServerConfigMBean;
 import org.springside.modules.jmx.JmxClient;
 import org.springside.modules.test.junit38.SpringContextTestCase;
 
@@ -16,13 +16,13 @@ public class JmxClientTest extends SpringContextTestCase {
 
 	private JmxClient jmxClient;
 
-	private ConfiguratorMBean configuratorMbean;
+	private ServerConfigMBean serverConfigMbean;
 
 	@Override
 	public void setUp() throws Exception {
 		jmxClient = new JmxClient("service:jmx:rmi:///jndi/rmi://localhost:1099/showcase");
-		configuratorMbean = jmxClient.getMBeanProxy("org.springside.showcase:type=Configurator",
-				ConfiguratorMBean.class);
+		serverConfigMbean = jmxClient.getMBeanProxy("org.springside.showcase:type=Configurator",
+				ServerConfigMBean.class);
 	}
 
 	@Override
@@ -31,12 +31,12 @@ public class JmxClientTest extends SpringContextTestCase {
 	}
 
 	public void testGetMBeanAttribute() {
-		assertEquals("node1", configuratorMbean.getNodeName());
+		assertEquals("node1", serverConfigMbean.getNodeName());
 	}
 
 	public void testSetMBeanAttribute() {
-		configuratorMbean.setNodeName("foo");
-		assertEquals("foo", configuratorMbean.getNodeName());
+		serverConfigMbean.setNodeName("foo");
+		assertEquals("foo", serverConfigMbean.getNodeName());
 	}
 
 	public void testGetMBeanAttributeByReflection() {

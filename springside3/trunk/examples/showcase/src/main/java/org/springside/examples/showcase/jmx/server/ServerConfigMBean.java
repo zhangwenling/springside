@@ -1,11 +1,11 @@
 package org.springside.examples.showcase.jmx.server;
 
 /**
- * 配置系统属性的标准MBean接口. 
+ * 系统属性配置的标准MBean接口.
  * 
  * @author calvin
  */
-public interface ConfiguratorMBean {
+public interface ServerConfigMBean {
 
 	String getNodeName();
 

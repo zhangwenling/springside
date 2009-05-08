@@ -16,8 +16,8 @@
 			<map>
 				<!-- 认证配置,文件路径需为绝对路径 -->
 				<!--
-					<entry key="jmx.remote.x.password.file" value="/mypath/jmxremote.password" />
-					<entry key="jmx.remote.x.access.file" value="/mypath/jmxremote.access" />
+					<entry key="jmx.remote.x.password.file" value="/mypath/jmxremote.password" /> <entry
+					key="jmx.remote.x.access.file" value="/mypath/jmxremote.access" />
 				-->
 			</map>
 		</property>
@@ -31,10 +31,6 @@
 				<entry key="org.springside.showcase:type=Configurator" value-ref="serverConfig" />
 				<entry key="org.hibernate:type=Statistics" value-ref="hibernateStatistics" />
 			</map>
-		</property>
-		<!-- 按bean实现的所有接口导出  -->
-		<property name="assembler">
-			<bean class="org.springframework.jmx.export.assembler.InterfaceBasedMBeanInfoAssembler" />
 		</property>
 	</bean>
 

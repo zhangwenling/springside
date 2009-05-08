@@ -8,7 +8,7 @@ import javax.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
-import org.springside.examples.showcase.jmx.server.ConfiguratorMBean;
+import org.springside.examples.showcase.jmx.server.ServerConfigMBean;
 import org.springside.modules.jmx.JmxClient;
 
 /**
@@ -29,7 +29,7 @@ public class JmxClientService {
 
 	//jmx客户端工厂及mbean代理
 	private JmxClient jmxClient;
-	private ConfiguratorMBean configuratorMBean;
+	private ServerConfigMBean serverConfigMBean;
 
 	//可注入的连接参数
 	private String host;
@@ -68,7 +68,7 @@ public class JmxClientService {
 			String serviceUrl = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/showcase";
 			jmxClient = new JmxClient(serviceUrl, userName, passwd);
 
-			configuratorMBean = jmxClient.getMBeanProxy(configuratorMBeanName, ConfiguratorMBean.class);
+			serverConfigMBean = jmxClient.getMBeanProxy(configuratorMBeanName, ServerConfigMBean.class);
 		} catch (Exception e) {
 			logger.error("连接Jmx Server 或 创建Mbean Proxy时失败", e);
 		}
@@ -85,19 +85,19 @@ public class JmxClientService {
 	// 标准MBean代理操作演示 、、
 
 	public String getNodeName() {
-		return configuratorMBean.getNodeName();
+		return serverConfigMBean.getNodeName();
 	}
 
 	public void setNodeName(String nodeName) {
-		configuratorMBean.setNodeName(nodeName);
+		serverConfigMBean.setNodeName(nodeName);
 	}
 
 	public boolean isNotificationMailEnabled() {
-		return configuratorMBean.isNotificationMailEnabled();
+		return serverConfigMBean.isNotificationMailEnabled();
 	}
 
 	public void setNotificationMailEnabled(boolean notificationMailEnabled) {
-		configuratorMBean.setNotificationMailEnabled(notificationMailEnabled);
+		serverConfigMBean.setNotificationMailEnabled(notificationMailEnabled);
 	}
 
 	// 无MBean的Class文件时直接访问属性调用方法的演示 //

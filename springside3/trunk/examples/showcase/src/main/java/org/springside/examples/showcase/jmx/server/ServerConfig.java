@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * 
  * @author calvin
  */
-public class ServerConfig implements ConfiguratorMBean {
+public class ServerConfig implements ServerConfigMBean {
 
 	private String nodeName;//服务器节点名
 	private AtomicBoolean notificationMailEnabled = new AtomicBoolean(true);//是否发送通知邮件
