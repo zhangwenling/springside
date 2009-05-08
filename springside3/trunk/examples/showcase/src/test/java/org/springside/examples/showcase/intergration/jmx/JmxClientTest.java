@@ -2,7 +2,7 @@ package org.springside.examples.showcase.intergration.jmx;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.jmx.server.ConfiguratorMBean;
-import org.springside.modules.jmx.JmxTemplate;
+import org.springside.modules.jmx.JmxClient;
 import org.springside.modules.test.junit38.SpringContextTestCase;
 
 /**
@@ -12,22 +12,22 @@ import org.springside.modules.test.junit38.SpringContextTestCase;
  */
 //载入/jmx/applicationContext-jmx-server.xml和父类中定义的applicationContext.xml.
 @ContextConfiguration(locations = { "/jmx/applicationContext-jmx-server.xml" })
-public class JMXTemplateTest extends SpringContextTestCase {
+public class JmxClientTest extends SpringContextTestCase {
 
-	private JmxTemplate jmxClientFactory;
+	private JmxClient jmxClient;
 
 	private ConfiguratorMBean configuratorMbean;
 
 	@Override
 	public void setUp() throws Exception {
-		jmxClientFactory = new JmxTemplate("service:jmx:rmi:///jndi/rmi://localhost:1099/showcase");
-		configuratorMbean = jmxClientFactory.getMBeanProxy("org.springside.showcase:type=Configurator",
+		jmxClient = new JmxClient("service:jmx:rmi:///jndi/rmi://localhost:1099/showcase");
+		configuratorMbean = jmxClient.getMBeanProxy("org.springside.showcase:type=Configurator",
 				ConfiguratorMBean.class);
 	}
 
 	@Override
 	public void tearDown() throws Exception {
-		jmxClientFactory.close();
+		jmxClient.close();
 	}
 
 	public void testGetMBeanAttribute() {
@@ -40,10 +40,10 @@ public class JMXTemplateTest extends SpringContextTestCase {
 	}
 
 	public void testGetMBeanAttributeByReflection() {
-		assertEquals(0L, jmxClientFactory.getAttribute("org.hibernate:type=Statistics", "SessionOpenCount"));
+		assertEquals(0L, jmxClient.getAttribute("org.hibernate:type=Statistics", "SessionOpenCount"));
 	}
 
 	public void testInvokeMBeanMethodByReflection() {
-		jmxClientFactory.inoke("org.hibernate:type=Statistics", "logSummary");
+		jmxClient.inoke("org.hibernate:type=Statistics", "logSummary");
 	}
 }

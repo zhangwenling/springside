@@ -29,17 +29,17 @@ import org.springframework.util.Assert;
  * @author ben
  * @author calvin
  */
-public class JmxTemplate {
+public class JmxClient {
 
 	private JMXConnector connector;
 	private MBeanServerConnection mbsc;
 	private AtomicBoolean connected = new AtomicBoolean(false);
 
-	public JmxTemplate(final String serviceUrl) throws IOException {
+	public JmxClient(final String serviceUrl) throws IOException {
 		initConnector(serviceUrl, null, null);
 	}
 
-	public JmxTemplate(final String serviceUrl, final String userName, final String passwd) throws IOException {
+	public JmxClient(final String serviceUrl, final String userName, final String passwd) throws IOException {
 		initConnector(serviceUrl, userName, passwd);
 	}
 
