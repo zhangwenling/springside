@@ -28,7 +28,6 @@
 				<version>2.1-beta-1</version>
 				<configuration>
 					<warSourceDirectory>webapp</warSourceDirectory>
-					<warName>${artifactId}</warName>
 				</configuration>
 			</plugin>
 
@@ -45,7 +44,7 @@
 			</plugin>
 
 			<!--
-				surefire插件. mvn test单元测试时忽略integration目录下的集成测试用例, mvn integration-test集成测试时忽略其他目录下的单元测试用例.
+				surefire插件. mvn test单元测试时忽略integration目录下的集成测试用例.
 			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -76,15 +75,11 @@
 				</executions>
 			</plugin>
 
-			<!-- tomcat插件 -->
+			<!-- cargo插件 -->
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>tomcat-maven-plugin</artifactId>
-				<version>1.0-beta-1</version>
-				<!-- 默认manager url -->
-				<configuration>
-					<url>http://localhost:8080/manager</url>
-				</configuration>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.0</version>
 			</plugin>
 
 			<!-- enforcer插件,检查JDK版本1.6 -->
