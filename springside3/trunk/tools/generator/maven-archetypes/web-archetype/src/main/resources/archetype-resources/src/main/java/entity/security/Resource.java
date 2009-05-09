@@ -83,7 +83,7 @@ public class Resource extends IdEntity {
 	}
 
 	@Transient
-	public String getAuthNames() throws Exception {
+	public String getAuthNames() {
 		return ReflectionUtils.fetchElementPropertyToString(authorities, "name", ",");
 	}
 }

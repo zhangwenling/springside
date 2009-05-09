@@ -29,7 +29,7 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 @Transactional
 public class UserManager extends EntityManager<User, Long> {
 	@Autowired
-	UserDao userDao;
+	private UserDao userDao;
 
 	@Override
 	protected UserDao getEntityDao() {

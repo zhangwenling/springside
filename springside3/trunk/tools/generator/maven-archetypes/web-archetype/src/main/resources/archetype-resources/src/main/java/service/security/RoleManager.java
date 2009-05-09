@@ -26,7 +26,7 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 public class RoleManager extends EntityManager<Role, Long> {
 
 	@Autowired
-	RoleDao roleDao;
+	private RoleDao roleDao;
 
 	@Override
 	protected RoleDao getEntityDao() {

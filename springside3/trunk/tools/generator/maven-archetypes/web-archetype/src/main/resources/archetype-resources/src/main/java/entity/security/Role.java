@@ -73,13 +73,13 @@ public class Role extends IdEntity {
 	}
 
 	@Transient
-	public String getAuthNames() throws Exception {
+	public String getAuthNames() {
 		return ReflectionUtils.fetchElementPropertyToString(authorities, "displayName", ", ");
 	}
 
 	@Transient
 	@SuppressWarnings("unchecked")
-	public List<Long> getAuthIds() throws Exception {
+	public List<Long> getAuthIds() {
 		return ReflectionUtils.fetchElementPropertyToList(authorities, "id");
 	}
 
