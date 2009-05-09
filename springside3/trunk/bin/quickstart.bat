@@ -23,7 +23,7 @@ start startup.bat
 cd ..\..\..\..\
 
 echo [Step 4] 安装SpringSide3 modules 和archetypes到 本地Maven仓库.
-call %MAVEN_BAT% -o dependency:copy-dependencies -DoutputDirectory=lib -Pmodules
+call %MAVEN_BAT% -o dependency:copy-dependencies -DoutputDirectory=lib -Dsilent=true -Pmodules
 call %MAVEN_BAT% -o clean install  -Pmodules
  
 echo [Step 5] 初始化依赖Jar包，初始化数据库，编译、测试、打包、部署三个Examles项目到tomcat。
