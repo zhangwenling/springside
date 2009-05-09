@@ -74,11 +74,14 @@
 							</cargo.tomcat.manager.url>
 						</properties>
 					</configuration>
-
 					<deployer>
 						<type>remote</type>
 						<deployables>
-							<deployable />
+							<deployable>
+								<properties>
+									<context>/${artifactId}</context>
+								</properties>
+							</deployable>
 						</deployables>
 					</deployer>
 				</configuration>

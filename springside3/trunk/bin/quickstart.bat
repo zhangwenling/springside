@@ -29,8 +29,7 @@ call %MAVEN_BAT% -o clean install  -Pmodules
 echo [Step 5] 初始化依赖Jar包，初始化数据库，编译、测试、打包、部署三个Examles项目到tomcat。
 call %MAVEN_BAT% -o dependency:copy-dependencies -DoutputDirectory=lib -DexcludeScope=runtime -Dsilent=true -Pexamples
 call %MAVEN_BAT% -o dependency:copy-dependencies -DoutputDirectory=webapp/WEB-INF/lib -DincludeScope=runtime -Dsilent=true -Pexamples
-call %MAVEN_BAT% -o tomcat:undeploy -Pexamples
-call %MAVEN_BAT% -o clean compile war:exploded tomcat:exploded -Pinitdb -Pnotest -Pexamples
+call %MAVEN_BAT% -o clean package cargo:redeploy -Pinitdb -Pnotest -Pexamples
 
 echo [Step 6] 启动IE浏览上述三个项目 .
 explorer http://localhost:8080/mini-web
