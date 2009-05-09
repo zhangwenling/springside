@@ -80,11 +80,6 @@
 			<artifactId>spring-security-core-tiger</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>com.octo.captcha</groupId>
-			<artifactId>jcaptcha</artifactId>
-			<optional>true</optional>
-		</dependency>
 
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
