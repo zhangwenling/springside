@@ -47,7 +47,7 @@ public class GMailEngine extends ListImageCaptchaEngine {
 		//wordtoimage components
 		TextPaster randomPaster = new DecoratedRandomTextPaster(7, 7, new RandomListColorGenerator(new Color[] {
 				new Color(23, 170, 27), new Color(220, 34, 11), new Color(23, 67, 172) }),
-				new TextDecorator[] { new BaffleTextDecorator(new Integer(1), Color.white) });
+				new TextDecorator[] { new BaffleTextDecorator(1, Color.white) });
 
 		BackgroundGenerator back = new UniColorBackgroundGenerator(200, 70, Color.white);
 

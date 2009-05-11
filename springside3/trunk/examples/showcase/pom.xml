@@ -243,5 +243,13 @@
 			<artifactId>commons-beanutils</artifactId>
 		</dependency>
 		<!-- utils end -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium.client-drivers</groupId>
+			<artifactId>selenium-java-client-driver</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
 	</dependencies>
 </project>
