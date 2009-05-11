@@ -614,12 +614,12 @@
 						<artifactId>gmaven-runtime-default</artifactId>
 					</exclusion>
 					<exclusion>
-						<groupId>org.seleniumhq.selenium.core</groupId>
-						<artifactId>selenium-core</artifactId>
+						<groupId>org.seleniumhq.selenium.server</groupId>
+						<artifactId>selenium-server</artifactId>
 					</exclusion>
 					<exclusion>
-						<groupId>org.seleniumhq.selenium.server</groupId>
-						<artifactId>selenium-server-coreless</artifactId>
+						<groupId>org.seleniumhq.selenium.core</groupId>
+						<artifactId>selenium-core</artifactId>
 					</exclusion>
 				</exclusions>
 				<scope>test</scope>
