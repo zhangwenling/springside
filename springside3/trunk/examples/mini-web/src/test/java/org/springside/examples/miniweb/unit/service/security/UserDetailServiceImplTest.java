@@ -1,4 +1,4 @@
-package org.springside.examples.miniweb.service.security;
+package org.springside.examples.miniweb.unit.service.security;
 
 import org.easymock.classextension.EasyMock;
 import org.springframework.security.GrantedAuthorityImpl;
@@ -9,6 +9,7 @@ import org.springside.examples.miniweb.dao.security.UserDao;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
+import org.springside.examples.miniweb.service.security.UserDetailServiceImpl;
 import org.springside.modules.test.junit38.SpringAnnotationTestCase;
 import org.springside.modules.utils.ReflectionUtils;
 

@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.intergration.jmx;
+package org.springside.examples.showcase.integration.jmx;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.jmx.server.ServerConfigMBean;

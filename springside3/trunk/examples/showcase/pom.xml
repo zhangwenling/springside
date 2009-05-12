@@ -15,46 +15,6 @@
 
 	<build>
 		<plugins>
-			<!-- sql 插件 -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>sql-maven-plugin</artifactId>
-
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.derby</groupId>
-						<artifactId>derbyclient</artifactId>
-						<version>10.4.2.0</version>
-					</dependency>
-				</dependencies>
-
-				<configuration>
-					<username>APP</username>
-					<password>APP</password>
-					<url>jdbc:derby://localhost:1527/springside-showcase;create=true
-					</url>
-					<driver>org.apache.derby.jdbc.ClientDriver
-					</driver>
-				</configuration>
-
-				<executions>
-					<execution>
-						<id>Create and initialize the database</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<onError>continue</onError>
-							<encoding>UTF-8</encoding>
-							<srcFiles>
-								<srcFile>src/main/sql/derby/schema.sql</srcFile>
-								<srcFile>src/main/sql/derby/load-data.sql</srcFile>
-							</srcFiles>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<!-- cargo 插件 -->
 			<plugin>
 				<groupId>org.codehaus.cargo</groupId>
@@ -84,7 +44,6 @@
 							</deployable>
 						</deployables>
 					</deployer>
-
 				</configuration>
 			</plugin>
 		</plugins>
@@ -252,4 +211,53 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>initdb</id>
+			<build>
+				<plugins>
+					<!-- sql 插件 -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>sql-maven-plugin</artifactId>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.derby</groupId>
+								<artifactId>derbyclient</artifactId>
+								<version>10.4.2.0</version>
+							</dependency>
+						</dependencies>
+
+						<configuration>
+							<username>APP</username>
+							<password>APP</password>
+							<url>jdbc:derby://localhost:1527/springside-showcase;create=true
+							</url>
+							<driver>org.apache.derby.jdbc.ClientDriver</driver>
+						</configuration>
+
+						<executions>
+							<execution>
+								<id>Create and initialize the database</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<configuration>
+									<onError>continue</onError>
+									<encoding>UTF-8</encoding>
+									<srcFiles>
+										<srcFile>src/main/sql/derby/schema.sql</srcFile>
+										<srcFile>src/main/sql/derby/load-data.sql</srcFile>
+									</srcFiles>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 </project>

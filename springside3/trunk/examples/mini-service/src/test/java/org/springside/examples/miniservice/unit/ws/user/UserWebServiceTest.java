@@ -1,9 +1,10 @@
-package org.springside.examples.miniservice.ws.user;
+package org.springside.examples.miniservice.unit.ws.user;
 
 import org.easymock.classextension.EasyMock;
 import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.service.user.UserManager;
 import org.springside.examples.miniservice.ws.WSResult;
+import org.springside.examples.miniservice.ws.user.UserWebServiceImpl;
 import org.springside.modules.test.junit38.SpringAnnotationTestCase;
 import org.springside.modules.utils.ReflectionUtils;
 

@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.intergration.log;
+package org.springside.examples.showcase.integration.log;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
