@@ -1,4 +1,4 @@
-package org.springside.examples.miniweb.integration.service.user;
+package org.springside.examples.miniweb.integration.service.security;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
