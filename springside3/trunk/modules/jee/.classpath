@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="lib/spring-web-2.5.6.jar"/>
 	<classpathentry kind="lib" path="lib/spring-webmvc-2.5.6.jar"/>
 	<classpathentry kind="lib" path="lib/spring-context-2.5.6.jar"/>
+	<classpathentry kind="lib" path="lib/jsr250-api-1.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
