@@ -4,14 +4,19 @@ import org.springside.examples.miniweb.functional.SeleniumBaseTestCase;
 
 
 public class UserManagerTest extends SeleniumBaseTestCase {
-	private String loginName = "testUser1";
-	private String newUserName = "newUserName";
 
-	public void testCreateUser() {
+	public void testCRUD() {
+		String loginName = createUser();
+		editUser(loginName);
+		deleteUser(loginName);
+	}
+
+	private String createUser() {
 		selenium.open("/mini-web/security/user.action");
 		selenium.click("link=增加新用户");
 		selenium.waitForPageToLoad("30000");
 
+		String loginName = "Tester" + random();
 		selenium.type("loginName", loginName);
 		selenium.type("name", loginName);
 		selenium.type("password", "tester");
@@ -21,11 +26,14 @@ public class UserManagerTest extends SeleniumBaseTestCase {
 		selenium.waitForPageToLoad("30000");
 
 		assertTrue(selenium.isTextPresent("保存用户成功"));
+		return loginName;
 	}
 
-	public void testEditUser() {
+	private void editUser(String loginName) {
+		String newUserName = "newUserName";
+		
 		selenium.open("/mini-web/security/user.action");
-		findTestUser();
+		findUser(loginName);
 
 		selenium.click("link=修改");
 		selenium.waitForPageToLoad("30000");
@@ -35,22 +43,24 @@ public class UserManagerTest extends SeleniumBaseTestCase {
 		selenium.waitForPageToLoad("30000");
 
 		assertTrue(selenium.isTextPresent("保存用户成功"));
-		findTestUser();
+		findUser(loginName);
 		assertEquals(newUserName, selenium.getTable("//div[@id='listContent']/table.1.1"));
 	}
 
-	public void testDeleteUser() {
+	private void deleteUser(String loginName) {
 		selenium.open("/mini-web/security/user.action");
-		findTestUser();
+		findUser(loginName);
 
 		selenium.click("link=删除");
 		selenium.waitForPageToLoad("30000");
+		
 		assertTrue(selenium.isTextPresent("删除用户成功"));
+		findUser(loginName);
 		assertTrue(selenium.isTextPresent("共0页"));
 	}
-
-	private void findTestUser() {
-		selenium.type("filter_EQ_loginName", loginName);
+		
+	private void findUser(String userName) {
+		selenium.type("filter_EQ_loginName", userName);
 		selenium.click("//input[@value='搜索']");
 		selenium.waitForPageToLoad("30000");
 	}

@@ -1,5 +1,7 @@
 package org.springside.examples.miniweb.functional;
 
+import org.apache.commons.lang.RandomStringUtils;
+
 import com.thoughtworks.selenium.SeleneseTestCase;
 
 public abstract class SeleniumBaseTestCase extends SeleneseTestCase {
@@ -7,7 +9,6 @@ public abstract class SeleniumBaseTestCase extends SeleneseTestCase {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp("http://localhost:8080", "*chrome");
-		super.setCaptureScreenShotOnFailure(true);
 		login();
 	}
 	
@@ -20,5 +21,7 @@ public abstract class SeleniumBaseTestCase extends SeleneseTestCase {
 		assertTrue(selenium.isTextPresent("你好,admin."));
 	}
 
-
+	public static String random() {
+		return RandomStringUtils.randomAlphabetic(5);
+	}
 }
