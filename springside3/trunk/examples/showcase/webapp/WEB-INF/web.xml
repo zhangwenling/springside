@@ -42,6 +42,11 @@
 			<param-name>failureUrl</param-name>
 			<param-value>/security/login.action?error=2</param-value>
 		</init-param>
+		<!-- 用于功能测试的自动通过值,在生产环境部署时移除该参数 -->
+		<init-param>
+			<param-name>autoPassValue</param-name>
+			<param-value>54321</param-value>
+		</init-param>
 	</filter>
 
 	<!-- SpringSecurity filter-->
@@ -98,7 +103,7 @@
 	<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
-	
+
 	<!-- 出错页面定义 -->
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>

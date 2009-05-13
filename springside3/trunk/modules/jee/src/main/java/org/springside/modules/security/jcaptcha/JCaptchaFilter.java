@@ -27,13 +27,15 @@ import com.octo.captcha.service.CaptchaServiceException;
  * 集成JCaptcha的Filter.
  * 
  * 可通过配置与SpringSecurity相同的登录表单处理URL与身份验证失败URL,实现与SpringSecurity的集成.
- * 另,本filter主要演示集成的方式，用户可参考本filter将其他验证码方案与SpringSecurity进行集成.
+ * 另本filter主要演示与SpringSecurity的集成方式，用户可参考其他验证码方案的集成.
  * 
  * 在web.xml中配置的参数包括：
- * 1.failureUrl -- 身份验证失败后跳转的URL,与SpringSecurity中的配置保持一致,无默认值必须配置.
- * 2.filterProcessesUrl -- 登录表单处理URL,与SpringSecurity中的配置一致,默认为"/j_spring_security_check".
+ * 1.failureUrl -- 身份验证失败后跳转的URL, 需与SpringSecurity中的配置保持一致, 无默认值必须配置.
+ * 2.filterProcessesUrl -- 登录表单处理URL, 需与SpringSecurity中的配置一致, 默认为"/j_spring_security_check".
  * 3.captchaServiceId -- captchaService在Spring ApplicationContext中的bean id,默认为"captchaService".
- * 4.captchaParamter -- 登录表单中验证码Input框的名称,默认为"j_captcha".
+ * 4.captchaParamter -- 登录表单中验证码Input框的名称, 默认为"j_captcha".
+ * 5.captchaPassValue -- 用于自动化功能测试的自动通过值, 默认不存在该值.
+ * 
  * 
  * 具体应用参考showcase示例的web.xml与login.jsp.
  * 
@@ -44,6 +46,7 @@ public class JCaptchaFilter implements Filter {
 	//web.xml中的参数名定义
 	private static final String CAPTCHA_PARAMTER_NAME = "captchaParamterName";
 	private static final String CAPTCHA_SERVICE_ID_NAME = "captchaServiceId";
+	private static final String AUTO_PASS_VALUE = "autoPassValue";
 	private static final String FILTER_PROCESSES_URL_NAME = "filterProcessesUrl";
 	private static final String FAILURE_URL_NAME = "failureUrl";
 
@@ -58,6 +61,7 @@ public class JCaptchaFilter implements Filter {
 	private String filterProcessesUrl = DEFAULT_FILTER_PROCESSES_URL;;
 	private String captchaServiceId = DEFAULT_CAPTCHA_SERVICE_ID;
 	private String captchaParamter = DEFAULT_CAPTCHA_PARAMTER;
+	private String autoPassValue = null;
 
 	private CaptchaService captchaService = null;
 
@@ -72,6 +76,7 @@ public class JCaptchaFilter implements Filter {
 	private void initParameters(final FilterConfig fConfig) {
 		if (StringUtils.isBlank(fConfig.getInitParameter(FAILURE_URL_NAME)))
 			throw new IllegalArgumentException("CaptchaFilter缺少failureUrl参数");
+		
 		failureUrl = fConfig.getInitParameter(FAILURE_URL_NAME);
 
 		if (StringUtils.isNotBlank(fConfig.getInitParameter(FILTER_PROCESSES_URL_NAME))) {
@@ -84,6 +89,10 @@ public class JCaptchaFilter implements Filter {
 
 		if (StringUtils.isNotBlank(fConfig.getInitParameter(CAPTCHA_PARAMTER_NAME))) {
 			captchaParamter = fConfig.getInitParameter(CAPTCHA_PARAMTER_NAME);
+		}
+		
+		if (StringUtils.isNotBlank(fConfig.getInitParameter(AUTO_PASS_VALUE))) {
+			autoPassValue = fConfig.getInitParameter(AUTO_PASS_VALUE);
 		}
 	}
 
@@ -142,7 +151,7 @@ public class JCaptchaFilter implements Filter {
 	}
 
 	/**
-	 * 验证验证码. 
+	 * 验证验证码.
 	 */
 	private boolean validateCaptchaChallenge(final HttpServletRequest request) {
 		if (request.getSession(false) == null)
@@ -151,6 +160,10 @@ public class JCaptchaFilter implements Filter {
 		try {
 			String captchaID = request.getSession().getId();
 			String challengeResponse = request.getParameter(captchaParamter);
+			
+			//自动通过值存在时,检验输入值是否等于自动通过值
+			if (autoPassValue != null && autoPassValue.equals(challengeResponse))
+				return true;
 			return captchaService.validateResponseForID(captchaID, challengeResponse);
 		} catch (CaptchaServiceException e) {
 			logger.error(e.getMessage(), e);
