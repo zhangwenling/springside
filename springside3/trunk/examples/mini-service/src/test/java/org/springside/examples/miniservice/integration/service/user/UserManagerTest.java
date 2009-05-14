@@ -2,7 +2,6 @@ package org.springside.examples.miniservice.integration.service.user;
 
 import static org.junit.Assert.*;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniservice.entity.user.Role;
@@ -27,7 +26,7 @@ public class UserManagerTest extends SpringTransactionalTestCase {
 
 		User entity = new User();
 		// 因为LoginName要求唯一性，因此添加random字段。
-		entity.setLoginName("tester" + RandomStringUtils.randomAlphabetic(5));
+		entity.setLoginName("tester" + randomString());
 		entity.setName("foo");
 		entity.setEmail("foo@bar.com");
 		entity.setPassword("foo");

@@ -1,5 +1,6 @@
 package org.springside.modules.test.junit4;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.hibernate.SessionFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
@@ -14,8 +15,8 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 public class SpringTransactionalTestCase extends AbstractTransactionalJUnit4SpringContextTests {
 
 	/**
-	 * 刷新默认的sessionFactory,强制Hibernate执行SQL以验证ORM配置.
-	 * 因为没有执行commit操作,不会更改测试数据库.
+	 * @see #flush(String)
+	 * 
 	 * sessionFactory名默认为"sessionFactory".
 	 */
 	protected void flush() {
@@ -30,5 +31,23 @@ public class SpringTransactionalTestCase extends AbstractTransactionalJUnit4Spri
 	 */
 	protected void flush(final String sessionFactoryName) {
 		((SessionFactory) applicationContext.getBean(sessionFactoryName)).getCurrentSession().flush();
+	}
+
+	/**
+	 * @see #randomString(int)
+	 * 
+	 * 长度默认为5.
+	 */
+	protected String randomString() {
+		return randomString(5);
+	}
+
+	/**
+	 * 产生包含数字和字母的随机字符串.
+	 * 
+	 * @param length 产生字符串长度
+	 */
+	protected String randomString(int length) {
+		return RandomStringUtils.randomAlphanumeric(length);
 	}
 }

@@ -1,11 +1,14 @@
 package org.springside.examples.miniweb.functional.security;
 
-import org.springside.examples.miniweb.functional.SeleniumBaseTestCase;
+import static org.junit.Assert.*;
 
+import org.junit.Test;
+import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
 
-public class UserManagerTest extends SeleniumBaseTestCase {
+public class UserManagerTest extends BaseSeleniumTestCase {
 
-	public void testCRUD() {
+	@Test
+	public void CrudUser() {
 		String loginName = createUser();
 		editUser(loginName);
 		deleteUser(loginName);
@@ -16,7 +19,7 @@ public class UserManagerTest extends SeleniumBaseTestCase {
 		selenium.click("link=增加新用户");
 		selenium.waitForPageToLoad("30000");
 
-		String loginName = "Tester" + random();
+		String loginName = "Tester" + randomString();
 		selenium.type("loginName", loginName);
 		selenium.type("name", loginName);
 		selenium.type("password", "tester");
@@ -31,13 +34,13 @@ public class UserManagerTest extends SeleniumBaseTestCase {
 
 	private void editUser(String loginName) {
 		String newUserName = "newUserName";
-		
+
 		selenium.open("/mini-web/security/user.action");
 		findUser(loginName);
 
 		selenium.click("link=修改");
 		selenium.waitForPageToLoad("30000");
-		
+
 		selenium.type("name", newUserName);
 		selenium.click("//input[@value='提交']");
 		selenium.waitForPageToLoad("30000");
@@ -53,12 +56,12 @@ public class UserManagerTest extends SeleniumBaseTestCase {
 
 		selenium.click("link=删除");
 		selenium.waitForPageToLoad("30000");
-		
+
 		assertTrue(selenium.isTextPresent("删除用户成功"));
 		findUser(loginName);
 		assertTrue(selenium.isTextPresent("共0页"));
 	}
-		
+
 	private void findUser(String userName) {
 		selenium.type("filter_EQ_loginName", userName);
 		selenium.click("//input[@value='搜索']");

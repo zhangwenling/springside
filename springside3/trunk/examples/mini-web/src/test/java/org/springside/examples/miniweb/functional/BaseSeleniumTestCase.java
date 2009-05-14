@@ -1,27 +1,23 @@
 package org.springside.examples.miniweb.functional;
 
-import org.apache.commons.lang.RandomStringUtils;
+import static org.junit.Assert.*;
 
-import com.thoughtworks.selenium.SeleneseTestCase;
+import org.springside.modules.test.selenium.SeleniumTestCase;
 
-public abstract class SeleniumBaseTestCase extends SeleneseTestCase {
+public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 
 	@Override
 	public void setUp() throws Exception {
-		super.setUp("http://localhost:8080", "*chrome");
+		setUpSelenium("http://localhost:8080", "*chrome");
 		login();
 	}
-	
-	public void login() {
+
+	protected void login() {
 		selenium.open("/mini-web/login.action");
 		selenium.type("j_username", "admin");
 		selenium.type("j_password", "admin");
 		selenium.click("//input[@value='登录']");
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("你好,admin."));
-	}
-
-	public static String random() {
-		return RandomStringUtils.randomAlphabetic(5);
 	}
 }
