@@ -71,7 +71,7 @@ public class UserDetailServiceImplTest {
 	}
 
 	@Test(expected = UsernameNotFoundException.class)
-	public void testLoadUserNotExist() {
+	public void loadUserNotExist() {
 		//录制脚本
 		EasyMock.expect(userDao.findByUnique("loginName", "userNameNotExist")).andReturn(null);
 		EasyMock.replay(userDao);

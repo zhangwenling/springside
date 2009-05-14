@@ -8,7 +8,7 @@ import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
 public class UserManagerTest extends BaseSeleniumTestCase {
 
 	@Test
-	public void CrudUser() {
+	public void crudUser() {
 		String loginName = createUser();
 		editUser(loginName);
 		deleteUser(loginName);

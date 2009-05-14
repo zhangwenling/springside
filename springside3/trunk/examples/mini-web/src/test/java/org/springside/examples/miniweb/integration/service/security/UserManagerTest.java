@@ -62,7 +62,7 @@ public class UserManagerTest extends SpringTransactionalTestCase {
 
 	//期望抛出ConstraintViolationException的异常.
 	@Test(expected = org.hibernate.exception.ConstraintViolationException.class)
-	public void testSavenEntityNotUnique() {
+	public void savenUserNotUnique() {
 		User entity = new User();
 		entity.setLoginName("admin");
 		userManager.save(entity);
