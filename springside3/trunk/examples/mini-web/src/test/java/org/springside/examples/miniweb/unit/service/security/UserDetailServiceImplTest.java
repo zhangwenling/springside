@@ -1,16 +1,19 @@
 package org.springside.examples.miniweb.unit.service.security;
 
+import static org.junit.Assert.*;
+
 import org.easymock.classextension.EasyMock;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.springframework.security.GrantedAuthorityImpl;
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UsernameNotFoundException;
-import org.springframework.test.annotation.ExpectedException;
 import org.springside.examples.miniweb.dao.security.UserDao;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.security.UserDetailServiceImpl;
-import org.springside.modules.test.junit38.SpringAnnotationTestCase;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
@@ -20,24 +23,25 @@ import org.springside.modules.utils.ReflectionUtils;
  * 
  * @author calvin
  */
-public class UserDetailServiceImplTest extends SpringAnnotationTestCase {
-	private UserDetailServiceImpl userDetailService = new UserDetailServiceImpl();
-	private UserDao userDao = null;
+public class UserDetailServiceImplTest {
+	private UserDetailServiceImpl	userDetailService	= new UserDetailServiceImpl();
+	private UserDao					userDao				= null;
 
-	@Override
+	@Before
 	public void setUp() {
 		//创建mock对象
 		userDao = EasyMock.createMock(UserDao.class);
 		ReflectionUtils.setFieldValue(userDetailService, "userDao", userDao);
 	}
 
-	@Override
+	@After
 	public void tearDown() {
 		//确认的脚本都已执行
 		EasyMock.verify(userDao);
 	}
 
-	public void testLoadUserExist() {
+	@Test
+	public void loadUserExist() {
 		//准备数据
 		String loginName = "user";
 		String passwd = "userPass";
@@ -66,7 +70,7 @@ public class UserDetailServiceImplTest extends SpringAnnotationTestCase {
 		assertEquals(new GrantedAuthorityImpl(authName), userDetails.getAuthorities()[0]);
 	}
 
-	@ExpectedException(value = UsernameNotFoundException.class)
+	@Test(expected = UsernameNotFoundException.class)
 	public void testLoadUserNotExist() {
 		//录制脚本
 		EasyMock.expect(userDao.findByUnique("loginName", "userNameNotExist")).andReturn(null);

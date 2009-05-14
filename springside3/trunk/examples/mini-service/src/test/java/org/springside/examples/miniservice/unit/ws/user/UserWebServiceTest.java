@@ -1,11 +1,15 @@
 package org.springside.examples.miniservice.unit.ws.user;
 
+import static org.junit.Assert.*;
+
 import org.easymock.classextension.EasyMock;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.service.user.UserManager;
 import org.springside.examples.miniservice.ws.WSResult;
 import org.springside.examples.miniservice.ws.user.UserWebServiceImpl;
-import org.springside.modules.test.junit38.SpringAnnotationTestCase;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
@@ -16,12 +20,11 @@ import org.springside.modules.utils.ReflectionUtils;
  * @author calvin
  * 
  */
-public class UserWebServiceTest extends SpringAnnotationTestCase {
-	private UserWebServiceImpl userWebService = new UserWebServiceImpl();
+public class UserWebServiceTest {
+	private UserWebServiceImpl	userWebService	= new UserWebServiceImpl();
+	private UserManager			userManager		= null;
 
-	private UserManager userManager = null;
-
-	@Override
+	@Before
 	public void setUp() {
 		//创建mock对象
 		userManager = EasyMock.createMock(UserManager.class);
@@ -29,13 +32,14 @@ public class UserWebServiceTest extends SpringAnnotationTestCase {
 		userWebService.initDozer();
 	}
 
-	@Override
+	@After
 	public void tearDown() {
 		//确认的脚本都已执行
 		EasyMock.verify(userManager);
 	}
 
-	public void testAuthUser() {
+	@Test
+	public void authUser() {
 		//准备数据,录制脚本
 		User user = new User();
 		user.setId(1L);

@@ -1,49 +1,57 @@
 package org.springside.examples.showcase.integration.jmx;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.jmx.server.ServerConfigMBean;
 import org.springside.modules.jmx.JmxClient;
-import org.springside.modules.test.junit38.SpringContextTestCase;
+import org.springside.modules.test.junit4.SpringContextTestCase;
 
 /**
  * sprinside-jee中ClientMBeanProxyFactory的测试用例.
  * 
  * @author calvin
  */
-//载入/jmx/applicationContext-jmx-server.xml和父类中定义的applicationContext.xml.
 @ContextConfiguration(locations = { "/jmx/applicationContext-jmx-server.xml" })
 public class JmxClientTest extends SpringContextTestCase {
 
 	private JmxClient jmxClient;
-
 	private ServerConfigMBean serverConfigMbean;
 
-	@Override
+	@Before
 	public void setUp() throws Exception {
+		System.out.println("aa");
 		jmxClient = new JmxClient("service:jmx:rmi:///jndi/rmi://localhost:1099/showcase");
 		serverConfigMbean = jmxClient.getMBeanProxy("org.springside.showcase:type=Configurator",
 				ServerConfigMBean.class);
 	}
 
-	@Override
+	@After
 	public void tearDown() throws Exception {
 		jmxClient.close();
 	}
 
-	public void testGetMBeanAttribute() {
+	@Test
+	public void getMBeanAttribute() {
 		assertEquals("node1", serverConfigMbean.getNodeName());
 	}
 
-	public void testSetMBeanAttribute() {
+	@Test
+	public void setMBeanAttribute() {
 		serverConfigMbean.setNodeName("foo");
 		assertEquals("foo", serverConfigMbean.getNodeName());
 	}
 
-	public void testGetMBeanAttributeByReflection() {
+	@Test
+	public void getMBeanAttributeByReflection() {
 		assertEquals(0L, jmxClient.getAttribute("org.hibernate:type=Statistics", "SessionOpenCount"));
 	}
 
-	public void testInvokeMBeanMethodByReflection() {
+	@Test
+	public void invokeMBeanMethodByReflection() {
 		jmxClient.inoke("org.hibernate:type=Statistics", "logSummary");
 	}
 }

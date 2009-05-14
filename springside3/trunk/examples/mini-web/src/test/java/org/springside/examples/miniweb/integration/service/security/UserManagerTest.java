@@ -1,12 +1,14 @@
 package org.springside.examples.miniweb.integration.service.security;
 
+import static org.junit.Assert.*;
+
 import org.apache.commons.lang.RandomStringUtils;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.ExpectedException;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.security.UserManager;
-import org.springside.modules.test.junit38.SpringTransactionalTestCase;
+import org.springside.modules.test.junit4.SpringTransactionalTestCase;
 
 /**
  * UserManager的集成测试用例.
@@ -18,9 +20,10 @@ import org.springside.modules.test.junit38.SpringTransactionalTestCase;
 public class UserManagerTest extends SpringTransactionalTestCase {
 
 	@Autowired
-	private UserManager userManager;
+	private UserManager	userManager;
 
-	public void testUserCRUD() {
+	@Test
+	public void crudUser() {
 		//保存用户并验证.
 		User entity = new User();
 		// 因为LoginName要求唯一性，因此添加random字段。
@@ -37,7 +40,8 @@ public class UserManagerTest extends SpringTransactionalTestCase {
 		flush();
 	}
 
-	public void testUserAndRole() {
+	@Test
+	public void crudUserAndRole() {
 		//保存带角色的用户并验证
 		User entity = new User();
 		entity.setLoginName("tester" + RandomStringUtils.randomAlphabetic(5));
@@ -58,7 +62,7 @@ public class UserManagerTest extends SpringTransactionalTestCase {
 	}
 
 	//期望抛出ConstraintViolationException的异常.
-	@ExpectedException(value = org.hibernate.exception.ConstraintViolationException.class)
+	@Test(expected = org.hibernate.exception.ConstraintViolationException.class)
 	public void testSavenEntityNotUnique() {
 		User entity = new User();
 		entity.setLoginName("admin");
