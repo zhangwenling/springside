@@ -16,10 +16,10 @@ public class AsyncLoggerTest extends SpringContextTestCase {
 
 	@Test
 	public void dBLogger() {
-		Logger logger = LoggerFactory.getLogger("org.springside.examples.showcase.log.dbLogExample");
+		Logger dbLogger = LoggerFactory.getLogger("org.springside.examples.showcase.log.dbLogExample");
 		int logCount = 10;
 		for (int i = 1; i <= logCount; i++) {
-			logger.info("helloworld {}", i);
+			dbLogger.info("helloworld {}", i);
 		}
 	}
 }

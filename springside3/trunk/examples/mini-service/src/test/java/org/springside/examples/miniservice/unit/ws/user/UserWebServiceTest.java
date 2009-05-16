@@ -1,9 +1,8 @@
 package org.springside.examples.miniservice.unit.ws.user;
 
-import static org.junit.Assert.*;
-
 import org.easymock.classextension.EasyMock;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springside.examples.miniservice.entity.user.User;
@@ -21,8 +20,8 @@ import org.springside.modules.utils.ReflectionUtils;
  * 
  */
 public class UserWebServiceTest {
-	private UserWebServiceImpl	userWebService	= new UserWebServiceImpl();
-	private UserManager			userManager		= null;
+	private UserWebServiceImpl userWebService = new UserWebServiceImpl();
+	private UserManager userManager = null;
 
 	@Before
 	public void setUp() {
@@ -51,9 +50,9 @@ public class UserWebServiceTest {
 
 		//执行测试,校验结果
 		WSResult result = userWebService.authUser("admin", "admin");
-		assertEquals(result.getCode(), WSResult.SUCCESS);
+		Assert.assertEquals(result.getCode(), WSResult.SUCCESS);
 
 		result = userWebService.authUser("admin", "false");
-		assertEquals(result.getCode(), WSResult.FALSE);
+		Assert.assertEquals(result.getCode(), WSResult.FALSE);
 	}
 }

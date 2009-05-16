@@ -1,9 +1,8 @@
 package org.springside.examples.miniweb.unit.service.security;
 
-import static org.junit.Assert.*;
-
 import org.easymock.classextension.EasyMock;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.security.GrantedAuthorityImpl;
@@ -24,8 +23,8 @@ import org.springside.modules.utils.ReflectionUtils;
  * @author calvin
  */
 public class UserDetailServiceImplTest {
-	private UserDetailServiceImpl	userDetailService	= new UserDetailServiceImpl();
-	private UserDao					userDao				= null;
+	private UserDetailServiceImpl userDetailService = new UserDetailServiceImpl();
+	private UserDao userDao = null;
 
 	@Before
 	public void setUp() {
@@ -64,10 +63,10 @@ public class UserDetailServiceImplTest {
 		UserDetails userDetails = userDetailService.loadUserByUsername(loginName);
 
 		//校验结果
-		assertEquals(loginName, userDetails.getUsername());
-		assertEquals(passwd, userDetails.getPassword());
-		assertEquals(1, userDetails.getAuthorities().length);
-		assertEquals(new GrantedAuthorityImpl(authName), userDetails.getAuthorities()[0]);
+		Assert.assertEquals(loginName, userDetails.getUsername());
+		Assert.assertEquals(passwd, userDetails.getPassword());
+		Assert.assertEquals(1, userDetails.getAuthorities().length);
+		Assert.assertEquals(new GrantedAuthorityImpl(authName), userDetails.getAuthorities()[0]);
 	}
 
 	@Test(expected = UsernameNotFoundException.class)

@@ -1,7 +1,5 @@
 package org.springside.examples.miniweb.integration.service.security;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.entity.security.Role;
@@ -19,7 +17,7 @@ import org.springside.modules.test.junit4.SpringTransactionalTestCase;
 public class UserManagerTest extends SpringTransactionalTestCase {
 
 	@Autowired
-	private UserManager	userManager;
+	private UserManager userManager;
 
 	@Test
 	public void crudUser() {

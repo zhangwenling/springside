@@ -1,7 +1,5 @@
 package org.springside.examples.showcase.integration.jmx;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

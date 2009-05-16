@@ -1,7 +1,5 @@
 package org.springside.examples.miniweb.functional;
 
-import static org.junit.Assert.*;
-
 import org.springside.modules.test.selenium.SeleniumTestCase;
 
 public abstract class BaseSeleniumTestCase extends SeleniumTestCase {

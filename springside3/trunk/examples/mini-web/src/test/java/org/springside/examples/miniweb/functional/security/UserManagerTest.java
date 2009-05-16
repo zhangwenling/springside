@@ -1,7 +1,5 @@
 package org.springside.examples.miniweb.functional.security;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
 

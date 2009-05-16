@@ -2,6 +2,7 @@ package org.springside.modules.test.selenium;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 
 import com.thoughtworks.selenium.DefaultSelenium;
@@ -24,6 +25,14 @@ public class SeleniumTestCase {
 		selenium = new DefaultSelenium("localhost", 4444, url, explorer);
 	}
 
+	protected void assertTrue(boolean condition) {
+		Assert.assertTrue(condition);
+	}
+
+	protected void assertEquals(Object expected, Object actual) {
+		Assert.assertEquals(expected, actual);
+	}
+
 	/**
 	 * @see #randomString(int)
 	 * 
@@ -41,5 +50,4 @@ public class SeleniumTestCase {
 	protected String randomString(int length) {
 		return RandomStringUtils.randomAlphanumeric(length);
 	}
-
 }

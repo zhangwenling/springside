@@ -2,6 +2,7 @@ package org.springside.modules.test.junit4;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.hibernate.SessionFactory;
+import org.junit.Assert;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
@@ -49,5 +50,17 @@ public class SpringTransactionalTestCase extends AbstractTransactionalJUnit4Spri
 	 */
 	protected String randomString(int length) {
 		return RandomStringUtils.randomAlphanumeric(length);
+	}
+
+	protected void assertTrue(boolean condition) {
+		Assert.assertTrue(condition);
+	}
+
+	protected void assertEquals(Object expected, Object actual) {
+		Assert.assertEquals(expected, actual);
+	}
+
+	protected void assertNotNull(Object object) {
+		Assert.assertNotNull(object);
 	}
 }
