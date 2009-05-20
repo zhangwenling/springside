@@ -16,7 +16,7 @@
 <script type="text/javascript">
 
 		function refreshCaptcha(){
-				$('#captchaImg').html('<img src="${ctx}/security/jcaptcha.jpg?'+Math.random()+'"/>');
+				$('#captchaImg').html('<img src="${ctx}/security/jcaptcha.jpg?'+Math.round(Math.random()*100000)+'"/>');
 		}
 </script>
 	

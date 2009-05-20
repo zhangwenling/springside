@@ -1,10 +1,12 @@
 package org.springside.examples.miniweb.functional;
 
+import org.junit.Before;
 import org.springside.modules.test.selenium.SeleniumTestCase;
 
 public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 
 	@Override
+	@Before
 	public void setUp() throws Exception {
 		setUpSelenium("http://localhost:8080", "*chrome");
 		login();

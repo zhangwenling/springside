@@ -22,7 +22,8 @@ public class SeleniumTestCase {
 	}
 
 	protected void setUpSelenium(String url, String explorer) {
-		selenium = new DefaultSelenium("localhost", 4444, url, explorer);
+		selenium = new DefaultSelenium("localhost", 4444, explorer, url);
+		selenium.start();
 	}
 
 	protected void assertTrue(boolean condition) {

@@ -11,6 +11,28 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		editUser(loginName);
 		deleteUser(loginName);
 	}
+	
+	@Test
+	public void validateUser() {
+		selenium.open("/mini-web/security/user.action");
+		selenium.click("link=增加新用户");
+		selenium.waitForPageToLoad("30000");
+
+		selenium.type("loginName", "admin");
+		selenium.type("name", "");
+		selenium.type("password", "a");
+		selenium.type("passwordConfirm", "abc");
+		selenium.type("email", "abc.com");
+		selenium.click("//input[@value='提交']");
+
+		assertTrue(selenium.isTextPresent("用户登录名已存在"));
+		assertEquals("请输入一个长度最少是 3 的字符串", selenium.getTable("//form[@id='inputForm']/table.2.1"));
+		assertEquals("必选字段", selenium.getTable("//form[@id='inputForm']/table.1.1"));
+		assertEquals("输入与上面相同的密码", selenium.getTable("//form[@id='inputForm']/table.3.1"));
+		assertEquals("请输入正确格式的电子邮件", selenium.getTable("//form[@id='inputForm']/table.4.1"));
+		
+	
+	}
 
 	private String createUser() {
 		selenium.open("/mini-web/security/user.action");

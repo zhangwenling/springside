@@ -21,16 +21,17 @@
 					loginName: { 
         				required: true, 
         				remote: "user!checkLoginName.action?orgLoginName="+encodeURIComponent('${loginName}')
-    			},
-          name: "required",
-          password: {
+    				},
+          			name: "required",
+          			password: {
     					required: true,
     					minlength:3
-    			}, 
-    			passwordConfirm: {
+    				}, 
+    				passwordConfirm: {
     					equalTo:"#password"
-    			},
-    			email:"email"
+    				},
+    				email:"email",
+    				checkedRoleIds:"required"
 				},
 				messages: {
 					loginName: {
