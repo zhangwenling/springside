@@ -1,4 +1,4 @@
-package org.springside.modules.webservice;
+package org.springside.examples.miniservice.ws;
 
 import javax.annotation.PostConstruct;
 

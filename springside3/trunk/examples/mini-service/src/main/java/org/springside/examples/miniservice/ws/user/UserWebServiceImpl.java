@@ -11,10 +11,10 @@ import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.service.user.UserManager;
 import org.springside.examples.miniservice.ws.Constants;
 import org.springside.examples.miniservice.ws.WSResult;
+import org.springside.examples.miniservice.ws.WebServiceSupport;
 import org.springside.examples.miniservice.ws.user.dto.CreateUserResult;
 import org.springside.examples.miniservice.ws.user.dto.GetAllUserResult;
 import org.springside.examples.miniservice.ws.user.dto.UserDTO;
-import org.springside.modules.webservice.WebServiceSupport;
 
 /**
  * WebService实现类.
