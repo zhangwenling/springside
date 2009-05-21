@@ -132,8 +132,8 @@
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -202,7 +202,7 @@
 			<artifactId>commons-beanutils</artifactId>
 		</dependency>
 		<!-- utils end -->
-		
+
 		<!-- test begin -->
 		<dependency>
 			<groupId>junit</groupId>

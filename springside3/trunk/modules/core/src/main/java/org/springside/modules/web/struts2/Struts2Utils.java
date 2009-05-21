@@ -7,9 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,7 +74,7 @@ public class Struts2Utils {
 	 * render("text/plain", "hello", "no-cache:false");
 	 * render("text/plain", "hello", "encoding:GBK", "no-cache:false");
 	 * 
-	 * @param headers 可变的header数组，目前接受的值为"encoding:"或"no-cache:",默认值分别为UTF-8和true.                 
+	 * @param headers 可变的header数组，目前接受的值为"encoding:"或"no-cache:",默认值分别为UTF-8和true.
 	 */
 	public static void render(final String contentType, final String content, final String... headers) {
 		try {
@@ -152,7 +153,7 @@ public class Struts2Utils {
 	 */
 	@SuppressWarnings("unchecked")
 	public static void renderJson(final Map map, final String... headers) {
-		String jsonString = new JSONObject(map).toString();
+		String jsonString = JSONObject.fromObject(map).toString();
 		renderJson(jsonString, headers);
 	}
 
@@ -163,7 +164,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderJson(final Object object, final String... headers) {
-		String jsonString = new JSONObject(object).toString();
+		String jsonString = JSONObject.fromObject(object).toString();
 		renderJson(jsonString, headers);
 	}
 }
