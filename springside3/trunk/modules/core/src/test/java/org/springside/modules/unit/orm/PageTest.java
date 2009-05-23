@@ -6,11 +6,11 @@ import org.junit.Test;
 import org.springside.modules.orm.Page;
 
 public class PageTest extends Assert {
-	private Page<TestBean> page;
+	private Page<Object> page;
 
 	@Before
 	public void setUp() {
-		page = new Page<TestBean>();
+		page = new Page<Object>();
 	}
 
 	/**

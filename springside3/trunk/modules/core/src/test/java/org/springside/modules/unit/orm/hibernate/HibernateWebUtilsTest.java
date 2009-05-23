@@ -1,4 +1,4 @@
-package org.springside.modules.unit.orm;
+package org.springside.modules.unit.orm.hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
