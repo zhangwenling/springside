@@ -10,13 +10,14 @@ import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 
 /**
- * 领域对象业务管理类基类.
+ * Service层领域对象业务管理类基类.
+ * 使用HibernateDao<T,PK>进行业务对象的CRUD操作,子类需重载getEntityDao()函数提供该DAO.
  * 
  * @param <T> 领域对象类型
  * @param <PK> 领域对象的主键类型
  * 
  * eg.
- * public class UserManager extends EntityManager<User, Long>{ 
+ * public class UserManager extends EntityManager<User, Long>{
  * }
  * 
  * @author calvin
@@ -26,6 +27,9 @@ public abstract class EntityManager<T, PK extends Serializable> {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
+	/**
+	 * 在子类实现此函数,为下面的CRUD操作提供DAO.
+	 */
 	protected abstract HibernateDao<T, PK> getEntityDao();
 
 	// CRUD函数 //

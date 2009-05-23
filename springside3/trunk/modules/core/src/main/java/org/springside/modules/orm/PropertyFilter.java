@@ -13,7 +13,7 @@ public class PropertyFilter {
 	/**
 	 * 多个属性间OR关系的分隔符.
 	 */
-	public static final String OR_SEPARATOR = "__";
+	public static final String OR_SEPARATOR = "_OR_";
 
 	/**
 	 * 属性比较类型.
@@ -36,14 +36,14 @@ public class PropertyFilter {
 	}
 
 	/**
-	 * 获取属性名称,可用'__'分隔多个属性,此时属性间是or的关系.
+	 * 获取属性名称,可用'_OR_'分隔多个属性,此时属性间是or的关系.
 	 */
 	public String getPropertyName() {
 		return propertyName;
 	}
 
 	/**
-	 * 设置属性名称,可用'__'分隔多个属性,此时属性间是or的关系.
+	 * 设置属性名称,可用'_OR_'分隔多个属性,此时属性间是or的关系.
 	 */
 	public void setPropertyName(final String propertyName) {
 		this.propertyName = propertyName;

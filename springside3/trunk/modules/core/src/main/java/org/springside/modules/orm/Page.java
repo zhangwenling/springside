@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * 与具体ORM实现无关的分页参数及查询结果封装.
+ * 注意所有序号从1开始.
  * 
  * @param <T> Page中记录的类型.
  * @author calvin
@@ -87,35 +88,35 @@ public class Page<T> {
 	}
 
 	/**
-	* 根据pageNo和pageSize计算当前页第一条记录在总结果集中的位置,序号从0开始.
+	* 根据pageNo和pageSize计算当前页第一条记录在总结果集中的位置,序号从1开始.
 	*/
 	public int getFirst() {
-		return ((pageNo - 1) * pageSize);
+		return ((pageNo - 1) * pageSize) + 1;
 	}
 
 	/**
-	 * 获得排序字段,无默认值.多个排序字段时用','分隔,仅在Criterion查询时有效.
+	 * 获得排序字段,无默认值.多个排序字段时用','分隔.
 	 */
 	public String getOrderBy() {
 		return orderBy;
 	}
 
 	/**
-	 * 设置排序字段.多个排序字段时用','分隔.仅在Criterion查询时有效.
+	 * 设置排序字段,多个排序字段时用','分隔.
 	 */
 	public void setOrderBy(final String orderBy) {
 		this.orderBy = orderBy;
 	}
 
 	/**
-	 * 是否已设置排序字段,仅在Criterion查询时有效.
+	 * 是否已设置排序字段.
 	 */
 	public boolean isOrderBySetted() {
 		return StringUtils.isNotBlank(orderBy);
 	}
 
 	/**
-	 * 获得排序方向,默认为asc,仅在Criterion查询时有效.
+	 * 获得排序方向.
 	 * 
 	 * @param order 可选值为desc或asc,多个排序字段时用','分隔.
 	 */
@@ -124,7 +125,7 @@ public class Page<T> {
 	}
 
 	/**
-	 * 设置排序方式向,仅在Criterion查询时有效.
+	 * 设置排序方式向.
 	 * 
 	 * @param order 可选值为desc或asc,多个排序字段时用','分隔.
 	 */
@@ -140,14 +141,14 @@ public class Page<T> {
 	}
 
 	/**
-	 * 查询对象时是否自动另外执行count查询获取总记录数,默认为false,仅在Criterion查询时有效.
+	 * 查询对象时是否自动另外执行count查询获取总记录数,默认为false.
 	 */
 	public boolean isAutoCount() {
 		return autoCount;
 	}
 
 	/**
-	 * 查询对象时是否自动另外执行count查询获取总记录数,仅在Criterion查询时有效.
+	 * 查询对象时是否自动另外执行count查询获取总记录数.
 	 */
 	public void setAutoCount(final boolean autoCount) {
 		this.autoCount = autoCount;
@@ -200,6 +201,7 @@ public class Page<T> {
 
 	/**
 	 * 取得下页的页号,序号从1开始.
+	 * 当前页为尾页时仍返回尾页序号.
 	 */
 	public int getNextPage() {
 		if (isHasNext())
@@ -209,7 +211,7 @@ public class Page<T> {
 	}
 
 	/**
-	 * 是否还有上一页. 
+	 * 是否还有上一页.
 	 */
 	public boolean isHasPre() {
 		return (pageNo - 1 >= 1);
@@ -217,6 +219,7 @@ public class Page<T> {
 
 	/**
 	 * 取得上页的页号,序号从1开始.
+	 * 当前页为首页时返回首页序号.
 	 */
 	public int getPrePage() {
 		if (isHasPre())

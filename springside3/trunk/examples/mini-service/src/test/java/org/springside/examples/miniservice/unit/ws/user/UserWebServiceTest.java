@@ -19,7 +19,7 @@ import org.springside.modules.utils.ReflectionUtils;
  * @author calvin
  * 
  */
-public class UserWebServiceTest {
+public class UserWebServiceTest extends Assert {
 	private UserWebServiceImpl userWebService = new UserWebServiceImpl();
 	private UserManager userManager = null;
 
@@ -50,9 +50,9 @@ public class UserWebServiceTest {
 
 		//执行测试,校验结果
 		WSResult result = userWebService.authUser("admin", "admin");
-		Assert.assertEquals(result.getCode(), WSResult.SUCCESS);
+		assertEquals(result.getCode(), WSResult.SUCCESS);
 
 		result = userWebService.authUser("admin", "false");
-		Assert.assertEquals(result.getCode(), WSResult.FALSE);
+		assertEquals(result.getCode(), WSResult.FALSE);
 	}
 }

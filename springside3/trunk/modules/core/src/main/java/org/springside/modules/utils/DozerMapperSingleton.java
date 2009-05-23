@@ -15,9 +15,6 @@ public final class DozerMapperSingleton {
 
 	private static MapperIF instance = new DozerBeanMapper();//使用预初始化避免并发问题.
 
-	private DozerMapperSingleton() {
-	}
-
 	public static MapperIF getInstance() {
 		return instance;
 	}

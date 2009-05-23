@@ -10,9 +10,6 @@ import org.springframework.security.context.SecurityContextHolder;
  */
 public class SpringSecurityUtils {
 
-	private SpringSecurityUtils() {
-	}
-
 	/**
 	 * 取得当前用户的登录名,如果当前用户未登录则返回null.
 	 */

@@ -17,7 +17,7 @@ import org.springframework.util.Assert;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
- * 封装Hibernate原生API的CRUD泛型基类.
+ * 封装Hibernate原生API的DAO泛型基类.
  * 
  * 可在Service层直接使用,也可以扩展泛型DAO子类使用.
  * 参考Spring2.5自带的Petlinc例子,取消了HibernateTemplate,直接使用Hibernate原生API.
@@ -38,7 +38,6 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 用于扩展的DAO子类使用的构造函数.
-	 * 
 	 * 通过子类的泛型定义取得对象类型Class.
 	 * eg.
 	 * public class UserDao extends SimpleHibernateDao<User, Long>
@@ -49,6 +48,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 用于Service层直接使用SimpleHibernateDAO的构造函数.
+	 * 在构造函数中定义对象类型Class.
 	 * eg.
 	 * SimpleHibernateDao<User, Long> userDao = new SimpleHibernateDao<User, Long>(sessionFactory, User.class);
 	 */
@@ -112,7 +112,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 *	获取全部对象. 
+	 *	获取全部对象.
 	 */
 	public List<T> getAll() {
 		return find();
@@ -153,14 +153,14 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * 按HQL查询Integer类型结果. 
+	 * 按HQL查询Integer类型结果.
 	 */
 	public Integer findInt(final String hql, final Object... values) {
 		return (Integer) findUnique(hql, values);
 	}
 
 	/**
-	 * 按HQL查询Long类型结果. 
+	 * 按HQL查询Long类型结果.
 	 */
 	public Long findLong(final String hql, final Object... values) {
 		return (Long) findUnique(hql, values);

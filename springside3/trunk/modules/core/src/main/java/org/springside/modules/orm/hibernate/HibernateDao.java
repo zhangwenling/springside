@@ -25,7 +25,7 @@ import org.springside.modules.orm.PropertyFilter.MatchType;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
- * 封装SpringSide扩展功能的Hibernat泛型基类.
+ * 封装SpringSide扩展功能的Hibernat DAO泛型基类.
  * 
  * 扩展功能包括分页查询,按属性过滤条件列表查询.
  * 可在Service层直接使用,也可以扩展泛型DAO子类使用,见两个构造函数的注释.
@@ -37,8 +37,7 @@ import org.springside.modules.utils.ReflectionUtils;
  */
 public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao<T, PK> {
 	/**
-	 * 用于扩展的DAO子类使用的构造函数.
-	 * 
+	 * 用于扩展的DAO子类使用的构造函数
 	 * 通过子类的泛型定义取得对象类型Class.
 	 * eg.
 	 * public class UserDao extends HibernateDao<User, Long>{
@@ -50,6 +49,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 
 	/**
 	 * 用于Service层直接使用HibernateDAO的构造函数.
+	 * 在构造函数中定义对象类型Class.
 	 * eg.
 	 * HibernateDao<User, Long> userDao = new HibernateDao<User, Long>(sessionFactory, User.class);
 	 */
@@ -60,7 +60,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	// 分页查询函数 //
 
 	/**
-	 * 分页获取全部对象. 
+	 * 分页获取全部对象.
 	 */
 	public Page<T> getAll(final Page<T> page) {
 		return findByCriteria(page);
@@ -91,7 +91,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 按Criteria分页查询.
 	 * 
 	 * @param page 分页参数.支持pageSize、firstResult和orderBy、order、autoCount参数.
-	 *             其中autoCount指定是否动态获取总结果数.         
+	 *             其中autoCount指定是否动态获取总结果数.
 	 * @param criterions 数量可变的Criterion.
 	 * 
 	 * @return 分页查询结果.附带结果列表及所有查询时的参数.
@@ -117,7 +117,8 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	* 设置分页参数到Query对象,辅助函数.
 	*/
 	protected Query setPageParameter(final Query q, final Page<T> page) {
-		q.setFirstResult(page.getFirst());
+		//hibernate的firstResult的序号从0开始
+		q.setFirstResult(page.getFirst() - 1);
 		q.setMaxResults(page.getPageSize());
 		return q;
 	}
@@ -126,7 +127,8 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 设置分页参数到Criteria对象,辅助函数.
 	 */
 	protected Criteria setPageParameter(final Criteria c, final Page<T> page) {
-		c.setFirstResult(page.getFirst());
+		//hibernate的firstResult的序号从0开始
+		c.setFirstResult(page.getFirst() - 1);
 		c.setMaxResults(page.getPageSize());
 
 		if (page.isOrderBySetted()) {

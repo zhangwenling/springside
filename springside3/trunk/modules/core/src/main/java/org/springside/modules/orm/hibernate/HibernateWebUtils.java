@@ -30,6 +30,7 @@ public class HibernateWebUtils {
 	 * 根据对象ID集合,整理合并集合.
 	 * 
 	 * 默认对象主键的名称名为"id".
+	 * 
 	 * @see #mergeByCheckedIds(Collection, Collection, Class, String)
 	 */
 	public static <T, ID> void mergeByCheckedIds(final Collection<T> srcObjects, final Collection<ID> checkedIds,
@@ -107,7 +108,7 @@ public class HibernateWebUtils {
 	 * 
 	 * eg.
 	 * filter_EQUAL_name
-	 * filter_LIKE_name|email
+	 * filter_LIKE_name_OR_email
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<PropertyFilter> buildPropertyFilters(final HttpServletRequest request, final String filterPrefix) {
