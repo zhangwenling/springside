@@ -8,21 +8,41 @@ import org.junit.Before;
 import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.Selenium;
 
+/**
+ * Selenium测试基类.
+ * 
+ * @author calvin
+ */
 public class SeleniumTestCase {
 	protected Selenium selenium;
 
+	/**
+	 * 初始化默认的selenium变量.
+	 * selenium server的地址为localhost:4444, 待测应用基础路径为"http://localhost:8080/", 浏览器为Firefox.
+	 */
 	@Before
 	public void setUp() throws Exception {
-		setUpSelenium("http://localhost:8080/", "*chrome");
+		initSelenium("http://localhost:8080/", "*firefox");
 	}
 
+	/**
+	 * 关闭selenium变量.
+	 */
 	@After
 	public void tearDown() throws Exception {
 		selenium.close();
 	}
 
-	protected void setUpSelenium(String url, String explorer) {
-		selenium = new DefaultSelenium("localhost", 4444, explorer, url);
+	/**
+	 * 初始化selenium变量.
+	 * 
+	 * 连接默认的selenium server(地址为localhost:4444),根据参数初始化selenium变量.
+	 * 
+	 * @param siteUrl 待测Web应用的基本路径, 如"http://localhost:8080/"
+	 * @param browser 浏览器选定, 可取值有*iexplore代表IE,*firefox代表Firefox.
+	 */
+	protected void initSelenium(String siteUrl, String browser) {
+		selenium = new DefaultSelenium("localhost", 4444, browser, siteUrl);
 		selenium.start();
 	}
 

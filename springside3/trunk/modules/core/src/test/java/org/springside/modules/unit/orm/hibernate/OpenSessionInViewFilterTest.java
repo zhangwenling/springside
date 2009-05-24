@@ -26,8 +26,7 @@ public class OpenSessionInViewFilterTest extends Assert {
 
 		request.setServletPath("/img/foo.jpg");
 		assertEquals(true, ReflectionUtils.invokeMethod(filter, "shouldNotFilter",
-				new Class[] { HttpServletRequest.class },
-				new Object[] { request }));
+				new Class[] { HttpServletRequest.class }, new Object[] { request }));
 
 		request.setServletPath("/foo.action");
 		assertEquals(false, ReflectionUtils.invokeMethod(filter, "shouldNotFilter",

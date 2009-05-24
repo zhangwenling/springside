@@ -4,7 +4,7 @@ import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContextHolder;
 
 /**
- * Spring Security的工具类.
+ * SpringSecurity的工具类.
  * 
  * @author calvin
  */

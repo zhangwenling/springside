@@ -5,10 +5,10 @@ import org.springside.modules.test.selenium.SeleniumTestCase;
 
 public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 
-	@Override
 	@Before
+	@Override
 	public void setUp() throws Exception {
-		setUpSelenium("http://localhost:8080", "*chrome");
+		initSelenium("http://localhost:8080", "*firefox");
 		login();
 	}
 

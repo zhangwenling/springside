@@ -81,6 +81,7 @@ public class ReflectionUtils {
 		} catch (IllegalAccessException e) {
 			logger.error("不可能抛出的异常:{}", e.getMessage());
 		}
+
 		return null;
 	}
 
@@ -141,7 +142,9 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 通过反射,获得定义Class时声明的父类的泛型参数的类型. 如public UserDao extends HibernateDao<User,Long>
+	 * 通过反射,获得定义Class时声明的父类的泛型参数的类型.
+	 * 
+	 * 如public UserDao extends HibernateDao<User,Long>
 	 *
 	 * @param clazz clazz The class to introspect
 	 * @param index the Index of the generic ddeclaration,start from 0.
@@ -173,15 +176,15 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 提取集合中的对象的属性,组合成List.
+	 * 提取集合中的对象的属性(通过getter函数),组合成List.
 	 * 
 	 * @param collection 来源集合.
 	 * @param propertityName 要提取的属性名.
 	 */
 	@SuppressWarnings("unchecked")
 	public static List fetchElementPropertyToList(final Collection collection, final String propertyName) {
-
 		List list = new ArrayList();
+
 		try {
 			for (Object obj : collection) {
 				list.add(PropertyUtils.getProperty(obj, propertyName));
@@ -194,7 +197,7 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 提取集合中的对象的属性,组合成由分割符分隔的字符串.
+	 * 提取集合中的对象的属性(通过getter函数),组合成由分割符分隔的字符串.
 	 * 
 	 * @param collection 来源集合.
 	 * @param propertityName 要提取的属性名.

@@ -16,9 +16,11 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 public class SpringTransactionalTestCase extends AbstractTransactionalJUnit4SpringContextTests {
 
 	/**
-	 * @see #flush(String)
+	 * 刷新sessionFactory,强制Hibernate执行SQL以验证ORM配置.
 	 * 
 	 * sessionFactory名默认为"sessionFactory".
+	 * 
+	 * @see #flush(String)
 	 */
 	protected void flush() {
 		flush("sessionFactory");

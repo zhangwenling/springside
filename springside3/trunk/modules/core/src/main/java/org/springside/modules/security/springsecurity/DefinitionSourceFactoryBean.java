@@ -14,9 +14,9 @@ import org.springframework.security.util.AntUrlPathMatcher;
 import org.springframework.security.util.UrlMatcher;
 
 /**
- * DefinitionSource工厂,可读取在数据库或其它地方中定义的URL-授权关系.
+ * DefinitionSource工厂.
  * 
- * 由注入的resourceDetailService提供LinkedHashMap<String, String>形式的URL及授权关系定义.
+ * 由注入的resourceDetailService读取在数据库或其它地方中定义的URL-授权关系,提供LinkedHashMap<String, String>形式的URL及授权关系定义.
  * 
  * @see org.springframework.security.intercept.web.DefaultFilterInvocationDefinitionSource
  * @see ResourceDetailService
@@ -31,6 +31,9 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 		this.resourceDetailService = resourceDetailService;
 	}
 
+	/**
+	 * 返回注入了Ant Style的URLMatcher和ResourceDetailService提供的RequestMap的DefaultFilterInvocationDefinitionSource.
+	 */
 	public Object getObject() throws Exception {
 		LinkedHashMap<RequestKey, ConfigAttributeDefinition> requestMap = buildRequestMap();
 		UrlMatcher matcher = getUrlMatcher();
@@ -48,25 +51,32 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 		return true;
 	}
 
-	private UrlMatcher getUrlMatcher() {
+	/**
+	 * 提供Ant Style的URLMatcher.
+	 */
+	protected UrlMatcher getUrlMatcher() {
 		return new AntUrlPathMatcher();
 	}
 
-	private LinkedHashMap<RequestKey, ConfigAttributeDefinition> buildRequestMap() throws Exception {
+	/**
+	 * 将resourceDetailService提供LinkedHashMap<String, String>形式的URL及授权关系定义
+	 * 转化为DefaultFilterInvocationDefinitionSource需要的LinkedHashMap<RequestKey, ConfigAttributeDefinition>形式.
+	 */
+	protected LinkedHashMap<RequestKey, ConfigAttributeDefinition> buildRequestMap() throws Exception {
 		LinkedHashMap<String, String> srcMap = resourceDetailService.getRequestMap();
-		LinkedHashMap<RequestKey, ConfigAttributeDefinition> requestMap = new LinkedHashMap<RequestKey, ConfigAttributeDefinition>();
+		LinkedHashMap<RequestKey, ConfigAttributeDefinition> distMap = new LinkedHashMap<RequestKey, ConfigAttributeDefinition>();
 		ConfigAttributeEditor editor = new ConfigAttributeEditor();
 
 		for (Map.Entry<String, String> entry : srcMap.entrySet()) {
 			RequestKey key = new RequestKey(entry.getKey(), null);
 			if (StringUtils.isNotBlank(entry.getValue())) {
 				editor.setAsText(entry.getValue());
-				requestMap.put(key, (ConfigAttributeDefinition) editor.getValue());
+				distMap.put(key, (ConfigAttributeDefinition) editor.getValue());
 			} else {
-				requestMap.put(key, ConfigAttributeDefinition.NO_ATTRIBUTES);
+				distMap.put(key, ConfigAttributeDefinition.NO_ATTRIBUTES);
 			}
 		}
 
-		return requestMap;
+		return distMap;
 	}
 }

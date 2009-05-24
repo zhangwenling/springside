@@ -24,15 +24,12 @@ import org.slf4j.LoggerFactory;
 public class Struts2Utils {
 
 	//header 常量定义
-	private static final String ENCODING_PREFIX = "encoding:";
-	private static final String NOCACHE_PREFIX = "no-cache:";
+	private static final String ENCODING_PREFIX = "encoding";
+	private static final String NOCACHE_PREFIX = "no-cache";
 	private static final String ENCODING_DEFAULT = "UTF-8";
 	private static final boolean NOCACHE_DEFAULT = true;
 
 	private static Logger logger = LoggerFactory.getLogger(Struts2Utils.class);
-
-	private Struts2Utils() {
-	}
 
 	// 取得Request/Response/Session的简化函数 //
 
@@ -105,6 +102,7 @@ public class Struts2Utils {
 			}
 
 			response.getWriter().write(content);
+			response.getWriter().flush();
 
 		} catch (IOException e) {
 			logger.error(e.getMessage(), e);
