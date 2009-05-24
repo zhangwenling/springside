@@ -39,7 +39,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		selenium.click("link=增加新用户");
 		selenium.waitForPageToLoad("30000");
 
-		String loginName = "Tester" + randomString();
+		String loginName = "Tester" + randomString(5);
 		selenium.type("loginName", loginName);
 		selenium.type("name", loginName);
 		selenium.type("password", "tester");

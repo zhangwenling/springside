@@ -135,7 +135,7 @@ public class HibernateWebUtils {
 				}
 				String propertyName = StringUtils.substringAfter(filterName, "_");
 
-				PropertyFilter filter = new PropertyFilter(propertyName, value, matchType);
+				PropertyFilter filter = new PropertyFilter(propertyName, matchType, value);
 				filterList.add(filter);
 			}
 		}

@@ -26,23 +26,6 @@ public class SeleniumTestCase {
 		selenium.start();
 	}
 
-	protected void assertTrue(boolean condition) {
-		Assert.assertTrue(condition);
-	}
-
-	protected void assertEquals(Object expected, Object actual) {
-		Assert.assertEquals(expected, actual);
-	}
-
-	/**
-	 * @see #randomString(int)
-	 * 
-	 * 长度默认为5.
-	 */
-	protected String randomString() {
-		return randomString(5);
-	}
-
 	/**
 	 * 产生包含数字和字母的随机字符串.
 	 * 
@@ -50,5 +33,31 @@ public class SeleniumTestCase {
 	 */
 	protected String randomString(int length) {
 		return RandomStringUtils.randomAlphanumeric(length);
+	}
+
+	// Assert 函数 //
+
+	protected void assertEquals(Object expected, Object actual) {
+		Assert.assertEquals(expected, actual);
+	}
+
+	protected void assertEquals(String message, Object expected, Object actual) {
+		Assert.assertEquals(message, expected, actual);
+	}
+
+	protected void assertTrue(boolean condition) {
+		Assert.assertTrue(condition);
+	}
+
+	protected void assertTrue(String message, boolean condition) {
+		Assert.assertTrue(message, condition);
+	}
+
+	protected void assertNotNull(Object object) {
+		Assert.assertNotNull(object);
+	}
+
+	protected void assertNotNull(String message, Object object) {
+		Assert.assertNotNull(message, object);
 	}
 }

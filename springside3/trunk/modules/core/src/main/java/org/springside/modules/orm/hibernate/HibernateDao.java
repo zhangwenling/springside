@@ -3,6 +3,7 @@ package org.springside.modules.orm.hibernate;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
@@ -63,7 +64,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 分页获取全部对象.
 	 */
 	public Page<T> getAll(final Page<T> page) {
-		return findByCriteria(page);
+		return find(page);
 	}
 
 	/**
@@ -72,12 +73,33 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 
 	 * @param page 分页参数.仅支持pageSize 和firstResult,忽略其他参数.
 	 * @param hql hql语句.
-	 * @param values 数量可变的查询参数.
+	 * @param values 数量可变的查询参数,按顺序绑定.
 	 * 
 	 * @return 分页查询结果,附带结果列表及所有查询时的参数.
 	 */
 	@SuppressWarnings("unchecked")
 	public Page<T> find(final Page<T> page, final String hql, final Object... values) {
+		Assert.notNull(page, "page不能为空");
+
+		Query q = createQuery(hql, values);
+		setPageParameter(q, page);
+		List result = q.list();
+		page.setResult(result);
+		return page;
+	}
+
+	/**
+	 * 按HQL分页查询.
+	 * 不支持自动获取总结果数,需用户另行执行查询.
+	 * 
+	 * @param page 分页参数.仅支持pageSize 和firstResult,忽略其他参数.
+	 * @param hql hql语句.
+	 * @param values 命名参数,按名称绑定.
+	 * 
+	 * @return 分页查询结果,附带结果列表及所有查询时的参数.
+	 */
+	@SuppressWarnings("unchecked")
+	public Page<T> find(final Page<T> page, final String hql, final Map<String, Object> values) {
 		Assert.notNull(page, "page不能为空");
 
 		Query q = createQuery(hql, values);
@@ -97,7 +119,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @return 分页查询结果.附带结果列表及所有查询时的参数.
 	 */
 	@SuppressWarnings("unchecked")
-	public Page<T> findByCriteria(final Page<T> page, final Criterion... criterions) {
+	public Page<T> find(final Page<T> page, final Criterion... criterions) {
 		Assert.notNull(page, "page不能为空");
 
 		Criteria c = createCriteria(criterions);
@@ -188,15 +210,14 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		return totalCount;
 	}
 
-	// 属性条件查询函数 //
+	// 属性过滤条件查询函数 //
 
 	/**
 	 * 按属性查找对象列表,支持多种匹配方式.
 	 * 
-	 * @param matchType 目前支持的取值为"EQUAL"与"LIKE".
+	 * @param matchType 匹配方式,目前支持的取值为"EQUAL"与"LIKE".
 	 */
-	public List<T> findBy(final String propertyName, final Object value, final String matchTypeStr) {
-		MatchType matchType = Enum.valueOf(MatchType.class, matchTypeStr);
+	public List<T> findBy(final String propertyName, final Object value, final MatchType matchType) {
 		Criterion criterion = buildPropertyCriterion(propertyName, value, matchType);
 		return find(criterion);
 	}
@@ -204,7 +225,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按属性过滤条件列表查找对象列表.
 	 */
-	public List<T> find(final List<PropertyFilter> filters) {
+	public List<T> find(List<PropertyFilter> filters) {
 		Criterion[] criterions = buildFilterCriterions(filters);
 		return find(criterions);
 	}
@@ -214,7 +235,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 */
 	public Page<T> find(final Page<T> page, final List<PropertyFilter> filters) {
 		Criterion[] criterions = buildFilterCriterions(filters);
-		return findByCriteria(page, criterions);
+		return find(page, criterions);
 	}
 
 	/**
@@ -258,5 +279,17 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		}
 
 		return criterion;
+	}
+
+	/**
+	 * 判断对象的属性值在数据库内是否唯一.
+	 * 
+	 * 在修改对象的情景下,如果属性新修改的值(value)等于属性原来的值(orgValue)则不作比较.
+	 */
+	public boolean isPropertyUnique(final String propertyName, final Object newValue, final Object orgValue) {
+		if (newValue == null || newValue.equals(orgValue))
+			return true;
+		Object object = findByUnique(propertyName, newValue);
+		return (object == null);
 	}
 }

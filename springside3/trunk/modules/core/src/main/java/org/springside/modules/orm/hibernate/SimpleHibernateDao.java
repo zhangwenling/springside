@@ -2,6 +2,8 @@ package org.springside.modules.orm.hibernate;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -63,7 +65,6 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 采用@Autowired按类型注入SessionFactory,当有多个SesionFactory的时候Override本函数.
-	 * @param sessionFactory
 	 */
 	@Autowired
 	public void setSessionFactory(final SessionFactory sessionFactory) {
@@ -139,23 +140,47 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	/**
 	 * 按HQL查询对象列表.
 	 * 
-	 * @param values 数量可变的参数
+	 * @param values 数量可变的参数,按顺序绑定.
 	 */
 	public List<T> find(final String hql, final Object... values) {
 		return createQuery(hql, values).list();
 	}
 
 	/**
-	 * 按HQL查询唯一对象.
+	 * 按HQL查询对象列表.
+	 * 
+	 * @param values 命名参数,按名称绑定.
 	 */
-	public Object findUnique(final String hql, final Object... values) {
-		return createQuery(hql, values).uniqueResult();
+	public List<T> find(final String hql, final Map<String, Object> values) {
+		return createQuery(hql, values).list();
+	}
+
+	/**
+	 * 按HQL查询唯一对象.
+	 * 
+	 * @param values 数量可变的参数,按顺序绑定.
+	 */
+	public T findUnique(final String hql, final Object... values) {
+		return (T) createQuery(hql, values).uniqueResult();
+	}
+
+	/**
+	 * 按HQL查询唯一对象.
+	 * 
+	 * @param values 命名参数,按名称绑定.
+	 */
+	public T findUnique(final String hql, final Map<String, Object> values) {
+		return (T) createQuery(hql, values).uniqueResult();
 	}
 
 	/**
 	 * 按HQL查询Integer类型结果.
 	 */
 	public Integer findInt(final String hql, final Object... values) {
+		return (Integer) findUnique(hql, values);
+	}
+	
+	public Integer findInt(final String hql, final Map<String, Object> values) {
 		return (Integer) findUnique(hql, values);
 	}
 
@@ -165,13 +190,20 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	public Long findLong(final String hql, final Object... values) {
 		return (Long) findUnique(hql, values);
 	}
+	
+	/**
+	 * 按HQL查询Long类型结果.
+	 */
+	public Long findLong(final String hql, final Map<String, Object> values) {
+		return (Long) findUnique(hql, values);
+	}
 
 	/**
 	 * 根据查询HQL与参数列表创建Query对象.
 	 * 
-	 * 返回对象类型不是Entity时可用此函数灵活查询.
+	 * 本类封装的find()函数全部默认返回对象类型为T,当不为T时使用本函数.
 	 * 
-	 * @param values 数量可变的参数
+	 * @param values 数量可变的参数,按顺序绑定.
 	 */
 	public Query createQuery(final String queryString, final Object... values) {
 		Assert.hasText(queryString, "queryString不能为空");
@@ -179,6 +211,22 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 		if (values != null) {
 			for (int i = 0; i < values.length; i++) {
 				query.setParameter(i, values[i]);
+			}
+		}
+		return query;
+	}
+
+	/**
+	 * 根据查询HQL与参数列表创建Query对象.
+	 * 
+	 * @param values 命名参数,按名称绑定.
+	 */
+	public Query createQuery(final String queryString, final Map<String, Object> values) {
+		Assert.hasText(queryString, "queryString不能为空");
+		Query query = getSession().createQuery(queryString);
+		if (values != null) {
+			for (Entry<String, Object> entry : values.entrySet()) {
+				query.setParameter(entry.getKey(), entry.getValue());
 			}
 		}
 		return query;
@@ -194,9 +242,18 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 按Criteria查询唯一对象.
+	 * 
+	 * @param criterions 数量可变的Criterion.
+	 */
+	public T findUnique(final Criterion... criterions) {
+		return (T) createCriteria(criterions).uniqueResult();
+	}
+
+	/**
 	 * 根据Criterion条件创建Criteria.
 	 * 
-	 * 返回对象类型不是Entity时可用此函数灵活查询.
+	 * 本类封装的find()函数全部默认返回对象类型为T,当不为T时使用本函数.
 	 * 
 	 * @param criterions 数量可变的Criterion.
 	 */
@@ -206,18 +263,6 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 			criteria.add(c);
 		}
 		return criteria;
-	}
-
-	/**
-	 * 判断对象的属性值在数据库内是否唯一.
-	 * 
-	 * 在修改对象的情景下,如果属性新修改的值(value)等于属性原来的值(orgValue)则不作比较.
-	 */
-	public boolean isPropertyUnique(final String propertyName, final Object newValue, final Object orgValue) {
-		if (newValue == null || newValue.equals(orgValue))
-			return true;
-		Object object = findByUnique(propertyName, newValue);
-		return (object == null);
 	}
 
 	/**

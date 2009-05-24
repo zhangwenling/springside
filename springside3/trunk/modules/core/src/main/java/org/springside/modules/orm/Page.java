@@ -17,12 +17,9 @@ public class Page<T> {
 	public static final String ASC = "asc";
 	public static final String DESC = "desc";
 
-	public static final int MIN_PAGESIZE = 5;
-	public static final int MAX_PAGESIZE = 200;
-
 	//分页参数
 	protected int pageNo = 1;
-	protected int pageSize = MIN_PAGESIZE;
+	protected int pageSize = 1;
 	protected String orderBy = null;
 	protected String order = null;
 	protected boolean autoCount = true;
@@ -67,23 +64,20 @@ public class Page<T> {
 	}
 
 	/**
-	 * 获得每页的记录数量,默认为10.
+	 * 获得每页的记录数量,默认为1.
 	 */
 	public int getPageSize() {
 		return pageSize;
 	}
 
 	/**
-	 * 设置每页的记录数量,超出MIN_PAGESIZE与MAX_PAGESIZE范围时会自动调整.
+	 * 设置每页的记录数量,低于1时自动调整为1.
 	 */
 	public void setPageSize(final int pageSize) {
 		this.pageSize = pageSize;
 
-		if (pageSize < MIN_PAGESIZE) {
-			this.pageSize = MIN_PAGESIZE;
-		}
-		if (pageSize > MAX_PAGESIZE) {
-			this.pageSize = MAX_PAGESIZE;
+		if (pageSize < 1) {
+			this.pageSize = 1;
 		}
 	}
 
@@ -109,7 +103,7 @@ public class Page<T> {
 	}
 
 	/**
-	 * 是否已设置排序字段.
+	 * 是否已设置排序字段,无默认值.
 	 */
 	public boolean isOrderBySetted() {
 		return StringUtils.isNotBlank(orderBy);

@@ -1,6 +1,6 @@
 package org.springside.examples.miniservice.integration.service.user;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class UserManagerTest extends SpringTransactionalTestCase {
 
 		User entity = new User();
 		// 因为LoginName要求唯一性，因此添加random字段。
-		entity.setLoginName("tester" + randomString());
+		entity.setLoginName("tester" + randomString(5));
 		entity.setName("foo");
 		entity.setEmail("foo@bar.com");
 		entity.setPassword("foo");

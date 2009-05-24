@@ -24,7 +24,7 @@ public class UserManagerTest extends SpringTransactionalTestCase {
 		//保存用户并验证.
 		User entity = new User();
 		// 因为LoginName要求唯一性，因此添加random字段。
-		entity.setLoginName("tester" + randomString());
+		entity.setLoginName("tester" + randomString(5));
 		entity.setName("foo");
 		entity.setEmail("foo@bar.com");
 		entity.setPassword("foo");
@@ -41,7 +41,7 @@ public class UserManagerTest extends SpringTransactionalTestCase {
 	public void crudUserAndRole() {
 		//保存带角色的用户并验证
 		User entity = new User();
-		entity.setLoginName("tester" + randomString());
+		entity.setLoginName("tester" + randomString(5));
 
 		Role role = new Role();
 		role.setId(1L);

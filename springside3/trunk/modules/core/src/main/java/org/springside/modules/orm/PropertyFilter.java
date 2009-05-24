@@ -29,10 +29,10 @@ public class PropertyFilter {
 	public PropertyFilter() {
 	}
 
-	public PropertyFilter(final String propertyName, final Object value, final MatchType matchType) {
+	public PropertyFilter(final String propertyName, final MatchType matchType, final Object value) {
 		this.propertyName = propertyName;
-		this.value = value;
 		this.matchType = matchType;
+		this.value = value;
 	}
 
 	/**

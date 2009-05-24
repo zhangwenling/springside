@@ -19,18 +19,15 @@ public class PageTest extends Assert {
 	@Test
 	public void defaultParameter() {
 		assertEquals(1, page.getPageNo());
-		assertEquals(Page.MIN_PAGESIZE, page.getPageSize());
+		assertEquals(1, page.getPageSize());
 		assertEquals(-1, page.getTotalCount());
 		assertEquals(-1, page.getTotalPages());
 
 		page.setPageNo(-1);
 		assertEquals(1, page.getPageNo());
 
-		page.setPageSize(Page.MIN_PAGESIZE - 1);
-		assertEquals(Page.MIN_PAGESIZE, page.getPageSize());
-
-		page.setPageSize(Page.MAX_PAGESIZE + 1);
-		assertEquals(Page.MAX_PAGESIZE, page.getPageSize());
+		page.setPageSize(-1);
+		assertEquals(1, page.getPageSize());
 	}
 
 	@Test
