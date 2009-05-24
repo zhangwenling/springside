@@ -69,6 +69,7 @@ public class ReflectionUtilsTest extends Assert {
 			return publicField;
 		}
 
+		@SuppressWarnings("unused")
 		private String privateMethod(String text) {
 			return "hello " + text;
 		}
@@ -77,6 +78,7 @@ public class ReflectionUtilsTest extends Assert {
 	class ParentBean<T, PK> {
 	}
 
+	@SuppressWarnings("unchecked")
 	class TestBean2 extends ParentBean {
 	}
 

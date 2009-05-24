@@ -1,9 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
-<%@ page
-	import="org.springframework.security.ui.AbstractProcessingFilter"%>
-<%@ page
-	import="org.springframework.security.ui.webapp.AuthenticationProcessingFilter"%>
+<%@ page import="org.springframework.security.ui.AbstractProcessingFilter"%>
+<%@ page import="org.springframework.security.ui.webapp.AuthenticationProcessingFilter"%>
 <%@ page import="org.springframework.security.AuthenticationException"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -53,7 +51,7 @@
 			</tr>
 			<tr>
 				<td>验证码:</td>
-				<td><input type='text' name='j_captcha' size='5'></td>
+				<td><input type='text' name='j_captcha' size='5' /></td>
 				<td><span id="captchaImg"><img  src="${ctx}/security/jcaptcha.jpg" /></span><a href="javascript:refreshCaptcha()">看不清楚换一张</a></td>
 			</tr>
 			<tr>

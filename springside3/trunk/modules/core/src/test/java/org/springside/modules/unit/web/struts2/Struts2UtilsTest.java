@@ -15,6 +15,7 @@ import com.opensymphony.xwork2.ActionContext;
 
 public class Struts2UtilsTest extends Assert {
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void render() throws UnsupportedEncodingException {
 		ActionContext.setContext(new ActionContext(new HashMap()));
@@ -48,6 +49,7 @@ public class Struts2UtilsTest extends Assert {
 		assertEquals("hello", response.getContentAsString());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void renderJson() throws UnsupportedEncodingException {
 		ActionContext.setContext(new ActionContext(new HashMap()));
@@ -85,7 +87,5 @@ public class Struts2UtilsTest extends Assert {
 		public void setName(String name) {
 			this.name = name;
 		}
-
 	}
-
 }

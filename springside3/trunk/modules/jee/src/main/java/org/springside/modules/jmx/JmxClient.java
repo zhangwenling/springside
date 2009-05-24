@@ -72,15 +72,14 @@ public class JmxClient {
 	}
 
 	/**
-	 * 创建标准MBean代理. 
+	 * 创建标准MBean代理.
 	 */
-	@SuppressWarnings("unchecked")
 	public <T> T getMBeanProxy(final String mbeanName, final Class<T> mBeanInterface) {
 		Assert.hasText(mbeanName, "mbeanName不能为空");
 		assertConnected();
 
 		ObjectName objectName = buildObjectName(mbeanName);
-		return (T)MBeanServerInvocationHandler.newProxyInstance(mbsc, objectName, mBeanInterface, false);
+		return MBeanServerInvocationHandler.newProxyInstance(mbsc, objectName, mBeanInterface, false);
 	}
 
 	/**
@@ -132,7 +131,7 @@ public class JmxClient {
 	/**
 	 * 按方法名直接调用MBean方法(无MBean的Class文件时使用).
 	 * 
-	 * @param signature 所有参数的类名集合.
+	 * @param signature 所有参数的Class全称集合.
 	 */
 	public void invoke(final String mbeanName, final String methodName, final Object[] params, final String[] signature) {
 		Assert.hasText(mbeanName, "mbeanName不能为空");

@@ -28,7 +28,7 @@
 	你好,<%=SpringSecurityUtils.getCurrentUserName()%>.&nbsp;&nbsp;
  	登录名: <input type="text" name="filter_EQ_loginName" value="${param['filter_EQ_loginName']}"  size="9"/> 
           姓名或Email: <input type="text" name="filter_LIKE_name_OR_email" value="${param['filter_LIKE_name_OR_email']}" size="9"/>
-	<input type="button" value="搜索" onClick="search()"/>
+	<input type="button" value="搜索" onclick="search()"/>
 </div> 
 <input type="hidden" name="page.pageNo" id="pageNo" value="${page.pageNo}"/>
 <input type="hidden" name="page.orderBy" id="orderBy" value="${page.orderBy}"/>
