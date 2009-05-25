@@ -34,7 +34,7 @@ import com.octo.captcha.service.CaptchaServiceException;
  * 2.filterProcessesUrl -- 登录表单处理URL, 需与SpringSecurity中的配置一致, 默认为"/j_spring_security_check".
  * 3.captchaServiceId -- captchaService在Spring ApplicationContext中的bean id,默认为"captchaService".
  * 4.captchaParamter -- 登录表单中验证码Input框的名称, 默认为"j_captcha".
- * 5.captchaPassValue -- 用于自动化功能测试的自动通过值, 默认不存在该值.
+ * 5.autoPassValue -- 用于自动化功能测试的自动通过值, 默认该值不存在.
  * 
  * 
  * 具体应用参考showcase示例的web.xml与login.jsp.
@@ -44,26 +44,26 @@ import com.octo.captcha.service.CaptchaServiceException;
 public class JCaptchaFilter implements Filter {
 
 	//web.xml中的参数名定义
-	private static final String CAPTCHA_PARAMTER_NAME = "captchaParamterName";
-	private static final String CAPTCHA_SERVICE_ID_NAME = "captchaServiceId";
-	private static final String AUTO_PASS_VALUE = "autoPassValue";
-	private static final String FILTER_PROCESSES_URL_NAME = "filterProcessesUrl";
-	private static final String FAILURE_URL_NAME = "failureUrl";
+	public static final String CAPTCHA_PARAMTER_NAME_PARAM = "captchaParamterName";
+	public static final String CAPTCHA_SERVICE_ID_PARAM = "captchaServiceId";
+	public static final String FILTER_PROCESSES_URL_PARAM = "filterProcessesUrl";
+	public static final String FAILURE_URL_PARAM = "failureUrl";
+	public static final String AUTO_PASS_VALUE_PARAM = "autoPassValue";
 
 	//默认值定义
-	private static final String DEFAULT_FILTER_PROCESSES_URL = "/j_spring_security_check";
-	private static final String DEFAULT_CAPTCHA_SERVICE_ID = "captchaService";
-	private static final String DEFAULT_CAPTCHA_PARAMTER = "j_captcha";
+	public static final String DEFAULT_FILTER_PROCESSES_URL = "/j_spring_security_check";
+	public static final String DEFAULT_CAPTCHA_SERVICE_ID = "captchaService";
+	public static final String DEFAULT_CAPTCHA_PARAMTER_NAME = "j_captcha";
 
 	private static Logger logger = LoggerFactory.getLogger(JCaptchaFilter.class);
 
 	private String failureUrl;
 	private String filterProcessesUrl = DEFAULT_FILTER_PROCESSES_URL;;
 	private String captchaServiceId = DEFAULT_CAPTCHA_SERVICE_ID;
-	private String captchaParamter = DEFAULT_CAPTCHA_PARAMTER;
-	private String autoPassValue = null;
+	private String captchaParamterName = DEFAULT_CAPTCHA_PARAMTER_NAME;
+	private String autoPassValue;
 
-	private CaptchaService captchaService = null;
+	private CaptchaService captchaService;
 
 	public void init(final FilterConfig fConfig) throws ServletException {
 		initParameters(fConfig);
@@ -74,25 +74,25 @@ public class JCaptchaFilter implements Filter {
 	 * 初始化web.xml中定义的filter init-param.
 	 */
 	private void initParameters(final FilterConfig fConfig) {
-		if (StringUtils.isBlank(fConfig.getInitParameter(FAILURE_URL_NAME)))
+		if (StringUtils.isBlank(fConfig.getInitParameter(FAILURE_URL_PARAM)))
 			throw new IllegalArgumentException("CaptchaFilter缺少failureUrl参数");
-		
-		failureUrl = fConfig.getInitParameter(FAILURE_URL_NAME);
 
-		if (StringUtils.isNotBlank(fConfig.getInitParameter(FILTER_PROCESSES_URL_NAME))) {
-			filterProcessesUrl = fConfig.getInitParameter(FILTER_PROCESSES_URL_NAME);
+		failureUrl = fConfig.getInitParameter(FAILURE_URL_PARAM);
+
+		if (StringUtils.isNotBlank(fConfig.getInitParameter(FILTER_PROCESSES_URL_PARAM))) {
+			filterProcessesUrl = fConfig.getInitParameter(FILTER_PROCESSES_URL_PARAM);
 		}
 
-		if (StringUtils.isNotBlank(fConfig.getInitParameter(CAPTCHA_SERVICE_ID_NAME))) {
-			captchaServiceId = fConfig.getInitParameter(CAPTCHA_SERVICE_ID_NAME);
+		if (StringUtils.isNotBlank(fConfig.getInitParameter(CAPTCHA_SERVICE_ID_PARAM))) {
+			captchaServiceId = fConfig.getInitParameter(CAPTCHA_SERVICE_ID_PARAM);
 		}
 
-		if (StringUtils.isNotBlank(fConfig.getInitParameter(CAPTCHA_PARAMTER_NAME))) {
-			captchaParamter = fConfig.getInitParameter(CAPTCHA_PARAMTER_NAME);
+		if (StringUtils.isNotBlank(fConfig.getInitParameter(CAPTCHA_PARAMTER_NAME_PARAM))) {
+			captchaParamterName = fConfig.getInitParameter(CAPTCHA_PARAMTER_NAME_PARAM);
 		}
-		
-		if (StringUtils.isNotBlank(fConfig.getInitParameter(AUTO_PASS_VALUE))) {
-			autoPassValue = fConfig.getInitParameter(AUTO_PASS_VALUE);
+
+		if (StringUtils.isNotBlank(fConfig.getInitParameter(AUTO_PASS_VALUE_PARAM))) {
+			autoPassValue = fConfig.getInitParameter(AUTO_PASS_VALUE_PARAM);
 		}
 	}
 
@@ -154,13 +154,10 @@ public class JCaptchaFilter implements Filter {
 	 * 验证验证码.
 	 */
 	private boolean validateCaptchaChallenge(final HttpServletRequest request) {
-		if (request.getSession(false) == null)
-			return false;
-
 		try {
 			String captchaID = request.getSession().getId();
-			String challengeResponse = request.getParameter(captchaParamter);
-			
+			String challengeResponse = request.getParameter(captchaParamterName);
+
 			//自动通过值存在时,检验输入值是否等于自动通过值
 			if (autoPassValue != null && autoPassValue.equals(challengeResponse))
 				return true;
