@@ -108,23 +108,23 @@ public class QueueManager {
 	 * 持久化队列中未处理的对象到文件中.
 	 */
 	protected static void backup(String queueName) throws IOException {
-		ObjectOutputStream oos = null;
-		try {
-			BlockingQueue queue = getQueue(queueName);
-			List list = new ArrayList();
-			queue.drainTo(list);
+		BlockingQueue queue = getQueue(queueName);
+		List list = new ArrayList();
+		queue.drainTo(list);
 
-			if (!list.isEmpty()) {
+		if (!list.isEmpty()) {
+			ObjectOutputStream oos = null;
+			try {
 				String filePath = getPersistenceFilePath(queueName);
 				oos = new ObjectOutputStream(new FileOutputStream(filePath));
-
 				for (Object event : list) {
 					oos.writeObject(event);
 				}
-			}
-		} finally {
-			if (oos != null) {
-				oos.close();
+				logger.info("队列{}已持久化到{}", queueName, filePath);
+			} finally {
+				if (oos != null) {
+					oos.close();
+				}
 			}
 		}
 	}
@@ -149,6 +149,7 @@ public class QueueManager {
 						break;
 					}
 				}
+				logger.info("队列{}已从{}中恢复.", queueName, filePath);
 			} finally {
 				if (ois != null) {
 					ois.close();
