@@ -62,7 +62,7 @@ public class QueueManager {
 	}
 
 	@PostConstruct
-	public void runTasks() {
+	public void start() {
 		for (QueueConsumerTask task : taskList) {
 			String queueName = task.getQueueName();
 			try {
@@ -82,7 +82,7 @@ public class QueueManager {
 	}
 
 	@PreDestroy
-	public void stopTasks() {
+	public void stop() {
 
 		//停止所有线程不再从队列读取内容.
 		if (taskList != null) {
@@ -99,6 +99,9 @@ public class QueueManager {
 				logger.error("持久化" + entry.getKey() + "队列时出错", e);
 			}
 		}
+		
+		//清除queueMap
+		queueMap.clear();
 	}
 
 	/**

@@ -19,7 +19,9 @@ public class QueueManagerTest extends Assert {
 
 	@Test
 	public void backup() throws FileNotFoundException, IOException, ClassNotFoundException {
-		String queueName = "test";
+		String queueName = "testBackup";
+		String filePath = System.getProperty("java.io.tmpdir") + File.separator + "queue" + File.separator + queueName;
+
 		BlockingQueue queue = QueueManager.getQueue(queueName);
 		Date date1 = new Date();
 		Date date2 = new Date();
@@ -27,10 +29,13 @@ public class QueueManagerTest extends Assert {
 		queue.offer(date2);
 
 		QueueManager manager = new QueueManager();
-		manager.stopTasks();
+		manager.stop();
 
-		String filePath = System.getProperty("java.io.tmpdir") + File.separator + "queue" + File.separator + queueName;
-		ObjectInputStream oos = new ObjectInputStream(new FileInputStream(filePath));
+		//判断存在持久化文件
+		File file = new File(filePath);
+		assertEquals(true, file.exists());
+
+		ObjectInputStream oos = new ObjectInputStream(new FileInputStream(file));
 		List list = new ArrayList();
 		while (true) {
 			Object obj = oos.readObject();
@@ -40,7 +45,40 @@ public class QueueManagerTest extends Assert {
 			list.add(obj);
 		}
 		oos.close();
+		file.delete();
 		assertEquals(2, list.size());
 		assertEquals(date1, list.get(0));
 	}
+
+	@Test
+	public void restore() {
+		String queueName = "testRestore";
+		String filePath = System.getProperty("java.io.tmpdir") + File.separator + "queue" + File.separator + queueName;
+
+		BlockingQueue queue = QueueManager.getQueue(queueName);
+		Date date1 = new Date();
+		Date date2 = new Date();
+		queue.offer(date1);
+		queue.offer(date2);
+
+		QueueManager manager = new QueueManager();
+		manager.stop();
+
+		//判断存在持久化文件
+		File file = new File(filePath);
+		assertEquals(true, file.exists());
+
+		BlockingQueue newQueue = QueueManager.getQueue(queueName);
+		List list = new ArrayList();
+		newQueue.drainTo(list);
+
+		assertEquals(2, list.size());
+		assertEquals(date1, list.get(0));
+		
+		//判断存在持久化文件
+		file = new File(filePath);
+		assertEquals(false, file.exists());
+
+	}
+
 }
