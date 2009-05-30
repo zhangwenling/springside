@@ -7,6 +7,7 @@ import org.apache.struts2.convention.annotation.InterceptorRefs;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.hibernate.StaleStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.UserManager;
@@ -28,6 +29,7 @@ public class UserAction extends CRUDActionSupport<User> {
 	// 基本属性
 	private User entity;
 	private Long id;
+	private Integer oldVersion;
 	private List<User> allUsers;
 
 	// 基本属性访问函数 //
@@ -49,6 +51,10 @@ public class UserAction extends CRUDActionSupport<User> {
 		this.id = id;
 	}
 
+	public void setOldVersion(Integer version) {
+		this.oldVersion = version;
+	}
+
 	public List<User> getAllUsers() {
 		return allUsers;
 	}
@@ -68,6 +74,9 @@ public class UserAction extends CRUDActionSupport<User> {
 
 	@Override
 	public String save() throws Exception {
+		if (oldVersion < entity.getVersion())
+			throw new StaleStateException("对象已有新的版本");
+
 		userManager.save(entity);
 		return RELOAD;
 	}

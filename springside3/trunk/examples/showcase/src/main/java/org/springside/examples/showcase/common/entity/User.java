@@ -12,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.Version;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Fetch;
@@ -36,8 +37,18 @@ public class User extends AuditableEntity {
 	private String password;
 	private String name;
 	private String email;
+	private Integer version;
 
 	private Set<Role> roles = new LinkedHashSet<Role>(); //有序的关联对象集合
+	
+	@Version
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 
 	public String getLoginName() {
 		return loginName;
