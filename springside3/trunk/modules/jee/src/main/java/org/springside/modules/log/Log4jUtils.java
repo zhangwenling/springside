@@ -8,7 +8,7 @@ import org.apache.log4j.PatternLayout;
 import org.apache.log4j.spi.LoggingEvent;
 
 /**
- * Log4j 工具类，转换Logging Event到字符串或Map.
+ * Log4j 工具类, 转换Logging Event到字符串或Map.
  * 
  * @author calvin
  */
@@ -32,7 +32,6 @@ public class Log4jUtils {
 
 	public static Map<String, Object> convertEventToMap(LoggingEvent event) {
 		Map<String, Object> map = new HashMap<String, Object>();
-
 		map.put(MESSAGE, event.getMessage());
 		map.put(LEVEL, event.getLevel().toString());
 		map.put(LOGGER_NAME, event.getLoggerName());

@@ -14,6 +14,7 @@
 		<config>src/main/resources/schedule/applicationContext-quartz.xml</config>
 		<config>src/main/resources/email/applicationContext-email.xml</config>
 		<config>src/main/resources/schedule/applicationContext-executor.xml</config>
+		<config>src/main/resources/log/applicationContext-log.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

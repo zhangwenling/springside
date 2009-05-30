@@ -79,7 +79,7 @@ public class JmxClient {
 		assertConnected();
 
 		ObjectName objectName = buildObjectName(mbeanName);
-		return MBeanServerInvocationHandler.newProxyInstance(mbsc, objectName, mBeanInterface, false);
+		return (T) MBeanServerInvocationHandler.newProxyInstance(mbsc, objectName, mBeanInterface, false);
 	}
 
 	/**

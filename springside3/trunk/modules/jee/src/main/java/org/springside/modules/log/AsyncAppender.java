@@ -5,7 +5,7 @@ import java.util.concurrent.BlockingQueue;
 import org.apache.log4j.spi.LoggingEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springside.modules.log.queue.QueueManager;
+import org.springside.modules.queue.QueueManager;
 
 /**
  * 轻量级的异步Appender.
