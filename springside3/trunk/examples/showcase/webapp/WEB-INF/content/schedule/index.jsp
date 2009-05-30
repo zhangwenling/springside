@@ -11,7 +11,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h2>定时任务演示</h2>
+<h3>定时任务演示</h3>
 <h4>技术说明：</h4>
 <ul>
 <li>Cron式任务定义：基于Quartz的实现。</li>

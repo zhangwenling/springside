@@ -11,7 +11,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h2>JMS演示</h2>
+<h3>JMS演示</h3>
 <h4>技术说明：</h4>
 演示基于ActiveMQ的JMS Topic/Queue 以及Polling消费者 和Message Driven POJO。
 <h4>用户故事：</h4>

@@ -11,7 +11,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h2>RESTful Web Service演示</h2>
+<h3>RESTful Web Service演示</h3>
 <h4>技术说明：</h4>
 <ul>
 <li>服务端使用Jersey </li>

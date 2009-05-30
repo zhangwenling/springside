@@ -11,7 +11,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h2>邮件演示</h2>
+<h3>邮件演示</h3>
 <h4>技术说明：</h4>
 <ul>
 <li>使用JDK5.0 Executor线程池群发简单文本邮件演示。</li>

@@ -11,7 +11,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h2>DWR演示</h2>
+<h3>DWR演示</h3>
 <h4>技术说明：</h4>
 基于DWR3.0CR1，Ajax直接调用服务端Service层代码。<br/>
 <h4>用户故事：</h4>

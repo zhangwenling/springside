@@ -11,7 +11,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h2>Ajax演示</h2>
+<h3>Ajax演示</h3>
 <p>说明：在JMX示例中已演示基于JQuery的标准Ajax获取内容与表单提交。</p>
 <ul>
 <li><a href="${ctx}/ajax/mashup/mashup-client.action">跨域Mashup演示</a></li>

@@ -11,7 +11,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h2>WS-*高级协议演示</h2>
+<h3>WS-*高级协议演示</h3>
 <h4>技术说明：</h4>
 <ul>
 <li>WS-Security：认证机制，建议大家从DIY的WebService安全机制逐渐转到标准之中。</li>

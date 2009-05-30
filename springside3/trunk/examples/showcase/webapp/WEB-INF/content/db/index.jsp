@@ -11,9 +11,13 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h2>数据库访问高级演示</h2>
-<h4>技术说明：</h4>Hibernate Event演示，在综合演示示例中自动在修改User对象时加入审计信息。
-<h4>未来版本：</h4>Hibernate Envers演示，自动记录对象的修改历史。(等待Hibernate 3.5)
+<h3>数据库访问高级演示</h3>
+<h4>技术说明：</h4>
+<ul>
+	<li>Hibernate Event演示，在综合演示示例中自动在修改User对象时加入审计信息。</li>
+	<li>Hibernate @Version字段在综合演示示例Struts2 Prepareable Action中的使用。</li>
+	<li>Hibernate Envers演示，自动记录对象的修改历史。(计划中,等待Hibernate 3.5)</li>
+</ul>
 </div>
 </div>
 </body>

@@ -23,7 +23,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-	<h2>Mashup演示</h2>
+	<h3>Mashup演示</h3>
 	<h4>技术说明：</h4>
 	演示基于JQuery，绕过浏览器对Ajax访问跨域名网站内容的限制。<br/>
 	 请先将本页另存为本地html文件，打开本地文件访问应用服务器即为跨域访问的场景。

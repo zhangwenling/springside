@@ -11,7 +11,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h2>工作流演示</h2>
+<h3>工作流演示</h3>
 <h4>技术说明：</h4>基于JBPM实现，尽量等待改变颇大的JBPM4.0正式版出来才动工。
 
 </div>

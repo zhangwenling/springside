@@ -20,7 +20,7 @@
 				rules: { 
 					loginName: { 
         				required: true, 
-        				remote: "user!checkLoginName.action?orgLoginName="+encodeURIComponent('${loginName}')
+        				remote: "user!checkLoginName.action?oldLoginName="+encodeURIComponent('${loginName}')
     				},
           			name: "required",
           			password: {

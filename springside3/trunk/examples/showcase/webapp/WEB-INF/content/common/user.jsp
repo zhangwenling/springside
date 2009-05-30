@@ -15,7 +15,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h2>综合演示用例</h2>
+<h3>综合演示用例</h3>
 
 <div id="listContent">
 <table>

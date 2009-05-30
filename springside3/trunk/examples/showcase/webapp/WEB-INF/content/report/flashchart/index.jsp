@@ -12,7 +12,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h2>Flash Chart演示</h2>
+<h3>Flash Chart演示</h3>
 <h4>技术说明：</h4>
 <p>使用AmCharts渲染Flash图表</p>
 <ul>

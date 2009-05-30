@@ -12,7 +12,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h2>Flash Chart演示</h2>
+<h3>Flash Chart演示</h3>
 <p>点击Amcharts柱状图进入本页面, 显示<%=Integer.parseInt(request.getParameter("id"))+1850%>年的数据细节.</p>
 </div>
 </div>

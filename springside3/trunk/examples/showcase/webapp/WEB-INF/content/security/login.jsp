@@ -32,7 +32,7 @@
 			if ("3".equals(request.getParameter("error"))) {%>
 			<span style="color:red"> 此帐号已从别处登录.</span>
 	<%}%>
-	<h2>Showcase登录页</h2>
+	<h3>Showcase登录页</h3>
 	<h4>技术说明：</h4>基于JCaptcha1.0的验证码方案，通过ServletFilter与SpringSecurity简单集成。
 	
 	<form id="loginForm" action="${ctx}/j_spring_security_check" method="post">

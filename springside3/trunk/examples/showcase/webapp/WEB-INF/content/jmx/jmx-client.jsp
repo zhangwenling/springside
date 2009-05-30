@@ -45,7 +45,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-	<h2>JMX演示用例</h2>
+	<h3>JMX演示用例</h3>
 	<h4>技术说明：</h4>
 	演示JMX MBean代理及直接读取属性两种模式。
 	<h4>用户故事：</h4>

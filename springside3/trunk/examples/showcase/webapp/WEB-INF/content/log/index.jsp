@@ -19,7 +19,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h2>日志高级演示</h2>
+<h3>日志高级演示</h3>
 <h4>技术说明：</h4>
 轻量级日志异步多线程处理框架：<br/>
 Log4j端很轻量的将Logging Evnet发送到Blocking Queue中,由归Spring统一管理JMS/DB/EMail资源的Appender Bean异步的、多线程的对事件进行处理。

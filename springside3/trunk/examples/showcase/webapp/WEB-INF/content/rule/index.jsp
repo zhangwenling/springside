@@ -11,7 +11,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h2>规则引擎演示</h2>
+<h3>规则引擎演示</h3>
 <h4>技术说明：</h4>基于JBossRule(Drools)，用于复杂业务规则处理、工作流的流程判断和数据级ACL安全判断。
 </div>
 </div>

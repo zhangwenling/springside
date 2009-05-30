@@ -11,7 +11,7 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h2>搜索引擎演示</h2>
+<h3>搜索引擎演示</h3>
 <h4>技术说明：</h4>同时演示Solr与Hibernate Search，满足不同情形的需求。
 <ul>
 <li>Solr--松耦合的独立的搜索引擎服务器集群。</li>
