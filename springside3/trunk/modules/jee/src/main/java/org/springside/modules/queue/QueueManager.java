@@ -1,5 +1,6 @@
 package org.springside.modules.queue;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -99,7 +99,7 @@ public class QueueManager {
 				logger.error("持久化" + entry.getKey() + "队列时出错", e);
 			}
 		}
-		
+
 		//清除queueMap
 		queueMap.clear();
 	}
@@ -121,8 +121,6 @@ public class QueueManager {
 				for (Object event : list) {
 					oos.writeObject(event);
 				}
-
-				oos.writeObject(new EndOfStream());
 			}
 		} finally {
 			if (oos != null) {
@@ -144,11 +142,12 @@ public class QueueManager {
 				ois = new ObjectInputStream(new FileInputStream(file));
 				BlockingQueue queue = getQueue(queueName);
 				while (true) {
-					Object event = ois.readObject();
-					if (event instanceof QueueManager.EndOfStream) {
+					try {
+						Object event = ois.readObject();
+						queue.offer(event);
+					} catch (EOFException e) {
 						break;
 					}
-					queue.offer(event);
 				}
 			} finally {
 				if (ois != null) {
@@ -170,12 +169,5 @@ public class QueueManager {
 			parentDir.mkdirs();
 		}
 		return parentDir.getAbsolutePath() + File.separator + queueName;
-	}
-
-	/**
-	 * 标志文件末尾的对象
-	 */
-	public static class EndOfStream implements Serializable {
-		private static final long serialVersionUID = 5505194496466848767L;
 	}
 }

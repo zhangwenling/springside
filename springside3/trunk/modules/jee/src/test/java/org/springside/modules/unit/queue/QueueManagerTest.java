@@ -1,5 +1,6 @@
 package org.springside.modules.unit.queue;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -38,11 +39,12 @@ public class QueueManagerTest extends Assert {
 		ObjectInputStream oos = new ObjectInputStream(new FileInputStream(file));
 		List list = new ArrayList();
 		while (true) {
-			Object obj = oos.readObject();
-			if (obj instanceof QueueManager.EndOfStream) {
+			try {
+				Object obj = oos.readObject();
+				list.add(obj);
+			} catch (EOFException e) {
 				break;
 			}
-			list.add(obj);
 		}
 		oos.close();
 		file.delete();
@@ -74,7 +76,7 @@ public class QueueManagerTest extends Assert {
 
 		assertEquals(2, list.size());
 		assertEquals(date1, list.get(0));
-		
+
 		//判断存在持久化文件
 		file = new File(filePath);
 		assertEquals(false, file.exists());
