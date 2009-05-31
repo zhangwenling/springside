@@ -32,7 +32,7 @@ public abstract class QueueConsumerTask implements Runnable {
 				processEvent(event);
 			}
 		} catch (InterruptedException e) {
-			logger.error("interrupted happen", e);
+			logger.debug("消费线程被中断", e);
 		}
 	}
 
@@ -46,9 +46,9 @@ public abstract class QueueConsumerTask implements Runnable {
 	 * 处理event的方法.
 	 * 注意除非确定要终止处理线程,否则不能抛出RuntimeException.
 	 */
-	protected abstract void processEvent(Object eventObject);
+	protected abstract void processEvent(Object eventObject) throws InterruptedException;
 
-	//属性访问函数//	
+	//属性访问函数//
 
 	@Required
 	public String getQueueName() {

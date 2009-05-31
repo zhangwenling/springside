@@ -39,12 +39,14 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	@Override
-	protected void processEvent(Object eventObject) {
+	protected void processEvent(Object eventObject) throws InterruptedException {
 		LoggingEvent event = (LoggingEvent) eventObject;
 		Map<String, Object> paramMap = parseEvent(event);
+		logger.debug("get event, {}", Log4jUtils.convertEventToString(event));
+		
 		try {
 			jdbcTemplate.update(getSql(), paramMap);
-			logger.debug("jdbc commit success,{}", Log4jUtils.convertEventToString(event));
+			logger.debug("finish event , {}", Log4jUtils.convertEventToString(event));
 		} catch (DataAccessException e) {
 			if (e instanceof DataIntegrityViolationException || e instanceof InvalidDataAccessApiUsageException) {
 				ignore(event, e);
@@ -68,14 +70,14 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	 */
 	protected void rollback(LoggingEvent event, RuntimeException e) {
 		queue.offer(event);
-		logger.error("data access error,put event to queue again," + Log4jUtils.convertEventToString(event), e);
+		logger.error("data access error, put event to queue again, " + Log4jUtils.convertEventToString(event), e);
 	}
 
 	/**
 	 * 忽略Event的错误处理策略.
 	 */
 	protected void ignore(LoggingEvent event, RuntimeException e) {
-		logger.error("event is not correct, ignore it," + Log4jUtils.convertEventToString(event), e);
+		logger.error("event is not correct, ignore it, " + Log4jUtils.convertEventToString(event), e);
 	}
 
 	/**

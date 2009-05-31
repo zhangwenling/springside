@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -38,6 +39,8 @@ public class QueueManager {
 
 	protected List<QueueConsumerTask> taskList; //任务列表
 
+	protected List<ExecutorService> executorList = new ArrayList<ExecutorService>();//执行任务的线程池列表
+
 	public void setTaskList(List<QueueConsumerTask> taskList) {
 		this.taskList = taskList;
 	}
@@ -50,19 +53,16 @@ public class QueueManager {
 		BlockingQueue queue = queueMap.get(queueName);
 
 		if (queue == null) {
-			try {
-				queue = new LinkedBlockingQueue();
-				queueMap.put(queueName, queue);
-				restore(queueName);
-			} catch (Exception e) {
-				logger.error("载入队列" + queueName + "时出错", e);
-			}
+			queue = new LinkedBlockingQueue();
+			queueMap.put(queueName, queue);
 		}
+
 		return queue;
 	}
 
 	@PostConstruct
 	public void start() {
+		//运行任务
 		for (QueueConsumerTask task : taskList) {
 			String queueName = task.getQueueName();
 			try {
@@ -75,8 +75,20 @@ public class QueueManager {
 				for (int i = 0; i < task.getThreadCount(); i++) {
 					executor.execute(task);
 				}
+
+				executorList.add(executor);
+
 			} catch (Exception e) {
 				logger.error("启动任务" + queueName + "时出错", e);
+			}
+
+			//从文件中恢复内容到队列.
+			for (Entry<String, BlockingQueue> entry : queueMap.entrySet()) {
+				try {
+					restore(entry.getKey());
+				} catch (Exception e) {
+					logger.error("载入队列" + queueName + "时出错", e);
+				}
 			}
 		}
 	}
@@ -91,7 +103,17 @@ public class QueueManager {
 			}
 		}
 
-		//持久化所有队列到文件.
+		//等待所有线程完成,最多等待5秒
+		for (ExecutorService executor : executorList) {
+			try {
+				executor.shutdown();
+				executor.awaitTermination(5000, TimeUnit.MILLISECONDS);
+			} catch (InterruptedException e) {
+				logger.debug("awaitTermination被中断", e);
+			}
+		}
+
+		//持久化所有未完成队列内容到文件
 		for (Entry<String, BlockingQueue> entry : queueMap.entrySet()) {
 			try {
 				backup(entry.getKey());
