@@ -29,7 +29,7 @@ public class UserAction extends CRUDActionSupport<User> {
 	// 基本属性
 	private User entity;
 	private Long id;
-	private Integer oldVersion;
+	private Integer workingVersion;
 	private List<User> allUsers;
 
 	// 基本属性访问函数 //
@@ -51,8 +51,8 @@ public class UserAction extends CRUDActionSupport<User> {
 		this.id = id;
 	}
 
-	public void setOldVersion(Integer version) {
-		this.oldVersion = version;
+	public void setWorkingVersion(Integer workingVersion) {
+		this.workingVersion = workingVersion;
 	}
 
 	public List<User> getAllUsers() {
@@ -74,7 +74,7 @@ public class UserAction extends CRUDActionSupport<User> {
 
 	@Override
 	public String save() throws Exception {
-		if (oldVersion < entity.getVersion())
+		if (workingVersion < entity.getVersion())
 			throw new StaleStateException("对象已有新的版本");
 
 		userManager.save(entity);
