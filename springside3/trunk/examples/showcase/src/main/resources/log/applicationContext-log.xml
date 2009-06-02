@@ -5,18 +5,19 @@
 	<description>日志异步处理任务配置</description>
 
 	<bean class="org.springside.modules.queue.QueueManager" lazy-init="false">
-		<property name="taskList">
+		<property name="taskNameList">
 			<list>
-				<ref bean="dbLogTask" />
+				<value>dbLogTask</value>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="dbLogTask" class="org.springside.modules.log.JdbcAppenderTask">
+	<bean id="dbLogTask" class="org.springside.modules.log.JdbcAppenderTask" scope="prototype">
 		<property name="queueName" value="dblog" />
 		<property name="threadCount" value="2" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="sql"
 			value="insert into LOGS(THREAD_NAME,LOGGER_NAME,TIMESTAMP,LEVEL,MESSAGE) values(:threadName,:loggerName,:timestamp,:level,:message)" />
+		<property name="bufferSize" value="5"/>
 	</bean>
 </beans>

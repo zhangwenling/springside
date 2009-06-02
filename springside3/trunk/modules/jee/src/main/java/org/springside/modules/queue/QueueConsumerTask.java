@@ -21,23 +21,18 @@ public abstract class QueueConsumerTask implements Runnable {
 	protected String queueName; //可配置的任务对应队列名称
 	protected int threadCount = 1;//可配置的任务并发线程数
 
-	protected volatile boolean stopping = false; //停止标志
-
 	// 流程控制函数 //
 
 	public void run() {
 		try {
-			while (!stopping) {
+			while (!Thread.currentThread().isInterrupted()) {
 				Object event = queue.take();
 				processEvent(event);
 			}
 		} catch (InterruptedException e) {
-			logger.debug("消费线程被中断", e);
+			logger.debug("消费线程阻塞被中断", e);
 		}
-	}
-
-	public void stop() {
-		stopping = true;
+		clean();
 	}
 
 	// 子类重载函数 //
@@ -48,13 +43,18 @@ public abstract class QueueConsumerTask implements Runnable {
 	 */
 	protected abstract void processEvent(Object eventObject) throws InterruptedException;
 
+	/**
+	 * 退出任务时的清理函数.
+	 */
+	protected abstract void clean();
+
 	//属性访问函数//
 
-	@Required
 	public String getQueueName() {
 		return queueName;
 	}
 
+	@Required
 	public void setQueueName(String queueName) {
 		this.queueName = queueName;
 	}

@@ -1,5 +1,7 @@
 package org.springside.modules.log;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -7,8 +9,8 @@ import javax.sql.DataSource;
 import org.apache.log4j.spi.LoggingEvent;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springside.modules.queue.QueueConsumerTask;
 
@@ -17,12 +19,14 @@ import org.springside.modules.queue.QueueConsumerTask;
  * 
  * @author calvin
  */
-@SuppressWarnings("unchecked")
 public class JdbcAppenderTask extends QueueConsumerTask {
 
 	protected SimpleJdbcTemplate jdbcTemplate;
-
 	protected String sql;
+	protected int bufferSize = 10;
+
+	protected List<LoggingEvent> buffer = new ArrayList<LoggingEvent>();
+	protected List<LoggingEvent> finishBuffer = new ArrayList<LoggingEvent>();
 
 	@Required
 	public void setDataSource(DataSource dataSource) {
@@ -38,26 +42,63 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 		this.sql = sql;
 	}
 
+	public void setBufferSize(int bufferSize) {
+		this.bufferSize = bufferSize;
+	}
+
+	/**
+	 * @see QueueConsumerTask#processEvent(Object)
+	 */
 	@Override
 	protected void processEvent(Object eventObject) throws InterruptedException {
 		LoggingEvent event = (LoggingEvent) eventObject;
-		Map<String, Object> paramMap = parseEvent(event);
+		buffer.add(event);
 		logger.debug("get event, {}", Log4jUtils.convertEventToString(event));
-		
-		try {
-			jdbcTemplate.update(getSql(), paramMap);
-			logger.debug("finish event , {}", Log4jUtils.convertEventToString(event));
-		} catch (DataAccessException e) {
-			if (e instanceof DataIntegrityViolationException || e instanceof InvalidDataAccessApiUsageException) {
-				ignore(event, e);
-			} else {
-				rollback(event, e);
-			}
+
+		if (buffer.size() >= bufferSize) {
+			updateBatch();
+			buffer.removeAll(finishBuffer);
 		}
 	}
 
 	/**
-	 * 分析Event,建立Parameter Map,用于绑定sql中的Named Parameter.
+	 * 批量更新Buffer中的事件.
+	 */
+	protected void updateBatch() {
+		List<Map<String, Object>> paramMaps = new ArrayList<Map<String, Object>>();
+
+		for (LoggingEvent event : buffer) {
+			Map<String, Object> paramMap = parseEvent(event);
+			paramMaps.add(paramMap);
+			finishBuffer.add(event);
+		}
+
+		SqlParameterSource[] batch = SqlParameterSourceUtils.createBatch(paramMaps.toArray(new Map[paramMaps.size()]));
+		try {
+			jdbcTemplate.batchUpdate(getActualSql(), batch);
+		} catch (DataAccessException e) {
+			dataAccessExceptionHandle(e);
+		}
+
+		if (logger.isDebugEnabled()) {
+			for (LoggingEvent event : finishBuffer) {
+				logger.debug("saved event, {}", Log4jUtils.convertEventToString(event));
+			}
+		}
+
+	}
+
+	/**
+	 * @see QueueConsumerTask#clean()
+	 */
+	@Override
+	protected void clean() {
+		updateBatch();
+		logger.debug("cleaned task {}", this);
+	}
+
+	/**
+	 * 分析Event, 建立Parameter Map, 用于绑定sql中的Named Parameter.
 	 */
 	protected Map<String, Object> parseEvent(LoggingEvent event) {
 		Map<String, Object> paramMap = Log4jUtils.convertEventToMap(event);
@@ -66,30 +107,25 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	 * 将Event重新放入Queue中的错误处理策略.
+	 * 可被子类重载的数据访问错误处理函数.
 	 */
-	protected void rollback(LoggingEvent event, RuntimeException e) {
-		queue.offer(event);
-		logger.error("data access error, put event to queue again, " + Log4jUtils.convertEventToString(event), e);
-	}
-
-	/**
-	 * 忽略Event的错误处理策略.
-	 */
-	protected void ignore(LoggingEvent event, RuntimeException e) {
-		logger.error("event is not correct, ignore it, " + Log4jUtils.convertEventToString(event), e);
-	}
-
-	/**
-	 * 可被子类重载的消息处理函数,可进行进一步的分析工作,如对message字符串进行分解等.
-	 */
-	protected void postParseEvent(LoggingEvent event, Map<String, Object> paramMap) {
+	protected void dataAccessExceptionHandle(RuntimeException e) {
+		for (LoggingEvent event : finishBuffer) {
+			logger.error("event in batch is not correct, ignore it, " + Log4jUtils.convertEventToString(event), e);
+		}
 	}
 
 	/**
 	 * 可被子类重载的sql提供函数,可对sql语句进行特殊处理，如日志表名带日期后缀 LOG_2009_02_31.
 	 */
-	protected String getSql() {
+	protected String getActualSql() {
 		return sql;
 	}
+
+	/**
+	 * 可被子类重载的事件分析函数,可进行进一步的分析工作,如对message字符串进行分解等.
+	 */
+	protected void postParseEvent(LoggingEvent event, Map<String, Object> paramMap) {
+	}
+
 }
