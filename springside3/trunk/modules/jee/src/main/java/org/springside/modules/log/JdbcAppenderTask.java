@@ -24,8 +24,7 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	protected SimpleJdbcTemplate jdbcTemplate;
 	protected String sql;
 	protected int bufferSize = 10;
-	protected int throttling = 0;
-
+	
 	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
 
 	@Required
@@ -50,13 +49,6 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	 * 执行完每次更新后等待的时间, 单位为毫秒, 默认为0.
-	 */
-	public void setThrottling(int throttling) {
-		this.throttling = throttling;
-	}
-
-	/**
 	 * @see QueueConsumerTask#processEvent(Object)
 	 */
 	@Override
@@ -67,10 +59,6 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 
 		if (eventBuffer.size() >= bufferSize) {
 			updateBatch();
-			
-			if (throttling > 0) {
-				Thread.sleep(throttling);
-			}
 		}
 	}
 
