@@ -14,9 +14,10 @@
 <h3>数据库访问高级演示</h3>
 <h4>技术说明：</h4>
 <ul>
-	<li>Hibernate Event演示，在综合演示示例中自动在修改User对象时加入审计信息。</li>
-	<li>Hibernate @Version字段在综合演示示例Struts2 Prepareable Action中的使用。</li>
-	<li>Hibernate Envers演示，自动记录对象的修改历史。(计划中,等待Hibernate 3.5)</li>
+	<li>Hibernate Event，在综合示例中修改User对象时自动加入审计信息。</li>
+	<li>Hibernate @Version字段，在综合示例中演示在Struts2 Prepareable Action里的使用。</li>
+	<li>Hibernate Native SQL，纯友情简单演示。</li>
+	<li>Hibernate Envers，自动记录对象的修改历史。(计划中,等待Hibernate 3.5)</li>
 </ul>
 </div>
 </div>

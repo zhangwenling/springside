@@ -168,7 +168,7 @@
 		<spring.version>2.5.6</spring.version>
 		<hibernate.version>3.3.1.GA</hibernate.version>
 		<struts2.version>2.1.6</struts2.version>
-		<cxf.version>2.2.1</cxf.version>
+		<cxf.version>2.2.2</cxf.version>
 		<spring-security.version>2.0.4</spring-security.version>
 	</properties>
 
