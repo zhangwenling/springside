@@ -68,7 +68,9 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	 */
 	@Override
 	protected void clean() {
-		updateBatch();
+		if (eventBuffer.size() > 0) {
+			updateBatch();
+		}
 		logger.debug("cleaned task {}", this);
 	}
 
@@ -87,19 +89,18 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 		SqlParameterSource[] paramMapBatch = SqlParameterSourceUtils.createBatch(paramMapArray);
 		
 		try {
-			jdbcTemplate.batchUpdate(getActualSql(), paramMapBatch);
+			jdbcTemplate.batchUpdate(getActualSql(paramMapList), paramMapBatch);
 		} catch (DataAccessException e) {
 			dataAccessExceptionHandle(e, eventBatch);
 		}
 
 		eventBuffer.removeAll(eventBatch);
-		eventBatch.clear();
-
 		if (logger.isDebugEnabled()) {
 			for (LoggingEvent event : eventBatch) {
 				logger.debug("saved event, {}", Log4jUtils.convertEventToString(event));
 			}
 		}
+		eventBatch.clear();
 	}
 
 	/**
@@ -123,7 +124,7 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	/**
 	 * 可被子类重载的sql提供函数,可对sql语句进行特殊处理，如日志表的表名可带日期后缀 LOG_2009_02_31.
 	 */
-	protected String getActualSql() {
+	protected String getActualSql(List<Map<String, Object>> paramMapList) {
 		return sql;
 	}
 
