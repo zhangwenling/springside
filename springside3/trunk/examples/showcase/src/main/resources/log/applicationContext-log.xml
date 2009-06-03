@@ -5,7 +5,7 @@
 	<description>日志异步处理任务配置</description>
 
 	<bean class="org.springside.modules.queue.QueueManager" lazy-init="false">
-		<property name="taskNameList">
+		<property name="taskBeanNames">
 			<list>
 				<value>dbLogTask</value>
 			</list>

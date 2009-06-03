@@ -40,12 +40,12 @@ public class QueueManager implements ApplicationContextAware {
 	protected static Logger logger = LoggerFactory.getLogger(QueueManager.class);
 
 	//可配置属性//
-	protected List<String> taskNameList; //任务名称列表
-	protected int stopWait = 10; //停止每个队列时最多等待的时间.
+	protected List<String> taskBeanNames; //任务名称列表
+	protected int shutdownWait = 10; //停止每个队列时最多等待的时间.
 	protected boolean persistence = true; //是否将队列中为处理的消息持久化到文件.
 
 	//内部属性//
-	protected ApplicationContext ac;
+	protected ApplicationContext applicatiionContext;
 	protected static Map<String, BlockingQueue> queueMap = new ConcurrentHashMap<String, BlockingQueue>();//消息队列
 	protected List<ExecutorService> executorList = new ArrayList<ExecutorService>();//执行任务的线程池列表
 
@@ -65,16 +65,16 @@ public class QueueManager implements ApplicationContextAware {
 	}
 
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		ac = applicationContext;
+		applicatiionContext = applicationContext;
 	}
 
 	@Required
-	public void setTaskNameList(List<String> taskNameList) {
-		this.taskNameList = taskNameList;
+	public void setTaskBeanNames(List<String> taskBeanNames) {
+		this.taskBeanNames = taskBeanNames;
 	}
 
-	public void setStopWait(int stopWait) {
-		this.stopWait = stopWait;
+	public void setShutdownWait(int shutdownWait) {
+		this.shutdownWait = shutdownWait;
 	}
 
 	public void setPersistence(boolean persistence) {
@@ -84,8 +84,8 @@ public class QueueManager implements ApplicationContextAware {
 	@PostConstruct
 	public void start() {
 		//运行任务
-		for (String taskName : taskNameList) {
-			QueueConsumerTask task = (QueueConsumerTask) ac.getBean(taskName);
+		for (String taskName : taskBeanNames) {
+			QueueConsumerTask task = (QueueConsumerTask) applicatiionContext.getBean(taskName);
 			String queueName = task.getQueueName();
 			int threadCount = task.getThreadCount();
 
@@ -96,10 +96,10 @@ public class QueueManager implements ApplicationContextAware {
 				//多线程运行任务
 				ExecutorService executor = Executors.newCachedThreadPool();
 				for (int i = 0; i < threadCount; i++) {
-					QueueConsumerTask runTask = (i == 0) ? task : (QueueConsumerTask) ac.getBean(taskName);
-					runTask.setQueue(queue);
-					executor.execute(runTask);
-					logger.debug("启动任务" + queueName);
+					//从ApplicationContext获得task的新实例
+					QueueConsumerTask taskInstance = (i == 0) ? task : (QueueConsumerTask) applicatiionContext.getBean(taskName);
+					taskInstance.setQueue(queue);
+					executor.execute(taskInstance);
 				}
 				executorList.add(executor);
 			} catch (Exception e) {
@@ -125,7 +125,7 @@ public class QueueManager implements ApplicationContextAware {
 		for (ExecutorService executor : executorList) {
 			try {
 				executor.shutdownNow();
-				executor.awaitTermination(stopWait, TimeUnit.SECONDS);
+				executor.awaitTermination(shutdownWait, TimeUnit.SECONDS);
 			} catch (InterruptedException e) {
 				logger.debug("awaitTermination被中断", e);
 			}
@@ -160,7 +160,7 @@ public class QueueManager implements ApplicationContextAware {
 				for (Object event : list) {
 					oos.writeObject(event);
 				}
-				logger.info("队列{}已持久化到{}", queueName, filePath);
+				logger.info("队列{}已持久化{}个事件到{}", new Object[] { queueName, list.size(), filePath });
 			} finally {
 				if (oos != null) {
 					oos.close();
@@ -181,15 +181,17 @@ public class QueueManager implements ApplicationContextAware {
 			try {
 				ois = new ObjectInputStream(new FileInputStream(file));
 				BlockingQueue queue = getQueue(queueName);
+				int i = 0;
 				while (true) {
 					try {
 						Object event = ois.readObject();
 						queue.offer(event);
+						i++;
 					} catch (EOFException e) {
 						break;
 					}
 				}
-				logger.info("队列{}已从{}中恢复.", queueName, filePath);
+				logger.info("队列{}已从{}中恢复{}个事件.", new Object[] { queueName, filePath, i });
 			} finally {
 				if (ois != null) {
 					ois.close();

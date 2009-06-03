@@ -54,6 +54,9 @@ public abstract class QueueConsumerTask implements Runnable {
 		return queueName;
 	}
 
+	/**
+	 * 任务对应的队列名称.
+	 */
 	@Required
 	public void setQueueName(String queueName) {
 		this.queueName = queueName;
@@ -63,6 +66,9 @@ public abstract class QueueConsumerTask implements Runnable {
 		return threadCount;
 	}
 
+	/**
+	 * 任务并发的线程数.
+	 */
 	public void setThreadCount(int threadCount) {
 		this.threadCount = threadCount;
 	}

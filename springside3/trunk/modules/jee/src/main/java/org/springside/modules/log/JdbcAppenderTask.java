@@ -25,8 +25,8 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	protected String sql;
 	protected int bufferSize = 10;
 
-	protected List<LoggingEvent> buffer = new ArrayList<LoggingEvent>();
-	protected List<LoggingEvent> finishBuffer = new ArrayList<LoggingEvent>();
+	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
+	protected List<LoggingEvent> eventBatch = new ArrayList<LoggingEvent>();
 
 	@Required
 	public void setDataSource(DataSource dataSource) {
@@ -42,6 +42,9 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 		this.sql = sql;
 	}
 
+	/**
+	 * 批量执行的队列大小.
+	 */
 	public void setBufferSize(int bufferSize) {
 		this.bufferSize = bufferSize;
 	}
@@ -52,40 +55,12 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	@Override
 	protected void processEvent(Object eventObject) throws InterruptedException {
 		LoggingEvent event = (LoggingEvent) eventObject;
-		buffer.add(event);
+		eventBuffer.add(event);
 		logger.debug("get event, {}", Log4jUtils.convertEventToString(event));
 
-		if (buffer.size() >= bufferSize) {
+		if (eventBuffer.size() >= bufferSize) {
 			updateBatch();
-			buffer.removeAll(finishBuffer);
 		}
-	}
-
-	/**
-	 * 批量更新Buffer中的事件.
-	 */
-	protected void updateBatch() {
-		List<Map<String, Object>> paramMaps = new ArrayList<Map<String, Object>>();
-
-		for (LoggingEvent event : buffer) {
-			Map<String, Object> paramMap = parseEvent(event);
-			paramMaps.add(paramMap);
-			finishBuffer.add(event);
-		}
-
-		SqlParameterSource[] batch = SqlParameterSourceUtils.createBatch(paramMaps.toArray(new Map[paramMaps.size()]));
-		try {
-			jdbcTemplate.batchUpdate(getActualSql(), batch);
-		} catch (DataAccessException e) {
-			dataAccessExceptionHandle(e);
-		}
-
-		if (logger.isDebugEnabled()) {
-			for (LoggingEvent event : finishBuffer) {
-				logger.debug("saved event, {}", Log4jUtils.convertEventToString(event));
-			}
-		}
-
 	}
 
 	/**
@@ -95,6 +70,36 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	protected void clean() {
 		updateBatch();
 		logger.debug("cleaned task {}", this);
+	}
+
+	/**
+	 * 批量更新Buffer中的事件.
+	 */
+	protected void updateBatch() {
+		List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
+		for (LoggingEvent event : eventBuffer) {
+			Map<String, Object> paramMap = parseEvent(event);
+			paramMapList.add(paramMap);
+			eventBatch.add(event);
+		}
+
+		Map[] paramMapArray = paramMapList.toArray(new Map[paramMapList.size()]);
+		SqlParameterSource[] paramMapBatch = SqlParameterSourceUtils.createBatch(paramMapArray);
+		
+		try {
+			jdbcTemplate.batchUpdate(getActualSql(), paramMapBatch);
+		} catch (DataAccessException e) {
+			dataAccessExceptionHandle(e, eventBatch);
+		}
+
+		eventBuffer.removeAll(eventBatch);
+		eventBatch.clear();
+
+		if (logger.isDebugEnabled()) {
+			for (LoggingEvent event : eventBatch) {
+				logger.debug("saved event, {}", Log4jUtils.convertEventToString(event));
+			}
+		}
 	}
 
 	/**
@@ -109,14 +114,14 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	/**
 	 * 可被子类重载的数据访问错误处理函数.
 	 */
-	protected void dataAccessExceptionHandle(RuntimeException e) {
-		for (LoggingEvent event : finishBuffer) {
+	protected void dataAccessExceptionHandle(RuntimeException e, List<LoggingEvent> eventBatch) {
+		for (LoggingEvent event : eventBatch) {
 			logger.error("event in batch is not correct, ignore it, " + Log4jUtils.convertEventToString(event), e);
 		}
 	}
 
 	/**
-	 * 可被子类重载的sql提供函数,可对sql语句进行特殊处理，如日志表名带日期后缀 LOG_2009_02_31.
+	 * 可被子类重载的sql提供函数,可对sql语句进行特殊处理，如日志表的表名可带日期后缀 LOG_2009_02_31.
 	 */
 	protected String getActualSql() {
 		return sql;
@@ -127,5 +132,4 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	 */
 	protected void postParseEvent(LoggingEvent event, Map<String, Object> paramMap) {
 	}
-
 }
