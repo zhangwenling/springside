@@ -2,6 +2,7 @@ package org.springside.modules.integration.log;
 
 import java.util.Date;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,7 @@ import org.springside.modules.test.junit4.SpringContextTestCase;
 public class AsyncLoggerTest extends SpringContextTestCase {
 
 	@Test
-	public void dBLogger() throws InterruptedException {
+	public void dbLogger() throws InterruptedException {
 		Logger dbLogger = LoggerFactory.getLogger("org.springside.examples.showcase.log.dbLogExample");
 		int logCount = 10;
 		for (int i = 1; i <= logCount; i++) {
@@ -26,7 +27,7 @@ public class AsyncLoggerTest extends SpringContextTestCase {
 	}
 	
 	@Test
-	//@Ignore("Only for performanceTest")
+	@Ignore("Only for performance Test")
 	public void performanceTest() throws InterruptedException {
 		Logger dbLogger = LoggerFactory.getLogger("org.springside.examples.showcase.log.dbLogExample");
 		int totalCount = 20000;

@@ -84,8 +84,8 @@ public class QueueManager implements ApplicationContextAware {
 	@PostConstruct
 	public void start() {
 		//运行任务
-		for (String taskName : taskBeanNames) {
-			QueueConsumerTask task = (QueueConsumerTask) applicatiionContext.getBean(taskName);
+		for (String taskBeanName : taskBeanNames) {
+			QueueConsumerTask task = (QueueConsumerTask) applicatiionContext.getBean(taskBeanName);
 			String queueName = task.getQueueName();
 			int threadCount = task.getThreadCount();
 
@@ -95,9 +95,16 @@ public class QueueManager implements ApplicationContextAware {
 
 				//多线程运行任务
 				ExecutorService executor = Executors.newCachedThreadPool();
+				
+				if (applicatiionContext.isSingleton(taskBeanName)) {
+					logger.warn("因为consumer task bean {} 为Singleton,将并发数调整为1.", taskBeanName);
+					threadCount = 1;
+				}
+
 				for (int i = 0; i < threadCount; i++) {
 					//从ApplicationContext获得task的新实例
-					QueueConsumerTask taskInstance = (i == 0) ? task : (QueueConsumerTask) applicatiionContext.getBean(taskName);
+					QueueConsumerTask taskInstance = (i == 0) ? task : (QueueConsumerTask) applicatiionContext
+							.getBean(taskBeanName);
 					taskInstance.setQueue(queue);
 					executor.execute(taskInstance);
 				}
@@ -146,6 +153,7 @@ public class QueueManager implements ApplicationContextAware {
 
 	/**
 	 * 持久化队列中未处理的对象到文件中.
+	 * 如果持久化文件已存在,会进行追加.
 	 */
 	protected static void backup(String queueName) throws IOException {
 		BlockingQueue queue = getQueue(queueName);
@@ -213,5 +221,4 @@ public class QueueManager implements ApplicationContextAware {
 		}
 		return parentDir.getAbsolutePath() + File.separator + queueName;
 	}
-
 }

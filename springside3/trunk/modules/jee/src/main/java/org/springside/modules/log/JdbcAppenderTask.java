@@ -87,9 +87,9 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 
 		Map[] paramMapArray = paramMapList.toArray(new Map[paramMapList.size()]);
 		SqlParameterSource[] paramMapBatch = SqlParameterSourceUtils.createBatch(paramMapArray);
-		
+
 		try {
-			jdbcTemplate.batchUpdate(getActualSql(paramMapList), paramMapBatch);
+			jdbcTemplate.batchUpdate(getActualSql(), paramMapBatch);
 		} catch (DataAccessException e) {
 			dataAccessExceptionHandle(e, eventBatch);
 		}
@@ -124,7 +124,7 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	/**
 	 * 可被子类重载的sql提供函数,可对sql语句进行特殊处理，如日志表的表名可带日期后缀 LOG_2009_02_31.
 	 */
-	protected String getActualSql(List<Map<String, Object>> paramMapList) {
+	protected String getActualSql() {
 		return sql;
 	}
 
