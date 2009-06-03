@@ -24,9 +24,9 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	protected SimpleJdbcTemplate jdbcTemplate;
 	protected String sql;
 	protected int bufferSize = 10;
+	protected int throttling = 0;
 
 	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
-	protected List<LoggingEvent> eventBatch = new ArrayList<LoggingEvent>();
 
 	@Required
 	public void setDataSource(DataSource dataSource) {
@@ -43,10 +43,17 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	 * 批量执行的队列大小.
+	 * 批量执行的队列大小,默认为10.
 	 */
 	public void setBufferSize(int bufferSize) {
 		this.bufferSize = bufferSize;
+	}
+
+	/**
+	 * 执行完每次更新后等待的时间, 单位为毫秒, 默认为0.
+	 */
+	public void setThrottling(int throttling) {
+		this.throttling = throttling;
 	}
 
 	/**
@@ -60,6 +67,10 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 
 		if (eventBuffer.size() >= bufferSize) {
 			updateBatch();
+			
+			if (throttling > 0) {
+				Thread.sleep(throttling);
+			}
 		}
 	}
 
@@ -82,7 +93,6 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 		for (LoggingEvent event : eventBuffer) {
 			Map<String, Object> paramMap = parseEvent(event);
 			paramMapList.add(paramMap);
-			eventBatch.add(event);
 		}
 
 		Map[] paramMapArray = paramMapList.toArray(new Map[paramMapList.size()]);
@@ -90,17 +100,16 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 
 		try {
 			jdbcTemplate.batchUpdate(getActualSql(), paramMapBatch);
+			if (logger.isDebugEnabled()) {
+				for (LoggingEvent event : eventBuffer) {
+					logger.debug("saved event, {}", Log4jUtils.convertEventToString(event));
+				}
+			}
 		} catch (DataAccessException e) {
-			dataAccessExceptionHandle(e, eventBatch);
+			dataAccessExceptionHandle(e, eventBuffer);
 		}
 
-		eventBuffer.removeAll(eventBatch);
-		if (logger.isDebugEnabled()) {
-			for (LoggingEvent event : eventBatch) {
-				logger.debug("saved event, {}", Log4jUtils.convertEventToString(event));
-			}
-		}
-		eventBatch.clear();
+		eventBuffer.clear();
 	}
 
 	/**

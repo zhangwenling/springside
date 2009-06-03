@@ -41,8 +41,8 @@ public class QueueManager implements ApplicationContextAware {
 
 	//可配置属性//
 	protected List<String> taskBeanNames; //任务名称列表
-	protected int shutdownWait = 10; //停止每个队列时最多等待的时间.
-	protected boolean persistence = true; //是否将队列中为处理的消息持久化到文件.
+	protected int shutdownWait = 10000; //停止每个队列时最多等待的时间,单位为毫秒.
+	protected boolean persistence = true; //是否将队列中未处理的消息持久化到文件.
 
 	//内部属性//
 	protected ApplicationContext applicatiionContext;
@@ -64,23 +64,35 @@ public class QueueManager implements ApplicationContextAware {
 		return queue;
 	}
 
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		applicatiionContext = applicationContext;
-	}
-
+	/**
+	 * ApplicationContext中consumer task的名称列表.
+	 */
 	@Required
 	public void setTaskBeanNames(List<String> taskBeanNames) {
 		this.taskBeanNames = taskBeanNames;
 	}
 
+	/**
+	 * 停止每个队列时最多等待的时间, 单位为毫秒, 默认为10秒.
+	 */
 	public void setShutdownWait(int shutdownWait) {
 		this.shutdownWait = shutdownWait;
 	}
 
+	/**
+	 * 是否将队列中为处理的消息持久化到文件, 默认为true.
+	 */
 	public void setPersistence(boolean persistence) {
 		this.persistence = persistence;
 	}
 
+	/**
+	 * @see ApplicationContextAware#setApplicationContext(ApplicationContext)
+	 */
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		applicatiionContext = applicationContext;
+	}
+	
 	@PostConstruct
 	public void start() {
 		//运行任务
@@ -132,7 +144,7 @@ public class QueueManager implements ApplicationContextAware {
 		for (ExecutorService executor : executorList) {
 			try {
 				executor.shutdownNow();
-				executor.awaitTermination(shutdownWait, TimeUnit.SECONDS);
+				executor.awaitTermination(shutdownWait, TimeUnit.MILLISECONDS);
 			} catch (InterruptedException e) {
 				logger.debug("awaitTermination被中断", e);
 			}
