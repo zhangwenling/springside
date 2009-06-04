@@ -61,10 +61,20 @@ rem                   command is executed. If used, JPDA_TRANSPORT, JPDA_ADDRESS
 rem                   and JPDA_SUSPEND are ignored. Thus, all required jpda
 rem                   options MUST be specified. The default is:
 rem
-rem                   -Xdebug -Xrunjdwp:transport=%JPDA_TRANSPORT%,
+rem                   -agentlib:jdwp=transport=%JPDA_TRANSPORT%,
 rem                       address=%JPDA_ADDRESS%,server=y,suspend=%JPDA_SUSPEND%
 rem
-rem $Id: catalina.bat 656834 2008-05-15 21:04:04Z markt $
+rem   LOGGING_CONFIG  (Optional) Override Tomcat's logging config file
+rem                   Example (all one line)
+rem                   set LOGGING_CONFIG="-Djava.util.logging.config.file=%CATALINA_BASE%\conf\logging.properties"
+rem
+rem   LOGGING_MANAGER (Optional) Override Tomcat's logging manager 
+rem                   Example (all one line)
+rem                   set LOGGING_CONFIG="-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager"
+rem
+rem
+rem
+rem $Id: catalina.bat 750920 2009-03-06 14:43:19Z markt $
 rem ---------------------------------------------------------------------------
 
 rem --------------------------------SpringSide Setting Sample Begin-----------------------------
@@ -121,9 +131,17 @@ if not "%CATALINA_TMPDIR%" == "" goto gotTmpdir
 set CATALINA_TMPDIR=%CATALINA_BASE%\temp
 :gotTmpdir
 
-if not exist "%CATALINA_BASE%\conf\logging.properties" goto noJuli
-set JAVA_OPTS=%JAVA_OPTS% -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djava.util.logging.config.file="%CATALINA_BASE%\conf\logging.properties"
-:noJuli
+if not "%LOGGING_CONFIG%" == "" goto noJuliConfig
+set LOGGING_CONFIG=-Dnop
+if not exist "%CATALINA_BASE%\conf\logging.properties" goto noJuliConfig
+set LOGGING_CONFIG=-Djava.util.logging.config.file="%CATALINA_BASE%\conf\logging.properties"
+:noJuliConfig
+set JAVA_OPTS=%JAVA_OPTS% %LOGGING_CONFIG%
+
+if not "%LOGGING_MANAGER%" == "" goto noJuliManager
+set LOGGING_MANAGER=-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+:noJuliManager
+set JAVA_OPTS=%JAVA_OPTS% %LOGGING_MANAGER%
 
 rem ----- Execute The Requested Command ---------------------------------------
 
@@ -147,10 +165,10 @@ set JPDA=
 if not ""%1"" == ""jpda"" goto noJpda
 set JPDA=jpda
 if not "%JPDA_TRANSPORT%" == "" goto gotJpdaTransport
-set JPDA_TRANSPORT=dt_shmem
+set JPDA_TRANSPORT=dt_socket
 :gotJpdaTransport
 if not "%JPDA_ADDRESS%" == "" goto gotJpdaAddress
-set JPDA_ADDRESS=jdbconn
+set JPDA_ADDRESS=8000
 :gotJpdaAddress
 if not "%JPDA_SUSPEND%" == "" goto gotJpdaSuspend
 set JPDA_SUSPEND=n

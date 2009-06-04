@@ -17,8 +17,8 @@ cd servers\derby
 start start-db.bat
 cd ..\..\
 
-echo [Step 3] 执行servers/tomcat/apache-tomcat-6.0.18/bin/startup.bat 启动Tomcat服务器
-cd  servers\tomcat\apache-tomcat-6.0.18\bin\
+echo [Step 3] 执行servers/tomcat/apache-tomcat-6.0.20/bin/startup.bat 启动Tomcat服务器
+cd  servers\tomcat\apache-tomcat-6.0.20\bin\
 start startup.bat
 cd ..\..\..\..\
 

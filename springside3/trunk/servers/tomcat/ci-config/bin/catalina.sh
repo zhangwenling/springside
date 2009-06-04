@@ -57,7 +57,7 @@
 #                   and JPDA_SUSPEND are ignored. Thus, all required jpda
 #                   options MUST be specified. The default is:
 #
-#                   -Xdebug -Xrunjdwp:transport=$JPDA_TRANSPORT,
+#                   -agentlib:jdwp=transport=$JPDA_TRANSPORT,
 #                       address=$JPDA_ADDRESS,server=y,suspend=$JPDA_SUSPEND
 #
 #   JSSE_HOME       (Optional) May point at your Java Secure Sockets Extension
@@ -67,7 +67,15 @@
 #   CATALINA_PID    (Optional) Path of the file which should contains the pid
 #                   of catalina startup java process, when start (fork) is used
 #
-# $Id: catalina.sh 656834 2008-05-15 21:04:04Z markt $
+#   LOGGING_CONFIG  (Optional) Override Tomcat's logging config file
+#                   Example (all one line)
+#                   LOGGING_CONFIG="-Djava.util.logging.config.file=$CATALINA_BASE/conf/logging.properties"
+#
+#   LOGGING_MANAGER (Optional) Override Tomcat's logging manager 
+#                   Example (all one line)
+#                   LOGGING_CONFIG="-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager"
+#
+# $Id: catalina.sh 750920 2009-03-06 14:43:19Z markt $
 # -----------------------------------------------------------------------------
 
 # --------------------------------SpringSide Setting Sample Begin-----------------------------
@@ -186,10 +194,20 @@ if $cygwin; then
   JAVA_ENDORSED_DIRS=`cygpath --path --windows "$JAVA_ENDORSED_DIRS"`
 fi
 
-# Set juli LogManager if it is present
-if [ -r "$CATALINA_BASE"/conf/logging.properties ]; then
+# Set juli LogManager config file if it is present and an override has not been issued
+if [ -z "$LOGGING_CONFIG" ]; then
+  if [ -r "$CATALINA_BASE"/conf/logging.properties ]; then
+    LOGGING_CONFIG="-Djava.util.logging.config.file=$CATALINA_BASE/conf/logging.properties"
+  else
+    # Bugzilla 45585
+    LOGGING_CONFIG="-Dnop"
+  fi
+fi
+
+if [ -z "$LOGGING_MANAGER" ]; then
   JAVA_OPTS="$JAVA_OPTS -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager"
-  LOGGING_CONFIG="-Djava.util.logging.config.file=$CATALINA_BASE/conf/logging.properties"
+else 
+  JAVA_OPTS="$JAVA_OPTS $LOGGING_MANAGER"
 fi
 
 # ----- Execute The Requested Command -----------------------------------------
@@ -232,7 +250,7 @@ if [ "$1" = "debug" ] ; then
     if [ "$1" = "-security" ] ; then
       echo "Using Security Manager"
       shift
-      exec "$_RUNJDB" $JAVA_OPTS "$LOGGING_CONFIG" $CATALINA_OPTS \
+      exec "$_RUNJDB" "$LOGGING_CONFIG" $JAVA_OPTS $CATALINA_OPTS \
         -Djava.endorsed.dirs="$JAVA_ENDORSED_DIRS" -classpath "$CLASSPATH" \
         -sourcepath "$CATALINA_HOME"/../../java \
         -Djava.security.manager \
@@ -242,7 +260,7 @@ if [ "$1" = "debug" ] ; then
         -Djava.io.tmpdir="$CATALINA_TMPDIR" \
         org.apache.catalina.startup.Bootstrap "$@" start
     else
-      exec "$_RUNJDB" $JAVA_OPTS "$LOGGING_CONFIG" $CATALINA_OPTS \
+      exec "$_RUNJDB" "$LOGGING_CONFIG" $JAVA_OPTS $CATALINA_OPTS \
         -Djava.endorsed.dirs="$JAVA_ENDORSED_DIRS" -classpath "$CLASSPATH" \
         -sourcepath "$CATALINA_HOME"/../../java \
         -Dcatalina.base="$CATALINA_BASE" \
@@ -258,7 +276,7 @@ elif [ "$1" = "run" ]; then
   if [ "$1" = "-security" ] ; then
     echo "Using Security Manager"
     shift
-    exec "$_RUNJAVA" $JAVA_OPTS "$LOGGING_CONFIG" $CATALINA_OPTS \
+    exec "$_RUNJAVA" "$LOGGING_CONFIG" $JAVA_OPTS $CATALINA_OPTS \
       -Djava.endorsed.dirs="$JAVA_ENDORSED_DIRS" -classpath "$CLASSPATH" \
       -Djava.security.manager \
       -Djava.security.policy=="$CATALINA_BASE"/conf/catalina.policy \
@@ -267,7 +285,7 @@ elif [ "$1" = "run" ]; then
       -Djava.io.tmpdir="$CATALINA_TMPDIR" \
       org.apache.catalina.startup.Bootstrap "$@" start
   else
-    exec "$_RUNJAVA" $JAVA_OPTS "$LOGGING_CONFIG" $CATALINA_OPTS \
+    exec "$_RUNJAVA" "$LOGGING_CONFIG" $JAVA_OPTS $CATALINA_OPTS \
       -Djava.endorsed.dirs="$JAVA_ENDORSED_DIRS" -classpath "$CLASSPATH" \
       -Dcatalina.base="$CATALINA_BASE" \
       -Dcatalina.home="$CATALINA_HOME" \
@@ -282,7 +300,7 @@ elif [ "$1" = "start" ] ; then
   if [ "$1" = "-security" ] ; then
     echo "Using Security Manager"
     shift
-    "$_RUNJAVA" $JAVA_OPTS "$LOGGING_CONFIG" $CATALINA_OPTS \
+    "$_RUNJAVA" "$LOGGING_CONFIG" $JAVA_OPTS $CATALINA_OPTS \
       -Djava.endorsed.dirs="$JAVA_ENDORSED_DIRS" -classpath "$CLASSPATH" \
       -Djava.security.manager \
       -Djava.security.policy=="$CATALINA_BASE"/conf/catalina.policy \
@@ -296,7 +314,7 @@ elif [ "$1" = "start" ] ; then
         echo $! > $CATALINA_PID
       fi
   else
-    "$_RUNJAVA" $JAVA_OPTS "$LOGGING_CONFIG" $CATALINA_OPTS \
+    "$_RUNJAVA" "$LOGGING_CONFIG" $JAVA_OPTS $CATALINA_OPTS \
       -Djava.endorsed.dirs="$JAVA_ENDORSED_DIRS" -classpath "$CLASSPATH" \
       -Dcatalina.base="$CATALINA_BASE" \
       -Dcatalina.home="$CATALINA_HOME" \
