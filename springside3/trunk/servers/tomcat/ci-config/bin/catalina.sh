@@ -80,7 +80,7 @@
 
 # --------------------------------SpringSide Setting Sample Begin-----------------------------
 
-MEMROY_OPTS="-XX:MaxPermSize=96m"
+MEMROY_OPTS="-XX:MaxPermSize=128m"
 JAVA_OPTS="$JAVA_OPTS% $MEMROY_OPTS" 
 
 # --------------------------------SpringSide Setting Sample End-----------------------------

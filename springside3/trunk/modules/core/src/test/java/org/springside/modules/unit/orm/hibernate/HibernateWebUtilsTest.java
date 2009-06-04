@@ -50,11 +50,10 @@ public class HibernateWebUtilsTest extends Assert {
 		assertEquals("efg", filter2.getValue());
 	}
 
-	public class TestBean {
+	public static class TestBean {
 		private int id;
 
 		public TestBean() {
-
 		}
 
 		public TestBean(int id) {

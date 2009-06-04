@@ -123,15 +123,15 @@ public class QueueManager implements ApplicationContextAware {
 			} catch (Exception e) {
 				logger.error("启动任务" + queueName + "时出错", e);
 			}
-
-			if (persistence) {
-				//从文件中恢复内容到队列.
-				for (Entry<String, BlockingQueue> entry : queueMap.entrySet()) {
-					try {
-						restore(entry.getKey());
-					} catch (Exception e) {
-						logger.error("载入队列" + queueName + "时出错", e);
-					}
+		}
+		
+		if (persistence) {
+			//从文件中恢复内容到队列.
+			for (Entry<String, BlockingQueue> entry : queueMap.entrySet()) {
+				try {
+					restore(entry.getKey());
+				} catch (Exception e) {
+					logger.error("载入队列" + entry.getKey() + "时出错", e);
 				}
 			}
 		}

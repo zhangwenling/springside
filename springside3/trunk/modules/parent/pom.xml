@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.springside</groupId>
-	<artifactId>springside-parent</artifactId>
+	<artifactId>springside3-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>SpringSide's Parent pom.xml</name>
 	<version>3.1.4</version>
@@ -595,7 +595,7 @@
 			<dependency>
 				<groupId>org.seleniumhq.selenium.client-drivers</groupId>
 				<artifactId>selenium-java-client-driver</artifactId>
-				<version>1.0-beta-2</version>
+				<version>1.0</version>
 				<exclusions>
 					<exclusion>
 						<groupId>org.codehaus.groovy.maven.runtime</groupId>
@@ -642,6 +642,7 @@
 				</plugins>
 			</build>
 		</profile>
+
 		<profile>
 			<id>functional</id>
 			<build>

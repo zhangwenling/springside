@@ -71,6 +71,10 @@ public class QueueManagerTest extends Assert {
 		assertEquals(true, file.exists());
 
 		BlockingQueue newQueue = QueueManager.getQueue(queueName);
+		manager = new QueueManager();
+		manager.setTaskBeanNames(new ArrayList());
+		manager.start();
+		
 		List list = new ArrayList();
 		newQueue.drainTo(list);
 

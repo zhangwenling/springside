@@ -79,7 +79,7 @@ rem ---------------------------------------------------------------------------
 
 rem --------------------------------SpringSide Setting Sample Begin-----------------------------
 
-set MEMROY_OPTS=-XX:MaxPermSize=96m
+set MEMROY_OPTS=-XX:MaxPermSize=128m
 set JAVA_OPTS=%JAVA_OPTS% %MEMROY_OPTS% 
 
 rem --------------------------------SpringSide Setting Sample End-------------------------------
