@@ -42,16 +42,24 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	 * 批量执行的队列大小,默认为10.
+	 * 批量执行的队列大小, 默认为10.
 	 */
 	public void setBufferSize(int bufferSize) {
 		this.bufferSize = bufferSize;
 	}
+	
+	public void run() {
+		try {
+			while (!Thread.currentThread().isInterrupted()) {
+				Object event = queue.take();
+				processEvent(event);
+			}
+		} catch (InterruptedException e) {
+			logger.debug("消费线程阻塞被中断", e);
+		}
+		clean();
+	}
 
-	/**
-	 * @see QueueConsumerTask#processEvent(Object)
-	 */
-	@Override
 	protected void processEvent(Object eventObject) throws InterruptedException {
 		LoggingEvent event = (LoggingEvent) eventObject;
 		eventBuffer.add(event);
@@ -62,10 +70,6 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 		}
 	}
 
-	/**
-	 * @see QueueConsumerTask#clean()
-	 */
-	@Override
 	protected void clean() {
 		if (eventBuffer.size() > 0) {
 			updateBatch();
@@ -76,6 +80,7 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	/**
 	 * 批量更新Buffer中的事件.
 	 */
+	@SuppressWarnings("unchecked")
 	protected void updateBatch() {
 		List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
 		for (LoggingEvent event : eventBuffer) {
