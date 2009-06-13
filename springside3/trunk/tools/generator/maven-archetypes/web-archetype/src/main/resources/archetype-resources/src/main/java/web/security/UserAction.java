@@ -130,9 +130,9 @@ public class UserAction extends CRUDActionSupport<User> {
 	public String checkLoginName() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String loginName = request.getParameter("loginName");
-		String orgLoginName = request.getParameter("orgLoginName");
+		String oldLoginName = request.getParameter("oldLoginName");
 
-		if (userManager.isLoginNameUnique(loginName, orgLoginName)) {
+		if (userManager.isLoginNameUnique(loginName, oldLoginName)) {
 			Struts2Utils.renderText("true");
 		} else {
 			Struts2Utils.renderText("false");

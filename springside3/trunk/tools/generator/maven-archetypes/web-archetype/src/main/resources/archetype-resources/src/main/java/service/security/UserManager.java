@@ -55,7 +55,7 @@ public class UserManager extends EntityManager<User, Long> {
 	 * @return loginName在数据库中唯一或等于orgLoginName时返回true.
 	 */
 	@Transactional(readOnly = true)
-	public boolean isLoginNameUnique(String loginName, String orgLoginName) {
-		return userDao.isPropertyUnique("loginName", loginName, orgLoginName);
+	public boolean isLoginNameUnique(String loginName, String oldLoginName) {
+		return userDao.isPropertyUnique("loginName", loginName, oldLoginName);
 	}
 }

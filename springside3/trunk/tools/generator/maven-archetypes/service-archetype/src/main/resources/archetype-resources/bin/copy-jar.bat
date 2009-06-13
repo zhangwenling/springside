@@ -12,8 +12,8 @@ set exec_driver=%exec_path:~1,2%
 %exec_driver%
 cd %exec_path%/..
 
-call mvn dependency:copy-dependencies -DoutputDirectory=lib -DexcludeScope=runtime
-call mvn dependency:copy-dependencies -DoutputDirectory=webapp/WEB-INF/lib  -DincludeScope=runtime
+call mvn dependency:copy-dependencies -DoutputDirectory=lib -DexcludeScope=runtime -Dsilent=true
+call mvn dependency:copy-dependencies -DoutputDirectory=webapp/WEB-INF/lib -DincludeScope=runtime -Dsilent=true
 
 %local_driver%
 cd %local_path%

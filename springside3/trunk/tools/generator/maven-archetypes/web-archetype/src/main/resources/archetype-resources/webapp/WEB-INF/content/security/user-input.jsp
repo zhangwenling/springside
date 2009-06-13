@@ -23,17 +23,18 @@
 				rules: { 
 					loginName: { 
         				required: true, 
-        				remote: "user!checkLoginName.action?orgLoginName="+encodeURIComponent('${symbol_dollar}{loginName}')
-    			},
-          name: "required",
-          password: {
+        				remote: "user!checkLoginName.action?oldLoginName="+encodeURIComponent('${symbol_dollar}{loginName}')
+    				},
+          			name: "required",
+          			password: {
     					required: true,
     					minlength:3
-    			}, 
-    			passwordConfirm: {
+    				}, 
+    				passwordConfirm: {
     					equalTo:"${symbol_pound}password"
-    			},
-    			email:"email"
+    				},
+    				email:"email",
+    				checkedRoleIds:"required"
 				},
 				messages: {
 					loginName: {

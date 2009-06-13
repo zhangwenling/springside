@@ -1,11 +1,11 @@
 function jumpPage(pageNo){
-		$("#pageNo").val(pageNo);
-		$("#mainForm").submit();
-	}
+	$("#pageNo").val(pageNo);
+	$("#mainForm").submit();
+}
 	
 function sort(orderBy,defaultOrder){
 	if($("#orderBy").val()==orderBy){
-			if($("#order").val()==""){
+		if($("#order").val()==""){
 			$("#order").val(defaultOrder);}
 			else if($("#order").val()=="desc"){
 			$("#order").val("asc");}
@@ -18,4 +18,12 @@ function sort(orderBy,defaultOrder){
 		}
 
 		$("#mainForm").submit();
-	}
+}
+
+function search(){
+	$("#order").val("");
+	$("#orderBy").val("");
+	$("#pageNo").val("1");
+	
+	$("#mainForm").submit();
+}

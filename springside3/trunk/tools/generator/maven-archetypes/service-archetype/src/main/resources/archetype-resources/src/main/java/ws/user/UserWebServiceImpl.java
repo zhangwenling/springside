@@ -14,10 +14,10 @@ import ${package}.entity.user.User;
 import ${package}.service.user.UserManager;
 import ${package}.ws.Constants;
 import ${package}.ws.WSResult;
+import ${package}.ws.WebServiceSupport;
 import ${package}.ws.user.dto.CreateUserResult;
 import ${package}.ws.user.dto.GetAllUserResult;
 import ${package}.ws.user.dto.UserDTO;
-import org.springside.modules.webservice.WebServiceSupport;
 
 /**
  * WebService实现类.

@@ -2,8 +2,8 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>${artifactId}-parent</artifactId>
-		<groupId>${groupId}</groupId>
+		<artifactId>springside3-parent</artifactId>
+		<groupId>org.springside</groupId>
 		<version>${version}</version>
 		<relativePath>pom-parent.xml</relativePath>
 	</parent>
@@ -15,43 +15,36 @@
 
 	<build>
 		<plugins>
-			<!-- sql 插件 -->
+			<!-- cargo 插件 -->
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>sql-maven-plugin</artifactId>
-
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.derby</groupId>
-						<artifactId>derbyclient</artifactId>
-						<version>10.4.2.0</version>
-					</dependency>
-				</dependencies>
-
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
 				<configuration>
-					<username>APP</username>
-					<password>APP</password>
-					<url>jdbc:derby://localhost:1527/${artifactId};create=true</url>
-					<driver>org.apache.derby.jdbc.ClientDriver</driver>
-				</configuration>
+					<container>
+						<containerId>tomcat6x</containerId>
+						<type>remote</type>
+					</container>
 
-				<executions>
-					<execution>
-						<id>Create and initialize the database</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>execute</goal>
-						</goals>
-						<configuration>
-							<onError>continue</onError>
-							<encoding>UTF-8</encoding>
-							<srcFiles>
-								<srcFile>src/main/sql/derby/schema.sql</srcFile>
-								<srcFile>src/main/sql/derby/load-data.sql</srcFile>
-							</srcFiles>
-						</configuration>
-					</execution>
-				</executions>
+					<configuration>
+						<type>runtime</type>
+						<properties>
+							<cargo.remote.username>admin</cargo.remote.username>
+							<cargo.remote.password></cargo.remote.password>
+							<cargo.tomcat.manager.url>http://localhost:8080/manager</cargo.tomcat.manager.url>
+						</properties>
+					</configuration>
+
+					<deployer>
+						<type>remote</type>
+						<deployables>
+							<deployable>
+								<properties>
+									<context>/${artifactId}</context>
+								</properties>
+							</deployable>
+						</deployables>
+					</deployer>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -199,6 +192,57 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium.client-drivers</groupId>
+			<artifactId>selenium-java-client-driver</artifactId>
+		</dependency>
 		<!-- testing end -->
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>initdb</id>
+			<build>
+				<plugins>
+					<!-- sql 插件 -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>sql-maven-plugin</artifactId>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.derby</groupId>
+								<artifactId>derbyclient</artifactId>
+								<version>10.4.2.0</version>
+							</dependency>
+						</dependencies>
+
+						<configuration>
+							<username>APP</username>
+							<password>APP</password>
+							<url>jdbc:derby://localhost:1527/${artifactId};create=true</url>
+							<driver>org.apache.derby.jdbc.ClientDriver</driver>
+						</configuration>
+
+						<executions>
+							<execution>
+								<id>Create and initialize the database</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<configuration>
+									<onError>continue</onError>
+									<encoding>UTF-8</encoding>
+									<srcFiles>
+										<srcFile>src/main/sql/derby/schema.sql</srcFile>
+										<srcFile>src/main/sql/derby/load-data.sql</srcFile>
+									</srcFiles>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

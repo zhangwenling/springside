@@ -6,7 +6,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>${groupId}</groupId>
-	<artifactId>${artifactId}-parent</artifactId>
+	<artifactId>springside3-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>SpringSide's Parent pom.xml</name>
 	<version>${version}</version>
@@ -23,129 +23,105 @@
 		<!-- 设定Web应用中编译结果输出到WEB-INF/classes 中，与使用IDE时相同  -->
 		<outputDirectory>webapp/WEB-INF/classes</outputDirectory>
 
-		<plugins>
-			<!-- war插件,设定webapp目录为/webapp,war名称不带版本号 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1-beta-1</version>
-				<configuration>
-					<warSourceDirectory>webapp</warSourceDirectory>
-					<warName>${symbol_dollar}{artifactId}</warName>
-				</configuration>
-			</plugin>
+		<pluginManagement>
+			<plugins>
+				<!-- war插件,设定webapp目录为/webapp,war名称不带版本号 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.1-beta-1</version>
+					<configuration>
+						<warSourceDirectory>webapp</warSourceDirectory>
+					</configuration>
+				</plugin>
 
-			<!-- compiler插件,设定JDK版本及编码 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.0.2</version>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
+				<!-- compiler插件,设定JDK版本及编码 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.0.2</version>
+					<configuration>
+						<source>1.5</source>
+						<target>1.5</target>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
 
-			<!--
-				surefire插件. mvn test单元测试时忽略integration目录下的集成测试用例, mvn integration-test集成测试时忽略其他目录下的单元测试用例.
+				<!--
+				surefire插件. mvn test单元测试时忽略integration目录下的集成测试用例.
 			-->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.4.3</version>
-				<configuration>
-					<excludes>
-						<exclude>**/integration/**</exclude>
-					</excludes>
-					<skip>${symbol_dollar}{maven-surefire-plugin.skip}</skip>
-				</configuration>
-				<executions>
-					<execution>
-						<id>integration-test</id>
-						<goals>
-							<goal>test</goal>
-						</goals>
-						<phase>integration-test</phase>
-						<configuration>
-							<excludes>
-								<exclude>none</exclude>
-							</excludes>
-							<includes>
-								<include>**/integration/**</include>
-							</includes>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.4.3</version>
+					<configuration>
+						<includes>
+							<include>**/unit/**</include>
+						</includes>
+					</configuration>
+				</plugin>
 
-			<!-- tomcat插件 -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>tomcat-maven-plugin</artifactId>
-				<version>1.0-beta-1</version>
-				<!-- 默认manager url -->
-				<configuration>
-					<url>http://localhost:8080/manager</url>
-				</configuration>
-			</plugin>
+				<!-- cargo插件 -->
+				<plugin>
+					<groupId>org.codehaus.cargo</groupId>
+					<artifactId>cargo-maven2-plugin</artifactId>
+					<version>1.0</version>
+				</plugin>
 
-			<!-- enforcer插件,检查JDK版本1.6 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>1.0-beta-1</version>
-				<executions>
-					<execution>
-						<id>enforce-versions</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<requireJavaVersion>
-									<version>1.5</version>
-								</requireJavaVersion>
-							</rules>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+				<!-- enforcer插件,检查JDK版本1.6 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>1.0-beta-1</version>
+					<executions>
+						<execution>
+							<id>enforce-versions</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<requireJavaVersion>
+										<version>1.5</version>
+									</requireJavaVersion>
+								</rules>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
 
-			<!-- resource插件,设定编码 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.3</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
+				<!-- resource插件,设定编码 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.3</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
 
-			<!-- sql 插件 -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>sql-maven-plugin</artifactId>
-				<version>1.3</version>
-				<configuration>
-					<skip>${symbol_dollar}{sql-maven-plugin.skip}</skip>
-				</configuration>
-			</plugin>
+				<!-- sql 插件 -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>sql-maven-plugin</artifactId>
+					<version>1.3</version>
+				</plugin>
 
-			<!-- archetype插件 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-archetype-plugin</artifactId>
-				<version>2.0-alpha-4</version>
-			</plugin>
+				<!-- archetype插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-archetype-plugin</artifactId>
+					<version>2.0-alpha-4</version>
+				</plugin>
 
-			<!-- dependency插件 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.1</version>
-			</plugin>
-		</plugins>
+				<!-- dependency插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
@@ -156,12 +132,28 @@
 			</snapshots> </repository>
 		-->
 		<repository>
+			<id>central</id>
+			<name>Maven Repository Switchboard</name>
+			<layout>default</layout>
+			<url>http://repo1.maven.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<repository>
 			<id>jboss</id>
 			<name>jboss repository</name>
 			<url>http://repository.jboss.com/maven2/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
+		</repository>
+
+		<repository>
+			<id>openqa-releases</id>
+			<name>Openqa Release Repository</name>
+			<url>http://nexus.openqa.org/content/repositories/releases</url>
 		</repository>
 	</repositories>
 
@@ -179,12 +171,8 @@
 		<spring.version>2.5.6</spring.version>
 		<hibernate.version>3.3.1.GA</hibernate.version>
 		<struts2.version>2.1.6</struts2.version>
-		<cxf.version>2.2.1</cxf.version>
+		<cxf.version>2.2.2</cxf.version>
 		<spring-security.version>2.0.4</spring-security.version>
-
-		<!-- Plugin的属性定义 -->
-		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
-		<sql-maven-plugin.skip>true</sql-maven-plugin.skip>
 	</properties>
 
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
@@ -342,9 +330,10 @@
 
 			<!-- json -->
 			<dependency>
-				<groupId>org.json</groupId>
-				<artifactId>json</artifactId>
-				<version>20080701</version>
+				<groupId>net.sf.json-lib</groupId>
+				<artifactId>json-lib</artifactId>
+				<version>2.2.3</version>
+				<classifier>jdk15</classifier>
 			</dependency>
 
 			<!-- j2ee web spec -->
@@ -582,9 +571,10 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>3.8.2</version>
+				<version>4.4</version>
 				<scope>test</scope>
 			</dependency>
+
 			<dependency>
 				<groupId>org.easymock</groupId>
 				<artifactId>easymock</artifactId>
@@ -597,10 +587,32 @@
 				<version>2.4</version>
 				<scope>test</scope>
 			</dependency>
+
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-test</artifactId>
 				<version>${symbol_dollar}{spring.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.seleniumhq.selenium.client-drivers</groupId>
+				<artifactId>selenium-java-client-driver</artifactId>
+				<version>1.0</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.codehaus.groovy.maven.runtime</groupId>
+						<artifactId>gmaven-runtime-default</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.seleniumhq.selenium.server</groupId>
+						<artifactId>selenium-server</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.seleniumhq.selenium.core</groupId>
+						<artifactId>selenium-core</artifactId>
+					</exclusion>
+				</exclusions>
 				<scope>test</scope>
 			</dependency>
 			<!-- test end -->
@@ -609,16 +621,69 @@
 
 	<profiles>
 		<profile>
-			<id>initdb</id>
-			<properties>
-				<sql-maven-plugin.skip>false</sql-maven-plugin.skip>
-			</properties>
+			<id>integration</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>integration-test</id>
+								<goals>
+									<goal>test</goal>
+								</goals>
+								<phase>integration-test</phase>
+								<configuration>
+									<includes>
+										<include>**/integration/**</include>
+									</includes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
+
 		<profile>
-			<id>notest</id>
-			<properties>
-				<maven-surefire-plugin.skip>true</maven-surefire-plugin.skip>
-			</properties>
+			<id>functional</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.cargo</groupId>
+						<artifactId>cargo-maven2-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>deploy</id>
+								<goals>
+									<goal>redeploy</goal>
+								</goals>
+								<phase>pre-integration-test</phase>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>functional-test</id>
+								<goals>
+									<goal>test</goal>
+								</goals>
+								<phase>integration-test</phase>
+								<configuration>
+									<includes>
+										<include>**/functional/**</include>
+									</includes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 </project>

@@ -1,15 +1,13 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.integration.service.user;
-
-import static org.junit.Assert.assertFalse;
+package ${package}.integration.service.security;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import ${package}.entity.user.Role;
-import ${package}.entity.user.User;
-import ${package}.service.user.UserManager;
+import ${package}.entity.security.Role;
+import ${package}.entity.security.User;
+import ${package}.service.security.UserManager;
 import org.springside.modules.test.junit4.SpringTransactionalTestCase;
 
 /**
@@ -22,36 +20,53 @@ import org.springside.modules.test.junit4.SpringTransactionalTestCase;
 public class UserManagerTest extends SpringTransactionalTestCase {
 
 	@Autowired
-	private UserManager	userManager;
+	private UserManager userManager;
 
 	@Test
-	public void saveUser() {
-
+	public void crudUser() {
+		//保存用户并验证.
 		User entity = new User();
 		// 因为LoginName要求唯一性，因此添加random字段。
 		entity.setLoginName("tester" + randomString(5));
 		entity.setName("foo");
 		entity.setEmail("foo@bar.com");
 		entity.setPassword("foo");
+		userManager.save(entity);
+		flush();
+		assertNotNull(entity.getId());
+
+		//删除用户并验证
+		userManager.delete(entity.getId());
+		flush();
+	}
+
+	@Test
+	public void crudUserAndRole() {
+		//保存带角色的用户并验证
+		User entity = new User();
+		entity.setLoginName("tester" + randomString(5));
+
 		Role role = new Role();
 		role.setId(1L);
 		entity.getRoles().add(role);
 		userManager.save(entity);
 		flush();
-		assertNotNull(entity.getId());
+		entity = userManager.get(entity.getId());
+		assertEquals(1, entity.getRoles().size());
+
+		//删除用户的角色并验证
+		entity.getRoles().remove(role);
+		flush();
+		entity = userManager.get(entity.getId());
+		assertEquals(0, entity.getRoles().size());
 	}
 
+	//期望抛出ConstraintViolationException的异常.
 	@Test(expected = org.hibernate.exception.ConstraintViolationException.class)
-	public void savenNotUniqueUser() {
+	public void savenUserNotUnique() {
 		User entity = new User();
 		entity.setLoginName("admin");
 		userManager.save(entity);
 		flush();
-	}
-
-	@Test
-	public void authUser() {
-		assertTrue(userManager.authenticate("admin", "admin"));
-		assertFalse(userManager.authenticate("admin", ""));
 	}
 }
