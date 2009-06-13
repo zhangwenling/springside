@@ -6,7 +6,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>${groupId}</groupId>
-	<artifactId>springside3-parent</artifactId>
+	<artifactId>${artifactId}-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>SpringSide's Parent pom.xml</name>
 	<version>${version}</version>

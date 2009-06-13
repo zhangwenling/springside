@@ -2,8 +2,8 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>springside3-parent</artifactId>
-		<groupId>org.springside</groupId>
+		<artifactId>${artifactId}-parent</artifactId>
+		<groupId>${groupId}</groupId>
 		<version>${version}</version>
 		<relativePath>pom-parent.xml</relativePath>
 	</parent>
