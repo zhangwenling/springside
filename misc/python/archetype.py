@@ -2,12 +2,10 @@ import os,shutil
 from common import rmdir,rmfile,move,replaceinfile
 
 def prepare():
-    rmdir(base_dir+'\\examples\\mini-service\\target')
     move(base_dir+'\\examples\\mini-service\\lib',base_dir+'\\examples\\mini-service\\target\\tmp\\lib')
     move(base_dir+'\\examples\\mini-service\\webapp\\WEB-INF\\lib',base_dir+'\\examples\\mini-service\\target\\tmp\\WEB-INF-lib')
     move(base_dir+'\\examples\\mini-service\\webapp\\WEB-INF\\classes',base_dir+'\\examples\\mini-service\\target\\tmp\\WEB-INF-classes')
    
-    rmdir(base_dir+'\\examples\\mini-web\\target')
     move(base_dir+'\\examples\\mini-web\\lib',base_dir+'\\examples\\mini-web\\target\\tmp\\lib')
     move(base_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\lib',base_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-lib')
     move(base_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\classes',base_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-classes')
@@ -89,7 +87,7 @@ def clean():
  
     print 'cleaned temp files.'
 
-springside_version='3.1.3'
+springside_version='3.1.4'
 base_dir = os.path.abspath("../../")
 
 prepare()

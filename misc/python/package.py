@@ -35,7 +35,7 @@ def clean():
 
 base_dir = os.path.abspath("../../")
 export_dir='C:\\'
-springside_version='3.1.3.1'
+springside_version='3.1.4'
 springside_dir="springside-"+springside_version
 
 prepare()
