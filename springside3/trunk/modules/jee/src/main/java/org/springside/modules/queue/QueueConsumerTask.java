@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 
 /**
- * 消费Queue中事件的任务基类.
+ * 消费Queue消息的任务基类.
  * 
  * @author calvin
  */
@@ -38,7 +38,7 @@ public abstract class QueueConsumerTask implements Runnable {
 	}
 
 	/**
-	 * 任务并发的线程数.
+	 * 任务的并发处理线程数.
 	 */
 	public void setThreadCount(int threadCount) {
 		this.threadCount = threadCount;

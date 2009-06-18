@@ -24,7 +24,7 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	protected SimpleJdbcTemplate jdbcTemplate;
 	protected String sql;
 	protected int bufferSize = 10;
-	
+
 	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
 
 	@Required
@@ -47,9 +47,13 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	public void setBufferSize(int bufferSize) {
 		this.bufferSize = bufferSize;
 	}
-	
+
+	/**
+	 * 线程执行函数.
+	 */
 	public void run() {
 		try {
+			//循环阻塞获取消息
 			while (!Thread.currentThread().isInterrupted()) {
 				Object event = queue.take();
 				processEvent(event);
@@ -60,6 +64,9 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 		clean();
 	}
 
+	/**
+	 * 事件处理函数.
+	 */
 	protected void processEvent(Object eventObject) throws InterruptedException {
 		LoggingEvent event = (LoggingEvent) eventObject;
 		eventBuffer.add(event);
@@ -70,6 +77,9 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 		}
 	}
 
+	/**
+	 * 退出清理函数.
+	 */
 	protected void clean() {
 		if (eventBuffer.size() > 0) {
 			updateBatch();
@@ -82,27 +92,32 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	 */
 	@SuppressWarnings("unchecked")
 	protected void updateBatch() {
-		List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
-		for (LoggingEvent event : eventBuffer) {
-			Map<String, Object> paramMap = parseEvent(event);
-			paramMapList.add(paramMap);
-		}
-
-		Map[] paramMapArray = paramMapList.toArray(new Map[paramMapList.size()]);
-		SqlParameterSource[] paramMapBatch = SqlParameterSourceUtils.createBatch(paramMapArray);
-
 		try {
-			jdbcTemplate.batchUpdate(getActualSql(), paramMapBatch);
-			if (logger.isDebugEnabled()) {
-				for (LoggingEvent event : eventBuffer) {
-					logger.debug("saved event, {}", Log4jUtils.convertEventToString(event));
-				}
+			List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
+			for (LoggingEvent event : eventBuffer) {
+				Map<String, Object> paramMap = parseEvent(event);
+				paramMapList.add(paramMap);
 			}
-		} catch (DataAccessException e) {
-			dataAccessExceptionHandle(e, eventBuffer);
+
+			Map[] paramMapArray = paramMapList.toArray(new Map[paramMapList.size()]);
+			SqlParameterSource[] paramMapBatch = SqlParameterSourceUtils.createBatch(paramMapArray);
+
+			try {
+				jdbcTemplate.batchUpdate(getActualSql(), paramMapBatch);
+				if (logger.isDebugEnabled()) {
+					for (LoggingEvent event : eventBuffer) {
+						logger.debug("saved event, {}", Log4jUtils.convertEventToString(event));
+					}
+				}
+			} catch (DataAccessException e) {
+				dataAccessExceptionHandle(e, eventBuffer);
+			}
+
+			eventBuffer.clear();
+		} catch (Exception e) {
+			logger.error("批量提交任务时发生错误.", e);
 		}
 
-		eventBuffer.clear();
 	}
 
 	/**

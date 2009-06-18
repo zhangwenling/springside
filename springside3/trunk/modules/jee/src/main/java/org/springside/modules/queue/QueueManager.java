@@ -47,7 +47,7 @@ public class QueueManager implements ApplicationContextAware {
 	//内部属性//
 	protected ApplicationContext applicatiionContext;
 	protected static Map<String, BlockingQueue> queueMap = new ConcurrentHashMap<String, BlockingQueue>();//消息队列
-	protected List<ExecutorService> executorList = new ArrayList<ExecutorService>();//执行任务的线程池列表
+	protected List<ExecutorService> executorList;//执行任务的线程池列表
 
 	/**
 	 * 根据queueName获得消息队列的静态函数.
@@ -92,17 +92,16 @@ public class QueueManager implements ApplicationContextAware {
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		applicatiionContext = applicationContext;
 	}
-	
+
 	@PostConstruct
 	public void start() {
-		//运行任务列表
 		for (String taskBeanName : taskBeanNames) {
 			QueueConsumerTask task = (QueueConsumerTask) applicatiionContext.getBean(taskBeanName);
 			String queueName = task.getQueueName();
 			int threadCount = task.getThreadCount();
 
 			try {
-				//初始化任务消费的队列
+				//初始化队列
 				BlockingQueue queue = getQueue(queueName);
 
 				//多线程运行任务
@@ -124,9 +123,9 @@ public class QueueManager implements ApplicationContextAware {
 				logger.error("启动任务" + queueName + "时出错", e);
 			}
 		}
-		
+
+		//从文件中恢复消息到队列.
 		if (persistence) {
-			//从文件中恢复内容到队列.
 			for (Entry<String, BlockingQueue> entry : queueMap.entrySet()) {
 				try {
 					restore(entry.getKey());
@@ -149,12 +148,14 @@ public class QueueManager implements ApplicationContextAware {
 			}
 		}
 
-		//持久化所有未完成队列内容到文件
-		for (Entry<String, BlockingQueue> entry : queueMap.entrySet()) {
-			try {
-				backup(entry.getKey());
-			} catch (IOException e) {
-				logger.error("持久化" + entry.getKey() + "队列时出错", e);
+		//持久化所有队列的未处理消息到文件
+		if (persistence) {
+			for (Entry<String, BlockingQueue> entry : queueMap.entrySet()) {
+				try {
+					backup(entry.getKey());
+				} catch (IOException e) {
+					logger.error("持久化" + entry.getKey() + "队列时出错", e);
+				}
 			}
 		}
 
@@ -163,10 +164,11 @@ public class QueueManager implements ApplicationContextAware {
 	}
 
 	/**
-	 * 持久化队列中未处理的对象到文件中.
-	 * 如果持久化文件已存在,会进行追加.
+	 * 持久化队列中未处理的消息到文件中.
+	 * 当持久化文件已存在时会进行追加.
+	 * 当队列中消息过多时, 客户端代码亦可调用本函数进行持久化, 等高峰期过后重新执行restore().
 	 */
-	protected static void backup(String queueName) throws IOException {
+	public static void backup(String queueName) throws IOException {
 		BlockingQueue queue = getQueue(queueName);
 		List list = new ArrayList();
 		queue.drainTo(list);
@@ -186,12 +188,15 @@ public class QueueManager implements ApplicationContextAware {
 				}
 			}
 		}
+		else {
+			logger.debug("队列为空,不需要持久化 .");
+		}
 	}
 
 	/**
-	 * 载入持久化文件中的对象到队列中.
+	 * 载入持久化文件中的消息到队列中.
 	 */
-	protected static void restore(String queueName) throws ClassNotFoundException, FileNotFoundException, IOException {
+	public static void restore(String queueName) throws ClassNotFoundException, FileNotFoundException, IOException {
 		ObjectInputStream ois = null;
 		String filePath = getPersistenceFilePath(queueName);
 		File file = new File(filePath);
@@ -217,6 +222,9 @@ public class QueueManager implements ApplicationContextAware {
 				}
 			}
 			file.delete();
+		}
+		else{
+			logger.debug("队列{}不存在", queueName);
 		}
 	}
 
