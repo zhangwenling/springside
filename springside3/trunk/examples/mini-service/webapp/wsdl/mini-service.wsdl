@@ -1,81 +1,92 @@
 <?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="UserWebService" targetNamespace="http://miniservice.examples.springside.org" xmlns:ns1="http://cxf.apache.org/bindings/xformat" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://miniservice.examples.springside.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <wsdl:types>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://miniservice.examples.springside.org" xmlns:tns="http://miniservice.examples.springside.org" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:element name="authUser" type="tns:authUser" />
-    <xs:element name="authUserResponse" type="tns:authUserResponse" />
-    <xs:element name="createUser" type="tns:createUser" />
-    <xs:element name="createUserResponse" type="tns:createUserResponse" />
-    <xs:element name="getAllUser" type="tns:getAllUser" />
-    <xs:element name="getAllUserResponse" type="tns:getAllUserResponse" />
-    <xs:complexType name="authUser">
-        <xs:sequence>
-            <xs:element minOccurs="0" name="loginName" type="xs:string" />
-            <xs:element minOccurs="0" name="password" type="xs:string" />
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="authUserResponse">
-        <xs:sequence>
-            <xs:element minOccurs="0" name="return" type="tns:WSResult" />
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="WSResult">
-        <xs:sequence>
-            <xs:element minOccurs="0" name="code" type="xs:string" />
-            <xs:element minOccurs="0" name="message" type="xs:string" />
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="getAllUser">
-        <xs:sequence />
-    </xs:complexType>
-    <xs:complexType name="getAllUserResponse">
-        <xs:sequence>
-            <xs:element minOccurs="0" name="return" type="tns:GetAllUserResult" />
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="GetAllUserResult">
-        <xs:complexContent>
-            <xs:extension base="tns:WSResult">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="userList" nillable="true" type="tns:User" />
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="User">
-        <xs:sequence>
-            <xs:element minOccurs="0" name="email" type="xs:string" />
-            <xs:element minOccurs="0" name="id" type="xs:long" />
-            <xs:element minOccurs="0" name="loginName" type="xs:string" />
-            <xs:element minOccurs="0" name="name" type="xs:string" />
-            <xs:element minOccurs="0" name="password" type="xs:string" />
-            <xs:element maxOccurs="unbounded" minOccurs="0" name="roles" nillable="true" type="tns:Role" />
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="Role">
-        <xs:sequence>
-            <xs:element minOccurs="0" name="id" type="xs:long" />
-            <xs:element minOccurs="0" name="name" type="xs:string" />
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="createUser">
-        <xs:sequence>
-            <xs:element minOccurs="0" name="user" type="tns:User" />
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="createUserResponse">
-        <xs:sequence>
-            <xs:element minOccurs="0" name="return" type="tns:CreateUserResult" />
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="CreateUserResult">
-        <xs:complexContent>
-            <xs:extension base="tns:WSResult">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="userId" type="xs:long" />
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+<xs:element name="authUser" type="tns:authUser" />
+<xs:element name="authUserResponse" type="tns:authUserResponse" />
+<xs:element name="createUser" type="tns:createUser" />
+<xs:element name="createUserResponse" type="tns:createUserResponse" />
+<xs:element name="getAllUser" type="tns:getAllUser" />
+<xs:element name="getAllUserResponse" type="tns:getAllUserResponse" />
+<xs:complexType name="authUser">
+<xs:sequence>
+<xs:element minOccurs="0" name="loginName" type="xs:string" />
+<xs:element minOccurs="0" name="password" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="authUserResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:WSResult" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="WSResult">
+<xs:sequence>
+<xs:element minOccurs="0" name="code" type="xs:string" />
+<xs:element minOccurs="0" name="message" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAllUser">
+<xs:sequence />
+</xs:complexType>
+<xs:complexType name="getAllUserResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:GetAllUserResult" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="GetAllUserResult">
+<xs:complexContent>
+<xs:extension base="tns:WSResult">
+<xs:sequence>
+<xs:element minOccurs="0" name="userList">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="user" type="tns:User" />
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="User">
+<xs:sequence>
+<xs:element minOccurs="0" name="email" type="xs:string" />
+<xs:element minOccurs="0" name="id" type="xs:long" />
+<xs:element minOccurs="0" name="loginName" type="xs:string" />
+<xs:element minOccurs="0" name="name" type="xs:string" />
+<xs:element minOccurs="0" name="roles">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="role" type="tns:Role" />
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Role">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long" />
+<xs:element minOccurs="0" name="name" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="createUser">
+<xs:sequence>
+<xs:element minOccurs="0" name="user" type="tns:User" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="createUserResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:CreateUserResult" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CreateUserResult">
+<xs:complexContent>
+<xs:extension base="tns:WSResult">
+<xs:sequence>
+<xs:element minOccurs="0" name="userId" type="xs:long" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
 </xs:schema>
   </wsdl:types>
   <wsdl:message name="createUser">
