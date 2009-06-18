@@ -45,8 +45,9 @@
 				</plugin>
 
 				<!--
-				surefire插件. mvn test单元测试时忽略integration目录下的集成测试用例.
-			-->
+				surefire插件. 
+				mvn test单元测试时忽略integration目录下的集成测试用例.
+				-->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
@@ -65,7 +66,7 @@
 					<version>1.0</version>
 				</plugin>
 
-				<!-- enforcer插件,检查JDK版本1.6 -->
+				<!-- enforcer插件,检查JDK版本1.5 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-enforcer-plugin</artifactId>
@@ -129,9 +130,8 @@
 			</snapshots> </repository>
 		-->
 		<repository>
-			<id>central</id>
+			<id>offical</id>
 			<name>Maven Repository Switchboard</name>
-			<layout>default</layout>
 			<url>http://repo1.maven.org/maven2</url>
 			<snapshots>
 				<enabled>false</enabled>
@@ -209,12 +209,12 @@
 			<dependency>
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjweaver</artifactId>
-				<version>1.6.2</version>
+				<version>1.6.5</version>
 			</dependency>
 			<dependency>
 				<groupId>cglib</groupId>
 				<artifactId>cglib-nodep</artifactId>
-				<version>2.1_3</version>
+				<version>2.2</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.annotation</groupId>
@@ -553,7 +553,7 @@
 			<dependency>
 				<groupId>net.sf.ehcache</groupId>
 				<artifactId>ehcache</artifactId>
-				<version>1.5.0</version>
+				<version>1.6.0</version>
 			</dependency>
 
 			<!-- usually for webservice -->
@@ -575,7 +575,7 @@
 			<dependency>
 				<groupId>org.easymock</groupId>
 				<artifactId>easymock</artifactId>
-				<version>2.4</version>
+				<version>2.5.1</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
@@ -595,7 +595,7 @@
 			<dependency>
 				<groupId>org.seleniumhq.selenium.client-drivers</groupId>
 				<artifactId>selenium-java-client-driver</artifactId>
-				<version>1.0</version>
+				<version>1.0.1</version>
 				<exclusions>
 					<exclusion>
 						<groupId>org.codehaus.groovy.maven.runtime</groupId>
