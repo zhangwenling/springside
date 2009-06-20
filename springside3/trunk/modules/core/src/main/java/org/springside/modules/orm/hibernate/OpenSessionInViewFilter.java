@@ -16,7 +16,7 @@ public class OpenSessionInViewFilter extends org.springframework.orm.hibernate3.
 
 	public static final String EXCLUDE_SUFFIXS_NAME = "excludeSuffixs";
 	private static final String[] DEFAULT_EXCLUDE_SUFFIXS = { ".js", ".css", ".jpg", ".gif" };
-	
+
 	private String[] excludeSuffixs = DEFAULT_EXCLUDE_SUFFIXS;
 
 	/**

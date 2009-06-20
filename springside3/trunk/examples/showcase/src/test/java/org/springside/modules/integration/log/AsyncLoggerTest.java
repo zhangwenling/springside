@@ -25,7 +25,7 @@ public class AsyncLoggerTest extends SpringContextTestCase {
 			dbLogger.info("helloworld {}", i);
 		}
 	}
-	
+
 	@Test
 	@Ignore("Only for performance Test")
 	public void performanceTest() throws InterruptedException {

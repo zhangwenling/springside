@@ -21,11 +21,11 @@ public class JCaptchaFilterTest extends Assert {
 	private MockFilterChain chain = new MockFilterChain();
 	private MockHttpServletRequest request = new MockHttpServletRequest();
 	private MockHttpServletResponse response = new MockHttpServletResponse();
-	
+
 	private JCaptchaFilter filter = new JCaptchaFilter();
-	
+
 	private String failUrl = "403.jsp";
-	
+
 	@Before
 	public void setUp() {
 		config.addInitParameter(JCaptchaFilter.FAILURE_URL_PARAM, failUrl);
@@ -33,46 +33,45 @@ public class JCaptchaFilterTest extends Assert {
 		MockServletContext servletContext = (MockServletContext) config.getServletContext();
 		servletContext.addInitParameter(ContextLoader.CONFIG_LOCATION_PARAM,
 				"/applicationContext.xml,/security/applicationContext-security.xml");
-		
+
 		new ContextLoader().initWebApplicationContext(servletContext);
 	}
 
 	@Test
 	public void displayImage() throws ServletException, IOException {
 		request.setServletPath("/img/capatcha.jpg");
-	
+
 		filter.init(config);
 		filter.doFilter(request, response, chain);
-		
+
 		assertEquals("image/jpeg", response.getContentType());
 		assertEquals(true, response.getContentAsByteArray().length > 0);
 	}
-	
+
 	@Test
 	public void validateWithErrorCaptcha() throws ServletException, IOException {
 		request.setServletPath(JCaptchaFilter.DEFAULT_FILTER_PROCESSES_URL);
 		request.setParameter(JCaptchaFilter.CAPTCHA_PARAMTER_NAME_PARAM, "12345678");
-		
+
 		filter.init(config);
 		filter.doFilter(request, response, chain);
-		
+
 		assertEquals(failUrl, response.getRedirectedUrl());
-		
+
 	}
-	
+
 	@Test
 	public void validateWithAutoPass() throws ServletException, IOException {
 		String autoPassValue = "1234";
 		config.addInitParameter(JCaptchaFilter.AUTO_PASS_VALUE_PARAM, autoPassValue);
-		
+
 		request.setServletPath(JCaptchaFilter.DEFAULT_FILTER_PROCESSES_URL);
 		request.setParameter(JCaptchaFilter.DEFAULT_CAPTCHA_PARAMTER_NAME, autoPassValue);
-		
+
 		filter.init(config);
 		filter.doFilter(request, response, chain);
 
 		assertEquals(null, response.getRedirectedUrl());
-		
 
 	}
 

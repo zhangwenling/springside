@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 public class SpringContextTestCase extends AbstractJUnit4SpringContextTests {
 
 	// Assert 函数 //
-	
+
 	protected void assertEquals(Object expected, Object actual) {
 		Assert.assertEquals(expected, actual);
 	}

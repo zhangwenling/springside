@@ -74,7 +74,7 @@ public class QueueManagerTest extends Assert {
 		manager = new QueueManager();
 		manager.setTaskBeanNames(new ArrayList());
 		manager.start();
-		
+
 		List list = new ArrayList();
 		newQueue.drainTo(list);
 

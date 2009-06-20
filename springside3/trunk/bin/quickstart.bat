@@ -1,8 +1,8 @@
 @echo off
 echo [INFO] 确保默认JDK版本为JDK5.0.
 
-if exist "..\tools\maven" goto begin
-echo [INFO] tools\maven目录不存在，请下载all-in-one版本
+if exist "..\servers\tomcat\apache-tomcat-6.0.20\" goto begin
+echo [ERROR] ..\servers\tomcat\apache-tomcat-6.0.20目录不存在，请下载all-in-one版本
 goto end
 
 :begin

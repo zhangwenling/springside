@@ -1,11 +1,13 @@
 package org.springside.modules.orm.hibernate;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -179,7 +181,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	public Integer findInt(final String hql, final Object... values) {
 		return (Integer) findUnique(hql, values);
 	}
-	
+
 	public Integer findInt(final String hql, final Map<String, Object> values) {
 		return (Integer) findUnique(hql, values);
 	}
@@ -190,7 +192,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	public Long findLong(final String hql, final Object... values) {
 		return (Long) findUnique(hql, values);
 	}
-	
+
 	/**
 	 * 按HQL查询Long类型结果.
 	 */
@@ -263,6 +265,13 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 			criteria.add(c);
 		}
 		return criteria;
+	}
+
+	/**
+	 * 初始化被lazy initialize的关联集合.
+	 */
+	public void initCollection(Collection collection) {
+		Hibernate.initialize(collection);
 	}
 
 	/**

@@ -27,24 +27,24 @@ public class HibernateDaoTest extends SpringTransactionalTestCase {
 	public void setUp() {
 		dao = new HibernateDao<User, Long>(sessionFactory, User.class);
 	}
-	
+
 	@Test
 	public void getAll() {
 		//初始化数据中共有6个用户
 		Page<User> page = new Page<User>(5);
 		dao.getAll(page);
 		assertEquals(5, page.getResult().size());
-		
+
 		//自动统计总数
 		assertEquals(6, page.getTotalCount());
-		
+
 		page.setPageNo(2);
 		dao.getAll(page);
 		assertEquals(1, page.getResult().size());
 	}
 
 	@Test
-	public void findByHQL(){
+	public void findByHQL() {
 		//初始化数据中共有6个email为@springside.org.cn的用户	
 		Page<User> page = new Page<User>(5);
 		dao.find(page, "from User u where email like ?", "%springside.org.cn%");
@@ -52,12 +52,12 @@ public class HibernateDaoTest extends SpringTransactionalTestCase {
 
 		//HQL不会默认查询统计总记录数.
 		assertEquals(-1, page.getTotalCount());
-		
+
 		page.setPageNo(2);
 		dao.find(page, "from User u where email like ?", "%springside.org.cn%");
 		assertEquals(1, page.getResult().size());
 	}
-	
+
 	@Test
 	public void findByCriterion() {
 		//初始化数据中共有6个email为@springside.org.cn的用户	
@@ -65,7 +65,7 @@ public class HibernateDaoTest extends SpringTransactionalTestCase {
 		Criterion c = Restrictions.like("email", "springside.org.cn", MatchMode.ANYWHERE);
 		dao.find(page, c);
 		assertEquals(5, page.getResult().size());
-		
+
 		//自动统计总数
 		assertEquals(6, page.getTotalCount());
 
@@ -73,36 +73,37 @@ public class HibernateDaoTest extends SpringTransactionalTestCase {
 		dao.find(page, c);
 		assertEquals(1, page.getResult().size());
 	}
-	
+
 	@Test
 	public void findByProperty() {
 		List<User> users = dao.findBy("loginName", "admin", PropertyFilter.MatchType.EQ);
 		assertEquals(1, users.size());
 		assertEquals("admin", users.get(0).getLoginName());
-		
+
 		users = dao.findBy("email", "springside.org.cn", PropertyFilter.MatchType.LIKE);
 		assertEquals(6, users.size());
 		assertTrue(users.get(0).getEmail().indexOf("springside.org.cn") != -1);
-		
+
 	}
+
 	@Test
-	public void findByFilters(){
+	public void findByFilters() {
 		PropertyFilter eqFilter = new PropertyFilter("loginName", PropertyFilter.MatchType.EQ, "admin");
-		
+
 		List<PropertyFilter> filters = new ArrayList<PropertyFilter>();
 		filters.add(eqFilter);
-		
+
 		List<User> users = dao.find(filters);
 		assertEquals(1, users.size());
 		assertEquals("admin", users.get(0).getLoginName());
-		
+
 		filters.clear();
 		PropertyFilter likeFilter = new PropertyFilter("email", PropertyFilter.MatchType.LIKE, "springside.org.cn");
 		filters.add(likeFilter);
 		users = dao.find(filters);
 		assertEquals(6, users.size());
 		assertTrue(users.get(0).getEmail().indexOf("springside.org.cn") != -1);
-		
+
 		Page<User> page = new Page<User>(5);
 
 		dao.find(page, filters);

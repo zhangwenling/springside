@@ -187,8 +187,7 @@ public class QueueManager implements ApplicationContextAware {
 					oos.close();
 				}
 			}
-		}
-		else {
+		} else {
 			logger.debug("队列为空,不需要持久化 .");
 		}
 	}
@@ -222,8 +221,7 @@ public class QueueManager implements ApplicationContextAware {
 				}
 			}
 			file.delete();
-		}
-		else{
+		} else {
 			logger.debug("队列{}不存在", queueName);
 		}
 	}

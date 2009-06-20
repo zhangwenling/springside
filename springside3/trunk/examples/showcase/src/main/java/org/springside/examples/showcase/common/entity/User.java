@@ -40,7 +40,7 @@ public class User extends AuditableEntity {
 	private Integer version;
 
 	private Set<Role> roles = new LinkedHashSet<Role>(); //有序的关联对象集合
-	
+
 	@Version
 	public Integer getVersion() {
 		return version;

@@ -15,10 +15,10 @@ import org.springside.modules.orm.hibernate.SimpleHibernateDao;
 import org.springside.modules.test.junit4.SpringTransactionalTestCase;
 
 public class SimpleHibernateDaoTest extends SpringTransactionalTestCase {
-	
+
 	private static final String LOGIN_NAME = "admin";
 	private SimpleHibernateDao<User, Long> dao;
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -26,7 +26,7 @@ public class SimpleHibernateDaoTest extends SpringTransactionalTestCase {
 	public void setUp() {
 		dao = new SimpleHibernateDao<User, Long>(sessionFactory, User.class);
 	}
-	
+
 	@Test
 	public void crud() {
 		User user = new User();
@@ -37,53 +37,53 @@ public class SimpleHibernateDaoTest extends SpringTransactionalTestCase {
 		dao.save(user);
 		dao.delete(user);
 	}
-	
+
 	@Test
 	public void findByProperty() {
 		List<User> users = dao.findBy("loginName", LOGIN_NAME);
 		assertEquals(1, users.size());
 		assertEquals(LOGIN_NAME, users.get(0).getLoginName());
-		
+
 		User user = dao.findByUnique("loginName", LOGIN_NAME);
-		assertEquals(LOGIN_NAME, user.getLoginName());	
+		assertEquals(LOGIN_NAME, user.getLoginName());
 	}
-	
+
 	@Test
 	public void findByHQL() {
-		
+
 		List<User> users = dao.find("from User u where loginName=?", LOGIN_NAME);
 		assertEquals(1, users.size());
 		assertEquals(LOGIN_NAME, users.get(0).getLoginName());
-		
+
 		User user = dao.findUnique("from User u where loginName=?", LOGIN_NAME);
-		assertEquals(LOGIN_NAME, user.getLoginName());	
-		
-		Map<String,Object> values = new HashMap<String,Object>();
+		assertEquals(LOGIN_NAME, user.getLoginName());
+
+		Map<String, Object> values = new HashMap<String, Object>();
 		values.put("loginName", LOGIN_NAME);
 		users = dao.find("from User u where loginName=:loginName", values);
 		assertEquals(1, users.size());
 		assertEquals(LOGIN_NAME, users.get(0).getLoginName());
-		
+
 		user = dao.findUnique("from User u where loginName=:loginName", values);
 		assertEquals(LOGIN_NAME, user.getLoginName());
 	}
-	
+
 	@Test
 	public void findByCriterion() {
 		Criterion c = Restrictions.eq("loginName", LOGIN_NAME);
 		List<User> users = dao.find(c);
 		assertEquals(1, users.size());
 		assertEquals(LOGIN_NAME, users.get(0).getLoginName());
-		
+
 		User user = dao.findUnique(c);
 		assertEquals(LOGIN_NAME, user.getLoginName());
-		
-		dao.findUnique(c);	
+
+		dao.findUnique(c);
 	}
-	
+
 	@Test
 	public void getIdName() {
 		assertEquals("id", dao.getIdName());
 	}
-	
+
 }
