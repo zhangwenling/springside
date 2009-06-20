@@ -11,14 +11,14 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h3>定时任务演示</h3>
+<h3>Java-XML绑定演示</h3>
 <h4>技术说明：</h4>
 <ul>
-<li>Cron式任务定义：基于Quartz的实现。</li>
-<li>Timer式任务定义：基于Quartz与基于JDK5.0 ScheduledExecutorService两种实现</li>
+<li>基于JAXB2.0的实现。</li>
+<li>基于XStream的实现。</li>
 </ul>
 
-<h4>用户故事：</h4>简单的定时在Console打印当前用户数日志。
+<h4>用户故事：</h4>在单元测试用例中演示XML与Java对象的转换。
 </div>
 </div>
 </body>

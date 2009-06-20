@@ -40,18 +40,26 @@ public class UserManager extends EntityManager<User, Long> {
 	@Override
 	public void save(User user) {
 		super.save(user);
-		if (serverConfig != null && serverConfig.isNotificationMailEnabled()) {
-			if (simpleMailService != null) {
-				simpleMailService.sendNotificationMail(user.getName());
-			}
-
-			if (mimeMailService != null) {
-				mimeMailService.sendNotificationMail(user.getName());
-			}
-		}
+		sendNotifyMail(user);
 	}
 
 	public long getUserCount() {
 		return userDao.findLong(User.COUNT_USER);
+	}
+
+	public void sendNotifyMail(User user) {
+		if (serverConfig != null && serverConfig.isNotificationMailEnabled()) {
+			try {
+				if (simpleMailService != null) {
+					simpleMailService.sendNotificationMail(user.getName());
+				}
+
+				if (mimeMailService != null) {
+					mimeMailService.sendNotificationMail(user.getName());
+				}
+			} catch (Exception e) {
+				logger.error("邮件发送失败", e);
+			}
+		}
 	}
 }

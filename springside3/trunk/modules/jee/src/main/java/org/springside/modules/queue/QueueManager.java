@@ -47,7 +47,7 @@ public class QueueManager implements ApplicationContextAware {
 	//内部属性//
 	protected ApplicationContext applicatiionContext;
 	protected static Map<String, BlockingQueue> queueMap = new ConcurrentHashMap<String, BlockingQueue>();//消息队列
-	protected List<ExecutorService> executorList;//执行任务的线程池列表
+	protected List<ExecutorService> executorList = new ArrayList();//执行任务的线程池列表
 
 	/**
 	 * 根据queueName获得消息队列的静态函数.

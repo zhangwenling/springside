@@ -210,6 +210,11 @@
 			<artifactId>xstream</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>p6spy</groupId>
+			<artifactId>p6spy</artifactId>
+		</dependency>
+
 		<!-- test begin -->
 		<dependency>
 			<groupId>junit</groupId>
