@@ -205,6 +205,11 @@
 		</dependency>
 		<!-- utils end -->
 
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+		</dependency>
+
 		<!-- test begin -->
 		<dependency>
 			<groupId>junit</groupId>
