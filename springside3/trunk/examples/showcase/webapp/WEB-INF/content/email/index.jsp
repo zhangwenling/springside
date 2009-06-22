@@ -18,7 +18,7 @@
 <li>使用Freemarker模板创建HTML内容，并带附件的MIME邮件演示。</li>
 </ul>
 <h4>用户故事：</h4>
-在综合演示用例中保存用户时，发送分别发送两种邮件。<br/>
+在综合演示用例中保存用户时，群发简单文本邮件并发送带附件的MIME邮件。<br/>
 演示邮箱名为springside3.demo@gmail.com, 密码为demoforyou。
 
 </div>

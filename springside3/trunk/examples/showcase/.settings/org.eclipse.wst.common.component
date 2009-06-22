@@ -4,10 +4,10 @@
 <wb-resource deploy-path="/" source-path="/webapp"/>
 <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
 <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="springside-jee.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/springside-jee/springside-jee">
+        <dependent-module archiveName="springside3-core.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/springside3-core/springside3-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="springside3-core.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/springside3-core/springside3-core">
+        <dependent-module archiveName="springside3-jee.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/springside3-jee/springside3-jee">
             <dependency-type>uses</dependency-type>
         </dependent-module>
 <property name="context-root" value="showcase"/>

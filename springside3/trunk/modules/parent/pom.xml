@@ -56,6 +56,7 @@
 						<includes>
 							<include>**/unit/**</include>
 						</includes>
+						<skip>${maven-surefire-plugin.skip}</skip>
 					</configuration>
 				</plugin>
 
@@ -170,6 +171,9 @@
 		<struts2.version>2.1.6</struts2.version>
 		<cxf.version>2.2.2</cxf.version>
 		<spring-security.version>2.0.4</spring-security.version>
+
+		<!--  Plugin的属性定义  -->
+		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
 	</properties>
 
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
@@ -569,7 +573,7 @@
 				<artifactId>xstream</artifactId>
 				<version>1.3.1</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>p6spy</groupId>
 				<artifactId>p6spy</artifactId>
@@ -629,6 +633,15 @@
 	</dependencyManagement>
 
 	<profiles>
+		<!-- 不执行任何测试 -->
+		<profile>
+			<id>notest</id>
+			<properties>
+				<maven-surefire-plugin.skip>true</maven-surefire-plugin.skip>
+			</properties>
+		</profile>
+
+		<!-- 执行集成测试 -->
 		<profile>
 			<id>integration</id>
 			<build>
@@ -655,6 +668,7 @@
 			</build>
 		</profile>
 
+		<!-- 执行功能测试 -->
 		<profile>
 			<id>functional</id>
 			<build>

@@ -3,8 +3,8 @@
 	<name>showcase</name>
 	<comment></comment>
 	<projects>
-		<project>springside-jee</project>
 		<project>springside3-core</project>
+		<project>springside3-jee</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

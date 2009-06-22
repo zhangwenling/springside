@@ -14,11 +14,11 @@
 <h3>定时任务演示</h3>
 <h4>技术说明：</h4>
 <ul>
-<li>Cron式任务定义：基于Quartz的实现。</li>
-<li>Timer式任务定义：基于Quartz与基于JDK5.0 ScheduledExecutorService两种实现</li>
+	<li>Cron式任务定义：基于Quartz的实现。</li>
+	<li>Timer式任务定义：基于Quartz 与 JDK5.0 ScheduledExecutorService的两种实现。</li>
 </ul>
 
-<h4>用户故事：</h4>简单的定时在Console打印当前用户数日志。
+<h4>用户故事：</h4>简单的定时在Console打印当前用户数量。
 </div>
 </div>
 </body>

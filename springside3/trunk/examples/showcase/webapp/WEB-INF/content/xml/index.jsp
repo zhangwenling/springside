@@ -18,7 +18,7 @@
 <li>基于XStream的实现。</li>
 </ul>
 
-<h4>用户故事：</h4>在单元测试用例中演示XML与Java对象的转换。
+<h4>用户故事：</h4>在JaxbTest与XStreamTest测试用例中演示XML与Java对象的转换。
 </div>
 </div>
 </body>
