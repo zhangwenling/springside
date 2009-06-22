@@ -73,7 +73,7 @@
                connectionTimeout="20000" 
                executor="tomcatThreadPool"
                acceptCount="100"
-               URIEncoding="UTF-8"
+               useBodyEncodingForURI="true"
                enableLookups="false"
                 />
     <!-- Define a SSL HTTP/1.1 Connector on port 8443
@@ -91,7 +91,7 @@
                connectionTimeout="20000" 
                executor="tomcatThreadPool"
                backlog="100"
-               URIEncoding="UTF-8"
+               useBodyEncodingForURI="true"
                enableLookups="false"
                />
 
