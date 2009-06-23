@@ -3,8 +3,6 @@
 #set( $symbol_escape = '\' )
 package ${package}.integration.service.user;
 
-import static org.junit.Assert.assertFalse;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ${package}.entity.user.Role;
@@ -22,7 +20,7 @@ import org.springside.modules.test.junit4.SpringTransactionalTestCase;
 public class UserManagerTest extends SpringTransactionalTestCase {
 
 	@Autowired
-	private UserManager	userManager;
+	private UserManager userManager;
 
 	@Test
 	public void saveUser() {
@@ -51,7 +49,7 @@ public class UserManagerTest extends SpringTransactionalTestCase {
 
 	@Test
 	public void authUser() {
-		assertTrue(userManager.authenticate("admin", "admin"));
-		assertFalse(userManager.authenticate("admin", ""));
+		assertEquals(true, userManager.authenticate("admin", "admin"));
+		assertEquals(false, userManager.authenticate("admin", ""));
 	}
 }

@@ -14,7 +14,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		editUser(loginName);
 		deleteUser(loginName);
 	}
-	
+
 	@Test
 	public void validateUser() {
 		selenium.open("/${artifactId}/security/user.action");
@@ -33,8 +33,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		assertEquals("必选字段", selenium.getTable("//form[@id='inputForm']/table.1.1"));
 		assertEquals("输入与上面相同的密码", selenium.getTable("//form[@id='inputForm']/table.3.1"));
 		assertEquals("请输入正确格式的电子邮件", selenium.getTable("//form[@id='inputForm']/table.4.1"));
-		
-	
+
 	}
 
 	private String createUser() {

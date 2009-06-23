@@ -5,6 +5,8 @@ package ${package}.ws.user.dto;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
 import ${package}.ws.Constants;
@@ -20,6 +22,8 @@ public class GetAllUserResult extends WSResult {
 
 	private List<UserDTO> userList;
 
+	@XmlElementWrapper(name = "userList")
+	@XmlElement(name = "user")
 	public List<UserDTO> getUserList() {
 		return userList;
 	}

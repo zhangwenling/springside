@@ -6,6 +6,8 @@ package ${package}.ws.user.dto;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -14,7 +16,7 @@ import ${package}.ws.Constants;
 /**
  * Web Service传输User信息的DTO.
  * 
- * 使用JAXB 2.0的annotation标注JAVA-XML映射,尽量使用默认约定.
+ * 使用JAXB 2.0的annotation标注JAVA-XML映射.
  * 
  * @author calvin
  */
@@ -24,7 +26,6 @@ public class UserDTO {
 	private Long id;
 	private String loginName;
 	private String name;
-	private String password;
 	private String email;
 
 	private Set<RoleDTO> roles = new LinkedHashSet<RoleDTO>(0);
@@ -53,13 +54,6 @@ public class UserDTO {
 		name = value;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String value) {
-		password = value;
-	}
 
 	public String getEmail() {
 		return email;
@@ -69,6 +63,8 @@ public class UserDTO {
 		email = value;
 	}
 
+	@XmlElementWrapper(name = "roles")
+	@XmlElement(name = "role")
 	public Set<RoleDTO> getRoles() {
 		return roles;
 	}

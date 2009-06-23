@@ -3,6 +3,8 @@
 #set( $symbol_escape = '\' )
 package ${package}.service.user;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,4 +39,16 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 			return false;
 		return (entityDao.findLong(User.AUTH_HQL, loginName, password) == 1);
 	}
+
+	@Transactional(readOnly = true)
+	public List<User> getAllUserWithRoles() {
+		List<User> users = getAll();
+
+		for (User user : users) {
+			entityDao.initCollection(user.getRoles());
+		}
+		
+		return users;
+	}
+
 }

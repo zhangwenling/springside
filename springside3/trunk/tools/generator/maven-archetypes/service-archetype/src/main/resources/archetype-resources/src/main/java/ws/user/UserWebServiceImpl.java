@@ -39,7 +39,7 @@ public class UserWebServiceImpl extends WebServiceSupport implements UserWebServ
 
 		//获取USer列表并转换为UserDTO列表.
 		try {
-			List<User> userList = userManager.getAll();
+			List<User> userList = userManager.getAllUserWithRoles();
 			List<UserDTO> userDTOList = new ArrayList<UserDTO>();
 			for (User userEntity : userList) {
 				userDTOList.add((UserDTO) dozer.map(userEntity, UserDTO.class));
