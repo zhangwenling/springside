@@ -57,7 +57,6 @@ public class JCaptchaFilterTest extends Assert {
 		filter.doFilter(request, response, chain);
 
 		assertEquals(failUrl, response.getRedirectedUrl());
-
 	}
 
 	@Test
@@ -72,7 +71,5 @@ public class JCaptchaFilterTest extends Assert {
 		filter.doFilter(request, response, chain);
 
 		assertEquals(null, response.getRedirectedUrl());
-
 	}
-
 }

@@ -169,7 +169,7 @@
    <soapenv:Body>
       <min:createUser>
          <user>
-            <loginName>user504613774</loginName>
+            <loginName>user23983747</loginName>
             <name>User</name>
             <password>user</password>
          </user>
@@ -216,4 +216,4 @@
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="SOAP Fault Assertion"/><con:assertion type="XPath Match" name="Check count of [return]"><con:configuration><path>declare namespace ns2='http://miniservice.examples.springside.org';
 count( //ns2:getAllUserResponse/return/userList)>0</path><content>true</content><allowWildcards>false</allowWildcards></con:configuration></con:assertion><con:assertion type="XPath Match" name="Match content of [loginName]"><con:configuration><path>declare namespace ns2='http://miniservice.examples.springside.org';
-//ns2:getAllUserResponse[1]/return[1]/userList[1]/loginName[1]/text()</path><content>admin</content><allowWildcards>false</allowWildcards></con:configuration></con:assertion></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:requirements/><con:properties/><con:wssContainer/></con:soapui-project>
+//ns2:getAllUserResponse[1]/return[1]/userList[1]/user[1]/loginName[1]/text()</path><content>admin</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences></con:configuration></con:assertion><con:wsaConfig mustUnderstand="NONE" version="200508"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:requirements/><con:properties/><con:wssContainer/></con:soapui-project>

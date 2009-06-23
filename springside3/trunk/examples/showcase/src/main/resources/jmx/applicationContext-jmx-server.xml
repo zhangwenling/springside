@@ -6,12 +6,12 @@
 
 	<!-- 配置RMI注册服务器 -->
 	<bean id="registry" class="org.springframework.remoting.rmi.RmiRegistryFactoryBean" lazy-init="false">
-		<property name="port" value="1099" />
+		<property name="port" value="${jmx.rmi.port}" />
 	</bean>
 
 	<!-- 配置JMX远程连接 -->
 	<bean id="serverConnector" class="org.springframework.jmx.support.ConnectorServerFactoryBean" lazy-init="false">
-		<property name="serviceUrl" value="service:jmx:rmi:///jndi/rmi://${server.host}:1099/showcase" />
+		<property name="serviceUrl" value="service:jmx:rmi:///jndi/rmi://${server.host}:${jmx.rmi.port}/showcase" />
 		<property name="environment">
 			<map>
 				<!-- 认证配置,文件路径需为绝对路径 -->
