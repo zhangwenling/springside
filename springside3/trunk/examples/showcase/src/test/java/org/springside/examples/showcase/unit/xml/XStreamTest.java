@@ -1,7 +1,6 @@
 package org.springside.examples.showcase.unit.xml;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springside.examples.showcase.xml.xstream.Role;
 import org.springside.examples.showcase.xml.xstream.User;
@@ -11,12 +10,13 @@ import org.springside.examples.showcase.xml.xstream.XStreamUtil;
  * 演示基于JAXB的Java对象-XML转换
  * @author calvin
  */
-@Ignore("For manual test")
 public class XStreamTest {
+	
+	private XStreamUtil xstream;
 
 	@Before
 	public void setUp() {
-		XStreamUtil.register(User.class, Role.class);
+		xstream = new XStreamUtil(User.class, Role.class);
 	}
 
 	@Test
@@ -35,7 +35,7 @@ public class XStreamTest {
 		user.getHouses().put("gz", "house1");
 		user.getHouses().put("bj", "house2");
 
-		String xml = XStreamUtil.xstream.toXML(user);
+		String xml = xstream.toXml(user);
 		System.out.println(xml);
 	}
 
@@ -46,7 +46,7 @@ public class XStreamTest {
 				+ "<interest>movie</interest><interest>sports</interest><houses><house key=\"bj\">"
 				+ "house1</house><house key=\"gz\">house2</house></houses></user>";
 
-		User user = XStreamUtil.fromXml(xml);
+		User user = xstream.fromXml(xml);
 		System.out.println("User:" + user);
 	}
 }

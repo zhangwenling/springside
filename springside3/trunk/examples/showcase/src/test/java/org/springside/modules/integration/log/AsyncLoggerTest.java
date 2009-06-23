@@ -18,7 +18,7 @@ import org.springside.modules.test.junit4.SpringContextTestCase;
 public class AsyncLoggerTest extends SpringContextTestCase {
 
 	@Test
-	public void dbLogger() throws InterruptedException {
+	public void dbLogger() {
 		Logger dbLogger = LoggerFactory.getLogger("org.springside.examples.showcase.log.dbLogExample");
 		int logCount = 10;
 		for (int i = 1; i <= logCount; i++) {

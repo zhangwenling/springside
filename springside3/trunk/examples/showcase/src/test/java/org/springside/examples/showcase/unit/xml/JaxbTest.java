@@ -1,7 +1,6 @@
 package org.springside.examples.showcase.unit.xml;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springside.examples.showcase.xml.jaxb.JaxbUtil;
 import org.springside.examples.showcase.xml.jaxb.Role;
@@ -11,7 +10,6 @@ import org.springside.examples.showcase.xml.jaxb.User;
  * 演示基于JAXB的Java对象-XML转换
  * @author calvin
  */
-@Ignore("For manual test")
 public class JaxbTest {
 	JaxbUtil jaxbUtil;
 
