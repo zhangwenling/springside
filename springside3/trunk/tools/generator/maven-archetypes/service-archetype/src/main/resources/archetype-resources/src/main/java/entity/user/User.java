@@ -36,10 +36,6 @@ import ${package}.entity.IdEntity;
 //默认的缓存策略.
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User extends IdEntity {
-
-	// 统一定义所有以用户为主体的HQL.
-	public static final String AUTH_HQL = "select count(u) from User u where u.loginName=? and u.password=?";
-
 	private String loginName;
 	private String password;
 	private String name;

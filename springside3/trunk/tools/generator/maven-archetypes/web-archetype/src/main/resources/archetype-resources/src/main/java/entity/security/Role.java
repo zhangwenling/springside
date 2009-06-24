@@ -38,7 +38,6 @@ import org.springside.modules.utils.ReflectionUtils;
 public class Role extends IdEntity {
 
 	private String name;
-
 	private Set<Authority> authorities = new LinkedHashSet<Authority>(); //有序的关联对象集合
 	private Set<User> users = new LinkedHashSet<User>();
 

@@ -6,10 +6,12 @@ package ${package}.service.user;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ${package}.dao.UserDao;
 import ${package}.entity.user.User;
-import org.springside.modules.orm.hibernate.DefaultEntityManager;
+import org.springside.modules.orm.hibernate.EntityManager;
 
 /**
  * 用户管理类.
@@ -26,7 +28,14 @@ import org.springside.modules.orm.hibernate.DefaultEntityManager;
 @Service
 //默认将类中的所有函数纳入事务管理.
 @Transactional
-public class UserManager extends DefaultEntityManager<User, Long> {
+public class UserManager extends EntityManager<User, Long> {
+	@Autowired
+	private UserDao userDao;
+
+	@Override
+	protected UserDao getEntityDao() {
+		return userDao;
+	}
 
 	/**
 	 * 验证用户名密码. 
@@ -37,7 +46,7 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 	public boolean authenticate(String loginName, String password) {
 		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password))
 			return false;
-		return (entityDao.findLong(User.AUTH_HQL, loginName, password) == 1);
+		return (userDao.findLong(UserDao.AUTH_HQL, loginName, password) == 1);
 	}
 
 	@Transactional(readOnly = true)
@@ -45,9 +54,9 @@ public class UserManager extends DefaultEntityManager<User, Long> {
 		List<User> users = getAll();
 
 		for (User user : users) {
-			entityDao.initCollection(user.getRoles());
+			userDao.initCollection(user.getRoles());
 		}
-		
+
 		return users;
 	}
 
