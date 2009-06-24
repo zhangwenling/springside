@@ -1,5 +1,7 @@
 package org.springside.examples.showcase.common.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +47,12 @@ public class UserManager extends EntityManager<User, Long> {
 
 	public long getUserCount() {
 		return userDao.findLong(User.COUNT_USER);
+	}
+	
+	@Override
+	public List<User> getAll() {
+		return userDao.getAllUserWithRolesByCriteria();
+
 	}
 
 	public void sendNotifyMail(User user) {

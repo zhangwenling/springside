@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -227,9 +226,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 		Assert.hasText(queryString, "queryString不能为空");
 		Query query = getSession().createQuery(queryString);
 		if (values != null) {
-			for (Entry<String, Object> entry : values.entrySet()) {
-				query.setParameter(entry.getKey(), entry.getValue());
-			}
+			query.setProperties(values);
 		}
 		return query;
 	}
@@ -271,7 +268,9 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 初始化被lazy initialize的关联集合.
 	 */
 	public void initCollection(Collection collection) {
-		Hibernate.initialize(collection);
+		if (!Hibernate.isInitialized(collection)) {
+			Hibernate.initialize(collection);
+		}
 	}
 
 	/**

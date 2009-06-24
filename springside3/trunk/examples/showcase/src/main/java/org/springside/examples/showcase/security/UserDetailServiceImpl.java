@@ -28,7 +28,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	 */
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
-		User user = userDao.findUserByNativeSQL(userName);
+		User user = userDao.getUserByNativeSql(userName);
 		if (user == null)
 			throw new UsernameNotFoundException("用户" + userName + " 不存在");
 
@@ -53,7 +53,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	private GrantedAuthority[] obtainGrantedAuthorities(User user) {
 		Set<GrantedAuthority> authSet = new HashSet<GrantedAuthority>();
 		for (Role role : user.getRoles()) {
-			System.out.println(role.getName());
 			authSet.add(new GrantedAuthorityImpl("ROLE_" + role.getName()));
 		}
 		return authSet.toArray(new GrantedAuthority[authSet.size()]);
