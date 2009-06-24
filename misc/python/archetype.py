@@ -44,7 +44,7 @@ def modifyArchetypes():
     
 def commonModifyArchetype(path):
     os.chdir(path)
-    replaceinfile('pom.xml','springside-parent','${artifactId}-parent')
+    replaceinfile('pom.xml','springside3-parent','${artifactId}-parent')
     replaceinfile('pom.xml','../../modules/parent/pom.xml','pom-parent.xml')
     replaceinfile('pom.xml','mini-service','${artifactId}')
     replaceinfile('pom.xml','mini-web','${artifactId}')
@@ -54,7 +54,7 @@ def commonModifyArchetype(path):
     replaceinfile('pom.xml','<version>'+springside_version+'</version>\n		<relativePath>pom-parent.xml</relativePath>','<version>${version}</version>\n		<relativePath>pom-parent.xml</relativePath>')		
 	
     replaceinfile('pom-parent.xml','<modelVersion>4.0.0</modelVersion>\n	<groupId>org.springside</groupId>','<modelVersion>4.0.0</modelVersion>\n	<groupId>${groupId}</groupId>')
-    replaceinfile('pom-parent.xml','springside-parent','${artifactId}-parent')
+    replaceinfile('pom-parent.xml','springside3-parent','${artifactId}-parent')
     replaceinfile('pom-parent.xml','<springside.version>\${version}</springside.version>','<springside.version>'+springside_version+'</springside.version>')
 
     replaceinfile('.settings/org.eclipse.wst.common.component','mini-service','${artifactId}')
