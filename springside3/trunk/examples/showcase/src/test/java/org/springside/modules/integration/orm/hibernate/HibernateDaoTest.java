@@ -45,14 +45,15 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 	@Test
 	public void findByHQL() {
-		//初始化数据中共有6个email为@springside.org.cn的用户	
+		//初始化数据中共有6个email为@springside.org.cn的用户
 		Page<User> page = new Page<User>(5);
 		dao.find(page, "from User u where email like ?", "%springside.org.cn%");
 		assertEquals(5, page.getResult().size());
 
-		//HQL不会默认查询统计总记录数.
-		assertEquals(-1, page.getTotalCount());
+		//自动统计总数
+		assertEquals(6L, page.getTotalCount());
 
+		//翻页
 		page.setPageNo(2);
 		dao.find(page, "from User u where email like ?", "%springside.org.cn%");
 		assertEquals(1, page.getResult().size());
@@ -60,7 +61,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 	@Test
 	public void findByCriterion() {
-		//初始化数据中共有6个email为@springside.org.cn的用户	
+		//初始化数据中共有6个email为@springside.org.cn的用户
 		Page<User> page = new Page<User>(5);
 		Criterion c = Restrictions.like("email", "springside.org.cn", MatchMode.ANYWHERE);
 		dao.find(page, c);
@@ -68,7 +69,8 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 		//自动统计总数
 		assertEquals(6, page.getTotalCount());
-
+		
+		//翻页
 		page.setPageNo(2);
 		dao.find(page, c);
 		assertEquals(1, page.getResult().size());
@@ -83,7 +85,6 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		users = dao.findBy("email", "springside.org.cn", PropertyFilter.MatchType.LIKE);
 		assertEquals(6, users.size());
 		assertTrue(users.get(0).getEmail().indexOf("springside.org.cn") != -1);
-
 	}
 
 	@Test
@@ -120,5 +121,18 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		assertEquals(true, dao.isPropertyUnique("loginName", "admin", "admin"));
 		assertEquals(true, dao.isPropertyUnique("loginName", "user6", "admin"));
 		assertEquals(false, dao.isPropertyUnique("loginName", "user2", "admin"));
+	}
+	
+	@Test
+	public void findPageByHqlAutoCount() {
+		Page<User> page = new Page<User>(5);
+		dao.find(page, "from User user");
+		assertEquals(6L, page.getTotalCount());
+	
+		dao.find(page, "select user from User user");
+		assertEquals(6L, page.getTotalCount());
+	
+		dao.find(page, "select user from User user order by id");
+		assertEquals(6L, page.getTotalCount());
 	}
 }

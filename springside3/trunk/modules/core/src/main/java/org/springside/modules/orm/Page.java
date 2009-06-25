@@ -26,7 +26,7 @@ public class Page<T> {
 
 	//返回结果
 	protected List<T> result = Collections.emptyList();
-	protected int totalCount = -1;
+	protected long totalCount = -1;
 
 	// 构造函数
 
@@ -164,22 +164,22 @@ public class Page<T> {
 	/**
 	 * 取得总记录数,默认值为-1.
 	 */
-	public int getTotalCount() {
+	public long getTotalCount() {
 		return totalCount;
 	}
 
-	public void setTotalCount(final int totalCount) {
+	public void setTotalCount(final long totalCount) {
 		this.totalCount = totalCount;
 	}
 
 	/**
 	 * 根据pageSize与totalCount计算总页数,默认值为-1.
 	 */
-	public int getTotalPages() {
+	public long getTotalPages() {
 		if (totalCount < 0)
 			return -1;
 
-		int count = totalCount / pageSize;
+		long count = totalCount / pageSize;
 		if (totalCount % pageSize > 0) {
 			count++;
 		}

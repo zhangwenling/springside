@@ -71,7 +71,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 按HQL分页查询.
 	 * 不支持自动获取总结果数,需用户另行执行查询.
 	 * 
-	 * @param page 分页参数.仅支持pageSize 和firstResult,忽略其他参数.
+	 * @param page 分页参数.不支持其中的orderBy参数.
 	 * @param hql hql语句.
 	 * @param values 数量可变的查询参数,按顺序绑定.
 	 * 
@@ -82,6 +82,12 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		Assert.notNull(page, "page不能为空");
 
 		Query q = createQuery(hql, values);
+
+		if (page.isAutoCount()) {
+			long totalCount = countHqlResult(hql, values);
+			page.setTotalCount(totalCount);
+		}
+
 		setPageParameter(q, page);
 		List result = q.list();
 		page.setResult(result);
@@ -90,9 +96,8 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 
 	/**
 	 * 按HQL分页查询.
-	 * 不支持自动获取总结果数,需用户另行执行查询.
 	 * 
-	 * @param page 分页参数.仅支持pageSize 和firstResult,忽略其他参数.
+	 * @param page 分页参数.不支持其中的orderBy参数.
 	 * @param hql hql语句.
 	 * @param values 命名参数,按名称绑定.
 	 * 
@@ -103,7 +108,14 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		Assert.notNull(page, "page不能为空");
 
 		Query q = createQuery(hql, values);
+
+		if (page.isAutoCount()) {
+			long totalCount = countHqlResult(hql, values);
+			page.setTotalCount(totalCount);
+		}
+
 		setPageParameter(q, page);
+
 		List result = q.list();
 		page.setResult(result);
 		return page;
@@ -112,8 +124,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按Criteria分页查询.
 	 * 
-	 * @param page 分页参数.支持pageSize、firstResult和orderBy、order、autoCount参数.
-	 *             其中autoCount指定是否动态获取总结果数.
+	 * @param page 分页参数.
 	 * @param criterions 数量可变的Criterion.
 	 * 
 	 * @return 分页查询结果.附带结果列表及所有查询时的参数.
@@ -168,6 +179,51 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 			}
 		}
 		return c;
+	}
+
+	/**
+	 * 执行count查询获得本次Hql查询所能获得的对象总数.
+	 * 
+	 * 本函数只能自动处理简单的hql语句,复杂的hql查询请另行编写count语句查询.
+	 */
+	protected long countHqlResult(final String hql, final Object... values) {
+		long count = 0;
+		String fromHql = hql;
+		//select子句与order by子句会影响count查询,进行简单的排除.
+		fromHql = "from " + StringUtils.substringAfter(fromHql, "from");
+		fromHql = StringUtils.substringBefore(fromHql, "order by");
+		
+		String countHql = "select count(*) " + fromHql;
+
+		try {
+			count = findLong(countHql, values);
+		} catch (Exception e) {
+			throw new RuntimeException("hql can't be auto count, hql is:" + countHql, e);
+		}
+		return count;
+	}
+
+	/**
+	 * 执行count查询获得本次Hql查询所能获得的对象总数.
+	 * 
+	 * 本函数只能自动处理简单的hql语句,复杂的hql查询请另行编写count语句查询.
+	 */
+	protected long countHqlResult(final String hql, final Map<String, Object> values) {
+		long count = 0;
+		String fromHql = hql;
+		//select子句与order by子句会影响count查询,进行简单的排除.
+		fromHql = "from " + StringUtils.substringAfter(fromHql, "from");
+		fromHql = StringUtils.substringBefore(fromHql, "order by");
+
+		String countHql = "select count(*) " + fromHql;
+
+		try {
+			count = findLong(countHql, values);
+		} catch (Exception e) {
+			throw new RuntimeException("hql can't be auto count, hql is:" + countHql, e);
+		}
+
+		return count;
 	}
 
 	/**
