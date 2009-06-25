@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
  */
 //默认载入applicationContext.xml,子类中的@ContextConfiguration定义将合并父类的定义.
 @ContextConfiguration(locations = { "/applicationContext.xml" })
-public class SpringTransactionalTestCase extends AbstractTransactionalJUnit4SpringContextTests {
+public class SpringTxTestCase extends AbstractTransactionalJUnit4SpringContextTests {
 
 	/**
 	 * 刷新sessionFactory,强制Hibernate执行SQL以验证ORM配置.

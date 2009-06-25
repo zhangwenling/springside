@@ -18,7 +18,6 @@
 	<classpathentry kind="lib" path="lib/jul-to-slf4j-1.5.6.jar"/>
 	<classpathentry kind="lib" path="lib/ognl-2.6.11.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api-2.4.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-api-1.5.6.jar"/>
 	<classpathentry kind="lib" path="lib/spring-beans-2.5.6.jar"/>
 	<classpathentry kind="lib" path="lib/spring-context-2.5.6.jar"/>
 	<classpathentry kind="lib" path="lib/spring-context-support-2.5.6.jar"/>
@@ -35,11 +34,12 @@
 	<classpathentry kind="lib" path="lib/xwork-2.1.2.jar"/>
 	<classpathentry kind="lib" path="lib/jsr250-api-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/junit-4.4.jar"/>
-	<classpathentry kind="lib" path="lib/selenium-java-client-driver-1.0-beta-2.jar"/>
 	<classpathentry kind="lib" path="lib/json-lib-2.2.3-jdk15.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.15.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.5.6.jar"/>
 	<classpathentry kind="lib" path="lib/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.5.8.jar"/>
+	<classpathentry kind="lib" path="lib/selenium-java-client-driver-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.5.8.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

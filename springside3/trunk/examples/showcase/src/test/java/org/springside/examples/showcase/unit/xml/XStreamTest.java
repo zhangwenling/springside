@@ -11,7 +11,7 @@ import org.springside.examples.showcase.xml.xstream.XStreamUtil;
  * @author calvin
  */
 public class XStreamTest {
-	
+
 	private XStreamUtil xstream;
 
 	@Before

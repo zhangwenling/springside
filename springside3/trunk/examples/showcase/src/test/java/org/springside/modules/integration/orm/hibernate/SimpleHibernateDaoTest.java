@@ -12,9 +12,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.orm.hibernate.SimpleHibernateDao;
-import org.springside.modules.test.junit4.SpringTransactionalTestCase;
+import org.springside.modules.test.junit4.SpringTxTestCase;
 
-public class SimpleHibernateDaoTest extends SpringTransactionalTestCase {
+public class SimpleHibernateDaoTest extends SpringTxTestCase {
 
 	private static final String LOGIN_NAME = "admin";
 	private SimpleHibernateDao<User, Long> dao;
