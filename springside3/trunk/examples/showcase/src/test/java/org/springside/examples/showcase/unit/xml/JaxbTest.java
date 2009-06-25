@@ -11,7 +11,7 @@ import org.springside.examples.showcase.xml.jaxb.User;
  * @author calvin
  */
 public class JaxbTest {
-	JaxbUtil jaxbUtil;
+	private JaxbUtil jaxbUtil;
 
 	@Before
 	public void setUp() {
@@ -48,5 +48,4 @@ public class JaxbTest {
 		User user = jaxbUtil.unmarshal(xml);
 		System.out.println(user);
 	}
-
 }

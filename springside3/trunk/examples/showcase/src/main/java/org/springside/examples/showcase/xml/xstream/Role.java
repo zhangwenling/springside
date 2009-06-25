@@ -8,9 +8,9 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 @XStreamAlias("role")
 public class Role {
 	@XStreamAsAttribute
-	Long id;
+	private Long id;
 	@XStreamAsAttribute
-	String name;
+	private String name;
 
 	public Role(Long id, String name) {
 		this.id = id;

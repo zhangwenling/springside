@@ -51,7 +51,7 @@ public class UserManager extends EntityManager<User, Long> {
 	}
 
 	public long getUserCount() {
-		return userDao.findLong(User.COUNT_USER);
+		return userDao.findLong(UserDao.COUNT_USER);
 	}
 
 	//Perf4j监控性能

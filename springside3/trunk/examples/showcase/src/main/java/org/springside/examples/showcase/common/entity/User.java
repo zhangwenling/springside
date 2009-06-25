@@ -30,9 +30,6 @@ import org.springside.modules.utils.ReflectionUtils;
 @Entity
 @Table(name = "USERS")
 public class User extends AuditableEntity {
-
-	public static final String COUNT_USER = "select count(u) from User u";
-
 	private String loginName;
 	private String password;
 	private String name;
@@ -41,16 +38,6 @@ public class User extends AuditableEntity {
 
 	private Set<Role> roles = new LinkedHashSet<Role>(); //有序的关联对象集合
 
-	public User() {
-	}
-	
-	public User(Long id, String loginName, String password, Set<Role> roles) {
-		this.id = id;
-		this.loginName = loginName;
-		this.password = password;
-		this.roles = roles;
-	}
-	
 	@Version
 	public Integer getVersion() {
 		return version;

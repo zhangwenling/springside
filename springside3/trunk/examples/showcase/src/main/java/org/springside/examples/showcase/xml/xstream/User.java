@@ -24,16 +24,16 @@ import com.thoughtworks.xstream.mapper.Mapper;
 public class User {
 
 	@XStreamAsAttribute
-	Long id;
+	private Long id;
 
-	String name;
+	private String name;
 
 	@XStreamOmitField
-	String password;
+	private String password;
 
-	String email;
+	private String email;
 
-	List<Role> roles = new ArrayList<Role>();
+	private List<Role> roles = new ArrayList<Role>();
 
 	@XStreamImplicit(itemFieldName = "interest")
 	List<String> interests = new ArrayList<String>();

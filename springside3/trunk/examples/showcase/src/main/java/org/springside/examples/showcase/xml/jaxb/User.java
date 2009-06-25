@@ -20,19 +20,14 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @XmlType(propOrder = { "name", "email", "roles", "interests", "houses" })
 public class User {
 
-	Long id;
+	private Long id;
+	private String name;
+	private String password;
+	private String email;
 
-	String name;
-
-	String password;
-
-	String email;
-
-	List<Role> roles = new ArrayList<Role>();
-
-	List<String> interests = new ArrayList<String>();
-
-	Map<String, String> houses = new HashMap<String, String>();
+	private List<Role> roles = new ArrayList<Role>();
+	private List<String> interests = new ArrayList<String>();
+	private Map<String, String> houses = new HashMap<String, String>();
 
 	@XmlAttribute
 	public Long getId() {

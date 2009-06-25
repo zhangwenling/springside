@@ -11,6 +11,9 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 
 @Repository
 public class UserDao extends HibernateDao<User, Long> {
+	
+	public static final String COUNT_USER = "select count(u) from User u";
+
 	/**
 	 * 使用 HQL 预加载lazy init的List<Role>.
 	 */

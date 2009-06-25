@@ -5,8 +5,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class Role {
-	Long id;
-	String name;
+	private Long id;
+	private String name;
 
 	public Role() {
 	}

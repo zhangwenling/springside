@@ -6,12 +6,15 @@ import com.thoughtworks.xstream.XStream;
 public class XStreamUtil {
 	public XStream xstream = new XStream();
 
+	/**
+	 * @param types 带XStream Annotation的class.
+	 */
 	public XStreamUtil(Class<?>... types) {
 		register(types);
 	}
 
 	/**
-	 * 注册带XStream Annotation的Class
+	 * 注册带XStream Annotation的Class.
 	 */
 	public void register(Class<?>... types) {
 		xstream.processAnnotations(types);
@@ -37,5 +40,4 @@ public class XStreamUtil {
 	public String toXml(Object object) {
 		return xstream.toXML(object);
 	}
-
 }

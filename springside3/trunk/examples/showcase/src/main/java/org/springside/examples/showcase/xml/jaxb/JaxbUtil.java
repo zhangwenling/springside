@@ -9,13 +9,12 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 public class JaxbUtil {
-	private JAXBContext jaxbContext;
 	private Marshaller marshaller;
 	private Unmarshaller unmarshaller;
 
 	public JaxbUtil(Class<?>... types) {
 		try {
-			jaxbContext = JAXBContext.newInstance(types);
+			JAXBContext jaxbContext = JAXBContext.newInstance(types);
 			marshaller = jaxbContext.createMarshaller();
 			marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
 			unmarshaller = jaxbContext.createUnmarshaller();
