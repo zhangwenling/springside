@@ -2,6 +2,9 @@ package org.springside.examples.showcase.common.service;
 
 import java.util.List;
 
+import org.perf4j.StopWatch;
+import org.perf4j.aop.Profiled;
+import org.perf4j.log4j.Log4JStopWatch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,22 +44,28 @@ public class UserManager extends EntityManager<User, Long> {
 	 */
 	@Override
 	public void save(User user) {
+
 		super.save(user);
+
 		sendNotifyMail(user);
 	}
 
 	public long getUserCount() {
 		return userDao.findLong(User.COUNT_USER);
 	}
-	
+
+	//Perf4j监控性能
+	@Profiled
 	@Override
 	public List<User> getAll() {
-		return userDao.getAllUserWithRolesByCriteria();
-
+		return userDao.getAllUserWithRoleByHql();
 	}
 
 	public void sendNotifyMail(User user) {
 		if (serverConfig != null && serverConfig.isNotificationMailEnabled()) {
+			//Perf4j监控性能
+			StopWatch stopWatch = new Log4JStopWatch();
+
 			try {
 				if (simpleMailService != null) {
 					simpleMailService.sendNotificationMail(user.getName());
@@ -65,8 +74,11 @@ public class UserManager extends EntityManager<User, Long> {
 				if (mimeMailService != null) {
 					mimeMailService.sendNotificationMail(user.getName());
 				}
+				stopWatch.stop("sendMail.success");
 			} catch (Exception e) {
 				logger.error("邮件发送失败", e);
+				stopWatch.stop("sendMail.fail");
+
 			}
 		}
 	}

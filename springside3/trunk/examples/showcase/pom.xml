@@ -205,20 +205,32 @@
 		</dependency>
 		<!-- utils end -->
 
+		<!--  xml binding begin -->
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
 		</dependency>
-		
-					<dependency>
-				<groupId>com.sun.xml.bind</groupId>
-				<artifactId>jaxb-impl</artifactId>
-			</dependency>
 
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+		</dependency>
+		<!--  xml binding end -->
+
+		<!-- profile tools begin -->
 		<dependency>
 			<groupId>p6spy</groupId>
 			<artifactId>p6spy</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.perf4j</groupId>
+			<artifactId>perf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-jexl</groupId>
+			<artifactId>commons-jexl</artifactId>
+		</dependency>
+		<!-- profile tools end -->
 
 		<!-- test begin -->
 		<dependency>
