@@ -16,7 +16,7 @@ import org.springside.examples.miniweb.service.security.UserManager;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;
-import org.springside.modules.web.struts2.CRUDActionSupport;
+import org.springside.modules.web.struts2.CrudActionSupport;
 import org.springside.modules.web.struts2.Struts2Utils;
 
 /**
@@ -27,8 +27,8 @@ import org.springside.modules.web.struts2.Struts2Utils;
  * @author calvin
  */
 @SuppressWarnings("serial")
-@Results( { @Result(name = CRUDActionSupport.RELOAD, location = "user.action", type = "redirect") })
-public class UserAction extends CRUDActionSupport<User> {
+@Results( { @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
+public class UserAction extends CrudActionSupport<User> {
 
 	@Autowired
 	private UserManager userManager;

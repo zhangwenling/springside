@@ -11,7 +11,7 @@ import org.hibernate.StaleStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.UserManager;
-import org.springside.modules.web.struts2.CRUDActionSupport;
+import org.springside.modules.web.struts2.CrudActionSupport;
 
 /**
  * 用户管理Action.
@@ -22,8 +22,8 @@ import org.springside.modules.web.struts2.CRUDActionSupport;
 //因为没有按Convention Plugin默认的Pacakge命名规则,因此用annotation重新指定Namespace.
 @Namespace("/common")
 @InterceptorRefs( { @InterceptorRef("paramsPrepareParamsStack") })
-@Results( { @Result(name = CRUDActionSupport.RELOAD, location = "user.action", type = "redirect") })
-public class UserAction extends CRUDActionSupport<User> {
+@Results( { @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
+public class UserAction extends CrudActionSupport<User> {
 	@Autowired
 	private UserManager userManager;
 	// 基本属性
