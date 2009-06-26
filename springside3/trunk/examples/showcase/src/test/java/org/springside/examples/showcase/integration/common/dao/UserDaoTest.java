@@ -13,9 +13,9 @@ public class UserDaoTest extends SpringTxTestCase {
 	private UserDao userDao;
 
 	@Test
-	public void testInitLazy() {
+	public void testEagerInitLazyCollection() {
 		//init by hql
-		List<User> userList1 = userDao.getAllUserWithRoleByHql();
+		List<User> userList1 = userDao.getAllUserWithRoleByDistinctHql();
 		assertEquals(6, userList1.size());
 
 		User user1 = userList1.get(0);
@@ -23,12 +23,20 @@ public class UserDaoTest extends SpringTxTestCase {
 		assertEquals("管理员, 用户", user1.getRoleNames());
 
 		//init by criteria
-		List<User> userList2 = userDao.getAllUserWithRolesByCriteria();
+		List<User> userList2 = userDao.getAllUserWithRolesByDistinctCriteria();
 		assertEquals(6, userList2.size());
 
 		User user2 = userList2.get(0);
 		userDao.getSession().evict(user2);
 		assertEquals("管理员, 用户", user2.getRoleNames());
+
+		//distinct by set
+		List<User> userList3 = userDao.getAllUserWithRoleByHqlDistinctBySet();
+		assertEquals(6, userList3.size());
+
+		//distinct by set
+		List<User> userList4 = userDao.getAllUserWithRolesByCriteriaDistinctBySet();
+		assertEquals(6, userList4.size());
 	}
 
 	@Test
@@ -36,5 +44,11 @@ public class UserDaoTest extends SpringTxTestCase {
 		User user = userDao.getUserByNativeSql("admin");
 		assertEquals("admin", user.getLoginName());
 		assertEquals("管理员, 用户", user.getRoleNames());
+	}
+
+	@Test
+	public void testClob() {
+		User user = userDao.get(1L);
+		assertEquals("a good guy", user.getDescription());
 	}
 }

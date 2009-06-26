@@ -29,8 +29,10 @@ public class UserAction extends CrudActionSupport<User> {
 	// 基本属性
 	private User entity;
 	private Long id;
-	private Integer workingVersion;
 	private List<User> allUsers;
+
+	private Integer workingVersion;
+	private List<Long> checkedUserIds;
 
 	// 基本属性访问函数 //
 
@@ -49,6 +51,10 @@ public class UserAction extends CrudActionSupport<User> {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public void setCheckedUserIds(List<Long> checkedUserIds) {
+		this.checkedUserIds = checkedUserIds;
 	}
 
 	public void setWorkingVersion(Integer workingVersion) {
@@ -72,6 +78,9 @@ public class UserAction extends CrudActionSupport<User> {
 		return INPUT;
 	}
 
+	/**
+	 * 演示Hibernate的version字段使用.
+	 */
 	@Override
 	public String save() throws Exception {
 		if (workingVersion < entity.getVersion())
@@ -84,5 +93,10 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	public String delete() throws Exception {
 		throw new UnsupportedOperationException("delete操作暂时未支持");
+	}
+
+	public String disableUsers() {
+		userManager.disableUsers(checkedUserIds);
+		return RELOAD;
 	}
 }

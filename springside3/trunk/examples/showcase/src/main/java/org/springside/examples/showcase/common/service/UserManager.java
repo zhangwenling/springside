@@ -50,22 +50,34 @@ public class UserManager extends EntityManager<User, Long> {
 		sendNotifyMail(user);
 	}
 
-	public long getUserCount() {
-		return userDao.findLong(UserDao.COUNT_USER);
-	}
-
+	/**
+	 * 重载函数，调用预加载用户角色的Dao函数.
+	 */
 	//Perf4j监控性能
 	@Profiled
 	@Override
 	public List<User> getAll() {
-		return userDao.getAllUserWithRoleByHql();
+		return userDao.getAllUserWithRoleByHqlDistinctBySet();
 	}
 
-	public void sendNotifyMail(User user) {
+	/**
+	 * 获取当前用户数量.
+	 */
+	public long getUserCount() {
+		return userDao.findLong(UserDao.COUNT_USER);
+	}
+
+	/**
+	 * 批量修改用户状态.
+	 */
+	public void disableUsers(List<Long> ids) {
+		userDao.disableUsers(ids);
+	}
+
+	private void sendNotifyMail(User user) {
 		if (serverConfig != null && serverConfig.isNotificationMailEnabled()) {
 			//Perf4j监控性能
 			StopWatch stopWatch = new Log4JStopWatch();
-
 			try {
 				if (simpleMailService != null) {
 					simpleMailService.sendNotificationMail(user.getName());
@@ -78,7 +90,6 @@ public class UserManager extends EntityManager<User, Long> {
 			} catch (Exception e) {
 				logger.error("邮件发送失败", e);
 				stopWatch.stop("sendMail.fail");
-
 			}
 		}
 	}

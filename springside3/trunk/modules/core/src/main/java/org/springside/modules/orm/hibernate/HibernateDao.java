@@ -69,7 +69,6 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 
 	/**
 	 * 按HQL分页查询.
-	 * 不支持自动获取总结果数,需用户另行执行查询.
 	 * 
 	 * @param page 分页参数.不支持其中的orderBy参数.
 	 * @param hql hql语句.
@@ -192,7 +191,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		//select子句与order by子句会影响count查询,进行简单的排除.
 		fromHql = "from " + StringUtils.substringAfter(fromHql, "from");
 		fromHql = StringUtils.substringBefore(fromHql, "order by");
-		
+
 		String countHql = "select count(*) " + fromHql;
 
 		try {

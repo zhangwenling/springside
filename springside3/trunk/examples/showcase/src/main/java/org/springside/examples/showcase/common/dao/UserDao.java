@@ -1,6 +1,8 @@
 package org.springside.examples.showcase.common.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
@@ -11,31 +13,58 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 
 @Repository
 public class UserDao extends HibernateDao<User, Long> {
-	
+
 	public static final String COUNT_USER = "select count(u) from User u";
+	public static final String DISABLE_USERS = "update User u set u.status='disabled' where id in(:ids)";
 
 	/**
-	 * 使用 HQL 预加载lazy init的List<Role>.
+	 * 使用 HQL 预加载lazy init的List<Role>,用 distinct语句排除重复数据.
 	 */
-	public List<User> getAllUserWithRoleByHql() {
-		return find("select distinct  u from User u left join fetch u.roles");
+	public List<User> getAllUserWithRoleByDistinctHql() {
+		return find("select distinct u from User u left join fetch u.roles");
 	}
 
 	/**
-	 * 使用Criteria 预加载lazy init的List<Role>.
+	 * 使用 HQL 预加载lazy init的List<Role>, 用Set排除重复数据.
 	 */
-	public List<User> getAllUserWithRolesByCriteria() {
+	public List<User> getAllUserWithRoleByHqlDistinctBySet() {
+		return distinct(find("select u from User u left join fetch u.roles order by u.id"));
+	}
+
+	/**
+	 * 使用Criteria 预加载lazy init的List<Role>, 用DISTINCE_ROOT_ENTITY排除重复数据.
+	 */
+	public List<User> getAllUserWithRolesByDistinctCriteria() {
 		Criteria c = createCriteria();
 		c.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		return c.setFetchMode("roles", FetchMode.JOIN).list();
+		c.setFetchMode("roles", FetchMode.JOIN);
+		return c.list();
 	}
 
 	/**
-	 * 使用NativeSql并装配成User Entity.
+	 * 使用Criteria 预加载lazy init的List<Role>, 用Set排除重复数据.
+	 */
+	public List<User> getAllUserWithRolesByCriteriaDistinctBySet() {
+		return distinct(createCriteria().setFetchMode("roles", FetchMode.JOIN).list());
+	}
+
+	/*
+	 * 批量修改用户状态.
+	 */
+	public void disableUsers(List<Long> ids) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ids", ids);
+		batchExecute(UserDao.DISABLE_USERS, map);
+	}
+
+	/**
+	 * 使用NativeSql并装配成User entity.
+	 * 
+	 * 因目前Native SQL预装载多对多关系还必须用hbm.xml来表达,暂时不演示.
 	 */
 	public User getUserByNativeSql(String loginName) {
-		String sql = "select * from USERS u where LOGIN_NAME=:loginName";
-		return (User) getSession().createSQLQuery(sql).addEntity(User.class).setString("loginName", loginName)
+		String sql = "select {u.*} from users u where u.LOGIN_NAME=:loginName";
+		return (User) getSession().createSQLQuery(sql).addEntity("u", User.class).setString("loginName", loginName)
 				.uniqueResult();
 	}
 }

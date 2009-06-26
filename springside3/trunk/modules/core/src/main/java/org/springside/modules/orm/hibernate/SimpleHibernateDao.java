@@ -1,9 +1,12 @@
 package org.springside.modules.orm.hibernate;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -200,6 +203,20 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 执行HQL进行批量修改/删除操作.
+	 */
+	public int batchExecute(final String hql, final Object... values) {
+		return createQuery(hql, values).executeUpdate();
+	}
+
+	/**
+	 * 执行HQL进行批量修改/删除操作.
+	 */
+	public int batchExecute(final String hql, final Map<String, Object> values) {
+		return createQuery(hql, values).executeUpdate();
+	}
+
+	/**
 	 * 根据查询HQL与参数列表创建Query对象.
 	 * 
 	 * 本类封装的find()函数全部默认返回对象类型为T,当不为T时使用本函数.
@@ -271,6 +288,14 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 		if (!Hibernate.isInitialized(collection)) {
 			Hibernate.initialize(collection);
 		}
+	}
+
+	/**
+	 * 通过Set将不唯一的对象列表唯一化,主要用于预加载数据形成重复结果时.
+	 */
+	public <X> List<X> distinct(List<X> list) {
+		Set<X> set = new LinkedHashSet<X>(list);
+		return new ArrayList<X>(set);
 	}
 
 	/**

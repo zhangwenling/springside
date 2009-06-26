@@ -4,10 +4,13 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
@@ -34,6 +37,8 @@ public class User extends AuditableEntity {
 	private String password;
 	private String name;
 	private String email;
+	private String description;
+	private String status;
 	private Integer version;
 
 	private Set<Role> roles = new LinkedHashSet<Role>(); //有序的关联对象集合
@@ -77,6 +82,25 @@ public class User extends AuditableEntity {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	//延时加载的Lob对象, 需要运行instrument任务初始化
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	//多对多定义，cascade操作避免定义CascadeType.REMOVE

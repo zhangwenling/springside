@@ -9,6 +9,12 @@
 	<%@ include file="/common/meta.jsp"%>
 	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet">
 	<link href="${ctx}/css/table.css" type="text/css" rel="stylesheet">
+	
+	<script language="javascript">
+	function disableUsers(){
+		$("#mainForm").submit();
+	}
+	</script>
 </head>
 
 <body>
@@ -18,25 +24,34 @@
 <h3>综合演示用例</h3>
 
 <div id="listContent">
+<form id="mainForm" action="user!disableUsers.action" method="post">
 <table>
 	<tr>
+		<th>&nbsp;</th>
 		<th><b>登录名</b></th>
 		<th><b>姓名</b></th>
 		<th><b>电邮</b></th>
+		<th><b>描述</b></th>
 		<th><b>角色</b></th>
+		<th><b>状态</b></th>
 		<th><b>操作</b></th>
 	</tr>
 
 	<s:iterator value="allUsers">
 		<tr>
+			<td><input type="checkbox" name="checkedUserIds" value="${id}"/></td>
 			<td>${loginName}&nbsp;</td>
 			<td>${name}&nbsp;</td>
 			<td>${email}&nbsp;</td>
+			<td>${description}&nbsp;</td>
 			<td>${roleNames}&nbsp;</td>
+			<td>${status}&nbsp;</td>
 			<td><a href="user!input.action?id=${id}">修改</a></td>
 		</tr>
 	</s:iterator>
 </table>
+<input type="submit" value="暂停用户"/>
+</form>
 </div>
 </div>
 </div>

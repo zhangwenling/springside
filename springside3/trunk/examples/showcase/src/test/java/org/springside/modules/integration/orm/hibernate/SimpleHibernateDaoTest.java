@@ -82,6 +82,18 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 	}
 
 	@Test
+	public void testBatchUpdate() {
+		Map map = new HashMap();
+		map.put("ids", new Long[] { 1L, 23L });
+
+		dao.batchExecute("update User u set u.status='disabled' where id in(:ids)", map);
+		User u1 = dao.get(1L);
+		assertEquals("disabled", u1.getStatus());
+		User u3 = dao.get(3L);
+		assertEquals("enabled", u3.getStatus());
+	}
+
+	@Test
 	public void getIdName() {
 		assertEquals("id", dao.getIdName());
 	}
