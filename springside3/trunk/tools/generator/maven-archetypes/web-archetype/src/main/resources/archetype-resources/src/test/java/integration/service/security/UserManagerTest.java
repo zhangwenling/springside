@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ${package}.entity.security.Role;
 import ${package}.entity.security.User;
 import ${package}.service.security.UserManager;
-import org.springside.modules.test.junit4.SpringTransactionalTestCase;
+import org.springside.modules.test.junit4.SpringTxTestCase;
 
 /**
  * UserManager的集成测试用例.
@@ -17,7 +17,7 @@ import org.springside.modules.test.junit4.SpringTransactionalTestCase;
  * 
  * @author calvin
  */
-public class UserManagerTest extends SpringTransactionalTestCase {
+public class UserManagerTest extends SpringTxTestCase {
 
 	@Autowired
 	private UserManager userManager;

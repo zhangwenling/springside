@@ -14,7 +14,7 @@ import ${package}.service.ServiceException;
 import ${package}.service.security.AuthorityManager;
 import ${package}.service.security.RoleManager;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;
-import org.springside.modules.web.struts2.CRUDActionSupport;
+import org.springside.modules.web.struts2.CrudActionSupport;
 
 /**
  * 角色管理Action.
@@ -24,8 +24,8 @@ import org.springside.modules.web.struts2.CRUDActionSupport;
  * @author calvin
  */
 @SuppressWarnings("serial")
-@Results( { @Result(name = CRUDActionSupport.RELOAD, location = "role.action", type = "redirect") })
-public class RoleAction extends CRUDActionSupport<Role> {
+@Results( { @Result(name = CrudActionSupport.RELOAD, location = "role.action", type = "redirect") })
+public class RoleAction extends CrudActionSupport<Role> {
 
 	@Autowired
 	private RoleManager roleManager;
