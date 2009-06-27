@@ -8,8 +8,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 /**
  * 角色.
  * 
- * 使用JPA annotation定义ORM关系.
- * 
  * @author calvin
  */
 @Entity

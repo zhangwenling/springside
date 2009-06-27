@@ -12,6 +12,9 @@ public class JaxbUtil {
 	private Marshaller marshaller;
 	private Unmarshaller unmarshaller;
 
+	/**
+	 * 参数types为所有需要序列化的Root对象的类型.
+	 */
 	public JaxbUtil(Class<?>... types) {
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(types);
@@ -23,6 +26,9 @@ public class JaxbUtil {
 		}
 	}
 
+	/**
+	 * Java->Xml
+	 */
 	public String marshal(Object root) {
 		try {
 			StringWriter writer = new StringWriter();
@@ -33,6 +39,9 @@ public class JaxbUtil {
 		}
 	}
 
+	/**
+	 * Xml->Java
+	 */
 	@SuppressWarnings("unchecked")
 	public <T> T unmarshal(String xml) {
 		try {

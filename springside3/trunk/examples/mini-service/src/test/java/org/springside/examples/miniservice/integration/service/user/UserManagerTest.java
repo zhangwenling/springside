@@ -21,7 +21,6 @@ public class UserManagerTest extends SpringTxTestCase {
 
 	@Test
 	public void saveUser() {
-
 		User entity = new User();
 		// 因为LoginName要求唯一性，因此添加random字段。
 		entity.setLoginName("tester" + randomString(5));
@@ -31,6 +30,7 @@ public class UserManagerTest extends SpringTxTestCase {
 		Role role = new Role();
 		role.setId(1L);
 		entity.getRoles().add(role);
+
 		userManager.save(entity);
 		flush();
 		assertNotNull(entity.getId());
@@ -40,6 +40,7 @@ public class UserManagerTest extends SpringTxTestCase {
 	public void savenNotUniqueUser() {
 		User entity = new User();
 		entity.setLoginName("admin");
+
 		userManager.save(entity);
 		flush();
 	}

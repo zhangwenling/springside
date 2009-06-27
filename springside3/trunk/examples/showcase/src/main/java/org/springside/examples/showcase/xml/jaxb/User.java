@@ -16,7 +16,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+//根节点
 @XmlRootElement
+//指定子节点的顺序
 @XmlType(propOrder = { "name", "email", "roles", "interests", "houses" })
 public class User {
 
@@ -29,6 +31,7 @@ public class User {
 	private List<String> interests = new ArrayList<String>();
 	private Map<String, String> houses = new HashMap<String, String>();
 
+	//设置转换为xml节点中的属性
 	@XmlAttribute
 	public Long getId() {
 		return id;
@@ -46,6 +49,7 @@ public class User {
 		this.name = name;
 	}
 
+	//设置不转换为xml
 	@XmlTransient
 	public String getPassword() {
 		return password;
@@ -63,6 +67,7 @@ public class User {
 		this.email = email;
 	}
 
+	//设置xml为<roles><role id="1"/><role id="2"/></roles>
 	@XmlElementWrapper(name = "roles")
 	@XmlElement(name = "role")
 	public List<Role> getRoles() {
@@ -83,6 +88,7 @@ public class User {
 		this.interests = interests;
 	}
 
+	//设置对Map的转换
 	@XmlJavaTypeAdapter(MapAdapter.class)
 	public Map<String, String> getHouses() {
 		return houses;

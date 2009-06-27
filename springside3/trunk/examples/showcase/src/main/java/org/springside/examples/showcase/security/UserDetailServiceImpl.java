@@ -17,6 +17,8 @@ import org.springside.examples.showcase.common.entity.User;
 /**
  * 实现SpringSecurity的UserDetailsService接口,实现获取用户Detail信息的回调函数.
  * 
+ * 演示扩展SpringSecurity的User类,加入loginTime信息.
+ * 
  * @author calvin
  */
 public class UserDetailServiceImpl implements UserDetailsService {
@@ -28,13 +30,13 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	 */
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
-		User user = userDao.getUserByNativeSql(userName);
+		User user = userDao.findByUnique("loginName", userName);
 		if (user == null)
 			throw new UsernameNotFoundException("用户" + userName + " 不存在");
 
 		GrantedAuthority[] grantedAuths = obtainGrantedAuthorities(user);
 
-		// showcase中无以下属性,暂时全部设为true.
+		// showcase的User类中无以下属性,暂时全部设为true.
 		boolean enabled = true;
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;
@@ -43,7 +45,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		org.springframework.security.userdetails.User userdetail = new org.springframework.security.userdetails.User(
 				user.getLoginName(), user.getPassword(), enabled, accountNonExpired, credentialsNonExpired,
 				accountNonLocked, grantedAuths);
-
 		return userdetail;
 	}
 

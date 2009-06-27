@@ -8,15 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniservice.dao.UserDao;
 import org.springside.examples.miniservice.entity.user.User;
-import org.springside.modules.orm.hibernate.EntityManager;
+import org.springside.examples.miniservice.service.EntityManager;
 
 /**
  * 用户管理类.
  * 
  * 实现领域对象用户的所有业务管理函数.
- * 演示没有DAO层子类的模式,通过默认的DAO基类完成数据访问,HQL语句统一定义于领域对象.
- * 
- * 通过泛型声明继承DefaultEntityManager,默认拥有CRUD管理函数及HibernateDao<User,Long> entityDao成员变量.
+ * 通过泛型声明继承EntityManager,默认拥有CRUD管理方法.
  * 使用Spring annotation定义事务管理.
  * 
  * @author calvin
@@ -35,6 +33,19 @@ public class UserManager extends EntityManager<User, Long> {
 	}
 
 	/**
+	 * 获取全部用户,已对用户及关联角色集合进行初始化.
+	 */
+	@Transactional(readOnly = true)
+	public List<User> getAllUser() {
+		List<User> users = getAll();
+
+		for (User user : users) {
+			userDao.initObject(user.getRoles());
+		}
+		return users;
+	}
+
+	/**
 	 * 验证用户名密码. 
 	 * 
 	 * @return 验证通过时返回true.用户名或密码错误时返回false.
@@ -45,16 +56,4 @@ public class UserManager extends EntityManager<User, Long> {
 			return false;
 		return (userDao.findLong(UserDao.AUTH_HQL, loginName, password) == 1);
 	}
-
-	@Transactional(readOnly = true)
-	public List<User> getAllUserWithRoles() {
-		List<User> users = getAll();
-
-		for (User user : users) {
-			userDao.initCollection(user.getRoles());
-		}
-
-		return users;
-	}
-
 }

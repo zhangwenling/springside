@@ -22,7 +22,7 @@ import freemarker.template.TemplateException;
 /**
  * MIME邮件服务类.
  * 
- * 演示由Freemarker引擎生成的,带附件的html格式邮件.
+ * 演示由Freemarker引擎生成的的html格式邮件, 并带有附件.
  * 
  * @author calvin
  */
@@ -33,7 +33,6 @@ public class MimeMailService {
 	private static Logger logger = LoggerFactory.getLogger(MimeMailService.class);
 
 	private JavaMailSender mailSender;
-
 	private Template template;
 
 	public void setMailSender(JavaMailSender mailSender) {
@@ -44,6 +43,7 @@ public class MimeMailService {
 	 * 注入Freemarker引擎配置.
 	 */
 	public void setFreemarkerConfiguration(Configuration freemarkerConfiguration) throws IOException {
+		//根据freemarkerConfiguration的templateLoaderPath载入文件.
 		template = freemarkerConfiguration.getTemplate("mailTemplate.ftl", ENCODING);
 	}
 
@@ -62,13 +62,11 @@ public class MimeMailService {
 
 			buildContent(helper, userName);
 			buildAttachment(helper);
-		} catch (MessagingException e) {
-			logger.error("构造邮件失败", e);
-		}
 
-		try {
 			mailSender.send(msg);
 			logger.info("HTML版邮件已发送至" + "springside3.demo@gmail.com");
+		} catch (MessagingException e) {
+			logger.error("构造邮件失败", e);
 		} catch (MailException e) {
 			logger.error("发送邮件失败", e);
 		}
@@ -87,8 +85,10 @@ public class MimeMailService {
 			helper.setText(content, true);
 		} catch (IOException e) {
 			logger.error("构造邮件失败,FreeMarker模板不存在", e);
+			throw new MessagingException("FreeMarker模板不存在");
 		} catch (TemplateException e) {
 			logger.error("构造邮件失败,FreeMarker处理失败", e);
+			throw new MessagingException("FreeMarker处理失败");
 		}
 	}
 
@@ -102,6 +102,7 @@ public class MimeMailService {
 			helper.addAttachment("mailAttachment.txt", attachment.getFile());
 		} catch (IOException e) {
 			logger.error("构造邮件失败,附件文件不存在", e);
+			throw new MessagingException("附件文件不存在");
 		}
 	}
 }

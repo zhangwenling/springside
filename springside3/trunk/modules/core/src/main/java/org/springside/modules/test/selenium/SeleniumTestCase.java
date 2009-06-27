@@ -14,15 +14,25 @@ import com.thoughtworks.selenium.Selenium;
  * @author calvin
  */
 public class SeleniumTestCase {
+
 	protected Selenium selenium;
+
+	protected String getHost() {
+		return "http://localhost:8080";
+	}
+
+	protected String getExplorer() {
+		return "*firefox";
+	}
 
 	/**
 	 * 初始化默认的selenium变量.
+	 * 
 	 * selenium server的地址为localhost:4444, 待测应用基础路径为"http://localhost:8080/", 浏览器为Firefox.
 	 */
 	@Before
 	public void setUp() throws Exception {
-		initSelenium("http://localhost:8080/", "*firefox");
+		initSelenium(getHost(), getExplorer());
 	}
 
 	/**

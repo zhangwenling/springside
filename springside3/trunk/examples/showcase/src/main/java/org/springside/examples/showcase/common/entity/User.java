@@ -43,6 +43,7 @@ public class User extends AuditableEntity {
 
 	private Set<Role> roles = new LinkedHashSet<Role>(); //有序的关联对象集合
 
+	//Hibernate自动维护的Version字段
 	@Version
 	public Integer getVersion() {
 		return version;
@@ -84,7 +85,7 @@ public class User extends AuditableEntity {
 		this.email = email;
 	}
 
-	//延时加载的Lob对象, 需要运行instrument任务初始化
+	//延时加载的Lob字段, 需要运行instrument任务进行bytecode enhancement
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	public String getDescription() {

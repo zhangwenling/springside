@@ -2,6 +2,7 @@ package org.springside.modules.security.springsecurity;
 
 import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContextHolder;
+import org.springframework.security.userdetails.User;
 
 /**
  * SpringSecurity的工具类.
@@ -15,9 +16,18 @@ public class SpringSecurityUtils {
 	 */
 	public static String getCurrentUserName() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
 		if (auth == null)
 			return null;
 		return auth.getName();
+	}
+
+	/**
+	 * 取得当前用户,如果当前用户未登录则返回null.
+	 */
+	public static User getCurrentUser() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal == null)
+			return null;
+		return (User) principal;
 	}
 }

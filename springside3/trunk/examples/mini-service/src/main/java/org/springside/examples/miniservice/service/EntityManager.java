@@ -1,4 +1,4 @@
-package org.springside.modules.orm.hibernate;
+package org.springside.examples.miniservice.service;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
+import org.springside.modules.orm.hibernate.HibernateDao;
 
 /**
  * Service层领域对象业务管理类基类.

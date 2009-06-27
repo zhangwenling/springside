@@ -95,6 +95,8 @@ public class UserAction extends CrudActionSupport<User> {
 		throw new UnsupportedOperationException("delete操作暂时未支持");
 	}
 
+	// 其他函数 //
+
 	public String disableUsers() {
 		userManager.disableUsers(checkedUserIds);
 		return RELOAD;

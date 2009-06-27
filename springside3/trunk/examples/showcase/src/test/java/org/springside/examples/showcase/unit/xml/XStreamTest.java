@@ -7,7 +7,8 @@ import org.springside.examples.showcase.xml.xstream.User;
 import org.springside.examples.showcase.xml.xstream.XStreamUtil;
 
 /**
- * 演示基于JAXB的Java对象-XML转换
+ * 演示基于JAXB的Java对象-XML转换.
+ * 
  * @author calvin
  */
 public class XStreamTest {

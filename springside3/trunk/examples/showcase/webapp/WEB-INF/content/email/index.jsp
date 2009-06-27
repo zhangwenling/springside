@@ -14,11 +14,11 @@
 <h3>邮件演示</h3>
 <h4>技术说明：</h4>
 <ul>
-<li>使用JDK5.0 Executor线程池群发简单文本邮件演示。</li>
+<li>简单文本邮件演示。</li>
 <li>使用Freemarker模板创建HTML内容，并带附件的MIME邮件演示。</li>
 </ul>
 <h4>用户故事：</h4>
-在综合演示用例中保存用户时，群发简单文本邮件并发送带附件的MIME邮件。<br/>
+在综合演示用例中保存用户时，发送简单文本邮件和带附件的MIME邮件。<br/>
 演示邮箱名为springside3.demo@gmail.com, 密码为demoforyou。
 
 </div>

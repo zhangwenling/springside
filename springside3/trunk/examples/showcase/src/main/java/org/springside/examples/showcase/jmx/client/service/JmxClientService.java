@@ -14,7 +14,7 @@ import org.springside.modules.jmx.JmxClient;
 /**
  * JMX客户端服务的封装.
  * 
- * 分别演示了标准MBean、MXBean代理及无MBean的Class文件时直接读取属性三种场景.
+ * 分别演示标准MBean代理及无MBean的Class文件时直接读取属性/调用方法两种场景.
  * 
  * @author ben
  * @author calvin
@@ -82,7 +82,7 @@ public class JmxClientService {
 		jmxClient.close();
 	}
 
-	// 标准MBean代理操作演示 、、
+	// 标准MBean代理操作演示 //
 
 	public String getNodeName() {
 		return serverConfigMBean.getNodeName();

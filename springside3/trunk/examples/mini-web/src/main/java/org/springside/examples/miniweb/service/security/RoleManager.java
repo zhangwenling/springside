@@ -5,16 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.dao.security.RoleDao;
 import org.springside.examples.miniweb.entity.security.Role;
+import org.springside.examples.miniweb.service.EntityManager;
 import org.springside.examples.miniweb.service.ServiceException;
-import org.springside.modules.orm.hibernate.EntityManager;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
  * 角色管理类.
- * 
- * 实现领域对象角色的所有业务管理函数.
- * 通过泛型声明继承DefaultEntityManager,默认拥有CRUD管理函数及HibernateDao<Role,Long> entityDao成员变量.
- * 使用Spring annotation定义事务管理.
  * 
  * @author calvin
  */

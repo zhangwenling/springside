@@ -13,7 +13,7 @@ import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.email.MimeMailService;
 import org.springside.examples.showcase.email.SimpleMailService;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
-import org.springside.modules.orm.hibernate.EntityManager;
+import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
  * 用户管理类.
@@ -40,10 +40,16 @@ public class UserManager extends EntityManager<User, Long> {
 	}
 
 	/**
-	 * 重载函数,在保存用户时,发送通知邮件.
+	 * 重载函数,演示:
+	 * 1.在保存用户时,发送通知邮件.
+	 * 2.删除超级用户时,取出当前操作员用户,打印其信息.
 	 */
 	@Override
 	public void save(User user) {
+		if (user.getId() == 1) {
+			logger.warn("操作员{}在{}尝试修改超级管理员用户", SpringSecurityUtils.getCurrentUser());
+			throw new ServiceException("不能修改超级管理员用户");
+		}
 
 		super.save(user);
 
@@ -51,11 +57,12 @@ public class UserManager extends EntityManager<User, Long> {
 	}
 
 	/**
-	 * 重载函数，调用预加载用户角色的Dao函数.
+	 * 重载函数，调用预加载用户角色的Dao方法.
 	 */
 	//Perf4j监控性能
 	@Profiled
 	@Override
+	@Transactional(readOnly = true)
 	public List<User> getAll() {
 		return userDao.getAllUserWithRoleByHqlDistinctBySet();
 	}
@@ -63,6 +70,7 @@ public class UserManager extends EntityManager<User, Long> {
 	/**
 	 * 获取当前用户数量.
 	 */
+	@Transactional(readOnly = true)
 	public long getUserCount() {
 		return userDao.findLong(UserDao.COUNT_USER);
 	}

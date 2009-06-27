@@ -2,6 +2,7 @@ package org.springside.examples.showcase.integration.common.dao;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.dao.UserDao;
@@ -18,17 +19,12 @@ public class UserDaoTest extends SpringTxTestCase {
 		List<User> userList1 = userDao.getAllUserWithRoleByDistinctHql();
 		assertEquals(6, userList1.size());
 
-		User user1 = userList1.get(0);
-		userDao.getSession().evict(user1);
-		assertEquals("管理员, 用户", user1.getRoleNames());
+		assertTrue(Hibernate.isInitialized(userList1.get(0).getRoles()));
 
 		//init by criteria
 		List<User> userList2 = userDao.getAllUserWithRolesByDistinctCriteria();
 		assertEquals(6, userList2.size());
-
-		User user2 = userList2.get(0);
-		userDao.getSession().evict(user2);
-		assertEquals("管理员, 用户", user2.getRoleNames());
+		assertTrue(Hibernate.isInitialized(userList2.get(0).getRoles()));
 
 		//distinct by set
 		List<User> userList3 = userDao.getAllUserWithRoleByHqlDistinctBySet();
@@ -49,6 +45,10 @@ public class UserDaoTest extends SpringTxTestCase {
 	@Test
 	public void testClob() {
 		User user = userDao.get(1L);
+		System.out.println("haha");
+		Hibernate.initialize(user.getDescription());
+		Hibernate.initialize(user.getDescription());
+		System.out.println("baba");
 		assertEquals("a good guy", user.getDescription());
 	}
 }

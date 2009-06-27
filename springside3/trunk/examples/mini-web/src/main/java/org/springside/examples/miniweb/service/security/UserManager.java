@@ -5,15 +5,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.dao.security.UserDao;
 import org.springside.examples.miniweb.entity.security.User;
+import org.springside.examples.miniweb.service.EntityManager;
 import org.springside.examples.miniweb.service.ServiceException;
-import org.springside.modules.orm.hibernate.EntityManager;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
  * 用户管理类.
  * 
  * 实现领域对象用户的所有业务管理函数.
- * 演示派生DAO层子类的模式,由注入的UserDao封装数据库访问.
  *  
  * 通过泛型声明继承EntityManager,默认拥有CRUD管理方法.
  * 使用Spring annotation定义事务管理.

@@ -2,7 +2,6 @@ package org.springside.modules.orm.hibernate;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -282,16 +281,19 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * 初始化被lazy initialize的关联集合.
+	 * 初始化对象.
+	 * 使用load()方法得到的仅是对象Proxy后, 在传到View层前需要进行初始化.
+	 * initObject(user) ,初始化User的直接属性，但不会初始化延迟加载的关联集合和属性.
+	 * initObject(user.getRoles())，初始化User的直接属性和关联集合.
+	 * initObject(user.getDescription())，初始化User的直接属性和延迟加载的Description属性.
 	 */
-	public void initCollection(Collection collection) {
-		if (!Hibernate.isInitialized(collection)) {
-			Hibernate.initialize(collection);
-		}
+	public void initObject(Object object) {
+		Hibernate.initialize(object);
 	}
 
 	/**
-	 * 通过Set将不唯一的对象列表唯一化,主要用于预加载数据形成重复结果时.
+	 * 通过Set将不唯一的对象列表唯一化.
+	 * 主要用于HQL/Criteria预加载关联集合形成重复记录,又不方便使用distinct语句时.
 	 */
 	public <X> List<X> distinct(List<X> list) {
 		Set<X> set = new LinkedHashSet<X>(list);

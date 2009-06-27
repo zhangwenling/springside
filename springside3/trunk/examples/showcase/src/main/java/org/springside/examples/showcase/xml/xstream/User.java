@@ -20,14 +20,17 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.mapper.Mapper;
 
+//指定User类的别名
 @XStreamAlias("user")
 public class User {
 
+	//设置转换为xml节点属性
 	@XStreamAsAttribute
 	private Long id;
 
 	private String name;
 
+	//设置不转换为xml
 	@XStreamOmitField
 	private String password;
 
@@ -35,9 +38,11 @@ public class User {
 
 	private List<Role> roles = new ArrayList<Role>();
 
+	//设置xml为<interest/><interest/>
 	@XStreamImplicit(itemFieldName = "interest")
 	List<String> interests = new ArrayList<String>();
 
+	//设置对Map的转换
 	@XStreamConverter(HouseMapConverter.class)
 	Map<String, String> houses = new HashMap<String, String>();
 
@@ -126,6 +131,7 @@ public class User {
 			}
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		protected void populateMap(HierarchicalStreamReader reader, UnmarshallingContext context, Map map) {
 			while (reader.hasMoreChildren()) {

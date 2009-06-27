@@ -17,7 +17,7 @@
 	<li>Hibernate Event，在修改User对象时自动加入审计信息。</li>
 	<li>Hibernate @Version字段，在Struts2 Prepareable Action里的使用。</li>
 	<li>Hibernate Clob字段。</li>
-	<li>Hibernate 批量操作的HQL。</li>
+	<li>Hibernate 批量更新操作的HQL。</li>
 	<li>Hibernate Native SQL。</li>
 	<li>Hibernate 查询时预加载Lazy Load关联对象。</li>
 	<li>Hibernate Dialect，演示扩展Dialect，加入数据库特性语句。(计划中)</li>

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.dao.security.AuthorityDao;
 import org.springside.examples.miniweb.entity.security.Authority;
-import org.springside.modules.orm.hibernate.EntityManager;
+import org.springside.examples.miniweb.service.EntityManager;
 
 /**
  * 授权管理类.
