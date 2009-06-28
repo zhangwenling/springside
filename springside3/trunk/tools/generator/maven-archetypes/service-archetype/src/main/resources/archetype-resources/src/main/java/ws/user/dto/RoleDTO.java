@@ -10,9 +10,7 @@ import ${package}.ws.Constants;
 
 /**
  * Web Service传输Role信息的DTO.
- * 
- * 使用JAXB 2.0的annotation标注JAVA-XML映射,尽量使用默认约定.
- * 
+ *
  * @author calvin
  */
 @XmlType(name = "Role", namespace = Constants.NS)

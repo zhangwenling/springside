@@ -16,7 +16,7 @@ import ${package}.ws.Constants;
 /**
  * Web Service传输User信息的DTO.
  * 
- * 使用JAXB 2.0的annotation标注JAVA-XML映射.
+ * 使用JAXB 2.0的annotation标注JAVA-XML映射,尽量使用默认约定.
  * 
  * @author calvin
  */
@@ -28,7 +28,7 @@ public class UserDTO {
 	private String name;
 	private String email;
 
-	private Set<RoleDTO> roles = new LinkedHashSet<RoleDTO>(0);
+	private Set<RoleDTO> roles = new LinkedHashSet<RoleDTO>();
 
 	public Long getId() {
 		return id;
@@ -53,7 +53,6 @@ public class UserDTO {
 	public void setName(String value) {
 		name = value;
 	}
-
 
 	public String getEmail() {
 		return email;

@@ -13,7 +13,7 @@ import ${package}.entity.security.Resource;
 import org.springside.modules.security.springsecurity.ResourceDetailService;
 
 /**
- * 从数据库查询URL--授权定义的RequestMapService实现类.
+ * 从数据库查询URL--授权定义Map的实现类.
  * 
  * @author calvin
  */
@@ -27,7 +27,8 @@ public class ResourceDetailServiceImpl implements ResourceDetailService {
 	 */
 	public LinkedHashMap<String, String> getRequestMap() throws Exception {
 		List<Resource> resourceList = resourceDao.find(ResourceDao.QUERY_BY_URL_TYPE, Resource.URL_TYPE);
-		LinkedHashMap<String, String> requestMap = new LinkedHashMap<String, String>();
+
+		LinkedHashMap<String, String> requestMap = new LinkedHashMap<String, String>(resourceList.size());
 		for (Resource resource : resourceList) {
 			requestMap.put(resource.getValue(), resource.getAuthNames());
 		}

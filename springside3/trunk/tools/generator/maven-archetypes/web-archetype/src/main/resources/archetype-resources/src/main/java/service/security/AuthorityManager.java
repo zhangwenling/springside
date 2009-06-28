@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ${package}.dao.security.AuthorityDao;
 import ${package}.entity.security.Authority;
-import org.springside.modules.orm.hibernate.EntityManager;
+import ${package}.service.EntityManager;
 
 /**
  * 授权管理类.

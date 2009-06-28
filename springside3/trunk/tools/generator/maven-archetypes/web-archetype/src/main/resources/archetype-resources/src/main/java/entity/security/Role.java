@@ -27,9 +27,6 @@ import org.springside.modules.utils.ReflectionUtils;
 /**
  * 角色.
  * 
- * 使用JPA annotation定义ORM关系.
- * 使用Hibernate annotation定义二级缓存. 
- * 
  * @author calvin
  */
 @Entity

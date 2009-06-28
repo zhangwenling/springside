@@ -13,8 +13,8 @@ import ${package}.entity.security.Role;
 import ${package}.service.ServiceException;
 import ${package}.service.security.AuthorityManager;
 import ${package}.service.security.RoleManager;
+import ${package}.web.CrudActionSupport;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;
-import org.springside.modules.web.struts2.CrudActionSupport;
 
 /**
  * 角色管理Action.

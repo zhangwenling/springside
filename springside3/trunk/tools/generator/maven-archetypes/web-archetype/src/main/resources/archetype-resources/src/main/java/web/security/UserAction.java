@@ -16,10 +16,10 @@ import ${package}.entity.security.User;
 import ${package}.service.ServiceException;
 import ${package}.service.security.RoleManager;
 import ${package}.service.security.UserManager;
+import ${package}.web.CrudActionSupport;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;
-import org.springside.modules.web.struts2.CrudActionSupport;
 import org.springside.modules.web.struts2.Struts2Utils;
 
 /**

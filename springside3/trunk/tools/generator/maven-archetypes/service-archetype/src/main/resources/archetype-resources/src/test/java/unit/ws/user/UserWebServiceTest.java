@@ -20,7 +20,6 @@ import org.springside.modules.utils.ReflectionUtils;
  * 使用EasyMock对UserService进行模拟.
  * 
  * @author calvin
- * 
  */
 public class UserWebServiceTest extends Assert {
 	private UserWebServiceImpl userWebService = new UserWebServiceImpl();
@@ -51,11 +50,12 @@ public class UserWebServiceTest extends Assert {
 		org.easymock.EasyMock.expect(userManager.authenticate("admin", "false")).andReturn(false);
 		EasyMock.replay(userManager);
 
-		//执行测试,校验结果
+		//执行输入正确的测试,校验结果
 		WSResult result = userWebService.authUser("admin", "admin");
-		assertEquals(result.getCode(), WSResult.SUCCESS);
+		assertEquals(WSResult.SUCCESS, result.getCode());
 
+		//执行输入错误的测试,校验结果
 		result = userWebService.authUser("admin", "false");
-		assertEquals(result.getCode(), WSResult.FALSE);
+		assertEquals(WSResult.FALSE, result.getCode());
 	}
 }

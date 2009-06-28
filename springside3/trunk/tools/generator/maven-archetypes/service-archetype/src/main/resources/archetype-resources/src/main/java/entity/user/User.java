@@ -26,7 +26,6 @@ import ${package}.entity.IdEntity;
  * 
  * 使用JPA annotation定义ORM关系.
  * 使用Hibernate annotation定义二级缓存.
- * 集中定义了所有以用户为主体的HQL.
  * 
  * @author calvin
  */

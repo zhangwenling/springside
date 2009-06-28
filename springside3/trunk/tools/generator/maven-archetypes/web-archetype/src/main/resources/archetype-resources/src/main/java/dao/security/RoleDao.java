@@ -12,7 +12,7 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 public class RoleDao extends HibernateDao<Role, Long> {
 
 	/**
-	 * 重载delte，在删除角色时删除与用户关联的中间表.
+	 * 重载函数，在删除角色时进行特殊处理删除与用户多对多关联的中间表.
 	 */
 	@Override
 	public void delete(Long id) {

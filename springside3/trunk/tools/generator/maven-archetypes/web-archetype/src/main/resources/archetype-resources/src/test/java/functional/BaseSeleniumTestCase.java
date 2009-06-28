@@ -6,12 +6,17 @@ package ${package}.functional;
 import org.junit.Before;
 import org.springside.modules.test.selenium.SeleniumTestCase;
 
+/**
+ * 项目相关的SeleniumTestCase基类,定义服务器地址,浏览器类型及登陆函数. 
+ * 
+ * @author calvin
+ */
 public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 
 	@Before
 	@Override
 	public void setUp() throws Exception {
-		initSelenium("http://localhost:8080", "*firefox");
+		super.setUp();
 		login();
 	}
 
