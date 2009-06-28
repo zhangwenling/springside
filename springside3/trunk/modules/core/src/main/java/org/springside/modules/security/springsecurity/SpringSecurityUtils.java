@@ -23,7 +23,6 @@ public class SpringSecurityUtils {
 
 	/**
 	 * 取得当前用户,返回值为SpringSecurity的User类及其子类, 如果当前用户未登录则返回null.
-	 * 
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends User> T getCurrentUser() {

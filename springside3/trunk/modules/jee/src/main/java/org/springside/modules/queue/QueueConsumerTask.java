@@ -4,10 +4,11 @@ import java.util.concurrent.BlockingQueue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Required;
 
 /**
- * 消费Queue消息的任务基类.
+ * 消费Queue中消息的任务基类.
+ * 
+ * @see QueueManager
  * 
  * @author calvin
  */
@@ -16,35 +17,26 @@ public abstract class QueueConsumerTask implements Runnable {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
-	protected BlockingQueue queue; //任务消费的队列
+	protected BlockingQueue queue;
 
-	protected String queueName; //可配置的任务对应队列名称
-	protected int threadCount = 1;//可配置的任务并发线程数
+	protected int threadCount = 1;
 
-	public String getQueueName() {
-		return queueName;
+	/**
+	 * 任务消费的队列.
+	 */
+	public void setQueue(BlockingQueue queue) {
+		this.queue = queue;
 	}
 
 	/**
-	 * 任务对应的队列名称.
+	 * 可配置的任的并发处理线程数.
 	 */
-	@Required
-	public void setQueueName(String queueName) {
-		this.queueName = queueName;
-	}
-
 	public int getThreadCount() {
 		return threadCount;
 	}
 
-	/**
-	 * 任务的并发处理线程数.
-	 */
 	public void setThreadCount(int threadCount) {
 		this.threadCount = threadCount;
 	}
 
-	public void setQueue(BlockingQueue queue) {
-		this.queue = queue;
-	}
 }

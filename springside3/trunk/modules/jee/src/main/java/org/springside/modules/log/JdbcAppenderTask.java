@@ -15,7 +15,8 @@ import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springside.modules.queue.QueueConsumerTask;
 
 /**
- * 将Queue中的Event写入数据库的Appender.
+ * 将Queue中的log4j event写入数据库的消费者任务.
+ * 使用Jdbc批量写入的模式.
  * 
  * @author calvin
  */
@@ -24,7 +25,6 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	protected SimpleJdbcTemplate jdbcTemplate;
 	protected String sql;
 	protected int bufferSize = 10;
-
 	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
 
 	@Required
@@ -71,7 +71,8 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 		LoggingEvent event = (LoggingEvent) eventObject;
 		eventBuffer.add(event);
 		logger.debug("get event, {}", Log4jUtils.convertEventToString(event));
-
+		
+		//已到达BufferSize则执行批量插入操作
 		if (eventBuffer.size() >= bufferSize) {
 			updateBatch();
 		}
@@ -88,7 +89,7 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	 * 批量更新Buffer中的事件.
+	 * 批量插入Buffer中的事件的数据库.
 	 */
 	@SuppressWarnings("unchecked")
 	protected void updateBatch() {

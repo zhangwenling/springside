@@ -10,25 +10,26 @@ import org.apache.commons.lang.StringUtils;
  * 注意所有序号从1开始.
  * 
  * @param <T> Page中记录的类型.
+ * 
  * @author calvin
  */
 public class Page<T> {
-	// 公共变量
+	// 公共变量 //
 	public static final String ASC = "asc";
 	public static final String DESC = "desc";
 
-	//分页参数
+	//分页参数 //
 	protected int pageNo = 1;
 	protected int pageSize = 1;
 	protected String orderBy = null;
 	protected String order = null;
 	protected boolean autoCount = true;
 
-	//返回结果
+	//返回结果 //
 	protected List<T> result = Collections.emptyList();
 	protected long totalCount = -1;
 
-	// 构造函数
+	// 构造函数 //
 
 	public Page() {
 		super();
@@ -43,7 +44,7 @@ public class Page<T> {
 		this.autoCount = autoCount;
 	}
 
-	//查询参数函数
+	// 查询参数访问函数 //
 
 	/**
 	 * 获得当前页的页号,序号从1开始,默认为1.
@@ -135,7 +136,7 @@ public class Page<T> {
 	}
 
 	/**
-	 * 查询对象时是否自动另外执行count查询获取总记录数,默认为false.
+	 * 查询对象时是否自动另外执行count查询获取总记录数, 默认为false.
 	 */
 	public boolean isAutoCount() {
 		return autoCount;
@@ -148,7 +149,7 @@ public class Page<T> {
 		this.autoCount = autoCount;
 	}
 
-	// 查询结果函数
+	// 访问查询结果函数 //
 
 	/**
 	 * 取得页内的记录列表.
@@ -162,7 +163,7 @@ public class Page<T> {
 	}
 
 	/**
-	 * 取得总记录数,默认值为-1.
+	 * 取得总记录数, 默认值为-1.
 	 */
 	public long getTotalCount() {
 		return totalCount;
@@ -173,7 +174,7 @@ public class Page<T> {
 	}
 
 	/**
-	 * 根据pageSize与totalCount计算总页数,默认值为-1.
+	 * 根据pageSize与totalCount计算总页数, 默认值为-1.
 	 */
 	public long getTotalPages() {
 		if (totalCount < 0)
@@ -194,7 +195,7 @@ public class Page<T> {
 	}
 
 	/**
-	 * 取得下页的页号,序号从1开始.
+	 * 取得下页的页号, 序号从1开始.
 	 * 当前页为尾页时仍返回尾页序号.
 	 */
 	public int getNextPage() {
@@ -212,7 +213,7 @@ public class Page<T> {
 	}
 
 	/**
-	 * 取得上页的页号,序号从1开始.
+	 * 取得上页的页号, 序号从1开始.
 	 * 当前页为首页时返回首页序号.
 	 */
 	public int getPrePage() {

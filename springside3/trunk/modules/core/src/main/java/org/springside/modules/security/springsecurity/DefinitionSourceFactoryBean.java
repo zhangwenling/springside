@@ -16,7 +16,9 @@ import org.springframework.security.util.UrlMatcher;
 /**
  * DefinitionSource工厂.
  * 
- * 由注入的resourceDetailService读取在数据库或其它地方中定义的URL-授权关系,提供LinkedHashMap<String, String>形式的URL及授权关系定义.
+ * 由注入的resourceDetailService读取在数据库或其它地方中定义的URL-授权关系,
+ * 提供LinkedHashMap<String, String>形式的URL及授权关系定义，
+ * 并最终转为SpringSecurity所需的LinkedHashMap<RequestKey, ConfigAttributeDefinition>形式的定义.
  * 
  * @see org.springframework.security.intercept.web.DefaultFilterInvocationDefinitionSource
  * @see ResourceDetailService

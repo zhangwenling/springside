@@ -21,7 +21,9 @@
 <div id="mainbar">
 <h3>日志高级演示</h3>
 <h4>技术说明：</h4>
-轻量级日志异步多线程处理框架：Log4j端很轻量的将Logging Event发送到Blocking Queue中，由归Spring统一管理JMS/DB/EMail资源的Appender异步的、多线程的对事件进行处理。
+轻量级日志异步多线程处理框架:<br/>
+1.在Log4j端通过AsyncAppender将Logging Event发送到Blocking Queue中.<br/>
+2.由归Spring统一管理JMS/DB/EMail资源的Appender异步、多线程的对事件进行处理。
 <h4>用户故事：</h4>
 	每次进入本页面，logger都会在数据库LOGS表中增加一条记录。
 </div>

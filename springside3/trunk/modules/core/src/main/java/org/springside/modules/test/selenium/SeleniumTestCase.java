@@ -15,24 +15,19 @@ import com.thoughtworks.selenium.Selenium;
  */
 public class SeleniumTestCase {
 
+	public static final String DEFAULT_HOST = "http://localhost:8080";
+	public static final String DEFAULT_EXPLOER = "*firefox";
+	
 	protected Selenium selenium;
-
-	protected String getHost() {
-		return "http://localhost:8080";
-	}
-
-	protected String getExplorer() {
-		return "*firefox";
-	}
 
 	/**
 	 * 初始化默认的selenium变量.
-	 * 
-	 * selenium server的地址为localhost:4444, 待测应用基础路径为"http://localhost:8080/", 浏览器为Firefox.
+	 * 连接默认的selenium server(地址为localhost:4444).
 	 */
 	@Before
 	public void setUp() throws Exception {
-		initSelenium(getHost(), getExplorer());
+		selenium = new DefaultSelenium("localhost", 4444, getExplorer(), getHost());
+		selenium.start();
 	}
 
 	/**
@@ -44,16 +39,19 @@ public class SeleniumTestCase {
 	}
 
 	/**
-	 * 初始化selenium变量.
-	 * 
-	 * 连接默认的selenium server(地址为localhost:4444),根据参数初始化selenium变量.
-	 * 
-	 * @param siteUrl 待测Web应用的基本路径, 如"http://localhost:8080/"
-	 * @param browser 浏览器选定, 可取值有*iexplore代表IE,*firefox代表Firefox.
+	 * 获取待测Web应用的地址,默认为"http://localhost:8080", 可在子类重载.
 	 */
-	protected void initSelenium(String siteUrl, String browser) {
-		selenium = new DefaultSelenium("localhost", 4444, browser, siteUrl);
-		selenium.start();
+	protected String getHost() {
+		return DEFAULT_HOST;
+	}
+
+	/**
+	 * 获取测试使用的浏览器,默认为FireFox, 可在子类重载.
+	 * 
+	 * 可取值有*iexplore代表IE,*firefox代表Firefox.
+	 */
+	protected String getExplorer() {
+		return DEFAULT_EXPLOER;
 	}
 
 	/**

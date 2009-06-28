@@ -42,7 +42,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	protected Class<T> entityClass;
 
 	/**
-	 * 用于扩展的DAO子类使用的构造函数.
+	 * 用于Dao层子类使用的构造函数.
 	 * 通过子类的泛型定义取得对象类型Class.
 	 * eg.
 	 * public class UserDao extends SimpleHibernateDao<User, Long>
@@ -52,7 +52,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * 用于Service层直接使用SimpleHibernateDAO的构造函数.
+	 * 用于用于省略Dao层, 在Service层直接使用通用SimpleHibernateDao的构造函数.
 	 * 在构造函数中定义对象类型Class.
 	 * eg.
 	 * SimpleHibernateDao<User, Long> userDao = new SimpleHibernateDao<User, Long>(sessionFactory, User.class);
@@ -74,6 +74,9 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 		this.sessionFactory = sessionFactory;
 	}
 
+	/**
+	 * 取得当前Session.
+	 */
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
@@ -293,7 +296,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 通过Set将不唯一的对象列表唯一化.
-	 * 主要用于HQL/Criteria预加载关联集合形成重复记录,又不方便使用distinct语句时.
+	 * 主要用于HQL/Criteria预加载关联集合形成重复记录,又不方便使用distinct查询语句时.
 	 */
 	public <X> List<X> distinct(List<X> list) {
 		Set<X> set = new LinkedHashSet<X>(list);

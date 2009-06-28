@@ -38,7 +38,7 @@ import org.springside.modules.utils.ReflectionUtils;
  */
 public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao<T, PK> {
 	/**
-	 * 用于扩展的DAO子类使用的构造函数
+	 * 用于Dao层子类使用的构造函数.
 	 * 通过子类的泛型定义取得对象类型Class.
 	 * eg.
 	 * public class UserDao extends HibernateDao<User, Long>{
@@ -49,7 +49,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	}
 
 	/**
-	 * 用于Service层直接使用HibernateDAO的构造函数.
+	 * 用于省略Dao层, Service层直接使用通用HibernateDao的构造函数.
 	 * 在构造函数中定义对象类型Class.
 	 * eg.
 	 * HibernateDao<User, Long> userDao = new HibernateDao<User, Long>(sessionFactory, User.class);
@@ -74,7 +74,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @param hql hql语句.
 	 * @param values 数量可变的查询参数,按顺序绑定.
 	 * 
-	 * @return 分页查询结果,附带结果列表及所有查询时的参数.
+	 * @return 分页查询结果, 附带结果列表及所有查询时的参数.
 	 */
 	@SuppressWarnings("unchecked")
 	public Page<T> find(final Page<T> page, final String hql, final Object... values) {
@@ -96,11 +96,11 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按HQL分页查询.
 	 * 
-	 * @param page 分页参数.不支持其中的orderBy参数.
+	 * @param page 分页参数.(不支持orderBy参数)
 	 * @param hql hql语句.
 	 * @param values 命名参数,按名称绑定.
 	 * 
-	 * @return 分页查询结果,附带结果列表及所有查询时的参数.
+	 * @return 分页查询结果, 附带结果列表及所有查询时的参数.
 	 */
 	@SuppressWarnings("unchecked")
 	public Page<T> find(final Page<T> page, final String hql, final Map<String, Object> values) {
@@ -273,7 +273,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @param matchType 匹配方式,目前支持的取值为"EQUAL"与"LIKE".
 	 */
 	public List<T> findBy(final String propertyName, final Object value, final MatchType matchType) {
-		Criterion criterion = buildPropertyCriterion(propertyName, value, matchType);
+		Criterion criterion = buildPropertyFilterCriterion(propertyName, value, matchType);
 		return find(criterion);
 	}
 
@@ -281,7 +281,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 按属性过滤条件列表查找对象列表.
 	 */
 	public List<T> find(List<PropertyFilter> filters) {
-		Criterion[] criterions = buildFilterCriterions(filters);
+		Criterion[] criterions = buildPropertyFilterCriterions(filters);
 		return find(criterions);
 	}
 
@@ -289,28 +289,29 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 按属性过滤条件列表分页查找对象.
 	 */
 	public Page<T> find(final Page<T> page, final List<PropertyFilter> filters) {
-		Criterion[] criterions = buildFilterCriterions(filters);
+		Criterion[] criterions = buildPropertyFilterCriterions(filters);
 		return find(page, criterions);
 	}
 
 	/**
 	 * 按属性条件列表创建Criterion数组,辅助函数.
 	 */
-	protected Criterion[] buildFilterCriterions(final List<PropertyFilter> filters) {
+	protected Criterion[] buildPropertyFilterCriterions(final List<PropertyFilter> filters) {
 		List<Criterion> criterionList = new ArrayList<Criterion>();
 		for (PropertyFilter filter : filters) {
 			String propertyName = filter.getPropertyName();
 
 			boolean multiProperty = StringUtils.contains(propertyName, PropertyFilter.OR_SEPARATOR);
 			if (!multiProperty) { //properNameName中只有一个属性的情况.
-				Criterion criterion = buildPropertyCriterion(propertyName, filter.getValue(), filter.getMatchType());
+				Criterion criterion = buildPropertyFilterCriterion(propertyName, filter.getValue(), filter
+						.getMatchType());
 				criterionList.add(criterion);
 			} else {//properName中包含多个属性的情况,进行or处理.
 				Disjunction disjunction = Restrictions.disjunction();
 				String[] params = StringUtils.split(propertyName, PropertyFilter.OR_SEPARATOR);
 
 				for (String param : params) {
-					Criterion criterion = buildPropertyCriterion(param, filter.getValue(), filter.getMatchType());
+					Criterion criterion = buildPropertyFilterCriterion(param, filter.getValue(), filter.getMatchType());
 					disjunction.add(criterion);
 				}
 				criterionList.add(disjunction);
@@ -322,7 +323,8 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按属性条件参数创建Criterion,辅助函数.
 	 */
-	protected Criterion buildPropertyCriterion(final String propertyName, final Object value, final MatchType matchType) {
+	protected Criterion buildPropertyFilterCriterion(final String propertyName, final Object value,
+			final MatchType matchType) {
 		Assert.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = null;
 

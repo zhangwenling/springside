@@ -8,14 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springside.modules.queue.QueueManager;
 
 /**
- * 轻量级的异步Appender.
+ * 轻量级的Log4j异步Appender.
  * 
  * 将所有消息放入QueueManager所管理的Blocking Queue中.
  * 
  * @see QueueManager
  * 
  * @author calvin
- *
  */
 public class AsyncAppender extends org.apache.log4j.AppenderSkeleton {
 	private static Logger logger = LoggerFactory.getLogger(AsyncAppender.class);

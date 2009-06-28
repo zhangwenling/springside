@@ -40,7 +40,7 @@ public class QueueManager implements ApplicationContextAware {
 	protected static Logger logger = LoggerFactory.getLogger(QueueManager.class);
 
 	//可配置属性//
-	protected List<String> taskBeanNames; //任务名称列表
+	protected Map<String, String> taskBeanMapping; //队列名称与消费任务名称映射
 	protected int shutdownWait = 10000; //停止每个队列时最多等待的时间,单位为毫秒.
 	protected boolean persistence = true; //是否将队列中未处理的消息持久化到文件.
 
@@ -65,11 +65,11 @@ public class QueueManager implements ApplicationContextAware {
 	}
 
 	/**
-	 * ApplicationContext中consumer task的名称列表.
+	 * ApplicationContext中consumer task与queue的名称列表.
 	 */
 	@Required
-	public void setTaskBeanNames(List<String> taskBeanNames) {
-		this.taskBeanNames = taskBeanNames;
+	public void setTaskBeanMapping(Map<String, String> taskBeanMapping) {
+		this.taskBeanMapping = taskBeanMapping;
 	}
 
 	/**
@@ -95,9 +95,11 @@ public class QueueManager implements ApplicationContextAware {
 
 	@PostConstruct
 	public void start() {
-		for (String taskBeanName : taskBeanNames) {
+
+		for (Entry<String, String> entry : taskBeanMapping.entrySet()) {
+			String queueName = entry.getKey();
+			String taskBeanName = entry.getValue();
 			QueueConsumerTask task = (QueueConsumerTask) applicatiionContext.getBean(taskBeanName);
-			String queueName = task.getQueueName();
 			int threadCount = task.getThreadCount();
 
 			try {
@@ -122,6 +124,7 @@ public class QueueManager implements ApplicationContextAware {
 			} catch (Exception e) {
 				logger.error("启动任务" + queueName + "时出错", e);
 			}
+
 		}
 
 		//从文件中恢复消息到队列.
