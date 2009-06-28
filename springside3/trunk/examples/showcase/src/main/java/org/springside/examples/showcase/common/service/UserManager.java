@@ -13,6 +13,7 @@ import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.email.MimeMailService;
 import org.springside.examples.showcase.email.SimpleMailService;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
+import org.springside.examples.showcase.security.Operator;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
@@ -47,7 +48,8 @@ public class UserManager extends EntityManager<User, Long> {
 	@Override
 	public void save(User user) {
 		if (user.getId() == 1) {
-			logger.warn("操作员{}在{}尝试修改超级管理员用户", SpringSecurityUtils.getCurrentUser());
+			Operator operator = SpringSecurityUtils.getCurrentUser();
+			logger.warn("操作员{}在{}尝试修改超级管理员用户", operator.getUsername(), operator.getLoginTime());
 			throw new ServiceException("不能修改超级管理员用户");
 		}
 

@@ -1,5 +1,6 @@
 package org.springside.examples.showcase.security;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.GrantedAuthority;
 import org.springframework.security.GrantedAuthorityImpl;
-import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UserDetailsService;
 import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springside.examples.showcase.common.dao.UserDao;
@@ -28,7 +28,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	/**
 	 * 获取用户Detail信息的回调函数.
 	 */
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
+	public Operator loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
 		User user = userDao.findByUnique("loginName", userName);
 		if (user == null)
@@ -42,10 +42,13 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
-		org.springframework.security.userdetails.User userdetail = new org.springframework.security.userdetails.User(
+		Operator operator = new Operator(
 				user.getLoginName(), user.getPassword(), enabled, accountNonExpired, credentialsNonExpired,
 				accountNonLocked, grantedAuths);
-		return userdetail;
+		
+		operator.setLoginTime(new Date());
+
+		return operator;
 	}
 
 	/**

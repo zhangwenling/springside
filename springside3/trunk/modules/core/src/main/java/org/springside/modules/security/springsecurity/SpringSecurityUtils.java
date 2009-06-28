@@ -24,10 +24,10 @@ public class SpringSecurityUtils {
 	/**
 	 * 取得当前用户,如果当前用户未登录则返回null.
 	 */
-	public static User getCurrentUser() {
+	public static <T extends User> T getCurrentUser() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (principal == null)
 			return null;
-		return (User) principal;
+		return (T) principal;
 	}
 }
