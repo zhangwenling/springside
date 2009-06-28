@@ -1,4 +1,4 @@
-package org.springside.modules.web.struts2;
+package org.springside.examples.showcase.common.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

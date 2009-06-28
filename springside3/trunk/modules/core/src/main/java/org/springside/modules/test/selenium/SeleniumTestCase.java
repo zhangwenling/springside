@@ -9,7 +9,7 @@ import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.Selenium;
 
 /**
- * Selenium测试基类.
+ * Selenium Web集成测试用例基类.
  * 
  * @author calvin
  */

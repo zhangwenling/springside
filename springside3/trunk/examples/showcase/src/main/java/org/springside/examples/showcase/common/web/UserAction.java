@@ -11,7 +11,6 @@ import org.hibernate.StaleStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.UserManager;
-import org.springside.modules.web.struts2.CrudActionSupport;
 
 /**
  * 用户管理Action.

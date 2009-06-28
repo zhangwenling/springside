@@ -10,8 +10,8 @@ import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.examples.miniweb.service.security.AuthorityManager;
 import org.springside.examples.miniweb.service.security.RoleManager;
+import org.springside.examples.miniweb.web.CrudActionSupport;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;
-import org.springside.modules.web.struts2.CrudActionSupport;
 
 /**
  * 角色管理Action.

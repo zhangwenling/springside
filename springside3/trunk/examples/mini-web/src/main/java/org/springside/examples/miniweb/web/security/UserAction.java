@@ -13,10 +13,10 @@ import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.examples.miniweb.service.security.RoleManager;
 import org.springside.examples.miniweb.service.security.UserManager;
+import org.springside.examples.miniweb.web.CrudActionSupport;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;
-import org.springside.modules.web.struts2.CrudActionSupport;
 import org.springside.modules.web.struts2.Struts2Utils;
 
 /**
