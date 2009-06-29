@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
@@ -72,7 +73,7 @@ public class QueueManagerTest extends Assert {
 
 		BlockingQueue newQueue = QueueManager.getQueue(queueName);
 		manager = new QueueManager();
-		manager.setTaskBeanNames(new ArrayList());
+		manager.setTaskBeanMapping(new HashMap());
 		manager.start();
 
 		List list = new ArrayList();
