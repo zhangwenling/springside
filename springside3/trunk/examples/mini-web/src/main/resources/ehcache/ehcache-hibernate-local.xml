@@ -14,18 +14,18 @@
 
 
 	<!-- Special objects setting. -->
-	<cache name="org.springside.examples.miniweb.entity.user.User" maxElementsInMemory="500" overflowToDisk="true"
+	<cache name="org.springside.examples.miniweb.entity.security.User" maxElementsInMemory="500" overflowToDisk="true"
 		eternal="true">
 	</cache>
-	<cache name="org.springside.examples.miniweb.entity.user.User.roles" maxElementsInMemory="500" overflowToDisk="true"
+	<cache name="org.springside.examples.miniweb.entity.security.User.roles" maxElementsInMemory="500" overflowToDisk="true"
 		eternal="true">
 	</cache>
-	<cache name="org.springside.examples.miniweb.entity.user.Role" maxElementsInMemory="500" overflowToDisk="true"
+	<cache name="org.springside.examples.miniweb.entity.security.Role" maxElementsInMemory="500" overflowToDisk="true"
 		eternal="true">
 	</cache>
-	<cache name="org.springside.examples.miniweb.entity.user.Role.auths" maxElementsInMemory="500" overflowToDisk="true"
+	<cache name="org.springside.examples.miniweb.entity.security.Role.auths" maxElementsInMemory="500" overflowToDisk="true"
 		eternal="true">
 	</cache>
-	<cache name="org.springside.examples.miniweb.entity.user.Authority" maxElementsInMemory="500" overflowToDisk="true"
+	<cache name="org.springside.examples.miniweb.entity.security.Authority" maxElementsInMemory="500" overflowToDisk="true"
 		eternal="true" />
 </ehcache>

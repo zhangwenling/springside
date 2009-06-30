@@ -150,6 +150,10 @@
 
 		<!-- utils begin -->
 		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-jgroupsreplication</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>net.sf.dozer</groupId>
 			<artifactId>dozer</artifactId>
 		</dependency>
@@ -235,17 +239,18 @@
 				</pluginRepository>
 			</pluginRepositories>
 			<build>
-			<plugins>
-				<plugin>
-					<groupId>eviware</groupId>
-					<artifactId>maven-soapui-plugin</artifactId>
-					<version>2.5.1</version>
-					<configuration>
-						<projectFile>src/test/soapui/mini-service-soapui-project.xml</projectFile>
-						<host>localhost:8080</host>
-					</configuration>
-				</plugin>
-			</plugins>
+				<plugins>
+					<plugin>
+						<groupId>eviware</groupId>
+						<artifactId>maven-soapui-plugin</artifactId>
+						<version>2.5.1</version>
+						<configuration>
+							<projectFile>src/test/soapui/mini-service-soapui-project.xml
+							</projectFile>
+							<host>localhost:8080</host>
+						</configuration>
+					</plugin>
+				</plugins>
 			</build>
 		</profile>
 	</profiles>
