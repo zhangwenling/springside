@@ -77,7 +77,7 @@
 	<p>
 		打开数据库连接:${hibernateStatistics.sessionOpenCount}<br/>
 		关闭数据库连接:${hibernateStatistics.sessionCloseCount}<br/>
-		<input type="button" value="打印Hibernate统计信息日志" onclick="logSummary();" />
+		<input type="button" value="在日志打印Hibernate统计信息" onclick="logSummary();" />
 	</p>
 	
 </div>

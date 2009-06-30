@@ -15,7 +15,6 @@
 <p>说明：在<a href="${ctx}/jmx/jmx-client.action">JMX示例</a>中已演示基于JQuery的标准Ajax获取内容与表单提交。</p>
 <ul>
 	<li><a href="${ctx}/ajax/mashup/mashup-client.action">跨域Mashup演示</a></li>
-	<li><a href="${ctx}/ajax/dwr/index.action">DWR演示(计划中)</a></li>
 </ul>
 </div>
 </div>

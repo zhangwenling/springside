@@ -17,7 +17,7 @@ public class UserDao extends HibernateDao<User, Long> {
 	public static final String COUNT_USER = "select count(u) from User u";
 	public static final String DISABLE_USERS = "update User u set u.status='disabled' where id in(:ids)";
 
-	/*
+	/**
 	 * 批量修改用户状态.
 	 */
 	public void disableUsers(List<Long> ids) {
@@ -54,17 +54,11 @@ public class UserDao extends HibernateDao<User, Long> {
 	/**
 	 * 使用Criteria 预加载lazy init的List<Role>, 用DISTINCE_ROOT_ENTITY排除重复数据.
 	 */
+	@SuppressWarnings("unchecked")
 	public List<User> getAllUserWithRolesByDistinctCriteria() {
 		Criteria c = createCriteria();
 		c.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		c.setFetchMode("roles", FetchMode.JOIN);
 		return c.list();
-	}
-
-	/**
-	 * 使用Criteria 预加载lazy init的List<Role>, 用Set排除重复数据.
-	 */
-	public List<User> getAllUserWithRolesByCriteriaDistinctBySet() {
-		return distinct(createCriteria().setFetchMode("roles", FetchMode.JOIN).list());
 	}
 }
