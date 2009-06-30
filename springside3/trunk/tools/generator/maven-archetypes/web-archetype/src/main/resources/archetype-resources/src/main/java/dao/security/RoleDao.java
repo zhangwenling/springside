@@ -17,6 +17,7 @@ public class RoleDao extends HibernateDao<Role, Long> {
 	@Override
 	public void delete(Long id) {
 		Role role = get(id);
+		//TODO: very slow
 		for (User user : role.getUsers()) {
 			user.getRoles().remove(role);
 		}
