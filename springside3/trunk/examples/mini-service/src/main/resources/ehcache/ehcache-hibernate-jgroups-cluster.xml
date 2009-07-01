@@ -3,10 +3,11 @@
 
 	<diskStore path="java.io.tmpdir/hibernate/mini-service" />
 
-	<!-- Cluster peer host setting. -->
+	<!-- Cluster peer host setting.
+	     Remember to set host1,host2 the real ip. -->
 	<cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheManagerPeerProviderFactory"
 		properties="connect=TCP(start_port=7800):
-		TCPPING(initial_hosts=192.168.0.2[7800],192.168.0.2[7800];port_range=3;timeout=3000;
+		TCPPING(initial_hosts=host1[7800],host2[7800];port_range=3;timeout=3000;
 		num_initial_members=2;up_thread=true;down_thread=true):
 		VERIFY_SUSPECT(timeout=1500;down_thread=false;up_thread=false):
 		pbcast.NAKACK(down_thread=true;up_thread=true;gc_lag=100;retransmit_timeout=3000):
