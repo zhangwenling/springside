@@ -316,6 +316,12 @@
 				<artifactId>struts2-convention-plugin</artifactId>
 				<version>${struts2.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.freemarker</groupId>
+				<artifactId>freemarker</artifactId>
+				<version>2.3.13</version>
+			</dependency>
+
 
 			<!-- spring web -->
 			<dependency>
@@ -596,14 +602,14 @@
 				<groupId>org.perf4j</groupId>
 				<artifactId>perf4j</artifactId>
 				<version>0.9.11</version>
-			</dependency>		
+			</dependency>
 			<dependency>
 				<groupId>commons-jexl</groupId>
 				<artifactId>commons-jexl</artifactId>
 				<version>1.1</version>
 			</dependency>
 			<!-- profile tools end -->
-			
+
 			<!-- test begin -->
 			<dependency>
 				<groupId>junit</groupId>

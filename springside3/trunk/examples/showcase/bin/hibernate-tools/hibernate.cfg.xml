@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+		<!-- Use for hbm2ddl -->
+		<property name="connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
+		<property name="connection.url">jdbc:derby://localhost:1527/springside-miniweb;create=true</property>
+		<property name="connection.username">APP</property>
+		<property name="connection.password">APP</property>
+
+		<!-- SQL dialect -->
+		<property name="dialect">org.hibernate.dialect.DerbyDialect</property>
+
+		<mapping class="org.springside.examples.showcase.common.entity.IdEntity" />
+		<mapping class="org.springside.examples.showcase.common.entity.User" />
+		<mapping class="org.springside.examples.showcase.common.entity.Role" />
+
+	</session-factory>
+</hibernate-configuration>
