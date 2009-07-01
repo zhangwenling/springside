@@ -1,7 +1,7 @@
-package ${basePackage}.dao;
+${pojo.getPackageDeclaration()}
 <#assign classbody>
 <#assign declarationName = pojo.importType(pojo.getDeclarationName())>
-public class ${declarationName}Dao extends HibernateDao<${declarationName}, ${PK}> {
+public class ${declarationName}Dao extends HibernateDao<${declarationName}, ${pojo.getJavaTypeName(clazz.identifierProperty, true)}> {
 }
 </#assign>
 ${pojo.generateImports()}

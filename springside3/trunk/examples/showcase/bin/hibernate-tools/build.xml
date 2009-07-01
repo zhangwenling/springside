@@ -19,6 +19,18 @@
 
 	<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="toolslib" />
 
+	<target name="generate.code">
+			<hibernatetool destdir="generated" templatepath="${hibernate-tools.path}/template/">
+				<classpath>
+					<path location="../../webapp/WEB-INF/classes" />
+				</classpath>
+						
+				<annotationconfiguration configurationfile="hibernate.cfg.xml" />
+
+				<hbmtemplate templateprefix="pojo/" template="dao.ftl" filepattern="{package-name}/{class-name}Dao.java"/>
+			</hibernatetool>
+	</target>
+
 	<target name="generate.ddl">
 		<hibernatetool destdir="generated">
 			<classpath>
@@ -30,22 +42,4 @@
 			<hbm2ddl export="false" update="false" drop="false" create="false" outputfilename="derby2.sql" delimiter=";" format="true" haltonerror="false" />
 		</hibernatetool>
 	</target>
-
-	<target name="generate.code">
-		<hibernatetool destdir="generated" templatepath="${hibernate-tools.path}/template/">
-			<classpath>
-				<path location="../../webapp/WEB-INF/classes" />
-			</classpath>
-			
-			
-			<annotationconfiguration configurationfile="hibernate.cfg.xml" />
-
-			<hbmtemplate templateprefix="pojo/" template="dao.ftl" filepattern="{package-name}/../dao/{class-name}Dao.java">
-				<property key="PK" value="Long" />
-				<property key="basePackage" value="org.springside.examples.showcase.common" />
-			</hbmtemplate>
-		</hibernatetool>
-	</target>
-
-
 </project>
