@@ -7,6 +7,12 @@
 		<!-- SQL dialect -->
 		<property name="dialect">org.hibernate.dialect.DerbyDialect</property>
 
+		<!-- Connection for Jdbc configuration -->
+		<property name="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
+		<property name="hibernate.connection.url">jdbc:derby://localhost:1527/springside-showcase;create=true</property>
+		<property name="hibernate.connection.username">APP</property>
+		<property name="hibernate.connection.password">APP</property>
+		
 		<mapping class="org.springside.examples.showcase.common.entity.IdEntity" />
 		<mapping class="org.springside.examples.showcase.common.entity.User" />
 		<mapping class="org.springside.examples.showcase.common.entity.Role" />
