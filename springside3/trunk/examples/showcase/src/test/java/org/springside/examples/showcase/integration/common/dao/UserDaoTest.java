@@ -14,7 +14,7 @@ public class UserDaoTest extends SpringTxTestCase {
 	private UserDao userDao;
 
 	@Test
-	public void testEagerInitLazyCollection() {
+	public void testEagerFetchCollection() {
 		//init by hql
 		List<User> userList1 = userDao.getAllUserWithRoleByDistinctHql();
 		assertEquals(6, userList1.size());

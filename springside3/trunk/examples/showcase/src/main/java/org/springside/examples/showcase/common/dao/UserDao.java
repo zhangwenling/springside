@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.springframework.stereotype.Repository;
@@ -14,7 +13,7 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 @Repository
 public class UserDao extends HibernateDao<User, Long> {
 
-	public static final String COUNT_USER = "select count(u) from User u";
+	public static final String COUNT_USERS = "select count(u) from User u";
 	public static final String DISABLE_USERS = "update User u set u.status='disabled' where id in(:ids)";
 
 	/**
@@ -38,10 +37,12 @@ public class UserDao extends HibernateDao<User, Long> {
 	}
 
 	/**
-	 * 使用 HQL 预加载lazy init的List<Role>,用 distinct语句排除重复数据.
+	 * 使用 HQL 预加载lazy init的List<Role>,用DISTINCE_ROOT_ENTITY排除重复数据.
 	 */
+	@SuppressWarnings("unchecked")
 	public List<User> getAllUserWithRoleByDistinctHql() {
-		return find("select distinct u from User u left join fetch u.roles");
+		return createQuery("from User u left join fetch u.roles").setResultTransformer(
+				CriteriaSpecification.DISTINCT_ROOT_ENTITY).list();
 	}
 
 	/**
@@ -56,9 +57,7 @@ public class UserDao extends HibernateDao<User, Long> {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUserWithRolesByDistinctCriteria() {
-		Criteria c = createCriteria();
-		c.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		c.setFetchMode("roles", FetchMode.JOIN);
-		return c.list();
+		return createCriteria().setFetchMode("roles", FetchMode.JOIN).setResultTransformer(
+				CriteriaSpecification.DISTINCT_ROOT_ENTITY).list();
 	}
 }
