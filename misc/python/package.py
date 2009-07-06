@@ -2,6 +2,9 @@ import os,shutil
 from common import zipfolder,rmdir,zipfolder,emptydir,rmfile
 
 def prepare():
+   os.chdir(base_dir+'\\bin')
+   os.system('install-all-module.bat')
+   os.system('init-all-jar.bat')
    os.system('TortoiseProc.exe /command:export /path:"'+base_dir+'"')
    os.chdir(export_dir)
    rmfile(springside_dir+'-src.zip')
@@ -33,9 +36,6 @@ def packageAll():
    ## copy selenium 
    os.system('xcopy /s/e/i/y '+base_dir+'\\tools\\selenium '+springside_dir+'\\tools\\selenium')
 
-   os.system('copy '+base_dir+'\\bin\\start-tomcat.bat '+springside_dir+'\\bin\\start-tomcat.bat')
-   os.system('copy '+base_dir+'\\bin\\start-selenium.bat '+springside_dir+'\\bin\\start-selenium.bat')
-   
    zipfolder(springside_dir,"springside-"+springside_version+'-all-in-one.zip')
    
 def clean():
@@ -43,7 +43,7 @@ def clean():
 
 base_dir = os.path.abspath("../../")
 export_dir='C:\\'
-springside_version='3.1.4'
+springside_version='3.1.4.2'
 springside_dir="springside-"+springside_version
 
 prepare()
