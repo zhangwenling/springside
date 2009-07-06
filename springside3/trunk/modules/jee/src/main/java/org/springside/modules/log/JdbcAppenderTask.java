@@ -71,7 +71,7 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 		LoggingEvent event = (LoggingEvent) eventObject;
 		eventBuffer.add(event);
 		logger.debug("get event, {}", Log4jUtils.convertEventToString(event));
-		
+
 		//已到达BufferSize则执行批量插入操作
 		if (eventBuffer.size() >= bufferSize) {
 			updateBatch();

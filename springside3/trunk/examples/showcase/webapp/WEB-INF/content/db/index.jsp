@@ -14,13 +14,13 @@
 <h3>数据库访问高级演示</h3>
 <h4>技术说明：</h4>
 <ul>
-	<li>Hibernate Event，在修改User对象时自动加入审计信息。</li>
-	<li>Hibernate @Version字段，在Struts2 Prepareable Action里的使用。</li>
-	<li>Hibernate Clob字段。</li>
-	<li>Hibernate 批量更新操作的HQL。</li>
-	<li>Hibernate Native SQL。</li>
-	<li>Hibernate 查询时预加载Lazy Load关联对象。</li>
-	<li>Hibernate Dialect，演示扩展Dialect，加入数据库特性语句。(计划中)</li>
+	<li>Hibernate Event，在修改User对象时自动加入审计信息。(综合示例)</li>
+	<li>Hibernate @Version字段，在Struts2 Prepareable Action里的使用。(综合示例)</li>
+	<li>Hibernate Clob字段。(综合示例)</li>
+	<li>Hibernate 批量更新操作的HQL。(测试用例)</li>
+	<li>Hibernate Native SQL。(测试用例)</li>
+	<li>Hibernate 查询时预加载Lazy Load关联对象。(测试用例)</li>
+	<li>Hibernate Dialect，演示扩展Dialect，加入数据库特性语句。(测试用例)</li>
 	<li>Hibernate Envers，自动记录关键业务对象的修改历史。(计划中)</li>
 </ul>
 </div>

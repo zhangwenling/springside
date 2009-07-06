@@ -17,7 +17,7 @@ public class SeleniumTestCase {
 
 	public static final String DEFAULT_HOST = "http://localhost:8080";
 	public static final String DEFAULT_EXPLOER = "*firefox";
-	
+
 	protected Selenium selenium;
 
 	/**

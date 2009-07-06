@@ -81,6 +81,7 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 		dao.findUnique(c);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testBatchUpdate() {
 		Map map = new HashMap();

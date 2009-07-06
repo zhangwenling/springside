@@ -42,10 +42,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
-		Operator operator = new Operator(
-				user.getLoginName(), user.getPassword(), enabled, accountNonExpired, credentialsNonExpired,
-				accountNonLocked, grantedAuths);
-		
+		Operator operator = new Operator(user.getLoginName(), user.getPassword(), enabled, accountNonExpired,
+				credentialsNonExpired, accountNonLocked, grantedAuths);
+
 		operator.setLoginTime(new Date());
 
 		return operator;
