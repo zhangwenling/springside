@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.orm;
+package org.springside.examples.showcase.orm.hibernate;
 
 import java.util.Date;
 

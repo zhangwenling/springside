@@ -1,7 +1,6 @@
 drop table USERS_ROLES;
 drop table USERS;
 drop table ROLES;
-
 drop table LOGS;
 
 create table USERS (

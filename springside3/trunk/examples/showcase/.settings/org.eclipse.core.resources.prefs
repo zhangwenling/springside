@@ -1,6 +1,6 @@
-#Thu Mar 05 14:48:56 CST 2009
+#Mon Jul 06 21:52:55 CST 2009
 eclipse.preferences.version=1
-encoding//bin/copy-jar.bat=GBK
 encoding//bin/deploy.bat=GBK
 encoding//bin/init-db.bat=GBK
+encoding//bin/init-jar.bat=GBK
 encoding/<project>=UTF-8

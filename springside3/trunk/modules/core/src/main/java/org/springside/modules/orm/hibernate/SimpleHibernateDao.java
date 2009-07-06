@@ -295,6 +295,16 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 批量初始化对象.
+	 * @see #initObject(Object)
+	 */
+	public void initObjects(List list) {
+		for (Object object : list) {
+			Hibernate.initialize(object);
+		}
+	}
+
+	/**
 	 * 通过Set将不唯一的对象列表唯一化.
 	 * 主要用于HQL/Criteria预加载关联集合形成重复记录,又不方便使用distinct查询语句时.
 	 */

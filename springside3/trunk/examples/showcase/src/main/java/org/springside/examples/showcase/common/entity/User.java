@@ -20,7 +20,7 @@ import javax.persistence.Version;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springside.examples.showcase.orm.AuditableEntity;
+import org.springside.examples.showcase.orm.hibernate.AuditableEntity;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**

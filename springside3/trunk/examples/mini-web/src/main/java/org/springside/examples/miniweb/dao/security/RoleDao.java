@@ -11,7 +11,7 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 public class RoleDao extends HibernateDao<Role, Long> {
 
 	/**
-	 * 重载函数，在删除角色时进行删除与用户多对多关联的中间表.
+	 * 重载函数,因为Role中没有建立与User的主动关联,因此需要以较低效率的方式进行删除User与Role的多对多中间表.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
