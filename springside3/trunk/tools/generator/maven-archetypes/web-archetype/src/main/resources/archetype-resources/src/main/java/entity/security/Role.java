@@ -57,7 +57,7 @@ public class Role extends IdEntity {
 	public void setAuthorities(Set<Authority> authorities) {
 		this.authorities = authorities;
 	}
-	
+
 	@Transient
 	public String getAuthNames() {
 		return ReflectionUtils.fetchElementPropertyToString(authorities, "displayName", ", ");
