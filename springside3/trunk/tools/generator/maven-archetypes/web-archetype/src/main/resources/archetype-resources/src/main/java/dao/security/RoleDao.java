@@ -3,6 +3,8 @@
 #set( $symbol_escape = '\' )
 package ${package}.dao.security;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 import ${package}.entity.security.Role;
 import ${package}.entity.security.User;
@@ -12,14 +14,15 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 public class RoleDao extends HibernateDao<Role, Long> {
 
 	/**
-	 * 重载函数，在删除角色时进行特殊处理删除与用户多对多关联的中间表.
+	 * 重载函数,因为Role中没有建立与User的主动关联,因此需要以较低效率的方式进行删除User与Role的多对多中间表.
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void delete(Long id) {
 		Role role = get(id);
-		//TODO: very slow
-		for (User user : role.getUsers()) {
-			user.getRoles().remove(role);
+		List<User> users = createQuery("select u from User u  left join u.roles r where r.id=?", role.getId()).list();
+		for (User u : users) {
+			u.getRoles().remove(role);
 		}
 		super.delete(role);
 	}

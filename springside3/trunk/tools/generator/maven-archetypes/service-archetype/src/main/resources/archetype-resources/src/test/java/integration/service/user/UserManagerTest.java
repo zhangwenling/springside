@@ -23,6 +23,8 @@ public class UserManagerTest extends SpringTxTestCase {
 	private UserManager userManager;
 
 	@Test
+	//如果你需要真正插入数据库,将Rollback设为false
+	//@Rollback(false) 
 	public void saveUser() {
 		User entity = new User();
 		// 因为LoginName要求唯一性，因此添加random字段。
@@ -35,6 +37,7 @@ public class UserManagerTest extends SpringTxTestCase {
 		entity.getRoles().add(role);
 
 		userManager.save(entity);
+		//强制执行sql语句
 		flush();
 		assertNotNull(entity.getId());
 	}

@@ -23,6 +23,8 @@ public class UserManagerTest extends SpringTxTestCase {
 	private UserManager userManager;
 
 	@Test
+	//如果需要真正插入数据库,将Rollback设为false
+	//@Rollback(false) 
 	public void crudUser() {
 		//保存用户并验证.
 		User entity = new User();
@@ -32,11 +34,13 @@ public class UserManagerTest extends SpringTxTestCase {
 		entity.setEmail("foo@bar.com");
 		entity.setPassword("foo");
 		userManager.save(entity);
+		//强制执行sql语句
 		flush();
 		assertNotNull(entity.getId());
 
 		//删除用户并验证
 		userManager.delete(entity.getId());
+		//强制执行sql语句
 		flush();
 	}
 

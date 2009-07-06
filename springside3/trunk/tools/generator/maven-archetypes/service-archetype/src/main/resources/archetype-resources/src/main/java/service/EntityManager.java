@@ -14,7 +14,8 @@ import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
 /**
- * Service层领域对象业务管理类基类.
+ * Service层领域对象业务管理类基类,对所有Hibernate对象主动进行初始化.
+ * 
  * 使用HibernateDao<T,PK>进行业务对象的CRUD操作,子类需重载getEntityDao()函数提供该DAO.
  * 
  * @param <T> 领域对象类型
@@ -40,22 +41,30 @@ public abstract class EntityManager<T, PK extends Serializable> {
 
 	@Transactional(readOnly = true)
 	public T get(final PK id) {
-		return getEntityDao().get(id);
+		T entity = getEntityDao().get(id);
+		getEntityDao().initObject(entity);
+		return entity;
 	}
 
 	@Transactional(readOnly = true)
 	public Page<T> getAll(final Page<T> page) {
-		return getEntityDao().getAll(page);
+		getEntityDao().getAll(page);
+		getEntityDao().initObjects(page.getResult());
+		return page;
 	}
 
 	@Transactional(readOnly = true)
 	public List<T> getAll() {
-		return getEntityDao().getAll();
+		List<T> list = getEntityDao().getAll();
+		getEntityDao().initObjects(list);
+		return list;
 	}
 
 	@Transactional(readOnly = true)
 	public Page<T> search(final Page<T> page, final List<PropertyFilter> filters) {
-		return getEntityDao().find(page, filters);
+		getEntityDao().find(page, filters);
+		getEntityDao().initObjects(page.getResult());
+		return page;
 	}
 
 	public void save(final T entity) {
