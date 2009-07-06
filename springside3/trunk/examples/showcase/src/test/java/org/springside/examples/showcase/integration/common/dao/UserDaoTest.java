@@ -41,10 +41,23 @@ public class UserDaoTest extends SpringTxTestCase {
 	@Test
 	public void testClob() {
 		User user = userDao.get(1L);
-		System.out.println("haha");
 		Hibernate.initialize(user.getDescription());
-		Hibernate.initialize(user.getDescription());
-		System.out.println("baba");
 		assertEquals("a good guy", user.getDescription());
+	}
+
+	@Test
+	public void testUpDialect() {
+		Object value = userDao.createQuery("select u.name from User u where up(u.name)='ADMIN'").uniqueResult();
+		assertEquals("Admin", value);
+	}
+
+	@Test
+	@SuppressWarnings("unchecked")
+	public void testSampleDialect() {
+		//select about 50% record from database.
+		List<String> values = userDao.createQuery("select u.name from User u where sample()<50").list();
+		for (String name : values) {
+			System.out.println(name);
+		}
 	}
 }
