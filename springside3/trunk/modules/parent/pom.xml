@@ -67,6 +67,12 @@
 					<version>1.0</version>
 				</plugin>
 
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>selenium-maven-plugin</artifactId>
+					<version>1.0-rc-1</version>
+				</plugin>
+
 				<!-- enforcer插件,检查JDK版本1.5 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -658,7 +664,7 @@
 				</exclusions>
 				<scope>test</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>emma</groupId>
 				<artifactId>emma</artifactId>
@@ -710,6 +716,31 @@
 			<id>functional</id>
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>selenium-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>start</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>start-server</goal>
+								</goals>
+								<configuration>
+									<background>true</background>
+								</configuration>
+							</execution>
+
+							<execution>
+								<id>stop</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>stop-server</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
 					<plugin>
 						<groupId>org.codehaus.cargo</groupId>
 						<artifactId>cargo-maven2-plugin</artifactId>

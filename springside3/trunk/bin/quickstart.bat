@@ -6,7 +6,7 @@ echo [ERROR] ..\servers\tomcat\apache-tomcat-6.0.20Ä¿Â¼²»´æÔÚ£¬ÇëÏÂÔØall-in-one°
 goto end
 
 :begin
-set MAVEN_BAT="%cd%\..\tools\maven\apache-maven-2.1.0\bin\mvn.bat"
+set MAVEN_BAT="%cd%\..\tools\maven\apache-maven-2.2.0\bin\mvn.bat"
 cd ..\
 
 echo [Step 1] ¸´ÖÆtools/maven/central-repository µ½ %userprofile%\.m2\repository

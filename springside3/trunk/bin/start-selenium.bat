@@ -1,4 +1,3 @@
 @echo off
-cd ..\tools\selenium
-
-startup.bat
+cd ..
+mvn selenium:start-server

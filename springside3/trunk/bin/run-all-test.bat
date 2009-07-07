@@ -3,7 +3,7 @@ echo [INFO] Run all modules unit test, all examples unit/integration/funcional t
 
 cd ..\
 call mvn test -Pmodules
-call mvn  integration-test -Pexamples -Pintegration
+call mvn test -Pexamples -Pintegration
 cd examples\mini-web
 call mvn  integration-test  -Pfunctional
 cd ..\mini-service
