@@ -127,8 +127,8 @@
 	<repositories>
 		<!--
 			<repository> <id>nexus</id> <name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled>
-			</snapshots> </repository>
+			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
+			</repository>
 		-->
 		<repository>
 			<id>offical</id>
@@ -158,8 +158,8 @@
 	<pluginRepositories>
 		<!--
 			<repository> <id>nexus</id> <name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled>
-			</snapshots> </repository>
+			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
+			</repository>
 		-->
 	</pluginRepositories>
 
@@ -658,6 +658,13 @@
 				</exclusions>
 				<scope>test</scope>
 			</dependency>
+			
+			<dependency>
+				<groupId>emma</groupId>
+				<artifactId>emma</artifactId>
+				<version>2.0.5312</version>
+				<scope>test</scope>
+			</dependency>
 			<!-- test end -->
 		</dependencies>
 	</dependencyManagement>
@@ -685,7 +692,7 @@
 								<goals>
 									<goal>test</goal>
 								</goals>
-								<phase>integration-test</phase>
+								<phase>test</phase>
 								<configuration>
 									<includes>
 										<include>**/integration/**</include>

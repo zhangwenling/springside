@@ -272,6 +272,10 @@
 			<groupId>org.seleniumhq.selenium.client-drivers</groupId>
 			<artifactId>selenium-java-client-driver</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>emma</groupId>
+			<artifactId>emma</artifactId>
+		</dependency>
 		<!-- test end -->
 	</dependencies>
 
