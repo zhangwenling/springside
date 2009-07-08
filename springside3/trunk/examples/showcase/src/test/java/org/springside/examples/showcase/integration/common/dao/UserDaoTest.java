@@ -5,10 +5,15 @@ import java.util.List;
 import org.hibernate.Hibernate;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.IfProfileValue;
+import org.springframework.test.annotation.ProfileValueSourceConfiguration;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
+import org.springside.modules.test.junit4.PropertiesProfile;
 import org.springside.modules.test.junit4.SpringTxTestCase;
 
+//使用自定义的PropertiesProfile从test.properties中读出profile值
+@ProfileValueSourceConfiguration(PropertiesProfile.class)
 public class UserDaoTest extends SpringTxTestCase {
 	@Autowired
 	private UserDao userDao;
@@ -46,12 +51,6 @@ public class UserDaoTest extends SpringTxTestCase {
 	}
 
 	@Test
-	public void testUpDialect() {
-		Object value = userDao.createQuery("select u.name from User u where up(u.name)='ADMIN'").uniqueResult();
-		assertEquals("Admin", value);
-	}
-
-	@Test
 	@SuppressWarnings("unchecked")
 	public void testSampleDialect() {
 		//select about 50% record from database.
@@ -60,4 +59,13 @@ public class UserDaoTest extends SpringTxTestCase {
 			System.out.println(name);
 		}
 	}
+
+	//只在test.properties中的test.level为extension时执行本测试方法.
+	@IfProfileValue(name = "test.level", value = "extension")
+	@Test
+	public void testUpDialect() {
+		Object value = userDao.createQuery("select u.name from User u where up(u.name)='ADMIN'").uniqueResult();
+		assertEquals("Admin", value);
+	}
+
 }

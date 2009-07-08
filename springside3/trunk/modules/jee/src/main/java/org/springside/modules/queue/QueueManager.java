@@ -65,6 +65,13 @@ public class QueueManager implements ApplicationContextAware {
 	}
 
 	/**
+	 * 根据queueName获得消息队列中未处理事件的大小.
+	 */
+	public static int getQueueSize(String queueName) {
+		return getQueue(queueName).size();
+	}
+
+	/**
 	 * ApplicationContext中consumer task与queue的名称列表.
 	 */
 	@Required
