@@ -1,9 +1,9 @@
 package org.springside.modules.test.selenium;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 
 import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.Selenium;
@@ -18,14 +18,14 @@ public class SeleniumTestCase {
 	public static final String DEFAULT_HOST = "http://localhost:8080";
 	public static final String DEFAULT_EXPLOER = "*firefox";
 
-	protected Selenium selenium;
+	public static Selenium selenium;
 
 	/**
 	 * 初始化默认的selenium变量.
 	 * 连接默认的selenium server(地址为localhost:4444).
 	 */
-	@Before
-	public void setUp() throws Exception {
+	@BeforeClass
+	public static void setUp() throws Exception {
 		selenium = new DefaultSelenium("localhost", 4444, getExplorer(), getHost());
 		selenium.start();
 	}
@@ -33,15 +33,15 @@ public class SeleniumTestCase {
 	/**
 	 * 关闭selenium变量.
 	 */
-	@After
-	public void tearDown() throws Exception {
+	@AfterClass
+	public static void tearDown() throws Exception {
 		selenium.close();
 	}
 
 	/**
 	 * 获取待测Web应用的地址,默认为"http://localhost:8080", 可在子类重载.
 	 */
-	protected String getHost() {
+	protected static String getHost() {
 		return DEFAULT_HOST;
 	}
 
@@ -50,7 +50,7 @@ public class SeleniumTestCase {
 	 * 
 	 * 可取值有*iexplore代表IE,*firefox代表Firefox.
 	 */
-	protected String getExplorer() {
+	protected static String getExplorer() {
 		return DEFAULT_EXPLOER;
 	}
 

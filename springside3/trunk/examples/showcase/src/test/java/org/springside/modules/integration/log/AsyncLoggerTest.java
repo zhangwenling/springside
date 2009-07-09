@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.modules.test.junit4.SpringContextTestCase;
+import org.springside.modules.test.spring.SpringContextTestCase;
 
 /**
  * sprinside-jee中ClientMBeanProxyFactory的测试用例.

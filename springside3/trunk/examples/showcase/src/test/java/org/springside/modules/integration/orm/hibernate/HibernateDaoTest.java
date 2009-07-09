@@ -14,7 +14,7 @@ import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateDao;
-import org.springside.modules.test.junit4.SpringTxTestCase;
+import org.springside.modules.test.spring.SpringTxTestCase;
 
 public class HibernateDaoTest extends SpringTxTestCase {
 

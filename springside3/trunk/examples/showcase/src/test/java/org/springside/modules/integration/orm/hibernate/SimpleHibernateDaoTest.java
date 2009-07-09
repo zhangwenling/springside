@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.orm.hibernate.SimpleHibernateDao;
-import org.springside.modules.test.junit4.SpringTxTestCase;
+import org.springside.modules.test.spring.SpringTxTestCase;
 
 public class SimpleHibernateDaoTest extends SpringTxTestCase {
 

@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.test.groups.Groups;
-import org.springside.modules.test.junit4.SpringTxTestCase;
 import org.springside.modules.test.spring.SpringGroupsTestRunner;
+import org.springside.modules.test.spring.SpringTxTestCase;
 
 //使用自定义的PropertiesProfile从System Property 和application.test.properties中读出profile值
 @RunWith(SpringGroupsTestRunner.class)

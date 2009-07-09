@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.security.UserManager;
-import org.springside.modules.test.junit4.SpringTxTestCase;
+import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
  * UserManager的集成测试用例.

@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.jmx.server.ServerConfigMBean;
 import org.springside.modules.jmx.JmxClient;
-import org.springside.modules.test.junit4.SpringContextTestCase;
+import org.springside.modules.test.spring.SpringContextTestCase;
 
 /**
  * sprinside-jee中ClientMBeanProxyFactory的测试用例.
