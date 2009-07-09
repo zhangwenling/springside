@@ -1,4 +1,4 @@
-package org.springside.modules.test.junit4;
+package org.springside.modules.test.spring;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.hibernate.SessionFactory;
@@ -11,8 +11,8 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
  * 
  * @author calvin
  */
-//默认载入applicationContext.xml,子类中的@ContextConfiguration定义将合并父类的定义.
-@ContextConfiguration(locations = { "/applicationContext.xml" })
+//默认载入applicationContext-test.xml,子类中的@ContextConfiguration定义将合并父类的定义.
+@ContextConfiguration(locations = { "/applicationContext-test.xml" })
 public class SpringTxTestCase extends AbstractTransactionalJUnit4SpringContextTests {
 
 	/**

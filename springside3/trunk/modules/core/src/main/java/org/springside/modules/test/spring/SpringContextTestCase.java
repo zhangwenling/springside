@@ -1,4 +1,4 @@
-package org.springside.modules.test.junit4;
+package org.springside.modules.test.spring;
 
 import org.junit.Assert;
 import org.springframework.test.context.ContextConfiguration;
@@ -9,8 +9,8 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
  * 
  * @author calvin
  */
-//默认载入applicationContext.xml,子类中的@ContextConfiguration定义将合并父类的定义.
-@ContextConfiguration(locations = { "/applicationContext.xml" })
+//默认载入applicationContext-test.xml,子类中的@ContextConfiguration定义将合并父类的定义.
+@ContextConfiguration(locations = { "/applicationContext-test.xml" })
 public class SpringContextTestCase extends AbstractJUnit4SpringContextTests {
 
 	// Assert 函数 //

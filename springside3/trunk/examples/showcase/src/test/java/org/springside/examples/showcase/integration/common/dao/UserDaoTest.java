@@ -4,16 +4,16 @@ import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.IfProfileValue;
-import org.springframework.test.annotation.ProfileValueSourceConfiguration;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.modules.test.junit4.PropertiesProfile;
+import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.junit4.SpringTxTestCase;
+import org.springside.modules.test.spring.SpringGroupsTestRunner;
 
-//使用自定义的PropertiesProfile从test.properties中读出profile值
-@ProfileValueSourceConfiguration(PropertiesProfile.class)
+//使用自定义的PropertiesProfile从System Property 和application.test.properties中读出profile值
+@RunWith(SpringGroupsTestRunner.class)
 public class UserDaoTest extends SpringTxTestCase {
 	@Autowired
 	private UserDao userDao;
@@ -60,12 +60,11 @@ public class UserDaoTest extends SpringTxTestCase {
 		}
 	}
 
-	//只在test.properties中的test.level为extension时执行本测试方法.
-	@IfProfileValue(name = "test.level", value = "extension")
+	//只在-Dtest.groups=xxxx或application.test.properties的test.groups中包含extension时执行本测试方法.
+	@Groups("extension")
 	@Test
 	public void testUpDialect() {
 		Object value = userDao.createQuery("select u.name from User u where up(u.name)='ADMIN'").uniqueResult();
 		assertEquals("Admin", value);
 	}
-
 }

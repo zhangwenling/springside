@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
 	default-lazy-init="true">
 
-	<description>Spring公共配置文件 </description>
+	<description>Spring测试环境配置文件 </description>
 
 	<!-- 定义易受环境影响的变量 -->
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -17,8 +17,6 @@
 				<value>classpath*:/application.properties</value>
 				<!-- 本地开发环境配置 -->
 				<value>classpath*:/application.local.properties</value>
-				<!-- 服务器生产环境配置 -->
-				<!-- <value>file:/var/myapp/application.server.properties</value> -->
 			</list>
 		</property>
 	</bean>
@@ -26,24 +24,13 @@
 	<!-- 使用annotation 自动注册bean,并保证@Required,@Autowired的属性被注入 -->
 	<context:component-scan base-package="org.springside.examples.miniservice" />
 
-	<!-- 数据源配置,使用应用中的DBCP数据库连接池 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<!-- Connection Info -->
+	<!-- 数据源配置,在测试环境使用JDBC直接连接 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-
-		<!-- Connection Pooling Info -->
-		<property name="initialSize" value="5" />
-		<property name="maxActive" value="100" />
-		<property name="maxIdle" value="30" />
-		<property name="maxWait" value="1000" />
-		<property name="poolPreparedStatements" value="true" />
-		<property name="defaultAutoCommit" value="false" />
 	</bean>
-	<!-- 数据源配置,在生产环境使用应用服务器的数据库连接池 -->
-	<!-- <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/ExampleDB" />-->
 
 	<!-- Hibernate配置 -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
