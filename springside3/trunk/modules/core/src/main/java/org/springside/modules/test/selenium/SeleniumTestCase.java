@@ -4,6 +4,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
 
 import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.Selenium;
@@ -13,6 +14,7 @@ import com.thoughtworks.selenium.Selenium;
  * 
  * @author calvin
  */
+@RunWith(SeleniumTestRunner.class)
 public class SeleniumTestCase {
 
 	public static final String DEFAULT_HOST = "http://localhost:8080";

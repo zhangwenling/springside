@@ -11,7 +11,7 @@ import org.springside.modules.test.selenium.SeleniumTestCase;
 public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 
 	@Before
-	protected void login() {
+	public void login() {
 		selenium.open("/mini-web/login.action");
 		selenium.type("j_username", "admin");
 		selenium.type("j_password", "admin");

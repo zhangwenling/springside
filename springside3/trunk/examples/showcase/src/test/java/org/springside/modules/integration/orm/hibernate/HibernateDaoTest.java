@@ -77,6 +77,20 @@ public class HibernateDaoTest extends SpringTxTestCase {
 	}
 
 	@Test
+	public void findByCriterionWithOrder() {
+		//初始化数据中共有6个email为@springside.org.cn的用户
+		Page<User> page = new Page<User>(5);
+		page.setOrderBy("name,loginName");
+		page.setOrder(Page.DESC + "," + Page.ASC);
+
+		Criterion c = Restrictions.like("email", "springside.org.cn", MatchMode.ANYWHERE);
+		dao.find(page, c);
+
+		assertEquals("Sawyer", page.getResult().get(0).getName());
+	}
+
+
+	@Test
 	public void findByProperty() {
 		List<User> users = dao.findBy("loginName", "admin", PropertyFilter.MatchType.EQ);
 		assertEquals(1, users.size());

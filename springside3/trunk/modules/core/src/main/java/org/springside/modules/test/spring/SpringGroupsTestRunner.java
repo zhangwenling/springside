@@ -20,7 +20,7 @@ public class SpringGroupsTestRunner extends SpringJUnit4ClassRunner {
 	}
 
 	/**
-	 * 重载加入类级别过滤.
+	 * 重载加入Class级别过滤.
 	 */
 	@Override
 	public void run(RunNotifier notifier) {

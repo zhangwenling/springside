@@ -32,7 +32,6 @@ public class Page<T> {
 	// 构造函数 //
 
 	public Page() {
-		super();
 	}
 
 	public Page(final int pageSize) {
@@ -41,7 +40,7 @@ public class Page<T> {
 
 	public Page(final int pageSize, final boolean autoCount) {
 		setPageSize(pageSize);
-		this.autoCount = autoCount;
+		setAutoCount(autoCount);
 	}
 
 	// 查询参数访问函数 //
@@ -83,8 +82,8 @@ public class Page<T> {
 	}
 
 	/**
-	* 根据pageNo和pageSize计算当前页第一条记录在总结果集中的位置,序号从1开始.
-	*/
+	 * 根据pageNo和pageSize计算当前页第一条记录在总结果集中的位置,序号从1开始.
+	 */
 	public int getFirst() {
 		return ((pageNo - 1) * pageSize) + 1;
 	}
@@ -107,7 +106,7 @@ public class Page<T> {
 	 * 是否已设置排序字段,无默认值.
 	 */
 	public boolean isOrderBySetted() {
-		return StringUtils.isNotBlank(orderBy);
+		return (StringUtils.isNotBlank(orderBy) && StringUtils.isNotBlank(order));
 	}
 
 	/**

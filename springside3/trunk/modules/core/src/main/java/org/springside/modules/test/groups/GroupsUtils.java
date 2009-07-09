@@ -67,11 +67,6 @@ public class GroupsUtils {
 		//如果环境变量未定义test.groups,尝试从property文件读取.
 		if (groupsDef == null) {
 			groupsDef = getGroupsFromPropertyFile();
-
-			//如果property文件也没定义test.groups,默认为all.
-			if (groupsDef == null) {
-				groupsDef = Groups.ALL;
-			}
 		}
 
 		groups = Arrays.asList(groupsDef.split(","));
