@@ -40,14 +40,11 @@
 					<configuration>
 						<source>1.5</source>
 						<target>1.5</target>
-						<encoding>UTF-8</encoding>
+						<encoding>${project.encoding}</encoding>
 					</configuration>
 				</plugin>
 
-				<!--
-				surefire插件. 
-				mvn test单元测试时忽略integration目录下的集成测试用例.
-				-->
+				<!-- surefire插件, 设定单元测试时只执行unit目录下的用例.-->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
@@ -67,32 +64,11 @@
 					<version>1.0</version>
 				</plugin>
 
+				<!-- selenium插件 -->
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>selenium-maven-plugin</artifactId>
 					<version>1.0-rc-1</version>
-				</plugin>
-
-				<!-- enforcer插件,检查JDK版本1.5 -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-enforcer-plugin</artifactId>
-					<version>1.0-beta-1</version>
-					<executions>
-						<execution>
-							<id>enforce-versions</id>
-							<goals>
-								<goal>enforce</goal>
-							</goals>
-							<configuration>
-								<rules>
-									<requireJavaVersion>
-										<version>1.5</version>
-									</requireJavaVersion>
-								</rules>
-							</configuration>
-						</execution>
-					</executions>
 				</plugin>
 
 				<!-- resource插件,设定编码 -->
@@ -101,15 +77,55 @@
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>2.3</version>
 					<configuration>
-						<encoding>UTF-8</encoding>
+						<encoding>${project.encoding}</encoding>
 					</configuration>
 				</plugin>
 
-				<!-- sql 插件 -->
+				<!-- dbunit插件 -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>dbunit-maven-plugin</artifactId>
+					<version>1.0-beta-2</version>
+					<configuration>
+						<driver>${jdbc.driver}</driver>
+						<url>${jdbc.url}</url>
+						<username>${jdbc.user}</username>
+						<password>${jdbc.password}</password>
+						<type>CLEAN_INSERT</type>
+						<src>src/test/resources/test-data</src>
+						<dest>src/test/resources/test-data</dest>
+						<format>csv</format>
+						<transaction>true</transaction>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>${jdbc.driver.groupid}</groupId>
+							<artifactId>${jdbc.driver.artifactId}</artifactId>
+							<version>${jdbc.driver.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+
+				<!-- sql插件 -->
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>sql-maven-plugin</artifactId>
 					<version>1.3</version>
+					<configuration>
+						<driver>${jdbc.driver}</driver>
+						<url>${jdbc.url}</url>
+						<username>${jdbc.user}</username>
+						<password>${jdbc.password}</password>
+						<onError>continue</onError>
+						<encoding>${project.encoding}</encoding>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>${jdbc.driver.groupid}</groupId>
+							<artifactId>${jdbc.driver.artifactId}</artifactId>
+							<version>${jdbc.driver.version}</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 
 				<!-- archetype插件 -->
@@ -180,6 +196,7 @@
 
 		<!--  Plugin的属性定义  -->
 		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
+		<project.encoding>UTF-8</project.encoding>
 	</properties>
 
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
@@ -497,6 +514,12 @@
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>jul-to-slf4j</artifactId>
+				<version>1.5.8</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
 				<version>1.5.8</version>
 			</dependency>
 
