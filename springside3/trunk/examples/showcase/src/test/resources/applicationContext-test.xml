@@ -17,9 +17,13 @@
 				<value>classpath*:/application.properties</value>
 				<!-- 本地开发环境配置 -->
 				<value>classpath*:/application.local.properties</value>
+				<!-- 本地测试环境配置 -->
+				<value>classpath*:/application.test.properties</value>
 			</list>
 		</property>
 	</bean>
+	
+	<context:property-override location="classpath*:/application.test.override.properties"/>
 
 	<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
 	<context:component-scan base-package="org.springside.examples.showcase" />
