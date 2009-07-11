@@ -1,40 +1,22 @@
 package org.springside.examples.showcase.common.entity;
 
-// Generated Jul 11, 2009 5:26:18 PM by Hibernate Tools 3.2.4.GA
-
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ForceDiscriminator;
 
 @Entity
 @Table(name = "POSTS")
-public class Post extends IdEntity {
-
-	private String type;
-	private String title;
-	private String content;
-	private User user;
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@ForceDiscriminator
+public abstract class Post extends IdEntity {
+	protected String title;
+	protected String content;
 
 	//延时加载的Lob字段, 需要运行instrument任务进行bytecode enhancement
 	@Lob
@@ -47,13 +29,13 @@ public class Post extends IdEntity {
 		this.content = content;
 	}
 
-	@ManyToOne(cascade = CascadeType.REFRESH, optional = false)
-	@JoinColumn(name = "user_id")
-	public User getUser() {
-		return user;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setTitle(String title) {
+		this.title = title;
 	}
+
+
 }

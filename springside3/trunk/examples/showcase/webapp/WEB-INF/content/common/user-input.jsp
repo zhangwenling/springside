@@ -33,11 +33,9 @@
 		<td><input type="password" name="password" size="40" value="${password}"/></td>
 	</tr>
 	<tr>
-		<td>文章列表:</td>
-		<td>
-		<s:iterator value="posts">
-		${title}<br/>
-		</s:iterator>
+		<td>发表文章</td>
+		<td>主题：${fn:length(subjects)} 篇, 回复：${fn:length(replys)} 篇
+		  
 		</td>
 	</tr>
 	<tr>

@@ -40,7 +40,8 @@ public class User extends AuditableEntity {
 	private Integer version;
 
 	private Set<Role> roles = new LinkedHashSet<Role>(); //有序的关联对象集合
-	private List<Post> posts = new ArrayList<Post>();
+	private List<Subject> subjects = new ArrayList<Subject>();
+	private List<Reply> replys = new ArrayList<Reply>();
 
 	//Hibernate自动维护的Version字段
 	@Version
@@ -122,12 +123,23 @@ public class User extends AuditableEntity {
 	@OneToMany(mappedBy = "user")
 	@Fetch(FetchMode.SELECT)
 	@OrderBy(value = "id ASC")
-	public List<Post> getPosts(){
-		return posts;
+	public List<Subject> getSubjects() {
+		return subjects;
 	}
 
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
+	public void setSubjects(List<Subject> subjects) {
+		this.subjects = subjects;
+	}
+
+	@OneToMany(mappedBy = "user")
+	@Fetch(FetchMode.SELECT)
+	@OrderBy(value = "id ASC")
+	public List<Reply> getReplys() {
+		return replys;
+	}
+
+	public void setReplys(List<Reply> replys) {
+		this.replys = replys;
 	}
 
 	@Override
