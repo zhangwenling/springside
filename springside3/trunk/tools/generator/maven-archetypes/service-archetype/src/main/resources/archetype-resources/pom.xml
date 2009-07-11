@@ -45,10 +45,30 @@
 					</deployer>
 				</configuration>
 			</plugin>
+			
+			<!-- dbunit插件 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>dbunit-maven-plugin</artifactId>
+				<configuration>
+					<dataTypeFactoryName>org.dbunit.dataset.datatype.DefaultDataTypeFactory</dataTypeFactoryName>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
+	<!-- 项目属性 -->
+	<properties>
+		<jdbc.driver>org.apache.derby.jdbc.ClientDriver</jdbc.driver>
+		<jdbc.url>jdbc:derby://localhost:1527/${artifactId};create=true</jdbc.url>
+		<jdbc.user>APP</jdbc.user>
+		<jdbc.password>APP</jdbc.password>
+		<jdbc.driver.groupid>org.apache.derby</jdbc.driver.groupid>
+		<jdbc.driver.artifactId>derbyclient</jdbc.driver.artifactId>
+		<jdbc.driver.version>10.4.2.0</jdbc.driver.version>
+	</properties>
 
+	<!-- 依赖项定义 -->
 	<dependencies>
 		<!-- springside -->
 		<dependency>
@@ -191,34 +211,18 @@
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>sql-maven-plugin</artifactId>
-						<dependencies>
-							<dependency>
-								<groupId>org.apache.derby</groupId>
-								<artifactId>derbyclient</artifactId>
-								<version>10.4.2.0</version>
-							</dependency>
-						</dependencies>
-
-						<configuration>
-							<username>APP</username>
-							<password>APP</password>
-							<url>jdbc:derby://localhost:1527/${artifactId};create=true</url>
-							<driver>org.apache.derby.jdbc.ClientDriver</driver>
-						</configuration>
-
+						
 						<executions>
 							<execution>
-								<id>Create and initialize the database</id>
+								<id>create database</id>
 								<phase>initialize</phase>
 								<goals>
 									<goal>execute</goal>
 								</goals>
 								<configuration>
-									<onError>continue</onError>
-									<encoding>UTF-8</encoding>
 									<srcFiles>
 										<srcFile>src/main/sql/derby/schema.sql</srcFile>
-										<srcFile>src/main/sql/derby/load-data.sql</srcFile>
+										<!-- <srcFile>src/main/sql/derby/init-data.sql</srcFile> -->
 									</srcFiles>
 								</configuration>
 							</execution>

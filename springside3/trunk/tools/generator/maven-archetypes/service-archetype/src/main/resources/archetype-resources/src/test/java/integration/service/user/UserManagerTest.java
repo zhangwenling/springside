@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ${package}.entity.user.Role;
 import ${package}.entity.user.User;
 import ${package}.service.user.UserManager;
-import org.springside.modules.test.junit4.SpringTxTestCase;
+import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
  * UserManager的集成测试用例.

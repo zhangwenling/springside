@@ -1,6 +1,7 @@
 @echo off
-echo [INFO] [INFO] 使用maven sql plugin 初始化数据库.
+echo [INFO] 使用maven sql plugin 创建数据库,使用dbunit初始化测试数据
 
 cd ..
 call mvn initialize -Pinitdb
+call mvn dbunit:operation
 pause

@@ -1,0 +1,7 @@
+ID, LOGIN_NAME, PASSWORD, NAME, EMAIL
+"1","admin","admin","Admin","admin@springside.org.cn"
+"2","user","user","User","user@springside.org.cn"
+"3","user2","user2","Jack","jack@springside.org.cn"
+"4","user3","user3","Kate","kate@springside.org.cn"
+"5","user4","user4","Sawyer","sawyer@springside.org.cn"
+"6","user5","user5","Ben","ben@springside.org.cn"

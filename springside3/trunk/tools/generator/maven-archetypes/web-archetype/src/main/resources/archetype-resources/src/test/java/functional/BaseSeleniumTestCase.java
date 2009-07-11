@@ -14,13 +14,7 @@ import org.springside.modules.test.selenium.SeleniumTestCase;
 public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 
 	@Before
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-		login();
-	}
-
-	protected void login() {
+	public void login() {
 		selenium.open("/${artifactId}/login.action");
 		selenium.type("j_username", "admin");
 		selenium.type("j_password", "admin");

@@ -5,6 +5,7 @@ package ${package}.functional.security;
 
 import org.junit.Test;
 import ${package}.functional.BaseSeleniumTestCase;
+import org.springside.modules.test.groups.Groups;
 
 public class UserManagerTest extends BaseSeleniumTestCase {
 
@@ -16,6 +17,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	}
 
 	@Test
+	@Groups("extension")
 	public void validateUser() {
 		selenium.open("/${artifactId}/security/user.action");
 		selenium.click("link=增加新用户");
@@ -29,8 +31,8 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		selenium.click("//input[@value='提交']");
 
 		assertTrue(selenium.isTextPresent("用户登录名已存在"));
-		assertEquals("请输入一个长度最少是 3 的字符串", selenium.getTable("//form[@id='inputForm']/table.2.1"));
 		assertEquals("必选字段", selenium.getTable("//form[@id='inputForm']/table.1.1"));
+		assertEquals("请输入一个长度最少是 3 的字符串", selenium.getTable("//form[@id='inputForm']/table.2.1"));
 		assertEquals("输入与上面相同的密码", selenium.getTable("//form[@id='inputForm']/table.3.1"));
 		assertEquals("请输入正确格式的电子邮件", selenium.getTable("//form[@id='inputForm']/table.4.1"));
 

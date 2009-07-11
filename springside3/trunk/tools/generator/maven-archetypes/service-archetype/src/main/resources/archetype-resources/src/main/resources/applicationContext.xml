@@ -72,12 +72,6 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<!-- 事务管理器配置,多数据源JTA事务-->
-	<!--
-		<bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager or
-		WebLogicJtaTransactionManager" />
-	-->
-
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>

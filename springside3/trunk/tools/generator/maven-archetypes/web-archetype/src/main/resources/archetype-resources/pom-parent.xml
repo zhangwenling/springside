@@ -35,7 +35,7 @@
 					</configuration>
 				</plugin>
 
-				<!-- compiler插件,设定JDK版本及编码 -->
+				<!-- compiler插件,设定JDK版本 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
@@ -43,14 +43,11 @@
 					<configuration>
 						<source>1.5</source>
 						<target>1.5</target>
-						<encoding>UTF-8</encoding>
+						<encoding>${symbol_dollar}{project.build.sourceEncoding}</encoding>
 					</configuration>
 				</plugin>
 
-				<!--
-				surefire插件. 
-				mvn test单元测试时忽略integration目录下的集成测试用例.
-				-->
+				<!-- surefire插件, 设定单元测试时只执行unit目录下的用例.-->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
@@ -70,26 +67,11 @@
 					<version>1.0</version>
 				</plugin>
 
-				<!-- enforcer插件,检查JDK版本1.5 -->
+				<!-- selenium插件 -->
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-enforcer-plugin</artifactId>
-					<version>1.0-beta-1</version>
-					<executions>
-						<execution>
-							<id>enforce-versions</id>
-							<goals>
-								<goal>enforce</goal>
-							</goals>
-							<configuration>
-								<rules>
-									<requireJavaVersion>
-										<version>1.5</version>
-									</requireJavaVersion>
-								</rules>
-							</configuration>
-						</execution>
-					</executions>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>selenium-maven-plugin</artifactId>
+					<version>1.0-rc-1</version>
 				</plugin>
 
 				<!-- resource插件,设定编码 -->
@@ -98,15 +80,56 @@
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>2.3</version>
 					<configuration>
-						<encoding>UTF-8</encoding>
+						<encoding>${symbol_dollar}{project.build.sourceEncoding}</encoding>
 					</configuration>
 				</plugin>
 
-				<!-- sql 插件 -->
+				<!-- dbunit插件 -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>dbunit-maven-plugin</artifactId>
+					<version>1.0-beta-2</version>
+					<configuration>
+						<driver>${symbol_dollar}{jdbc.driver}</driver>
+						<url>${symbol_dollar}{jdbc.url}</url>
+						<username>${symbol_dollar}{jdbc.user}</username>
+						<password>${symbol_dollar}{jdbc.password}</password>
+						<type>CLEAN_INSERT</type>
+						<src>src/test/resources/test-data</src>
+						<dest>src/test/resources/test-data</dest>
+						<format>csv</format>
+						<transaction>true</transaction>
+						<encoding>${symbol_dollar}{project.build.sourceEncoding}</encoding>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>${symbol_dollar}{jdbc.driver.groupid}</groupId>
+							<artifactId>${symbol_dollar}{jdbc.driver.artifactId}</artifactId>
+							<version>${symbol_dollar}{jdbc.driver.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+
+				<!-- sql插件 -->
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>sql-maven-plugin</artifactId>
 					<version>1.3</version>
+					<configuration>
+						<driver>${symbol_dollar}{jdbc.driver}</driver>
+						<url>${symbol_dollar}{jdbc.url}</url>
+						<username>${symbol_dollar}{jdbc.user}</username>
+						<password>${symbol_dollar}{jdbc.password}</password>
+						<onError>continue</onError>
+						<encoding>${symbol_dollar}{project.build.sourceEncoding}</encoding>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>${symbol_dollar}{jdbc.driver.groupid}</groupId>
+							<artifactId>${symbol_dollar}{jdbc.driver.artifactId}</artifactId>
+							<version>${symbol_dollar}{jdbc.driver.version}</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 
 				<!-- archetype插件 -->
@@ -130,8 +153,8 @@
 	<repositories>
 		<!--
 			<repository> <id>nexus</id> <name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled>
-			</snapshots> </repository>
+			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
+			</repository>
 		-->
 		<repository>
 			<id>offical</id>
@@ -161,8 +184,8 @@
 	<pluginRepositories>
 		<!--
 			<repository> <id>nexus</id> <name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled>
-			</snapshots> </repository>
+			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
+			</repository>
 		-->
 	</pluginRepositories>
 
@@ -177,6 +200,7 @@
 
 		<!--  Plugin的属性定义  -->
 		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
@@ -498,6 +522,12 @@
 			</dependency>
 
 			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
+				<version>1.5.8</version>
+			</dependency>
+
+			<dependency>
 				<groupId>commons-logging</groupId>
 				<artifactId>commons-logging</artifactId>
 				<version>1.1.1</version>
@@ -661,6 +691,13 @@
 				</exclusions>
 				<scope>test</scope>
 			</dependency>
+
+			<dependency>
+				<groupId>emma</groupId>
+				<artifactId>emma</artifactId>
+				<version>2.0.5312</version>
+				<scope>test</scope>
+			</dependency>
 			<!-- test end -->
 		</dependencies>
 	</dependencyManagement>
@@ -688,12 +725,25 @@
 								<goals>
 									<goal>test</goal>
 								</goals>
-								<phase>integration-test</phase>
+								<phase>test</phase>
 								<configuration>
 									<includes>
 										<include>**/integration/**</include>
 									</includes>
 								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>dbunit-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>test-compile</id>
+								<phase>test-compile</phase>
+								<goals>
+									<goal>operation</goal>
+								</goals>
 							</execution>
 						</executions>
 					</plugin>
@@ -706,6 +756,45 @@
 			<id>functional</id>
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>dbunit-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>test-compile</id>
+								<phase>test-compile</phase>
+								<goals>
+									<goal>operation</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>selenium-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>start</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>start-server</goal>
+								</goals>
+								<configuration>
+									<background>true</background>
+								</configuration>
+							</execution>
+
+							<execution>
+								<id>stop</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>stop-server</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
 					<plugin>
 						<groupId>org.codehaus.cargo</groupId>
 						<artifactId>cargo-maven2-plugin</artifactId>
