@@ -1,11 +1,12 @@
 package org.springside.modules.test.groups;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 /**
  * 实现TestNG Groups功能的Utils函数,判断测试类与测试方法是否在Groups内.
@@ -86,15 +87,13 @@ public class GroupsUtils {
 	 * @return
 	 */
 	protected static String getGroupsFromPropertyFile() {
-		Properties p = new Properties();
+		Properties p;
 		try {
-			InputStream inputStream = GroupsUtils.class.getClassLoader().getResourceAsStream(PROPERTY_FILE);
-			if (inputStream != null) {
-				p.load(inputStream);
-			}
+			p = PropertiesLoaderUtils.loadAllProperties(PROPERTY_FILE);
+			return p.getProperty(PROPERTY_NAME);
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
-
-		return p.getProperty(PROPERTY_NAME);
+		return null;
 	}
 }
