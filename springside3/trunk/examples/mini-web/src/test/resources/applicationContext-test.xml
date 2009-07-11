@@ -17,6 +17,8 @@
 				<value>classpath*:/application.properties</value>
 				<!-- 本地开发环境配置 -->
 				<value>classpath*:/application.local.properties</value>
+				<!-- 本地测试环境配置 -->
+				<value>classpath*:/application.test.properties</value>
 			</list>
 		</property>
 	</bean>

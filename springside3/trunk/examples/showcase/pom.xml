@@ -75,60 +75,29 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>sql-maven-plugin</artifactId>
-				<configuration>
-					<driver>${jdbc.driver}</driver>
-					<url>${jdbc.url}</url>
-					<username>${jdbc.user}</username>
-					<password>${jdbc.password}</password>
-					<onError>continue</onError>
-					<encoding>UTF-8</encoding>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>${jdbcdriver.groupid}</groupId>
-						<artifactId>${jdbcdriver.artifactId}</artifactId>
-						<version>${jdbcdriver.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-
+			<!-- dbunit插件 -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>dbunit-maven-plugin</artifactId>
 				<configuration>
 					<dataTypeFactoryName>org.dbunit.dataset.datatype.DefaultDataTypeFactory</dataTypeFactoryName>
-					<driver>${jdbc.driver}</driver>
-					<url>${jdbc.url}</url>
-					<username>${jdbc.user}</username>
-					<password>${jdbc.password}</password>
-					<type>CLEAN_INSERT</type>
-					<src>src/test/resources/test-data</src>
-					<dest>src/test/resources/test-data</dest>
-					<format>csv</format>
 				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>${jdbcdriver.groupid}</groupId>
-						<artifactId>${jdbcdriver.artifactId}</artifactId>
-						<version>${jdbcdriver.version}</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
 
+	<!-- 项目属性 -->
 	<properties>
 		<jdbc.driver>org.apache.derby.jdbc.ClientDriver</jdbc.driver>
 		<jdbc.url>jdbc:derby://localhost:1527/springside-showcase;create=true</jdbc.url>
 		<jdbc.user>APP</jdbc.user>
 		<jdbc.password>APP</jdbc.password>
-		<jdbcdriver.groupid>org.apache.derby</jdbcdriver.groupid>
-		<jdbcdriver.artifactId>derbyclient</jdbcdriver.artifactId>
-		<jdbcdriver.version>10.4.2.0</jdbcdriver.version>
+		<jdbc.driver.groupid>org.apache.derby</jdbc.driver.groupid>
+		<jdbc.driver.artifactId>derbyclient</jdbc.driver.artifactId>
+		<jdbc.driver.version>10.4.2.0</jdbc.driver.version>
 	</properties>
+
+	<!-- 依赖项定义 -->
 	<dependencies>
 		<!-- springside -->
 		<dependency>
