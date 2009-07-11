@@ -81,6 +81,17 @@
 				<artifactId>dbunit-maven-plugin</artifactId>
 				<configuration>
 					<dataTypeFactoryName>org.dbunit.dataset.datatype.DefaultDataTypeFactory</dataTypeFactoryName>
+					<tables>
+						<table>
+							<name>USERS</name>
+						</table>
+						<table>
+							<name>ROLES</name>
+						</table>
+						<table>
+							<name>USERS_ROLES</name>
+						</table>
+					</tables>
 				</configuration>
 			</plugin>
 		</plugins>
