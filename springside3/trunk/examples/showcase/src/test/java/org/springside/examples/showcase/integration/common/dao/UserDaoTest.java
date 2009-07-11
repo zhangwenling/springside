@@ -43,12 +43,12 @@ public class UserDaoTest extends SpringTxTestCase {
 		assertEquals("管理员, 用户", user.getRoleNames());
 	}
 
-	@Test
+	/*@Test
 	public void testClob() {
 		User user = userDao.get(1L);
 		Hibernate.initialize(user.getDescription());
 		assertEquals("a good guy", user.getDescription());
-	}
+	}*/
 
 	@Test
 	@SuppressWarnings("unchecked")

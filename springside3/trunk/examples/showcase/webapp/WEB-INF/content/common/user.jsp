@@ -31,7 +31,6 @@
 		<th><b>登录名</b></th>
 		<th><b>姓名</b></th>
 		<th><b>电邮</b></th>
-		<th><b>描述</b></th>
 		<th><b>角色</b></th>
 		<th><b>状态</b></th>
 		<th><b>操作</b></th>
@@ -43,7 +42,6 @@
 			<td>${loginName}&nbsp;</td>
 			<td>${name}&nbsp;</td>
 			<td>${email}&nbsp;</td>
-			<td>${description}&nbsp;</td>
 			<td>${roleNames}&nbsp;</td>
 			<td>${status}&nbsp;</td>
 			<td><a href="user!input.action?id=${id}">修改</a></td>

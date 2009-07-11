@@ -91,6 +91,9 @@
 						<table>
 							<name>USERS_ROLES</name>
 						</table>
+						<table>
+							<name>POSTS</name>
+						</table>
 					</tables>
 				</configuration>
 			</plugin>
@@ -330,7 +333,7 @@
 								<configuration>
 									<srcFiles>
 										<srcFile>src/main/sql/derby/schema.sql</srcFile>
-										<!--<srcFile>src/main/sql/derby/init-data.sql</srcFile>-->
+										<!--<srcFile>src/main/sql/derby/init-data.sql</srcFile> -->
 									</srcFiles>
 								</configuration>
 							</execution>

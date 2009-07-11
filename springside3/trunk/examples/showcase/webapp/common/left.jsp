@@ -13,7 +13,7 @@
 		<a href="${ctx}/xml/index.action">Java-XML演示</a>
 		<a href="${ctx}/security/index.action">安全高级演示</a>
 		<a href="${ctx}/log/index.action">日志高级演示</a>
-		<a href="${ctx}/db/index.action">数据库高级演示</a>
+		<a href="${ctx}/orm/index.action">数据库高级演示</a>
 		<a href="${ctx}/profiler/index.action">性能分析演示</a>
     </div>
     

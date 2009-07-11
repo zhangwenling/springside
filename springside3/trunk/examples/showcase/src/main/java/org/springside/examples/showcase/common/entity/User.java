@@ -1,17 +1,16 @@
 package org.springside.examples.showcase.common.entity;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -37,11 +36,11 @@ public class User extends AuditableEntity {
 	private String password;
 	private String name;
 	private String email;
-	private String description;
 	private String status;
 	private Integer version;
 
 	private Set<Role> roles = new LinkedHashSet<Role>(); //有序的关联对象集合
+	private List<Post> posts = new ArrayList<Post>();
 
 	//Hibernate自动维护的Version字段
 	@Version
@@ -85,17 +84,6 @@ public class User extends AuditableEntity {
 		this.email = email;
 	}
 
-	//延时加载的Lob字段, 需要运行instrument任务进行bytecode enhancement
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -111,7 +99,7 @@ public class User extends AuditableEntity {
 	//Fecth策略定义
 	@Fetch(FetchMode.SUBSELECT)
 	//集合按id排序
-	@OrderBy("id")
+	@OrderBy("id ASC")
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -129,6 +117,17 @@ public class User extends AuditableEntity {
 	@Transient
 	public List<Long> getRoleIds() {
 		return ReflectionUtils.fetchElementPropertyToList(roles, "id");
+	}
+
+	@OneToMany(mappedBy = "user")
+	@Fetch(FetchMode.SELECT)
+	@OrderBy(value = "id ASC")
+	public List<Post> getPosts(){
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	@Override

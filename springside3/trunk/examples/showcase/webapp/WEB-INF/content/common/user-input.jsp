@@ -20,7 +20,7 @@
 <input type="hidden" name="id" value="${id}" />
 <input type="hidden" name="workingVersion" value="${version}" />
 <table>
-<tr>
+	<tr>
 		<td>登录名:</td>
 		<td><input type="text" name="loginName" size="40" value="${loginName}"/></td>
 	</tr>
@@ -31,6 +31,14 @@
 		<tr>
 		<td>密码:</td>
 		<td><input type="password" name="password" size="40" value="${password}"/></td>
+	</tr>
+	<tr>
+		<td>文章列表:</td>
+		<td>
+		<s:iterator value="posts">
+		${title}<br/>
+		</s:iterator>
+		</td>
 	</tr>
 	<tr>
 		<td>创建:</td>

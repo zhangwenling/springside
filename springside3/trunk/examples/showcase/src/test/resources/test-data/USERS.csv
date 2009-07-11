@@ -1,7 +1,7 @@
-ID, LOGIN_NAME, PASSWORD, NAME, EMAIL, DESCRIPTION, STATUS, VERSION, CREATE_TIME, CREATE_BY, LAST_MODIFY_TIME, LAST_MODIFY_BY
-"1","admin","admin","Admin","admin@springside.org.cn","a good guy","enabled","1","2009-07-11 08:52:25.805","admin",null,null
-"2","user","user","Calvin","user@springside.org.cn","a good guy","enabled","1","2009-07-11 08:52:25.809","admin",null,null
-"3","user2","user2","Jack","jack@springside.org.cn","a good guy","enabled","1","2009-07-11 08:52:25.814","admin",null,null
-"4","user3","user3","Kate","kate@springside.org.cn","a good guy","enabled","1","2009-07-11 08:52:25.818","admin",null,null
-"5","user4","user4","Sawyer","sawyer@springside.org.cn","a good guy","enabled","1","2009-07-11 08:52:25.822","admin",null,null
-"6","user5","user5","Ben","ben@springside.org.cn","a good guy","enabled","1","2009-07-11 08:52:25.827","admin",null,null
+ID, LOGIN_NAME, PASSWORD, NAME, EMAIL, STATUS, VERSION, CREATE_TIME, CREATE_BY, LAST_MODIFY_TIME, LAST_MODIFY_BY
+"1","admin","admin","Admin","admin@springside.org.cn","enabled","1","2009-07-11 08:52:25.805","admin",null,null
+"2","user","user","Calvin","user@springside.org.cn","enabled","1","2009-07-11 08:52:25.809","admin",null,null
+"3","user2","user2","Jack","jack@springside.org.cn","enabled","1","2009-07-11 08:52:25.814","admin",null,null
+"4","user3","user3","Kate","kate@springside.org.cn","enabled","1","2009-07-11 08:52:25.818","admin",null,null
+"5","user4","user4","Sawyer","sawyer@springside.org.cn","enabled","1","2009-07-11 08:52:25.822","admin",null,null
+"6","user5","user5","Ben","ben@springside.org.cn","enabled","1","2009-07-11 08:52:25.827","admin",null,null

@@ -20,7 +20,7 @@
 	<li>Hibernate 批量更新操作的HQL。(测试用例)</li>
 	<li>Hibernate Native SQL。(测试用例)</li>
 	<li>Hibernate 查询时预加载Lazy Load关联对象。(测试用例)</li>
-	<li>Hibernate Dialect，演示扩展Dialect，加入数据库特性语句。(测试用例)</li>
+	<li>Hibernate 扩展Dialect，加入数据库特性语句。(测试用例)</li>
 	<li>Hibernate Envers，自动记录关键业务对象的修改历史。(计划中)</li>
 </ul>
 </div>

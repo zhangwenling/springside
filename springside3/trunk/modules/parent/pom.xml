@@ -32,7 +32,7 @@
 					</configuration>
 				</plugin>
 
-				<!-- compiler插件,设定JDK版本及编码 -->
+				<!-- compiler插件,设定JDK版本 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
@@ -40,7 +40,7 @@
 					<configuration>
 						<source>1.5</source>
 						<target>1.5</target>
-						<encoding>${project.encoding}</encoding>
+						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
 				</plugin>
 
@@ -77,7 +77,7 @@
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>2.3</version>
 					<configuration>
-						<encoding>${project.encoding}</encoding>
+						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
 				</plugin>
 
@@ -96,6 +96,7 @@
 						<dest>src/test/resources/test-data</dest>
 						<format>csv</format>
 						<transaction>true</transaction>
+						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
 					<dependencies>
 						<dependency>
@@ -117,7 +118,7 @@
 						<username>${jdbc.user}</username>
 						<password>${jdbc.password}</password>
 						<onError>continue</onError>
-						<encoding>${project.encoding}</encoding>
+						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
 					<dependencies>
 						<dependency>
@@ -196,7 +197,7 @@
 
 		<!--  Plugin的属性定义  -->
 		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
-		<project.encoding>UTF-8</project.encoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
