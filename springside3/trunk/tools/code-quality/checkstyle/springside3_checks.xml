@@ -5,9 +5,8 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: springside3
-    Description: 
-Checkstyle5.0 configuration that checks the spring3 coding conventions.
+    Checkstyle-Configuration: SpringSide3
+    Description: none
 -->
 <module name="Checker">
   <property name="severity" value="warning"/>
@@ -19,7 +18,7 @@ Checkstyle5.0 configuration that checks the spring3 coding conventions.
     </module>
     <module name="JavadocType"/>
     <module name="JavadocVariable">
-      <property name="severity" value="info"/>
+      <property name="severity" value="ignore"/>
       <property name="scope" value="public"/>
     </module>
     <module name="JavadocStyle">
@@ -47,39 +46,10 @@ Checkstyle5.0 configuration that checks the spring3 coding conventions.
     <module name="LineLength">
       <property name="severity" value="ignore"/>
     </module>
-    <module name="EmptyForIteratorPad">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="MethodParamPad">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="NoWhitespaceAfter">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="NoWhitespaceBefore">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="OperatorWrap">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="ParenPad">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="TypecastParenPad">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="WhitespaceAfter">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="WhitespaceAround">
-      <property name="severity" value="ignore"/>
-    </module>
     <module name="ModifierOrder"/>
     <module name="RedundantModifier"/>
     <module name="AvoidNestedBlocks"/>
-    <module name="EmptyBlock">
-      <property name="severity" value="ignore"/>
-    </module>
+    <module name="EmptyBlock"/>
     <module name="LeftCurly">
       <property name="severity" value="ignore"/>
     </module>
@@ -114,30 +84,16 @@ Checkstyle5.0 configuration that checks the spring3 coding conventions.
     <module name="SimplifyBooleanReturn">
       <property name="severity" value="ignore"/>
     </module>
-    <module name="DesignForExtension">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="FinalClass">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="HideUtilityClassConstructor">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="InterfaceIsType">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="VisibilityModifier">
-      <property name="severity" value="ignore"/>
-    </module>
     <module name="ArrayTypeStyle"/>
     <module name="FinalParameters">
       <property name="severity" value="ignore"/>
     </module>
     <module name="TodoComment"/>
     <module name="UpperEll"/>
-    <module name="AnnotationUseStyle"/>
+    <module name="AnnotationUseStyle">
+      <property name="severity" value="ignore"/>
+    </module>
     <module name="SuppressWarnings"/>
-    <module name="JUnitTestCase"/>
     <module name="DeclarationOrder"/>
     <module name="ModifiedControlVariable"/>
     <module name="ParameterAssignment"/>
@@ -153,6 +109,22 @@ Checkstyle5.0 configuration that checks the spring3 coding conventions.
       <property name="tokens" value="INSTANCE_INIT,STATIC_INIT,METHOD_DEF,CTOR_DEF"/>
     </module>
     <module name="EqualsAvoidNull"/>
+    <module name="AvoidStaticImport"/>
+    <module name="OuterTypeNumber"/>
+    <module name="ImportOrder">
+      <property name="severity" value="ignore"/>
+    </module>
+    <module name="ImportControl">
+      <property name="severity" value="ignore"/>
+    </module>
+    <module name="AbstractClassName">
+      <property name="severity" value="ignore"/>
+    </module>
+    <module name="WriteTag">
+      <property name="severity" value="ignore"/>
+    </module>
+    <module name="PackageDeclaration"/>
+    <module name="MultipleVariableDeclarations"/>
   </module>
   <module name="JavadocPackage">
     <property name="severity" value="ignore"/>
@@ -162,9 +134,6 @@ Checkstyle5.0 configuration that checks the spring3 coding conventions.
   </module>
   <module name="Translation"/>
   <module name="FileLength"/>
-  <module name="FileTabCharacter">
-    <property name="severity" value="ignore"/>
-  </module>
   <module name="RegexpSingleline">
     <property name="severity" value="ignore"/>
     <property name="format" value="\s+$"/>
