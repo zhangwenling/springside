@@ -2,44 +2,8 @@
 <classpath>
 	<classpathentry excluding="**/.svn/" kind="src" output="target/classes" path="src/main/java"/>
 	<classpathentry excluding="**/.svn/" kind="src" output="target/test-classes" path="src/test/java"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.0.jar"/>
-	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
-	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="lib/dozer-4.4.jar"/>
-	<classpathentry kind="lib" path="lib/ejb3-persistence-1.0.2.GA.jar"/>
-	<classpathentry kind="lib" path="lib/freemarker-2.3.13.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate-annotations-3.4.0.GA.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate-commons-annotations-3.1.0.GA.jar"/>
-	<classpathentry kind="lib" path="lib/jta-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/ognl-2.6.11.jar"/>
-	<classpathentry kind="lib" path="lib/servlet-api-2.4.jar"/>
-	<classpathentry kind="lib" path="lib/spring-beans-2.5.6.jar"/>
-	<classpathentry kind="lib" path="lib/spring-context-2.5.6.jar"/>
-	<classpathentry kind="lib" path="lib/spring-context-support-2.5.6.jar"/>
-	<classpathentry kind="lib" path="lib/spring-core-2.5.6.jar"/>
-	<classpathentry kind="lib" path="lib/spring-orm-2.5.6.jar"/>
-	<classpathentry kind="lib" path="lib/spring-security-core-2.0.4.jar"/>
-	<classpathentry kind="lib" path="lib/spring-security-core-tiger-2.0.4.jar"/>
-	<classpathentry kind="lib" path="lib/spring-test-2.5.6.jar"/>
-	<classpathentry kind="lib" path="lib/spring-tx-2.5.6.jar"/>
-	<classpathentry kind="lib" path="lib/spring-web-2.5.6.jar"/>
-	<classpathentry kind="lib" path="lib/spring-webmvc-2.5.6.jar"/>
-	<classpathentry kind="lib" path="lib/struts2-core-2.1.6.jar"/>
-	<classpathentry kind="lib" path="lib/xml-apis-1.0.b2.jar"/>
-	<classpathentry kind="lib" path="lib/xwork-2.1.2.jar"/>
-	<classpathentry kind="lib" path="lib/jsr250-api-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/junit-4.4.jar"/>
-	<classpathentry kind="lib" path="lib/json-lib-2.2.3-jdk15.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/log4j-1.2.15.jar"/>
-	<classpathentry kind="lib" path="lib/ezmorph-1.0.6.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-api-1.5.8.jar"/>
-	<classpathentry kind="lib" path="lib/selenium-java-client-driver-1.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.5.8.jar"/>
-	<classpathentry kind="lib" path="lib/hibernate-core-3.3.2.GA.jar"/>
-	<classpathentry kind="lib" path="lib/jul-to-slf4j-1.5.8.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
