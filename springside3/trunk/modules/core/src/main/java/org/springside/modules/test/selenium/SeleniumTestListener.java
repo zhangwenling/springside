@@ -7,11 +7,16 @@ import org.junit.runner.notification.RunListener;
 
 import com.thoughtworks.selenium.Selenium;
 
+/**
+ * Selenium在Assert出错时屏幕截图并保存页面html的Listener.
+ * 
+ * @author calvin
+ */
 public class SeleniumTestListener extends RunListener {
 
 	@Override
 	public void testFailure(Failure failure) {
-		Selenium selenium = SeleniumTestCase.selenium;
+		Selenium selenium = SeleniumTestCase.getSelenium();
 		String filePathPrefix = System.getProperty("java.io.tmpdir") + failure.getDescription().getDisplayName();
 		String imgFilePath = filePathPrefix + ".png";
 		String htmFilePath = filePathPrefix + ".htm";

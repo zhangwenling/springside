@@ -12,7 +12,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @DiscriminatorValue("Reply")
 public class Reply extends Post {
 
-	protected String content;
 	protected User user;
 
 	@ManyToOne(cascade = CascadeType.REFRESH, optional = false)

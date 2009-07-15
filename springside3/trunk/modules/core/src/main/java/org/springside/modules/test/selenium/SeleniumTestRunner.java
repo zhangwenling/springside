@@ -5,15 +5,21 @@ import java.lang.reflect.Method;
 import org.junit.internal.runners.InitializationError;
 import org.junit.internal.runners.JUnit4ClassRunner;
 import org.junit.runner.notification.RunNotifier;
+import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.groups.GroupsUtils;
 
+/**
+ * Selenium的Runner支持TestNG Groups分组执行用例并在Assert出错时截图.
+ * 
+ * @see Groups
+ * @see SeleniumTestListener
+ * 
+ * @author calvin
+ */
 public class SeleniumTestRunner extends JUnit4ClassRunner {
-
-	SeleniumTestListener listener;
 
 	public SeleniumTestRunner(Class<?> klass) throws InitializationError {
 		super(klass);
-		listener = new SeleniumTestListener();
 	}
 
 	@Override
@@ -23,7 +29,7 @@ public class SeleniumTestRunner extends JUnit4ClassRunner {
 			return;
 		}
 
-		notifier.addFirstListener(listener);
+		notifier.addFirstListener(new SeleniumTestListener());
 
 		super.run(notifier);
 	}

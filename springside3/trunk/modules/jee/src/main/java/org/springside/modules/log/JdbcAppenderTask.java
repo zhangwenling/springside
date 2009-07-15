@@ -67,7 +67,7 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	/**
 	 * 事件处理函数.
 	 */
-	protected void processEvent(Object eventObject) throws InterruptedException {
+	protected void processEvent(Object eventObject) {
 		LoggingEvent event = (LoggingEvent) eventObject;
 		eventBuffer.add(event);
 		logger.debug("get event, {}", Log4jUtils.convertEventToString(event));

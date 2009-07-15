@@ -9,7 +9,7 @@ import java.util.Properties;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 /**
- * 实现TestNG Groups功能的Utils函数,判断测试类与测试方法是否在Groups内.
+ * 实现TestNG Groups分组执行用例功能的Utils函数, 判断测试类与测试方法是否在Groups内.
  * 
  * @author freeman
  * @author calvin

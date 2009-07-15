@@ -17,7 +17,7 @@ import org.springside.modules.security.jcaptcha.JCaptchaFilter;
 
 public class JCaptchaFilterTest extends Assert {
 
-	private MockFilterConfig config = new MockFilterConfig();;
+	private MockFilterConfig config = new MockFilterConfig();
 	private MockFilterChain chain = new MockFilterChain();
 	private MockHttpServletRequest request = new MockHttpServletRequest();
 	private MockHttpServletResponse response = new MockHttpServletResponse();
@@ -32,7 +32,7 @@ public class JCaptchaFilterTest extends Assert {
 
 		MockServletContext servletContext = (MockServletContext) config.getServletContext();
 		servletContext.addInitParameter(ContextLoader.CONFIG_LOCATION_PARAM,
-				"/applicationContext.xml,/security/applicationContext-security.xml");
+		"/applicationContext.xml,/security/applicationContext-security.xml");
 
 		new ContextLoader().initWebApplicationContext(servletContext);
 	}

@@ -3,7 +3,6 @@ package org.springside.modules.queue;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -39,15 +38,15 @@ public class QueueManager implements ApplicationContextAware {
 
 	protected static Logger logger = LoggerFactory.getLogger(QueueManager.class);
 
+	//内部属性//
+	protected static Map<String, BlockingQueue> queueMap = new ConcurrentHashMap<String, BlockingQueue>();//消息队列
+	protected ApplicationContext applicatiionContext;
+	protected List<ExecutorService> executorList = new ArrayList();//执行任务的线程池列表
+
 	//可配置属性//
 	protected Map<String, String> taskBeanMapping; //队列名称与消费任务名称映射
 	protected int shutdownWait = 10000; //停止每个队列时最多等待的时间,单位为毫秒.
 	protected boolean persistence = true; //是否将队列中未处理的消息持久化到文件.
-
-	//内部属性//
-	protected ApplicationContext applicatiionContext;
-	protected static Map<String, BlockingQueue> queueMap = new ConcurrentHashMap<String, BlockingQueue>();//消息队列
-	protected List<ExecutorService> executorList = new ArrayList();//执行任务的线程池列表
 
 	/**
 	 * 根据queueName获得消息队列的静态函数.
@@ -205,7 +204,7 @@ public class QueueManager implements ApplicationContextAware {
 	/**
 	 * 载入持久化文件中的消息到队列中.
 	 */
-	public static void restore(String queueName) throws ClassNotFoundException, FileNotFoundException, IOException {
+	public static void restore(String queueName) throws ClassNotFoundException, IOException {
 		ObjectInputStream ois = null;
 		String filePath = getPersistenceFilePath(queueName);
 		File file = new File(filePath);

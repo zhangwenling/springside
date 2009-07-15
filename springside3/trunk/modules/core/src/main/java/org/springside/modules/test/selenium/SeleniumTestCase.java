@@ -20,7 +20,7 @@ public class SeleniumTestCase {
 	public static final String DEFAULT_HOST = "http://localhost:8080";
 	public static final String DEFAULT_EXPLOER = "*firefox";
 
-	public static Selenium selenium;
+	protected static Selenium selenium;
 
 	/**
 	 * 初始化默认的selenium变量.
@@ -37,7 +37,14 @@ public class SeleniumTestCase {
 	 */
 	@AfterClass
 	public static void tearDown() throws Exception {
-		selenium.close();
+		selenium.stop();
+	}
+
+	/**
+	 * 取得Selenium变量.
+	 */
+	public static Selenium getSelenium() {
+		return selenium;
 	}
 
 	/**

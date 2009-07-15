@@ -40,11 +40,11 @@ public class User {
 
 	//设置xml为<interest/><interest/>
 	@XStreamImplicit(itemFieldName = "interest")
-	List<String> interests = new ArrayList<String>();
+	private List<String> interests = new ArrayList<String>();
 
 	//设置对Map的转换
 	@XStreamConverter(HouseMapConverter.class)
-	Map<String, String> houses = new HashMap<String, String>();
+	private Map<String, String> houses = new HashMap<String, String>();
 
 	public Long getId() {
 		return id;
