@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ForceDiscriminator;
@@ -17,6 +19,7 @@ import org.hibernate.annotations.ForceDiscriminator;
 public abstract class Post extends IdEntity {
 	protected String title;
 	protected String content;
+	protected User user;
 
 	//延时加载的Lob字段, 需要运行instrument任务进行bytecode enhancement
 	@Lob
@@ -37,5 +40,14 @@ public abstract class Post extends IdEntity {
 		this.title = title;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 }

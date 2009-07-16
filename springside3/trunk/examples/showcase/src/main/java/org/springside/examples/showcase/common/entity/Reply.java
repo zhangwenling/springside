@@ -1,8 +1,8 @@
 package org.springside.examples.showcase.common.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -12,16 +12,16 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @DiscriminatorValue("Reply")
 public class Reply extends Post {
 
-	protected User user;
+	protected Subject subject;
 
-	@ManyToOne(cascade = CascadeType.REFRESH, optional = false)
-	@JoinColumn(name = "user_id")
-	public User getUser() {
-		return user;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "subject_id")
+	public Subject getSubject() {
+		return subject;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setSubject(Subject subject) {
+		this.subject = subject;
 	}
 
 	@Override

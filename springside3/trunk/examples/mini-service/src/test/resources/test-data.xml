@@ -5,11 +5,11 @@
     <column>NAME</column>
     <row>
       <value>1</value>
-      <value>???</value>
+      <value>管理员</value>
     </row>
     <row>
       <value>2</value>
-      <value>??</value>
+      <value>用户</value>
     </row>
   </table>
   <table name="USERS">

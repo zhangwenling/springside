@@ -1,6 +1,5 @@
 package org.springside.examples.showcase.common.entity;
 
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -40,8 +38,6 @@ public class User extends AuditableEntity {
 	private Integer version;
 
 	private Set<Role> roles = new LinkedHashSet<Role>(); //有序的关联对象集合
-	private List<Subject> subjects = new ArrayList<Subject>();
-	private List<Reply> replys = new ArrayList<Reply>();
 
 	//Hibernate自动维护的Version字段
 	@Version
@@ -118,28 +114,6 @@ public class User extends AuditableEntity {
 	@Transient
 	public List<Long> getRoleIds() {
 		return ReflectionUtils.fetchElementPropertyToList(roles, "id");
-	}
-
-	@OneToMany(mappedBy = "user")
-	@Fetch(FetchMode.SELECT)
-	@OrderBy(value = "id ASC")
-	public List<Subject> getSubjects() {
-		return subjects;
-	}
-
-	public void setSubjects(List<Subject> subjects) {
-		this.subjects = subjects;
-	}
-
-	@OneToMany(mappedBy = "user")
-	@Fetch(FetchMode.SELECT)
-	@OrderBy(value = "id ASC")
-	public List<Reply> getReplys() {
-		return replys;
-	}
-
-	public void setReplys(List<Reply> replys) {
-		this.replys = replys;
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class Resource extends IdEntity {
 
 	private String value; //资源标识
 
-	private double orderNum; //资源排序字段
+	private double position; //资源显示顺序字段
 
 	private Set<Authority> authorities = new LinkedHashSet<Authority>(); //可访问该资源的授权
 
@@ -57,12 +57,12 @@ public class Resource extends IdEntity {
 		this.value = value;
 	}
 
-	public double getOrderNum() {
-		return orderNum;
+	public double getPosition() {
+		return position;
 	}
 
-	public void setOrderNum(double orderNum) {
-		this.orderNum = orderNum;
+	public void setPosition(double position) {
+		this.position = position;
 	}
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })

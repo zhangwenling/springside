@@ -37,6 +37,7 @@ DTYPE varchar(10) not null,
 TITLE varchar(100) not null,
 CONTENT clob not null,
 USER_ID integer not null,
+SUBJECT_ID integer,
 FOREIGN KEY (USER_ID) references USERS(ID)
 );
 

@@ -141,18 +141,21 @@
     <column>TITLE</column>
     <column>CONTENT</column>
     <column>USER_ID</column>
+    <column>SUBJECT_ID</column>
     <row>
       <value>1</value>
       <value>Subject</value>
       <value>HelloWorld</value>
       <value><![CDATA[Hello World!!]]></value>
       <value>1</value>
+      <value>0</value>
     </row>
     <row>
       <value>2</value>
       <value>Reply</value>
       <value>GoodMorning</value>
       <value><![CDATA[Good Morning!!]]></value>
+      <value>1</value>
       <value>1</value>
     </row>
   </table>

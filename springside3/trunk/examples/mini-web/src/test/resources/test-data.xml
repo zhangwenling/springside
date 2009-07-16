@@ -7,29 +7,29 @@
     <row>
       <value>1</value>
       <value>A_VIEW_USER</value>
-      <value>????</value>
+      <value>浏览用户</value>
     </row>
     <row>
       <value>2</value>
       <value>A_MODIFY_USER</value>
-      <value>????</value>
+      <value>修改用户</value>
     </row>
     <row>
       <value>3</value>
       <value>A_VIEW_ROLE</value>
-      <value>????</value>
+      <value>浏览角色</value>
     </row>
     <row>
       <value>4</value>
       <value>A_MODIFY_ROLE</value>
-      <value>????</value>
+      <value>修改角色</value>
     </row>
   </table>
   <table name="RESOURCES">
     <column>ID</column>
     <column>RESOURCE_TYPE</column>
     <column>VALUE</column>
-    <column>ORDER_NUM</column>
+    <column>POSITION</column>
     <row>
       <value>1</value>
       <value>url</value>
@@ -100,11 +100,11 @@
     <column>NAME</column>
     <row>
       <value>1</value>
-      <value>???</value>
+      <value>管理员</value>
     </row>
     <row>
       <value>2</value>
-      <value>??</value>
+      <value>用户</value>
     </row>
   </table>
   <table name="ROLES_AUTHORITIES">

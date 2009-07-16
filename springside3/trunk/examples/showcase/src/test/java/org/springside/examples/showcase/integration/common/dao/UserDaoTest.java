@@ -7,8 +7,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.dao.UserDao;
-import org.springside.examples.showcase.common.entity.Reply;
-import org.springside.examples.showcase.common.entity.Subject;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.spring.SpringGroupsTestRunner;
@@ -68,20 +66,5 @@ public class UserDaoTest extends SpringTxTestCase {
 	public void testUpDialect() {
 		Object value = userDao.createQuery("select u.name from User u where up(u.name)='ADMIN'").uniqueResult();
 		assertEquals("Admin", value);
-	}
-
-	@Test
-	public void testInheritance() {
-		User user = userDao.get(1L);
-		List<Subject> subjects = user.getSubjects();
-		List<Reply> replys = user.getReplys();
-
-		assertEquals(1, subjects.size());
-		assertEquals("HelloWorld", subjects.get(0).getTitle());
-		assertEquals("Hello World!!", subjects.get(0).getContent());
-
-		assertEquals(1, replys.size());
-		assertEquals("GoodMorning", replys.get(0).getTitle());
-
 	}
 }
