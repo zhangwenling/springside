@@ -2,6 +2,12 @@ package org.springside.examples.showcase.xml.xstream;
 
 import com.thoughtworks.xstream.XStream;
 
+/**
+ * 使用XStream持久化XML的Util.
+ * 
+ * @author calvin
+ */
+
 @SuppressWarnings("unchecked")
 public class XStreamUtil {
 	public XStream xstream = new XStream();

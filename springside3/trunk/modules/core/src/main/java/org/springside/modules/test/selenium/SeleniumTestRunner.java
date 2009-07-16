@@ -41,6 +41,7 @@ public class SeleniumTestRunner extends JUnit4ClassRunner {
 			notifier.fireTestIgnored(getDescription());
 			return;
 		}
+
 		super.invokeTestMethod(method, notifier);
 	}
 }

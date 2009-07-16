@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
 @Documented
 public @interface Groups {
 
-	public static final String ALL = "all";
+	String ALL = "all";
 
 	String value() default ALL;
 }

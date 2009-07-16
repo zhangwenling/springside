@@ -8,6 +8,11 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+/**
+ * 使用Jaxb持久化XML的Util.
+ * 
+ * @author calvin
+ */
 public class JaxbUtil {
 	private Marshaller marshaller;
 	private Unmarshaller unmarshaller;

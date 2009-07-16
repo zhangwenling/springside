@@ -32,10 +32,7 @@ public class GroupsUtils {
 
 		Groups annotationGroup = testMethod.getAnnotation(Groups.class);
 
-		if (annotationGroup == null)
-			return true;
-
-		if (groups.contains(annotationGroup.value()))
+		if ((annotationGroup == null) || groups.contains(annotationGroup.value()))
 			return true;
 
 		return false;
@@ -52,15 +49,15 @@ public class GroupsUtils {
 
 		Groups annotationGroup = testClass.getAnnotation(Groups.class);
 
-		if (annotationGroup == null)
-			return true;
-
-		if (groups.contains(annotationGroup.value()))
+		if ((annotationGroup == null) || groups.contains(annotationGroup.value()))
 			return true;
 
 		return false;
 	}
 
+	/**
+	 * 从系统变量或Properties文件初始化运行的groups.
+	 */
 	protected static void initGroups() {
 
 		String groupsDef = getGroupsFromSystemProperty();
@@ -68,6 +65,10 @@ public class GroupsUtils {
 		//如果环境变量未定义test.groups,尝试从property文件读取.
 		if (groupsDef == null) {
 			groupsDef = getGroupsFromPropertyFile();
+			//如果仍未定义,设为全部运行
+			if (groupsDef == null) {
+				groupsDef = Groups.ALL;
+			}
 		}
 
 		groups = Arrays.asList(groupsDef.split(","));

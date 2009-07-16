@@ -107,7 +107,7 @@ public class User {
 
 		@Override
 		public MapEntry[] marshal(Map<String, String> map) throws Exception {
-			ArrayList<MapEntry> list = new ArrayList<MapEntry>();
+			List<MapEntry> list = new ArrayList<MapEntry>();
 			for (Map.Entry<String, String> e : map.entrySet()) {
 				list.add(new MapEntry(e));
 			}
@@ -116,7 +116,7 @@ public class User {
 
 		@Override
 		public Map<String, String> unmarshal(MapEntry[] array) throws Exception {
-			HashMap<String, String> map = new HashMap<String, String>();
+			Map<String, String> map = new HashMap<String, String>();
 			for (MapEntry e : array) {
 				map.put(e.key, e.value);
 			}

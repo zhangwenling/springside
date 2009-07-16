@@ -1,14 +1,12 @@
 package org.springside.modules.test.selenium;
 
-import java.io.FileWriter;
-
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
 
 import com.thoughtworks.selenium.Selenium;
 
 /**
- * Selenium在Assert出错时屏幕截图并保存页面html的Listener.
+ * Selenium在Assert出错时屏幕截图的Listener.
  * 
  * @author calvin
  */
@@ -19,25 +17,12 @@ public class SeleniumTestListener extends RunListener {
 		Selenium selenium = SeleniumTestCase.getSelenium();
 		String filePathPrefix = System.getProperty("java.io.tmpdir") + failure.getDescription().getDisplayName();
 		String imgFilePath = filePathPrefix + ".png";
-		String htmFilePath = filePathPrefix + ".htm";
 		try {
 			selenium.captureScreenshot(imgFilePath);
 			System.err.println("Saved screenshot " + imgFilePath);
 
 		} catch (Exception e) {
 			System.err.println("Couldn't save screenshot " + imgFilePath + ": " + e.getMessage());
-		}
-
-		try {
-			String html = selenium.getHtmlSource();
-			FileWriter writer = new FileWriter(htmFilePath);
-			writer.write(html);
-			writer.close();
-
-			System.err.println("Saved html " + htmFilePath);
-
-		} catch (Exception e) {
-			System.err.println("Couldn't save html " + htmFilePath + ": " + e.getMessage());
 		}
 	}
 

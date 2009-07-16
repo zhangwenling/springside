@@ -49,7 +49,10 @@
     <module name="ModifierOrder"/>
     <module name="RedundantModifier"/>
     <module name="AvoidNestedBlocks"/>
-    <module name="EmptyBlock"/>
+    <module name="EmptyBlock">
+      <property name="severity" value="info"/>
+      <property name="option" value="text"/>
+    </module>
     <module name="LeftCurly">
       <property name="severity" value="ignore"/>
     </module>
@@ -125,6 +128,28 @@
     </module>
     <module name="PackageDeclaration"/>
     <module name="MultipleVariableDeclarations"/>
+    <module name="BooleanExpressionComplexity">
+      <property name="severity" value="info"/>
+    </module>
+    <module name="ClassDataAbstractionCoupling">
+      <property name="severity" value="info"/>
+    </module>
+    <module name="ClassFanOutComplexity">
+      <property name="severity" value="info"/>
+    </module>
+    <module name="CyclomaticComplexity">
+      <property name="severity" value="info"/>
+    </module>
+    <module name="JavaNCSS">
+      <property name="severity" value="info"/>
+    </module>
+    <module name="NPathComplexity">
+      <property name="severity" value="info"/>
+    </module>
+    <module name="IllegalThrows"/>
+    <module name="IllegalType">
+      <property name="tokens" value="METHOD_DEF,PARAMETER_DEF,VARIABLE_DEF"/>
+    </module>
   </module>
   <module name="JavadocPackage">
     <property name="severity" value="ignore"/>
@@ -138,5 +163,8 @@
     <property name="severity" value="ignore"/>
     <property name="format" value="\s+$"/>
     <property name="message" value="Line has trailing spaces."/>
+  </module>
+  <module name="StrictDuplicateCode">
+    <property name="severity" value="ignore"/>
   </module>
 </module>
