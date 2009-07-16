@@ -1,7 +1,0 @@
-ID, RESOURCE_TYPE, VALUE, ORDER_NUM
-"1","url","/security/user!save*","1.0"
-"2","url","/security/user!delete*","2.0"
-"3","url","/security/user*","3.0"
-"4","url","/security/role!save*","4.0"
-"5","url","/security/role!delete*","5.0"
-"6","url","/security/role*","6.0"

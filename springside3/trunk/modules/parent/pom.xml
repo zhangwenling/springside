@@ -92,9 +92,9 @@
 						<username>${jdbc.user}</username>
 						<password>${jdbc.password}</password>
 						<type>CLEAN_INSERT</type>
-						<src>src/test/resources/test-data</src>
-						<dest>src/test/resources/test-data</dest>
-						<format>csv</format>
+						<src>src/test/resources/test-data.xml</src>
+						<dest>src/test/resources/test-data.xml</dest>
+						<format>xml</format>
 						<transaction>true</transaction>
 						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
