@@ -1,5 +1,7 @@
 package org.springside.examples.showcase.common.entity;
 
+import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,6 +22,7 @@ public abstract class Post extends IdEntity {
 	protected String title;
 	protected String content;
 	protected User user;
+	protected Date modifyTime;
 
 	//延时加载的Lob字段, 需要运行instrument任务进行bytecode enhancement
 	@Lob
@@ -48,6 +51,14 @@ public abstract class Post extends IdEntity {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Date getModifyTime() {
+		return modifyTime;
+	}
+
+	public void setModifyTime(Date modifyTime) {
+		this.modifyTime = modifyTime;
 	}
 
 }

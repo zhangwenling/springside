@@ -1,7 +1,7 @@
 package org.springside.examples.showcase.common.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
@@ -15,26 +15,21 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @Entity
 @DiscriminatorValue("Subject")
 public class Subject extends Post {
-	protected List<Reply> replys = new ArrayList<Reply>();
 
-	@OneToMany(mappedBy = "subject", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, fetch = FetchType.LAZY)
-	@OrderBy(value = "id DESC")
-	public List<Reply> getReplys() {
+	protected Set<Reply> replys = new LinkedHashSet<Reply>();
+
+	@OneToMany(mappedBy = "subject", cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY)
+	@OrderBy(value = "modifyTime DESC")
+	public Set<Reply> getReplys() {
 		return replys;
 	}
 
-	public void setReplys(List<Reply> replys) {
+	public void setReplys(Set<Reply> replys) {
 		this.replys = replys;
-	}
-
-	public void addReply(Reply reply) {
-		reply.setSubject(this);
-		getReplys().add(reply);
 	}
 
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
-
 }

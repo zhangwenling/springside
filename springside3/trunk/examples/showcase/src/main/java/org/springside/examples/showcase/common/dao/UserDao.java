@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.FetchMode;
-import org.hibernate.criterion.CriteriaSpecification;
 import org.springframework.stereotype.Repository;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.orm.hibernate.HibernateDao;
@@ -33,7 +32,7 @@ public class UserDao extends HibernateDao<User, Long> {
 	public User getUserByNativeSql(String loginName) {
 		String sql = "select {u.*} from users u where u.LOGIN_NAME=:loginName";
 		return (User) getSession().createSQLQuery(sql).addEntity("u", User.class).setString("loginName", loginName)
-				.uniqueResult();
+		.uniqueResult();
 	}
 
 	/**
@@ -41,8 +40,7 @@ public class UserDao extends HibernateDao<User, Long> {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUserWithRoleByDistinctHql() {
-		return createQuery("from User u left join fetch u.roles").setResultTransformer(
-				CriteriaSpecification.DISTINCT_ROOT_ENTITY).list();
+		return distinct(createQuery("from User u left join fetch u.roles")).list();
 	}
 
 	/**
@@ -57,7 +55,6 @@ public class UserDao extends HibernateDao<User, Long> {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUserWithRolesByDistinctCriteria() {
-		return createCriteria().setFetchMode("roles", FetchMode.JOIN).setResultTransformer(
-				CriteriaSpecification.DISTINCT_ROOT_ENTITY).list();
+		return distinct(createCriteria().setFetchMode("roles", FetchMode.JOIN)).list();
 	}
 }

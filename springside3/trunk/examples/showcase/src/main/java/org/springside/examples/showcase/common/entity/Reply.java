@@ -28,6 +28,5 @@ public class Reply extends Post {
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
-
 }
 

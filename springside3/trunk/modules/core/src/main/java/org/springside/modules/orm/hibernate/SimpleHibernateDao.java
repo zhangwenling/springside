@@ -12,6 +12,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.metadata.ClassMetadata;
@@ -311,6 +312,17 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	public <X> List<X> distinct(List<X> list) {
 		Set<X> set = new LinkedHashSet<X>(list);
 		return new ArrayList<X>(set);
+	}
+
+	public Query distinct(Query query) {
+		query.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		return query;
+	}
+
+	public Criteria distinct(Criteria c) {
+		c.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		return c;
+
 	}
 
 	/**
