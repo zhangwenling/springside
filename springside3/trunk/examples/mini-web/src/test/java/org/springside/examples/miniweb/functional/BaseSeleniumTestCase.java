@@ -1,6 +1,6 @@
 package org.springside.examples.miniweb.functional;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.springside.modules.test.selenium.SeleniumTestCase;
 
 /**
@@ -10,8 +10,8 @@ import org.springside.modules.test.selenium.SeleniumTestCase;
  */
 public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 
-	@Before
-	public void login() {
+	@BeforeClass
+	public static void loginAsAdmin() {
 		selenium.open("/mini-web/login.action");
 		selenium.type("j_username", "admin");
 		selenium.type("j_password", "admin");
