@@ -1,3 +1,8 @@
+/**
+ * $Revision: $
+ * $Author: $
+ * $Date: $
+ */
 package org.springside.examples.miniweb.functional.security;
 
 import org.junit.Test;
@@ -18,7 +23,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	public void validateUser() {
 		selenium.open("/mini-web/security/user.action");
 		selenium.click("link=增加新用户");
-		selenium.waitForPageToLoad("30000");
+		waitPageLoad();
 
 		selenium.type("loginName", "admin");
 		selenium.type("name", "");
@@ -38,7 +43,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	private String createUser() {
 		selenium.open("/mini-web/security/user.action");
 		selenium.click("link=增加新用户");
-		selenium.waitForPageToLoad("30000");
+		waitPageLoad();
 
 		String loginName = "Tester" + randomString(5);
 		selenium.type("loginName", loginName);
@@ -47,7 +52,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		selenium.type("passwordConfirm", "tester");
 		selenium.click("checkedRoleIds-2");
 		selenium.click("//input[@value='提交']");
-		selenium.waitForPageToLoad("30000");
+		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("保存用户成功"));
 		return loginName;
@@ -60,11 +65,11 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		findUser(loginName);
 
 		selenium.click("link=修改");
-		selenium.waitForPageToLoad("30000");
+		waitPageLoad();
 
 		selenium.type("name", newUserName);
 		selenium.click("//input[@value='提交']");
-		selenium.waitForPageToLoad("30000");
+		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("保存用户成功"));
 		findUser(loginName);
@@ -76,7 +81,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		findUser(loginName);
 
 		selenium.click("link=删除");
-		selenium.waitForPageToLoad("30000");
+		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("删除用户成功"));
 		findUser(loginName);
@@ -86,6 +91,6 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	private void findUser(String userName) {
 		selenium.type("filter_EQ_loginName", userName);
 		selenium.click("//input[@value='搜索']");
-		selenium.waitForPageToLoad("30000");
+		waitPageLoad();
 	}
 }
