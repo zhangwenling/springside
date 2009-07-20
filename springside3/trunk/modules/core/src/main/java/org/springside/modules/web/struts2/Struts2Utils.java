@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2005-2009 springside.org.cn
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * 
+ * $Id$
+ */
 package org.springside.modules.web.struts2;
 
 import java.io.IOException;
@@ -65,7 +72,7 @@ public class Struts2Utils {
 
 	/**
 	 * 直接输出内容的简便函数.
-	 
+
 	 * eg.
 	 * render("text/plain", "hello", "encoding:GBK");
 	 * render("text/plain", "hello", "no-cache:false");

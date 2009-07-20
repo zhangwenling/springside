@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2005-2009 springside.org.cn
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * 
+ * $Id$
+ */
 package org.springside.modules.utils;
 
 import java.lang.reflect.Field;
@@ -92,7 +99,7 @@ public class ReflectionUtils {
 		Assert.notNull(object, "object不能为空");
 		Assert.hasText(fieldName, "fieldName");
 		for (Class<?> superClass = object.getClass(); superClass != Object.class; superClass = superClass
-				.getSuperclass()) {
+		.getSuperclass()) {
 			try {
 				return superClass.getDeclaredField(fieldName);
 			} catch (NoSuchFieldException e) {
@@ -118,7 +125,7 @@ public class ReflectionUtils {
 		Assert.notNull(object, "object不能为空");
 
 		for (Class<?> superClass = object.getClass(); superClass != Object.class; superClass = superClass
-				.getSuperclass()) {
+		.getSuperclass()) {
 			try {
 				return superClass.getDeclaredMethod(methodName, parameterTypes);
 			} catch (NoSuchMethodException e) {
