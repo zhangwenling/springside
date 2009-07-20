@@ -29,10 +29,12 @@ public class SeleniumTestCase {
 	public static final String PROPERTY_URL_NAME = "selenium.url";
 	public static final String PROPERTY_SELENIUM_HOST_NAME = "selenium.host";
 
+	public static final String WAIT_FOR_PAGE = "30000";
+
 	protected static Selenium selenium;
 
 	/**
-	 * 初始化默认的selenium变量.
+	 * 初始化selenium client.
 	 * 从application.test.properties中获取selenium连接参数,否则使用默认配置.
 	 */
 	@BeforeClass
@@ -44,6 +46,7 @@ public class SeleniumTestCase {
 
 		selenium = new DefaultSelenium(host, 4444, browser, url);
 		selenium.start();
+		selenium.windowFocus();
 		selenium.windowMaximize();
 	}
 
@@ -60,6 +63,13 @@ public class SeleniumTestCase {
 	 */
 	public static Selenium getSelenium() {
 		return selenium;
+	}
+
+	/**
+	 * 等待页面载入.
+	 */
+	public static void waitPageLoad() {
+		selenium.waitForPageToLoad(WAIT_FOR_PAGE);
 	}
 
 	/**
