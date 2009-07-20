@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2005-2009 springside.org.cn
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * 
+ * $Id$
+ */
 package org.springside.modules.orm.hibernate;
 
 import java.io.Serializable;
@@ -146,8 +153,8 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	}
 
 	/**
-	* 设置分页参数到Query对象,辅助函数.
-	*/
+	 * 设置分页参数到Query对象,辅助函数.
+	 */
 	protected Query setPageParameter(final Query q, final Page<T> page) {
 		//hibernate的firstResult的序号从0开始
 		q.setFirstResult(page.getFirst() - 1);
