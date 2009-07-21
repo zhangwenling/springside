@@ -99,7 +99,7 @@ public class ReflectionUtils {
 		Assert.notNull(object, "object不能为空");
 		Assert.hasText(fieldName, "fieldName");
 		for (Class<?> superClass = object.getClass(); superClass != Object.class; superClass = superClass
-		.getSuperclass()) {
+				.getSuperclass()) {
 			try {
 				return superClass.getDeclaredField(fieldName);
 			} catch (NoSuchFieldException e) {
@@ -125,7 +125,7 @@ public class ReflectionUtils {
 		Assert.notNull(object, "object不能为空");
 
 		for (Class<?> superClass = object.getClass(); superClass != Object.class; superClass = superClass
-		.getSuperclass()) {
+				.getSuperclass()) {
 			try {
 				return superClass.getDeclaredMethod(methodName, parameterTypes);
 			} catch (NoSuchMethodException e) {
@@ -186,7 +186,7 @@ public class ReflectionUtils {
 	 * 提取集合中的对象的属性(通过getter函数),组合成List.
 	 * 
 	 * @param collection 来源集合.
-	 * @param propertityName 要提取的属性名.
+	 * @param propertyName 要提取的属性名.
 	 */
 	@SuppressWarnings("unchecked")
 	public static List fetchElementPropertyToList(final Collection collection, final String propertyName) {
@@ -207,7 +207,7 @@ public class ReflectionUtils {
 	 * 提取集合中的对象的属性(通过getter函数),组合成由分割符分隔的字符串.
 	 * 
 	 * @param collection 来源集合.
-	 * @param propertityName 要提取的属性名.
+	 * @param propertyName 要提取的属性名.
 	 * @param separator 分隔符.
 	 */
 	@SuppressWarnings("unchecked")
@@ -218,7 +218,7 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 将反射时的checked exception转换为unchecked exception。
+	 * 将反射时的checked exception转换为unchecked exception.
 	 */
 	public static void convertToUncheckedException(Exception e) throws IllegalArgumentException {
 		if (e instanceof IllegalAccessException || e instanceof IllegalArgumentException

@@ -108,7 +108,7 @@ public class User {
 	}
 
 	/**
-	 * 将key转换为entry节点属性的Converter
+	 * 将key转换为entry节点属性的Converter.
 	 */
 	public static class HouseMapConverter extends MapConverter {
 

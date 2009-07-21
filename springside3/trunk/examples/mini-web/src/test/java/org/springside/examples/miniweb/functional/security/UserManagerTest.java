@@ -1,8 +1,3 @@
-/**
- * $Revision$
- * $Author$
- * $Date$
- */
 package org.springside.examples.miniweb.functional.security;
 
 import org.junit.Test;
