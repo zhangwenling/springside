@@ -115,7 +115,7 @@ public class JCaptchaFilter implements Filter {
 	}
 
 	public void doFilter(final ServletRequest theRequest, final ServletResponse theResponse, final FilterChain chain)
-	throws IOException, ServletException {
+			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) theRequest;
 		HttpServletResponse response = (HttpServletResponse) theResponse;
 		String servletPath = request.getServletPath();
@@ -137,7 +137,7 @@ public class JCaptchaFilter implements Filter {
 	 * 生成验证码图片.
 	 */
 	private void genernateCaptchaImage(final HttpServletRequest request, final HttpServletResponse response)
-	throws IOException {
+			throws IOException {
 
 		response.setHeader("Cache-Control", "no-store");
 		response.setHeader("Pragma", "no-cache");
@@ -181,7 +181,7 @@ public class JCaptchaFilter implements Filter {
 	 * 可在子类进行扩展，比如在session中放入SpringSecurity的Exception.
 	 */
 	protected void redirectFailureUrl(final HttpServletRequest request, final HttpServletResponse response)
-	throws IOException {
+			throws IOException {
 		response.sendRedirect(request.getContextPath() + failureUrl);
 	}
 }

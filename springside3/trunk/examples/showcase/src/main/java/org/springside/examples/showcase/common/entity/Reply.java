@@ -29,4 +29,3 @@ public class Reply extends Post {
 		return ToStringBuilder.reflectionToString(this);
 	}
 }
-

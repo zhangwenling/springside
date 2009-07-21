@@ -32,7 +32,7 @@ public class JCaptchaFilterTest extends Assert {
 
 		MockServletContext servletContext = (MockServletContext) config.getServletContext();
 		servletContext.addInitParameter(ContextLoader.CONFIG_LOCATION_PARAM,
-		"/applicationContext.xml,/security/applicationContext-security.xml");
+				"/applicationContext.xml,/security/applicationContext-security.xml");
 
 		new ContextLoader().initWebApplicationContext(servletContext);
 	}

@@ -89,7 +89,6 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		assertEquals("Sawyer", page.getResult().get(0).getName());
 	}
 
-
 	@Test
 	public void findByProperty() {
 		List<User> users = dao.findBy("loginName", "admin", PropertyFilter.MatchType.EQ);

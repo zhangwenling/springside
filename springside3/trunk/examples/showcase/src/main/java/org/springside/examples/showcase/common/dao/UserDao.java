@@ -32,7 +32,7 @@ public class UserDao extends HibernateDao<User, Long> {
 	public User getUserByNativeSql(String loginName) {
 		String sql = "select {u.*} from users u where u.LOGIN_NAME=:loginName";
 		return (User) getSession().createSQLQuery(sql).addEntity("u", User.class).setString("loginName", loginName)
-		.uniqueResult();
+				.uniqueResult();
 	}
 
 	/**
