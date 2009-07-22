@@ -7,11 +7,11 @@ package org.springside.examples.showcase.jmx.server;
  */
 public interface ServerConfigMBean {
 
-	String getNodeName();
+	public String getNodeName();
 
-	void setNodeName(String nodeName);
+	public void setNodeName(String nodeName);
 
-	boolean isNotificationMailEnabled();
+	public boolean isNotificationMailEnabled();
 
-	void setNotificationMailEnabled(boolean notificationMailEnabled);
+	public void setNotificationMailEnabled(boolean notificationMailEnabled);
 }

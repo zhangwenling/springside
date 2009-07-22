@@ -32,17 +32,17 @@ call %MAVEN_BAT% -o dependency:copy-dependencies -DoutputDirectory=webapp/WEB-IN
 
 echo [Step 6] 为Mini-Service 初始化数据库，编译、测试、打包、部署到tomcat，并启动IE浏览。
 cd examples\mini-service
-call %MAVEN_BAT% -o clean package cargo:redeploy -Pinitdb -Pnotest
+call %MAVEN_BAT% -o clean package dbunit:operation cargo:redeploy -Pinitdb -Pnotest
 explorer http://localhost:8080/mini-service
 
 echo [Step 7] 为Mini-Web 初始化数据库，编译、测试、打包、部署到tomcat，并启动IE浏览。
 cd ..\mini-web
-call %MAVEN_BAT% -o clean package cargo:redeploy -Pinitdb -Pnotest
+call %MAVEN_BAT% -o clean package dbunit:operation cargo:redeploy -Pinitdb -Pnotest
 explorer http://localhost:8080/mini-web
 
 echo [Step 8] 为Showcase 初始化数据库，编译、测试、打包、部署到tomcat，并启动IE浏览。
 cd ..\showcase
-call %MAVEN_BAT% -o clean package cargo:redeploy -Pinitdb -Pnotest
+call %MAVEN_BAT% -o clean package dbunit:operation cargo:redeploy -Pinitdb -Pnotest
 explorer http://localhost:8080/showcase
 
 echo [INFO] SpringSide3.0 快速启动完毕.

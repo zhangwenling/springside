@@ -11,17 +11,8 @@
 <module name="Checker">
   <property name="severity" value="warning"/>
   <module name="TreeWalker">
-    <module name="JavadocMethod">
-      <property name="severity" value="ignore"/>
-      <property name="logLoadErrors" value="true"/>
-      <property name="suppressLoadErrors" value="true"/>
-    </module>
     <module name="JavadocType">
       <property name="severity" value="info"/>
-    </module>
-    <module name="JavadocVariable">
-      <property name="severity" value="ignore"/>
-      <property name="scope" value="public"/>
     </module>
     <module name="JavadocStyle"/>
     <module name="ConstantName"/>
@@ -33,33 +24,17 @@
     <module name="ParameterName"/>
     <module name="StaticVariableName"/>
     <module name="TypeName"/>
-    <module name="AvoidStarImport">
-      <property name="severity" value="ignore"/>
-    </module>
     <module name="IllegalImport"/>
     <module name="RedundantImport"/>
-    <module name="UnusedImports">
-      <property name="severity" value="ignore"/>
-    </module>
     <module name="MethodLength">
       <property name="max" value="50"/>
     </module>
     <module name="ParameterNumber"/>
-    <module name="LineLength">
-      <property name="severity" value="ignore"/>
-    </module>
     <module name="ModifierOrder"/>
-    <module name="RedundantModifier"/>
     <module name="AvoidNestedBlocks"/>
     <module name="EmptyBlock">
       <property name="severity" value="info"/>
       <property name="option" value="text"/>
-    </module>
-    <module name="NeedBraces">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="AvoidInlineConditionals">
-      <property name="severity" value="ignore"/>
     </module>
     <module name="DoubleCheckedLocking"/>
     <module name="EmptyStatement"/>
@@ -81,30 +56,12 @@
       <property name="suppressLoadErrors" value="true"/>
     </module>
     <module name="SimplifyBooleanExpression"/>
-    <module name="SimplifyBooleanReturn">
-      <property name="severity" value="ignore"/>
-    </module>
     <module name="ArrayTypeStyle"/>
-    <module name="FinalParameters">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="TodoComment">
-      <property name="severity" value="ignore"/>
-    </module>
     <module name="UpperEll"/>
-    <module name="AnnotationUseStyle">
-      <property name="severity" value="ignore"/>
-    </module>
     <module name="SuppressWarnings"/>
     <module name="DeclarationOrder"/>
     <module name="ModifiedControlVariable"/>
     <module name="StringLiteralEquality"/>
-    <module name="ClassTypeParameterName">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="MethodTypeParameterName">
-      <property name="severity" value="ignore"/>
-    </module>
     <module name="AnonInnerLength"/>
     <module name="ExecutableStatementCount">
       <property name="tokens" value="INSTANCE_INIT,STATIC_INIT,METHOD_DEF,CTOR_DEF"/>
@@ -112,19 +69,6 @@
     <module name="EqualsAvoidNull"/>
     <module name="AvoidStaticImport"/>
     <module name="OuterTypeNumber"/>
-    <module name="ImportOrder">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="ImportControl">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="AbstractClassName">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="WriteTag">
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="PackageDeclaration"/>
     <module name="MultipleVariableDeclarations"/>
     <module name="IllegalThrows"/>
     <module name="LeftCurly"/>
@@ -138,20 +82,6 @@
       <property name="protectedAllowed" value="true"/>
     </module>
   </module>
-  <module name="JavadocPackage">
-    <property name="severity" value="ignore"/>
-  </module>
-  <module name="NewlineAtEndOfFile">
-    <property name="severity" value="ignore"/>
-  </module>
   <module name="Translation"/>
   <module name="FileLength"/>
-  <module name="RegexpSingleline">
-    <property name="severity" value="ignore"/>
-    <property name="format" value="\s+$"/>
-    <property name="message" value="Line has trailing spaces."/>
-  </module>
-  <module name="StrictDuplicateCode">
-    <property name="severity" value="ignore"/>
-  </module>
 </module>

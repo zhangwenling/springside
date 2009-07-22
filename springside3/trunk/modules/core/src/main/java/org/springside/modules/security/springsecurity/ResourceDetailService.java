@@ -21,6 +21,5 @@ public interface ResourceDetailService {
 	 * 
 	 * Map中的key为URL, value为能访问该URL的以','分隔的授权列表.
 	 */
-	LinkedHashMap<String, String> getRequestMap() throws Exception;
-
+	public LinkedHashMap<String, String> getRequestMap() throws Exception;
 }
