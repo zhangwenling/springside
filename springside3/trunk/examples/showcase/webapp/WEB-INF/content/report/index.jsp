@@ -17,7 +17,6 @@
 <ul>
 <li><a href="flashchart/index.action">amCharts渲染Flash图表</a></li>
 <li>POI导出Excel文件(计划中)</li>
-<li>iText导出Pdf文件(计划中)</li>
 </ul>
 </div>
 </div>

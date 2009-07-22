@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
+import org.springside.examples.showcase.jmx.client.service.JmxClientService;
 import org.springside.examples.showcase.jmx.server.ServerConfigMBean;
 import org.springside.modules.jmx.JmxClient;
 import org.springside.modules.test.spring.SpringContextTestCase;
@@ -22,8 +23,7 @@ public class JmxClientTest extends SpringContextTestCase {
 	@Before
 	public void setUp() throws Exception {
 		jmxClient = new JmxClient("service:jmx:rmi:///jndi/rmi://localhost:1098/showcase");
-		serverConfigMbean = jmxClient.getMBeanProxy("org.springside.showcase:type=Configurator",
-				ServerConfigMBean.class);
+		serverConfigMbean = jmxClient.getMBeanProxy(JmxClientService.CONFIG_MBEAN_NAME, ServerConfigMBean.class);
 	}
 
 	@After
@@ -44,11 +44,11 @@ public class JmxClientTest extends SpringContextTestCase {
 
 	@Test
 	public void getMBeanAttributeByReflection() {
-		assertEquals(0L, jmxClient.getAttribute("org.hibernate:type=Statistics", "SessionOpenCount"));
+		assertEquals(0L, jmxClient.getAttribute(JmxClientService.HIBERNATE_MBEAN_NAME, "SessionOpenCount"));
 	}
 
 	@Test
 	public void invokeMBeanMethodByReflection() {
-		jmxClient.inoke("org.hibernate:type=Statistics", "logSummary");
+		jmxClient.inoke(JmxClientService.HIBERNATE_MBEAN_NAME, "logSummary");
 	}
 }

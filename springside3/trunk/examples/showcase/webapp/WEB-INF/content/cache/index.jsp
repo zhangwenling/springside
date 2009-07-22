@@ -14,7 +14,6 @@
 <h3>缓存演示</h3>
 <h4>技术说明：</h4>
 <ul>
-<li>Ehcache使用JGroups同步节点间的缓存。</li>
 <li>Memcached中央服务器式缓存演示。</li>
 </ul>
 </div>

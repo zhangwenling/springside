@@ -21,11 +21,11 @@ import org.springside.modules.jmx.JmxClient;
  */
 public class JmxClientService {
 
-	protected static Logger logger = LoggerFactory.getLogger(JmxClientService.class);
-
 	//ObjectName定义
-	private static String configuratorMBeanName = "org.springside.showcase:type=Configurator";
-	private static String hibernteMBeanName = "org.hibernate:type=Statistics";
+	public static final String CONFIG_MBEAN_NAME = "Custom:name=serverConfig,type=ServerConfig";
+	public static final String HIBERNATE_MBEAN_NAME = "Custom:name=hibernateStatistics,type=StatisticsService";
+
+	protected static Logger logger = LoggerFactory.getLogger(JmxClientService.class);
 
 	//jmx客户端工厂及mbean代理
 	private JmxClient jmxClient;
@@ -68,7 +68,7 @@ public class JmxClientService {
 			String serviceUrl = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/showcase";
 			jmxClient = new JmxClient(serviceUrl, userName, passwd);
 
-			serverConfigMBean = jmxClient.getMBeanProxy(configuratorMBeanName, ServerConfigMBean.class);
+			serverConfigMBean = jmxClient.getMBeanProxy(CONFIG_MBEAN_NAME, ServerConfigMBean.class);
 		} catch (Exception e) {
 			logger.error("连接Jmx Server 或 创建Mbean Proxy时失败", e);
 		}
@@ -107,8 +107,8 @@ public class JmxClientService {
 	 */
 	public HibernateStatistics getHibernateStatistics() {
 		HibernateStatistics statistics = new HibernateStatistics();
-		statistics.setSessionOpenCount((Long) jmxClient.getAttribute(hibernteMBeanName, "SessionOpenCount"));
-		statistics.setSessionCloseCount((Long) jmxClient.getAttribute(hibernteMBeanName, "SessionCloseCount"));
+		statistics.setSessionOpenCount((Long) jmxClient.getAttribute(HIBERNATE_MBEAN_NAME, "SessionOpenCount"));
+		statistics.setSessionCloseCount((Long) jmxClient.getAttribute(HIBERNATE_MBEAN_NAME, "SessionCloseCount"));
 		return statistics;
 	}
 
@@ -116,6 +116,6 @@ public class JmxClientService {
 	 * 调用Hibernate MBean的logSummary函数.
 	 */
 	public void logSummary() {
-		jmxClient.inoke(hibernteMBeanName, "logSummary");
+		jmxClient.inoke(HIBERNATE_MBEAN_NAME, "logSummary");
 	}
 }

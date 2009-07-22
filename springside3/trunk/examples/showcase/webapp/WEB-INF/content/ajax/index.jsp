@@ -12,7 +12,7 @@
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
 <h3>Ajax演示</h3>
-<p>说明：在<a href="${ctx}/jmx/jmx-client.action">JMX示例</a>中已演示基于JQuery的标准Ajax获取内容与表单提交。</p>
+<p>说明：在<a href="${ctx}/jmx/jmx-client.action">JMX示例</a>中已演示基于JQuery的标准Ajax获取内容并提交表单。</p>
 <ul>
 	<li><a href="${ctx}/ajax/mashup/mashup-client.action">跨域Mashup演示</a></li>
 </ul>

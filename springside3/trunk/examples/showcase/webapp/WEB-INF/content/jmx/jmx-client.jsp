@@ -47,9 +47,12 @@
 <div id="mainbar">
 	<h3>JMX演示用例</h3>
 	<h4>技术说明：</h4>
-	演示JMX MBean代理及直接读取属性两种模式。
+	<ul>
+	<li>服务端演示Interface与Spring annotation两种方式定义MBean</li>
+	<li>客户端演示MBean代理及直接反射读取属性两种方式调用MBean</li>
+	</ul>
 	<h4>用户故事：</h4>
-	使用JMX动态配置服务节点的系统变量并实时监控系统运行统计。<br/>
+	使用JMX动态配置服务节点的系统变量与Log4J日志等级,并实时监控Hibernate运行统计。<br/>
 	
 	客户端可使用JConsole, 远程进程URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase
 	<h4>系统配置(MBean代理)</h4>

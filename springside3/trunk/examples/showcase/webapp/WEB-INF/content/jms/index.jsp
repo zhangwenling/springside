@@ -14,11 +14,6 @@
 <h3>JMS演示</h3>
 <h4>技术说明：</h4>
 演示基于ActiveMQ的JMS Topic/Queue 以及Polling消费者 和Message Driven POJO。
-<h4>用户故事：</h4>
-<ul>
-   <li>在综合演示示例中创建用户时，将消息发送到Queue中，Polling消费者接收消息，发送用户通知邮件。</li>
-   <li>在综合演示示例中删除用户时，将消息发送到Topic中，两类不同的Message Driven POJO接收消息，打印不同的日志。</li>
-</ul>
 </div>
 </div>
 </body>

@@ -34,6 +34,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.jmx.export.annotation.ManagedOperation;
+import org.springframework.jmx.export.annotation.ManagedOperationParameter;
+import org.springframework.jmx.export.annotation.ManagedResource;
 
 /**
  * 管理BlockingQueue Map与消费它们的任务.
@@ -41,6 +44,7 @@ import org.springframework.context.ApplicationContextAware;
  * @author calvin
  */
 @SuppressWarnings("unchecked")
+@ManagedResource(objectName = "Custom:type=QueueManagement,name=queueManagement", description = "Queue Managed Bean")
 public class QueueManager implements ApplicationContextAware {
 
 	protected static Logger logger = LoggerFactory.getLogger(QueueManager.class);
@@ -73,7 +77,9 @@ public class QueueManager implements ApplicationContextAware {
 	/**
 	 * 根据queueName获得消息队列中未处理事件的大小.
 	 */
-	public static int getQueueSize(String queueName) {
+	@ManagedOperation(description = "Get event count in queue")
+	public static int getQueueSize(
+			@ManagedOperationParameter(name = "queueName", description = "queue name") String queueName) {
 		return getQueue(queueName).size();
 	}
 

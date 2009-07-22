@@ -21,7 +21,7 @@
 <h4>用户故事：</h4>简单的定时在Console打印当前用户数量。
 <ul>
    <li>访问对象列表及修改用户对象，Per4j将代码执行时间记录到c:/perf4j.log，执行bin/perf4j.bat产生报表。</li>
-   <li>访问对象列表及修改用户对象，P6spy将sql记录到c:/spy.log，使用irontracksql观看结果。</li>
+   <li>访问对象列表及修改用户对象，P6Spy将sql记录到c:/spy.log，使用irontracksql观看结果。</li>
 </ul>
 
 </div>
