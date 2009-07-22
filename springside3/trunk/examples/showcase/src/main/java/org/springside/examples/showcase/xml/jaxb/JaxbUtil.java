@@ -32,7 +32,7 @@ public class JaxbUtil {
 	}
 
 	/**
-	 * Java->Xml
+	 * Java->Xml.
 	 */
 	public String marshal(Object root) {
 		try {
@@ -45,7 +45,7 @@ public class JaxbUtil {
 	}
 
 	/**
-	 * Xml->Java
+	 * Xml->Java.
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T unmarshal(String xml) {

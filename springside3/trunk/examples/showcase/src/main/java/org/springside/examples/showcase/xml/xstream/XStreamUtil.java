@@ -10,9 +10,10 @@ import com.thoughtworks.xstream.XStream;
 
 @SuppressWarnings("unchecked")
 public class XStreamUtil {
-	public XStream xstream = new XStream();
+	private XStream xstream = new XStream();
 
 	/**
+	 * 初始化XStream对象.
 	 * @param types 带XStream Annotation的class.
 	 */
 	public XStreamUtil(Class<?>... types) {

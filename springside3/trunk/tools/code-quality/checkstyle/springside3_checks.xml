@@ -98,7 +98,6 @@
     <module name="SuppressWarnings"/>
     <module name="DeclarationOrder"/>
     <module name="ModifiedControlVariable"/>
-    <module name="ParameterAssignment"/>
     <module name="StringLiteralEquality"/>
     <module name="ClassTypeParameterName">
       <property name="severity" value="ignore"/>
@@ -133,6 +132,10 @@
     <module name="NestedIfDepth">
       <property name="severity" value="info"/>
       <property name="max" value="3"/>
+    </module>
+    <module name="VisibilityModifier">
+      <property name="packageAllowed" value="true"/>
+      <property name="protectedAllowed" value="true"/>
     </module>
   </module>
   <module name="JavadocPackage">
