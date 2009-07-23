@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.xml.jaxb;
+package org.springside.modules.xml;
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -13,14 +13,14 @@ import javax.xml.bind.Unmarshaller;
  * 
  * @author calvin
  */
-public class JaxbUtil {
+public class JaxbBinder implements XmlBinder {
 	private Marshaller marshaller;
 	private Unmarshaller unmarshaller;
 
 	/**
-	 * 参数types为所有需要序列化的Root对象的类型.
+	 * @param types 所有需要序列化的Root对象的类型.
 	 */
-	public JaxbUtil(Class<?>... types) {
+	public JaxbBinder(Class<?>... types) {
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(types);
 			marshaller = jaxbContext.createMarshaller();
@@ -34,7 +34,7 @@ public class JaxbUtil {
 	/**
 	 * Java->Xml.
 	 */
-	public String marshal(Object root) {
+	public String toXml(Object root) {
 		try {
 			StringWriter writer = new StringWriter();
 			marshaller.marshal(root, writer);
@@ -48,7 +48,7 @@ public class JaxbUtil {
 	 * Xml->Java.
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T unmarshal(String xml) {
+	public <T> T fromXml(String xml) {
 		try {
 			StringReader reader = new StringReader(xml);
 			return (T) unmarshaller.unmarshal(reader);

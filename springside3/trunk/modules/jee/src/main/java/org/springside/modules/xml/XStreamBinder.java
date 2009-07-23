@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.xml.xstream;
+package org.springside.modules.xml;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -9,19 +9,21 @@ import com.thoughtworks.xstream.XStream;
  */
 
 @SuppressWarnings("unchecked")
-public class XStreamUtil {
+public class XStreamBinder implements XmlBinder {
 	private XStream xstream = new XStream();
 
 	/**
 	 * 初始化XStream对象.
 	 * @param types 带XStream Annotation的class.
 	 */
-	public XStreamUtil(Class<?>... types) {
+	public XStreamBinder(Class<?>... types) {
 		register(types);
 	}
 
 	/**
 	 * 注册带XStream Annotation的Class.
+
+	 * @param types 带XStream Annotation的class.
 	 */
 	public void register(Class<?>... types) {
 		xstream.processAnnotations(types);

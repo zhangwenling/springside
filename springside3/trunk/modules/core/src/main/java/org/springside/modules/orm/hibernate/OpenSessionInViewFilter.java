@@ -23,16 +23,28 @@ public class OpenSessionInViewFilter extends org.springframework.orm.hibernate3.
 
 	public static final String EXCLUDE_SUFFIXS_NAME = "excludeSuffixs";
 
+	public static final String INCLUDE_SUFFIXS_NAME = "includeSuffixs";
+
 	private static final String[] DEFAULT_EXCLUDE_SUFFIXS = { ".js", ".css", ".jpg", ".gif" };
 
+	private static final String[] DEFAULT_INCLUDE_SUFFIXS = { ".action" };
+
 	private String[] excludeSuffixs = DEFAULT_EXCLUDE_SUFFIXS;
+
+	private String[] includeSuffixs = DEFAULT_INCLUDE_SUFFIXS;
 
 	/**
 	 * 重载过滤控制函数,忽略特定后缀名的请求.
 	 */
 	@Override
 	protected boolean shouldNotFilter(final HttpServletRequest request) throws ServletException {
-		String path = request.getServletPath();
+		String fullPath = request.getServletPath();
+		String path = StringUtils.substringBefore(fullPath, "?");
+
+		for (String suffix : includeSuffixs) {
+			if (path.endsWith(suffix))
+				return false;
+		}
 
 		for (String suffix : excludeSuffixs) {
 			if (path.endsWith(suffix))
@@ -48,11 +60,20 @@ public class OpenSessionInViewFilter extends org.springframework.orm.hibernate3.
 	@Override
 	protected void initFilterBean() throws ServletException {
 
+		String includeSuffixStr = getFilterConfig().getInitParameter(INCLUDE_SUFFIXS_NAME);
+
+		if (StringUtils.isNotBlank(includeSuffixStr)) {
+			includeSuffixs = includeSuffixStr.split(",");
+			//为匹配字符串加上"."使匹配更精确，如.jpg
+			for (int i = 0; i < includeSuffixs.length; i++) {
+				includeSuffixs[i] = "." + includeSuffixs[i];
+			}
+		}
+
 		String excludeSuffixStr = getFilterConfig().getInitParameter(EXCLUDE_SUFFIXS_NAME);
 
 		if (StringUtils.isNotBlank(excludeSuffixStr)) {
 			excludeSuffixs = excludeSuffixStr.split(",");
-			//处理匹配字符串为".后缀名"
 			for (int i = 0; i < excludeSuffixs.length; i++) {
 				excludeSuffixs[i] = "." + excludeSuffixs[i];
 			}

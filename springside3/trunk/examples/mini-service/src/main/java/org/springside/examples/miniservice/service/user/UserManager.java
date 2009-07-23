@@ -54,6 +54,6 @@ public class UserManager extends EntityManager<User, Long> {
 	public boolean authenticate(String loginName, String password) {
 		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password))
 			return false;
-		return (userDao.findLong(UserDao.AUTH_HQL, loginName, password) == 1);
+		return ((Integer) userDao.findUnique(UserDao.AUTH_HQL, loginName, password) == 1);
 	}
 }

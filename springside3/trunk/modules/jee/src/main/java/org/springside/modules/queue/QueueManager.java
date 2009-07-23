@@ -130,6 +130,7 @@ public class QueueManager implements ApplicationContextAware {
 					logger.warn("因为consumer task bean {} 为Singleton,将并发数调整为1.", taskBeanName);
 					threadCount = 1;
 				}
+
 				ExecutorService executor = Executors.newFixedThreadPool(threadCount);
 
 				for (int i = 0; i < threadCount; i++) {
@@ -139,6 +140,7 @@ public class QueueManager implements ApplicationContextAware {
 					taskInstance.setQueue(queue);
 					executor.execute(taskInstance);
 				}
+
 				executorList.add(executor);
 			} catch (Exception e) {
 				logger.error("启动任务" + queueName + "时出错", e);

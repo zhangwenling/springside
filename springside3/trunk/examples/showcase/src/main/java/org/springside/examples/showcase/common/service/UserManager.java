@@ -74,7 +74,7 @@ public class UserManager extends EntityManager<User, Long> {
 	 */
 	@Transactional(readOnly = true)
 	public long getUserCount() {
-		return userDao.findLong(UserDao.COUNT_USERS);
+		return userDao.findUnique(UserDao.COUNT_USERS);
 	}
 
 	/**

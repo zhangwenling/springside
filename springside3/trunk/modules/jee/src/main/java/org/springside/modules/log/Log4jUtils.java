@@ -27,10 +27,10 @@ public class Log4jUtils {
 	public static final String LOGGER_NAME = "loggerName";
 	public static final String THREAD_NAME = "threadName";
 
-	public static final PatternLayout DEFAULT_PATTERN = new PatternLayout("%d [%t] %-5p %c - %m");
+	public static final PatternLayout DEFAULT_PATTERN_LAYOUT = new PatternLayout("%d [%t] %-5p %c - %m");
 
 	public static String convertEventToString(LoggingEvent event) {
-		return DEFAULT_PATTERN.format(event);
+		return DEFAULT_PATTERN_LAYOUT.format(event);
 	}
 
 	public static String convertEventToString(LoggingEvent event, String pattern) {

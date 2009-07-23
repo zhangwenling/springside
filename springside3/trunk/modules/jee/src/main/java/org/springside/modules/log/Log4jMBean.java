@@ -23,15 +23,17 @@ public class Log4jMBean {
 	}
 
 	@ManagedOperation(description = "get the logging level to the root logger")
-	public String getLogLevel(@ManagedOperationParameter(name = "name", description = "logger name") String name) {
-		Logger logger = Logger.getLogger(name);
+	public String getLogLevel(
+			@ManagedOperationParameter(name = "loggerName", description = "logger name") String loggerName) {
+		Logger logger = Logger.getLogger(loggerName);
 		return logger.getLevel().toString();
 	}
 
 	@ManagedOperation(description = "set the new logging level to logger")
-	public void setLogLevel(@ManagedOperationParameter(name = "name", description = "logger name") String name,
+	public void setLogLevel(
+			@ManagedOperationParameter(name = "loggerName", description = "logger name") String loggerName,
 			@ManagedOperationParameter(name = "newlevel", description = "new level") String newLevel) {
-		Logger logger = Logger.getLogger(name);
+		Logger logger = Logger.getLogger(loggerName);
 		Level level = Level.toLevel(newLevel);
 		logger.setLevel(level);
 	}

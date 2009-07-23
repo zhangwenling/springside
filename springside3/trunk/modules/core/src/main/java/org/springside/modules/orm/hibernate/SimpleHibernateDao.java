@@ -156,7 +156,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 
 	 * @param values 数量可变的参数,按顺序绑定.
 	 */
-	public List<T> find(final String hql, final Object... values) {
+	public <X> List<X> find(final String hql, final Object... values) {
 		return createQuery(hql, values).list();
 	}
 
@@ -165,7 +165,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 
 	 * @param values 命名参数,按名称绑定.
 	 */
-	public List<T> find(final String hql, final Map<String, Object> values) {
+	public <X> List<X> find(final String hql, final Map<String, Object> values) {
 		return createQuery(hql, values).list();
 	}
 
@@ -174,8 +174,8 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 
 	 * @param values 数量可变的参数,按顺序绑定.
 	 */
-	public T findUnique(final String hql, final Object... values) {
-		return (T) createQuery(hql, values).uniqueResult();
+	public <X> X findUnique(final String hql, final Object... values) {
+		return (X) createQuery(hql, values).uniqueResult();
 	}
 
 	/**
@@ -183,33 +183,8 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 
 	 * @param values 命名参数,按名称绑定.
 	 */
-	public T findUnique(final String hql, final Map<String, Object> values) {
-		return (T) createQuery(hql, values).uniqueResult();
-	}
-
-	/**
-	 * 按HQL查询Integer类型结果.
-	 */
-	public Integer findInt(final String hql, final Object... values) {
-		return (Integer) findUnique(hql, values);
-	}
-
-	public Integer findInt(final String hql, final Map<String, Object> values) {
-		return (Integer) findUnique(hql, values);
-	}
-
-	/**
-	 * 按HQL查询Long类型结果.
-	 */
-	public Long findLong(final String hql, final Object... values) {
-		return (Long) findUnique(hql, values);
-	}
-
-	/**
-	 * 按HQL查询Long类型结果.
-	 */
-	public Long findLong(final String hql, final Map<String, Object> values) {
-		return (Long) findUnique(hql, values);
+	public <X> X findUnique(final String hql, final Map<String, Object> values) {
+		return (X) createQuery(hql, values).uniqueResult();
 	}
 
 	/**
@@ -221,6 +196,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 执行HQL进行批量修改/删除操作.
+	 * @return 更新记录数.
 	 */
 	public int batchExecute(final String hql, final Map<String, Object> values) {
 		return createQuery(hql, values).executeUpdate();
@@ -313,23 +289,28 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * 通过Set将不唯一的对象列表唯一化.
-	 * 主要用于HQL/Criteria预加载关联集合形成重复记录,又不方便使用distinct查询语句时.
+	 * 为Query添加distinct transformer.
 	 */
-	public <X> List<X> distinct(List<X> list) {
-		Set<X> set = new LinkedHashSet<X>(list);
-		return new ArrayList<X>(set);
-	}
-
 	public Query distinct(Query query) {
 		query.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		return query;
 	}
 
-	public Criteria distinct(Criteria c) {
-		c.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		return c;
+	/**
+	 * 为Criteria添加distinct transformer.
+	 */
+	public Criteria distinct(Criteria criteria) {
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		return criteria;
+	}
 
+	/**
+	 * 通过Set将不唯一的对象列表唯一化.
+	 * 主要用于HQL/Criteria预加载关联集合形成重复记录,又不方便使用distinct查询语句时.
+	 */
+	public <X> List<X> distinct(List list) {
+		Set<X> set = new LinkedHashSet<X>(list);
+		return new ArrayList<X>(set);
 	}
 
 	/**
@@ -337,7 +318,6 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 */
 	public String getIdName() {
 		ClassMetadata meta = getSessionFactory().getClassMetadata(entityClass);
-		Assert.notNull(meta, "Class " + entityClass.getSimpleName() + " not define in HibernateSessionFactory.");
 		return meta.getIdentifierPropertyName();
 	}
 }

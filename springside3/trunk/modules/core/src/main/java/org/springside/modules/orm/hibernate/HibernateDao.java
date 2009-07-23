@@ -202,7 +202,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		String countHql = "select count(*) " + fromHql;
 
 		try {
-			count = findLong(countHql, values);
+			count = findUnique(countHql, values);
 		} catch (Exception e) {
 			throw new RuntimeException("hql can't be auto count, hql is:" + countHql, e);
 		}
@@ -224,7 +224,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		String countHql = "select count(*) " + fromHql;
 
 		try {
-			count = findLong(countHql, values);
+			count = findUnique(countHql, values);
 		} catch (Exception e) {
 			throw new RuntimeException("hql can't be auto count, hql is:" + countHql, e);
 		}

@@ -1,22 +1,23 @@
 package org.springside.examples.showcase.unit.xml;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springside.examples.showcase.xml.jaxb.JaxbUtil;
 import org.springside.examples.showcase.xml.jaxb.Role;
 import org.springside.examples.showcase.xml.jaxb.User;
+import org.springside.modules.xml.JaxbBinder;
+import org.springside.modules.xml.XmlBinder;
 
 /**
- * 演示基于JAXB的Java对象-XML转换.
+ * 演示基于JAXB2.0的Java对象-XML转换.
  * 
  * @author calvin
  */
 public class JaxbTest {
-	private JaxbUtil jaxbUtil;
+	private static XmlBinder binder;
 
-	@Before
+	@BeforeClass
 	public void setUp() {
-		jaxbUtil = new JaxbUtil(User.class);
+		binder = new JaxbBinder(User.class);
 	}
 
 	@Test
@@ -35,7 +36,7 @@ public class JaxbTest {
 		user.getHouses().put("gz", "house1");
 		user.getHouses().put("bj", "house2");
 
-		String xml = jaxbUtil.marshal(user);
+		String xml = binder.toXml(user);
 		System.out.println(xml);
 	}
 
@@ -46,7 +47,7 @@ public class JaxbTest {
 				+ "<interest>movie</interest><interest>sports</interest></interests><houses>"
 				+ "<item key=\"bj\"><value>house2</value></item><item key=\"gz\">"
 				+ "<value>house1</value></item></houses></user>";
-		User user = jaxbUtil.unmarshal(xml);
+		User user = binder.fromXml(xml);
 		System.out.println(user);
 	}
 }

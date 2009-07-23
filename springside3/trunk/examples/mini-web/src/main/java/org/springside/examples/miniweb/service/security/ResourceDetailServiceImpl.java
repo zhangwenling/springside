@@ -23,7 +23,7 @@ public class ResourceDetailServiceImpl implements ResourceDetailService {
 	 * @see ResourceDetailService#getRequestMap()
 	 */
 	public LinkedHashMap<String, String> getRequestMap() throws Exception {
-		List<Resource> resourceList = resourceDao.find(ResourceDao.QUERY_BY_URL_TYPE, Resource.URL_TYPE);
+		List<Resource> resourceList = resourceDao.getUrlResourceWithAuthorities();
 
 		LinkedHashMap<String, String> requestMap = new LinkedHashMap<String, String>(resourceList.size());
 		for (Resource resource : resourceList) {
@@ -31,5 +31,4 @@ public class ResourceDetailServiceImpl implements ResourceDetailService {
 		}
 		return requestMap;
 	}
-
 }

@@ -165,7 +165,7 @@ public class JmxClient {
 	}
 
 	/**
-	 * 转换ObjectName构造函数抛出的异常为unchecked exception.
+	 * 构造ObjectName对象,并转换其抛出的异常为unchecked exception.
 	 */
 	private ObjectName buildObjectName(final String mbeanName) {
 		try {

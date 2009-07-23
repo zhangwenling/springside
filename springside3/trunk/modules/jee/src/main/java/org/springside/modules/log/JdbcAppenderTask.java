@@ -14,6 +14,8 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.apache.log4j.spi.LoggingEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -29,6 +31,7 @@ import org.springside.modules.queue.QueueConsumerTask;
  */
 public class JdbcAppenderTask extends QueueConsumerTask {
 
+	protected Logger logger = LoggerFactory.getLogger(JdbcAppenderTask.class);
 	protected SimpleJdbcTemplate jdbcTemplate;
 	protected String sql;
 	protected int bufferSize = 10;
@@ -66,7 +69,7 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 				processEvent(event);
 			}
 		} catch (InterruptedException e) {
-			logger.debug("消费线程阻塞被中断", e);
+			logger.debug("消费线程阻塞被中断");
 		}
 		clean();
 	}

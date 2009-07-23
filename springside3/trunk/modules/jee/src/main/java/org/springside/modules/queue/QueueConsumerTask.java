@@ -9,9 +9,6 @@ package org.springside.modules.queue;
 
 import java.util.concurrent.BlockingQueue;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * 消费Queue中消息的任务基类.
  * 
@@ -22,14 +19,11 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("unchecked")
 public abstract class QueueConsumerTask implements Runnable {
 
-	protected Logger logger = LoggerFactory.getLogger(getClass());
-
 	protected BlockingQueue queue;
-
 	protected int threadCount = 1;
 
 	/**
-	 * 任务消费的队列.
+	 * 任务所消费的队列.
 	 */
 	public void setQueue(BlockingQueue queue) {
 		this.queue = queue;
@@ -45,5 +39,4 @@ public abstract class QueueConsumerTask implements Runnable {
 	public void setThreadCount(int threadCount) {
 		this.threadCount = threadCount;
 	}
-
 }
