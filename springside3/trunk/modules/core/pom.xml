@@ -9,26 +9,11 @@
 	</parent>
 	<groupId>org.springside</groupId>
 	<artifactId>springside3-core</artifactId>
-	<name>Springside's Core Module</name>
-	<version>${springside.version}</version>
-	<build>
-		<outputDirectory>target/classes</outputDirectory>
-		<plugins>
-			<plugin>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+	<name>Springside3's Core Module</name>
+	<version>3.1.4</version>
 
 	<dependencies>
+		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
@@ -39,6 +24,8 @@
 			<artifactId>jsr250-api</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -49,6 +36,8 @@
 			<artifactId>hibernate-annotations</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- web -->
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-core</artifactId>
@@ -72,12 +61,14 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core-tiger</artifactId>
 			<optional>true</optional>
 		</dependency>
 
+		<!-- utils -->
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
 			<artifactId>dozer</artifactId>
@@ -94,6 +85,7 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -110,6 +102,7 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- test -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -129,4 +122,21 @@
 			<optional>true</optional>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<outputDirectory>target/classes</outputDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

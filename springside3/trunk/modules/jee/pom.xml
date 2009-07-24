@@ -9,27 +9,11 @@
 	</parent>
 	<groupId>org.springside</groupId>
 	<artifactId>springside3-jee</artifactId>
-	<name>Springside's JavaEE Module</name>
-	<version>${springside.version}</version>
-	<build>
-		<outputDirectory>target/classes</outputDirectory>
-		<plugins>
-			<!-- source插件,打包源码 -->
-			<plugin>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+	<name>Springside3's JavaEE Module</name>
+	<version>3.1.4</version>
 
 	<dependencies>
+		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -51,11 +35,7 @@
 			<optional>true</optional>
 		</dependency>
 
-		<dependency>
-			<groupId>com.octo.captcha</groupId>
-			<artifactId>jcaptcha</artifactId>
-			<optional>true</optional>
-		</dependency>
+		<!-- web -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -67,7 +47,14 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!--  xml binding begin -->
+		<!-- security -->
+		<dependency>
+			<groupId>com.octo.captcha</groupId>
+			<artifactId>jcaptcha</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!--  xml -->
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
@@ -79,8 +66,8 @@
 			<artifactId>jaxb-impl</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!--  xml binding end -->
 
+		<!-- logging -->
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
@@ -101,7 +88,8 @@
 			<artifactId>log4j</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+
+		<!-- test -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -113,4 +101,23 @@
 			<optional>true</optional>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<outputDirectory>target/classes</outputDirectory>
+		<plugins>
+			<!-- source插件,打包源码 -->
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>
