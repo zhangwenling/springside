@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2005-2009 springside.org.cn
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * 
+ * $Id$
+ */
 package org.springside.modules.xml;
 
 import java.io.StringReader;
@@ -9,7 +16,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 /**
- * 使用Jaxb持久化XML的Util.
+ * 使用Jaxb2.0持久化XML的Binder.
  * 
  * @author calvin
  */
@@ -55,5 +62,13 @@ public class JaxbBinder implements XmlBinder {
 		} catch (JAXBException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public Marshaller getMarshaller() {
+		return marshaller;
+	}
+
+	public Unmarshaller getUnmarshaller() {
+		return unmarshaller;
 	}
 }
