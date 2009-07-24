@@ -4,16 +4,10 @@
 
 	<description>日志高级演示配置</description>
 
-	<bean class="org.springside.modules.queue.QueueManager" lazy-init="false">
-		<property name="taskBeanMapping">
-			<map>
-				<entry key="dblog" value="dbLogTask" />
-			</map>
-		</property>
-	</bean>
+	<bean class="org.springside.modules.queue.QueueManager" lazy-init="false"/>
 
 	<bean id="dbLogTask" class="org.springside.modules.log.JdbcAppenderTask" scope="prototype">
-		<property name="threadCount" value="2" />
+		<property name="queueName" value="dblog" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="sql"
 			value="insert into LOGS(THREAD_NAME,LOGGER_NAME,TIMESTAMP,LEVEL,MESSAGE) values(:threadName,:loggerName,:timestamp,:level,:message)" />

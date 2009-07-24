@@ -21,19 +21,13 @@ import java.util.Map.Entry;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedOperationParameter;
 import org.springframework.jmx.export.annotation.ManagedResource;
@@ -45,19 +39,15 @@ import org.springframework.jmx.export.annotation.ManagedResource;
  */
 @SuppressWarnings("unchecked")
 @ManagedResource(objectName = "Custom:type=QueueManagement,name=queueManagement", description = "Queue Managed Bean")
-public class QueueManager implements ApplicationContextAware {
+public class QueueManager {
 
 	protected static Logger logger = LoggerFactory.getLogger(QueueManager.class);
 
-	//内部属性//
 	protected static Map<String, BlockingQueue> queueMap = new ConcurrentHashMap<String, BlockingQueue>();//消息队列
-	protected ApplicationContext applicatiionContext;
-	protected List<ExecutorService> executorList = new ArrayList();//执行任务的线程池列表
+	protected static List<ExecutorService> executorList = new ArrayList();//执行任务的线程池列表
 
-	//可配置属性//
-	protected Map<String, String> taskBeanMapping; //队列名称与消费任务名称映射
-	protected int shutdownWait = 10000; //停止每个队列时最多等待的时间,单位为毫秒.
-	protected boolean persistence = true; //是否将队列中未处理的消息持久化到文件.
+	protected static boolean persistence = true;
+	protected int shutdownWait = 10000;
 
 	/**
 	 * 根据queueName获得消息队列的静态函数.
@@ -68,6 +58,16 @@ public class QueueManager implements ApplicationContextAware {
 
 		if (queue == null) {
 			queue = new LinkedBlockingQueue();
+
+			//从文件中恢复消息到队列.
+			if (persistence) {
+				try {
+					restore(queueName);
+				} catch (Exception e) {
+					logger.error("载入队列" + queueName + "时出错", e);
+				}
+			}
+
 			queueMap.put(queueName, queue);
 		}
 
@@ -83,12 +83,8 @@ public class QueueManager implements ApplicationContextAware {
 		return getQueue(queueName).size();
 	}
 
-	/**
-	 * ApplicationContext中consumer task与queue的名称列表.
-	 */
-	@Required
-	public void setTaskBeanMapping(Map<String, String> taskBeanMapping) {
-		this.taskBeanMapping = taskBeanMapping;
+	public static List<ExecutorService> getExecutorList() {
+		return executorList;
 	}
 
 	/**
@@ -102,62 +98,7 @@ public class QueueManager implements ApplicationContextAware {
 	 * 是否将队列中为处理的消息持久化到文件, 默认为true.
 	 */
 	public void setPersistence(boolean persistence) {
-		this.persistence = persistence;
-	}
-
-	/**
-	 * @see ApplicationContextAware#setApplicationContext(ApplicationContext)
-	 */
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		applicatiionContext = applicationContext;
-	}
-
-	@PostConstruct
-	public void start() {
-
-		for (Entry<String, String> entry : taskBeanMapping.entrySet()) {
-			String queueName = entry.getKey();
-			String taskBeanName = entry.getValue();
-			QueueConsumerTask task = (QueueConsumerTask) applicatiionContext.getBean(taskBeanName);
-			int threadCount = task.getThreadCount();
-
-			try {
-				//初始化队列
-				BlockingQueue queue = getQueue(queueName);
-
-				//多线程运行任务
-				if (applicatiionContext.isSingleton(taskBeanName)) {
-					logger.warn("因为consumer task bean {} 为Singleton,将并发数调整为1.", taskBeanName);
-					threadCount = 1;
-				}
-
-				ExecutorService executor = Executors.newFixedThreadPool(threadCount);
-
-				for (int i = 0; i < threadCount; i++) {
-					//从ApplicationContext获得task的新实例
-					QueueConsumerTask taskInstance = (i == 0) ? task : (QueueConsumerTask) applicatiionContext
-							.getBean(taskBeanName);
-					taskInstance.setQueue(queue);
-					executor.execute(taskInstance);
-				}
-
-				executorList.add(executor);
-			} catch (Exception e) {
-				logger.error("启动任务" + queueName + "时出错", e);
-			}
-
-		}
-
-		//从文件中恢复消息到队列.
-		if (persistence) {
-			for (Entry<String, BlockingQueue> entry : queueMap.entrySet()) {
-				try {
-					restore(entry.getKey());
-				} catch (Exception e) {
-					logger.error("载入队列" + entry.getKey() + "时出错", e);
-				}
-			}
-		}
+		QueueManager.persistence = persistence;
 	}
 
 	@PreDestroy
@@ -193,7 +134,7 @@ public class QueueManager implements ApplicationContextAware {
 	 * 当队列中消息过多时, 客户端代码亦可调用本函数进行持久化, 等高峰期过后重新执行restore().
 	 */
 	public static void backup(String queueName) throws IOException {
-		BlockingQueue queue = getQueue(queueName);
+		BlockingQueue queue = queueMap.get(queueName);
 		List list = new ArrayList();
 		queue.drainTo(list);
 
@@ -227,7 +168,7 @@ public class QueueManager implements ApplicationContextAware {
 		if (file.exists()) {
 			try {
 				ois = new ObjectInputStream(new FileInputStream(file));
-				BlockingQueue queue = getQueue(queueName);
+				BlockingQueue queue = queueMap.get(queueName);
 				int i = 0;
 				while (true) {
 					try {

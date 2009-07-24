@@ -8,6 +8,10 @@
 package org.springside.modules.queue;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import javax.annotation.PostConstruct;
 
 /**
  * 消费Queue中消息的任务基类.
@@ -20,7 +24,8 @@ import java.util.concurrent.BlockingQueue;
 public abstract class QueueConsumerTask implements Runnable {
 
 	protected BlockingQueue queue;
-	protected int threadCount = 1;
+
+	protected String queueName;
 
 	/**
 	 * 任务所消费的队列.
@@ -30,13 +35,18 @@ public abstract class QueueConsumerTask implements Runnable {
 	}
 
 	/**
-	 * 可配置的任的并发处理线程数.
+	 * 任务所消费的队列名称.
 	 */
-	public int getThreadCount() {
-		return threadCount;
+	public void setQueueName(String queueName) {
+		this.queueName = queueName;
 	}
 
-	public void setThreadCount(int threadCount) {
-		this.threadCount = threadCount;
+	@PostConstruct
+	public void start() {
+		queue = QueueManager.getQueue(queueName);
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+		executor.execute(this);
+		QueueManager.getExecutorList().add(executor);
+
 	}
 }
