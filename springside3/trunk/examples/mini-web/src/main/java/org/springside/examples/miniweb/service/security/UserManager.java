@@ -41,7 +41,7 @@ public class UserManager {
 	private AuthorityDao authorityDao;
 
 	// User Manager //
-
+	@Transactional(readOnly = true)
 	public User getUser(long id) {
 		return userDao.get(id);
 	}
@@ -57,7 +57,8 @@ public class UserManager {
 		}
 		userDao.delete(id);
 	}
-
+	
+	@Transactional(readOnly = true)
 	public Page<User> searchUser(final Page<User> page, final List<PropertyFilter> filters) {
 		return userDao.find(page, filters);
 	}
@@ -73,11 +74,12 @@ public class UserManager {
 	}
 
 	// Role Manager //
-
+	@Transactional(readOnly = true)
 	public Role getRole(Long id) {
 		return roleDao.get(id);
 	}
-
+	
+	@Transactional(readOnly = true)
 	public List<Role> getAllRole() {
 		return roleDao.getAll();
 	}
@@ -96,7 +98,7 @@ public class UserManager {
 	}
 
 	// Authority Manager //
-
+	@Transactional(readOnly = true)
 	public List<Authority> getAllAuthority() {
 		return authorityDao.getAll();
 	}

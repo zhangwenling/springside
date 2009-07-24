@@ -1,7 +1,9 @@
 package org.springside.examples.miniweb.functional.security;
 
 import org.junit.Test;
+import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
+import org.springside.examples.miniweb.unit.service.security.UserData;
 import org.springside.modules.test.groups.Groups;
 
 public class UserManagerTest extends BaseSeleniumTestCase {
@@ -35,24 +37,31 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 
 	}
 
+	/**
+	 * 创建用户,并返回创建的用户名.
+	 */
 	private String createUser() {
 		selenium.open("/mini-web/security/user.action");
 		selenium.click("link=增加新用户");
 		waitPageLoad();
 
-		String loginName = "Tester" + randomString(5);
-		selenium.type("loginName", loginName);
-		selenium.type("name", loginName);
-		selenium.type("password", "tester");
-		selenium.type("passwordConfirm", "tester");
+		User user = UserData.getRandomUser();
+		
+		selenium.type("loginName", user.getLoginName());
+		selenium.type("name", user.getName());
+		selenium.type("password", user.getPassword());
+		selenium.type("passwordConfirm", user.getPassword());
 		selenium.click("checkedRoleIds-2");
 		selenium.click("//input[@value='提交']");
 		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("保存用户成功"));
-		return loginName;
+		return user.getLoginName();
 	}
 
+	/**
+	 * 根据用户名修改对象.
+	 */
 	private void editUser(String loginName) {
 		String newUserName = "newUserName";
 
@@ -71,6 +80,9 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		assertEquals(newUserName, selenium.getTable("//div[@id='listContent']/table.1.1"));
 	}
 
+	/**
+	 * 根据用户名删除对象.
+	 */
 	private void deleteUser(String loginName) {
 		selenium.open("/mini-web/security/user.action");
 		findUser(loginName);
@@ -83,8 +95,11 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		assertTrue(selenium.isTextPresent("共0页"));
 	}
 
-	private void findUser(String userName) {
-		selenium.type("filter_EQ_loginName", userName);
+	/**
+	 * 根据用户名查找用户. 
+	 */
+	private void findUser(String loginName) {
+		selenium.type("filter_EQ_loginName", loginName);
 		selenium.click("//input[@value='搜索']");
 		waitPageLoad();
 	}

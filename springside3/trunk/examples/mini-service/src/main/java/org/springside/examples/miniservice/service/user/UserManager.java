@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniservice.dao.UserDao;
 import org.springside.examples.miniservice.entity.user.User;
-import org.springside.examples.miniservice.service.EntityManager;
 
 /**
  * 用户管理类.
@@ -23,26 +22,25 @@ import org.springside.examples.miniservice.service.EntityManager;
 @Service
 //默认将类中的所有函数纳入事务管理.
 @Transactional
-public class UserManager extends EntityManager<User, Long> {
+public class UserManager {
 	@Autowired
 	private UserDao userDao;
-
-	@Override
-	protected UserDao getEntityDao() {
-		return userDao;
-	}
-
+	
 	/**
 	 * 获取全部用户,已对用户及关联角色集合进行初始化.
 	 */
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
-		List<User> users = getAll();
+		List<User> users = userDao.getAll();
 
 		for (User user : users) {
 			userDao.initObject(user.getRoles());
 		}
 		return users;
+	}
+	
+	public void saveUser(User user) {
+		userDao.save(user);
 	}
 
 	/**
@@ -54,6 +52,6 @@ public class UserManager extends EntityManager<User, Long> {
 	public boolean authenticate(String loginName, String password) {
 		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password))
 			return false;
-		return ((Integer) userDao.findUnique(UserDao.AUTH_HQL, loginName, password) == 1);
+		return ((Long) userDao.findUnique(UserDao.AUTH_HQL, loginName, password) == 1);
 	}
 }

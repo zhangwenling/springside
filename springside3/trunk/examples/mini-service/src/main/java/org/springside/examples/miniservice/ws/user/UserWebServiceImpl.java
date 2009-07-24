@@ -67,7 +67,7 @@ public class UserWebServiceImpl extends WebServiceSupport implements UserWebServ
 			User userEntity = (User) dozer.map(user, User.class);
 
 			// 保存User
-			userManager.save(userEntity);
+			userManager.saveUser(userEntity);
 			result.setUserId(userEntity.getId());
 		} catch (RuntimeException e) {
 			result.setSystemError();

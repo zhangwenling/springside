@@ -5,7 +5,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.service.user.UserManager;
 import org.springside.examples.miniservice.ws.WSResult;
 import org.springside.examples.miniservice.ws.user.UserWebServiceImpl;
@@ -39,12 +38,8 @@ public class UserWebServiceTest extends Assert {
 	@Test
 	public void authUser() {
 		//准备数据,录制脚本
-		User user = new User();
-		user.setId(1L);
-		user.setLoginName("admin");
-
-		org.easymock.EasyMock.expect(userManager.authenticate("admin", "admin")).andReturn(true);
-		org.easymock.EasyMock.expect(userManager.authenticate("admin", "false")).andReturn(false);
+		EasyMock.expect(userManager.authenticate("admin", "admin")).andReturn(true);
+		EasyMock.expect(userManager.authenticate("admin", "errorPasswd")).andReturn(false);
 		EasyMock.replay(userManager);
 
 		//执行输入正确的测试,校验结果

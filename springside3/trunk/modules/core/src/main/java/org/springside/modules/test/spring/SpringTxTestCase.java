@@ -7,7 +7,6 @@
  */
 package org.springside.modules.test.spring;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.springframework.test.context.ContextConfiguration;
@@ -41,15 +40,6 @@ public class SpringTxTestCase extends AbstractTransactionalJUnit4SpringContextTe
 	 */
 	protected void flush(final String sessionFactoryName) {
 		((SessionFactory) applicationContext.getBean(sessionFactoryName)).getCurrentSession().flush();
-	}
-
-	/**
-	 * 产生包含数字和字母的随机字符串.
-	 * 
-	 * @param length 产生字符串长度
-	 */
-	protected String randomString(int length) {
-		return RandomStringUtils.randomAlphanumeric(length);
 	}
 
 	// Assert 函数 //

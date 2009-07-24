@@ -9,7 +9,6 @@ package org.springside.modules.test.selenium;
 
 import java.util.Properties;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -77,15 +76,6 @@ public class SeleniumTestCase {
 	 */
 	public static void waitPageLoad() {
 		selenium.waitForPageToLoad(WAIT_FOR_PAGE);
-	}
-
-	/**
-	 * 产生包含数字和字母的随机字符串.
-	 * 
-	 * @param length 产生字符串长度
-	 */
-	protected static String randomString(int length) {
-		return RandomStringUtils.randomAlphanumeric(length);
 	}
 
 	// Assert 函数 //

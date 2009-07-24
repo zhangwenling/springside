@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.security.UserManager;
+import org.springside.examples.miniweb.unit.service.security.UserData;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
@@ -24,12 +25,7 @@ public class UserManagerTest extends SpringTxTestCase {
 	//@Rollback(false) 
 	public void crudUser() {
 		//保存用户并验证.
-		User entity = new User();
-		// 因为LoginName要求唯一性，因此添加random字段。
-		entity.setLoginName("tester" + randomString(5));
-		entity.setName("foo");
-		entity.setEmail("foo@bar.com");
-		entity.setPassword("foo");
+		User entity = UserData.getRandomUser();
 		userManager.saveUser(entity);
 		//强制执行sql语句
 		flush();
@@ -44,14 +40,14 @@ public class UserManagerTest extends SpringTxTestCase {
 	@Test
 	public void crudUserAndRole() {
 		//保存带角色的用户并验证
-		User entity = new User();
-		entity.setLoginName("tester" + randomString(5));
-
-		Role role = new Role();
-		role.setId(1L);
+		User entity = UserData.getRandomUser();
+		Role role = UserData.getRandomRole();
 		entity.getRoles().add(role);
+		
+		userManager.saveRole(role);
 		userManager.saveUser(entity);
 		flush();
+		
 		entity = userManager.getUser(entity.getId());
 		assertEquals(1, entity.getRoles().size());
 
@@ -65,7 +61,7 @@ public class UserManagerTest extends SpringTxTestCase {
 	//期望抛出ConstraintViolationException的异常.
 	@Test(expected = org.hibernate.exception.ConstraintViolationException.class)
 	public void savenUserNotUnique() {
-		User entity = new User();
+		User entity = UserData.getRandomUser();
 		entity.setLoginName("admin");
 		userManager.saveUser(entity);
 		flush();
