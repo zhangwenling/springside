@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
@@ -72,9 +71,6 @@ public class QueueManagerTest extends Assert {
 		assertEquals(true, file.exists());
 
 		BlockingQueue newQueue = QueueManager.getQueue(queueName);
-		manager = new QueueManager();
-		manager.setTaskBeanMapping(new HashMap());
-		manager.start();
 
 		List list = new ArrayList();
 		newQueue.drainTo(list);

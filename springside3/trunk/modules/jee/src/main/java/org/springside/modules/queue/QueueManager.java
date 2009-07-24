@@ -58,6 +58,7 @@ public class QueueManager {
 
 		if (queue == null) {
 			queue = new LinkedBlockingQueue();
+			queueMap.put(queueName, queue);
 
 			//从文件中恢复消息到队列.
 			if (persistence) {
@@ -67,8 +68,6 @@ public class QueueManager {
 					logger.error("载入队列" + queueName + "时出错", e);
 				}
 			}
-
-			queueMap.put(queueName, queue);
 		}
 
 		return queue;

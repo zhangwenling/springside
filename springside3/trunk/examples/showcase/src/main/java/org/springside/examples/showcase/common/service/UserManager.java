@@ -5,6 +5,8 @@ import java.util.List;
 import org.perf4j.StopWatch;
 import org.perf4j.aop.Profiled;
 import org.perf4j.log4j.Log4JStopWatch;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +27,9 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 @Service
 //默认将类中的所有函数纳入事务管理.
 @Transactional
-public class UserManager extends EntityManager<User, Long> {
+public class UserManager {
+
+	protected Logger logger = LoggerFactory.getLogger(UserManager.class);
 	@Autowired
 	private UserDao userDao;
 	@Autowired(required = false)
@@ -35,38 +39,34 @@ public class UserManager extends EntityManager<User, Long> {
 	@Autowired(required = false)
 	private MimeMailService mimeMailService;//邮件发送
 
-	@Override
-	protected UserDao getEntityDao() {
-		return userDao;
+	public User getUser(Long id) {
+		return userDao.get(id);
 	}
 
 	/**
-	 * 重载函数,演示:
-	 * 1.在保存用户时,发送通知邮件.
-	 * 2.删除超级用户时,取出当前操作员用户,打印其信息.
+	 * 在保存用户时,发送通知邮件.
+	 * 如果修改超级用户时,取出当前操作员用户,打印其信息然后抛出异常.
 	 */
-	@Override
-	public void save(User user) {
+	public void saveUser(User user) {
 		if (user.getId() == 1) {
 			Operator operator = SpringSecurityUtils.getCurrentUser();
 			logger.warn("操作员{}在{}尝试修改超级管理员用户", operator.getUsername(), operator.getLoginTime());
 			throw new ServiceException("不能修改超级管理员用户");
 		}
 
-		super.save(user);
+		userDao.save(user);
 
 		sendNotifyMail(user);
 	}
 
 	/**
-	 * 重载函数，调用预加载用户角色的Dao方法.
+	 * 调用预加载用户角色的Dao方法.
 	 */
 	//Perf4j监控性能
 	@Profiled
-	@Override
 	@Transactional(readOnly = true)
-	public List<User> getAll() {
-		return userDao.getAllUserWithRoleByHqlDistinctBySet();
+	public List<User> getAllUser() {
+		return userDao.getAllUserWithRoleByDistinctHql();
 	}
 
 	/**

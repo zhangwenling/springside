@@ -30,13 +30,13 @@ public class UserManagerTest extends SpringTxTestCase {
 		entity.setName("foo");
 		entity.setEmail("foo@bar.com");
 		entity.setPassword("foo");
-		userManager.save(entity);
+		userManager.saveUser(entity);
 		//强制执行sql语句
 		flush();
 		assertNotNull(entity.getId());
 
 		//删除用户并验证
-		userManager.delete(entity.getId());
+		userManager.deleteUser(entity.getId());
 		//强制执行sql语句
 		flush();
 	}
@@ -50,15 +50,15 @@ public class UserManagerTest extends SpringTxTestCase {
 		Role role = new Role();
 		role.setId(1L);
 		entity.getRoles().add(role);
-		userManager.save(entity);
+		userManager.saveUser(entity);
 		flush();
-		entity = userManager.get(entity.getId());
+		entity = userManager.getUser(entity.getId());
 		assertEquals(1, entity.getRoles().size());
 
 		//删除用户的角色并验证
 		entity.getRoles().remove(role);
 		flush();
-		entity = userManager.get(entity.getId());
+		entity = userManager.getUser(entity.getId());
 		assertEquals(0, entity.getRoles().size());
 	}
 
@@ -67,7 +67,7 @@ public class UserManagerTest extends SpringTxTestCase {
 	public void savenUserNotUnique() {
 		User entity = new User();
 		entity.setLoginName("admin");
-		userManager.save(entity);
+		userManager.saveUser(entity);
 		flush();
 	}
 }

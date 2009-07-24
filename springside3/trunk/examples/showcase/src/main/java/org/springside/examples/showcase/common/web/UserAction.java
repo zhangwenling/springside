@@ -42,7 +42,7 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	protected void prepareModel() throws Exception {
 		if (id != null) {
-			entity = userManager.get(id);
+			entity = userManager.getUser(id);
 		} else {
 			entity = new User();
 		}
@@ -68,7 +68,7 @@ public class UserAction extends CrudActionSupport<User> {
 
 	@Override
 	public String list() throws Exception {
-		allUsers = userManager.getAll();
+		allUsers = userManager.getAllUser();
 		return SUCCESS;
 	}
 
@@ -85,7 +85,7 @@ public class UserAction extends CrudActionSupport<User> {
 		if (workingVersion < entity.getVersion())
 			throw new StaleStateException("对象已有新的版本");
 
-		userManager.save(entity);
+		userManager.saveUser(entity);
 		return RELOAD;
 	}
 
