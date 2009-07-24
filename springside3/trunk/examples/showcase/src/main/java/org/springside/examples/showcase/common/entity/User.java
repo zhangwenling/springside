@@ -4,7 +4,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -16,6 +15,7 @@ import javax.persistence.Version;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springside.examples.showcase.orm.hibernate.AuditableEntity;
@@ -90,9 +90,10 @@ public class User extends AuditableEntity {
 		this.status = status;
 	}
 
-	//多对多定义，cascade操作避免定义CascadeType.REMOVE
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@Cascade( { org.hibernate.annotations.CascadeType.SAVE_UPDATE })
+	//多对多定义
+	@ManyToMany
+	//级联保存
+	@Cascade( { CascadeType.SAVE_UPDATE })
 	//中间表定义,表名采用默认命名规则
 	@JoinTable(joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
 	//Fecth策略定义
