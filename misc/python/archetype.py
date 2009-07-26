@@ -25,16 +25,16 @@ def createArchetypes():
     os.chdir(base_dir+'\\examples\\mini-web')
     os.system('mvn archetype:create-from-project -DpackageName=org.springside.examples.miniweb')
     
-    os.system('xcopy /s/e/i/y '+base_dir+'\\examples\\mini-service\\target\\generated-sources\\archetype\\src\\main\\resources\\archetype-resources '+base_dir+'\\tools\\generator\\maven-archetypes\\service-archetype\\src\\main\\resources\\archetype-resources')
-    os.system('xcopy /s/e/i/y '+base_dir+'\\examples\\mini-web\\target\\generated-sources\\archetype\\src\\main\\resources\\archetype-resources '+base_dir+'\\tools\\generator\\maven-archetypes\\web-archetype\\src\\main\\resources\\archetype-resources')
+    os.system('xcopy /s/e/i/y '+base_dir+'\\examples\\mini-service\\target\\generated-sources\\archetype\\src\\main\\resources\\archetype-resources '+base_dir+'\\tools\\code-generator\\maven-archetypes\\service-archetype\\src\\main\\resources\\archetype-resources')
+    os.system('xcopy /s/e/i/y '+base_dir+'\\examples\\mini-web\\target\\generated-sources\\archetype\\src\\main\\resources\\archetype-resources '+base_dir+'\\tools\\code-generator\\maven-archetypes\\web-archetype\\src\\main\\resources\\archetype-resources')
 
     print 'created archetypes.'
 
 def modifyArchetypes():
-    commonModifyArchetype(base_dir+'/tools/generator/maven-archetypes/service-archetype/src/main/resources/archetype-resources')
-    commonModifyArchetype(base_dir+'/tools/generator/maven-archetypes/web-archetype/src/main/resources/archetype-resources')
+    commonModifyArchetype(base_dir+'/tools/code-generator/maven-archetypes/service-archetype/src/main/resources/archetype-resources')
+    commonModifyArchetype(base_dir+'/tools/code-generator/maven-archetypes/web-archetype/src/main/resources/archetype-resources')
 
-    os.chdir(base_dir+'/tools/generator/maven-archetypes/service-archetype/src/main/resources/archetype-resources')
+    os.chdir(base_dir+'/tools/code-generator/maven-archetypes/service-archetype/src/main/resources/archetype-resources')
     replaceinfile('bin/ws-bin/build-client.bat','mini-service','${artifactId}')
     replaceinfile('bin/ws-bin/save-wsdl.bat','mini-service','${artifactId}')
     replaceinfile('bin/ws-bin/build-client-binding.xml','http://miniservice.examples.springside.org','${webservice-namespace}')
@@ -87,7 +87,7 @@ def clean():
  
     print 'cleaned temp files.'
 
-springside_version='3.1.4'
+springside_version='3.1.5'
 base_dir = os.path.abspath("../../")
 
 prepare()

@@ -20,7 +20,7 @@ def packageAll():
    os.system('xcopy /s/e/i/h %USERPROFILE%\\.m2\\repository '+springside_dir + '\\tools\\maven\\central-repository')
 
    ## copy tomcat 
-   os.chdir(base_dir+'\\servers\\tomcat\\apache-tomcat-6.0.20')
+   os.chdir(base_dir+'\\tools\\tomcat\\apache-tomcat-6.0.20')
    emptydir('temp')
    emptydir('work')
    emptydir('logs')
@@ -32,7 +32,7 @@ def packageAll():
    rmfile('webapps/showcase.war')
 
    os.chdir(export_dir)
-   os.system('xcopy /s/e/i/y '+base_dir+'\\servers\\tomcat\\apache-tomcat-6.0.20 '+springside_dir+'\\servers\\tomcat\\apache-tomcat-6.0.20')   
+   os.system('xcopy /s/e/i/y '+base_dir+'\\tools\\tomcat\\apache-tomcat-6.0.20 '+springside_dir+'\\tools\\tomcat\\apache-tomcat-6.0.20')   
    ## copy selenium 
    os.system('xcopy /s/e/i/y '+base_dir+'\\tools\\selenium '+springside_dir+'\\tools\\selenium')
 
