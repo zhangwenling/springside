@@ -11,8 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ${package}.entity.security.Authority;
 import ${package}.entity.security.Role;
 import ${package}.service.ServiceException;
-import ${package}.service.security.AuthorityManager;
-import ${package}.service.security.RoleManager;
+import ${package}.service.security.UserManager;
 import ${package}.web.CrudActionSupport;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;
 
@@ -28,9 +27,7 @@ import org.springside.modules.orm.hibernate.HibernateWebUtils;
 public class RoleAction extends CrudActionSupport<Role> {
 
 	@Autowired
-	private RoleManager roleManager;
-	@Autowired
-	private AuthorityManager authorityManager;
+	private UserManager userManager;
 
 	// 基本属性
 	private Role entity;
@@ -50,7 +47,7 @@ public class RoleAction extends CrudActionSupport<Role> {
 	@Override
 	protected void prepareModel() throws Exception {
 		if (id != null) {
-			entity = roleManager.get(id);
+			entity = userManager.getRole(id);
 		} else {
 			entity = new Role();
 		}
@@ -68,13 +65,13 @@ public class RoleAction extends CrudActionSupport<Role> {
 
 	@Override
 	public String list() throws Exception {
-		allRoles = roleManager.getAll();
+		allRoles = userManager.getAllRole();
 		return SUCCESS;
 	}
 
 	@Override
 	public String input() throws Exception {
-		allAuths = authorityManager.getAll();
+		allAuths = userManager.getAllAuthority();
 		checkedAuthIds = entity.getAuthIds();
 		return INPUT;
 	}
@@ -84,7 +81,7 @@ public class RoleAction extends CrudActionSupport<Role> {
 		//根据页面上的checkbox 整合Role的Authorities Set.
 		HibernateWebUtils.mergeByCheckedIds(entity.getAuthorities(), checkedAuthIds, Authority.class);
 
-		roleManager.save(entity);
+		userManager.saveRole(entity);
 		addActionMessage("保存角色成功");
 		return RELOAD;
 	}
@@ -92,7 +89,7 @@ public class RoleAction extends CrudActionSupport<Role> {
 	@Override
 	public String delete() throws Exception {
 		try {
-			roleManager.delete(id);
+			userManager.deleteRole(id);
 			addActionMessage("删除角色成功");
 		} catch (ServiceException e) {
 			logger.error(e.getMessage(), e);

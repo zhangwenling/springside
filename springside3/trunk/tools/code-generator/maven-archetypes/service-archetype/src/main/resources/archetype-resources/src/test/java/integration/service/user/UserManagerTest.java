@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ${package}.entity.user.Role;
 import ${package}.entity.user.User;
 import ${package}.service.user.UserManager;
+import ${package}.unit.ws.user.UserData;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
@@ -26,28 +27,22 @@ public class UserManagerTest extends SpringTxTestCase {
 	//如果你需要真正插入数据库,将Rollback设为false
 	//@Rollback(false) 
 	public void saveUser() {
-		User entity = new User();
-		// 因为LoginName要求唯一性，因此添加random字段。
-		entity.setLoginName("tester" + randomString(5));
-		entity.setName("foo");
-		entity.setEmail("foo@bar.com");
-		entity.setPassword("foo");
-		Role role = new Role();
-		role.setId(1L);
-		entity.getRoles().add(role);
-
-		userManager.save(entity);
+		User user = UserData.getRandomUser();
+		Role role = UserData.getRandomRole();
+		user.getRoles().add(role);
+	
+		userManager.saveUser(user);
 		//强制执行sql语句
 		flush();
-		assertNotNull(entity.getId());
+		assertNotNull(user.getId());
 	}
 
 	@Test(expected = org.hibernate.exception.ConstraintViolationException.class)
 	public void savenNotUniqueUser() {
-		User entity = new User();
-		entity.setLoginName("admin");
+		User user = UserData.getRandomUser();
+		user.setLoginName("admin");
 
-		userManager.save(entity);
+		userManager.saveUser(user);
 		flush();
 	}
 

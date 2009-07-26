@@ -27,15 +27,16 @@ public interface UserWebService {
 	/**
 	 * 显示所有用户.
 	 */
-	GetAllUserResult getAllUser();
+	public GetAllUserResult getAllUser();
 
 	/**
 	 * 新建用户.
 	 */
-	CreateUserResult createUser(@WebParam(name = "user") UserDTO user);
+	public CreateUserResult createUser(@WebParam(name = "user") UserDTO user);
 
 	/**
 	 * 验证用户名密码.
 	 */
-	WSResult authUser(@WebParam(name = "loginName") String loginName, @WebParam(name = "password") String password);
+	public WSResult authUser(@WebParam(name = "loginName") String loginName,
+			@WebParam(name = "password") String password);
 }

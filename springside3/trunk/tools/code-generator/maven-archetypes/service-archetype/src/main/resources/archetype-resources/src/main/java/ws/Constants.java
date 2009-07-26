@@ -10,6 +10,6 @@ package ${package}.ws;
  */
 public class Constants {
 
-	/**项目内统一的NameSpace定义*/
+	/**项目内统一的NameSpace定义.*/
 	public static final String NS = "${webservice-namespace}";
 }

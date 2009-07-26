@@ -44,14 +44,10 @@ public class UserDetailServiceImplTest extends Assert {
 
 	@Test
 	public void loadUserExist() {
-		//准备数据
-		String loginName = "user";
-		String passwd = "userPass";
+	
 		String authName = "A_aaa";
-
-		User user = new User();
-		user.setLoginName(loginName);
-		user.setPassword(passwd);
+		User user = UserData.getRandomUser();
+		
 		Role role = new Role();
 		user.getRoles().add(role);
 		Authority auth = new Authority();
@@ -59,15 +55,15 @@ public class UserDetailServiceImplTest extends Assert {
 		role.getAuthorities().add(auth);
 
 		//录制脚本
-		EasyMock.expect(userDao.findByUnique("loginName", loginName)).andReturn(user);
+		EasyMock.expect(userDao.findByUnique("loginName", user.getLoginName())).andReturn(user);
 		EasyMock.replay(userDao);
 
 		//执行测试
-		UserDetails userDetails = userDetailService.loadUserByUsername(loginName);
+		UserDetails userDetails = userDetailService.loadUserByUsername(user.getLoginName());
 
 		//校验结果
-		assertEquals(loginName, userDetails.getUsername());
-		assertEquals(passwd, userDetails.getPassword());
+		assertEquals(user.getLoginName(), userDetails.getUsername());
+		assertEquals(user.getPassword(), userDetails.getPassword());
 		assertEquals(1, userDetails.getAuthorities().length);
 		assertEquals(new GrantedAuthorityImpl(authName), userDetails.getAuthorities()[0]);
 	}

@@ -3,7 +3,7 @@
 #set( $symbol_escape = '\' )
 package ${package}.functional;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.springside.modules.test.selenium.SeleniumTestCase;
 
 /**
@@ -13,13 +13,13 @@ import org.springside.modules.test.selenium.SeleniumTestCase;
  */
 public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 
-	@Before
-	public void login() {
+	@BeforeClass
+	public static void loginAsAdmin() {
 		selenium.open("/${artifactId}/login.action");
 		selenium.type("j_username", "admin");
 		selenium.type("j_password", "admin");
 		selenium.click("//input[@value='登录']");
-		selenium.waitForPageToLoad("30000");
+		waitPageLoad();
 		assertTrue(selenium.isTextPresent("你好,admin."));
 	}
 }

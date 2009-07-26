@@ -3,22 +3,26 @@
 #set( $symbol_escape = '\' )
 package ${package}.service.security;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ${package}.dao.security.AuthorityDao;
+import ${package}.dao.security.RoleDao;
 import ${package}.dao.security.UserDao;
+import ${package}.entity.security.Authority;
+import ${package}.entity.security.Role;
 import ${package}.entity.security.User;
-import ${package}.service.EntityManager;
 import ${package}.service.ServiceException;
+import org.springside.modules.orm.Page;
+import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
- * 用户管理类.
- * 
- * 实现领域对象用户的所有业务管理函数.
- *  
- * 通过泛型声明继承EntityManager,默认拥有CRUD管理方法.
- * 使用Spring annotation定义事务管理.
+ * 用户及相关的角色,授权管理类.
  * 
  * @author calvin
  */
@@ -26,26 +30,40 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 @Service
 //默认将类中的所有函数纳入事务管理.
 @Transactional
-public class UserManager extends EntityManager<User, Long> {
+public class UserManager {
+
+	protected Logger logger = LoggerFactory.getLogger(UserManager.class);
+
 	@Autowired
 	private UserDao userDao;
 
-	@Override
-	protected UserDao getEntityDao() {
-		return userDao;
+	@Autowired
+	private RoleDao roleDao;
+
+	@Autowired
+	private AuthorityDao authorityDao;
+
+	// User Manager //
+	@Transactional(readOnly = true)
+	public User getUser(long id) {
+		return userDao.get(id);
 	}
 
-	/**
-	 * 重载delte函数,演示异常处理及用户行为日志.
-	 */
-	@Override
-	public void delete(Long id) {
+	public void saveUser(User entity) {
+		userDao.save(entity);
+	}
+
+	public void deleteUser(Long id) {
 		if (id == 1) {
 			logger.warn("操作员{}尝试删除超级管理员用户", SpringSecurityUtils.getCurrentUserName());
 			throw new ServiceException("不能删除超级管理员用户");
 		}
-
 		userDao.delete(id);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<User> searchUser(final Page<User> page, final List<PropertyFilter> filters) {
+		return userDao.find(page, filters);
 	}
 
 	/**
@@ -56,5 +74,35 @@ public class UserManager extends EntityManager<User, Long> {
 	@Transactional(readOnly = true)
 	public boolean isLoginNameUnique(String loginName, String oldLoginName) {
 		return userDao.isPropertyUnique("loginName", loginName, oldLoginName);
+	}
+
+	// Role Manager //
+	@Transactional(readOnly = true)
+	public Role getRole(Long id) {
+		return roleDao.get(id);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Role> getAllRole() {
+		return roleDao.getAll();
+	}
+
+	public void saveRole(Role entity) {
+		roleDao.save(entity);
+	}
+
+	public void deleteRole(Long id) {
+		if (id == 1) {
+			logger.warn("操作员{}尝试删除超级管理员用户角色", SpringSecurityUtils.getCurrentUserName());
+			throw new ServiceException("不能删除超级管理员角色");
+		}
+
+		roleDao.delete(id);
+	}
+
+	// Authority Manager //
+	@Transactional(readOnly = true)
+	public List<Authority> getAllAuthority() {
+		return authorityDao.getAll();
 	}
 }

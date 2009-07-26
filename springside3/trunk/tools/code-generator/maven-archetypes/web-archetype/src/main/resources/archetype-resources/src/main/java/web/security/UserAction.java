@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ${package}.entity.security.Role;
 import ${package}.entity.security.User;
 import ${package}.service.ServiceException;
-import ${package}.service.security.RoleManager;
 import ${package}.service.security.UserManager;
 import ${package}.web.CrudActionSupport;
 import org.springside.modules.orm.Page;
@@ -35,8 +34,6 @@ public class UserAction extends CrudActionSupport<User> {
 
 	@Autowired
 	private UserManager userManager;
-	@Autowired
-	private RoleManager roleManager;
 
 	// 基本属性
 	private User entity;
@@ -56,7 +53,7 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	protected void prepareModel() throws Exception {
 		if (id != null) {
-			entity = userManager.get(id);
+			entity = userManager.getUser(id);
 		} else {
 			entity = new User();
 		}
@@ -77,13 +74,13 @@ public class UserAction extends CrudActionSupport<User> {
 		HttpServletRequest request = Struts2Utils.getRequest();
 		List<PropertyFilter> filters = HibernateWebUtils.buildPropertyFilters(request);
 
-		page = userManager.search(page, filters);
+		page = userManager.searchUser(page, filters);
 		return SUCCESS;
 	}
 
 	@Override
 	public String input() throws Exception {
-		allRoles = roleManager.getAll();
+		allRoles = userManager.getAllRole();
 		checkedRoleIds = entity.getRoleIds();
 		return INPUT;
 	}
@@ -93,7 +90,7 @@ public class UserAction extends CrudActionSupport<User> {
 		//根据页面上的checkbox 整合User的Roles Set
 		HibernateWebUtils.mergeByCheckedIds(entity.getRoles(), checkedRoleIds, Role.class);
 
-		userManager.save(entity);
+		userManager.saveUser(entity);
 		addActionMessage("保存用户成功");
 		return RELOAD;
 	}
@@ -101,7 +98,7 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	public String delete() throws Exception {
 		try {
-			userManager.delete(id);
+			userManager.deleteUser(id);
 			addActionMessage("删除用户成功");
 		} catch (ServiceException e) {
 			logger.error(e.getMessage(), e);

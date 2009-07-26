@@ -6,7 +6,6 @@ package ${package}.entity.security;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -17,6 +16,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import ${package}.entity.IdEntity;
@@ -37,9 +38,7 @@ public class Resource extends IdEntity {
 	public static final String MENU_TYPE = "menu";
 
 	private String resourceType; //资源类型
-
 	private String value; //资源标识
-
 	private double position; //资源显示顺序字段
 
 	private Set<Authority> authorities = new LinkedHashSet<Authority>(); //可访问该资源的授权
@@ -68,7 +67,8 @@ public class Resource extends IdEntity {
 		this.position = position;
 	}
 
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany
+	@Cascade( { CascadeType.SAVE_UPDATE })
 	@JoinTable(joinColumns = { @JoinColumn(name = "RESOURCE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
 	@Fetch(FetchMode.JOIN)
 	@OrderBy("id")

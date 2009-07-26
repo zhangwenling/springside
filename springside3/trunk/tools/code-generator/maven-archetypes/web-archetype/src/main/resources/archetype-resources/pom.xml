@@ -13,51 +13,6 @@
 	<packaging>war</packaging>
 	<name>${artifactId}</name>
 
-	<build>
-		<plugins>
-			<!-- cargo 插件 -->
-			<plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven2-plugin</artifactId>
-				<configuration>
-					<container>
-						<containerId>tomcat6x</containerId>
-						<type>remote</type>
-					</container>
-
-					<configuration>
-						<type>runtime</type>
-						<properties>
-							<cargo.remote.username>admin</cargo.remote.username>
-							<cargo.remote.password></cargo.remote.password>
-							<cargo.tomcat.manager.url>http://localhost:8080/manager</cargo.tomcat.manager.url>
-						</properties>
-					</configuration>
-
-					<deployer>
-						<type>remote</type>
-						<deployables>
-							<deployable>
-								<properties>
-									<context>/${artifactId}</context>
-								</properties>
-							</deployable>
-						</deployables>
-					</deployer>
-				</configuration>
-			</plugin>
-
-			<!-- dbunit插件 -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>dbunit-maven-plugin</artifactId>
-				<configuration>
-					<dataTypeFactoryName>org.dbunit.dataset.datatype.DefaultDataTypeFactory</dataTypeFactoryName>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
 	<!-- 项目属性 -->
 	<properties>
 		<jdbc.driver>org.apache.derby.jdbc.ClientDriver</jdbc.driver>
@@ -228,6 +183,51 @@
 		<!-- testing end -->
 	</dependencies>
 
+	<build>
+		<plugins>
+			<!-- cargo 插件 -->
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<configuration>
+					<container>
+						<containerId>tomcat6x</containerId>
+						<type>remote</type>
+					</container>
+
+					<configuration>
+						<type>runtime</type>
+						<properties>
+							<cargo.remote.username>admin</cargo.remote.username>
+							<cargo.remote.password></cargo.remote.password>
+							<cargo.tomcat.manager.url>http://localhost:8080/manager</cargo.tomcat.manager.url>
+						</properties>
+					</configuration>
+
+					<deployer>
+						<type>remote</type>
+						<deployables>
+							<deployable>
+								<properties>
+									<context>/${artifactId}</context>
+								</properties>
+							</deployable>
+						</deployables>
+					</deployer>
+				</configuration>
+			</plugin>
+
+			<!-- dbunit插件 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>dbunit-maven-plugin</artifactId>
+				<configuration>
+					<dataTypeFactoryName>org.dbunit.dataset.datatype.DefaultDataTypeFactory</dataTypeFactoryName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<profiles>
 		<profile>
 			<id>initdb</id>
@@ -236,7 +236,7 @@
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>sql-maven-plugin</artifactId>
-			
+
 						<executions>
 							<execution>
 								<id>create database</id>
@@ -250,6 +250,19 @@
 										<!-- <srcFile>src/main/sql/derby/init-data.sql</srcFile> -->
 									</srcFiles>
 								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>dbunit-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>create database</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>operation</goal>
+								</goals>
 							</execution>
 						</executions>
 					</plugin>
