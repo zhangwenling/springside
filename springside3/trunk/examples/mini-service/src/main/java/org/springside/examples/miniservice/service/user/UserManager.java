@@ -31,12 +31,12 @@ public class UserManager {
 	 */
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
-		List<User> users = userDao.getAll();
+		List<User> userList = userDao.getAll();
 
-		for (User user : users) {
+		for (User user : userList) {
 			userDao.initObject(user.getRoles());
 		}
-		return users;
+		return userList;
 	}
 	
 	public void saveUser(User user) {

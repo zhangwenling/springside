@@ -33,16 +33,14 @@ public class UserManager {
 
 	@Autowired
 	private UserDao userDao;
-
 	@Autowired
 	private RoleDao roleDao;
-
 	@Autowired
 	private AuthorityDao authorityDao;
 
 	// User Manager //
 	@Transactional(readOnly = true)
-	public User getUser(long id) {
+	public User getUser(Long id) {
 		return userDao.get(id);
 	}
 
