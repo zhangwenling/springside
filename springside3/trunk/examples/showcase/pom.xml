@@ -221,11 +221,13 @@
 			<groupId>org.seleniumhq.selenium.client-drivers</groupId>
 			<artifactId>selenium-java-client-driver</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>emma</groupId>
-			<artifactId>emma</artifactId>
-		</dependency>
 		<!-- test end -->
+
+		<!-- hibernate tools -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-tools</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
