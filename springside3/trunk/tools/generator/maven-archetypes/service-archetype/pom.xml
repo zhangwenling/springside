@@ -4,14 +4,13 @@
 	<parent>
 		<artifactId>springside3-parent</artifactId>
 		<groupId>org.springside</groupId>
-		<version>3.1.4</version>
+		<version>3.1.5</version>
 		<relativePath>../../../../modules/parent/pom.xml</relativePath>
 	</parent>
 	<groupId>org.springside</groupId>
 	<artifactId>service-archetype</artifactId>
 	<packaging>maven-archetype</packaging>
 	<name>Springside's Service Archetype</name>
-	<version>3.1.4</version>
 	<build>
 		<outputDirectory>target/classes</outputDirectory>
 		<extensions>

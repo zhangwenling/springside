@@ -73,7 +73,7 @@ public class UserManager {
 	 * 获取当前用户数量.
 	 */
 	@Transactional(readOnly = true)
-	public long getUserCount() {
+	public Long getUserCount() {
 		return userDao.findUnique(UserDao.COUNT_USERS);
 	}
 

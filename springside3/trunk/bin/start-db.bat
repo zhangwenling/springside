@@ -1,4 +1,4 @@
 @echo off
-cd ..\servers\derby
+cd ..\tools\derby
 
 start-db.bat

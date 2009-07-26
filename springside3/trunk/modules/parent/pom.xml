@@ -6,7 +6,7 @@
 	<artifactId>springside3-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>SpringSide's Parent pom.xml</name>
-	<version>3.1.4</version>
+	<version>3.1.5</version>
 	<organization>
 		<name>SpringSide</name>
 		<url>http://www.springside.org.cn</url>
@@ -14,7 +14,7 @@
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<springside.version>3.1.4</springside.version>
+		<springside.version>3.1.5</springside.version>
 		<spring.version>2.5.6</spring.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<struts2.version>2.1.6</struts2.version>
@@ -646,6 +646,33 @@
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>selenium-maven-plugin</artifactId>
 					<version>1.0</version>
+				</plugin>
+
+				<!-- hibernte tools插件 -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>hibernate3-maven-plugin</artifactId>
+					<version>2.2</version>
+					<dependencies>
+						<dependency>
+							<groupId>${jdbc.driver.groupid}</groupId>
+							<artifactId>${jdbc.driver.artifactId}</artifactId>
+							<version>${jdbc.driver.version}</version>
+						</dependency>
+					</dependencies>
+					<configuration>
+						<components>
+							<component>
+								<name>hbm2ddl</name>
+								<implementation>annotationconfiguration</implementation>
+							</component>
+						</components>
+						<componentProperties>
+							<jdk5>true</jdk5>
+							<propertyfile>/src/main/resources/jdbc.properties</propertyfile>
+							<configurationfile>/src/main/resources/hibernate.cfg.xml</configurationfile>
+						</componentProperties>
+					</configuration>
 				</plugin>
 
 				<!-- dbunit插件 -->

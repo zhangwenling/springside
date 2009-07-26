@@ -4,13 +4,12 @@
 	<parent>
 		<artifactId>springside3-parent</artifactId>
 		<groupId>org.springside</groupId>
-		<version>3.1.4</version>
+		<version>3.1.5</version>
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
 	<groupId>org.springside</groupId>
 	<artifactId>springside3-jee</artifactId>
 	<name>Springside3's JavaEE Module</name>
-	<version>3.1.4</version>
 
 	<dependencies>
 		<!-- spring -->
