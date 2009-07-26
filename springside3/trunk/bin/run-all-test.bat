@@ -1,5 +1,6 @@
 @echo off
 echo [INFO] Run all modules unit test, all examples unit/integration/funcional test
+echo [INOF] Please Start Tomcat and Derby first
 
 cd ..\
 call mvn test -Pmodules

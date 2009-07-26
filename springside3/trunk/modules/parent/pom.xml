@@ -45,7 +45,7 @@
 		<repository>
 			<id>jboss</id>
 			<name>jboss repository</name>
-			<url>http://repository.jboss.com/maven2/</url>
+			<url>http://repository.jboss.com/maven2</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
