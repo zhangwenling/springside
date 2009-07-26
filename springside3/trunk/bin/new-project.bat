@@ -1,5 +1,5 @@
 @echo off
-cd ..\tools\generator
+cd ..\tools\code-generator
 
 start new-project.bat
 

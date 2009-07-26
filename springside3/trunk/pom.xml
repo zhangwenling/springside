@@ -19,8 +19,8 @@
 				<module>modules/core</module>
 				<module>modules/jee</module>
 				<module>modules/parent</module>
-				<module>tools/generator/maven-archetypes/service-archetype</module>
-				<module>tools/generator/maven-archetypes/web-archetype</module>
+				<module>tools/code-generator/maven-archetypes/service-archetype</module>
+				<module>tools/code-generator/maven-archetypes/web-archetype</module>
 			</modules>
 		</profile>
 
