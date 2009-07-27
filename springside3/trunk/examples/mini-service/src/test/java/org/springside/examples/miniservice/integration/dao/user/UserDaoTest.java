@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniservice.dao.UserDao;
 import org.springside.examples.miniservice.entity.user.Role;
 import org.springside.examples.miniservice.entity.user.User;
-import org.springside.examples.miniservice.unit.ws.user.UserData;
+import org.springside.examples.miniservice.unit.service.user.UserData;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**

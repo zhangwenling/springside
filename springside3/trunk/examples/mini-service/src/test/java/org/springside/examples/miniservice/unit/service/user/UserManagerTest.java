@@ -17,13 +17,13 @@ public class UserManagerTest extends Assert {
 	@Before
 	public void setUp() {
 		//创建mock对象
-		userDao = EasyMock.createMock(UserDao.class);
+		userDao = EasyMock.createNiceMock(UserDao.class);
 		ReflectionUtils.setFieldValue(userManager, "userDao", userDao);
 	}
 
 	@After
 	public void tearDown() {
-		//确认的脚本都已执行
+		//确认脚本都已执行
 		EasyMock.verify(userDao);
 	}
 

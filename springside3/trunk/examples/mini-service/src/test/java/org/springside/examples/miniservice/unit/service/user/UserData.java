@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.unit.ws.user;
+package org.springside.examples.miniservice.unit.service.user;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.springside.examples.miniservice.entity.user.Role;

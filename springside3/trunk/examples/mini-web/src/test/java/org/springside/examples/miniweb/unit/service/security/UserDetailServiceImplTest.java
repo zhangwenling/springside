@@ -28,14 +28,12 @@ public class UserDetailServiceImplTest extends Assert {
 
 	@Before
 	public void setUp() {
-		//创建mock对象
-		userDao = EasyMock.createMock(UserDao.class);
+		userDao = EasyMock.createNiceMock(UserDao.class);
 		ReflectionUtils.setFieldValue(userDetailService, "userDao", userDao);
 	}
 
 	@After
 	public void tearDown() {
-		//确认的脚本都已执行
 		EasyMock.verify(userDao);
 	}
 
@@ -43,9 +41,9 @@ public class UserDetailServiceImplTest extends Assert {
 	public void loadUserExist() {
 	
 		String authName = "A_aaa";
+
 		User user = UserData.getRandomUser();
-		
-		Role role = new Role();
+		Role role = UserData.getRandomRole();
 		user.getRoles().add(role);
 		Authority auth = new Authority();
 		auth.setName(authName);

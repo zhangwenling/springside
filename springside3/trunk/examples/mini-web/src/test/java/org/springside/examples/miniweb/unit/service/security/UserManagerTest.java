@@ -18,23 +18,25 @@ public class UserManagerTest extends Assert {
 	@Before
 	public void setUp() {
 		//创建mock对象
-		userDao = EasyMock.createMock(UserDao.class);
+		userDao = EasyMock.createNiceMock(UserDao.class);
 		ReflectionUtils.setFieldValue(userManager, "userDao", userDao);
 	}
 	
 	@After
 	public void tearDown() {
-		//确认的脚本都已执行
+		//确认脚本都已执行
 		EasyMock.verify(userDao);
 	}
 
 	@Test
 	public void testDetelteUser() {
+		EasyMock.replay(userDao);
 		userManager.deleteUser(2L);
 	}
 
 	@Test(expected = ServiceException.class)
 	public void testDeleteAdmin(){
+		EasyMock.replay(userDao);
 		userManager.deleteRole(1L);
 	}
 }
