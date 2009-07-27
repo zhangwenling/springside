@@ -33,7 +33,10 @@ import org.springframework.jmx.export.annotation.ManagedOperationParameter;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
 /**
- * 管理BlockingQueue Map与消费它们的任务.
+ * 管理BlockingQueue Map.
+ * 
+ * 当Queue初始化时,负责restore持久化文件中的消息.
+ * 当系统关闭时,负责停止Task线程, 并将未完成的消息持久化到文件.
  * 
  * @author calvin
  */
@@ -74,16 +77,19 @@ public class QueueManager {
 	}
 
 	/**
-	 * 根据queueName获得消息队列中未处理事件的大小.
+	 * 根据queueName获得消息队列中未处理消息的数量,支持基于JMX查询.
 	 */
-	@ManagedOperation(description = "Get event count in queue")
+	@ManagedOperation(description = "Get message count in queue")
 	public static int getQueueSize(
 			@ManagedOperationParameter(name = "queueName", description = "queue name") String queueName) {
 		return getQueue(queueName).size();
 	}
 
-	public static List<ExecutorService> getExecutorList() {
-		return executorList;
+	/**
+	 * 消费任务向QueueManager注册自己的Executor
+	 */
+	public static void registerTaskExecutor(ExecutorService executor) {
+		executorList.add(executor);
 	}
 
 	/**
@@ -142,10 +148,10 @@ public class QueueManager {
 			try {
 				String filePath = getPersistenceFilePath(queueName);
 				oos = new ObjectOutputStream(new FileOutputStream(filePath));
-				for (Object event : list) {
-					oos.writeObject(event);
+				for (Object message : list) {
+					oos.writeObject(message);
 				}
-				logger.info("队列{}已持久化{}个事件到{}", new Object[] { queueName, list.size(), filePath });
+				logger.info("队列{}已持久化{}个消息到{}", new Object[] { queueName, list.size(), filePath });
 			} finally {
 				if (oos != null) {
 					oos.close();
@@ -171,14 +177,14 @@ public class QueueManager {
 				int i = 0;
 				while (true) {
 					try {
-						Object event = ois.readObject();
-						queue.offer(event);
+						Object message = ois.readObject();
+						queue.offer(message);
 						i++;
 					} catch (EOFException e) {
 						break;
 					}
 				}
-				logger.info("队列{}已从{}中恢复{}个事件.", new Object[] { queueName, filePath, i });
+				logger.info("队列{}已从{}中恢复{}个消息.", new Object[] { queueName, filePath, i });
 			} finally {
 				if (ois != null) {
 					ois.close();

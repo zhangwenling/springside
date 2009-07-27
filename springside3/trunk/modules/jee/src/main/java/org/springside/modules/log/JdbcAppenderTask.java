@@ -32,9 +32,9 @@ import org.springside.modules.queue.QueueConsumerTask;
 public class JdbcAppenderTask extends QueueConsumerTask {
 
 	protected Logger logger = LoggerFactory.getLogger(JdbcAppenderTask.class);
+
 	protected SimpleJdbcTemplate jdbcTemplate;
 	protected String sql;
-	protected int bufferSize = 10;
 	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
 
 	@Required
@@ -52,60 +52,30 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	 * 批量执行的队列大小, 默认为10.
+	 * 事件处理函数,将事件放入buffer,当buffer达到batchSize时执行批量事件处理函数.
 	 */
-	public void setBufferSize(int bufferSize) {
-		this.bufferSize = bufferSize;
-	}
-
-	/**
-	 * 线程执行函数.
-	 */
-	public void run() {
-		try {
-			//循环阻塞获取消息
-			while (!Thread.currentThread().isInterrupted()) {
-				Object event = queue.take();
-				processEvent(event);
-			}
-		} catch (InterruptedException e) {
-			logger.debug("消费线程阻塞被中断");
-		}
-		clean();
-	}
-
-	/**
-	 * 事件处理函数.
-	 */
-	protected void processEvent(Object eventObject) {
-		LoggingEvent event = (LoggingEvent) eventObject;
+	@Override
+	protected void processMessage(Object message) {
+		LoggingEvent event = (LoggingEvent) message;
 		eventBuffer.add(event);
 		logger.debug("get event, {}", Log4jUtils.convertEventToString(event));
 
 		//已到达BufferSize则执行批量插入操作
-		if (eventBuffer.size() >= bufferSize) {
-			updateBatch();
+		if (eventBuffer.size() >= batchSize) {
+			processMessageList(eventBuffer);
 		}
 	}
 
 	/**
-	 * 退出清理函数.
+	 * 批量消息处理函数,将事件列表批量插入数据库.
 	 */
-	protected void clean() {
-		if (eventBuffer.size() > 0) {
-			updateBatch();
-		}
-		logger.debug("cleaned task {}", this);
-	}
-
-	/**
-	 * 批量插入Buffer中的事件的数据库.
-	 */
+	@Override
 	@SuppressWarnings("unchecked")
-	protected void updateBatch() {
+	protected void processMessageList(List messageList) {
+		List<LoggingEvent> eventList = messageList;
 		try {
 			List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
-			for (LoggingEvent event : eventBuffer) {
+			for (LoggingEvent event : eventList) {
 				Map<String, Object> paramMap = parseEvent(event);
 				paramMapList.add(paramMap);
 			}
@@ -128,7 +98,17 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 		} catch (Exception e) {
 			logger.error("批量提交任务时发生错误.", e);
 		}
+	}
 
+	/**
+	 * 退出清理函数.
+	 */
+	@Override
+	protected void clean() {
+		if (eventBuffer.size() > 0) {
+			processMessageList(eventBuffer);
+		}
+		logger.debug("cleaned task {}", this);
 	}
 
 	/**
@@ -143,8 +123,8 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	/**
 	 * 可被子类重载的数据访问错误处理函数.
 	 */
-	protected void dataAccessExceptionHandle(RuntimeException e, List<LoggingEvent> eventBatch) {
-		for (LoggingEvent event : eventBatch) {
+	protected void dataAccessExceptionHandle(RuntimeException e, List<LoggingEvent> errorEventBatch) {
+		for (LoggingEvent event : errorEventBatch) {
 			logger.error("event in batch is not correct, ignore it, " + Log4jUtils.convertEventToString(event), e);
 		}
 	}
