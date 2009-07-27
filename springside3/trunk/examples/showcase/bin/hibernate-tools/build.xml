@@ -48,7 +48,10 @@
 			<annotationconfiguration configurationfile="hibernate.cfg.xml" />
 
 			<hbmtemplate templateprefix="pojo/" template="dao.ftl" filepattern="{package-name}/{class-name}Dao.java" />
-			<hbmtemplate templateprefix="pojo/" template="service.ftl" filepattern="{package-name}/{class-name}Manager.java" />
+			<hbmtemplate templateprefix="pojo/" template="manager.ftl" filepattern="{package-name}/{class-name}Manager.java" />
+			<hbmtemplate templateprefix="pojo/" template="daoTest.ftl" filepattern="{package-name}/{class-name}DaoTest.java" />
+			<hbmtemplate templateprefix="pojo/" template="managerTest.ftl" filepattern="{package-name}/{class-name}ManagerTest.java" />
+
 		</hibernatetool>
 	</target>
 

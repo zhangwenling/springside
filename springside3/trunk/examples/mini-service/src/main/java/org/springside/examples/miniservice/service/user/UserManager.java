@@ -25,7 +25,7 @@ import org.springside.examples.miniservice.entity.user.User;
 public class UserManager {
 	@Autowired
 	private UserDao userDao;
-	
+
 	/**
 	 * 获取全部用户,已对用户及关联角色集合进行初始化.
 	 */
