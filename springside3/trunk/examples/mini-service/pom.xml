@@ -157,6 +157,12 @@
 			<artifactId>spring-test</artifactId>
 		</dependency>
 		<!-- test end -->
+		
+		<!-- hibernate tools -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-tools</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

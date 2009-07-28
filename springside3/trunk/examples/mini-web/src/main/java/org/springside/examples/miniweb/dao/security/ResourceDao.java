@@ -8,10 +8,10 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 
 @Repository
 public class ResourceDao extends HibernateDao<Resource, Long> {
-	public static final String QUERY_BY_RESOURCE_TYPE = "from Resource r left join fetch r.authorities WHERE r.resourceType=? ORDER BY r.position ASC";
+	public static final String QUERY_BY_RESOURCETYPE = "from Resource r left join fetch r.authorities WHERE r.resourceType=? ORDER BY r.position ASC";
 
 	@SuppressWarnings("unchecked")
 	public List<Resource> getUrlResourceWithAuthorities() {
-		return distinct(createQuery(QUERY_BY_RESOURCE_TYPE, Resource.URL_TYPE)).list();
+		return distinct(createQuery(QUERY_BY_RESOURCETYPE, Resource.URL_TYPE)).list();
 	}
 }

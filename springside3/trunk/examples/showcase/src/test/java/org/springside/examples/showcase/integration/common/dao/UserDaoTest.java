@@ -4,16 +4,13 @@ import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.test.groups.Groups;
-import org.springside.modules.test.spring.SpringGroupsTestRunner;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 //使用自定义的PropertiesProfile从System Property 和application.test.properties中读出profile值
-@RunWith(SpringGroupsTestRunner.class)
 public class UserDaoTest extends SpringTxTestCase {
 	@Autowired
 	private UserDao userDao;
@@ -40,15 +37,8 @@ public class UserDaoTest extends SpringTxTestCase {
 	public void testNativeSql() {
 		User user = userDao.getUserByNativeSql("admin");
 		assertEquals("admin", user.getLoginName());
-		assertEquals("管理员, 用户", user.getRoleNames());
+		assertEquals("Admin, User", user.getRoleNames());
 	}
-
-	/*@Test
-	public void testClob() {
-		User user = userDao.get(1L);
-		Hibernate.initialize(user.getDescription());
-		assertEquals("a good guy", user.getDescription());
-	}*/
 
 	@Test
 	@SuppressWarnings("unchecked")
@@ -61,8 +51,8 @@ public class UserDaoTest extends SpringTxTestCase {
 	}
 
 	//只在-Dtest.groups=xxxx或application.test.properties的test.groups中包含extension时执行本测试方法.
-	@Groups("extension")
 	@Test
+	@Groups("extension")
 	public void testUpDialect() {
 		Object value = userDao.createQuery("select u.name from User u where up(u.name)='ADMIN'").uniqueResult();
 		assertEquals("Admin", value);
