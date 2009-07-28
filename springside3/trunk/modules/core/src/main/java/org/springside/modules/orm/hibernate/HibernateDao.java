@@ -306,18 +306,13 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	protected Criterion[] buildPropertyFilterCriterions(final List<PropertyFilter> filters) {
 		List<Criterion> criterionList = new ArrayList<Criterion>();
 		for (PropertyFilter filter : filters) {
-			String propertyName = filter.getPropertyName();
-
-			boolean multiProperty = StringUtils.contains(propertyName, PropertyFilter.OR_SEPARATOR);
-			if (!multiProperty) { //properNameName中只有一个属性的情况.
-				Criterion criterion = buildPropertyFilterCriterion(propertyName, filter.getValue(), filter
+			if (!filter.isMultiProperty()) { //只有一个属性需要比较的情况.
+				Criterion criterion = buildPropertyFilterCriterion(filter.getPropertyName(), filter.getValue(), filter
 						.getMatchType());
 				criterionList.add(criterion);
-			} else {//properName中包含多个属性的情况,进行or处理.
+			} else {//包含多个属性需要比较的情况,进行or处理.
 				Disjunction disjunction = Restrictions.disjunction();
-				String[] params = StringUtils.split(propertyName, PropertyFilter.OR_SEPARATOR);
-
-				for (String param : params) {
+				for (String param : filter.getPropertyNames()) {
 					Criterion criterion = buildPropertyFilterCriterion(param, filter.getValue(), filter.getMatchType());
 					disjunction.add(criterion);
 				}
@@ -334,14 +329,32 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 			final MatchType matchType) {
 		Assert.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = null;
+		try {
+			//按entity property中的类型将字符串转化为实际类型.
+			Object realValue = ReflectionUtils.convertValue(value, entityClass, propertyName);
 
-		if (MatchType.EQ.equals(matchType)) {
-			criterion = Restrictions.eq(propertyName, value);
+			//根据MatchType构造criterion
+			if (MatchType.EQ.equals(matchType)) {
+				criterion = Restrictions.eq(propertyName, realValue);
+			}
+			if (MatchType.LIKE.equals(matchType)) {
+				criterion = Restrictions.like(propertyName, (String) realValue, MatchMode.ANYWHERE);
+			}
+			if (MatchType.LE.equals(matchType)) {
+				criterion = Restrictions.le(propertyName, realValue);
+			}
+			if (MatchType.LT.equals(matchType)) {
+				criterion = Restrictions.lt(propertyName, realValue);
+			}
+			if (MatchType.GE.equals(matchType)) {
+				criterion = Restrictions.ge(propertyName, realValue);
+			}
+			if (MatchType.GT.equals(matchType)) {
+				criterion = Restrictions.gt(propertyName, realValue);
+			}
+		} catch (Exception e) {
+			throw ReflectionUtils.convertToUncheckedException(e);
 		}
-		if (MatchType.LIKE.equals(matchType)) {
-			criterion = Restrictions.like(propertyName, (String) value, MatchMode.ANYWHERE);
-		}
-
 		return criterion;
 	}
 

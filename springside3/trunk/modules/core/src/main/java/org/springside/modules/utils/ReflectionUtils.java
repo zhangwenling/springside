@@ -15,12 +15,16 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.Assert;
 
 /**
@@ -218,13 +222,34 @@ public class ReflectionUtils {
 	}
 
 	/**
+	 * 转换字符串类型到clazz的property类型的值.
+	 * 
+	 * @param value 待转换的字符串
+	 * @param clazz 提供类型信息的Class
+	 * @param propertyName 提供类型信息的Class的属性.
+	 */
+	public static Object convertValue(Object value, Class<?> clazz, String propertyName) {
+		try {
+			Class<?> toType = BeanUtils.getPropertyDescriptor(clazz, propertyName).getPropertyType();
+			DateConverter dc = new DateConverter();
+			dc.setUseLocaleFormat(true);
+			dc.setPatterns(new String[] { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss" });
+			ConvertUtils.register(dc, Date.class);
+			return ConvertUtils.convert(value, toType);
+
+		} catch (Exception e) {
+			throw convertToUncheckedException(e);
+		}
+	}
+
+	/**
 	 * 将反射时的checked exception转换为unchecked exception.
 	 */
-	public static void convertToUncheckedException(Exception e) throws IllegalArgumentException {
+	public static IllegalArgumentException convertToUncheckedException(Exception e) {
 		if (e instanceof IllegalAccessException || e instanceof IllegalArgumentException
 				|| e instanceof NoSuchMethodException)
-			throw new IllegalArgumentException("Refelction Exception.", e);
+			return new IllegalArgumentException("Refelction Exception.", e);
 		else
-			throw new IllegalArgumentException(e);
+			return new IllegalArgumentException(e);
 	}
 }

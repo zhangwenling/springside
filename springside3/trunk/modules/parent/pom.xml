@@ -20,7 +20,7 @@
 		<struts2.version>2.1.6</struts2.version>
 		<cxf.version>2.2.2</cxf.version>
 		<spring-security.version>2.0.4</spring-security.version>
-
+	
 		<!--  Plugin的属性定义  -->
 		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -458,7 +458,7 @@
 			<dependency>
 				<groupId>net.sf.ehcache</groupId>
 				<artifactId>ehcache</artifactId>
-				<version>1.6.0</version>
+				<version>1.6.1</version>
 			</dependency>
 			<dependency>
 				<groupId>net.sf.ehcache</groupId>

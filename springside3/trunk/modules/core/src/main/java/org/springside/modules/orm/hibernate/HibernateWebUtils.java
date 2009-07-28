@@ -20,7 +20,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
 import org.springframework.web.util.WebUtils;
 import org.springside.modules.orm.PropertyFilter;
-import org.springside.modules.orm.PropertyFilter.MatchType;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
@@ -93,9 +92,8 @@ public class HibernateWebUtils {
 				PropertyUtils.setProperty(obj, idName, id);
 				srcObjects.add(obj);
 			}
-
 		} catch (Exception e) {
-			ReflectionUtils.convertToUncheckedException(e);
+			throw ReflectionUtils.convertToUncheckedException(e);
 		}
 	}
 
@@ -132,17 +130,7 @@ public class HibernateWebUtils {
 			boolean omit = StringUtils.isBlank(value);
 			if (!omit) {
 
-				//分析filterName,获取matchType与propertyName
-				MatchType matchType;
-				String matchTypeCode = StringUtils.substringBefore(filterName, "_");
-				try {
-					matchType = Enum.valueOf(MatchType.class, matchTypeCode);
-				} catch (RuntimeException e) {
-					throw new IllegalArgumentException("filter名称没有按规则编写,无法得到属性比较类型.", e);
-				}
-				String propertyName = StringUtils.substringAfter(filterName, "_");
-
-				PropertyFilter filter = new PropertyFilter(propertyName, matchType, value);
+				PropertyFilter filter = new PropertyFilter(filterName, value);
 				filterList.add(filter);
 			}
 		}
