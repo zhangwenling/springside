@@ -16,7 +16,7 @@ import org.springside.modules.utils.ReflectionUtils;
 /**
  * User Web服务的单元测试用例.
  * 
- * 使用EasyMock对UserService进行模拟.
+ * 使用EasyMock对UserManager进行模拟.
  * 
  * @author calvin
  */
@@ -27,7 +27,7 @@ public class UserWebServiceTest extends Assert {
 	@Before
 	public void setUp() {
 		//创建mock对象
-		userManager = EasyMock.createMock(UserManager.class);
+		userManager = EasyMock.createNiceMock(UserManager.class);
 		ReflectionUtils.setFieldValue(userWebService, "userManager", userManager);
 		userWebService.initDozer();
 	}

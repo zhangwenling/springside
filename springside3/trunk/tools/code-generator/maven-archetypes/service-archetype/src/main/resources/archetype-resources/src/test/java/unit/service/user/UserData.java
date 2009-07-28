@@ -1,13 +1,11 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.unit.service.security;
+package ${package}.unit.service.user;
 
 import org.apache.commons.lang.RandomStringUtils;
-import ${package}.entity.security.Authority;
-import ${package}.entity.security.Resource;
-import ${package}.entity.security.Role;
-import ${package}.entity.security.User;
+import ${package}.entity.user.Role;
+import ${package}.entity.user.User;
 
 /**
  * 测试用户数据生成.
@@ -22,7 +20,6 @@ public class UserData {
 
 	public static User getRandomUser() {
 		String userName = "User" + random();
-
 		User user = new User();
 		user.setLoginName(userName);
 		user.setName(userName);
@@ -37,23 +34,5 @@ public class UserData {
 		role.setName("Role" + random());
 
 		return role;
-	}
-
-	public static Authority getRandomAuthority() {
-		Authority authority = new Authority();
-		String authName = "Authority" + random();
-		authority.setName(authName);
-		authority.setDisplayName(authName);
-
-		return authority;
-	}
-
-	public static Resource getRandomResource() {
-		Resource resource = new Resource();
-		resource.setValue("Resource" + random());
-		resource.setResourceType(Resource.URL_TYPE);
-		resource.setPosition(100);
-
-		return resource;
 	}
 }

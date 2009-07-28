@@ -42,7 +42,7 @@
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="UTF-8">
-      <directory>bin/ws-bin</directory>
+      <directory>bin</directory>
       <includes>
         <include>**/*.xml</include>
       </includes>
@@ -61,12 +61,6 @@
         <include>**/*.container</include>
         <include>**/*.prefs</include>
         <include>**/*.name</include>
-      </includes>
-    </fileSet>
-    <fileSet filtered="true" encoding="GBK">
-      <directory>bin/ws-bin</directory>
-      <includes>
-        <include>**/*.bat</include>
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="GBK">

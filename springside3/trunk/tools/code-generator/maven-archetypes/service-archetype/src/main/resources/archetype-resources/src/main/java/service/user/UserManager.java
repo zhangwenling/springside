@@ -28,7 +28,7 @@ import ${package}.entity.user.User;
 public class UserManager {
 	@Autowired
 	private UserDao userDao;
-	
+
 	/**
 	 * 获取全部用户,已对用户及关联角色集合进行初始化.
 	 */
@@ -55,6 +55,6 @@ public class UserManager {
 	public boolean authenticate(String loginName, String password) {
 		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password))
 			return false;
-		return ((Long) userDao.findUnique(UserDao.AUTH_HQL, loginName, password) == 1);
+		return ((Long) userDao.findUnique(UserDao.QUERY_BY_LNAME_PASSWD, loginName, password) == 1);
 	}
 }

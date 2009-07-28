@@ -1,0 +1,77 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+package ${package}.integration.dao.security;
+
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import ${package}.dao.security.UserDao;
+import ${package}.entity.security.Role;
+import ${package}.entity.security.User;
+import ${package}.unit.service.security.UserData;
+import org.springside.modules.test.spring.SpringTxTestCase;
+
+/**
+ * UserManager的集成测试用例.
+ * 
+ * 调用实际的DAO类进行操作,默认在操作后进行回滚.
+ * 
+ * @author calvin
+ */
+public class UserDaoTest extends SpringTxTestCase {
+
+	@Autowired
+	private UserDao entityDao;
+
+	@Test
+	//如果你需要真正插入数据库,将Rollback设为false
+	//@Rollback(false) 
+	public void crudEntity() {
+		//新建并保存用户.
+		User entity = UserData.getRandomUser();
+		entityDao.save(entity);
+		//强制执行sql语句
+		flush();
+
+		//获取用户
+		entity = entityDao.get(entity.getId());
+
+		//修改用户
+		entity.setEmail("new.email@springside.org.cn");
+		entityDao.save(entity);
+		flush();
+
+		//删除用户
+		entityDao.delete(entity.getId());
+		flush();
+	}
+
+	@Test
+	public void crudEntityWithRole() {
+		//保存带角色的用户
+		User user = UserData.getRandomUser();
+		Role role = UserData.getRandomRole();
+		user.getRoles().add(role);
+		
+		entityDao.save(user);
+		flush();
+		
+		user = entityDao.get(user.getId());
+		assertEquals(1, user.getRoles().size());
+
+		//删除用户的角色
+		user.getRoles().remove(role);
+		flush();
+		user = entityDao.get(user.getId());
+		assertEquals(0, user.getRoles().size());
+	}
+
+	//期望抛出ConstraintViolationException的异常.
+	@Test(expected = org.hibernate.exception.ConstraintViolationException.class)
+	public void savenUserNotUnique() {
+		User user = UserData.getRandomUser();
+		user.setLoginName("admin");
+		entityDao.save(user);
+		flush();
+	}
+}
