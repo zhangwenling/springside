@@ -26,7 +26,9 @@ import org.springside.modules.queue.QueueConsumerTask;
 
 /**
  * 将Queue中的log4j event写入数据库的消费者任务.
- * 使用Jdbc批量写入的模式.
+ * 使用Jdbc批量写入的模式,同时支持阻塞与定时批量两种策略.
+ * 
+ * @see QueueConsumerTask
  * 
  * @author calvin
  */
@@ -105,11 +107,15 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	 * 退出清理函数.
 	 */
 	@Override
-	protected void clean() {
+	protected void blockingFetchClean() {
 		if (eventBuffer.size() > 0) {
 			processMessageList(eventBuffer);
 		}
 		logger.debug("cleaned task {}", this);
+	}
+
+	@Override
+	protected void periodFetchClean() {
 	}
 
 	/**

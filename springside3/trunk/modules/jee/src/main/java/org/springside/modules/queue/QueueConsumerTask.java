@@ -105,7 +105,7 @@ public abstract class QueueConsumerTask implements Runnable {
 		} catch (InterruptedException e) {
 			logger.debug("消费线程阻塞被中断");
 		}
-		clean();
+		blockingFetchClean();
 	}
 
 	/**
@@ -124,7 +124,7 @@ public abstract class QueueConsumerTask implements Runnable {
 		} catch (InterruptedException e) {
 			logger.debug("消费线程阻塞被中断");
 		}
-		clean();
+		periodFetchClean();
 	}
 
 	/**
@@ -140,5 +140,10 @@ public abstract class QueueConsumerTask implements Runnable {
 	/**
 	 * 退出循环时的清理函数,在子类实现.
 	 */
-	protected abstract void clean();
+	protected abstract void blockingFetchClean();
+
+	/**
+	 * 退出循环时的清理函数,在子类实现.
+	 */
+	protected abstract void periodFetchClean();
 }
