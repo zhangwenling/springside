@@ -77,6 +77,11 @@ public class UserManager {
 		return userDao.findUnique(UserDao.COUNT_USERS);
 	}
 
+	@Transactional(readOnly = true)
+	public User getUserByLoginName(String loginName) {
+		return userDao.findByUnique("loginName", loginName);
+	}
+
 	/**
 	 * 批量修改用户状态.
 	 */
