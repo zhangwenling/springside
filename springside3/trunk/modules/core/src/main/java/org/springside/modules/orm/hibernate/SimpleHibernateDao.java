@@ -269,23 +269,14 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 初始化对象.
-	 * 使用load()方法得到的仅是对象Proxy后, 在传到View层前需要进行初始化.
-	 * initObject(user) ,初始化User的直接属性，但不会初始化延迟加载的关联集合和属性.
+	 * 使用load()方法得到的仅是对象Proxy, 在传到View层前需要进行初始化.
+	 * 只初始化entity的直接属性,但不会初始化延迟加载的关联集合和属性.
+	 * 如需初始化关联属性,可实现新的函数,执行:
 	 * initObject(user.getRoles())，初始化User的直接属性和关联集合.
 	 * initObject(user.getDescription())，初始化User的直接属性和延迟加载的Description属性.
 	 */
-	public void initObject(Object object) {
-		Hibernate.initialize(object);
-	}
-
-	/**
-	 * 批量初始化对象.
-	 * @see #initObject(Object)
-	 */
-	public void initObjects(List list) {
-		for (Object object : list) {
-			Hibernate.initialize(object);
-		}
+	public void initEntity(T entity) {
+		Hibernate.initialize(entity);
 	}
 
 	/**
