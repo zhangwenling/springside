@@ -658,6 +658,7 @@
 						<url>${jdbc.url}</url>
 						<username>${jdbc.user}</username>
 						<password>${jdbc.password}</password>
+						<schema>${jdbc.schema}</schema>
 						<type>CLEAN_INSERT</type>
 						<src>src/test/resources/test-data.xml</src>
 						<dest>src/test/resources/test-data.xml</dest>

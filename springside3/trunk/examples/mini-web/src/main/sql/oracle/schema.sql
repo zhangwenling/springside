@@ -3,15 +3,15 @@
 
     drop table ss_resource cascade constraints;
 
-    drop table resources_authority cascade constraints;
+    drop table ss_resource_authority cascade constraints;
 
-    drop table roles cascade constraints;
+    drop table ss_role cascade constraints;
 
-    drop table roles_authority cascade constraints;
+    drop table ss_role_authority cascade constraints;
 
-    drop table users cascade constraints;
+    drop table ss_user cascade constraints;
 
-    drop table users_roles cascade constraints;
+    drop table ss_user_role cascade constraints;
 
     drop sequence hibernate_sequence;
 
@@ -78,7 +78,7 @@
         foreign key (role_id) 
         references ss_role;
 
-    alter table ss+roles_authority 
+    alter table ss_role_authority 
         add constraint FKE9CCCC9FC67601C1 
         foreign key (authority_id) 
         references ss_authority;

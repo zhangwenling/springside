@@ -30,6 +30,7 @@
 		<jdbc.url>jdbc:oracle:thin:@127.0.0.1:1521:XE</jdbc.url>
 		<jdbc.user>miniweb</jdbc.user>
 		<jdbc.password>miniweb</jdbc.password>
+		<jdbc.schema>MINIWEB</jdbc.schema>
 		<jdbc.driver.groupid>com.oracle</jdbc.driver.groupid>
 		<jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
 		<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version>

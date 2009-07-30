@@ -2,6 +2,6 @@
 <!DOCTYPE hibernate-reverse-engineering 
   SYSTEM "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 <hibernate-reverse-engineering>
-	<table-filter match-schema=".*" match-name="SS.*"/>
+	<table-filter match-schema=".*" match-name="SS_.*"/>
 	<table-filter match-schema=".*" match-name=".*" exclude="true"/>
 </hibernate-reverse-engineering>
