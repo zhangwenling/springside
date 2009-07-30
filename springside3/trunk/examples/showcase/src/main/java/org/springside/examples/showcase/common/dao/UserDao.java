@@ -31,7 +31,7 @@ public class UserDao extends HibernateDao<User, Long> {
 	 * 因目前Native SQL预装载多对多关系还必须用hbm.xml来表达,暂时不演示.
 	 */
 	public User getUserByNativeSql(String loginName) {
-		String sql = "select {u.*} from users u where u.LOGIN_NAME=:loginName";
+		String sql = "select {u.*} from ss_user u where u.LOGIN_NAME=:loginName";
 		return (User) getSession().createSQLQuery(sql).addEntity("u", User.class).setString("loginName", loginName)
 				.uniqueResult();
 	}

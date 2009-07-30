@@ -8,11 +8,11 @@ import org.junit.Test;
 import org.springframework.security.GrantedAuthorityImpl;
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UsernameNotFoundException;
-import org.springside.examples.miniweb.dao.security.UserDao;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.security.UserDetailServiceImpl;
+import org.springside.examples.miniweb.service.security.UserManager;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
@@ -24,17 +24,17 @@ import org.springside.modules.utils.ReflectionUtils;
  */
 public class UserDetailServiceImplTest extends Assert {
 	private UserDetailServiceImpl userDetailService = new UserDetailServiceImpl();
-	private UserDao userDao = null;
+	private UserManager userManager = null;
 
 	@Before
 	public void setUp() {
-		userDao = EasyMock.createNiceMock(UserDao.class);
-		ReflectionUtils.setFieldValue(userDetailService, "userDao", userDao);
+		userManager = EasyMock.createNiceMock(UserManager.class);
+		ReflectionUtils.setFieldValue(userDetailService, "userManager", userManager);
 	}
 
 	@After
 	public void tearDown() {
-		EasyMock.verify(userDao);
+		EasyMock.verify(userManager);
 	}
 
 	@Test
@@ -50,8 +50,8 @@ public class UserDetailServiceImplTest extends Assert {
 		role.getAuthorities().add(auth);
 
 		//录制脚本
-		EasyMock.expect(userDao.findUniqueBy("loginName", user.getLoginName())).andReturn(user);
-		EasyMock.replay(userDao);
+		EasyMock.expect(userManager.findUserByLoginName(user.getLoginName())).andReturn(user);
+		EasyMock.replay(userManager);
 
 		//执行测试
 		UserDetails userDetails = userDetailService.loadUserByUsername(user.getLoginName());
@@ -66,8 +66,8 @@ public class UserDetailServiceImplTest extends Assert {
 	@Test(expected = UsernameNotFoundException.class)
 	public void loadUserNotExist() {
 		//录制脚本
-		EasyMock.expect(userDao.findUniqueBy("loginName", "userNameNotExist")).andReturn(null);
-		EasyMock.replay(userDao);
+		EasyMock.expect(userManager.findUserByLoginName("userNameNotExist")).andReturn(null);
+		EasyMock.replay(userManager);
 		//执行测试
 		userDetailService.loadUserByUsername("userNameNotExist");
 	}

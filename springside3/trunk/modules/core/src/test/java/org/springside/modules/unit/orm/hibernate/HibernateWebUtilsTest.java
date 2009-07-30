@@ -14,19 +14,19 @@ public class HibernateWebUtilsTest extends Assert {
 	@Test
 	public void mergeByCheckedIds() {
 		List<TestBean> srcList = new ArrayList<TestBean>();
-		srcList.add(new TestBean(1));
-		srcList.add(new TestBean(2));
+		srcList.add(new TestBean("A"));
+		srcList.add(new TestBean("B"));
 
-		List<Integer> idList = new ArrayList<Integer>();
-		idList.add(1);
-		idList.add(3);
+		List<String> idList = new ArrayList<String>();
+		idList.add("A");
+		idList.add("C");
 
 		HibernateWebUtils.cleanCheckedCollections(srcList, idList);
 
-		assertEquals(2, srcList.size());
-		assertEquals(1, srcList.get(0).getId());
-		assertEquals(3, srcList.get(1).getId());
-
+		assertEquals(1, srcList.size());
+		assertEquals("A", srcList.get(0).getId());
+		assertEquals(1, idList.size());
+		assertEquals("C", idList.get(0));
 	}
 
 	@Test
@@ -46,25 +46,25 @@ public class HibernateWebUtilsTest extends Assert {
 
 		PropertyFilter filter2 = filters.get(1);
 		assertEquals(PropertyFilter.MatchType.LIKE, filter2.getMatchType());
-		assertEquals("name_OR_email", filter2.getPropertyName());
+		assertEquals(true, filter2.isMultiProperty());
 		assertEquals("efg", filter2.getValue());
 	}
 
 	public static class TestBean {
-		private int id;
+		private String id;
 
 		public TestBean() {
 		}
 
-		public TestBean(int id) {
+		public TestBean(String id) {
 			this.id = id;
 		}
 
-		public int getId() {
+		public String getId() {
 			return id;
 		}
 
-		public void setId(int id) {
+		public void setId(String id) {
 			this.id = id;
 		}
 	}

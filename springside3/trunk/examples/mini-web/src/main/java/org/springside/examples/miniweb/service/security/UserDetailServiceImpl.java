@@ -31,7 +31,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	 */
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
-		User user = userManager.findUerByLoginName(userName);
+		User user = userManager.findUserByLoginName(userName);
 		if (user == null)
 			throw new UsernameNotFoundException("用户" + userName + " 不存在");
 

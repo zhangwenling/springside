@@ -16,7 +16,7 @@ public class JaxbTest {
 	private static XmlBinder binder;
 
 	@BeforeClass
-	public void setUp() {
+	public static void setUp() {
 		binder = new JaxbBinder(User.class);
 	}
 

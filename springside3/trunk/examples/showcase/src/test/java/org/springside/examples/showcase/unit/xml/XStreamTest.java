@@ -17,7 +17,7 @@ public class XStreamTest {
 	private static XmlBinder binder;
 
 	@BeforeClass
-	public void setUp() {
+	public static void setUp() {
 		binder = new XStreamBinder(User.class, Role.class);
 	}
 
