@@ -29,7 +29,7 @@ import org.springside.modules.utils.ReflectionUtils;
  * @author calvin
  */
 @Entity
-@Table(name = "USERS")
+@Table(name = "SS_USER")
 public class User extends AuditableEntity {
 	private String loginName;
 	private String password;
@@ -95,7 +95,7 @@ public class User extends AuditableEntity {
 	//级联保存
 	@Cascade( { CascadeType.SAVE_UPDATE })
 	//中间表定义,表名采用默认命名规则
-	@JoinTable(joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
+	@JoinTable(name = "SS_USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
 	//Fecth策略定义
 	@Fetch(FetchMode.SUBSELECT)
 	//集合按id排序

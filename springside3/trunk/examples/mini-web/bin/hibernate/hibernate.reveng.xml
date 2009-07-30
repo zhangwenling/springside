@@ -2,12 +2,6 @@
 <!DOCTYPE hibernate-reverse-engineering 
   SYSTEM "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 <hibernate-reverse-engineering>
-	<table-filter match-schema=".*" match-name="USERS"/>
-	<table-filter match-schema=".*" match-name="ROLES"/>
-	<table-filter match-schema=".*" match-name="USERS_ROLES"/> 
-	<table-filter match-schema=".*" match-name="AUTHORITIES"/>
-	<table-filter match-schema=".*" match-name="ROLES_AUTHORITIES"/>
-	<table-filter match-schema=".*" match-name="RESOURCES"/>
-	<table-filter match-schema=".*" match-name="RESOURCES_AUTHORITIES"/>
+	<table-filter match-schema=".*" match-name="SS.*"/>
 	<table-filter match-schema=".*" match-name=".*" exclude="true"/>
 </hibernate-reverse-engineering>

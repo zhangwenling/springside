@@ -14,7 +14,7 @@ import org.springside.examples.miniweb.entity.IdEntity;
  * @author calvin
  */
 @Entity
-@Table(name = "AUTHORITIES")
+@Table(name = "SS_AUTHORITY")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Authority extends IdEntity {
 

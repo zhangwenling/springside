@@ -2,5 +2,5 @@
 <!DOCTYPE hibernate-reverse-engineering 
   SYSTEM "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 <hibernate-reverse-engineering>
-	<table-filter match-name="LOGS" exclude="true" />
+	<table-filter match-name="SS_LOG" exclude="true" />
 </hibernate-reverse-engineering>

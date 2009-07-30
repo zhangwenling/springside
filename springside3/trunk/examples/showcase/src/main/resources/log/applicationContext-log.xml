@@ -10,7 +10,7 @@
 		<property name="queueName" value="dblog" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="sql"
-			value="insert into LOGS(THREAD_NAME,LOGGER_NAME,TIMESTAMP,LEVEL,MESSAGE) values(:threadName,:loggerName,:timestamp,:level,:message)" />
+			value="insert into SS_LOG(THREAD_NAME,LOGGER_NAME,TIMESTAMP,LEVEL,MESSAGE) values(:threadName,:loggerName,:timestamp,:level,:message)" />
 		<property name="bufferSize" value="20" />
 	</bean>
 

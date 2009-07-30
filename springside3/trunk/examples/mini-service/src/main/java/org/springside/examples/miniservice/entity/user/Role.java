@@ -14,7 +14,7 @@ import org.springside.examples.miniservice.entity.IdEntity;
  * @author calvin
  */
 @Entity
-@Table(name = "ROLES")
+@Table(name = "SS_ROLE")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Role extends IdEntity {
 

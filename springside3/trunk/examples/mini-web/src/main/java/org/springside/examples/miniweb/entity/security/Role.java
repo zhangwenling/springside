@@ -28,7 +28,7 @@ import org.springside.modules.utils.ReflectionUtils;
  * @author calvin
  */
 @Entity
-@Table(name = "ROLES")
+@Table(name = "SS_ROLE")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Role extends IdEntity {
 
@@ -45,7 +45,7 @@ public class Role extends IdEntity {
 
 	@ManyToMany
 	@Cascade( { CascadeType.SAVE_UPDATE })
-	@JoinTable(joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
+	@JoinTable(name = "SS_ROLE_AUTHORITY", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
 	@Fetch(FetchMode.SUBSELECT)
 	@OrderBy("id")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

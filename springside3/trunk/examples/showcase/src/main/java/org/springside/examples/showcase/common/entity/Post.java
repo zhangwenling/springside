@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ForceDiscriminator;
 
 @Entity
-@Table(name = "POSTS")
+@Table(name = "SS_POST")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @ForceDiscriminator
 public abstract class Post extends IdEntity {

@@ -26,7 +26,7 @@ import org.springside.modules.utils.ReflectionUtils;
  * @author calvin
  */
 @Entity
-@Table(name = "RESOURCES")
+@Table(name = "SS_RESOURCE")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Resource extends IdEntity {
 
@@ -66,7 +66,7 @@ public class Resource extends IdEntity {
 
 	@ManyToMany
 	@Cascade( { CascadeType.SAVE_UPDATE })
-	@JoinTable(joinColumns = { @JoinColumn(name = "RESOURCE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
+	@JoinTable(name = "SS_RESOURCE_AUTHORITY", joinColumns = { @JoinColumn(name = "RESOURCE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
 	@Fetch(FetchMode.JOIN)
 	@OrderBy("id")
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
