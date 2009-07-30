@@ -10,7 +10,7 @@ public class UserDao extends HibernateDao<User, Long> {
 	// 统一定义所有以用户为主体的HQL.
 	public static final String QUERY_BY_LNAME_PASSWD = "select count(u) from User u where u.loginName=? and u.password=?";
 
-	public void initUserWithRoles(User user) {
+	public void initAll(User user) {
 		Hibernate.initialize(user.getRoles());
 	}
 }

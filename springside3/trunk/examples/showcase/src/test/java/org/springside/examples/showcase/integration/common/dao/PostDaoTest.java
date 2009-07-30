@@ -71,7 +71,6 @@ public class PostDaoTest extends SpringTxTestCase {
 		reply.setUser(user);
 
 		Subject subject = subjectDao.get(1L);
-		subjectDao.initSubjectWithReply(subject);
 		reply.setSubject(subject);
 
 		replyDao.save(reply);

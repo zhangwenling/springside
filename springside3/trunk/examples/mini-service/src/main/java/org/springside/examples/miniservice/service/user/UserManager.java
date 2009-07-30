@@ -34,7 +34,7 @@ public class UserManager {
 		List<User> userList = userDao.getAll();
 
 		for (User user : userList) {
-			userDao.initUserWithRoles(user);
+			userDao.initAll(user);
 		}
 		return userList;
 	}
