@@ -32,10 +32,7 @@ public class UserManager {
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
 		List<User> userList = userDao.getAll();
-
-		for (User user : userList) {
-			userDao.initAll(user);
-		}
+		userDao.initAll(userList);
 		return userList;
 	}
 	

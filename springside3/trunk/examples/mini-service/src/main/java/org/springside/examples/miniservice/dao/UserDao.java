@@ -1,5 +1,7 @@
 package org.springside.examples.miniservice.dao;
 
+import java.util.List;
+
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 import org.springside.examples.miniservice.entity.user.User;
@@ -12,5 +14,11 @@ public class UserDao extends HibernateDao<User, Long> {
 
 	public void initAll(User user) {
 		Hibernate.initialize(user.getRoles());
+	}
+
+	public void initAll(List<User> userList) {
+		for (User user : userList) {
+			initAll(user);
+		}
 	}
 }

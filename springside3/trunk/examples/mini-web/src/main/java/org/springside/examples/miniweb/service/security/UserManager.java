@@ -111,12 +111,13 @@ public class UserManager {
 	}
 	
 	// Authority Manager //
-	public Authority getAuthorty(Long id) {
-		return authorityDao.get(id);
-	}
-
 	@Transactional(readOnly = true)
 	public List<Authority> getAllAuthority() {
 		return authorityDao.getAll();
+	}
+
+	@Transactional(readOnly = true)
+	public Authority getAuthorty(Long id) {
+		return authorityDao.get(id);
 	}
 }

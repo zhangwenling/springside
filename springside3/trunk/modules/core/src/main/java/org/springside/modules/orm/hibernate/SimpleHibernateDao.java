@@ -127,6 +127,13 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 按id列表获取对象.
+	 */
+	public List<T> get(List<PK> ids) {
+		return find(Restrictions.in(getIdName(), ids));
+	}
+
+	/**
 	 *	获取全部对象.
 	 */
 	public List<T> getAll() {
@@ -277,6 +284,15 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 */
 	public void initEntity(T entity) {
 		Hibernate.initialize(entity);
+	}
+
+	/**
+	 * @see #initEntity(Object)
+	 */
+	public void initEntity(List<T> entityList) {
+		for (T entity : entityList) {
+			Hibernate.initialize(entity);
+		}
 	}
 
 	/**

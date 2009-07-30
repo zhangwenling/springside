@@ -277,7 +277,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按属性查找对象列表,支持多种匹配方式.
 	 * 
-	 * @param matchType 匹配方式,目前支持的取值为"EQUAL"与"LIKE".
+	 * @param matchType 匹配方式,目前支持的取值见PropertyFilter的MatcheType enum.
 	 */
 	public List<T> findBy(final String propertyName, final Object value, final MatchType matchType) {
 		Criterion criterion = buildPropertyFilterCriterion(propertyName, value, matchType);
