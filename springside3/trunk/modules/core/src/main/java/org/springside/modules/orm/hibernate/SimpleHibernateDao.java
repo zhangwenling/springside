@@ -127,13 +127,6 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * 按id列表获取对象.
-	 */
-	public List<T> get(List<PK> ids) {
-		return find(Restrictions.in(getIdName(), ids));
-	}
-
-	/**
 	 *	获取全部对象.
 	 */
 	public List<T> getAll() {
@@ -156,6 +149,13 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 		Assert.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = Restrictions.eq(propertyName, value);
 		return (T) createCriteria(criterion).uniqueResult();
+	}
+
+	/**
+	 * 按id列表获取对象.
+	 */
+	public List<T> findByIds(List<PK> ids) {
+		return find(Restrictions.in(getIdName(), ids));
 	}
 
 	/**
