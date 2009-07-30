@@ -76,8 +76,10 @@ public class RoleAction extends CrudActionSupport<Role> {
 	@Override
 	public String save() throws Exception {
 		//根据页面上的checkbox 整合Role的Authorities Set.
-		HibernateWebUtils.mergeByCheckedIds(entity.getAuthorities(), checkedAuthIds, Authority.class);
-
+		HibernateWebUtils.cleanCheckedCollections(entity.getAuthorities(), checkedAuthIds);
+		for (Long aid : checkedAuthIds) {
+			entity.getAuthorities().add(userManager.getAuthorty(aid));
+		}
 		userManager.saveRole(entity);
 		addActionMessage("保存角色成功");
 		return RELOAD;

@@ -21,7 +21,7 @@ public class HibernateWebUtilsTest extends Assert {
 		idList.add(1);
 		idList.add(3);
 
-		HibernateWebUtils.mergeByCheckedIds(srcList, idList, TestBean.class);
+		HibernateWebUtils.cleanCheckedCollections(srcList, idList);
 
 		assertEquals(2, srcList.size());
 		assertEquals(1, srcList.get(0).getId());

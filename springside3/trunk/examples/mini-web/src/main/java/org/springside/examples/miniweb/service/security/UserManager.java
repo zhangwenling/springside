@@ -105,11 +105,16 @@ public class UserManager {
 	}
 
 	// Resource Manager //
+	@Transactional(readOnly = true)
 	public List<Resource> getUrlResourceWithAuthorities() {
 		return resourceDao.getUrlResourceWithAuthorities();
 	}
 	
 	// Authority Manager //
+	public Authority getAuthorty(Long id) {
+		return authorityDao.get(id);
+	}
+
 	@Transactional(readOnly = true)
 	public List<Authority> getAllAuthority() {
 		return authorityDao.getAll();
