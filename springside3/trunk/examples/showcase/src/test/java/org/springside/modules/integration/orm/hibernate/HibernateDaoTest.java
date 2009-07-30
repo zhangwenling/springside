@@ -47,7 +47,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 	public void findByHQL() {
 		//初始化数据中共有6个email为@springside.org.cn的用户
 		Page<User> page = new Page<User>(5);
-		dao.find(page, "from User u where email like ?", "%springside.org.cn%");
+		dao.findPage(page, "from User u where email like ?", "%springside.org.cn%");
 		assertEquals(5, page.getResult().size());
 
 		//自动统计总数
@@ -55,7 +55,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 		//翻页
 		page.setPageNo(2);
-		dao.find(page, "from User u where email like ?", "%springside.org.cn%");
+		dao.findPage(page, "from User u where email like ?", "%springside.org.cn%");
 		assertEquals(1, page.getResult().size());
 	}
 
@@ -64,7 +64,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		//初始化数据中共有6个email为@springside.org.cn的用户
 		Page<User> page = new Page<User>(5);
 		Criterion c = Restrictions.like("email", "springside.org.cn", MatchMode.ANYWHERE);
-		dao.find(page, c);
+		dao.findPage(page, c);
 		assertEquals(5, page.getResult().size());
 
 		//自动统计总数
@@ -72,7 +72,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 		//翻页
 		page.setPageNo(2);
-		dao.find(page, c);
+		dao.findPage(page, c);
 		assertEquals(1, page.getResult().size());
 	}
 
@@ -84,7 +84,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		page.setOrder(Page.DESC + "," + Page.ASC);
 
 		Criterion c = Restrictions.like("email", "springside.org.cn", MatchMode.ANYWHERE);
-		dao.find(page, c);
+		dao.findPage(page, c);
 
 		assertEquals("Sawyer", page.getResult().get(0).getName());
 	}
@@ -122,12 +122,12 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 		//Filter with Page
 		Page<User> page = new Page<User>(5);
-		dao.find(page, filters);
+		dao.findPage(page, filters);
 		assertEquals(5, page.getResult().size());
 		assertEquals(6L, page.getTotalCount());
 
 		page.setPageNo(2);
-		dao.find(page, filters);
+		dao.findPage(page, filters);
 		assertEquals(1, page.getResult().size());
 
 		//Date and LT/GT filter
@@ -154,13 +154,13 @@ public class HibernateDaoTest extends SpringTxTestCase {
 	@Test
 	public void findPageByHqlAutoCount() {
 		Page<User> page = new Page<User>(5);
-		dao.find(page, "from User user");
+		dao.findPage(page, "from User user");
 		assertEquals(6L, page.getTotalCount());
 
-		dao.find(page, "select user from User user");
+		dao.findPage(page, "select user from User user");
 		assertEquals(6L, page.getTotalCount());
 
-		dao.find(page, "select user from User user order by id");
+		dao.findPage(page, "select user from User user order by id");
 		assertEquals(6L, page.getTotalCount());
 	}
 }

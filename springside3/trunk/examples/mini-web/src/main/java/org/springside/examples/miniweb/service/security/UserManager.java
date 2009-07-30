@@ -62,12 +62,12 @@ public class UserManager {
 	
 	@Transactional(readOnly = true)
 	public Page<User> searchUser(final Page<User> page, final List<PropertyFilter> filters) {
-		return userDao.find(page, filters);
+		return userDao.findPage(page, filters);
 	}
 	
 	@Transactional(readOnly = true)
 	public User findUerByLoginName(String loginName) {
-		return userDao.findByUnique("loginName", loginName);
+		return userDao.findUniqueBy("loginName", loginName);
 	}
 
 	/**

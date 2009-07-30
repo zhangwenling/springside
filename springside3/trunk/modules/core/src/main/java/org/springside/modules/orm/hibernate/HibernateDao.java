@@ -71,7 +71,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 分页获取全部对象.
 	 */
 	public Page<T> getAll(final Page<T> page) {
-		return find(page);
+		return findPage(page);
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @return 分页查询结果, 附带结果列表及所有查询时的参数.
 	 */
 	@SuppressWarnings("unchecked")
-	public Page<T> find(final Page<T> page, final String hql, final Object... values) {
+	public Page<T> findPage(final Page<T> page, final String hql, final Object... values) {
 		Assert.notNull(page, "page不能为空");
 
 		Query q = createQuery(hql, values);
@@ -110,7 +110,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @return 分页查询结果, 附带结果列表及所有查询时的参数.
 	 */
 	@SuppressWarnings("unchecked")
-	public Page<T> find(final Page<T> page, final String hql, final Map<String, Object> values) {
+	public Page<T> findPage(final Page<T> page, final String hql, final Map<String, Object> values) {
 		Assert.notNull(page, "page不能为空");
 
 		Query q = createQuery(hql, values);
@@ -136,7 +136,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @return 分页查询结果.附带结果列表及所有查询时的参数.
 	 */
 	@SuppressWarnings("unchecked")
-	public Page<T> find(final Page<T> page, final Criterion... criterions) {
+	public Page<T> findPage(final Page<T> page, final Criterion... criterions) {
 		Assert.notNull(page, "page不能为空");
 
 		Criteria c = createCriteria(criterions);
@@ -295,9 +295,9 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按属性过滤条件列表分页查找对象.
 	 */
-	public Page<T> find(final Page<T> page, final List<PropertyFilter> filters) {
+	public Page<T> findPage(final Page<T> page, final List<PropertyFilter> filters) {
 		Criterion[] criterions = buildPropertyFilterCriterions(filters);
-		return find(page, criterions);
+		return findPage(page, criterions);
 	}
 
 	/**
@@ -366,7 +366,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	public boolean isPropertyUnique(final String propertyName, final Object newValue, final Object oldValue) {
 		if (newValue == null || newValue.equals(oldValue))
 			return true;
-		Object object = findByUnique(propertyName, newValue);
+		Object object = findUniqueBy(propertyName, newValue);
 		return (object == null);
 	}
 }

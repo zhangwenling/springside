@@ -50,7 +50,7 @@ public class UserDetailServiceImplTest extends Assert {
 		role.getAuthorities().add(auth);
 
 		//录制脚本
-		EasyMock.expect(userDao.findByUnique("loginName", user.getLoginName())).andReturn(user);
+		EasyMock.expect(userDao.findUniqueBy("loginName", user.getLoginName())).andReturn(user);
 		EasyMock.replay(userDao);
 
 		//执行测试
@@ -66,7 +66,7 @@ public class UserDetailServiceImplTest extends Assert {
 	@Test(expected = UsernameNotFoundException.class)
 	public void loadUserNotExist() {
 		//录制脚本
-		EasyMock.expect(userDao.findByUnique("loginName", "userNameNotExist")).andReturn(null);
+		EasyMock.expect(userDao.findUniqueBy("loginName", "userNameNotExist")).andReturn(null);
 		EasyMock.replay(userDao);
 		//执行测试
 		userDetailService.loadUserByUsername("userNameNotExist");

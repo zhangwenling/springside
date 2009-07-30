@@ -44,7 +44,7 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 		assertEquals(1, users.size());
 		assertEquals(LOGIN_NAME, users.get(0).getLoginName());
 
-		User user = dao.findByUnique("loginName", LOGIN_NAME);
+		User user = dao.findUniqueBy("loginName", LOGIN_NAME);
 		assertEquals(LOGIN_NAME, user.getLoginName());
 	}
 
