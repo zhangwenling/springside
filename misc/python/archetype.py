@@ -35,9 +35,9 @@ def modifyArchetypes():
     commonModifyArchetype(base_dir+'/tools/code-generator/maven-archetypes/web-archetype/src/main/resources/archetype-resources')
 
     os.chdir(base_dir+'/tools/code-generator/maven-archetypes/service-archetype/src/main/resources/archetype-resources')
-    replaceinfile('bin/ws-bin/build-client.bat','mini-service','${artifactId}')
-    replaceinfile('bin/ws-bin/save-wsdl.bat','mini-service','${artifactId}')
-    replaceinfile('bin/ws-bin/build-client-binding.xml','http://miniservice.examples.springside.org','${webservice-namespace}')
+    replaceinfile('bin/webservice/build-client.bat','mini-service','${artifactId}')
+    replaceinfile('bin/webservice/save-wsdl.bat','mini-service','${artifactId}')
+    replaceinfile('bin/webservice/build-client-binding.xml','http://miniservice.examples.springside.org','${webservice-namespace}')
     replaceinfile('src/main/java/ws/Constants.java','http://miniservice.examples.springside.org','${webservice-namespace}')
 
     print 'modified archetypes.'
