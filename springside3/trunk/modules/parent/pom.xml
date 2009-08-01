@@ -20,7 +20,7 @@
 		<struts2.version>2.1.6</struts2.version>
 		<cxf.version>2.2.2</cxf.version>
 		<spring-security.version>2.0.4</spring-security.version>
-	
+
 		<!--  Plugin的属性定义  -->
 		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,11 +28,16 @@
 
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
 	<repositories>
-		<!--
-			<repository> <id>nexus</id> <name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
-			</repository>
-		-->
+		<!-- 
+		<repository>
+			<id>nexus</id>
+			<name>local nexus server</name>
+			<url>http://localhost:8081/nexus/content/groups/public</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+ 		-->
 		<repository>
 			<id>offical</id>
 			<name>Maven Offical Repository</name>
@@ -60,9 +65,14 @@
 
 	<pluginRepositories>
 		<!--
-			<repository> <id>nexus</id> <name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
-			</repository>
+		<pluginRepository>
+			<id>nexus</id>
+			<name>local nexus server</name>
+			<url>http://localhost:8081/nexus/content/groups/public</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
 		-->
 	</pluginRepositories>
 
