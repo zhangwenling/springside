@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><archetype-descriptor name="web-archetype">
+<?xml version="1.0" encoding="UTF-8"?><archetype-descriptor name="mini-web">
   <fileSets>
     <fileSet filtered="true" packaged="true" encoding="UTF-8">
       <directory>src/main/java</directory>
@@ -32,6 +32,13 @@
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="UTF-8">
+      <directory>src/test/resources</directory>
+      <includes>
+        <include>**/*.xml</include>
+        <include>**/*.properties</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
       <directory>.settings</directory>
       <includes>
         <include>**/*.xml</include>
@@ -42,12 +49,19 @@
       <includes>
         <include>**/*.jsp</include>
         <include>**/*.xml</include>
+        <include>**/*.properties</include>
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="UTF-8">
       <directory>webapp/common</directory>
       <includes>
         <include>**/*.jsp</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="GBK">
+      <directory>bin/hibernate</directory>
+      <includes>
+        <include>**/*.xml</include>
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="UTF-8">
@@ -75,6 +89,12 @@
       </includes>
     </fileSet>
     <fileSet encoding="UTF-8">
+      <directory>webapp/WEB-INF</directory>
+      <includes>
+        <include>**/*.ftl</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
       <directory>webapp/css</directory>
       <includes>
         <include>**/*.css</include>
@@ -83,14 +103,13 @@
     <fileSet filtered="true" encoding="GBK">
       <directory>bin</directory>
       <includes>
-        <include>**/*.sh</include>
         <include>**/*.bat</include>
       </includes>
     </fileSet>
-    <fileSet filtered="true" encoding="UTF-8">
-      <directory>bin</directory>
+    <fileSet encoding="GBK">
+      <directory>bin/hibernate</directory>
       <includes>
-        <include>**/*.xml</include>
+        <include>**/*.bat</include>
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="UTF-8">

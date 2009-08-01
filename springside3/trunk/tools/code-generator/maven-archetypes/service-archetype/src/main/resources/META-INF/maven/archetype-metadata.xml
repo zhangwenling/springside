@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?><archetype-descriptor name="mini-service">
 <archetype-descriptor name="service-archetype">
   <requiredProperties>
         <requiredProperty key="webservice-namespace"/>
@@ -30,6 +30,12 @@
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="UTF-8">
+      <directory>src/test/resources</directory>
+      <includes>
+        <include>**/*.xml</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
       <directory>.settings</directory>
       <includes>
         <include>**/*.xml</include>
@@ -39,10 +45,17 @@
       <directory>webapp/WEB-INF</directory>
       <includes>
         <include>**/*.xml</include>
+        <include>**/*.properties</include>
       </includes>
     </fileSet>
     <fileSet filtered="true" encoding="UTF-8">
-      <directory>bin</directory>
+      <directory>bin/webservice</directory>
+      <includes>
+        <include>**/*.xml</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>bin/hibernate</directory>
       <includes>
         <include>**/*.xml</include>
       </includes>
@@ -63,10 +76,21 @@
         <include>**/*.name</include>
       </includes>
     </fileSet>
-    <fileSet filtered="true" encoding="GBK">
+    <fileSet encoding="GBK">
+      <directory>bin/webservice</directory>
+      <includes>
+        <include>**/*.bat</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="GBK">
       <directory>bin</directory>
       <includes>
-        <include>**/*.sh</include>
+        <include>**/*.bat</include>
+      </includes>
+    </fileSet>
+   <fileSet encoding="GBK">
+      <directory>bin/hibernate</directory>
+      <includes>
         <include>**/*.bat</include>
       </includes>
     </fileSet>
