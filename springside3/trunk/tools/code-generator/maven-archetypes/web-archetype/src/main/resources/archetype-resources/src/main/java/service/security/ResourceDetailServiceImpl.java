@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import ${package}.dao.security.ResourceDao;
 import ${package}.entity.security.Resource;
 import org.springside.modules.security.springsecurity.ResourceDetailService;
 
@@ -20,13 +19,13 @@ import org.springside.modules.security.springsecurity.ResourceDetailService;
 @Transactional(readOnly = true)
 public class ResourceDetailServiceImpl implements ResourceDetailService {
 	@Autowired
-	private ResourceDao resourceDao;
+	private UserManager userManager;
 
 	/**
 	 * @see ResourceDetailService${symbol_pound}getRequestMap()
 	 */
 	public LinkedHashMap<String, String> getRequestMap() throws Exception {
-		List<Resource> resourceList = resourceDao.getUrlResourceWithAuthorities();
+		List<Resource> resourceList = userManager.getUrlResourceWithAuthorities();
 
 		LinkedHashMap<String, String> requestMap = new LinkedHashMap<String, String>(resourceList.size());
 		for (Resource resource : resourceList) {

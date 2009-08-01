@@ -35,10 +35,7 @@ public class UserManager {
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
 		List<User> userList = userDao.getAll();
-
-		for (User user : userList) {
-			userDao.initObject(user.getRoles());
-		}
+		userDao.initAllProperty(userList);
 		return userList;
 	}
 	

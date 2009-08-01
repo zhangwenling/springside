@@ -14,7 +14,6 @@ import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UserDetailsService;
 import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
-import ${package}.dao.security.UserDao;
 import ${package}.entity.security.Authority;
 import ${package}.entity.security.Role;
 import ${package}.entity.security.User;
@@ -28,14 +27,14 @@ import ${package}.entity.security.User;
 public class UserDetailServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private UserDao userDao;
+	private UserManager userManager;
 
 	/**
 	 * 获取用户Detail信息的回调函数.
 	 */
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
-		User user = userDao.findByUnique("loginName", userName);
+		User user = userManager.findUserByLoginName(userName);
 		if (user == null)
 			throw new UsernameNotFoundException("用户" + userName + " 不存在");
 

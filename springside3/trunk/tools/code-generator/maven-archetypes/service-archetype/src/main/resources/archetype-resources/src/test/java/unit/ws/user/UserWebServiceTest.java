@@ -50,7 +50,7 @@ public class UserWebServiceTest extends Assert {
 		assertEquals(WSResult.SUCCESS, result.getCode());
 
 		//执行输入错误的测试,校验结果
-		result = userWebService.authUser("admin", "false");
+		result = userWebService.authUser("admin", "errorPasswd");
 		assertEquals(WSResult.FALSE, result.getCode());
 	}
 }

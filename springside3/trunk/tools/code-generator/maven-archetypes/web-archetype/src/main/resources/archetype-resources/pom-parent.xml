@@ -167,23 +167,6 @@
 				<artifactId>commons-dbcp</artifactId>
 				<version>1.2.2</version>
 			</dependency>
-
-			<!-- optional jdbc driver -->
-			<dependency>
-				<groupId>org.apache.derby</groupId>
-				<artifactId>derbyclient</artifactId>
-				<version>10.4.2.0</version>
-			</dependency>
-			<dependency>
-				<groupId>com.oracle</groupId>
-				<artifactId>ojdbc14</artifactId>
-				<version>10.2.0.3.0</version>
-			</dependency>
-			<dependency>
-				<groupId>mysql</groupId>
-				<artifactId>mysql-connector-java</artifactId>
-				<version>5.1.6</version>
-			</dependency>
 			<!-- orm end -->
 
 			<!-- web begin -->
@@ -661,12 +644,14 @@
 						<url>${symbol_dollar}{jdbc.url}</url>
 						<username>${symbol_dollar}{jdbc.user}</username>
 						<password>${symbol_dollar}{jdbc.password}</password>
+						<schema>${symbol_dollar}{jdbc.schema}</schema>
 						<type>CLEAN_INSERT</type>
 						<src>src/test/resources/test-data.xml</src>
 						<dest>src/test/resources/test-data.xml</dest>
 						<format>xml</format>
 						<transaction>true</transaction>
 						<encoding>${symbol_dollar}{project.build.sourceEncoding}</encoding>
+						<dataTypeFactoryName>${symbol_dollar}{dbunit.datatype}</dataTypeFactoryName>
 					</configuration>
 					<dependencies>
 						<dependency>

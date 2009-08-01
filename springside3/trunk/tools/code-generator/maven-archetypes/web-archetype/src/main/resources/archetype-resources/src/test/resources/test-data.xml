@@ -3,7 +3,7 @@
 #set( $symbol_escape = '\' )
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-  <table name="AUTHORITIES">
+  <table name="SS_AUTHORITY">
     <column>ID</column>
     <column>NAME</column>
     <column>DISPLAY_NAME</column>
@@ -28,7 +28,7 @@
       <value>修改角色</value>
     </row>
   </table>
-  <table name="RESOURCES">
+  <table name="SS_RESOURCE">
     <column>ID</column>
     <column>RESOURCE_TYPE</column>
     <column>VALUE</column>
@@ -70,7 +70,7 @@
       <value>6.0</value>
     </row>
   </table>
-  <table name="RESOURCES_AUTHORITIES">
+  <table name="SS_RESOURCE_AUTHORITY">
     <column>AUTHORITY_ID</column>
     <column>RESOURCE_ID</column>
     <row>
@@ -98,7 +98,7 @@
       <value>6</value>
     </row>
   </table>
-  <table name="ROLES">
+  <table name="SS_ROLE">
     <column>ID</column>
     <column>NAME</column>
     <row>
@@ -110,7 +110,7 @@
       <value>用户</value>
     </row>
   </table>
-  <table name="ROLES_AUTHORITIES">
+  <table name="SS_ROLE_AUTHORITY">
     <column>ROLE_ID</column>
     <column>AUTHORITY_ID</column>
     <row>
@@ -138,7 +138,7 @@
       <value>3</value>
     </row>
   </table>
-  <table name="USERS">
+  <table name="SS_USER">
     <column>ID</column>
     <column>LOGIN_NAME</column>
     <column>PASSWORD</column>
@@ -187,7 +187,7 @@
       <value>ben@springside.org.cn</value>
     </row>
   </table>
-  <table name="USERS_ROLES">
+  <table name="SS_USER_ROLE">
     <column>USER_ID</column>
     <column>ROLE_ID</column>
     <row>

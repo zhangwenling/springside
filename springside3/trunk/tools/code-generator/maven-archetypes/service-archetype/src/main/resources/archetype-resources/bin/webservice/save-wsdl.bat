@@ -17,5 +17,5 @@ call ant -f save-wsdl-build.xml
 %local_driver%
 cd %local_path%
 
-echo [INFO] WSDL已保存到webapp/wsdl/mini-service.wsdl.
+echo [INFO] WSDL已保存到webapp/wsdl/${artifactId}.wsdl.
 pause

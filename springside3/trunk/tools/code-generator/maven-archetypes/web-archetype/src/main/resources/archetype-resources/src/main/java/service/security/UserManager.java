@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ${package}.dao.security.AuthorityDao;
+import ${package}.dao.security.ResourceDao;
 import ${package}.dao.security.RoleDao;
 import ${package}.dao.security.UserDao;
 import ${package}.entity.security.Authority;
+import ${package}.entity.security.Resource;
 import ${package}.entity.security.Role;
 import ${package}.entity.security.User;
 import ${package}.service.ServiceException;
@@ -40,6 +42,8 @@ public class UserManager {
 	private RoleDao roleDao;
 	@Autowired
 	private AuthorityDao authorityDao;
+	@Autowired
+	private ResourceDao resourceDao;
 
 	// User Manager //
 	@Transactional(readOnly = true)
@@ -61,7 +65,12 @@ public class UserManager {
 	
 	@Transactional(readOnly = true)
 	public Page<User> searchUser(final Page<User> page, final List<PropertyFilter> filters) {
-		return userDao.find(page, filters);
+		return userDao.findPage(page, filters);
+	}
+	
+	@Transactional(readOnly = true)
+	public User findUserByLoginName(String loginName) {
+		return userDao.findUniqueBy("loginName", loginName);
 	}
 
 	/**
@@ -98,9 +107,20 @@ public class UserManager {
 		roleDao.delete(id);
 	}
 
+	// Resource Manager //
+	@Transactional(readOnly = true)
+	public List<Resource> getUrlResourceWithAuthorities() {
+		return resourceDao.getUrlResourceWithAuthorities();
+	}
+	
 	// Authority Manager //
 	@Transactional(readOnly = true)
 	public List<Authority> getAllAuthority() {
 		return authorityDao.getAll();
+	}
+
+	@Transactional(readOnly = true)
+	public Authority getAuthorty(Long id) {
+		return authorityDao.get(id);
 	}
 }
