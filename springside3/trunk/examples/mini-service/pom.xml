@@ -98,6 +98,7 @@
 		<dependency>
 			<groupId>${jdbc.driver.groupid}</groupId>
 			<artifactId>${jdbc.driver.artifactId}</artifactId>
+			<version>${jdbc.driver.version}</version>
 		</dependency>
 		<!-- orm end -->
 

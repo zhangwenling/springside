@@ -32,7 +32,7 @@ public class UserManager {
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
 		List<User> userList = userDao.getAll();
-		userDao.initAll(userList);
+		userDao.initAllProperty(userList);
 		return userList;
 	}
 	

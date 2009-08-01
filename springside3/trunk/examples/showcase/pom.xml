@@ -23,7 +23,8 @@
 		<jdbc.driver.artifactId>derbyclient</jdbc.driver.artifactId>
 		<jdbc.driver.version>10.4.2.0</jdbc.driver.version>
 		<dbunit.schema.file>src/main/sql/derby/schema.sql</dbunit.schema.file>
-		<dbunit.datatype>org.dbunit.dataset.datatype.DefaultDataTypeFactory</dbunit.datatype>
+		<dbunit.datatype>org.dbunit.dataset.datatype.DefaultDataTypeFactory
+		</dbunit.datatype>
 	</properties>
 
 	<!-- 依赖项定义 -->
@@ -88,6 +89,7 @@
 		<dependency>
 			<groupId>${jdbc.driver.groupid}</groupId>
 			<artifactId>${jdbc.driver.artifactId}</artifactId>
+			<version>${jdbc.driver.version}</version>
 		</dependency>
 		<!-- orm end -->
 

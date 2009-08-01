@@ -19,7 +19,7 @@ public class SubjectDao extends HibernateDao<Subject, Long> {
 		return (Subject) distinct(createQuery(QUERY_WITH_DETAIL_AND_REPLY, id)).uniqueResult();
 	}
 
-	public void initAll(Subject subject) {
+	public void initAllProperties(Subject subject) {
 		Hibernate.initialize(subject.getReplys());
 		Hibernate.initialize(subject.getContent());
 	}
