@@ -26,7 +26,7 @@ import org.springside.modules.queue.QueueConsumerTask;
 
 /**
  * 将Queue中的log4j event写入数据库的消费者任务.
- * 使用Jdbc批量写入的模式,同时支持阻塞与定时批量两种策略.
+ * 使用Jdbc批量写入的模式,同时支持阻塞读取事件与定时批量读取事件两种策略.
  * 
  * @see QueueConsumerTask
  * 
@@ -36,9 +36,13 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 
 	protected Logger logger = LoggerFactory.getLogger(JdbcAppenderTask.class);
 
+	protected boolean blockingFetch = true;
+	protected int batchSize = 10;
+	protected int period = 1000;
+	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
+
 	protected SimpleJdbcTemplate jdbcTemplate;
 	protected String sql;
-	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
 
 	@Required
 	public void setDataSource(DataSource dataSource) {
@@ -55,9 +59,78 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
+	 * 循环读取消息的策略,为true时采用单条阻塞读取策略,false时采用定期批量读取策略.
+	 * @param blockingFetch
+	 */
+	public void setBlockingFetch(boolean blockingFetch) {
+		this.blockingFetch = blockingFetch;
+	}
+
+	/**
+	 * 批量定时读取的队列大小, 默认为10.
+	 */
+	public void setBatchSize(int batchSize) {
+		this.batchSize = batchSize;
+	}
+
+	/**
+	 * 批量定时读取的时间间隔,单位为毫秒,默认为1秒.
+	 */
+	public void setPeriod(int period) {
+		this.period = period;
+	}
+
+	/**
+	 * 线程执行函数.
+	 */
+	public void run() {
+		if (blockingFetch) {
+			blockingFetch();
+		} else {
+			periodFetch();
+		}
+	}
+
+	/**
+	 * 阻塞获取事件并调用processMessage()进行处理.
+	 * 
+	 * @see #processMessage(Object)
+	 */
+	protected void blockingFetch() {
+		try {
+			//循环阻塞获取消息
+			while (!Thread.currentThread().isInterrupted()) {
+				Object message = queue.take();
+				processMessage(message);
+			}
+		} catch (InterruptedException e) {
+			logger.debug("消费线程阻塞被中断");
+		}
+		blockingFetchClean();
+	}
+
+	/**
+	 * 定期批量获取事件并调用processMessageList()处理.
+	 * 
+	 * @see #processMessageList(List)
+	 */
+	@SuppressWarnings("unchecked")
+	protected void periodFetch() {
+		try {
+			while (!Thread.currentThread().isInterrupted()) {
+				List list = new ArrayList(batchSize);
+				queue.drainTo(list, batchSize);
+				processMessageList(list);
+				Thread.sleep(period);
+			}
+		} catch (InterruptedException e) {
+			logger.debug("消费线程阻塞被中断");
+		}
+	}
+
+	/**
 	 * 事件处理函数,将事件放入buffer,当buffer达到batchSize时执行批量事件处理函数.
 	 */
-	@Override
 	protected void processMessage(Object message) {
 		LoggingEvent event = (LoggingEvent) message;
 		eventBuffer.add(event);
@@ -72,7 +145,6 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	/**
 	 * 批量消息处理函数,将事件列表批量插入数据库.
 	 */
-	@Override
 	@SuppressWarnings("unchecked")
 	protected void processMessageList(List messageList) {
 		List<LoggingEvent> eventList = messageList;
@@ -104,18 +176,13 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	 * 退出清理函数.
+	 * 阻塞读取策略的退出清理函数.
 	 */
-	@Override
 	protected void blockingFetchClean() {
 		if (eventBuffer.size() > 0) {
 			processMessageList(eventBuffer);
 		}
 		logger.debug("cleaned task {}", this);
-	}
-
-	@Override
-	protected void periodFetchClean() {
 	}
 
 	/**

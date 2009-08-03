@@ -20,9 +20,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PreDestroy;
 
@@ -36,7 +34,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
  * 管理BlockingQueue Map.
  * 
  * 当Queue初始化时,负责restore持久化文件中的消息.
- * 当系统关闭时,负责停止Task线程, 并将未完成的消息持久化到文件.
+ * 当系统关闭时,负责停止Task, 并将未完成的消息持久化到文件.
  * 
  * @author calvin
  */
@@ -47,10 +45,9 @@ public class QueueManager {
 	protected static Logger logger = LoggerFactory.getLogger(QueueManager.class);
 
 	protected static Map<String, BlockingQueue> queueMap = new ConcurrentHashMap<String, BlockingQueue>();//消息队列
-	protected static List<ExecutorService> executorList = new ArrayList();//执行任务的线程池列表
+	protected static List<QueueConsumerTask> taskList = new ArrayList();
 
 	protected static boolean persistence = true;
-	protected int shutdownWait = 10000;
 
 	/**
 	 * 根据queueName获得消息队列的静态函数.
@@ -86,17 +83,10 @@ public class QueueManager {
 	}
 
 	/**
-	 * 消费任务向QueueManager注册自己的Executor
+	 * 消费任务向QueueManager注册Task.
 	 */
-	public static void registerTaskExecutor(ExecutorService executor) {
-		executorList.add(executor);
-	}
-
-	/**
-	 * 停止每个队列时最多等待的时间, 单位为毫秒, 默认为10秒.
-	 */
-	public void setShutdownWait(int shutdownWait) {
-		this.shutdownWait = shutdownWait;
+	public static void registerTask(QueueConsumerTask task) {
+		taskList.add(task);
 	}
 
 	/**
@@ -106,16 +96,14 @@ public class QueueManager {
 		QueueManager.persistence = persistence;
 	}
 
+	/**
+	 * JVM关闭时的钩子函数.
+	 */
 	@PreDestroy
 	public void stop() {
-		//停止所有线程, 每个任务最多等待stopWait秒
-		for (ExecutorService executor : executorList) {
-			try {
-				executor.shutdownNow();
-				executor.awaitTermination(shutdownWait, TimeUnit.MILLISECONDS);
-			} catch (InterruptedException e) {
-				logger.debug("awaitTermination被中断", e);
-			}
+		//停止所有任务
+		for (QueueConsumerTask task : taskList) {
+			task.stop();
 		}
 
 		//持久化所有队列的未处理消息到文件
