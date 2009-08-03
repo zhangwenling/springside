@@ -14,8 +14,6 @@ import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springside.examples.showcase.orm.hibernate.AuditableEntity;
@@ -92,8 +90,6 @@ public class User extends AuditableEntity {
 
 	//多对多定义
 	@ManyToMany
-	//级联保存
-	@Cascade( { CascadeType.SAVE_UPDATE })
 	//中间表定义,表名采用默认命名规则
 	@JoinTable(name = "SS_USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
 	//Fecth策略定义

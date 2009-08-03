@@ -15,8 +15,6 @@ import javax.persistence.Transient;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springside.examples.miniweb.entity.IdEntity;
@@ -44,7 +42,6 @@ public class Role extends IdEntity {
 	}
 
 	@ManyToMany
-	@Cascade( { CascadeType.SAVE_UPDATE })
 	@JoinTable(name = "SS_ROLE_AUTHORITY", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
 	@Fetch(FetchMode.SUBSELECT)
 	@OrderBy("id")
