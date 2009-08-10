@@ -11,9 +11,7 @@
 <module name="Checker">
   <property name="severity" value="warning"/>
   <module name="TreeWalker">
-    <module name="JavadocType">
-      <property name="severity" value="info"/>
-    </module>
+    <module name="JavadocType"/>
     <module name="JavadocStyle"/>
     <module name="ConstantName"/>
     <module name="LocalFinalVariableName"/>
@@ -80,6 +78,9 @@
     <module name="VisibilityModifier">
       <property name="packageAllowed" value="true"/>
       <property name="protectedAllowed" value="true"/>
+    </module>
+    <module name="ReturnCount">
+      <property name="max" value="3"/>
     </module>
   </module>
   <module name="Translation"/>
