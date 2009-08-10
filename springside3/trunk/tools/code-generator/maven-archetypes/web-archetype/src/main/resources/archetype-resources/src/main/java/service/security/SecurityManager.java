@@ -24,7 +24,7 @@ import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
- * 用户及相关的角色,授权管理类.
+ * 安全相关实体的管理类, 包括用户,角色,资源与授权类.
  * 
  * @author calvin
  */
@@ -32,9 +32,9 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 @Service
 //默认将类中的所有函数纳入事务管理.
 @Transactional
-public class UserManager {
+public class SecurityManager {
 
-	protected Logger logger = LoggerFactory.getLogger(UserManager.class);
+	private static Logger logger = LoggerFactory.getLogger(SecurityManager.class);
 
 	@Autowired
 	private UserDao userDao;
@@ -99,11 +99,6 @@ public class UserManager {
 	}
 
 	public void deleteRole(Long id) {
-		if (id == 1) {
-			logger.warn("操作员{}尝试删除超级管理员用户角色", SpringSecurityUtils.getCurrentUserName());
-			throw new ServiceException("不能删除超级管理员角色");
-		}
-
 		roleDao.delete(id);
 	}
 
@@ -117,10 +112,5 @@ public class UserManager {
 	@Transactional(readOnly = true)
 	public List<Authority> getAllAuthority() {
 		return authorityDao.getAll();
-	}
-
-	@Transactional(readOnly = true)
-	public Authority getAuthorty(Long id) {
-		return authorityDao.get(id);
 	}
 }

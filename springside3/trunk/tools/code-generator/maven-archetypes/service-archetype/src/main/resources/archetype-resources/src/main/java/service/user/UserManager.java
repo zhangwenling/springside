@@ -15,8 +15,7 @@ import ${package}.entity.user.User;
 /**
  * 用户管理类.
  * 
- * 实现领域对象用户的所有业务管理函数.
- * 通过泛型声明继承EntityManager,默认拥有CRUD管理方法.
+ * 实现领域对象用户及其相关实体的所有业务管理函数.
  * 使用Spring annotation定义事务管理.
  * 
  * @author calvin
@@ -30,7 +29,7 @@ public class UserManager {
 	private UserDao userDao;
 
 	/**
-	 * 获取全部用户,已对用户及关联角色集合进行初始化.
+	 * 获取全部用户,并对用户及关联角色集合进行初始化.
 	 */
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
@@ -52,6 +51,7 @@ public class UserManager {
 	public boolean authenticate(String loginName, String password) {
 		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password))
 			return false;
+
 		return ((Long) userDao.findUnique(UserDao.QUERY_BY_LNAME_PASSWD, loginName, password) == 1);
 	}
 }

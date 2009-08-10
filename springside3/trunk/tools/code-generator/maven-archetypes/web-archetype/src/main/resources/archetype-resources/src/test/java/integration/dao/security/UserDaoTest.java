@@ -12,7 +12,7 @@ import ${package}.unit.service.security.UserData;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
- * UserManager的集成测试用例.
+ * UserDao的集成测试用例.
  * 
  * 调用实际的DAO类进行操作,默认在操作后进行回滚.
  * 

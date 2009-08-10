@@ -8,7 +8,7 @@ import ${package}.entity.security.User;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
 /**
- * 用户泛型DAO类.
+ * 用户的泛型DAO类.
  * 
  * @author calvin
  */

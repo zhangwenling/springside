@@ -11,6 +11,9 @@ import org.springside.modules.test.groups.Groups;
 
 public class UserManagerTest extends BaseSeleniumTestCase {
 
+	/**
+	 * 用户增删改操作查测试.
+	 */
 	@Test
 	public void crudUser() {
 		String loginName = createUser();
@@ -18,6 +21,9 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		deleteUser(loginName);
 	}
 
+	/**
+	 * 修改用户时的输入校验测试. 
+	 */
 	@Test
 	@Groups("extension")
 	public void validateUser() {
@@ -99,7 +105,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	}
 
 	/**
-	 * 根据用户名查找用户. 
+	 * 根据用户名查找用户的Utils函数. 
 	 */
 	private void findUser(String loginName) {
 		selenium.type("filter_EQ_loginName", loginName);

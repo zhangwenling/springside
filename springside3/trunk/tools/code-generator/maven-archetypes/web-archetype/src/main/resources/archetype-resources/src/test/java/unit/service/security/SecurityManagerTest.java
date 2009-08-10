@@ -10,19 +10,19 @@ import org.junit.Before;
 import org.junit.Test;
 import ${package}.dao.security.UserDao;
 import ${package}.service.ServiceException;
-import ${package}.service.security.UserManager;
+import ${package}.service.security.SecurityManager;
 import org.springside.modules.utils.ReflectionUtils;
 
-public class UserManagerTest extends Assert {
+public class SecurityManagerTest extends Assert {
 
-	private UserManager userManager = new UserManager();
+	private SecurityManager securityManager = new SecurityManager();
 	private UserDao userDao = null;
 	
 	@Before
 	public void setUp() {
 		//创建mock对象
 		userDao = EasyMock.createNiceMock(UserDao.class);
-		ReflectionUtils.setFieldValue(userManager, "userDao", userDao);
+		ReflectionUtils.setFieldValue(securityManager, "userDao", userDao);
 	}
 	
 	@After
@@ -34,12 +34,12 @@ public class UserManagerTest extends Assert {
 	@Test
 	public void testDetelteUser() {
 		EasyMock.replay(userDao);
-		userManager.deleteUser(2L);
+		securityManager.deleteUser(2L);
 	}
 
 	@Test(expected = ServiceException.class)
 	public void testDeleteAdmin(){
 		EasyMock.replay(userDao);
-		userManager.deleteRole(1L);
+		securityManager.deleteUser(1L);
 	}
 }

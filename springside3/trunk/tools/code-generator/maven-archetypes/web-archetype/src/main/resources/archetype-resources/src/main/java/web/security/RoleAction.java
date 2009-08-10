@@ -10,8 +10,7 @@ import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import ${package}.entity.security.Authority;
 import ${package}.entity.security.Role;
-import ${package}.service.ServiceException;
-import ${package}.service.security.UserManager;
+import ${package}.service.security.SecurityManager;
 import ${package}.web.CrudActionSupport;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;
 
@@ -19,6 +18,7 @@ import org.springside.modules.orm.hibernate.HibernateWebUtils;
  * 角色管理Action.
  * 
  * 使用Struts2 convention-plugin annotation定义Action参数.
+ * 演示不分页的简单管理界面.
  * 
  * @author calvin
  */
@@ -27,19 +27,18 @@ import org.springside.modules.orm.hibernate.HibernateWebUtils;
 public class RoleAction extends CrudActionSupport<Role> {
 
 	@Autowired
-	private UserManager userManager;
+	private SecurityManager securityManager;
 
-	// 基本属性
+	// 基本属性 //
 	private Role entity;
 	private Long id;
 	private List<Role> allRoles;
 
-	// 权限相关属性
+	// 权限相关属性 //
 	private List<Authority> allAuths; //全部可选权限列表
 	private List<Long> checkedAuthIds;//页面中钩选的权限id列表
 
 	// 基本属性访问函数 //
-
 	public Role getModel() {
 		return entity;
 	}
@@ -47,7 +46,7 @@ public class RoleAction extends CrudActionSupport<Role> {
 	@Override
 	protected void prepareModel() throws Exception {
 		if (id != null) {
-			entity = userManager.getRole(id);
+			entity = securityManager.getRole(id);
 		} else {
 			entity = new Role();
 		}
@@ -62,16 +61,15 @@ public class RoleAction extends CrudActionSupport<Role> {
 	}
 
 	// CRUD Action 函数 //
-
 	@Override
 	public String list() throws Exception {
-		allRoles = userManager.getAllRole();
+		allRoles = securityManager.getAllRole();
 		return SUCCESS;
 	}
 
 	@Override
 	public String input() throws Exception {
-		allAuths = userManager.getAllAuthority();
+		allAuths = securityManager.getAllAuthority();
 		checkedAuthIds = entity.getAuthIds();
 		return INPUT;
 	}
@@ -80,25 +78,19 @@ public class RoleAction extends CrudActionSupport<Role> {
 	public String save() throws Exception {
 		//根据页面上的checkbox 整合Role的Authorities Set.
 		HibernateWebUtils.mergeByCheckedIds(entity.getAuthorities(), checkedAuthIds, Authority.class);
-		userManager.saveRole(entity);
+		securityManager.saveRole(entity);
 		addActionMessage("保存角色成功");
 		return RELOAD;
 	}
 
 	@Override
 	public String delete() throws Exception {
-		try {
-			userManager.deleteRole(id);
-			addActionMessage("删除角色成功");
-		} catch (ServiceException e) {
-			logger.error(e.getMessage(), e);
-			addActionMessage(e.getMessage());
-		}
+		securityManager.deleteRole(id);
+		addActionMessage("删除角色成功");
 		return RELOAD;
 	}
 
 	// 其他属性访问函数及Action函数 //
-
 	public List<Authority> getAllAuths() {
 		return allAuths;
 	}

@@ -37,7 +37,7 @@ public class Resource extends IdEntity {
 
 	private String resourceType; //资源类型
 	private String value; //资源标识
-	private double position; //资源显示顺序字段
+	private double position; //资源在SpringSecurity中的校验顺序字段
 
 	private Set<Authority> authorities = new LinkedHashSet<Authority>(); //可访问该资源的授权
 

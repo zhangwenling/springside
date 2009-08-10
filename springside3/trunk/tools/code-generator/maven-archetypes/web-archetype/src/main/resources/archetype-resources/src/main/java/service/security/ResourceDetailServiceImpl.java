@@ -19,13 +19,13 @@ import org.springside.modules.security.springsecurity.ResourceDetailService;
 @Transactional(readOnly = true)
 public class ResourceDetailServiceImpl implements ResourceDetailService {
 	@Autowired
-	private UserManager userManager;
+	private SecurityManager securityManager;
 
 	/**
 	 * @see ResourceDetailService${symbol_pound}getRequestMap()
 	 */
 	public LinkedHashMap<String, String> getRequestMap() throws Exception {
-		List<Resource> resourceList = userManager.getUrlResourceWithAuthorities();
+		List<Resource> resourceList = securityManager.getUrlResourceWithAuthorities();
 
 		LinkedHashMap<String, String> requestMap = new LinkedHashMap<String, String>(resourceList.size());
 		for (Resource resource : resourceList) {

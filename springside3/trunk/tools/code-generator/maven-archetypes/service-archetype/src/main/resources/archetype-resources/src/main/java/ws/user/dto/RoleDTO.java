@@ -35,9 +35,6 @@ public class RoleDTO {
 		this.name = name;
 	}
 
-	/**
-	 * 重新实现toString()函数方便在日志中打印DTO信息.
-	 */
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

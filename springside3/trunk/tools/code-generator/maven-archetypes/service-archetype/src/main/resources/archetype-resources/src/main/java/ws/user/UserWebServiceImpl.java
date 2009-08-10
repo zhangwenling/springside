@@ -37,7 +37,7 @@ public class UserWebServiceImpl extends WebServiceSupport implements UserWebServ
 	public GetAllUserResult getAllUser() {
 		GetAllUserResult result = new GetAllUserResult();
 
-		//获取USer列表并转换为UserDTO列表.
+		//获取User列表并转换为UserDTO列表.
 		try {
 			List<User> userList = userManager.getAllUser();
 			List<UserDTO> userDTOList = new ArrayList<UserDTO>();
@@ -65,17 +65,16 @@ public class UserWebServiceImpl extends WebServiceSupport implements UserWebServ
 			return result;
 		}
 
+		//保存用户
 		try {
-			// 从DTO转换到User
 			User userEntity = (User) dozer.map(user, User.class);
-
-			// 保存User
 			userManager.saveUser(userEntity);
 			result.setUserId(userEntity.getId());
 		} catch (RuntimeException e) {
 			result.setSystemError();
 			logger.error(e.getMessage(), e);
 		}
+
 		return result;
 	}
 
@@ -92,11 +91,12 @@ public class UserWebServiceImpl extends WebServiceSupport implements UserWebServ
 			return result;
 		}
 
+		//认证
 		try {
 			if (userManager.authenticate(loginName, password)) {
 				result.setCode(WSResult.SUCCESS);
 			} else {
-				result.setCode(WSResult.FALSE);
+				result.setCode(WSResult.AUTH_ERROR);
 			}
 		} catch (RuntimeException e) {
 			result.setSystemError();

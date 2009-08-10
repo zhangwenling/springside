@@ -27,14 +27,14 @@ import ${package}.entity.security.User;
 public class UserDetailServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private UserManager userManager;
+	private SecurityManager securityManager;
 
 	/**
 	 * 获取用户Detail信息的回调函数.
 	 */
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
-		User user = userManager.findUserByLoginName(userName);
+		User user = securityManager.findUserByLoginName(userName);
 		if (user == null)
 			throw new UsernameNotFoundException("用户" + userName + " 不存在");
 
