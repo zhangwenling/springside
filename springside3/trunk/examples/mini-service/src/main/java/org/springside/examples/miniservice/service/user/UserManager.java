@@ -26,7 +26,7 @@ public class UserManager {
 	private UserDao userDao;
 
 	/**
-	 * 获取全部用户,已对用户及关联角色集合进行初始化.
+	 * 获取全部用户,并对用户及关联角色集合进行初始化.
 	 */
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
@@ -48,6 +48,7 @@ public class UserManager {
 	public boolean authenticate(String loginName, String password) {
 		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password))
 			return false;
+
 		return ((Long) userDao.findUnique(UserDao.QUERY_BY_LNAME_PASSWD, loginName, password) == 1);
 	}
 }

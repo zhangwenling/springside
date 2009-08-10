@@ -13,7 +13,7 @@ import javax.persistence.MappedSuperclass;
  * 
  * @author calvin
  */
-//JPA Entity基类的标识
+//JPA 基类标识
 @MappedSuperclass
 public abstract class IdEntity {
 

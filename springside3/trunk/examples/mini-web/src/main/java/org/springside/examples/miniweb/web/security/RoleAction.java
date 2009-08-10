@@ -15,6 +15,7 @@ import org.springside.modules.orm.hibernate.HibernateWebUtils;
  * 角色管理Action.
  * 
  * 使用Struts2 convention-plugin annotation定义Action参数.
+ * 演示不分页的简单管理界面.
  * 
  * @author calvin
  */
@@ -25,17 +26,16 @@ public class RoleAction extends CrudActionSupport<Role> {
 	@Autowired
 	private SecurityManager securityManager;
 
-	// 基本属性
+	// 基本属性 //
 	private Role entity;
 	private Long id;
 	private List<Role> allRoles;
 
-	// 权限相关属性
+	// 权限相关属性 //
 	private List<Authority> allAuths; //全部可选权限列表
 	private List<Long> checkedAuthIds;//页面中钩选的权限id列表
 
 	// 基本属性访问函数 //
-
 	public Role getModel() {
 		return entity;
 	}
@@ -58,7 +58,6 @@ public class RoleAction extends CrudActionSupport<Role> {
 	}
 
 	// CRUD Action 函数 //
-
 	@Override
 	public String list() throws Exception {
 		allRoles = securityManager.getAllRole();
@@ -89,7 +88,6 @@ public class RoleAction extends CrudActionSupport<Role> {
 	}
 
 	// 其他属性访问函数及Action函数 //
-
 	public List<Authority> getAllAuths() {
 		return allAuths;
 	}

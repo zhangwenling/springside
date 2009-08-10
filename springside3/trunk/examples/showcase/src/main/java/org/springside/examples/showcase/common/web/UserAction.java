@@ -34,7 +34,6 @@ public class UserAction extends CrudActionSupport<User> {
 	private List<Long> checkedUserIds;
 
 	// 基本属性访问函数 //
-
 	public User getModel() {
 		return entity;
 	}
@@ -65,7 +64,6 @@ public class UserAction extends CrudActionSupport<User> {
 	}
 
 	// CRUD Action 函数 //
-
 	@Override
 	public String list() throws Exception {
 		allUsers = userManager.getAllUser();
@@ -95,7 +93,6 @@ public class UserAction extends CrudActionSupport<User> {
 	}
 
 	// 其他函数 //
-
 	public String disableUsers() {
 		userManager.disableUsers(checkedUserIds);
 		return RELOAD;

@@ -38,7 +38,6 @@ public class JmxClientService {
 	private String passwd;
 
 	// 连接参数设定函数 //
-
 	public void setHost(String host) {
 		this.host = host;
 	}
@@ -83,7 +82,6 @@ public class JmxClientService {
 	}
 
 	// 标准MBean代理操作演示 //
-
 	public String getNodeName() {
 		return serverConfigMBean.getNodeName();
 	}
@@ -101,7 +99,6 @@ public class JmxClientService {
 	}
 
 	// 无MBean的Class文件时直接访问属性调用方法的演示 //
-
 	/**
 	 * 获取Hibernate统计数据.
 	 */

@@ -22,6 +22,7 @@ import org.springside.modules.web.struts2.Struts2Utils;
  * 用户管理Action.
  * 
  * 使用Struts2 convention-plugin annotation定义Action参数.
+ * 演示带分页的管理界面.
  * 
  * @author calvin
  */
@@ -32,17 +33,16 @@ public class UserAction extends CrudActionSupport<User> {
 	@Autowired
 	private SecurityManager securityManager;
 
-	// 基本属性
+	// 基本属性 //
 	private User entity;
 	private Long id;
 	private Page<User> page = new Page<User>(5);//每页5条记录
 
-	// 角色相关属性
+	// 角色相关属性 //
 	private List<Role> allRoles; //全部可选角色列表
 	private List<Long> checkedRoleIds; //页面中钩选的角色id列表
 
 	// 基本属性访问函数 //
-
 	public User getModel() {
 		return entity;
 	}
@@ -65,7 +65,6 @@ public class UserAction extends CrudActionSupport<User> {
 	}
 
 	// CRUD Action 函数 //
-
 	@Override
 	public String list() throws Exception {
 		HttpServletRequest request = Struts2Utils.getRequest();
@@ -105,7 +104,6 @@ public class UserAction extends CrudActionSupport<User> {
 	}
 
 	// 其他属性访问函数与Action函数 //
-
 	public List<Role> getAllRoles() {
 		return allRoles;
 	}
