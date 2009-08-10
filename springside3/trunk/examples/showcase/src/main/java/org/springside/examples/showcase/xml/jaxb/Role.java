@@ -4,6 +4,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+/**
+ * 使用JAXB2.0标注的待转换Java Bean.
+ */
 public class Role {
 	private Long id;
 	private String name;

@@ -8,10 +8,10 @@
 
 	<bean id="dbLogTask" class="org.springside.modules.log.JdbcAppenderTask" scope="prototype">
 		<property name="queueName" value="dblog" />
+		<property name="batchSize" value="20" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="sql"
 			value="insert into SS_LOG(THREAD_NAME,LOGGER_NAME,TIMESTAMP,LEVEL,MESSAGE) values(:threadName,:loggerName,:timestamp,:level,:message)" />
-		<property name="bufferSize" value="20" />
 	</bean>
 
 	<bean id="log4jMBean" class="org.springside.modules.log.Log4jMBean" />

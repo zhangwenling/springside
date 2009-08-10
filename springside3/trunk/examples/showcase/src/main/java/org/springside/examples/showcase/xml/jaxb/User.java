@@ -16,6 +16,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+/**
+ * 使用JAXB2.0标注的待转换Java Bean.
+ */
 //根节点
 @XmlRootElement
 //指定子节点的顺序

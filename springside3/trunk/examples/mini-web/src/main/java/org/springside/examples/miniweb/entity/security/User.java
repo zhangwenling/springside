@@ -24,7 +24,7 @@ import org.springside.modules.utils.ReflectionUtils;
  * 用户.
  * 
  * 使用JPA annotation定义ORM关系.
- * 使用Hibernate annotation定义二级缓存.
+ * 使用Hibernate annotation定义JPA 1.0未覆盖的部分.
  * 
  * @author calvin
  */

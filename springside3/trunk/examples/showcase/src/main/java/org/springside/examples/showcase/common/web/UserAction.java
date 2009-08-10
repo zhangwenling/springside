@@ -25,7 +25,7 @@ import org.springside.examples.showcase.common.service.UserManager;
 public class UserAction extends CrudActionSupport<User> {
 	@Autowired
 	private UserManager userManager;
-	// 基本属性
+	// 基本属性  //
 	private User entity;
 	private Long id;
 	private List<User> allUsers;
@@ -78,7 +78,7 @@ public class UserAction extends CrudActionSupport<User> {
 	}
 
 	/**
-	 * 演示Hibernate的version字段使用.
+	 * 保存用户时,演示Hibernate的version字段使用.
 	 */
 	@Override
 	public String save() throws Exception {

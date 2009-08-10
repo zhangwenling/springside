@@ -12,8 +12,7 @@ import org.springside.examples.miniservice.entity.user.User;
 /**
  * 用户管理类.
  * 
- * 实现领域对象用户的所有业务管理函数.
- * 通过泛型声明继承EntityManager,默认拥有CRUD管理方法.
+ * 实现领域对象用户及其相关实体的所有业务管理函数.
  * 使用Spring annotation定义事务管理.
  * 
  * @author calvin

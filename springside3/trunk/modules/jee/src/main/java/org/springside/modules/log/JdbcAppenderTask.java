@@ -92,7 +92,7 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	 * 阻塞获取事件并调用processMessage()进行处理.
+	 * 阻塞获取消息并调用processMessage()进行处理.
 	 * 
 	 * @see #processMessage(Object)
 	 */
@@ -110,7 +110,7 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	 * 定期批量获取事件并调用processMessageList()处理.
+	 * 定期批量获取消息并调用processMessageList()处理.
 	 * 
 	 * @see #processMessageList(List)
 	 */
@@ -129,7 +129,7 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	 * 事件处理函数,将事件放入buffer,当buffer达到batchSize时执行批量事件处理函数.
+	 * 消息处理函数,将消息放入buffer,当buffer达到batchSize时执行批量消息处理函数.
 	 */
 	protected void processMessage(Object message) {
 		LoggingEvent event = (LoggingEvent) message;

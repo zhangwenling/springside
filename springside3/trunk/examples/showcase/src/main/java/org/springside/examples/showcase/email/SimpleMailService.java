@@ -36,7 +36,5 @@ public class SimpleMailService {
 		} catch (MailException e) {
 			logger.error("发送邮件失败", e);
 		}
-
 	}
-
 }

@@ -35,6 +35,10 @@ public class UserWebServiceTest extends Assert {
 		EasyMock.verify(userManager);
 	}
 
+	/**
+	 * 用户认证测试.
+	 * 分别测试正确用户名与正确,错误密码两种情况.
+	 */
 	@Test
 	public void authUser() {
 		//准备数据,录制脚本
@@ -48,6 +52,6 @@ public class UserWebServiceTest extends Assert {
 
 		//执行输入错误的测试,校验结果
 		result = userWebService.authUser("admin", "errorPasswd");
-		assertEquals(WSResult.FALSE, result.getCode());
+		assertEquals(WSResult.AUTH_ERROR, result.getCode());
 	}
 }

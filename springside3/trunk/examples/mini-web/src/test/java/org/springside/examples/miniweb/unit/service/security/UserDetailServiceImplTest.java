@@ -12,7 +12,7 @@ import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.security.UserDetailServiceImpl;
-import org.springside.examples.miniweb.service.security.UserManager;
+import org.springside.examples.miniweb.service.security.SecurityManager;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
@@ -24,17 +24,17 @@ import org.springside.modules.utils.ReflectionUtils;
  */
 public class UserDetailServiceImplTest extends Assert {
 	private UserDetailServiceImpl userDetailService = new UserDetailServiceImpl();
-	private UserManager userManager = null;
+	private SecurityManager securityManager = null;
 
 	@Before
 	public void setUp() {
-		userManager = EasyMock.createNiceMock(UserManager.class);
-		ReflectionUtils.setFieldValue(userDetailService, "userManager", userManager);
+		securityManager = EasyMock.createNiceMock(SecurityManager.class);
+		ReflectionUtils.setFieldValue(userDetailService, "userManager", securityManager);
 	}
 
 	@After
 	public void tearDown() {
-		EasyMock.verify(userManager);
+		EasyMock.verify(securityManager);
 	}
 
 	@Test
@@ -50,8 +50,8 @@ public class UserDetailServiceImplTest extends Assert {
 		role.getAuthorities().add(auth);
 
 		//录制脚本
-		EasyMock.expect(userManager.findUserByLoginName(user.getLoginName())).andReturn(user);
-		EasyMock.replay(userManager);
+		EasyMock.expect(securityManager.findUserByLoginName(user.getLoginName())).andReturn(user);
+		EasyMock.replay(securityManager);
 
 		//执行测试
 		UserDetails userDetails = userDetailService.loadUserByUsername(user.getLoginName());
@@ -66,8 +66,8 @@ public class UserDetailServiceImplTest extends Assert {
 	@Test(expected = UsernameNotFoundException.class)
 	public void loadUserNotExist() {
 		//录制脚本
-		EasyMock.expect(userManager.findUserByLoginName("userNameNotExist")).andReturn(null);
-		EasyMock.replay(userManager);
+		EasyMock.expect(securityManager.findUserByLoginName("userNameNotExist")).andReturn(null);
+		EasyMock.replay(securityManager);
 		//执行测试
 		userDetailService.loadUserByUsername("userNameNotExist");
 	}

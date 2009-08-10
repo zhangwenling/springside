@@ -5,6 +5,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
+/**
+ * 使用XStream标注的待转换Java Bean.
+ */
 @XStreamAlias("role")
 public class Role {
 	@XStreamAsAttribute

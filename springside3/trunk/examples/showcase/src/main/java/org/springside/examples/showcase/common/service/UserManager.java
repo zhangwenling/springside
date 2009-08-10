@@ -45,7 +45,7 @@ public class UserManager {
 
 	/**
 	 * 在保存用户时,发送通知邮件.
-	 * 如果修改超级用户时,取出当前操作员用户,打印其信息然后抛出异常.
+	 * 如果企图修改超级用户,取出当前操作员用户,打印其信息然后抛出异常.
 	 */
 	public void saveUser(User user) {
 		if (user.getId() == 1) {
@@ -60,7 +60,7 @@ public class UserManager {
 	}
 
 	/**
-	 * 调用预加载用户角色的Dao方法.
+	 * 取得所有用户,预加载用户的角色.
 	 */
 	//Perf4j监控性能
 	@Profiled
@@ -89,6 +89,9 @@ public class UserManager {
 		userDao.disableUsers(ids);
 	}
 
+	/**
+	 * 发送用户变更通知邮件.
+	 */
 	private void sendNotifyMail(User user) {
 		if (serverConfig != null && serverConfig.isNotificationMailEnabled()) {
 			//Perf4j监控性能

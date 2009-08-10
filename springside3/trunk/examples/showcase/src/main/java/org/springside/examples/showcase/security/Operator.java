@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.security.GrantedAuthority;
 import org.springframework.security.userdetails.User;
 
-/**\
+/**
  * 扩展SpringSecurity的User类,增加登录时间属性.
  * 
  * @author calvin

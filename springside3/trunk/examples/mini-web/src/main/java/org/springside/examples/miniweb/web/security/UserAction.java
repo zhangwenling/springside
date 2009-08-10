@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.ServiceException;
-import org.springside.examples.miniweb.service.security.UserManager;
+import org.springside.examples.miniweb.service.security.SecurityManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
@@ -30,7 +30,7 @@ import org.springside.modules.web.struts2.Struts2Utils;
 public class UserAction extends CrudActionSupport<User> {
 
 	@Autowired
-	private UserManager userManager;
+	private SecurityManager securityManager;
 
 	// 基本属性
 	private User entity;
@@ -50,7 +50,7 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	protected void prepareModel() throws Exception {
 		if (id != null) {
-			entity = userManager.getUser(id);
+			entity = securityManager.getUser(id);
 		} else {
 			entity = new User();
 		}
@@ -71,13 +71,13 @@ public class UserAction extends CrudActionSupport<User> {
 		HttpServletRequest request = Struts2Utils.getRequest();
 		List<PropertyFilter> filters = HibernateWebUtils.buildPropertyFilters(request);
 
-		page = userManager.searchUser(page, filters);
+		page = securityManager.searchUser(page, filters);
 		return SUCCESS;
 	}
 
 	@Override
 	public String input() throws Exception {
-		allRoles = userManager.getAllRole();
+		allRoles = securityManager.getAllRole();
 		checkedRoleIds = entity.getRoleIds();
 		return INPUT;
 	}
@@ -87,7 +87,7 @@ public class UserAction extends CrudActionSupport<User> {
 		//根据页面上的checkbox 整合User的Roles Set
 		HibernateWebUtils.mergeByCheckedIds(entity.getRoles(), checkedRoleIds, Role.class);
 
-		userManager.saveUser(entity);
+		securityManager.saveUser(entity);
 		addActionMessage("保存用户成功");
 		return RELOAD;
 	}
@@ -95,7 +95,7 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	public String delete() throws Exception {
 		try {
-			userManager.deleteUser(id);
+			securityManager.deleteUser(id);
 			addActionMessage("删除用户成功");
 		} catch (ServiceException e) {
 			logger.error(e.getMessage(), e);
@@ -126,7 +126,7 @@ public class UserAction extends CrudActionSupport<User> {
 		String loginName = request.getParameter("loginName");
 		String oldLoginName = request.getParameter("oldLoginName");
 
-		if (userManager.isLoginNameUnique(loginName, oldLoginName)) {
+		if (securityManager.isLoginNameUnique(loginName, oldLoginName)) {
 			Struts2Utils.renderText("true");
 		} else {
 			Struts2Utils.renderText("false");

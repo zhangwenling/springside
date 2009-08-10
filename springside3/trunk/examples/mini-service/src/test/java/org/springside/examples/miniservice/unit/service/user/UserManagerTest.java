@@ -27,6 +27,10 @@ public class UserManagerTest extends Assert {
 		EasyMock.verify(userDao);
 	}
 
+	/**
+	 * 用户认证测试.
+	 * 分别测试正确的用户与正确,空,错误的密码三种情况.
+	 */
 	@Test
 	public void authUser() {
 		EasyMock.expect(userDao.findUnique(UserDao.QUERY_BY_LNAME_PASSWD, "admin", "admin")).andReturn(1L);

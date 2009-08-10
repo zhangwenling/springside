@@ -93,7 +93,7 @@ public class UserWebServiceImpl extends WebServiceSupport implements UserWebServ
 			if (userManager.authenticate(loginName, password)) {
 				result.setCode(WSResult.SUCCESS);
 			} else {
-				result.setCode(WSResult.FALSE);
+				result.setCode(WSResult.AUTH_ERROR);
 			}
 		} catch (RuntimeException e) {
 			result.setSystemError();

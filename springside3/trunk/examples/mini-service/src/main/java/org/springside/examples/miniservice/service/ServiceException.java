@@ -3,7 +3,7 @@ package org.springside.examples.miniservice.service;
 /**
  * Service层公用的Exception.
  * 
- * 继承自RuntimeException,在函数中抛出会触发Spring的事务管理引起事务回退.
+ * 继承自RuntimeException,从被Spring声明式事务管理的函数中抛出时会触发事务回滚.
  * 
  * @author calvin
  */

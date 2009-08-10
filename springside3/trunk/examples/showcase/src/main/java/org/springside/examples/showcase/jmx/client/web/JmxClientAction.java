@@ -7,8 +7,8 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springside.examples.showcase.jmx.client.service.HibernateStatistics;
 import org.springside.examples.showcase.jmx.client.service.JmxClientService;
+import org.springside.examples.showcase.jmx.client.service.JmxClientService.HibernateStatistics;
 import org.springside.modules.web.struts2.Struts2Utils;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -69,7 +69,7 @@ public class JmxClientAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	// 系统配置(MBean) //
+	// 系统配置 (基于MBean) //
 
 	/**
 	 * 修改系统配置的Ajax请求.

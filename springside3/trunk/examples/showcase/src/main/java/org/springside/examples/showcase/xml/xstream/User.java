@@ -20,6 +20,9 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.mapper.Mapper;
 
+/**
+ * 使用XStream标注的待转换Java Bean.
+ */
 //指定User类的别名
 @XStreamAlias("user")
 public class User {
