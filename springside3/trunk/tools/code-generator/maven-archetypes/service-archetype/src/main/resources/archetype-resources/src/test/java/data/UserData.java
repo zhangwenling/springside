@@ -1,7 +1,7 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.unit.service.user;
+package ${package}.data;
 
 import org.apache.commons.lang.RandomStringUtils;
 import ${package}.entity.user.Role;
@@ -24,7 +24,7 @@ public class UserData {
 		user.setLoginName(userName);
 		user.setName(userName);
 		user.setPassword("passwd");
-		user.setEmail("foo@bar.com");
+		user.setEmail(userName + "@springside.org.cn");
 
 		return user;
 	}
@@ -32,6 +32,13 @@ public class UserData {
 	public static Role getRandomRole() {
 		Role role = new Role();
 		role.setName("Role" + random());
+
+		return role;
+	}
+
+	public static Role getAdminRole() {
+		Role role = new Role();
+		role.setId(1L);
 
 		return role;
 	}

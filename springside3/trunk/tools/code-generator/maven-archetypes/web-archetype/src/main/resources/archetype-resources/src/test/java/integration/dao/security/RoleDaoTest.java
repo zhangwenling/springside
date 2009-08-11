@@ -6,8 +6,8 @@ package ${package}.integration.dao.security;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ${package}.dao.security.RoleDao;
+import ${package}.data.SecurityData;
 import ${package}.entity.security.Role;
-import ${package}.unit.service.security.UserData;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 public class RoleDaoTest extends SpringTxTestCase  {
@@ -17,21 +17,27 @@ public class RoleDaoTest extends SpringTxTestCase  {
 	@Test
 	public void crudEntity() {
 		//new entity and save it. 
-		Role entity = UserData.getRandomRole();
+		Role entity = SecurityData.getRandomRole();
 		entityDao.save(entity);
 		flush();
-
-		//get entity by id.	
-		entity = entityDao.get(entity.getId());
 		
+		//find entity.
+		entity = entityDao.findUniqueBy("id", entity.getId());
+		assertNotNull(entity);
+
 		//modify entity.
-		entity.setName("new name");
+		entity = entityDao.get(entity.getId());
+		entity.setName("new value");
 		entityDao.save(entity);
 		flush();
+		entity = entityDao.findUniqueBy("id", entity.getId());
+		assertEquals("new value", entity.getName());
 		
 		//delete entity.
 		entityDao.delete(entity.getId());
 		flush();
+		entity = entityDao.findUniqueBy("id", entity.getId());
+		assertNull(entity);
 	}
 }
 

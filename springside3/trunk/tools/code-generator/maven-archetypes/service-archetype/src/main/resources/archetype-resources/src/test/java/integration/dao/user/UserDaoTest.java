@@ -6,9 +6,9 @@ package ${package}.integration.dao.user;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ${package}.dao.UserDao;
+import ${package}.data.UserData;
 import ${package}.entity.user.Role;
 import ${package}.entity.user.User;
-import ${package}.unit.service.user.UserData;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
@@ -33,36 +33,41 @@ public class UserDaoTest extends SpringTxTestCase {
 		//强制执行sql语句
 		flush();
 
-		//获取用户
-		entity = entityDao.get(entity.getId());
+		//查找用户
+		entity = entityDao.findUniqueBy("id", entity.getId());
+		assertNotNull(entity);
 		
 		//修改用户
-		entity.setEmail("new.email@springside.org.cn");
+		entity.setName("new value");
 		entityDao.save(entity);
 		flush();
+		entity = entityDao.findUniqueBy("id", entity.getId());
+		assertEquals("new value", entity.getName());
 		
 		//删除用户
 		entityDao.delete(entity.getId());
 		flush();
+		entity = entityDao.findUniqueBy("id", entity.getId());
+		assertNull(entity);
 	}
 
 	@Test
 	public void crudEntityWithRole() {
 		//保存带角色的用户
 		User user = UserData.getRandomUser();
-		Role role = UserData.getRandomRole();
+		Role role = UserData.getAdminRole();
 		user.getRoles().add(role);
 
 		entityDao.save(user);
 		flush();
 
-		user = entityDao.get(user.getId());
+		user = entityDao.findUniqueBy("id", user.getId());
 		assertEquals(1, user.getRoles().size());
 
 		//删除用户的角色
 		user.getRoles().remove(role);
 		flush();
-		user = entityDao.get(user.getId());
+		user = entityDao.findUniqueBy("id", user.getId());
 		assertEquals(0, user.getRoles().size());
 	}
 

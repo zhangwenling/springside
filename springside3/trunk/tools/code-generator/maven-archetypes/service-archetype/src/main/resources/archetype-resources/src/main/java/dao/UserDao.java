@@ -23,16 +23,9 @@ public class UserDao extends HibernateDao<User, Long> {
 	/**
 	 * 关联对象初始化函数.
 	 */
-	public void initAllProperty(User user) {
-		Hibernate.initialize(user.getRoles());
-	}
-
-	/**
-	 * 关联对象初始化函数.
-	 */
 	public void initAllProperty(List<User> userList) {
 		for (User user : userList) {
-			initAllProperty(user);
+			Hibernate.initialize(user.getRoles());
 		}
 	}
 }

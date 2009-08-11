@@ -1,7 +1,7 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.unit.service.security;
+package ${package}.data;
 
 import org.apache.commons.lang.RandomStringUtils;
 import ${package}.entity.security.Authority;
@@ -14,7 +14,7 @@ import ${package}.entity.security.User;
  * 
  * @author calvin
  */
-public class UserData {
+public class SecurityData {
 
 	public static String random() {
 		return RandomStringUtils.randomAlphanumeric(5);
@@ -27,7 +27,7 @@ public class UserData {
 		user.setLoginName(userName);
 		user.setName(userName);
 		user.setPassword("passwd");
-		user.setEmail("foo@bar.com");
+		user.setEmail(userName + "@springside.org.cn");
 
 		return user;
 	}
@@ -35,6 +35,13 @@ public class UserData {
 	public static Role getRandomRole() {
 		Role role = new Role();
 		role.setName("Role" + random());
+
+		return role;
+	}
+
+	public static Role getAdminRole() {
+		Role role = new Role();
+		role.setId(1L);
 
 		return role;
 	}

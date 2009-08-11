@@ -6,8 +6,8 @@ package ${package}.integration.dao.security;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ${package}.dao.security.AuthorityDao;
+import ${package}.data.SecurityData;
 import ${package}.entity.security.Authority;
-import ${package}.unit.service.security.UserData;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 public class AuthorityDaoTest extends SpringTxTestCase  {
@@ -17,21 +17,26 @@ public class AuthorityDaoTest extends SpringTxTestCase  {
 	@Test
 	public void crudEntity() {
 		//new entity and save it. 
-		Authority entity = UserData.getRandomAuthority();
+		Authority entity = SecurityData.getRandomAuthority();
 		entityDao.save(entity);
 		flush();
 
-		//get entity by id.	
-		entity = entityDao.get(entity.getId());
-		
+		//find entity.
+		entity = entityDao.findUniqueBy("id", entity.getId());
+		assertNotNull(entity);
+
 		//modify entity.
-		entity.setName("new name");
+		entity.setName("new value");
 		entityDao.save(entity);
 		flush();
-		
+		entity = entityDao.findUniqueBy("id", entity.getId());
+		assertEquals("new value", entity.getName());
+
 		//delete entity.
 		entityDao.delete(entity.getId());
 		flush();
+		entity = entityDao.findUniqueBy("id", entity.getId());
+		assertNull(entity);
 	}
 }
 
