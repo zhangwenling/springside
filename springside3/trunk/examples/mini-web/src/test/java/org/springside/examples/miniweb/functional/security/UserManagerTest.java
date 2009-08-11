@@ -1,9 +1,9 @@
 package org.springside.examples.miniweb.functional.security;
 
 import org.junit.Test;
+import org.springside.examples.miniweb.data.SecurityData;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
-import org.springside.examples.miniweb.unit.service.security.UserData;
 import org.springside.modules.test.groups.Groups;
 
 public class UserManagerTest extends BaseSeleniumTestCase {
@@ -51,7 +51,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		selenium.click("link=增加新用户");
 		waitPageLoad();
 
-		User user = UserData.getRandomUser();
+		User user = SecurityData.getRandomUser();
 		
 		selenium.type("loginName", user.getLoginName());
 		selenium.type("name", user.getName());

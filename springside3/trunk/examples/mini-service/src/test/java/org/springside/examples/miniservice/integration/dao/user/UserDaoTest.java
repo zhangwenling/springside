@@ -3,9 +3,9 @@ package org.springside.examples.miniservice.integration.dao.user;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniservice.dao.UserDao;
+import org.springside.examples.miniservice.data.UserData;
 import org.springside.examples.miniservice.entity.user.Role;
 import org.springside.examples.miniservice.entity.user.User;
-import org.springside.examples.miniservice.unit.service.user.UserData;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
@@ -47,7 +47,7 @@ public class UserDaoTest extends SpringTxTestCase {
 	public void crudEntityWithRole() {
 		//保存带角色的用户
 		User user = UserData.getRandomUser();
-		Role role = UserData.getRandomRole();
+		Role role = UserData.getAdminRole();
 		user.getRoles().add(role);
 
 		entityDao.save(user);

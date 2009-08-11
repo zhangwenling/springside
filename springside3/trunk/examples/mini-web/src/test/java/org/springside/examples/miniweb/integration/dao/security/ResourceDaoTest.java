@@ -3,8 +3,8 @@ package org.springside.examples.miniweb.integration.dao.security;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.dao.security.ResourceDao;
+import org.springside.examples.miniweb.data.SecurityData;
 import org.springside.examples.miniweb.entity.security.Resource;
-import org.springside.examples.miniweb.unit.service.security.UserData;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 public class ResourceDaoTest extends SpringTxTestCase  {
@@ -14,7 +14,7 @@ public class ResourceDaoTest extends SpringTxTestCase  {
 	@Test
 	public void crudEntity() {
 		//new entity and save it. 
-		Resource entity = UserData.getRandomResource();
+		Resource entity = SecurityData.getRandomResource();
 		entityDao.save(entity);
 		flush();
 

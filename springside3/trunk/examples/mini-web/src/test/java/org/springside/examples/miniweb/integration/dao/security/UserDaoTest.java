@@ -3,9 +3,9 @@ package org.springside.examples.miniweb.integration.dao.security;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.dao.security.UserDao;
+import org.springside.examples.miniweb.data.SecurityData;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
-import org.springside.examples.miniweb.unit.service.security.UserData;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
@@ -25,7 +25,7 @@ public class UserDaoTest extends SpringTxTestCase {
 	//@Rollback(false) 
 	public void crudEntity() {
 		//新建并保存用户.
-		User entity = UserData.getRandomUser();
+		User entity = SecurityData.getRandomUser();
 		entityDao.save(entity);
 		//强制执行sql语句
 		flush();
@@ -46,8 +46,8 @@ public class UserDaoTest extends SpringTxTestCase {
 	@Test
 	public void crudEntityWithRole() {
 		//保存带角色的用户
-		User user = UserData.getRandomUser();
-		Role role = UserData.getRandomRole();
+		User user = SecurityData.getRandomUser();
+		Role role = SecurityData.getAdminRole();
 		user.getRoles().add(role);
 		
 		entityDao.save(user);
@@ -66,7 +66,7 @@ public class UserDaoTest extends SpringTxTestCase {
 	//期望抛出ConstraintViolationException的异常.
 	@Test(expected = org.hibernate.exception.ConstraintViolationException.class)
 	public void savenUserNotUnique() {
-		User user = UserData.getRandomUser();
+		User user = SecurityData.getRandomUser();
 		user.setLoginName("admin");
 		entityDao.save(user);
 		flush();

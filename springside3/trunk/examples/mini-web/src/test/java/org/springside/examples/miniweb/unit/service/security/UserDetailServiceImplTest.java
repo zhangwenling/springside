@@ -8,11 +8,12 @@ import org.junit.Test;
 import org.springframework.security.GrantedAuthorityImpl;
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UsernameNotFoundException;
+import org.springside.examples.miniweb.data.SecurityData;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
-import org.springside.examples.miniweb.service.security.UserDetailServiceImpl;
 import org.springside.examples.miniweb.service.security.SecurityManager;
+import org.springside.examples.miniweb.service.security.UserDetailServiceImpl;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
@@ -29,7 +30,7 @@ public class UserDetailServiceImplTest extends Assert {
 	@Before
 	public void setUp() {
 		securityManager = EasyMock.createNiceMock(SecurityManager.class);
-		ReflectionUtils.setFieldValue(userDetailService, "userManager", securityManager);
+		ReflectionUtils.setFieldValue(userDetailService, "securityManager", securityManager);
 	}
 
 	@After
@@ -42,8 +43,8 @@ public class UserDetailServiceImplTest extends Assert {
 	
 		String authName = "A_aaa";
 
-		User user = UserData.getRandomUser();
-		Role role = UserData.getRandomRole();
+		User user = SecurityData.getRandomUser();
+		Role role = SecurityData.getRandomRole();
 		user.getRoles().add(role);
 		Authority auth = new Authority();
 		auth.setName(authName);

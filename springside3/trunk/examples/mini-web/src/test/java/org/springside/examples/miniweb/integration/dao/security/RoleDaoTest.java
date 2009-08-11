@@ -3,8 +3,8 @@ package org.springside.examples.miniweb.integration.dao.security;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.dao.security.RoleDao;
+import org.springside.examples.miniweb.data.SecurityData;
 import org.springside.examples.miniweb.entity.security.Role;
-import org.springside.examples.miniweb.unit.service.security.UserData;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 public class RoleDaoTest extends SpringTxTestCase  {
@@ -14,7 +14,7 @@ public class RoleDaoTest extends SpringTxTestCase  {
 	@Test
 	public void crudEntity() {
 		//new entity and save it. 
-		Role entity = UserData.getRandomRole();
+		Role entity = SecurityData.getRandomRole();
 		entityDao.save(entity);
 		flush();
 
