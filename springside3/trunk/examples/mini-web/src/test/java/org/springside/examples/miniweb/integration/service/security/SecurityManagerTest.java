@@ -22,8 +22,8 @@ public class SecurityManagerTest extends SpringTxTestCase {
 	
 	@Test
 	public void isLoginNameUnique() {
-		assertTrue(securityManager.isLoginNameUnique("admin", "admin"));
-		assertTrue(securityManager.isLoginNameUnique("foo", "admin"));
-		assertTrue(!securityManager.isLoginNameUnique("admin", ""));
+		assertEquals(true, securityManager.isLoginNameUnique("admin", "admin"));
+		assertEquals(true, securityManager.isLoginNameUnique("foo", "admin"));
+		assertEquals(false, securityManager.isLoginNameUnique("admin", ""));
 	}
 }

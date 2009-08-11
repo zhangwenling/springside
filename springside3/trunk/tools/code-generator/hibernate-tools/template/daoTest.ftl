@@ -12,16 +12,21 @@ public class ${declarationName}DaoTest extends ${pojo.importType("org.springside
 		entityDao.save(entity);
 		flush();
 
-		//get entity by id.	
-		entity = entityDao.get(entity.getId());
+		//find entity.	
+		entity = entityDao.findUniqueBy("id", entity.getId());
+		assertNotNull(entity);
 		
 		//modify entity.
 		entityDao.save(entity);
 		flush();
+		entity = entityDao.findUniqueBy("id", entity.getId());
+
 		
 		//delete entity.
 		entityDao.delete(entity.getId());
 		flush();
+		entity = entityDao.findUniqueBy("id", entity.getId());
+		assertNull(entity);
 	}
 }
 </#assign>

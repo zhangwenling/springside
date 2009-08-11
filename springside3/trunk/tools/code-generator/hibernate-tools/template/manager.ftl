@@ -4,7 +4,7 @@ ${pojo.getPackageDeclaration()}
 <#assign entityName = declarationName?uncap_first>
 @${pojo.importType("org.springframework.stereotype.Service")}
 @${pojo.importType("org.springframework.transaction.annotation.Transactional")}
-public class ${declarationName}Manager{
+public class ${declarationName}Manager {
 	@${pojo.importType("org.springframework.beans.factory.annotation.Autowired")}
 	private ${declarationName}Dao ${entityName}Dao;
 

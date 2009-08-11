@@ -96,6 +96,14 @@ public class SeleniumTestCase {
 		Assert.assertTrue(message, condition);
 	}
 
+	protected static void assertNull(Object object) {
+		Assert.assertNull(object);
+	}
+
+	protected static void assertNull(String message, Object object) {
+		Assert.assertNull(message, object);
+	}
+
 	protected static void assertNotNull(Object object) {
 		Assert.assertNotNull(object);
 	}

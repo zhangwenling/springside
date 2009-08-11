@@ -19,17 +19,22 @@ public class RoleDaoTest extends SpringTxTestCase  {
 		entityDao.save(entity);
 		flush();
 
-		//get entity by id.	
+		//find entity.	
 		entity = entityDao.get(entity.getId());
+		assertNotNull(entity);
 		
 		//modify entity.
-		entity.setName("new name");
+		entity.setName("new value");
 		entityDao.save(entity);
 		flush();
+		entity = entityDao.findUniqueBy("id", entity.getId());
+		assertEquals("new value", entity.getName());
 		
 		//delete entity.
 		entityDao.delete(entity.getId());
 		flush();
+		entity = entityDao.findUniqueBy("id", entity.getId());
+		assertNull(entity);
 	}
 }
 

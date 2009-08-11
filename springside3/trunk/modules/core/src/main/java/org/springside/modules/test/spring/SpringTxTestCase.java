@@ -60,6 +60,14 @@ public class SpringTxTestCase extends AbstractTransactionalJUnit4SpringContextTe
 		Assert.assertTrue(message, condition);
 	}
 
+	protected void assertNull(Object object) {
+		Assert.assertNull(object);
+	}
+
+	protected void assertNull(String message, Object object) {
+		Assert.assertNull(message, object);
+	}
+
 	protected void assertNotNull(Object object) {
 		Assert.assertNotNull(object);
 	}
