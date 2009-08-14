@@ -2,8 +2,7 @@ package org.springside.examples.miniservice.ws;
 
 import javax.annotation.PostConstruct;
 
-import net.sf.dozer.util.mapping.MapperIF;
-
+import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springside.modules.utils.DozerMapperSingleton;
@@ -19,9 +18,9 @@ public abstract class WebServiceSupport {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	protected MapperIF dozer;
+	protected Mapper dozer;
 
-	public void setDozer(final MapperIF dozer) {
+	public void setDozer(final Mapper dozer) {
 		this.dozer = dozer;
 	}
 

@@ -6,7 +6,7 @@
 
 	<bean class="org.springside.modules.queue.QueueManager" lazy-init="false"/>
 
-	<bean id="dbLogTask" class="org.springside.modules.log.JdbcAppenderTask" scope="prototype">
+	<bean id="dbLogTask" class="org.springside.modules.log.JdbcAppenderTask">
 		<property name="queueName" value="dblog" />
 		<property name="batchSize" value="20" />
 		<property name="dataSource" ref="dataSource" />

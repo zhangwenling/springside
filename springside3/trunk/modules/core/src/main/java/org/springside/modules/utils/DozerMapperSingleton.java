@@ -7,8 +7,8 @@
  */
 package org.springside.modules.utils;
 
-import net.sf.dozer.util.mapping.DozerBeanMapper;
-import net.sf.dozer.util.mapping.MapperIF;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 
 /**
  * DTO复制辅助工具Dozer的单例wrapper.
@@ -20,9 +20,9 @@ import net.sf.dozer.util.mapping.MapperIF;
  */
 public final class DozerMapperSingleton {
 
-	private static MapperIF instance = new DozerBeanMapper();//使用预初始化避免并发问题.
+	private static Mapper instance = new DozerBeanMapper();//使用预初始化避免并发问题.
 
-	public static MapperIF getInstance() {
+	public static Mapper getInstance() {
 		return instance;
 	}
 }

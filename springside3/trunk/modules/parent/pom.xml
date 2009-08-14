@@ -18,7 +18,7 @@
 		<spring.version>2.5.6</spring.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<struts2.version>2.1.6</struts2.version>
-		<cxf.version>2.2.2</cxf.version>
+		<cxf.version>2.2.3</cxf.version>
 		<spring-security.version>2.0.5.RELEASE</spring-security.version>
 
 		<!--  Plugin的属性定义  -->
@@ -463,7 +463,7 @@
 			<dependency>
 				<groupId>net.sf.dozer</groupId>
 				<artifactId>dozer</artifactId>
-				<version>4.4</version>
+				<version>5.1</version>
 			</dependency>
 			<!-- utils end -->
 
