@@ -15,7 +15,7 @@ import ${package}.entity.security.User;
  * @author calvin
  */
 public class SecurityData {
-
+	
 	public static String random() {
 		return RandomStringUtils.randomAlphanumeric(5);
 	}

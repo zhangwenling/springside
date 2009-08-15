@@ -22,8 +22,8 @@ public class ResourceDaoTest extends SpringTxTestCase  {
 		flush();
 
 		//find entity.
-		entity = entityDao.findUniqueBy("id", entity.getId());
-		assertNotNull(entity);
+		Resource entityFromDB = entityDao.findUniqueBy("id", entity.getId());
+		assertReflectionEquals(entity, entityFromDB);
 		
 		//modify entity.
 		entity.setValue("new value");

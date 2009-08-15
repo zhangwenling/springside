@@ -34,8 +34,8 @@ public class UserDaoTest extends SpringTxTestCase {
 		flush();
 
 		//获取用户
-		entity = entityDao.findUniqueBy("id", entity.getId());
-		assertNotNull(entity);
+		User entityFromDB = entityDao.findUniqueBy("id", entity.getId());
+		assertReflectionEquals(entity, entityFromDB);
 
 		//修改用户
 		entity.setName("new value");
