@@ -120,6 +120,12 @@
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>org.unitils</groupId>
+			<artifactId>unitils</artifactId>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 
 	<build>

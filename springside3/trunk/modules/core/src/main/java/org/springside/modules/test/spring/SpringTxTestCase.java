@@ -11,6 +11,8 @@ import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.unitils.reflectionassert.ReflectionAssert;
+import org.unitils.reflectionassert.ReflectionComparatorMode;
 
 /**
  * Spring的支持数据库事务和依赖注入的JUnit 4 TestCase基类简写.
@@ -44,6 +46,22 @@ public class SpringTxTestCase extends AbstractTransactionalJUnit4SpringContextTe
 
 	// Assert 函数 //
 
+	/**
+	 * 反射比较对象间的所有属性,忽略expected对象的Null对象和集合中对象的次序.
+	 */
+	protected void assertReflectionEquals(Object expected, Object actual) {
+		ReflectionAssert.assertReflectionEquals(expected, actual, ReflectionComparatorMode.IGNORE_DEFAULTS,
+				ReflectionComparatorMode.LENIENT_ORDER);
+	}
+
+	/**
+	 * @see #assertReflectionEquals(Object, Object)
+	 */
+	protected void assertReflectionEquals(String message, Object expected, Object actual) {
+		ReflectionAssert.assertReflectionEquals(message, expected, actual, ReflectionComparatorMode.IGNORE_DEFAULTS,
+				ReflectionComparatorMode.LENIENT_ORDER);
+	}
+
 	protected void assertEquals(Object expected, Object actual) {
 		Assert.assertEquals(expected, actual);
 	}
@@ -58,6 +76,14 @@ public class SpringTxTestCase extends AbstractTransactionalJUnit4SpringContextTe
 
 	protected void assertTrue(String message, boolean condition) {
 		Assert.assertTrue(message, condition);
+	}
+
+	protected void assertFalse(boolean condition) {
+		Assert.assertFalse(condition);
+	}
+
+	protected void assertFalse(String message, boolean condition) {
+		Assert.assertFalse(message, condition);
 	}
 
 	protected void assertNull(Object object) {

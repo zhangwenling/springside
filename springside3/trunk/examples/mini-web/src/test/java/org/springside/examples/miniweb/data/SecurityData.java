@@ -12,7 +12,7 @@ import org.springside.examples.miniweb.entity.security.User;
  * @author calvin
  */
 public class SecurityData {
-
+	
 	public static String random() {
 		return RandomStringUtils.randomAlphanumeric(5);
 	}

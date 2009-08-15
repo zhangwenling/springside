@@ -31,8 +31,8 @@ public class SeleniumTestCase {
 	public static final String DEFAULT_SELENIUM_HOST = "localhost";
 
 	public static final String PROPERTY_FILE = "application.test.properties";
-	public static final String PROPERTY_BROWSER_NAME = "selenium.browser";
 	public static final String PROPERTY_URL_NAME = "selenium.url";
+	public static final String PROPERTY_BROWSER_NAME = "selenium.browser";
 	public static final String PROPERTY_SELENIUM_HOST_NAME = "selenium.host";
 
 	public static final String WAIT_FOR_PAGE = "30000";
@@ -94,6 +94,14 @@ public class SeleniumTestCase {
 
 	protected static void assertTrue(String message, boolean condition) {
 		Assert.assertTrue(message, condition);
+	}
+
+	protected static void assertFalse(boolean condition) {
+		Assert.assertFalse(condition);
+	}
+
+	protected static void assertFalse(String message, boolean condition) {
+		Assert.assertFalse(message, condition);
 	}
 
 	protected static void assertNull(Object object) {

@@ -225,6 +225,18 @@
 			<groupId>org.seleniumhq.selenium.client-drivers</groupId>
 			<artifactId>selenium-java-client-driver</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymockclassextension</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.unitils</groupId>
+			<artifactId>unitils</artifactId>
+		</dependency>
 		<!-- test end -->
 
 		<!-- hibernate tools -->
@@ -350,7 +362,7 @@
 						<artifactId>dbunit-maven-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>create database</id>
+								<id>init data</id>
 								<phase>initialize</phase>
 								<goals>
 									<goal>operation</goal>

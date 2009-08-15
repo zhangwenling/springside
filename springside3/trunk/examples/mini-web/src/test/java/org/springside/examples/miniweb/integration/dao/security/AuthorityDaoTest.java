@@ -19,8 +19,8 @@ public class AuthorityDaoTest extends SpringTxTestCase  {
 		flush();
 
 		//find entity.
-		entity = entityDao.findUniqueBy("id", entity.getId());
-		assertNotNull(entity);
+		Authority entityFromDB = entityDao.findUniqueBy("id", entity.getId());
+		assertReflectionEquals(entity, entityFromDB);
 
 		//modify entity.
 		entity.setName("new value");

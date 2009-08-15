@@ -13,8 +13,8 @@ public class ${declarationName}DaoTest extends ${pojo.importType("org.springside
 		flush();
 
 		//find entity.	
-		entity = entityDao.findUniqueBy("id", entity.getId());
-		assertNotNull(entity);
+		${declarationName} entityFromDB = entityDao.findUniqueBy("id", entity.getId());
+		assertReflectionEquals(entity, entityFromDB);
 		
 		//modify entity.
 		entityDao.save(entity);
