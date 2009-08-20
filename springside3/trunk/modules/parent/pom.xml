@@ -745,7 +745,7 @@
 						<artifactId>dbunit-maven-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>test-compile</id>
+								<id>init-data</id>
 								<phase>test-compile</phase>
 								<goals>
 									<goal>operation</goal>
