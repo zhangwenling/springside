@@ -14,8 +14,9 @@ import org.springside.examples.miniweb.entity.security.User;
 public class SecurityData {
 
 	public static User getRandomUser() {
-		User user = new User();
 		String userName = "User" + random();
+
+		User user = new User();
 		user.setLoginName(userName);
 		user.setName(userName);
 		user.setPassword("passwd");
@@ -39,8 +40,9 @@ public class SecurityData {
 	}
 
 	public static Authority getRandomAuthority() {
-		Authority authority = new Authority();
 		String authName = "Authority" + random();
+		
+		Authority authority = new Authority();
 		authority.setName(authName);
 		authority.setDisplayName(authName);
 

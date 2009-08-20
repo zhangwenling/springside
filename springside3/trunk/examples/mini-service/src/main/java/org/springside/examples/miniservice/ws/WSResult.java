@@ -40,13 +40,13 @@ public class WSResult {
 	/**
 	 * 设置返回结果.
 	 */
-	public void setResult(String code, String message) {
-		this.code = code;
-		this.message = message;
+	public void setResult(String resultCode, String resultMessage) {
+		this.code = resultCode;
+		this.message = resultMessage;
 	}
 
 	/**
-	 * 设置默认的系统内部未知错误.
+	 * 设置为默认的系统内部未知错误.
 	 */
 	public void setSystemError() {
 		setResult(SYSTEM_ERROR, "系统未知运行时错误");

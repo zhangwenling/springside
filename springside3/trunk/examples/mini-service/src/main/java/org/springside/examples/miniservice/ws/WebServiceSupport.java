@@ -16,7 +16,7 @@ import org.springside.modules.utils.DozerMapperSingleton;
  */
 public abstract class WebServiceSupport {
 
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	protected Mapper dozer;
 
