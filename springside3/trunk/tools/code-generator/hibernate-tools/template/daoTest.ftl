@@ -15,13 +15,7 @@ public class ${declarationName}DaoTest extends ${pojo.importType("org.springside
 		//find entity.	
 		${declarationName} entityFromDB = entityDao.findUniqueBy("id", entity.getId());
 		assertReflectionEquals(entity, entityFromDB);
-		
-		//modify entity.
-		entityDao.save(entity);
-		flush();
-		entity = entityDao.findUniqueBy("id", entity.getId());
-
-		
+			
 		//delete entity.
 		entityDao.delete(entity.getId());
 		flush();

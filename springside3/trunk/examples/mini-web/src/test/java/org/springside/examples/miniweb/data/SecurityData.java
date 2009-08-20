@@ -7,20 +7,15 @@ import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 
 /**
- * 测试用户数据生成.
+ * 安全相关实体测试数据生成.
  * 
  * @author calvin
  */
 public class SecurityData {
-	
-	public static String random() {
-		return RandomStringUtils.randomAlphanumeric(5);
-	}
 
 	public static User getRandomUser() {
-		String userName = "User" + random();
-
 		User user = new User();
+		String userName = "User" + random();
 		user.setLoginName(userName);
 		user.setName(userName);
 		user.setPassword("passwd");
@@ -59,5 +54,9 @@ public class SecurityData {
 		resource.setPosition(100);
 
 		return resource;
+	}
+	
+	public static String random() {
+		return RandomStringUtils.randomAlphanumeric(5);
 	}
 }

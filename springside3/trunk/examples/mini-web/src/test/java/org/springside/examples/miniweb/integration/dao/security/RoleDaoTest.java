@@ -21,14 +21,6 @@ public class RoleDaoTest extends SpringTxTestCase  {
 		//find entity.
 		Role entityFromDB = entityDao.findUniqueBy("id", entity.getId());
 		assertReflectionEquals(entity, entityFromDB);
-
-		//modify entity.
-		entity = entityDao.get(entity.getId());
-		entity.setName("new value");
-		entityDao.save(entity);
-		flush();
-		entity = entityDao.findUniqueBy("id", entity.getId());
-		assertEquals("new value", entity.getName());
 		
 		//delete entity.
 		entityDao.delete(entity.getId());

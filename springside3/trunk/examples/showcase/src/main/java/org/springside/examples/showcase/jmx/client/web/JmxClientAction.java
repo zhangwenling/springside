@@ -19,10 +19,11 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author ben
  * @author calvin
  */
-@SuppressWarnings("serial")
 //因为没有按Convention Plugin默认的Pacakge命名规则,因此用annotation重新指定Namespace.
 @Namespace("/jmx")
 public class JmxClientAction extends ActionSupport {
+
+	private static final long serialVersionUID = 1321167727728057491L;
 
 	private static Logger logger = LoggerFactory.getLogger(JmxClientAction.class);
 
@@ -33,27 +34,6 @@ public class JmxClientAction extends ActionSupport {
 	private String nodeName;
 	private boolean notificationMailEnabled;
 	private HibernateStatistics hibernateStatistics;
-
-	// 属性访问函数 //
-	public String getNodeName() {
-		return nodeName;
-	}
-
-	public void setNodeName(String nodeName) {
-		this.nodeName = nodeName;
-	}
-
-	public boolean isNotificationMailEnabled() {
-		return notificationMailEnabled;
-	}
-
-	public void setNotificationMailEnabled(boolean notificationMailEnabled) {
-		this.notificationMailEnabled = notificationMailEnabled;
-	}
-
-	public HibernateStatistics getHibernateStatistics() {
-		return hibernateStatistics;
-	}
 
 	// Action 函数 //
 	/**
@@ -111,5 +91,26 @@ public class JmxClientAction extends ActionSupport {
 	 */
 	public void logSummary() {
 		jmxClientService.logSummary();
+	}
+
+	// 页面属性访问函数 //
+	public String getNodeName() {
+		return nodeName;
+	}
+
+	public void setNodeName(String nodeName) {
+		this.nodeName = nodeName;
+	}
+
+	public boolean isNotificationMailEnabled() {
+		return notificationMailEnabled;
+	}
+
+	public void setNotificationMailEnabled(boolean notificationMailEnabled) {
+		this.notificationMailEnabled = notificationMailEnabled;
+	}
+
+	public HibernateStatistics getHibernateStatistics() {
+		return hibernateStatistics;
 	}
 }
