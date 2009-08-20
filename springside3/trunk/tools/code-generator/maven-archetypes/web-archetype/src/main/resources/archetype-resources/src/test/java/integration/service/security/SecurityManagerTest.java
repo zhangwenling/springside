@@ -14,10 +14,10 @@ public class SecurityManagerTest extends SpringTxTestCase {
 	private SecurityManager securityManager = new SecurityManager();
 
 	@Test(expected = ServiceException.class)
-	public void deleteAdmin(){
+	public void deleteAdmin() {
 		securityManager.deleteUser(1L);
 	}
-	
+
 	@Test
 	public void isLoginNameUnique() {
 		assertEquals(true, securityManager.isLoginNameUnique("admin", "admin"));

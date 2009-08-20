@@ -10,7 +10,7 @@ import ${package}.data.SecurityData;
 import ${package}.entity.security.Authority;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
-public class AuthorityDaoTest extends SpringTxTestCase  {
+public class AuthorityDaoTest extends SpringTxTestCase {
 	@Autowired
 	private AuthorityDao entityDao;
 
@@ -25,13 +25,6 @@ public class AuthorityDaoTest extends SpringTxTestCase  {
 		Authority entityFromDB = entityDao.findUniqueBy("id", entity.getId());
 		assertReflectionEquals(entity, entityFromDB);
 
-		//modify entity.
-		entity.setName("new value");
-		entityDao.save(entity);
-		flush();
-		entity = entityDao.findUniqueBy("id", entity.getId());
-		assertEquals("new value", entity.getName());
-
 		//delete entity.
 		entityDao.delete(entity.getId());
 		flush();
@@ -39,4 +32,3 @@ public class AuthorityDaoTest extends SpringTxTestCase  {
 		assertNull(entity);
 	}
 }
-

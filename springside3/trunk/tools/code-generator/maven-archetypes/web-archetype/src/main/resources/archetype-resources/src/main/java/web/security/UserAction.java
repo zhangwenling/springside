@@ -29,23 +29,25 @@ import org.springside.modules.web.struts2.Struts2Utils;
  * 
  * @author calvin
  */
-@SuppressWarnings("serial")
 @Results( { @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
 public class UserAction extends CrudActionSupport<User> {
+
+	private static final long serialVersionUID = -3158937030006900402L;
 
 	@Autowired
 	private SecurityManager securityManager;
 
-	// 基本属性 //
+	// 页面属性 //
 	private User entity;
 	private Long id;
 	private Page<User> page = new Page<User>(5);//每页5条记录
-
-	// 角色相关属性 //
-	private List<Role> allRoles; //全部可选角色列表
 	private List<Long> checkedRoleIds; //页面中钩选的角色id列表
 
-	// 基本属性访问函数 //
+	// ModelDriven 与 Preparable函数 //
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public User getModel() {
 		return entity;
 	}
@@ -59,34 +61,23 @@ public class UserAction extends CrudActionSupport<User> {
 		}
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Page<User> getPage() {
-		return page;
-	}
-
 	// CRUD Action 函数 //
 	@Override
 	public String list() throws Exception {
-		HttpServletRequest request = Struts2Utils.getRequest();
-		List<PropertyFilter> filters = HibernateWebUtils.buildPropertyFilters(request);
-
+		List<PropertyFilter> filters = HibernateWebUtils.buildPropertyFilters(Struts2Utils.getRequest());
 		page = securityManager.searchUser(page, filters);
 		return SUCCESS;
 	}
 
 	@Override
 	public String input() throws Exception {
-		allRoles = securityManager.getAllRole();
 		checkedRoleIds = entity.getRoleIds();
 		return INPUT;
 	}
 
 	@Override
 	public String save() throws Exception {
-		//根据页面上的checkbox 整合User的Roles Set
+		//根据页面上的checkbox选择 整合User的Roles Set
 		HibernateWebUtils.mergeByCheckedIds(entity.getRoles(), checkedRoleIds, Role.class);
 
 		securityManager.saveUser(entity);
@@ -101,24 +92,12 @@ public class UserAction extends CrudActionSupport<User> {
 			addActionMessage("删除用户成功");
 		} catch (ServiceException e) {
 			logger.error(e.getMessage(), e);
-			addActionMessage(e.getMessage());
+			addActionMessage("删除用户失败");
 		}
 		return RELOAD;
 	}
 
-	// 其他属性访问函数与Action函数 //
-	public List<Role> getAllRoles() {
-		return allRoles;
-	}
-
-	public List<Long> getCheckedRoleIds() {
-		return checkedRoleIds;
-	}
-
-	public void setCheckedRoleIds(List<Long> checkedRoleIds) {
-		this.checkedRoleIds = checkedRoleIds;
-	}
-
+	// 其他Action函数 //
 	/**
 	 * 支持使用Jquery.validate Ajax检验用户名是否重复.
 	 */
@@ -134,5 +113,22 @@ public class UserAction extends CrudActionSupport<User> {
 		}
 		//因为直接输出内容而不经过jsp,因此返回null.
 		return null;
+	}
+
+	// 页面属性访问函数 //
+	public Page<User> getPage() {
+		return page;
+	}
+
+	public List<Role> getAllRoles() {
+		return securityManager.getAllRole();
+	}
+
+	public List<Long> getCheckedRoleIds() {
+		return checkedRoleIds;
+	}
+
+	public void setCheckedRoleIds(List<Long> checkedRoleIds) {
+		this.checkedRoleIds = checkedRoleIds;
 	}
 }

@@ -3,7 +3,6 @@
 #set( $symbol_escape = '\' )
 package ${package}.integration.dao.user;
 
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ${package}.dao.RoleDao;
@@ -11,7 +10,7 @@ import ${package}.data.UserData;
 import ${package}.entity.user.Role;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
-public class RoleDaoTest extends SpringTxTestCase  {
+public class RoleDaoTest extends SpringTxTestCase {
 	@Autowired
 	private RoleDao entityDao;
 
@@ -25,14 +24,7 @@ public class RoleDaoTest extends SpringTxTestCase  {
 		//find entity.	
 		Role entityFromDB = entityDao.get(entity.getId());
 		assertReflectionEquals(entity, entityFromDB);
-		
-		//modify entity.
-		entity.setName("new value");
-		entityDao.save(entity);
-		flush();
-		entity = entityDao.findUniqueBy("id", entity.getId());
-		assertEquals("new value", entity.getName());
-		
+
 		//delete entity.
 		entityDao.delete(entity.getId());
 		flush();
@@ -40,4 +32,3 @@ public class RoleDaoTest extends SpringTxTestCase  {
 		assertNull(entity);
 	}
 }
-

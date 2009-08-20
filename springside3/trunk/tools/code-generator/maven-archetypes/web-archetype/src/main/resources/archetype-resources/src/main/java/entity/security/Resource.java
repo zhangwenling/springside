@@ -35,12 +35,15 @@ public class Resource extends IdEntity {
 	public static final String URL_TYPE = "url";
 	public static final String MENU_TYPE = "menu";
 
-	private String resourceType; //资源类型
-	private String value; //资源标识
-	private double position; //资源在SpringSecurity中的校验顺序字段
+	private String resourceType;
+	private String value;
+	private double position;
 
-	private Set<Authority> authorities = new LinkedHashSet<Authority>(); //可访问该资源的授权
+	private Set<Authority> authorities = new LinkedHashSet<Authority>();
 
+	/**
+	 * 资源类型.
+	 */
 	public String getResourceType() {
 		return resourceType;
 	}
@@ -49,6 +52,9 @@ public class Resource extends IdEntity {
 		this.resourceType = resourceType;
 	}
 
+	/**
+	 * 资源标识.
+	 */
 	public String getValue() {
 		return value;
 	}
@@ -57,6 +63,9 @@ public class Resource extends IdEntity {
 		this.value = value;
 	}
 
+	/**
+	 * 资源在SpringSecurity中的校验顺序字段.
+	 */
 	public double getPosition() {
 		return position;
 	}
@@ -65,6 +74,9 @@ public class Resource extends IdEntity {
 		this.position = position;
 	}
 
+	/**
+	 * 可访问该资源的授权集合.
+	 */
 	@ManyToMany
 	@JoinTable(name = "SS_RESOURCE_AUTHORITY", joinColumns = { @JoinColumn(name = "RESOURCE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
 	@Fetch(FetchMode.JOIN)
@@ -78,6 +90,9 @@ public class Resource extends IdEntity {
 		this.authorities = authorities;
 	}
 
+	/**
+	 * 可访问该资源的授权名称字符串, 多个授权用','分隔.
+	 */
 	@Transient
 	public String getAuthNames() {
 		return ReflectionUtils.fetchElementPropertyToString(authorities, "name", ",");

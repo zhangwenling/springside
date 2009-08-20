@@ -27,10 +27,10 @@ public abstract class CrudActionSupport<T> extends ActionSupport implements Mode
 	 */
 	public static final String RELOAD = "reload";
 
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
-	 * Action函数,默认action函数，默认指向list函数.
+	 * Action函数, 默认的action函数, 默认调用list()函数.
 	 */
 	@Override
 	public String execute() throws Exception {

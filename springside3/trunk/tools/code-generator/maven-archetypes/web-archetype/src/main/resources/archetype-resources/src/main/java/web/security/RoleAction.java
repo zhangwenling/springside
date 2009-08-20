@@ -22,25 +22,27 @@ import org.springside.modules.orm.hibernate.HibernateWebUtils;
  * 
  * @author calvin
  */
-@SuppressWarnings("serial")
 @Results( { @Result(name = CrudActionSupport.RELOAD, location = "role.action", type = "redirect") })
 public class RoleAction extends CrudActionSupport<Role> {
+
+	private static final long serialVersionUID = -3564362190437271123L;
 
 	@Autowired
 	private SecurityManager securityManager;
 
-	// 基本属性 //
+	// 页面属性 //
 	private Role entity;
 	private Long id;
-	private List<Role> allRoles;
-
-	// 权限相关属性 //
-	private List<Authority> allAuths; //全部可选权限列表
+	private List<Role> allRoles;//角色列表
 	private List<Long> checkedAuthIds;//页面中钩选的权限id列表
 
-	// 基本属性访问函数 //
+	// ModelDriven 与 Preparable函数 //
 	public Role getModel() {
 		return entity;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override
@@ -52,14 +54,6 @@ public class RoleAction extends CrudActionSupport<Role> {
 		}
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public List<Role> getAllRoles() {
-		return allRoles;
-	}
-
 	// CRUD Action 函数 //
 	@Override
 	public String list() throws Exception {
@@ -69,7 +63,6 @@ public class RoleAction extends CrudActionSupport<Role> {
 
 	@Override
 	public String input() throws Exception {
-		allAuths = securityManager.getAllAuthority();
 		checkedAuthIds = entity.getAuthIds();
 		return INPUT;
 	}
@@ -90,9 +83,13 @@ public class RoleAction extends CrudActionSupport<Role> {
 		return RELOAD;
 	}
 
-	// 其他属性访问函数及Action函数 //
+	// 页面属性访问函数 //
+	public List<Role> getAllRoles() {
+		return allRoles;
+	}
+
 	public List<Authority> getAllAuths() {
-		return allAuths;
+		return securityManager.getAllAuthority();
 	}
 
 	public List<Long> getCheckedAuthIds() {

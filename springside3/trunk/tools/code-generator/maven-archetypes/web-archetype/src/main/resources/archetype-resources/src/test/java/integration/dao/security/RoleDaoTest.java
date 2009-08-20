@@ -10,7 +10,7 @@ import ${package}.data.SecurityData;
 import ${package}.entity.security.Role;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
-public class RoleDaoTest extends SpringTxTestCase  {
+public class RoleDaoTest extends SpringTxTestCase {
 	@Autowired
 	private RoleDao entityDao;
 
@@ -20,19 +20,11 @@ public class RoleDaoTest extends SpringTxTestCase  {
 		Role entity = SecurityData.getRandomRole();
 		entityDao.save(entity);
 		flush();
-		
+
 		//find entity.
 		Role entityFromDB = entityDao.findUniqueBy("id", entity.getId());
 		assertReflectionEquals(entity, entityFromDB);
 
-		//modify entity.
-		entity = entityDao.get(entity.getId());
-		entity.setName("new value");
-		entityDao.save(entity);
-		flush();
-		entity = entityDao.findUniqueBy("id", entity.getId());
-		assertEquals("new value", entity.getName());
-		
 		//delete entity.
 		entityDao.delete(entity.getId());
 		flush();
@@ -40,4 +32,3 @@ public class RoleDaoTest extends SpringTxTestCase  {
 		assertNull(entity);
 	}
 }
-

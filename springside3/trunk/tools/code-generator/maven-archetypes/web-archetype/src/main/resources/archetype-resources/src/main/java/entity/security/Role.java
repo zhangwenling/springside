@@ -62,6 +62,9 @@ public class Role extends IdEntity {
 		return ReflectionUtils.fetchElementPropertyToString(authorities, "displayName", ", ");
 	}
 
+	/**
+	 * 角色拥有的授权id字符串, 多个授权id用','分隔.
+	 */
 	@Transient
 	@SuppressWarnings("unchecked")
 	public List<Long> getAuthIds() {

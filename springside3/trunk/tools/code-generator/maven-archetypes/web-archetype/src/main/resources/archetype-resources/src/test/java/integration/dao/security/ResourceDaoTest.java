@@ -10,7 +10,7 @@ import ${package}.data.SecurityData;
 import ${package}.entity.security.Resource;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
-public class ResourceDaoTest extends SpringTxTestCase  {
+public class ResourceDaoTest extends SpringTxTestCase {
 	@Autowired
 	private ResourceDao entityDao;
 
@@ -24,14 +24,7 @@ public class ResourceDaoTest extends SpringTxTestCase  {
 		//find entity.
 		Resource entityFromDB = entityDao.findUniqueBy("id", entity.getId());
 		assertReflectionEquals(entity, entityFromDB);
-		
-		//modify entity.
-		entity.setValue("new value");
-		entityDao.save(entity);
-		flush();
-		entity = entityDao.findUniqueBy("id", entity.getId());
-		assertEquals("new value", entity.getValue());
-		
+
 		//delete entity.
 		entityDao.delete(entity.getId());
 		flush();

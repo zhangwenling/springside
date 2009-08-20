@@ -43,7 +43,7 @@ public class UserDetailServiceImplTest extends Assert {
 
 	@Test
 	public void loadUserExist() {
-	
+
 		String authName = "A_foo";
 
 		User user = SecurityData.getRandomUser();
@@ -54,7 +54,7 @@ public class UserDetailServiceImplTest extends Assert {
 		role.getAuthorities().add(auth);
 
 		//录制脚本
-		EasyMock.expect(securityManager.findUserByLoginName(user.getLoginName())).andReturn(user);
+		org.easymock.EasyMock.expect(securityManager.findUserByLoginName(user.getLoginName())).andReturn(user);
 		EasyMock.replay(securityManager);
 
 		//执行测试
@@ -70,7 +70,7 @@ public class UserDetailServiceImplTest extends Assert {
 	@Test(expected = UsernameNotFoundException.class)
 	public void loadUserNotExist() {
 		//录制脚本
-		EasyMock.expect(securityManager.findUserByLoginName("userNameNotExist")).andReturn(null);
+		org.easymock.EasyMock.expect(securityManager.findUserByLoginName("userNameNotExist")).andReturn(null);
 		EasyMock.replay(securityManager);
 		//执行测试
 		userDetailService.loadUserByUsername("userNameNotExist");

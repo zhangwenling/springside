@@ -37,13 +37,6 @@ public class UserDaoTest extends SpringTxTestCase {
 		User entityFromDB = entityDao.findUniqueBy("id", entity.getId());
 		assertReflectionEquals(entity, entityFromDB);
 
-		//修改用户
-		entity.setName("new value");
-		entityDao.save(entity);
-		flush();
-		entity = entityDao.findUniqueBy("id", entity.getId());
-		assertEquals("new value", entity.getName());
-		
 		//删除用户
 		entityDao.delete(entity.getId());
 		flush();
@@ -57,10 +50,10 @@ public class UserDaoTest extends SpringTxTestCase {
 		User user = SecurityData.getRandomUser();
 		Role role = SecurityData.getAdminRole();
 		user.getRoles().add(role);
-		
+
 		entityDao.save(user);
 		flush();
-		
+
 		user = entityDao.findUniqueBy("id", user.getId());
 		assertEquals(1, user.getRoles().size());
 

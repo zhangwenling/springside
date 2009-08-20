@@ -42,7 +42,7 @@ public class UserWebServiceImpl extends WebServiceSupport implements UserWebServ
 			List<User> userList = userManager.getAllUser();
 			List<UserDTO> userDTOList = new ArrayList<UserDTO>();
 			for (User userEntity : userList) {
-				userDTOList.add((UserDTO) dozer.map(userEntity, UserDTO.class));
+				userDTOList.add(dozer.map(userEntity, UserDTO.class));
 			}
 			result.setUserList(userDTOList);
 		} catch (RuntimeException e) {
@@ -67,7 +67,7 @@ public class UserWebServiceImpl extends WebServiceSupport implements UserWebServ
 
 		//保存用户
 		try {
-			User userEntity = (User) dozer.map(user, User.class);
+			User userEntity = dozer.map(user, User.class);
 			userManager.saveUser(userEntity);
 			result.setUserId(userEntity.getId());
 		} catch (RuntimeException e) {

@@ -10,15 +10,11 @@ import ${package}.entity.security.Role;
 import ${package}.entity.security.User;
 
 /**
- * 测试用户数据生成.
+ * 安全相关实体测试数据生成.
  * 
  * @author calvin
  */
 public class SecurityData {
-	
-	public static String random() {
-		return RandomStringUtils.randomAlphanumeric(5);
-	}
 
 	public static User getRandomUser() {
 		String userName = "User" + random();
@@ -47,8 +43,9 @@ public class SecurityData {
 	}
 
 	public static Authority getRandomAuthority() {
-		Authority authority = new Authority();
 		String authName = "Authority" + random();
+
+		Authority authority = new Authority();
 		authority.setName(authName);
 		authority.setDisplayName(authName);
 
@@ -62,5 +59,9 @@ public class SecurityData {
 		resource.setPosition(100);
 
 		return resource;
+	}
+
+	public static String random() {
+		return RandomStringUtils.randomAlphanumeric(5);
 	}
 }

@@ -26,20 +26,20 @@ public class HibernateMappingTest extends SpringTxTestCase {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-    @Test
-    public void testColumnMapping() throws Exception {
-        Session session = sessionFactory.openSession();
-        try {
-            Map metadata = sessionFactory.getAllClassMetadata();
-            for (Object o : metadata.values()) {
-                EntityPersister persister = (EntityPersister) o;
-                String className = persister.getEntityName();
-                Query q = session.createQuery("from " + className + " c");
-                q.iterate();
+	@Test
+	public void testColumnMapping() throws Exception {
+		Session session = sessionFactory.openSession();
+		try {
+			Map metadata = sessionFactory.getAllClassMetadata();
+			for (Object o : metadata.values()) {
+				EntityPersister persister = (EntityPersister) o;
+				String className = persister.getEntityName();
+				Query q = session.createQuery("from " + className + " c");
+				q.iterate();
 				logger.debug("ok: " + className);
-            }
-        } finally {
-            session.close();
-        }
-    }
+			}
+		} finally {
+			session.close();
+		}
+	}
 }

@@ -34,10 +34,10 @@ public class UserManager {
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
 		List<User> userList = userDao.getAll();
-		userDao.initAllProperty(userList);
+		userDao.initAllProperties(userList);
 		return userList;
 	}
-	
+
 	public void saveUser(User user) {
 		userDao.save(user);
 	}
