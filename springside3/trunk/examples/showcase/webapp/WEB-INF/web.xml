@@ -91,7 +91,7 @@
 
 	<filter-mapping>
 		<filter-name>struts2Filter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
 
 	<!--Spring ApplicationContext 载入 -->

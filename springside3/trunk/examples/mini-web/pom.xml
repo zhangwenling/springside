@@ -210,6 +210,8 @@
 	</dependencies>
 
 	<build>
+	<finalName>mini-web</finalName>
+	
 		<plugins>
 			<!-- Hibernate lazy load bytecode enhancement -->
 			<plugin>
@@ -276,6 +278,12 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>dbunit-maven-plugin</artifactId>
+			</plugin>
+			
+			<!-- jetty插件 -->
+			<plugin>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>maven-jetty-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
