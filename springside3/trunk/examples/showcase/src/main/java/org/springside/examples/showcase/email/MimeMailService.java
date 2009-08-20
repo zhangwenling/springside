@@ -76,7 +76,7 @@ public class MimeMailService {
 	 * 使用Freemarker生成html格式内容.
 	 */
 	@SuppressWarnings("unchecked")
-	public void buildContent(MimeMessageHelper helper, String userName) throws MessagingException {
+	private void buildContent(MimeMessageHelper helper, String userName) throws MessagingException {
 
 		try {
 			Map context = new HashMap();
@@ -95,7 +95,7 @@ public class MimeMailService {
 	/**
 	 * 添加附件.
 	 */
-	public void buildAttachment(MimeMessageHelper helper) throws MessagingException {
+	private void buildAttachment(MimeMessageHelper helper) throws MessagingException {
 		try {
 			//使用Spring的Resource Loader获取打包在classpath中的附件.
 			ClassPathResource attachment = new ClassPathResource("/email/mailAttachment.txt");

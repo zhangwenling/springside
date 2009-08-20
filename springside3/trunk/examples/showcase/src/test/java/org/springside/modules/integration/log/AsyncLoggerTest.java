@@ -17,9 +17,11 @@ import org.springside.modules.test.spring.SpringContextTestCase;
 @ContextConfiguration(locations = { "/log/applicationContext-log.xml" })
 public class AsyncLoggerTest extends SpringContextTestCase {
 
+	private static final String loggerName = "org.springside.examples.showcase.log.dbLogExample";
+
 	@Test
 	public void dbLogger() {
-		Logger dbLogger = LoggerFactory.getLogger("org.springside.examples.showcase.log.dbLogExample");
+		Logger dbLogger = LoggerFactory.getLogger(loggerName);
 		int logCount = 10;
 		for (int i = 1; i <= logCount; i++) {
 			dbLogger.info("helloworld {}", i);
@@ -29,7 +31,7 @@ public class AsyncLoggerTest extends SpringContextTestCase {
 	@Test
 	@Ignore("Only for performance Test")
 	public void performanceTest() throws InterruptedException {
-		Logger dbLogger = LoggerFactory.getLogger("org.springside.examples.showcase.log.dbLogExample");
+		Logger dbLogger = LoggerFactory.getLogger(loggerName);
 		int totalCount = 20000;
 		int tps = 4000;
 		Date batchBegin = new Date();

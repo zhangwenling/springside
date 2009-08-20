@@ -3,14 +3,14 @@ package org.springside.examples.showcase.jmx.server;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * 系统属性配置.
+ * 系统属性配置MBean.
  * 
  * @author calvin
  */
 public class ServerConfig implements ServerConfigMBean {
 
-	private String nodeName;//服务器节点名
-	private AtomicBoolean notificationMailEnabled = new AtomicBoolean(true);//是否发送通知邮件
+	private String nodeName;
+	private AtomicBoolean notificationMailEnabled = new AtomicBoolean(true);
 
 	public String getNodeName() {
 		return nodeName;

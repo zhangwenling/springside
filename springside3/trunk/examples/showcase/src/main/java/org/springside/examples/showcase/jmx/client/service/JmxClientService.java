@@ -25,7 +25,7 @@ public class JmxClientService {
 	public static final String CONFIG_MBEAN_NAME = "Custom:name=serverConfig,type=ServerConfig";
 	public static final String HIBERNATE_MBEAN_NAME = "Custom:name=hibernateStatistics,type=StatisticsService";
 
-	protected static Logger logger = LoggerFactory.getLogger(JmxClientService.class);
+	private static Logger logger = LoggerFactory.getLogger(JmxClientService.class);
 
 	//jmx客户端工厂及mbean代理
 	private JmxClient jmxClient;

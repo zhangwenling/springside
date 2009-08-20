@@ -8,6 +8,11 @@ import javax.persistence.ManyToOne;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+/**
+ * 回复.
+ * 
+ * @author calvin
+ */
 @Entity
 @DiscriminatorValue("Reply")
 public class Reply extends Post {

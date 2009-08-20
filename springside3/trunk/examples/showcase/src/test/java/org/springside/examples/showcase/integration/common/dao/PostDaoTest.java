@@ -16,10 +16,8 @@ public class PostDaoTest extends SpringTxTestCase {
 
 	@Autowired
 	private SubjectDao subjectDao;
-
 	@Autowired
 	private ReplyDao replyDao;
-
 	@Autowired
 	private UserDao userDao;
 

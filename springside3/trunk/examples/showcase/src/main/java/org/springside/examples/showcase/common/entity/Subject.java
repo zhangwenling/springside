@@ -12,6 +12,11 @@ import javax.persistence.OrderBy;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+/**
+ * 主题.
+ * 
+ * @author calvin
+ */
 @Entity
 @DiscriminatorValue("Subject")
 public class Subject extends Post {

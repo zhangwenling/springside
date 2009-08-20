@@ -14,6 +14,7 @@ import org.springframework.util.StringUtils;
  */
 public class SimpleMailService {
 	private static Logger logger = LoggerFactory.getLogger(SimpleMailService.class);
+
 	private JavaMailSender mailSender;
 
 	public void setMailSender(JavaMailSender mailSender) {

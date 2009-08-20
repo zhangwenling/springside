@@ -7,10 +7,16 @@ package org.springside.examples.showcase.jmx.server;
  */
 public interface ServerConfigMBean {
 
+	/**
+	 * 服务器节点名.
+	 */
 	public String getNodeName();
 
 	public void setNodeName(String nodeName);
 
+	/**
+	 * 是否发送通知邮件.
+	 */
 	public boolean isNotificationMailEnabled();
 
 	public void setNotificationMailEnabled(boolean notificationMailEnabled);

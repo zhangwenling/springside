@@ -22,8 +22,6 @@ import org.springside.modules.utils.ReflectionUtils;
 /**
  * 用户.
  * 
- * 使用JPA annotation定义ORM关系.
- * 
  * @author calvin
  */
 @Entity

@@ -14,6 +14,9 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ForceDiscriminator;
 
+/**
+ * 帖子基类.
+ */
 @Entity
 @Table(name = "SS_POST")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -60,5 +63,4 @@ public abstract class Post extends IdEntity {
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-
 }

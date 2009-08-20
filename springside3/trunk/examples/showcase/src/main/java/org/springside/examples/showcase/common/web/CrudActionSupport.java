@@ -24,10 +24,10 @@ public abstract class CrudActionSupport<T> extends ActionSupport implements Mode
 	 */
 	public static final String RELOAD = "reload";
 
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
-	 * Action函数,默认action函数，默认指向list函数.
+	 * Action函数, 默认的action函数, 默认调用list()函数.
 	 */
 	@Override
 	public String execute() throws Exception {
@@ -35,9 +35,8 @@ public abstract class CrudActionSupport<T> extends ActionSupport implements Mode
 	}
 
 	// CRUD函数 //
-
 	/**
-	 * Action函数,显示Entity列表.
+	 * Action函数, 显示Entity列表.
 	 * 建议return SUCCESS.
 	 */
 	public abstract String list() throws Exception;
@@ -55,7 +54,6 @@ public abstract class CrudActionSupport<T> extends ActionSupport implements Mode
 	public abstract String delete() throws Exception;
 
 	// Preparable函数 //
-
 	/**
 	 * 实现空的prepare()函数,屏蔽所有Action函数公共的二次绑定.
 	 */
