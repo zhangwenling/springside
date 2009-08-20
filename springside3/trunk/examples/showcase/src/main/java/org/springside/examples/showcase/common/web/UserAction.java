@@ -17,25 +17,31 @@ import org.springside.examples.showcase.common.service.UserManager;
  * 
  * @author calvin
  */
-@SuppressWarnings("serial")
 //因为没有按Convention Plugin默认的Pacakge命名规则,因此用annotation重新指定Namespace.
 @Namespace("/common")
 @InterceptorRefs( { @InterceptorRef("paramsPrepareParamsStack") })
 @Results( { @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
 public class UserAction extends CrudActionSupport<User> {
+
+	private static final long serialVersionUID = 4384919647659925184L;
+
 	@Autowired
 	private UserManager userManager;
-	// 基本属性  //
+
+	// 页面属性  //
 	private User entity;
 	private Long id;
 	private List<User> allUsers;
-
 	private Integer workingVersion;
 	private List<Long> checkedUserIds;
 
-	// 基本属性访问函数 //
+	// ModelDriven 与 Preparable函数 //
 	public User getModel() {
 		return entity;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override
@@ -45,22 +51,6 @@ public class UserAction extends CrudActionSupport<User> {
 		} else {
 			entity = new User();
 		}
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public void setCheckedUserIds(List<Long> checkedUserIds) {
-		this.checkedUserIds = checkedUserIds;
-	}
-
-	public void setWorkingVersion(Integer workingVersion) {
-		this.workingVersion = workingVersion;
-	}
-
-	public List<User> getAllUsers() {
-		return allUsers;
 	}
 
 	// CRUD Action 函数 //
@@ -92,9 +82,22 @@ public class UserAction extends CrudActionSupport<User> {
 		throw new UnsupportedOperationException("delete操作暂时未支持");
 	}
 
-	// 其他函数 //
+	// 其他Action函数 //
 	public String disableUsers() {
 		userManager.disableUsers(checkedUserIds);
 		return RELOAD;
+	}
+
+	// 页面属性访问函数 //
+	public List<User> getAllUsers() {
+		return allUsers;
+	}
+
+	public void setCheckedUserIds(List<Long> checkedUserIds) {
+		this.checkedUserIds = checkedUserIds;
+	}
+
+	public void setWorkingVersion(Integer workingVersion) {
+		this.workingVersion = workingVersion;
 	}
 }
