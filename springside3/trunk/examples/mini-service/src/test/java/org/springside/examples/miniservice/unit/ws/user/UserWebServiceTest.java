@@ -42,8 +42,8 @@ public class UserWebServiceTest extends Assert {
 	@Test
 	public void authUser() {
 		//准备数据,录制脚本
-		EasyMock.expect(userManager.authenticate("admin", "admin")).andReturn(true);
-		EasyMock.expect(userManager.authenticate("admin", "errorPasswd")).andReturn(false);
+		org.easymock.EasyMock.expect(userManager.authenticate("admin", "admin")).andReturn(true);
+		org.easymock.EasyMock.expect(userManager.authenticate("admin", "errorPasswd")).andReturn(false);
 		EasyMock.replay(userManager);
 
 		//执行输入正确的测试

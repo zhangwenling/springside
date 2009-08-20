@@ -34,7 +34,7 @@ public class UserManager {
 		userDao.initAllProperties(userList);
 		return userList;
 	}
-	
+
 	public void saveUser(User user) {
 		userDao.save(user);
 	}

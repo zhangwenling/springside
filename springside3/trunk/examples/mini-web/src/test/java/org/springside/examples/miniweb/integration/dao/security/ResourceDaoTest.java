@@ -7,7 +7,7 @@ import org.springside.examples.miniweb.data.SecurityData;
 import org.springside.examples.miniweb.entity.security.Resource;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
-public class ResourceDaoTest extends SpringTxTestCase  {
+public class ResourceDaoTest extends SpringTxTestCase {
 	@Autowired
 	private ResourceDao entityDao;
 
@@ -21,7 +21,7 @@ public class ResourceDaoTest extends SpringTxTestCase  {
 		//find entity.
 		Resource entityFromDB = entityDao.findUniqueBy("id", entity.getId());
 		assertReflectionEquals(entity, entityFromDB);
-				
+
 		//delete entity.
 		entityDao.delete(entity.getId());
 		flush();

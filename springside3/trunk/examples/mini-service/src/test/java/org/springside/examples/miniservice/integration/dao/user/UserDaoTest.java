@@ -33,7 +33,7 @@ public class UserDaoTest extends SpringTxTestCase {
 		//查找用户
 		User entityFromDB = entityDao.findUniqueBy("id", entity.getId());
 		assertReflectionEquals(entity, entityFromDB);
-				
+
 		//删除用户
 		entityDao.delete(entity.getId());
 		flush();

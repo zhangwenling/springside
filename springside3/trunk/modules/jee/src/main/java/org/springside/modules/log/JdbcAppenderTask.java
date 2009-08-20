@@ -198,10 +198,11 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	 * 可被子类重载的数据访问错误处理函数.
 	 */
 	protected void dataAccessExceptionHandle(DataAccessException e, List<LoggingEvent> errorEventBatch) {
-		if (e instanceof DataAccessResourceFailureException)
+		if (e instanceof DataAccessResourceFailureException) {
 			logger.error("database connection error", e);
-		else
+		} else {
 			logger.error("other database error", e);
+		}
 
 		for (LoggingEvent event : errorEventBatch) {
 			logger.error("event insert to database error, ignore it, " + Log4jUtils.convertEventToString(event), e);

@@ -59,12 +59,12 @@ public class SecurityManager {
 		}
 		userDao.delete(id);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public Page<User> searchUser(final Page<User> page, final List<PropertyFilter> filters) {
 		return userDao.findPage(page, filters);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public User findUserByLoginName(String loginName) {
 		return userDao.findUniqueBy("loginName", loginName);
@@ -85,7 +85,7 @@ public class SecurityManager {
 	public Role getRole(Long id) {
 		return roleDao.get(id);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<Role> getAllRole() {
 		return roleDao.getAll();
@@ -104,7 +104,7 @@ public class SecurityManager {
 	public List<Resource> getUrlResourceWithAuthorities() {
 		return resourceDao.getUrlResourceWithAuthorities();
 	}
-	
+
 	// Authority Manager //
 	@Transactional(readOnly = true)
 	public List<Authority> getAllAuthority() {

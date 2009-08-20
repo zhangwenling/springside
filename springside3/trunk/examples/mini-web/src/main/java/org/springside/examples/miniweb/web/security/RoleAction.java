@@ -41,6 +41,7 @@ public class RoleAction extends CrudActionSupport<Role> {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	@Override
 	protected void prepareModel() throws Exception {
 		if (id != null) {

@@ -1,6 +1,5 @@
 package org.springside.examples.miniservice.integration.dao.user;
 
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniservice.dao.RoleDao;
@@ -8,7 +7,7 @@ import org.springside.examples.miniservice.data.UserData;
 import org.springside.examples.miniservice.entity.user.Role;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
-public class RoleDaoTest extends SpringTxTestCase  {
+public class RoleDaoTest extends SpringTxTestCase {
 	@Autowired
 	private RoleDao entityDao;
 
@@ -22,7 +21,7 @@ public class RoleDaoTest extends SpringTxTestCase  {
 		//find entity.	
 		Role entityFromDB = entityDao.get(entity.getId());
 		assertReflectionEquals(entity, entityFromDB);
-				
+
 		//delete entity.
 		entityDao.delete(entity.getId());
 		flush();
@@ -30,4 +29,3 @@ public class RoleDaoTest extends SpringTxTestCase  {
 		assertNull(entity);
 	}
 }
-

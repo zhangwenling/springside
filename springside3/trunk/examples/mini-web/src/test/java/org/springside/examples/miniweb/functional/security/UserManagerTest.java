@@ -52,7 +52,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		waitPageLoad();
 
 		User user = SecurityData.getRandomUser();
-		
+
 		selenium.type("loginName", user.getLoginName());
 		selenium.type("name", user.getName());
 		selenium.type("password", user.getPassword());

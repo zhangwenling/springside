@@ -41,7 +41,7 @@ public class SecurityData {
 
 	public static Authority getRandomAuthority() {
 		String authName = "Authority" + random();
-		
+
 		Authority authority = new Authority();
 		authority.setName(authName);
 		authority.setDisplayName(authName);
@@ -57,7 +57,7 @@ public class SecurityData {
 
 		return resource;
 	}
-	
+
 	public static String random() {
 		return RandomStringUtils.randomAlphanumeric(5);
 	}

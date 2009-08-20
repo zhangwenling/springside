@@ -8,7 +8,7 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 
 @Repository
 public class ResourceDao extends HibernateDao<Resource, Long> {
-	
+
 	public static final String QUERY_BY_RESOURCETYPE_WITH_AUTHORITY = "from Resource r left join fetch r.authorities WHERE r.resourceType=? ORDER BY r.position ASC";
 
 	@SuppressWarnings("unchecked")

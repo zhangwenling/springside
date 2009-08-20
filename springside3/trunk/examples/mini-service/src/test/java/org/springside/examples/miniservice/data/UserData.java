@@ -36,7 +36,7 @@ public class UserData {
 
 		return role;
 	}
-	
+
 	public static String random() {
 		return RandomStringUtils.randomAlphanumeric(5);
 	}

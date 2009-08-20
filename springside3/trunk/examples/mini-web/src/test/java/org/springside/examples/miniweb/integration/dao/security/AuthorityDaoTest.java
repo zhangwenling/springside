@@ -7,7 +7,7 @@ import org.springside.examples.miniweb.data.SecurityData;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
-public class AuthorityDaoTest extends SpringTxTestCase  {
+public class AuthorityDaoTest extends SpringTxTestCase {
 	@Autowired
 	private AuthorityDao entityDao;
 
@@ -29,4 +29,3 @@ public class AuthorityDaoTest extends SpringTxTestCase  {
 		assertNull(entity);
 	}
 }
-

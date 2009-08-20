@@ -7,7 +7,7 @@ import org.springside.examples.miniweb.data.SecurityData;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
-public class RoleDaoTest extends SpringTxTestCase  {
+public class RoleDaoTest extends SpringTxTestCase {
 	@Autowired
 	private RoleDao entityDao;
 
@@ -17,11 +17,11 @@ public class RoleDaoTest extends SpringTxTestCase  {
 		Role entity = SecurityData.getRandomRole();
 		entityDao.save(entity);
 		flush();
-		
+
 		//find entity.
 		Role entityFromDB = entityDao.findUniqueBy("id", entity.getId());
 		assertReflectionEquals(entity, entityFromDB);
-		
+
 		//delete entity.
 		entityDao.delete(entity.getId());
 		flush();
@@ -29,4 +29,3 @@ public class RoleDaoTest extends SpringTxTestCase  {
 		assertNull(entity);
 	}
 }
-
