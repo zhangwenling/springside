@@ -7,7 +7,7 @@
 
 	<description>使用SpringSecurity的安全配置文件</description>
 
-	<!-- 此处采用原版的配置方式,数据库方式见mini-web. -->
+	<!-- 此处采用原版的配置方式, 数据库方式见mini-web. -->
 	<s:http auto-config="true">
 		<s:intercept-url pattern="/common/user!input*" access="ROLE_User" />
 		<s:form-login login-page="/security/login.action" default-target-url="/"
@@ -15,7 +15,7 @@
 		<s:logout logout-success-url="/" />
 		<s:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66" />
 		<s:concurrent-session-control max-sessions="1"
-			exception-if-maximum-exceeded="false" expired-url="/login.jsp?error=3" />
+			exception-if-maximum-exceeded="false" expired-url="/security/login.action?error=3" />
 	</s:http>
 
 	<!-- 认证配置 -->
@@ -32,7 +32,7 @@
 		<property name="captchaEngine">
 			<bean class="org.springside.modules.security.jcaptcha.GMailEngine" />
 		</property>
-	<!-- 
+		<!-- 
 		默认生成的图片180秒过期 , 可另行设置
 		<property name="minGuarantedStorageDelayInSeconds" value="180" />
 		-->

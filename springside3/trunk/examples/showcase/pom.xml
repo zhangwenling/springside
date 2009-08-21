@@ -316,16 +316,16 @@
 					<!-- include export tables -->
 					<tables>
 						<table>
-							<name>USERS</name>
+							<name>SS_USER</name>
 						</table>
 						<table>
-							<name>ROLES</name>
+							<name>SS_ROLE</name>
 						</table>
 						<table>
-							<name>USERS_ROLES</name>
+							<name>SS_USER_ROLE</name>
 						</table>
 						<table>
-							<name>POSTS</name>
+							<name>SS_POST</name>
 						</table>
 					</tables>
 				</configuration>

@@ -1,7 +1,6 @@
 package org.springside.examples.showcase.common.entity;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -105,12 +104,6 @@ public class User extends AuditableEntity {
 	@Transient
 	public String getRoleNames() {
 		return ReflectionUtils.fetchElementPropertyToString(roles, "name", ", ");
-	}
-
-	@SuppressWarnings("unchecked")
-	@Transient
-	public List<Long> getRoleIds() {
-		return ReflectionUtils.fetchElementPropertyToList(roles, "id");
 	}
 
 	@Override

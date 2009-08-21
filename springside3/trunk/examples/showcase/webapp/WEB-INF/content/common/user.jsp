@@ -25,7 +25,7 @@
 
 <div id="listContent">
 <form id="mainForm" action="user!disableUsers.action" method="post">
-<table>
+<table id="listTable">
 	<tr>
 		<th>&nbsp;</th>
 		<th><b>登录名</b></th>
