@@ -31,16 +31,11 @@
 
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
 	<repositories>
-		<!-- 
-		<repository>
-			<id>nexus</id>
-			<name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
- 		-->
+		<!--
+			<repository> <id>nexus</id> <name>local nexus server</name>
+			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
+			</repository>
+		-->
 		<repository>
 			<id>offical</id>
 			<name>Maven Offical Repository</name>
@@ -68,14 +63,9 @@
 
 	<pluginRepositories>
 		<!--
-		<pluginRepository>
-			<id>nexus</id>
-			<name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
+			<pluginRepository> <id>nexus</id> <name>local nexus server</name>
+			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
+			</pluginRepository>
 		-->
 	</pluginRepositories>
 
@@ -636,6 +626,13 @@
 					<version>2.0-alpha-4</version>
 				</plugin>
 
+				<!-- jetty插件 -->
+				<plugin>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>maven-jetty-plugin</artifactId>
+					<version>6.1.19</version>
+				</plugin>
+
 				<!-- cargo插件 -->
 				<plugin>
 					<groupId>org.codehaus.cargo</groupId>
@@ -703,7 +700,6 @@
 		</pluginManagement>
 	</build>
 
-
 	<profiles>
 		<!-- 不执行任何测试 -->
 		<profile>
@@ -741,7 +737,7 @@
 						<artifactId>dbunit-maven-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>test-compile</id>
+								<id>init-data</id>
 								<phase>test-compile</phase>
 								<goals>
 									<goal>operation</goal>
@@ -763,7 +759,7 @@
 						<artifactId>dbunit-maven-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>test-compile</id>
+								<id>init-data</id>
 								<phase>test-compile</phase>
 								<goals>
 									<goal>operation</goal>
@@ -777,7 +773,7 @@
 						<artifactId>selenium-maven-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>start</id>
+								<id>start-selenium</id>
 								<phase>pre-integration-test</phase>
 								<goals>
 									<goal>start-server</goal>
@@ -788,7 +784,7 @@
 							</execution>
 
 							<execution>
-								<id>stop</id>
+								<id>stop-selenium</id>
 								<phase>post-integration-test</phase>
 								<goals>
 									<goal>stop-server</goal>
@@ -798,15 +794,25 @@
 					</plugin>
 
 					<plugin>
-						<groupId>org.codehaus.cargo</groupId>
-						<artifactId>cargo-maven2-plugin</artifactId>
+						<groupId>org.mortbay.jetty</groupId>
+						<artifactId>maven-jetty-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>deploy</id>
+								<id>start-jetty</id>
 								<goals>
-									<goal>redeploy</goal>
+									<goal>deploy-war</goal>
 								</goals>
+								<configuration>
+									<daemon>true</daemon>
+								</configuration>
 								<phase>pre-integration-test</phase>
+							</execution>
+							<execution>
+								<id>stop-jetty</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>stop</goal>
+								</goals>
 							</execution>
 						</executions>
 					</plugin>

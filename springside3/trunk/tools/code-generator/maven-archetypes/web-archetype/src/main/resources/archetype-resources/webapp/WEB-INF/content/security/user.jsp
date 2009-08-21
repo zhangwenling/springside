@@ -37,7 +37,7 @@
 <input type="hidden" name="page.orderBy" id="orderBy" value="${symbol_dollar}{page.orderBy}"/>
 <input type="hidden" name="page.order" id="order" value="${symbol_dollar}{page.order}" />
 <div id="listContent">
-<table>
+<table id="listTable">
 	<tr>
 		<th><a href="javascript:sort('loginName','asc')"><b>登录名</b></a></th>
 		<th><a href="javascript:sort('name','asc')""><b>姓名</b></a></th>
