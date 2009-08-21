@@ -7,6 +7,8 @@ import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
 import org.springside.modules.test.groups.Groups;
 
 public class UserManagerTest extends BaseSeleniumTestCase {
+	
+	private static final String USER_LINK = "/mini-web/security/user.action";
 
 	/**
 	 * 用户增删改操作查测试.
@@ -19,12 +21,12 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	}
 
 	/**
-	 * 修改用户时的输入校验测试. 
+	 * 创建用户时的输入校验测试. 
 	 */
 	@Test
 	@Groups("extension")
 	public void validateUser() {
-		selenium.open("/mini-web/security/user.action");
+		selenium.open(USER_LINK);
 		selenium.click("link=增加新用户");
 		waitPageLoad();
 
@@ -47,11 +49,12 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	 * 创建用户,并返回创建的用户名.
 	 */
 	private String createUser() {
-		selenium.open("/mini-web/security/user.action");
+		selenium.open(USER_LINK);
 		selenium.click("link=增加新用户");
 		waitPageLoad();
 
 		User user = SecurityData.getRandomUser();
+		String loginName = user.getLoginName();
 
 		selenium.type("loginName", user.getLoginName());
 		selenium.type("name", user.getName());
@@ -62,7 +65,11 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("保存用户成功"));
-		return user.getLoginName();
+		
+		findUser(loginName);
+		assertEquals(loginName, selenium.getTable("listTable.1.1"));
+		assertEquals("用户", selenium.getTable("listTable.1.3"));
+		return loginName;
 	}
 
 	/**
@@ -71,26 +78,30 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	private void editUser(String loginName) {
 		String newUserName = "newUserName";
 
-		selenium.open("/mini-web/security/user.action");
+		selenium.open(USER_LINK);
 		findUser(loginName);
 
 		selenium.click("link=修改");
 		waitPageLoad();
 
 		selenium.type("name", newUserName);
+		//取消用户角色,增加管理员角色
+		selenium.click("checkedRoleIds-1");
+		selenium.click("checkedRoleIds-2");
 		selenium.click("//input[@value='提交']");
 		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("保存用户成功"));
 		findUser(loginName);
-		assertEquals(newUserName, selenium.getTable("//div[@id='listContent']/table.1.1"));
+		assertEquals(newUserName, selenium.getTable("listTable.1.1"));
+		assertEquals("管理员", selenium.getTable("listTable.1.3"));
 	}
 
 	/**
 	 * 根据用户名删除对象.
 	 */
 	private void deleteUser(String loginName) {
-		selenium.open("/mini-web/security/user.action");
+		selenium.open(USER_LINK);
 		findUser(loginName);
 
 		selenium.click("link=删除");
