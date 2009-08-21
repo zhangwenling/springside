@@ -14,8 +14,6 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.apache.log4j.spi.LoggingEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
@@ -33,8 +31,6 @@ import org.springside.modules.queue.QueueConsumerTask;
  * @author calvin
  */
 public class JdbcAppenderTask extends QueueConsumerTask {
-
-	protected Logger logger = LoggerFactory.getLogger(JdbcAppenderTask.class);
 
 	protected boolean blockingFetch = true;
 	protected int batchSize = 10;

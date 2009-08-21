@@ -42,12 +42,13 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 @ManagedResource(objectName = "Custom:type=QueueManagement,name=queueManagement", description = "Queue Managed Bean")
 public class QueueManager {
 
-	protected static Logger logger = LoggerFactory.getLogger(QueueManager.class);
-
 	protected static Map<String, BlockingQueue> queueMap = new ConcurrentHashMap<String, BlockingQueue>();//消息队列
+
 	protected static List<QueueConsumerTask> taskList = new ArrayList();
 
 	protected static boolean persistence = true;
+
+	private static Logger logger = LoggerFactory.getLogger(QueueManager.class);
 
 	/**
 	 * 根据queueName获得消息队列的静态函数.

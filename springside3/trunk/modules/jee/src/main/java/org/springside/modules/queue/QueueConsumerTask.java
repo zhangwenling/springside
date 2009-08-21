@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("unchecked")
 public abstract class QueueConsumerTask implements Runnable {
 
-	protected Logger logger = LoggerFactory.getLogger(QueueConsumerTask.class);
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	protected String queueName;
 	protected BlockingQueue queue;
