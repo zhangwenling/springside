@@ -85,10 +85,10 @@ public class MimeMailService {
 			helper.setText(content, true);
 		} catch (IOException e) {
 			logger.error("构造邮件失败,FreeMarker模板不存在", e);
-			throw new MessagingException("FreeMarker模板不存在");
+			throw new MessagingException("FreeMarker模板不存在", e);
 		} catch (TemplateException e) {
 			logger.error("构造邮件失败,FreeMarker处理失败", e);
-			throw new MessagingException("FreeMarker处理失败");
+			throw new MessagingException("FreeMarker处理失败", e);
 		}
 	}
 
@@ -102,7 +102,7 @@ public class MimeMailService {
 			helper.addAttachment("mailAttachment.txt", attachment.getFile());
 		} catch (IOException e) {
 			logger.error("构造邮件失败,附件文件不存在", e);
-			throw new MessagingException("附件文件不存在");
+			throw new MessagingException("附件文件不存在", e);
 		}
 	}
 }

@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 /**
@@ -27,6 +29,7 @@ public class GroupsUtils {
 	public static final String PROPERTY_FILE = "application.test.properties";
 
 	private static List<String> groups;
+	private static Logger logger = LoggerFactory.getLogger(GroupsUtils.class);
 
 	public static boolean isTestMethodInGroups(Method testMethod) {
 
@@ -100,7 +103,7 @@ public class GroupsUtils {
 			p = PropertiesLoaderUtils.loadAllProperties(PROPERTY_FILE);
 			return p.getProperty(PROPERTY_NAME);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.warn(e.getMessage(), e);
 		}
 		return null;
 	}

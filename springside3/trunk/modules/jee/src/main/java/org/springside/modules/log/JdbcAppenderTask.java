@@ -175,7 +175,7 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	 * 阻塞读取策略的退出清理函数.
 	 */
 	protected void blockingFetchClean() {
-		if (eventBuffer.size() > 0) {
+		if (!eventBuffer.isEmpty()) {
 			processMessageList(eventBuffer);
 		}
 		logger.debug("cleaned task {}", this);
