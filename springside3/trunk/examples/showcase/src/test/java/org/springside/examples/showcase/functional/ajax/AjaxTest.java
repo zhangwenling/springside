@@ -3,7 +3,12 @@ package org.springside.examples.showcase.functional.ajax;
 import org.junit.Test;
 import org.springside.examples.showcase.functional.BaseSeleniumTestCase;
 
+/**
+ * 
+ * 演示selenium.waitForConditon()测试Ajax.
+ */
 public class AjaxTest extends BaseSeleniumTestCase {
+
 	@Test
 	public void mashup() {
 		clickMenu("Ajax演示");
