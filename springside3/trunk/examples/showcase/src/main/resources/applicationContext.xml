@@ -71,10 +71,10 @@
 	</bean>
 
 	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
 	<!-- 使用annotation定义AOP -->
-	<aop:aspectj-autoproxy />
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	
 	<!-- perf4j的方面定义 -->
 	<bean id="timingAspect" class="org.perf4j.log4j.aop.TimingAspect" />

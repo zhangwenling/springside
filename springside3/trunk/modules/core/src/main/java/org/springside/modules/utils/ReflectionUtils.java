@@ -183,6 +183,7 @@ public class ReflectionUtils {
 			logger.warn(clazz.getSimpleName() + " not set the actual class on superclass generic parameter");
 			return Object.class;
 		}
+
 		return (Class) params[index];
 	}
 

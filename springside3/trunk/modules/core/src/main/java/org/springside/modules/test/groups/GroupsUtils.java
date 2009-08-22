@@ -24,41 +24,54 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
  * @author calvin
  */
 public class GroupsUtils {
-
+	/**
+	 * 在Properties文件或系统运行参数-D中定义执行分组的变量名称.
+	 */
 	public static final String PROPERTY_NAME = "test.groups";
+
+	/**
+	 * 定义执行分组的变量的属性文件名.
+	 */
 	public static final String PROPERTY_FILE = "application.test.properties";
 
-	private static List<String> groups;
 	private static Logger logger = LoggerFactory.getLogger(GroupsUtils.class);
 
-	public static boolean isTestMethodInGroups(Method testMethod) {
+	private static List<String> groups;
 
+	/**
+	 * 判断测试方是否符合分组要求.
+	 */
+	public static boolean isTestMethodInGroups(Method testMethod) {
+		//初始化Groups定义
 		if (groups == null) {
 			initGroups();
 		}
-
+		//如果定义全部执行则返回true
 		if (groups.contains(Groups.ALL))
 			return true;
 
+		//取得方法上的Groups annotation, 如果无Groups注解或注解符合分组要求则返回true.
 		Groups annotationGroup = testMethod.getAnnotation(Groups.class);
-
 		if ((annotationGroup == null) || groups.contains(annotationGroup.value()))
 			return true;
 
 		return false;
 	}
 
+	/**
+	 * 判断测试类是否符合分组要求.
+	 */
 	public static boolean isTestClassInGroups(Class<?> testClass) {
-
+		//初始化Groups定义
 		if (groups == null) {
 			initGroups();
 		}
-
+		//如果定义全部执行则返回true
 		if (groups.contains(Groups.ALL))
 			return true;
 
+		//取得类上的Groups annotation, 如果无Groups注解或注解符合分组要求则返回true.
 		Groups annotationGroup = testClass.getAnnotation(Groups.class);
-
 		if ((annotationGroup == null) || groups.contains(annotationGroup.value()))
 			return true;
 
@@ -67,6 +80,7 @@ public class GroupsUtils {
 
 	/**
 	 * 从系统变量或Properties文件初始化运行的groups.
+	 * 如果均无定义则返回ALL.
 	 */
 	protected static void initGroups() {
 
@@ -85,7 +99,7 @@ public class GroupsUtils {
 	}
 
 	/**
-	 * 从环境变量读取test.groups定义, 多个group可用逗号分隔.
+	 * 从环境变量读取test.groups定义, 多个group用逗号分隔.
 	 * eg.
 	 * java -Dtest.groups=basic,extension
 	 */
@@ -94,8 +108,7 @@ public class GroupsUtils {
 	}
 
 	/**
-	 * 从Classpath中的application.test.properties文件读取test.groups定义, 多个group可用逗号分隔.
-	 * @return
+	 * 从Classpath中的application.test.properties文件读取test.groups定义, 多个group用逗号分隔.
 	 */
 	protected static String getGroupsFromPropertyFile() {
 		Properties p;

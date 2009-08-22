@@ -23,8 +23,14 @@ import java.lang.annotation.Target;
 @Target( { ElementType.METHOD, ElementType.TYPE })
 @Documented
 public @interface Groups {
-
+	/**
+	 * 执行所有组别的测试.
+	 */
 	public static final String ALL = "all";
 
+	/**
+	 * 组别定义,默认为ALL.
+	 * @return
+	 */
 	public String value() default ALL;
 }

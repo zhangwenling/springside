@@ -32,13 +32,14 @@ import org.springside.modules.queue.QueueConsumerTask;
  */
 public class JdbcAppenderTask extends QueueConsumerTask {
 
+	protected SimpleJdbcTemplate jdbcTemplate;
+	protected String sql;
+
 	protected boolean blockingFetch = true;
 	protected int batchSize = 10;
 	protected int period = 1000;
-	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
 
-	protected SimpleJdbcTemplate jdbcTemplate;
-	protected String sql;
+	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
 
 	@Required
 	public void setDataSource(DataSource dataSource) {
@@ -55,15 +56,14 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	 * 循环读取消息的策略,为true时采用单条阻塞读取策略,false时采用定期批量读取策略.
-	 * @param blockingFetch
+	 * 循环读取消息的策略,为true时采用阻塞读取单条消息策略,false时采用定期批量读取消息策略.
 	 */
 	public void setBlockingFetch(boolean blockingFetch) {
 		this.blockingFetch = blockingFetch;
 	}
 
 	/**
-	 * 批量定时读取的队列大小, 默认为10.
+	 * 批量定时读取消息的队列大小, 默认为10.
 	 */
 	public void setBatchSize(int batchSize) {
 		this.batchSize = batchSize;

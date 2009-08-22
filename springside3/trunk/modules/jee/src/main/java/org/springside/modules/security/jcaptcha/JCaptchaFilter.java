@@ -72,6 +72,9 @@ public class JCaptchaFilter implements Filter {
 
 	private CaptchaService captchaService;
 
+	/**
+	 * Filter回调初始化函数.
+	 */
 	public void init(final FilterConfig fConfig) throws ServletException {
 		initParameters(fConfig);
 		initCaptchaService(fConfig);
@@ -80,7 +83,7 @@ public class JCaptchaFilter implements Filter {
 	/**
 	 * 初始化web.xml中定义的filter init-param.
 	 */
-	private void initParameters(final FilterConfig fConfig) {
+	protected void initParameters(final FilterConfig fConfig) {
 		if (StringUtils.isBlank(fConfig.getInitParameter(FAILURE_URL_PARAM)))
 			throw new IllegalArgumentException("CaptchaFilter缺少failureUrl参数");
 
@@ -106,14 +109,20 @@ public class JCaptchaFilter implements Filter {
 	/**
 	 * 从ApplicatonContext获取CaptchaService实例.
 	 */
-	private void initCaptchaService(final FilterConfig fConfig) {
+	protected void initCaptchaService(final FilterConfig fConfig) {
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(fConfig.getServletContext());
 		captchaService = (CaptchaService) context.getBean(captchaServiceId);
 	}
 
+	/**
+	 * Filter回调退出函数.
+	 */
 	public void destroy() {
 	}
 
+	/**
+	 * Filter回调请求处理函数.
+	 */
 	public void doFilter(final ServletRequest theRequest, final ServletResponse theResponse, final FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) theRequest;
@@ -136,7 +145,7 @@ public class JCaptchaFilter implements Filter {
 	/**
 	 * 生成验证码图片.
 	 */
-	private void genernateCaptchaImage(final HttpServletRequest request, final HttpServletResponse response)
+	protected void genernateCaptchaImage(final HttpServletRequest request, final HttpServletResponse response)
 			throws IOException {
 
 		response.setHeader("Cache-Control", "no-store");
@@ -160,7 +169,7 @@ public class JCaptchaFilter implements Filter {
 	/**
 	 * 验证验证码.
 	 */
-	private boolean validateCaptchaChallenge(final HttpServletRequest request) {
+	protected boolean validateCaptchaChallenge(final HttpServletRequest request) {
 		try {
 			String captchaID = request.getSession().getId();
 			String challengeResponse = request.getParameter(captchaParamterName);
@@ -178,7 +187,7 @@ public class JCaptchaFilter implements Filter {
 	/**
 	 * 跳转到失败页面.
 	 * 
-	 * 可在子类进行扩展，比如在session中放入SpringSecurity的Exception.
+	 * 可在子类进行扩展, 比如在session中放入SpringSecurity的Exception.
 	 */
 	protected void redirectFailureUrl(final HttpServletRequest request, final HttpServletResponse response)
 			throws IOException {

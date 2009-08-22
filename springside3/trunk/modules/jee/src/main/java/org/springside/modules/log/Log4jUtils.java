@@ -15,7 +15,7 @@ import org.apache.log4j.PatternLayout;
 import org.apache.log4j.spi.LoggingEvent;
 
 /**
- * Log4j 工具类, 转换Logging Event到字符串或Map.
+ * Log4j工具类, 转换Logging Event到字符串或Map.
  * 
  * @author calvin
  */
@@ -29,14 +29,23 @@ public class Log4jUtils {
 
 	public static final PatternLayout DEFAULT_PATTERN_LAYOUT = new PatternLayout("%d [%t] %-5p %c - %m");
 
+	/**
+	 * 使用默认的pattern转换事件到日志字符串.
+	 */
 	public static String convertEventToString(LoggingEvent event) {
 		return DEFAULT_PATTERN_LAYOUT.format(event);
 	}
 
-	public static String convertEventToString(LoggingEvent event, String pattern) {
-		return new PatternLayout(pattern).format(event);
+	/**
+	 * 根据layoutPattern转换事件到日志字符串.
+	 */
+	public static String convertEventToString(LoggingEvent event, String layoutPattern) {
+		return new PatternLayout(layoutPattern).format(event);
 	}
 
+	/**
+	 * 将事件转换到Map, Map中的Key参见本类中定义的常量.
+	 */
 	public static Map<String, Object> convertEventToMap(LoggingEvent event) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(MESSAGE, event.getMessage());

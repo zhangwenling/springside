@@ -24,13 +24,24 @@ import org.springside.modules.queue.QueueManager;
  * @author calvin
  */
 public class AsyncAppender extends org.apache.log4j.AppenderSkeleton {
+
 	private static Logger logger = LoggerFactory.getLogger(AsyncAppender.class);
 
 	protected String queueName;
 
+	protected BlockingQueue<LoggingEvent> queue;
+
+	/**
+	 * AppenderSkeleton回调函数, 事件到达时将时间放入Queue.
+	 */
 	@Override
 	public void append(LoggingEvent event) {
-		boolean sucess = getQueue().offer(event);
+		if (queue == null) {
+			QueueManager.getQueue(queueName);
+		}
+
+		boolean sucess = queue.offer(event);
+
 		if (sucess) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("put event ,{}", Log4jUtils.convertEventToString(event));
@@ -40,22 +51,29 @@ public class AsyncAppender extends org.apache.log4j.AppenderSkeleton {
 		}
 	}
 
+	/**
+	 * AppenderSkeleton回调函数,关闭Logger时的清理动作.
+	 */
 	public void close() {
 	}
 
+	/**
+	 * AppenderSkeleton回调函数, 设置是否需要定义Layout.
+	 */
 	public boolean requiresLayout() {
 		return false;
 	}
 
-	@SuppressWarnings("unchecked")
-	protected BlockingQueue<LoggingEvent> getQueue() {
-		return QueueManager.getQueue(queueName);
-	}
-
+	/**
+	 * Log4j根据getter/setter从log4j.properties中注入同名参数.
+	 */
 	public String getQueueName() {
 		return queueName;
 	}
 
+	/**
+	 * @see #getQueueName()
+	 */
 	public void setQueueName(String queueName) {
 		this.queueName = queueName;
 	}

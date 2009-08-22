@@ -124,7 +124,7 @@ public class User {
 		public Map<String, String> unmarshal(MapEntry[] array) throws Exception {
 			Map<String, String> map = new HashMap<String, String>();
 			for (MapEntry e : array) {
-				map.put(e.getKey(), e.getValue());
+				map.put(e.key, e.value);
 			}
 			return map;
 		}
@@ -135,9 +135,9 @@ public class User {
 	 */
 	public static class MapEntry {
 		@XmlAttribute
-		private String key;
+		String key;
 
-		private String value;
+		String value;
 
 		public MapEntry() {
 		}
@@ -145,22 +145,6 @@ public class User {
 		public MapEntry(Map.Entry<String, String> e) {
 			key = e.getKey();
 			value = e.getValue();
-		}
-
-		public String getKey() {
-			return key;
-		}
-
-		public void setKey(String key) {
-			this.key = key;
-		}
-
-		public String getValue() {
-			return value;
-		}
-
-		public void setValue(String value) {
-			this.value = value;
 		}
 	}
 }

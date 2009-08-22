@@ -14,7 +14,8 @@ import org.springframework.jmx.export.annotation.ManagedResource;
  */
 @ManagedResource(objectName = "Custom:type=Log4jManagement,name=log4jManagement", description = "Log4j Managed Bean")
 public class Log4jMBean {
-	@ManagedAttribute(description = "get the logging level to the root logger")
+
+	@ManagedAttribute(description = "get the logging level of the root logger")
 	public String getRootLogLevel() {
 		Logger root = Logger.getRootLogger();
 		return root.getLevel().toString();
@@ -27,14 +28,14 @@ public class Log4jMBean {
 		root.setLevel(level);
 	}
 
-	@ManagedOperation(description = "get the logging level to the root logger")
+	@ManagedOperation(description = "get the logging level of the logger")
 	public String getLogLevel(
 			@ManagedOperationParameter(name = "loggerName", description = "logger name") String loggerName) {
 		Logger logger = Logger.getLogger(loggerName);
 		return logger.getLevel().toString();
 	}
 
-	@ManagedOperation(description = "set the new logging level to logger")
+	@ManagedOperation(description = "set the new logging level to the logger")
 	public void setLogLevel(
 			@ManagedOperationParameter(name = "loggerName", description = "logger name") String loggerName,
 			@ManagedOperationParameter(name = "newlevel", description = "new level") String newLevel) {

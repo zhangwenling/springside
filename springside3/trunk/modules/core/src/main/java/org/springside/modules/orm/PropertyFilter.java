@@ -39,6 +39,11 @@ public class PropertyFilter {
 	public PropertyFilter() {
 	}
 
+	/**
+	 * @param filterName 比较属性字符串,含待比较的属性列表及比较类型. 
+	 *                   eg LIKE_NAME_OR_LOGIN_NAME
+	 * @param value 待比较的值.
+	 */
 	public PropertyFilter(final String filterName, final Object value) {
 
 		String matchTypeCode = StringUtils.substringBefore(filterName, "_");
@@ -55,6 +60,27 @@ public class PropertyFilter {
 	}
 
 	/**
+	 * 获取比较属性名称列表.
+	 */
+	public String[] getPropertyNames() {
+		return propertyNames;
+	}
+
+	/**
+	 * 获取比较值.
+	 */
+	public Object getValue() {
+		return value;
+	}
+
+	/**
+	 * 获取比较类型.
+	 */
+	public MatchType getMatchType() {
+		return matchType;
+	}
+
+	/**
 	 * 是否有多个属性.
 	 */
 	public boolean isMultiProperty() {
@@ -68,20 +94,5 @@ public class PropertyFilter {
 		if (propertyNames.length > 1)
 			throw new IllegalArgumentException("There are not only one property");
 		return propertyNames[0];
-	}
-
-	/**
-	 * 获取属性名称列表.
-	 */
-	public String[] getPropertyNames() {
-		return propertyNames;
-	}
-
-	public Object getValue() {
-		return value;
-	}
-
-	public MatchType getMatchType() {
-		return matchType;
 	}
 }
