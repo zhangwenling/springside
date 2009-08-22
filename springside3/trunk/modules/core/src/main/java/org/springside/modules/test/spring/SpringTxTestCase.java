@@ -44,6 +44,23 @@ public class SpringTxTestCase extends AbstractTransactionalJUnit4SpringContextTe
 		((SessionFactory) applicationContext.getBean(sessionFactoryName)).getCurrentSession().flush();
 	}
 
+	/**
+	 * 将对象从session中消除, 用于测试初对象的始化情况.
+	 * 
+	 * sessionFactory名默认为"sessionFactory".
+	 */
+	protected void evict(Object entity) {
+		evict(entity, "sessionFactory");
+	}
+
+	/**
+	 * 将对象从session中消除, 用于测试初对象的始化情况.
+	 * 
+	 */
+	protected void evict(final Object entity, final String sessionFactoryName) {
+		((SessionFactory) applicationContext.getBean(sessionFactoryName)).getCurrentSession().evict(entity);
+	}
+
 	// Assert 函数 //
 
 	/**

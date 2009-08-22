@@ -24,10 +24,11 @@ public abstract class WebServiceSupport {
 		this.dozer = dozer;
 	}
 
-	//Spring在所有属性注入后自动执行的函数.
+	/**
+	 * 保证dozer初始化, 如果Spring未注入dozer,创建无配置文件的dozer单例.
+	 */
 	@PostConstruct
 	public void initDozer() {
-		// 如果Spring未注入dozer,获取无配置文件的dozer单例.
 		if (dozer == null) {
 			logger.info("ApplicationContext中不存在dozer mapper,使用无配置文件的默认dozer.");
 			dozer = DozerMapperSingleton.getInstance();
