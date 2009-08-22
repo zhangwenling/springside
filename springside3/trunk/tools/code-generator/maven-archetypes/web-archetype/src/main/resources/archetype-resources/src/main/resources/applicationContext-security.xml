@@ -25,7 +25,7 @@
 	</s:authentication-provider>
 
 	<!-- 项目实现的用户查询服务 -->
-	<bean id="userDetailsService" class="${package}.service.security.UserDetailServiceImpl" />
+	<bean id="userDetailsService" class="${package}.service.security.UserDetailsServiceImpl" />
 
 	<!-- 重新定义的FilterSecurityInterceptor,使用databaseDefinitionSource提供的url-授权关系定义 -->
 	<bean id="filterSecurityInterceptor" class="org.springframework.security.intercept.web.FilterSecurityInterceptor">

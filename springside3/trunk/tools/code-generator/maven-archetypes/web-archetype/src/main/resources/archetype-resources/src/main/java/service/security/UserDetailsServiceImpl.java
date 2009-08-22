@@ -24,7 +24,7 @@ import ${package}.entity.security.User;
  * @author calvin
  */
 @Transactional(readOnly = true)
-public class UserDetailServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	private SecurityManager securityManager;

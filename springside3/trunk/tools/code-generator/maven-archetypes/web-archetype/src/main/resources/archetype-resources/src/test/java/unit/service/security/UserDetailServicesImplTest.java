@@ -16,7 +16,7 @@ import ${package}.entity.security.Authority;
 import ${package}.entity.security.Role;
 import ${package}.entity.security.User;
 import ${package}.service.security.SecurityManager;
-import ${package}.service.security.UserDetailServiceImpl;
+import ${package}.service.security.UserDetailsServiceImpl;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
@@ -26,8 +26,9 @@ import org.springside.modules.utils.ReflectionUtils;
  * 
  * @author calvin
  */
-public class UserDetailServiceImplTest extends Assert {
-	private UserDetailServiceImpl userDetailService = new UserDetailServiceImpl();
+public class UserDetailServicesImplTest extends Assert {
+	
+	private UserDetailsServiceImpl userDetailService = new UserDetailsServiceImpl();
 	private SecurityManager securityManager = null;
 
 	@Before

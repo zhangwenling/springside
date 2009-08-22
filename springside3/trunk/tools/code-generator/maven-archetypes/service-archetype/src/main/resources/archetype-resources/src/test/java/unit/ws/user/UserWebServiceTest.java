@@ -40,7 +40,7 @@ public class UserWebServiceTest extends Assert {
 
 	/**
 	 * 用户认证测试.
-	 * 分别测试正确用户名与正确,错误密码两种情况.
+	 * 分别测试正确用户名与正确,错误密码,无密码三种情况.
 	 */
 	@Test
 	public void authUser() {
@@ -56,5 +56,8 @@ public class UserWebServiceTest extends Assert {
 		//执行输入错误的测试
 		result = userWebService.authUser("admin", "errorPasswd");
 		assertEquals(WSResult.AUTH_ERROR, result.getCode());
+		
+		result = userWebService.authUser("admin", "");
+		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
 	}
 }

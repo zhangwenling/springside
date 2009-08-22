@@ -256,48 +256,7 @@
 	</build>
 
 	<profiles>
-		<profile>
-			<id>initdb</id>
-			<build>
-				<plugins>
-					<!-- sql 插件 -->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>sql-maven-plugin</artifactId>
-
-						<executions>
-							<execution>
-								<id>create database</id>
-								<phase>initialize</phase>
-								<goals>
-									<goal>execute</goal>
-								</goals>
-								<configuration>
-									<srcFiles>
-										<srcFile>${dbunit.schema.file}</srcFile>
-										<!-- <srcFile>src/main/sql/derby/init-data.sql</srcFile> -->
-									</srcFiles>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>dbunit-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>init data</id>
-								<phase>initialize</phase>
-								<goals>
-									<goal>operation</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
+		<!-- 执行soap-ui测试的profile -->
 		<profile>
 			<id>soapui</id>
 			<pluginRepositories>
@@ -317,6 +276,7 @@
 
 			<build>
 				<plugins>
+					<!-- dbunit插件初始化测试数据 -->
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>dbunit-maven-plugin</artifactId>
@@ -330,7 +290,8 @@
 							</execution>
 						</executions>
 					</plugin>
-
+					
+					<!-- jetty插件启动应用 -->
 					<plugin>
 						<groupId>org.mortbay.jetty</groupId>
 						<artifactId>maven-jetty-plugin</artifactId>
@@ -354,11 +315,12 @@
 							</execution>
 						</executions>
 					</plugin>
-
+					
+					<!-- soapui插件执行测试 -->
 					<plugin>
 						<groupId>eviware</groupId>
 						<artifactId>maven-soapui-plugin</artifactId>
-						<version>2.5.1</version>
+						<version>3.0</version>
 						<configuration>
 							<projectFile>src/test/soapui/${artifactId}-soapui-project.xml</projectFile>
 							<host>localhost:8080</host>

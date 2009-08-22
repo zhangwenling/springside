@@ -10,8 +10,14 @@ import ${package}.service.security.SecurityManager;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 public class SecurityManagerTest extends SpringTxTestCase {
+	
 	@Autowired
-	private SecurityManager securityManager = new SecurityManager();
+	private SecurityManager securityManager;
+
+	@Test
+	public void deleteUser() {
+		securityManager.deleteUser(2L);
+	}
 
 	@Test(expected = ServiceException.class)
 	public void deleteAdmin() {

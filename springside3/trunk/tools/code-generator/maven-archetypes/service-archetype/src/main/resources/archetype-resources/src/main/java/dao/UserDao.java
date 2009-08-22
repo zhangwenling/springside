@@ -11,7 +11,7 @@ import ${package}.entity.user.User;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
 /**
- * 用户的泛型DAO.
+ * 用户对象的泛型DAO.
  * 
  * @author calvin
  */

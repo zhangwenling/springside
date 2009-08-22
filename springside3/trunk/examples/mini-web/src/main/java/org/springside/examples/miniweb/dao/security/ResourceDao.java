@@ -2,6 +2,7 @@ package org.springside.examples.miniweb.dao.security;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import org.springside.examples.miniweb.entity.security.Resource;
 import org.springside.modules.orm.hibernate.HibernateDao;
@@ -18,6 +19,7 @@ public class ResourceDao extends HibernateDao<Resource, Long> {
 
 	@SuppressWarnings("unchecked")
 	public List<Resource> getUrlResourceWithAuthorities() {
-		return distinct(createQuery(QUERY_BY_RESOURCETYPE_WITH_AUTHORITY, Resource.URL_TYPE)).list();
+		Query query = createQuery(QUERY_BY_RESOURCETYPE_WITH_AUTHORITY, Resource.URL_TYPE);
+		return distinct(query).list();
 	}
 }

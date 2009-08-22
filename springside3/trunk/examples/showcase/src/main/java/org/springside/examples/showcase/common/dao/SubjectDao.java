@@ -1,6 +1,7 @@
 package org.springside.examples.showcase.common.dao;
 
 import org.hibernate.Hibernate;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import org.springside.examples.showcase.common.entity.Subject;
 import org.springside.modules.orm.hibernate.HibernateDao;
@@ -27,7 +28,8 @@ public class SubjectDao extends HibernateDao<Subject, Long> {
 	 * 获取帖子内容及回复.
 	 */
 	public Subject getDetailWithReply(Long id) {
-		return (Subject) distinct(createQuery(QUERY_WITH_DETAIL_AND_REPLY, id)).uniqueResult();
+		Query query = createQuery(QUERY_WITH_DETAIL_AND_REPLY, id);
+		return (Subject) distinct(query).uniqueResult();
 	}
 
 	/**

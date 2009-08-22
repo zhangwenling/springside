@@ -3,8 +3,11 @@
 #set( $symbol_escape = '\' )
 package ${package}.integration.service.user;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import ${package}.entity.user.User;
 import ${package}.service.user.UserManager;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
@@ -14,7 +17,23 @@ public class UserManagerTest extends SpringTxTestCase {
 	private UserManager userManager;
 
 	/**
+	 * 用户获取测试.
+	 * 
+	 * 将用户从session中断开,特别测试用户及其关联角色的初始化情况.
+	 */
+	@Test
+	public void getAllUser() {
+		List<User> userList = userManager.getAllUser();
+		assertEquals(6, userList.size());
+
+		User user = userList.get(0);
+		evict(user);
+		assertTrue(user.getRoles().size() > 0);
+	}
+
+	/**
 	 * 用户认证测试.
+	 * 
 	 * 分别测试正确的用户与正确,空,错误的密码三种情况.
 	 */
 	@Test

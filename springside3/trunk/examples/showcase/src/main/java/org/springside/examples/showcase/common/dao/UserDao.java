@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.orm.hibernate.HibernateDao;
@@ -17,7 +19,7 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 @Repository
 public class UserDao extends HibernateDao<User, Long> {
 
-	public static final String QUERY_WITH_ROLE = "from User u left join fetch u.roles";
+	public static final String QUERY_WITH_ROLE = "from User u left join fetch u.roles order by u.id";
 	public static final String COUNT_USERS = "select count(u) from User u";
 	public static final String DISABLE_USERS = "update User u set u.status='disabled' where id in(:ids)";
 
@@ -46,7 +48,8 @@ public class UserDao extends HibernateDao<User, Long> {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUserWithRoleByDistinctHql() {
-		return distinct(createQuery(QUERY_WITH_ROLE)).list();
+		Query query = createQuery(QUERY_WITH_ROLE);
+		return distinct(query).list();
 	}
 
 	/**
@@ -61,6 +64,7 @@ public class UserDao extends HibernateDao<User, Long> {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUserWithRolesByDistinctCriteria() {
-		return distinct(createCriteria().setFetchMode("roles", FetchMode.JOIN)).list();
+		Criteria criteria = createCriteria().setFetchMode("roles", FetchMode.JOIN);
+		return distinct(criteria).list();
 	}
 }

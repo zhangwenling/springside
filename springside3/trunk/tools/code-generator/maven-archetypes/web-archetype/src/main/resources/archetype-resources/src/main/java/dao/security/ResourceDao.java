@@ -5,10 +5,16 @@ package ${package}.dao.security;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import ${package}.entity.security.Resource;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
+/**
+ * 受保护资源对象的泛型DAO.
+ * 
+ * @author calvin
+ */
 @Repository
 public class ResourceDao extends HibernateDao<Resource, Long> {
 
@@ -16,6 +22,7 @@ public class ResourceDao extends HibernateDao<Resource, Long> {
 
 	@SuppressWarnings("unchecked")
 	public List<Resource> getUrlResourceWithAuthorities() {
-		return distinct(createQuery(QUERY_BY_RESOURCETYPE_WITH_AUTHORITY, Resource.URL_TYPE)).list();
+		Query query = createQuery(QUERY_BY_RESOURCETYPE_WITH_AUTHORITY, Resource.URL_TYPE);
+		return distinct(query).list();
 	}
 }

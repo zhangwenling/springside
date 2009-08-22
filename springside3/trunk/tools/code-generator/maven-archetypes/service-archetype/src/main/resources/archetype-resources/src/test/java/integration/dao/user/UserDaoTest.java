@@ -65,7 +65,7 @@ public class UserDaoTest extends SpringTxTestCase {
 	}
 
 	@Test(expected = org.hibernate.exception.ConstraintViolationException.class)
-	public void savenNotUniqueUser() {
+	public void saveNotUniqueUser() {
 		User user = UserData.getRandomUser();
 		user.setLoginName("admin");
 
