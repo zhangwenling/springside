@@ -39,11 +39,6 @@ public class PropertyFilter {
 	public PropertyFilter() {
 	}
 
-	/**
-	 * 
-	 * @param filterName EQ_S_NAME
-	 * @param value
-	 */
 	public PropertyFilter(final String filterName, final Object value) {
 
 		String matchTypeCode = StringUtils.substringBefore(filterName, "_");
@@ -60,7 +55,7 @@ public class PropertyFilter {
 	}
 
 	/**
-	 * 是否有多个属性
+	 * 是否有多个属性.
 	 */
 	public boolean isMultiProperty() {
 		return (propertyNames.length > 1);

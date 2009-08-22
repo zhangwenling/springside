@@ -7,7 +7,6 @@
  */
 package org.springside.modules.utils;
 
-import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
@@ -23,7 +22,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 	/**
 	 * ApplicationContextAware接口的context注入函数.
 	 */
-	public void setApplicationContext(ApplicationContext context) throws BeansException {
+	public void setApplicationContext(ApplicationContext context) {
 		applicationContext = context;
 	}
 
@@ -34,7 +33,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> T getBean(String name) throws BeansException {
+	public static <T> T getBean(String name) {
 		return (T) applicationContext.getBean(name);
 	}
 }

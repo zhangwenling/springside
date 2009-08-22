@@ -29,11 +29,13 @@ public class SeleniumTestCase {
 	public static final String DEFAULT_URL = "http://localhost:8080";
 	public static final String DEFAULT_BROWSER = "*chrome";
 	public static final String DEFAULT_SELENIUM_HOST = "localhost";
+	public static final String DEFAULT_SELENIUM_PORT = "4444";
 
 	public static final String PROPERTY_FILE = "application.test.properties";
 	public static final String PROPERTY_URL_NAME = "selenium.url";
 	public static final String PROPERTY_BROWSER_NAME = "selenium.browser";
 	public static final String PROPERTY_SELENIUM_HOST_NAME = "selenium.host";
+	public static final String PROPERTY_SELENIUM_PORT_NAME = "selenium.port";
 
 	public static final String WAIT_FOR_PAGE = "30000";
 
@@ -49,8 +51,9 @@ public class SeleniumTestCase {
 		String browser = p.getProperty(PROPERTY_BROWSER_NAME, DEFAULT_BROWSER);
 		String url = p.getProperty(PROPERTY_URL_NAME, DEFAULT_URL);
 		String host = p.getProperty(PROPERTY_SELENIUM_HOST_NAME, DEFAULT_SELENIUM_HOST);
+		int port = Integer.valueOf(p.getProperty(PROPERTY_SELENIUM_PORT_NAME, DEFAULT_SELENIUM_PORT));
 
-		selenium = new DefaultSelenium(host, 4444, browser, url);
+		selenium = new DefaultSelenium(host, port, browser, url);
 		selenium.start();
 		selenium.windowFocus();
 		selenium.windowMaximize();
