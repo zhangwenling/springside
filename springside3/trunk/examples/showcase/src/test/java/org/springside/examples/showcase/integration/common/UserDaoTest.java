@@ -1,5 +1,6 @@
 package org.springside.examples.showcase.integration.common;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Hibernate;
@@ -12,6 +13,7 @@ import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.spring.SpringGroupsTestRunner;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
+//分组执行TestCase
 @RunWith(SpringGroupsTestRunner.class)
 public class UserDaoTest extends SpringTxTestCase {
 	@Autowired
@@ -58,5 +60,17 @@ public class UserDaoTest extends SpringTxTestCase {
 	public void testUpDialect() {
 		Object value = userDao.createQuery("select u.name from User u where up(u.name)='ADMIN'").uniqueResult();
 		assertEquals("Admin", value);
+	}
+
+	@Test
+	public void testDisableUser() {
+		List<Long> ids = new ArrayList<Long>();
+		ids.add(1L);
+		ids.add(2L);
+
+		userDao.disableUsers(ids);
+
+		assertEquals("disabled", userDao.get(1L).getStatus());
+		assertEquals("disabled", userDao.get(2L).getStatus());
 	}
 }

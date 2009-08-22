@@ -23,7 +23,8 @@ import org.springside.modules.utils.ReflectionUtils;
  * 
  * @author calvin
  */
-public class UserDetailServiceImplTest extends Assert {
+public class UserDetailServicesImplTest extends Assert {
+	
 	private UserDetailsServiceImpl userDetailService = new UserDetailsServiceImpl();
 	private SecurityManager securityManager = null;
 
