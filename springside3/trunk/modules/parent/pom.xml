@@ -28,11 +28,16 @@
 
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
 	<repositories>
-		<!--
-			<repository> <id>nexus</id> <name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
-			</repository>
-		-->
+
+		<repository>
+			<id>nexus</id>
+			<name>local nexus server</name>
+			<url>http://localhost:8081/nexus/content/groups/public</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
 		<repository>
 			<id>offical</id>
 			<name>Maven Offical Repository</name>
@@ -50,20 +55,19 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-
-		<repository>
-			<id>openqa-releases</id>
-			<name>Openqa Release Repository</name>
-			<url>http://nexus.openqa.org/content/repositories/releases</url>
-		</repository>
 	</repositories>
 
 	<pluginRepositories>
-		<!--
-			<pluginRepository> <id>nexus</id> <name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
-			</pluginRepository>
-		-->
+
+		<pluginRepository>
+			<id>nexus</id>
+			<name>local nexus server</name>
+			<url>http://localhost:8081/nexus/content/groups/public</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+
 	</pluginRepositories>
 
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
@@ -457,6 +461,7 @@
 			</dependency>
 			<!-- utils end -->
 
+			<!-- xml binding begin -->
 			<dependency>
 				<groupId>com.thoughtworks.xstream</groupId>
 				<artifactId>xstream</artifactId>
@@ -468,6 +473,7 @@
 				<artifactId>jaxb-impl</artifactId>
 				<version>2.1.11</version>
 			</dependency>
+			<!-- xml binding end -->
 
 			<!-- profile tools begin -->
 			<dependency>
@@ -559,12 +565,12 @@
 		<!-- 命令行输入mvn时，默认执行mvn package  -->
 		<defaultGoal>package</defaultGoal>
 
-		<!-- 设定Web应用中编译结果输出到WEB-INF/classes 中，与使用IDE时相同  -->
+		<!-- 设定Web应用中编译结果输出到WEB-INF/classes 中, 与使用IDE时相同  -->
 		<outputDirectory>webapp/WEB-INF/classes</outputDirectory>
 
 		<pluginManagement>
 			<plugins>
-				<!-- war插件,设定webapp目录为/webapp,war名称不带版本号 -->
+				<!-- war插件, 设定webapp目录为/webapp -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
@@ -574,7 +580,7 @@
 					</configuration>
 				</plugin>
 
-				<!-- compiler插件,设定JDK版本 -->
+				<!-- compiler插件, 设定JDK版本与编码 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
@@ -599,7 +605,7 @@
 					</configuration>
 				</plugin>
 
-				<!-- resource插件,设定编码 -->
+				<!-- resource插件, 设定编码 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
@@ -698,7 +704,7 @@
 	</build>
 
 	<profiles>
-		<!-- 不执行任何测试 -->
+		<!-- 不执行任何测试的profile -->
 		<profile>
 			<id>notest</id>
 			<properties>
@@ -706,11 +712,27 @@
 			</properties>
 		</profile>
 
-		<!-- 执行集成测试 -->
+		<!-- 在test阶段执行集成测试的profile -->
 		<profile>
 			<id>integration</id>
 			<build>
 				<plugins>
+					<!-- dbunit插件初始化测试数据 -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>dbunit-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>init-data</id>
+								<phase>test-compile</phase>
+								<goals>
+									<goal>operation</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- junit插件执行integration目录的用例 -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-surefire-plugin</artifactId>
@@ -729,35 +751,23 @@
 							</execution>
 						</executions>
 					</plugin>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>dbunit-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>init-data</id>
-								<phase>test-compile</phase>
-								<goals>
-									<goal>operation</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
 				</plugins>
 			</build>
 		</profile>
 
-		<!-- 执行功能测试 -->
+		<!-- 执行功能测试的profile -->
 		<profile>
 			<id>functional</id>
 			<build>
 				<plugins>
+					<!-- dbunit插件初始化测试数据 -->
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>dbunit-maven-plugin</artifactId>
 						<executions>
 							<execution>
 								<id>init-data</id>
-								<phase>test-compile</phase>
+								<phase>pre-integration-test</phase>
 								<goals>
 									<goal>operation</goal>
 								</goals>
@@ -765,6 +775,7 @@
 						</executions>
 					</plugin>
 
+					<!-- selenium插件启动与关闭selenium服务器 -->
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>selenium-maven-plugin</artifactId>
@@ -779,7 +790,6 @@
 									<background>true</background>
 								</configuration>
 							</execution>
-
 							<execution>
 								<id>stop-selenium</id>
 								<phase>post-integration-test</phase>
@@ -789,20 +799,21 @@
 							</execution>
 						</executions>
 					</plugin>
-
+					
+					<!-- jetty插件启动与关闭应用 -->
 					<plugin>
 						<groupId>org.mortbay.jetty</groupId>
 						<artifactId>maven-jetty-plugin</artifactId>
 						<executions>
 							<execution>
 								<id>start-jetty</id>
+								<phase>pre-integration-test</phase>
 								<goals>
 									<goal>deploy-war</goal>
 								</goals>
 								<configuration>
 									<daemon>true</daemon>
 								</configuration>
-								<phase>pre-integration-test</phase>
 							</execution>
 							<execution>
 								<id>stop-jetty</id>
@@ -813,22 +824,68 @@
 							</execution>
 						</executions>
 					</plugin>
-
+					
+					<!-- surefire插件执行functional目录的用例 -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-surefire-plugin</artifactId>
 						<executions>
 							<execution>
 								<id>functional-test</id>
+								<phase>integration-test</phase>
 								<goals>
 									<goal>test</goal>
 								</goals>
-								<phase>integration-test</phase>
 								<configuration>
 									<includes>
 										<include>**/functional/**</include>
 									</includes>
 								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!--初始化数据库Schema及测试数据的profile-->
+		<profile>
+			<id>initdb</id>
+			<build>
+				<plugins>
+					<!-- sql 插件创建Schema -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>sql-maven-plugin</artifactId>
+
+						<executions>
+							<execution>
+								<id>create database</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<configuration>
+									<srcFiles>
+										<srcFile>${dbunit.schema.file}</srcFile>
+										<!-- <srcFile>src/main/sql/derby/init-data.sql</srcFile> -->
+									</srcFiles>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- dbunit 插件初始化数据-->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>dbunit-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>init data</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>operation</goal>
+								</goals>
 							</execution>
 						</executions>
 					</plugin>
