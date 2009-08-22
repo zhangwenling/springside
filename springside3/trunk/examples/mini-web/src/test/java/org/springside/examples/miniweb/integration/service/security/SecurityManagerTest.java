@@ -11,6 +11,11 @@ public class SecurityManagerTest extends SpringTxTestCase {
 	@Autowired
 	private SecurityManager securityManager;
 
+	@Test
+	public void deleteUser() {
+		securityManager.deleteUser(2L);
+	}
+
 	@Test(expected = ServiceException.class)
 	public void deleteAdmin() {
 		securityManager.deleteUser(1L);

@@ -1,5 +1,7 @@
 package org.springside.examples.miniweb.integration.dao.security;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.dao.security.ResourceDao;
@@ -27,5 +29,17 @@ public class ResourceDaoTest extends SpringTxTestCase {
 		flush();
 		entity = entityDao.findUniqueBy("id", entity.getId());
 		assertNull(entity);
+	}
+	
+	@Test
+	public void getUrlResourceWithAuthorities() {
+		List<Resource> resourceList = entityDao.getUrlResourceWithAuthorities();
+	
+		//校验资源的总数、排序及其授权已初始化
+		assertEquals(6, resourceList.size());
+		Resource resource = resourceList.get(0);
+		assertEquals(1.0, resource.getPosition());
+		evict(resource);
+		assertTrue(resource.getAuthorities().size() > 0);		
 	}
 }

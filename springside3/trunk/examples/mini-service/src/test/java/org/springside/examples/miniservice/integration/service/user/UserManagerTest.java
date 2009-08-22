@@ -22,11 +22,12 @@ public class UserManagerTest extends SpringTxTestCase {
 	public void getAllUser() {
 		List<User> userList = userManager.getAllUser();
 		assertEquals(6, userList.size());
-		
-		evict(userList.get(0));
-		assertTrue(userList.get(0).getRoles().size() > 0);
+
+		User user = userList.get(0);
+		evict(user);
+		assertTrue(user.getRoles().size() > 0);
 	}
-	
+
 	/**
 	 * 用户认证测试.
 	 * 分别测试正确的用户与正确,空,错误的密码三种情况.
