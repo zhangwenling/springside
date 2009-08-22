@@ -36,7 +36,7 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 
 	private ResourceDetailsService resourceDetailsService;
 
-	public void setResourceDetailService(ResourceDetailsService resourceDetailsService) {
+	public void setResourceDetailsService(ResourceDetailsService resourceDetailsService) {
 		this.resourceDetailsService = resourceDetailsService;
 	}
 

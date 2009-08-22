@@ -54,7 +54,7 @@ public class QueueManager {
 	 * 根据queueName获得消息队列的静态函数.
 	 * 如消息队列还不存在, 会自动进行创建.
 	 */
-	public static BlockingQueue getQueue(String queueName) {
+	public static <T> BlockingQueue<T> getQueue(String queueName) {
 		BlockingQueue queue = queueMap.get(queueName);
 
 		if (queue == null) {

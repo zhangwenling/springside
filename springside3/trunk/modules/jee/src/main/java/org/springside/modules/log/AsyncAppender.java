@@ -37,7 +37,7 @@ public class AsyncAppender extends org.apache.log4j.AppenderSkeleton {
 	@Override
 	public void append(LoggingEvent event) {
 		if (queue == null) {
-			QueueManager.getQueue(queueName);
+			queue = QueueManager.getQueue(queueName);
 		}
 
 		boolean sucess = queue.offer(event);
