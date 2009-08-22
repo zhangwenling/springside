@@ -5,6 +5,11 @@ import org.springframework.stereotype.Repository;
 import org.springside.examples.showcase.common.entity.Subject;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
+/**
+ * 主题对象的泛型DAO.
+ * 
+ * @author calvin
+ */
 @Repository
 public class SubjectDao extends HibernateDao<Subject, Long> {
 

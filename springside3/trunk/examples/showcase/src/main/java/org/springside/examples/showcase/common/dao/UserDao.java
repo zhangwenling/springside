@@ -9,6 +9,11 @@ import org.springframework.stereotype.Repository;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
+/**
+ * 用户对象的泛型DAO.
+ * 
+ * @author calvin
+ */
 @Repository
 public class UserDao extends HibernateDao<User, Long> {
 

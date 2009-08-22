@@ -7,6 +7,11 @@ import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedOperationParameter;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
+/**
+ * JMX动态配置日志等级的MBean.
+ * 
+ * @author calvin
+ */
 @ManagedResource(objectName = "Custom:type=Log4jManagement,name=log4jManagement", description = "Log4j Managed Bean")
 public class Log4jMBean {
 	@ManagedAttribute(description = "get the logging level to the root logger")

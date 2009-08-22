@@ -7,8 +7,9 @@ import org.springside.examples.miniweb.service.security.SecurityManager;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 public class SecurityManagerTest extends SpringTxTestCase {
+	
 	@Autowired
-	private SecurityManager securityManager = new SecurityManager();
+	private SecurityManager securityManager;
 
 	@Test(expected = ServiceException.class)
 	public void deleteAdmin() {

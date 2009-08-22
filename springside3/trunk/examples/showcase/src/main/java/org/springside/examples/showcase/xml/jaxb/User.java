@@ -106,6 +106,9 @@ public class User {
 		return ToStringBuilder.reflectionToString(this);
 	}
 
+	/**
+	 * Map转换适配器,将Map转换为MapEntry[]数组.
+	 */
 	public static class MapAdapter extends XmlAdapter<MapEntry[], Map<String, String>> {
 
 		@Override
@@ -121,17 +124,20 @@ public class User {
 		public Map<String, String> unmarshal(MapEntry[] array) throws Exception {
 			Map<String, String> map = new HashMap<String, String>();
 			for (MapEntry e : array) {
-				map.put(e.key, e.value);
+				map.put(e.getKey(), e.getValue());
 			}
 			return map;
 		}
 	}
 
+	/**
+	 * Map的可绑定数据类型.
+	 */
 	public static class MapEntry {
 		@XmlAttribute
-		public String key;
+		private String key;
 
-		public String value;
+		private String value;
 
 		public MapEntry() {
 		}
@@ -139,6 +145,22 @@ public class User {
 		public MapEntry(Map.Entry<String, String> e) {
 			key = e.getKey();
 			value = e.getValue();
+		}
+
+		public String getKey() {
+			return key;
+		}
+
+		public void setKey(String key) {
+			this.key = key;
+		}
+
+		public String getValue() {
+			return value;
+		}
+
+		public void setValue(String value) {
+			this.value = value;
 		}
 	}
 }

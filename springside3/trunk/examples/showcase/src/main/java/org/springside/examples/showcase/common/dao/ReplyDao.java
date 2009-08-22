@@ -4,6 +4,11 @@ import org.springframework.stereotype.Repository;
 import org.springside.examples.showcase.common.entity.Reply;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
+/**
+ * 回复对象的泛型DAO.
+ * 
+ * @author calvin
+ */
 @Repository
 public class ReplyDao extends HibernateDao<Reply, Long> {
 

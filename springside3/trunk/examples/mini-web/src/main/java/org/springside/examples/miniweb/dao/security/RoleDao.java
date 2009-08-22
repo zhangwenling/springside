@@ -7,6 +7,11 @@ import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
+/**
+ * 角色对象的泛型DAO.
+ * 
+ * @author calvin
+ */
 @Repository
 public class RoleDao extends HibernateDao<Role, Long> {
 
