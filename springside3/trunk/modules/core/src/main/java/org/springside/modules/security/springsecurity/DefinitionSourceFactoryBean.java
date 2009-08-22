@@ -28,16 +28,16 @@ import org.springframework.security.util.UrlMatcher;
  * 并最终转为SpringSecurity所需的LinkedHashMap<RequestKey, ConfigAttributeDefinition>形式的定义.
  * 
  * @see org.springframework.security.intercept.web.DefaultFilterInvocationDefinitionSource
- * @see ResourceDetailService
+ * @see ResourceDetailsService
  * 
  * @author calvin
  */
 public class DefinitionSourceFactoryBean implements FactoryBean {
 
-	private ResourceDetailService resourceDetailService;
+	private ResourceDetailsService resourceDetailsService;
 
-	public void setResourceDetailService(ResourceDetailService resourceDetailService) {
-		this.resourceDetailService = resourceDetailService;
+	public void setResourceDetailService(ResourceDetailsService resourceDetailsService) {
+		this.resourceDetailsService = resourceDetailsService;
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 	 * 转化为DefaultFilterInvocationDefinitionSource需要的LinkedHashMap<RequestKey, ConfigAttributeDefinition>形式.
 	 */
 	protected LinkedHashMap<RequestKey, ConfigAttributeDefinition> buildRequestMap() throws Exception {
-		LinkedHashMap<String, String> srcMap = resourceDetailService.getRequestMap();
+		LinkedHashMap<String, String> srcMap = resourceDetailsService.getRequestMap();
 		LinkedHashMap<RequestKey, ConfigAttributeDefinition> distMap = new LinkedHashMap<RequestKey, ConfigAttributeDefinition>();
 		ConfigAttributeEditor editor = new ConfigAttributeEditor();
 

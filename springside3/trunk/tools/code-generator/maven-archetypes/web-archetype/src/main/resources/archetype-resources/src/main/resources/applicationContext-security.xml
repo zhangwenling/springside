@@ -36,11 +36,11 @@
 
 	<!-- DefinitionSource工厂,使用resourceDetailService提供的URL-授权关系. -->
 	<bean id="databaseDefinitionSource" class="org.springside.modules.security.springsecurity.DefinitionSourceFactoryBean">
-		<property name="resourceDetailService" ref="resourceDetailService" />
+		<property name="resourceDetailsService" ref="resourceDetailsService" />
 	</bean>
 	
 	<!-- 项目实现的URL-授权查询服务 -->
-	<bean id="resourceDetailService" class="${package}.service.security.ResourceDetailServiceImpl" />
+	<bean id="resourceDetailsService" class="${package}.service.security.ResourceDetailsServiceImpl" />
 
 	<!-- 授权判断配置, 将授权名称的默认前缀由ROLE_改为A_. -->
 	<bean id="accessDecisionManager" class="org.springframework.security.vote.AffirmativeBased">

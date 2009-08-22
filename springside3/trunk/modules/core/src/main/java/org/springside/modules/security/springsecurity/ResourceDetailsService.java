@@ -14,12 +14,10 @@ import java.util.LinkedHashMap;
  * 
  * @author calvin
  */
-public interface ResourceDetailService {
+public interface ResourceDetailsService {
 
-	/**
-	 * 获取RequestMap.
-	 * 
-	 * 有序Map中的key为URL, value为能访问该URL的以','分隔的授权列表.
+	/*
+	 *ResourceDetailsServicevalue为能访问该URL的以','分隔的授权列表.
 	 */
 	public LinkedHashMap<String, String> getRequestMap() throws Exception;
 }
