@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.integration.common.dao;
+package org.springside.examples.showcase.integration.common;
 
 import java.util.Date;
 
@@ -31,7 +31,7 @@ public class PostDaoTest extends SpringTxTestCase {
 	@Test
 	public void newSubject() {
 		Subject subject = new Subject();
-		subject.setTitle("GoodNight");
+		subject.setTitle("Good Night");
 		subject.setContent("Good Night!!");
 		subject.setModifyTime(new Date());
 
@@ -40,22 +40,29 @@ public class PostDaoTest extends SpringTxTestCase {
 
 		subjectDao.save(subject);
 		flush();
+		subject = subjectDao.getDetail(subject.getId());
+		assertEquals("Good Night!!", subject.getContent());
 	}
 
 	@Test
 	public void editSubject() {
 		Subject subject = subjectDao.getDetail(1L);
-		subject.setTitle("GoodAfternoon");
+		subject.setTitle("Good Afternoon");
 		subject.setContent("Good Afternoon!!!");
 		subject.setModifyTime(new Date());
 
 		subjectDao.save(subject);
 		flush();
+		subject = subjectDao.getDetail(subject.getId());
+		assertEquals("Good Afternoon!!!", subject.getContent());
 	}
 
 	@Test
 	public void deleteSubject() {
 		subjectDao.delete(1L);
+		flush();
+		Subject subject = subjectDao.findUniqueBy("id", 1L);
+		assertNull(subject);
 	}
 
 	@Test

@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.integration.common.dao;
+package org.springside.examples.showcase.integration.common;
 
 import java.util.Map;
 

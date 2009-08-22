@@ -13,7 +13,7 @@ import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.security.SecurityManager;
-import org.springside.examples.miniweb.service.security.UserDetailServiceImpl;
+import org.springside.examples.miniweb.service.security.UserDetailsServiceImpl;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
@@ -24,7 +24,7 @@ import org.springside.modules.utils.ReflectionUtils;
  * @author calvin
  */
 public class UserDetailServiceImplTest extends Assert {
-	private UserDetailServiceImpl userDetailService = new UserDetailServiceImpl();
+	private UserDetailsServiceImpl userDetailService = new UserDetailsServiceImpl();
 	private SecurityManager securityManager = null;
 
 	@Before
