@@ -16,18 +16,10 @@
 </head>
 
 <body>
-<div id="menu">
-	<h3>
-	<a href="${symbol_dollar}{ctx}/security/user.action">帐号列表</a>
-	<a href="${symbol_dollar}{ctx}/security/role.action">角色列表</a> 
-	<a href="${symbol_dollar}{ctx}/j_spring_security_logout">退出登录</a>
-	</h3> 
-</div>
-
+<%@ include file="/common/menu.jsp"%>
 <div id="message"><s:actionmessage theme="mytheme"/></div>
 <form id="mainForm" action="user.action" method="get">
 <div id="filter">
-
 	你好,<%=SpringSecurityUtils.getCurrentUserName()%>.&nbsp;&nbsp;
  	登录名: <input type="text" name="filter_EQ_loginName" value="${symbol_dollar}{param['filter_EQ_loginName']}"  size="9"/> 
           姓名或Email: <input type="text" name="filter_LIKE_name_OR_email" value="${symbol_dollar}{param['filter_LIKE_name_OR_email']}" size="9"/>
@@ -53,8 +45,14 @@
 			<td>${symbol_dollar}{email}&nbsp;</td>
 			<td>${symbol_dollar}{roleNames}&nbsp;</td>
 			<td>&nbsp; 
+				<security:authorize ifAnyGranted="A_VIEW_USER">
+				<security:authorize ifNotGranted="A_MODIFY_USER">
+					<a href="user!input.action?id=${symbol_dollar}{id}">查看</a>&nbsp; 
+				</security:authorize>
+				</security:authorize>
+
 				<security:authorize ifAnyGranted="A_MODIFY_USER">
-					<a href="user!input.action?id=${symbol_dollar}{id}">修改</a>、
+					<a href="user!input.action?id=${symbol_dollar}{id}">修改</a>&nbsp; 
 					<a href="user!delete.action?id=${symbol_dollar}{id}">删除</a>
 				</security:authorize>
 			</td>

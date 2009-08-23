@@ -22,4 +22,11 @@ public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 		waitPageLoad();
 		assertTrue(selenium.isTextPresent("你好,admin."));
 	}
+
+	protected void clickMenu(String menuName) {
+		selenium.open("/${artifactId}");
+		waitPageLoad();
+		selenium.click("link=" + menuName);
+		waitPageLoad();
+	}
 }

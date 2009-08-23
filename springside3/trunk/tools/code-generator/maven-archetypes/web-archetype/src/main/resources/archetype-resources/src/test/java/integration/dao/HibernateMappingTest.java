@@ -26,6 +26,7 @@ public class HibernateMappingTest extends SpringTxTestCase {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testColumnMapping() throws Exception {
 		Session session = sessionFactory.openSession();

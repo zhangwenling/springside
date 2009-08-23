@@ -50,6 +50,7 @@
 </head>
 
 <body>
+<%@ include file="/common/menu.jsp"%>
 <h3><s:if test="id == null">创建</s:if><s:else>修改</s:else>用户</h3>
 <div id="inputContent">
 <form id="inputForm" action="user!save.action" method="post">
@@ -79,14 +80,16 @@
 		<td>角色:</td>
 		<td>
 			<div style="word-break:break-all;width:250px; overflow:auto; ">
-				<s:checkboxlist name="checkedRoleIds"  list="allRoles"  listKey="id" listValue="name" theme="simple"/>
+				<s:checkboxlist name="checkedRoleIds"  list="roleList"  listKey="id" listValue="name" theme="simple"/>
 			</div>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input type="submit" value="提交" />&nbsp; 
-			<input type="button" value="取消" onclick="history.back()"/>
+			<security:authorize ifAnyGranted="A_MODIFY_USER">
+				<input type="submit" value="提交" />&nbsp; 
+			</security:authorize>
+			<input type="button" value="返回" onclick="history.back()"/>
 		</td>
 	</tr>
 </table>

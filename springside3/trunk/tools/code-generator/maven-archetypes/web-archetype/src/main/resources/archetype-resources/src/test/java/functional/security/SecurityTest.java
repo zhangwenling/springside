@@ -4,9 +4,9 @@
 package ${package}.functional.security;
 
 import org.junit.Test;
-import org.springside.modules.test.selenium.SeleniumTestCase;
+import ${package}.functional.BaseSeleniumTestCase;
 
-public class SecurityTest extends SeleniumTestCase {
+public class SecurityTest extends BaseSeleniumTestCase {
 
 	@Test
 	public void checkAnonymous() {
@@ -15,30 +15,29 @@ public class SecurityTest extends SeleniumTestCase {
 		assertTrue(selenium.isElementPresent("//input[@value='登录']"));
 
 		//访问任意页面会跳转到登录界面
-		selenium.open(UserManagerTest.USER_MENU);
+		selenium.open("/${artifactId}/security/user.action");
 		assertTrue(selenium.isElementPresent("//input[@value='登录']"));
 	}
 
 	@Test
 	public void checkUserRole() {
-		//访问推出登录页面
+		//访问退出登录页面
 		selenium.open("/${artifactId}/j_spring_security_logout");
 		assertTrue(selenium.isElementPresent("//input[@value='登录']"));
 
 		//登录普通用户
-		selenium.open("/${artifactId}/login.action");
 		selenium.type("j_username", "user");
 		selenium.type("j_password", "user");
 		selenium.click("//input[@value='登录']");
 		waitPageLoad();
 
 		//校验用户角色的操作单元格为空
-		selenium.open(UserManagerTest.USER_MENU);
+		clickMenu("帐号列表");
 		waitPageLoad();
-		assertEquals("", selenium.getTable("listTable.1.4"));
+		assertEquals("查看", selenium.getTable("listTable.1.4"));
 
-		selenium.open(RoleManagerTest.ROLE_MENU);
+		clickMenu("角色列表");
 		waitPageLoad();
-		assertEquals("", selenium.getTable("listTable.1.2"));
+		assertEquals("查看", selenium.getTable("listTable.1.2"));
 	}
 }

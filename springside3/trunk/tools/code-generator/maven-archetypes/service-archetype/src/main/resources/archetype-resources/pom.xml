@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>${artifactId}-parent</artifactId>
 		<groupId>${groupId}</groupId>
-		<version>${version}</version>
+		<version>3.1.6</version>
 		<relativePath>pom-parent.xml</relativePath>
 	</parent>
 	<groupId>${groupId}</groupId>
@@ -282,7 +282,7 @@
 						<artifactId>dbunit-maven-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>init-data</id>
+								<id>init-functional-data</id>
 								<phase>pre-integration-test</phase>
 								<goals>
 									<goal>operation</goal>

@@ -10,8 +10,6 @@ import ${package}.functional.BaseSeleniumTestCase;
 import org.springside.modules.test.groups.Groups;
 
 public class UserManagerTest extends BaseSeleniumTestCase {
-	
-	public static final String USER_MENU = "/${artifactId}/security/user.action";
 
 	/**
 	 * 用户增删改操作查测试.
@@ -29,7 +27,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	@Test
 	@Groups("extension")
 	public void validateUser() {
-		selenium.open(USER_MENU);
+		clickMenu("帐号列表");
 		selenium.click("link=增加新用户");
 		waitPageLoad();
 
@@ -53,7 +51,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	 * 创建用户,并返回创建的用户名.
 	 */
 	private String createUser() {
-		selenium.open(USER_MENU);
+		clickMenu("帐号列表");
 		selenium.click("link=增加新用户");
 		waitPageLoad();
 
@@ -82,7 +80,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	private void editUser(String loginName) {
 		String newUserName = "newUserName";
 
-		selenium.open(USER_MENU);
+		clickMenu("帐号列表");
 		findUser(loginName);
 
 		selenium.click("link=修改");
@@ -105,7 +103,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	 * 根据用户名删除对象.
 	 */
 	private void deleteUser(String loginName) {
-		selenium.open(USER_MENU);
+		clickMenu("帐号列表");
 		findUser(loginName);
 
 		selenium.click("link=删除");

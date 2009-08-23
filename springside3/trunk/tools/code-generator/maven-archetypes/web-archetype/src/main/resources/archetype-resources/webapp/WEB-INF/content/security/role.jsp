@@ -14,14 +14,7 @@
 </head>
 
 <body>
-<div id="menu">
-<h3>
-	<a href="${symbol_dollar}{ctx}/security/user.action">帐号列表</a>
-	<a href="${symbol_dollar}{ctx}/security/role.action">角色列表</a> 
-	<a href="${symbol_dollar}{ctx}/j_spring_security_logout">退出登录</a>
-</h3>
-</div>
-
+<%@ include file="/common/menu.jsp"%>
 <div id="message"><s:actionmessage theme="mytheme"/></div>
 
 <div id="filter">你好,<%=SpringSecurityUtils.getCurrentUserName()%>.</div>
@@ -34,13 +27,19 @@
 		<th><b>操作</b></th>
 	</tr>
 
-	<s:iterator value="allRoles">
+	<s:iterator value="roleList">
 		<tr>
 			<td>${symbol_dollar}{name}</td>
 			<td>${symbol_dollar}{authNames}</td>
 			<td>&nbsp; 
+				<security:authorize ifAnyGranted="A_VIEW_ROLE">
+				<security:authorize ifNotGranted="A_MODIFY_ROLE">
+					<a href="role!input.action?id=${symbol_dollar}{id}">查看</a>&nbsp;
+				</security:authorize>
+				</security:authorize>
+	
 				<security:authorize ifAnyGranted="A_MODIFY_ROLE">
-					<a href="role!input.action?id=${symbol_dollar}{id}">修改</a>、
+					<a href="role!input.action?id=${symbol_dollar}{id}">修改</a>&nbsp;
 					<a href="role!delete.action?id=${symbol_dollar}{id}">删除</a>
 				</security:authorize>
 			</td>
