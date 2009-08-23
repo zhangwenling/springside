@@ -6,7 +6,7 @@
 	<artifactId>springside3-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>SpringSide's Parent pom.xml</name>
-	<version>3.1.5</version>
+	<version>3.1.6</version>
 	<organization>
 		<name>SpringSide</name>
 		<url>http://www.springside.org.cn</url>
@@ -14,7 +14,7 @@
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<springside.version>3.1.5</springside.version>
+		<springside.version>3.1.6</springside.version>
 		<spring.version>2.5.6</spring.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<struts2.version>2.1.6</struts2.version>
