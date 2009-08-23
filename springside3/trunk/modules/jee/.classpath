@@ -12,7 +12,6 @@
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/imaging-01012005.jar"/>
 	<classpathentry kind="lib" path="lib/jaxb-api-2.1.jar"/>
-	<classpathentry kind="lib" path="lib/jaxb-impl-2.1.11.jar"/>
 	<classpathentry kind="lib" path="lib/jcaptcha-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/jcaptcha-api-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/jsr250-api-1.0.jar"/>

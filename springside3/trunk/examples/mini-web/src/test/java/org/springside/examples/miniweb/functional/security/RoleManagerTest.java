@@ -7,8 +7,6 @@ import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
 
 public class RoleManagerTest extends BaseSeleniumTestCase {
 
-	public static final String ROLE_MENU = "/mini-web/security/role.action";
-
 	/**
 	 * 用户增删改操作查测试.
 	 */
@@ -23,7 +21,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 	 * 创建用户,并返回创建的用户名.
 	 */
 	private void createRole() {
-		selenium.open(ROLE_MENU);
+		clickMenu("角色列表");
 		selenium.click("link=增加新角色");
 		waitPageLoad();
 
@@ -46,7 +44,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 	private String editRole() {
 		String newRoleName = "newRoleName";
 
-		selenium.open(ROLE_MENU);
+		clickMenu("角色列表");
 		selenium.click("//table[@id='listTable']/tbody/tr[4]/td[3]/a[1]");
 		waitPageLoad();
 
@@ -67,7 +65,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 	 * 根据用户名删除对象.
 	 */
 	private void deleteRole(String roleName) {
-		selenium.open(ROLE_MENU);
+		clickMenu("角色列表");
 		selenium.click("//table[@id='listTable']/tbody/tr[4]/td[3]/a[2]");
 		waitPageLoad();
 

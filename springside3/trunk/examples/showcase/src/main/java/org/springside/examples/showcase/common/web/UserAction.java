@@ -29,10 +29,10 @@ public class UserAction extends CrudActionSupport<User> {
 	private UserManager userManager;
 
 	// 页面属性  //
-	private User entity;
 	private Long id;
-	private List<User> allUsers;
-	private Integer workingVersion;
+	private User entity;
+	private List<User> userList;
+	private Integer workingVersion;//对象版本号, 配合Hibernate的@Version防止并发修改
 	private List<Long> checkedUserIds;
 
 	// ModelDriven 与 Preparable函数 //
@@ -56,7 +56,7 @@ public class UserAction extends CrudActionSupport<User> {
 	// CRUD Action 函数 //
 	@Override
 	public String list() throws Exception {
-		allUsers = userManager.getAllUser();
+		userList = userManager.getAllUser();
 		return SUCCESS;
 	}
 
@@ -89,8 +89,8 @@ public class UserAction extends CrudActionSupport<User> {
 	}
 
 	// 页面属性访问函数 //
-	public List<User> getAllUsers() {
-		return allUsers;
+	public List<User> getUserList() {
+		return userList;
 	}
 
 	public void setCheckedUserIds(List<Long> checkedUserIds) {

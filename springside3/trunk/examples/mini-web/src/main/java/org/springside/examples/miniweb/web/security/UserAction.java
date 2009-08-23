@@ -35,8 +35,8 @@ public class UserAction extends CrudActionSupport<User> {
 	private SecurityManager securityManager;
 
 	// 页面属性 //
-	private User entity;
 	private Long id;
+	private User entity;
 	private Page<User> page = new Page<User>(5);//每页5条记录
 	private List<Long> checkedRoleIds; //页面中钩选的角色id列表
 
@@ -117,7 +117,7 @@ public class UserAction extends CrudActionSupport<User> {
 		return page;
 	}
 
-	public List<Role> getAllRoles() {
+	public List<Role> getRoleList() {
 		return securityManager.getAllRole();
 	}
 

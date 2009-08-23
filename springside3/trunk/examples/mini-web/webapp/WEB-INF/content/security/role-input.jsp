@@ -23,6 +23,7 @@
 </head>
 
 <body>
+<%@ include file="/common/menu.jsp"%>
 <h3><s:if test="id == null">创建</s:if><s:else>修改</s:else>角色</h3>
 <div id="inputContent">
 <form id="inputForm" action="role!save.action" method="post">
@@ -36,14 +37,16 @@
 		<td>授权:</td>
 		<td>
 			<div style="word-break:break-all;width:300px; overflow:auto; ">
-				<s:checkboxlist name="checkedAuthIds"  list="allAuths"  listKey="id" listValue="displayName" theme="simple"/>
+				<s:checkboxlist name="checkedAuthIds"  list="authorityList"  listKey="id" listValue="displayName" theme="simple"/>
 			</div>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input type="submit" value="提交" />&nbsp; 
-			<input type="button" value="取消" onclick="history.back()"/>
+			<security:authorize ifAnyGranted="A_MODIFY_ROLE">
+				<input type="submit" value="提交" />&nbsp; 
+			</security:authorize>
+			<input type="button" value="返回" onclick="history.back()"/>
 		</td>
 	</tr>
 </table>

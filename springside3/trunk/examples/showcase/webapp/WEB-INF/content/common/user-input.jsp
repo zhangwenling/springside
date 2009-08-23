@@ -43,7 +43,7 @@
 	<tr>
 		<td colspan="2">
 			<input type="submit" value="提交" />&nbsp; 
-			<input type="button" value="取消" onclick="history.back()"/>
+			<input type="button" value="返回" onclick="history.back()"/>
 		</td>
 	</tr>
 </table>
