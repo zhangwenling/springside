@@ -19,7 +19,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		waitPageLoad();
 		//提交修改
 		selenium.click("//input[@value='提交']");
-		waitPageLoad();
+		selenium.waitForPageToLoad("60000");
 		//重新进入用户修改页面, 检查最后修改者
 		selenium.click("//table[@id='listTable']/tbody/tr[7]/td[7]/a");
 		waitPageLoad();

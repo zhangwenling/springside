@@ -34,7 +34,7 @@
 		<property name="objectDefinitionSource" ref="databaseDefinitionSource" />
 	</bean>
 
-	<!-- DefinitionSource工厂,使用resourceDetailService提供的URL-授权关系. -->
+	<!-- DefinitionSource工厂,使用resourceDetailsService提供的URL-授权关系. -->
 	<bean id="databaseDefinitionSource" class="org.springside.modules.security.springsecurity.DefinitionSourceFactoryBean">
 		<property name="resourceDetailsService" ref="resourceDetailsService" />
 	</bean>

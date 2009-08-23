@@ -723,7 +723,7 @@
 						<artifactId>dbunit-maven-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>init-data</id>
+								<id>init-integration-data</id>
 								<phase>test-compile</phase>
 								<goals>
 									<goal>operation</goal>
@@ -766,7 +766,7 @@
 						<artifactId>dbunit-maven-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>init-data</id>
+								<id>init-functional-data</id>
 								<phase>pre-integration-test</phase>
 								<goals>
 									<goal>operation</goal>

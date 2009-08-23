@@ -36,7 +36,7 @@
 		<th><b>操作</b></th>
 	</tr>
 
-	<s:iterator value="allUsers">
+	<s:iterator value="userList">
 		<tr>
 			<td><input type="checkbox" name="checkedUserIds" value="${id}"/></td>
 			<td>${loginName}&nbsp;</td>

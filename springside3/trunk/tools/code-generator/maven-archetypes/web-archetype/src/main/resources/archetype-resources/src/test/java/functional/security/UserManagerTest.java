@@ -40,6 +40,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		selenium.type("email", "abc.com");
 		selenium.click("//input[@value='提交']");
 
+		selenium.waitForCondition("selenium.isTextPresent('用户登录名已存在')", "5000");
 		assertTrue(selenium.isTextPresent("用户登录名已存在"));
 		assertEquals("必选字段", selenium.getTable("//form[@id='inputForm']/table.1.1"));
 		assertEquals("请输入一个长度最少是 3 的字符串", selenium.getTable("//form[@id='inputForm']/table.2.1"));
