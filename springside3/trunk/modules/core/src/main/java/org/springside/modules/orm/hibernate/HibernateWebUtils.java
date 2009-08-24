@@ -129,7 +129,6 @@ public class HibernateWebUtils {
 			//如果value值为空,则忽略此filter.
 			boolean omit = StringUtils.isBlank(value);
 			if (!omit) {
-
 				PropertyFilter filter = new PropertyFilter(filterName, value);
 				filterList.add(filter);
 			}

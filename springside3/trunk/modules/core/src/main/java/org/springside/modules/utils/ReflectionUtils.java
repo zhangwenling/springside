@@ -24,7 +24,6 @@ import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.util.Assert;
 
 /**
@@ -231,13 +230,12 @@ public class ReflectionUtils {
 	 */
 	public static Object convertValue(Object value, Class<?> clazz, String propertyName) {
 		try {
-			Class<?> toType = BeanUtils.getPropertyDescriptor(clazz, propertyName).getPropertyType();
+			Class<?> toType = PropertyUtils.getPropertyDescriptor(clazz.newInstance(), propertyName).getPropertyType();
 			DateConverter dc = new DateConverter();
 			dc.setUseLocaleFormat(true);
 			dc.setPatterns(new String[] { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss" });
 			ConvertUtils.register(dc, Date.class);
 			return ConvertUtils.convert(value, toType);
-
 		} catch (Exception e) {
 			throw convertToUncheckedException(e);
 		}

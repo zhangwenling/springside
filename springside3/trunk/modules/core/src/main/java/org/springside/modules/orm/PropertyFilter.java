@@ -67,6 +67,15 @@ public class PropertyFilter {
 	}
 
 	/**
+	 * 获取唯一的属性名称.
+	 */
+	public String getPropertyName() {
+		if (propertyNames.length > 1)
+			throw new IllegalArgumentException("There are not only one property");
+		return propertyNames[0];
+	}
+
+	/**
 	 * 获取比较值.
 	 */
 	public Object getValue() {
@@ -85,14 +94,5 @@ public class PropertyFilter {
 	 */
 	public boolean isMultiProperty() {
 		return (propertyNames.length > 1);
-	}
-
-	/**
-	 * 获取唯一的属性名称.
-	 */
-	public String getPropertyName() {
-		if (propertyNames.length > 1)
-			throw new IllegalArgumentException("There are not only one property");
-		return propertyNames[0];
 	}
 }
