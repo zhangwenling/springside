@@ -45,8 +45,8 @@ public class UserWebServiceTest extends Assert {
 	@Test
 	public void authUser() {
 		//准备数据,录制脚本
-		org.easymock.EasyMock.expect(userManager.authenticate("admin", "admin")).andReturn(true);
-		org.easymock.EasyMock.expect(userManager.authenticate("admin", "errorPasswd")).andReturn(false);
+		EasyMock.expect(userManager.authenticate("admin", "admin")).andReturn(true);
+		EasyMock.expect(userManager.authenticate("admin", "errorPasswd")).andReturn(false);
 		EasyMock.replay(userManager);
 
 		//执行输入正确的测试
@@ -56,7 +56,7 @@ public class UserWebServiceTest extends Assert {
 		//执行输入错误的测试
 		result = userWebService.authUser("admin", "errorPasswd");
 		assertEquals(WSResult.AUTH_ERROR, result.getCode());
-		
+
 		result = userWebService.authUser("admin", "");
 		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
 	}
