@@ -1,5 +1,7 @@
 package org.springside.examples.showcase.email;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.MailException;
@@ -17,8 +19,14 @@ public class SimpleMailService {
 
 	private JavaMailSender mailSender;
 
+	private String textTemplate;
+
 	public void setMailSender(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
+	}
+
+	public void setTextTemplate(String textTemplate) {
+		this.textTemplate = textTemplate;
 	}
 
 	/**
@@ -29,7 +37,10 @@ public class SimpleMailService {
 		msg.setFrom("springside3.demo@gmail.com");
 		msg.setTo("springside3.demo@gmail.com");
 		msg.setSubject("用户修改通知");
-		msg.setText(userName + "被修改.");
+
+		String content = String.format(textTemplate, userName, new Date());
+		System.out.println(content);
+		msg.setText(content);
 
 		try {
 			mailSender.send(msg);
