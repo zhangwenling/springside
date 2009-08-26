@@ -28,16 +28,11 @@
 
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
 	<repositories>
-
-		<repository>
-			<id>nexus</id>
-			<name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-
+		<!--
+			<repository> <id>nexus</id> <name>local nexus server</name>
+			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
+			</repository>
+		-->
 		<repository>
 			<id>offical</id>
 			<name>Maven Offical Repository</name>
@@ -58,16 +53,11 @@
 	</repositories>
 
 	<pluginRepositories>
-
-		<pluginRepository>
-			<id>nexus</id>
-			<name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-
+		<!--
+			<pluginRepository> <id>nexus</id> <name>local nexus server</name>
+			<url>http://localhost:8081/nexus/content/groups/public</url> <snapshots> <enabled>false</enabled> </snapshots>
+			</pluginRepository>
+		-->
 	</pluginRepositories>
 
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
@@ -338,7 +328,6 @@
 				<artifactId>jcaptcha</artifactId>
 				<version>1.0</version>
 			</dependency>
-
 			<!-- security end -->
 
 			<!-- quartz -->
@@ -598,6 +587,7 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.4.3</version>
 					<configuration>
+						<argLine>-Xmx512M</argLine>
 						<includes>
 							<include>**/unit/**</include>
 						</includes>
@@ -799,7 +789,7 @@
 							</execution>
 						</executions>
 					</plugin>
-					
+
 					<!-- jetty插件启动与关闭应用 -->
 					<plugin>
 						<groupId>org.mortbay.jetty</groupId>
@@ -824,7 +814,7 @@
 							</execution>
 						</executions>
 					</plugin>
-					
+
 					<!-- surefire插件执行functional目录的用例 -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
