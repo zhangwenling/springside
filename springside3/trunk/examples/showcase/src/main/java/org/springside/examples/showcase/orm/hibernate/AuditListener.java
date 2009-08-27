@@ -19,6 +19,8 @@ public class AuditListener implements SaveOrUpdateEventListener {
 
 	public void onSaveOrUpdate(SaveOrUpdateEvent event) throws HibernateException {
 		Object object = event.getObject();
+
+		//如果对象是AuditableEntity子类,添加最后修改时间及操作员ID.
 		if (object instanceof AuditableEntity) {
 			AuditableEntity entity = (AuditableEntity) object;
 

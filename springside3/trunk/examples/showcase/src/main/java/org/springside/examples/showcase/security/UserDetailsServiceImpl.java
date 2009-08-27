@@ -36,7 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		GrantedAuthority[] grantedAuths = obtainGrantedAuthorities(user);
 
-		// showcase的User类中无以下属性,暂时全部设为true.
+		//showcase的User类中无以下属性,暂时全部设为true.
 		boolean enabled = true;
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;
@@ -45,6 +45,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		Operator operator = new Operator(user.getLoginName(), user.getPassword(), enabled, accountNonExpired,
 				credentialsNonExpired, accountNonLocked, grantedAuths);
 
+		//为Operator类加入登录时间信息.
 		operator.setLoginTime(new Date());
 
 		return operator;
