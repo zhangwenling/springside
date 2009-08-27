@@ -183,6 +183,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>mini-service</finalName>
 		<plugins>
 			<!-- Hibernate lazy load bytecode enhancement -->
 			<plugin>

@@ -102,7 +102,6 @@
 	</dependencies>
 
 	<build>
-		<outputDirectory>target/classes</outputDirectory>
 		<plugins>
 			<!-- source插件,打包源码 -->
 			<plugin>
