@@ -62,13 +62,15 @@ public class JCaptchaFilter implements Filter {
 	public static final String DEFAULT_CAPTCHA_SERVICE_ID = "captchaService";
 	public static final String DEFAULT_CAPTCHA_PARAMTER_NAME = "j_captcha";
 
+	public static final String INVALID_AUTO_PASS_VALUE = "invalid";
+
 	private static Logger logger = LoggerFactory.getLogger(JCaptchaFilter.class);
 
 	private String failureUrl;
 	private String filterProcessesUrl = DEFAULT_FILTER_PROCESSES_URL;
 	private String captchaServiceId = DEFAULT_CAPTCHA_SERVICE_ID;
 	private String captchaParamterName = DEFAULT_CAPTCHA_PARAMTER_NAME;
-	private String autoPassValue;
+	private String autoPassValue = INVALID_AUTO_PASS_VALUE;
 
 	private CaptchaService captchaService;
 
@@ -174,8 +176,8 @@ public class JCaptchaFilter implements Filter {
 			String captchaID = request.getSession().getId();
 			String challengeResponse = request.getParameter(captchaParamterName);
 
-			//自动通过值存在时,检验输入值是否等于自动通过值
-			if (autoPassValue != null && autoPassValue.equals(challengeResponse))
+			//自动通过值存在时且不等于invalid时,检验输入值是否等于自动通过值
+			if (!INVALID_AUTO_PASS_VALUE.equals(autoPassValue) && autoPassValue.equals(challengeResponse))
 				return true;
 			return captchaService.validateResponseForID(captchaID, challengeResponse);
 		} catch (CaptchaServiceException e) {
