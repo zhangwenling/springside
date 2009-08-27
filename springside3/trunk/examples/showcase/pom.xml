@@ -118,6 +118,11 @@
 			<classifier>jdk15</classifier>
 		</dependency>
 		<dependency>
+			<groupId>org.tuckey</groupId>
+			<artifactId>urlrewritefilter</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
@@ -248,7 +253,7 @@
 
 	<build>
 		<finalName>showcase</finalName>
-	
+
 		<plugins>
 			<!-- Hibernate lazy load bytecode enhancement -->
 			<plugin>

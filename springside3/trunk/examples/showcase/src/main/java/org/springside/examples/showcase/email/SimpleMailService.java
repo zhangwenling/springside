@@ -18,16 +18,7 @@ public class SimpleMailService {
 	private static Logger logger = LoggerFactory.getLogger(SimpleMailService.class);
 
 	private JavaMailSender mailSender;
-
 	private String textTemplate;
-
-	public void setMailSender(JavaMailSender mailSender) {
-		this.mailSender = mailSender;
-	}
-
-	public void setTextTemplate(String textTemplate) {
-		this.textTemplate = textTemplate;
-	}
 
 	/**
 	 * 发送纯文本的用户修改通知邮件.
@@ -39,7 +30,6 @@ public class SimpleMailService {
 		msg.setSubject("用户修改通知");
 
 		String content = String.format(textTemplate, userName, new Date());
-		System.out.println(content);
 		msg.setText(content);
 
 		try {
@@ -49,4 +39,19 @@ public class SimpleMailService {
 			logger.error("发送邮件失败", e);
 		}
 	}
+
+	/**
+	 * Spring的MailSender.
+	 */
+	public void setMailSender(JavaMailSender mailSender) {
+		this.mailSender = mailSender;
+	}
+
+	/**
+	 * 邮件内容的字符串模板.
+	 */
+	public void setTextTemplate(String textTemplate) {
+		this.textTemplate = textTemplate;
+	}
+
 }
