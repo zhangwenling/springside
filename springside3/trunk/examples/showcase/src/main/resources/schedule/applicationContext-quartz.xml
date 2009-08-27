@@ -41,13 +41,13 @@
 	<!-- Cron Job -->
 	<bean id="cronJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="quartzJob" />
-		<property name="targetMethod" value="executeCronLog" />
+		<property name="targetMethod" value="cronExecuteLog" />
 	</bean>
 
 	<!-- Timer Job -->
 	<bean id="timerJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="quartzJob" />
-		<property name="targetMethod" value="executeTimerLog" />
+		<property name="targetMethod" value="timerExecuteLog" />
 	</bean>
 
 	<!-- 被执行的业务类 -->

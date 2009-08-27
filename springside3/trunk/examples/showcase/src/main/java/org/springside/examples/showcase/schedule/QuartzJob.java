@@ -17,12 +17,18 @@ public class QuartzJob {
 	@Autowired
 	private UserManager userManager;
 
-	protected void executeCronLog() {
+	/**
+	 * 被Quartz以cron trigger调用的方法.
+	 */
+	public void cronExecuteLog() {
 		long userCount = userManager.getUserCount();
 		logger.info("Hello, now is {}, there is {} user in table, print by Quartz cron job", new Date(), userCount);
 	}
 
-	protected void executeTimerLog() {
+	/**
+	 * 被Quartz以simmpler trigger调用的方法.
+	 */
+	public void timerExecuteLog() {
 		long userCount = userManager.getUserCount();
 		logger.info("Hello, now is {}, there is {} user in table, print by Quartz timer job", new Date(), userCount);
 	}

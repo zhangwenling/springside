@@ -17,7 +17,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @DiscriminatorValue("Reply")
 public class Reply extends Post {
 
-	protected Subject subject;
+	private Subject subject;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "subject_id")

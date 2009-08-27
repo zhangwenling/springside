@@ -21,7 +21,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @DiscriminatorValue("Subject")
 public class Subject extends Post {
 
-	protected Set<Reply> replys = new LinkedHashSet<Reply>();
+	private Set<Reply> replys = new LinkedHashSet<Reply>();
 
 	@OneToMany(mappedBy = "subject", cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY)
 	@OrderBy(value = "modifyTime DESC")
