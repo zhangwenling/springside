@@ -10,6 +10,7 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
  */
 @XStreamAlias("role")
 public class Role {
+
 	@XStreamAsAttribute
 	private Long id;
 	@XStreamAsAttribute

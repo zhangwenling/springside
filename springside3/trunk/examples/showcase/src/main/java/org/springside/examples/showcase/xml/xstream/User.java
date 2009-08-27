@@ -123,6 +123,9 @@ public class User {
 			super(mapper);
 		}
 
+		/**
+		 * 将Map对象写成XML.
+		 */
 		@Override
 		public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
 			Map<?, ?> map = (Map<?, ?>) source;
@@ -134,6 +137,9 @@ public class User {
 			}
 		}
 
+		/**
+		 * 从XML节点组装Map对象.
+		 */
 		@SuppressWarnings("unchecked")
 		@Override
 		protected void populateMap(HierarchicalStreamReader reader, UnmarshallingContext context, Map map) {
