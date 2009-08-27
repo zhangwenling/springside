@@ -290,7 +290,7 @@
 							</execution>
 						</executions>
 					</plugin>
-					
+
 					<!-- jetty插件启动应用 -->
 					<plugin>
 						<groupId>org.mortbay.jetty</groupId>
@@ -315,7 +315,7 @@
 							</execution>
 						</executions>
 					</plugin>
-					
+
 					<!-- soapui插件执行测试 -->
 					<plugin>
 						<groupId>eviware</groupId>
