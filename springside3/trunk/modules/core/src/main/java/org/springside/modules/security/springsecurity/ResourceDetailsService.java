@@ -17,7 +17,7 @@ import java.util.LinkedHashMap;
 public interface ResourceDetailsService {
 
 	/*
-	 *ResourceDetailsServicevalue为能访问该URL的以','分隔的授权列表.
+	 *返回带顺序的URL-授权关系Map, key为受保护的URL, value为能访问该URL的以','分隔的授权名称列表.
 	 */
 	public LinkedHashMap<String, String> getRequestMap() throws Exception;
 }

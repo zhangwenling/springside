@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private SecurityManager securityManager;
 
 	/**
-	 * 获取用户Detail信息的回调函数.
+	 * 获取用户Details信息的回调函数.
 	 */
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
@@ -51,7 +51,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	}
 
 	/**
-	 * 获得用户所有角色的权限.
+	 * 获得用户所有角色的权限集合.
 	 */
 	private GrantedAuthority[] obtainGrantedAuthorities(User user) {
 		Set<GrantedAuthority> authSet = new HashSet<GrantedAuthority>();
