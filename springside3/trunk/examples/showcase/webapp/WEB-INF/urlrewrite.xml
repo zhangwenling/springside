@@ -5,11 +5,11 @@
 
 <urlrewrite>
 	<rule>
-		<from>^/common/users$</from>
+		<from>^/common/users.htm$</from>
 		<to type="forward">/common/user.action</to>
 	</rule>
 	<rule>
-		<from>^/common/user/([0-9]+)$</from>
+		<from>^/common/user/([0-9]+)\.htm$</from>
 		<to type="forward">/common/user!input.action?id=$1</to>
 	</rule>
 </urlrewrite>

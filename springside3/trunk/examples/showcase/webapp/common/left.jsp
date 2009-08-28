@@ -4,7 +4,7 @@
     <h2>(部分)完成特性</h2>
 
     <div class="line">
-        <a href="${ctx}/common/users">综合演示</a>
+        <a href="${ctx}/common/users.htm">综合演示</a>
         <a href="${ctx}/jmx/jmx-client.action">JMX演示</a>
 		<a href="${ctx}/email/index.action">邮件演示</a>
 		<a href="${ctx}/ajax/index.action">Ajax演示</a>

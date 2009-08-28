@@ -42,6 +42,13 @@ public abstract class CrudActionSupport<T> extends ActionSupport implements Mode
 	public abstract String list() throws Exception;
 
 	/**
+	 * Action函数,显示新增或修改Entity界面.
+	 * 建议return INPUT.
+	 */
+	@Override
+	public abstract String input() throws Exception;
+
+	/**
 	 * Action函数,新增或修改Entity. 
 	 * 建议return RELOAD.
 	 */
@@ -61,16 +68,16 @@ public abstract class CrudActionSupport<T> extends ActionSupport implements Mode
 	}
 
 	/**
-	 * 在save()前执行二次绑定.
+	 * 在input()前执行二次绑定.
 	 */
-	public void prepareSave() throws Exception {
+	public void prepareInput() throws Exception {
 		prepareModel();
 	}
 
 	/**
-	 * 在input()前执行二次绑定.
+	 * 在save()前执行二次绑定.
 	 */
-	public void prepareInput() throws Exception {
+	public void prepareSave() throws Exception {
 		prepareModel();
 	}
 
