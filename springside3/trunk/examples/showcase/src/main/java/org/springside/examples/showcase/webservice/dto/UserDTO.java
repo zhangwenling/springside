@@ -1,14 +1,9 @@
-package org.springside.examples.miniservice.ws.user.dto;
+package org.springside.examples.showcase.webservice.dto;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.springside.examples.miniservice.ws.WebServiceSupport;
+import org.springside.examples.showcase.webservice.WebServiceSupport;
 
 /**
  * Web Service传输User信息的DTO.
@@ -24,8 +19,6 @@ public class UserDTO {
 	private String loginName;
 	private String name;
 	private String email;
-
-	private Set<RoleDTO> roles = new LinkedHashSet<RoleDTO>();
 
 	public Long getId() {
 		return id;
@@ -57,16 +50,6 @@ public class UserDTO {
 
 	public void setEmail(String value) {
 		email = value;
-	}
-
-	@XmlElementWrapper(name = "roles")
-	@XmlElement(name = "role")
-	public Set<RoleDTO> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<RoleDTO> roles) {
-		this.roles = roles;
 	}
 
 	/**

@@ -9,7 +9,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.service.user.UserManager;
-import org.springside.examples.miniservice.ws.Constants;
 import org.springside.examples.miniservice.ws.WSResult;
 import org.springside.examples.miniservice.ws.WebServiceSupport;
 import org.springside.examples.miniservice.ws.user.dto.CreateUserResult;
@@ -23,7 +22,7 @@ import org.springside.examples.miniservice.ws.user.dto.UserDTO;
  * @author calvin
  */
 //serviceName与portName属性指明WSDL中的名称,endpointInterface属性指向Interface定义类.
-@WebService(serviceName = "UserWebService", portName = "UserWebServicePort", endpointInterface = "org.springside.examples.miniservice.ws.user.UserWebService", targetNamespace = Constants.NS)
+@WebService(serviceName = "UserWebService", portName = "UserWebServicePort", endpointInterface = "org.springside.examples.miniservice.ws.user.UserWebService", targetNamespace = WebServiceSupport.NS)
 public class UserWebServiceImpl extends WebServiceSupport implements UserWebService {
 	@Autowired
 	private UserManager userManager;

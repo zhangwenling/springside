@@ -3,8 +3,8 @@ package org.springside.examples.miniservice.ws.user;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-import org.springside.examples.miniservice.ws.Constants;
 import org.springside.examples.miniservice.ws.WSResult;
+import org.springside.examples.miniservice.ws.WebServiceSupport;
 import org.springside.examples.miniservice.ws.user.dto.CreateUserResult;
 import org.springside.examples.miniservice.ws.user.dto.GetAllUserResult;
 import org.springside.examples.miniservice.ws.user.dto.UserDTO;
@@ -19,7 +19,7 @@ import org.springside.examples.miniservice.ws.user.dto.UserDTO;
  * @author sky
  * @author calvin
  */
-@WebService(name = "UserService", targetNamespace = Constants.NS)
+@WebService(name = "UserService", targetNamespace = WebServiceSupport.NS)
 public interface UserWebService {
 	/**
 	 * 显示所有用户.
