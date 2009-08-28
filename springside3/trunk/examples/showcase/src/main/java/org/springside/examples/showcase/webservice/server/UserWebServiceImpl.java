@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.webservice;
+package org.springside.examples.showcase.webservice.server;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import javax.jws.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.UserManager;
-import org.springside.examples.showcase.webservice.dto.GetAllUserResult;
-import org.springside.examples.showcase.webservice.dto.UserDTO;
+import org.springside.examples.showcase.webservice.server.dto.GetAllUserResult;
+import org.springside.examples.showcase.webservice.server.dto.UserDTO;
 
 /**
  * WebService实现类.
@@ -18,7 +18,7 @@ import org.springside.examples.showcase.webservice.dto.UserDTO;
  * @author calvin
  */
 //serviceName与portName属性指明WSDL中的名称,endpointInterface属性指向Interface定义类.
-@WebService(serviceName = "UserWebService", portName = "UserWebServicePort", endpointInterface = "org.springside.examples.showcase.webservice.UserWebService", targetNamespace = WebServiceSupport.NS)
+@WebService(serviceName = "UserWebService", portName = "UserWebServicePort", endpointInterface = "org.springside.examples.showcase.webservice.server.UserWebService", targetNamespace = WebServiceSupport.NS)
 public class UserWebServiceImpl extends WebServiceSupport implements UserWebService {
 	@Autowired
 	private UserManager userManager;

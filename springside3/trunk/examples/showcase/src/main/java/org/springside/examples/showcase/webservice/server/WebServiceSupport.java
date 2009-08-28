@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.webservice;
+package org.springside.examples.showcase.webservice.server;
 
 import javax.annotation.PostConstruct;
 

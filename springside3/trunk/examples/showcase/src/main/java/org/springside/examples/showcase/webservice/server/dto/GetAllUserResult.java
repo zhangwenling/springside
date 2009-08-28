@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.webservice.dto;
+package org.springside.examples.showcase.webservice.server.dto;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
-import org.springside.examples.showcase.webservice.WebServiceSupport;
+import org.springside.examples.showcase.webservice.server.WebServiceSupport;
 
 /**
  * GetAllUser方法的返回结果类型.

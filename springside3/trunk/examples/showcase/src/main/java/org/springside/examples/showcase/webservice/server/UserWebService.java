@@ -1,8 +1,8 @@
-package org.springside.examples.showcase.webservice;
+package org.springside.examples.showcase.webservice.server;
 
 import javax.jws.WebService;
 
-import org.springside.examples.showcase.webservice.dto.GetAllUserResult;
+import org.springside.examples.showcase.webservice.server.dto.GetAllUserResult;
 
 /**
  * JAX-WS2.0的WebService接口定义类.

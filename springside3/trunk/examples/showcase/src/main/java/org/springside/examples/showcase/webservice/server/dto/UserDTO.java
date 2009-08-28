@@ -1,9 +1,9 @@
-package org.springside.examples.showcase.webservice.dto;
+package org.springside.examples.showcase.webservice.server.dto;
 
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.springside.examples.showcase.webservice.WebServiceSupport;
+import org.springside.examples.showcase.webservice.server.WebServiceSupport;
 
 /**
  * Web Service传输User信息的DTO.

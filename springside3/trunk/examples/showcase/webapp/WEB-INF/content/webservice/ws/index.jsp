@@ -12,15 +12,13 @@
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
 <h3>WS-*高级协议演示</h3>
-<h4>技术说明：</h4>
+<h4>技术说明:</h4>
 <ul>
-<li>WS-Security：认证机制，建议大家从DIY的WebService安全机制逐渐转到标准之中。</li>
-<li>MTOM:附件机制。</li>
+<li>WS-Security：认证机制,演示用户名+Digest式密码或Plain密码的符合WS互操作规范的标准认证机制.</li>
+<li>MTOM:附件机制.</li>
 </ul>
-
-<h4>未来版本：</h4>
-异步回调机制，客户端发送请求后立即返回，服务端产生结果后回调客户端提供的接口通知结果。
-
+<h4>用户故事:</h4>
+WSDL:<a href="http://localhost:8080/showcase/services/UserService?wsdl">http://localhost:8080/showcase/services/UserService?wsdl</a>
 </div>
 </div>
 </body>

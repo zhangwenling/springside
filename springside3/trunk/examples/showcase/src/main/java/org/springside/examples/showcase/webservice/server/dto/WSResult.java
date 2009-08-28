@@ -1,8 +1,8 @@
-package org.springside.examples.showcase.webservice.dto;
+package org.springside.examples.showcase.webservice.server.dto;
 
 import javax.xml.bind.annotation.XmlType;
 
-import org.springside.examples.showcase.webservice.WebServiceSupport;
+import org.springside.examples.showcase.webservice.server.WebServiceSupport;
 
 /**
  * WebService返回结果基类,定义所有返回码.
