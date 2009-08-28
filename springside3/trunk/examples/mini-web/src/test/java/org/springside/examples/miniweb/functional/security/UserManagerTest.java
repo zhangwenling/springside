@@ -115,7 +115,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	 * 根据用户名查找用户的Utils函数. 
 	 */
 	private void findUser(String loginName) {
-		selenium.type("filter_EQ_loginName", loginName);
+		selenium.type("filter_EQS_loginName", loginName);
 		selenium.click("//input[@value='搜索']");
 		waitPageLoad();
 	}
