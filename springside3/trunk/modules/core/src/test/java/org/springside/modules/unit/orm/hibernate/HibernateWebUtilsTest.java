@@ -32,8 +32,8 @@ public class HibernateWebUtilsTest extends Assert {
 	@Test
 	public void buildPropertyFilters() {
 		MockHttpServletRequest request = new MockHttpServletRequest();
-		request.setParameter("filter_EQ_loginName", "abcd");
-		request.setParameter("filter_LIKE_name_OR_email", "efg");
+		request.setParameter("filter_EQS_loginName", "abcd");
+		request.setParameter("filter_LIKES_name_OR_email", "efg");
 
 		List<PropertyFilter> filters = HibernateWebUtils.buildPropertyFilters(request);
 
@@ -42,12 +42,14 @@ public class HibernateWebUtilsTest extends Assert {
 		PropertyFilter filter1 = filters.get(0);
 		assertEquals(PropertyFilter.MatchType.EQ, filter1.getMatchType());
 		assertEquals("loginName", filter1.getPropertyName());
-		assertEquals("abcd", filter1.getValue());
+		assertEquals(String.class, filter1.getPropertyType());
+		assertEquals("abcd", filter1.getPropertyValue());
 
 		PropertyFilter filter2 = filters.get(1);
 		assertEquals(PropertyFilter.MatchType.LIKE, filter2.getMatchType());
+		assertEquals(String.class, filter2.getPropertyType());
 		assertEquals(true, filter2.isMultiProperty());
-		assertEquals("efg", filter2.getValue());
+		assertEquals("efg", filter2.getPropertyValue());
 	}
 
 	public static class TestBean {

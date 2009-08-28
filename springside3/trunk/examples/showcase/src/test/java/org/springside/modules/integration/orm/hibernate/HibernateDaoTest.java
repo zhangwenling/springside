@@ -104,7 +104,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 	public void findByFilters() {
 		List<PropertyFilter> filters = new ArrayList<PropertyFilter>();
 		//EQ filter
-		PropertyFilter eqFilter = new PropertyFilter("EQ_loginName", "admin");
+		PropertyFilter eqFilter = new PropertyFilter("EQS_loginName", "admin");
 		filters.add(eqFilter);
 
 		List<User> users = dao.find(filters);
@@ -112,7 +112,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		assertEquals("admin", users.get(0).getLoginName());
 
 		//LIKE filter
-		PropertyFilter likeFilter = new PropertyFilter("LIKE_email", "springside.org.cn");
+		PropertyFilter likeFilter = new PropertyFilter("LIKES_email", "springside.org.cn");
 		filters.clear();
 		filters.add(likeFilter);
 
@@ -131,13 +131,13 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		assertEquals(1, page.getResult().size());
 
 		//Date and LT/GT filter
-		PropertyFilter dateLtFilter = new PropertyFilter("LT_createTime", "2046-01-01");
+		PropertyFilter dateLtFilter = new PropertyFilter("LTD_createTime", "2046-01-01");
 		filters.clear();
 		filters.add(dateLtFilter);
 		users = dao.find(filters);
 		assertEquals(6, users.size());
 
-		PropertyFilter dateGtFilter = new PropertyFilter("GT_createTime", "2046-01-01 10:00:22");
+		PropertyFilter dateGtFilter = new PropertyFilter("GTD_createTime", "2046-01-01 10:00:22");
 		filters.clear();
 		filters.add(dateGtFilter);
 		users = dao.find(filters);

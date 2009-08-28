@@ -228,9 +228,8 @@ public class ReflectionUtils {
 	 * @param clazz 提供类型信息的Class
 	 * @param propertyName 提供类型信息的Class的属性.
 	 */
-	public static Object convertValue(Object value, Class<?> clazz, String propertyName) {
+	public static Object convertValue(Object value, Class<?> toType) {
 		try {
-			Class<?> toType = PropertyUtils.getPropertyDescriptor(clazz.newInstance(), propertyName).getPropertyType();
 			DateConverter dc = new DateConverter();
 			dc.setUseLocaleFormat(true);
 			dc.setPatterns(new String[] { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss" });
