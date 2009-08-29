@@ -3,11 +3,19 @@ package org.springside.examples.miniweb.functional.security;
 import org.junit.Test;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
 
+/**
+ * 系统安全控制的功能测试, 测试主要用户故事.
+ * 
+ * @author calvin
+ */
 public class SecurityTest extends BaseSeleniumTestCase {
 
+	/**
+	 * 测试匿名用户访问系统时的行为.
+	 */
 	@Test
 	public void checkAnonymous() {
-		//访问退出登录页面
+		//访问退出登录页面,退出之前的登录
 		selenium.open("/mini-web/j_spring_security_logout");
 		assertTrue(selenium.isElementPresent("//input[@value='登录']"));
 
@@ -16,9 +24,12 @@ public class SecurityTest extends BaseSeleniumTestCase {
 		assertTrue(selenium.isElementPresent("//input[@value='登录']"));
 	}
 
+	/**
+	 * 访问只有用户角色的用户访问系统时的受限行为.
+	 */
 	@Test
 	public void checkUserRole() {
-		//访问退出登录页面
+		//访问退出登录页面,退出之前的登录
 		selenium.open("/mini-web/j_spring_security_logout");
 		assertTrue(selenium.isElementPresent("//input[@value='登录']"));
 

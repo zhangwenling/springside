@@ -6,6 +6,11 @@ import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
 import org.springside.modules.test.groups.Groups;
 
+/**
+ * 用户管理的功能测试, 测试页面JavaScript及主要用户故事流程.
+ * 
+ * @author calvin
+ */
 public class UserManagerTest extends BaseSeleniumTestCase {
 
 	/**

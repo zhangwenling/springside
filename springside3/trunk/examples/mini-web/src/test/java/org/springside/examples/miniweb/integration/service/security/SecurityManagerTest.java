@@ -6,6 +6,13 @@ import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.examples.miniweb.service.security.SecurityManager;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
+/**
+ * SecurityManager的集成测试用例,测试Service层的业务逻辑.
+ * 
+ * 调用实际的DAO类进行操作,亦可使用MockDAO对象将本用例改为单元测试.
+ * 
+ * @author calvin
+ */
 public class SecurityManagerTest extends SpringTxTestCase {
 	
 	@Autowired
@@ -19,12 +26,5 @@ public class SecurityManagerTest extends SpringTxTestCase {
 	@Test(expected = ServiceException.class)
 	public void deleteAdmin() {
 		securityManager.deleteUser(1L);
-	}
-
-	@Test
-	public void isLoginNameUnique() {
-		assertEquals(true, securityManager.isLoginNameUnique("admin", "admin"));
-		assertEquals(true, securityManager.isLoginNameUnique("foo", "admin"));
-		assertEquals(false, securityManager.isLoginNameUnique("admin", ""));
 	}
 }

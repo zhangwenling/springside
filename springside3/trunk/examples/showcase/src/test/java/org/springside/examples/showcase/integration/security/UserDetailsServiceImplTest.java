@@ -2,6 +2,7 @@ package org.springside.examples.showcase.integration.security;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.providers.encoding.ShaPasswordEncoder;
 import org.springframework.security.userdetails.UserDetailsService;
 import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,6 +18,7 @@ public class UserDetailsServiceImplTest extends SpringTxTestCase {
 	public void loadUserByUserName() {
 		Operator operator = (Operator) userDetailsService.loadUserByUsername("admin");
 		assertEquals("admin", operator.getUsername());
+		assertEquals(new ShaPasswordEncoder().encodePassword("admin", null), operator.getPassword());
 		assertEquals(2, operator.getAuthorities().length);
 		assertNotNull(operator.getLoginTime());
 	}

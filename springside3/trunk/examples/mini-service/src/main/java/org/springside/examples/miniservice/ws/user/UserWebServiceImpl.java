@@ -22,7 +22,7 @@ import org.springside.examples.miniservice.ws.user.dto.UserDTO;
  * @author calvin
  */
 //serviceName与portName属性指明WSDL中的名称,endpointInterface属性指向Interface定义类.
-@WebService(serviceName = "UserWebService", portName = "UserWebServicePort", endpointInterface = "org.springside.examples.miniservice.ws.user.UserWebService", targetNamespace = WebServiceSupport.NS)
+@WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "org.springside.examples.miniservice.ws.user.UserWebService", targetNamespace = WebServiceSupport.NS)
 public class UserWebServiceImpl extends WebServiceSupport implements UserWebService {
 	@Autowired
 	private UserManager userManager;

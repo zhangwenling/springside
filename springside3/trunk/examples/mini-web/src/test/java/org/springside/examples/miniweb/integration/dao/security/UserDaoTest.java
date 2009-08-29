@@ -9,9 +9,9 @@ import org.springside.examples.miniweb.entity.security.User;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
- * UserDao的集成测试用例.
+ * UserDao的集成测试用例,测试ORM映射及特殊的DAO操作.
  * 
- * 调用实际的DAO类进行操作,默认在操作后进行回滚.
+ * 默认在每个测试函数后进行回滚.
  * 
  * @author calvin
  */

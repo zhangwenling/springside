@@ -5,6 +5,11 @@ import org.springside.examples.miniweb.data.SecurityData;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
 
+/**
+ * 角色管理的功能测试,测试页面JavaScript及主要用户故事流程.
+ * 
+ * @author calvin
+ */
 public class RoleManagerTest extends BaseSeleniumTestCase {
 
 	/**

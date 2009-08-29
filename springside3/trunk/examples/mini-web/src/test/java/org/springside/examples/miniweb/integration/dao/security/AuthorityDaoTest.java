@@ -7,6 +7,13 @@ import org.springside.examples.miniweb.data.SecurityData;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
+/**
+ * UserDao的集成测试用例,测试ORM映射及特殊的DAO操作.
+ * 
+ * 默认在每个测试函数后进行回滚.
+ * 
+ * @author calvin
+ */
 public class AuthorityDaoTest extends SpringTxTestCase {
 	@Autowired
 	private AuthorityDao entityDao;
