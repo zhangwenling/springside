@@ -28,10 +28,15 @@
 		<td>用户名:</td>
 		<td><input type="text" name="name" size="40" value="${name}"/></td>
 	</tr>
-		<tr>
+	<tr>
 		<td>密码:</td>
-		<td><input type="password" name="password" size="40" value="${password}"/></td>
+		<td><input type="password" name="plainPassword" size="40" value="${plainPassword}"/></td>
 	</tr>
+	<tr>
+		<td>密码散列:</td>
+		<td>${shaPassword}</td>
+	</tr>
+	
 	<tr>
 		<td>创建:</td>
 		<td>${createBy} <fmt:formatDate value="${createTime}" type="both"/></td>

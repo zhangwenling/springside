@@ -27,7 +27,8 @@ import org.springside.modules.utils.ReflectionUtils;
 @Table(name = "SS_USER")
 public class User extends AuditableEntity {
 	private String loginName;
-	private String password;
+	private String plainPassword;
+	private String shaPassword;
 	private String name;
 	private String email;
 	private String status;
@@ -53,12 +54,20 @@ public class User extends AuditableEntity {
 		this.loginName = loginName;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPlainPassword() {
+		return plainPassword;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPlainPassword(String plainPassword) {
+		this.plainPassword = plainPassword;
+	}
+
+	public String getShaPassword() {
+		return shaPassword;
+	}
+
+	public void setShaPassword(String shaPassword) {
+		this.shaPassword = shaPassword;
 	}
 
 	public String getName() {

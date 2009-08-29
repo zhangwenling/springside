@@ -3,7 +3,8 @@
   <table name="SS_USER">
     <column>ID</column>
     <column>LOGIN_NAME</column>
-    <column>PASSWORD</column>
+    <column>PLAIN_PASSWORD</column>
+    <column>SHA_PASSWORD</column> 
     <column>NAME</column>
     <column>EMAIL</column>
     <column>STATUS</column>
@@ -16,6 +17,7 @@
       <value>1</value>
       <value>admin</value>
       <value>admin</value>
+      <value>d033e22ae348aeb5660fc2140aec35850c4da997</value>
       <value>Admin</value>
       <value>admin@springside.org.cn</value>
       <value>enabled</value>
@@ -29,6 +31,7 @@
       <value>2</value>
       <value>user</value>
       <value>user</value>
+      <value>12dea96fec20593566ab75692c9949596833adc9</value>
       <value>Calvin</value>
       <value>user@springside.org.cn</value>
       <value>enabled</value>
@@ -42,6 +45,7 @@
       <value>3</value>
       <value>user2</value>
       <value>user2</value>
+      <value>a1881c06eec96db9901c7bbfe41c42a3f08e9cb4</value>
       <value>Jack</value>
       <value>jack@springside.org.cn</value>
       <value>enabled</value>
@@ -55,6 +59,7 @@
       <value>4</value>
       <value>user3</value>
       <value>user3</value>
+      <value>0b7f849446d3383546d15a480966084442cd2193</value>
       <value>Kate</value>
       <value>kate@springside.org.cn</value>
       <value>enabled</value>
@@ -68,6 +73,7 @@
       <value>5</value>
       <value>user4</value>
       <value>user4</value>
+      <value>06e6eef6adf2e5f54ea6c43c376d6d36605f810e</value>
       <value>Sawyer</value>
       <value>sawyer@springside.org.cn</value>
       <value>enabled</value>
@@ -81,6 +87,7 @@
       <value>6</value>
       <value>user5</value>
       <value>user5</value>
+      <value>7d112681b8dd80723871a87ff506286613fa9cf6</value>
       <value>Ben</value>
       <value>ben@springside.org.cn</value>
       <value>enabled</value>

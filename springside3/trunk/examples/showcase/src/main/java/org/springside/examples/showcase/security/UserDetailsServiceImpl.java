@@ -42,7 +42,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
-		Operator operator = new Operator(user.getLoginName(), user.getPassword(), enabled, accountNonExpired,
+		Operator operator = new Operator(user.getLoginName(), user.getShaPassword(), enabled, accountNonExpired,
 				credentialsNonExpired, accountNonLocked, grantedAuths);
 
 		//为Operator类加入登录时间信息.

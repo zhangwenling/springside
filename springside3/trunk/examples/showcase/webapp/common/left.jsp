@@ -15,6 +15,7 @@
 		<a href="${ctx}/log/index.action">日志高级演示</a>
 		<a href="${ctx}/web/index.action">Web高级演示</a>
 		<a href="${ctx}/orm/index.action">数据库高级演示</a>
+		<a href="${ctx}/webservice/index.action">Web服务高级演示</a>
 		<a href="${ctx}/profiler/index.action">性能分析演示</a>
     </div>
     
@@ -26,6 +27,5 @@
 		<a href="${ctx}/rule/index.action">规则引擎演示</a>
 		<a href="${ctx}/workflow/index.action">工作流演示</a>
 		<a href="${ctx}/cache/index.action">缓存高级演示</a>
-		<a href="${ctx}/webservice/index.action">Web服务高级演示</a>
     </div>
 </div>

@@ -12,7 +12,8 @@
 	<import resource="classpath:META-INF/cxf/cxf-extension-ws-security.xml" />
 
 	<!-- jax-ws endpoint定义  -->
-	<jaxws:endpoint id="userServiceEP" address="/UserService">
+	<!-- 使用WS-Security中的明文密码认证机制的Endpoint -->	
+	<jaxws:endpoint id="userServiceWithPlainPasswordEP" address="/UserServiceWithPlainPassword">
 		<jaxws:implementor ref="userWebService" />
 		<jaxws:inInterceptors>
 			<bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
@@ -29,12 +30,34 @@
 			</bean>
 		</jaxws:inInterceptors>
 	</jaxws:endpoint>
+	
+	<!-- 使用WS-Security中的Digest密码认证机制的Endpoint -->	
+	<jaxws:endpoint id="userServiceWithDigestPasswordEP" address="/UserServiceWithDigestPassword">
+		<jaxws:implementor ref="userWebService" />
+		<jaxws:inInterceptors>
+			<bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+				<property name="properties">
+					<map>
+						<entry key="action" value="UsernameToken" />
+						<entry key="passwordType" value="PasswordDigest" />
+						<entry key="passwordCallbackRef">
+							<ref bean="digestPasswordCallback" />
+						</entry>
+					</map>
+				</property>
+			</bean>
+		</jaxws:inInterceptors>
+	</jaxws:endpoint>
+
 
 	<!-- WebService的实现Bean定义 -->
 	<bean id="userWebService" class="org.springside.examples.showcase.webservice.server.UserWebServiceImpl" />
 
 	<!-- 明文密码处理Bean定义 -->
 	<bean id="plainPasswordCallback" class="org.springside.examples.showcase.webservice.server.PlainPasswordCallback" />
+
+	<!-- 明文密码处理Bean定义 -->
+	<bean id="digestPasswordCallback" class="org.springside.examples.showcase.webservice.server.DigestPasswordCallback" />
 
 	<!-- 设定由slf4j处理cxf中java.util.logging打印的日志 -->
 	<bean id="JulOverSlf4j" class="org.springside.modules.utils.JulOverSlf4j" lazy-init="false" />

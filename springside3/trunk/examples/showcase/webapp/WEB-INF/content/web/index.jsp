@@ -16,6 +16,11 @@
 <ul>
 	<li>URLRewrite, 使用URL Rewrite转换用户友好的URL. (综合示例)</li>
 </ul>
+<h4>用户故事：</h4>
+<ul>
+	<li>综合示例中的地址为搜索引擎友好的地址,如用户列表地址为users.htm, 用户1的修改地址为user/1.htm</li>
+</ul>
+
 </div>
 </div>
 </body>

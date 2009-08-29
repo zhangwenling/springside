@@ -38,7 +38,7 @@ public class XStreamTest {
 		user.getHouses().put("bj", "house2");
 
 		String xml = binder.toXml(user);
-		System.out.println(xml);
+		System.out.println("XStream Object to Xml result:" + xml);
 	}
 
 	@Test
@@ -49,6 +49,6 @@ public class XStreamTest {
 				+ "house1</house><house key=\"gz\">house2</house></houses></user>";
 
 		User user = binder.fromXml(xml);
-		System.out.println("User:" + user);
+		System.out.println("XStream Xml to Object result:" + user);
 	}
 }

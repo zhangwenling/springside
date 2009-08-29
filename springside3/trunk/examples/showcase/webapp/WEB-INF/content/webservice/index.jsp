@@ -13,7 +13,7 @@
 <div id="mainbar">
 <h3>Web Service高级演示</h3>
 <ul>
-<li><a href="${ctx}/webservice/ws/index.action">WS-*高级协议演示(安全、附件、异步)</a></li>
+<li><a href="${ctx}/webservice/ws/index.action">WS-*高级协议演示(安全、附件)</a></li>
 <li><a href="${ctx}/webservice/rest/index.action">RESTful Web Service演示</a></li>
 </ul>
 </div>

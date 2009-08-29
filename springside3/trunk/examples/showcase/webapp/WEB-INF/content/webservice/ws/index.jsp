@@ -14,11 +14,14 @@
 <h3>WS-*高级协议演示</h3>
 <h4>技术说明:</h4>
 <ul>
-<li>WS-Security：认证机制,演示用户名+Digest式密码或Plain密码的符合WS互操作规范的标准认证机制.</li>
+<li>WS-Security认证机制：符合WS互操作规范的标准认证机制,演示Plain与Digest式的密码认证.</li>
 <li>MTOM:附件机制.</li>
 </ul>
 <h4>用户故事:</h4>
-WSDL:<a href="http://localhost:8080/showcase/services/UserService?wsdl">http://localhost:8080/showcase/services/UserService?wsdl</a>
+<ul>
+<li>Plain密码WSDL: <a href="http://localhost:8080/showcase/services/UserServiceWithPlainPassword?wsdl">http://localhost:8080/showcase/services/UserServiceWithPlainPassword?wsdl</a></li>
+<li>Digest式密码WSDL: <a href="http://localhost:8080/showcase/services/UserServiceWithDigestPassword?wsdl">http://localhost:8080/showcase/services/UserServiceWithDigestPassword?wsdl</a></li>
+</ul>
 </div>
 </div>
 </body>

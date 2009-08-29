@@ -21,7 +21,7 @@
 	<!-- 认证配置 -->
 	<s:authentication-provider user-service-ref="userDetailsService">
 		<!-- 可设置hash使用sha1或md5散列密码后再存入数据库 -->
-		<s:password-encoder hash="plaintext" />
+		<s:password-encoder hash="sha" />
 	</s:authentication-provider>
 	
 	<!-- 项目实现的用户查询服务  -->

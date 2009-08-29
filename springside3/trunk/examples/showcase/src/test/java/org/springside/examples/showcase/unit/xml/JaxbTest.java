@@ -37,7 +37,7 @@ public class JaxbTest {
 		user.getHouses().put("bj", "house2");
 
 		String xml = binder.toXml(user);
-		System.out.println(xml);
+		System.out.println("Jaxb Object to Xml result:" + xml);
 	}
 
 	@Test
@@ -48,6 +48,6 @@ public class JaxbTest {
 				+ "<item key=\"bj\"><value>house2</value></item><item key=\"gz\">"
 				+ "<value>house1</value></item></houses></user>";
 		User user = binder.fromXml(xml);
-		System.out.println(user);
+		System.out.println("Jaxb Xml to Object result:" + user);
 	}
 }
