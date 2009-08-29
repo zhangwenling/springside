@@ -9,6 +9,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.security.Operator;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
+/**
+ * serDetailsServiceImpl的集成测试用例, 测试Service层的业务逻辑.
+ * 
+ * @author calvin
+ */
 @ContextConfiguration(locations = { "/security/applicationContext-security.xml" })
 public class UserDetailsServiceImplTest extends SpringTxTestCase {
 	@Autowired

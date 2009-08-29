@@ -13,6 +13,13 @@ import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.spring.SpringGroupsTestRunner;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
+/**
+ * UserDao的集成测试用例,测试ORM映射及特殊的DAO操作.
+ * 
+ * 同时演示分组执行TestCase功能.
+ * 
+ * @author calvin
+ */
 //分组执行TestCase
 @RunWith(SpringGroupsTestRunner.class)
 public class UserDaoTest extends SpringTxTestCase {

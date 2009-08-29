@@ -15,7 +15,7 @@
 <ul>
 <li><a href="${ctx}/security/login.action">认证码集成演示</a></li>
 <li>数据级别的权限控制(计划中)</li>
-<li>其他: sha1密码与同时登录人数限制.</li>
+<li>其他: Sha1散列密码与同时登录人数限制.</li>
 </ul>
 </div>
 </div>

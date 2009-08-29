@@ -12,6 +12,11 @@ import org.springside.examples.showcase.common.entity.Subject;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
+/**
+ * PostDao的集成测试用例,测试ORM映射及特殊的DAO操作.
+ * 
+ * @author calvin
+ */
 public class PostDaoTest extends SpringTxTestCase {
 
 	@Autowired

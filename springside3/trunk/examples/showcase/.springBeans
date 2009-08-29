@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[2.2.2.RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[2.2.4.RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
@@ -15,6 +15,7 @@
 		<config>src/main/resources/email/applicationContext-email.xml</config>
 		<config>src/main/resources/schedule/applicationContext-executor.xml</config>
 		<config>src/main/resources/log/applicationContext-log.xml</config>
+		<config>src/main/resources/webservice/applicationContext-cxf.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

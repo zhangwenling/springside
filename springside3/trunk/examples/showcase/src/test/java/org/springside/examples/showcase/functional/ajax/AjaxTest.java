@@ -4,8 +4,10 @@ import org.junit.Test;
 import org.springside.examples.showcase.functional.BaseSeleniumTestCase;
 
 /**
+ * 测试Ajax Mashup.
+ * 演示Ajax测试常用的selenium.waitForConditon()
  * 
- * 演示selenium.waitForConditon()测试Ajax.
+ * @calvin
  */
 public class AjaxTest extends BaseSeleniumTestCase {
 

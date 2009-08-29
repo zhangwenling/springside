@@ -10,8 +10,6 @@ import org.springside.modules.test.spring.SpringTxTestCase;
 /**
  * UserDao的集成测试用例,测试ORM映射及特殊的DAO操作.
  * 
- * 默认在每个测试函数后进行回滚.
- * 
  * @author calvin
  */
 public class RoleDaoTest extends SpringTxTestCase {
