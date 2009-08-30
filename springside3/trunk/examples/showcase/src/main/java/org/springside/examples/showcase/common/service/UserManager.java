@@ -8,6 +8,7 @@ import org.perf4j.log4j.Log4JStopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.providers.encoding.PasswordEncoder;
 import org.springframework.security.providers.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,7 +54,8 @@ public class UserManager {
 			throw new ServiceException("不能修改超级管理员用户");
 		}
 
-		String shaPassword = new ShaPasswordEncoder().encodePassword(user.getPlainPassword(), null);
+		PasswordEncoder encoder = new ShaPasswordEncoder();
+		String shaPassword = encoder.encodePassword(user.getPlainPassword(), null);
 		user.setShaPassword(shaPassword);
 
 		userDao.save(user);

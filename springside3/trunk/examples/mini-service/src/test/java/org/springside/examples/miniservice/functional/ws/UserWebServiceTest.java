@@ -29,6 +29,9 @@ import org.springside.modules.test.spring.SpringContextTestCase;
 @ContextConfiguration(locations = { "/applicationContext-cxf-client.xml" })
 public class UserWebServiceTest extends SpringContextTestCase {
 
+	/**
+	 * 测试认证用户,在Spring中用<jaxws:client/>创建的Client.
+	 */
 	@Test
 	public void authUser() {
 		UserWebService userWebService = (UserWebService) applicationContext.getBean("userWebService");
@@ -36,6 +39,9 @@ public class UserWebServiceTest extends SpringContextTestCase {
 		assertEquals(WSResult.SUCCESS, result.getCode());
 	}
 
+	/**
+	 * 测试创建用户,在Spring中用<jaxws:client/>创建的Client.
+	 */
 	@Test
 	public void createUser() {
 		UserDTO userDTO = new UserDTO();
@@ -53,9 +59,12 @@ public class UserWebServiceTest extends SpringContextTestCase {
 		assertEquals(WSResult.SUCCESS, result.getCode());
 		assertNotNull(result.getUserId());
 	}
-	
+
+	/**
+	 * 测试获取全部用户,使用JAXWS的API自行创建Client.
+	 */
 	@Test
-	public void getAllUserWithApi() throws MalformedURLException {
+	public void getAllUser() throws MalformedURLException {
 		URL wsdlURL = new URL("http://localhost:8080/mini-service/services/UserService?wsdl");
 		QName UserServiceName = new QName(Constants.NS, "UserService");
 		Service service = Service.create(wsdlURL, UserServiceName);

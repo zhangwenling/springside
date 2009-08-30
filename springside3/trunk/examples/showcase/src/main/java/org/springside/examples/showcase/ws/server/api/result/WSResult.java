@@ -1,15 +1,15 @@
-package org.springside.examples.showcase.webservice.server.dto;
+package org.springside.examples.showcase.ws.server.api.result;
 
 import javax.xml.bind.annotation.XmlType;
 
-import org.springside.examples.showcase.webservice.server.WebServiceSupport;
+import org.springside.examples.showcase.ws.server.api.Constants;
 
 /**
  * WebService返回结果基类,定义所有返回码.
  * 
  * @author calvin
  */
-@XmlType(name = "WSResult", namespace = WebServiceSupport.NS)
+@XmlType(name = "WSResult", namespace = Constants.NS)
 public class WSResult {
 
 	// 返回代码定义 //

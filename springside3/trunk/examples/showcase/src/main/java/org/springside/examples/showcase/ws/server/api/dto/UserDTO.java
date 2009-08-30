@@ -1,9 +1,9 @@
-package org.springside.examples.showcase.webservice.server.dto;
+package org.springside.examples.showcase.ws.server.api.dto;
 
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.springside.examples.showcase.webservice.server.WebServiceSupport;
+import org.springside.examples.showcase.ws.server.api.Constants;
 
 /**
  * Web Service传输User信息的DTO.
@@ -12,7 +12,7 @@ import org.springside.examples.showcase.webservice.server.WebServiceSupport;
  * 
  * @author calvin
  */
-@XmlType(name = "User", namespace = WebServiceSupport.NS)
+@XmlType(name = "User", namespace = Constants.NS)
 public class UserDTO {
 
 	private Long id;
