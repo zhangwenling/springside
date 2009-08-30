@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.ws.user.dto;
+package org.springside.examples.miniservice.ws.api.dto;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.springside.examples.miniservice.ws.WebServiceSupport;
+import org.springside.examples.miniservice.ws.api.Constants;
 
 /**
  * Web Service传输User信息的DTO.
@@ -17,7 +17,7 @@ import org.springside.examples.miniservice.ws.WebServiceSupport;
  * 
  * @author calvin
  */
-@XmlType(name = "User", namespace = WebServiceSupport.NS)
+@XmlType(name = "User", namespace = Constants.NS)
 public class UserDTO {
 
 	private Long id;

@@ -1,13 +1,12 @@
-package org.springside.examples.miniservice.ws.user;
+package org.springside.examples.miniservice.ws.api;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-import org.springside.examples.miniservice.ws.WSResult;
-import org.springside.examples.miniservice.ws.WebServiceSupport;
-import org.springside.examples.miniservice.ws.user.dto.CreateUserResult;
-import org.springside.examples.miniservice.ws.user.dto.GetAllUserResult;
-import org.springside.examples.miniservice.ws.user.dto.UserDTO;
+import org.springside.examples.miniservice.ws.api.dto.UserDTO;
+import org.springside.examples.miniservice.ws.api.result.CreateUserResult;
+import org.springside.examples.miniservice.ws.api.result.GetAllUserResult;
+import org.springside.examples.miniservice.ws.api.result.WSResult;
 
 /**
  * JAX-WS2.0的WebService接口定义类.
@@ -19,7 +18,7 @@ import org.springside.examples.miniservice.ws.user.dto.UserDTO;
  * @author sky
  * @author calvin
  */
-@WebService(name = "UserService", targetNamespace = WebServiceSupport.NS)
+@WebService(name = "UserService", targetNamespace = Constants.NS)
 public interface UserWebService {
 	/**
 	 * 显示所有用户.

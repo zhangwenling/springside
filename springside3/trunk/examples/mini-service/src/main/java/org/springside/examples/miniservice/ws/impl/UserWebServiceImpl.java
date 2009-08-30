@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.ws.user;
+package org.springside.examples.miniservice.ws.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +9,12 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.service.user.UserManager;
-import org.springside.examples.miniservice.ws.WSResult;
-import org.springside.examples.miniservice.ws.WebServiceSupport;
-import org.springside.examples.miniservice.ws.user.dto.CreateUserResult;
-import org.springside.examples.miniservice.ws.user.dto.GetAllUserResult;
-import org.springside.examples.miniservice.ws.user.dto.UserDTO;
+import org.springside.examples.miniservice.ws.api.Constants;
+import org.springside.examples.miniservice.ws.api.UserWebService;
+import org.springside.examples.miniservice.ws.api.dto.UserDTO;
+import org.springside.examples.miniservice.ws.api.result.CreateUserResult;
+import org.springside.examples.miniservice.ws.api.result.GetAllUserResult;
+import org.springside.examples.miniservice.ws.api.result.WSResult;
 
 /**
  * WebService实现类.
@@ -22,7 +23,7 @@ import org.springside.examples.miniservice.ws.user.dto.UserDTO;
  * @author calvin
  */
 //serviceName与portName属性指明WSDL中的名称,endpointInterface属性指向Interface定义类.
-@WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "org.springside.examples.miniservice.ws.user.UserWebService", targetNamespace = WebServiceSupport.NS)
+@WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "org.springside.examples.miniservice.ws.api.UserWebService", targetNamespace = Constants.NS)
 public class UserWebServiceImpl extends WebServiceSupport implements UserWebService {
 	@Autowired
 	private UserManager userManager;

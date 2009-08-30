@@ -1,16 +1,15 @@
-package org.springside.examples.miniservice.ws.user.dto;
+package org.springside.examples.miniservice.ws.api.result;
 
 import javax.xml.bind.annotation.XmlType;
 
-import org.springside.examples.miniservice.ws.WSResult;
-import org.springside.examples.miniservice.ws.WebServiceSupport;
+import org.springside.examples.miniservice.ws.api.Constants;
 
 /**
  * CreateUser方法的返回结果类型.
  * 
  * @author calvin
  */
-@XmlType(name = "CreateUserResult", namespace = WebServiceSupport.NS)
+@XmlType(name = "CreateUserResult", namespace = Constants.NS)
 public class CreateUserResult extends WSResult {
 
 	private Long userId;

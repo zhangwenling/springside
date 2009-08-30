@@ -6,8 +6,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springside.examples.miniservice.service.user.UserManager;
-import org.springside.examples.miniservice.ws.WSResult;
-import org.springside.examples.miniservice.ws.user.UserWebServiceImpl;
+import org.springside.examples.miniservice.ws.api.result.WSResult;
+import org.springside.examples.miniservice.ws.impl.UserWebServiceImpl;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**

@@ -4,20 +4,13 @@
 	xsi:schemaLocation="http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 	default-autowire="byType" default-lazy-init="true">
 
-	<description>使用Apache CXF的Web Service配置文件</description>
+	<description>使用Apache CXF Client的Web Service配置文件</description>
 
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 
-	<!-- jax-ws endpoint定义  -->
-	<jaxws:endpoint id="userServiceEP" address="/UserService">
-		<jaxws:implementor ref="userWebService" />
-	</jaxws:endpoint>
+	<jaxws:client id="userWebService" serviceClass="org.springside.examples.miniservice.ws.api.UserWebService" address="http://localhost:8080/mini-service/services/UserService">
+	</jaxws:client>
 
-	<!-- WebService的实现Bean定义 -->
-	<bean id="userWebService" class="org.springside.examples.miniservice.ws.impl.UserWebServiceImpl" />
-
-	<!-- 设定由slf4j处理cxf中java.util.logging打印的日志 -->
-	<bean id="JulOverSlf4j" class="org.springside.modules.utils.JulOverSlf4j" lazy-init="false" />
 </beans>

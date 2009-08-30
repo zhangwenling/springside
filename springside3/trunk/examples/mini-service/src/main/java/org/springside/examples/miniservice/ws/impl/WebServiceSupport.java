@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.ws;
+package org.springside.examples.miniservice.ws.impl;
 
 import javax.annotation.PostConstruct;
 
@@ -15,9 +15,6 @@ import org.springside.modules.utils.DozerMapperSingleton;
  * @author calvin
  */
 public abstract class WebServiceSupport {
-
-	/**项目内统一的NameSpace定义.*/
-	public static final String NS = "http://miniservice.examples.springside.org";
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
