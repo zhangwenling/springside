@@ -38,7 +38,7 @@ def modifyArchetypes():
     replaceinfile('bin/webservice/build-client.bat','mini-service','${artifactId}')
     replaceinfile('bin/webservice/save-wsdl.bat','mini-service','${artifactId}')
     replaceinfile('bin/webservice/build-client-binding.xml','http://miniservice.examples.springside.org','${webservice-namespace}')
-    replaceinfile('src/main/java/ws/Constants.java','http://miniservice.examples.springside.org','${webservice-namespace}')
+    replaceinfile('src/main/java/ws/api/Constants.java','http://miniservice.examples.springside.org','${webservice-namespace}')
 
     print 'modified archetypes.'
     
@@ -87,7 +87,7 @@ def clean():
  
     print 'cleaned temp files.'
 
-springside_version='3.1.5'
+springside_version='3.1.8'
 base_dir = os.path.abspath("../../")
 
 prepare()

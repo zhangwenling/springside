@@ -15,7 +15,7 @@ def packageSource():
 
 def packageAll():
    ## copy maven and repository 
-   os.system('xcopy /s/e/i/y '+base_dir+'\\tools\\maven\\apache-maven-2.2.0 '+springside_dir+'\\tools\\maven\\apache-maven-2.1.0')
+   os.system('xcopy /s/e/i/y '+base_dir+'\\tools\\maven\\apache-maven-2.2.1 '+springside_dir+'\\tools\\maven\\apache-maven-2.1.0')
    os.system('xcopy /s/e/i/h %USERPROFILE%\\.m2\\repository '+springside_dir + '\\tools\\maven\\central-repository')
 
    ## copy tomcat 
@@ -39,7 +39,7 @@ def clean():
 
 base_dir = os.path.abspath("../../")
 export_dir='C:\\'
-springside_version='3.1.5'
+springside_version='3.1.8'
 springside_dir="springside-"+springside_version
 
 prepare()
