@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
- * 简单测试所有Entity类的O/R Mapping是否正确.
+ * 简单测试所有Entity类的O/R Mapping.
  *  
  * @author calvin
  */

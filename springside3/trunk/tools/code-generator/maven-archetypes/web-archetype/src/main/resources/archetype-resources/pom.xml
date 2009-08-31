@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>${artifactId}-parent</artifactId>
 		<groupId>${groupId}</groupId>
-		<version>3.1.6</version>
+		<version>${version}</version>
 		<relativePath>pom-parent.xml</relativePath>
 	</parent>
 	<groupId>${groupId}</groupId>
@@ -206,6 +206,8 @@
 	</dependencies>
 
 	<build>
+		<finalName>${artifactId}</finalName>
+		
 		<plugins>
 			<!-- Hibernate lazy load bytecode enhancement -->
 			<plugin>

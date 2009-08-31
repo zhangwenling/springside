@@ -1,12 +1,12 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.ws.user.dto;
+package ${package}.ws.api.dto;
 
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import ${package}.ws.Constants;
+import ${package}.ws.api.Constants;
 
 /**
  * Web Service传输Role信息的DTO.

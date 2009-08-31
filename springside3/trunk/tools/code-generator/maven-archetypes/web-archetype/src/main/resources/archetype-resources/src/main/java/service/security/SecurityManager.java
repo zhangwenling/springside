@@ -55,6 +55,9 @@ public class SecurityManager {
 		userDao.save(entity);
 	}
 
+	/**
+	 * 删除用户,如果尝试删除超级管理员将抛出异常.
+	 */
 	public void deleteUser(Long id) {
 		if (id == 1) {
 			logger.warn("操作员{}尝试删除超级管理员用户", SpringSecurityUtils.getCurrentUserName());
@@ -76,7 +79,7 @@ public class SecurityManager {
 	/**
 	 * 检查用户名是否唯一.
 	 *
-	 * @return loginName在数据库中唯一或等于orgLoginName时返回true.
+	 * @return loginName在数据库中唯一或等于oldLoginName时返回true.
 	 */
 	@Transactional(readOnly = true)
 	public boolean isLoginNameUnique(String loginName, String oldLoginName) {

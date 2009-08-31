@@ -1,7 +1,7 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.ws.user;
+package ${package}.ws.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +12,12 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import ${package}.entity.user.User;
 import ${package}.service.user.UserManager;
-import ${package}.ws.Constants;
-import ${package}.ws.WSResult;
-import ${package}.ws.WebServiceSupport;
-import ${package}.ws.user.dto.CreateUserResult;
-import ${package}.ws.user.dto.GetAllUserResult;
-import ${package}.ws.user.dto.UserDTO;
+import ${package}.ws.api.Constants;
+import ${package}.ws.api.UserWebService;
+import ${package}.ws.api.dto.UserDTO;
+import ${package}.ws.api.result.CreateUserResult;
+import ${package}.ws.api.result.GetAllUserResult;
+import ${package}.ws.api.result.WSResult;
 
 /**
  * WebService实现类.
@@ -26,7 +26,7 @@ import ${package}.ws.user.dto.UserDTO;
  * @author calvin
  */
 //serviceName与portName属性指明WSDL中的名称,endpointInterface属性指向Interface定义类.
-@WebService(serviceName = "UserWebService", portName = "UserWebServicePort", endpointInterface = "${package}.ws.user.UserWebService", targetNamespace = Constants.NS)
+@WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "${package}.ws.api.UserWebService", targetNamespace = Constants.NS)
 public class UserWebServiceImpl extends WebServiceSupport implements UserWebService {
 	@Autowired
 	private UserManager userManager;

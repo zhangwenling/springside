@@ -1,9 +1,11 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.ws;
+package ${package}.ws.api.result;
 
 import javax.xml.bind.annotation.XmlType;
+
+import ${package}.ws.api.Constants;
 
 /**
  * WebService返回结果基类,定义所有返回码.

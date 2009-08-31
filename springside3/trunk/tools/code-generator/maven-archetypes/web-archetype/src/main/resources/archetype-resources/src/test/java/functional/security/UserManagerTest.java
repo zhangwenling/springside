@@ -9,6 +9,11 @@ import ${package}.entity.security.User;
 import ${package}.functional.BaseSeleniumTestCase;
 import org.springside.modules.test.groups.Groups;
 
+/**
+ * 用户管理的功能测试, 测试页面JavaScript及主要用户故事流程.
+ * 
+ * @author calvin
+ */
 public class UserManagerTest extends BaseSeleniumTestCase {
 
 	/**
@@ -118,7 +123,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	 * 根据用户名查找用户的Utils函数. 
 	 */
 	private void findUser(String loginName) {
-		selenium.type("filter_EQ_loginName", loginName);
+		selenium.type("filter_EQS_loginName", loginName);
 		selenium.click("//input[@value='搜索']");
 		waitPageLoad();
 	}

@@ -1,7 +1,7 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.ws.user.dto;
+package ${package}.ws.api.dto;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import ${package}.ws.Constants;
+import ${package}.ws.api.Constants;
 
 /**
  * Web Service传输User信息的DTO.

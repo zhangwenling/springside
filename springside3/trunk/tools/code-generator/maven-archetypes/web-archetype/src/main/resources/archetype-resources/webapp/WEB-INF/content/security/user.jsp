@@ -21,8 +21,8 @@
 <form id="mainForm" action="user.action" method="get">
 <div id="filter">
 	你好,<%=SpringSecurityUtils.getCurrentUserName()%>.&nbsp;&nbsp;
- 	登录名: <input type="text" name="filter_EQ_loginName" value="${symbol_dollar}{param['filter_EQ_loginName']}"  size="9"/> 
-          姓名或Email: <input type="text" name="filter_LIKE_name_OR_email" value="${symbol_dollar}{param['filter_LIKE_name_OR_email']}" size="9"/>
+ 	登录名: <input type="text" name="filter_EQS_loginName" value="${symbol_dollar}{param['filter_EQS_loginName']}"  size="9"/> 
+          姓名或Email: <input type="text" name="filter_LIKES_name_OR_email" value="${symbol_dollar}{param['filter_LIKES_name_OR_email']}" size="9"/>
 	<input type="button" value="搜索" onclick="search()"/>
 </div> 
 <input type="hidden" name="page.pageNo" id="pageNo" value="${symbol_dollar}{page.pageNo}"/>

@@ -10,6 +10,11 @@ import ${package}.data.UserData;
 import ${package}.entity.user.Role;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
+/**
+ * RoleDao的集成测试用例,测试ORM映射及特殊的DAO操作.
+ * 
+ * @author calvin
+ */
 public class RoleDaoTest extends SpringTxTestCase {
 	@Autowired
 	private RoleDao entityDao;

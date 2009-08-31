@@ -1,16 +1,15 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.ws.user;
+package ${package}.ws.api;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-import ${package}.ws.Constants;
-import ${package}.ws.WSResult;
-import ${package}.ws.user.dto.CreateUserResult;
-import ${package}.ws.user.dto.GetAllUserResult;
-import ${package}.ws.user.dto.UserDTO;
+import ${package}.ws.api.dto.UserDTO;
+import ${package}.ws.api.result.CreateUserResult;
+import ${package}.ws.api.result.GetAllUserResult;
+import ${package}.ws.api.result.WSResult;
 
 /**
  * JAX-WS2.0的WebService接口定义类.

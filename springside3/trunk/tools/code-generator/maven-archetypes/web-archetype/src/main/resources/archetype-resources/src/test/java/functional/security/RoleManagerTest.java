@@ -8,6 +8,11 @@ import ${package}.data.SecurityData;
 import ${package}.entity.security.Role;
 import ${package}.functional.BaseSeleniumTestCase;
 
+/**
+ * 角色管理的功能测试,测试页面JavaScript及主要用户故事流程.
+ * 
+ * @author calvin
+ */
 public class RoleManagerTest extends BaseSeleniumTestCase {
 
 	/**

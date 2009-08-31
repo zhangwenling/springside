@@ -9,12 +9,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ${package}.service.user.UserManager;
-import ${package}.ws.WSResult;
-import ${package}.ws.user.UserWebServiceImpl;
+import ${package}.ws.api.result.WSResult;
+import ${package}.ws.impl.UserWebServiceImpl;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
- * User Web服务的单元测试用例.
+ * User Web Service的单元测试用例,测试WebService操作的返回码.
  * 
  * 使用EasyMock对UserManager进行模拟.
  * 
@@ -40,7 +40,7 @@ public class UserWebServiceTest extends Assert {
 
 	/**
 	 * 用户认证测试.
-	 * 分别测试正确用户名与正确,错误密码,无密码三种情况.
+	 * 分别测试正确用户名与正确,错误密码,无密码三种情况的返回码.
 	 */
 	@Test
 	public void authUser() {

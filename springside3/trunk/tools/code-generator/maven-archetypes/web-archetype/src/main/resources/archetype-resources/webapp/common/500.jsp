@@ -10,7 +10,7 @@
 	if (exception != null)
 		ex = exception;
 	if (request.getAttribute("javax.servlet.error.exception") != null)
-		ex = (Exception) request.getAttribute("javax.servlet.error.exception");
+		ex = (Throwable) request.getAttribute("javax.servlet.error.exception");
 
 	//记录日志
 	Logger logger = LoggerFactory.getLogger("500.jsp");

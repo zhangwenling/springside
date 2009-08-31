@@ -12,6 +12,11 @@ import ${package}.data.SecurityData;
 import ${package}.entity.security.Resource;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
+/**
+ * ResourceDao的集成测试用例,测试ORM映射及特殊的DAO操作.
+ * 
+ * @author calvin
+ */
 public class ResourceDaoTest extends SpringTxTestCase {
 	@Autowired
 	private ResourceDao entityDao;

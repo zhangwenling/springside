@@ -13,6 +13,7 @@
 		<param-value>classpath*:/applicationContext*.xml</param-value>
 	</context-param>
 
+	<!-- Filter 定义  -->
 	<!-- Character Encoding filter -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -45,10 +46,16 @@
 
 	<!-- Struts2 filter -->
 	<filter>
+		<filter-name>struts2CleanupFilter</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ActionContextCleanUp</filter-class>
+	</filter>
+	
+	<filter>
 		<filter-name>struts2Filter</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
 	</filter>
 
+	<!-- Filter 映射 -->
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -65,8 +72,17 @@
 	</filter-mapping>
 
 	<filter-mapping>
+		<filter-name>struts2CleanupFilter</filter-name>
+		<url-pattern>*.action</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
+	<filter-mapping>
 		<filter-name>struts2Filter</filter-name>
 		<url-pattern>*.action</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 
 	<!--Spring的ApplicationContext 载入 -->
