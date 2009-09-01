@@ -43,8 +43,8 @@ public class WSResult {
 	 * 设置返回结果.
 	 */
 	public void setResult(String resultCode, String resultMessage) {
-		this.code = resultCode;
-		this.message = resultMessage;
+		code = resultCode;
+		message = resultMessage;
 	}
 
 	/**

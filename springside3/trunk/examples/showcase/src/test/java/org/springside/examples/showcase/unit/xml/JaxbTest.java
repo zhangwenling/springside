@@ -26,7 +26,6 @@ public class JaxbTest {
 		user.setId(1L);
 		user.setName("calvin");
 		user.setPassword("calvin");
-		user.setEmail("calvin@abc.com");
 
 		user.getRoles().add(new Role(1L, "admin"));
 		user.getRoles().add(new Role(1L, "user"));
@@ -42,7 +41,7 @@ public class JaxbTest {
 
 	@Test
 	public void xmlToObject() {
-		String xml = "<user id=\"1\"><name>calvin</name><email>calvin@abc.com</email><roles>"
+		String xml = "<user id=\"1\"><name>calvin</name><roles>"
 				+ "<role name=\"admin\" id=\"1\"/><role name=\"user\" id=\"1\"/></roles><interests>"
 				+ "<interest>movie</interest><interest>sports</interest></interests><houses>"
 				+ "<item key=\"bj\"><value>house2</value></item><item key=\"gz\">"

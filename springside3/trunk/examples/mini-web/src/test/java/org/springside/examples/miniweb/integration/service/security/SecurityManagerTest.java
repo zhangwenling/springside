@@ -14,7 +14,7 @@ import org.springside.modules.test.spring.SpringTxTestCase;
  * @author calvin
  */
 public class SecurityManagerTest extends SpringTxTestCase {
-	
+
 	@Autowired
 	private SecurityManager securityManager;
 

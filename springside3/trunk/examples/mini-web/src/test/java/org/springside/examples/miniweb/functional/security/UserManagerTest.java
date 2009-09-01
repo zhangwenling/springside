@@ -69,7 +69,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("保存用户成功"));
-		
+
 		findUser(loginName);
 		assertEquals(loginName, selenium.getTable("listTable.1.1"));
 		assertEquals("用户", selenium.getTable("listTable.1.3"));

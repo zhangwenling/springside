@@ -27,7 +27,6 @@ public class XStreamTest {
 		user.setId(1L);
 		user.setName("calvin");
 		user.setPassword("calvin");
-		user.setEmail("calvin@abc.com");
 
 		user.getRoles().add(new Role(1L, "admin"));
 		user.getRoles().add(new Role(1L, "user"));
@@ -43,7 +42,7 @@ public class XStreamTest {
 
 	@Test
 	public void xmlToObject() {
-		String xml = "<user id=\"1\"><name>calvin</name><email>calvin@abc.com</email><roles>"
+		String xml = "<user id=\"1\"><name>calvin</name><roles>"
 				+ "<role id=\"1\" name=\"admin\"/><role id=\"1\" name=\"user\"/></roles>"
 				+ "<interest>movie</interest><interest>sports</interest><houses><house key=\"bj\">"
 				+ "house1</house><house key=\"gz\">house2</house></houses></user>";

@@ -22,13 +22,12 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 //根节点
 @XmlRootElement
 //指定子节点的顺序
-@XmlType(propOrder = { "name", "email", "roles", "interests", "houses" })
+@XmlType(propOrder = { "name", "roles", "interests", "houses" })
 public class User {
 
 	private Long id;
 	private String name;
 	private String password;
-	private String email;
 
 	private List<Role> roles = new ArrayList<Role>();
 	private List<String> interests = new ArrayList<String>();
@@ -62,15 +61,7 @@ public class User {
 		this.password = password;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	//设置xml为<roles><role id="1"/><role id="2"/></roles>
+	//设置对List<Object>的映射, xml为<roles><role id="1" name="admin"/></roles>
 	@XmlElementWrapper(name = "roles")
 	@XmlElement(name = "role")
 	public List<Role> getRoles() {
@@ -81,17 +72,18 @@ public class User {
 		this.roles = roles;
 	}
 
+	//设置对List<String>的映射, xml为<interests><interest>movie</interest></interests>
+	@XmlElementWrapper(name = "interests")
+	@XmlElement(name = "interest")
 	public List<String> getInterests() {
 		return interests;
 	}
 
-	@XmlElementWrapper(name = "interests")
-	@XmlElement(name = "interest")
 	public void setInterests(List<String> interests) {
 		this.interests = interests;
 	}
 
-	//设置对Map的转换
+	//设置对Map的映射,xml为<houses><item key="bj"><value>house1</value></item></houses>
 	@XmlJavaTypeAdapter(MapAdapter.class)
 	public Map<String, String> getHouses() {
 		return houses;

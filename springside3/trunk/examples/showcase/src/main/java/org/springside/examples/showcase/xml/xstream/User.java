@@ -37,15 +37,14 @@ public class User {
 	@XStreamOmitField
 	private String password;
 
-	private String email;
-
+	//List<Object>的映射按默认, xml为<roles><role id="1" name="admin"/></roles>
 	private List<Role> roles = new ArrayList<Role>();
 
-	//设置xml为<interest/><interest/>
+	//设置List<String>的映射, xml为<interest>movie</interest><interest>sports</interest>
 	@XStreamImplicit(itemFieldName = "interest")
 	private List<String> interests = new ArrayList<String>();
 
-	//设置对Map的转换
+	//设置对Map的映射, xml为<houses><house key="bj">house1</house></houses>
 	@XStreamConverter(HouseMapConverter.class)
 	private Map<String, String> houses = new HashMap<String, String>();
 
@@ -71,14 +70,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public List<Role> getRoles() {
