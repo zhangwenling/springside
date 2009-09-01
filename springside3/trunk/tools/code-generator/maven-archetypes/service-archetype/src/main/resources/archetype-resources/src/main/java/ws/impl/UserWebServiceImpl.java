@@ -9,6 +9,9 @@ import java.util.List;
 import javax.jws.WebService;
 
 import org.apache.commons.lang.StringUtils;
+import org.dozer.DozerBeanMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ${package}.entity.user.User;
 import ${package}.service.user.UserManager;
@@ -27,9 +30,14 @@ import ${package}.ws.api.result.WSResult;
  */
 //serviceName与portName属性指明WSDL中的名称,endpointInterface属性指向Interface定义类.
 @WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "${package}.ws.api.UserWebService", targetNamespace = Constants.NS)
-public class UserWebServiceImpl extends WebServiceSupport implements UserWebService {
+public class UserWebServiceImpl implements UserWebService {
+
+	private static Logger logger = LoggerFactory.getLogger(UserWebServiceImpl.class);
+
 	@Autowired
 	private UserManager userManager;
+	@Autowired
+	private DozerBeanMapper dozer;
 
 	/**
 	 * @see UserWebService${symbol_pound}getAllUser()

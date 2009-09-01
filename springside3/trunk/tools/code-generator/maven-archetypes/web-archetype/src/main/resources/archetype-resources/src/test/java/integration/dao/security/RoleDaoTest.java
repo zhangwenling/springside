@@ -44,11 +44,11 @@ public class RoleDaoTest extends SpringTxTestCase {
 	public void deleteRole() {
 		int oldJoinTableCount = countRowsInTable("SS_USER_ROLE");
 		int oldUserTableCount = countRowsInTable("SS_USER");
-		
+
 		//删除用户角色, 中间表将减少6条记录.
 		entityDao.delete(2L);
 		flush();
-		
+
 		int newJoinTableCount = countRowsInTable("SS_USER_ROLE");
 		int newUserTableCount = countRowsInTable("SS_USER");
 		assertEquals(6, oldJoinTableCount - newJoinTableCount);

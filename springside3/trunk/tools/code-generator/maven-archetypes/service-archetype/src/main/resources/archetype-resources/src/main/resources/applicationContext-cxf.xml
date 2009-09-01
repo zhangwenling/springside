@@ -20,6 +20,9 @@
 
 	<!-- WebService的实现Bean定义 -->
 	<bean id="userWebService" class="${package}.ws.impl.UserWebServiceImpl" />
+	
+	<!-- dozer DTO复制类 -->
+	<bean id="dozer" class="org.dozer.DozerBeanMapper"/>
 
 	<!-- 设定由slf4j处理cxf中java.util.logging打印的日志 -->
 	<bean id="JulOverSlf4j" class="org.springside.modules.utils.JulOverSlf4j" lazy-init="false" />

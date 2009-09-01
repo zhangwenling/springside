@@ -3,6 +3,7 @@
 #set( $symbol_escape = '\' )
 package ${package}.unit.ws.user;
 
+import org.dozer.DozerBeanMapper;
 import org.easymock.classextension.EasyMock;
 import org.junit.After;
 import org.junit.Assert;
@@ -29,7 +30,7 @@ public class UserWebServiceTest extends Assert {
 		//创建mock对象
 		userManager = EasyMock.createNiceMock(UserManager.class);
 		ReflectionUtils.setFieldValue(userWebService, "userManager", userManager);
-		userWebService.initDozer();
+		ReflectionUtils.setFieldValue(userWebService, "dozer", new DozerBeanMapper());
 	}
 
 	@After
