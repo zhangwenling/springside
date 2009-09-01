@@ -14,11 +14,15 @@ import org.springside.examples.showcase.common.entity.IdEntity;
  */
 @MappedSuperclass
 public class AuditableEntity extends IdEntity {
-	protected Date createTime; //创建时间
-	protected String createBy; //创建操作员的登录名
-	protected Date lastModifyTime; //最后修改时间
-	protected String lastModifyBy; //最后修改操作员的登录名
 
+	protected Date createTime;
+	protected String createBy;
+	protected Date lastModifyTime;
+	protected String lastModifyBy;
+
+	/**
+	 * 创建时间.
+	 */
 	//本属性只在save时有效,update时无效.
 	@Column(updatable = false)
 	public Date getCreateTime() {
@@ -29,6 +33,9 @@ public class AuditableEntity extends IdEntity {
 		this.createTime = createTime;
 	}
 
+	/**
+	 * 创建的操作员的登录名.
+	 */
 	@Column(updatable = false)
 	public String getCreateBy() {
 		return createBy;
@@ -38,6 +45,9 @@ public class AuditableEntity extends IdEntity {
 		this.createBy = createBy;
 	}
 
+	/**
+	 * 最后修改时间.
+	 */
 	//本属性只在update时有效,save时无效.
 	@Column(insertable = false)
 	public Date getLastModifyTime() {
@@ -48,6 +58,9 @@ public class AuditableEntity extends IdEntity {
 		this.lastModifyTime = lastModifyTime;
 	}
 
+	/**
+	 * 最后修改的操作员的登录名
+	 */
 	@Column(insertable = false)
 	public String getLastModifyBy() {
 		return lastModifyBy;

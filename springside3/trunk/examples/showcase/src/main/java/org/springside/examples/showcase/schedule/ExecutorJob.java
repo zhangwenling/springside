@@ -17,9 +17,12 @@ public class ExecutorJob implements Runnable {
 	@Autowired
 	private UserManager userManager;
 
+	/**
+	 * 定时打印当前用户数到日志.
+	 */
 	public void run() {
 		long userCount = userManager.getUserCount();
-		logger.info("Hello, now is {}, there is {} user in table, print by ScheduledExecutor Job.", new Date(),
+		logger.info("Hello, now is {}, there is {} user in database, print by ScheduledExecutor Job.", new Date(),
 				userCount);
 	}
 }

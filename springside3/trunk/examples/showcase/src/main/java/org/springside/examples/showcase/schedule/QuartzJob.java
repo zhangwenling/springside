@@ -18,7 +18,7 @@ public class QuartzJob {
 	private UserManager userManager;
 
 	/**
-	 * 被Quartz以cron trigger调用的方法.
+	 * 被Quartz以cron trigger调用的方法,定时打印当前用户数到日志.
 	 */
 	public void cronExecuteLog() {
 		long userCount = userManager.getUserCount();
@@ -26,7 +26,7 @@ public class QuartzJob {
 	}
 
 	/**
-	 * 被Quartz以simmpler trigger调用的方法.
+	 * 被Quartz以simmpler trigger调用的方法,定时打印当前用户数到日志.
 	 */
 	public void timerExecuteLog() {
 		long userCount = userManager.getUserCount();

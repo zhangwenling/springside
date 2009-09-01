@@ -18,12 +18,15 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * @author calvin
  */
 @Entity
+//标识字段值
 @DiscriminatorValue("Subject")
 public class Subject extends Post {
 
 	private Set<Reply> replys = new LinkedHashSet<Reply>();
 
+	//与回帖的一对多关系,在删除主题时cascade删除回帖.
 	@OneToMany(mappedBy = "subject", cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY)
+	//按时间排序回帖
 	@OrderBy(value = "modifyTime DESC")
 	public Set<Reply> getReplys() {
 		return replys;

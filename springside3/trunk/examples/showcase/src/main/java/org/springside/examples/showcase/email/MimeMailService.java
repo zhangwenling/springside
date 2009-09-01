@@ -35,12 +35,15 @@ public class MimeMailService {
 	private JavaMailSender mailSender;
 	private Template template;
 
+	/**
+	 * Spring的MailSender.
+	 */
 	public void setMailSender(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
 	}
 
 	/**
-	 * 注入Freemarker引擎配置.
+	 * 注入Freemarker引擎配置,构造Freemarker 邮件内容模板.
 	 */
 	public void setFreemarkerConfiguration(Configuration freemarkerConfiguration) throws IOException {
 		//根据freemarkerConfiguration的templateLoaderPath载入文件.
@@ -64,7 +67,7 @@ public class MimeMailService {
 			buildAttachment(helper);
 
 			mailSender.send(msg);
-			logger.info("HTML版邮件已发送至" + "springside3.demo@gmail.com");
+			logger.info("HTML版邮件已发送至springside3.demo@gmail.com");
 		} catch (MessagingException e) {
 			logger.error("构造邮件失败", e);
 		} catch (MailException e) {

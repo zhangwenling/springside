@@ -54,6 +54,9 @@ public class User extends AuditableEntity {
 		this.loginName = loginName;
 	}
 
+	/**
+	 * 演示用明文密码.
+	 */
 	public String getPlainPassword() {
 		return plainPassword;
 	}
@@ -62,6 +65,9 @@ public class User extends AuditableEntity {
 		this.plainPassword = plainPassword;
 	}
 
+	/**
+	 * 演示用SHA1散列密码.
+	 */
 	public String getShaPassword() {
 		return shaPassword;
 	}

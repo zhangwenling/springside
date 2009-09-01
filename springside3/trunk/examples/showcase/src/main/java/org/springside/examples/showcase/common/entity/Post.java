@@ -19,13 +19,23 @@ import org.hibernate.annotations.ForceDiscriminator;
  */
 @Entity
 @Table(name = "SS_POST")
+//单表继承策略
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//查询对象时强制加入子类标识字段
 @ForceDiscriminator
 public abstract class Post extends IdEntity {
 	protected String title;
 	protected String content;
 	protected User user;
 	protected Date modifyTime;
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	//延时加载的Lob字段, 需要运行instrument任务进行bytecode enhancement
 	@Lob
@@ -38,14 +48,7 @@ public abstract class Post extends IdEntity {
 		this.content = content;
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
+	//与用户的多对一映射
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	public User getUser() {

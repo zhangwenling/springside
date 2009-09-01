@@ -3,7 +3,7 @@ package org.springside.examples.showcase.jmx.server;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * 系统属性配置MBean.
+ * 系统属性配置的MBean实现.
  * 
  * @author calvin
  */

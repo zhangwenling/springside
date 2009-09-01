@@ -17,6 +17,8 @@ public class PasswordCallback implements CallbackHandler {
 
 	public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
 		WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];
-		pc.setPassword("admin");
+		//为admin用户设置密码"admin"
+		if (pc.getIdentifier().equals("admin"))
+			pc.setPassword("admin");
 	}
 }

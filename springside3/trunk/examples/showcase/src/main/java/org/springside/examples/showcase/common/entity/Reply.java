@@ -14,11 +14,13 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * @author calvin
  */
 @Entity
+//标识字段值
 @DiscriminatorValue("Reply")
 public class Reply extends Post {
 
 	private Subject subject;
 
+	//与主题的多对一关系
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "subject_id")
 	public Subject getSubject() {

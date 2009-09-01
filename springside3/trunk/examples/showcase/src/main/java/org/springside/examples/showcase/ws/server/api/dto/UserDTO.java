@@ -18,7 +18,6 @@ public class UserDTO {
 	private Long id;
 	private String loginName;
 	private String name;
-	private String email;
 
 	public Long getId() {
 		return id;
@@ -42,14 +41,6 @@ public class UserDTO {
 
 	public void setName(String value) {
 		name = value;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String value) {
-		email = value;
 	}
 
 	/**
