@@ -370,6 +370,9 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
+				<configuration>
+					<overrideWebXml>src/test/resources/web.xml</overrideWebXml>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
