@@ -14,7 +14,7 @@ xcopy /s/e/i/h/d/y "tools\maven\central-repository" "%USERPROFILE%\.m2\repositor
 
 echo [Step 2] 执行tools/h2/h2w.bat 启动H2数据库.
 cd tools\h2
-start h2w.bat
+call h2w.bat
 cd ..\..\
 
 echo [Step 3] 执行tools/tomcat/apache-tomcat-6.0.20/bin/startup.bat 启动Tomcat服务器.
