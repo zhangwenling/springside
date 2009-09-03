@@ -1,4 +1,4 @@
 @echo off
-cd ..\tools\derby
+cd ..\tools\h2
 
-start-db.bat
+h2w.bat

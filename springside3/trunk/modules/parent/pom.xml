@@ -643,7 +643,7 @@
 				<plugin>
 					<groupId>org.mortbay.jetty</groupId>
 					<artifactId>maven-jetty-plugin</artifactId>
-					<version>6.1.19</version>
+					<version>6.1.20</version>
 				</plugin>
 
 				<!-- cargo插件 -->
@@ -674,7 +674,7 @@
 						<type>CLEAN_INSERT</type>
 						<src>src/test/resources/test-data.xml</src>
 						<dest>src/test/resources/test-data.xml</dest>
-						<format>xml</format>
+						<format>${dbunit.format}</format>
 						<transaction>true</transaction>
 						<encoding>${project.build.sourceEncoding}</encoding>
 						<dataTypeFactoryName>${dbunit.datatype}</dataTypeFactoryName>

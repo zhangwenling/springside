@@ -1,219 +1,40 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-  <table name="SS_AUTHORITY">
-    <column>ID</column>
-    <column>DISPLAY_NAME</column>
-    <column>NAME</column>
-    <row>
-      <value>1</value>
-      <value>浏览用户</value>
-      <value>A_VIEW_USER</value>
-    </row>
-    <row>
-      <value>2</value>
-      <value>修改用户</value>
-      <value>A_MODIFY_USER</value>
-    </row>
-    <row>
-      <value>3</value>
-      <value>浏览角色</value>
-      <value>A_VIEW_ROLE</value>
-    </row>
-    <row>
-      <value>4</value>
-      <value>修改角色</value>
-      <value>A_MODIFY_ROLE</value>
-    </row>
-  </table>
-  <table name="SS_RESOURCE">
-    <column>ID</column>
-    <column>POSITION</column>
-    <column>RESOURCE_TYPE</column>
-    <column>VALUE</column>
-    <row>
-      <value>1</value>
-      <value>1.0</value>
-      <value>url</value>
-      <value>/security/user!save*</value>
-    </row>
-    <row>
-      <value>2</value>
-      <value>2.0</value>
-      <value>url</value>
-      <value>/security/user!delete*</value>
-    </row>
-    <row>
-      <value>3</value>
-      <value>3.0</value>
-      <value>url</value>
-      <value>/security/user*</value>
-    </row>
-    <row>
-      <value>4</value>
-      <value>4.0</value>
-      <value>url</value>
-      <value>/security/role!save*</value>
-    </row>
-    <row>
-      <value>5</value>
-      <value>5.0</value>
-      <value>url</value>
-      <value>/security/role!delete*</value>
-    </row>
-    <row>
-      <value>6</value>
-      <value>6.0</value>
-      <value>url</value>
-      <value>/security/role*</value>
-    </row>
-  </table>
-  <table name="SS_RESOURCE_AUTHORITY">
-    <column>RESOURCE_ID</column>
-    <column>AUTHORITY_ID</column>
-    <row>
-      <value>1</value>
-      <value>2</value>
-    </row>
-    <row>
-      <value>2</value>
-      <value>2</value>
-    </row>
-    <row>
-      <value>3</value>
-      <value>1</value>
-    </row>
-    <row>
-      <value>4</value>
-      <value>4</value>
-    </row>
-    <row>
-      <value>5</value>
-      <value>4</value>
-    </row>
-    <row>
-      <value>6</value>
-      <value>3</value>
-    </row>
-  </table>
-  <table name="SS_ROLE">
-    <column>ID</column>
-    <column>NAME</column>
-    <row>
-      <value>1</value>
-      <value>管理员</value>
-    </row>
-    <row>
-      <value>2</value>
-      <value>用户</value>
-    </row>
-  </table>
-  <table name="SS_ROLE_AUTHORITY">
-    <column>ROLE_ID</column>
-    <column>AUTHORITY_ID</column>
-    <row>
-      <value>1</value>
-      <value>1</value>
-    </row>
-    <row>
-      <value>1</value>
-      <value>2</value>
-    </row>
-    <row>
-      <value>1</value>
-      <value>3</value>
-    </row>
-    <row>
-      <value>1</value>
-      <value>4</value>
-    </row>
-    <row>
-      <value>2</value>
-      <value>1</value>
-    </row>
-    <row>
-      <value>2</value>
-      <value>3</value>
-    </row>
-  </table>
-  <table name="SS_USER">
-    <column>ID</column>
-    <column>EMAIL</column>
-    <column>LOGIN_NAME</column>
-    <column>NAME</column>
-    <column>PASSWORD</column>
-    <row>
-      <value>1</value>
-      <value>admin@springside.org.cn</value>
-      <value>admin</value>
-      <value>Admin</value>
-      <value>admin</value>
-    </row>
-    <row>
-      <value>2</value>
-      <value>user@springside.org.cn</value>
-      <value>user</value>
-      <value>User</value>
-      <value>user</value>
-    </row>
-    <row>
-      <value>3</value>
-      <value>jack@springside.org.cn</value>
-      <value>user2</value>
-      <value>Jack</value>
-      <value>user2</value>
-    </row>
-    <row>
-      <value>4</value>
-      <value>kate@springside.org.cn</value>
-      <value>user3</value>
-      <value>Kate</value>
-      <value>user3</value>
-    </row>
-    <row>
-      <value>5</value>
-      <value>sawyer@springside.org.cn</value>
-      <value>user4</value>
-      <value>Sawyer</value>
-      <value>user4</value>
-    </row>
-    <row>
-      <value>6</value>
-      <value>ben@springside.org.cn</value>
-      <value>user5</value>
-      <value>Ben</value>
-      <value>user5</value>
-    </row>
-  </table>
-  <table name="SS_USER_ROLE">
-    <column>USER_ID</column>
-    <column>ROLE_ID</column>
-    <row>
-      <value>1</value>
-      <value>1</value>
-    </row>
-    <row>
-      <value>1</value>
-      <value>2</value>
-    </row>
-    <row>
-      <value>2</value>
-      <value>2</value>
-    </row>
-    <row>
-      <value>3</value>
-      <value>2</value>
-    </row>
-    <row>
-      <value>4</value>
-      <value>2</value>
-    </row>
-    <row>
-      <value>5</value>
-      <value>2</value>
-    </row>
-    <row>
-      <value>6</value>
-      <value>2</value>
-    </row>
-  </table>
+  <SS_AUTHORITY ID="1" DISPLAY_NAME="浏览用户" NAME="A_VIEW_USER"/>
+  <SS_AUTHORITY ID="2" DISPLAY_NAME="修改用户" NAME="A_MODIFY_USER"/>
+  <SS_AUTHORITY ID="3" DISPLAY_NAME="浏览角色" NAME="A_VIEW_ROLE"/>
+  <SS_AUTHORITY ID="4" DISPLAY_NAME="修改角色" NAME="A_MODIFY_ROLE"/>
+  <SS_RESOURCE ID="1" POSITION="1.0" RESOURCE_TYPE="url" VALUE="/security/user!save*"/>
+  <SS_RESOURCE ID="2" POSITION="2.0" RESOURCE_TYPE="url" VALUE="/security/user!delete*"/>
+  <SS_RESOURCE ID="3" POSITION="3.0" RESOURCE_TYPE="url" VALUE="/security/user*"/>
+  <SS_RESOURCE ID="4" POSITION="4.0" RESOURCE_TYPE="url" VALUE="/security/role!save*"/>
+  <SS_RESOURCE ID="5" POSITION="5.0" RESOURCE_TYPE="url" VALUE="/security/role!delete*"/>
+  <SS_RESOURCE ID="6" POSITION="6.0" RESOURCE_TYPE="url" VALUE="/security/role*"/>
+  <SS_RESOURCE_AUTHORITY RESOURCE_ID="1" AUTHORITY_ID="2"/>
+  <SS_RESOURCE_AUTHORITY RESOURCE_ID="2" AUTHORITY_ID="2"/>
+  <SS_RESOURCE_AUTHORITY RESOURCE_ID="3" AUTHORITY_ID="1"/>
+  <SS_RESOURCE_AUTHORITY RESOURCE_ID="4" AUTHORITY_ID="4"/>
+  <SS_RESOURCE_AUTHORITY RESOURCE_ID="5" AUTHORITY_ID="4"/>
+  <SS_RESOURCE_AUTHORITY RESOURCE_ID="6" AUTHORITY_ID="3"/>
+  <SS_ROLE ID="1" NAME="管理员"/>
+  <SS_ROLE ID="2" NAME="用户"/>
+  <SS_ROLE_AUTHORITY ROLE_ID="1" AUTHORITY_ID="1"/>
+  <SS_ROLE_AUTHORITY ROLE_ID="1" AUTHORITY_ID="2"/>
+  <SS_ROLE_AUTHORITY ROLE_ID="1" AUTHORITY_ID="3"/>
+  <SS_ROLE_AUTHORITY ROLE_ID="1" AUTHORITY_ID="4"/>
+  <SS_ROLE_AUTHORITY ROLE_ID="2" AUTHORITY_ID="1"/>
+  <SS_ROLE_AUTHORITY ROLE_ID="2" AUTHORITY_ID="3"/>
+  <SS_USER ID="1" EMAIL="admin@springside.org.cn" LOGIN_NAME="admin" NAME="Admin" PASSWORD="admin"/>
+  <SS_USER ID="2" EMAIL="user@springside.org.cn" LOGIN_NAME="user" NAME="User" PASSWORD="user"/>
+  <SS_USER ID="3" EMAIL="jack@springside.org.cn" LOGIN_NAME="user2" NAME="Jack" PASSWORD="user2"/>
+  <SS_USER ID="4" EMAIL="kate@springside.org.cn" LOGIN_NAME="user3" NAME="Kate" PASSWORD="user3"/>
+  <SS_USER ID="5" EMAIL="sawyer@springside.org.cn" LOGIN_NAME="user4" NAME="Sawyer" PASSWORD="user4"/>
+  <SS_USER ID="6" EMAIL="ben@springside.org.cn" LOGIN_NAME="user5" NAME="Ben" PASSWORD="user5"/>
+  <SS_USER_ROLE USER_ID="1" ROLE_ID="1"/>
+  <SS_USER_ROLE USER_ID="1" ROLE_ID="2"/>
+  <SS_USER_ROLE USER_ID="2" ROLE_ID="2"/>
+  <SS_USER_ROLE USER_ID="3" ROLE_ID="2"/>
+  <SS_USER_ROLE USER_ID="4" ROLE_ID="2"/>
+  <SS_USER_ROLE USER_ID="5" ROLE_ID="2"/>
+  <SS_USER_ROLE USER_ID="6" ROLE_ID="2"/>
 </dataset>

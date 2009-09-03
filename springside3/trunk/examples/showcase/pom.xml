@@ -18,11 +18,14 @@
 		<jdbc.url>jdbc:h2:tcp://localhost/~/showcase</jdbc.url>
 		<jdbc.user>sa</jdbc.user>
 		<jdbc.password></jdbc.password>
+		
 		<jdbc.driver.groupid>com.h2database</jdbc.driver.groupid>
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
 		<jdbc.driver.version>1.1.117</jdbc.driver.version>
+		
 		<dbunit.schema.file>src/main/sql/h2/schema.sql</dbunit.schema.file>
 		<dbunit.datatype>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.datatype>
+		<dbunit.format>flat</dbunit.format>
 	</properties>
 
 	<!-- 依赖项定义 -->
