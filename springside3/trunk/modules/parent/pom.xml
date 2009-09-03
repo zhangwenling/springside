@@ -878,7 +878,6 @@
 								<configuration>
 									<srcFiles>
 										<srcFile>${dbunit.schema.file}</srcFile>
-										<!-- <srcFile>src/main/sql/derby/init-data.sql</srcFile> -->
 									</srcFiles>
 								</configuration>
 							</execution>
