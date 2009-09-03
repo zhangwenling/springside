@@ -3,6 +3,7 @@ package org.springside.examples.showcase.common.entity;
 import java.util.Date;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
@@ -29,6 +30,7 @@ public abstract class Post extends IdEntity {
 	protected User user;
 	protected Date modifyTime;
 
+	@Column(nullable = false)
 	public String getTitle() {
 		return title;
 	}

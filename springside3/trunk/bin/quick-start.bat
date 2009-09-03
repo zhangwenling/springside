@@ -12,9 +12,9 @@ cd ..\
 echo [Step 1] 复制tools/maven/central-repository 到 %userprofile%\.m2\repository
 xcopy /s/e/i/h/d/y "tools\maven\central-repository" "%USERPROFILE%\.m2\repository"
 
-echo [Step 2] 执行tools/derby/start-db.bat 以Standalone形式启动Derby数据库.
-cd tools\derby
-start start-db.bat
+echo [Step 2] 执行tools/h2/h2w.bat 启动H2数据库.
+cd tools\h2
+start h2w.bat
 cd ..\..\
 
 echo [Step 3] 执行tools/tomcat/apache-tomcat-6.0.20/bin/startup.bat 启动Tomcat服务器.

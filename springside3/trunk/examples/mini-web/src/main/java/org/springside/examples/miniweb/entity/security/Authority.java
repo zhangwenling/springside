@@ -1,5 +1,6 @@
 package org.springside.examples.miniweb.entity.security;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -21,6 +22,7 @@ public class Authority extends IdEntity {
 	private String name;
 	private String displayName;
 
+	@Column(nullable = false, unique = true)
 	public String getName() {
 		return name;
 	}

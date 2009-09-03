@@ -14,17 +14,15 @@
 
 	<!-- 项目属性 -->
 	<properties>
-		<jdbc.driver>org.apache.derby.jdbc.ClientDriver</jdbc.driver>
-		<jdbc.url>jdbc:derby://localhost:1527/springside-showcase;create=true
-		</jdbc.url>
-		<jdbc.user>APP</jdbc.user>
-		<jdbc.password>APP</jdbc.password>
-		<jdbc.driver.groupid>org.apache.derby</jdbc.driver.groupid>
-		<jdbc.driver.artifactId>derbyclient</jdbc.driver.artifactId>
-		<jdbc.driver.version>10.4.2.0</jdbc.driver.version>
-		<dbunit.schema.file>src/main/sql/derby/schema.sql</dbunit.schema.file>
-		<dbunit.datatype>org.dbunit.dataset.datatype.DefaultDataTypeFactory
-		</dbunit.datatype>
+		<jdbc.driver>org.h2.Driver</jdbc.driver>
+		<jdbc.url>jdbc:h2:tcp://localhost/~/showcase</jdbc.url>
+		<jdbc.user>sa</jdbc.user>
+		<jdbc.password></jdbc.password>
+		<jdbc.driver.groupid>com.h2database</jdbc.driver.groupid>
+		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
+		<jdbc.driver.version>1.1.117</jdbc.driver.version>
+		<dbunit.schema.file>src/main/sql/h2/schema.sql</dbunit.schema.file>
+		<dbunit.datatype>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.datatype>
 	</properties>
 
 	<!-- 依赖项定义 -->

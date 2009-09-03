@@ -10,13 +10,13 @@ import org.hibernate.dialect.function.StandardSQLFunction;
  * 
  * @author calvin
  */
-public class DerbyExtDialect extends DerbyDialect {
+public class H2ExtDialect extends DerbyDialect {
 
-	public DerbyExtDialect() {
+	public H2ExtDialect() {
 		super();
 		//新函数up(), 等同于uppper()的缩写, 如up(u.name)="FOO".
 		registerFunction("up", new StandardSQLFunction("upper"));
 		//新函数sample(),用于按某个百分比随机决定是否返回该条数据, 如sample()>50  按50%概率返回数据.
-		registerFunction("sample", new SQLFunctionTemplate(Hibernate.DOUBLE, "random()*100", true));
+		registerFunction("sample", new SQLFunctionTemplate(Hibernate.DOUBLE, "rand()*100", true));
 	}
 }

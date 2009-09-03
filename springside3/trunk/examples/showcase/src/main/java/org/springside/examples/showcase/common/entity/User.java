@@ -3,6 +3,7 @@ package org.springside.examples.showcase.common.entity;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -46,6 +47,7 @@ public class User extends AuditableEntity {
 		this.version = version;
 	}
 
+	@Column(nullable = false, unique = true)
 	public String getLoginName() {
 		return loginName;
 	}

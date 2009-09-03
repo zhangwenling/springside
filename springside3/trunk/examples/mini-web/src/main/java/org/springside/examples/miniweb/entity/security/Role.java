@@ -4,6 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -33,6 +34,7 @@ public class Role extends IdEntity {
 	private String name;
 	private Set<Authority> authorities = new LinkedHashSet<Authority>(); //有序的关联对象集合
 
+	@Column(nullable = false, unique = true)
 	public String getName() {
 		return name;
 	}

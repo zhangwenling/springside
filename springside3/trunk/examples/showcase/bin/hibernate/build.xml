@@ -23,7 +23,7 @@
 		<path location="${project.runtime.lib}/log4j-1.2.15.jar" />
 		<path location="${project.runtime.lib}/springside3-jee-3.1.5.jar" />
 		<!--jdbc driver-->
-		<path location="${project.runtime.lib}/derbyclient-10.4.2.0.jar" />
+		<path location="${project.runtime.lib}/h2-1.1.117.jar" />
 	</path>
 
 	<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="toolslib" />

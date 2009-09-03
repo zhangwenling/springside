@@ -3,6 +3,7 @@ package org.springside.examples.miniweb.entity.security;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -41,6 +42,7 @@ public class Resource extends IdEntity {
 	/**
 	 * 资源类型.
 	 */
+	@Column(nullable = false)
 	public String getResourceType() {
 		return resourceType;
 	}
@@ -52,6 +54,7 @@ public class Resource extends IdEntity {
 	/**
 	 * 资源标识.
 	 */
+	@Column(nullable = false, unique = true)
 	public String getValue() {
 		return value;
 	}

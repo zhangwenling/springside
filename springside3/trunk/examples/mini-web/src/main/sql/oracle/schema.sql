@@ -18,15 +18,15 @@
     create table ss_authority (
         id number(19,0) not null,
         display_name varchar2(255 char),
-        name varchar2(255 char),
+        name varchar2(255 char) not null unique,
         primary key (id)
     );
 
     create table ss_resource (
         id number(19,0) not null,
         position double precision not null,
-        resource_type varchar2(255 char),
-        value varchar2(255 char),
+        resource_type varchar2(255 char) not null,
+        value varchar2(255 char) not null unique,
         primary key (id)
     );
 
@@ -38,7 +38,7 @@
 
     create table ss_role (
         id number(19,0) not null,
-        name varchar2(255 char),
+        name varchar2(255 char) not null unique,
         primary key (id)
     );
 
@@ -51,7 +51,7 @@
     create table ss_user (
         id number(19,0) not null,
         email varchar2(255 char),
-        login_name varchar2(255 char),
+        login_name varchar2(255 char) not null unique,
         name varchar2(255 char),
         password varchar2(255 char),
         primary key (id)
@@ -64,33 +64,33 @@
     );
 
     alter table ss_resource_authority 
-        add constraint FKF58B2007C67601C1 
+        add constraint FKD7216891C67601C1 
         foreign key (authority_id) 
         references ss_authority;
 
     alter table ss_resource_authority 
-        add constraint FKF58B200770DB5B33 
+        add constraint FKD721689170DB5B33 
         foreign key (resource_id) 
         references ss_resource;
 
     alter table ss_role_authority 
-        add constraint FKE9CCCC9F93BA26B3 
+        add constraint FKE536BA7993BA26B3 
         foreign key (role_id) 
         references ss_role;
 
     alter table ss_role_authority 
-        add constraint FKE9CCCC9FC67601C1 
+        add constraint FKE536BA79C67601C1 
         foreign key (authority_id) 
         references ss_authority;
 
     alter table ss_user_role 
-        add constraint FKF6CCD9C693BA26B3 
-        foreign key (role_id) 
-        references ss_role;
-
-    alter table ss_user_role 
-        add constraint FKF6CCD9C638E4EA93 
+        add constraint FK1306854B38E4EA93 
         foreign key (user_id) 
         references ss_user;
+
+    alter table ss_user_role 
+        add constraint FK1306854B93BA26B3 
+        foreign key (role_id) 
+        references ss_role;
 
     create sequence hibernate_sequence;

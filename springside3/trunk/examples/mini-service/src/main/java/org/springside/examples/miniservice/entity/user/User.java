@@ -3,6 +3,7 @@ package org.springside.examples.miniservice.entity.user;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -38,6 +39,7 @@ public class User extends IdEntity {
 
 	private Set<Role> roles = new LinkedHashSet<Role>(0); //有序的关联对象集合
 
+	@Column(nullable = false, unique = true)
 	public String getLoginName() {
 		return loginName;
 	}
