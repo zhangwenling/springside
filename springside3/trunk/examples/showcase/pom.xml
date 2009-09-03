@@ -288,6 +288,7 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>instrument-hibernate-entity</id>
 						<phase>process-classes</phase>
 						<goals>
 							<goal>run</goal>
@@ -308,38 +309,6 @@
 							</fileset>
 						</instrument>
 					</tasks>
-				</configuration>
-			</plugin>
-
-			<!-- cargo 插件 -->
-			<plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven2-plugin</artifactId>
-				<configuration>
-					<container>
-						<containerId>tomcat6x</containerId>
-						<type>remote</type>
-					</container>
-
-					<configuration>
-						<type>runtime</type>
-						<properties>
-							<cargo.remote.username>admin</cargo.remote.username>
-							<cargo.remote.password></cargo.remote.password>
-							<cargo.tomcat.manager.url>http://localhost:8080/manager
-							</cargo.tomcat.manager.url>
-						</properties>
-					</configuration>
-					<deployer>
-						<type>remote</type>
-						<deployables>
-							<deployable>
-								<properties>
-									<context>/${artifactId}</context>
-								</properties>
-							</deployable>
-						</deployables>
-					</deployer>
 				</configuration>
 			</plugin>
 
@@ -366,12 +335,12 @@
 				</configuration>
 			</plugin>
 
-			<!-- jetty插件 -->
+			<!-- jetty插件,重载web.xml中设置验证码自动通过值 -->
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
 				<configuration>
-					<overrideWebXml>src/test/resources/web.xml</overrideWebXml>
+					<overrideWebXml>src/test/resources/web-override.xml</overrideWebXml>
 				</configuration>
 			</plugin>
 		</plugins>
