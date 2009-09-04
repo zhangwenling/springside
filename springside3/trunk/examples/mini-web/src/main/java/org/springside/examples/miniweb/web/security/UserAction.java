@@ -117,7 +117,7 @@ public class UserAction extends CrudActionSupport<User> {
 		return page;
 	}
 
-	public List<Role> getRoleList() {
+	public List<Role> getAllRoleList() {
 		return securityManager.getAllRole();
 	}
 
