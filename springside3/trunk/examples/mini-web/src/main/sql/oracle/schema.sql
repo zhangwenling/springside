@@ -32,8 +32,7 @@
 
     create table ss_resource_authority (
         resource_id number(19,0) not null,
-        authority_id number(19,0) not null,
-        primary key (resource_id, authority_id)
+        authority_id number(19,0) not null
     );
 
     create table ss_role (
@@ -44,8 +43,7 @@
 
     create table ss_role_authority (
         role_id number(19,0) not null,
-        authority_id number(19,0) not null,
-        primary key (role_id, authority_id)
+        authority_id number(19,0) not null
     );
 
     create table ss_user (
@@ -59,8 +57,7 @@
 
     create table ss_user_role (
         user_id number(19,0) not null,
-        role_id number(19,0) not null,
-        primary key (user_id, role_id)
+        role_id number(19,0) not null
     );
 
     alter table ss_resource_authority 

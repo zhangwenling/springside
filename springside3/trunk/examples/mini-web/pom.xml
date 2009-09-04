@@ -27,14 +27,36 @@
 		<dbunit.schema.file>src/main/sql/h2/schema.sql</dbunit.schema.file>
 		<dbunit.datatype>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.datatype>
 		<dbunit.format>flat</dbunit.format>
-
+		
 		<!--
-			<jdbc.driver>oracle.jdbc.driver.OracleDriver</jdbc.driver> <jdbc.url>jdbc:oracle:thin:@127.0.0.1:1521:XE</jdbc.url>
-			<jdbc.user>miniweb</jdbc.user> <jdbc.password>miniweb</jdbc.password> <jdbc.schema>MINIWEB</jdbc.schema>
-			<jdbc.driver.groupid>com.oracle</jdbc.driver.groupid> <jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
-			<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version>
-			<dbunit.schema.file>src/main/sql/oracle/schema.sql</dbunit.schema.file>
-			<dbunit.datatype>org.dbunit.ext.oracle.Oracle10DataTypeFactory</dbunit.datatype>
+		<jdbc.driver>oracle.jdbc.driver.OracleDriver</jdbc.driver>
+		<jdbc.url>jdbc:oracle:thin:@127.0.0.1:1521:XE</jdbc.url>
+		<jdbc.user>miniweb</jdbc.user>
+		<jdbc.password>miniweb</jdbc.password> 
+		<jdbc.schema>MINIWEB</jdbc.schema>
+			
+		<jdbc.driver.groupid>com.oracle</jdbc.driver.groupid> 
+		<jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
+		<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version>
+			
+		<dbunit.schema.file>src/main/sql/oracle/schema.sql</dbunit.schema.file>
+		<dbunit.datatype>org.dbunit.ext.oracle.Oracle10DataTypeFactory</dbunit.datatype>
+		<dbunit.format>flat</dbunit.format>
+		-->
+		
+		<!--	
+		<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+		<jdbc.url>jdbc:mysql://localhost/mini-web?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
+		<jdbc.user>root</jdbc.user>
+		<jdbc.password></jdbc.password>
+		
+		<jdbc.driver.groupid>mysql</jdbc.driver.groupid>
+		<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
+		<jdbc.driver.version>5.1.6</jdbc.driver.version>
+		
+		<dbunit.schema.file>src/main/sql/mysql/schema.sql</dbunit.schema.file>
+		<dbunit.datatype>org.dbunit.ext.mysql.MySqlDataTypeFactory</dbunit.datatype>
+		<dbunit.format>flat</dbunit.format>
 		-->
 	</properties>
 

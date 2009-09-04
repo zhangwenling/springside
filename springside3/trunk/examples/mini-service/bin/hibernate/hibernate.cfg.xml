@@ -6,8 +6,10 @@
 	<session-factory>
 		<!-- SQL dialect for generate.pojo and ddl-->
 		<property name="dialect">org.hibernate.dialect.H2Dialect</property>
-		<!-- <property name="dialect">org.hibernate.dialect.Oracle10gDialect</property> -->
-		<!-- <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property> -->
+		<!-- 
+		<property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		-->
 
 		<!-- jdbc properties for generate.pojo -->
 		<property name="hibernate.connection.driver_class">org.h2.Driver</property>

@@ -1,8 +1,17 @@
-    drop table if exists ss_user_role;
-    
+
+    alter table ss_user_role 
+        drop 
+        foreign key FK1306854B6B2AC727;
+
+    alter table ss_user_role 
+        drop 
+        foreign key FK1306854BC6000347;
+
     drop table if exists ss_role;
 
     drop table if exists ss_user;
+
+    drop table if exists ss_user_role;
 
     create table ss_role (
         id bigint not null auto_increment,

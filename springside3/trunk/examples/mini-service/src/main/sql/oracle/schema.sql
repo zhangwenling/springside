@@ -1,10 +1,9 @@
 
-    drop table ss_user_role cascade constraints;
-    
     drop table ss_role cascade constraints;
 
     drop table ss_user cascade constraints;
 
+    drop table ss_user_role cascade constraints;
 
     drop sequence hibernate_sequence;
 
@@ -25,8 +24,7 @@
 
     create table ss_user_role (
         user_id number(19,0) not null,
-        role_id number(19,0) not null,
-        primary key (user_id, role_id)
+        role_id number(19,0) not null
     );
 
     alter table ss_user_role 
