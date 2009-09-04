@@ -15,7 +15,7 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 @Repository
 public class ResourceDao extends HibernateDao<Resource, Long> {
 
-	public static final String QUERY_BY_RESOURCETYPE_WITH_AUTHORITY = "from Resource r left join fetch r.authorities WHERE r.resourceType=? ORDER BY r.position ASC";
+	public static final String QUERY_BY_RESOURCETYPE_WITH_AUTHORITY = "from Resource r left join fetch r.authorityList WHERE r.resourceType=? ORDER BY r.position ASC";
 
 	/**
 	 * 查询URL类型的资源并预加载可访问该资源的授权信息.
