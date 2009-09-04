@@ -5,6 +5,8 @@
     drop table ss_user if exists;
 
     drop table ss_user_role if exists;
+    
+    drop table ss_log if exists;
 
     create table ss_post (
         dtype varchar(31) not null,
@@ -43,6 +45,14 @@
         user_id bigint not null,
         role_id bigint not null,
         primary key (user_id, role_id)
+    );
+    
+    create table SS_LOG (
+    THREAD_NAME varchar(255),
+    LOGGER_NAME varchar(255),
+    TIMESTAMP timestamp,
+    LEVEL varchar(20),
+    MESSAGE varchar(255)
     );
 
     alter table ss_post 
