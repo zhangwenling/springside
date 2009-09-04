@@ -27,7 +27,7 @@ public class RoleDao extends HibernateDao<Role, Long> {
 		//查询出拥有该角色的用户,并删除该用户的角色.
 		List<User> users = createQuery(QUERY_USER_BY_ROLEID, role.getId()).list();
 		for (User u : users) {
-			u.getRoles().remove(role);
+			u.getRoleList().remove(role);
 		}
 		super.delete(role);
 	}

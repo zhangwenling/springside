@@ -45,6 +45,6 @@ public class ResourceDaoTest extends SpringTxTestCase {
 		Resource resource = resourceList.get(0);
 		assertEquals(1.0, resource.getPosition());
 		evict(resource);
-		assertTrue(resource.getAuthorities().size() > 0);
+		assertTrue(resource.getAuthorityList().size() > 0);
 	}
 }

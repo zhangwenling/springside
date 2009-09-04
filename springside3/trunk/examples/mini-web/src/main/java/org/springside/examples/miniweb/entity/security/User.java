@@ -1,8 +1,7 @@
 package org.springside.examples.miniweb.entity.security;
 
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,7 +40,7 @@ public class User extends IdEntity {
 	private String name;
 	private String email;
 
-	private Set<Role> roles = new LinkedHashSet<Role>(); //有序的关联对象集合.
+	private List<Role> roleList = new ArrayList<Role>(); //有序的关联对象集合.
 
 	@Column(nullable = false, unique = true)
 	public String getLoginName() {
@@ -86,25 +85,25 @@ public class User extends IdEntity {
 	@OrderBy("id")
 	//集合中对象id的缓存.
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public Set<Role> getRoles() {
-		return roles;
+	public List<Role> getRoleList() {
+		return roleList;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
 	}
 
 	//非持久化属性.
 	@Transient
 	public String getRoleNames() {
-		return ReflectionUtils.fetchElementPropertyToString(roles, "name", ", ");
+		return ReflectionUtils.fetchElementPropertyToString(roleList, "name", ", ");
 	}
 
 	//非持久化属性.
 	@Transient
 	@SuppressWarnings("unchecked")
 	public List<Long> getRoleIds() {
-		return ReflectionUtils.fetchElementPropertyToList(roles, "id");
+		return ReflectionUtils.fetchElementPropertyToList(roleList, "id");
 	}
 
 	@Override

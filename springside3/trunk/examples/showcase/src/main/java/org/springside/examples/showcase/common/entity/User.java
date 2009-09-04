@@ -1,7 +1,7 @@
 package org.springside.examples.showcase.common.entity;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +35,7 @@ public class User extends AuditableEntity {
 	private String status;
 	private Integer version;
 
-	private Set<Role> roles = new LinkedHashSet<Role>(); //有序的关联对象集合
+	private List<Role> roleList = new ArrayList<Role>(); //有序的关联对象集合
 
 	//Hibernate自动维护的Version字段
 	@Version
@@ -110,17 +110,17 @@ public class User extends AuditableEntity {
 	@Fetch(FetchMode.SUBSELECT)
 	//集合按id排序
 	@OrderBy("id ASC")
-	public Set<Role> getRoles() {
-		return roles;
+	public List<Role> getRoleList() {
+		return roleList;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
 	}
 
 	@Transient
 	public String getRoleNames() {
-		return ReflectionUtils.fetchElementPropertyToString(roles, "name", ", ");
+		return ReflectionUtils.fetchElementPropertyToString(roleList, "name", ", ");
 	}
 
 	@Override

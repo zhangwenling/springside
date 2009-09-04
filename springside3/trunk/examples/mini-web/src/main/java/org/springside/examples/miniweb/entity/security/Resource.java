@@ -1,7 +1,7 @@
 package org.springside.examples.miniweb.entity.security;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,8 +28,7 @@ import org.springside.modules.utils.ReflectionUtils;
 @Table(name = "SS_RESOURCE")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Resource extends IdEntity {
-
-	//resourceType常量
+	// resourceType常量 //
 	public static final String URL_TYPE = "url";
 	public static final String MENU_TYPE = "menu";
 
@@ -37,7 +36,7 @@ public class Resource extends IdEntity {
 	private String value;
 	private double position;
 
-	private Set<Authority> authorities = new LinkedHashSet<Authority>();
+	private List<Authority> authorityList = new ArrayList<Authority>();
 
 	/**
 	 * 资源类型.
@@ -82,12 +81,12 @@ public class Resource extends IdEntity {
 	@Fetch(FetchMode.JOIN)
 	@OrderBy("id")
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-	public Set<Authority> getAuthorities() {
-		return authorities;
+	public List<Authority> getAuthorityList() {
+		return authorityList;
 	}
 
-	public void setAuthorities(Set<Authority> authorities) {
-		this.authorities = authorities;
+	public void setAuthorityList(List<Authority> authorityList) {
+		this.authorityList = authorityList;
 	}
 
 	/**
@@ -95,6 +94,6 @@ public class Resource extends IdEntity {
 	 */
 	@Transient
 	public String getAuthNames() {
-		return ReflectionUtils.fetchElementPropertyToString(authorities, "name", ",");
+		return ReflectionUtils.fetchElementPropertyToString(authorityList, "name", ",");
 	}
 }

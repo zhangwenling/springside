@@ -46,19 +46,19 @@ public class UserDaoTest extends SpringTxTestCase {
 		//保存带角色的用户
 		User user = SecurityData.getRandomUser();
 		Role role = SecurityData.getAdminRole();
-		user.getRoles().add(role);
+		user.getRoleList().add(role);
 
 		entityDao.save(user);
 		flush();
 
 		user = entityDao.findUniqueBy("id", user.getId());
-		assertEquals(1, user.getRoles().size());
+		assertEquals(1, user.getRoleList().size());
 
 		//删除用户的角色
-		user.getRoles().remove(role);
+		user.getRoleList().remove(role);
 		flush();
 		user = entityDao.findUniqueBy("id", user.getId());
-		assertEquals(0, user.getRoles().size());
+		assertEquals(0, user.getRoleList().size());
 	}
 
 	//期望抛出ConstraintViolationException的异常.

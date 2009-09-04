@@ -75,7 +75,7 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	public String save() throws Exception {
 		//根据页面上的checkbox选择 整合User的Roles Set
-		HibernateWebUtils.mergeByCheckedIds(entity.getRoles(), checkedRoleIds, Role.class);
+		HibernateWebUtils.mergeByCheckedIds(entity.getRoleList(), checkedRoleIds, Role.class);
 
 		securityManager.saveUser(entity);
 		addActionMessage("保存用户成功");

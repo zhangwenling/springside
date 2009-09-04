@@ -1,7 +1,7 @@
 package org.springside.examples.showcase.common.entity;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
@@ -22,18 +22,18 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @DiscriminatorValue("Subject")
 public class Subject extends Post {
 
-	private Set<Reply> replys = new LinkedHashSet<Reply>();
+	private List<Reply> replyList = new ArrayList<Reply>();
 
 	//与回帖的一对多关系,在删除主题时cascade删除回帖.
 	@OneToMany(mappedBy = "subject", cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY)
 	//按时间排序回帖
 	@OrderBy(value = "modifyTime DESC")
-	public Set<Reply> getReplys() {
-		return replys;
+	public List<Reply> getReplyList() {
+		return replyList;
 	}
 
-	public void setReplys(Set<Reply> replys) {
-		this.replys = replys;
+	public void setReplyList(List<Reply> replyList) {
+		this.replyList = replyList;
 	}
 
 	@Override

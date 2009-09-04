@@ -1,7 +1,7 @@
 package org.springside.examples.miniservice.ws.api.dto;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -25,7 +25,7 @@ public class UserDTO {
 	private String name;
 	private String email;
 
-	private Set<RoleDTO> roles = new LinkedHashSet<RoleDTO>();
+	private List<RoleDTO> roleList = new ArrayList<RoleDTO>();
 
 	public Long getId() {
 		return id;
@@ -59,14 +59,14 @@ public class UserDTO {
 		email = value;
 	}
 
-	@XmlElementWrapper(name = "roles")
+	@XmlElementWrapper(name = "roleList")
 	@XmlElement(name = "role")
-	public Set<RoleDTO> getRoles() {
-		return roles;
+	public List<RoleDTO> getRoleList() {
+		return roleList;
 	}
 
-	public void setRoles(Set<RoleDTO> roles) {
-		this.roles = roles;
+	public void setRoles(List<RoleDTO> roleList) {
+		this.roleList = roleList;
 	}
 
 	/**

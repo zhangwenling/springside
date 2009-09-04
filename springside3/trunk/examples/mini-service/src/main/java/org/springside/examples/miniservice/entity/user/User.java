@@ -1,7 +1,7 @@
 package org.springside.examples.miniservice.entity.user;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +37,7 @@ public class User extends IdEntity {
 	private String name;
 	private String email;
 
-	private Set<Role> roles = new LinkedHashSet<Role>(0); //有序的关联对象集合
+	private List<Role> roleList = new ArrayList<Role>(0);
 
 	@Column(nullable = false, unique = true)
 	public String getLoginName() {
@@ -82,12 +82,12 @@ public class User extends IdEntity {
 	@OrderBy("id")
 	//集合中对象的id的缓存.
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public Set<Role> getRoles() {
-		return roles;
+	public List<Role> getRoleList() {
+		return roleList;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
 	}
 
 	@Override

@@ -22,7 +22,7 @@ public class UserDao extends HibernateDao<User, Long> {
 	 */
 	public void initAllProperties(List<User> userList) {
 		for (User user : userList) {
-			Hibernate.initialize(user.getRoles());
+			Hibernate.initialize(user.getRoleList());
 		}
 	}
 }

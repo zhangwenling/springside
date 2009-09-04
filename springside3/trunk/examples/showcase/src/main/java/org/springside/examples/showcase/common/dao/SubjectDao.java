@@ -36,7 +36,7 @@ public class SubjectDao extends HibernateDao<Subject, Long> {
 	 * 初始化帖子的内容及回复.
 	 */
 	public void initAllProperties(Subject subject) {
-		Hibernate.initialize(subject.getReplys());
+		Hibernate.initialize(subject.getReplyList());
 		Hibernate.initialize(subject.getContent());
 	}
 }
