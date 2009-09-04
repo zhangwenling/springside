@@ -24,7 +24,6 @@
 		
 		<!--jdbc driver-->
 		<path location="${project.runtime.lib}/h2-1.1.117.jar" />
-		<path location="${project.runtime.lib}/derbyclient-10.4.2.0.jar" />
 		<path location="${project.runtime.lib}/ojdbc14-10.2.3.0.jar" />
 	</path>
 

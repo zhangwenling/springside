@@ -1,22 +1,3 @@
-
-    alter table ss_resource_authority 
-        drop constraint FKD7216891C67601C1;
-
-    alter table ss_resource_authority 
-        drop constraint FKD721689170DB5B33;
-
-    alter table ss_role_authority 
-        drop constraint FKE536BA7993BA26B3;
-
-    alter table ss_role_authority 
-        drop constraint FKE536BA79C67601C1;
-
-    alter table ss_user_role 
-        drop constraint FK1306854B38E4EA93;
-
-    alter table ss_user_role 
-        drop constraint FK1306854B93BA26B3;
-
     drop table ss_authority if exists;
 
     drop table ss_resource if exists;

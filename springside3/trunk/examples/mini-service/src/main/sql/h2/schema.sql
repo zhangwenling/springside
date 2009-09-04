@@ -1,10 +1,3 @@
-
-    alter table ss_user_role 
-        drop constraint FK1306854B6B2AC727;
-
-    alter table ss_user_role 
-        drop constraint FK1306854BC6000347;
-
     drop table ss_role if exists;
 
     drop table ss_user if exists;

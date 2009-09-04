@@ -1,16 +1,3 @@
-
-    alter table ss_post 
-        drop constraint FK8D193F1F7334D076;
-
-    alter table ss_post 
-        drop constraint FK8D193F1FF125651E;
-
-    alter table ss_user_role 
-        drop constraint FK1306854BF125651E;
-
-    alter table ss_user_role 
-        drop constraint FK1306854B4BFAA13E;
-
     drop table ss_post if exists;
 
     drop table ss_role if exists;
