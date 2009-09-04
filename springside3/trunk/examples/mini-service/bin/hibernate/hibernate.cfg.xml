@@ -7,6 +7,7 @@
 		<!-- SQL dialect for generate.pojo and ddl-->
 		<property name="dialect">org.hibernate.dialect.H2Dialect</property>
 		<!-- <property name="dialect">org.hibernate.dialect.Oracle10gDialect</property> -->
+		<!-- <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property> -->
 
 		<!-- jdbc properties for generate.pojo -->
 		<property name="hibernate.connection.driver_class">org.h2.Driver</property>
@@ -20,7 +21,14 @@
 		<property name="hibernate.connection.username">miniservice</property>
 		<property name="hibernate.connection.password">miniservice</property>
 		-->
-
+		
+		<!--
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/mini-service?useUnicode=true&amp;characterEncoding=utf-8</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password"></property>
+		-->
+		
 		<!-- pojos for  generate.code -->
 		<mapping class="org.springside.examples.miniservice.entity.IdEntity" />
 		<mapping class="org.springside.examples.miniservice.entity.user.User" />

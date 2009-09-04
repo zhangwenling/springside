@@ -1,9 +1,10 @@
 
+    drop table ss_user_role cascade constraints;
+    
     drop table ss_role cascade constraints;
 
     drop table ss_user cascade constraints;
 
-    drop table ss_user_role cascade constraints;
 
     drop sequence hibernate_sequence;
 
