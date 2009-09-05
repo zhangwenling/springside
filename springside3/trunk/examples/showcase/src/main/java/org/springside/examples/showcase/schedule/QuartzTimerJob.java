@@ -22,10 +22,13 @@ public class QuartzTimerJob extends QuartzJobBean implements Serializable {
 
 	private static Logger logger = LoggerFactory.getLogger(QuartzTimerJob.class);
 
-	private String serverName;
+	private String greet;
 
-	public void setServerName(String serverName) {
-		this.serverName = serverName;
+	/**
+	 * JobDetailBean每次创建本类的实例时,将从jobDataMap中读出数据注入本类的属性中.
+	 */
+	public void setGreet(String greet) {
+		this.greet = greet;
 	}
 
 	/**
@@ -35,7 +38,7 @@ public class QuartzTimerJob extends QuartzJobBean implements Serializable {
 	protected void executeInternal(JobExecutionContext ctx) throws JobExecutionException {
 		UserManager userManager = SpringContextUtil.getBean("userManager");
 		long userCount = userManager.getUserCount();
-		logger.info("Hello, now is {}, there is {} user in table, print by Quartz timer job at {}", new Object[] {
-				new Date(), userCount, serverName });
+		logger.info("{}, now is {}, there is {} user in table, print by Quartz timer job", new Object[] { greet,
+				new Date(), userCount });
 	}
 }

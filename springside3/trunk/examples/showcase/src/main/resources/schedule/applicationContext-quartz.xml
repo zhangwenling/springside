@@ -64,11 +64,11 @@
 	<!-- Timer JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
 	<bean name="timerJobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
 		<property name="jobClass" value="org.springside.examples.showcase.schedule.QuartzTimerJob" />
+		<!-- 注入到jobClass示例中的属性 -->
 		<property name="jobDataAsMap">
 			<map>
-				<entry key="serverName" value="node1" />
+				<entry key="greet" value="Hi" />
 			</map>
 		</property>
-
 	</bean>
 </beans>
