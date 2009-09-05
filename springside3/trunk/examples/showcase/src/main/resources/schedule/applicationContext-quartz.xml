@@ -5,13 +5,12 @@
 
 	<description>Quartz的定时任务配置</description>
 
-	<!-- Quartz集成工厂 -->
-	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
+	<!-- Quartz本地Schduler -->
+	<bean id="localQuartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
 		<!-- Triggers集成 -->
 		<property name="triggers">
 			<list>
 				<ref bean="cronTrigger" />
-				<ref bean="simpleTrigger" />
 			</list>
 		</property>
 		<!-- Quartz配置 -->
@@ -20,20 +19,36 @@
 				<prop key="org.quartz.threadPool.threadCount">5</prop>
 			</props>
 		</property>
+		<!-- 启动时延期10秒开始任务 -->
+		<property name="startupDelay" value="10000" />
+	</bean>
+	
+	<!-- Quartz集群Schduler 
+	<bean id="clusterQuartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
+		 Triggers集成 
+		<property name="triggers">
+			<list>
+				<ref bean="simpleTrigger" />
+			</list>
+		</property>
+		 quartz配置文件路径 
+		<property name="configLocation" value="classpath:schedule/quartz-cluster.properties" />
+		 启动时延期10秒开始任务 
+		<property name="startupDelay" value="10000" />
+		 保存Job数据到数据库所需的带事务数据源 
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!-- Cron式Trigger定义 -->
+	--><!-- Cron式Trigger定义 -->
 	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="cronJob" />
 		<!-- 周一至五,朝九晚五工作时间内每半小时执行一次 -->
 		<property name="cronExpression" value="0 0/30 9-17 ? * MON-FRI" />
 	</bean>
 
-	<!-- Timer式 Trigger -->
+	<!-- Timer式 Trigger定义-->
 	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
 		<property name="jobDetail" ref="timerJob" />
-		<!-- 首次执行延期10秒 -->
-		<property name="startDelay" value="10000" />
 		<!-- 每次执行间隔1小时 -->
 		<property name="repeatInterval" value="3600000" />
 	</bean>
@@ -51,5 +66,5 @@
 	</bean>
 
 	<!-- 被执行的业务类 -->
-	<bean id="quartzJob" class="org.springside.examples.showcase.schedule.QuartzJob"/>
+	<bean id="quartzJob" class="org.springside.examples.showcase.schedule.QuartzJob" />
 </beans>

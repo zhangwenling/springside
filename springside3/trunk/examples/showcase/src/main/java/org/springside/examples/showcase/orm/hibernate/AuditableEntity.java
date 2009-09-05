@@ -59,7 +59,7 @@ public class AuditableEntity extends IdEntity {
 	}
 
 	/**
-	 * 最后修改的操作员的登录名
+	 * 最后修改的操作员的登录名.
 	 */
 	@Column(insertable = false)
 	public String getLastModifyBy() {
