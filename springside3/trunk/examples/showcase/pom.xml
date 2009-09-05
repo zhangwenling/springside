@@ -241,6 +241,13 @@
 		</dependency>
 		<!--  xml binding end -->
 
+		<!-- poi begin -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+		</dependency>
+		<!-- poi end -->
+
 		<!-- profile tools begin -->
 		<dependency>
 			<groupId>p6spy</groupId>

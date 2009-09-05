@@ -71,7 +71,7 @@
 			<align>center</align>
 			<text_size></text_size>
 			<text>                                 
-        <![CDATA[<b>网站流量报表</b>]]>
+        <![CDATA[<b>Temperature anomaly</b>]]>
 			</text>
 		</label>
 
@@ -91,7 +91,7 @@
 
 	<graphs>
 		<graph gid="1">
-			<title>页面浏览量</title>
+			<title>Anomaly</title>
 			<unit>亿</unit>
 			<color>#0D8ECF</color>
 			<color_hover>#FF6600</color_hover>
@@ -101,7 +101,7 @@
 		</graph>
 
 		<graph gid="2">
-			<title>独立访客量</title>
+			<title>Smoothed</title>
 			<unit>亿</unit>
 			<color>#B0DE09</color>
 			<color_hover>#FF6600</color_hover>

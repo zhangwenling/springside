@@ -79,6 +79,6 @@
 	<!-- perf4j的方面定义 -->
 	<bean id="timingAspect" class="org.perf4j.log4j.aop.TimingAspect" />
 	
-	<!-- SpringContextUtil定义 -->
-	<bean id="springContextUtil" class="org.springside.modules.utils.SpringContextUtil" lazy-init="false"/>
+	<!-- SpringContextUtils定义 -->
+	<bean id="springContextUtils" class="org.springside.modules.utils.SpringContextUtils" lazy-init="false"/>
 </beans>

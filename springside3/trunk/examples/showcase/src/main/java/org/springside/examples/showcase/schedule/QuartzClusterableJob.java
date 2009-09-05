@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springside.examples.showcase.common.service.UserManager;
-import org.springside.modules.utils.SpringContextUtil;
+import org.springside.modules.utils.SpringContextUtils;
 
 /**
  * 被Quartz JobDetailBean定时执行的Job类.
@@ -35,7 +35,7 @@ public class QuartzClusterableJob extends QuartzJobBean implements Serializable 
 	 */
 	@Override
 	protected void executeInternal(JobExecutionContext ctx) throws JobExecutionException {
-		UserManager userManager = SpringContextUtil.getBean("userManager");
+		UserManager userManager = SpringContextUtils.getBean("userManager");
 		long userCount = userManager.getUserCount();
 		logger.info("{}, now is {}, there are {} user in table.", new Object[] { greet, new Date(), userCount });
 	}

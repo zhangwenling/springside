@@ -25,7 +25,7 @@
 		// <![CDATA[		
 		var so = new SWFObject("${ctx}/report/amline.swf", "report1", "640", "420", "8", "#FFFFFF");
 		so.addVariable("settings_file", encodeURIComponent("${ctx}/report/report1-settings.xml"));
-		so.addVariable("data_file", encodeURIComponent("${ctx}/report/flashchart/report1-data.action"));
+		so.addVariable("data_file", encodeURIComponent("${ctx}/report/flashchart/chart-data!report1.action"));
 		so.write("report1Content");
 		// ]]>
 	</script>
@@ -36,7 +36,7 @@
 		// <![CDATA[		
 		var so = new SWFObject("${ctx}/report/amcolumn.swf", "report2", "640", "420", "8", "#FFFFFF");
 		so.addVariable("settings_file", encodeURIComponent("${ctx}/report/report2-settings.xml"));
-		so.addVariable("data_file", encodeURIComponent("${ctx}/report/flashchart/report2-data.action"));
+		so.addVariable("data_file", encodeURIComponent("${ctx}/report/flashchart/chart-data!report2.action"));
 		so.write("report2Content");
 		// ]]>
 	</script>
