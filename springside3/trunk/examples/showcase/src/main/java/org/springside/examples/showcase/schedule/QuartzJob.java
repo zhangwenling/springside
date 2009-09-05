@@ -8,13 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.service.UserManager;
 
 /**
- * 被Quartz定时执行的普通Spring Bean.
- * 
- * 不支持持久化到数据库实现Quartz集群.
+ * 被Quartz MethodInvokingJobDetailFactoryBean定时执行的普通Spring Bean.
  */
-public class QuartzCronJob {
+public class QuartzJob {
 
-	private static Logger logger = LoggerFactory.getLogger(QuartzCronJob.class);
+	private static Logger logger = LoggerFactory.getLogger(QuartzJob.class);
 
 	@Autowired
 	private UserManager userManager;
@@ -24,6 +22,6 @@ public class QuartzCronJob {
 	 */
 	public void execute() {
 		long userCount = userManager.getUserCount();
-		logger.info("Hello, now is {}, there is {} user in table, print by Quartz cron job", new Date(), userCount);
+		logger.info("Hello, now is {}, there are {} user in table.", new Date(), userCount);
 	}
 }

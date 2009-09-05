@@ -12,14 +12,14 @@ import org.springside.examples.showcase.common.service.UserManager;
 import org.springside.modules.utils.SpringContextUtil;
 
 /**
- * 被Quartz定时执行的Job类.
+ * 被Quartz JobDetailBean定时执行的Job类.
  * 
  * 支持持久化到数据库实现Quartz集群.
  */
-public class QuartzTimerJob extends QuartzJobBean implements Serializable {
+public class QuartzClusterableJob extends QuartzJobBean implements Serializable {
 	private static final long serialVersionUID = 628727256400306220L;
 
-	private static Logger logger = LoggerFactory.getLogger(QuartzTimerJob.class);
+	private static Logger logger = LoggerFactory.getLogger(QuartzClusterableJob.class);
 
 	private String greet;
 
@@ -37,7 +37,6 @@ public class QuartzTimerJob extends QuartzJobBean implements Serializable {
 	protected void executeInternal(JobExecutionContext ctx) throws JobExecutionException {
 		UserManager userManager = SpringContextUtil.getBean("userManager");
 		long userCount = userManager.getUserCount();
-		logger.info("{}, now is {}, there is {} user in table, print by Quartz timer job", new Object[] { greet,
-				new Date(), userCount });
+		logger.info("{}, now is {}, there are {} user in table.", new Object[] { greet, new Date(), userCount });
 	}
 }
