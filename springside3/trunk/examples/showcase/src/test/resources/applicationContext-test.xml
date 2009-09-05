@@ -22,8 +22,8 @@
 			</list>
 		</property>
 	</bean>
-	
-	<context:property-override location="classpath*:/application.test.override.properties"/>
+
+	<context:property-override location="classpath*:/application.test.override.properties" />
 
 	<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
 	<context:component-scan base-package="org.springside.examples.showcase" />
@@ -70,5 +70,8 @@
 	</bean>
 
 	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+	<!-- SpringContextUtil定义 -->
+	<bean id="springContextUtil" class="org.springside.modules.utils.SpringContextUtil" lazy-init="false" />
 </beans>

@@ -350,6 +350,14 @@
 			</dependency>
 			<!-- security end -->
 
+			<!-- hessian begin -->
+			<dependency>
+				<groupId>com.caucho</groupId>
+				<artifactId>hessian</artifactId>
+				<version>3.1.5</version>
+			</dependency>
+			<!-- hessian end -->
+
 			<!-- quartz -->
 			<dependency>
 				<groupId>org.opensymphony.quartz</groupId>

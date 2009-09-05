@@ -20,6 +20,16 @@
 		<url-pattern>/services/*</url-pattern>
 	</servlet-mapping>
 
+	<!-- Hessian 配置-->
+	<servlet>
+		<servlet-name>userHessianServiceExporter</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>userHessianServiceExporter</servlet-name>
+		<url-pattern>/remoting/UserHessianService</url-pattern>
+	</servlet-mapping>
+
 	<!-- Filter 定义  -->
 	<!-- Character Encoding filter -->
 	<filter>
@@ -72,7 +82,7 @@
 		<filter-name>struts2CleanupFilter</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ActionContextCleanUp</filter-class>
 	</filter>
-	
+
 	<filter>
 		<filter-name>struts2Filter</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>

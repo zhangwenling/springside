@@ -45,7 +45,7 @@
 	</jaxws:endpoint>
 
 
-	<!-- WebService的实现Bean定义 -->
+	<!-- UserWebService的实现Bean定义 -->
 	<bean id="userWebService" class="org.springside.examples.showcase.ws.server.impl.UserWebServiceImpl" />
 
 	<!-- dozer DTO复制辅助Bean定义 -->

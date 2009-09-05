@@ -16,6 +16,7 @@ import org.springside.examples.showcase.ws.server.api.dto.UserDTO;
  */
 @XmlType(name = "GetAllUserResult", namespace = Constants.NS)
 public class GetAllUserResult extends WSResult {
+	private static final long serialVersionUID = 4739558570080898049L;
 
 	private List<UserDTO> userList;
 

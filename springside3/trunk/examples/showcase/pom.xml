@@ -179,6 +179,13 @@
 		</dependency>
 		<!-- security end -->
 
+		<!-- hessian begin -->
+		<dependency>
+			<groupId>com.caucho</groupId>
+			<artifactId>hessian</artifactId>
+		</dependency>
+		<!-- hessian end -->
+
 		<!-- quartz -->
 		<dependency>
 			<artifactId>quartz</artifactId>

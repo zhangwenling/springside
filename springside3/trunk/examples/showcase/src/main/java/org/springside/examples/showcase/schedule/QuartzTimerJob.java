@@ -17,7 +17,6 @@ import org.springside.modules.utils.SpringContextUtil;
  * 支持持久化到数据库实现Quartz集群.
  */
 public class QuartzTimerJob extends QuartzJobBean implements Serializable {
-
 	private static final long serialVersionUID = 628727256400306220L;
 
 	private static Logger logger = LoggerFactory.getLogger(QuartzTimerJob.class);

@@ -1,5 +1,7 @@
 package org.springside.examples.miniservice.ws.api.result;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlType;
 
 import org.springside.examples.miniservice.ws.api.Constants;
@@ -10,7 +12,8 @@ import org.springside.examples.miniservice.ws.api.Constants;
  * @author calvin
  */
 @XmlType(name = "WSResult", namespace = Constants.NS)
-public class WSResult {
+public class WSResult implements Serializable {
+	private static final long serialVersionUID = -5681149926052616839L;
 
 	// 返回代码定义 //
 	// 按项目的规则进行定义，比如1xx代表客户端参数错误，2xx代表业务错误等.

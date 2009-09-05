@@ -1,5 +1,7 @@
 package org.springside.examples.showcase.ws.server.api.dto;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -13,7 +15,8 @@ import org.springside.examples.showcase.ws.server.api.Constants;
  * @author calvin
  */
 @XmlType(name = "User", namespace = Constants.NS)
-public class UserDTO {
+public class UserDTO implements Serializable {
+	private static final long serialVersionUID = 5417916547256861781L;
 
 	private Long id;
 	private String loginName;

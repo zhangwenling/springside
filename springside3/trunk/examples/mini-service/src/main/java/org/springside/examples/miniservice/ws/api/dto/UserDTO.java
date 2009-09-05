@@ -1,5 +1,6 @@
 package org.springside.examples.miniservice.ws.api.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,8 @@ import org.springside.examples.miniservice.ws.api.Constants;
  * @author calvin
  */
 @XmlType(name = "User", namespace = Constants.NS)
-public class UserDTO {
+public class UserDTO implements Serializable {
+	private static final long serialVersionUID = -1747311328588931287L;
 
 	private Long id;
 	private String loginName;
