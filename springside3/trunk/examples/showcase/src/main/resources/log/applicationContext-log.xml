@@ -3,9 +3,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<description>日志高级演示配置</description>
-
+	
+	<!-- 消息Queue管理器-->
 	<bean class="org.springside.modules.queue.QueueManager" lazy-init="false"/>
 
+	<!-- 读出Queue中日志消息写入数据库的任务 -->
 	<bean id="dbLogTask" class="org.springside.modules.log.JdbcAppenderTask">
 		<property name="queueName" value="dblog" />
 		<property name="batchSize" value="20" />
@@ -14,5 +16,6 @@
 			value="insert into SS_LOG(THREAD_NAME,LOGGER_NAME,TIMESTAMP,LEVEL,MESSAGE) values(:threadName,:loggerName,:timestamp,:level,:message)" />
 	</bean>
 
+	<!-- 动态配置log4j日志级别的JMX MBean -->
 	<bean id="log4jMBean" class="org.springside.modules.log.Log4jMBean" />
 </beans>

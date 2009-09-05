@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
-	default-lazy-init="true">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<description>Quartz的定时任务配置</description>
 
@@ -20,51 +19,56 @@
 			</props>
 		</property>
 		<!-- 启动时延期10秒开始任务 -->
-		<property name="startupDelay" value="10000" />
+		<property name="startupDelay" value="10" />
 	</bean>
-	
-	<!-- Quartz集群Schduler 
+
+	<!-- Quartz集群Schduler -->
 	<bean id="clusterQuartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
-		 Triggers集成 
+		<!-- Triggers集成 -->
 		<property name="triggers">
 			<list>
-				<ref bean="simpleTrigger" />
+				<ref bean="timerTrigger" />
 			</list>
 		</property>
-		 quartz配置文件路径 
+		<!--  quartz配置文件路径-->
 		<property name="configLocation" value="classpath:schedule/quartz-cluster.properties" />
-		 启动时延期10秒开始任务 
-		<property name="startupDelay" value="10000" />
-		 保存Job数据到数据库所需的带事务数据源 
+		<!-- 启动时延期10秒开始任务 -->
+		<property name="startupDelay" value="10" />
+		<!-- 保存Job数据到数据库所需的带事务数据源 -->
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	--><!-- Cron式Trigger定义 -->
+	<!-- Cron式Trigger定义 -->
 	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="jobDetail" ref="cronJob" />
+		<property name="jobDetail" ref="cronJobDetail" />
 		<!-- 周一至五,朝九晚五工作时间内每半小时执行一次 -->
 		<property name="cronExpression" value="0 0/30 9-17 ? * MON-FRI" />
 	</bean>
 
 	<!-- Timer式 Trigger定义-->
-	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
-		<property name="jobDetail" ref="timerJob" />
+	<bean id="timerTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="timerJobDetail" />
 		<!-- 每次执行间隔1小时 -->
 		<property name="repeatInterval" value="3600000" />
 	</bean>
 
-	<!-- Cron Job -->
-	<bean id="cronJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="quartzJob" />
-		<property name="targetMethod" value="cronExecuteLog" />
+	<!-- Cron JobDetajil, 基于MethodInvokingJobDetailFactoryBean调用普通Spring Bean -->
+	<bean id="cronJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="cronJob" />
+		<property name="targetMethod" value="execute" />
 	</bean>
 
-	<!-- Timer Job -->
-	<bean id="timerJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="quartzJob" />
-		<property name="targetMethod" value="timerExecuteLog" />
-	</bean>
+	<!-- 被Cron执行的Spring Bean -->
+	<bean id="cronJob" class="org.springside.examples.showcase.schedule.QuartzCronJob" />
 
-	<!-- 被执行的业务类 -->
-	<bean id="quartzJob" class="org.springside.examples.showcase.schedule.QuartzJob" />
+	<!-- Timer JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
+	<bean name="timerJobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="org.springside.examples.showcase.schedule.QuartzTimerJob" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="serverName" value="node1" />
+			</map>
+		</property>
+
+	</bean>
 </beans>
