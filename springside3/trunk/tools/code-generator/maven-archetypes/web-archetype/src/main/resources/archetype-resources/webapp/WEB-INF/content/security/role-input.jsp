@@ -9,7 +9,7 @@
 <head>
 	<title>Mini-Web 角色管理</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${symbol_dollar}{ctx}/css/default.css" type="text/css" rel="stylesheet">
+	<link href="${symbol_dollar}{ctx}/css/default.css" type="text/css" rel="stylesheet" />
 	<link href="${symbol_dollar}{ctx}/js/validate/jquery.validate.css" type="text/css" rel="stylesheet" />
 	<script src="${symbol_dollar}{ctx}/js/jquery.js" type="text/javascript"></script>
 	<script src="${symbol_dollar}{ctx}/js/validate/jquery.validate.js" type="text/javascript"></script>
@@ -40,7 +40,7 @@
 		<td>授权:</td>
 		<td>
 			<div style="word-break:break-all;width:300px; overflow:auto; ">
-				<s:checkboxlist name="checkedAuthIds"  list="authorityList"  listKey="id" listValue="displayName" theme="simple"/>
+				<s:checkboxlist name="checkedAuthIds"  list="allAuthorityList"  listKey="id" listValue="displayName" theme="simple"/>
 			</div>
 		</td>
 	</tr>

@@ -353,6 +353,14 @@
 			</dependency>
 			<!-- security end -->
 
+			<!-- hessian begin -->
+			<dependency>
+				<groupId>com.caucho</groupId>
+				<artifactId>hessian</artifactId>
+				<version>3.1.5</version>
+			</dependency>
+			<!-- hessian end -->
+
 			<!-- quartz -->
 			<dependency>
 				<groupId>org.opensymphony.quartz</groupId>
@@ -486,6 +494,14 @@
 				<version>2.1.12</version>
 			</dependency>
 			<!-- xml binding end -->
+
+			<!-- poi begin -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>3.5-beta6</version>
+			</dependency>
+			<!-- poi end -->
 
 			<!-- profile tools begin -->
 			<dependency>
@@ -677,7 +693,7 @@
 						<type>CLEAN_INSERT</type>
 						<src>src/test/resources/test-data.xml</src>
 						<dest>src/test/resources/test-data.xml</dest>
-						<format>xml</format>
+						<format>${symbol_dollar}{dbunit.format}</format>
 						<transaction>true</transaction>
 						<encoding>${symbol_dollar}{project.build.sourceEncoding}</encoding>
 						<dataTypeFactoryName>${symbol_dollar}{dbunit.datatype}</dataTypeFactoryName>
@@ -881,7 +897,6 @@
 								<configuration>
 									<srcFiles>
 										<srcFile>${symbol_dollar}{dbunit.schema.file}</srcFile>
-										<!-- <srcFile>src/main/sql/derby/init-data.sql</srcFile> -->
 									</srcFiles>
 								</configuration>
 							</execution>

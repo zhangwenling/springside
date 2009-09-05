@@ -19,6 +19,7 @@ import ${package}.ws.api.dto.UserDTO;
  */
 @XmlType(name = "GetAllUserResult", namespace = Constants.NS)
 public class GetAllUserResult extends WSResult {
+	private static final long serialVersionUID = -1152770104523604878L;
 
 	private List<UserDTO> userList;
 

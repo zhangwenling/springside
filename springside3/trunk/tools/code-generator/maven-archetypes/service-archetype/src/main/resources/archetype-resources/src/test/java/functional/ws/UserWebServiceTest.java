@@ -55,7 +55,7 @@ public class UserWebServiceTest extends SpringContextTestCase {
 
 		RoleDTO roleDTO = new RoleDTO();
 		roleDTO.setId(1L);
-		userDTO.getRoles().add(roleDTO);
+		userDTO.getRoleList().add(roleDTO);
 
 		UserWebService userWebService = (UserWebService) applicationContext.getBean("userWebService");
 		CreateUserResult result = userWebService.createUser(userDTO);

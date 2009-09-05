@@ -26,7 +26,7 @@
 		<path location="${symbol_dollar}{project.runtime.lib}/log4j-1.2.15.jar" />
 		
 		<!--jdbc driver-->
-		<path location="${symbol_dollar}{project.runtime.lib}/derbyclient-10.4.2.0.jar" />
+		<path location="${symbol_dollar}{project.runtime.lib}/h2-1.1.117.jar" />
 		<path location="${symbol_dollar}{project.runtime.lib}/ojdbc14-10.2.3.0.jar" />
 	</path>
 

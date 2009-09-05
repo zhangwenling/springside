@@ -3,10 +3,10 @@
 #set( $symbol_escape = '\' )
 package ${package}.entity.security;
 
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -34,8 +34,9 @@ import org.springside.modules.utils.ReflectionUtils;
 public class Role extends IdEntity {
 
 	private String name;
-	private Set<Authority> authorities = new LinkedHashSet<Authority>(); //有序的关联对象集合
+	private List<Authority> authorityList = new ArrayList<Authority>();
 
+	@Column(nullable = false, unique = true)
 	public String getName() {
 		return name;
 	}
@@ -49,17 +50,17 @@ public class Role extends IdEntity {
 	@Fetch(FetchMode.SUBSELECT)
 	@OrderBy("id")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public Set<Authority> getAuthorities() {
-		return authorities;
+	public List<Authority> getAuthorityList() {
+		return authorityList;
 	}
 
-	public void setAuthorities(Set<Authority> authorities) {
-		this.authorities = authorities;
+	public void setAuthorityList(List<Authority> authorityList) {
+		this.authorityList = authorityList;
 	}
 
 	@Transient
 	public String getAuthNames() {
-		return ReflectionUtils.fetchElementPropertyToString(authorities, "displayName", ", ");
+		return ReflectionUtils.fetchElementPropertyToString(authorityList, "displayName", ", ");
 	}
 
 	/**
@@ -68,7 +69,7 @@ public class Role extends IdEntity {
 	@Transient
 	@SuppressWarnings("unchecked")
 	public List<Long> getAuthIds() {
-		return ReflectionUtils.fetchElementPropertyToList(authorities, "id");
+		return ReflectionUtils.fetchElementPropertyToList(authorityList, "id");
 	}
 
 	@Override

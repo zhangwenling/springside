@@ -49,10 +49,10 @@ public class UserDetailsServiceImplTest extends Assert {
 
 		User user = SecurityData.getRandomUser();
 		Role role = SecurityData.getRandomRole();
-		user.getRoles().add(role);
+		user.getRoleList().add(role);
 		Authority auth = new Authority();
 		auth.setName(authName);
-		role.getAuthorities().add(auth);
+		role.getAuthorityList().add(auth);
 
 		//录制脚本
 		EasyMock.expect(securityManager.findUserByLoginName(user.getLoginName())).andReturn(user);

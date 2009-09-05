@@ -27,7 +27,7 @@
 		<th><b>操作</b></th>
 	</tr>
 
-	<s:iterator value="roleList">
+	<s:iterator value="allRoleList">
 		<tr>
 			<td>${symbol_dollar}{name}</td>
 			<td>${symbol_dollar}{authNames}</td>

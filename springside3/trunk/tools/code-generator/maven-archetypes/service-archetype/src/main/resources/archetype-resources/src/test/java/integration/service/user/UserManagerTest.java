@@ -35,7 +35,7 @@ public class UserManagerTest extends SpringTxTestCase {
 
 		User user = userList.get(0);
 		evict(user);
-		assertTrue(user.getRoles().size() > 0);
+		assertTrue(user.getRoleList().size() > 0);
 	}
 
 	/**

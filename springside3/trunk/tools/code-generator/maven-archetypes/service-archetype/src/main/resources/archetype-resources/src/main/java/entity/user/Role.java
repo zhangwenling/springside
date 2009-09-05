@@ -3,6 +3,7 @@
 #set( $symbol_escape = '\' )
 package ${package}.entity.user;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -23,6 +24,7 @@ public class Role extends IdEntity {
 
 	private String name;
 
+	@Column(nullable = false, unique = true)
 	public String getName() {
 		return name;
 	}
