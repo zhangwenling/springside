@@ -22,7 +22,7 @@ public class ExecutorJob implements Runnable {
 	 */
 	public void run() {
 		long userCount = userManager.getUserCount();
-		logger.info("Hello, now is {}, there is {} user in database, print by ScheduledExecutor Job.", new Date(),
+		logger.info("Hello, now is {}, there is {} user in database, print by ScheduledExecutor job.", new Date(),
 				userCount);
 	}
 }

@@ -1,7 +1,5 @@
 package org.springside.examples.miniservice.ws.api.dto;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -13,9 +11,8 @@ import org.springside.examples.miniservice.ws.api.Constants;
  * @author calvin
  */
 @XmlType(name = "Role", namespace = Constants.NS)
-public class RoleDTO implements Serializable {
-	private static final long serialVersionUID = 1968746070218905430L;
-
+public class RoleDTO {
+	
 	private Long id;
 	private String name;
 

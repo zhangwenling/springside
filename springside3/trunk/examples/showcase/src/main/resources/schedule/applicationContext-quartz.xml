@@ -57,6 +57,7 @@
 	<bean id="cronJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="cronJob" />
 		<property name="targetMethod" value="execute" />
+		<property name="concurrent" value="true"/>
 	</bean>
 
 	<!-- 被Cron执行的普通Spring Bean -->

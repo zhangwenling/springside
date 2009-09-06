@@ -3,7 +3,6 @@
 #set( $symbol_escape = '\' )
 package ${package}.ws.api.dto;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +21,8 @@ import ${package}.ws.api.Constants;
  * @author calvin
  */
 @XmlType(name = "User", namespace = Constants.NS)
-public class UserDTO implements Serializable {
-	private static final long serialVersionUID = -1747311328588931287L;
-
+public class UserDTO {
+	
 	private Long id;
 	private String loginName;
 	private String name;

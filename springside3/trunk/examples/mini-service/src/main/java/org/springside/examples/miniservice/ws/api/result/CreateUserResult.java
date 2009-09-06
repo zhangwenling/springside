@@ -11,8 +11,7 @@ import org.springside.examples.miniservice.ws.api.Constants;
  */
 @XmlType(name = "CreateUserResult", namespace = Constants.NS)
 public class CreateUserResult extends WSResult {
-	private static final long serialVersionUID = -3566281078899970716L;
-
+	
 	private Long userId;
 
 	/**

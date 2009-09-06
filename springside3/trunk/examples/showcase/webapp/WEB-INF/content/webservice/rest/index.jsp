@@ -14,8 +14,6 @@
 <h3>RESTful Web Service演示</h3>
 <h4>技术说明：</h4>
 <ul>
-<li>服务端使用Jersey </li>
-<li>客户端使用HttpClient 4.0</li>
 <li>主要目的是简化Web Service的提供与使用，因此并不严格遵循GET/POST/PUT等REST概念，而注重演示REST中的ETag缓存与安全等特性。</li>
 </ul>
 </div>
