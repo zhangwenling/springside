@@ -22,6 +22,6 @@ public class QuartzJob {
 	 */
 	public void execute() {
 		long userCount = userManager.getUserCount();
-		logger.info("Hello, now is {}, there are {} user in table, print by Quartz job.", new Date(), userCount);
+		logger.info("Hello, now is {}, there are {} user in table.", new Date(), userCount);
 	}
 }

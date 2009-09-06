@@ -1,7 +1,7 @@
 @echo off
-echo [INFO] 使用maven jetty plugin 运行项目.
+echo [INFO] 使用maven jetty plugin 运行项目在node1节点8080端口.
 
 cd ..
-call mvn jetty:run-war -Pnotest -Pcluster -Djetty.port=8081 -Dcluster.nodename=node1
+call mvn jetty:run-war -Pnotest -Pcluster -Djetty.port=8080 -Dcluster.nodename=node1
 
 pause

@@ -49,14 +49,15 @@
 	<!-- Timer式 Trigger定义-->
 	<bean id="timerTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
 		<property name="jobDetail" ref="timerJobDetail" />
-		<!-- 每次执行间隔1小时 -->
-		<property name="repeatInterval" value="3600000" />
+		<!-- 每次执行间隔5分钟 -->
+		<property name="repeatInterval" value="300000" />
 	</bean>
 
 	<!-- Cron JobDetajil, 基于MethodInvokingJobDetailFactoryBean调用普通Spring Bean -->
 	<bean id="cronJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="cronJob" />
 		<property name="targetMethod" value="execute" />
+		<!-- 同一任务在前一次执行未完成而Trigger时间又到时是否并发开始新的执行, 默认为true. -->
 		<property name="concurrent" value="true"/>
 	</bean>
 
@@ -66,10 +67,12 @@
 	<!-- Timer JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
 	<bean name="timerJobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
 		<property name="jobClass" value="org.springside.examples.showcase.schedule.QuartzClusterableJob" />
+		<!-- fail-over节点重新执行之前所有失败或未执行的任务, 默认为false. -->
+		<property name="requestsRecovery" value="true"/>
 		<!-- 注入到jobClass示例中的属性 -->
 		<property name="jobDataAsMap">
 			<map>
-				<entry key="greet" value="Hi" />
+				<entry key="nodeName" value="${server.nodeName}" />
 			</map>
 		</property>
 	</bean>
