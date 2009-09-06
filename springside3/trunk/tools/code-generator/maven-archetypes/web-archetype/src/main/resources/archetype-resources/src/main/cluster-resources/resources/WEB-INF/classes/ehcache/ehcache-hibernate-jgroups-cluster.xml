@@ -6,21 +6,18 @@
 
 	<diskStore path="java.io.tmpdir/hibernate/${artifactId}" />
 
-	<!-- Cluster peer host setting.
-	     Remember to set host1,host2 the real ip. -->
+	<!-- JGroups cluster setting. -->
 	<cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheManagerPeerProviderFactory"
-		properties="connect=TCP(start_port=7800):
-		TCPPING(initial_hosts=host1[7800],host2[7800];port_range=3;timeout=3000;
-		num_initial_members=2;up_thread=true;down_thread=true):
-		VERIFY_SUSPECT(timeout=1500;down_thread=false;up_thread=false):
-		pbcast.NAKACK(down_thread=true;up_thread=true;gc_lag=100;retransmit_timeout=3000):
-		pbcast.GMS(join_timeout=5000;join_retry_timeout=2000;shun=false;
-		print_local_addr=false;down_thread=true;up_thread=true)"
+		properties="connect=TCP(start_port=7800;bind_addr=${symbol_dollar}{server.addr}):
+		TCPPING(initial_hosts=${symbol_dollar}{jgroups.initial_hosts};port_range=1;timeout=5000;num_initial_members=2):
+		VERIFY_SUSPECT(timeout=1500):
+		pbcast.NAKACK(gc_lag=100;retransmit_timeout=3000):
+		pbcast.GMS(join_timeout=5000;shun=false;print_local_addr=true)"
 		propertySeparator="::" />
-		 	
- 	<!--
-		DefaultCache setting.
-		Modify ehcache-safe.xml for timeToIdleSeconds,timeToLiveSecond,diskExpiryThreadIntervalSeconds.
+		
+	<!--
+		DefaultCache setting. 
+		Modify ehcache-safe.xml for timeToIdleSeconds,timeToLiveSecond,diskExpiryThreadIntervalSeconds. 
 		Use ehcache-safe.xml default for maxElementsInMemory,maxElementsOnDisk,overflowToDisk,eternal.
 		Use ehcache default for memoryStoreEvictionPolicy,diskPersistent.
 	-->
@@ -29,19 +26,22 @@
 		timeToIdleSeconds="3600" timeToLiveSeconds="100000" diskPersistent="false" />
 
 	<!-- Special objects setting. -->
-	<cache name="${package}.entity.user.User" maxElementsInMemory="500" overflowToDisk="true"
-		eternal="true">
+	<cache name="${package}.entity.security.User" maxElementsInMemory="500" eternal="true">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
-	<cache name="${package}.entity.user.User.roles" maxElementsInMemory="500"
-		overflowToDisk="true" eternal="true">
+	<cache name="${package}.entity.security.User.roles" maxElementsInMemory="500" eternal="true">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
-	<cache name="${package}.entity.user.Role" maxElementsInMemory="500" overflowToDisk="true"
-		eternal="true">
+	<cache name="${package}.entity.security.Role" maxElementsInMemory="500" eternal="true">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
+	<cache name="${package}.entity.security.Role.auths" maxElementsInMemory="500" eternal="true">
+		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
+	</cache>
+
+	<cache name="${package}.entity.security.Authority" maxElementsInMemory="500"  eternal="true"/>
 </ehcache>

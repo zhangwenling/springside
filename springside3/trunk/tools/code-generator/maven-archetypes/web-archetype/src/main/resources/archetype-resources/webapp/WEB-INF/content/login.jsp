@@ -37,13 +37,13 @@
 			<tr>
 				<td>用户名:</td>
 				<td>
-					<input type='text' name='j_username' class="required"
+					<input type='text' id='j_username' name='j_username' class="required"
 					<s:if test="not empty param.error"> value='<%=session.getAttribute(AuthenticationProcessingFilter.SPRING_SECURITY_LAST_USERNAME_KEY)%>'</s:if>/>
 				</td>
 			</tr>
 			<tr>
 				<td>密码:</td>
-				<td><input type='password' name='j_password' class="required" /></td>
+				<td><input type='password' id='j_password' name='j_password' class="required" /></td>
 			</tr>
 			<tr>
 				<td>
