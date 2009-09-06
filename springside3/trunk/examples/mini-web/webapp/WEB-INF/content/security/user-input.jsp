@@ -24,8 +24,7 @@
     				},
           			name: "required",
           			password: {
-    					required: true,
-    					minlength:3
+    					required: true
     				}, 
     				passwordConfirm: {
     					equalTo:"#password"
@@ -59,7 +58,7 @@
 	</tr>
 	<tr>
 		<td>用户名:</td>
-		<td><input type="text" name="name" size="40" value="${name}" /></td>
+		<td><input type="text" id="name" name="name" size="40" value="${name}" /></td>
 	</tr>
 	<tr>
 		<td>密码:</td>
@@ -67,11 +66,11 @@
 	</tr>
 	<tr>
 		<td>确认密码:</td>
-		<td><input type="password" name="passwordConfirm" size="40" value="${password}" /></td>
+		<td><input type="password" id="passwordConfirm" name="passwordConfirm" size="40" value="${password}" /></td>
 	</tr>
 	<tr>
 		<td>邮箱:</td>
-		<td><input type="text" name="email" size="40" value="${email}" /></td>
+		<td><input type="text" id="email" name="email" size="40" value="${email}" /></td>
 	</tr>
 	<tr>
 		<td>角色:</td>

@@ -730,7 +730,55 @@
 	</build>
 
 	<profiles>
-		<!-- 不执行任何测试的profile -->
+		<!-- 以cluster模式打包war文件和运行jetty的profile,以-Dcluster.nodename=xxx 激活 -->
+		<profile>
+			<id>cluster</id>
+			<activation>
+				<property>
+					<name>cluster.nodename</name>
+				</property>
+			</activation>
+
+			<build>
+				<!-- 指定war名带节点名 -->
+				<finalName>${project.artifactId}-${cluster.nodename}</finalName>
+
+				<!-- war插件,指定打包war文件时加入节点特定的配置文件 -->
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<filters>
+								<filter>src/main/cluster-resources/properties/${cluster.nodename}.properties</filter>
+							</filters>
+
+							<webResources>
+								<resource>
+									<filtering>true</filtering>
+									<directory>src/main/cluster-resources/resources</directory>
+								</resource>
+							</webResources>
+						</configuration>
+					</plugin>
+
+					<!-- jetty插件,指定不同节点不同的work目录 -->
+					<plugin>
+						<groupId>org.mortbay.jetty</groupId>
+						<artifactId>maven-jetty-plugin</artifactId>
+						<configuration>
+							<webAppConfig>
+								<contextPath>/${artifactId}</contextPath>
+								<tempDirectory>${project.build.directory}/work-${cluster.nodename}
+								</tempDirectory>
+							</webAppConfig>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- 不执行任何测试的profile, 以-Pnotest激活 -->
 		<profile>
 			<id>notest</id>
 			<properties>
@@ -738,7 +786,7 @@
 			</properties>
 		</profile>
 
-		<!-- 在test阶段执行集成测试的profile -->
+		<!-- 在test阶段执行集成测试的profile, 以-Pintegration激活 -->
 		<profile>
 			<id>integration</id>
 			<build>
@@ -781,7 +829,7 @@
 			</build>
 		</profile>
 
-		<!-- 执行功能测试的profile -->
+		<!-- 执行功能测试的profile,以-Pfunctional激活 -->
 		<profile>
 			<id>functional</id>
 			<build>
@@ -874,7 +922,7 @@
 			</build>
 		</profile>
 
-		<!--初始化数据库Schema及测试数据的profile-->
+		<!--初始化数据库Schema及测试数据的profile, 以-Pinitdb激活-->
 		<profile>
 			<id>initdb</id>
 			<build>

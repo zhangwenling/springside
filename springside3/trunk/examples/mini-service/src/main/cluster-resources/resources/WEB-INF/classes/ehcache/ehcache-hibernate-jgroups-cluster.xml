@@ -7,7 +7,7 @@
 	     Remember to set host1,host2 the real ip. -->
 	<cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheManagerPeerProviderFactory"
 		properties="connect=TCP(start_port=7800):
-		TCPPING(initial_hosts=host1[7800],host2[7800];port_range=3;timeout=3000;
+		TCPPING(initial_hosts=${initial_hosts};port_range=3;timeout=3000;
 		num_initial_members=2;up_thread=true;down_thread=true):
 		VERIFY_SUSPECT(timeout=1500;down_thread=false;up_thread=false):
 		pbcast.NAKACK(down_thread=true;up_thread=true;gc_lag=100;retransmit_timeout=3000):
@@ -26,18 +26,15 @@
 		timeToIdleSeconds="3600" timeToLiveSeconds="100000" diskPersistent="false" />
 
 	<!-- Special objects setting. -->
-	<cache name="org.springside.examples.miniservice.entity.user.User" maxElementsInMemory="500" overflowToDisk="true"
-		eternal="true">
+	<cache name="org.springside.examples.miniservice.entity.user.User" maxElementsInMemory="500" eternal="true">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
-	<cache name="org.springside.examples.miniservice.entity.user.User.roles" maxElementsInMemory="500"
-		overflowToDisk="true" eternal="true">
+	<cache name="org.springside.examples.miniservice.entity.user.User.roles" maxElementsInMemory="500" eternal="true">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
-	<cache name="org.springside.examples.miniservice.entity.user.Role" maxElementsInMemory="500" overflowToDisk="true"
-		eternal="true">
+	<cache name="org.springside.examples.miniservice.entity.user.Role" maxElementsInMemory="500" eternal="true">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>

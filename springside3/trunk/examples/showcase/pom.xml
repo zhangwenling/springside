@@ -294,7 +294,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>showcase</finalName>
+		<finalName>${project.artifactId}</finalName>
 
 		<plugins>
 			<!-- Hibernate lazy load bytecode enhancement -->
@@ -351,49 +351,6 @@
 		</plugins>
 	</build>
 	<profiles>
-		<profile>
-			<id>cluster</id>
-
-			<properties>
-				<cluster.nodename>node1</cluster.nodename>
-			</properties>
-
-			<build>
-				<!-- 指定war名带节点名 -->
-				<finalName>${artifactId}-${cluster.nodename}</finalName>
-
-				<!-- war插件,指定war打包时加入节点特定的配置文件 -->
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-war-plugin</artifactId>
-						<configuration>
-							<webResources>
-								<resource>
-									<directory>src/main/cluster-resources/${cluster.nodename}
-									</directory>
-								</resource>
-							</webResources>
-						</configuration>
-					</plugin>
-
-					<!-- jetty插件,指定不同节点不同的work目录 -->
-					<plugin>
-						<groupId>org.mortbay.jetty</groupId>
-						<artifactId>maven-jetty-plugin</artifactId>
-						<configuration>
-							<webAppConfig>
-								<contextPath>/${artifactId}</contextPath>
-								<tempDirectory>${project.build.directory}/work-${cluster.nodename}
-								</tempDirectory>
-								<overrideDescriptor>src/test/resources/web-override.xml
-								</overrideDescriptor>
-							</webAppConfig>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
 
 		<!-- 重载initdb profile设定,加入对Quartz数据库的初始化 -->
 		<profile>
@@ -441,6 +398,20 @@
 						</configuration>
 					</plugin>
 				</plugins>
+			</build>
+		</profile>
+	
+		<!-- 重载cluster profile,指定finalName -->
+		<profile>
+			<id>cluster</id>
+			<activation>
+				<property>
+					<name>cluster.nodename</name>
+				</property>
+			</activation>
+
+			<build>
+				<finalName>${project.artifactId}-${cluster.nodename}</finalName>
 			</build>
 		</profile>
 	</profiles>

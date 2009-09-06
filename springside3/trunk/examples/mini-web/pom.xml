@@ -231,8 +231,8 @@
 	</dependencies>
 
 	<build>
-		<finalName>mini-web</finalName>
-
+		<finalName>${project.artifactId}</finalName>
+		
 		<plugins>
 			<!-- Hibernate lazy load bytecode enhancement -->
 			<plugin>
@@ -276,4 +276,20 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<profiles>
+		<!-- 重载cluster profile,指定finalName -->
+		<profile>
+			<id>cluster</id>
+			<activation>
+				<property>
+					<name>cluster.nodename</name>
+				</property>
+			</activation>
+
+			<build>
+				<finalName>${project.artifactId}-${cluster.nodename}</finalName>
+			</build>
+		</profile>
+	</profiles>
 </project>

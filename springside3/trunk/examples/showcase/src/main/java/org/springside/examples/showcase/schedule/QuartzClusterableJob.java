@@ -19,13 +19,13 @@ public class QuartzClusterableJob extends QuartzJobBean implements Serializable 
 
 	private static Logger logger = LoggerFactory.getLogger(QuartzClusterableJob.class);
 
-	private String nodeName;
+	private String greet;
 
 	/**
 	 * JobDetailBean每次创建本类的实例时,将从jobDataMap中读出数据注入本类的属性中.
 	 */
-	public void setNodeName(String nodeName) {
-		this.nodeName = nodeName;
+	public void setGreet(String greet) {
+		this.greet = greet;
 	}
 
 	/**
@@ -35,7 +35,6 @@ public class QuartzClusterableJob extends QuartzJobBean implements Serializable 
 	protected void executeInternal(JobExecutionContext ctx) throws JobExecutionException {
 		UserManager userManager = SpringContextUtils.getBean("userManager");
 		long userCount = userManager.getUserCount();
-		logger.info("Hello, now is {},  there are {} user in table. Job is initialize at {}.", new Object[] {
-				new Date(), userCount, nodeName });
+		logger.info("{}, now is {},  there are {} user in table.", new Object[] { greet, new Date(), userCount });
 	}
 }

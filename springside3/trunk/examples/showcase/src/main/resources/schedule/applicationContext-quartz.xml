@@ -72,7 +72,7 @@
 		<!-- 注入到jobClass示例中的属性 -->
 		<property name="jobDataAsMap">
 			<map>
-				<entry key="nodeName" value="${server.nodeName}" />
+				<entry key="greet" value="Hi" />
 			</map>
 		</property>
 	</bean>
