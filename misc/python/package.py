@@ -2,8 +2,6 @@ import os,shutil
 from common import zipfolder,rmdir,zipfolder,emptydir,rmfile
 
 def prepare():
-   os.chdir(base_dir+'\\bin')
-   os.system('init-all-jar.bat')
    os.system('TortoiseProc.exe /command:export /path:"'+base_dir+'"')
    os.chdir(export_dir)
    rmfile(springside_dir+'-src.zip')
@@ -15,7 +13,7 @@ def packageSource():
 
 def packageAll():
    ## copy maven and repository 
-   os.system('xcopy /s/e/i/y '+base_dir+'\\tools\\maven\\apache-maven-2.2.1 '+springside_dir+'\\tools\\maven\\apache-maven-2.1.0')
+   os.system('xcopy /s/e/i/y '+base_dir+'\\tools\\maven\\apache-maven-2.2.1 '+springside_dir+'\\tools\\maven\\apache-maven-2.2.1')
    os.system('xcopy /s/e/i/h %USERPROFILE%\\.m2\\repository '+springside_dir + '\\tools\\maven\\central-repository')
 
    ## copy tomcat 
