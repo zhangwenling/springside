@@ -88,7 +88,7 @@ def clean():
     print 'cleaned temp files.'
 
 springside_version='3.1.8'
-base_dir = os.path.abspath("../../")
+base_dir = os.path.abspath("../../../")
 
 prepare()
 createArchetypes()
