@@ -348,6 +348,12 @@
 					</tables>
 				</configuration>
 			</plugin>
+			
+			<!-- jetty插件 -->
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+			</plugin>
 		</plugins>
 	</build>
 	<profiles>
