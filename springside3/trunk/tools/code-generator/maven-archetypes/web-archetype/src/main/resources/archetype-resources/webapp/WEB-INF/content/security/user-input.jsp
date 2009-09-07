@@ -27,7 +27,8 @@
     				},
           			name: "required",
           			password: {
-    					required: true
+    					required: true,
+    					minlength:3
     				}, 
     				passwordConfirm: {
     					equalTo:"${symbol_pound}password"
