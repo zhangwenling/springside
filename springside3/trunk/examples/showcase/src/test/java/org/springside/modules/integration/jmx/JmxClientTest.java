@@ -3,8 +3,10 @@ package org.springside.modules.integration.jmx;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.jmx.client.service.JmxClientService;
+import org.springside.examples.showcase.jmx.server.ServerConfig;
 import org.springside.examples.showcase.jmx.server.ServerConfigMBean;
 import org.springside.modules.jmx.JmxClient;
 import org.springside.modules.test.spring.SpringContextTestCase;
@@ -16,6 +18,9 @@ import org.springside.modules.test.spring.SpringContextTestCase;
  */
 @ContextConfiguration(locations = { "/jmx/applicationContext-jmx-server.xml" })
 public class JmxClientTest extends SpringContextTestCase {
+
+	@Autowired
+	private ServerConfig serverConfig;
 
 	private JmxClient jmxClient;
 	private ServerConfigMBean serverConfigMbean;
@@ -33,7 +38,7 @@ public class JmxClientTest extends SpringContextTestCase {
 
 	@Test
 	public void getMBeanAttribute() {
-		assertEquals("node1", serverConfigMbean.getNodeName());
+		assertEquals(serverConfig.getNodeName(), serverConfigMbean.getNodeName());
 	}
 
 	@Test
