@@ -65,6 +65,11 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	public String list() throws Exception {
 		List<PropertyFilter> filters = HibernateWebUtils.buildPropertyFilters(Struts2Utils.getRequest());
+		//设置默认排序方式
+		if (!page.isOrderBySetted()) {
+			page.setOrderBy("id");
+			page.setOrder(Page.ASC);
+		}
 		page = securityManager.searchUser(page, filters);
 		return SUCCESS;
 	}

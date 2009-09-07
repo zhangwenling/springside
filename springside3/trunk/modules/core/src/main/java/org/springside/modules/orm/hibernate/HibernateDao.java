@@ -103,7 +103,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按HQL分页查询.
 	 * 
-	 * @param page 分页参数.(不支持orderBy参数)
+	 * @param page 分页参数.
 	 * @param hql hql语句.
 	 * @param values 命名参数,按名称绑定.
 	 * 
