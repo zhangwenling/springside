@@ -24,7 +24,8 @@
     				},
           			name: "required",
           			password: {
-    					required: true
+    					required: true,
+    					minlength:3
     				}, 
     				passwordConfirm: {
     					equalTo:"#password"
