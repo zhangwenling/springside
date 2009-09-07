@@ -1,16 +1,16 @@
 package org.springside.examples.showcase.orm.hibernate;
 
 import org.hibernate.Hibernate;
-import org.hibernate.dialect.DerbyDialect;
+import org.hibernate.dialect.H2Dialect;
 import org.hibernate.dialect.function.SQLFunctionTemplate;
 import org.hibernate.dialect.function.StandardSQLFunction;
 
 /**
- * 演示扩展DerbyDialect,增加两种新函数.
+ * 演示扩展H2Dialect,增加两种新函数.
  * 
  * @author calvin
  */
-public class H2ExtDialect extends DerbyDialect {
+public class H2ExtDialect extends H2Dialect {
 
 	public H2ExtDialect() {
 		super();

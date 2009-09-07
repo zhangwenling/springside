@@ -7,7 +7,7 @@
 
 	<!-- 配置RMI注册服务器 -->
 	<bean id="registry" class="org.springframework.remoting.rmi.RmiRegistryFactoryBean" lazy-init="false">
-		<property name="port" value="${jmx.rmi.port}" />
+		<property name="port" value="${jmx.rmi_port}" />
 	</bean>
 
 	<!-- 配置JMX远程连接 -->
@@ -17,19 +17,19 @@
 			<map>
 				<!-- 认证配置,文件路径需为绝对路径 -->
 				<!--
-					<entry key="jmx.remote.x.password.file" value="/mypath/jmxremote.password" /> <entry
-					key="jmx.remote.x.access.file" value="/mypath/jmxremote.access" />
+					<entry key="jmx.remote.x.password.file" value="/mypath/jmxremote.password" />
+					<entry key="jmx.remote.x.access.file" value="/mypath/jmxremote.access" />
 				-->
 			</map>
 		</property>
 	</bean>
 
-	<!-- MBean注册 -->
+	<!-- 配置MBean自动注册 -->
 	<context:mbean-export default-domain="Custom" registration="ignoreExisting" />
 
 	<!-- 系统属性配置MBean -->
 	<bean id="serverConfig" class="org.springside.examples.showcase.jmx.server.ServerConfig">
-		<property name="nodeName" value="node1" />
+		<property name="nodeName" value="${server.node_name}" />
 		<property name="notificationMailEnabled" value="true" />
 	</bean>
 
