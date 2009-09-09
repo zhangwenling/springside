@@ -750,13 +750,13 @@
 						<artifactId>maven-war-plugin</artifactId>
 						<configuration>
 							<filters>
-								<filter>src/main/cluster-resources/properties/${cluster.nodename}.properties</filter>
+								<filter>src/main/cluster/properties/${cluster.nodename}.properties</filter>
 							</filters>
 
 							<webResources>
 								<resource>
 									<filtering>true</filtering>
-									<directory>src/main/cluster-resources/resources</directory>
+									<directory>src/main/cluster/webapp</directory>
 								</resource>
 							</webResources>
 						</configuration>
