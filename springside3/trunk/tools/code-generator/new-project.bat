@@ -7,11 +7,6 @@ cd generated-project
 
 call mvn archetype:generate -DarchetypeCatalog=local
 
-echo [INFO] 已在%cd%\generated-project下生成项目.
+echo [INFO] 已在%cd%下生成项目.
 
-echo [INFO] 为新项目初始化依赖jar.
-cd generated-project
-for /D %%a in (*) do cd "%%a"
-call mvn dependency:copy-dependencies -DoutputDirectory=lib -DexcludeScope=runtime -Dsilent=true
-call mvn dependency:copy-dependencies -DoutputDirectory=webapp/WEB-INF/lib  -DincludeScope=runtime -Dsilent=true
 pause
