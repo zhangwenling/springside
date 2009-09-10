@@ -478,7 +478,7 @@
 			</dependency>
 			<!-- utils end -->
 
-			<!-- xml binding begin -->
+			<!-- xml  begin -->
 			<dependency>
 				<groupId>com.thoughtworks.xstream</groupId>
 				<artifactId>xstream</artifactId>
@@ -490,7 +490,19 @@
 				<artifactId>jaxb-impl</artifactId>
 				<version>2.1.12</version>
 			</dependency>
-			<!-- xml binding end -->
+
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>1.6.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>jaxen</groupId>
+				<artifactId>jaxen</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+			<!-- xml  end -->
 
 			<!-- poi begin -->
 			<dependency>

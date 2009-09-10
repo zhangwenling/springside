@@ -11,10 +11,10 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.springside.examples.showcase.xml.jaxb.HouseMap.MapAdapter;
 
 /**
  * 使用JAXB2.0标注的待转换Java Bean.
@@ -83,7 +83,7 @@ public class User {
 		this.interests = interests;
 	}
 
-	//设置对Map的映射,xml为<houses><item key="bj"><value>house1</value></item></houses>
+	//设置对Map的映射,xml为<houses><item key="bj">house1</item></houses>
 	@XmlJavaTypeAdapter(MapAdapter.class)
 	public Map<String, String> getHouses() {
 		return houses;
@@ -96,47 +96,5 @@ public class User {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
-	}
-
-	/**
-	 * Map转换适配器,将Map转换为MapEntry[]数组.
-	 */
-	public static class MapAdapter extends XmlAdapter<MapEntry[], Map<String, String>> {
-
-		@Override
-		public MapEntry[] marshal(Map<String, String> map) throws Exception {
-			List<MapEntry> list = new ArrayList<MapEntry>();
-			for (Map.Entry<String, String> e : map.entrySet()) {
-				list.add(new MapEntry(e));
-			}
-			return list.toArray(new MapEntry[list.size()]);
-		}
-
-		@Override
-		public Map<String, String> unmarshal(MapEntry[] array) throws Exception {
-			Map<String, String> map = new HashMap<String, String>();
-			for (MapEntry e : array) {
-				map.put(e.key, e.value);
-			}
-			return map;
-		}
-	}
-
-	/**
-	 * Map的可绑定数据类型.
-	 */
-	public static class MapEntry {
-		@XmlAttribute
-		String key;
-
-		String value;
-
-		public MapEntry() {
-		}
-
-		public MapEntry(Map.Entry<String, String> e) {
-			key = e.getKey();
-			value = e.getValue();
-		}
 	}
 }
