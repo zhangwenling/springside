@@ -17,9 +17,8 @@ import org.springside.modules.web.struts2.Struts2Utils;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * JMX客户端演示的Action.
+ * FlashChart演示生成Amcharts所需 CVS/XML格式数据的Action.
  * 
- * @author ben
  * @author calvin
  */
 //因为没有按Convention Plugin默认的Pacakge命名规则, 因此用annotation重新指定Namespace.
@@ -74,18 +73,19 @@ public class ChartDataAction extends ActionSupport {
 
 		int index = 100;
 		for (TemperatureAnomaly data : temperatureAnomalyArray) {
-			Element serieValue = series.addElement("value").addAttribute("xid", String.valueOf(index));
-			serieValue.setText(String.valueOf(data.getYear()));
+			series.addElement("value").addAttribute("xid", String.valueOf(index)).addText(
+					String.valueOf(data.getYear()));
 
-			Element graph1Value = graph1.addElement("value").addAttribute("xid", String.valueOf(index));
-			graph1Value.setText(String.valueOf(data.getAnomaly()));
+			Element graph1Value = graph1.addElement("value").addAttribute("xid", String.valueOf(index)).addText(
+					String.valueOf(data.getAnomaly()));
 
 			graph1Value.addAttribute("url", url + index);
+
 			if (data.getAnomaly() < 0)
 				graph1Value.addAttribute("color", "#318DBD");
 
-			Element graph2Value = graph2.addElement("value").addAttribute("xid", String.valueOf(index));
-			graph2Value.setText(String.valueOf(data.getSmoothed()));
+			graph2.addElement("value").addAttribute("xid", String.valueOf(index)).addText(
+					String.valueOf(data.getSmoothed()));
 
 			index++;
 		}

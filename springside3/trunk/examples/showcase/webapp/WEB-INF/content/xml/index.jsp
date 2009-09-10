@@ -14,7 +14,7 @@
 <h3>XML操作演示</h3>
 <h4>技术说明：</h4>
 <ul>
-<li>基于JAXB2.0的Java-XML绑定。</li>
+<li>基于JAXB2.0的Java-XML绑定,根元素是List, 属性是Map等特殊情况。</li>
 <li>万能老倌Dom4j。</li>
 <li></li>
 </ul>

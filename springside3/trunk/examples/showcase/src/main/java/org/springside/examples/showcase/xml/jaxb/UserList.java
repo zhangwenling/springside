@@ -20,5 +20,4 @@ public class UserList {
 	public List<User> getList() {
 		return list;
 	}
-
 }
