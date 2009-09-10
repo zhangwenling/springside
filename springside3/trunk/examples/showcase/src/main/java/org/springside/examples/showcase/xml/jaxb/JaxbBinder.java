@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.xml;
+package org.springside.examples.showcase.xml.jaxb;
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -20,7 +20,7 @@ import javax.xml.bind.Unmarshaller;
  * 
  * @author calvin
  */
-public class JaxbBinder implements XmlBinder {
+public class JaxbBinder {
 	private Marshaller marshaller;
 	private Unmarshaller unmarshaller;
 

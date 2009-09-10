@@ -15,12 +15,11 @@
 <h4>技术说明：</h4>
 <ul>
 <li>基于JAXB2.0的Java-XML绑定。</li>
-<li>基于XStream的Java-XML绑定。</li>
 <li>万能老倌Dom4j。</li>
 <li></li>
 </ul>
 
-<h4>用户故事：</h4>在JaxbTest与XStreamTest测试用例中演示XML与Java对象的转换及Dom4j的使用。
+<h4>用户故事：</h4>在JaxbTest测试用例中演示XML与Java对象的转换及Dom4j的使用。
 </div>
 </div>
 </body>

@@ -7,11 +7,10 @@ import org.dom4j.Element;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springside.examples.showcase.xml.jaxb.JaxbBinder;
 import org.springside.examples.showcase.xml.jaxb.Role;
 import org.springside.examples.showcase.xml.jaxb.User;
 import org.springside.examples.showcase.xml.jaxb.UserList;
-import org.springside.modules.xml.JaxbBinder;
-import org.springside.modules.xml.XmlBinder;
 
 /**
  * 演示基于JAXB2.0的Java对象-XML转换.
@@ -38,7 +37,7 @@ import org.springside.modules.xml.XmlBinder;
  */
 public class JaxbTest extends Assert {
 
-	private XmlBinder binder;
+	private JaxbBinder binder;
 
 	@Before
 	public void setUp() {
