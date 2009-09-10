@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.springside.examples.showcase.xml.jaxb.HouseMap.MapAdapter;
+import org.springside.examples.showcase.xml.jaxb.HouseMap.HouseMapAdapter;
 
 /**
  * 使用JAXB2.0标注的待转换Java Bean.
@@ -83,8 +83,8 @@ public class User {
 		this.interests = interests;
 	}
 
-	//设置对Map的映射,xml为<houses><item key="bj">house1</item></houses>
-	@XmlJavaTypeAdapter(MapAdapter.class)
+	//设置对Map的映射为<houses><house key="bj">house1</house></houses>
+	@XmlJavaTypeAdapter(HouseMapAdapter.class)
 	public Map<String, String> getHouses() {
 		return houses;
 	}

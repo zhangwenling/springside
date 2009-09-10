@@ -31,8 +31,8 @@ import org.springside.modules.xml.XmlBinder;
  * 		<interest>sports</interest>
  * 	</interests>
  * 	<houses>
- * 		<item key="bj">house1</item>
- * 		<item key="gz">house2</item>
+ * 		<house key="bj">house1</item>
+ * 		<hosue key="gz">house2</item>
  * 	</houses>
  * </user>
  */

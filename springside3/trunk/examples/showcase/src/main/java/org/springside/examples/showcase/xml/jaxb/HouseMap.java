@@ -11,6 +11,17 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
+/**
+ * 为使Map<String,String> houses转化为有业务意义的xml的巨大努力,
+ * 分别定义了一个List<HouseEntry> Wrapper类--HouseMap, 一个MapEntry表达类--HouseEntry和一个Adapter--HouseMapAdapter.
+ * 最后的劳动成果是：
+ * <houses>
+ * 		<house key="bj">house1</item>
+ * 		<hosue key="gz">house2</item>
+ * 	</houses>
+ * 
+ * @author calvin
+ */
 @XmlType(name = "houses")
 public class HouseMap {
 
@@ -26,9 +37,28 @@ public class HouseMap {
 	}
 
 	/**
+	 * Map的Entry转换为.
+	 */
+	public static class HouseEntry {
+		@XmlAttribute
+		public String key;
+
+		@XmlValue
+		public String value;
+
+		public HouseEntry() {
+		}
+
+		public HouseEntry(Map.Entry<String, String> e) {
+			key = e.getKey();
+			value = e.getValue();
+		}
+	}
+
+	/**
 	 * Map转换适配器,将Map转换为HouseMap.
 	 */
-	public static class MapAdapter extends XmlAdapter<HouseMap, Map<String, String>> {
+	public static class HouseMapAdapter extends XmlAdapter<HouseMap, Map<String, String>> {
 
 		@Override
 		public HouseMap marshal(Map<String, String> map) throws Exception {
@@ -48,24 +78,4 @@ public class HouseMap {
 			return map;
 		}
 	}
-
-	/**
-	 * Map的可绑定数据类型.
-	 */
-	public static class HouseEntry {
-		@XmlAttribute
-		public String key;
-
-		@XmlValue
-		public String value;
-
-		public HouseEntry() {
-		}
-
-		public HouseEntry(Map.Entry<String, String> e) {
-			key = e.getKey();
-			value = e.getValue();
-		}
-	}
-
 }

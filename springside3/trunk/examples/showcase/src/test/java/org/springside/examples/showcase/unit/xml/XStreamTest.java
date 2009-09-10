@@ -95,7 +95,7 @@ public class XStreamTest extends Assert {
 		user2.setId(2L);
 		user2.setName("kate");
 
-		List userList = new ArrayList();
+		List<User> userList = new ArrayList<User>();
 		userList.add(user1);
 		userList.add(user2);
 
