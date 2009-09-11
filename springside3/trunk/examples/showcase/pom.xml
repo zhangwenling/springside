@@ -229,12 +229,7 @@
 		</dependency>
 		<!-- utils end -->
 
-		<!--  xml binding begin -->
-		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-		</dependency>
-
+		<!--  xml begin -->
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-impl</artifactId>
@@ -249,8 +244,7 @@
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
 		</dependency>
-
-		<!--  xml binding end -->
+		<!--  xml end -->
 
 		<!-- poi begin -->
 		<dependency>

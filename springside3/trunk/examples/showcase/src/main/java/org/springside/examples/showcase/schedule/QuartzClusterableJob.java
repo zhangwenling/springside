@@ -1,31 +1,30 @@
 package org.springside.examples.showcase.schedule;
 
-import java.io.Serializable;
 import java.util.Date;
+import java.util.Map;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springside.examples.showcase.common.service.UserManager;
-import org.springside.modules.utils.SpringContextUtils;
 
 /**
  * 被Quartz JobDetailBean定时执行的Job类,支持持久化到数据库实现Quartz集群.
  */
-public class QuartzClusterableJob extends QuartzJobBean implements Serializable {
-	private static final long serialVersionUID = 628727256400306220L;
+public class QuartzClusterableJob extends QuartzJobBean {
 
 	private static Logger logger = LoggerFactory.getLogger(QuartzClusterableJob.class);
 
-	private String greet;
+	private ApplicationContext applicationContext;
 
 	/**
-	 * JobDetailBean每次创建本类的实例时,将从jobDataMap中读出数据注入本类的属性中.
+	 * 从SchedulerFactoryBean注入到applicationContext.
 	 */
-	public void setGreet(String greet) {
-		this.greet = greet;
+	public void setApplicationContext(ApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
 	}
 
 	/**
@@ -33,8 +32,11 @@ public class QuartzClusterableJob extends QuartzJobBean implements Serializable 
 	 */
 	@Override
 	protected void executeInternal(JobExecutionContext ctx) throws JobExecutionException {
-		UserManager userManager = SpringContextUtils.getBean("userManager");
+		UserManager userManager = (UserManager) applicationContext.getBean("userManager");
+		Map<?, ?> config = (Map<?, ?>) applicationContext.getBean("timerJobConfig");
+
 		long userCount = userManager.getUserCount();
-		logger.info("{}, now is {},  there are {} user in table.", new Object[] { greet, new Date(), userCount });
+		logger.info("Hi, now is {}, here is {}, there are {} user in table.", new Object[] { new Date(),
+				config.get("nodeName"), userCount });
 	}
 }

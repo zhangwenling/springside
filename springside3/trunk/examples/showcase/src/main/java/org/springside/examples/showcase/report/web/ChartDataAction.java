@@ -48,14 +48,14 @@ public class ChartDataAction extends ActionSupport {
 	 * 示例:
 	 * <chart>
 	 * 	<series>
-	 * 		<value xid="100">1950</value>
+	 * 		<value xid="1">1950</value>
 	 * 	</series>
 	 * 	<graphs>
 	 * 		<graph gid="1">
-	 * 			<value xid="100" color="#318DBD" url="/showcase/report/flashchart/report2-drilldown.action?id=100">-0.307</value>
+	 * 			<value xid="1" color="#318DBD" url="/showcase/report/flashchart/report2-drilldown.action?id=100">-0.307</value>
 	 * 		</graph>
 	 * 		<graph gid="2">
-	 * 			<value xid="100">-0.171</value>
+	 * 			<value xid="1">-0.171</value>
 	 * 		</graph>
 	 * 	</graphs>
 	 * </chart>
@@ -71,7 +71,7 @@ public class ChartDataAction extends ActionSupport {
 		Element graph1 = graphs.addElement("graph").addAttribute("gid", "1");
 		Element graph2 = graphs.addElement("graph").addAttribute("gid", "2");
 
-		int index = 100;
+		int index = 1;
 		for (TemperatureAnomaly data : temperatureAnomalyArray) {
 			series.addElement("value").addAttribute("xid", String.valueOf(index)).addText(
 					String.valueOf(data.getYear()));

@@ -116,9 +116,9 @@
   <values>                                                    <!-- VALUES -->
     <category>                                                <!-- category axis -->
       <enabled></enabled>                                     <!-- [true] (true / false) -->
-      <frequency>3</frequency>                                <!-- [1] (Number) how often values should be placed -->
+      <frequency>4</frequency>                                <!-- [1] (Number) how often values should be placed -->
       <start_from></start_from>                               <!-- [1] (Number) you can set series from which category values will be displayed -->
-      <rotate>45</rotate>                                     <!-- [0] (0 - 90) angle of rotation. If you want to rotate by degree from 1 to 89, you must have font.swf file in fonts folder -->      
+      <rotate></rotate>                                     <!-- [0] (0 - 90) angle of rotation. If you want to rotate by degree from 1 to 89, you must have font.swf file in fonts folder -->      
       <color></color>                                         <!-- [text_color] (hex color code) -->
       <text_size></text_size>                                 <!-- [text_size] (Number) -->    
       <inside></inside>                                       <!-- [false] (true / false) if set to true, axis values will be displayed inside plot area. This setting will not work for values rotated by 1-89 degrees (0 and 90 only) -->      

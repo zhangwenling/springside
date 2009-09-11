@@ -16,7 +16,7 @@
 <p>说明：演示DIY报表所需技术。</p>
 <ul>
 <li><a href="flashchart/index.action">amCharts渲染Flash图表</a></li>
-<li>POI导出Excel文件(计划中)</li>
+<li><a href="excel-export.action">POI导出Excel文件</a></li>
 </ul>
 </div>
 </div>
