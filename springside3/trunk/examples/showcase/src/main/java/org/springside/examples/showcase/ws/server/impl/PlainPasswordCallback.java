@@ -33,9 +33,8 @@ public class PlainPasswordCallback implements CallbackHandler {
 		PasswordEncoder encoder = new ShaPasswordEncoder();
 		User user = userManager.getUserByLoginName(pc.getIdentifier());
 
-		if (user == null) {
+		if (user == null)
 			throw new IOException("wrong login name " + pc.getIdentifier());
-		}
 		//对明文的密码进行sha1散列, 再与数据库中保存的sha1散列密码进行比较.
 		if (!encoder.isPasswordValid(user.getShaPassword(), pc.getPassword(), null))
 			throw new IOException("wrong password " + pc.getPassword() + " for " + pc.getIdentifier());

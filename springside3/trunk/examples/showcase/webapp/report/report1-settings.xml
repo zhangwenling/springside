@@ -91,7 +91,7 @@
 	<graphs>
 		<graph gid="1">
 			<title>Anomaly</title>
-			<unit>亿</unit>
+			<unit>C</unit>
 			<color>#0D8ECF</color>
 			<color_hover>#FF6600</color_hover>
 			<line_width>2</line_width>
@@ -101,7 +101,7 @@
 
 		<graph gid="2">
 			<title>Smoothed</title>
-			<unit>亿</unit>
+			<unit>C</unit>
 			<color>#B0DE09</color>
 			<color_hover>#FF6600</color_hover>
 			<line_width>2</line_width>

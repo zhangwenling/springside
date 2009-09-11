@@ -11,7 +11,7 @@ import org.springside.examples.miniservice.ws.api.Constants;
  */
 @XmlType(name = "WSResult", namespace = Constants.NS)
 public class WSResult {
-	
+
 	// 返回代码定义 //
 	// 按项目的规则进行定义，比如1xx代表客户端参数错误，2xx代表业务错误等.
 	public static final String SUCCESS = "0";

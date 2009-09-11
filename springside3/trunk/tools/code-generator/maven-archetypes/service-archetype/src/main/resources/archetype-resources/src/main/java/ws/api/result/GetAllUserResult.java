@@ -19,7 +19,7 @@ import ${package}.ws.api.dto.UserDTO;
  */
 @XmlType(name = "GetAllUserResult", namespace = Constants.NS)
 public class GetAllUserResult extends WSResult {
-	
+
 	private List<UserDTO> userList;
 
 	@XmlElementWrapper(name = "userList")

@@ -22,7 +22,7 @@ import ${package}.ws.api.Constants;
  */
 @XmlType(name = "User", namespace = Constants.NS)
 public class UserDTO {
-	
+
 	private Long id;
 	private String loginName;
 	private String name;

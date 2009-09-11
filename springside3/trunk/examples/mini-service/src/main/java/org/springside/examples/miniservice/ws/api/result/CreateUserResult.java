@@ -11,7 +11,7 @@ import org.springside.examples.miniservice.ws.api.Constants;
  */
 @XmlType(name = "CreateUserResult", namespace = Constants.NS)
 public class CreateUserResult extends WSResult {
-	
+
 	private Long userId;
 
 	/**

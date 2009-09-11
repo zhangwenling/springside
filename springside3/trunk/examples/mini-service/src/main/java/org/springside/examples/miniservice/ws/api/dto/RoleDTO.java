@@ -12,7 +12,7 @@ import org.springside.examples.miniservice.ws.api.Constants;
  */
 @XmlType(name = "Role", namespace = Constants.NS)
 public class RoleDTO {
-	
+
 	private Long id;
 	private String name;
 

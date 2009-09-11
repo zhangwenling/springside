@@ -81,8 +81,9 @@ public class ChartDataAction extends ActionSupport {
 
 			graph1Value.addAttribute("url", url + index);
 
-			if (data.getAnomaly() < 0)
+			if (data.getAnomaly() < 0) {
 				graph1Value.addAttribute("color", "#318DBD");
+			}
 
 			graph2.addElement("value").addAttribute("xid", String.valueOf(index)).addText(
 					String.valueOf(data.getSmoothed()));
