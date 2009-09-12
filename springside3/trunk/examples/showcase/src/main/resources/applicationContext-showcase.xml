@@ -10,7 +10,8 @@
 	<import resource="jmx/applicationContext-jmx-server.xml" />
 	<import resource="jmx/applicationContext-jmx-client.xml" />
 	<import resource="log/applicationContext-log.xml" />
-	<import resource="schedule/applicationContext-quartz.xml" />
+	<import resource="schedule/applicationContext-quartz-cron-local.xml" />
+	<import resource="schedule/applicationContext-quartz-timer-cluster.xml" />
 	<import resource="schedule/applicationContext-executor.xml" />
 	<import resource="security/applicationContext-security.xml" />
 	<import resource="webservice/applicationContext-cxf-server.xml"/>

@@ -53,19 +53,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!--  xml -->
-		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-			<optional>true</optional>
-		</dependency>
-
 		<!-- logging -->
 		<dependency>
 			<groupId>commons-lang</groupId>
