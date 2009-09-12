@@ -43,10 +43,10 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 public class QueueManager {
 
 	protected static Map<String, BlockingQueue> queueMap = new ConcurrentHashMap<String, BlockingQueue>();//消息队列
-
 	protected static List<QueueConsumerTask> taskList = new ArrayList();
 
 	protected static boolean persistence = true;
+	protected static int queueSize = Integer.MAX_VALUE;
 
 	private static Logger logger = LoggerFactory.getLogger(QueueManager.class);
 
@@ -58,7 +58,7 @@ public class QueueManager {
 		BlockingQueue queue = queueMap.get(queueName);
 
 		if (queue == null) {
-			queue = new LinkedBlockingQueue();
+			queue = new LinkedBlockingQueue(queueSize);
 			queueMap.put(queueName, queue);
 
 			//从文件中恢复消息到队列.
@@ -78,7 +78,7 @@ public class QueueManager {
 	 * 根据queueName获得消息队列中未处理消息的数量,支持基于JMX查询.
 	 */
 	@ManagedOperation(description = "Get message count in queue")
-	public static int getQueueSize(
+	public static int getQueueLength(
 			@ManagedOperationParameter(name = "queueName", description = "queue name") String queueName) {
 		return getQueue(queueName).size();
 	}
@@ -98,28 +98,10 @@ public class QueueManager {
 	}
 
 	/**
-	 * JVM关闭时的钩子函数.
+	 * 每个队列的长度大小,默认为Int最大值.
 	 */
-	@PreDestroy
-	public void stop() {
-		//停止所有任务
-		for (QueueConsumerTask task : taskList) {
-			task.stop();
-		}
-
-		//持久化所有队列的未处理消息到文件
-		if (persistence) {
-			for (Entry<String, BlockingQueue> entry : queueMap.entrySet()) {
-				try {
-					backup(entry.getKey());
-				} catch (IOException e) {
-					logger.error("持久化" + entry.getKey() + "队列时出错", e);
-				}
-			}
-		}
-
-		//清除queueMap
-		queueMap.clear();
+	public static void setQueueSize(int queueSize) {
+		QueueManager.queueSize = queueSize;
 	}
 
 	/**
@@ -183,6 +165,31 @@ public class QueueManager {
 		} else {
 			logger.debug("队列{}不存在", queueName);
 		}
+	}
+
+	/**
+	 * JVM关闭时的钩子函数.
+	 */
+	@PreDestroy
+	public void stop() {
+		//停止所有任务
+		for (QueueConsumerTask task : taskList) {
+			task.stop();
+		}
+
+		//持久化所有队列的未处理消息到文件
+		if (persistence) {
+			for (Entry<String, BlockingQueue> entry : queueMap.entrySet()) {
+				try {
+					backup(entry.getKey());
+				} catch (IOException e) {
+					logger.error("持久化" + entry.getKey() + "队列时出错", e);
+				}
+			}
+		}
+
+		//清除queueMap
+		queueMap.clear();
 	}
 
 	/**
