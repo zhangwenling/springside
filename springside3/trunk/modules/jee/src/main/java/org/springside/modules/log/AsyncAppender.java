@@ -47,7 +47,7 @@ public class AsyncAppender extends org.apache.log4j.AppenderSkeleton {
 				logger.debug("put event ,{}", Log4jUtils.convertEventToString(event));
 			}
 		} else {
-			logger.error("Put event in queue fail ,{}", Log4jUtils.convertEventToString(event));
+			logger.error("Put event to queue fail ,{}", Log4jUtils.convertEventToString(event));
 		}
 	}
 

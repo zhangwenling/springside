@@ -24,18 +24,17 @@ import org.springside.modules.queue.QueueConsumerTask;
 
 /**
  * 将Queue中的log4j event写入数据库的消费者任务.
- * 使用Jdbc批量写入的模式,同时支持阻塞读取事件与定时批量读取事件两种策略.
+ * 定期获取的读取Queue中的消息并使用Jdbc批量写入.
  * 
  * @see QueueConsumerTask
  * 
  * @author calvin
  */
-public class JdbcAppenderTask extends QueueConsumerTask {
+public class JdbcPeriodFetchAppenderTask extends QueueConsumerTask {
 
 	protected SimpleJdbcTemplate jdbcTemplate;
 	protected String sql;
 
-	protected boolean blockingFetch = true;
 	protected int batchSize = 10;
 	protected int period = 1000;
 
@@ -56,15 +55,8 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	 * 循环读取消息的策略,为true时采用阻塞读取单条消息策略,false时采用定期批量读取消息策略.
-	 */
-	public void setBlockingFetch(boolean blockingFetch) {
-		this.blockingFetch = blockingFetch;
-	}
-
-	/**
-	 * 批量定时读取消息的队列大小, 默认为10.
-	 */
+	* 批量定时读取消息的队列大小, 默认为10.
+	*/
 	public void setBatchSize(int batchSize) {
 		this.batchSize = batchSize;
 	}
@@ -77,41 +69,10 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	 * 线程执行函数.
-	 */
-	public void run() {
-		if (blockingFetch) {
-			blockingFetch();
-		} else {
-			periodFetch();
-		}
-	}
-
-	/**
-	 * 阻塞获取消息并调用processMessage()进行处理.
-	 * 
-	 * @see #processMessage(Object)
-	 */
-	protected void blockingFetch() {
-		try {
-			//循环阻塞获取消息
-			while (!Thread.currentThread().isInterrupted()) {
-				Object message = queue.take();
-				processMessage(message);
-			}
-		} catch (InterruptedException e) {
-			logger.debug("消费线程阻塞被中断");
-		}
-		blockingFetchClean();
-	}
-
-	/**
-	 * 定期批量获取消息并调用processMessageList()处理.
-	 * 
-	 * @see #processMessageList(List)
+	 * 线程执行函数,定期批量获取消息并调用processMessageList()处理.
 	 */
 	@SuppressWarnings("unchecked")
-	protected void periodFetch() {
+	public void run() {
 		try {
 			while (!Thread.currentThread().isInterrupted()) {
 				List list = new ArrayList(batchSize);
@@ -125,60 +86,39 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	 * 消息处理函数,将消息放入buffer,当buffer达到batchSize时执行批量消息处理函数.
-	 */
-	protected void processMessage(Object message) {
-		LoggingEvent event = (LoggingEvent) message;
-		eventBuffer.add(event);
-		logger.debug("get event, {}", Log4jUtils.convertEventToString(event));
-
-		//已到达BufferSize则执行批量插入操作
-		if (eventBuffer.size() >= batchSize) {
-			processMessageList(eventBuffer);
-		}
-	}
-
-	/**
 	 * 批量消息处理函数,将事件列表批量插入数据库.
 	 */
 	@SuppressWarnings("unchecked")
 	protected void processMessageList(List messageList) {
 		List<LoggingEvent> eventList = messageList;
+		List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
+
 		try {
-			List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
+			//分析事件列表,转换为jdbc参数.
 			for (LoggingEvent event : eventList) {
 				Map<String, Object> paramMap = parseEvent(event);
 				paramMapList.add(paramMap);
 			}
-
 			Map[] paramMapArray = paramMapList.toArray(new Map[paramMapList.size()]);
-			SqlParameterSource[] paramMapBatch = SqlParameterSourceUtils.createBatch(paramMapArray);
+			SqlParameterSource[] batchParams = SqlParameterSourceUtils.createBatch(paramMapArray);
 
+			//执行批量插入,失败时调用失败处理函数.
 			try {
-				jdbcTemplate.batchUpdate(getActualSql(), paramMapBatch);
+				jdbcTemplate.batchUpdate(getActualSql(), batchParams);
 				if (logger.isDebugEnabled()) {
 					for (LoggingEvent event : eventBuffer) {
 						logger.debug("saved event, {}", Log4jUtils.convertEventToString(event));
 					}
 				}
 			} catch (DataAccessException e) {
-				dataAccessExceptionHandle(e, eventBuffer);
+				handleDataAccessException(e, eventBuffer);
 			}
 
+			//清除eventBuffer
 			eventBuffer.clear();
 		} catch (Exception e) {
 			logger.error("批量提交任务时发生错误.", e);
 		}
-	}
-
-	/**
-	 * 阻塞读取策略的退出清理函数.
-	 */
-	protected void blockingFetchClean() {
-		if (!eventBuffer.isEmpty()) {
-			processMessageList(eventBuffer);
-		}
-		logger.debug("cleaned task {}", this);
 	}
 
 	/**
@@ -193,7 +133,7 @@ public class JdbcAppenderTask extends QueueConsumerTask {
 	/**
 	 * 可被子类重载的数据访问错误处理函数.
 	 */
-	protected void dataAccessExceptionHandle(DataAccessException e, List<LoggingEvent> errorEventBatch) {
+	protected void handleDataAccessException(DataAccessException e, List<LoggingEvent> errorEventBatch) {
 		if (e instanceof DataAccessResourceFailureException) {
 			logger.error("database connection error", e);
 		} else {

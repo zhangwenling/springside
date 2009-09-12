@@ -81,7 +81,5 @@ public class QueueManagerTest extends Assert {
 		//判断存在持久化文件
 		file = new File(filePath);
 		assertEquals(false, file.exists());
-
 	}
-
 }

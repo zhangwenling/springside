@@ -93,7 +93,7 @@ public class ChartDataAction extends ActionSupport {
 		HttpServletResponse response = Struts2Utils.getResponse();
 		response.setContentType("text/xml;charset=utf-8");
 
-		OutputFormat format = OutputFormat.createPrettyPrint();
+		OutputFormat format = OutputFormat.createCompactFormat();
 		XMLWriter xmlWriter = new XMLWriter(response.getWriter(), format);
 		xmlWriter.write(document);
 		xmlWriter.close();

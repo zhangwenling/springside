@@ -8,7 +8,7 @@
 	<bean class="org.springside.modules.queue.QueueManager" lazy-init="false"/>
 
 	<!-- 读出Queue中日志消息写入数据库的任务 -->
-	<bean id="dbLogTask" class="org.springside.modules.log.JdbcAppenderTask">
+	<bean id="dbLogTask" class="org.springside.modules.log.JdbcBlockingFetchAppenderTask">
 		<property name="queueName" value="dblog" />
 		<property name="batchSize" value="20" />
 		<property name="dataSource" ref="dataSource" />

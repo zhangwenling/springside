@@ -13,7 +13,7 @@ import org.springside.examples.showcase.xml.jaxb.User;
 import org.springside.examples.showcase.xml.jaxb.UserList;
 
 /**
- * 演示基于JAXB2.0的Java对象-XML转换.
+ * 演示基于JAXB2.0的Java对象-XML转换及Dom4j的使用.
  * 
  * @author calvin
  * 演示用xml如下:
@@ -99,9 +99,14 @@ public class JaxbTest extends Assert {
 		System.out.println("Jaxb Object List to Xml result:" + xml);
 	}
 
+	/**
+	 * 使用Dom4j生成测试用的XML文档字符串.
+	 */
 	private String generateXmlByDom4j() {
 		Document document = DocumentHelper.createDocument();
+
 		Element root = document.addElement("user").addAttribute("id", "1");
+
 		root.addElement("name").setText("calvin");
 
 		//List<Role>
@@ -122,6 +127,9 @@ public class JaxbTest extends Assert {
 		return document.asXML();
 	}
 
+	/**
+	 * 使用Dom4j验证Jaxb所生成XML的正确性.
+	 */
 	private void assertXmlByDom4j(String xml) throws DocumentException {
 		Document doc = DocumentHelper.parseText(xml);
 		Element user = doc.getRootElement();
