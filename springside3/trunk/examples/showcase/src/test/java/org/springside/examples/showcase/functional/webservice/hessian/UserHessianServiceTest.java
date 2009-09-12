@@ -12,7 +12,7 @@ import org.springside.modules.test.spring.SpringContextTestCase;
  * 
  * @author calvin
  */
-@ContextConfiguration(locations = { "/webservice/applicationContext-hessian-client.xml" })
+@ContextConfiguration(locations = { "/webservice/applicationContext-hessian-client.xml" }, inheritLocations = false)
 public class UserHessianServiceTest extends SpringContextTestCase {
 
 	@Autowired

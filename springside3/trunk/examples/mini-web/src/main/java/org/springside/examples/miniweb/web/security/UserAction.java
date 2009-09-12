@@ -26,10 +26,9 @@ import org.springside.modules.web.struts2.Struts2Utils;
  * 
  * @author calvin
  */
+@SuppressWarnings("serial")
 @Results( { @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
 public class UserAction extends CrudActionSupport<User> {
-
-	private static final long serialVersionUID = -3158937030006900402L;
 
 	@Autowired
 	private SecurityManager securityManager;

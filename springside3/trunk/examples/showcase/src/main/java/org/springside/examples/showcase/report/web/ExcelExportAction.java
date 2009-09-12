@@ -25,9 +25,8 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author calvin
  */
 @Namespace("/report")
+@SuppressWarnings("serial")
 public class ExcelExportAction extends ActionSupport {
-
-	private static final long serialVersionUID = 1321167727728057491L;
 
 	/**
 	 * 生成Excel格式的内容.

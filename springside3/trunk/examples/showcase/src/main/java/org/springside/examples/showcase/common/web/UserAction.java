@@ -19,11 +19,10 @@ import org.springside.examples.showcase.common.service.UserManager;
  */
 //因为没有按Convention Plugin默认的Pacakge命名规则, 因此用annotation重新指定Namespace.
 @Namespace("/common")
+@SuppressWarnings("serial")
 @InterceptorRefs( { @InterceptorRef("paramsPrepareParamsStack") })
 @Results( { @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
 public class UserAction extends CrudActionSupport<User> {
-
-	private static final long serialVersionUID = 4384919647659925184L;
 
 	@Autowired
 	private UserManager userManager;

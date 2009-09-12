@@ -21,9 +21,8 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 //因为没有按Convention Plugin默认的Pacakge命名规则, 因此用annotation重新指定Namespace.
 @Namespace("/jmx")
+@SuppressWarnings("serial")
 public class JmxClientAction extends ActionSupport {
-
-	private static final long serialVersionUID = 1321167727728057491L;
 
 	private static Logger logger = LoggerFactory.getLogger(JmxClientAction.class);
 

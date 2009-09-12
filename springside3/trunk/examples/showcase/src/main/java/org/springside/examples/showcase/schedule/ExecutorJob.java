@@ -1,7 +1,5 @@
 package org.springside.examples.showcase.schedule;
 
-import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +20,6 @@ public class ExecutorJob implements Runnable {
 	 */
 	public void run() {
 		long userCount = userManager.getUserCount();
-		logger.info("Hello, now is {}, there is {} user in database.", new Date(), userCount);
+		logger.info("There are {} user in database.", userCount);
 	}
 }

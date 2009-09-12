@@ -1,12 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%@ page import="org.slf4j.Logger,org.slf4j.LoggerFactory" %>
 <%@ include file="/common/taglibs.jsp"%>
-
-<%
-	//在log4j.xml中,本logger已被指定使用asyncAppender
-	Logger logger = LoggerFactory.getLogger("org.springside.examples.showcase.log.dbLogExample");
-	logger.info("helloworld");
-%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

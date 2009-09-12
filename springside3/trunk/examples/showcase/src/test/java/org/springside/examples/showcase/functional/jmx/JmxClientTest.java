@@ -13,6 +13,6 @@ public class JmxClientTest extends BaseSeleniumTestCase {
 	@Test
 	public void general() {
 		clickMenu("JMX演示");
-		assertEquals("node1", selenium.getValue("nodeName"));
+		assertEquals("default", selenium.getValue("nodeName"));
 	}
 }

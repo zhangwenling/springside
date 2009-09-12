@@ -1,6 +1,5 @@
 package org.springside.examples.showcase.schedule;
 
-import java.util.Date;
 import java.util.Map;
 
 import org.quartz.JobExecutionContext;
@@ -21,7 +20,7 @@ public class QuartzClusterableJob extends QuartzJobBean {
 	private ApplicationContext applicationContext;
 
 	/**
-	 * 从SchedulerFactoryBean注入到applicationContext.
+	 * 从SchedulerFactoryBean注入的applicationContext.
 	 */
 	public void setApplicationContext(ApplicationContext applicationContext) {
 		this.applicationContext = applicationContext;
@@ -30,13 +29,15 @@ public class QuartzClusterableJob extends QuartzJobBean {
 	/**
 	 * 定时打印当前用户数到日志.
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void executeInternal(JobExecutionContext ctx) throws JobExecutionException {
 		UserManager userManager = (UserManager) applicationContext.getBean("userManager");
-		Map<?, ?> config = (Map<?, ?>) applicationContext.getBean("timerJobConfig");
+		Map config = (Map) applicationContext.getBean("timerJobConfig");
 
 		long userCount = userManager.getUserCount();
-		logger.info("Hi, now is {}, here is {}, there are {} user in table.", new Object[] { new Date(),
-				config.get("nodeName"), userCount });
+		String nodeName = (String) config.get("nodeName");
+
+		logger.info("There are {} user in table,print by {}'s job.", userCount, nodeName);
 	}
 }

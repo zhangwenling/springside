@@ -5,7 +5,7 @@
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd"
 	default-autowire="byType" default-lazy-init="true">
 
-	<description>使用SpringSecurity的安全配置文件</description>
+	<description>SpringSecurity安全配置</description>
 
 	<!-- http安全配置 -->
 	<s:http auto-config="true" access-decision-manager-ref="accessDecisionManager">

@@ -19,10 +19,9 @@ import org.springside.modules.orm.hibernate.HibernateWebUtils;
  * 
  * @author calvin
  */
+@SuppressWarnings("serial")
 @Results( { @Result(name = CrudActionSupport.RELOAD, location = "role.action", type = "redirect") })
 public class RoleAction extends CrudActionSupport<Role> {
-
-	private static final long serialVersionUID = -3564362190437271123L;
 
 	@Autowired
 	private SecurityManager securityManager;

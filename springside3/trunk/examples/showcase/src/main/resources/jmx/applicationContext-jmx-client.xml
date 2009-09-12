@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 	default-lazy-init="true">
 
-	<description>JMX客户端配置文件</description>
+	<description>JMX客户端配置</description>
 
 	<bean id="jmxClient" class="org.springside.examples.showcase.jmx.client.service.JmxClientService">
 		<property name="host" value="${server.addr}" />

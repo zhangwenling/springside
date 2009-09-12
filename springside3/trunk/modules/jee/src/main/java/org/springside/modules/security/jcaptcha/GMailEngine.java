@@ -30,7 +30,7 @@ import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 import com.octo.captcha.image.gimpy.GimpyFactory;
 
 /**
- * 仿照JCaptcha2.0编写GMail验证码样式的图片引擎.
+ * JCaptcha验证码图片生成引擎,仿照JCaptcha2.0编写类似GMail验证码的样式.
  * 
  * @author calvin
  */

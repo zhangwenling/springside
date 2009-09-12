@@ -26,7 +26,7 @@ import org.springside.modules.test.spring.SpringContextTestCase;
  * 
  * @author calvin
  */
-@ContextConfiguration(locations = { "/applicationContext-cxf-client.xml" })
+@ContextConfiguration(locations = { "/applicationContext-cxf-client.xml" }, inheritLocations = false)
 public class UserWebServiceTest extends SpringContextTestCase {
 
 	/**

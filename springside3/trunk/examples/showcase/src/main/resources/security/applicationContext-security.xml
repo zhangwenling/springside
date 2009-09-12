@@ -5,7 +5,7 @@
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd"
 	default-lazy-init="true">
 
-	<description>使用SpringSecurity的安全配置文件</description>
+	<description>SpringSecurity安全配置</description>
 
 	<!-- 此处采用原版的配置方式, 数据库方式见mini-web. -->
 	<s:http auto-config="true">

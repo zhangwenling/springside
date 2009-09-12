@@ -31,7 +31,7 @@ import com.octo.captcha.service.CaptchaService;
 import com.octo.captcha.service.CaptchaServiceException;
 
 /**
- * 集成JCaptcha的Filter.
+ * 集成JCaptcha验证码的Filter.
  * 
  * 可通过配置与SpringSecurity相同的登录表单处理URL与身份验证失败URL,实现与SpringSecurity的集成.
  * 另本filter主要演示与SpringSecurity的集成方式，用户可参考其他验证码方案的集成.

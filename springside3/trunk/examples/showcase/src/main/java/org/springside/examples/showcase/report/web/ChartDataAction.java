@@ -23,9 +23,8 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 //因为没有按Convention Plugin默认的Pacakge命名规则, 因此用annotation重新指定Namespace.
 @Namespace("/report/flashchart")
+@SuppressWarnings("serial")
 public class ChartDataAction extends ActionSupport {
-
-	private static final long serialVersionUID = 1321167727728057491L;
 
 	/**
 	 * 生成CSV格式的内容.
