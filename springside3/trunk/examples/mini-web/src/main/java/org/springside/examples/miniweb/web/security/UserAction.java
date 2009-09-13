@@ -118,28 +118,28 @@ public class UserAction extends CrudActionSupport<User> {
 
 	// 页面属性访问函数 //
 	/**
-	 * List页面的用户分页列表显示.
+	 * list页面显示用户分页列表.
 	 */
 	public Page<User> getPage() {
 		return page;
 	}
 
 	/**
-	 * Input页面的用户可选角色列表显示.
+	 * input页面显示所有角色列表.
 	 */
 	public List<Role> getAllRoleList() {
 		return securityManager.getAllRole();
 	}
 
 	/**
-	 * Input页面的用户拥有角色显示.
+	 * input页面显示用户拥有的角色.
 	 */
 	public List<Long> getCheckedRoleIds() {
 		return checkedRoleIds;
 	}
 
 	/**
-	 * Input页面的用户拥有角色提交.
+	 * input页面提交用户拥有的角色.
 	 */
 	public void setCheckedRoleIds(List<Long> checkedRoleIds) {
 		this.checkedRoleIds = checkedRoleIds;

@@ -10,7 +10,7 @@ import org.springside.examples.miniservice.ws.api.Constants;
 import org.springside.examples.miniservice.ws.api.dto.UserDTO;
 
 /**
- * GetAllUser方法的返回结果类型.
+ * GetAllUser方法的返回结果.
  * 
  * @author calvin
  */

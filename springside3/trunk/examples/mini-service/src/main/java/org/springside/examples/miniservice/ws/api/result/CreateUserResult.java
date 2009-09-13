@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.springside.examples.miniservice.ws.api.Constants;
 
 /**
- * CreateUser方法的返回结果类型.
+ * CreateUser方法的返回结果.
  * 
  * @author calvin
  */

@@ -59,6 +59,8 @@ public class UserDTO {
 		email = value;
 	}
 
+	
+	//配置输出xml为<roleList><role><id>1</id></role></roleList>
 	@XmlElementWrapper(name = "roleList")
 	@XmlElement(name = "role")
 	public List<RoleDTO> getRoleList() {

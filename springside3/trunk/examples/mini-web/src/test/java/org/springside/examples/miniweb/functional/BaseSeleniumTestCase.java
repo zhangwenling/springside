@@ -10,6 +10,9 @@ import org.springside.modules.test.selenium.SeleniumTestCase;
  */
 public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 
+	/**
+	 * 登录管理员角色.
+	 */
 	@BeforeClass
 	public static void loginAsAdmin() {
 		selenium.open("/mini-web/login.action");
@@ -20,6 +23,9 @@ public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 		assertTrue(selenium.isTextPresent("你好,admin."));
 	}
 
+	/**
+	 * 点击菜单.
+	 */
 	protected void clickMenu(String menuName) {
 		selenium.open("/mini-web");
 		waitPageLoad();

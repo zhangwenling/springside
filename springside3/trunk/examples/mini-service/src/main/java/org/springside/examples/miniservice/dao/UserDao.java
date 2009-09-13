@@ -18,7 +18,7 @@ public class UserDao extends HibernateDao<User, Long> {
 	public static final String QUERY_BY_LNAME_PASSWD = "select count(u) from User u where u.loginName=? and u.password=?";
 
 	/**
-	 * 关联对象初始化函数.
+	 * LazyLoad关联对象的初始化函数.
 	 */
 	public void initAllProperties(List<User> userList) {
 		for (User user : userList) {

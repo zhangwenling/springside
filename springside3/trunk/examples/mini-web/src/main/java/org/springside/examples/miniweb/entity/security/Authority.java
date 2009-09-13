@@ -12,6 +12,8 @@ import org.springside.examples.miniweb.entity.IdEntity;
 /**
  * 权限.
  * 
+ * 注释见{@link User}.
+ * 
  * @author calvin
  */
 @Entity

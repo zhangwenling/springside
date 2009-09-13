@@ -80,18 +80,30 @@ public class RoleAction extends CrudActionSupport<Role> {
 	}
 
 	// 页面属性访问函数 //
+	/**
+	 * list页面显示所有角色列表.
+	 */
 	public List<Role> getAllRoleList() {
 		return allRoleList;
 	}
 
+	/**
+	 * input页面显示所有授权列表.
+	 */
 	public List<Authority> getAllAuthorityList() {
 		return securityManager.getAllAuthority();
 	}
 
+	/**
+	 * input页面显示角色拥有的授权.
+	 */
 	public List<Long> getCheckedAuthIds() {
 		return checkedAuthIds;
 	}
 
+	/**
+	 * input页面提交角色拥有的授权.
+	 */
 	public void setCheckedAuthIds(List<Long> checkedAuthIds) {
 		this.checkedAuthIds = checkedAuthIds;
 	}

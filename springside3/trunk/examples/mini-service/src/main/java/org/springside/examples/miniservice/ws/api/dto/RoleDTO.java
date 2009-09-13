@@ -7,6 +7,8 @@ import org.springside.examples.miniservice.ws.api.Constants;
 
 /**
  * Web Service传输Role信息的DTO.
+ * 
+ * 注释见{@link UserDTO}.
  *
  * @author calvin
  */

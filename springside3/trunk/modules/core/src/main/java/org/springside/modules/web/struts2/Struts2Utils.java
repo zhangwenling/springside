@@ -30,11 +30,17 @@ import org.slf4j.LoggerFactory;
  */
 public class Struts2Utils {
 
-	//header 常量定义
+	//header 常量定义//
 	private static final String ENCODING_PREFIX = "encoding";
 	private static final String NOCACHE_PREFIX = "no-cache";
 	private static final String ENCODING_DEFAULT = "UTF-8";
 	private static final boolean NOCACHE_DEFAULT = true;
+
+	//content-type 定义 //
+	private static final String TEXT = "text/plain";
+	private static final String JSON = "application/json";
+	private static final String XML = "text/xml";
+	private static final String HTML = "text/html";
 
 	private static Logger logger = LoggerFactory.getLogger(Struts2Utils.class);
 
@@ -121,7 +127,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderText(final String text, final String... headers) {
-		render("text/plain", text, headers);
+		render(TEXT, text, headers);
 	}
 
 	/**
@@ -129,7 +135,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderHtml(final String html, final String... headers) {
-		render("text/html", html, headers);
+		render(HTML, html, headers);
 	}
 
 	/**
@@ -137,7 +143,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderXml(final String xml, final String... headers) {
-		render("text/xml", xml, headers);
+		render(XML, xml, headers);
 	}
 
 	/**
@@ -146,8 +152,8 @@ public class Struts2Utils {
 	 * @param string json字符串.
 	 * @see #render(String, String, String...)
 	 */
-	public static void renderJson(final String string, final String... headers) {
-		render("application/json", string, headers);
+	public static void renderJson(final String jsonString, final String... headers) {
+		render(JSON, jsonString, headers);
 	}
 
 	/**
@@ -159,7 +165,7 @@ public class Struts2Utils {
 	@SuppressWarnings("unchecked")
 	public static void renderJson(final Map map, final String... headers) {
 		String jsonString = JSONObject.fromObject(map).toString();
-		renderJson(jsonString, headers);
+		render(JSON, jsonString, headers);
 	}
 
 	/**
@@ -170,6 +176,6 @@ public class Struts2Utils {
 	 */
 	public static void renderJson(final Object object, final String... headers) {
 		String jsonString = JSONObject.fromObject(object).toString();
-		renderJson(jsonString, headers);
+		render(JSON, jsonString, headers);
 	}
 }
