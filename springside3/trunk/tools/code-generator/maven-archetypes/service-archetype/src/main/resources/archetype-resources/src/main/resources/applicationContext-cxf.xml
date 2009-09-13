@@ -7,7 +7,7 @@
 	xsi:schemaLocation="http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 	default-autowire="byType" default-lazy-init="true">
 
-	<description>使用Apache CXF的Web Service配置文件</description>
+	<description>Apache CXF的Web Service配置</description>
 
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
@@ -25,5 +25,5 @@
 	<bean id="dozer" class="org.dozer.DozerBeanMapper"/>
 
 	<!-- 设定由slf4j处理cxf中java.util.logging打印的日志 -->
-	<bean id="JulOverSlf4j" class="org.springside.modules.utils.JulOverSlf4j" lazy-init="false" />
+	<bean class="org.springside.modules.utils.JulToSlf4jInit" lazy-init="false" />
 </beans>
