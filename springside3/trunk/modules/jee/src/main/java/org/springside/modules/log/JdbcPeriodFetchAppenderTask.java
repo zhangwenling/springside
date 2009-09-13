@@ -33,15 +33,8 @@ import org.springside.modules.queue.QueueConsumerTask;
  */
 public class JdbcPeriodFetchAppenderTask extends PeriodConsumerTask {
 
-	protected SimpleJdbcTemplate jdbcTemplate;
 	protected String sql;
-
-	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
-
-	@Required
-	public void setDataSource(DataSource dataSource) {
-		jdbcTemplate = new SimpleJdbcTemplate(dataSource);
-	}
+	protected SimpleJdbcTemplate jdbcTemplate;
 
 	/**
 	 * 带Named Parameter的insert sql.
@@ -53,16 +46,25 @@ public class JdbcPeriodFetchAppenderTask extends PeriodConsumerTask {
 	}
 
 	/**
+	 * 根据注入到DataSource创建jdbcTemplate.
+	 */
+	@Required
+	public void setDataSource(DataSource dataSource) {
+		jdbcTemplate = new SimpleJdbcTemplate(dataSource);
+	}
+
+	/**
 	 * 批量消息处理函数,将事件列表批量插入数据库.
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	protected void processMessageList(List messageList) {
+
 		List<LoggingEvent> eventList = messageList;
-		List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
 
 		try {
 			//分析事件列表,转换为jdbc参数.
+			List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
 			for (LoggingEvent event : eventList) {
 				Map<String, Object> paramMap = parseEvent(event);
 				paramMapList.add(paramMap);
@@ -70,20 +72,17 @@ public class JdbcPeriodFetchAppenderTask extends PeriodConsumerTask {
 			Map[] paramMapArray = paramMapList.toArray(new Map[paramMapList.size()]);
 			SqlParameterSource[] batchParams = SqlParameterSourceUtils.createBatch(paramMapArray);
 
-			//执行批量插入,失败时调用失败处理函数.
+			//执行批量插入,如果失败调用失败处理函数.
 			try {
 				jdbcTemplate.batchUpdate(getActualSql(), batchParams);
 				if (logger.isDebugEnabled()) {
-					for (LoggingEvent event : eventBuffer) {
+					for (LoggingEvent event : eventList) {
 						logger.debug("saved event, {}", Log4jUtils.convertEventToString(event));
 					}
 				}
 			} catch (DataAccessException e) {
-				handleDataAccessException(e, eventBuffer);
+				handleDataAccessException(e, eventList);
 			}
-
-			//清除eventBuffer
-			eventBuffer.clear();
 		} catch (Exception e) {
 			logger.error("批量提交任务时发生错误.", e);
 		}

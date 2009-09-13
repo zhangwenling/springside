@@ -83,10 +83,9 @@ public class JdbcBlockingFetchAppenderTask extends BlockingConsumerTask {
 	 */
 	@SuppressWarnings("unchecked")
 	protected void updateBatch() {
-		List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
-
 		try {
 			//分析事件列表,转换为jdbc参数.
+			List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
 			for (LoggingEvent event : eventBuffer) {
 				Map<String, Object> paramMap = parseEvent(event);
 				paramMapList.add(paramMap);
@@ -94,7 +93,7 @@ public class JdbcBlockingFetchAppenderTask extends BlockingConsumerTask {
 			Map[] paramMapArray = paramMapList.toArray(new Map[paramMapList.size()]);
 			SqlParameterSource[] batchParams = SqlParameterSourceUtils.createBatch(paramMapArray);
 
-			//执行批量插入,失败时调用失败处理函数.
+			//执行批量插入,如果失败调用失败处理函数.
 			try {
 				jdbcTemplate.batchUpdate(getActualSql(), batchParams);
 				if (logger.isDebugEnabled()) {
