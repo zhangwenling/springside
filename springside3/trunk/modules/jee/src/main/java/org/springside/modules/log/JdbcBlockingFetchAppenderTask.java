@@ -21,28 +21,23 @@ import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
-import org.springside.modules.queue.QueueConsumerTask;
+import org.springside.modules.queue.BlockingConsumerTask;
 
 /**
  * 将Queue中的log4j event写入数据库的消费者任务.
  * 即时阻塞的读取Queue中的事件,达到缓存上限后使用Jdbc批量写入模式.
  * 
- * @see QueueConsumerTask
+ * @see BlockingConsumerTask
  * 
  * @author calvin
  */
-public class JdbcBlockingFetchAppenderTask extends QueueConsumerTask {
+public class JdbcBlockingFetchAppenderTask extends BlockingConsumerTask {
 
-	protected SimpleJdbcTemplate jdbcTemplate;
 	protected String sql;
 	protected int batchSize = 10;
 
+	protected SimpleJdbcTemplate jdbcTemplate;
 	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
-
-	@Required
-	public void setDataSource(DataSource dataSource) {
-		jdbcTemplate = new SimpleJdbcTemplate(dataSource);
-	}
 
 	/**
 	 * 带Named Parameter的insert sql.
@@ -61,26 +56,17 @@ public class JdbcBlockingFetchAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	 * 线程执行函数,阻塞获取消息并调用processMessage()进行处理.
+	 * 根据注入到DataSource创建jdbcTemplate.
 	 */
-	public void run() {
-		//循环阻塞获取消息直到线程被中断.
-		try {
-			while (!Thread.currentThread().isInterrupted()) {
-				Object message = queue.take();
-				processMessage(message);
-			}
-		} catch (InterruptedException e) {
-			logger.debug("消费线程阻塞被中断");
-		}
-
-		//在线程被中断后,退出线程前的清理函数.
-		clean();
+	@Required
+	public void setDataSource(DataSource dataSource) {
+		jdbcTemplate = new SimpleJdbcTemplate(dataSource);
 	}
 
 	/**
-	 * 消息处理函数,将消息放入buffer,当buffer达到batchSize时执行批量消息处理函数.
+	 * 消息处理函数,将消息放入buffer,当buffer达到batchSize时执行批量更新函数.
 	 */
+	@Override
 	protected void processMessage(Object message) {
 		LoggingEvent event = (LoggingEvent) message;
 		eventBuffer.add(event);
@@ -88,21 +74,20 @@ public class JdbcBlockingFetchAppenderTask extends QueueConsumerTask {
 
 		//已到达BufferSize则执行批量插入操作
 		if (eventBuffer.size() >= batchSize) {
-			processMessageList(eventBuffer);
+			updateBatch();
 		}
 	}
 
 	/**
-	 * 批量消息处理函数,将事件列表批量插入数据库.
+	 * 将Buffer中的事件列表批量插入数据库.
 	 */
 	@SuppressWarnings("unchecked")
-	protected void processMessageList(List messageList) {
-		List<LoggingEvent> eventList = messageList;
+	protected void updateBatch() {
 		List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
 
 		try {
 			//分析事件列表,转换为jdbc参数.
-			for (LoggingEvent event : eventList) {
+			for (LoggingEvent event : eventBuffer) {
 				Map<String, Object> paramMap = parseEvent(event);
 				paramMapList.add(paramMap);
 			}
@@ -131,9 +116,10 @@ public class JdbcBlockingFetchAppenderTask extends QueueConsumerTask {
 	/**
 	 * 退出清理函数,完成buffer中未完成的消息.
 	 */
+	@Override
 	protected void clean() {
 		if (!eventBuffer.isEmpty()) {
-			processMessageList(eventBuffer);
+			updateBatch();
 		}
 		logger.debug("cleaned task {}", this);
 	}
@@ -142,9 +128,7 @@ public class JdbcBlockingFetchAppenderTask extends QueueConsumerTask {
 	 * 分析Event, 建立Parameter Map, 用于绑定sql中的Named Parameter.
 	 */
 	protected Map<String, Object> parseEvent(LoggingEvent event) {
-		Map<String, Object> paramMap = Log4jUtils.convertEventToMap(event);
-		postParseEvent(event, paramMap);
-		return paramMap;
+		return Log4jUtils.convertEventToMap(event);
 	}
 
 	/**
@@ -167,12 +151,5 @@ public class JdbcBlockingFetchAppenderTask extends QueueConsumerTask {
 	 */
 	protected String getActualSql() {
 		return sql;
-	}
-
-	/**
-	 * 可被子类重载的事件分析函数,可进行进一步的分析工作,如对message字符串进行分解等.
-	 */
-	protected void postParseEvent(LoggingEvent event, Map<String, Object> paramMap) {
-		//do nothing.
 	}
 }

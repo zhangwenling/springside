@@ -91,6 +91,31 @@ public class QueueManager {
 	}
 
 	/**
+	 * JVM关闭时的钩子函数.
+	 */
+	@PreDestroy
+	public void stop() {
+		//停止所有任务
+		for (QueueConsumerTask task : taskList) {
+			task.stop();
+		}
+
+		//持久化所有队列的未处理消息到文件
+		if (persistence) {
+			for (Entry<String, BlockingQueue> entry : queueMap.entrySet()) {
+				try {
+					backup(entry.getKey());
+				} catch (IOException e) {
+					logger.error("持久化" + entry.getKey() + "队列时出错", e);
+				}
+			}
+		}
+
+		//清除queueMap
+		queueMap.clear();
+	}
+
+	/**
 	 * 是否将队列中为处理的消息持久化到文件, 默认为true.
 	 */
 	public void setPersistence(boolean persistence) {
@@ -165,31 +190,6 @@ public class QueueManager {
 		} else {
 			logger.debug("队列{}不存在", queueName);
 		}
-	}
-
-	/**
-	 * JVM关闭时的钩子函数.
-	 */
-	@PreDestroy
-	public void stop() {
-		//停止所有任务
-		for (QueueConsumerTask task : taskList) {
-			task.stop();
-		}
-
-		//持久化所有队列的未处理消息到文件
-		if (persistence) {
-			for (Entry<String, BlockingQueue> entry : queueMap.entrySet()) {
-				try {
-					backup(entry.getKey());
-				} catch (IOException e) {
-					logger.error("持久化" + entry.getKey() + "队列时出错", e);
-				}
-			}
-		}
-
-		//清除queueMap
-		queueMap.clear();
 	}
 
 	/**

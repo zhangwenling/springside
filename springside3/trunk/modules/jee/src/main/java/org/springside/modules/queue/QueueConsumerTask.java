@@ -32,10 +32,10 @@ public abstract class QueueConsumerTask implements Runnable {
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	protected String queueName;
-	protected BlockingQueue queue;
-
-	protected ExecutorService executor;
 	protected int shutdownWait = 10000;
+
+	protected BlockingQueue queue;
+	protected ExecutorService executor;
 
 	/**
 	 * 任务所消费的队列名称.

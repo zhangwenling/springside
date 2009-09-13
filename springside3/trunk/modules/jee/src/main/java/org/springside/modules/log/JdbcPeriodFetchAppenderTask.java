@@ -20,6 +20,7 @@ import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springside.modules.queue.PeriodConsumerTask;
 import org.springside.modules.queue.QueueConsumerTask;
 
 /**
@@ -30,13 +31,10 @@ import org.springside.modules.queue.QueueConsumerTask;
  * 
  * @author calvin
  */
-public class JdbcPeriodFetchAppenderTask extends QueueConsumerTask {
+public class JdbcPeriodFetchAppenderTask extends PeriodConsumerTask {
 
 	protected SimpleJdbcTemplate jdbcTemplate;
 	protected String sql;
-
-	protected int batchSize = 10;
-	protected int period = 1000;
 
 	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
 
@@ -55,39 +53,9 @@ public class JdbcPeriodFetchAppenderTask extends QueueConsumerTask {
 	}
 
 	/**
-	* 批量定时读取消息的队列大小, 默认为10.
-	*/
-	public void setBatchSize(int batchSize) {
-		this.batchSize = batchSize;
-	}
-
-	/**
-	 * 批量定时读取的时间间隔,单位为毫秒,默认为1秒.
-	 */
-	public void setPeriod(int period) {
-		this.period = period;
-	}
-
-	/**
-	 * 线程执行函数,定期批量获取消息并调用processMessageList()处理.
-	 */
-	@SuppressWarnings("unchecked")
-	public void run() {
-		try {
-			while (!Thread.currentThread().isInterrupted()) {
-				List list = new ArrayList(batchSize);
-				queue.drainTo(list, batchSize);
-				processMessageList(list);
-				Thread.sleep(period);
-			}
-		} catch (InterruptedException e) {
-			logger.debug("消费线程阻塞被中断");
-		}
-	}
-
-	/**
 	 * 批量消息处理函数,将事件列表批量插入数据库.
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	protected void processMessageList(List messageList) {
 		List<LoggingEvent> eventList = messageList;
@@ -125,9 +93,7 @@ public class JdbcPeriodFetchAppenderTask extends QueueConsumerTask {
 	 * 分析Event, 建立Parameter Map, 用于绑定sql中的Named Parameter.
 	 */
 	protected Map<String, Object> parseEvent(LoggingEvent event) {
-		Map<String, Object> paramMap = Log4jUtils.convertEventToMap(event);
-		postParseEvent(event, paramMap);
-		return paramMap;
+		return Log4jUtils.convertEventToMap(event);
 	}
 
 	/**
@@ -150,11 +116,5 @@ public class JdbcPeriodFetchAppenderTask extends QueueConsumerTask {
 	 */
 	protected String getActualSql() {
 		return sql;
-	}
-
-	/**
-	 * 可被子类重载的事件分析函数,可进行进一步的分析工作,如对message字符串进行分解等.
-	 */
-	protected void postParseEvent(LoggingEvent event, Map<String, Object> paramMap) {
 	}
 }
