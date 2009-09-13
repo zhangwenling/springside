@@ -1,5 +1,3 @@
-package org.springside.modules.log;
-
 /**
  * Copyright (c) 2005-2009 springside.org.cn
  *
@@ -7,6 +5,7 @@ package org.springside.modules.log;
  * 
  * $Id: JdbcAppenderTask.java 353 2009-08-22 09:33:28Z calvinxiu
  */
+package org.springside.modules.log;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -16,9 +16,9 @@ import org.slf4j.bridge.SLF4JBridgeHandler;
  * 
  * @author calvin
  */
-public class JulOverSlf4j {
+public class JulToSlf4jInit {
 
-	//Spring在所有属性注入后自动执行的函数.
+	//Spring在JulToSlf4jInit函数.
 	@PostConstruct
 	public void init() {
 		SLF4JBridgeHandler.install();
