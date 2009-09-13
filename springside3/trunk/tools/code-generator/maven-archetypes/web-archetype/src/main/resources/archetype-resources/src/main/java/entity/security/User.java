@@ -45,6 +45,7 @@ public class User extends IdEntity {
 
 	private List<Role> roleList = new ArrayList<Role>(); //有序的关联对象集合.
 
+	//字段非空且唯一,用于提醒Entity使用者及生成DDL.
 	@Column(nullable = false, unique = true)
 	public String getLoginName() {
 		return loginName;
@@ -96,12 +97,18 @@ public class User extends IdEntity {
 		this.roleList = roleList;
 	}
 
+	/**
+	 * 用户拥有的角色名称字符串, 多个角色名称用','分隔.
+	 */
 	//非持久化属性.
 	@Transient
 	public String getRoleNames() {
 		return ReflectionUtils.fetchElementPropertyToString(roleList, "name", ", ");
 	}
 
+	/**
+	 * 用户拥有的角色id字符串, 多个角色id用','分隔.
+	 */
 	//非持久化属性.
 	@Transient
 	@SuppressWarnings("unchecked")

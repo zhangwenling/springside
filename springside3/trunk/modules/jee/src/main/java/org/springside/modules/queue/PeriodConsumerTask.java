@@ -52,5 +52,5 @@ public abstract class PeriodConsumerTask extends QueueConsumerTask {
 	/**
 	 * 批量消息处理函数.
 	 */
-	abstract protected void processMessageList(List<?> messageList);
+	protected abstract void processMessageList(List<?> messageList);
 }

@@ -26,7 +26,7 @@ public class PropertyFilter {
 	/**
 	 * 多个属性间OR关系的分隔符.
 	 */
-	private static final String OR_SEPARATOR = "_OR_";
+	public static final String OR_SEPARATOR = "_OR_";
 
 	/**
 	 * 属性比较类型.
@@ -62,7 +62,7 @@ public class PropertyFilter {
 
 	/**
 	 * @param filterName 比较属性字符串,含待比较的比较类型、属性值类型及属性列表. 
-	 *                   eg LIKES_NAME_OR_LOGIN_NAME
+	 *                   eg. LIKES_NAME_OR_LOGIN_NAME
 	 * @param value 待比较的值.
 	 */
 	public PropertyFilter(final String filterName, final Object value) {

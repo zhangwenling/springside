@@ -14,7 +14,6 @@ import org.springside.modules.orm.hibernate.HibernateWebUtils;
 /**
  * 角色管理Action.
  * 
- * 使用Struts2 convention-plugin annotation定义Action参数.
  * 演示不分页的简单管理界面.
  * 
  * @author calvin
@@ -67,6 +66,7 @@ public class RoleAction extends CrudActionSupport<Role> {
 	public String save() throws Exception {
 		//根据页面上的checkbox 整合Role的Authorities Set.
 		HibernateWebUtils.mergeByCheckedIds(entity.getAuthorityList(), checkedAuthIds, Authority.class);
+		//保存用户并放入成功信息.
 		securityManager.saveRole(entity);
 		addActionMessage("保存角色成功");
 		return RELOAD;

@@ -63,6 +63,9 @@ public class SecurityManager {
 		userDao.delete(id);
 	}
 
+	/**
+	 * 使用属性过滤条件查询用户.
+	 */
 	@Transactional(readOnly = true)
 	public Page<User> searchUser(final Page<User> page, final List<PropertyFilter> filters) {
 		return userDao.findPage(page, filters);
@@ -103,6 +106,9 @@ public class SecurityManager {
 	}
 
 	// Resource Manager //
+	/**
+	 * 查找URL类型的资源并初始化可访问该资源的授权.
+	 */
 	@Transactional(readOnly = true)
 	public List<Resource> getUrlResourceWithAuthorities() {
 		return resourceDao.getUrlResourceWithAuthorities();

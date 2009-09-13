@@ -1,5 +1,10 @@
 package org.springside.examples.showcase.report.data;
 
+/**
+ * 报表演示的模拟数据提供类.
+ * 
+ * @author calvin
+ */
 public class DummyDataFetcher {
 
 	public static TemperatureAnomaly[] getDummyData() {
@@ -22,6 +27,11 @@ public class DummyDataFetcher {
 				new TemperatureAnomaly(1999, 0.298, 0.348) };
 	}
 
+	/**
+	 * 年度气温记录类.
+	 * 
+	 * @author calvin
+	 */
 	public static class TemperatureAnomaly {
 		private int year;
 		private double anomaly;
