@@ -42,13 +42,35 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 @ManagedResource(objectName = "Custom:type=QueueManagement,name=queueManagement", description = "Queue Managed Bean")
 public class QueueManager {
 
-	protected static Map<String, BlockingQueue> queueMap = new ConcurrentHashMap<String, BlockingQueue>();//消息队列
-	protected static List<QueueConsumerTask> taskList = new ArrayList();
-
-	protected static boolean persistence = true;
-	protected static int queueSize = Integer.MAX_VALUE;
-
 	private static Logger logger = LoggerFactory.getLogger(QueueManager.class);
+
+	private static int queueSize = Integer.MAX_VALUE;
+	private static boolean persistence = true;
+	private static String persistencePath = System.getProperty("java.io.tmpdir") + File.separator + "queue";
+
+	private static Map<String, BlockingQueue> queueMap = new ConcurrentHashMap<String, BlockingQueue>();//消息队列
+	private static List<QueueConsumerTask> taskList = new ArrayList();
+
+	/**
+	 * 每个队列的长度大小,默认为Integer最大值.
+	 */
+	public void setQueueSize(int queueSize) {
+		QueueManager.queueSize = queueSize;
+	}
+
+	/**
+	 * 系统关闭时是否将队列中未处理的消息持久化到文件, 默认为true.
+	 */
+	public void setPersistence(boolean persistence) {
+		QueueManager.persistence = persistence;
+	}
+
+	/**
+	 * 系统关闭时将队列中未处理的消息持久化到文件的目录,默认为系统临时文件夹下的queue目录.
+	 */
+	public void setPersistencePath(String persistencePath) {
+		QueueManager.persistencePath = persistencePath;
+	}
 
 	/**
 	 * 根据queueName获得消息队列的静态函数.
@@ -75,19 +97,19 @@ public class QueueManager {
 	}
 
 	/**
+	 * 消费任务向QueueManager注册Task.
+	 */
+	public static void registerTask(QueueConsumerTask task) {
+		taskList.add(task);
+	}
+
+	/**
 	 * 根据queueName获得消息队列中未处理消息的数量,支持基于JMX查询.
 	 */
 	@ManagedOperation(description = "Get message count in queue")
 	public static int getQueueLength(
 			@ManagedOperationParameter(name = "queueName", description = "queue name") String queueName) {
 		return getQueue(queueName).size();
-	}
-
-	/**
-	 * 消费任务向QueueManager注册Task.
-	 */
-	public static void registerTask(QueueConsumerTask task) {
-		taskList.add(task);
 	}
 
 	/**
@@ -113,20 +135,6 @@ public class QueueManager {
 
 		//清除queueMap
 		queueMap.clear();
-	}
-
-	/**
-	 * 是否将队列中为处理的消息持久化到文件, 默认为true.
-	 */
-	public void setPersistence(boolean persistence) {
-		QueueManager.persistence = persistence;
-	}
-
-	/**
-	 * 每个队列的长度大小,默认为Int最大值.
-	 */
-	public static void setQueueSize(int queueSize) {
-		QueueManager.queueSize = queueSize;
 	}
 
 	/**
@@ -198,7 +206,7 @@ public class QueueManager {
 	 * 如果java.io.tmpdir/queue/目录不存在,会进行创建.
 	 */
 	protected static String getPersistenceFilePath(String queueName) {
-		File parentDir = new File(System.getProperty("java.io.tmpdir") + File.separator + "queue" + File.separator);
+		File parentDir = new File(persistencePath + File.separator);
 		if (!parentDir.exists()) {
 			parentDir.mkdirs();
 		}
