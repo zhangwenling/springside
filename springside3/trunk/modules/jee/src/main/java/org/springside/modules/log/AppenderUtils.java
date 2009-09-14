@@ -15,11 +15,11 @@ import org.apache.log4j.PatternLayout;
 import org.apache.log4j.spi.LoggingEvent;
 
 /**
- * Log4j工具类, 转换Logging Event到字符串或Map.
+ * Log4j Appender工具类, 转换Logging Event到字符串或Map.
  * 
  * @author calvin
  */
-public class Log4jUtils {
+public class AppenderUtils {
 
 	public static final String MESSAGE = "message";
 	public static final String LEVEL = "level";

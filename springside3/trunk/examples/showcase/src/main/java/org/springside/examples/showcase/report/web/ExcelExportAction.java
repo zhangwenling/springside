@@ -173,7 +173,6 @@ public class ExcelExportAction extends ActionSupport {
 		//标题格式
 		CellStyle headerStyle = wb.createCellStyle();
 		headerStyle.setFont(boldFont);
-		//setBorderAll(headerStyle);
 		styles.put("header", headerStyle);
 
 		//日期格式
@@ -201,6 +200,7 @@ public class ExcelExportAction extends ActionSupport {
 	}
 
 	private void setBorderAll(CellStyle style) {
+		//设置边框
 		style.setBorderRight(CellStyle.BORDER_THIN);
 		style.setRightBorderColor(IndexedColors.BLACK.getIndex());
 		style.setBorderLeft(CellStyle.BORDER_THIN);

@@ -77,7 +77,7 @@ public class JdbcPeriodFetchAppenderTask extends PeriodConsumerTask {
 				jdbcTemplate.batchUpdate(getActualSql(), batchParams);
 				if (logger.isDebugEnabled()) {
 					for (LoggingEvent event : eventList) {
-						logger.debug("saved event, {}", Log4jUtils.convertEventToString(event));
+						logger.debug("saved event, {}", AppenderUtils.convertEventToString(event));
 					}
 				}
 			} catch (DataAccessException e) {
@@ -92,7 +92,7 @@ public class JdbcPeriodFetchAppenderTask extends PeriodConsumerTask {
 	 * 分析Event, 建立Parameter Map, 用于绑定sql中的Named Parameter.
 	 */
 	protected Map<String, Object> parseEvent(LoggingEvent event) {
-		return Log4jUtils.convertEventToMap(event);
+		return AppenderUtils.convertEventToMap(event);
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class JdbcPeriodFetchAppenderTask extends PeriodConsumerTask {
 		}
 
 		for (LoggingEvent event : errorEventBatch) {
-			logger.error("event insert to database error, ignore it, " + Log4jUtils.convertEventToString(event), e);
+			logger.error("event insert to database error, ignore it, " + AppenderUtils.convertEventToString(event), e);
 		}
 	}
 

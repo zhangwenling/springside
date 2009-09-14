@@ -69,7 +69,7 @@ public class JdbcBlockingFetchAppenderTask extends BlockingConsumerTask {
 	protected void processMessage(Object message) {
 		LoggingEvent event = (LoggingEvent) message;
 		eventBuffer.add(event);
-		logger.debug("get event, {}", Log4jUtils.convertEventToString(event));
+		logger.debug("get event, {}", AppenderUtils.convertEventToString(event));
 
 		//已到达BufferSize则执行批量插入操作
 		if (eventBuffer.size() >= batchSize) {
@@ -97,7 +97,7 @@ public class JdbcBlockingFetchAppenderTask extends BlockingConsumerTask {
 				jdbcTemplate.batchUpdate(getActualSql(), batchParams);
 				if (logger.isDebugEnabled()) {
 					for (LoggingEvent event : eventBuffer) {
-						logger.debug("saved event, {}", Log4jUtils.convertEventToString(event));
+						logger.debug("saved event, {}", AppenderUtils.convertEventToString(event));
 					}
 				}
 			} catch (DataAccessException e) {
@@ -126,7 +126,7 @@ public class JdbcBlockingFetchAppenderTask extends BlockingConsumerTask {
 	 * 分析Event, 建立Parameter Map, 用于绑定sql中的Named Parameter.
 	 */
 	protected Map<String, Object> parseEvent(LoggingEvent event) {
-		return Log4jUtils.convertEventToMap(event);
+		return AppenderUtils.convertEventToMap(event);
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class JdbcBlockingFetchAppenderTask extends BlockingConsumerTask {
 		}
 
 		for (LoggingEvent event : errorEventBatch) {
-			logger.error("event insert to database error, ignore it, " + Log4jUtils.convertEventToString(event), e);
+			logger.error("event insert to database error, ignore it, " + AppenderUtils.convertEventToString(event), e);
 		}
 	}
 
