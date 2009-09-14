@@ -10,7 +10,6 @@ package org.springside.modules.log;
 import org.apache.log4j.Appender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.log4j.helpers.OptionConverter;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedOperationParameter;
@@ -54,12 +53,11 @@ public class Log4jMBean {
 	}
 
 	@ManagedOperation(description = "add the new appender to the logger")
-	void addAppender(@ManagedOperationParameter(name = "loggerName", description = "logger name") String loggerName,
-			@ManagedOperationParameter(name = "appenderClass", description = "appender class") String appenderClass,
+	public void addAppender(
+			@ManagedOperationParameter(name = "loggerName", description = "logger name") String loggerName,
 			@ManagedOperationParameter(name = "appenderName", description = "appender name") String appenderName) {
 		Logger logger = Logger.getLogger(loggerName);
-		Appender appender = (Appender) OptionConverter.instantiateByClassName(appenderClass,
-				org.apache.log4j.Appender.class, null);
+		Appender appender = Logger.getRootLogger().getAppender(appenderName);
 		appender.setName(appenderName);
 		logger.addAppender(appender);
 	}
