@@ -24,6 +24,7 @@ public class AsyncLoggerTest extends SpringContextTestCase {
 		for (int i = 1; i <= logCount; i++) {
 			dbLogger.info("helloworld" + i);
 		}
+		//TODO: sleep then check database
 	}
 
 	@Test

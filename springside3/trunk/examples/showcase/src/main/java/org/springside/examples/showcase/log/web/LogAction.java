@@ -18,7 +18,7 @@ public class LogAction extends ActionSupport {
 	/**
 	 * 在log4j.properties中,本logger已被指定使用asyncAppender.
 	 */
-	public static final String DB_LOGGER_NAME = "org.springside.examples.showcase.log.dbLogExample";
+	public static final String DB_LOGGER_NAME = "DBLogExample";
 
 	@Override
 	public String execute() {
