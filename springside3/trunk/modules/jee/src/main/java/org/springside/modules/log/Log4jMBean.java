@@ -27,19 +27,21 @@ import org.springframework.jmx.export.annotation.ManagedResource;
  * 
  * @author calvin
  */
-@ManagedResource(objectName = "Custom:type=Log4jManagement,name=log4jManagement", description = "Log4j Managed Bean")
+@ManagedResource(objectName = Log4jMBean.LOG4J_MBEAN_NAME, description = "Log4j Management Bean")
 public class Log4jMBean {
 
-	private org.slf4j.Logger mbeanLogger = LoggerFactory.getLogger(Log4jMBean.class);
+	public static final String LOG4J_MBEAN_NAME = "Custom:type=Log4jManagement,name=log4jManagement";
+
+	private static final org.slf4j.Logger mbeanLogger = LoggerFactory.getLogger(Log4jMBean.class);
 
 	@ManagedAttribute(description = "Logging level of the root logger")
-	public String getRootLogLevel() {
+	public String getRootLoggerLevel() {
 		Logger root = Logger.getRootLogger();
 		return root.getLevel().toString();
 	}
 
 	@ManagedAttribute(description = "Logging level of the root logger")
-	public void setRootLogLevel(String newLevel) {
+	public void setRootLoggerLevel(String newLevel) {
 		Logger root = Logger.getRootLogger();
 		Level level = Level.toLevel(newLevel);
 		root.setLevel(level);
@@ -48,7 +50,7 @@ public class Log4jMBean {
 
 	@ManagedOperation(description = "Get logging level of the logger")
 	@ManagedOperationParameters( { @ManagedOperationParameter(name = "loggerName", description = "Logger name") })
-	public String getLogLevel(String loggerName) {
+	public String getLoggerLevel(String loggerName) {
 		Logger logger = Logger.getLogger(loggerName);
 		return logger.getLevel().toString();
 	}
@@ -56,7 +58,7 @@ public class Log4jMBean {
 	@ManagedOperation(description = "set the new logging level to the logger")
 	@ManagedOperationParameters( { @ManagedOperationParameter(name = "loggerName", description = "Logger name"),
 			@ManagedOperationParameter(name = "newlevel", description = "New level") })
-	public void setLogLevel(String loggerName, String newLevel) {
+	public void setLoggerLevel(String loggerName, String newLevel) {
 		Logger logger = Logger.getLogger(loggerName);
 		Level level = Level.toLevel(newLevel);
 		logger.setLevel(level);
@@ -65,7 +67,7 @@ public class Log4jMBean {
 
 	@ManagedOperation(description = "Get all appenders of the logger")
 	@ManagedOperationParameters( { @ManagedOperationParameter(name = "loggerName", description = "Logger name") })
-	public List<String> getAppenders(String loggerName) {
+	public List<String> getLoggerAppenders(String loggerName) {
 		List<String> appenderNameList = new ArrayList<String>();
 		Logger logger = Logger.getLogger(loggerName);
 
