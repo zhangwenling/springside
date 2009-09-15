@@ -61,6 +61,16 @@ public class SpringTxTestCase extends AbstractTransactionalJUnit4SpringContextTe
 		((SessionFactory) applicationContext.getBean(sessionFactoryName)).getCurrentSession().evict(entity);
 	}
 
+	/**
+	 * sleep等待,单位毫秒.
+	 */
+	protected void sleep(long millis) {
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException e) {
+		}
+	}
+
 	// Assert 函数 //
 
 	/**

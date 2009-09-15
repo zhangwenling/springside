@@ -12,7 +12,7 @@
 	<!-- 读出Queue中日志消息写入数据库的任务 -->
 	<bean id="dbLogTask" class="org.springside.modules.log.BlockingFetchJdbcStore">
 		<property name="queueName" value="dblog" />
-		<property name="batchSize" value="20" />
+		<property name="batchSize" value="10" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="sql"
 			value="insert into SS_LOG(THREAD_NAME,LOGGER_NAME,TIMESTAMP,LEVEL,MESSAGE) values(:threadName,:loggerName,:timestamp,:level,:message)" />

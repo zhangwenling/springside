@@ -17,10 +17,32 @@ public class InMemoryAppender extends AppenderSkeleton {
 	private List<LoggingEvent> logs = new ArrayList<LoggingEvent>();
 
 	/**
+	 * 返回之前append的log事件列表.
+	 */
+	public List<LoggingEvent> getLogs() {
+		return logs;
+	}
+
+	/**
+	 * 返回之前append的log事件列表.
+	 */
+	public void clearLogs() {
+		logs.clear();
+	}
+
+	/**
 	 * 将本Appender添加到logger中.
 	 */
 	public void addToLogger(String loggerName) {
 		Logger logger = Logger.getLogger(loggerName);
+		logger.addAppender(this);
+	}
+
+	/**
+	 * 将本Appender添加到logger中.
+	 */
+	public void addToLogger(Class<?> loggerClass) {
+		Logger logger = Logger.getLogger(loggerClass);
 		logger.addAppender(this);
 	}
 
@@ -32,18 +54,10 @@ public class InMemoryAppender extends AppenderSkeleton {
 		logs.add(event);
 	}
 
-	/**
-	 * 返回之前append的log事件列表.
-	 */
-	public List<LoggingEvent> getLogs() {
-		return logs;
-	}
-
 	public void close() {
 	}
 
 	public boolean requiresLayout() {
 		return false;
 	}
-
 }

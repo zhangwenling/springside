@@ -7,24 +7,39 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.log.web.LogAction;
-import org.springside.modules.test.spring.SpringContextTestCase;
+import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
- * sprinside-jee中ClientMBeanProxyFactory的测试用例.
+ * sprinside-jee中AsyncAppender及BlockingFetchJdbcStore的测试用例.
  * 
  * @author calvin
  */
 @ContextConfiguration(locations = { "/log/applicationContext-log.xml" })
-public class AsyncLoggerTest extends SpringContextTestCase {
+public class AsyncLoggerTest extends SpringTxTestCase {
+
+	private static final String LOG_TABLE_NAME = "SS_LOG";
 
 	@Test
-	public void dbLogger() {
+	public void logToDb() {
 		Logger dbLogger = Logger.getLogger(LogAction.DB_LOGGER_NAME);
-		int logCount = 10;
-		for (int i = 1; i <= logCount; i++) {
+
+		int oldLogsCount = this.countRowsInTable(LOG_TABLE_NAME);
+
+		int i = 1;
+
+		//插入5条记录,未真正插入数据库.
+		for (; i <= 5; i++) {
 			dbLogger.info("helloworld" + i);
 		}
-		//TODO: sleep then check database
+		sleep(1000);
+		assertEquals(oldLogsCount, this.countRowsInTable(LOG_TABLE_NAME));
+
+		//再插入5条记录,达到batchSize(10),插入数据库.
+		for (; i <= 10; i++) {
+			dbLogger.info("helloworld" + i);
+		}
+		sleep(1000);
+		assertEquals(oldLogsCount + 10, this.countRowsInTable(LOG_TABLE_NAME));
 	}
 
 	@Test

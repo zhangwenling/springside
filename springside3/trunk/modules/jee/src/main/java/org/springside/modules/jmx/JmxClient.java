@@ -139,16 +139,17 @@ public class JmxClient {
 	/**
 	 * 按方法名直接调用MBean方法(无MBean的Class文件时使用).
 	 * 
-	 * @param signature 所有参数的Class全称集合.
+	 * @param signature 所有参数的Class名全称的数组.
 	 */
-	public void invoke(final String mbeanName, final String methodName, final Object[] params, final String[] signature) {
+	@SuppressWarnings("unchecked")
+	public <T> T invoke(final String mbeanName, final String methodName, final Object[] params, final String[] signature) {
 		Assert.hasText(mbeanName, "mbeanName不能为空");
 		Assert.hasText(methodName, "methodName不能为空");
 		assertConnected();
 
 		try {
 			ObjectName objectName = buildObjectName(mbeanName);
-			mbsc.invoke(objectName, methodName, params, signature);
+			return (T) mbsc.invoke(objectName, methodName, params, signature);
 		} catch (JMException e) {
 			throw new IllegalArgumentException("参数不正确", e);
 		} catch (IOException e) {

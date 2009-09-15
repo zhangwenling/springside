@@ -20,6 +20,6 @@ public class QuartzJob {
 	 */
 	public void execute() {
 		long userCount = userManager.getUserCount();
-		logger.info("There are {} user in table.", userCount);
+		logger.info("There are {} user in database.", userCount);
 	}
 }

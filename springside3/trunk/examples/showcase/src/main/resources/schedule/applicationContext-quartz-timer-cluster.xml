@@ -15,8 +15,8 @@
 		</property>
 		<!--  quartz配置文件路径-->
 		<property name="configLocation" value="classpath:schedule/quartz-cluster.properties" />
-		<!-- 启动时延期10秒开始任务 -->
-		<property name="startupDelay" value="10" />
+		<!-- 启动时延期5秒开始任务 -->
+		<property name="startupDelay" value="5" />
 		<!-- 保存Job数据到数据库所需的带事务数据源 -->
 		<property name="dataSource" ref="dataSource" />
 		<!-- Job接受applicationContext的成员变量名 -->

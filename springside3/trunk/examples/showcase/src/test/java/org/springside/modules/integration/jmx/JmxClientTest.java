@@ -10,7 +10,7 @@ import org.springside.modules.jmx.JmxClient;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 /**
- * sprinside-jee中ClientMBeanProxyFactory的测试用例.
+ * springside-jee中{@link JmxClient}的测试用例.
  * 
  * @author calvin
  */

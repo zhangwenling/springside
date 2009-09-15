@@ -38,6 +38,6 @@ public class QuartzClusterableJob extends QuartzJobBean {
 		long userCount = userManager.getUserCount();
 		String nodeName = (String) config.get("nodeName");
 
-		logger.info("There are {} user in table,print by {}'s job.", userCount, nodeName);
+		logger.info("There are {} user in database, print by {}'s job.", userCount, nodeName);
 	}
 }

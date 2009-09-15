@@ -18,8 +18,8 @@
 	<!-- Task的封装 -->
 	<bean id="scheduledExecutorTasks" class="org.springframework.scheduling.concurrent.ScheduledExecutorTask">
 		<property name="runnable" ref="executorJob" />
-		<!-- 首次执行延期10秒 -->
-		<property name="delay" value="10000" />
+		<!-- 首次执行延期5秒 -->
+		<property name="delay" value="5000" />
 		<!-- 每次执行间隔1小时 -->
 		<property name="period" value="3600000" />
 		<!-- 固定间隔,否则默认fixDelay会等到前一个任务完成后才开始计时. -->
