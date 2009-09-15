@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedOperationParameter;
+import org.springframework.jmx.export.annotation.ManagedOperationParameters;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
 /**
@@ -107,8 +108,8 @@ public class QueueManager {
 	 * 根据queueName获得消息队列中未处理消息的数量,支持基于JMX查询.
 	 */
 	@ManagedOperation(description = "Get message count in queue")
-	public static int getQueueLength(
-			@ManagedOperationParameter(name = "queueName", description = "queue name") String queueName) {
+	@ManagedOperationParameters( { @ManagedOperationParameter(name = "queueName", description = "Queue name") })
+	public static int getQueueLength(String queueName) {
 		return getQueue(queueName).size();
 	}
 
