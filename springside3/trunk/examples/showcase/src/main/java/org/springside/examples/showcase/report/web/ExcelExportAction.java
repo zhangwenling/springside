@@ -40,6 +40,17 @@ public class ExcelExportAction extends ActionSupport {
 	 */
 	@Override
 	public String execute() throws Exception {
+		//生成Excel文件.
+		Workbook wb = exportExcelWorkbook();
+		//输出Excel文件.
+		HttpServletResponse response = Struts2Utils.getResponse();
+		response.setContentType("application/vnd.ms-excel");
+		wb.write(response.getOutputStream());
+		response.getOutputStream().flush();
+		return null;
+	}
+
+	private Workbook exportExcelWorkbook() {
 		TemperatureAnomaly[] temperatureAnomalyArray = DummyDataFetcher.getDummyData();
 
 		//创建Workbook
@@ -68,12 +79,7 @@ public class ExcelExportAction extends ActionSupport {
 		//产生合计
 		generateTotals(s);
 
-		//输出Excel文件.
-		HttpServletResponse response = Struts2Utils.getResponse();
-		response.setContentType("application/vnd.ms-excel");
-		wb.write(response.getOutputStream());
-		response.getOutputStream().flush();
-		return null;
+		return wb;
 	}
 
 	private void generateTitle(Sheet s) {

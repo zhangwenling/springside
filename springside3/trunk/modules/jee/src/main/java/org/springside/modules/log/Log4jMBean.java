@@ -32,7 +32,7 @@ public class Log4jMBean {
 
 	public static final String LOG4J_MBEAN_NAME = "Custom:type=Log4jManagement,name=log4jManagement";
 
-	private static final org.slf4j.Logger mbeanLogger = LoggerFactory.getLogger(Log4jMBean.class);
+	private static org.slf4j.Logger mbeanLogger = LoggerFactory.getLogger(Log4jMBean.class);
 
 	@ManagedAttribute(description = "Logging level of the root logger")
 	public String getRootLoggerLevel() {
