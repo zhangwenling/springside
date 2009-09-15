@@ -18,7 +18,7 @@ public class ExecutorJobTest extends SpringContextTestCase {
 
 	@Test
 	public void run() {
-		sleep(6000);
+		sleep(4000);
 		assertEquals(1, appender.getLogs().size());
 		assertEquals("There are 6 user in database.", appender.getLogs().get(0).getMessage());
 	}

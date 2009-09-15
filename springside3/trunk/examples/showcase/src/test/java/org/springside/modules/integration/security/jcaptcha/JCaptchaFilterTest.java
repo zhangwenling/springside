@@ -15,6 +15,11 @@ import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.ContextLoader;
 import org.springside.modules.security.jcaptcha.JCaptchaFilter;
 
+/**
+ * sprinside-jee中JCaptchaFilter的测试用例.
+ * 
+ * @author calvin
+ */
 public class JCaptchaFilterTest extends Assert {
 
 	private MockFilterConfig config = new MockFilterConfig();

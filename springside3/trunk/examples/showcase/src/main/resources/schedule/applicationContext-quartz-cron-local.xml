@@ -20,8 +20,8 @@
 				<prop key="org.quartz.threadPool.threadCount">5</prop>
 			</props>
 		</property>
-		<!-- 启动时延期10秒开始任务 -->
-		<property name="startupDelay" value="10" />
+		<!-- 启动时延期3秒开始任务 -->
+		<property name="startupDelay" value="3" />
 	</bean>
 
 	<!-- Cron式Trigger定义 -->

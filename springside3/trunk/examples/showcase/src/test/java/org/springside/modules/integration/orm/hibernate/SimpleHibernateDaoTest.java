@@ -14,6 +14,11 @@ import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.orm.hibernate.SimpleHibernateDao;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
+/**
+ * springside-core中{@link SimpleHibernateDao}的测试用例.
+ * 
+ * @author calvin
+ */
 public class SimpleHibernateDaoTest extends SpringTxTestCase {
 
 	private static final String DEFAULT_LOGIN_NAME = "admin";

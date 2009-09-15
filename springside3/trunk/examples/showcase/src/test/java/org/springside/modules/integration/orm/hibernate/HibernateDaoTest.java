@@ -16,6 +16,11 @@ import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateDao;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
+/**
+ * springside-core中{@link HibernateDao}的测试用例.
+ * 
+ * @author calvin
+ */
 public class HibernateDaoTest extends SpringTxTestCase {
 
 	private HibernateDao<User, Long> dao;
