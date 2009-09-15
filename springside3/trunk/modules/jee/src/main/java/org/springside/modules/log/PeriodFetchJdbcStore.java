@@ -31,7 +31,7 @@ import org.springside.modules.queue.QueueConsumerTask;
  * 
  * @author calvin
  */
-public class JdbcPeriodFetchTask extends PeriodConsumerTask {
+public class PeriodFetchJdbcStore extends PeriodConsumerTask {
 
 	protected String sql;
 	protected SimpleJdbcTemplate jdbcTemplate;

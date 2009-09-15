@@ -15,9 +15,11 @@ import org.apache.log4j.Appender;
 import org.apache.log4j.Category;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedOperationParameter;
+import org.springframework.jmx.export.annotation.ManagedOperationParameters;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
 /**
@@ -28,67 +30,62 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 @ManagedResource(objectName = "Custom:type=Log4jManagement,name=log4jManagement", description = "Log4j Managed Bean")
 public class Log4jMBean {
 
-	/*
-	 * log4j.properties中关联全部Appender的Category,用于addAppender().
-	 */
-	public static final String ALL_APPENDER_CATEGORY_NAME = "appenders";
+	private org.slf4j.Logger mbeanLogger = LoggerFactory.getLogger(Log4jMBean.class);
 
-	@ManagedAttribute(description = "get the logging level of the root logger")
+	@ManagedAttribute(description = "Logging level of the root logger")
 	public String getRootLogLevel() {
 		Logger root = Logger.getRootLogger();
 		return root.getLevel().toString();
 	}
 
-	@ManagedAttribute(description = "set the new logging level to the root logger")
+	@ManagedAttribute(description = "Logging level of the root logger")
 	public void setRootLogLevel(String newLevel) {
 		Logger root = Logger.getRootLogger();
 		Level level = Level.toLevel(newLevel);
 		root.setLevel(level);
+		mbeanLogger.info("设置rootLogger级别到{}", newLevel);
 	}
 
-	@ManagedOperation(description = "get the logging level of the logger")
-	public String getLogLevel(
-			@ManagedOperationParameter(name = "loggerName", description = "logger name") String loggerName) {
+	@ManagedOperation(description = "Get logging level of the logger")
+	@ManagedOperationParameters( { @ManagedOperationParameter(name = "loggerName", description = "Logger name") })
+	public String getLogLevel(String loggerName) {
 		Logger logger = Logger.getLogger(loggerName);
 		return logger.getLevel().toString();
 	}
 
 	@ManagedOperation(description = "set the new logging level to the logger")
-	public void setLogLevel(
-			@ManagedOperationParameter(name = "loggerName", description = "logger name") String loggerName,
-			@ManagedOperationParameter(name = "newlevel", description = "new level") String newLevel) {
+	@ManagedOperationParameters( { @ManagedOperationParameter(name = "loggerName", description = "Logger name"),
+			@ManagedOperationParameter(name = "newlevel", description = "New level") })
+	public void setLogLevel(String loggerName, String newLevel) {
 		Logger logger = Logger.getLogger(loggerName);
 		Level level = Level.toLevel(newLevel);
 		logger.setLevel(level);
+		mbeanLogger.info("设置{}级别到{}", loggerName, newLevel);
 	}
 
-	@ManagedOperation(description = "add the new appender to the logger")
-	public void addAppender(
-			@ManagedOperationParameter(name = "loggerName", description = "logger name") String loggerName,
-			@ManagedOperationParameter(name = "appenderName", description = "appender name") String appenderName) {
+	@ManagedOperation(description = "Get all appenders of the logger")
+	@ManagedOperationParameters( { @ManagedOperationParameter(name = "loggerName", description = "Logger name") })
+	public List<String> getAppenders(String loggerName) {
+		List<String> appenderNameList = new ArrayList<String>();
 		Logger logger = Logger.getLogger(loggerName);
-		Appender appender = Logger.getLogger(ALL_APPENDER_CATEGORY_NAME).getAppender(appenderName);
-		appender.setName(appenderName);
-		logger.addAppender(appender);
-	}
 
-	@ManagedOperation(description = "get all appenders of the logger")
-	public List<String> getAllAppenders(
-			@ManagedOperationParameter(name = "loggerName", description = "logger name") String loggerName) {
-		List<String> appenderNames = new ArrayList<String>();
-		Logger logger = Logger.getLogger(loggerName);
+		//循环加载logger及其parent的appenders
 		for (Category c = logger; c != null; c = c.getParent()) {
 			Enumeration e = c.getAllAppenders();
 			while (e.hasMoreElements()) {
 				Appender appender = (Appender) e.nextElement();
-				appenderNames.add(appender.getName());
+				String appenderName = appender.getName();
+				if (c != logger)
+					appenderName += "(parent)";
+				appenderNameList.add(appenderName);
 			}
 
+			//如果logger不继承parent的appender,则停止向上循环.
 			if (!c.getAdditivity()) {
 				break;
 			}
 		}
 
-		return appenderNames;
+		return appenderNameList;
 	}
 }

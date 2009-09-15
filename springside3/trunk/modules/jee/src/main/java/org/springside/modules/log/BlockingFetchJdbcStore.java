@@ -30,7 +30,7 @@ import org.springside.modules.queue.BlockingConsumerTask;
  * 
  * @author calvin
  */
-public class JdbcBlockingFetchTask extends BlockingConsumerTask {
+public class BlockingFetchJdbcStore extends BlockingConsumerTask {
 
 	protected String sql;
 	protected int batchSize = 10;

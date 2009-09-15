@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.AppenderSkeleton;
+import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LoggingEvent;
 
 /**
@@ -13,15 +14,29 @@ import org.apache.log4j.spi.LoggingEvent;
  */
 public class InMemoryAppender extends AppenderSkeleton {
 
-	private static List<LoggingEvent> logs = new ArrayList<LoggingEvent>();
+	private List<LoggingEvent> logs = new ArrayList<LoggingEvent>();
 
-	public static List<LoggingEvent> getLogs() {
-		return logs;
+	/**
+	 * 将本Appender添加到logger中.
+	 */
+	public void addToLogger(String loggerName) {
+		Logger logger = Logger.getLogger(loggerName);
+		logger.addAppender(this);
 	}
 
+	/**
+	 * 实现append函数,将log事件加入到内部事件列表.
+	 */
 	@Override
 	protected void append(LoggingEvent event) {
 		logs.add(event);
+	}
+
+	/**
+	 * 返回之前append的log事件列表.
+	 */
+	public List<LoggingEvent> getLogs() {
+		return logs;
 	}
 
 	public void close() {
