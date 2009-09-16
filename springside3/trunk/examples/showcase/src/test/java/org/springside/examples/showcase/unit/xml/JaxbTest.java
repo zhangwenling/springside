@@ -81,8 +81,11 @@ public class JaxbTest extends Assert {
 		assertEquals("house1", user.getHouses().get("bj"));
 	}
 
+	/**
+	 * 测试以List对象作为根节点时的XML输出
+	 */
 	@Test
-	public void listAsRoot() {
+	public void toXmlWithlistAsRoot() {
 		User user1 = new User();
 		user1.setId(1L);
 		user1.setName("calvin");

@@ -8,10 +8,10 @@ import org.springside.examples.showcase.functional.BaseSeleniumTestCase;
  * 
  * @author calvin
  */
-public class JmxClientTest extends BaseSeleniumTestCase {
+public class JmxTest extends BaseSeleniumTestCase {
 
 	@Test
-	public void general() {
+	public void test() {
 		clickMenu("JMX演示");
 		assertEquals("default", selenium.getValue("nodeName"));
 	}

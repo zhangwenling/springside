@@ -82,18 +82,30 @@ public class JmxClientService {
 	}
 
 	// 标准MBean代理操作演示 //
+	/**
+	 * 获取节点名.
+	 */
 	public String getNodeName() {
 		return serverConfigMBean.getNodeName();
 	}
 
+	/**
+	 * 设置节点名.
+	 */
 	public void setNodeName(String nodeName) {
 		serverConfigMBean.setNodeName(nodeName);
 	}
 
+	/**
+	 * 获取是否发送通知邮件.
+	 */
 	public boolean isNotificationMailEnabled() {
 		return serverConfigMBean.isNotificationMailEnabled();
 	}
 
+	/**
+	 * 设置是否发送通知邮件.
+	 */
 	public void setNotificationMailEnabled(boolean notificationMailEnabled) {
 		serverConfigMBean.setNotificationMailEnabled(notificationMailEnabled);
 	}

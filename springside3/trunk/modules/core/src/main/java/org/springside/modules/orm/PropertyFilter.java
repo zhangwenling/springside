@@ -17,8 +17,6 @@ import org.springframework.util.Assert;
  * 
  * PropertyFilter主要记录页面中简单的搜索过滤条件,比Hibernate的Criterion要简单.
  * 
- * TODO:扩展其他对比方式如大于、小于及其他数据类型如数字和日期.
- * 
  * @author calvin
  */
 public class PropertyFilter {

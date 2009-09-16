@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.jmx.client.service.JmxClientService;
 import org.springside.examples.showcase.jmx.server.ServerConfigMBean;
 import org.springside.modules.jmx.JmxClient;
+import org.springside.modules.log.Log4jMBean;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 /**
@@ -14,7 +15,7 @@ import org.springside.modules.test.spring.SpringContextTestCase;
  * 
  * @author calvin
  */
-@ContextConfiguration(locations = { "/jmx/applicationContext-jmx-server.xml" })
+@ContextConfiguration(locations = { "/jmx/applicationContext-jmx-server.xml", "/log/applicationContext-log.xml" })
 public class JmxClientTest extends SpringContextTestCase {
 
 	private JmxClient jmxClient;
@@ -32,12 +33,7 @@ public class JmxClientTest extends SpringContextTestCase {
 	}
 
 	@Test
-	public void getMBeanAttribute() {
-		assertEquals("default", serverConfigMbean.getNodeName());
-	}
-
-	@Test
-	public void setMBeanAttribute() {
+	public void accessMBeanAttribute() {
 		serverConfigMbean.setNodeName("foo");
 		assertEquals("foo", serverConfigMbean.getNodeName());
 	}
@@ -49,6 +45,15 @@ public class JmxClientTest extends SpringContextTestCase {
 
 	@Test
 	public void invokeMBeanMethodByReflection() {
+		//无参数
 		jmxClient.inoke(JmxClientService.HIBERNATE_MBEAN_NAME, "logSummary");
+
+		//以参数Class名描述函数签名		
+		assertEquals("INFO", jmxClient.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerLevel",
+				new String[] { "java.lang.String" }, new Object[] { "org.springside" }));
+
+		//参数Class类描述函数签名
+		assertEquals("INFO", jmxClient.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerLevel",
+				new Class[] { String.class }, new Object[] { "org.springside" }));
 	}
 }

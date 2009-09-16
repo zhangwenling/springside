@@ -133,28 +133,40 @@ public class JmxClient {
 	 * 所调用方法无参数时的简写函数.
 	 */
 	public void inoke(final String mbeanName, final String methodName) {
-		invoke(mbeanName, methodName, new Object[] {}, new String[] {});
+		invoke(mbeanName, methodName, new String[] {}, new Object[] {});
 	}
 
 	/**
 	 * 按方法名直接调用MBean方法(无MBean的Class文件时使用).
 	 * 
-	 * @param signature 所有参数的Class名全称的数组.
+	 * @param paramClassNames 所有参数的Class名全称的数组.
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T invoke(final String mbeanName, final String methodName, final Object[] params, final String[] signature) {
+	public <T> T invoke(final String mbeanName, final String methodName, final String[] paramClassNames,
+			final Object[] paramValues) {
 		Assert.hasText(mbeanName, "mbeanName不能为空");
 		Assert.hasText(methodName, "methodName不能为空");
 		assertConnected();
 
 		try {
 			ObjectName objectName = buildObjectName(mbeanName);
-			return (T) mbsc.invoke(objectName, methodName, params, signature);
+			return (T) mbsc.invoke(objectName, methodName, paramValues, paramClassNames);
 		} catch (JMException e) {
 			throw new IllegalArgumentException("参数不正确", e);
 		} catch (IOException e) {
 			throw new IllegalStateException("连接出错", e);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T invoke(final String mbeanName, final String methodName, final Class[] paramClasses,
+			final Object[] paramValues) {
+		String[] paramClassNames = new String[paramClasses.length];
+		for (int i = 0; i < paramClasses.length; i++) {
+			paramClassNames[i] = paramClasses[i].getName();
+		}
+
+		return (T) invoke(mbeanName, methodName, paramClassNames, paramValues);
 	}
 
 	/**
