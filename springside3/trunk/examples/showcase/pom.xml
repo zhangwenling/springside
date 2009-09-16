@@ -393,7 +393,7 @@
 			</build>
 		</profile>
 
-		<!-- 重载integration profile设定,每次执行重新创建数据库 -->
+		<!-- 重载integration profile设定,每次执行前重新创建数据库 -->
 		<profile>
 			<id>integration</id>
 			<build>
