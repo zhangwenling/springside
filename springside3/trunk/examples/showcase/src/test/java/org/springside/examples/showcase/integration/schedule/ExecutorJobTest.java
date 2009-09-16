@@ -10,12 +10,12 @@ import org.springside.modules.test.spring.SpringContextTestCase;
 public class ExecutorJobTest extends SpringContextTestCase {
 	@Test
 	public void test() {
-		//等待任务启动
-		sleep(4000);
-
 		//加载测试用logger appender
 		InMemoryAppender appender = new InMemoryAppender();
 		appender.addToLogger(ExecutorJob.class);
+
+		//等待任务启动
+		sleep(4000);
 
 		//验证任务已执行
 		assertEquals(1, appender.getLogs().size());
