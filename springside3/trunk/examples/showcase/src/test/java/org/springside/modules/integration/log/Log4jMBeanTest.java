@@ -3,6 +3,7 @@ package org.springside.modules.integration.log;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
@@ -13,9 +14,12 @@ import org.springside.modules.test.spring.SpringContextTestCase;
 /**
  * sprinside-jee中Log4jMBean的测试用例.
  * 
+ * JMX相关用例使用相同的@ContextConfiguration以保证使用同一个ApplicationContext,避免JMX端口重复注册.
+ * 
  * @author calvin
  */
-@ContextConfiguration(locations = { "/jmx/applicationContext-jmx-server.xml", "/log/applicationContext-log.xml" })
+@ContextConfiguration(locations = { "/jmx/applicationContext-jmx-server.xml", "/jmx/applicationContext-jmx-client.xml",
+		"/log/applicationContext-log.xml" })
 public class Log4jMBeanTest extends SpringContextTestCase {
 
 	private JmxClient jmxClient;
@@ -23,6 +27,11 @@ public class Log4jMBeanTest extends SpringContextTestCase {
 	@Before
 	public void setUp() throws Exception {
 		jmxClient = new JmxClient("service:jmx:rmi:///jndi/rmi://localhost:1098/showcase");
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		jmxClient.close();
 	}
 
 	@Test

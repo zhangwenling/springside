@@ -13,9 +13,12 @@ import org.springside.modules.test.spring.SpringContextTestCase;
 /**
  * springside-jee中{@link JmxClient}的测试用例.
  * 
+ * JMX相关用例使用相同的@ContextConfiguration以保证使用同一个ApplicationContext,避免JMX端口重复注册.
+ * 
  * @author calvin
  */
-@ContextConfiguration(locations = { "/jmx/applicationContext-jmx-server.xml", "/log/applicationContext-log.xml" })
+@ContextConfiguration(locations = { "/jmx/applicationContext-jmx-server.xml", "/jmx/applicationContext-jmx-client.xml",
+		"/log/applicationContext-log.xml" })
 public class JmxClientTest extends SpringContextTestCase {
 
 	private JmxClient jmxClient;
