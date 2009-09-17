@@ -40,8 +40,10 @@ import org.springframework.jmx.export.annotation.ManagedResource;
  * @author calvin
  */
 @SuppressWarnings("unchecked")
-@ManagedResource(objectName = "Custom:type=QueueManagement,name=queueManagement", description = "Queue Managed Bean")
+@ManagedResource(objectName = QueueManager.QUEUEMANAGER_MBEAN_NAME, description = "Queue Managed Bean")
 public class QueueManager {
+
+	public static final String QUEUEMANAGER_MBEAN_NAME = "SpringSide:type=QueueManagement,name=queueManagement";
 
 	private static Logger logger = LoggerFactory.getLogger(QueueManager.class);
 

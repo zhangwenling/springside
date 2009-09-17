@@ -30,7 +30,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 @ManagedResource(objectName = Log4jMBean.LOG4J_MBEAN_NAME, description = "Log4j Management Bean")
 public class Log4jMBean {
 
-	public static final String LOG4J_MBEAN_NAME = "Custom:type=Log4jManagement,name=log4jManagement";
+	public static final String LOG4J_MBEAN_NAME = "SpringSide:type=Log4jManagement,name=log4jManagement";
 
 	private static org.slf4j.Logger mbeanLogger = LoggerFactory.getLogger(Log4jMBean.class);
 
