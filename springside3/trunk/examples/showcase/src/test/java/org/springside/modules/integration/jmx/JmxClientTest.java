@@ -52,11 +52,11 @@ public class JmxClientTest extends SpringContextTestCase {
 		jmxClient.inoke(JmxClientService.HIBERNATE_MBEAN_NAME, "logSummary");
 
 		//以参数Class名描述函数签名		
-		assertEquals("INFO", jmxClient.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerLevel",
-				new String[] { "java.lang.String" }, new Object[] { "org.springside" }));
+		assertEquals("WARN", jmxClient.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerLevel",
+				new String[] { "java.lang.String" }, new Object[] { "foo" }));
 
 		//参数Class类描述函数签名
-		assertEquals("INFO", jmxClient.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerLevel",
-				new Class[] { String.class }, new Object[] { "org.springside" }));
+		assertEquals("WARN", jmxClient.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerLevel",
+				new Class[] { String.class }, new Object[] { "foo" }));
 	}
 }

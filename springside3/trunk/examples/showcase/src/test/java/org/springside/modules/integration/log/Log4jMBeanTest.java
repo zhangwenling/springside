@@ -35,32 +35,35 @@ public class Log4jMBeanTest extends SpringContextTestCase {
 	}
 
 	@Test
-	public void getRootLoggerLevel() {
-		assertEquals("WARN", jmxClient.getAttribute(Log4jMBean.LOG4J_MBEAN_NAME, "RootLoggerLevel"));
+	public void accessRootLoggerLevel() {
+		String orginalLevel = "WARN";
+		String newLevel = "ERROR";
+
+		//判断原级别
+		assertEquals(orginalLevel, jmxClient.getAttribute(Log4jMBean.LOG4J_MBEAN_NAME, "RootLoggerLevel"));
+		//设定新级别
+		jmxClient.setAttribute(Log4jMBean.LOG4J_MBEAN_NAME, "RootLoggerLevel", newLevel);
+		assertEquals(newLevel, Logger.getRootLogger().getLevel().toString());
+		//恢复原级别
+		jmxClient.setAttribute(Log4jMBean.LOG4J_MBEAN_NAME, "RootLoggerLevel", orginalLevel);
 	}
 
 	@Test
-	public void setRootLoggerLevel() {
-		jmxClient.setAttribute(Log4jMBean.LOG4J_MBEAN_NAME, "RootLoggerLevel", "ERROR");
-		assertEquals("ERROR", Logger.getRootLogger().getLevel().toString());
-		jmxClient.setAttribute(Log4jMBean.LOG4J_MBEAN_NAME, "RootLoggerLevel", "WARN");
-	}
+	public void accessLoggerLevel() {
+		String loggerName = "foo";
+		String orginalLevel = "WARN";
+		String newLevel = "ERROR";
 
-	@Test
-	public void getLoggerLevel() {
-		assertEquals("INFO", jmxClient.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerLevel",
-				new Class[] { String.class }, new Object[] { "org.springside" }));
-	}
-
-	@Test
-	public void SetLoggerLevel() {
+		//判断原级别
+		assertEquals(orginalLevel, jmxClient.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerLevel",
+				new Class[] { String.class }, new Object[] { loggerName }));
+		//设定新级别
 		jmxClient.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "setLoggerLevel", new Class[] { String.class, String.class },
-				new Object[] { "org.springside", "ERROR" });
-
-		assertEquals("ERROR", Logger.getLogger("org.springside").getLevel().toString());
-
+				new Object[] { loggerName, newLevel });
+		assertEquals(newLevel, Logger.getLogger(loggerName).getLevel().toString());
+		//恢复原级别
 		jmxClient.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "setLoggerLevel", new Class[] { String.class, String.class },
-				new Object[] { "org.springside", "INFO" });
+				new Object[] { loggerName, orginalLevel });
 	}
 
 	@Test

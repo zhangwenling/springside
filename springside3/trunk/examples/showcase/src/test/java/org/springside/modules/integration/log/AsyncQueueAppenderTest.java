@@ -14,8 +14,9 @@ import org.springside.modules.test.spring.SpringTxTestCase;
  * 
  * @author calvin
  */
-@ContextConfiguration(locations = { "/log/applicationContext-log.xml" })
-public class AsyncLoggerTest extends SpringTxTestCase {
+@ContextConfiguration(locations = { "/jmx/applicationContext-jmx-server.xml", "/jmx/applicationContext-jmx-client.xml",
+		"/log/applicationContext-log.xml" })
+public class AsyncQueueAppenderTest extends SpringTxTestCase {
 
 	private static final String LOG_TABLE_NAME = "SS_LOG";
 
@@ -38,7 +39,7 @@ public class AsyncLoggerTest extends SpringTxTestCase {
 		for (; i <= 10; i++) {
 			dbLogger.info("helloworld" + i);
 		}
-		sleep(2000);
+		sleep(1000);
 		assertEquals(oldLogsCount + 10, this.countRowsInTable(LOG_TABLE_NAME));
 	}
 

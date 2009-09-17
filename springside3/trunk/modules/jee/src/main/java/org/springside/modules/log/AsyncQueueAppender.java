@@ -23,9 +23,9 @@ import org.springside.modules.queue.QueueManager;
  * 
  * @author calvin
  */
-public class AsyncAppender extends org.apache.log4j.AppenderSkeleton {
+public class AsyncQueueAppender extends org.apache.log4j.AppenderSkeleton {
 
-	private static Logger logger = LoggerFactory.getLogger(AsyncAppender.class);
+	private static Logger logger = LoggerFactory.getLogger(AsyncQueueAppender.class);
 
 	protected String queueName;
 

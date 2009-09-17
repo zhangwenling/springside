@@ -28,8 +28,8 @@ public class JmxClientServiceTest extends SpringContextTestCase {
 		jmxClientService.setNotificationMailEnabled(false);
 		assertEquals(false, jmxClientService.isNotificationMailEnabled());
 
-		assertEquals(0L, jmxClientService.getHibernateStatistics().getSessionOpenCount());
-		assertEquals(0L, jmxClientService.getHibernateStatistics().getSessionCloseCount());
+		assertEquals(jmxClientService.getHibernateStatistics().getSessionCloseCount(), jmxClientService
+				.getHibernateStatistics().getSessionOpenCount());
 		jmxClientService.logSummary();
 	}
 }

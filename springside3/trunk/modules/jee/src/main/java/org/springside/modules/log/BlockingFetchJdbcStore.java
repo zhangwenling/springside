@@ -20,6 +20,10 @@ import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springside.modules.queue.BlockingConsumerTask;
 
 /**
@@ -38,7 +42,10 @@ public class BlockingFetchJdbcStore extends BlockingConsumerTask {
 	protected int batchSize = 10;
 
 	protected SimpleJdbcTemplate jdbcTemplate;
+	protected TransactionTemplate transactionTemplate;
 	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
+
+	protected SqlParameterSource[] batchParams;
 
 	/**
 	 * 带Named Parameter的insert sql.
@@ -64,6 +71,11 @@ public class BlockingFetchJdbcStore extends BlockingConsumerTask {
 		jdbcTemplate = new SimpleJdbcTemplate(dataSource);
 	}
 
+	@Required
+	public void setTransactionManager(PlatformTransactionManager transactionManager) {
+		this.transactionTemplate = new TransactionTemplate(transactionManager);
+	}
+
 	/**
 	 * 消息处理函数,将消息放入buffer,当buffer达到batchSize时执行批量更新函数.
 	 */
@@ -83,7 +95,7 @@ public class BlockingFetchJdbcStore extends BlockingConsumerTask {
 	 * 将Buffer中的事件列表批量插入数据库.
 	 */
 	@SuppressWarnings("unchecked")
-	protected void updateBatch() {
+	public void updateBatch() {
 		try {
 			//分析事件列表,转换为jdbc参数.
 			List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
@@ -92,11 +104,17 @@ public class BlockingFetchJdbcStore extends BlockingConsumerTask {
 				paramMapList.add(paramMap);
 			}
 			Map[] paramMapArray = paramMapList.toArray(new Map[paramMapList.size()]);
-			SqlParameterSource[] batchParams = SqlParameterSourceUtils.createBatch(paramMapArray);
+			batchParams = SqlParameterSourceUtils.createBatch(paramMapArray);
 
 			//执行批量插入,如果失败调用失败处理函数.
 			try {
-				jdbcTemplate.batchUpdate(getActualSql(), batchParams);
+				transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+					@Override
+					public void doInTransactionWithoutResult(TransactionStatus status) {
+						jdbcTemplate.batchUpdate(getActualSql(), batchParams);
+					}
+				});
+
 				if (logger.isDebugEnabled()) {
 					for (LoggingEvent event : eventBuffer) {
 						logger.debug("saved event, {}", AppenderUtils.convertEventToString(event));

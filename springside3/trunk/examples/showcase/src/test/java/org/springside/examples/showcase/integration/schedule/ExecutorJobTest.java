@@ -15,7 +15,7 @@ public class ExecutorJobTest extends SpringContextTestCase {
 		appender.addToLogger(ExecutorJob.class);
 
 		//等待任务启动
-		sleep(4000);
+		sleep(3000);
 
 		//验证任务已执行
 		assertEquals(1, appender.getLogs().size());
