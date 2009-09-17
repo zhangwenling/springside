@@ -3,13 +3,13 @@ package org.springside.examples.showcase.integration.schedule;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.schedule.QuartzClusterableJob;
-import org.springside.modules.log.InMemoryAppender;
+import org.springside.modules.log.ListAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 /**
  * Quartz可集群Timer Job测试.
  * 
- * 注意因为任务会被持久化,因此本用例仅在清空数据库QRTZ_*表后的第一次运行可通过.
+ * 注意因为任务会被持久化,因此本用例仅在清空数据库QRTZ_*表后的第一次运行或距上一次运行5分钟方可通过.
  * 
  * @author calvin
  */
@@ -19,7 +19,7 @@ public class QuartzClusterableJobTest extends SpringContextTestCase {
 	@Test
 	public void test() {
 		//加载测试用logger appender
-		InMemoryAppender appender = new InMemoryAppender();
+		ListAppender appender = new ListAppender();
 		appender.addToLogger(QuartzClusterableJob.class);
 
 		//等待任务启动

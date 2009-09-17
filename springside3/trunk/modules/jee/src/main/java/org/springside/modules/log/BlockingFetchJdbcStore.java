@@ -24,7 +24,9 @@ import org.springside.modules.queue.BlockingConsumerTask;
 
 /**
  * 将Queue中的log4j event写入数据库的消费者任务.
+ * 
  * 即时阻塞的读取Queue中的事件,达到缓存上限后使用Jdbc批量写入模式.
+ * 如需换为定时读取模式,继承于PeriodConsumerTask稍加改造即可.
  * 
  * @see BlockingConsumerTask
  * 

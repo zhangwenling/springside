@@ -37,7 +37,7 @@ public class PropertyFilter {
 	 * 属性数据类型.
 	 */
 	public enum PropertyType {
-		S(String.class), I(Integer.class), L(Long.class), F(Float.class), D(Date.class);
+		S(String.class), I(Integer.class), L(Long.class), F(Float.class), D(Date.class), B(Boolean.class);
 
 		PropertyType(Class<?> clazz) {
 			this.clazz = clazz;

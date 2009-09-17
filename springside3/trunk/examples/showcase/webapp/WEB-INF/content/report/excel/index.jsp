@@ -12,11 +12,12 @@
 <div id="content">
 <%@ include file="/common/left.jsp"%>
 <div id="mainbar">
-<h3>报表演示</h3>
-<p>说明：演示DIY报表所需技术。</p>
+<h3>Excel导出演示</h3>
+<p>说明：演示基于POI的Excel操作。</p>
 <ul>
-<li><a href="flashchart/index.action">amCharts渲染Flash图表</a></li>
-<li><a href="excel/index.action">POI导出Excel文件</a></li>
+<li><a href="excel-export.action">导出Excel文件</a><br/>
+演示冻结/合并单元格, 单元格字体/边框/颜色, 单元格数值格式/公式等特性.</li>
+<li>Excel文件读取<br/>见ExcelExportActionTest测试用例.</li>
 </ul>
 </div>
 </div>

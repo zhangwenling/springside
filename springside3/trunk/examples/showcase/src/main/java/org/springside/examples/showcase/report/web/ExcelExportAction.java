@@ -28,7 +28,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * 
  * @author calvin
  */
-@Namespace("/report")
+@Namespace("/report/excel")
 @SuppressWarnings("serial")
 public class ExcelExportAction extends ActionSupport {
 
