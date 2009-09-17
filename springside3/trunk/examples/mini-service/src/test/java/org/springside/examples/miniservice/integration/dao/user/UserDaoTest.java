@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniservice.dao.UserDao;
 import org.springside.examples.miniservice.data.UserData;
-import org.springside.examples.miniservice.entity.user.Role;
 import org.springside.examples.miniservice.entity.user.User;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
@@ -44,10 +43,7 @@ public class UserDaoTest extends SpringTxTestCase {
 	@Test
 	public void crudEntityWithRole() {
 		//保存带角色的用户
-		User user = UserData.getRandomUser();
-		Role role = UserData.getAdminRole();
-		user.getRoleList().add(role);
-
+		User user = UserData.getRandomUserWithAdminRole();
 		entityDao.save(user);
 		flush();
 
@@ -55,7 +51,7 @@ public class UserDaoTest extends SpringTxTestCase {
 		assertEquals(1, user.getRoleList().size());
 
 		//删除用户的角色
-		user.getRoleList().remove(role);
+		user.getRoleList().remove(0);
 		flush();
 		user = entityDao.findUniqueBy("id", user.getId());
 		assertEquals(0, user.getRoleList().size());

@@ -8,7 +8,7 @@ import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
  * 
  * @author calvin
  */
-public class SecurityTest extends BaseSeleniumTestCase {
+public class SecurityCheckingTest extends BaseSeleniumTestCase {
 
 	/**
 	 * 测试匿名用户访问系统时的行为.

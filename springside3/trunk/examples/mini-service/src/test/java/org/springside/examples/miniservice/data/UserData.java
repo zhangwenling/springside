@@ -23,6 +23,13 @@ public class UserData {
 		return user;
 	}
 
+	public static User getRandomUserWithAdminRole() {
+		User user = UserData.getRandomUser();
+		Role adminRole = UserData.getAdminRole();
+		user.getRoleList().add(adminRole);
+		return user;
+	}
+
 	public static Role getRandomRole() {
 		Role role = new Role();
 		role.setName("Role" + random());

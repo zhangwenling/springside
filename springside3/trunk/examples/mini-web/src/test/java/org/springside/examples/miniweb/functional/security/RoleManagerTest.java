@@ -1,7 +1,7 @@
 package org.springside.examples.miniweb.functional.security;
 
 import org.junit.Test;
-import org.springside.examples.miniweb.data.SecurityData;
+import org.springside.examples.miniweb.data.SecurityEntityData;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
 
@@ -30,7 +30,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 		selenium.click("link=增加新角色");
 		waitPageLoad();
 
-		Role role = SecurityData.getRandomRole();
+		Role role = SecurityEntityData.getRandomRole();
 
 		selenium.type("name", role.getName());
 		selenium.click("checkedAuthIds-1");

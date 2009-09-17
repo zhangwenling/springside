@@ -24,14 +24,14 @@ import org.springside.examples.miniweb.entity.security.User;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private SecurityManager securityManager;
+	private SecurityEntityManager securityEntityManager;
 
 	/**
 	 * 获取用户Details信息的回调函数.
 	 */
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
-		User user = securityManager.findUserByLoginName(userName);
+		User user = securityEntityManager.findUserByLoginName(userName);
 		if (user == null)
 			throw new UsernameNotFoundException("用户" + userName + " 不存在");
 

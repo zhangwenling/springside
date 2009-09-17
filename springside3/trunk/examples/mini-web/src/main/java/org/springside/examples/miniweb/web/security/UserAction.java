@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.ServiceException;
-import org.springside.examples.miniweb.service.security.SecurityManager;
+import org.springside.examples.miniweb.service.security.SecurityEntityManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
@@ -31,7 +31,7 @@ import org.springside.modules.web.struts2.Struts2Utils;
 public class UserAction extends CrudActionSupport<User> {
 
 	@Autowired
-	private SecurityManager securityManager;
+	private SecurityEntityManager securityEntityManager;
 
 	// 页面属性 //
 	private Long id;
@@ -51,7 +51,7 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	protected void prepareModel() throws Exception {
 		if (id != null) {
-			entity = securityManager.getUser(id);
+			entity = securityEntityManager.getUser(id);
 		} else {
 			entity = new User();
 		}
@@ -66,7 +66,7 @@ public class UserAction extends CrudActionSupport<User> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
-		page = securityManager.searchUser(page, filters);
+		page = securityEntityManager.searchUser(page, filters);
 		return SUCCESS;
 	}
 
@@ -81,7 +81,7 @@ public class UserAction extends CrudActionSupport<User> {
 		//根据页面上的checkbox选择 整合User的Roles Set
 		HibernateWebUtils.mergeByCheckedIds(entity.getRoleList(), checkedRoleIds, Role.class);
 
-		securityManager.saveUser(entity);
+		securityEntityManager.saveUser(entity);
 		addActionMessage("保存用户成功");
 		return RELOAD;
 	}
@@ -89,7 +89,7 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	public String delete() throws Exception {
 		try {
-			securityManager.deleteUser(id);
+			securityEntityManager.deleteUser(id);
 			addActionMessage("删除用户成功");
 		} catch (ServiceException e) {
 			logger.error(e.getMessage(), e);
@@ -107,7 +107,7 @@ public class UserAction extends CrudActionSupport<User> {
 		String loginName = request.getParameter("loginName");
 		String oldLoginName = request.getParameter("oldLoginName");
 
-		if (securityManager.isLoginNameUnique(loginName, oldLoginName)) {
+		if (securityEntityManager.isLoginNameUnique(loginName, oldLoginName)) {
 			Struts2Utils.renderText("true");
 		} else {
 			Struts2Utils.renderText("false");
@@ -128,7 +128,7 @@ public class UserAction extends CrudActionSupport<User> {
 	 * input页面显示所有角色列表.
 	 */
 	public List<Role> getAllRoleList() {
-		return securityManager.getAllRole();
+		return securityEntityManager.getAllRole();
 	}
 
 	/**

@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.dao.security.ResourceDao;
-import org.springside.examples.miniweb.data.SecurityData;
+import org.springside.examples.miniweb.data.SecurityEntityData;
 import org.springside.examples.miniweb.entity.security.Resource;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
@@ -21,7 +21,7 @@ public class ResourceDaoTest extends SpringTxTestCase {
 	@Test
 	public void crudEntity() {
 		//new entity and save it. 
-		Resource entity = SecurityData.getRandomResource();
+		Resource entity = SecurityEntityData.getRandomResource();
 		entityDao.save(entity);
 		flush();
 

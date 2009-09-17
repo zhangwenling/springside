@@ -1,12 +1,19 @@
 package org.springside.examples.miniservice.unit.ws.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.dozer.DozerBeanMapper;
 import org.easymock.classextension.EasyMock;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springside.examples.miniservice.data.UserData;
+import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.service.user.UserManager;
+import org.springside.examples.miniservice.ws.api.dto.UserDTO;
+import org.springside.examples.miniservice.ws.api.result.GetAllUserResult;
 import org.springside.examples.miniservice.ws.api.result.WSResult;
 import org.springside.examples.miniservice.ws.impl.UserWebServiceImpl;
 import org.springside.modules.utils.ReflectionUtils;
@@ -34,6 +41,46 @@ public class UserWebServiceTest extends Assert {
 	public void tearDown() {
 		//确认的脚本都已执行
 		EasyMock.verify(userManager);
+	}
+
+	/**
+	 * 测试dozer正确映射.
+	 */
+	public void dozerBinding() {
+		User user = UserData.getRandomUserWithAdminRole();
+		List<User> list = new ArrayList<User>();
+		list.add(user);
+		EasyMock.expect(userManager.getAllUser()).andReturn(list);
+		EasyMock.replay(userManager);
+
+		GetAllUserResult result = userWebService.getAllUser();
+		assertEquals(WSResult.SUCCESS, result.getCode());
+		UserDTO dto = result.getUserList().get(0);
+		assertEquals(user.getLoginName(), dto.getLoginName());
+		assertEquals(user.getRoleList().get(0).getName(), dto.getRoleList().get(0).getName());
+	}
+
+	/**
+	 * 测试参数错误时的返回码.
+	 */
+	@Test
+	public void validateParamter() {
+		EasyMock.replay(userManager);
+		WSResult result = userWebService.createUser(null);
+		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
+	}
+
+	/**
+	 * 测试系统内部抛出异常时的处理.
+	 */
+	@Test
+	public void handleException(){
+		EasyMock.expect(userManager.getAllUser()).andStubThrow(new RuntimeException("oh.."));
+		EasyMock.replay(userManager);
+
+		GetAllUserResult result = userWebService.getAllUser();
+		assertEquals(WSResult.SYSTEM_ERROR, result.getCode());
+		assertEquals(WSResult.SYSTEM_ERROR_MESSAGE, result.getMessage());
 	}
 
 	/**

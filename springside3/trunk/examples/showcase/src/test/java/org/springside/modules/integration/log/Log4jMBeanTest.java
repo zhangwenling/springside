@@ -36,26 +36,26 @@ public class Log4jMBeanTest extends SpringContextTestCase {
 
 	@Test
 	public void accessRootLoggerLevel() {
-		String orginalLevel = "WARN";
+		String oldLevel = "WARN";
 		String newLevel = "ERROR";
 
 		//判断原级别
-		assertEquals(orginalLevel, jmxClient.getAttribute(Log4jMBean.LOG4J_MBEAN_NAME, "RootLoggerLevel"));
+		assertEquals(oldLevel, jmxClient.getAttribute(Log4jMBean.LOG4J_MBEAN_NAME, "RootLoggerLevel"));
 		//设定新级别
 		jmxClient.setAttribute(Log4jMBean.LOG4J_MBEAN_NAME, "RootLoggerLevel", newLevel);
 		assertEquals(newLevel, Logger.getRootLogger().getLevel().toString());
 		//恢复原级别
-		jmxClient.setAttribute(Log4jMBean.LOG4J_MBEAN_NAME, "RootLoggerLevel", orginalLevel);
+		jmxClient.setAttribute(Log4jMBean.LOG4J_MBEAN_NAME, "RootLoggerLevel", oldLevel);
 	}
 
 	@Test
 	public void accessLoggerLevel() {
 		String loggerName = "foo";
-		String orginalLevel = "WARN";
+		String oldLevel = "WARN";
 		String newLevel = "ERROR";
 
 		//判断原级别
-		assertEquals(orginalLevel, jmxClient.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerLevel",
+		assertEquals(oldLevel, jmxClient.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerLevel",
 				new Class[] { String.class }, new Object[] { loggerName }));
 		//设定新级别
 		jmxClient.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "setLoggerLevel", new Class[] { String.class, String.class },
@@ -63,7 +63,7 @@ public class Log4jMBeanTest extends SpringContextTestCase {
 		assertEquals(newLevel, Logger.getLogger(loggerName).getLevel().toString());
 		//恢复原级别
 		jmxClient.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "setLoggerLevel", new Class[] { String.class, String.class },
-				new Object[] { loggerName, orginalLevel });
+				new Object[] { loggerName, oldLevel });
 	}
 
 	@Test

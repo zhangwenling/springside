@@ -19,6 +19,8 @@ public class WSResult {
 	public static final String AUTH_ERROR = "201";
 	public static final String SYSTEM_ERROR = "300";
 
+	public static final String SYSTEM_ERROR_MESSAGE = "Runtime unknow internal error.";
+
 	// WSResult基本属性 //
 	private String code = SUCCESS;
 	private String message;
@@ -51,6 +53,6 @@ public class WSResult {
 	 * 设置为默认的系统内部未知错误.
 	 */
 	public void setDefaultError() {
-		setResult(SYSTEM_ERROR, "系统未知运行时错误");
+		setResult(SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
 	}
 }
