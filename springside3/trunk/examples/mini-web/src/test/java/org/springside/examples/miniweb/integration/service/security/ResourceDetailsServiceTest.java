@@ -28,5 +28,4 @@ public class ResourceDetailsServiceTest extends SpringTxTestCase {
 		assertEquals("/security/role*", ((Entry<String, String>) requests[5]).getKey());
 		assertEquals("A_VIEW_ROLE", ((Entry<String, String>) requests[5]).getValue());
 	}
-
 }

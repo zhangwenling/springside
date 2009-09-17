@@ -52,7 +52,7 @@ public class Log4jMBean {
 	@ManagedOperationParameters( { @ManagedOperationParameter(name = "loggerName", description = "Logger name") })
 	public String getLoggerLevel(String loggerName) {
 		Logger logger = Logger.getLogger(loggerName);
-		return logger.getLevel().toString();
+		return logger.getEffectiveLevel().toString();
 	}
 
 	@ManagedOperation(description = "set the new logging level to the logger")
