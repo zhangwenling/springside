@@ -107,15 +107,6 @@ public class QueueManager {
 	}
 
 	/**
-	 * 根据queueName获得消息队列中未处理消息的数量,支持基于JMX查询.
-	 */
-	@ManagedOperation(description = "Get message count in queue")
-	@ManagedOperationParameters( { @ManagedOperationParameter(name = "queueName", description = "Queue name") })
-	public static int getQueueLength(String queueName) {
-		return getQueue(queueName).size();
-	}
-
-	/**
 	 * JVM关闭时的钩子函数.
 	 */
 	@PreDestroy
@@ -141,10 +132,21 @@ public class QueueManager {
 	}
 
 	/**
+	 * 根据queueName获得消息队列中未处理消息的数量,支持基于JMX查询.
+	 */
+	@ManagedOperation(description = "Get message count in queue")
+	@ManagedOperationParameters( { @ManagedOperationParameter(name = "queueName", description = "Queue name") })
+	public static int getQueueLength(String queueName) {
+		return getQueue(queueName).size();
+	}
+
+	/**
 	 * 持久化队列中未处理的消息到文件中.
 	 * 当持久化文件已存在时会进行追加.
 	 * 当队列中消息过多时, 客户端代码亦可调用本函数进行持久化, 等高峰期过后重新执行restore().
 	 */
+	@ManagedOperation(description = "Backup message from queue to file")
+	@ManagedOperationParameters( { @ManagedOperationParameter(name = "queueName", description = "Queue name") })
 	public static void backup(String queueName) throws IOException {
 		BlockingQueue queue = queueMap.get(queueName);
 		List list = new ArrayList();
@@ -172,6 +174,8 @@ public class QueueManager {
 	/**
 	 * 载入持久化文件中的消息到队列中.
 	 */
+	@ManagedOperation(description = "Restore message from file to queue")
+	@ManagedOperationParameters( { @ManagedOperationParameter(name = "queueName", description = "Queue name") })
 	public static void restore(String queueName) throws ClassNotFoundException, IOException {
 		ObjectInputStream ois = null;
 		String filePath = getPersistenceFilePath(queueName);

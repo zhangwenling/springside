@@ -337,20 +337,15 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 			//根据MatchType构造criterion
 			if (MatchType.EQ.equals(matchType)) {
 				criterion = Restrictions.eq(propertyName, realValue);
-			}
-			if (MatchType.LIKE.equals(matchType)) {
+			} else if (MatchType.LIKE.equals(matchType)) {
 				criterion = Restrictions.like(propertyName, (String) realValue, MatchMode.ANYWHERE);
-			}
-			if (MatchType.LE.equals(matchType)) {
+			} else if (MatchType.LE.equals(matchType)) {
 				criterion = Restrictions.le(propertyName, realValue);
-			}
-			if (MatchType.LT.equals(matchType)) {
+			} else if (MatchType.LT.equals(matchType)) {
 				criterion = Restrictions.lt(propertyName, realValue);
-			}
-			if (MatchType.GE.equals(matchType)) {
+			} else if (MatchType.GE.equals(matchType)) {
 				criterion = Restrictions.ge(propertyName, realValue);
-			}
-			if (MatchType.GT.equals(matchType)) {
+			} else if (MatchType.GT.equals(matchType)) {
 				criterion = Restrictions.gt(propertyName, realValue);
 			}
 		} catch (Exception e) {

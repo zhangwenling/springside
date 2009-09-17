@@ -51,8 +51,7 @@ public class UserWebServiceImpl implements UserWebService {
 			}
 			result.setUserList(userDTOList);
 		} catch (RuntimeException e) {
-			result.setSystemError();
-			logger.error(e.getMessage(), e);
+			handleException(e, result);
 		}
 		return result;
 	}
@@ -76,8 +75,7 @@ public class UserWebServiceImpl implements UserWebService {
 			userManager.saveUser(userEntity);
 			result.setUserId(userEntity.getId());
 		} catch (RuntimeException e) {
-			result.setSystemError();
-			logger.error(e.getMessage(), e);
+			handleException(e, result);
 		}
 
 		return result;
@@ -104,10 +102,17 @@ public class UserWebServiceImpl implements UserWebService {
 				result.setCode(WSResult.AUTH_ERROR);
 			}
 		} catch (RuntimeException e) {
-			result.setSystemError();
-			logger.error(e.getMessage(), e);
+			handleException(e, result);
 		}
 
 		return result;
+	}
+
+	/**
+	 * 默认的异常处理函数.
+	 */
+	private void handleException(Exception e, WSResult result) {
+		result.setDefaultError();
+		logger.error(e.getMessage(), e);
 	}
 }
