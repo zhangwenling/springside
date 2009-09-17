@@ -19,7 +19,7 @@ import org.apache.log4j.spi.LoggingEvent;
  * 
  * @author calvin
  */
-public class ListAppender extends AppenderSkeleton {
+public class MockAppender extends AppenderSkeleton {
 
 	private List<LoggingEvent> logs = new ArrayList<LoggingEvent>();
 

@@ -3,7 +3,7 @@ package org.springside.examples.showcase.integration.schedule;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.schedule.ExecutorJob;
-import org.springside.modules.log.ListAppender;
+import org.springside.modules.log.MockAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 @ContextConfiguration(locations = { "/schedule/applicationContext-executor.xml" })
@@ -11,7 +11,7 @@ public class ExecutorJobTest extends SpringContextTestCase {
 	@Test
 	public void test() {
 		//加载测试用logger appender
-		ListAppender appender = new ListAppender();
+		MockAppender appender = new MockAppender();
 		appender.addToLogger(ExecutorJob.class);
 
 		//等待任务启动
