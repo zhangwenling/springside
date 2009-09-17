@@ -38,7 +38,7 @@ public class AsyncLoggerTest extends SpringTxTestCase {
 		for (; i <= 10; i++) {
 			dbLogger.info("helloworld" + i);
 		}
-		sleep(1000);
+		sleep(2000);
 		assertEquals(oldLogsCount + 10, this.countRowsInTable(LOG_TABLE_NAME));
 	}
 

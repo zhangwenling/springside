@@ -22,8 +22,8 @@ import org.springside.modules.jmx.JmxClient;
 public class JmxClientService {
 
 	//ObjectName定义
-	public static final String CONFIG_MBEAN_NAME = "Custom:name=serverConfig,type=ServerConfig";
-	public static final String HIBERNATE_MBEAN_NAME = "Custom:name=hibernateStatistics,type=StatisticsService";
+	public static final String CONFIG_MBEAN_NAME = "Showcase:name=serverConfig,type=ServerConfig";
+	public static final String HIBERNATE_MBEAN_NAME = "Showcase:name=hibernateStatistics,type=StatisticsService";
 
 	private static Logger logger = LoggerFactory.getLogger(JmxClientService.class);
 
