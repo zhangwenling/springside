@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.miniservice.data.UserData;
 import org.springside.examples.miniservice.entity.user.User;
-import org.springside.examples.miniservice.ws.api.Constants;
+import org.springside.examples.miniservice.ws.api.WsConstants;
 import org.springside.examples.miniservice.ws.api.UserWebService;
 import org.springside.examples.miniservice.ws.api.dto.RoleDTO;
 import org.springside.examples.miniservice.ws.api.dto.UserDTO;
@@ -66,7 +66,7 @@ public class UserWebServiceTest extends SpringContextTestCase {
 	@Test
 	public void getAllUser() throws MalformedURLException {
 		URL wsdlURL = new URL("http://localhost:8080/mini-service/services/UserService?wsdl");
-		QName UserServiceName = new QName(Constants.NS, "UserService");
+		QName UserServiceName = new QName(WsConstants.NS, "UserService");
 		Service service = Service.create(wsdlURL, UserServiceName);
 		UserWebService userWebService = service.getPort(UserWebService.class);
 

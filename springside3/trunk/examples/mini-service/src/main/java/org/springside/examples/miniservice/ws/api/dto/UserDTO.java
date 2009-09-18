@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.springside.examples.miniservice.ws.api.Constants;
+import org.springside.examples.miniservice.ws.api.WsConstants;
 
 /**
  * Web Service传输User信息的DTO.
@@ -17,7 +17,7 @@ import org.springside.examples.miniservice.ws.api.Constants;
  * 
  * @author calvin
  */
-@XmlType(name = "User", namespace = Constants.NS)
+@XmlType(name = "User", namespace = WsConstants.NS)
 public class UserDTO {
 
 	private Long id;

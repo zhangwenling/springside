@@ -3,7 +3,7 @@ package org.springside.examples.miniservice.ws.api.dto;
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.springside.examples.miniservice.ws.api.Constants;
+import org.springside.examples.miniservice.ws.api.WsConstants;
 
 /**
  * Web Service传输Role信息的DTO.
@@ -12,7 +12,7 @@ import org.springside.examples.miniservice.ws.api.Constants;
  *
  * @author calvin
  */
-@XmlType(name = "Role", namespace = Constants.NS)
+@XmlType(name = "Role", namespace = WsConstants.NS)
 public class RoleDTO {
 
 	private Long id;

@@ -67,22 +67,6 @@ public class Log4jMBeanTest extends SpringContextTestCase {
 	}
 
 	@Test
-	public void accessLoggerLevelBare() {
-		String loggerName = "foo";
-		String oldLevel = "WARN";
-		String newLevel = "ERROR";
-		Log4jMBean mbean = new Log4jMBean();
-
-		//判断原级别
-		assertEquals(oldLevel, mbean.getLoggerLevel(loggerName));
-		//设定新级别
-		mbean.setLoggerLevel(loggerName, newLevel);
-		assertEquals(newLevel, Logger.getLogger(loggerName).getEffectiveLevel().toString());
-		//恢复原级别
-		mbean.setLoggerLevel(loggerName, oldLevel);
-	}
-
-	@Test
 	public void getLoggerAppenders() {
 		List<String> list = jmxClient.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerAppenders",
 				new Class[] { String.class }, new Object[] { "org.springside" });

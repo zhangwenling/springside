@@ -2,14 +2,14 @@ package org.springside.examples.miniservice.ws.api.result;
 
 import javax.xml.bind.annotation.XmlType;
 
-import org.springside.examples.miniservice.ws.api.Constants;
+import org.springside.examples.miniservice.ws.api.WsConstants;
 
 /**
  * CreateUser方法的返回结果.
  * 
  * @author calvin
  */
-@XmlType(name = "CreateUserResult", namespace = Constants.NS)
+@XmlType(name = "CreateUserResult", namespace = WsConstants.NS)
 public class CreateUserResult extends WSResult {
 
 	private Long userId;

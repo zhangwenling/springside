@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.service.user.UserManager;
-import org.springside.examples.miniservice.ws.api.Constants;
+import org.springside.examples.miniservice.ws.api.WsConstants;
 import org.springside.examples.miniservice.ws.api.UserWebService;
 import org.springside.examples.miniservice.ws.api.dto.UserDTO;
 import org.springside.examples.miniservice.ws.api.result.CreateUserResult;
@@ -26,7 +26,7 @@ import org.springside.examples.miniservice.ws.api.result.WSResult;
  * @author calvin
  */
 //serviceName与portName属性指明WSDL中的名称,endpointInterface属性指向Interface定义类.
-@WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "org.springside.examples.miniservice.ws.api.UserWebService", targetNamespace = Constants.NS)
+@WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "org.springside.examples.miniservice.ws.api.UserWebService", targetNamespace = WsConstants.NS)
 public class UserWebServiceImpl implements UserWebService {
 
 	private static Logger logger = LoggerFactory.getLogger(UserWebServiceImpl.class);
