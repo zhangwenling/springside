@@ -11,11 +11,11 @@ import org.junit.Test;
 import org.springframework.security.GrantedAuthorityImpl;
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UsernameNotFoundException;
-import ${package}.data.SecurityData;
+import ${package}.data.SecurityEntityData;
 import ${package}.entity.security.Authority;
 import ${package}.entity.security.Role;
 import ${package}.entity.security.User;
-import ${package}.service.security.SecurityManager;
+import ${package}.service.security.SecurityEntityManager;
 import ${package}.service.security.UserDetailsServiceImpl;
 import org.springside.modules.utils.ReflectionUtils;
 
@@ -29,34 +29,34 @@ import org.springside.modules.utils.ReflectionUtils;
 public class UserDetailsServiceImplTest extends Assert {
 
 	private UserDetailsServiceImpl userDetailService = new UserDetailsServiceImpl();
-	private SecurityManager securityManager = null;
+	private SecurityEntityManager securityEntityManager = null;
 
 	@Before
 	public void setUp() {
-		securityManager = EasyMock.createNiceMock(SecurityManager.class);
-		ReflectionUtils.setFieldValue(userDetailService, "securityManager", securityManager);
+		securityEntityManager = EasyMock.createNiceMock(SecurityEntityManager.class);
+		ReflectionUtils.setFieldValue(userDetailService, "securityEntityManager", securityEntityManager);
 	}
 
 	@After
 	public void tearDown() {
-		EasyMock.verify(securityManager);
+		EasyMock.verify(securityEntityManager);
 	}
 
 	@Test
 	public void loadUserExist() {
 
 		String authName = "A_foo";
-
-		User user = SecurityData.getRandomUser();
-		Role role = SecurityData.getRandomRole();
+		//准备数据
+		User user = SecurityEntityData.getRandomUser();
+		Role role = SecurityEntityData.getRandomRole();
 		user.getRoleList().add(role);
 		Authority auth = new Authority();
 		auth.setName(authName);
 		role.getAuthorityList().add(auth);
 
 		//录制脚本
-		EasyMock.expect(securityManager.findUserByLoginName(user.getLoginName())).andReturn(user);
-		EasyMock.replay(securityManager);
+		EasyMock.expect(securityEntityManager.findUserByLoginName(user.getLoginName())).andReturn(user);
+		EasyMock.replay(securityEntityManager);
 
 		//执行测试
 		UserDetails userDetails = userDetailService.loadUserByUsername(user.getLoginName());
@@ -71,8 +71,8 @@ public class UserDetailsServiceImplTest extends Assert {
 	@Test(expected = UsernameNotFoundException.class)
 	public void loadUserNotExist() {
 		//录制脚本
-		EasyMock.expect(securityManager.findUserByLoginName("userNameNotExist")).andReturn(null);
-		EasyMock.replay(securityManager);
+		EasyMock.expect(securityEntityManager.findUserByLoginName("userNameNotExist")).andReturn(null);
+		EasyMock.replay(securityEntityManager);
 		//执行测试
 		userDetailService.loadUserByUsername("userNameNotExist");
 	}

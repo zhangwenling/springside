@@ -9,15 +9,15 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
-import ${package}.ws.api.Constants;
+import ${package}.ws.api.WsConstants;
 import ${package}.ws.api.dto.UserDTO;
 
 /**
- * GetAllUser方法的返回结果类型.
+ * GetAllUser方法的返回结果.
  * 
  * @author calvin
  */
-@XmlType(name = "GetAllUserResult", namespace = Constants.NS)
+@XmlType(name = "GetAllUserResult", namespace = WsConstants.NS)
 public class GetAllUserResult extends WSResult {
 
 	private List<UserDTO> userList;

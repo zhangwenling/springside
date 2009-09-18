@@ -5,14 +5,14 @@ package ${package}.ws.api.result;
 
 import javax.xml.bind.annotation.XmlType;
 
-import ${package}.ws.api.Constants;
+import ${package}.ws.api.WsConstants;
 
 /**
- * CreateUser方法的返回结果类型.
+ * CreateUser方法的返回结果.
  * 
  * @author calvin
  */
-@XmlType(name = "CreateUserResult", namespace = Constants.NS)
+@XmlType(name = "CreateUserResult", namespace = WsConstants.NS)
 public class CreateUserResult extends WSResult {
 
 	private Long userId;

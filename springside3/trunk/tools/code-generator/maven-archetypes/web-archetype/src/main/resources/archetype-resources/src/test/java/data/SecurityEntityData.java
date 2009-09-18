@@ -14,7 +14,7 @@ import ${package}.entity.security.User;
  * 
  * @author calvin
  */
-public class SecurityData {
+public class SecurityEntityData {
 
 	public static User getRandomUser() {
 		String userName = "User" + random();
@@ -25,6 +25,13 @@ public class SecurityData {
 		user.setPassword("passwd");
 		user.setEmail(userName + "@springside.org.cn");
 
+		return user;
+	}
+
+	public static User getRandomUserWithAdminRole() {
+		User user = getRandomUser();
+		Role adminRole = getAdminRole();
+		user.getRoleList().add(adminRole);
 		return user;
 	}
 

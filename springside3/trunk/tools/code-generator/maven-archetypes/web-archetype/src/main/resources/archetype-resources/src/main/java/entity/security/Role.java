@@ -26,6 +26,8 @@ import org.springside.modules.utils.ReflectionUtils;
 /**
  * 角色.
  * 
+ * 注释见{@link User}.
+ * 
  * @author calvin
  */
 @Entity

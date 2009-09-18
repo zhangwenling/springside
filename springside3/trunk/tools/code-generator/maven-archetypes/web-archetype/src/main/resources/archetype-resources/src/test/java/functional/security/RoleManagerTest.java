@@ -4,7 +4,7 @@
 package ${package}.functional.security;
 
 import org.junit.Test;
-import ${package}.data.SecurityData;
+import ${package}.data.SecurityEntityData;
 import ${package}.entity.security.Role;
 import ${package}.functional.BaseSeleniumTestCase;
 
@@ -33,7 +33,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 		selenium.click("link=增加新角色");
 		waitPageLoad();
 
-		Role role = SecurityData.getRandomRole();
+		Role role = SecurityEntityData.getRandomRole();
 
 		selenium.type("name", role.getName());
 		selenium.click("checkedAuthIds-1");

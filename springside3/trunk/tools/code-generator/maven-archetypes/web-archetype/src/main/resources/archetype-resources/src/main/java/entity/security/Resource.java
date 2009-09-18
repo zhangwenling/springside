@@ -25,6 +25,8 @@ import org.springside.modules.utils.ReflectionUtils;
 /**
  * 受保护的资源.
  * 
+ * 注释见{@link User}.
+ * 
  * @author calvin
  */
 @Entity

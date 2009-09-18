@@ -4,7 +4,7 @@
 package ${package}.functional.security;
 
 import org.junit.Test;
-import ${package}.data.SecurityData;
+import ${package}.data.SecurityEntityData;
 import ${package}.entity.security.User;
 import ${package}.functional.BaseSeleniumTestCase;
 import org.springside.modules.test.groups.Groups;
@@ -60,7 +60,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		selenium.click("link=增加新用户");
 		waitPageLoad();
 
-		User user = SecurityData.getRandomUser();
+		User user = SecurityEntityData.getRandomUser();
 		String loginName = user.getLoginName();
 
 		selenium.type("loginName", user.getLoginName());

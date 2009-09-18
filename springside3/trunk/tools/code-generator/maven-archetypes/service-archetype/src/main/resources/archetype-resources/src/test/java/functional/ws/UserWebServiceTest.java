@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import ${package}.data.UserData;
 import ${package}.entity.user.User;
-import ${package}.ws.api.Constants;
+import ${package}.ws.api.WsConstants;
 import ${package}.ws.api.UserWebService;
 import ${package}.ws.api.dto.RoleDTO;
 import ${package}.ws.api.dto.UserDTO;
@@ -69,7 +69,7 @@ public class UserWebServiceTest extends SpringContextTestCase {
 	@Test
 	public void getAllUser() throws MalformedURLException {
 		URL wsdlURL = new URL("http://localhost:8080/${artifactId}/services/UserService?wsdl");
-		QName UserServiceName = new QName(Constants.NS, "UserService");
+		QName UserServiceName = new QName(WsConstants.NS, "UserService");
 		Service service = Service.create(wsdlURL, UserServiceName);
 		UserWebService userWebService = service.getPort(UserWebService.class);
 

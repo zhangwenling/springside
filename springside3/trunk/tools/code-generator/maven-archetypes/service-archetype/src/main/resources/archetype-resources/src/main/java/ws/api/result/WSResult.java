@@ -5,14 +5,14 @@ package ${package}.ws.api.result;
 
 import javax.xml.bind.annotation.XmlType;
 
-import ${package}.ws.api.Constants;
+import ${package}.ws.api.WsConstants;
 
 /**
  * WebService返回结果基类,定义所有返回码.
  * 
  * @author calvin
  */
-@XmlType(name = "WSResult", namespace = Constants.NS)
+@XmlType(name = "WSResult", namespace = WsConstants.NS)
 public class WSResult {
 
 	// 返回代码定义 //
@@ -21,6 +21,8 @@ public class WSResult {
 	public static final String PARAMETER_ERROR = "101";
 	public static final String AUTH_ERROR = "201";
 	public static final String SYSTEM_ERROR = "300";
+
+	public static final String SYSTEM_ERROR_MESSAGE = "Runtime unknow internal error.";
 
 	// WSResult基本属性 //
 	private String code = SUCCESS;
@@ -53,7 +55,7 @@ public class WSResult {
 	/**
 	 * 设置为默认的系统内部未知错误.
 	 */
-	public void setSystemError() {
-		setResult(SYSTEM_ERROR, "系统未知运行时错误");
+	public void setDefaultError() {
+		setResult(SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
 	}
 }

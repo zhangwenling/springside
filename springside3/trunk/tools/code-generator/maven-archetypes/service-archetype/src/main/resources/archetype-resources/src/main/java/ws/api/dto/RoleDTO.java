@@ -6,14 +6,16 @@ package ${package}.ws.api.dto;
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import ${package}.ws.api.Constants;
+import ${package}.ws.api.WsConstants;
 
 /**
  * Web Service传输Role信息的DTO.
+ * 
+ * 注释见{@link UserDTO}.
  *
  * @author calvin
  */
-@XmlType(name = "Role", namespace = Constants.NS)
+@XmlType(name = "Role", namespace = WsConstants.NS)
 public class RoleDTO {
 
 	private Long id;

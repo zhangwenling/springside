@@ -6,7 +6,7 @@ package ${package}.integration.dao.security;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ${package}.dao.security.AuthorityDao;
-import ${package}.data.SecurityData;
+import ${package}.data.SecurityEntityData;
 import ${package}.entity.security.Authority;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
@@ -22,7 +22,7 @@ public class AuthorityDaoTest extends SpringTxTestCase {
 	@Test
 	public void crudEntity() {
 		//new entity and save it. 
-		Authority entity = SecurityData.getRandomAuthority();
+		Authority entity = SecurityEntityData.getRandomAuthority();
 		entityDao.save(entity);
 		flush();
 

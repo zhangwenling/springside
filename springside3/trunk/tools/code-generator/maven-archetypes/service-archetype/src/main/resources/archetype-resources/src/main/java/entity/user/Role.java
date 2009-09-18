@@ -15,6 +15,8 @@ import ${package}.entity.IdEntity;
 /**
  * 角色.
  * 
+ * 注释见{@link User}.
+ * 
  * @author calvin
  */
 @Entity
