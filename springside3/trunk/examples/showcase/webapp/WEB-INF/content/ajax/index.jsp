@@ -13,8 +13,9 @@
 <div id="mainbar">
 <h3>Ajax演示</h3>
 <ul>
-	<li><a href="${ctx}/jmx/jmx-client.action">标准Ajax演示</a> 在JMX示例中演示html/json内容的动态获取y与表单的动态提交.</li>
+	<li><a href="${ctx}/jmx/jmx-client.action">标准Ajax演示</a> 在JMX示例中演示html/json内容的动态获取与表单的动态提交.</li>
 	<li><a href="${ctx}/ajax/mashup/mashup-client.action">跨域Mashup演示</a> 演示基于JSONP实现跨域Ajax.</li>
+	<li><a href="${ctx}/ajax/dojo/index.action">Dojo base演示</a> 演示基于Dojo Base的Javascript文件Package化与Script方法OO化.</li>
 </ul>
 </div>
 </div>

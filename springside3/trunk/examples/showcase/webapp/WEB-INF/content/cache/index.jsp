@@ -14,7 +14,7 @@
 <h3>缓存演示</h3>
 <h4>技术说明：</h4>
 <ul>
-<li>Memcached中央服务器式缓存演示。</li>
+<li>Memcached式中央服务器缓存演示。</li>
 </ul>
 </div>
 </div>

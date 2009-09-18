@@ -14,7 +14,7 @@
 		//使用JQuery.getJSON(url?callback=?)方式跨域访问内容
 		function getMashupContent() {
 			$.getJSON(remoteUrl+"/ajax/mashup/mashup-server.action?callback=?",function(data){
-				$('#mashupContnt').html(data.content);
+				$('#mashupContent').html(data.content);
 			});
 		}
 	</script>
@@ -32,7 +32,7 @@
 
 	<p>跨域页面内容：</p>
 
-	<div id="mashupContnt"></div>
+	<div id="mashupContent"></div>
 </div>
 </div>
 </body>
