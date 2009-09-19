@@ -16,7 +16,7 @@ import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.groups.GroupsUtils;
 
 /**
- * Selenium的Runner支持TestNG Groups分组执行用例并在Assert出错时截图.
+ * Selenium的Runner支持TestNGGroups式分组执行用例并在Assert出错时截图.
  * 
  * @see Groups
  * @see SeleniumTestListener
@@ -31,11 +31,13 @@ public class SeleniumTestRunner extends JUnit4ClassRunner {
 
 	@Override
 	public void run(RunNotifier notifier) {
+		//对Class是否需要执行测试进行Groups判定.
 		if (!GroupsUtils.isTestClassInGroups(getTestClass().getJavaClass())) {
 			notifier.fireTestIgnored(getDescription());
 			return;
 		}
 
+		//加入Assert出错时截图的Listener.
 		notifier.addFirstListener(new SeleniumTestListener());
 
 		super.run(notifier);
@@ -44,6 +46,7 @@ public class SeleniumTestRunner extends JUnit4ClassRunner {
 	@Override
 	protected void invokeTestMethod(Method method, RunNotifier notifier) {
 
+		//对Method是否需要执行测试进行Groups判定.
 		if (!GroupsUtils.isTestMethodInGroups(method)) {
 			notifier.fireTestIgnored(getDescription());
 			return;

@@ -102,7 +102,8 @@ public class JmxClient {
 
 	/**
 	 * 按属性名直接读取MBean属性(无MBean的Class文件时使用).
-	 * 属性名首字母大写.
+	 * 
+	 * attributeName首字母大写.
 	 */
 	public Object getAttribute(final String mbeanName, final String attributeName) {
 		Assert.hasText(mbeanName, "mbeanName不能为空");
@@ -121,7 +122,8 @@ public class JmxClient {
 
 	/**
 	 * 按属性名直接设置MBean属性(无MBean的Class文件时使用).
-	 * 属性名首字母大写.
+	 * 
+	 * attributeName首字母大写.
 	 */
 	public void setAttribute(final String mbeanName, final String attributeName, final Object value) {
 		Assert.hasText(mbeanName, "mbeanName不能为空");

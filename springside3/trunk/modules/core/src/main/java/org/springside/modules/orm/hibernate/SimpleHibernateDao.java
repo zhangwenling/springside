@@ -70,6 +70,9 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 		this.entityClass = entityClass;
 	}
 
+	/**
+	 * 取得sessionFactory.
+	 */
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}

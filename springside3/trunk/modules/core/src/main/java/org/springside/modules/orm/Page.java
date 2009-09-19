@@ -162,6 +162,9 @@ public class Page<T> {
 		return result;
 	}
 
+	/**
+	 * 设置页内的记录列表.
+	 */
 	public void setResult(final List<T> result) {
 		this.result = result;
 	}
@@ -173,6 +176,9 @@ public class Page<T> {
 		return totalCount;
 	}
 
+	/**
+	 * 设置总记录数.
+	 */
 	public void setTotalCount(final long totalCount) {
 		this.totalCount = totalCount;
 	}
