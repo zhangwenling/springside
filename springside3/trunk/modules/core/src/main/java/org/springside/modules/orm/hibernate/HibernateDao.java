@@ -280,7 +280,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @param matchType 匹配方式,目前支持的取值见PropertyFilter的MatcheType enum.
 	 */
 	public List<T> findBy(final String propertyName, final Object value, final MatchType matchType) {
-		Criterion criterion = buildPropertyFilterCriterion(propertyName, value, value.getClass(), matchType);
+		Criterion criterion = buildPropertyFilterCriterion(propertyName, value, matchType);
 		return find(criterion);
 	}
 
@@ -308,13 +308,13 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		for (PropertyFilter filter : filters) {
 			if (!filter.isMultiProperty()) { //只有一个属性需要比较的情况.
 				Criterion criterion = buildPropertyFilterCriterion(filter.getPropertyName(), filter.getPropertyValue(),
-						filter.getPropertyType(), filter.getMatchType());
+						filter.getMatchType());
 				criterionList.add(criterion);
 			} else {//包含多个属性需要比较的情况,进行or处理.
 				Disjunction disjunction = Restrictions.disjunction();
 				for (String param : filter.getPropertyNames()) {
 					Criterion criterion = buildPropertyFilterCriterion(param, filter.getPropertyValue(), filter
-							.getPropertyType(), filter.getMatchType());
+							.getMatchType());
 					disjunction.add(criterion);
 				}
 				criterionList.add(disjunction);
@@ -327,26 +327,24 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 按属性条件参数创建Criterion,辅助函数.
 	 */
 	protected Criterion buildPropertyFilterCriterion(final String propertyName, final Object propertyValue,
-			final Class<?> propertyType, final MatchType matchType) {
+			final MatchType matchType) {
 		Assert.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = null;
 		try {
-			//按entity property中的类型将字符串转化为实际类型.
-			Object realValue = ReflectionUtils.convertValue(propertyValue, propertyType);
 
 			//根据MatchType构造criterion
 			if (MatchType.EQ.equals(matchType)) {
-				criterion = Restrictions.eq(propertyName, realValue);
+				criterion = Restrictions.eq(propertyName, propertyValue);
 			} else if (MatchType.LIKE.equals(matchType)) {
-				criterion = Restrictions.like(propertyName, (String) realValue, MatchMode.ANYWHERE);
+				criterion = Restrictions.like(propertyName, (String) propertyValue, MatchMode.ANYWHERE);
 			} else if (MatchType.LE.equals(matchType)) {
-				criterion = Restrictions.le(propertyName, realValue);
+				criterion = Restrictions.le(propertyName, propertyValue);
 			} else if (MatchType.LT.equals(matchType)) {
-				criterion = Restrictions.lt(propertyName, realValue);
+				criterion = Restrictions.lt(propertyName, propertyValue);
 			} else if (MatchType.GE.equals(matchType)) {
-				criterion = Restrictions.ge(propertyName, realValue);
+				criterion = Restrictions.ge(propertyName, propertyValue);
 			} else if (MatchType.GT.equals(matchType)) {
-				criterion = Restrictions.gt(propertyName, realValue);
+				criterion = Restrictions.gt(propertyName, propertyValue);
 			}
 		} catch (Exception e) {
 			throw ReflectionUtils.convertToUncheckedException(e);

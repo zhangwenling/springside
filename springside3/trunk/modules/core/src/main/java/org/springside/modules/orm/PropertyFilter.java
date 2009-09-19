@@ -11,6 +11,7 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
+import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * 与具体ORM实现无关的属性过滤条件封装类.
@@ -37,7 +38,7 @@ public class PropertyFilter {
 	 * 属性数据类型.
 	 */
 	public enum PropertyType {
-		S(String.class), I(Integer.class), L(Long.class), F(Float.class), D(Date.class), B(Boolean.class);
+		S(String.class), I(Integer.class), L(Long.class), N(Double.class), D(Date.class), B(Boolean.class);
 
 		PropertyType(Class<?> clazz) {
 			this.clazz = clazz;
@@ -84,8 +85,8 @@ public class PropertyFilter {
 		propertyNames = StringUtils.split(propertyNameStr, PropertyFilter.OR_SEPARATOR);
 
 		Assert.isTrue(propertyNames.length > 0, "filter名称" + filterName + "没有按规则编写,无法得到属性名称.");
-
-		this.propertyValue = value;
+		//按entity property中的类型将字符串转化为实际类型.
+		this.propertyValue = ReflectionUtils.convertValue(value, propertyType);
 	}
 
 	/**
