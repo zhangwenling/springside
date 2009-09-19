@@ -64,13 +64,16 @@ public class BlockingFetchJdbcStore extends BlockingConsumerTask {
 	}
 
 	/**
-	 * 根据注入到DataSource创建jdbcTemplate.
+	 * 根据注入的DataSource创建jdbcTemplate.
 	 */
 	@Required
 	public void setDataSource(DataSource dataSource) {
 		jdbcTemplate = new SimpleJdbcTemplate(dataSource);
 	}
 
+	/**
+	 * 根据注入的PlatformTransactionManager创建transactionTemplate.
+	 */
 	@Required
 	public void setTransactionManager(PlatformTransactionManager transactionManager) {
 		this.transactionTemplate = new TransactionTemplate(transactionManager);

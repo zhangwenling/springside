@@ -42,10 +42,20 @@ public class JmxClient {
 	private MBeanServerConnection mbsc;
 	private AtomicBoolean connected = new AtomicBoolean(false);
 
+	/**
+	 *  无认证信息的构造函数. 
+	 */
 	public JmxClient(final String serviceUrl) throws IOException {
 		initConnector(serviceUrl, null, null);
 	}
 
+	/**
+	 * 带认证信息的构造函数.
+	 * @param serviceUrl
+	 * @param userName
+	 * @param passwd
+	 * @throws IOException
+	 */
 	public JmxClient(final String serviceUrl, final String userName, final String passwd) throws IOException {
 		initConnector(serviceUrl, userName, passwd);
 	}
@@ -92,6 +102,7 @@ public class JmxClient {
 
 	/**
 	 * 按属性名直接读取MBean属性(无MBean的Class文件时使用).
+	 * 属性名首字母大写.
 	 */
 	public Object getAttribute(final String mbeanName, final String attributeName) {
 		Assert.hasText(mbeanName, "mbeanName不能为空");
@@ -110,6 +121,7 @@ public class JmxClient {
 
 	/**
 	 * 按属性名直接设置MBean属性(无MBean的Class文件时使用).
+	 * 属性名首字母大写.
 	 */
 	public void setAttribute(final String mbeanName, final String attributeName, final Object value) {
 		Assert.hasText(mbeanName, "mbeanName不能为空");

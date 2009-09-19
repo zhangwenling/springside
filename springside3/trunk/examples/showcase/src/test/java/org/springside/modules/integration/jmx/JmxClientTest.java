@@ -42,8 +42,8 @@ public class JmxClientTest extends SpringContextTestCase {
 	}
 
 	@Test
-	public void getMBeanAttributeByReflection() {
-		assertEquals(0L, jmxClient.getAttribute(JmxClientService.HIBERNATE_MBEAN_NAME, "SessionOpenCount"));
+	public void accessMBeanAttributeByReflection() {
+		assertEquals(true, jmxClient.getAttribute(JmxClientService.CONFIG_MBEAN_NAME, "NotificationMailEnabled"));
 	}
 
 	@Test

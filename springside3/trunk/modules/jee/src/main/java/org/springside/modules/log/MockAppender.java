@@ -54,16 +54,22 @@ public class MockAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * 实现append函数,将log事件加入到内部事件列表.
+	 * 实现AppenderSkeleton的append函数,将log事件加入到内部事件列表.
 	 */
 	@Override
 	protected void append(LoggingEvent event) {
 		logs.add(event);
 	}
 
+	/**
+	 * 实现AppenderSkeleton的close函数,不作任何处理.
+	 */
 	public void close() {
 	}
 
+	/**
+	 * 实现AppenderSkeleton的close函数,不作任何处理.
+	 */
 	public boolean requiresLayout() {
 		return false;
 	}

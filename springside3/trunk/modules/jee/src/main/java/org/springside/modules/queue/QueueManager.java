@@ -42,7 +42,9 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 @SuppressWarnings("unchecked")
 @ManagedResource(objectName = QueueManager.QUEUEMANAGER_MBEAN_NAME, description = "Queue Managed Bean")
 public class QueueManager {
-
+	/**
+	 * QueueManager注册的名称.
+	 */
 	public static final String QUEUEMANAGER_MBEAN_NAME = "SpringSide:type=QueueManagement,name=queueManagement";
 
 	private static Logger logger = LoggerFactory.getLogger(QueueManager.class);
