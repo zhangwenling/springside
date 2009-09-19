@@ -37,13 +37,22 @@ public class JmxClientTest extends SpringContextTestCase {
 
 	@Test
 	public void accessMBeanAttribute() {
+		String oldName = serverConfigMbean.getNodeName();
+
 		serverConfigMbean.setNodeName("foo");
 		assertEquals("foo", serverConfigMbean.getNodeName());
+
+		serverConfigMbean.setNodeName(oldName);
 	}
 
 	@Test
 	public void accessMBeanAttributeByReflection() {
-		assertEquals(true, jmxClient.getAttribute(JmxClientService.CONFIG_MBEAN_NAME, "NotificationMailEnabled"));
+		String oldName = (String) jmxClient.getAttribute(JmxClientService.CONFIG_MBEAN_NAME, "NodeName");
+
+		jmxClient.setAttribute(JmxClientService.CONFIG_MBEAN_NAME, "NodeName", "foo");
+		assertEquals("foo", jmxClient.getAttribute(JmxClientService.CONFIG_MBEAN_NAME, "NodeName"));
+
+		jmxClient.setAttribute(JmxClientService.CONFIG_MBEAN_NAME, "NodeName", oldName);
 	}
 
 	@Test
