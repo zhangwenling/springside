@@ -1,7 +1,7 @@
 package org.springside.examples.showcase.xml.jaxb;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +30,7 @@ public class HouseMap {
 	/**
 	 * House Map中的Entry.
 	 */
-	public static class HouseEntry {
+	static class HouseEntry {
 		@XmlAttribute
 		public String key;
 
@@ -62,7 +62,7 @@ public class HouseMap {
 
 		@Override
 		public Map<String, String> unmarshal(HouseMap houseMap) throws Exception {
-			Map<String, String> map = new HashMap<String, String>();
+			Map<String, String> map = new LinkedHashMap<String, String>();
 			for (HouseEntry e : houseMap.entries) {
 				map.put(e.key, e.value);
 			}
