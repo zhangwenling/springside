@@ -3,17 +3,20 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
- * $Id$
+ * $Id: JaxbBinder.java 447 2009-09-10 15:49:16Z calvinxiu $
  */
-package org.springside.examples.showcase.xml.jaxb;
+package org.springside.modules.xml;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.namespace.QName;
 
 /**
  * 使用Jaxb2.0持久化XML的Binder.
@@ -45,6 +48,27 @@ public class JaxbBinder {
 		try {
 			StringWriter writer = new StringWriter();
 			marshaller.marshal(root, writer);
+			return writer.toString();
+		} catch (JAXBException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Java List ->Xml.
+	 */
+	@SuppressWarnings("unchecked")
+	public String toXml(List root, String rootName) {
+		try {
+			ListWrapper wrapper = new ListWrapper();
+			wrapper.getValue().addAll(root);
+
+			JAXBElement<ListWrapper> wrapperElement = new JAXBElement<ListWrapper>(new QName(rootName),
+					ListWrapper.class, wrapper);
+
+			StringWriter writer = new StringWriter();
+			marshaller.marshal(wrapperElement, writer);
+
 			return writer.toString();
 		} catch (JAXBException e) {
 			throw new RuntimeException(e);

@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.xml.jaxb;
+package org.springside.modules.xml;
 
 import java.util.ArrayList;
 import java.util.List;
