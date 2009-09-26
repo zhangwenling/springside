@@ -1,5 +1,10 @@
 package org.springside.examples.showcase.unit.xml;
 
+import java.util.ArrayList;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -8,9 +13,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springside.examples.showcase.xml.jaxb.JaxbBinder;
+import org.springside.examples.showcase.xml.jaxb.ListWrapper;
 import org.springside.examples.showcase.xml.jaxb.Role;
 import org.springside.examples.showcase.xml.jaxb.User;
-import org.springside.examples.showcase.xml.jaxb.UserList;
 
 /**
  * 演示基于JAXB2.0的Java对象-XML转换及Dom4j的使用.
@@ -41,7 +46,7 @@ public class JaxbTest extends Assert {
 
 	@Before
 	public void setUp() {
-		binder = new JaxbBinder(User.class, UserList.class);
+		binder = new JaxbBinder(User.class, ListWrapper.class, ArrayList.class);
 	}
 
 	@Test
@@ -85,7 +90,7 @@ public class JaxbTest extends Assert {
 	 * 测试以List对象作为根节点时的XML输出
 	 */
 	@Test
-	public void toXmlWithlistAsRoot() {
+	public void toXmlWithListAsRoot() {
 		User user1 = new User();
 		user1.setId(1L);
 		user1.setName("calvin");
@@ -94,12 +99,14 @@ public class JaxbTest extends Assert {
 		user2.setId(2L);
 		user2.setName("kate");
 
-		UserList userList = new UserList();
-		userList.getList().add(user1);
-		userList.getList().add(user2);
+		ListWrapper col = new ListWrapper();
+		col.getValue().add(user1);
+		col.getValue().add(user2);
 
-		String xml = binder.toXml(userList);
-		System.out.println("Jaxb Object List to Xml result:" + xml);
+		JAXBElement<ListWrapper> userListElement = new JAXBElement(new QName("userList"), ListWrapper.class, col);
+
+		String xml = binder.toXml(userListElement);
+		System.out.println("Jaxb Object List to Xml result:\n" + xml);
 	}
 
 	/**
