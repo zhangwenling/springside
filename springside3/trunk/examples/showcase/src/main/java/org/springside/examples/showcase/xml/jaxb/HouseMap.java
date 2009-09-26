@@ -24,20 +24,11 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
  */
 @XmlType(name = "houses")
 public class HouseMap {
-
-	private List<HouseEntry> entries = new ArrayList<HouseEntry>();
-
 	@XmlElement(name = "house")
-	public List<HouseEntry> getEntries() {
-		return entries;
-	}
-
-	public void setEntries(List<HouseEntry> entries) {
-		this.entries = entries;
-	}
+	List<HouseEntry> entries = new ArrayList<HouseEntry>();
 
 	/**
-	 * Map的Entry转换为.
+	 * House Map中的Entry.
 	 */
 	public static class HouseEntry {
 		@XmlAttribute
@@ -64,7 +55,7 @@ public class HouseMap {
 		public HouseMap marshal(Map<String, String> map) throws Exception {
 			HouseMap houseMap = new HouseMap();
 			for (Map.Entry<String, String> e : map.entrySet()) {
-				houseMap.getEntries().add(new HouseEntry(e));
+				houseMap.entries.add(new HouseEntry(e));
 			}
 			return houseMap;
 		}
@@ -72,7 +63,7 @@ public class HouseMap {
 		@Override
 		public Map<String, String> unmarshal(HouseMap houseMap) throws Exception {
 			Map<String, String> map = new HashMap<String, String>();
-			for (HouseEntry e : houseMap.getEntries()) {
+			for (HouseEntry e : houseMap.entries) {
 				map.put(e.key, e.value);
 			}
 			return map;

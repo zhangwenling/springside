@@ -55,7 +55,7 @@ public class JaxbBinder {
 	}
 
 	/**
-	 * Java List ->Xml.
+	 * Java List -> Xml, 支持对Root Element是List的情形.
 	 */
 	@SuppressWarnings("unchecked")
 	public String toXml(List root, String rootName) {
