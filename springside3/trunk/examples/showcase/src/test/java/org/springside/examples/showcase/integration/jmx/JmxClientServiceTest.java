@@ -2,6 +2,7 @@ package org.springside.examples.showcase.integration.jmx;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.jmx.client.service.JmxClientService;
 import org.springside.modules.test.spring.SpringContextTestCase;
@@ -21,6 +22,7 @@ public class JmxClientServiceTest extends SpringContextTestCase {
 	private JmxClientService jmxClientService;
 
 	@Test
+	@DirtiesContext
 	public void test() {
 		jmxClientService.setNodeName("node1");
 		assertEquals("node1", jmxClientService.getNodeName());

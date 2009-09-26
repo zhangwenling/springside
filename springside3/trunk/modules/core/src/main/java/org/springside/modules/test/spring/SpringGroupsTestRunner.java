@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springside.modules.test.groups.GroupsUtils;
 
 /**
- * 实现TestNG Groups功能的Runner.
+ * 实现TestNG Groups功能的Runner,继承于Spring原有的SpringJUnit4ClassRunner.
  * 
  * @author freeman
  * @author calvin

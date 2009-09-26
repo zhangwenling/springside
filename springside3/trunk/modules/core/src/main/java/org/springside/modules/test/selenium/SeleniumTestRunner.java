@@ -29,6 +29,9 @@ public class SeleniumTestRunner extends JUnit4ClassRunner {
 		super(klass);
 	}
 
+	/**
+	 * 重载加入Class级别控制.
+	 */
 	@Override
 	public void run(RunNotifier notifier) {
 		//对Class是否需要执行测试进行Groups判定.
@@ -43,10 +46,13 @@ public class SeleniumTestRunner extends JUnit4ClassRunner {
 		super.run(notifier);
 	}
 
+	/**
+	 * 重载加入方法级别控制.
+	 */
 	@Override
 	protected void invokeTestMethod(Method method, RunNotifier notifier) {
 
-		//对Method是否需要执行测试进行Groups判定.
+		//对方法是否需要执行测试进行Groups判定.
 		if (!GroupsUtils.isTestMethodInGroups(method)) {
 			notifier.fireTestIgnored(getDescription());
 			return;

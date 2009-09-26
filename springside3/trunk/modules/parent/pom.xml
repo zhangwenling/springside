@@ -746,9 +746,6 @@
 			</activation>
 
 			<build>
-				<!-- 指定war名带节点名 -->
-				<finalName>${project.artifactId}-${cluster.nodename}</finalName>
-
 				<!-- war插件,指定打包war文件时加入节点特定的配置文件 -->
 				<plugins>
 					<plugin>
