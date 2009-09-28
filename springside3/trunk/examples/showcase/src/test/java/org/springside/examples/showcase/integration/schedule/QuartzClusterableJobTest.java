@@ -26,7 +26,7 @@ public class QuartzClusterableJobTest extends SpringContextTestCase {
 		sleep(3000);
 
 		//验证任务已执行
-		assertEquals(1, appender.getLogs().size());
-		assertEquals("There are 6 user in database, print by default's job.", appender.getLogs().get(0).getMessage());
+		assertEquals(1, appender.getAllLogs().size());
+		assertEquals("There are 6 user in database, print by default's job.", appender.getFirstLog().getMessage());
 	}
 }

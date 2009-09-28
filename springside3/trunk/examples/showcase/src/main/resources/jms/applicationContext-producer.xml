@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<description>JMS生产者演示配置</description>
+
+	<!-- a sample POJO which uses a Spring JmsTemplate -->
+	<bean id="producer" class="org.springside.examples.showcase.jms.Producer">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="notifyQueue" ref="notifyQueue" />
+		<property name="notifyTopic" ref="notifyTopic" />
+	</bean>
+</beans>

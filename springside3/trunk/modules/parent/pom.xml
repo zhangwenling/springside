@@ -61,7 +61,7 @@
 		<pluginRepository>
 			<id>nexus</id>
 			<name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url>
+			<url>http://150.236.71.72:8081/nexus/content/groups/public</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -349,6 +349,33 @@
 				<version>1.0</version>
 			</dependency>
 			<!-- security end -->
+
+			<!-- jms begin -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jms</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-core</artifactId>
+				<version>5.2.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-pool</artifactId>
+				<version>5.2.0</version>
+			</dependency>
+			
+				<dependency>
+			<groupId>org.apache.xbean</groupId>
+			<artifactId>xbean-spring</artifactId>
+			<version>3.6</version>
+		</dependency>
+	
+
+			<!-- jms end -->
 
 			<!-- hessian begin -->
 			<dependency>

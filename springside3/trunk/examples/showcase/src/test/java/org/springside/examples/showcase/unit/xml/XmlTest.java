@@ -62,7 +62,7 @@ public class XmlTest extends Assert {
 		user.getHouses().put("gz", "house2");
 
 		String xml = binder.toXml(user);
-		System.out.println("Jaxb Object to Xml result:" + xml);
+		System.out.println("Jaxb Object to Xml result:\n" + xml);
 		assertXmlByDom4j(xml);
 	}
 
@@ -71,7 +71,7 @@ public class XmlTest extends Assert {
 		String xml = generateXmlByDom4j();
 		User user = binder.fromXml(xml);
 
-		System.out.println("Jaxb Xml to Object result:" + user);
+		System.out.println("Jaxb Xml to Object result:\n" + user);
 
 		assertEquals(Long.valueOf(1L), user.getId());
 		assertEquals(2, user.getRoles().size());

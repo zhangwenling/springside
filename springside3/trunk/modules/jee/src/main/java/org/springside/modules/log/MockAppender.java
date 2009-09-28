@@ -26,9 +26,18 @@ public class MockAppender extends AppenderSkeleton {
 	private List<LoggingEvent> logs = new ArrayList<LoggingEvent>();
 
 	/**
+	 * 返回之前append的log事件.
+	 */
+	public LoggingEvent getFirstLog() {
+		if (logs.size() == 0)
+			return null;
+		return logs.get(0);
+	}
+
+	/**
 	 * 返回之前append的log事件列表.
 	 */
-	public List<LoggingEvent> getLogs() {
+	public List<LoggingEvent> getAllLogs() {
 		return logs;
 	}
 
