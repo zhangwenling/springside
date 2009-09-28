@@ -9,11 +9,11 @@
 		<property name="notifyQueue" ref="notifyQueue" />
 	</bean>
 
-	<bean id="jmsContainer" class="org.springframework.jms.listener.SimpleMessageListenerContainer" lazy-init="false">
+	<bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer" lazy-init="false">
 		<property name="connectionFactory" ref="jmsFactory" />
 		<property name="destination" ref="notifyTopic" />
 		<property name="messageListener" ref="topicListener" />
 	</bean>
 
-	<bean id="topicListener" class="org.springside.examples.showcase.jms.TopicListener"/>
+	<bean id="topicListener" class="org.springside.examples.showcase.jms.TopicListener" />
 </beans>

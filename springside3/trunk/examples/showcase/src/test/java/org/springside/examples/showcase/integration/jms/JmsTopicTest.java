@@ -29,7 +29,7 @@ public class JmsTopicTest extends SpringContextTestCase {
 		producer.sendTopic(user);
 		logger.info("sended message");
 
-		sleep(1000);
+		sleep(2000);
 		assertEquals("UserName:calvin, Email:calvin@sringside.org.cn, Property:1234", appender.getFirstLog()
 				.getMessage());
 	}
