@@ -10,10 +10,10 @@ import org.dom4j.Element;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springside.examples.showcase.xml.jaxb.JaxbBinder;
 import org.springside.examples.showcase.xml.jaxb.Role;
 import org.springside.examples.showcase.xml.jaxb.User;
-import org.springside.modules.xml.JaxbBinder;
-import org.springside.modules.xml.ListWrapper;
+import org.springside.examples.showcase.xml.jaxb.JaxbBinder.ListWrapper;
 
 /**
  * 演示基于JAXB2.0的Java对象-XML转换及Dom4j的使用.

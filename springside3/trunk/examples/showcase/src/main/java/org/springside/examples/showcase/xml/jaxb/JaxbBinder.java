@@ -3,12 +3,13 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
- * $Id: JaxbBinder.java 447 2009-09-10 15:49:16Z calvinxiu $
+ * $Id$
  */
-package org.springside.modules.xml;
+package org.springside.examples.showcase.xml.jaxb;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.Collection;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -16,6 +17,7 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.namespace.QName;
 
 /**
@@ -61,7 +63,7 @@ public class JaxbBinder {
 	public String toXml(List root, String rootName) {
 		try {
 			ListWrapper wrapper = new ListWrapper();
-			wrapper.getValue().addAll(root);
+			wrapper.list = root;
 
 			JAXBElement<ListWrapper> wrapperElement = new JAXBElement<ListWrapper>(new QName(rootName),
 					ListWrapper.class, wrapper);
@@ -94,5 +96,10 @@ public class JaxbBinder {
 
 	public Unmarshaller getUnmarshaller() {
 		return unmarshaller;
+	}
+
+	public static class ListWrapper {
+		@XmlAnyElement
+		private Collection list;
 	}
 }
