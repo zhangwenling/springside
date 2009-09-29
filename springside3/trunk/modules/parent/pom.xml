@@ -61,7 +61,7 @@
 		<pluginRepository>
 			<id>nexus</id>
 			<name>local nexus server</name>
-			<url>http://150.236.71.72:8081/nexus/content/groups/public</url>
+			<url>http://localhost:8081/nexus/content/groups/public</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -772,6 +772,8 @@
 			</activation>
 
 			<build>
+				
+				
 				<!-- war插件,指定打包war文件时加入节点特定的配置文件 -->
 				<plugins>
 					<plugin>
@@ -779,13 +781,13 @@
 						<artifactId>maven-war-plugin</artifactId>
 						<configuration>
 							<filters>
-								<filter>src/main/cluster/properties/${cluster.nodename}.properties</filter>
+								<filter>src/cluster/properties/${cluster.nodename}.properties</filter>
 							</filters>
 
 							<webResources>
 								<resource>
 									<filtering>true</filtering>
-									<directory>src/main/cluster/webapp</directory>
+									<directory>src/cluster/webapp</directory>
 								</resource>
 							</webResources>
 						</configuration>
