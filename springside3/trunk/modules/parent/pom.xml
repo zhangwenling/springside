@@ -650,17 +650,16 @@
 					</configuration>
 				</plugin>
 
-				<!-- surefire插件, 设定单元测试时只执行unit目录下的用例.-->
+				<!-- surefire插件, 设定单元测试时只执行unit目录下的用例, 增加执行测试的内存.-->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.4.3</version>
 					<configuration>
-						<argLine>-Xmx512M</argLine>
+						<argLine>-Xmx256M</argLine>
 						<includes>
 							<include>**/unit/**/*Test.java</include>
 						</includes>
-						<skip>${maven-surefire-plugin.skip}</skip>
 					</configuration>
 				</plugin>
 
@@ -806,14 +805,6 @@
 					</plugin>
 				</plugins>
 			</build>
-		</profile>
-
-		<!-- 不执行任何测试的profile, 以-Pnotest激活 -->
-		<profile>
-			<id>notest</id>
-			<properties>
-				<maven-surefire-plugin.skip>true</maven-surefire-plugin.skip>
-			</properties>
 		</profile>
 
 		<!-- 在test阶段执行集成测试的profile, 以-Pintegration激活 -->
