@@ -17,6 +17,7 @@ import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.email.MimeMailService;
 import org.springside.examples.showcase.email.SimpleMailService;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
+import org.springside.modules.log.TraceUtils;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
@@ -30,6 +31,7 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 @Transactional
 public class UserManager {
 	private static Logger logger = LoggerFactory.getLogger(UserManager.class);
+	private static Logger traceLogger = TraceUtils.getLogger();
 
 	@Autowired
 	private UserDao userDao;
@@ -70,7 +72,9 @@ public class UserManager {
 	@Profiled
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
-		return userDao.getAllUserWithRoleByDistinctHql();
+		List<User> list = userDao.getAllUserWithRoleByDistinctHql();
+		traceLogger.trace("get {} user sucessful.", list.size());
+		return list;
 	}
 
 	/**

@@ -15,13 +15,18 @@
 <h3>日志高级演示</h3>
 <h4>技术说明：</h4>
 <ul>
-<li>轻量级日志异步多线程处理框架</li>
-<li>JMX动态改变log4j的日志等级</li>
+<li>Log4JMBean: JMX动态改变log4j的日志等级,并查询Logger的Appender.</li>
+<li>MockAppender: 在测试用例中验正日志输出.</li>
+<li>TraceUtils: 输出可方便Trace的业务系统运行调试信息.</li>
+<li>AsyncQueueAppender:轻量级日志异步多线程处理框架</li>
+
 </ul>
 <h4>用户故事：</h4>
 <ul>
-<li>每次进入本页面,logger都会在数据库LOGS表中增加一条记录.</li>
-<li>使用JConsole动态修改log4j的日志等级.</li>
+<li>使用JConsole动态修改log4j的日志等级.(路径service:jmx:rmi:///jndi/rmi://localhost:1099/showcase,名称SpringSide:type=Log4jManagement)</li>
+<li>Schedule测试用例使用MockAppender校验日志输出.</li>
+<li>UserWebService使用TraceUtils打印Trace信息.</li>
+<li>每次进入本页面, logger都会在数据库LOGS表中增加一条记录.</li>
 </ul>	
 </div>
 </div>

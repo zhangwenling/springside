@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.utils;
+package org.springside.modules.log;
 
 import javax.annotation.PostConstruct;
 
