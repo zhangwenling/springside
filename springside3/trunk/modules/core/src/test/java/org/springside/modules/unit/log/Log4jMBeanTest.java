@@ -1,10 +1,8 @@
 package org.springside.modules.unit.log;
 
-/**
- * integration-test in showcase example instead.
- * 
- * @author calvin
- */
+import org.junit.Ignore;
+
+@Ignore("see integration-test in showcase example.")
 public class Log4jMBeanTest {
 
 }
