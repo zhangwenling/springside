@@ -38,7 +38,7 @@ public class ReflectionUtils {
 	private static Logger logger = LoggerFactory.getLogger(ReflectionUtils.class);
 
 	/**
-	 * 直接读取对象属性值,无视private/protected修饰符,不经过getter函数.
+	 * 直接读取对象属性值, 无视private/protected修饰符, 不经过getter函数.
 	 */
 	public static Object getFieldValue(final Object object, final String fieldName) {
 		Field field = getDeclaredField(object, fieldName);
@@ -58,7 +58,7 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 直接设置对象属性值,无视private/protected修饰符,不经过setter函数.
+	 * 直接设置对象属性值, 无视private/protected修饰符, 不经过setter函数.
 	 */
 	public static void setFieldValue(final Object object, final String fieldName, final Object value) {
 		Field field = getDeclaredField(object, fieldName);
@@ -76,7 +76,7 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 直接调用对象方法,无视private/protected修饰符.
+	 * 直接调用对象方法, 无视private/protected修饰符.
 	 */
 	public static Object invokeMethod(final Object object, final String methodName, final Class<?>[] parameterTypes,
 			final Object[] parameters) throws InvocationTargetException {
@@ -96,7 +96,9 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 循环向上转型,获取对象的DeclaredField.
+	 * 循环向上转型, 获取对象的DeclaredField.
+	 * 
+	 * 如向上转型到Object仍无法找到, 返回null.
 	 */
 	protected static Field getDeclaredField(final Object object, final String fieldName) {
 		Assert.notNull(object, "object不能为空");
@@ -113,7 +115,7 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 循环向上转型,获取对象的DeclaredField.
+	 * 强行设置Field可访问.
 	 */
 	protected static void makeAccessible(final Field field) {
 		if (!Modifier.isPublic(field.getModifiers()) || !Modifier.isPublic(field.getDeclaringClass().getModifiers())) {
@@ -123,6 +125,8 @@ public class ReflectionUtils {
 
 	/**
 	 * 循环向上转型,获取对象的DeclaredMethod.
+	 * 
+	 * 如向上转型到Object仍无法找到, 返回null.
 	 */
 	protected static Method getDeclaredMethod(Object object, String methodName, Class<?>[] parameterTypes) {
 		Assert.notNull(object, "object不能为空");
@@ -193,7 +197,7 @@ public class ReflectionUtils {
 	 * @param propertyName 要提取的属性名.
 	 */
 	@SuppressWarnings("unchecked")
-	public static List fetchElementPropertyToList(final Collection collection, final String propertyName) {
+	public static List convertElementPropertyToList(final Collection collection, final String propertyName) {
 		List list = new ArrayList();
 
 		try {
@@ -201,7 +205,7 @@ public class ReflectionUtils {
 				list.add(PropertyUtils.getProperty(obj, propertyName));
 			}
 		} catch (Exception e) {
-			convertToUncheckedException(e);
+			convertReflectionExceptionToUnchecked(e);
 		}
 
 		return list;
@@ -215,9 +219,9 @@ public class ReflectionUtils {
 	 * @param separator 分隔符.
 	 */
 	@SuppressWarnings("unchecked")
-	public static String fetchElementPropertyToString(final Collection collection, final String propertyName,
+	public static String convertElementPropertyToString(final Collection collection, final String propertyName,
 			final String separator) {
-		List list = fetchElementPropertyToList(collection, propertyName);
+		List list = convertElementPropertyToList(collection, propertyName);
 		return StringUtils.join(list, separator);
 	}
 
@@ -236,14 +240,14 @@ public class ReflectionUtils {
 			ConvertUtils.register(dc, Date.class);
 			return ConvertUtils.convert(value, toType);
 		} catch (Exception e) {
-			throw convertToUncheckedException(e);
+			throw convertReflectionExceptionToUnchecked(e);
 		}
 	}
 
 	/**
 	 * 将反射时的checked exception转换为unchecked exception.
 	 */
-	public static IllegalArgumentException convertToUncheckedException(Exception e) {
+	public static IllegalArgumentException convertReflectionExceptionToUnchecked(Exception e) {
 		if (e instanceof IllegalAccessException || e instanceof IllegalArgumentException
 				|| e instanceof NoSuchMethodException)
 			return new IllegalArgumentException("Refelction Exception.", e);

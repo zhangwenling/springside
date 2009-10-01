@@ -96,6 +96,6 @@ public class Resource extends IdEntity {
 	 */
 	@Transient
 	public String getAuthNames() {
-		return ReflectionUtils.fetchElementPropertyToString(authorityList, "name", ",");
+		return ReflectionUtils.convertElementPropertyToString(authorityList, "name", ",");
 	}
 }

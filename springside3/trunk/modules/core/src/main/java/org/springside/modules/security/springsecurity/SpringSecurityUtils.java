@@ -19,7 +19,7 @@ import org.springframework.security.userdetails.User;
 public class SpringSecurityUtils {
 
 	/**
-	 * 取得当前用户的登录名,如果当前用户未登录则返回空字符串.
+	 * 取得当前用户的登录名, 如果当前用户未登录则返回空字符串.
 	 */
 	public static String getCurrentUserName() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -29,7 +29,7 @@ public class SpringSecurityUtils {
 	}
 
 	/**
-	 * 取得当前用户,返回值为SpringSecurity的User类及其子类, 如果当前用户未登录则返回null.
+	 * 取得当前用户, 返回值为SpringSecurity的User类及其子类, 如果当前用户未登录则返回null.
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends User> T getCurrentUser() {

@@ -94,7 +94,7 @@ public class HibernateWebUtils {
 				srcObjects.add(obj);
 			}
 		} catch (Exception e) {
-			throw ReflectionUtils.convertToUncheckedException(e);
+			throw ReflectionUtils.convertReflectionExceptionToUnchecked(e);
 		}
 	}
 

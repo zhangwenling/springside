@@ -37,10 +37,10 @@ public class Struts2Utils {
 	private static final boolean NOCACHE_DEFAULT = true;
 
 	//content-type 定义 //
-	private static final String TEXT = "text/plain";
-	private static final String JSON = "application/json";
-	private static final String XML = "text/xml";
-	private static final String HTML = "text/html";
+	private static final String TEXT_TYPE = "text/plain";
+	private static final String JSON_TYPE = "application/json";
+	private static final String XML_TYPE = "text/xml";
+	private static final String HTML_TYPE = "text/html";
 
 	private static Logger logger = LoggerFactory.getLogger(Struts2Utils.class);
 
@@ -127,7 +127,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderText(final String text, final String... headers) {
-		render(TEXT, text, headers);
+		render(TEXT_TYPE, text, headers);
 	}
 
 	/**
@@ -135,7 +135,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderHtml(final String html, final String... headers) {
-		render(HTML, html, headers);
+		render(HTML_TYPE, html, headers);
 	}
 
 	/**
@@ -143,7 +143,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderXml(final String xml, final String... headers) {
-		render(XML, xml, headers);
+		render(XML_TYPE, xml, headers);
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderJson(final String jsonString, final String... headers) {
-		render(JSON, jsonString, headers);
+		render(JSON_TYPE, jsonString, headers);
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class Struts2Utils {
 	@SuppressWarnings("unchecked")
 	public static void renderJson(final Map map, final String... headers) {
 		String jsonString = JSONObject.fromObject(map).toString();
-		render(JSON, jsonString, headers);
+		render(JSON_TYPE, jsonString, headers);
 	}
 
 	/**
@@ -176,6 +176,6 @@ public class Struts2Utils {
 	 */
 	public static void renderJson(final Object object, final String... headers) {
 		String jsonString = JSONObject.fromObject(object).toString();
-		render(JSON, jsonString, headers);
+		render(JSON_TYPE, jsonString, headers);
 	}
 }

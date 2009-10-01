@@ -16,7 +16,7 @@ import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.groups.GroupsUtils;
 
 /**
- * Selenium的Runner支持TestNGGroups式分组执行用例并在Assert出错时截图.
+ * Selenium的Runner支持TestNG Groups式分组执行用例并在Assert出错时截图.
  * 
  * @see Groups
  * @see SeleniumTestListener

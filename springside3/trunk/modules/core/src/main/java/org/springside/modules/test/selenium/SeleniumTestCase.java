@@ -24,7 +24,7 @@ import com.thoughtworks.selenium.Selenium;
  * @author calvin
  */
 @RunWith(SeleniumTestRunner.class)
-public class SeleniumTestCase {
+public class SeleniumTestCase extends Assert {
 
 	public static final String DEFAULT_URL = "http://localhost:8080";
 	public static final String DEFAULT_BROWSER = "*chrome";
@@ -79,47 +79,5 @@ public class SeleniumTestCase {
 	 */
 	public static void waitPageLoad() {
 		selenium.waitForPageToLoad(WAIT_FOR_PAGE);
-	}
-
-	// Assert 函数 //
-
-	protected static void assertEquals(Object expected, Object actual) {
-		Assert.assertEquals(expected, actual);
-	}
-
-	protected static void assertEquals(String message, Object expected, Object actual) {
-		Assert.assertEquals(message, expected, actual);
-	}
-
-	protected static void assertTrue(boolean condition) {
-		Assert.assertTrue(condition);
-	}
-
-	protected static void assertTrue(String message, boolean condition) {
-		Assert.assertTrue(message, condition);
-	}
-
-	protected static void assertFalse(boolean condition) {
-		Assert.assertFalse(condition);
-	}
-
-	protected static void assertFalse(String message, boolean condition) {
-		Assert.assertFalse(message, condition);
-	}
-
-	protected static void assertNull(Object object) {
-		Assert.assertNull(object);
-	}
-
-	protected static void assertNull(String message, Object object) {
-		Assert.assertNull(message, object);
-	}
-
-	protected static void assertNotNull(Object object) {
-		Assert.assertNotNull(object);
-	}
-
-	protected static void assertNotNull(String message, Object object) {
-		Assert.assertNotNull(message, object);
 	}
 }

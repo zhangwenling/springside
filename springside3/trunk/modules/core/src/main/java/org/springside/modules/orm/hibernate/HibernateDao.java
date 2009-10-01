@@ -347,7 +347,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 				criterion = Restrictions.gt(propertyName, propertyValue);
 			}
 		} catch (Exception e) {
-			throw ReflectionUtils.convertToUncheckedException(e);
+			throw ReflectionUtils.convertReflectionExceptionToUnchecked(e);
 		}
 		return criterion;
 	}

@@ -120,7 +120,7 @@ public class User extends AuditableEntity {
 
 	@Transient
 	public String getRoleNames() {
-		return ReflectionUtils.fetchElementPropertyToString(roleList, "name", ", ");
+		return ReflectionUtils.convertElementPropertyToString(roleList, "name", ", ");
 	}
 
 	@Override

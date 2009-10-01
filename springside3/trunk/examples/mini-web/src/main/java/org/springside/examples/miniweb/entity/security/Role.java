@@ -59,13 +59,13 @@ public class Role extends IdEntity {
 
 	@Transient
 	public String getAuthNames() {
-		return ReflectionUtils.fetchElementPropertyToString(authorityList, "displayName", ", ");
+		return ReflectionUtils.convertElementPropertyToString(authorityList, "displayName", ", ");
 	}
 
 	@Transient
 	@SuppressWarnings("unchecked")
 	public List<Long> getAuthIds() {
-		return ReflectionUtils.fetchElementPropertyToList(authorityList, "id");
+		return ReflectionUtils.convertElementPropertyToList(authorityList, "id");
 	}
 
 	@Override

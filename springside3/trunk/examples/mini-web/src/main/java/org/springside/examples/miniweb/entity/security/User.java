@@ -100,7 +100,7 @@ public class User extends IdEntity {
 	//非持久化属性.
 	@Transient
 	public String getRoleNames() {
-		return ReflectionUtils.fetchElementPropertyToString(roleList, "name", ", ");
+		return ReflectionUtils.convertElementPropertyToString(roleList, "name", ", ");
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class User extends IdEntity {
 	@Transient
 	@SuppressWarnings("unchecked")
 	public List<Long> getRoleIds() {
-		return ReflectionUtils.fetchElementPropertyToList(roleList, "id");
+		return ReflectionUtils.convertElementPropertyToList(roleList, "id");
 	}
 
 	@Override
