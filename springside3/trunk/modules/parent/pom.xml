@@ -772,8 +772,6 @@
 			</activation>
 
 			<build>
-				
-				
 				<!-- war插件,指定打包war文件时加入节点特定的配置文件 -->
 				<plugins>
 					<plugin>
@@ -781,13 +779,13 @@
 						<artifactId>maven-war-plugin</artifactId>
 						<configuration>
 							<filters>
-								<filter>src/cluster/properties/${cluster.nodename}.properties</filter>
+								<filter>src/main/cluster-resources/properties/${cluster.nodename}.properties</filter>
 							</filters>
 
 							<webResources>
 								<resource>
 									<filtering>true</filtering>
-									<directory>src/cluster/webapp</directory>
+									<directory>src/main/cluster-resources/webapp</directory>
 								</resource>
 							</webResources>
 						</configuration>
@@ -852,7 +850,7 @@
 			</build>
 		</profile>
 
-		<!-- 执行功能测试的profile,以-Pfunctional激活 -->
+		<!-- 在integration-test阶段执行功能测试的profile, 以-Pfunctional激活 -->
 		<profile>
 			<id>functional</id>
 			<build>
