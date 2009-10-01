@@ -23,7 +23,7 @@ import org.springframework.jmx.export.annotation.ManagedOperationParameters;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
 /**
- * 基于JMX动态配置Logger日志等级,获取Logger AppenderMBean.
+ * 基于JMX动态配置Logger日志等级, 获取Logger Appender的MBean.
  * 
  * @author calvin
  */
@@ -89,7 +89,8 @@ public class Log4jMBean {
 	}
 
 	/**
-	 * 获取Logger的所有Appender的名称,继承而来的Appender名称后将有(parent)标识.
+	 * 获取Logger的所有Appender的名称.
+	 * 继承而来的Appender名称后将有(parent)标识.
 	 */
 	@SuppressWarnings("unchecked")
 	@ManagedOperation(description = "Get all appenders of the logger")

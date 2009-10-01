@@ -40,11 +40,11 @@ public class PropertyFilter {
 	public enum PropertyType {
 		S(String.class), I(Integer.class), L(Long.class), N(Double.class), D(Date.class), B(Boolean.class);
 
+		private Class<?> clazz;
+
 		PropertyType(Class<?> clazz) {
 			this.clazz = clazz;
 		}
-
-		private Class<?> clazz;
 
 		public Class<?> getValue() {
 			return clazz;

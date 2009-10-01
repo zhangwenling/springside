@@ -23,6 +23,8 @@ public class MockAppenderTest extends Assert {
 		assertEquals(2, appender.getAllLogs().size());
 		assertEquals(testString2, appender.getAllLogs().get(1).getMessage());
 
+		appender.clearLogs();
+		assertNull(appender.getFirstLog());
 	}
 
 }
