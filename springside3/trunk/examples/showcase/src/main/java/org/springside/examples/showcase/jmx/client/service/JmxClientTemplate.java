@@ -1,11 +1,4 @@
-/**
- * Copyright (c) 2005-2009 springside.org.cn
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * 
- * $Id$
- */
-package org.springside.modules.jmx;
+package org.springside.examples.showcase.jmx.client.service;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -36,7 +29,7 @@ import org.springframework.util.Assert;
  * @author ben
  * @author calvin
  */
-public class JmxClient {
+public class JmxClientTemplate {
 
 	private JMXConnector connector;
 	private MBeanServerConnection mbsc;
@@ -45,7 +38,7 @@ public class JmxClient {
 	/**
 	 *  无认证信息的构造函数. 
 	 */
-	public JmxClient(final String serviceUrl) throws IOException {
+	public JmxClientTemplate(final String serviceUrl) throws IOException {
 		initConnector(serviceUrl, null, null);
 	}
 
@@ -56,7 +49,7 @@ public class JmxClient {
 	 * @param passwd
 	 * @throws IOException
 	 */
-	public JmxClient(final String serviceUrl, final String userName, final String passwd) throws IOException {
+	public JmxClientTemplate(final String serviceUrl, final String userName, final String passwd) throws IOException {
 		initConnector(serviceUrl, userName, passwd);
 	}
 
