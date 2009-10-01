@@ -22,16 +22,20 @@ public class PageTest extends Assert {
 		assertEquals(1, page.getPageSize());
 		assertEquals(-1, page.getTotalCount());
 		assertEquals(-1, page.getTotalPages());
+		assertEquals(true, page.isAutoCount());
 
 		page.setPageNo(-1);
 		assertEquals(1, page.getPageNo());
 
 		page.setPageSize(-1);
 		assertEquals(1, page.getPageSize());
-	}
 
-	@Test
-	public void checkValidOrderParameter() {
+		assertNull(page.getOrder());
+		assertNull(page.getOrderBy());
+
+		assertEquals(false, page.isOrderBySetted());
+		page.setOrderBy("Id");
+		assertEquals(false, page.isOrderBySetted());
 		page.setOrder("ASC,desc");
 	}
 
@@ -98,6 +102,5 @@ public class PageTest extends Assert {
 
 		page.setPageNo(2);
 		assertEquals(2, page.getNextPage());
-
 	}
 }

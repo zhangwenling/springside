@@ -57,4 +57,31 @@ public class PropertyFilterTest extends Assert {
 		assertArrayEquals(new String[] { "foo", "bar" }, likeOrFilter.getPropertyNames());
 		assertEquals("hello", likeOrFilter.getPropertyValue());
 	}
+
+	@Test
+	public void errorFilterName() throws Exception {
+		int exceptionCount = 0;
+		try {
+			PropertyFilter filter = new PropertyFilter("ABS_foo", "hello");
+		} catch (IllegalArgumentException e) {
+			assertEquals("filter名称ABS_foo没有按规则编写,无法得到属性比较类型.", e.getMessage());
+			exceptionCount++;
+		}
+
+		try {
+			PropertyFilter filter = new PropertyFilter("GEX_foo", "hello");
+		} catch (IllegalArgumentException e) {
+			assertEquals("filter名称GEX_foo没有按规则编写,无法得到属性值类型.", e.getMessage());
+			exceptionCount++;
+		}
+
+		try {
+			PropertyFilter filter = new PropertyFilter("EQS_", "hello");
+		} catch (IllegalArgumentException e) {
+			assertEquals("filter名称EQS_没有按规则编写,无法得到属性名称.", e.getMessage());
+			exceptionCount++;
+		}
+
+		assertEquals(3, exceptionCount);
+	}
 }
