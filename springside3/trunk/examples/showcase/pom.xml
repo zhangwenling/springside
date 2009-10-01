@@ -10,7 +10,7 @@
 	<groupId>org.springside</groupId>
 	<artifactId>showcase</artifactId>
 	<packaging>war</packaging>
-	<name>showcase</name>
+	<name>Springside3's Showcase Example</name>
 
 	<!-- 项目属性 -->
 	<properties>

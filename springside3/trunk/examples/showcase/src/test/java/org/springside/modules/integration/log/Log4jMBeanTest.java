@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.examples.showcase.jmx.client.service.JmxClientTemplate;
+import org.springside.modules.jmx.JmxClientTemplate;
 import org.springside.modules.log.Log4jMBean;
 import org.springside.modules.test.spring.SpringContextTestCase;
 

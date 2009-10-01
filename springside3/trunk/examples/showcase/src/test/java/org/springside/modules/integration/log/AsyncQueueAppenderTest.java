@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.examples.showcase.log.web.LogAction;
+import org.springside.examples.showcase.log.LogAction;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**

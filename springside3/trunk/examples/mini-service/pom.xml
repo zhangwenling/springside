@@ -11,7 +11,7 @@
 	<artifactId>mini-service</artifactId>
 	<version>3.1.8</version>
 	<packaging>war</packaging>
-	<name>mini-service</name>
+	<name>Springside3's Mini-Service Example</name>
 
 	<!-- 项目属性 -->
 	<properties>

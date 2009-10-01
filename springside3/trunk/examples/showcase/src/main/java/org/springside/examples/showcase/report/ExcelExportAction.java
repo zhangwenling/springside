@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.report.web;
+package org.springside.examples.showcase.report;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -17,8 +17,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.struts2.convention.annotation.Namespace;
-import org.springside.examples.showcase.report.data.DummyDataFetcher;
-import org.springside.examples.showcase.report.data.DummyDataFetcher.TemperatureAnomaly;
+import org.springside.examples.showcase.report.DummyDataFetcher.TemperatureAnomaly;
 import org.springside.modules.web.struts2.Struts2Utils;
 
 import com.opensymphony.xwork2.ActionSupport;

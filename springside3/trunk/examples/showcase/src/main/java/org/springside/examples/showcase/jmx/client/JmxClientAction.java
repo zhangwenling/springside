@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.jmx.client.web;
+package org.springside.examples.showcase.jmx.client;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,8 +7,7 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springside.examples.showcase.jmx.client.service.JmxClientService;
-import org.springside.examples.showcase.jmx.client.service.JmxClientService.HibernateStatistics;
+import org.springside.examples.showcase.jmx.client.JmxClientService.HibernateStatistics;
 import org.springside.modules.web.struts2.Struts2Utils;
 
 import com.opensymphony.xwork2.ActionSupport;

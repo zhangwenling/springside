@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.log.web;
+package org.springside.examples.showcase.log;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.slf4j.Logger;

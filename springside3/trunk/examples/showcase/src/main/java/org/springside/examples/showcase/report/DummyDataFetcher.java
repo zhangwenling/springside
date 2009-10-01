@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.report.data;
+package org.springside.examples.showcase.report;
 
 /**
  * 报表演示的模拟数据提供类.

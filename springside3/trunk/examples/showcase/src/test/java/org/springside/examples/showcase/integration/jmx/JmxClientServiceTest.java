@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.examples.showcase.jmx.client.service.JmxClientService;
+import org.springside.examples.showcase.jmx.client.JmxClientService;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 /**

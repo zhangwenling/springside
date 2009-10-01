@@ -5,7 +5,7 @@
 
 	<description>JMX客户端配置</description>
 
-	<bean id="jmxClient" class="org.springside.examples.showcase.jmx.client.service.JmxClientService">
+	<bean id="jmxClient" class="org.springside.examples.showcase.jmx.client.JmxClientService">
 		<property name="host" value="${server.addr}" />
 		<property name="port" value="${jmx.rmi_port}" />
 	</bean>

@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.report.web;
+package org.springside.examples.showcase.report;
 
 import java.io.IOException;
 
@@ -10,8 +10,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
-import org.springside.examples.showcase.report.data.DummyDataFetcher;
-import org.springside.examples.showcase.report.data.DummyDataFetcher.TemperatureAnomaly;
+import org.springside.examples.showcase.report.DummyDataFetcher.TemperatureAnomaly;
 import org.springside.modules.web.struts2.Struts2Utils;
 
 import com.opensymphony.xwork2.ActionSupport;

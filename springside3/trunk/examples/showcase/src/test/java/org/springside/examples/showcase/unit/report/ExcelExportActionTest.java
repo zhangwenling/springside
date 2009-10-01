@@ -6,7 +6,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellReference;
 import org.junit.Assert;
 import org.junit.Test;
-import org.springside.examples.showcase.report.web.ExcelExportAction;
+import org.springside.examples.showcase.report.ExcelExportAction;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
