@@ -58,5 +58,5 @@
 	<bean id="digestPasswordCallback" class="org.springside.examples.showcase.ws.server.impl.DigestPasswordCallback" />
 
 	<!-- 设定由slf4j处理cxf中java.util.logging打印的日志 -->
-	<bean class="org.springside.modules.utils.JulToSlf4jInit" lazy-init="false" />
+	<bean class="org.springside.modules.log.JulToSlf4jInit" lazy-init="false" />
 </beans>

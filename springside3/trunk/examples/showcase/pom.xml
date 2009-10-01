@@ -37,7 +37,7 @@
 
 		<dependency>
 			<groupId>org.springside</groupId>
-			<artifactId>springside3-jee</artifactId>
+			<artifactId>springside3-extension</artifactId>
 		</dependency>
 
 		<!-- spring begin -->

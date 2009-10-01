@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>org.springside</groupId>
 	<artifactId>springside3-all</artifactId>
-	<name>Springside3 all</name>
+	<name>Springside3's All</name>
 	<packaging>pom</packaging>
 
 	<build>
@@ -71,7 +71,7 @@
 			<id>modules</id>
 			<modules>
 				<module>modules/core</module>
-				<module>modules/jee</module>
+				<module>modules/extension</module>
 				<module>modules/parent</module>
 				<module>tools/code-generator/maven-archetypes/service-archetype</module>
 				<module>tools/code-generator/maven-archetypes/web-archetype</module>

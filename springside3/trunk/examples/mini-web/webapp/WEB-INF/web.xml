@@ -28,11 +28,7 @@
 	<!-- SpringSide's Hibernate Open Session In View filter-->
 	<filter>
 		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
-		<filter-class>org.springside.modules.orm.hibernate.OpenSessionInViewFilter</filter-class>
-		<init-param>
-			<param-name>excludeSuffixs</param-name>
-			<param-value>js,css,jpg,gif</param-value>
-		</init-param>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
 	</filter>
 
 	<!-- SpringSecurity filter-->

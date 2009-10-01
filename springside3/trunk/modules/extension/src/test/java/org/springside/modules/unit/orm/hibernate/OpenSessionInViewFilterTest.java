@@ -33,5 +33,4 @@ public class OpenSessionInViewFilterTest extends Assert {
 				new Class[] { HttpServletRequest.class }, new Object[] { request }));
 
 	}
-
 }

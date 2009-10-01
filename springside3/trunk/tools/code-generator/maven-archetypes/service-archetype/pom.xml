@@ -10,7 +10,7 @@
 	<groupId>org.springside</groupId>
 	<artifactId>service-archetype</artifactId>
 	<packaging>maven-archetype</packaging>
-	<name>Springside's Service Archetype</name>
+	<name>Springside3's Service Archetype</name>
 	<build>
 		<outputDirectory>target/classes</outputDirectory>
 		<extensions>
