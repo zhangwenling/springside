@@ -2,9 +2,6 @@ package org.springside.examples.showcase.common.service;
 
 import java.util.List;
 
-import org.perf4j.StopWatch;
-import org.perf4j.aop.Profiled;
-import org.perf4j.log4j.Log4JStopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,11 +45,8 @@ public class UserManager {
 	 * 如果企图修改超级用户,取出当前操作员用户,打印其信息然后抛出异常.
 	 */
 	public void saveUser(User user) {
-		//Perf4j监控性能
-		StopWatch stopWatch = new Log4JStopWatch();
 		if (user.getId() == 1) {
 			logger.warn("操作员{}尝试修改超级管理员用户", SpringSecurityUtils.getCurrentUserName());
-			stopWatch.stop("saveUser.fail");
 			throw new ServiceException("不能修改超级管理员用户");
 		}
 
@@ -63,14 +57,11 @@ public class UserManager {
 		userDao.save(user);
 
 		sendNotifyMessage(user);
-		stopWatch.stop("saveUser.success");
 	}
 
 	/**
 	 * 取得所有用户,预加载用户的角色.
 	 */
-	//Perf4j监控性能
-	@Profiled
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
 		List<User> list = userDao.getAllUserWithRoleByDistinctHql();
