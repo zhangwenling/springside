@@ -23,7 +23,7 @@
 		<path location="${project.runtime.lib}/log4j-1.2.15.jar" />
 		
 		<!--jdbc driver-->
-		<path location="${project.runtime.lib}/h2-1.1.117.jar" />
+		<path location="${project.runtime.lib}/h2-1.1.119.jar" />
 		<path location="${project.runtime.lib}/ojdbc14-10.2.3.0.jar" />
 	</path>
 

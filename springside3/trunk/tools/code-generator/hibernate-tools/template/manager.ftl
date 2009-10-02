@@ -15,7 +15,7 @@ public class ${declarationName}Manager {
 	}
 
 	public List<${declarationName}> getAll${declarationName}() {
-		List<${declarationName}> ${entityName}List = ${entityName}Dao.getAll();
+		return ${entityName}Dao.getAll();
 	}
 	
 	public void save${declarationName}(${declarationName} ${entityName}) {
