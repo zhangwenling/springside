@@ -1,6 +1,8 @@
 package org.springside.modules.unit.utils;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -38,6 +40,7 @@ public class ReflectionUtilsTest extends Assert {
 
 	@Test
 	public void getSuperClassGenricType() {
+		//获取第1，2个泛型类型
 		assertEquals(String.class, ReflectionUtils.getSuperClassGenricType(TestBean.class));
 		assertEquals(Long.class, ReflectionUtils.getSuperClassGenricType(TestBean.class, 1));
 
@@ -46,10 +49,26 @@ public class ReflectionUtilsTest extends Assert {
 
 		//无父类定义
 		assertEquals(Object.class, ReflectionUtils.getSuperClassGenricType(TestBean3.class));
-
 	}
 
-	class TestBean extends ParentBean<String, Long> {
+	@SuppressWarnings("unchecked")
+	@Test
+	public void convertElementPropertyToString() {
+		List list = new ArrayList();
+		TestBean3 bean1 = new TestBean3();
+		bean1.setId(1);
+		list.add(bean1);
+		TestBean3 bean2 = new TestBean3();
+		bean2.setId(2);
+		list.add(bean2);
+
+		assertEquals("1,2", ReflectionUtils.convertElementPropertyToString(list, "id", ","));
+	}
+
+	public static class ParentBean<T, PK> {
+	}
+
+	public static class TestBean extends ParentBean<String, Long> {
 		private int privateField = 1;
 		private int publicField = 1;
 
@@ -75,13 +94,20 @@ public class ReflectionUtilsTest extends Assert {
 		}
 	}
 
-	class ParentBean<T, PK> {
-	}
-
 	@SuppressWarnings("unchecked")
-	class TestBean2 extends ParentBean {
+	public static class TestBean2 extends ParentBean {
 	}
 
-	class TestBean3 {
+	public static class TestBean3 {
+
+		int id;
+
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
 	}
 }

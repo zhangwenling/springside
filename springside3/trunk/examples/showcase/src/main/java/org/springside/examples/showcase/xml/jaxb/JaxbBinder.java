@@ -99,7 +99,8 @@ public class JaxbBinder {
 	}
 
 	public static class ListWrapper {
+		@SuppressWarnings("unchecked")
 		@XmlAnyElement
-		private Collection list;
+		Collection list;
 	}
 }

@@ -18,7 +18,6 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author ben
  * @author calvin
  */
-//因为没有按Convention Plugin默认的Pacakge命名规则, 因此用annotation重新指定Namespace.
 @Namespace("/jmx")
 @SuppressWarnings("serial")
 public class JmxClientAction extends ActionSupport {

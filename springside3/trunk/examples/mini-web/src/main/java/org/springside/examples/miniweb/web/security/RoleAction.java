@@ -2,6 +2,7 @@ package org.springside.examples.miniweb.web.security;
 
 import java.util.List;
 
+import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springside.modules.orm.hibernate.HibernateWebUtils;
  * @author calvin
  */
 @SuppressWarnings("serial")
+@Namespace("/security")
 @Results( { @Result(name = CrudActionSupport.RELOAD, location = "role.action", type = "redirect") })
 public class RoleAction extends CrudActionSupport<Role> {
 

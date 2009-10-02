@@ -17,7 +17,6 @@ import org.springside.examples.showcase.common.service.UserManager;
  * 
  * @author calvin
  */
-//因为没有按Convention Plugin默认的Pacakge命名规则, 因此用annotation重新指定Namespace.
 @Namespace("/common")
 @SuppressWarnings("serial")
 @InterceptorRefs( { @InterceptorRef("paramsPrepareParamsStack") })

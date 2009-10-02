@@ -79,7 +79,7 @@ public class ReflectionUtils {
 	 * 直接调用对象方法, 无视private/protected修饰符.
 	 */
 	public static Object invokeMethod(final Object object, final String methodName, final Class<?>[] parameterTypes,
-			final Object[] parameters) throws InvocationTargetException {
+			final Object[] parameters) {
 		Method method = getDeclaredMethod(object, methodName, parameterTypes);
 		if (method == null)
 			throw new IllegalArgumentException("Could not find method [" + methodName + "] on target [" + object + "]");
@@ -88,11 +88,9 @@ public class ReflectionUtils {
 
 		try {
 			return method.invoke(object, parameters);
-		} catch (IllegalAccessException e) {
-			logger.error("不可能抛出的异常:{}", e.getMessage());
+		} catch (Exception e) {
+			throw convertReflectionExceptionToUnchecked(e);
 		}
-
-		return null;
 	}
 
 	/**
@@ -144,6 +142,7 @@ public class ReflectionUtils {
 
 	/**
 	 * 通过反射,获得Class定义中声明的父类的泛型参数的类型.
+	 * 如无法找到, 返回Object.class.
 	 * eg.
 	 * public UserDao extends HibernateDao<User>
 	 *
@@ -157,6 +156,7 @@ public class ReflectionUtils {
 
 	/**
 	 * 通过反射,获得定义Class时声明的父类的泛型参数的类型.
+	 * 如无法找到, 返回Object.class.
 	 * 
 	 * 如public UserDao extends HibernateDao<User,Long>
 	 *
@@ -191,7 +191,7 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 提取集合中的对象的属性(通过getter函数),组合成List.
+	 * 提取集合中的对象的属性(通过getter函数), 组合成List.
 	 * 
 	 * @param collection 来源集合.
 	 * @param propertyName 要提取的属性名.
@@ -205,14 +205,14 @@ public class ReflectionUtils {
 				list.add(PropertyUtils.getProperty(obj, propertyName));
 			}
 		} catch (Exception e) {
-			convertReflectionExceptionToUnchecked(e);
+			throw convertReflectionExceptionToUnchecked(e);
 		}
 
 		return list;
 	}
 
 	/**
-	 * 提取集合中的对象的属性(通过getter函数),组合成由分割符分隔的字符串.
+	 * 提取集合中的对象的属性(通过getter函数), 组合成由分割符分隔的字符串.
 	 * 
 	 * @param collection 来源集合.
 	 * @param propertyName 要提取的属性名.
@@ -247,11 +247,11 @@ public class ReflectionUtils {
 	/**
 	 * 将反射时的checked exception转换为unchecked exception.
 	 */
-	public static IllegalArgumentException convertReflectionExceptionToUnchecked(Exception e) {
+	public static RuntimeException convertReflectionExceptionToUnchecked(Exception e) {
 		if (e instanceof IllegalAccessException || e instanceof IllegalArgumentException
-				|| e instanceof NoSuchMethodException)
-			return new IllegalArgumentException("Refelction Exception.", e);
+				|| e instanceof NoSuchMethodException || e instanceof InvocationTargetException)
+			return new IllegalArgumentException("Reflection Exception.", e);
 		else
-			return new IllegalArgumentException(e);
+			return new RuntimeException(e);
 	}
 }

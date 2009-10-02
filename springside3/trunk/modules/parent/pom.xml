@@ -529,7 +529,7 @@
 			<dependency>
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi</artifactId>
-				<version>3.5-beta6</version>
+				<version>3.5-FINAL</version>
 			</dependency>
 			<!-- poi end -->
 

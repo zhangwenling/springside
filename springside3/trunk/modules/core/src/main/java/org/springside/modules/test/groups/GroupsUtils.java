@@ -39,27 +39,8 @@ public class GroupsUtils {
 	private static List<String> groups;
 
 	/**
-	 * 判断测试方是否符合分组要求.
-	 */
-	public static boolean isTestMethodInGroups(Method testMethod) {
-		//初始化Groups定义
-		if (groups == null) {
-			initGroups();
-		}
-		//如果定义全部执行则返回true
-		if (groups.contains(Groups.ALL))
-			return true;
-
-		//取得方法上的Groups annotation, 如果无Groups注解或注解符合分组要求则返回true.
-		Groups annotationGroup = testMethod.getAnnotation(Groups.class);
-		if ((annotationGroup == null) || groups.contains(annotationGroup.value()))
-			return true;
-
-		return false;
-	}
-
-	/**
 	 * 判断测试类是否符合分组要求.
+	 * 如果@Groups符合定义或无@Groups定义返回true.
 	 */
 	public static boolean isTestClassInGroups(Class<?> testClass) {
 		//初始化Groups定义
@@ -72,6 +53,27 @@ public class GroupsUtils {
 
 		//取得类上的Groups annotation, 如果无Groups注解或注解符合分组要求则返回true.
 		Groups annotationGroup = testClass.getAnnotation(Groups.class);
+		if ((annotationGroup == null) || groups.contains(annotationGroup.value()))
+			return true;
+
+		return false;
+	}
+
+	/**
+	 * 判断测试方是否符合分组要求.
+	 * 如果@Groups符合定义或无@Groups定义返回true.
+	 */
+	public static boolean isTestMethodInGroups(Method testMethod) {
+		//初始化Groups定义
+		if (groups == null) {
+			initGroups();
+		}
+		//如果定义全部执行则返回true
+		if (groups.contains(Groups.ALL))
+			return true;
+
+		//取得方法上的Groups annotation, 如果无Groups注解或注解符合分组要求则返回true.
+		Groups annotationGroup = testMethod.getAnnotation(Groups.class);
 		if ((annotationGroup == null) || groups.contains(annotationGroup.value()))
 			return true;
 
