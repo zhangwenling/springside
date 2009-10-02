@@ -22,7 +22,7 @@
 		
 		<jdbc.driver.groupid>com.h2database</jdbc.driver.groupid>
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
-		<jdbc.driver.version>1.1.117</jdbc.driver.version>
+		<jdbc.driver.version>1.1.119</jdbc.driver.version>
 		
 		<dbunit.schema.file>src/main/sql/h2/schema.sql</dbunit.schema.file>
 		<dbunit.datatype>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.datatype>
