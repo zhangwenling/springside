@@ -4,7 +4,7 @@
 	<comment></comment>
 	<projects>
 		<project>springside3-core</project>
-		<project>springside3-jee</project>
+		<project>springside3-extension</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

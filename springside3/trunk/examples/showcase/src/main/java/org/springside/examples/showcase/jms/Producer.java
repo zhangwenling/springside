@@ -13,6 +13,13 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springside.examples.showcase.common.entity.User;
 
+/**
+ * JMS用户变更消息生产者.
+ * 
+ * 使用jmsTemplate将用户变更消息分别发送到queue与topic.
+ * 
+ * @author calvin
+ */
 @SuppressWarnings("unchecked")
 public class Producer {
 
@@ -20,6 +27,10 @@ public class Producer {
 	private Destination notifyQueue;
 	private Destination notifyTopic;
 
+	/**
+	 * 将变更用户消息发送到只有单个接收者的queue.
+	 * 使用jmsTemplate最简便的封装convertAndSend()发送Map类型的消息.
+	 */
 	public void sendQueue(final User user) {
 		Map map = new HashMap();
 		map.put("userName", user.getName());
@@ -28,6 +39,10 @@ public class Producer {
 		jmsTemplate.convertAndSend(notifyQueue, map);
 	}
 
+	/**
+	 * 将变更用户消息发送到只有多个订阅接收者的topic.
+	 * 使用jmsTemplate的send/MessageCreator()发送Map类型的消息并在Message中附加属性.
+	 */
 	public void sendTopic(final User user) {
 		jmsTemplate.send(notifyTopic, new MessageCreator() {
 			public Message createMessage(Session session) throws JMSException {
@@ -55,5 +70,4 @@ public class Producer {
 	public void setNotifyTopic(Destination nodifyTopic) {
 		this.notifyTopic = nodifyTopic;
 	}
-
 }

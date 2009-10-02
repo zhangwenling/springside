@@ -65,7 +65,7 @@ public class JmxClientAction extends ActionSupport {
 	 * 获取最新系统配置的Ajax请求, 返回JSON字符串.
 	 */
 	@SuppressWarnings("unchecked")
-	public String updateConfig() {
+	public String refreshConfig() {
 		Map map = new HashMap();
 		try {
 			nodeName = jmxClientService.getNodeName();

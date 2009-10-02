@@ -19,8 +19,8 @@
 		}
 
 		//动态获取服务器最新配置,返回JSON对象.
-		function updateConfig(){
-			$.getJSON("jmx-client!updateConfig.action", function(data){
+		function refreshConfig(){
+			$.getJSON("jmx-client!refreshConfig.action", function(data){
 				$('#nodeName').val(data.nodeName);
 				$('input:radio[name=notificationMailEnabled]').val([data.notificationMailEnabled]);
 				$('#updateMessage').text(data.message).show().fadeOut(2000);

@@ -7,7 +7,7 @@
         <dependent-module archiveName="springside3-core.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/springside3-core/springside3-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="springside3-jee.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/springside3-jee/springside3-jee">
+        <dependent-module archiveName="springside3-extension.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/springside3-extension/springside3-extension">
             <dependency-type>uses</dependency-type>
         </dependent-module>
 <property name="context-root" value="showcase"/>

@@ -5,7 +5,7 @@ package org.springside.examples.showcase.ws.server.api;
  * 
  * @author calvin
  */
-public class Constants {
+public class WsConstants {
 
 	/**项目内统一的NameSpace定义.*/
 	public static final String NS = "http://showcase.examples.springside.org";

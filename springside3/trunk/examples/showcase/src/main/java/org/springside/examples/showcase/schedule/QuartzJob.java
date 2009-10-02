@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.service.UserManager;
 
 /**
- * 被Quartz MethodInvokingJobDetailFactoryBean定时执行的普通Spring Bean.
+ * 被Spring的Quartz MethodInvokingJobDetailFactoryBean定时执行的普通Spring Bean.
  */
 public class QuartzJob {
 

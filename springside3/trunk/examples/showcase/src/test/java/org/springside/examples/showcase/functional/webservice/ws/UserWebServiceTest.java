@@ -17,7 +17,7 @@ import org.apache.ws.security.handler.WSHandlerConstants;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.ws.client.PasswordCallback;
-import org.springside.examples.showcase.ws.server.api.Constants;
+import org.springside.examples.showcase.ws.server.api.WsConstants;
 import org.springside.examples.showcase.ws.server.api.UserWebService;
 import org.springside.examples.showcase.ws.server.api.result.GetAllUserResult;
 import org.springside.modules.test.spring.SpringContextTestCase;
@@ -50,7 +50,7 @@ public class UserWebServiceTest extends SpringContextTestCase {
 
 		//创建UserWebService
 		URL wsdlURL = new URL("http://localhost:8080/showcase/services/UserServiceWithDigestPassword?wsdl");
-		QName UserServiceName = new QName(Constants.NS, "UserService");
+		QName UserServiceName = new QName(WsConstants.NS, "UserService");
 		Service service = Service.create(wsdlURL, UserServiceName);
 		UserWebService userWebService = service.getPort(UserWebService.class);
 

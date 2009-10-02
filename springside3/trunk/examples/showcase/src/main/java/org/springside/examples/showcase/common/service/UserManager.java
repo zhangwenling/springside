@@ -14,8 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.email.MimeMailService;
-import org.springside.examples.showcase.email.SimpleMailService;
+import org.springside.examples.showcase.jms.Producer;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
 import org.springside.modules.log.TraceUtils;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
@@ -38,9 +37,7 @@ public class UserManager {
 	@Autowired(required = false)
 	private ServerConfig serverConfig; //系统配置
 	@Autowired(required = false)
-	private SimpleMailService simpleMailService;//邮件发送
-	@Autowired(required = false)
-	private MimeMailService mimeMailService;//邮件发送
+	private Producer notifyProducer; //JMX消息发送
 
 	public User getUser(Long id) {
 		return userDao.get(id);
@@ -51,8 +48,11 @@ public class UserManager {
 	 * 如果企图修改超级用户,取出当前操作员用户,打印其信息然后抛出异常.
 	 */
 	public void saveUser(User user) {
+		//Perf4j监控性能
+		StopWatch stopWatch = new Log4JStopWatch();
 		if (user.getId() == 1) {
 			logger.warn("操作员{}尝试修改超级管理员用户", SpringSecurityUtils.getCurrentUserName());
+			stopWatch.stop("saveUser.fail");
 			throw new ServiceException("不能修改超级管理员用户");
 		}
 
@@ -62,7 +62,8 @@ public class UserManager {
 
 		userDao.save(user);
 
-		sendNotifyMail(user);
+		sendNotifyMessage(user);
+		stopWatch.stop("saveUser.success");
 	}
 
 	/**
@@ -98,24 +99,15 @@ public class UserManager {
 	}
 
 	/**
-	 * 发送用户变更通知邮件.
+	 * 发送用户变更消息.
 	 */
-	private void sendNotifyMail(User user) {
-		if (serverConfig != null && serverConfig.isNotificationMailEnabled()) {
-			//Perf4j监控性能
-			StopWatch stopWatch = new Log4JStopWatch();
+	private void sendNotifyMessage(User user) {
+		if (serverConfig != null && serverConfig.isNotificationMailEnabled() && notifyProducer != null) {
 			try {
-				if (simpleMailService != null) {
-					simpleMailService.sendNotificationMail(user.getName());
-				}
-
-				if (mimeMailService != null) {
-					mimeMailService.sendNotificationMail(user.getName());
-				}
-				stopWatch.stop("sendMail.success");
+				notifyProducer.sendQueue(user);
+				notifyProducer.sendTopic(user);
 			} catch (Exception e) {
-				logger.error("邮件发送失败", e);
-				stopWatch.stop("sendMail.fail");
+				logger.error("消息发送失败", e);
 			}
 		}
 	}

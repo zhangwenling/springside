@@ -11,7 +11,7 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springside.examples.showcase.common.service.UserManager;
 
 /**
- * 被Quartz JobDetailBean定时执行的Job类,支持持久化到数据库实现Quartz集群.
+ * 被Spring的Quartz JobDetailBean定时执行的Job类, 支持持久化到数据库实现Quartz集群.
  */
 public class QuartzClusterableJob extends QuartzJobBean {
 

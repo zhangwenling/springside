@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
-import org.springside.examples.showcase.ws.server.api.Constants;
+import org.springside.examples.showcase.ws.server.api.WsConstants;
 import org.springside.examples.showcase.ws.server.api.dto.UserDTO;
 
 /**
@@ -14,7 +14,7 @@ import org.springside.examples.showcase.ws.server.api.dto.UserDTO;
  * 
  * @author calvin
  */
-@XmlType(name = "GetAllUserResult", namespace = Constants.NS)
+@XmlType(name = "GetAllUserResult", namespace = WsConstants.NS)
 public class GetAllUserResult extends WSResult {
 	private static final long serialVersionUID = 4739558570080898049L;
 

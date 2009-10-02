@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.UserManager;
-import org.springside.examples.showcase.ws.server.api.Constants;
+import org.springside.examples.showcase.ws.server.api.WsConstants;
 import org.springside.examples.showcase.ws.server.api.UserWebService;
 import org.springside.examples.showcase.ws.server.api.dto.UserDTO;
 import org.springside.examples.showcase.ws.server.api.result.GetAllUserResult;
@@ -24,7 +24,7 @@ import org.springside.modules.log.TraceUtils;
  * @author calvin
  */
 //serviceName与portName属性指明WSDL中的名称,endpointInterface属性指向Interface定义类.
-@WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.api.UserWebService", targetNamespace = Constants.NS)
+@WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.api.UserWebService", targetNamespace = WsConstants.NS)
 public class UserWebServiceImpl implements UserWebService {
 
 	private static Logger logger = LoggerFactory.getLogger(UserWebServiceImpl.class);

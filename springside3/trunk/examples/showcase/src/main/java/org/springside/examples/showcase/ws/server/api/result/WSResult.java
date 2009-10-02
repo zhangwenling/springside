@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlType;
 
-import org.springside.examples.showcase.ws.server.api.Constants;
+import org.springside.examples.showcase.ws.server.api.WsConstants;
 
 /**
  * WebService返回结果基类,定义所有返回码.
  * 
  * @author calvin
  */
-@XmlType(name = "WSResult", namespace = Constants.NS)
+@XmlType(name = "WSResult", namespace = WsConstants.NS)
 public class WSResult implements Serializable {
 	// 返回代码定义 //
 	// 按项目的规则进行定义，比如1xx代表客户端参数错误，2xx代表业务错误等.
