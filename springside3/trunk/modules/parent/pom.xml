@@ -599,6 +599,12 @@
 				<artifactId>hibernate-tools</artifactId>
 				<version>3.2.4.GA</version>
 				<scope>provided</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>freemarker</groupId>
+						<artifactId>freemarker</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

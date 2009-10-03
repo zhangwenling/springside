@@ -203,6 +203,12 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-tools</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<scope>provider</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
