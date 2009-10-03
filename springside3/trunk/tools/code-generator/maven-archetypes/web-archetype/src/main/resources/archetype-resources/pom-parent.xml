@@ -17,7 +17,7 @@
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<springside.version>3.1.8</springside.version>
+		<springside.version>3.2.0</springside.version>
 		<spring.version>2.5.6</spring.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<struts2.version>2.1.8</struts2.version>
