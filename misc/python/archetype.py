@@ -11,7 +11,6 @@ def prepare():
     move(base_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\classes',base_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-classes')
 
     move(base_dir+'\\examples\\mini-service\\webapp\\wsdl\\mini-service.wsdl',base_dir+'\\examples\\mini-service\\target\\tmp\\mini-service.wsdl')
-    move(base_dir+'\\examples\\mini-service\\src\\test\\soapui\\mini-service-soapui-project.xml',base_dir+'\\examples\\mini-service\\target\\tmp\\mini-service-soapui-project.xml')
 
     shutil.copyfile(base_dir+"\\modules\\parent\\pom.xml",base_dir+"\\examples\\mini-service\\pom-parent.xml")
     shutil.copyfile(base_dir+"\\modules\\parent\\pom.xml",base_dir+"\\examples\\mini-web\\pom-parent.xml")
@@ -38,7 +37,7 @@ def modifyArchetypes():
     replaceinfile('bin/webservice/build-client.bat','mini-service','${artifactId}')
     replaceinfile('bin/webservice/save-wsdl.bat','mini-service','${artifactId}')
     replaceinfile('bin/webservice/build-client-binding.xml','http://miniservice.examples.springside.org','${webservice-namespace}')
-    replaceinfile('src/main/java/ws/api/Constants.java','http://miniservice.examples.springside.org','${webservice-namespace}')
+    replaceinfile('src/main/java/ws/api/WsConstants.java','http://miniservice.examples.springside.org','${webservice-namespace}')
 
     print 'modified archetypes.'
     
@@ -83,11 +82,10 @@ def clean():
     move(base_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-classes', base_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\classes')
 
     move(base_dir+'\\examples\\mini-service\\target\\tmp\\mini-service.wsdl',base_dir+'\\examples\\mini-service\\webapp\\wsdl\\mini-service.wsdl')
-    move(base_dir+'\\examples\\mini-service\\target\\tmp\\mini-service-soapui-project.xml', base_dir+'\\examples\\mini-service\\src\\test\\soapui\\mini-service-soapui-project.xml')
  
     print 'cleaned temp files.'
 
-springside_version='3.1.8'
+springside_version='3.2.0'
 base_dir = os.path.abspath("../../../")
 
 prepare()
