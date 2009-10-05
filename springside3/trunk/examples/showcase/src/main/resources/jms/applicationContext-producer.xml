@@ -4,7 +4,7 @@
 
 	<description>JMS生产者演示配置</description>
 
-	<!-- a sample POJO which uses a Spring JmsTemplate -->
+	<!-- 使用Spring JmsTemplate的消息生产者 -->
 	<bean id="producer" class="org.springside.examples.showcase.jms.Producer">
 		<property name="jmsTemplate" ref="jmsTemplate" />
 		<property name="notifyQueue" ref="notifyQueue" />
