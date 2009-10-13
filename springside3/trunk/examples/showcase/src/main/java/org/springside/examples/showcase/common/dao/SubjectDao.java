@@ -21,7 +21,7 @@ public class SubjectDao extends HibernateDao<Subject, Long> {
 	 * 获取帖子内容.
 	 */
 	public Subject getDetail(Long id) {
-		return findUnique(QUERY_WITH_DETAIL, id);
+		return (Subject) findUnique(QUERY_WITH_DETAIL, id);
 	}
 
 	/**

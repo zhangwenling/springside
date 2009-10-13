@@ -23,7 +23,7 @@ public class TopicListener implements MessageListener {
 	private static Logger logger = LoggerFactory.getLogger(TopicListener.class);
 
 	@Autowired(required = false)
-	private MimeMailService mimeMailService;//邮件发送
+	private MimeMailService mimeMailService;//邮件发送服务
 
 	public void onMessage(Message message) {
 		MapMessage mapMessage = (MapMessage) message;

@@ -36,13 +36,12 @@ import org.springside.modules.utils.ReflectionUtils;
 public class User extends IdEntity {
 
 	private String loginName;
-	private String password; //为简化演示,使用明文保存密码.
+	private String password;//为简化演示使用明文保存的密码
 	private String name;
 	private String email;
+	private List<Role> roleList = new ArrayList<Role>();//有序的关联对象集合
 
-	private List<Role> roleList = new ArrayList<Role>(); //有序的关联对象集合.
-
-	//字段非空且唯一,用于提醒Entity使用者及生成DDL.
+	//字段非空且唯一, 用于提醒Entity使用者及生成DDL.
 	@Column(nullable = false, unique = true)
 	public String getLoginName() {
 		return loginName;

@@ -1,6 +1,5 @@
 package org.springside.modules.unit.utils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class ReflectionUtilsTest extends Assert {
 	}
 
 	@Test
-	public void invokeMethod() throws InvocationTargetException {
+	public void invokeMethod() {
 		TestBean bean = new TestBean();
 		assertEquals("hello calvin", ReflectionUtils.invokeMethod(bean, "privateMethod", new Class[] { String.class },
 				new Object[] { "calvin" }));

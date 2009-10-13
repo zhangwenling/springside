@@ -27,13 +27,13 @@ public class RoleAction extends CrudActionSupport<Role> {
 	@Autowired
 	private SecurityEntityManager securityEntityManager;
 
-	// 页面属性 //
+	//-- 页面属性 --//
 	private Long id;
 	private Role entity;
 	private List<Role> allRoleList;//角色列表
 	private List<Long> checkedAuthIds;//页面中钩选的权限id列表
 
-	// ModelDriven 与 Preparable函数 //
+	//-- ModelDriven 与 Preparable函数 --//
 	public Role getModel() {
 		return entity;
 	}
@@ -51,7 +51,7 @@ public class RoleAction extends CrudActionSupport<Role> {
 		}
 	}
 
-	// CRUD Action 函数 //
+	//-- CRUD Action 函数 --//
 	@Override
 	public String list() throws Exception {
 		allRoleList = securityEntityManager.getAllRole();
@@ -81,7 +81,7 @@ public class RoleAction extends CrudActionSupport<Role> {
 		return RELOAD;
 	}
 
-	// 页面属性访问函数 //
+	//-- 页面属性访问函数 --//
 	/**
 	 * list页面显示所有角色列表.
 	 */

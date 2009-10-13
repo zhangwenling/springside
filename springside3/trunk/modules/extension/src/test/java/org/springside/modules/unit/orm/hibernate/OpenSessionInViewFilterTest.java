@@ -1,7 +1,5 @@
 package org.springside.modules.unit.orm.hibernate;
 
-import java.lang.reflect.InvocationTargetException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,7 +13,7 @@ import org.springside.modules.utils.ReflectionUtils;
 public class OpenSessionInViewFilterTest extends Assert {
 
 	@Test
-	public void shouldNotFilter() throws ServletException, InvocationTargetException {
+	public void shouldNotFilter() throws ServletException {
 		MockFilterConfig config = new MockFilterConfig();
 		config.addInitParameter(OpenSessionInViewFilter.EXCLUDE_SUFFIXS_NAME, "jpg,css");
 

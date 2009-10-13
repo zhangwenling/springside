@@ -21,23 +21,22 @@ import org.apache.commons.lang.StringUtils;
  * @author calvin
  */
 public class Page<T> {
-	// 公共变量 //
+	//-- 公共变量 --//
 	public static final String ASC = "asc";
 	public static final String DESC = "desc";
 
-	//分页参数 //
+	//-- 分页参数 --//
 	protected int pageNo = 1;
 	protected int pageSize = 1;
 	protected String orderBy = null;
 	protected String order = null;
 	protected boolean autoCount = true;
 
-	//返回结果 //
+	//-- 返回结果 --//
 	protected List<T> result = Collections.emptyList();
 	protected long totalCount = -1;
 
-	// 构造函数 //
-
+	//-- 构造函数 --//
 	public Page() {
 	}
 
@@ -50,8 +49,7 @@ public class Page<T> {
 		setAutoCount(autoCount);
 	}
 
-	// 查询参数访问函数 //
-
+	//-- 访问查询参数函数 --//
 	/**
 	 * 获得当前页的页号,序号从1开始,默认为1.
 	 */
@@ -153,7 +151,7 @@ public class Page<T> {
 		this.autoCount = autoCount;
 	}
 
-	// 访问查询结果函数 //
+	//-- 访问查询结果函数 --//
 
 	/**
 	 * 取得页内的记录列表.

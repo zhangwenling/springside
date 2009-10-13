@@ -27,7 +27,7 @@ public class QueueConsumer implements Runnable {
 	private static Logger logger = LoggerFactory.getLogger(QueueConsumer.class);
 
 	@Autowired(required = false)
-	private SimpleMailService simpleMailService;//邮件发送
+	private SimpleMailService simpleMailService;//邮件发送服务
 
 	private ScheduledExecutorService executor;
 

@@ -27,17 +27,17 @@ public class JmxClientService {
 
 	private static Logger logger = LoggerFactory.getLogger(JmxClientService.class);
 
-	//jmx客户端工厂及mbean代理
+	//-- jmx客户端工厂及mbean代理 --//
 	private JmxClientTemplate jmxClientTemplate;
 	private ServerConfigMBean serverConfigMBean;
 
-	//可注入的连接参数
+	//-- 可注入的连接参数 --//
 	private String host;
 	private String port;
 	private String userName;
 	private String passwd;
 
-	// 连接参数设定函数 //
+	//-- 连接参数设定函数 --//
 	public void setHost(String host) {
 		this.host = host;
 	}
@@ -54,7 +54,7 @@ public class JmxClientService {
 		this.passwd = passwd;
 	}
 
-	// 连接与断开远程连接 //
+	//-- 连接与断开远程连接 --//
 	/**
 	 * 连接JMX Server并创建本地的MBean代理.
 	 */
@@ -81,7 +81,7 @@ public class JmxClientService {
 		jmxClientTemplate.close();
 	}
 
-	// 标准MBean代理操作演示 //
+	//-- 标准MBean代理操作演示 --//
 	/**
 	 * 获取节点名.
 	 */
@@ -110,14 +110,15 @@ public class JmxClientService {
 		serverConfigMBean.setNotificationMailEnabled(notificationMailEnabled);
 	}
 
-	// 无MBean的Class文件时直接访问属性调用方法的演示 //
+	//-- 无MBean的Class文件时直接访问属性调用方法的演示 --//
 	/**
 	 * 获取Hibernate统计数据.
 	 */
 	public HibernateStatistics getHibernateStatistics() {
 		HibernateStatistics statistics = new HibernateStatistics();
 		statistics.setSessionOpenCount((Long) jmxClientTemplate.getAttribute(HIBERNATE_MBEAN_NAME, "SessionOpenCount"));
-		statistics.setSessionCloseCount((Long) jmxClientTemplate.getAttribute(HIBERNATE_MBEAN_NAME, "SessionCloseCount"));
+		statistics.setSessionCloseCount((Long) jmxClientTemplate
+				.getAttribute(HIBERNATE_MBEAN_NAME, "SessionCloseCount"));
 		return statistics;
 	}
 

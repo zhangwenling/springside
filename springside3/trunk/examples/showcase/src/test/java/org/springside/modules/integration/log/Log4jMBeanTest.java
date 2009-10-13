@@ -58,25 +58,26 @@ public class Log4jMBeanTest extends SpringContextTestCase {
 		assertEquals(oldLevel, jmxClientTemplate.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerLevel",
 				new Class[] { String.class }, new Object[] { loggerName }));
 		//设定新级别
-		jmxClientTemplate.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "setLoggerLevel", new Class[] { String.class, String.class },
-				new Object[] { loggerName, newLevel });
+		jmxClientTemplate.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "setLoggerLevel", new Class[] { String.class,
+				String.class }, new Object[] { loggerName, newLevel });
 		assertEquals(newLevel, Logger.getLogger(loggerName).getEffectiveLevel().toString());
 		//恢复原级别
-		jmxClientTemplate.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "setLoggerLevel", new Class[] { String.class, String.class },
-				new Object[] { loggerName, oldLevel });
+		jmxClientTemplate.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "setLoggerLevel", new Class[] { String.class,
+				String.class }, new Object[] { loggerName, oldLevel });
 	}
 
 	@Test
+	@SuppressWarnings("unchecked")
 	public void getLoggerAppenders() {
-		List<String> list = jmxClientTemplate.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerAppenders",
+		List<String> list = (List<String>) jmxClientTemplate.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerAppenders",
 				new Class[] { String.class }, new Object[] { "org.springside" });
 
 		assertEquals(2, list.size());
 		assertEquals("stdout(parent)", list.get(0));
 		assertEquals("logfile(parent)", list.get(1));
 
-		list = jmxClientTemplate.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerAppenders", new Class[] { String.class },
-				new Object[] { "DBLogExample" });
+		list = (List<String>) jmxClientTemplate.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerAppenders",
+				new Class[] { String.class }, new Object[] { "DBLogExample" });
 
 		assertEquals(2, list.size());
 		assertEquals("stdout", list.get(0));

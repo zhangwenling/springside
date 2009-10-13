@@ -42,7 +42,7 @@ public class SecurityEntityManager {
 	@Autowired
 	private ResourceDao resourceDao;
 
-	// User Manager //
+	//-- User Manager --//
 	@Transactional(readOnly = true)
 	public User getUser(Long id) {
 		return userDao.get(id);
@@ -86,7 +86,7 @@ public class SecurityEntityManager {
 		return userDao.isPropertyUnique("loginName", loginName, oldLoginName);
 	}
 
-	// Role Manager //
+	//-- Role Manager --//
 	@Transactional(readOnly = true)
 	public Role getRole(Long id) {
 		return roleDao.get(id);
@@ -105,7 +105,7 @@ public class SecurityEntityManager {
 		roleDao.delete(id);
 	}
 
-	// Resource Manager //
+	//-- Resource Manager --//
 	/**
 	 * 查找URL类型的资源并初始化可访问该资源的授权.
 	 */
@@ -114,7 +114,7 @@ public class SecurityEntityManager {
 		return resourceDao.getUrlResourceWithAuthorities();
 	}
 
-	// Authority Manager //
+	//-- Authority Manager --//
 	@Transactional(readOnly = true)
 	public List<Authority> getAllAuthority() {
 		return authorityDao.getAll();

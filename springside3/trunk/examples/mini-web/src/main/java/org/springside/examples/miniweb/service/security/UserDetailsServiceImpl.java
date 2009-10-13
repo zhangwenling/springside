@@ -37,7 +37,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		GrantedAuthority[] grantedAuths = obtainGrantedAuthorities(user);
 
-		// mini-web中无以下属性,暂时全部设为true.
+		//-- mini-web示例中无以下属性, 暂时全部设为true. --//
 		boolean enabled = true;
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;

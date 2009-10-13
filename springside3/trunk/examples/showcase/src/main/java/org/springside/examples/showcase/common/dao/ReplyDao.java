@@ -18,6 +18,6 @@ public class ReplyDao extends HibernateDao<Reply, Long> {
 	 * 获取回复内容.
 	 */
 	public Reply getDetail(Long id) {
-		return findUnique(QUERY_WITH_DETAIL, id);
+		return (Reply) findUnique(QUERY_WITH_DETAIL, id);
 	}
 }

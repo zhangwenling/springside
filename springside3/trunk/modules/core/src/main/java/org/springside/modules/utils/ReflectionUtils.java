@@ -164,7 +164,6 @@ public class ReflectionUtils {
 	 * @param index the Index of the generic ddeclaration,start from 0.
 	 * @return the index generic declaration, or Object.class if cannot be determined
 	 */
-
 	@SuppressWarnings("unchecked")
 	public static Class getSuperClassGenricType(final Class clazz, final int index) {
 

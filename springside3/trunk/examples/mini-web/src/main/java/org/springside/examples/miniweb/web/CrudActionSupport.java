@@ -34,8 +34,7 @@ public abstract class CrudActionSupport<T> extends ActionSupport implements Mode
 		return list();
 	}
 
-	// CRUD函数 //
-
+	//-- CRUD Action函数 --//
 	/**
 	 * Action函数,显示Entity列表界面.
 	 * 建议return SUCCESS.
@@ -61,8 +60,7 @@ public abstract class CrudActionSupport<T> extends ActionSupport implements Mode
 	 */
 	public abstract String delete() throws Exception;
 
-	// Preparable函数 //
-
+	//-- Preparable函数 --//
 	/**
 	 * 实现空的prepare()函数,屏蔽所有Action函数公共的二次绑定.
 	 */

@@ -30,13 +30,13 @@ import org.slf4j.LoggerFactory;
  */
 public class Struts2Utils {
 
-	//header 常量定义//
+	//-- header 常量定义 --//
 	private static final String ENCODING_PREFIX = "encoding";
 	private static final String NOCACHE_PREFIX = "no-cache";
 	private static final String ENCODING_DEFAULT = "UTF-8";
 	private static final boolean NOCACHE_DEFAULT = true;
 
-	//content-type 定义 //
+	//-- content-type 常量定义 --//
 	private static final String TEXT_TYPE = "text/plain";
 	private static final String JSON_TYPE = "application/json";
 	private static final String XML_TYPE = "text/xml";
@@ -44,24 +44,23 @@ public class Struts2Utils {
 
 	private static Logger logger = LoggerFactory.getLogger(Struts2Utils.class);
 
-	// 取得Request/Response/Session的简化函数 //
-
+	//-- 取得Request/Response/Session的简化函数 --//
 	/**
-	 * 取得HttpSession的简化方法.
+	 * 取得HttpSession的简化函数.
 	 */
 	public static HttpSession getSession() {
 		return ServletActionContext.getRequest().getSession();
 	}
 
 	/**
-	 * 取得HttpRequest的简化方法.
+	 * 取得HttpRequest的简化函数.
 	 */
 	public static HttpServletRequest getRequest() {
 		return ServletActionContext.getRequest();
 	}
 
 	/**
-	 * 取得HttpResponse的简化方法.
+	 * 取得HttpResponse的简化函数.
 	 */
 	public static HttpServletResponse getResponse() {
 		return ServletActionContext.getResponse();
@@ -74,8 +73,7 @@ public class Struts2Utils {
 		return getRequest().getParameter(name);
 	}
 
-	// 绕过jsp/freemaker直接输出文本的函数 //
-
+	//-- 绕过jsp/freemaker直接输出文本的函数 --//
 	/**
 	 * 直接输出内容的简便函数.
 

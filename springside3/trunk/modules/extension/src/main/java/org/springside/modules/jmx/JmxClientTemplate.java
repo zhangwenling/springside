@@ -148,8 +148,7 @@ public class JmxClientTemplate {
 	 * 
 	 * @param paramClassNames 所有参数的Class名全称的数组.
 	 */
-	@SuppressWarnings("unchecked")
-	public <T> T invoke(final String mbeanName, final String methodName, final String[] paramClassNames,
+	public Object invoke(final String mbeanName, final String methodName, final String[] paramClassNames,
 			final Object[] paramValues) {
 		Assert.hasText(mbeanName, "mbeanName不能为空");
 		Assert.hasText(methodName, "methodName不能为空");
@@ -157,7 +156,7 @@ public class JmxClientTemplate {
 
 		try {
 			ObjectName objectName = buildObjectName(mbeanName);
-			return (T) mbsc.invoke(objectName, methodName, paramValues, paramClassNames);
+			return mbsc.invoke(objectName, methodName, paramValues, paramClassNames);
 		} catch (JMException e) {
 			throw new IllegalArgumentException("参数不正确", e);
 		} catch (IOException e) {
@@ -165,15 +164,20 @@ public class JmxClientTemplate {
 		}
 	}
 
+	/**
+	 * 按方法名直接调用MBean方法(无MBean的Class文件时使用).
+	 * 
+	 * @param paramClasses 所有参数的Class数组.
+	 */
 	@SuppressWarnings("unchecked")
-	public <T> T invoke(final String mbeanName, final String methodName, final Class[] paramClasses,
+	public Object invoke(final String mbeanName, final String methodName, final Class[] paramClasses,
 			final Object[] paramValues) {
 		String[] paramClassNames = new String[paramClasses.length];
 		for (int i = 0; i < paramClasses.length; i++) {
 			paramClassNames[i] = paramClasses[i].getName();
 		}
 
-		return (T) invoke(mbeanName, methodName, paramClassNames, paramValues);
+		return invoke(mbeanName, methodName, paramClassNames, paramValues);
 	}
 
 	/**

@@ -65,8 +65,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		super(sessionFactory, entityClass);
 	}
 
-	// 分页查询函数 //
-
+	//-- 分页查询函数 --//
 	/**
 	 * 分页获取全部对象.
 	 */
@@ -272,7 +271,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		return totalCount;
 	}
 
-	// 属性过滤条件查询函数 //
+	//-- 属性过滤条件(PropertyFilter)查询函数 --//
 
 	/**
 	 * 按属性查找对象列表,支持多种匹配方式.

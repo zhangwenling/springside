@@ -30,7 +30,7 @@ public class SpringContextTestCase extends AbstractJUnit4SpringContextTests {
 		}
 	}
 
-	// Assert 函数 //
+	//-- Assert 函数 --//
 	protected void assertEquals(Object expected, Object actual) {
 		Assert.assertEquals(expected, actual);
 	}

@@ -71,7 +71,7 @@ public class SpringTxTestCase extends AbstractTransactionalJUnit4SpringContextTe
 		}
 	}
 
-	// Assert 函数 //
+	//-- Assert 函数 --//
 
 	/**
 	 * 反射比较对象间的所有属性,忽略expected对象的Null对象和集合中对象的次序.

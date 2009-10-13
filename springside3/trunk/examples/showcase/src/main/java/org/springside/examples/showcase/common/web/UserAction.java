@@ -26,14 +26,14 @@ public class UserAction extends CrudActionSupport<User> {
 	@Autowired
 	private UserManager userManager;
 
-	// 页面属性  //
+	//-- 页面属性  --//
 	private Long id;
 	private User entity;
 	private List<User> allUserList;
 	private Integer workingVersion;//对象版本号, 配合Hibernate的@Version防止并发修改
 	private List<Long> checkedUserIds;
 
-	// ModelDriven 与 Preparable函数 //
+	//-- ModelDriven 与 Preparable函数 --//
 	public User getModel() {
 		return entity;
 	}
@@ -51,7 +51,7 @@ public class UserAction extends CrudActionSupport<User> {
 		}
 	}
 
-	// CRUD Action 函数 //
+	//-- CRUD Action 函数 --//
 	@Override
 	public String list() throws Exception {
 		allUserList = userManager.getAllUser();
@@ -80,13 +80,13 @@ public class UserAction extends CrudActionSupport<User> {
 		throw new UnsupportedOperationException("delete操作暂时未支持");
 	}
 
-	// 其他Action函数 //
+	//-- 其他Action函数 --//
 	public String disableUsers() {
 		userManager.disableUsers(checkedUserIds);
 		return RELOAD;
 	}
 
-	// 页面属性访问函数 //
+	//-- 页面属性访问函数 --//
 	public List<User> getAllUserList() {
 		return allUserList;
 	}

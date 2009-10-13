@@ -27,12 +27,11 @@ public class JmxClientAction extends ActionSupport {
 	@Autowired
 	private JmxClientService jmxClientService;
 
-	// 页面属性 //
+	//-- 页面属性 --//
 	private String nodeName;
 	private boolean notificationMailEnabled;
 	private HibernateStatistics hibernateStatistics;
 
-	// Action 函数 //
 	/**
 	 * 默认函数,显示服务器配置及运行情况.
 	 */
@@ -44,7 +43,7 @@ public class JmxClientAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	// 系统配置 (基于MBean) //
+	//-- 系统配置 (基于MBean) --//
 	/**
 	 * 修改系统配置的Ajax请求.
 	 */
@@ -82,7 +81,7 @@ public class JmxClientAction extends ActionSupport {
 		return null;
 	}
 
-	// Hibernate运行统计(直接读取属性/调用方法) //
+	//-- Hibernate运行统计(直接读取属性/调用方法) --//
 	/**
 	 * 打印Hibernate统计信息日志.
 	 */
@@ -90,7 +89,7 @@ public class JmxClientAction extends ActionSupport {
 		jmxClientService.logSummary();
 	}
 
-	// 页面属性访问函数 //
+	//-- 页面属性访问函数 --//
 	public String getNodeName() {
 		return nodeName;
 	}

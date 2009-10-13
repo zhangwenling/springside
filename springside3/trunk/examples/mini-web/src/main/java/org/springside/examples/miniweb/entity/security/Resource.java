@@ -30,14 +30,13 @@ import org.springside.modules.utils.ReflectionUtils;
 @Table(name = "SS_RESOURCE")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Resource extends IdEntity {
-	// resourceType常量 //
+	//-- resourceType常量 --//
 	public static final String URL_TYPE = "url";
 	public static final String MENU_TYPE = "menu";
 
 	private String resourceType;
 	private String value;
 	private double position;
-
 	private List<Authority> authorityList = new ArrayList<Authority>();
 
 	/**
