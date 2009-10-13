@@ -11,12 +11,13 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 
 /**
  * 单向SHA-1散列与DES对称加密的Utils.
  * 
- * 使用Base64编码SHA1与DES产生的字节数组.
+ * 默认使用Hex编码字节数组, 亦可使用Base64版本的函数.
  * 
  * @author calvin
  */
@@ -29,14 +30,27 @@ public class SecurityUtils {
 	 * 对输入字符串进行sha1散列,并进行Hex编码.
 	 */
 	public static String sha1(String input) {
+
+		byte[] digest = sha1ToBytes(input);
+		return Hex.encodeHexString(digest);
+	}
+
+	/**
+	 * 对输入字符串进行sha1散列,并进行Base64编码.
+	 */
+	public static String sha1Base64(String input) {
+		byte[] digest = sha1ToBytes(input);
+		return Base64.encodeBase64String(digest);
+	}
+
+	private static byte[] sha1ToBytes(String input) {
 		MessageDigest messageDigest;
 		try {
 			messageDigest = MessageDigest.getInstance("SHA-1");
 		} catch (NoSuchAlgorithmException e) {
 			throw new IllegalStateException("Unexpected exception.", e);
 		}
-		byte[] digest = messageDigest.digest(input.getBytes());
-		return Hex.encodeHexString(digest);
+		return messageDigest.digest(input.getBytes());
 	}
 
 	//-- DES --//
@@ -52,6 +66,17 @@ public class SecurityUtils {
 	}
 
 	/**
+	 * 使用DES加密原始字符串,返回Base64编码的结果.
+	 * 
+	 * @param input 原始输入字符串.
+	 * @param key 由desGenerateKey()生成的, 使用Hex编码的密钥.
+	 */
+	public static String desEncryptBase64(String input, String key) throws Exception {
+		byte[] encryptResult = des(input.getBytes(), key, Cipher.ENCRYPT_MODE);
+		return Base64.encodeBase64String(encryptResult);
+	}
+
+	/**
 	 * 使用DES解密Hex编码的加密字符串, 返回原始字符串.
 	 * 
 	 * @param input Hex编码的加密字符串.
@@ -59,6 +84,17 @@ public class SecurityUtils {
 	 */
 	public static String desDecrypt(String input, String key) throws Exception {
 		byte[] decryptResult = des(Hex.decodeHex(input.toCharArray()), key, Cipher.DECRYPT_MODE);
+		return new String(decryptResult);
+	}
+
+	/**
+	 * 使用DES解密Base64编码的加密字符串, 返回原始字符串.
+	 * 
+	 * @param input Base64编码的加密字符串.
+	 * @param key 由desGenerateKey()生成的, 使用Hex编码的密钥.
+	 */
+	public static String desDecryptBase64(String input, String key) throws Exception {
+		byte[] decryptResult = des(Base64.decodeBase64(input), key, Cipher.DECRYPT_MODE);
 		return new String(decryptResult);
 	}
 
