@@ -99,6 +99,17 @@ public class SecurityUtils {
 	}
 
 	/**
+	 * 生成符合DES规范的密钥,使用Hex编码.
+	 */
+	public static String desGenerateKey() throws Exception {
+		SecureRandom secureRandom = new SecureRandom();
+		KeyGenerator kg = KeyGenerator.getInstance(DES);
+		kg.init(secureRandom);
+		SecretKey secretKey = kg.generateKey();
+		return Hex.encodeHexString(secretKey.getEncoded());
+	}
+
+	/**
 	 * 使用DES加密或解密无编码的原始字节数组,返回无编码的字节数组结果.
 	 * 
 	 * @param input 无编码的原始字或加密字符串
@@ -114,13 +125,4 @@ public class SecurityUtils {
 		cipher.init(mode, k);
 		return cipher.doFinal(input);
 	}
-
-	public static String desGenerateKey() throws Exception {
-		SecureRandom secureRandom = new SecureRandom();
-		KeyGenerator kg = KeyGenerator.getInstance(DES);
-		kg.init(secureRandom);
-		SecretKey secretKey = kg.generateKey();
-		return Hex.encodeHexString(secretKey.getEncoded());
-	}
-
 }
