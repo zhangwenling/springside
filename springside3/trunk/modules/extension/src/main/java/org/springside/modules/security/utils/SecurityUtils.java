@@ -261,12 +261,10 @@ public class SecurityUtils {
 	}
 
 	public static void handleSecurityException(Exception e) {
-		if (e instanceof NoSuchAlgorithmException) {
-			throw new IllegalStateException("Unexpected exception", e);
-		} else if (e instanceof GeneralSecurityException) {
+		if (e instanceof GeneralSecurityException) {
 			throw new IllegalStateException("Security exception", e);
 		} else if (e instanceof DecoderException) {
-			throw new IllegalStateException("Decoder  exception", e);
+			throw new IllegalStateException("Hex Decoder exception", e);
 		} else {
 			throw new IllegalStateException("Unexpected exception", e);
 		}
