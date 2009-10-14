@@ -7,14 +7,14 @@ import org.springside.modules.security.utils.SecurityUtils;
 public class SecurityUtilsTest extends Assert {
 
 	@Test
-	public void digest() throws Exception {
+	public void digest() {
 		String input = "adkluqkddn";
 		System.out.println(input + " sha1 in hex result    :" + SecurityUtils.sha1ToHex(input));
 		System.out.println(input + " sha1 in base64 result :" + SecurityUtils.sha1ToBase64(input));
 	}
 
 	@Test
-	public void encrypt() throws Exception {
+	public void encrypt() {
 		String hexKey = SecurityUtils.desGenerateHexKey();
 		byte[] key = SecurityUtils.hexDecode(hexKey);
 		System.out.println("des key in hex:" + hexKey);
@@ -35,7 +35,7 @@ public class SecurityUtilsTest extends Assert {
 	}
 
 	@Test
-	public void mac() throws Exception {
+	public void mac() {
 		String input = "adfadfadca";
 		String key = "abcdefgdd";
 		byte[] keyBytes = key.getBytes();
