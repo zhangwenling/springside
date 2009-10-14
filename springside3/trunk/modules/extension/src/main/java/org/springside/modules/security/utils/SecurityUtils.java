@@ -1,11 +1,8 @@
 package org.springside.modules.security.utils;
 
 import java.security.GeneralSecurityException;
-import java.security.InvalidKeyException;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 
 import javax.crypto.Cipher;
@@ -58,7 +55,6 @@ public class SecurityUtils {
 	//-- SHA1 function --//
 	/**
 	 * 对输入字符串进行sha1散列, 返回字节数组.
-	 * @throws NoSuchAlgorithmException 
 	 */
 	public static byte[] sha1(String input) {
 		try {
@@ -92,7 +88,6 @@ public class SecurityUtils {
 	 * 
 	 * @param input 原始输入字符串
 	 * @param key 任意长度的密钥
-	 * @throws InvalidKeyException 
 	 */
 	public static byte[] hmacSha1(String input, byte[] key) {
 		try {
@@ -134,7 +129,6 @@ public class SecurityUtils {
 	 * @param hexMac Hex编码的签名
 	 * @param input 原始输入字符串
 	 * @param key 任意长度的密钥
-	 * @throws Exception 
 	 */
 	public static boolean isHexMacValid(String hexMac, String input, byte[] key) {
 		byte[] expected = hexDecode(hexMac);
@@ -164,9 +158,6 @@ public class SecurityUtils {
 	 * @param input 无编码的原始字或加密字符串
 	 * @param key 符合DES规范的密钥
 	 * @param mode Cipher.ENCRYPT_MODE 或 Cipher.DECRYPT_MODE
-	 * @throws GeneralSecurityException 
-	 * @throws InvalidKeyException 
-	 * @throws InvalidKeySpecException 
 	 */
 	public static byte[] des(byte[] input, byte[] key, int mode) {
 		try {
