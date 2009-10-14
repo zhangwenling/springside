@@ -89,9 +89,9 @@ public class SecurityUtils {
 	 * @param input 原始输入字符串
 	 * @param key 任意长度的密钥
 	 */
-	public static byte[] hmacSha1(String input, byte[] key) {
+	public static byte[] hmacSha1(String input, String key) {
 		try {
-			SecretKey secretKey = new SecretKeySpec(key, HMACSHA1);
+			SecretKey secretKey = new SecretKeySpec(key.getBytes(), HMACSHA1);
 			Mac mac = Mac.getInstance(HMACSHA1);
 			mac.init(secretKey);
 			return mac.doFinal(input.getBytes());
@@ -107,7 +107,7 @@ public class SecurityUtils {
 	 * @param input 原始输入字符串
 	 * @param key 任意长度的密钥
 	 */
-	public static String hmacSha1ToHex(String input, byte[] key) {
+	public static String hmacSha1ToHex(String input, String key) {
 		byte[] signature = hmacSha1(input, key);
 		return hexEncode(signature);
 	}
@@ -118,7 +118,7 @@ public class SecurityUtils {
 	 * @param input 原始输入字符串
 	 * @param key 任意长度的密钥
 	 */
-	public static String hmacSha1ToBase64(String input, byte[] key) {
+	public static String hmacSha1ToBase64(String input, String key) {
 		byte[] signature = hmacSha1(input, key);
 		return base64Encode(signature);
 	}
@@ -130,7 +130,7 @@ public class SecurityUtils {
 	 * @param input 原始输入字符串
 	 * @param key 任意长度的密钥
 	 */
-	public static boolean isHexMacValid(String hexMac, String input, byte[] key) {
+	public static boolean isHexMacValid(String hexMac, String input, String key) {
 		byte[] expected = hexDecode(hexMac);
 		byte[] actual = hmacSha1(input, key);
 
@@ -144,7 +144,7 @@ public class SecurityUtils {
 	 * @param input 原始输入字符串
 	 * @param key 任意长度的密钥
 	 */
-	public static boolean isBase64MacValid(String base64Mac, String input, byte[] key) {
+	public static boolean isBase64MacValid(String base64Mac, String input, String key) {
 		byte[] expected = base64Decode(base64Mac);
 		byte[] actual = hmacSha1(input, key);
 
@@ -156,12 +156,12 @@ public class SecurityUtils {
 	 * 使用DES加密或解密无编码的原始字节数组, 返回无编码的字节数组结果.
 	 * 
 	 * @param input 无编码的原始字或加密字符串
-	 * @param key 符合DES规范的密钥
+	 * @param hexKey 符合DES规范的Hex编码密钥
 	 * @param mode Cipher.ENCRYPT_MODE 或 Cipher.DECRYPT_MODE
 	 */
-	public static byte[] des(byte[] input, byte[] key, int mode) {
+	public static byte[] des(byte[] input, String hexKey, int mode) {
 		try {
-			DESKeySpec dks = new DESKeySpec(key);
+			DESKeySpec dks = new DESKeySpec(hexDecode(hexKey));
 			SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(DES);
 			SecretKey secretKey = keyFactory.generateSecret(dks);
 
@@ -179,10 +179,10 @@ public class SecurityUtils {
 	 * 使用DES加密原始字符串, 返回Hex编码的结果.
 	 * 
 	 * @param input 原始输入字符串
-	 * @param key 符合DES规范的密钥
+	 * @param key 符合DES规范的Hex编码密钥
 	 */
-	public static String desEncryptToHex(String input, byte[] key) {
-		byte[] encryptResult = des(input.getBytes(), key, Cipher.ENCRYPT_MODE);
+	public static String desEncryptToHex(String input, String hexKey) {
+		byte[] encryptResult = des(input.getBytes(), hexKey, Cipher.ENCRYPT_MODE);
 		return hexEncode(encryptResult);
 	}
 
@@ -190,10 +190,10 @@ public class SecurityUtils {
 	 * 使用DES加密原始字符串, 返回Base64编码的结果.
 	 * 
 	 * @param input 原始输入字符串
-	 * @param key 符合DES规范的密钥
+	 * @param key 符合DES规范的Hex编码密钥
 	 */
-	public static String desEncryptToBase64(String input, byte[] key) {
-		byte[] encryptResult = des(input.getBytes(), key, Cipher.ENCRYPT_MODE);
+	public static String desEncryptToBase64(String input, String hexKey) {
+		byte[] encryptResult = des(input.getBytes(), hexKey, Cipher.ENCRYPT_MODE);
 		return base64Encode(encryptResult);
 	}
 
@@ -201,10 +201,10 @@ public class SecurityUtils {
 	 * 使用DES解密Hex编码的加密字符串, 返回原始字符串.
 	 * 
 	 * @param input Hex编码的加密字符串
-	 * @param key 符合DES规范的密钥
+	 * @param key 符合DES规范的Hex编码密钥
 	 */
-	public static String desDecryptFromHex(String input, byte[] key) {
-		byte[] decryptResult = des(hexDecode(input), key, Cipher.DECRYPT_MODE);
+	public static String desDecryptFromHex(String input, String hexKey) {
+		byte[] decryptResult = des(hexDecode(input), hexKey, Cipher.DECRYPT_MODE);
 		return new String(decryptResult);
 	}
 
@@ -212,23 +212,23 @@ public class SecurityUtils {
 	 * 使用DES解密Base64编码的加密字符串, 返回原始字符串.
 	 * 
 	 * @param input Base64编码的加密字符串
-	 * @param key 符合DES规范的密钥
+	 * @param key 符合DES规范的Hex编码密钥
 	 */
-	public static String desDecryptFromBase64(String input, byte[] key) {
-		byte[] decryptResult = des(base64Decode(input), key, Cipher.DECRYPT_MODE);
+	public static String desDecryptFromBase64(String input, String hexKey) {
+		byte[] decryptResult = des(base64Decode(input), hexKey, Cipher.DECRYPT_MODE);
 		return new String(decryptResult);
 	}
 
 	/**
-	 * 生成符合DES规范的密钥, 返回字节数组.
+	 * 生成符合DES规范的密钥, 返回Hex编码结果.
 	 */
-	public static byte[] desGenerateKey() {
+	public static String desGenerateKey() {
 		try {
 			SecureRandom secureRandom = new SecureRandom();
 			KeyGenerator kg = KeyGenerator.getInstance(DES);
 			kg.init(secureRandom);
 			SecretKey secretKey = kg.generateKey();
-			return secretKey.getEncoded();
+			return hexEncode(secretKey.getEncoded());
 		} catch (Exception e) {
 			handleSecurityException(e);
 			return null;
@@ -236,21 +236,8 @@ public class SecurityUtils {
 	}
 
 	/**
-	 * 生成符合DES规范的密钥, 返回Hex编码的结果.
+	 * 处理抛出的异常, 统一转化为Unchecked Exception.
 	 */
-	public static String desGenerateHexKey() {
-		byte[] key = desGenerateKey();
-		return hexEncode(key);
-	}
-
-	/**
-	 * 生成符合DES规范的密钥, 返回Base65编码的结果.
-	 */
-	public static String desGenerateBase64Key() {
-		byte[] key = desGenerateKey();
-		return base64Encode(key);
-	}
-
 	public static void handleSecurityException(Exception e) {
 		if (e instanceof GeneralSecurityException) {
 			throw new IllegalStateException("Security exception", e);

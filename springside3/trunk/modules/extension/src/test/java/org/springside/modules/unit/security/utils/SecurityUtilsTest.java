@@ -15,9 +15,8 @@ public class SecurityUtilsTest extends Assert {
 
 	@Test
 	public void encrypt() {
-		String hexKey = SecurityUtils.desGenerateHexKey();
-		byte[] key = SecurityUtils.hexDecode(hexKey);
-		System.out.println("des key in hex:" + hexKey);
+		String key = SecurityUtils.desGenerateKey();
+		System.out.println("des key in hex:" + key);
 
 		String input = "adfadfadca";
 
@@ -38,13 +37,12 @@ public class SecurityUtilsTest extends Assert {
 	public void mac() {
 		String input = "adfadfadca";
 		String key = "abcdefgdd";
-		byte[] keyBytes = key.getBytes();
-		String macHexResult = SecurityUtils.hmacSha1ToHex(input, keyBytes);
-		String macBase64Result = SecurityUtils.hmacSha1ToBase64(input, keyBytes);
+		String macHexResult = SecurityUtils.hmacSha1ToHex(input, key);
+		String macBase64Result = SecurityUtils.hmacSha1ToBase64(input, key);
 		System.out.println(input + " hmac-sha1 in hex result   :" + macHexResult);
 		System.out.println(input + " hmac-sha1 in base64 result:" + macBase64Result);
 
-		assertTrue(SecurityUtils.isHexMacValid(macHexResult, input, keyBytes));
-		assertTrue(SecurityUtils.isBase64MacValid(macBase64Result, input, keyBytes));
+		assertTrue(SecurityUtils.isHexMacValid(macHexResult, input, key));
+		assertTrue(SecurityUtils.isBase64MacValid(macBase64Result, input, key));
 	}
 }
