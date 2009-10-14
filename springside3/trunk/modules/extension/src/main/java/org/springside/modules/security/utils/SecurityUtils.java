@@ -30,33 +30,27 @@ public class SecurityUtils {
 	private static final String SHA1 = "SHA-1";
 	private static final String HMACSHA1 = "HmacSHA1";
 
-	//-- Hex/Base64 encode and decode function --//
-	public static String hexEncode(byte[] input) {
-		return Hex.encodeHexString(input);
-	}
-
-	public static byte[] hexDecode(String input) {
-		try {
-			return Hex.decodeHex(input.toCharArray());
-		} catch (Exception e) {
-			handleSecurityException(e);
-			return null;
-		}
-	}
-
-	public static String base64Encode(byte[] input) {
-		return Base64.encodeBase64String(input);
-	}
-
-	public static byte[] base64Decode(String input) {
-		return Base64.decodeBase64(input);
-	}
-
 	//-- SHA1 function --//
+	/**
+	 * 对输入字符串进行sha1散列, 返回Hex编码的结果.
+	 */
+	public static String sha1ToHex(String input) {
+		byte[] digestResult = sha1(input);
+		return hexEncode(digestResult);
+	}
+
+	/**
+	 * 对输入字符串进行sha1散列, 返回Base64编码的结果.
+	 */
+	public static String sha1ToBase64(String input) {
+		byte[] digestResult = sha1(input);
+		return base64Encode(digestResult);
+	}
+
 	/**
 	 * 对输入字符串进行sha1散列, 返回字节数组.
 	 */
-	public static byte[] sha1(String input) {
+	private static byte[] sha1(String input) {
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance(SHA1);
 			return messageDigest.digest(input.getBytes());
@@ -66,41 +60,7 @@ public class SecurityUtils {
 		}
 	}
 
-	/**
-	 * 对输入字符串进行sha1散列, 返回Hex编码的结果.
-	 */
-	public static String sha1ToHex(String input) {
-		byte[] digest = sha1(input);
-		return hexEncode(digest);
-	}
-
-	/**
-	 * 对输入字符串进行sha1散列, 返回Base64编码的结果.
-	 */
-	public static String sha1ToBase64(String input) {
-		byte[] digest = sha1(input);
-		return base64Encode(digest);
-	}
-
 	//-- HMAC-SHA1 funciton --//
-	/**
-	 * 使用HMAC-SHA1进行消息签名, 返回字节数组.
-	 * 
-	 * @param input 原始输入字符串
-	 * @param key 任意长度的密钥
-	 */
-	public static byte[] hmacSha1(String input, String key) {
-		try {
-			SecretKey secretKey = new SecretKeySpec(key.getBytes(), HMACSHA1);
-			Mac mac = Mac.getInstance(HMACSHA1);
-			mac.init(secretKey);
-			return mac.doFinal(input.getBytes());
-		} catch (Exception e) {
-			handleSecurityException(e);
-			return null;
-		}
-	}
-
 	/**
 	 * 使用HMAC-SHA1进行消息签名, 返回Hex编码的结果.
 	 *
@@ -108,8 +68,8 @@ public class SecurityUtils {
 	 * @param key 任意长度的密钥
 	 */
 	public static String hmacSha1ToHex(String input, String key) {
-		byte[] signature = hmacSha1(input, key);
-		return hexEncode(signature);
+		byte[] macResult = hmacSha1(input, key);
+		return hexEncode(macResult);
 	}
 
 	/**
@@ -119,8 +79,8 @@ public class SecurityUtils {
 	 * @param key 任意长度的密钥
 	 */
 	public static String hmacSha1ToBase64(String input, String key) {
-		byte[] signature = hmacSha1(input, key);
-		return base64Encode(signature);
+		byte[] macResult = hmacSha1(input, key);
+		return base64Encode(macResult);
 	}
 
 	/**
@@ -151,30 +111,25 @@ public class SecurityUtils {
 		return Arrays.equals(expected, actual);
 	}
 
-	//-- DES function --//
 	/**
-	 * 使用DES加密或解密无编码的原始字节数组, 返回无编码的字节数组结果.
+	 * 使用HMAC-SHA1进行消息签名, 返回字节数组.
 	 * 
-	 * @param input 无编码的原始字或加密字符串
-	 * @param hexKey 符合DES规范的Hex编码密钥
-	 * @param mode Cipher.ENCRYPT_MODE 或 Cipher.DECRYPT_MODE
+	 * @param input 原始输入字符串
+	 * @param key 任意长度的密钥
 	 */
-	public static byte[] des(byte[] input, String hexKey, int mode) {
+	private static byte[] hmacSha1(String input, String key) {
 		try {
-			DESKeySpec dks = new DESKeySpec(hexDecode(hexKey));
-			SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(DES);
-			SecretKey secretKey = keyFactory.generateSecret(dks);
-
-			Cipher cipher = Cipher.getInstance(DES);
-			cipher.init(mode, secretKey);
-			return cipher.doFinal(input);
+			SecretKey secretKey = new SecretKeySpec(key.getBytes(), HMACSHA1);
+			Mac mac = Mac.getInstance(HMACSHA1);
+			mac.init(secretKey);
+			return mac.doFinal(input.getBytes());
 		} catch (Exception e) {
 			handleSecurityException(e);
 			return null;
 		}
-
 	}
 
+	//-- DES function --//
 	/**
 	 * 使用DES加密原始字符串, 返回Hex编码的结果.
 	 * 
@@ -220,7 +175,29 @@ public class SecurityUtils {
 	}
 
 	/**
-	 * 生成符合DES规范的密钥, 返回Hex编码结果.
+	 * 使用DES加密或解密无编码的原始字节数组, 返回无编码的字节数组结果.
+	 * 
+	 * @param input 无编码的原始字或加密字符串
+	 * @param hexKey 符合DES规范的Hex编码密钥
+	 * @param mode Cipher.ENCRYPT_MODE 或 Cipher.DECRYPT_MODE
+	 */
+	private static byte[] des(byte[] input, String hexKey, int mode) {
+		try {
+			DESKeySpec dks = new DESKeySpec(hexDecode(hexKey));
+			SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(DES);
+			SecretKey secretKey = keyFactory.generateSecret(dks);
+
+			Cipher cipher = Cipher.getInstance(DES);
+			cipher.init(mode, secretKey);
+			return cipher.doFinal(input);
+		} catch (Exception e) {
+			handleSecurityException(e);
+			return null;
+		}
+	}
+
+	/**
+	 * 生成符合DES规范的Hex编码的密钥.
 	 */
 	public static String desGenerateKey() {
 		try {
@@ -235,10 +212,32 @@ public class SecurityUtils {
 		}
 	}
 
+	//-- Support function--// 
+	private static String hexEncode(byte[] input) {
+		return Hex.encodeHexString(input);
+	}
+
+	private static byte[] hexDecode(String input) {
+		try {
+			return Hex.decodeHex(input.toCharArray());
+		} catch (Exception e) {
+			handleSecurityException(e);
+			return null;
+		}
+	}
+
+	private static String base64Encode(byte[] input) {
+		return Base64.encodeBase64String(input);
+	}
+
+	private static byte[] base64Decode(String input) {
+		return Base64.decodeBase64(input);
+	}
+
 	/**
 	 * 处理抛出的异常, 统一转化为Unchecked Exception.
 	 */
-	public static void handleSecurityException(Exception e) {
+	private static void handleSecurityException(Exception e) {
 		if (e instanceof GeneralSecurityException) {
 			throw new IllegalStateException("Security exception", e);
 		} else if (e instanceof DecoderException) {
