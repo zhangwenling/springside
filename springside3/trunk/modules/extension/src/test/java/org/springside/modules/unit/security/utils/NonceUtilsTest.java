@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.junit.Test;
+import org.springside.modules.security.utils.CryptoUtils;
 import org.springside.modules.security.utils.NonceUtils;
 
 public class NonceUtilsTest {
@@ -14,12 +15,18 @@ public class NonceUtilsTest {
 
 	@Test
 	public void getRandomNonce() {
-		System.out.println("randomNonce   :" + NonceUtils.nextRandomNonce());
+		System.out.println("randomNonce   :" + CryptoUtils.hexEncode(NonceUtils.nextRandomNonce()));
 	}
 
 	@Test
 	public void getTimestampNonce() {
 		System.out.println("timestampNonce:" + NonceUtils.nextTimestampNonce());
+	}
+
+	@Test
+	public void getUuidNonce() {
+		for (int i = 0; i < 5; i++)
+			System.out.println("UUID Nonce    :" + NonceUtils.nextUuidNonce());
 	}
 
 	@Test
@@ -41,7 +48,7 @@ public class NonceUtilsTest {
 	static class RandomNonceRequestTask implements Runnable {
 		public void run() {
 			for (int i = 0; i < 3; i++) {
-				System.out.println(NonceUtils.nextRandomNonce());
+				System.out.println("randomNonce   :" + CryptoUtils.hexEncode(NonceUtils.nextRandomNonce()));
 			}
 		}
 	}
@@ -49,7 +56,7 @@ public class NonceUtilsTest {
 	static class TimestampNonceRequestTask implements Runnable {
 		public void run() {
 			for (int i = 0; i < 3; i++) {
-				System.out.println(NonceUtils.nextTimestampNonce());
+				System.out.println("timestampNonce:" + NonceUtils.nextTimestampNonce());
 			}
 		}
 	}

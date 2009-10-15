@@ -13,9 +13,10 @@
 <div id="mainbar">
 <h3>安全高级演示</h3>
 <ul>
-<li><a href="${ctx}/security/login.action">SpringSecurity与认证码集成演示</a></li>
+<li><a href="${ctx}/security/login.action">SpringSecurity与认证码集成演示.</a></li>
 <li>SpringSecurity Sha1散列密码与同时登录人数限制演示.</li>
-<li>SHA-1消息摘要, HMAC-SHA1消息签名 及 DES对称加密演示.(见SecurityUtils及其测试用例)</li>
+<li>SHA-1消息摘要, HMAC-SHA1消息签名 及 DES对称加密演示.(见CryptoUtils及其测试用例)</li>
+<li>Timestamp与 Nonce演示.(见NonceUtils及其测试用例)</li>
 <li>数据级别的权限控制(计划中)</li>
 </ul>
 </div>
