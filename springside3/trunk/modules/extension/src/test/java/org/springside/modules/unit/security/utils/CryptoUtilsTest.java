@@ -54,4 +54,10 @@ public class CryptoUtilsTest extends Assert {
 		assertTrue(CryptoUtils.isHexMacValid(macHexResult, input, key));
 		assertTrue(CryptoUtils.isBase64MacValid(macBase64Result, input, key));
 	}
+
+	@Test
+	public void timestamp() {
+		System.out.println(CryptoUtils.getCurrentDate());
+		System.out.println(CryptoUtils.getCurrentTimpestamp());
+	}
 }

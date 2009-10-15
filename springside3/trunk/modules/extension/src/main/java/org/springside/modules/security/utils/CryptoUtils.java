@@ -1,10 +1,11 @@
 package org.springside.modules.security.utils;
 
-import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -31,8 +32,8 @@ public class CryptoUtils {
 	private static final String SHA1 = "SHA-1";
 	private static final String HMACSHA1 = "HmacSHA1";
 
-	private static final int HMACSHA1_KEY_SIZE = 160;
-	private static final String URL_ENCODING = "UTF-8";
+	private static final int DEFAULT_HMACSHA1_KEYSIZE = 160;//RFC2401
+	private static final SimpleDateFormat internateDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");//RFC3339
 
 	//-- SHA1 function --//
 	/**
@@ -159,7 +160,7 @@ public class CryptoUtils {
 	public static byte[] generateMacSha1Key() {
 		try {
 			KeyGenerator keyGen = KeyGenerator.getInstance(HMACSHA1);
-			keyGen.init(HMACSHA1_KEY_SIZE);
+			keyGen.init(DEFAULT_HMACSHA1_KEYSIZE);
 			SecretKey secretKey = keyGen.generateKey();
 			return secretKey.getEncoded();
 		} catch (Exception e) {
@@ -320,16 +321,10 @@ public class CryptoUtils {
 	}
 
 	/**
-	 * Base64编码, URL安全(不含URL中不支持的字符, RFC3548).
+	 * Base64编码, URL安全(不含URL不支持的字符, RFC3548).
 	 */
 	public static String base64UrlEncode(byte[] input) {
-		try {
-			return URLEncoder.encode(Base64.encodeBase64String(input), URL_ENCODING);
-		} catch (Exception e) {
-			handleSecurityException(e);
-			return null;
-		}
-
+		return Base64.encodeBase64URLSafeString(input);
 	}
 
 	/**
@@ -337,6 +332,22 @@ public class CryptoUtils {
 	 */
 	public static byte[] base64Decode(String input) {
 		return Base64.decodeBase64(input);
+	}
+
+	/**
+	 * 返回Internate标准格式的当前时间戳字符串.
+	 * 标准格式为yyyy-MM-dd'T'HH:mm:ss.SSS'Z', 如2009-10-15T14:24:50.316Z
+	 */
+	public static String getCurrentDate() {
+		Date now = new Date();
+		return internateDateFormat.format(now);
+	}
+
+	/**
+	 * 返回从1970到现在的毫秒数.
+	 */
+	public static String getCurrentTimpestamp() {
+		return Long.toString(new Date().getTime());
 	}
 
 	/**
