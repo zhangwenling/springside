@@ -10,9 +10,6 @@ package org.springside.modules.log;
 import java.util.UUID;
 
 import org.apache.log4j.MDC;
-import org.apache.log4j.NDC;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 系统运行时打印方便调试与追踪信息的工具类.
@@ -35,72 +32,30 @@ import org.slf4j.LoggerFactory;
  */
 public class TraceUtils {
 
-	public static final String LOGGER_NAME = "TraceLogger";
 	public static final String TRACE_ID_KEY = "traceId";
-	public static final String INDENT = "  ";
 
-	private static final String TRACE_NAME_KEY = "traceName";
-	private static final String SUBTRACE_NAME_KEY = "subtraceName";
-
-	private static Logger logger = LoggerFactory.getLogger(LOGGER_NAME);
-
-	public static Logger getLogger() {
-		return logger;
+	/**
+	 * 开始Trace.
+	 * 生成本次Trace的唯一ID并放入MDC.
+	 */
+	public static void beginTrace() {
+		UUID traceId = UUID.randomUUID();
+		MDC.put(TRACE_ID_KEY, traceId);
 	}
 
 	/**
 	 * 开始Trace.
-	 * 生成本次Trace的唯一ID并放入MDC, 打印trace开始信息并增加缩进.
+	 * 将TraceID放入MDC.
 	 */
-	public static void beginTrace(String traceName) {
-		UUID traceId = UUID.randomUUID();
+	public static void beginTrace(String traceId) {
 		MDC.put(TRACE_ID_KEY, traceId);
-		MDC.put(TRACE_NAME_KEY, traceName);
-
-		NDC.clear();
-		logger.trace("-> {}", traceName);
-
-		NDC.push(INDENT);
 	}
 
 	/**
 	 * 结束一次Trace.
-	 * 打印trace结束信息, 减少缩进, 清除traceId.
+	 * 清除traceId.
 	 */
 	public static void endTrace() {
-		NDC.pop();
-
-		logger.trace("<- {}", MDC.get(TRACE_NAME_KEY));
-
 		MDC.remove(TRACE_ID_KEY);
-		MDC.remove(TRACE_NAME_KEY);
-	}
-
-	/**
-	 * 开始子Trace.
-	 * 打印子Trace开始信息, 增加缩进. 
-	 */
-	public static void beginSubTrace(String traceName) {
-		String traceNameKey = SUBTRACE_NAME_KEY + NDC.getDepth();
-
-		MDC.put(traceNameKey, traceName);
-
-		logger.trace("-> {}", traceName);
-
-		NDC.push(INDENT);
-	}
-
-	/**
-	 * 结束子Trace.
-	 * 打印子Trace结束信息, 减少缩进.
-	 */
-	public static void endSubTrace() {
-		NDC.pop();
-
-		String traceNameKey = SUBTRACE_NAME_KEY + NDC.getDepth();
-
-		logger.trace("<- {}", MDC.get(traceNameKey));
-
-		MDC.remove(traceNameKey);
 	}
 }

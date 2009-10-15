@@ -13,7 +13,6 @@ import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.Producer;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
-import org.springside.modules.log.TraceUtils;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
@@ -27,7 +26,6 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 @Transactional
 public class UserManager {
 	private static Logger logger = LoggerFactory.getLogger(UserManager.class);
-	private static Logger traceLogger = TraceUtils.getLogger();
 
 	@Autowired
 	private UserDao userDao;
@@ -65,7 +63,7 @@ public class UserManager {
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
 		List<User> list = userDao.getAllUserWithRoleByDistinctHql();
-		traceLogger.trace("get {} user sucessful.", list.size());
+		logger.trace("get {} user sucessful.", list.size());
 		return list;
 	}
 
