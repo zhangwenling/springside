@@ -37,6 +37,8 @@ public class NonceUtils {
 		}
 	}
 
+	static String[] SPACES = { "0", "00", "0000", "00000000", "0000000000000000", "00000000000000000000000000000000" };
+
 	//-- Timestamp function --//
 	/**
 	 * 返回Internate标准格式的当前毫秒级时间戳字符串.
@@ -114,29 +116,39 @@ public class NonceUtils {
 	}
 
 	/**
-	 * 返回Hex编码的IP, 生成自定义UUID的辅助函数
+	 * 返回Hex编码的IP, 生成自定义UUID的辅助函数.
 	 */
 	public static String getIp() {
 		return ip;
 	}
 
 	/**
-	 * 返回Hex编码的短IP.使用length控制返回的长度.
-	 * 如完整为96ec458e的地址, length=1时只返回8e, length=2时返回458e.
+	 * 返回Hex编码的短IP, 生成自定义UUID的辅助函数.
+	 * 使用length控制返回的长度,如完整为96ec458e的地址
+	 * length=1时只返回8e, length=2时返回458e.
 	 */
 	public static String getShortIp(int length) {
 		return shortips.get(length);
 	}
 
 	/**
-	 * 格式化字符串,固定长度,不足长度在前面补0.
+	 * 格式化字符串,固定长度,不足长度在前面补0, 生成自定义UUID的辅助函数.
 	 */
-	public static String format(String string, int length) {
+	public static String format(String hexString, int length) {
+		int spaceLength = length - hexString.length();
 		StringBuilder buf = new StringBuilder();
-		for (int i = 0; i < length; i++) {
-			buf.append("0");
+
+		while (spaceLength >= 32) {
+			buf.append(SPACES[5]);
+			spaceLength -= 32;
 		}
-		buf.replace(length - string.length(), length, string);
+
+		for (int i = 4; i >= 0; i--) {
+			if ((spaceLength & (1 << i)) != 0) {
+				buf.append(SPACES[i]);
+			}
+		}
+		buf.append(hexString);
 		return buf.toString();
 	}
 }
