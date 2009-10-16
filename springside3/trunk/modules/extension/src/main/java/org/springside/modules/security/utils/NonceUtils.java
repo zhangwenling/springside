@@ -42,7 +42,8 @@ public class NonceUtils {
 	//-- Timestamp function --//
 	/**
 	 * 返回Internate标准格式的当前毫秒级时间戳字符串.
-	 * 标准格式为yyyy-MM-dd'T'HH:mm:ss.SSS'Z', 如2009-10-15T14:24:50.316Z
+	 * 标准格式为yyyy-MM-dd'T'HH:mm:ss.SSS'Z', 如2009-10-15T14:24:50.316Z.
+	 * 可以作为生成自定义UUID的辅助函数.
 	 */
 	public static String getCurrentTimestamp() {
 		Date now = new Date();
@@ -51,6 +52,7 @@ public class NonceUtils {
 
 	/**
 	 * 返回当前毫秒数.
+	 * 可以作为生成自定义UUID的辅助函数.
 	 */
 	public static String getCurrentMills() {
 		return Long.toHexString(System.currentTimeMillis());
@@ -80,6 +82,7 @@ public class NonceUtils {
 
 	/**
 	 * 生成SHA1PRNG算法的SecureRandom Nonce, 返回Hex编码的结果.
+	 * 可以作为生成自定义UUID的辅助函数.
 	 */
 	public static String nextRandomHexNonce(int length) {
 		return Hex.encodeHexString(nextRandomNonce(length));
@@ -124,18 +127,18 @@ public class NonceUtils {
 
 	/**
 	 * 返回Hex编码的短IP, 生成自定义UUID的辅助函数.
-	 * 使用length控制返回的长度,如完整为96ec458e的地址
-	 * length=1时只返回8e, length=2时返回458e.
+	 * 使用length控制返回的长度, 如完整为96ec458e的地址, length=1时只返回8e, length=2时返回458e.
 	 */
 	public static String getShortIp(int length) {
 		return shortips.get(length);
 	}
 
 	/**
-	 * 格式化字符串,固定长度,不足长度在前面补0, 生成自定义UUID的辅助函数.
+	 * 格式化字符串, 固定字串长度, 不足长度在前面补0, 生成自定义UUID的辅助函数.
 	 */
 	public static String format(String hexString, int length) {
 		int spaceLength = length - hexString.length();
+
 		StringBuilder buf = new StringBuilder();
 
 		while (spaceLength >= 32) {
@@ -148,6 +151,7 @@ public class NonceUtils {
 				buf.append(SPACES[i]);
 			}
 		}
+
 		buf.append(hexString);
 		return buf.toString();
 	}

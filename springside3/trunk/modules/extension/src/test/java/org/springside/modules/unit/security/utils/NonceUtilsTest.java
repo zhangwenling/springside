@@ -17,6 +17,7 @@ public class NonceUtilsTest {
 
 	@Test
 	public void noncesCompare() {
+		//标准UUID
 		for (int i = 0; i < 3; i++)
 			System.out.println("Random Nonce        :" + NonceUtils.nextRandomHexNonce());
 		for (int i = 0; i < 3; i++)
@@ -25,12 +26,19 @@ public class NonceUtilsTest {
 			System.out.println("Hibernate UUID Nonce:" + NonceUtils.nextUuidNonce());
 		for (int i = 0; i < 3; i++)
 			System.out.println("RMI UID Nonce       :" + new UID().toString());
-		for (int i = 0; i < 3; i++)
-			System.out.println("Timestamp Nonce     :" + NonceUtils.getIp() + NonceUtils.getCurrentTimestamp()
-					+ NonceUtils.getCounter());
-		for (int i = 0; i < 3; i++)
-			System.out.println("Mills Nonce         :" + NonceUtils.getShortIp(1) + NonceUtils.getCurrentMills()
-					+ NonceUtils.format(NonceUtils.getCounter(), 2));
+
+		//自定义UUID
+		for (int i = 0; i < 3; i++) {
+			System.out.println("Timestamp Nonce     :"
+					+ new StringBuilder().append(NonceUtils.nextRandomHexNonce(2)).append(
+							NonceUtils.getCurrentTimestamp()).append(NonceUtils.getCounter()));
+		}
+
+		for (int i = 0; i < 3; i++) {
+			System.out.println("Mills Nonce         :"
+					+ new StringBuilder().append(NonceUtils.getShortIp(2)).append(NonceUtils.getCurrentMills()).append(
+							NonceUtils.format(NonceUtils.getCounter(), 2)));
+		}
 	}
 
 	@Test
@@ -48,5 +56,4 @@ public class NonceUtilsTest {
 			}
 		}
 	}
-
 }
