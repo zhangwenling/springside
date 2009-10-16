@@ -1,6 +1,7 @@
 package org.springside.modules.security.utils;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
@@ -10,7 +11,7 @@ import org.apache.commons.codec.binary.Hex;
 import org.hibernate.id.UUIDHexGenerator;
 
 /**
- * 唯一数生成类,提供纯Random与UUID两种风格的生成函数.
+ * 唯一数生成类, 提供纯Random与UUID两种风格的生成函数.
  * 
  * @author calvin
  */
@@ -18,8 +19,8 @@ public class NonceUtils {
 	//RFC3339 日期标准格式
 	private static final SimpleDateFormat internateDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
-	//定长格式化所用字符串, 含1,2,4,8,16位的字符串.
-	private static final String[] SPACES = { "0", "00", "0000", "00000000", "0000000000000000" }; //
+	//定长格式化所用字符串, 含1,2,4,8位的字符串.
+	private static final String[] SPACES = { "0", "00", "0000", "00000000" }; //
 
 	//UUID风格同一毫秒内请求的计数器.
 	private static Date lastTime;
@@ -31,8 +32,8 @@ public class NonceUtils {
 		try {
 			byte[] ipbytes = InetAddress.getLocalHost().getAddress();
 			ip = Hex.encodeHexString(ipbytes);
-		} catch (Exception e) {
-			ip = "0";
+		} catch (UnknownHostException e) {
+			ip = "00000000";
 		}
 	}
 
@@ -66,7 +67,7 @@ public class NonceUtils {
 	}
 
 	/**
-	 * 生成SHA1PRNG算法的SecureRandom Nonce, 默认长度为16字节,返回Hex编码的结果.
+	 * 生成SHA1PRNG算法的SecureRandom Nonce, 默认长度为16字节, 返回32字符的Hex编码结果.
 	 */
 	public static String nextRandomHexNonce() {
 		return Hex.encodeHexString(nextRandomNonce());
@@ -92,7 +93,7 @@ public class NonceUtils {
 	}
 
 	/**
-	 * 返回当前毫秒数.
+	 * 返回当前距离1970年的毫秒数.
 	 */
 	public static String getCurrentMills() {
 		return Long.toHexString(System.currentTimeMillis());
@@ -121,19 +122,18 @@ public class NonceUtils {
 	}
 
 	/**
-	 * 格式化字符串, 固定字串长度, 不足长度在前面补0, 生成自定义UUID的辅助函数.
+	 * 格式化字符串, 固定字符串长度, 不足长度在前面补0, 生成自定义UUID的辅助函数.
 	 */
 	public static String format(String hexString, int length) {
 		int spaceLength = length - hexString.length();
-
 		StringBuilder buf = new StringBuilder();
 
-		while (spaceLength >= 16) {
-			buf.append(SPACES[4]);
-			spaceLength -= 16;
+		while (spaceLength >= 8) {
+			buf.append(SPACES[3]);
+			spaceLength -= 8;
 		}
 
-		for (int i = 3; i >= 0; i--) {
+		for (int i = 2; i >= 0; i--) {
 			if ((spaceLength & (1 << i)) != 0) {
 				buf.append(SPACES[i]);
 			}

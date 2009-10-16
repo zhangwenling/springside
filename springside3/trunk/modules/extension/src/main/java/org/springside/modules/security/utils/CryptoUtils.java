@@ -152,7 +152,7 @@ public class CryptoUtils {
 
 	/**
 	 * 生成HMAC-SHA1密钥,返回字节数组.
-	 * HMAC-SHA1算法(RFC2401)建议最少长度为160位(20字节).
+	 * HMAC-SHA1算法(RFC2401)建议最少长度为160位.
 	 */
 	public static byte[] generateMacSha1Key() {
 		try {
@@ -168,7 +168,7 @@ public class CryptoUtils {
 
 	/**
 	 * 生成HMAC-SHA1密钥, 返回Hex编码的结果.
-	 * HMAC-SHA1算法可使用任意长度的密钥, 默认长度为160字节.
+	 * HMAC-SHA1算法可使用任意长度的密钥, 默认长度为160位.
 	 */
 	public static String generateMacSha1HexKey() {
 		return hexEncode(generateMacSha1Key());
@@ -176,7 +176,7 @@ public class CryptoUtils {
 
 	/**
 	 * 生成HMAC-SHA1密钥, 返回Base64编码的结果.
-	 * HMAC-SHA1算法可使用任意长度的密钥, 默认长度为160字节.
+	 * HMAC-SHA1算法可使用任意长度的密钥, 默认长度为160位.
 	 */
 	public static String generateMacSha1Base64Key() {
 		return base64Encode(generateMacSha1Key());
@@ -277,14 +277,14 @@ public class CryptoUtils {
 	}
 
 	/**
-	 * 生成符合DES规范的Hex编码的密钥.
+	 * 生成符合DES要求的Hex编码密钥.
 	 */
 	public static String generateDesHexKey() {
 		return hexEncode(generateDesKey());
 	}
 
 	/**
-	 * 生成符合DES规范的Base64编码的密钥.
+	 * 生成符合DES要求的Base64编码密钥.
 	 */
 	public static String generateDesBase64Key() {
 		return base64Encode(generateDesKey());
