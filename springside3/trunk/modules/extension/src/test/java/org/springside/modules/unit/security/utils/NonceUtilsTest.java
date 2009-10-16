@@ -26,9 +26,11 @@ public class NonceUtilsTest {
 		for (int i = 0; i < 3; i++)
 			System.out.println("RMI UID Nonce       :" + new UID().toString());
 		for (int i = 0; i < 3; i++)
-			System.out.println("Timestamp Nonce     :" + NonceUtils.getCurrentTimestamp() + NonceUtils.getCounter());
+			System.out.println("Timestamp Nonce     :" + NonceUtils.getIp() + NonceUtils.getCurrentTimestamp()
+					+ NonceUtils.getCounter());
 		for (int i = 0; i < 3; i++)
-			System.out.println("Mills Nonce         :" + NonceUtils.getCurrentMills() + NonceUtils.getCounter());
+			System.out.println("Mills Nonce         :" + NonceUtils.getShortIp(1) + NonceUtils.getCurrentMills()
+					+ NonceUtils.format(NonceUtils.getCounter(), 2));
 	}
 
 	@Test

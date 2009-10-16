@@ -5,10 +5,11 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.codec.binary.Hex;
 import org.hibernate.id.UUIDHexGenerator;
-import org.hibernate.util.BytesHelper;
 
 /**
  * 
@@ -21,9 +22,16 @@ public class NonceUtils {
 	private static Date lastTime;
 	private static int counter = 0;
 	private static String ip;
+	private static Map<Integer, String> shortips = new HashMap<Integer, String>();
 	static {
 		try {
-			ip = Integer.toHexString(BytesHelper.toInt(InetAddress.getLocalHost().getAddress()));
+			byte[] ipbytes = InetAddress.getLocalHost().getAddress();
+			ip = Hex.encodeHexString(ipbytes);
+			for (int i = 1; i <= 4; i++) {
+				byte[] shortIpBytes = new byte[i];
+				System.arraycopy(ipbytes, 4 - i, shortIpBytes, 0, i);
+				shortips.put(i, Hex.encodeHexString(shortIpBytes));
+			}
 		} catch (Exception e) {
 			ip = "0";
 		}
@@ -96,7 +104,7 @@ public class NonceUtils {
 	public synchronized static String getCounter() {
 		Date currentTime = new Date();
 
-		if (lastTime.equals(currentTime)) {
+		if (currentTime.equals(lastTime)) {
 			counter++;
 		} else {
 			lastTime = currentTime;
@@ -108,7 +116,27 @@ public class NonceUtils {
 	/**
 	 * 返回Hex编码的IP, 生成自定义UUID的辅助函数
 	 */
-	public String getIp() {
+	public static String getIp() {
 		return ip;
+	}
+
+	/**
+	 * 返回Hex编码的短IP.使用length控制返回的长度.
+	 * 如完整为96ec458e的地址, length=1时只返回8e, length=2时返回458e.
+	 */
+	public static String getShortIp(int length) {
+		return shortips.get(length);
+	}
+
+	/**
+	 * 格式化字符串,固定长度,不足长度在前面补0.
+	 */
+	public static String format(String string, int length) {
+		StringBuilder buf = new StringBuilder();
+		for (int i = 0; i < length; i++) {
+			buf.append("0");
+		}
+		buf.replace(length - string.length(), length, string);
+		return buf.toString();
 	}
 }
