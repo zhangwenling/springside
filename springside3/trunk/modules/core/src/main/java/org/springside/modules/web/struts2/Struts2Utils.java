@@ -41,6 +41,7 @@ public class Struts2Utils {
 	private static final String JSON_TYPE = "application/json";
 	private static final String XML_TYPE = "text/xml";
 	private static final String HTML_TYPE = "text/html";
+	private static final String JS_TYPE = "text/javascript";
 
 	private static Logger logger = LoggerFactory.getLogger(Struts2Utils.class);
 
@@ -147,7 +148,7 @@ public class Struts2Utils {
 	/**
 	 * 直接输出JSON.
 	 * 
-	 * @param string json字符串.
+	 * @param jsonString json字符串.
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderJson(final String jsonString, final String... headers) {
@@ -175,5 +176,42 @@ public class Struts2Utils {
 	public static void renderJson(final Object object, final String... headers) {
 		String jsonString = JSONObject.fromObject(object).toString();
 		render(JSON_TYPE, jsonString, headers);
+	}
+
+	/**
+	 * 直接输出JSONP.
+	 * 
+	 * @param callbackName callback函数名.
+	 * @param jsonString json字符串.
+	 * @see #render(String, String, String...)
+	 */
+	public static void renderJsonp(final String callbackName, final String jsonString, final String... headers) {
+		StringBuilder result = new StringBuilder().append(callbackName).append("(").append(jsonString).append(")");
+		render(JS_TYPE, result.toString(), headers);
+	}
+
+	/**
+	 * 直接输出JSONP.
+	 * 
+	 * @param callbackName callback函数名.
+	 * @param map Map对象,将被转化为json字符串.
+	 * @see #render(String, String, String...)
+	 */
+	@SuppressWarnings("unchecked")
+	public static void renderJsonp(final String callbackName, final Map map, final String... headers) {
+		String jsonString = JSONObject.fromObject(map).toString();
+		renderJsonp(callbackName, jsonString, headers);
+	}
+
+	/**
+	 * 直接输出JSONP.
+	 * 
+	 * @param callbackName callback函数名.
+	 * @param object Java对象,将被转化为json字符串.
+	 * @see #render(String, String, String...)
+	 */
+	public static void renderJsonp(final String callbackName, final Object object, final String... headers) {
+		String jsonString = JSONObject.fromObject(object).toString();
+		renderJsonp(callbackName, jsonString, headers);
 	}
 }
