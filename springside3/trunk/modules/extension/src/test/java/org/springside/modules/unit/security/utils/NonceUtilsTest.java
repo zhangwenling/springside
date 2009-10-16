@@ -6,7 +6,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.junit.Test;
-import org.springside.modules.security.utils.CryptoUtils;
 import org.springside.modules.security.utils.NonceUtils;
 
 public class NonceUtilsTest {
@@ -17,9 +16,11 @@ public class NonceUtilsTest {
 
 	@Test
 	public void noncesCompare() {
-		//标准UUID
+		//Random
 		for (int i = 0; i < 3; i++)
 			System.out.println("Random Nonce        :" + NonceUtils.nextRandomHexNonce());
+
+		//标准UUID
 		for (int i = 0; i < 3; i++)
 			System.out.println("Java UUID Nonce     :" + UUID.randomUUID().toString());
 		for (int i = 0; i < 3; i++)
@@ -31,28 +32,32 @@ public class NonceUtilsTest {
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Timestamp Nonce     :"
 					+ new StringBuilder().append(NonceUtils.nextRandomHexNonce(2)).append(
-							NonceUtils.getCurrentTimestamp()).append(NonceUtils.getCounter()));
+							NonceUtils.getCurrentTimestamp()).append(NonceUtils.getCounter()).toString());
 		}
 
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Mills Nonce         :"
 					+ new StringBuilder().append(NonceUtils.getShortIp(2)).append(NonceUtils.getCurrentMills()).append(
-							NonceUtils.format(NonceUtils.getCounter(), 2)));
+							NonceUtils.format(NonceUtils.getCounter(), 2)).toString());
 		}
 	}
 
 	@Test
-	public void getRandomNoncesConcurrent() {
+	public void getUuidNoncesConcurrent() {
 		ExecutorService executor = Executors.newCachedThreadPool();
 		for (int i = 0; i < 3; i++) {
-			executor.execute(new RandomNonceRequestTask());
+			executor.execute(new UuidNonceRequestTask());
 		}
 	}
 
-	static class RandomNonceRequestTask implements Runnable {
+	static class UuidNonceRequestTask implements Runnable {
 		public void run() {
+
 			for (int i = 0; i < 3; i++) {
-				System.out.println("randomNonce   :" + CryptoUtils.hexEncode(NonceUtils.nextRandomNonce()));
+				System.out.println("Mills Nonce         :"
+						+ new StringBuilder().append(NonceUtils.getShortIp(2)).append(NonceUtils.getCurrentMills())
+								.append(NonceUtils.format(NonceUtils.getCounter(), 2)).toString());
+
 			}
 		}
 	}
