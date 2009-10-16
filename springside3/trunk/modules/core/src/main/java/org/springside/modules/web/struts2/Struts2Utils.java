@@ -8,12 +8,14 @@
 package org.springside.modules.web.struts2;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
@@ -179,39 +181,41 @@ public class Struts2Utils {
 	}
 
 	/**
-	 * 直接输出JSONP.
+	 * 直接输出JSON.
 	 * 
-	 * @param callbackName callback函数名.
-	 * @param jsonString json字符串.
+	 * @param collction Java对象集合, 将被转化为json字符串.
 	 * @see #render(String, String, String...)
 	 */
-	public static void renderJsonp(final String callbackName, final String jsonString, final String... headers) {
-		StringBuilder result = new StringBuilder().append(callbackName).append("(").append(jsonString).append(")");
-		render(JS_TYPE, result.toString(), headers);
+	public static void renderJson(final Collection<?> collction, final String... headers) {
+		String jsonString = JSONArray.fromObject(collction).toString();
+		render(JSON_TYPE, jsonString, headers);
+	}
+
+	/**
+	 * 直接输出JSON.
+	 * 
+	 * @param array Java对象数组, 将被转化为json字符串.
+	 * @see #render(String, String, String...)
+	 */
+	public static void renderJson(final Object[] array, final String... headers) {
+		String jsonString = JSONArray.fromObject(array).toString();
+		render(JSON_TYPE, jsonString, headers);
 	}
 
 	/**
 	 * 直接输出JSONP.
 	 * 
 	 * @param callbackName callback函数名.
-	 * @param map Map对象,将被转化为json字符串.
+	 * @param contentMap Map对象,将被转化为json字符串.
 	 * @see #render(String, String, String...)
 	 */
 	@SuppressWarnings("unchecked")
-	public static void renderJsonp(final String callbackName, final Map map, final String... headers) {
-		String jsonString = JSONObject.fromObject(map).toString();
-		renderJsonp(callbackName, jsonString, headers);
-	}
+	public static void renderJsonp(final String callbackName, final Map contentMap, final String... headers) {
+		String jsonParam = JSONObject.fromObject(contentMap).toString();
 
-	/**
-	 * 直接输出JSONP.
-	 * 
-	 * @param callbackName callback函数名.
-	 * @param object Java对象,将被转化为json字符串.
-	 * @see #render(String, String, String...)
-	 */
-	public static void renderJsonp(final String callbackName, final Object object, final String... headers) {
-		String jsonString = JSONObject.fromObject(object).toString();
-		renderJsonp(callbackName, jsonString, headers);
+		StringBuilder result = new StringBuilder().append(callbackName).append("(").append(jsonParam).append(");");
+
+		//渲染Content-Type为javascript的返回内容,输出结果为javascript语句, 如callback197("{content:'Hello World!!!'}");
+		render(JS_TYPE, result.toString(), headers);
 	}
 }
