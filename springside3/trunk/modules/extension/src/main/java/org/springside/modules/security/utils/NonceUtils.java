@@ -5,60 +5,38 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.commons.codec.binary.Hex;
 import org.hibernate.id.UUIDHexGenerator;
 
 /**
+ * 唯一数生成类,提供纯Random与UUID两种风格的生成函数.
  * 
  * @author calvin
  */
 public class NonceUtils {
+	//RFC3339 日期标准格式
+	private static final SimpleDateFormat internateDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
-	private static final SimpleDateFormat internateDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");//RFC3339
+	//定长格式化所用字符串, 含1,2,4,8,16位的字符串.
+	private static final String[] SPACES = { "0", "00", "0000", "00000000", "0000000000000000" }; //
 
+	//UUID风格同一毫秒内请求的计数器.
 	private static Date lastTime;
 	private static int counter = 0;
+
+	//UUID风格Hex编码的IP地址
 	private static String ip;
-	private static Map<Integer, String> shortips = new HashMap<Integer, String>();
 	static {
 		try {
 			byte[] ipbytes = InetAddress.getLocalHost().getAddress();
 			ip = Hex.encodeHexString(ipbytes);
-			for (int i = 1; i <= 4; i++) {
-				byte[] shortIpBytes = new byte[i];
-				System.arraycopy(ipbytes, 4 - i, shortIpBytes, 0, i);
-				shortips.put(i, Hex.encodeHexString(shortIpBytes));
-			}
 		} catch (Exception e) {
 			ip = "0";
 		}
 	}
 
-	static String[] SPACES = { "0", "00", "0000", "00000000", "0000000000000000", "00000000000000000000000000000000" };
-
-	//-- Timestamp function --//
-	/**
-	 * 返回Internate标准格式的当前毫秒级时间戳字符串.
-	 * 标准格式为yyyy-MM-dd'T'HH:mm:ss.SSS'Z', 如2009-10-15T14:24:50.316Z.
-	 * 可以作为生成自定义UUID的辅助函数.
-	 */
-	public static String getCurrentTimestamp() {
-		Date now = new Date();
-		return internateDateFormat.format(now);
-	}
-
-	/**
-	 * 返回当前毫秒数.
-	 * 可以作为生成自定义UUID的辅助函数.
-	 */
-	public static String getCurrentMills() {
-		return Long.toHexString(System.currentTimeMillis());
-	}
-
-	//-- random nonce function --//
+	//-- random nonce generator --//
 	/**
 	 * 生成SHA1PRNG算法的SecureRandom Nonce.
 	 */
@@ -82,7 +60,6 @@ public class NonceUtils {
 
 	/**
 	 * 生成SHA1PRNG算法的SecureRandom Nonce, 返回Hex编码的结果.
-	 * 可以作为生成自定义UUID的辅助函数.
 	 */
 	public static String nextRandomHexNonce(int length) {
 		return Hex.encodeHexString(nextRandomNonce(length));
@@ -95,16 +72,34 @@ public class NonceUtils {
 		return Hex.encodeHexString(nextRandomNonce());
 	}
 
-	//-- UUID nonce function --//
+	//-- UUID nonce generator --//
 	/**
-	 * 生成Timebase的UUID Nonce, 返回Hex编码的结果.
+	 * 使用Hibernate的实现生成Timebase的Hex编码的UUID Nonce.
 	 */
 	public static String nextUuidNonce() {
 		return (String) new UUIDHexGenerator().generate(null, null);
 	}
 
+	//-- UUID nonce support function --//
 	/**
-	 * 返回Hex编码的同一毫秒内的Counter, 生成自定义UUID的辅助函数.
+	 * 返回Internate标准格式的当前毫秒级时间戳字符串.
+	 * 
+	 * 标准格式为yyyy-MM-dd'T'HH:mm:ss.SSS'Z', 如2009-10-15T14:24:50.316Z.
+	 */
+	public static String getCurrentTimestamp() {
+		Date now = new Date();
+		return internateDateFormat.format(now);
+	}
+
+	/**
+	 * 返回当前毫秒数.
+	 */
+	public static String getCurrentMills() {
+		return Long.toHexString(System.currentTimeMillis());
+	}
+
+	/**
+	 * 返回Hex编码的同一毫秒内的Counter.
 	 */
 	public synchronized static String getCounter() {
 		Date currentTime = new Date();
@@ -126,14 +121,6 @@ public class NonceUtils {
 	}
 
 	/**
-	 * 返回Hex编码的短IP, 生成自定义UUID的辅助函数.
-	 * 使用length控制返回的长度, 如完整为96ec458e的地址, length=1时只返回8e, length=2时返回458e.
-	 */
-	public static String getShortIp(int length) {
-		return shortips.get(length);
-	}
-
-	/**
 	 * 格式化字符串, 固定字串长度, 不足长度在前面补0, 生成自定义UUID的辅助函数.
 	 */
 	public static String format(String hexString, int length) {
@@ -141,12 +128,12 @@ public class NonceUtils {
 
 		StringBuilder buf = new StringBuilder();
 
-		while (spaceLength >= 32) {
-			buf.append(SPACES[5]);
-			spaceLength -= 32;
+		while (spaceLength >= 16) {
+			buf.append(SPACES[4]);
+			spaceLength -= 16;
 		}
 
-		for (int i = 4; i >= 0; i--) {
+		for (int i = 3; i >= 0; i--) {
 			if ((spaceLength & (1 << i)) != 0) {
 				buf.append(SPACES[i]);
 			}

@@ -31,14 +31,14 @@ public class NonceUtilsTest {
 		//自定义UUID
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Timestamp Nonce     :"
-					+ new StringBuilder().append(NonceUtils.nextRandomHexNonce(2)).append(
-							NonceUtils.getCurrentTimestamp()).append(NonceUtils.getCounter()).toString());
+					+ new StringBuilder().append(NonceUtils.getIp()).append(NonceUtils.getCurrentTimestamp()).append(
+							NonceUtils.getCounter()).toString());
 		}
 
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Mills Nonce         :"
-					+ new StringBuilder().append(NonceUtils.getShortIp(2)).append(NonceUtils.getCurrentMills()).append(
-							NonceUtils.format(NonceUtils.getCounter(), 2)).toString());
+					+ new StringBuilder().append(NonceUtils.nextRandomHexNonce(2)).append(NonceUtils.getCurrentMills())
+							.append(NonceUtils.format(NonceUtils.getCounter(), 2)).toString());
 		}
 	}
 
@@ -55,8 +55,8 @@ public class NonceUtilsTest {
 
 			for (int i = 0; i < 3; i++) {
 				System.out.println("Mills Nonce         :"
-						+ new StringBuilder().append(NonceUtils.getShortIp(2)).append(NonceUtils.getCurrentMills())
-								.append(NonceUtils.format(NonceUtils.getCounter(), 2)).toString());
+						+ new StringBuilder().append(NonceUtils.getIp()).append(NonceUtils.getCurrentMills()).append(
+								NonceUtils.format(NonceUtils.getCounter(), 2)).toString());
 
 			}
 		}
