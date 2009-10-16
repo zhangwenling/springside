@@ -1,5 +1,7 @@
 package org.springside.modules.unit.security.utils;
 
+import java.rmi.server.UID;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -14,19 +16,19 @@ public class NonceUtilsTest {
 	}
 
 	@Test
-	public void getRandomNonce() {
-		System.out.println("randomNonce   :" + CryptoUtils.hexEncode(NonceUtils.nextRandomNonce()));
-	}
-
-	@Test
-	public void getTimestampNonce() {
-		System.out.println("timestampNonce:" + NonceUtils.nextTimestampNonce());
-	}
-
-	@Test
-	public void getUuidNonce() {
-		for (int i = 0; i < 5; i++)
-			System.out.println("UUID Nonce    :" + NonceUtils.nextUuidNonce());
+	public void noncesCompare() {
+		for (int i = 0; i < 3; i++)
+			System.out.println("Random Nonce        :" + NonceUtils.nextRandomHexNonce());
+		for (int i = 0; i < 3; i++)
+			System.out.println("Java UUID Nonce     :" + UUID.randomUUID().toString());
+		for (int i = 0; i < 3; i++)
+			System.out.println("Hibernate UUID Nonce:" + NonceUtils.nextUuidNonce());
+		for (int i = 0; i < 3; i++)
+			System.out.println("RMI UID Nonce       :" + new UID().toString());
+		for (int i = 0; i < 3; i++)
+			System.out.println("Timestamp Nonce     :" + NonceUtils.getCurrentTimestamp() + NonceUtils.getCounter());
+		for (int i = 0; i < 3; i++)
+			System.out.println("Mills Nonce         :" + NonceUtils.getCurrentMills() + NonceUtils.getCounter());
 	}
 
 	@Test
@@ -34,14 +36,6 @@ public class NonceUtilsTest {
 		ExecutorService executor = Executors.newCachedThreadPool();
 		for (int i = 0; i < 3; i++) {
 			executor.execute(new RandomNonceRequestTask());
-		}
-	}
-
-	@Test
-	public void getTimestampNoncesConcurrent() {
-		ExecutorService executor = Executors.newCachedThreadPool();
-		for (int i = 0; i < 3; i++) {
-			executor.execute(new TimestampNonceRequestTask());
 		}
 	}
 
@@ -53,11 +47,4 @@ public class NonceUtilsTest {
 		}
 	}
 
-	static class TimestampNonceRequestTask implements Runnable {
-		public void run() {
-			for (int i = 0; i < 3; i++) {
-				System.out.println("timestampNonce:" + NonceUtils.nextTimestampNonce());
-			}
-		}
-	}
 }
