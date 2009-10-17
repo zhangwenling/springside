@@ -13,9 +13,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.binary.Hex;
+import org.springside.modules.utils.EncodeUtils;
 
 /**
  * 支持SHA-1消息摘要, HMAC-SHA1消息签名 及 DES对称加密的方法集合.
@@ -38,7 +36,7 @@ public class CryptoUtils {
 	 */
 	public static String sha1ToHex(String input) {
 		byte[] digestResult = sha1(input);
-		return hexEncode(digestResult);
+		return EncodeUtils.hexEncode(digestResult);
 	}
 
 	/**
@@ -46,7 +44,7 @@ public class CryptoUtils {
 	 */
 	public static String sha1ToBase64(String input) {
 		byte[] digestResult = sha1(input);
-		return base64Encode(digestResult);
+		return EncodeUtils.base64Encode(digestResult);
 	}
 
 	/**
@@ -54,7 +52,7 @@ public class CryptoUtils {
 	 */
 	public static String sha1ToBase64Url(String input) {
 		byte[] digestResult = sha1(input);
-		return base64UrlEncode(digestResult);
+		return EncodeUtils.base64UrlEncode(digestResult);
 	}
 
 	/**
@@ -64,9 +62,8 @@ public class CryptoUtils {
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance(SHA1);
 			return messageDigest.digest(input.getBytes());
-		} catch (Exception e) {
-			handleSecurityException(e);
-			return null;
+		} catch (GeneralSecurityException e) {
+			throw new IllegalStateException("Security exception", e);
 		}
 	}
 
@@ -79,7 +76,7 @@ public class CryptoUtils {
 	 */
 	public static String hmacSha1ToHex(String input, byte[] keyBytes) {
 		byte[] macResult = hmacSha1(input, keyBytes);
-		return hexEncode(macResult);
+		return EncodeUtils.hexEncode(macResult);
 	}
 
 	/**
@@ -90,7 +87,7 @@ public class CryptoUtils {
 	 */
 	public static String hmacSha1ToBase64(String input, byte[] keyBytes) {
 		byte[] macResult = hmacSha1(input, keyBytes);
-		return base64Encode(macResult);
+		return EncodeUtils.base64Encode(macResult);
 	}
 
 	/**
@@ -101,7 +98,7 @@ public class CryptoUtils {
 	 */
 	public static String hmacSha1ToBase64Url(String input, byte[] keyBytes) {
 		byte[] macResult = hmacSha1(input, keyBytes);
-		return base64UrlEncode(macResult);
+		return EncodeUtils.base64UrlEncode(macResult);
 	}
 
 	/**
@@ -112,7 +109,7 @@ public class CryptoUtils {
 	 * @param keyBytes 建议最少160位的密钥
 	 */
 	public static boolean isHexMacValid(String hexMac, String input, byte[] keyBytes) {
-		byte[] expected = hexDecode(hexMac);
+		byte[] expected = EncodeUtils.hexDecode(hexMac);
 		byte[] actual = hmacSha1(input, keyBytes);
 
 		return Arrays.equals(expected, actual);
@@ -126,7 +123,7 @@ public class CryptoUtils {
 	 * @param keyBytes 建议最少160位的密钥
 	 */
 	public static boolean isBase64MacValid(String base64Mac, String input, byte[] keyBytes) {
-		byte[] expected = base64Decode(base64Mac);
+		byte[] expected = EncodeUtils.base64Decode(base64Mac);
 		byte[] actual = hmacSha1(input, keyBytes);
 
 		return Arrays.equals(expected, actual);
@@ -144,9 +141,8 @@ public class CryptoUtils {
 			Mac mac = Mac.getInstance(HMACSHA1);
 			mac.init(secretKey);
 			return mac.doFinal(input.getBytes());
-		} catch (Exception e) {
-			handleSecurityException(e);
-			return null;
+		} catch (GeneralSecurityException e) {
+			throw new IllegalStateException("Security exception", e);
 		}
 	}
 
@@ -160,9 +156,8 @@ public class CryptoUtils {
 			keyGen.init(DEFAULT_HMACSHA1_KEYSIZE);
 			SecretKey secretKey = keyGen.generateKey();
 			return secretKey.getEncoded();
-		} catch (Exception e) {
-			handleSecurityException(e);
-			return null;
+		} catch (GeneralSecurityException e) {
+			throw new IllegalStateException("Security exception", e);
 		}
 	}
 
@@ -171,7 +166,7 @@ public class CryptoUtils {
 	 * HMAC-SHA1算法可使用任意长度的密钥, 默认长度为160位.
 	 */
 	public static String generateMacSha1HexKey() {
-		return hexEncode(generateMacSha1Key());
+		return EncodeUtils.hexEncode(generateMacSha1Key());
 	}
 
 	/**
@@ -179,7 +174,7 @@ public class CryptoUtils {
 	 * HMAC-SHA1算法可使用任意长度的密钥, 默认长度为160位.
 	 */
 	public static String generateMacSha1Base64Key() {
-		return base64Encode(generateMacSha1Key());
+		return EncodeUtils.base64Encode(generateMacSha1Key());
 	}
 
 	//-- DES function --//
@@ -191,7 +186,7 @@ public class CryptoUtils {
 	 */
 	public static String desEncryptToHex(String input, byte[] keyBytes) {
 		byte[] encryptResult = des(input.getBytes(), keyBytes, Cipher.ENCRYPT_MODE);
-		return hexEncode(encryptResult);
+		return EncodeUtils.hexEncode(encryptResult);
 	}
 
 	/**
@@ -202,7 +197,7 @@ public class CryptoUtils {
 	 */
 	public static String desEncryptToBase64(String input, byte[] keyBytes) {
 		byte[] encryptResult = des(input.getBytes(), keyBytes, Cipher.ENCRYPT_MODE);
-		return base64Encode(encryptResult);
+		return EncodeUtils.base64Encode(encryptResult);
 	}
 
 	/**
@@ -213,7 +208,7 @@ public class CryptoUtils {
 	 */
 	public static String desEncryptToBase64Url(String input, byte[] keyBytes) {
 		byte[] encryptResult = des(input.getBytes(), keyBytes, Cipher.ENCRYPT_MODE);
-		return base64UrlEncode(encryptResult);
+		return EncodeUtils.base64UrlEncode(encryptResult);
 	}
 
 	/**
@@ -223,7 +218,7 @@ public class CryptoUtils {
 	 * @param keyBytes 符合DES要求的密钥
 	 */
 	public static String desDecryptFromHex(String input, byte[] keyBytes) {
-		byte[] decryptResult = des(hexDecode(input), keyBytes, Cipher.DECRYPT_MODE);
+		byte[] decryptResult = des(EncodeUtils.hexDecode(input), keyBytes, Cipher.DECRYPT_MODE);
 		return new String(decryptResult);
 	}
 
@@ -234,7 +229,7 @@ public class CryptoUtils {
 	 * @param keyBytes 符合DES要求的密钥
 	 */
 	public static String desDecryptFromBase64(String input, byte[] keyBytes) {
-		byte[] decryptResult = des(base64Decode(input), keyBytes, Cipher.DECRYPT_MODE);
+		byte[] decryptResult = des(EncodeUtils.base64Decode(input), keyBytes, Cipher.DECRYPT_MODE);
 		return new String(decryptResult);
 	}
 
@@ -254,9 +249,8 @@ public class CryptoUtils {
 			Cipher cipher = Cipher.getInstance(DES);
 			cipher.init(mode, secretKey);
 			return cipher.doFinal(input);
-		} catch (Exception e) {
-			handleSecurityException(e);
-			return null;
+		} catch (GeneralSecurityException e) {
+			throw new IllegalStateException("Security exception", e);
 		}
 	}
 
@@ -270,9 +264,8 @@ public class CryptoUtils {
 			kg.init(secureRandom);
 			SecretKey secretKey = kg.generateKey();
 			return secretKey.getEncoded();
-		} catch (Exception e) {
-			handleSecurityException(e);
-			return null;
+		} catch (GeneralSecurityException e) {
+			throw new IllegalStateException("Security exception", e);
 		}
 	}
 
@@ -280,67 +273,13 @@ public class CryptoUtils {
 	 * 生成符合DES要求的Hex编码密钥.
 	 */
 	public static String generateDesHexKey() {
-		return hexEncode(generateDesKey());
+		return EncodeUtils.hexEncode(generateDesKey());
 	}
 
 	/**
 	 * 生成符合DES要求的Base64编码密钥.
 	 */
 	public static String generateDesBase64Key() {
-		return base64Encode(generateDesKey());
-	}
-
-	//-- Support function--// 
-	/**
-	 * Hex编码.
-	 */
-	public static String hexEncode(byte[] input) {
-		return Hex.encodeHexString(input);
-	}
-
-	/**
-	 * Hex解码.
-	 */
-	public static byte[] hexDecode(String input) {
-		try {
-			return Hex.decodeHex(input.toCharArray());
-		} catch (Exception e) {
-			handleSecurityException(e);
-			return null;
-		}
-	}
-
-	/**
-	 * Base64编码.
-	 */
-	public static String base64Encode(byte[] input) {
-		return Base64.encodeBase64String(input);
-	}
-
-	/**
-	 * Base64编码, URL安全(不含URL不支持的字符, RFC3548).
-	 */
-	public static String base64UrlEncode(byte[] input) {
-		return Base64.encodeBase64URLSafeString(input);
-	}
-
-	/**
-	 * Base64解码.
-	 */
-	public static byte[] base64Decode(String input) {
-		return Base64.decodeBase64(input);
-	}
-
-	/**
-	 * 统一处理异常, 将全部异常转化为Unchecked Exception后重新抛出.
-	 */
-	private static void handleSecurityException(Exception e) {
-		if (e instanceof GeneralSecurityException) {
-			throw new IllegalStateException("Security exception", e);
-		} else if (e instanceof DecoderException) {
-			throw new IllegalStateException("Hex Decoder exception", e);
-		} else {
-			throw new IllegalStateException("Unexpected exception", e);
-		}
+		return EncodeUtils.base64Encode(generateDesKey());
 	}
 }

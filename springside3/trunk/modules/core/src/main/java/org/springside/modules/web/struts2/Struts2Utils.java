@@ -203,7 +203,7 @@ public class Struts2Utils {
 	}
 
 	/**
-	 * 直接输出JSONP.
+	 * 直接输出支持跨域Mashup的JSONP.
 	 * 
 	 * @param callbackName callback函数名.
 	 * @param contentMap Map对象,将被转化为json字符串.

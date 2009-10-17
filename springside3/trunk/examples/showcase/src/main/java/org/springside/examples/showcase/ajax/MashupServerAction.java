@@ -24,7 +24,7 @@ public class MashupServerAction extends ActionSupport {
 
 		//设置需要被格式化为JSON字符串的内容.
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("content", "<p>Hello World!</p>");
+		map.put("html", "<p>Hello World!</p>");
 
 		//渲染返回结果.
 		Struts2Utils.renderJsonp(callbackName, map);

@@ -14,7 +14,7 @@
 		//使用JQuery.getJSON(url?callback=?)方式跨域访问内容
 		function getMashupContent() {
 			$.getJSON(remoteUrl+"/ajax/mashup/mashup-server.action?callback=?",function(data){
-				$('#mashupContent').html(data.content);
+				$('#mashupContent').html(data.html);
 			});
 		}
 	</script>
