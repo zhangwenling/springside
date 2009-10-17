@@ -2,8 +2,8 @@
 html{height: 100%;}
 
 body
-{ padding: 0px;
-  margin: 0px;
+{ margin: 0px;
+  padding: 0px;
   font-size: .78em;
 }
 
@@ -40,11 +40,11 @@ a{outline: none;}
 
 /* footer */
 #footer
-{ height: 40px;  
-  padding: 18px 0px 0px 0px;
-  font-size: 90%;
+{ height: 30px;  
+  padding: 10px 0px 0px 0px;
+  font-size: 95%;
   text-align: center; 
-  border-top: 4px solid;
+  border-top: 3px solid;
 }
 
 /* main content */

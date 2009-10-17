@@ -4,18 +4,13 @@
   border-bottom-color: #6C6C6C;
 }
 
-#header h1, #header h2 { color: #FFF;}
-
-#content{ color: #555;}
-
 #footer
-{ background: #555;
+{ background: #666;
   color: #FFF;
-  border-color: #658A16;
+  border-color: #BACE87;
 }
 
 #footer a{ color: #BACE87;}
-
 #footer a:hover { color: #FFF;}
 
 
