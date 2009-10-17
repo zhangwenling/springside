@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-	<!-- 演示用途的最简单Server, 不支持持久化, 在61616端口上侦听请求 -->
 	<broker persistent="false" xmlns="http://activemq.apache.org/schema/core">
-		
+
 		<managementContext>
 			<managementContext createConnector="false" />
 		</managementContext>
-		
+
 		<transportConnectors>
-			<transportConnector uri="tcp://localhost:61616" />
+			<transportConnector uri="tcp://localhost:${jms.tcp_port}" />
 		</transportConnectors>
 	</broker>
 </beans>

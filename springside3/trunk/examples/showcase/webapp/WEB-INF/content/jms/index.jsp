@@ -13,7 +13,17 @@
 <div id="mainbar">
 <h3>JMS演示</h3>
 <h4>技术说明：</h4>
-演示基于ActiveMQ的JMS Topic/Queue 以及Polling消费者 和Message Driven POJO。
+<ul>
+<li>演示基于ActiveMQ的JMS Topic/Queue</li>
+<li>演示同步Polling receive与异步Message Driven POJO两种消费者模式</li>
+<li>ActiveMQ的高可用性集群配置演示(计划中)</li>
+</ul>
+ 
+<h4>用户故事：</h4>
+<ul>
+	<li>在综合演示用例中保存用户时,异步发送通知消息邮件</li>
+	<li>使用JConsole查看ActiveMQ Server运行情况.(路径service:jmx:rmi:///jndi/rmi://localhost:1099/showcase,名称org.activemq)</li>
+</ul>
 </div>
 </div>
 </body>

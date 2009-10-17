@@ -9,7 +9,7 @@
 	<!-- 标准的Activemq 连接工厂. -->
 	<bean id="jmsFactory" class="org.apache.activemq.ActiveMQConnectionFactory" depends-on="broker">
 		<property name="brokerURL">
-			<value>tcp://localhost:61616</value>
+			<value>${jms.broker_url}</value>
 		</property>
 	</bean>
 
