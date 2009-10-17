@@ -1,0 +1,23 @@
+#header
+{ background: #95C359;
+  color: #FFF;
+  border-bottom-color: #6C6C6C;
+}
+
+#header h1, #header h2 { color: #FFF;}
+
+#content{ color: #555;}
+
+#footer
+{ background: #555;
+  color: #FFF;
+  border-color: #83B82E;
+}
+
+#footer a{ color: #83B82E;}
+
+#footer a:hover { color: #FFF;}
+
+
+
+

@@ -1,0 +1,98 @@
+/* global */
+html{height: 100%;}
+
+body
+{ padding: 0px;
+  margin: 0px;
+  font-size: .78em;
+}
+
+p
+{ margin: 0px;
+  padding: 0px 0px 16px 0px;
+  line-height: 1.7em;
+}
+
+h1
+{ font-size: 108%;
+  letter-spacing: .1em;
+}
+
+h2
+{ margin: 0px;
+  padding: 0px 0px 4px 0px;
+  font-size: 100%;
+  letter-spacing: .1em;
+}
+
+img{border: 0px;}
+
+a{outline: none;}
+
+/* unordered list */
+ul
+{ margin: 8px 0px 0px 16px;
+  padding: 0px;
+}
+
+ul li
+{ list-style-type: square;
+  margin: 0px 0px 11px 0px; 
+  padding: 0px;
+}
+
+/* ordered list */
+ol
+{ margin: 8px 0px 0px 24px;
+  padding: 0px;
+}
+
+ol li
+{ margin: 0px 0px 11px 0px; 
+  padding: 0px;
+}
+
+/* widths */
+#header, #content, #footer
+{ width: 100%; 
+  margin-left: auto; 
+  margin-right: auto;
+}
+
+/* header */
+#header
+{ border-top: 1px solid; 
+  border-bottom: 1px solid;
+}
+
+#header h1
+{ margin: 0px;
+  padding: 18px 0px 0px 20px;
+  font-size: 160%;
+  letter-spacing: .2em;
+}
+
+#header h2
+{ margin: 0px;
+  padding: 5px 0px 10px 20px;
+  font-size: 120%;
+  letter-spacing: .2em;
+}
+
+/* footer */
+#footer
+{ height: 40px;  
+  padding: 18px 0px 0px 0px;
+  font-size: 88%;
+  text-align: center; 
+  border-top: 4px solid;
+}
+
+/* main content */
+#content
+{ height: auto;
+  padding: 20px 0px 0px 0px;
+  overflow: hidden;
+}
+
+#footer a, #footer a:hover{text-decoration: none;}

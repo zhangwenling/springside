@@ -9,7 +9,9 @@
 <head>
 	<title>Mini-Web 登录页</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
+	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet" />
+	<link href="${ctx}/css/color.css" type="text/css" rel="stylesheet" />
+	<link href="${ctx}/css/content.css" type="text/css" rel="stylesheet" />
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/jquery.validate.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/messages_cn.js" type="text/javascript"></script>
@@ -20,6 +22,12 @@
   	</script>
 </head>
 <body>
+  <div id="header">
+        	<h1>Mini-Web示例</h1>
+			<h2>--CRUD管理界面演示</h2>
+  </div>
+
+     <div id="content">
 	<%
 		if (session.getAttribute(AbstractProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY) != null) {
 	%>
@@ -27,8 +35,7 @@
 	<%
 		}
 	%>
-	<h2>Mini-Web示例</h2>
-	<h3>--CRUD管理界面演示</h3>
+
 	<form id="loginForm" action="${ctx}/j_spring_security_check" method="post">
 		<table class="inputView">
 			<tr>
@@ -44,9 +51,9 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="checkbox" name="_spring_security_remember_me" />
+					
 				</td>
-				<td>两周内记住我</td>
+				<td><input type="checkbox" name="_spring_security_remember_me" />两周内记住我</td>
 			</tr>
 			<tr>
 				<td colspan='2'><input value="登录" type="submit" /></td>
@@ -54,6 +61,10 @@
 		</table>
 	</form>
 	<p>（管理员<b>admin/admin</b> ,普通用户<b>user/user</b>）</p>
+	</div>
+	<div id="footer">
+	    	Copyright &copy; 2005-2009 <a href="http://springside.org.cn">springside.org.cn</a>
+	</div>
 </body>
 </html>
 
