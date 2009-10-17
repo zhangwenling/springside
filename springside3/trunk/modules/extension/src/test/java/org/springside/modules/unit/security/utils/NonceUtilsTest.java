@@ -4,6 +4,7 @@ import java.rmi.server.UID;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 import org.springside.modules.security.utils.NonceUtils;
@@ -43,22 +44,24 @@ public class NonceUtilsTest {
 	}
 
 	@Test
-	public void getUuidNoncesConcurrent() {
+	public void getUuidNoncesConcurrent() throws InterruptedException {
+		Runnable uuidNonceRequestTask = new Runnable() {
+			public void run() {
+				for (int i = 0; i < 3; i++) {
+					String nonce = new StringBuilder().append(NonceUtils.getIp()).append(NonceUtils.getCurrentMills())
+							.append(NonceUtils.format(NonceUtils.getCounter(), 2)).toString();
+					System.out.println("Mills Nonce         :" + nonce);
+
+				}
+			}
+		};
+
 		ExecutorService executor = Executors.newCachedThreadPool();
 		for (int i = 0; i < 3; i++) {
-			executor.execute(new UuidNonceRequestTask());
+			executor.execute(uuidNonceRequestTask);
 		}
-	}
 
-	static class UuidNonceRequestTask implements Runnable {
-		public void run() {
-
-			for (int i = 0; i < 3; i++) {
-				System.out.println("Mills Nonce         :"
-						+ new StringBuilder().append(NonceUtils.getIp()).append(NonceUtils.getCurrentMills()).append(
-								NonceUtils.format(NonceUtils.getCounter(), 2)).toString());
-
-			}
-		}
+		executor.shutdown();
+		executor.awaitTermination(10000, TimeUnit.MILLISECONDS);
 	}
 }
