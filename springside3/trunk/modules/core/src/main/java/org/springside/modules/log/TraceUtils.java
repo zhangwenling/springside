@@ -9,6 +9,7 @@ package org.springside.modules.log;
 
 import java.util.UUID;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.MDC;
 
 /**
@@ -17,35 +18,27 @@ import org.apache.log4j.MDC;
  * 使用MDC存储traceID, 一次trace中所有日志都自动带有该ID,
  * 可以方便的用grep命令在日志文件中提取该trace的所有日志.
  * 
- * 如果一次Trace较长或层次较多, 还可以使用的SubTrace分类和缩进.
+ * 需要在log4j.properties中将ConversionPattern配置为:
  * 
- * 需要在log4j.properties中进行如下配置:
- * 
- * log4j.logger.TraceLogger=TRACE,trace
- * log4j.additivity.TraceLogger=false
- * 
- * log4j.appender.trace=org.apache.log4j.ConsoleAppender
- * log4j.appender.trace.layout=org.apache.log4j.PatternLayout
- * log4j.appender.trace.layout.ConversionPattern=%d [%t] %X{traceId} -%x %m%n
+ * log4j.appender.trace.layout.ConversionPattern=%d [%t] %X{traceId} -%m%n
  * 
  * @author calvin
  */
 public class TraceUtils {
 
 	public static final String TRACE_ID_KEY = "traceId";
+	private static final int TRANCE_ID_LENGTH = 10;
 
 	/**
-	 * 开始Trace.
-	 * 生成本次Trace的唯一ID并放入MDC.
+	 * 开始Trace, 默认生成本次Trace的ID并放入MDC.
 	 */
 	public static void beginTrace() {
-		UUID traceId = UUID.randomUUID();
+		String traceId = RandomStringUtils.randomAlphanumeric(TRANCE_ID_LENGTH);
 		MDC.put(TRACE_ID_KEY, traceId);
 	}
 
 	/**
-	 * 开始Trace.
-	 * 将TraceID放入MDC.
+	 * 开始Trace, 将traceId放入MDC.
 	 */
 	public static void beginTrace(String traceId) {
 		MDC.put(TRACE_ID_KEY, traceId);
