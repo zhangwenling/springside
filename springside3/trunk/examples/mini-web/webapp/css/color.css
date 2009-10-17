@@ -1,17 +1,20 @@
+a:link,a:visited,a:active,a:hover {color: #4d87ce;}
+
 #header
-{ background: #BACE87;
+{ background: #B6CF84;
   color: #FFF;
   border-bottom-color: #6C6C6C;
 }
 
 #footer
-{ background: #666;
-  color: #FFF;
-  border-color: #BACE87;
+{ background: #B6CF84;
+  color: #444;
+  border-color: #6C6C6C;
 }
 
-#footer a{ color: #BACE87;}
+#footer a{ color: #444;}
 #footer a:hover { color: #FFF;}
+
 
 
 

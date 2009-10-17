@@ -1,66 +1,65 @@
 /* global */
-html{height: 100%;}
-
-body
-{ margin: 0px;
-  padding: 0px;
-  font-size: .78em;
+body{
+	margin: 0px;
+	padding: 0px;
+	font-size: .78em;
 }
 
-p
-{ margin: 0px;
-  padding: 0px 0px 16px 0px;
-  line-height: 1.7em;
+p{
+	padding: 0px 0px 16px 0px;
+	line-height: 1.7em;
+}
+
+h1{
+	font-size: 150%;
+	letter-spacing: .2em;
+}
+
+h2{
+	font-size: 125%;
+	letter-spacing: .2em;
 }
 
 img{border: 0px;}
 
-a{outline: none;}
-
 
 /* header */
-#header
-{ border-top: 1px solid; 
-  border-bottom: 1px solid;
+#header{
+	border-top: 1px solid; 
+	border-bottom: 2px solid;
 }
 
-#header h1
-{ margin: 0px;
-  padding: 18px 0px 0px 20px;
-  font-size: 150%;
-  letter-spacing: .2em;
-}
-
-#header h2
-{ margin: 0px;
-  padding: 5px 0px 10px 20px;
-  font-size: 125%;
-  letter-spacing: .2em;
-}
+#header h1{margin: 20px 0px 0px 20px;}
+#header h2{margin: 10px 0px 10px 20px;}
 
 /* footer */
-#footer
-{ height: 30px;  
-  padding: 10px 0px 0px 0px;
-  font-size: 95%;
-  text-align: center; 
-  border-top: 3px solid;
+#footer{
+	height: 30px;  
+	padding: 10px 0px 0px 0px;
+	font-size: 95%;
+	text-align: center; 
+	border-top: 2px solid;
 }
 
 /* main content */
-#content
-{ height: auto;
-  padding: 20px 0px 0px 0px;
-  overflow: hidden;
+#content{margin:20px 0px 0px 20px}
+
+#content .listTable {
+	border-collapse: collapse;
+	border: none;
+}
+
+#content .listTable th, #content .listTable td {
+	border: solid #999 1px;
+}
+
+#content.buttons{
+	align=
+}
+.actionMessage {
+	font-weight: bold;
 }
 
 /* link */
 #footer a, #footer a:hover{text-decoration: none;}
-
-/* widths */
-#header, #content, #footer
-{ width: 100%; 
-  margin-left: auto; 
-  margin-right: auto;
-}
 
