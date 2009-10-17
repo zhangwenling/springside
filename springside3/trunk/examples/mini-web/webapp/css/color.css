@@ -1,5 +1,5 @@
 #header
-{ background: #95C359;
+{ background: #BACE87;
   color: #FFF;
   border-bottom-color: #6C6C6C;
 }
@@ -11,10 +11,10 @@
 #footer
 { background: #555;
   color: #FFF;
-  border-color: #83B82E;
+  border-color: #658A16;
 }
 
-#footer a{ color: #83B82E;}
+#footer a{ color: #BACE87;}
 
 #footer a:hover { color: #FFF;}
 

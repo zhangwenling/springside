@@ -13,51 +13,10 @@ p
   line-height: 1.7em;
 }
 
-h1
-{ font-size: 108%;
-  letter-spacing: .1em;
-}
-
-h2
-{ margin: 0px;
-  padding: 0px 0px 4px 0px;
-  font-size: 100%;
-  letter-spacing: .1em;
-}
-
 img{border: 0px;}
 
 a{outline: none;}
 
-/* unordered list */
-ul
-{ margin: 8px 0px 0px 16px;
-  padding: 0px;
-}
-
-ul li
-{ list-style-type: square;
-  margin: 0px 0px 11px 0px; 
-  padding: 0px;
-}
-
-/* ordered list */
-ol
-{ margin: 8px 0px 0px 24px;
-  padding: 0px;
-}
-
-ol li
-{ margin: 0px 0px 11px 0px; 
-  padding: 0px;
-}
-
-/* widths */
-#header, #content, #footer
-{ width: 100%; 
-  margin-left: auto; 
-  margin-right: auto;
-}
 
 /* header */
 #header
@@ -68,14 +27,14 @@ ol li
 #header h1
 { margin: 0px;
   padding: 18px 0px 0px 20px;
-  font-size: 160%;
+  font-size: 150%;
   letter-spacing: .2em;
 }
 
 #header h2
 { margin: 0px;
   padding: 5px 0px 10px 20px;
-  font-size: 120%;
+  font-size: 125%;
   letter-spacing: .2em;
 }
 
@@ -83,7 +42,7 @@ ol li
 #footer
 { height: 40px;  
   padding: 18px 0px 0px 0px;
-  font-size: 88%;
+  font-size: 90%;
   text-align: center; 
   border-top: 4px solid;
 }
@@ -95,4 +54,13 @@ ol li
   overflow: hidden;
 }
 
+/* link */
 #footer a, #footer a:hover{text-decoration: none;}
+
+/* widths */
+#header, #content, #footer
+{ width: 100%; 
+  margin-left: auto; 
+  margin-right: auto;
+}
+
