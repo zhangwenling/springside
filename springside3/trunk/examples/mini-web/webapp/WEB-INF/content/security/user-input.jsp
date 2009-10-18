@@ -6,7 +6,7 @@
 <head>
 	<title>Mini-Web 帐号管理</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
+	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet" />
 	<link href="${ctx}/js/validate/jquery.validate.css" type="text/css" rel="stylesheet" />
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/jquery.validate.js" type="text/javascript"></script>
@@ -47,12 +47,12 @@
 </head>
 
 <body>
-<%@ include file="/common/menu.jsp"%>
+<%@ include file="/common/header.jsp"%>
+<div id="content">
 <h3><s:if test="id == null">创建</s:if><s:else>修改</s:else>用户</h3>
-<div id="inputContent">
-<form id="inputForm" action="user!save.action" method="post">
+<form action="user!save.action" method="post">
 <input type="hidden" name="id" value="${id}" />
-<table class="inputView">
+<table class="noborder">
 	<tr>
 		<td>登录名:</td>
 		<td><input type="text" name="loginName" size="40" id="loginName" value="${loginName}" /></td>
@@ -84,13 +84,14 @@
 	<tr>
 		<td colspan="2">
 			<security:authorize ifAnyGranted="A_MODIFY_USER">
-				<input type="submit" value="提交" />&nbsp; 
+				<input class="button" type="submit" value="提交" />&nbsp; 
 			</security:authorize>
-			<input type="button" value="返回" onclick="history.back()"/>
+			<input class="button" type="button" value="返回" onclick="history.back()"/>
 		</td>
 	</tr>
 </table>
 </form>
 </div>
+<%@ include file="/common/footer.jsp"%>
 </body>
 </html>

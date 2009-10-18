@@ -7,26 +7,28 @@
 <head>
 	<title>Mini-Web 帐号管理</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet" />
+	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet" />
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script  src="${ctx}/js/table.js" type="text/javascript"></script>
 </head>
 
 <body>
-<%@ include file="/common/menu.jsp"%>
+<%@ include file="/common/header.jsp"%>
+<div id="content">
 <div id="message"><s:actionmessage theme="mytheme"/></div>
-<form id="mainForm" action="user.action" method="get">
+<form action="user.action" method="get">
+<input type="hidden" name="page.pageNo" id="pageNo" value="${page.pageNo}"/>
+<input type="hidden" name="page.orderBy" id="orderBy" value="${page.orderBy}"/>
+<input type="hidden" name="page.order" id="order" value="${page.order}" />
+
 <div id="filter">
 	你好,<%=SpringSecurityUtils.getCurrentUserName()%>.&nbsp;&nbsp;
  	登录名: <input type="text" name="filter_EQS_loginName" value="${param['filter_EQS_loginName']}"  size="9"/> 
           姓名或Email: <input type="text" name="filter_LIKES_name_OR_email" value="${param['filter_LIKES_name_OR_email']}" size="9"/>
-	<input type="button" value="搜索" onclick="search()"/>
+	<input class="button" type="button" value="搜索" onclick="search()"/>
 </div> 
-<input type="hidden" name="page.pageNo" id="pageNo" value="${page.pageNo}"/>
-<input type="hidden" name="page.orderBy" id="orderBy" value="${page.orderBy}"/>
-<input type="hidden" name="page.order" id="order" value="${page.order}" />
-<div id="listContent">
-<table id="listTable">
+<div id="table">
+<table>
 	<tr>
 		<th><a href="javascript:sort('loginName','asc')"><b>登录名</b></a></th>
 		<th><a href="javascript:sort('name','asc')""><b>姓名</b></a></th>
@@ -58,7 +60,7 @@
 </table>
 </div>
 
-<div id="footer">
+<div id="buttons">
 	第${page.pageNo}页, 共${page.totalPages}页 
 	<a href="javascript:jumpPage(1)">首页</a>
 	<s:if test="page.hasPre"><a href="javascript:jumpPage(${page.prePage})">上一页</a></s:if>
@@ -70,5 +72,7 @@
 	</security:authorize>
 </div>
 </form>
+</div>
+<%@ include file="/common/footer.jsp"%>
 </body>
 </html>

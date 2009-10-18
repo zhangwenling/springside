@@ -7,17 +7,18 @@
 <head>
 	<title>Mini-Web 角色管理</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/default.css" type="text/css" rel="stylesheet">
+	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
-<%@ include file="/common/menu.jsp"%>
+<%@ include file="/common/header.jsp"%>
+<div id="content">
 <div id="message"><s:actionmessage theme="mytheme"/></div>
 
 <div id="filter">你好,<%=SpringSecurityUtils.getCurrentUserName()%>.</div>
 
-<div id="listContent">
-<table id="listTable">
+<div id="table">
+<table>
 	<tr>
 		<th><b>名称</b></th>
 		<th><b>授权</b></th>
@@ -45,12 +46,13 @@
 </table>
 </div>
 
-<div id="footer">
+<div id="buttons">
 	<security:authorize ifAnyGranted="A_MODIFY_ROLE">
 		<a href="role!input.action">增加新角色</a>
 	</security:authorize>
 </div>
+</div>
+<%@ include file="/common/footer.jsp"%>
 
-<div id="comment">本页面为单纯的白板,各式Table Grid组件的应用见Showcase项目(开发中).</div>
 </body>
 </html>
