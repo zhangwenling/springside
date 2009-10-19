@@ -19,7 +19,7 @@ import org.springside.modules.queue.QueueManager;
 public class QueueManagerTest extends Assert {
 
 	@Test
-	public void backup() throws FileNotFoundException, IOException, ClassNotFoundException {
+	public void backup() throws IOException, ClassNotFoundException {
 		String queueName = "testBackup";
 		String filePath = System.getProperty("java.io.tmpdir") + File.separator + "queue" + File.separator + queueName;
 
