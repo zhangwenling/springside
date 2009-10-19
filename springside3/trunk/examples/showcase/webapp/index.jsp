@@ -4,14 +4,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
+<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet" />
 <title>Showcase 示例</title>
 </head>
 <body>
+<%@ include file="/common/header.jsp"%>
 <div id="content">
 <%@ include file="/common/left.jsp"%>
-<div id="mainbar">
-<h1>Showcase示例</h1>
+<div id="main">
 <p>各式主流的、实用的、好玩的开源项目大派对。</p>
 </div>
 </div>

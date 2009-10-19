@@ -6,7 +6,7 @@
 <head>
 	<title>JMX演示用例</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet"/>
+	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script type="text/javascript">
 
@@ -42,11 +42,12 @@
 	</script>
 </head>
 <body>
+<%@ include file="/common/header.jsp"%>
 <div id="content">
 <%@ include file="/common/left.jsp"%>
-<div id="mainbar">
-	<h3>JMX演示用例</h3>
-	<h4>技术说明：</h4>
+<div id="main">
+	<h1>JMX演示用例</h1>
+	<h2>技术说明：</h2>
 	<ul>
 	<li>服务端演示Interface与Spring annotation两种方式定义MBean</li>
 	<li>客户端演示MBean代理及直接反射读取属性两种方式调用MBean</li>
@@ -57,7 +58,7 @@
 	客户端可使用JConsole, 远程进程URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase
 	<h4>系统配置(MBean代理)</h4>
 	<form id="configForm">
-	<table>
+	<table class="noborder">
 		<tr>
 			<td>服务器节点名:</td>
 			<td><input id="nodeName" name="nodeName" value="${nodeName}" /></td>

@@ -6,13 +6,14 @@
 <title>报表演示</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <script type="text/javascript" src="${ctx}/report/swfobject.js"></script>
-<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
+<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<%@ include file="/common/header.jsp"%>
 <div id="content">
 <%@ include file="/common/left.jsp"%>
-<div id="mainbar">
-<h3>报表演示</h3>
+<div id="main">
+<h1>报表演示</h1>
 <p>说明：演示DIY报表所需技术。</p>
 <ul>
 <li><a href="flashchart/index.action">amCharts渲染Flash图表</a></li>

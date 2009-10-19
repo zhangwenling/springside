@@ -6,13 +6,14 @@
 <title>Flash Chart演示</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <script type="text/javascript" src="${ctx}/report/swfobject.js"></script>
-<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
+<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<%@ include file="/common/header.jsp"%>
 <div id="content">
 <%@ include file="/common/left.jsp"%>
-<div id="mainbar">
-<h3>Flash Chart演示</h3>
+<div id="main">
+<h1>Flash Chart演示</h1>
 <p>点击Amcharts柱状图进入本页面, 显示<%=Integer.parseInt(request.getParameter("id"))+1969%>年的数据细节.</p>
 </div>
 </div>

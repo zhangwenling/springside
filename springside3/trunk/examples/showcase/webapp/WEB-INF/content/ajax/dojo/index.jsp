@@ -5,7 +5,7 @@
 <head>
 	<title>Dojo Base演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
+	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet" />
 	<script src="${ctx}/js/dojo/dojo.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		//载入js/showcase/shape.js
@@ -19,11 +19,12 @@
 	</script>
 </head>
 <body>
+<%@ include file="/common/header.jsp"%>
 <div id="content">
 <%@ include file="/common/left.jsp"%>
-<div id="mainbar">
-<h3>Dojo Base演示</h3>
-<h4>技术说明：</h4>
+<div id="main">
+<h1>Dojo Base演示</h1>
+<h2>技术说明：</h2>
 <p>演示基于Dojo Base的Javascript文件Package化与Script方法OO化.</p>
 </div>
 	<p><input type="button" value="演示" onclick="demo();" /></p>

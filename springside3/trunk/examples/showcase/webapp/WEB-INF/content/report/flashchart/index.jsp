@@ -6,14 +6,15 @@
 <title>Flash Chart演示</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <script type="text/javascript" src="${ctx}/report/swfobject.js"></script>
-<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
+<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<%@ include file="/common/header.jsp"%>
 <div id="content">
 <%@ include file="/common/left.jsp"%>
-<div id="mainbar">
-<h3>Flash Chart演示</h3>
-<h4>技术说明：</h4>
+<div id="main">
+<h1>Flash Chart演示</h1>
+<h2>技术说明：</h2>
 <p>使用AmCharts渲染Flash图表</p>
 <ul>
 <li>曲线图：演示精简版配置文件与CSV格式数据文件。</li>

@@ -6,14 +6,15 @@
 <head>
 <title>日志高级演示</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
+<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<%@ include file="/common/header.jsp"%>
 <div id="content">
 <%@ include file="/common/left.jsp"%>
-<div id="mainbar">
-<h3>日志高级演示</h3>
-<h4>技术说明：</h4>
+<div id="main">
+<h1>日志高级演示</h1>
+<h2>技术说明：</h2>
 <ul>
 <li>Log4JMBean: JMX动态改变log4j的日志等级,并查询Logger的Appender.</li>
 <li>MockAppender: 在测试用例中验正日志输出.</li>

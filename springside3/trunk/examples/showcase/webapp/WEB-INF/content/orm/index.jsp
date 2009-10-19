@@ -5,13 +5,15 @@
 <head>
 <title>数据库访问高级演示</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
+<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-<div id="content"><%@ include file="/common/left.jsp"%>
-<div id="mainbar">
-<h3>数据库访问高级演示</h3>
-<h4>技术说明：</h4>
+<%@ include file="/common/header.jsp"%>
+<div id="content">
+<%@ include file="/common/left.jsp"%>
+<div id="main">
+<h1>数据库访问高级演示</h1>
+<h2>技术说明：</h2>
 <ul>
 	<li>Hibernate Event，在修改User对象时自动加入审计信息。(综合示例)</li>
 	<li>Hibernate @Version字段，在Struts2 Prepareable Action里的使用。(综合示例)</li>

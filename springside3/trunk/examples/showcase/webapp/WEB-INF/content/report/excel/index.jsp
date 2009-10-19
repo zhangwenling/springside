@@ -9,10 +9,11 @@
 <link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<%@ include file="/common/header.jsp"%>
 <div id="content">
 <%@ include file="/common/left.jsp"%>
-<div id="mainbar">
-<h3>Excel导出演示</h3>
+<div id="main">
+<h1>Excel导出演示</h1>
 <p>说明：演示基于POI的Excel操作。</p>
 <ul>
 <li><a href="excel-export.action">导出Excel文件</a><br/>

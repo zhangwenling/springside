@@ -5,12 +5,13 @@
 <head>
 <title>Ajax演示</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
+<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<%@ include file="/common/header.jsp"%>
 <div id="content">
 <%@ include file="/common/left.jsp"%>
-<div id="mainbar">
+<div id="main">
 <h3>Ajax演示</h3>
 <ul>
 	<li><a href="${ctx}/jmx/jmx-client.action">标准Ajax演示</a> 在JMX示例中演示html/json内容的动态获取与表单的动态提交.</li>

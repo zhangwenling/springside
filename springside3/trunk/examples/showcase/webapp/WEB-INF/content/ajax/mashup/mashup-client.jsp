@@ -6,7 +6,7 @@
 <head>
 	<title>跨域Mashup演示</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet"/>
+	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script type="text/javascript">
     	var remoteUrl ="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}";	
@@ -20,11 +20,12 @@
 	</script>
 </head>
 <body>
+<%@ include file="/common/header.jsp"%>
 <div id="content">
 <%@ include file="/common/left.jsp"%>
-<div id="mainbar">
-	<h3>Mashup演示</h3>
-	<h4>技术说明：</h4>
+<div id="main">
+	<h1>Mashup演示</h1>
+	<h2>技术说明：</h2>
 	演示基于JQuery的JSONP实现，绕过浏览器对Ajax访问跨域名网站内容的限制。<br/>
 	 请先将本页另存为本地html文件，打开本地文件访问应用服务器即为跨域访问的场景。
 

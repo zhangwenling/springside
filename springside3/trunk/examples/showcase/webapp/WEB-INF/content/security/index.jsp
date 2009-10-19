@@ -5,13 +5,14 @@
 <head>
 	<title>安全高级演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
+	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<%@ include file="/common/header.jsp"%>
 <div id="content">
 <%@ include file="/common/left.jsp"%>
-<div id="mainbar">
-<h3>安全高级演示</h3>
+<div id="main">
+<h1>安全高级演示</h1>
 <ul>
 <li><a href="${ctx}/security/login.action">SpringSecurity与认证码集成演示.</a></li>
 <li>SpringSecurity Sha1散列密码与同时登录人数限制演示.</li>

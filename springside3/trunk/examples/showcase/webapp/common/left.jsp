@@ -1,9 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
 <div id="leftbar">
-    <h2>(部分)完成特性</h2>
-
-    <div class="line">
+      <div class="line">
         <a href="${ctx}/common/users.htm">综合演示</a>
     	<a href="${ctx}/jms/index.action">JMS演示</a>
         <a href="${ctx}/jmx/jmx-client.action">JMX演示</a>

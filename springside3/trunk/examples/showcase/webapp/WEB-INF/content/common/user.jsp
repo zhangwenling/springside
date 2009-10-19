@@ -7,8 +7,7 @@
 <head>
 	<title>综合演示用例</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet">
-	<link href="${ctx}/css/table.css" type="text/css" rel="stylesheet">
+	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet" />
 	
 	<script language="javascript">
 	function disableUsers(){
@@ -18,10 +17,11 @@
 </head>
 
 <body>
+<%@ include file="/common/header.jsp"%>
 <div id="content">
 <%@ include file="/common/left.jsp"%>
-<div id="mainbar">
-<h3>综合演示用例</h3>
+<div id="main">
+<h1>综合演示用例</h1>
 
 <div id="listContent">
 <form id="mainForm" action="user!disableUsers.action" method="post">

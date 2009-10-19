@@ -6,20 +6,19 @@
 <head>
 	<title>综合演示用例</title>
 	<%@ include file="/common/meta.jsp"%>
-	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet">
-	<link href="${ctx}/css/table.css" type="text/css" rel="stylesheet">
+	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
+<%@ include file="/common/header.jsp"%>
 <div id="content">
 <%@ include file="/common/left.jsp"%>
-<div id="mainbar">
-<h3><s:if test="id == null">创建</s:if><s:else>修改</s:else>用户</h3>
-<div id="inputContent">
+<div id="main">
+<h1><s:if test="id == null">创建</s:if><s:else>修改</s:else>用户</h1>
 <form id="inputForm" action="${ctx}/common/user!save.action" method="post">
 <input type="hidden" name="id" value="${id}" />
 <input type="hidden" name="workingVersion" value="${version}" />
-<table>
+<table class="noborder">
 	<tr>
 		<td>登录名:</td>
 		<td><input type="text" name="loginName" size="40" value="${loginName}"/></td>
@@ -53,7 +52,6 @@
 	</tr>
 </table>
 </form>
-</div>
 </div>
 </div>
 </body>

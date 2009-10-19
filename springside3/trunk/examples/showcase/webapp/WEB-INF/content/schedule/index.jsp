@@ -5,14 +5,15 @@
 <head>
 	<title>定时任务演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet" />
+	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
+<%@ include file="/common/header.jsp"%>
 <div id="content">
 <%@ include file="/common/left.jsp"%>
-<div id="mainbar">
-<h3>定时任务演示</h3>
-<h4>技术说明：</h4>
+<div id="main">
+<h1>定时任务演示</h1>
+<h2>技术说明：</h2>
 <ul>
 	<li>JDK5.0 ScheduledExecutorService Timer式任务定义.</li>
 	<li>Quartz Timer式与Cron式任务定义.</li>
