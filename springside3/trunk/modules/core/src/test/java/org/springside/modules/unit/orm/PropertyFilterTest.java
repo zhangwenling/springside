@@ -61,21 +61,20 @@ public class PropertyFilterTest extends Assert {
 	@Test
 	public void errorFilterName() throws Exception {
 		int exceptionCount = 0;
-		PropertyFilter filter = null;
 		try {
-			filter = new PropertyFilter("ABS_foo", "hello");
+			new PropertyFilter("ABS_foo", "hello");
 		} catch (IllegalArgumentException e) {
 			exceptionCount++;
 		}
 
 		try {
-			filter = new PropertyFilter("GEX_foo", "hello");
+			new PropertyFilter("GEX_foo", "hello");
 		} catch (IllegalArgumentException e) {
 			exceptionCount++;
 		}
 
 		try {
-			filter = new PropertyFilter("EQS_", "hello");
+			new PropertyFilter("EQS_", "hello");
 		} catch (IllegalArgumentException e) {
 			exceptionCount++;
 		}

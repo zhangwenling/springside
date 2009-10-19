@@ -7,8 +7,6 @@
  */
 package org.springside.modules.log;
 
-import java.util.UUID;
-
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.MDC;
 
