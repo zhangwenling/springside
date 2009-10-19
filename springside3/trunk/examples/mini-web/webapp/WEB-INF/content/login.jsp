@@ -1,9 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
-<%@ page
-	import="org.springframework.security.ui.AbstractProcessingFilter"%>
-<%@ page
-	import="org.springframework.security.ui.webapp.AuthenticationProcessingFilter"%>
+<%@ page import="org.springframework.security.ui.AbstractProcessingFilter"%>
+<%@ page import="org.springframework.security.ui.webapp.AuthenticationProcessingFilter"%>
 <%@ page import="org.springframework.security.AuthenticationException"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -32,8 +30,7 @@
  	}
  %>
 
-<form id="loginForm" action="${ctx}/j_spring_security_check"
-	method="post">
+<form id="loginForm" action="${ctx}/j_spring_security_check" method="post">
 <table class="noborder">
 	<tr>
 		<td><label>用户名:</label></td>
@@ -44,17 +41,17 @@
 	</tr>
 	<tr>
 		<td><label>密码:</label></td>
-		<td><input type='password' id='j_password' name='j_password'
-			class="required" /></td>
+		<td><input type='password' id='j_password' name='j_password' class="required" /></td>
 	</tr>
 	<tr>
-		<td colspan='2' class="right"><input type="checkbox"
-			name="_spring_security_remember_me" />两周内记住我 <input value="登录"
-			type="submit" class="button" /></td>
+		<td colspan='2' align="right">
+			<input type="checkbox" name="_spring_security_remember_me" />两周内记住我
+			<input value="登录" type="submit" class="button" />
+		</td>
 	</tr>
 </table>
 </form>
-<p>(管理员<b>admin/admin</b> ,普通用户<b>user/user</b>)</p>
+<div id="hint">(管理员<b>admin/admin</b> ,普通用户<b>user/user</b>)</div>
 </div>
 <%@ include file="/common/footer.jsp"%>
 </body>
