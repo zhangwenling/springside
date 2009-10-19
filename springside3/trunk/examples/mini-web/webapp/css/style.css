@@ -3,9 +3,10 @@ body {
 	margin: 0px;
 	padding: 0px;
 	font-size: .78em;
+	color: #333;
 }
 
-a:link,a:visited,a:active,a:hover {
+a {
 	color: #4d87ce;
 }
 
@@ -13,57 +14,63 @@ img {
 	border: 0px;
 }
 
+h1,h2{
+	margin: 0px;
+}
+
 /* header */
 #header {
 	width: 100%;
 }
 
+#title {
+	margin: 20px 0px 0px 35px;
+}
+
 #header h1 {
 	font-size: 150%;
 	letter-spacing: .1em;
-	margin: 20px 0px 0px 35px;
 }
 
 #header h2 {
 	font-size: 110%;
-	color: #999;
 	letter-spacing: .1em;
-	margin: 0px 0px 0px 35px;
+	color: #999;
 }
 
-ul#menu {
+#menu{
+	margin-top: 15px;
+}
+#menu ul {
 	background: #BACE87;
 	padding: 10px;
+	font-weight: bold;
 	border-top: 2px solid #658A16;
 	border-bottom: 2px solid #658A16;
-	font-weight: bold;
-	margin-top: 20px;
 }
 
-ul#menu li {
+#menu ul li {
 	display: inline;
 	list-style: none;
 	margin-right: 10px;
 }
 
-ul#menu li a {
+#menu ul li a {
 	padding: 5px 14px;
 	text-decoration: none;
 	color: #fff;
 }
 
-ul#menu li a:hover {
+#menu ul li a:hover {
 	background: #658A16;
 }
 
-ul#menu li a.active {
+#menu ul li a.active {
 	background: #fff;
 	color: #333;
-	border-right: 2px solid #658A16;
-	border-bottom: 2px solid #658A16;
 }
 
-/* main content */
+/* content */
 #content {
 	padding: 0px 0px 0px 20px
 }
@@ -72,13 +79,13 @@ ul#menu li a.active {
 input {
 	border: 1px solid #999;
 	margin: 0px 7px;
-	padding: 3px;
+	padding: 2px;
 }
 
 input.button {
 	font-weight: bold;
 	background: #FFF;
-	padding: 1px 3px;
+	padding: 0px 3px;
 }
 
 #buttons {
@@ -87,7 +94,7 @@ input.button {
 
 /* table */
 table {
-	margin-top:5px;
+	margin-top: 5px;
 	border-collapse: collapse;
 	border: none;
 }
@@ -102,11 +109,11 @@ table.noborder,table.noborder th,table.noborder td {
 
 /* footer */
 #footer {
-	margin-top: 15px; padding : 10px 0px 0px 0px;
+	margin-top: 15px;
+	padding: 10px 0px 0px 0px;
 	font-size: 95%;
 	text-align: center;
 	border-top: 2px solid #658A16;
-	padding: 10px 0px 0px 0px;
 }
 
 #footer a {
