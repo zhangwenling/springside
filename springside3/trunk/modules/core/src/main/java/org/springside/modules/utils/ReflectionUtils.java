@@ -27,9 +27,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 /**
- * 反射的Utils函数集合.
+ * 反射的Util函数集合.
  * 
- * 提供访问私有变量,获取泛型类型Class,提取集合中元素的属性等Utils函数.
+ * 提供访问私有变量,获取泛型类型Class,提取集合中元素的属性,转换字符串到对象等Util函数.
  * 
  * @author calvin
  */
@@ -248,9 +248,12 @@ public class ReflectionUtils {
 	 */
 	public static RuntimeException convertReflectionExceptionToUnchecked(Exception e) {
 		if (e instanceof IllegalAccessException || e instanceof IllegalArgumentException
-				|| e instanceof NoSuchMethodException || e instanceof InvocationTargetException)
+				|| e instanceof NoSuchMethodException) {
 			return new IllegalArgumentException("Reflection Exception.", e);
-		else
-			return new RuntimeException(e);
+		} else if (e instanceof InvocationTargetException) {
+			return new RuntimeException("Reflection Exception.", ((InvocationTargetException) e).getTargetException());
+		}
+
+		return new RuntimeException("Unexpected Exception.", e);
 	}
 }

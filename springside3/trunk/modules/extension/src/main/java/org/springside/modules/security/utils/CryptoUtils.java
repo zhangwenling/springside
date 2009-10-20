@@ -16,7 +16,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springside.modules.utils.EncodeUtils;
 
 /**
- * 支持SHA-1消息摘要, HMAC-SHA1消息签名 及 DES对称加密的方法集合.
+ * 支持SHA-1消息摘要, HMAC-SHA1消息签名 及 DES对称加密的Util方法集合.
  * 
  * 支持Hex与Base64两种编码方式.
  * 
