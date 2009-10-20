@@ -14,7 +14,7 @@ img {
 	border: 0px;
 }
 
-h1,h2,p {
+h1, h2, p {
 	margin: 0px;
 }
 
@@ -76,6 +76,18 @@ h1,h2,p {
 	padding: 0px 0px 0px 20px
 }
 
+#content h1 {
+	font-size: 120%;
+	letter-spacing: .1em;
+	margin: auto;
+}
+
+#content h2 {
+	font-size: 100%;
+	letter-spacing: .1em;
+	margin-top: 10px;
+}
+
 /* form */
 input {
 	border: 1px solid #999;
@@ -94,14 +106,19 @@ table {
 	margin-top: 10px;
 	margin-bottom: 15px;
 	border-collapse: collapse;
+	padding:3px;
 	border: none;
 }
 
-th,td {
+th {
+	font-weight: bold;
+}
+
+th, td {
 	border: solid #999 1px;
 }
 
-table.noborder th,table.noborder td {
+table.noborder th, table.noborder td {
 	border: none;
 }
 

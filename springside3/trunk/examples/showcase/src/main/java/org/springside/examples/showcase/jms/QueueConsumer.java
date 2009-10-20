@@ -6,6 +6,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.jms.Destination;
 
 import org.slf4j.Logger;
@@ -40,6 +41,11 @@ public class QueueConsumer implements Runnable {
 		executor.scheduleAtFixedRate(this, 0, 1000, TimeUnit.MILLISECONDS);
 	}
 
+	@PreDestroy
+	public void stop(){
+		executor.shutdown();
+	}
+
 	public void run() {
 		receive();
 	}
@@ -66,5 +72,4 @@ public class QueueConsumer implements Runnable {
 	public void setNotifyQueue(Destination notifyQueue) {
 		this.notifyQueue = notifyQueue;
 	}
-
 }

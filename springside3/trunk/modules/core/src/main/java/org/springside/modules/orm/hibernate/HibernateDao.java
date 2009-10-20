@@ -192,7 +192,6 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 本函数只能自动处理简单的hql语句,复杂的hql查询请另行编写count语句查询.
 	 */
 	protected long countHqlResult(final String hql, final Object... values) {
-		Long count = 0L;
 		String fromHql = hql;
 		//select子句与order by子句会影响count查询,进行简单的排除.
 		fromHql = "from " + StringUtils.substringAfter(fromHql, "from");
@@ -201,11 +200,11 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		String countHql = "select count(*) " + fromHql;
 
 		try {
-			count = findUnique(countHql, values);
+			Long count = findUnique(countHql, values);
+			return count;
 		} catch (Exception e) {
 			throw new RuntimeException("hql can't be auto count, hql is:" + countHql, e);
 		}
-		return count;
 	}
 
 	/**
@@ -214,7 +213,6 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 本函数只能自动处理简单的hql语句,复杂的hql查询请另行编写count语句查询.
 	 */
 	protected long countHqlResult(final String hql, final Map<String, Object> values) {
-		Long count = 0L;
 		String fromHql = hql;
 		//select子句与order by子句会影响count查询,进行简单的排除.
 		fromHql = "from " + StringUtils.substringAfter(fromHql, "from");
@@ -223,12 +221,11 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		String countHql = "select count(*) " + fromHql;
 
 		try {
-			count = findUnique(countHql, values);
+			Long count = findUnique(countHql, values);
+			return count;
 		} catch (Exception e) {
 			throw new RuntimeException("hql can't be auto count, hql is:" + countHql, e);
 		}
-
-		return count;
 	}
 
 	/**

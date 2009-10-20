@@ -69,8 +69,8 @@
 			<y>25</y>
 			<align>center</align>
 			<text_size></text_size>
-			<text>                                 
-        <![CDATA[<b>Temperature anomaly</b>]]>
+			<text>
+				<![CDATA[<b>Temperature anomaly</b>]]>
 			</text>
 		</label>
 
@@ -81,8 +81,8 @@
 			<align>right</align>
 			<text_color>#999999</text_color>
 			<text_size>12</text_size>
-			<text>                   
-        <![CDATA[Amcharts曲线图演示]]>
+			<text>
+				<![CDATA[Amcharts曲线图演示]]>
 			</text>
 		</label>
 	</labels>
