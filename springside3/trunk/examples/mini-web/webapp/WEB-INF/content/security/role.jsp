@@ -17,8 +17,8 @@
 
 	<div id="filter">你好, <%=SpringSecurityUtils.getCurrentUserName()%>.</div>
 
-	<div id="table">
-		<table>
+	<div>
+		<table id="contentTable">
 			<tr>
 				<th>名称</th>
 				<th>授权</th>

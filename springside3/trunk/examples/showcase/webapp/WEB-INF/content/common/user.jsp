@@ -25,7 +25,7 @@
 
 		<div>
 			<form id="mainForm" action="user!disableUsers.action" method="post">
-				<table>
+				<table id="contentTable">
 					<tr>
 						<th>&nbsp;</th>
 						<th>登录名</th>

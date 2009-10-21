@@ -39,8 +39,8 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("保存角色成功"));
-		assertEquals(role.getName(), selenium.getTable("listTable.3.0"));
-		assertEquals("浏览用户, 浏览角色", selenium.getTable("listTable.3.1"));
+		assertEquals(role.getName(), selenium.getTable("contentTable.3.0"));
+		assertEquals("浏览用户, 浏览角色", selenium.getTable("contentTable.3.1"));
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 		String newRoleName = "newRoleName";
 
 		clickMenu("角色列表");
-		selenium.click("//table[@id='listTable']/tbody/tr[4]/td[3]/a[1]");
+		selenium.click("//table[@id='contentTable']/tbody/tr[4]/td[3]/a[1]");
 		waitPageLoad();
 
 		selenium.type("name", newRoleName);
@@ -60,8 +60,8 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("保存角色成功"));
-		assertEquals(newRoleName, selenium.getTable("listTable.3.0"));
-		assertEquals("浏览用户, 修改用户", selenium.getTable("listTable.3.1"));
+		assertEquals(newRoleName, selenium.getTable("contentTable.3.0"));
+		assertEquals("浏览用户, 修改用户", selenium.getTable("contentTable.3.1"));
 
 		return newRoleName;
 	}
@@ -71,7 +71,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 	 */
 	private void deleteRole(String roleName) {
 		clickMenu("角色列表");
-		selenium.click("//table[@id='listTable']/tbody/tr[4]/td[3]/a[2]");
+		selenium.click("//table[@id='contentTable']/tbody/tr[4]/td[3]/a[2]");
 		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("删除角色成功"));

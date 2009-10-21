@@ -94,7 +94,7 @@ public class SecurityEntityManager {
 
 	@Transactional(readOnly = true)
 	public List<Role> getAllRole() {
-		return roleDao.getAll();
+		return roleDao.getAll("id", "asc");
 	}
 
 	public void saveRole(Role entity) {

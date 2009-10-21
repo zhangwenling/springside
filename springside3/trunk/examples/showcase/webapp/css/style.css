@@ -46,7 +46,7 @@ h1, h2, p {
 #leftbar {
 	width: 180px;
 	float: left;
-	font-size: 12px;
+	font-size: 110%;
 	color: #6c534a;
 	text-align: left;
 }

@@ -21,6 +21,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.metadata.ClassMetadata;
 import org.slf4j.Logger;
@@ -134,6 +135,19 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 */
 	public List<T> getAll() {
 		return find();
+	}
+
+	/**
+	 *	获取全部对象,支持排序.
+	 *	@param order 排序方向,可选值为asc 或 desc.
+	 */
+	public List<T> getAll(String orderBy, String order) {
+		Criteria c = createCriteria();
+		if ("asc".equals(order))
+			c.addOrder(Order.asc(orderBy));
+		else
+			c.addOrder(Order.desc(orderBy));
+		return c.list();
 	}
 
 	/**

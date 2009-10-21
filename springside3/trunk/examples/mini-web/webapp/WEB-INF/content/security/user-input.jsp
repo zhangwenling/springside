@@ -50,7 +50,7 @@
 <%@ include file="/common/header.jsp" %>
 <div id="content">
 	<h1><s:if test="id == null">创建</s:if><s:else>修改</s:else>用户</h1>
-	<form action="user!save.action" method="post">
+	<form id="inputForm" action="user!save.action" method="post">
 		<input type="hidden" name="id" value="${id}"/>
 		<table class="noborder">
 			<tr>

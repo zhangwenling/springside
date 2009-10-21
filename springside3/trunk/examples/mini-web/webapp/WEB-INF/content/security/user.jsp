@@ -16,7 +16,7 @@
 <%@ include file="/common/header.jsp" %>
 <div id="content">
 	<div id="message"><s:actionmessage theme="mytheme"/></div>
-	<form action="user.action" method="get">
+	<form id="mainForm" action="user.action" method="get">
 		<input type="hidden" name="page.pageNo" id="pageNo" value="${page.pageNo}"/>
 		<input type="hidden" name="page.orderBy" id="orderBy" value="${page.orderBy}"/>
 		<input type="hidden" name="page.order" id="order" value="${page.order}"/>
@@ -26,10 +26,10 @@
 			登录名: <input type="text" name="filter_EQS_loginName" value="${param['filter_EQS_loginName']}" size="9"/>
 			姓名或Email: <input type="text" name="filter_LIKES_name_OR_email"
 							 value="${param['filter_LIKES_name_OR_email']}" size="9"/>
-			<input class="button" type="button" value="搜索" onclick="search()"/>
+			<input class="button" type="button" value="搜索" onclick="search();"/>
 		</div>
-		<div id="table">
-			<table>
+		<div>
+			<table id="contentTable">
 				<tr>
 					<th><a href="javascript:sort('loginName','asc')">登录名</a></th>
 					<th><a href="javascript:sort('name','asc')">姓名</a></th>

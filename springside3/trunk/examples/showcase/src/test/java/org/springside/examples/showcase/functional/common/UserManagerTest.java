@@ -14,7 +14,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	public void manageUser() {
 
 		clickMenu("综合演示");
-		selenium.click("//table[@id='listTable']/tbody/tr[7]/td[7]/a");
+		selenium.click("//table[@id='contentTable']/tbody/tr[7]/td[7]/a");
 		waitPageLoad();
 		//修改用户需要登录管理员权限
 		selenium.type("j_username", "admin");
@@ -27,7 +27,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		selenium.click("//input[@value='提交']");
 		selenium.waitForPageToLoad("60000");
 		//重新进入用户修改页面, 检查最后修改者
-		selenium.click("//table[@id='listTable']/tbody/tr[7]/td[7]/a");
+		selenium.click("//table[@id='contentTable']/tbody/tr[7]/td[7]/a");
 		waitPageLoad();
 		assertTrue(selenium.isTextPresent("最后修改: admin"));
 	}

@@ -71,8 +71,8 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		assertTrue(selenium.isTextPresent("保存用户成功"));
 
 		findUser(loginName);
-		assertEquals(loginName, selenium.getTable("listTable.1.1"));
-		assertEquals("用户", selenium.getTable("listTable.1.3"));
+		assertEquals(loginName, selenium.getTable("contentTable.1.1"));
+		assertEquals("用户", selenium.getTable("contentTable.1.3"));
 		return loginName;
 	}
 
@@ -97,8 +97,8 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 
 		assertTrue(selenium.isTextPresent("保存用户成功"));
 		findUser(loginName);
-		assertEquals(newUserName, selenium.getTable("listTable.1.1"));
-		assertEquals("管理员", selenium.getTable("listTable.1.3"));
+		assertEquals(newUserName, selenium.getTable("contentTable.1.1"));
+		assertEquals("管理员", selenium.getTable("contentTable.1.3"));
 	}
 
 	/**
