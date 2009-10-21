@@ -16,7 +16,6 @@ public class WSResult {
 	// 按项目的规则进行定义, 比如1xx代表客户端参数错误，2xx代表业务错误等.
 	public static final String SUCCESS = "0";
 	public static final String PARAMETER_ERROR = "101";
-	public static final String AUTH_ERROR = "201";
 	public static final String SYSTEM_ERROR = "300";
 
 	public static final String SYSTEM_ERROR_MESSAGE = "Runtime unknow internal error.";

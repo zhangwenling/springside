@@ -10,10 +10,11 @@ import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.miniservice.data.UserData;
 import org.springside.examples.miniservice.entity.user.User;
-import org.springside.examples.miniservice.ws.api.WsConstants;
 import org.springside.examples.miniservice.ws.api.UserWebService;
+import org.springside.examples.miniservice.ws.api.WsConstants;
 import org.springside.examples.miniservice.ws.api.dto.RoleDTO;
 import org.springside.examples.miniservice.ws.api.dto.UserDTO;
+import org.springside.examples.miniservice.ws.api.result.AuthUserResult;
 import org.springside.examples.miniservice.ws.api.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.api.result.GetAllUserResult;
 import org.springside.examples.miniservice.ws.api.result.WSResult;
@@ -35,8 +36,8 @@ public class UserWebServiceTest extends SpringContextTestCase {
 	@Test
 	public void authUser() {
 		UserWebService userWebService = (UserWebService) applicationContext.getBean("userWebService");
-		WSResult result = userWebService.authUser("admin", "admin");
-		assertEquals(WSResult.SUCCESS, result.getCode());
+		AuthUserResult result = userWebService.authUser("admin", "admin");
+		assertEquals(true, result.isValid());
 	}
 
 	/**

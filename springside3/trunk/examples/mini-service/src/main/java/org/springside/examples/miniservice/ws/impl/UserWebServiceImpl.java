@@ -15,6 +15,7 @@ import org.springside.examples.miniservice.service.user.UserManager;
 import org.springside.examples.miniservice.ws.api.UserWebService;
 import org.springside.examples.miniservice.ws.api.WsConstants;
 import org.springside.examples.miniservice.ws.api.dto.UserDTO;
+import org.springside.examples.miniservice.ws.api.result.AuthUserResult;
 import org.springside.examples.miniservice.ws.api.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.api.result.GetAllUserResult;
 import org.springside.examples.miniservice.ws.api.result.WSResult;
@@ -84,8 +85,8 @@ public class UserWebServiceImpl implements UserWebService {
 	/**
 	 * @see UserWebService#authUser(String, String)
 	 */
-	public WSResult authUser(String loginName, String password) {
-		WSResult result = new WSResult();
+	public AuthUserResult authUser(String loginName, String password) {
+		AuthUserResult result = new AuthUserResult();
 
 		//校验请求参数
 		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password)) {
@@ -97,9 +98,9 @@ public class UserWebServiceImpl implements UserWebService {
 		//认证
 		try {
 			if (userManager.authenticate(loginName, password)) {
-				result.setCode(WSResult.SUCCESS);
+				result.setValid(true);
 			} else {
-				result.setCode(WSResult.AUTH_ERROR);
+				result.setValid(false);
 			}
 		} catch (RuntimeException e) {
 			handleException(e, result);

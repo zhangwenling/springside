@@ -13,6 +13,7 @@ import org.springside.examples.miniservice.data.UserData;
 import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.service.user.UserManager;
 import org.springside.examples.miniservice.ws.api.dto.UserDTO;
+import org.springside.examples.miniservice.ws.api.result.AuthUserResult;
 import org.springside.examples.miniservice.ws.api.result.GetAllUserResult;
 import org.springside.examples.miniservice.ws.api.result.WSResult;
 import org.springside.examples.miniservice.ws.impl.UserWebServiceImpl;
@@ -75,7 +76,7 @@ public class UserWebServiceTest extends Assert {
 	 */
 	@Test
 	public void handleException(){
-		EasyMock.expect(userManager.getAllUser()).andStubThrow(new RuntimeException("oh.."));
+		EasyMock.expect(userManager.getAllUser()).andStubThrow(new RuntimeException("Expected exception.."));
 		EasyMock.replay(userManager);
 
 		GetAllUserResult result = userWebService.getAllUser();
@@ -95,12 +96,12 @@ public class UserWebServiceTest extends Assert {
 		EasyMock.replay(userManager);
 
 		//执行输入正确的测试
-		WSResult result = userWebService.authUser("admin", "admin");
-		assertEquals(WSResult.SUCCESS, result.getCode());
+		AuthUserResult result = userWebService.authUser("admin", "admin");
+		assertEquals(true, result.isValid());
 
 		//执行输入错误的测试
 		result = userWebService.authUser("admin", "errorPasswd");
-		assertEquals(WSResult.AUTH_ERROR, result.getCode());
+		assertEquals(false, result.isValid());
 
 		result = userWebService.authUser("admin", "");
 		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());

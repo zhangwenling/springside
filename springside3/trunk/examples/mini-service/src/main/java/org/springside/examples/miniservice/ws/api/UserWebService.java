@@ -4,9 +4,9 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import org.springside.examples.miniservice.ws.api.dto.UserDTO;
+import org.springside.examples.miniservice.ws.api.result.AuthUserResult;
 import org.springside.examples.miniservice.ws.api.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.api.result.GetAllUserResult;
-import org.springside.examples.miniservice.ws.api.result.WSResult;
 
 /**
  * JAX-WS2.0的WebService接口定义类.
@@ -33,6 +33,6 @@ public interface UserWebService {
 	/**
 	 * 验证用户名密码.
 	 */
-	public WSResult authUser(@WebParam(name = "loginName") String loginName,
+	public AuthUserResult authUser(@WebParam(name = "loginName") String loginName,
 			@WebParam(name = "password") String password);
 }
