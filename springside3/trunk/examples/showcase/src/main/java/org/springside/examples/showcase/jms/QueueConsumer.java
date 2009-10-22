@@ -28,30 +28,42 @@ public class QueueConsumer implements Runnable {
 	private static Logger logger = LoggerFactory.getLogger(QueueConsumer.class);
 
 	@Autowired(required = false)
-	private SimpleMailService simpleMailService;//邮件发送服务
+	private SimpleMailService simpleMailService;
 
 	private ScheduledExecutorService executor;
 
 	private JmsTemplate jmsTemplate;
 	private Destination notifyQueue;
 
+	/**
+	 * 在Spring Context初始化时, 启动Schedule每秒运行一次.
+	 */
 	@PostConstruct
 	public void start() {
 		executor = Executors.newScheduledThreadPool(1);
 		executor.scheduleAtFixedRate(this, 0, 1000, TimeUnit.MILLISECONDS);
 	}
 
+	/**
+	 * 在Spring Context关闭时, 停止Schedule.
+	 */
 	@PreDestroy
-	public void stop(){
-		executor.shutdown();
+	public void stop() {
+		try {
+			executor.shutdown();
+			executor.awaitTermination(1000, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e) {
+			logger.debug("awaitTermination被中断", e);
+		}
 	}
 
+	/**
+	 * 每秒定时运行的主动消息接收方法.
+	 */
 	public void run() {
-		receive();
-	}
 
-	public void receive() {
 		Map message = (Map) jmsTemplate.receiveAndConvert(notifyQueue);
+
 		//发送邮件
 		if (simpleMailService != null) {
 			try {

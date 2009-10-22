@@ -9,8 +9,8 @@ import org.springside.examples.showcase.jms.TopicListener;
 import org.springside.modules.log.MockAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
-@ContextConfiguration(locations = { "/jms/applicationContext-common.xml", "/jms/applicationContext-producer.xml",
-		"/jms/applicationContext-consumer.xml" }, inheritLocations = false)
+@ContextConfiguration(locations = { "/applicationContext.xml", "/jms/applicationContext-common.xml",
+		"/jms/applicationContext-producer.xml", "/jms/applicationContext-consumer.xml" }, inheritLocations = false)
 public class JmsTopicTest extends SpringContextTestCase {
 
 	@Autowired
@@ -33,5 +33,4 @@ public class JmsTopicTest extends SpringContextTestCase {
 		assertEquals("UserName:calvin, Email:calvin@sringside.org.cn, Property:1234", appender.getFirstLog()
 				.getMessage());
 	}
-
 }

@@ -9,14 +9,12 @@ import org.springside.examples.showcase.jms.QueueConsumer;
 import org.springside.modules.log.MockAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
-@ContextConfiguration(locations = { "/jms/applicationContext-common.xml", "/jms/applicationContext-producer.xml",
-		"/jms/applicationContext-consumer.xml" }, inheritLocations = false)
+@ContextConfiguration(locations = { "/applicationContext.xml", "/jms/applicationContext-common.xml",
+		"/jms/applicationContext-producer.xml", "/jms/applicationContext-consumer.xml" }, inheritLocations = false)
 public class JmsQueueTest extends SpringContextTestCase {
 
 	@Autowired
 	private Producer producer;
-	@Autowired
-	private QueueConsumer consumer;
 
 	@Test
 	public void test() {
@@ -29,8 +27,8 @@ public class JmsQueueTest extends SpringContextTestCase {
 
 		producer.sendQueue(user);
 		logger.info("sended message");
-
-		consumer.receive();
+		sleep(1000);
 		assertEquals("UserName:calvin, Email:calvin@sringside.org.cn", appender.getFirstLog().getMessage());
+		logger.info("received message");
 	}
 }
