@@ -18,41 +18,41 @@
 		<jdbc.driver>org.h2.Driver</jdbc.driver>
 		<jdbc.url>jdbc:h2:tcp://localhost/~/${artifactId}</jdbc.url>
 		<jdbc.user>sa</jdbc.user>
-		
+
 		<jdbc.driver.groupid>com.h2database</jdbc.driver.groupid>
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
 		<jdbc.driver.version>1.1.119</jdbc.driver.version>
-		
+
 		<dbunit.schema.file>src/main/sql/h2/schema.sql</dbunit.schema.file>
 		<dbunit.datatype>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.datatype>
 		<dbunit.format>flat</dbunit.format>
-		
+
 		<!--
 		<jdbc.driver>oracle.jdbc.driver.OracleDriver</jdbc.driver>
 		<jdbc.url>jdbc:oracle:thin:@127.0.0.1:1521:XE</jdbc.url>
-		<jdbc.user>miniservice</jdbc.user> 
+		<jdbc.user>miniservice</jdbc.user>
 		<jdbc.password>miniservice</jdbc.password>
-		<jdbc.schema>MINISERVICE</jdbc.schema> 
-			
+		<jdbc.schema>MINISERVICE</jdbc.schema>
+
 		<jdbc.driver.groupid>com.oracle</jdbc.driver.groupid>
-		<jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId> 
+		<jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
 		<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version>
-			
+
 		<dbunit.schema.file>src/main/sql/oracle/schema.sql</dbunit.schema.file>
 		<dbunit.datatype>org.dbunit.ext.oracle.Oracle10DataTypeFactory</dbunit.datatype>
 		<dbunit.format>flat</dbunit.format>
 		-->
-		
+
 		<!--
 		<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
 		<jdbc.url>jdbc:mysql://localhost/${artifactId}?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
 		<jdbc.user>root</jdbc.user>
 		<jdbc.password></jdbc.password>
-		
+
 		<jdbc.driver.groupid>mysql</jdbc.driver.groupid>
 		<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
 		<jdbc.driver.version>5.1.6</jdbc.driver.version>
-		
+
 		<dbunit.schema.file>src/main/sql/mysql/schema.sql</dbunit.schema.file>
 		<dbunit.datatype>org.dbunit.ext.mysql.MySqlDataTypeFactory</dbunit.datatype>
 		<dbunit.format>flat</dbunit.format>
@@ -137,6 +137,10 @@
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-transports-http</artifactId>
 		</dependency>
+		<dependency>
+				<groupId>javax.activation</groupId>
+				<artifactId>activation</artifactId>
+		</dependency>
 		<!-- webservice end -->
 
 		<!-- logging begin -->
@@ -202,7 +206,7 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-tools</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
@@ -212,7 +216,7 @@
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
-		
+
 		<plugins>
 			<!-- Hibernate lazy load bytecode enhancement -->
 			<plugin>
@@ -256,7 +260,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<profiles>
 		<!-- 重载cluster profile,指定finalName -->
 		<profile>

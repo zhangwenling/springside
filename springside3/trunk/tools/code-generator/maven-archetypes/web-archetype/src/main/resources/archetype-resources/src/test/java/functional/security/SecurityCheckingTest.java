@@ -45,10 +45,10 @@ public class SecurityCheckingTest extends BaseSeleniumTestCase {
 		//校验用户角色的操作单元格为空
 		clickMenu("帐号列表");
 		waitPageLoad();
-		assertEquals("查看", selenium.getTable("listTable.1.4"));
+		assertEquals("查看", selenium.getTable("contentTable.1.4"));
 
 		clickMenu("角色列表");
 		waitPageLoad();
-		assertEquals("查看", selenium.getTable("listTable.1.2"));
+		assertEquals("查看", selenium.getTable("contentTable.1.2"));
 	}
 }

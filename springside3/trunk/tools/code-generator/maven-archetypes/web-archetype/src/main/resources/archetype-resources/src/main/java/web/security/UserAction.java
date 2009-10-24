@@ -38,13 +38,13 @@ public class UserAction extends CrudActionSupport<User> {
 	@Autowired
 	private SecurityEntityManager securityEntityManager;
 
-	// 页面属性 //
+	//-- 页面属性 --//
 	private Long id;
 	private User entity;
 	private Page<User> page = new Page<User>(5);//每页5条记录
 	private List<Long> checkedRoleIds; //页面中钩选的角色id列表
 
-	// ModelDriven 与 Preparable函数 //
+	//-- ModelDriven 与 Preparable函数 --//
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -62,7 +62,7 @@ public class UserAction extends CrudActionSupport<User> {
 		}
 	}
 
-	// CRUD Action 函数 //
+	//-- CRUD Action 函数 --//
 	@Override
 	public String list() throws Exception {
 		List<PropertyFilter> filters = HibernateWebUtils.buildPropertyFilters(Struts2Utils.getRequest());
@@ -103,7 +103,7 @@ public class UserAction extends CrudActionSupport<User> {
 		return RELOAD;
 	}
 
-	// 其他Action函数 //
+	//-- 其他Action函数 --//
 	/**
 	 * 支持使用Jquery.validate Ajax检验用户名是否重复.
 	 */
@@ -121,7 +121,7 @@ public class UserAction extends CrudActionSupport<User> {
 		return null;
 	}
 
-	// 页面属性访问函数 //
+	//-- 页面属性访问函数 --//
 	/**
 	 * list页面显示用户分页列表.
 	 */

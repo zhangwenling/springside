@@ -40,7 +40,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		GrantedAuthority[] grantedAuths = obtainGrantedAuthorities(user);
 
-		// ${artifactId}中无以下属性,暂时全部设为true.
+		//-- ${artifactId}示例中无以下属性, 暂时全部设为true. --//
 		boolean enabled = true;
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;

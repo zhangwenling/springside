@@ -21,11 +21,10 @@
 		<spring.version>2.5.6</spring.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<struts2.version>2.1.8</struts2.version>
-		<cxf.version>2.2.3</cxf.version>
+		<cxf.version>2.2.4</cxf.version>
 		<spring-security.version>2.0.5.RELEASE</spring-security.version>
 
 		<!--  Plugin的属性定义  -->
-		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -108,13 +107,14 @@
 			<dependency>
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjweaver</artifactId>
-				<version>1.6.5</version>
+				<version>1.6.6</version>
 			</dependency>
 			<dependency>
 				<groupId>cglib</groupId>
 				<artifactId>cglib-nodep</artifactId>
 				<version>2.2</version>
 			</dependency>
+			<!-- only for jdk5.0 -->
 			<dependency>
 				<groupId>javax.annotation</groupId>
 				<artifactId>jsr250-api</artifactId>
@@ -144,10 +144,11 @@
 				<artifactId>hibernate-jmx</artifactId>
 				<version>${symbol_dollar}{hibernate.version}</version>
 			</dependency>
+			<!-- newest version in jboss repository -->
 			<dependency>
 				<groupId>javassist</groupId>
 				<artifactId>javassist</artifactId>
-				<version>3.8.0.GA</version>
+				<version>3.11.0.GA</version>
 			</dependency>
 
 			<!-- spring orm -->
@@ -265,13 +266,20 @@
 				<artifactId>cxf-rt-core</artifactId>
 				<version>${symbol_dollar}{cxf.version}</version>
 				<exclusions>
+					<!-- use javax.annotation.jsr250-api instead -->
+					<exclusion>
+						<groupId>org.apache.geronimo.specs</groupId>
+						<artifactId>geronimo-annotation_1.0_spec</artifactId>
+					</exclusion>
+					<!-- use javax.mail.mail instead -->
 					<exclusion>
 						<groupId>org.apache.geronimo.specs</groupId>
 						<artifactId>geronimo-javamail_1.4_spec</artifactId>
 					</exclusion>
+					<!-- use javax.activation.activation instead -->
 					<exclusion>
 						<groupId>org.apache.geronimo.specs</groupId>
-						<artifactId>geronimo-javamail_1.4_spec</artifactId>
+						<artifactId>geronimo-activation_1.1_spec</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>
@@ -280,6 +288,7 @@
 				<artifactId>cxf-rt-frontend-jaxws</artifactId>
 				<version>${symbol_dollar}{cxf.version}</version>
 				<exclusions>
+					<!-- see above -->
 					<exclusion>
 						<groupId>org.apache.geronimo.specs</groupId>
 						<artifactId>geronimo-annotation_1.0_spec</artifactId>
@@ -303,6 +312,13 @@
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-ws-security</artifactId>
 				<version>${symbol_dollar}{cxf.version}</version>
+				<exclusions>
+					<!-- see above -->
+					<exclusion>
+						<groupId>org.apache.geronimo.specs</groupId>
+						<artifactId>geronimo-annotation_1.0_spec</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<!-- webservice end -->
 
@@ -312,6 +328,7 @@
 				<artifactId>spring-security-core-tiger</artifactId>
 				<version>${symbol_dollar}{spring-security.version}</version>
 				<exclusions>
+					<!-- wrong spring version -->
 					<exclusion>
 						<groupId>org.springframework</groupId>
 						<artifactId>spring-core</artifactId>
@@ -335,6 +352,7 @@
 				<artifactId>spring-security-taglibs</artifactId>
 				<version>${symbol_dollar}{spring-security.version}</version>
 				<exclusions>
+					<!-- see above -->
 					<exclusion>
 						<groupId>org.springframework</groupId>
 						<artifactId>spring-web</artifactId>
@@ -351,7 +369,6 @@
 				<artifactId>jcaptcha-api</artifactId>
 				<version>1.0</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.octo.captcha</groupId>
 				<artifactId>jcaptcha</artifactId>
@@ -369,14 +386,26 @@
 			<dependency>
 				<groupId>org.apache.activemq</groupId>
 				<artifactId>activemq-core</artifactId>
-				<version>5.2.0</version>
+				<version>5.3.0</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.camel</groupId>
+						<artifactId>camel-core</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.activemq</groupId>
 				<artifactId>activemq-pool</artifactId>
-				<version>5.2.0</version>
+				<version>5.3.0</version>
+				<exclusions>
+					<!-- use javax.transaction.jta instead -->
+					<exclusion>
+						<groupId>org.apache.geronimo.specs</groupId>
+						<artifactId>geronimo-jta_1.0.1B_spec</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
-
 			<dependency>
 				<groupId>org.apache.xbean</groupId>
 				<artifactId>xbean-spring</artifactId>
@@ -414,13 +443,14 @@
 				<version>1.5.8</version>
 			</dependency>
 
-			<!-- 替代java.util.logging -->
+			<!-- slf4j替代java.util.logging -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>jul-to-slf4j</artifactId>
 				<version>1.5.8</version>
 			</dependency>
 
+			<!-- slf4j没有log4j的情形 -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-simple</artifactId>
@@ -475,6 +505,40 @@
 			</dependency>
 			<!-- email end -->
 
+			<!-- xml  begin -->
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-impl</artifactId>
+				<version>2.1.12</version>
+			</dependency>
+
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>1.6.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>jaxen</groupId>
+				<artifactId>jaxen</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>xerces</groupId>
+				<artifactId>xercesImpl</artifactId>
+				<version>2.9.1</version>
+			</dependency>
+			<!-- xml  end -->
+
+			<!-- poi begin -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>3.5-FINAL</version>
+			</dependency>
+			<!-- poi end -->
+
 			<!-- utils begin -->
 			<dependency>
 				<groupId>commons-beanutils</groupId>
@@ -490,6 +554,36 @@
 				<groupId>commons-collections</groupId>
 				<artifactId>commons-collections</artifactId>
 				<version>3.2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>1.4</version>
+			</dependency>
+
+			<dependency>
+				<groupId>asm</groupId>
+				<artifactId>asm</artifactId>
+				<version>3.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>ognl</groupId>
+				<artifactId>ognl</artifactId>
+				<version>2.7.3</version>
+				<exclusions>
+					<!-- use javassist.javassist instead -->
+					<exclusion>
+						<groupId>jboss</groupId>
+						<artifactId>javassist</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.transaction</groupId>
+				<artifactId>jta</artifactId>
+				<version>1.1</version>
 			</dependency>
 
 			<!-- cache (usually for orm) -->
@@ -512,34 +606,6 @@
 			</dependency>
 			<!-- utils end -->
 
-			<!-- xml  begin -->
-			<dependency>
-				<groupId>com.sun.xml.bind</groupId>
-				<artifactId>jaxb-impl</artifactId>
-				<version>2.1.12</version>
-			</dependency>
-
-			<dependency>
-				<groupId>dom4j</groupId>
-				<artifactId>dom4j</artifactId>
-				<version>1.6.1</version>
-			</dependency>
-
-			<dependency>
-				<groupId>jaxen</groupId>
-				<artifactId>jaxen</artifactId>
-				<version>1.1.1</version>
-			</dependency>
-			<!-- xml  end -->
-
-			<!-- poi begin -->
-			<dependency>
-				<groupId>org.apache.poi</groupId>
-				<artifactId>poi</artifactId>
-				<version>3.5-FINAL</version>
-			</dependency>
-			<!-- poi end -->
-
 			<!-- test begin -->
 			<dependency>
 				<groupId>junit</groupId>
@@ -551,7 +617,7 @@
 			<dependency>
 				<groupId>org.easymock</groupId>
 				<artifactId>easymock</artifactId>
-				<version>2.5.1</version>
+				<version>2.5.2</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
@@ -572,11 +638,8 @@
 				<groupId>org.seleniumhq.selenium.client-drivers</groupId>
 				<artifactId>selenium-java-client-driver</artifactId>
 				<version>1.0.1</version>
+				<scope>test</scope>
 				<exclusions>
-					<exclusion>
-						<groupId>org.codehaus.groovy.maven.runtime</groupId>
-						<artifactId>gmaven-runtime-default</artifactId>
-					</exclusion>
 					<exclusion>
 						<groupId>org.seleniumhq.selenium.server</groupId>
 						<artifactId>selenium-server</artifactId>
@@ -586,17 +649,28 @@
 						<artifactId>selenium-core</artifactId>
 					</exclusion>
 				</exclusions>
-				<scope>test</scope>
 			</dependency>
+
 			<dependency>
 				<groupId>org.unitils</groupId>
 				<artifactId>unitils</artifactId>
 				<version>2.4</version>
 				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>ant</groupId>
+						<artifactId>ant</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-dbcp</groupId>
+						<artifactId>commons-dbcp</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<!-- test end -->
 
 			<!-- hibernate tools -->
+			<!-- newest version in jboss repository -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-tools</artifactId>
@@ -617,7 +691,7 @@
 		<!-- 命令行输入mvn时，默认执行mvn package  -->
 		<defaultGoal>package</defaultGoal>
 
-		<!-- 设定Web应用中编译结果输出到WEB-INF/classes 中, 与使用IDE时相同  -->
+		<!-- 设定Web应用中编译结果输出到WEB-INF/classes 中,与使用Eclipse时相同  -->
 		<outputDirectory>webapp/WEB-INF/classes</outputDirectory>
 
 		<pluginManagement>
@@ -661,7 +735,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.4</version>
+					<version>2.4.1</version>
 					<configuration>
 						<encoding>${symbol_dollar}{project.build.sourceEncoding}</encoding>
 					</configuration>
@@ -685,7 +759,7 @@
 				<plugin>
 					<groupId>org.mortbay.jetty</groupId>
 					<artifactId>maven-jetty-plugin</artifactId>
-					<version>6.1.19</version>
+					<version>6.1.21</version>
 				</plugin>
 
 				<!-- cargo插件 -->
@@ -773,13 +847,13 @@
 						<artifactId>maven-war-plugin</artifactId>
 						<configuration>
 							<filters>
-								<filter>src/main/cluster-resources/properties/${symbol_dollar}{cluster.nodename}.properties</filter>
+								<filter>src/cluster/nodes/${symbol_dollar}{cluster.nodename}.properties</filter>
 							</filters>
 
 							<webResources>
 								<resource>
 									<filtering>true</filtering>
-									<directory>src/main/cluster-resources/webapp</directory>
+									<directory>src/cluster/webapp-override</directory>
 								</resource>
 							</webResources>
 						</configuration>

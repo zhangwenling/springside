@@ -15,9 +15,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ${package}.entity.user.User;
 import ${package}.service.user.UserManager;
-import ${package}.ws.api.WsConstants;
 import ${package}.ws.api.UserWebService;
+import ${package}.ws.api.WsConstants;
 import ${package}.ws.api.dto.UserDTO;
+import ${package}.ws.api.result.AuthUserResult;
 import ${package}.ws.api.result.CreateUserResult;
 import ${package}.ws.api.result.GetAllUserResult;
 import ${package}.ws.api.result.WSResult;
@@ -28,7 +29,7 @@ import ${package}.ws.api.result.WSResult;
  * @author sky
  * @author calvin
  */
-//serviceName与portName属性指明WSDL中的名称,endpointInterface属性指向Interface定义类.
+//serviceName与portName属性指明WSDL中的名称, endpointInterface属性指向Interface定义类.
 @WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "${package}.ws.api.UserWebService", targetNamespace = WsConstants.NS)
 public class UserWebServiceImpl implements UserWebService {
 
@@ -87,8 +88,8 @@ public class UserWebServiceImpl implements UserWebService {
 	/**
 	 * @see UserWebService${symbol_pound}authUser(String, String)
 	 */
-	public WSResult authUser(String loginName, String password) {
-		WSResult result = new WSResult();
+	public AuthUserResult authUser(String loginName, String password) {
+		AuthUserResult result = new AuthUserResult();
 
 		//校验请求参数
 		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password)) {
@@ -100,9 +101,9 @@ public class UserWebServiceImpl implements UserWebService {
 		//认证
 		try {
 			if (userManager.authenticate(loginName, password)) {
-				result.setCode(WSResult.SUCCESS);
+				result.setValid(true);
 			} else {
-				result.setCode(WSResult.AUTH_ERROR);
+				result.setValid(false);
 			}
 		} catch (RuntimeException e) {
 			handleException(e, result);

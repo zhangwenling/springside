@@ -13,10 +13,11 @@ import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import ${package}.data.UserData;
 import ${package}.entity.user.User;
-import ${package}.ws.api.WsConstants;
 import ${package}.ws.api.UserWebService;
+import ${package}.ws.api.WsConstants;
 import ${package}.ws.api.dto.RoleDTO;
 import ${package}.ws.api.dto.UserDTO;
+import ${package}.ws.api.result.AuthUserResult;
 import ${package}.ws.api.result.CreateUserResult;
 import ${package}.ws.api.result.GetAllUserResult;
 import ${package}.ws.api.result.WSResult;
@@ -38,8 +39,8 @@ public class UserWebServiceTest extends SpringContextTestCase {
 	@Test
 	public void authUser() {
 		UserWebService userWebService = (UserWebService) applicationContext.getBean("userWebService");
-		WSResult result = userWebService.authUser("admin", "admin");
-		assertEquals(WSResult.SUCCESS, result.getCode());
+		AuthUserResult result = userWebService.authUser("admin", "admin");
+		assertEquals(true, result.isValid());
 	}
 
 	/**

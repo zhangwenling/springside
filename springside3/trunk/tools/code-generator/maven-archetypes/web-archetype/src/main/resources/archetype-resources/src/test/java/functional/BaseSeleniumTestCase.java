@@ -23,7 +23,7 @@ public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 		selenium.type("j_password", "admin");
 		selenium.click("//input[@value='登录']");
 		waitPageLoad();
-		assertTrue(selenium.isTextPresent("你好,admin."));
+		assertTrue(selenium.isTextPresent("你好, admin."));
 	}
 
 	/**

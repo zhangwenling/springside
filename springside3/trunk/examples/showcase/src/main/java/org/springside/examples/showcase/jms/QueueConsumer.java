@@ -65,7 +65,7 @@ public class QueueConsumer implements Runnable {
 		Map message = (Map) jmsTemplate.receiveAndConvert(notifyQueue);
 
 		//发送邮件
-		if (simpleMailService != null) {
+		if (simpleMailService != null&&message!=null) {
 			try {
 				simpleMailService.sendNotificationMail((String) message.get("userName"));
 			} catch (Exception e) {

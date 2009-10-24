@@ -7,9 +7,9 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import ${package}.ws.api.dto.UserDTO;
+import ${package}.ws.api.result.AuthUserResult;
 import ${package}.ws.api.result.CreateUserResult;
 import ${package}.ws.api.result.GetAllUserResult;
-import ${package}.ws.api.result.WSResult;
 
 /**
  * JAX-WS2.0的WebService接口定义类.
@@ -36,6 +36,6 @@ public interface UserWebService {
 	/**
 	 * 验证用户名密码.
 	 */
-	public WSResult authUser(@WebParam(name = "loginName") String loginName,
+	public AuthUserResult authUser(@WebParam(name = "loginName") String loginName,
 			@WebParam(name = "password") String password);
 }
