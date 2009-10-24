@@ -844,13 +844,13 @@
 						<artifactId>maven-war-plugin</artifactId>
 						<configuration>
 							<filters>
-								<filter>src/main/cluster-resources/properties/${cluster.nodename}.properties</filter>
+								<filter>src/cluster/nodes/${cluster.nodename}.properties</filter>
 							</filters>
 
 							<webResources>
 								<resource>
 									<filtering>true</filtering>
-									<directory>src/main/cluster-resources/webapp</directory>
+									<directory>src/cluster/webapp-override</directory>
 								</resource>
 							</webResources>
 						</configuration>
