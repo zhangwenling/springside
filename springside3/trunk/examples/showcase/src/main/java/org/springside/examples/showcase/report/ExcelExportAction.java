@@ -41,9 +41,11 @@ public class ExcelExportAction extends ActionSupport {
 	public String execute() throws Exception {
 		//生成Excel文件.
 		Workbook wb = exportExcelWorkbook();
+
 		//输出Excel文件.
 		HttpServletResponse response = Struts2Utils.getResponse();
 		response.setContentType("application/vnd.ms-excel");
+		response.setHeader("Content-Disposition", "attachment; filename=\"report.xls\"");
 		wb.write(response.getOutputStream());
 		response.getOutputStream().flush();
 		return null;

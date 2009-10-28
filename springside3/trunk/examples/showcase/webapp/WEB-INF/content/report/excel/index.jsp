@@ -6,7 +6,7 @@
 	<title>报表演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 	<script type="text/javascript" src="${ctx}/report/swfobject.js"></script>
-	<link href="${ctx}/css/main.css" type="text/css" rel="stylesheet"/>
+	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <%@ include file="/common/header.jsp" %>

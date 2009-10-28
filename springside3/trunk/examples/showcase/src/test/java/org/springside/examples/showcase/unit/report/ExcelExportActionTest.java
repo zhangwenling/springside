@@ -30,6 +30,5 @@ public class ExcelExportActionTest extends Assert {
 		Cell cellTotal = wb.getSheetAt(0).getRow(32).getCell(1);
 		FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
 		assertEquals(2.373, evaluator.evaluate(cellTotal).getNumberValue(), 0.01);
-
 	}
 }

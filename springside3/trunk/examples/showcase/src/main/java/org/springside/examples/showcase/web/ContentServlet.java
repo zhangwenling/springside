@@ -11,10 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ContentServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
 	private static final String PARAMETER_FILE = "file";
+	private static final String PARAMETER_DOWNLOAD = "download";
+
 	private static final int DEFAULT_BUFFER_SIZE = 8 * 1024;
+	private static final String DEFAULT_MIME_TYPE = "application/octet-stream";
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,10 +27,14 @@ public class ContentServlet extends HttpServlet {
 		File file = new File(filePath);
 
 		//设置Response Header.
-		String fileMimeType = getFileMimeType(filePath);
 		int fileLength = (int) file.length();
-		response.setContentType(fileMimeType);
 		response.setContentLength(fileLength);
+
+		String fileMimeType = getFileMimeType(filePath);
+		response.setContentType(fileMimeType);
+
+		if (request.getParameter(PARAMETER_DOWNLOAD) != null)
+			response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
 
 		//取得Input/Output Stream.
 		ServletOutputStream output = response.getOutputStream();
@@ -48,10 +56,19 @@ public class ContentServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * 取得文件MimeType, 无法取得时默认为
+	 */
 	private String getFileMimeType(String filePath) {
-		return getServletContext().getMimeType(filePath);
+		String mimeType = getServletContext().getMimeType(filePath);
+		if (mimeType == null)
+			mimeType = DEFAULT_MIME_TYPE;
+		return mimeType;
 	}
 
+	/**
+	 * 取得Web应用内文件的绝对存储路径.
+	 */
 	private String getFilePath(HttpServletRequest request) {
 		String filePath = request.getParameter(PARAMETER_FILE);
 		return getServletContext().getRealPath(filePath);
