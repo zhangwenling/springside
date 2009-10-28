@@ -25,11 +25,12 @@ import org.springside.modules.utils.ReflectionUtils;
  */
 public class UserDetailsServiceImplTest extends Assert {
 
-	private UserDetailsServiceImpl userDetailService = new UserDetailsServiceImpl();
-	private SecurityEntityManager securityEntityManager = null;
+	private UserDetailsServiceImpl userDetailService;
+	private SecurityEntityManager securityEntityManager;
 
 	@Before
 	public void setUp() {
+		userDetailService = new UserDetailsServiceImpl();
 		securityEntityManager = EasyMock.createNiceMock(SecurityEntityManager.class);
 		ReflectionUtils.setFieldValue(userDetailService, "securityEntityManager", securityEntityManager);
 	}

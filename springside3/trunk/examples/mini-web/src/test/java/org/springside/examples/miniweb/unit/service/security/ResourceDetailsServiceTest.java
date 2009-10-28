@@ -19,11 +19,12 @@ import org.springside.modules.utils.ReflectionUtils;
 
 public class ResourceDetailsServiceTest extends Assert {
 
-	private ResourceDetailsServiceImpl resourceDetailService = new ResourceDetailsServiceImpl();
-	private SecurityEntityManager securityEntityManager = null;
+	private ResourceDetailsServiceImpl resourceDetailService;
+	private SecurityEntityManager securityEntityManager;
 
 	@Before
 	public void setUp() {
+		resourceDetailService = new ResourceDetailsServiceImpl();
 		securityEntityManager = EasyMock.createNiceMock(SecurityEntityManager.class);
 		ReflectionUtils.setFieldValue(resourceDetailService, "securityEntityManager", securityEntityManager);
 	}

@@ -27,15 +27,17 @@ import org.springside.modules.utils.ReflectionUtils;
  * @author calvin
  */
 public class UserWebServiceTest extends Assert {
-	private UserWebServiceImpl userWebService = new UserWebServiceImpl();
-	private UserManager userManager = null;
+	private UserWebServiceImpl userWebService;
+	private UserManager userManager;
 
 	@Before
 	public void setUp() {
+		userWebService = new UserWebServiceImpl();
+		ReflectionUtils.setFieldValue(userWebService, "dozer", new DozerBeanMapper());
 		//创建mock对象
 		userManager = EasyMock.createNiceMock(UserManager.class);
 		ReflectionUtils.setFieldValue(userWebService, "userManager", userManager);
-		ReflectionUtils.setFieldValue(userWebService, "dozer", new DozerBeanMapper());
+
 	}
 
 	@After
