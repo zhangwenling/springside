@@ -18,6 +18,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.springside.examples.showcase.report.DummyDataFetcher.TemperatureAnomaly;
+import org.springside.modules.web.WebUtils;
 import org.springside.modules.web.struts2.Struts2Utils;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -45,7 +46,7 @@ public class ExcelExportAction extends ActionSupport {
 		//输出Excel文件.
 		HttpServletResponse response = Struts2Utils.getResponse();
 		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "attachment; filename=\"report.xls\"");
+		WebUtils.setDownloadableHeader(response, "Temperature_Anomaly_Report.xls");
 		wb.write(response.getOutputStream());
 		response.getOutputStream().flush();
 		return null;

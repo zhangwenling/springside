@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springside.modules.utils.IOUtils;
+import org.springside.modules.web.WebUtils;
+
 public class ContentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -17,7 +20,6 @@ public class ContentServlet extends HttpServlet {
 	private static final String PARAMETER_FILE = "file";
 	private static final String PARAMETER_DOWNLOAD = "download";
 
-	private static final int DEFAULT_BUFFER_SIZE = 8 * 1024;
 	private static final String DEFAULT_MIME_TYPE = "application/octet-stream";
 
 	@Override
@@ -29,35 +31,34 @@ public class ContentServlet extends HttpServlet {
 		//设置Response Header.
 		int fileLength = (int) file.length();
 		response.setContentLength(fileLength);
-
+		
 		String fileMimeType = getFileMimeType(filePath);
 		response.setContentType(fileMimeType);
-
-		if (request.getParameter(PARAMETER_DOWNLOAD) != null)
-			response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
+		
+		//如果是下载请求,设置下载Header
+		if (request.getParameter(PARAMETER_DOWNLOAD) != null){
+			WebUtils.setDownloadableHeader(response, file.getName());
+		}
 
 		//取得Input/Output Stream.
 		ServletOutputStream output = response.getOutputStream();
 		FileInputStream input = new FileInputStream(file);
 
-		//直接基于byte数组读取文件并直接写入OutputStream, buffer默认大小为8k.
+		//基于byte数组直接读取文件并直接写入OutputStream, 数组默认大小为8k.
 		try {
-			byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
-			int bytesRead = 0;
-
-			while ((bytesRead = input.read(buffer)) != -1) {
-				output.write(buffer, 0, bytesRead);
-			}
+			IOUtils.copy(input, output);
+			output.flush();
 		} finally {
 			//保证Input/Output Stream的关闭.
-			input.close();
-			output.flush();
-			output.close();
+			IOUtils.close(input);
+			IOUtils.close(output);
 		}
 	}
 
+
+
 	/**
-	 * 取得文件MimeType, 无法取得时默认为
+	 * 取得文件MimeType, 无法取得时默认为"application/octet-stream".
 	 */
 	private String getFileMimeType(String filePath) {
 		String mimeType = getServletContext().getMimeType(filePath);
