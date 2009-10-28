@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springside.modules.utils.IOUtils;
+import org.apache.commons.io.IOUtils;
 import org.springside.modules.web.WebUtils;
 
 public class ContentServlet extends HttpServlet {
@@ -44,14 +44,14 @@ public class ContentServlet extends HttpServlet {
 		ServletOutputStream output = response.getOutputStream();
 		FileInputStream input = new FileInputStream(file);
 
-		//基于byte数组直接读取文件并直接写入OutputStream, 数组默认大小为8k.
+		//基于byte数组直接读取文件并直接写入OutputStream, 数组默认大小为4k.
 		try {
 			IOUtils.copy(input, output);
 			output.flush();
 		} finally {
 			//保证Input/Output Stream的关闭.
-			IOUtils.close(input);
-			IOUtils.close(output);
+			IOUtils.closeQuietly(input);
+			IOUtils.closeQuietly(output);
 		}
 	}
 

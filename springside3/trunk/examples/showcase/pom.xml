@@ -193,7 +193,7 @@
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-pool</artifactId>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>org.apache.xbean</groupId>
 			<artifactId>xbean-spring</artifactId>
@@ -247,6 +247,10 @@
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
 		</dependency>
 		<!-- utils end -->
 
@@ -329,7 +333,8 @@
 				</executions>
 				<configuration>
 					<tasks>
-						<taskdef name="instrument" classname="org.hibernate.tool.instrument.javassist.InstrumentTask">
+						<taskdef name="instrument"
+							classname="org.hibernate.tool.instrument.javassist.InstrumentTask">
 							<classpath>
 								<path refid="maven.runtime.classpath" />
 								<path refid="maven.plugin.classpath" />
