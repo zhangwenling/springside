@@ -18,21 +18,21 @@ public class ContentServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//取得文件的绝对存储路径.
+		//取得文件.
 		String filePath = getFilePath(request);
-
-		//设置MimeType.
-		String fileMimeType = getFileMimeType(filePath);
-		response.setContentType(fileMimeType);
-
-		//从Response取得Outputstream.
-		ServletOutputStream output = response.getOutputStream();
-
-		//打开文件取得InputStream.
 		File file = new File(filePath);
+
+		//设置Response Header.
+		String fileMimeType = getFileMimeType(filePath);
+		int fileLength = (int) file.length();
+		response.setContentType(fileMimeType);
+		response.setContentLength(fileLength);
+
+		//取得Input/Output Stream.
+		ServletOutputStream output = response.getOutputStream();
 		FileInputStream input = new FileInputStream(file);
 
-		//直接基于byte数组读取文件并写入OutputStream, buffer默认大小为8k.
+		//直接基于byte数组读取文件并直接写入OutputStream, buffer默认大小为8k.
 		try {
 			byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
 			int bytesRead = 0;
