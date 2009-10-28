@@ -25,9 +25,24 @@
 		<servlet-name>userHessianServiceExporter</servlet-name>
 		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
 	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>userHessianServiceExporter</servlet-name>
 		<url-pattern>/remoting/UserHessianService</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Content Servlet 配置 -->
+	<servlet>
+		<description>
+		</description>
+		<display-name>ContentServlet</display-name>
+		<servlet-name>ContentServlet</servlet-name>
+		<servlet-class>
+		org.springside.examples.showcase.web.ContentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ContentServlet</servlet-name>
+		<url-pattern>/content</url-pattern>
 	</servlet-mapping>
 
 	<!-- Filter 定义  -->

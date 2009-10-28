@@ -16,11 +16,13 @@
 
 		<h2>技术说明：</h2>
 		<ul>
-			<li>URLRewrite, 使用URL Rewrite转换用户友好的URL. (综合示例)</li>
+			<li>URLRewrite, 使用URL Rewrite转换用户友好的URL.</li>
+			<li>内容下载Servlet.</li>
 		</ul>
 		<h2>用户故事：</h2>
 		<ul>
 			<li>综合示例中的地址为搜索引擎友好的地址,如用户列表地址为users.htm, 用户1的修改地址为user/1.htm</li>
+			<li>内容下载Servlet图片演示:<img src="${ctx}/content?file=img/logo.jpg"/></li>
 		</ul>
 
 	</div>
