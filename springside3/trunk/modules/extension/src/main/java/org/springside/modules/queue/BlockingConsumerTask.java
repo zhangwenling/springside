@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
- * $Id: JdbcAppenderTask.java 353 2009-08-22 09:33:28Z calvinxiu
+ * $Id$
  */
 package org.springside.modules.queue;
 
