@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LoggingEvent;
 
 /**
- * 在List中保存日志的Appender,用于测试日志输出.
+ * 在List中保存日志的Appender, 用于测试日志输出.
  * 
  * 在测试开始前,使用addToLogger方法将本logger添加到需要侦听的logger.
  * 
@@ -42,7 +42,7 @@ public class MockAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * 返回之前append的log事件列表.
+	 * 清除之前append的log事件列表.
 	 */
 	public void clearLogs() {
 		logs.clear();
@@ -65,7 +65,14 @@ public class MockAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * 实现AppenderSkeleton的append函数,将log事件加入到内部事件列表.
+	 * 将本Appender添加到logger中.
+	 */
+	public void addToLogger(Logger logger) {
+		logger.addAppender(this);
+	}
+
+	/**
+	 * 实现AppenderSkeleton的append函数, 将log事件加入到内部事件列表.
 	 */
 	@Override
 	protected void append(LoggingEvent event) {
@@ -73,13 +80,14 @@ public class MockAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * 实现AppenderSkeleton的close函数,不作任何处理.
+	 * 实现AppenderSkeleton的close函数, 清除之前append的log事件列表.
 	 */
 	public void close() {
+		clearLogs();
 	}
 
 	/**
-	 * 实现AppenderSkeleton的close函数,不作任何处理.
+	 * 实现AppenderSkeleton的close函数, 不作任何处理.
 	 */
 	public boolean requiresLayout() {
 		return false;

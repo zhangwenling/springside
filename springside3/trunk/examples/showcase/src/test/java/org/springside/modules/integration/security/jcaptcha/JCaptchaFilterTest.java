@@ -34,11 +34,17 @@ public class JCaptchaFilterTest extends Assert {
 	@Before
 	public void setUp() {
 		config.addInitParameter(JCaptchaFilter.FAILURE_URL_PARAM, failUrl);
+		initWebApplicationContext("/applicationContext.xml,/security/applicationContext-security.xml");
+	}
 
+	/**
+	 * 在ServletContext里初始化Spring ApplicationContext.
+	 * 
+	 * @param contexts 逗号分隔的application context路径列表.
+	 */
+	private void initWebApplicationContext(String contexts) {
 		MockServletContext servletContext = (MockServletContext) config.getServletContext();
-		servletContext.addInitParameter(ContextLoader.CONFIG_LOCATION_PARAM,
-				"/applicationContext.xml,/security/applicationContext-security.xml");
-
+		servletContext.addInitParameter(ContextLoader.CONFIG_LOCATION_PARAM, contexts);
 		new ContextLoader().initWebApplicationContext(servletContext);
 	}
 
