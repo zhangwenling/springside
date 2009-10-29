@@ -63,7 +63,7 @@ public class ResourceDetailsServiceTest extends Assert {
 		LinkedHashMap<String, String> requestMap = resourceDetailService.getRequestMap();
 		assertEquals(3, requestMap.size());
 		Object[] requests = requestMap.entrySet().toArray();
-		
+
 		assertEquals(r1.getValue(), ((Entry<String, String>) requests[0]).getKey());
 		assertEquals(a1.getName(), ((Entry<String, String>) requests[0]).getValue());
 

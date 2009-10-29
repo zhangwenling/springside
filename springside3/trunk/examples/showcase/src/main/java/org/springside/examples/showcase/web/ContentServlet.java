@@ -31,12 +31,12 @@ public class ContentServlet extends HttpServlet {
 		//设置Response Header.
 		int fileLength = (int) file.length();
 		response.setContentLength(fileLength);
-		
+
 		String fileMimeType = getFileMimeType(filePath);
 		response.setContentType(fileMimeType);
-		
+
 		//如果是下载请求,设置下载Header
-		if (request.getParameter(PARAMETER_DOWNLOAD) != null){
+		if (request.getParameter(PARAMETER_DOWNLOAD) != null) {
 			WebUtils.setDownloadableHeader(response, file.getName());
 		}
 
@@ -55,15 +55,14 @@ public class ContentServlet extends HttpServlet {
 		}
 	}
 
-
-
 	/**
 	 * 取得文件MimeType, 无法取得时默认为"application/octet-stream".
 	 */
 	private String getFileMimeType(String filePath) {
 		String mimeType = getServletContext().getMimeType(filePath);
-		if (mimeType == null)
+		if (mimeType == null) {
 			mimeType = DEFAULT_MIME_TYPE;
+		}
 		return mimeType;
 	}
 

@@ -143,10 +143,11 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 */
 	public List<T> getAll(String orderBy, boolean isAsc) {
 		Criteria c = createCriteria();
-		if (isAsc)
+		if (isAsc) {
 			c.addOrder(Order.asc(orderBy));
-		else
+		} else {
 			c.addOrder(Order.desc(orderBy));
+		}
 		return c.list();
 	}
 

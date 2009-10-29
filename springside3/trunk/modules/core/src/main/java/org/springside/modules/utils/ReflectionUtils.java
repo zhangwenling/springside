@@ -248,11 +248,10 @@ public class ReflectionUtils {
 	 */
 	public static RuntimeException convertReflectionExceptionToUnchecked(Exception e) {
 		if (e instanceof IllegalAccessException || e instanceof IllegalArgumentException
-				|| e instanceof NoSuchMethodException) {
+				|| e instanceof NoSuchMethodException)
 			return new IllegalArgumentException("Reflection Exception.", e);
-		} else if (e instanceof InvocationTargetException) {
+		else if (e instanceof InvocationTargetException)
 			return new RuntimeException("Reflection Exception.", ((InvocationTargetException) e).getTargetException());
-		}
 
 		return new RuntimeException("Unexpected Exception.", e);
 	}

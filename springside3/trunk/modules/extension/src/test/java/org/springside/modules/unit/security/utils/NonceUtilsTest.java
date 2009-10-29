@@ -18,16 +18,20 @@ public class NonceUtilsTest {
 	@Test
 	public void noncesCompare() {
 		//Random
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 3; i++) {
 			System.out.println("Random Nonce        :" + NonceUtils.nextRandomHexNonce());
+		}
 
 		//标准UUID
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 3; i++) {
 			System.out.println("Java UUID Nonce     :" + UUID.randomUUID().toString());
-		for (int i = 0; i < 3; i++)
+		}
+		for (int i = 0; i < 3; i++) {
 			System.out.println("Hibernate UUID Nonce:" + NonceUtils.nextUuidNonce());
-		for (int i = 0; i < 3; i++)
+		}
+		for (int i = 0; i < 3; i++) {
 			System.out.println("RMI UID Nonce       :" + new UID().toString());
+		}
 
 		//自定义UUID
 		for (int i = 0; i < 3; i++) {

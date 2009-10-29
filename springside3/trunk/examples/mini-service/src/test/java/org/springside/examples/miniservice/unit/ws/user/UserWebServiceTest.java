@@ -77,7 +77,7 @@ public class UserWebServiceTest extends Assert {
 	 * 测试系统内部抛出异常时的处理.
 	 */
 	@Test
-	public void handleException(){
+	public void handleException() {
 		EasyMock.expect(userManager.getAllUser()).andStubThrow(new RuntimeException("Expected exception.."));
 		EasyMock.replay(userManager);
 

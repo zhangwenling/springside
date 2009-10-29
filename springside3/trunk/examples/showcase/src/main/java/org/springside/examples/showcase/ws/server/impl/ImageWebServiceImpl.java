@@ -5,8 +5,6 @@ import java.io.IOException;
 import javax.jws.WebService;
 
 import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -23,8 +21,6 @@ import org.springside.examples.showcase.ws.server.api.result.WSResult;
  */
 @WebService(serviceName = "ImageService", portName = "ImageServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.api.ImageWebService", targetNamespace = WsConstants.NS)
 public class ImageWebServiceImpl implements ImageWebService, ApplicationContextAware {
-
-	private static Logger logger = LoggerFactory.getLogger(ImageWebServiceImpl.class);
 
 	private ApplicationContext cxt;
 

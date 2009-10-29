@@ -25,12 +25,12 @@ import org.springside.modules.utils.EncodeUtils;
  */
 public class NonceUtils {
 	//RFC3339 日期标准格式,
-	private static final SimpleDateFormat internateDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+	private static final SimpleDateFormat INTERNATE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
 	//定长格式化所用字符串, 含1,2,4,8位的字符串.
 	private static final String[] SPACES = { "0", "00", "0000", "00000000" };
 
-	//SecurtyRandom默认生成的字节数.
+	//SecurtyRandom默认生成的字节长度.
 	private static final int DEFAULT_RANDOM_BYTES = 16;
 
 	//UUID风格同一JVM同一毫秒内请求的计数器.
@@ -100,7 +100,7 @@ public class NonceUtils {
 	 */
 	public static String getCurrentTimestamp() {
 		Date now = new Date();
-		return internateDateFormat.format(now);
+		return INTERNATE_DATE_FORMAT.format(now);
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class NonceUtils {
 	/**
 	 * 返回Hex编码的同一毫秒内的Counter, 生成自定义UUID的辅助函数.
 	 */
-	public synchronized static String getCounter() {
+	public static synchronized String getCounter() {
 		Date currentTime = new Date();
 
 		if (currentTime.equals(lastTime)) {

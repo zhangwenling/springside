@@ -115,8 +115,7 @@ public class ExcelExportAction extends ActionSupport {
 		CellStyle dateCellStyle = styles.get("dateCell");
 		CellStyle numberCellStyle = styles.get("numberCell");
 
-		for (int i = 0; i < temperatureAnomalys.length; i++) {
-			TemperatureAnomaly temperatureAnomaly = temperatureAnomalys[i];
+		for (TemperatureAnomaly temperatureAnomaly : temperatureAnomalys) {
 			Row r = s.createRow(rowIndex++);
 
 			Cell c1 = r.createCell(0);

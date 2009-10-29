@@ -17,22 +17,22 @@ import org.springframework.context.ApplicationContextAware;
  */
 public class SpringContextUtils implements ApplicationContextAware {
 
-	private static ApplicationContext applicationContext;
+	private static ApplicationContext staticApplicationContext;
 
 	/**
 	 * 实现ApplicationContextAware接口的context注入函数, 将其存入静态变量.
 	 */
-	public void setApplicationContext(ApplicationContext context) {
-		applicationContext = context;
+	public void setApplicationContext(ApplicationContext applicationContext) {
+		staticApplicationContext = applicationContext;
 	}
 
 	/**
 	 * 取得存储在静态变量中的ApplicationContext.
 	 */
 	public static ApplicationContext getApplicationContext() {
-		if (applicationContext == null)
+		if (staticApplicationContext == null)
 			throw new IllegalStateException("applicaitonContext未注入,请在applicationContext.xml中定义SpringContextUtil");
-		return applicationContext;
+		return staticApplicationContext;
 	}
 
 	/**
@@ -40,6 +40,6 @@ public class SpringContextUtils implements ApplicationContextAware {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T getBean(String name) {
-		return (T) applicationContext.getBean(name);
+		return (T) staticApplicationContext.getBean(name);
 	}
 }

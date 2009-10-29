@@ -63,18 +63,19 @@ public class QueueConsumer implements Runnable {
 	public void run() {
 
 		Map message = (Map) jmsTemplate.receiveAndConvert(notifyQueue);
-
-		//发送邮件
-		if (simpleMailService != null&&message!=null) {
-			try {
-				simpleMailService.sendNotificationMail((String) message.get("userName"));
-			} catch (Exception e) {
-				logger.error("邮件发送失败", e);
+		if (message != null) {
+			//发送邮件
+			if (simpleMailService != null) {
+				try {
+					simpleMailService.sendNotificationMail((String) message.get("userName"));
+				} catch (Exception e) {
+					logger.error("邮件发送失败", e);
+				}
 			}
-		}
 
-		//打印消息详情
-		logger.info("UserName:" + message.get("userName") + ", Email:" + message.get("email"));
+			//打印消息详情
+			logger.info("UserName:" + message.get("userName") + ", Email:" + message.get("email"));
+		}
 	}
 
 	public void setJmsTemplate(JmsTemplate jmsTemplate) {

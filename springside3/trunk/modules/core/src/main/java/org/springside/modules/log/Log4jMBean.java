@@ -105,8 +105,9 @@ public class Log4jMBean {
 			while (e.hasMoreElements()) {
 				Appender appender = (Appender) e.nextElement();
 				String appenderName = appender.getName();
-				if (c != logger)
+				if (c != logger) {
 					appenderName += "(parent)";
+				}
 				appenderNameList.add(appenderName);
 			}
 

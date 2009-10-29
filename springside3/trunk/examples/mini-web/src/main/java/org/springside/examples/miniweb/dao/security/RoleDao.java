@@ -14,7 +14,7 @@ import org.springside.modules.orm.hibernate.HibernateDao;
  */
 @Repository
 public class RoleDao extends HibernateDao<Role, Long> {
-	
+
 	private static final String QUERY_USER_BY_ROLEID = "select u from User u left join u.roleList r where r.id=?";
 
 	/**
