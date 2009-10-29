@@ -16,6 +16,7 @@ public class WSResult implements Serializable {
 	//-- 返回代码定义 --//
 	// 按项目的规则进行定义，比如1xx代表客户端参数错误，2xx代表业务错误等.
 	public static final String SUCCESS = "0";
+	public static final String IMAGE_ERROR = "201";
 	public static final String SYSTEM_ERROR = "300";
 
 	private static final long serialVersionUID = -4631825906277830687L;

@@ -44,9 +44,16 @@
 		</jaxws:inInterceptors>
 	</jaxws:endpoint>
 
+	<!-- 使用base64Binary传输二进制内容的endpoint定义  -->
+	<jaxws:endpoint id="imageServiceEP" address="/ImageService">
+		<jaxws:implementor ref="imageWebService" />
+	</jaxws:endpoint>
 
 	<!-- UserWebService的实现Bean定义 -->
 	<bean id="userWebService" class="org.springside.examples.showcase.ws.server.impl.UserWebServiceImpl" />
+
+	<!-- ImageWebService的实现Bean定义 -->
+	<bean id="imageWebService" class="org.springside.examples.showcase.ws.server.impl.ImageWebServiceImpl" />
 
 	<!-- dozer DTO复制辅助Bean定义 -->
 	<bean id="dozer" class="org.dozer.DozerBeanMapper" />
