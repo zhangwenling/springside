@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,8 +13,8 @@ import org.springframework.mock.web.MockFilterConfig;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockServletContext;
-import org.springframework.web.context.ContextLoader;
 import org.springside.modules.security.jcaptcha.JCaptchaFilter;
+import org.springside.modules.test.spring.SpringWebMockUtils;
 
 /**
  * sprinside-jee中JCaptchaFilter的测试用例.
@@ -32,27 +33,25 @@ public class JCaptchaFilterTest extends Assert {
 	private String failUrl = "403.jsp";
 
 	@Before
-	public void setUp() {
-		config.addInitParameter(JCaptchaFilter.FAILURE_URL_PARAM, failUrl);
-		initWebApplicationContext("/applicationContext.xml,/security/applicationContext-security.xml");
+	public void setUp() throws ServletException {
+		MockServletContext context = (MockServletContext) config.getServletContext();
+		SpringWebMockUtils.initWebApplicationContext(context, "/applicationContext.xml",
+				"/security/applicationContext-security.xml");
+		config.addInitParameter(JCaptchaFilter.PARAM_FAILURE_URL, failUrl);
+
+		filter.init(config);
 	}
 
-	/**
-	 * 在ServletContext里初始化Spring ApplicationContext.
-	 * 
-	 * @param contexts 逗号分隔的application context路径列表.
-	 */
-	private void initWebApplicationContext(String contexts) {
-		MockServletContext servletContext = (MockServletContext) config.getServletContext();
-		servletContext.addInitParameter(ContextLoader.CONFIG_LOCATION_PARAM, contexts);
-		new ContextLoader().initWebApplicationContext(servletContext);
+	@After
+	public void tearDown() {
+		SpringWebMockUtils.closeWebApplicationContext(config.getServletContext());
 	}
 
 	@Test
 	public void displayImage() throws ServletException, IOException {
+		//非 filterProcessesUrl 均为图片生成URL.
 		request.setServletPath("/img/capatcha.jpg");
 
-		filter.init(config);
 		filter.doFilter(request, response, chain);
 
 		assertEquals("image/jpeg", response.getContentType());
@@ -62,9 +61,8 @@ public class JCaptchaFilterTest extends Assert {
 	@Test
 	public void validateWithErrorCaptcha() throws ServletException, IOException {
 		request.setServletPath(JCaptchaFilter.DEFAULT_FILTER_PROCESSES_URL);
-		request.setParameter(JCaptchaFilter.CAPTCHA_PARAMTER_NAME_PARAM, "12345678");
+		request.setParameter(JCaptchaFilter.PARAM_CAPTCHA_PARAMTER_NAME, "12345678ABCDEFG");
 
-		filter.init(config);
 		filter.doFilter(request, response, chain);
 
 		assertEquals(failUrl, response.getRedirectedUrl());
@@ -72,13 +70,13 @@ public class JCaptchaFilterTest extends Assert {
 
 	@Test
 	public void validateWithAutoPass() throws ServletException, IOException {
+		//在config中设定自动通过密码
 		String autoPassValue = "1234";
-		config.addInitParameter(JCaptchaFilter.AUTO_PASS_VALUE_PARAM, autoPassValue);
+		config.addInitParameter(JCaptchaFilter.PARAM_AUTO_PASS_VALUE, autoPassValue);
 
 		request.setServletPath(JCaptchaFilter.DEFAULT_FILTER_PROCESSES_URL);
 		request.setParameter(JCaptchaFilter.DEFAULT_CAPTCHA_PARAMTER_NAME, autoPassValue);
 
-		filter.init(config);
 		filter.doFilter(request, response, chain);
 
 		assertEquals(null, response.getRedirectedUrl());

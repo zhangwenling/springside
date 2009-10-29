@@ -51,18 +51,16 @@ import com.octo.captcha.service.CaptchaServiceException;
 public class JCaptchaFilter implements Filter {
 
 	//web.xml中的参数名定义
-	public static final String CAPTCHA_PARAMTER_NAME_PARAM = "captchaParamterName";
-	public static final String CAPTCHA_SERVICE_ID_PARAM = "captchaServiceId";
-	public static final String FILTER_PROCESSES_URL_PARAM = "filterProcessesUrl";
-	public static final String FAILURE_URL_PARAM = "failureUrl";
-	public static final String AUTO_PASS_VALUE_PARAM = "autoPassValue";
+	public static final String PARAM_CAPTCHA_PARAMTER_NAME = "captchaParamterName";
+	public static final String PARAM_CAPTCHA_SERVICE_ID = "captchaServiceId";
+	public static final String PARAM_FILTER_PROCESSES_URL = "filterProcessesUrl";
+	public static final String PARAM_FAILURE_URL = "failureUrl";
+	public static final String PARAM_AUTO_PASS_VALUE = "autoPassValue";
 
 	//默认值定义
 	public static final String DEFAULT_FILTER_PROCESSES_URL = "/j_spring_security_check";
 	public static final String DEFAULT_CAPTCHA_SERVICE_ID = "captchaService";
 	public static final String DEFAULT_CAPTCHA_PARAMTER_NAME = "j_captcha";
-
-	public static final String INVALID_AUTO_PASS_VALUE = "invalid";
 
 	private static Logger logger = LoggerFactory.getLogger(JCaptchaFilter.class);
 
@@ -70,7 +68,7 @@ public class JCaptchaFilter implements Filter {
 	private String filterProcessesUrl = DEFAULT_FILTER_PROCESSES_URL;
 	private String captchaServiceId = DEFAULT_CAPTCHA_SERVICE_ID;
 	private String captchaParamterName = DEFAULT_CAPTCHA_PARAMTER_NAME;
-	private String autoPassValue = INVALID_AUTO_PASS_VALUE;
+	private String autoPassValue;
 
 	private CaptchaService captchaService;
 
@@ -86,25 +84,25 @@ public class JCaptchaFilter implements Filter {
 	 * 初始化web.xml中定义的filter init-param.
 	 */
 	protected void initParameters(final FilterConfig fConfig) {
-		if (StringUtils.isBlank(fConfig.getInitParameter(FAILURE_URL_PARAM)))
+		if (StringUtils.isBlank(fConfig.getInitParameter(PARAM_FAILURE_URL)))
 			throw new IllegalArgumentException("CaptchaFilter缺少failureUrl参数");
 
-		failureUrl = fConfig.getInitParameter(FAILURE_URL_PARAM);
+		failureUrl = fConfig.getInitParameter(PARAM_FAILURE_URL);
 
-		if (StringUtils.isNotBlank(fConfig.getInitParameter(FILTER_PROCESSES_URL_PARAM))) {
-			filterProcessesUrl = fConfig.getInitParameter(FILTER_PROCESSES_URL_PARAM);
+		if (StringUtils.isNotBlank(fConfig.getInitParameter(PARAM_FILTER_PROCESSES_URL))) {
+			filterProcessesUrl = fConfig.getInitParameter(PARAM_FILTER_PROCESSES_URL);
 		}
 
-		if (StringUtils.isNotBlank(fConfig.getInitParameter(CAPTCHA_SERVICE_ID_PARAM))) {
-			captchaServiceId = fConfig.getInitParameter(CAPTCHA_SERVICE_ID_PARAM);
+		if (StringUtils.isNotBlank(fConfig.getInitParameter(PARAM_CAPTCHA_SERVICE_ID))) {
+			captchaServiceId = fConfig.getInitParameter(PARAM_CAPTCHA_SERVICE_ID);
 		}
 
-		if (StringUtils.isNotBlank(fConfig.getInitParameter(CAPTCHA_PARAMTER_NAME_PARAM))) {
-			captchaParamterName = fConfig.getInitParameter(CAPTCHA_PARAMTER_NAME_PARAM);
+		if (StringUtils.isNotBlank(fConfig.getInitParameter(PARAM_CAPTCHA_PARAMTER_NAME))) {
+			captchaParamterName = fConfig.getInitParameter(PARAM_CAPTCHA_PARAMTER_NAME);
 		}
 
-		if (StringUtils.isNotBlank(fConfig.getInitParameter(AUTO_PASS_VALUE_PARAM))) {
-			autoPassValue = fConfig.getInitParameter(AUTO_PASS_VALUE_PARAM);
+		if (StringUtils.isNotBlank(fConfig.getInitParameter(PARAM_AUTO_PASS_VALUE))) {
+			autoPassValue = fConfig.getInitParameter(PARAM_AUTO_PASS_VALUE);
 		}
 	}
 
@@ -176,8 +174,8 @@ public class JCaptchaFilter implements Filter {
 			String captchaID = request.getSession().getId();
 			String challengeResponse = request.getParameter(captchaParamterName);
 
-			//自动通过值存在时且不等于invalid时,检验输入值是否等于自动通过值
-			if (!INVALID_AUTO_PASS_VALUE.equals(autoPassValue) && autoPassValue.equals(challengeResponse))
+			//自动通过值存在时,检验输入值是否等于自动通过值
+			if (StringUtils.isNotBlank(autoPassValue) && autoPassValue.equals(challengeResponse))
 				return true;
 			return captchaService.validateResponseForID(captchaID, challengeResponse);
 		} catch (CaptchaServiceException e) {
