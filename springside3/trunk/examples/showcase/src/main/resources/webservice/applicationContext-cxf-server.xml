@@ -45,15 +45,27 @@
 	</jaxws:endpoint>
 
 	<!-- 使用base64Binary传输二进制内容的endpoint定义  -->
-	<jaxws:endpoint id="imageServiceEP" address="/ImageService">
-		<jaxws:implementor ref="imageWebService" />
+	<jaxws:endpoint id="littleImageServiceWithBase64EP" address="/LittleImageService">
+		<jaxws:implementor ref="littleImageWebService" />
+	</jaxws:endpoint>
+
+	<!-- 使用MTOM传输二进制内容的endpoint定义  -->
+	<jaxws:endpoint id="largeimageService" address="/LargeImageService">
+		<jaxws:implementor ref="largeImageWebService" />
+		<jaxws:properties>
+			<entry key="mtom-enabled" value="true" />
+		</jaxws:properties>
 	</jaxws:endpoint>
 
 	<!-- UserWebService的实现Bean定义 -->
 	<bean id="userWebService" class="org.springside.examples.showcase.ws.server.impl.UserWebServiceImpl" />
 
-	<!-- ImageWebService的实现Bean定义 -->
-	<bean id="imageWebService" class="org.springside.examples.showcase.ws.server.impl.ImageWebServiceImpl" />
+	<!-- LittleImageWebService的实现Bean定义 -->
+	<bean id="littleImageWebService" class="org.springside.examples.showcase.ws.server.impl.LittleImageWebServiceImpl" />
+
+	<!-- LargeImageWebService的实现Bean定义 -->
+	<bean id="largeImageWebService" class="org.springside.examples.showcase.ws.server.impl.LargeImageWebServiceImpl" />
+
 
 	<!-- dozer DTO复制辅助Bean定义 -->
 	<bean id="dozer" class="org.dozer.DozerBeanMapper" />
