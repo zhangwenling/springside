@@ -80,10 +80,9 @@ public class MockAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * 实现AppenderSkeleton的close函数, 清除之前append的log事件列表.
+	 * 实现AppenderSkeleton的close函数, 不作任何处理.
 	 */
 	public void close() {
-		clearLogs();
 	}
 
 	/**

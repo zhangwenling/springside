@@ -17,6 +17,8 @@ import org.springside.modules.test.groups.GroupsUtils;
 /**
  * 实现TestNG Groups功能的Runner,继承于Spring原有的SpringJUnit4ClassRunner.
  * 
+ * 使用方法:在TestCase类定义处添加@RunWith(SpringGroupsTestRunner.class)
+ * 
  * @author freeman
  * @author calvin
  */
