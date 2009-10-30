@@ -40,6 +40,7 @@ public class UserData {
 	public static Role getAdminRole() {
 		Role role = new Role();
 		role.setId(1L);
+		role.setName("Admin");
 
 		return role;
 	}

@@ -49,6 +49,7 @@ public class UserWebServiceTest extends Assert {
 	/**
 	 * 测试dozer正确映射.
 	 */
+	@Test
 	public void dozerBinding() {
 		User user = UserData.getRandomUserWithAdminRole();
 		List<User> list = new ArrayList<User>();
@@ -78,7 +79,7 @@ public class UserWebServiceTest extends Assert {
 	 */
 	@Test
 	public void handleException() {
-		EasyMock.expect(userManager.getAllUser()).andStubThrow(new RuntimeException("Expected exception.."));
+		EasyMock.expect(userManager.getAllUser()).andThrow(new RuntimeException("Expected exception.."));
 		EasyMock.replay(userManager);
 
 		GetAllUserResult result = userWebService.getAllUser();

@@ -34,8 +34,8 @@ public class ResourceDetailsServiceTest extends Assert {
 		EasyMock.verify(securityEntityManager);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
+	@SuppressWarnings("unchecked")
 	public void getRequestMap() throws Exception {
 		//准备数据
 		List<Resource> resourceList = new ArrayList<Resource>();
@@ -55,6 +55,7 @@ public class ResourceDetailsServiceTest extends Assert {
 		r3.getAuthorityList().add(a1);
 		r3.getAuthorityList().add(a2);
 		resourceList.add(r3);
+
 		//录制脚本
 		EasyMock.expect(securityEntityManager.getUrlResourceWithAuthorities()).andReturn(resourceList);
 		EasyMock.replay(securityEntityManager);

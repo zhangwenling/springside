@@ -25,7 +25,7 @@ public class UserDTO {
 	private String name;
 	private String email;
 
-	private List<RoleDTO> roleList = new ArrayList<RoleDTO>();
+	private List<RoleDTO> roleList = new ArrayList<RoleDTO>(0);
 
 	public Long getId() {
 		return id;
@@ -66,7 +66,7 @@ public class UserDTO {
 		return roleList;
 	}
 
-	public void setRoles(List<RoleDTO> roleList) {
+	public void setRoleList(List<RoleDTO> roleList) {
 		this.roleList = roleList;
 	}
 

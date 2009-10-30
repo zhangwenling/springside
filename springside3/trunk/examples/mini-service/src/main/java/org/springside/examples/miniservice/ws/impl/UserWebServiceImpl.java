@@ -45,9 +45,9 @@ public class UserWebServiceImpl implements UserWebService {
 
 		//获取User列表并转换为UserDTO列表.
 		try {
-			List<User> userList = userManager.getAllUser();
+			List<User> userEntityList = userManager.getAllUser();
 			List<UserDTO> userDTOList = new ArrayList<UserDTO>();
-			for (User userEntity : userList) {
+			for (User userEntity : userEntityList) {
 				userDTOList.add(dozer.map(userEntity, UserDTO.class));
 			}
 			result.setUserList(userDTOList);
