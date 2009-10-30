@@ -5,6 +5,6 @@
 
 	<description>Log测试配置</description>
 	
-	<bean class="org.springside.modules.log.JulToSlf4jInit" lazy-init="false" />
+	<bean class="org.springside.modules.log.JulToSlf4jHandler" lazy-init="false" />
 
 </beans>

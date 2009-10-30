@@ -9,8 +9,8 @@ import org.springside.examples.showcase.ws.server.api.WsConstants;
  * 
  * @author calvin
  */
-@XmlType(name = "GetLittleImageResult", namespace = WsConstants.NS)
-public class LittleImageResult extends WSResult {
+@XmlType(name = "SmallImageResult", namespace = WsConstants.NS)
+public class SmallImageResult extends WSResult {
 
 	private static final long serialVersionUID = 8375875101365439245L;
 

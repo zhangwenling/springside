@@ -16,16 +16,16 @@ import org.apache.log4j.MDC;
  * 使用MDC存储traceID, 一次trace中所有日志都自动带有该ID,
  * 可以方便的用grep命令在日志文件中提取该trace的所有日志.
  * 
- * 需要在log4j.properties中将ConversionPattern配置为:
+ * 需要在log4j.properties中将ConversionPattern添加%X{traceId},如:
  * 
- * log4j.appender.trace.layout.ConversionPattern=%d [%t] %X{traceId} -%m%n
+ * log4j.appender.stdout.layout.ConversionPattern=%d [%t] %p %c %X{traceId}-%m%n
  * 
  * @author calvin
  */
 public class TraceUtils {
 
 	public static final String TRACE_ID_KEY = "traceId";
-	private static final int TRANCE_ID_LENGTH = 10;
+	public static final int TRANCE_ID_LENGTH = 10;
 
 	/**
 	 * 开始Trace, 默认生成本次Trace的ID并放入MDC.

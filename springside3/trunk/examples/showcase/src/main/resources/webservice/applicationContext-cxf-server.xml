@@ -45,12 +45,12 @@
 	</jaxws:endpoint>
 
 	<!-- 使用base64Binary传输二进制内容的endpoint定义  -->
-	<jaxws:endpoint id="littleImageServiceWithBase64EP" address="/LittleImageService">
-		<jaxws:implementor ref="littleImageWebService" />
+	<jaxws:endpoint id="smallImageServiceEP" address="/SmallImageService">
+		<jaxws:implementor ref="smallImageWebService" />
 	</jaxws:endpoint>
 
 	<!-- 使用MTOM传输二进制内容的endpoint定义  -->
-	<jaxws:endpoint id="largeimageService" address="/LargeImageService">
+	<jaxws:endpoint id="largeimageServiceEP" address="/LargeImageService">
 		<jaxws:implementor ref="largeImageWebService" />
 		<jaxws:properties>
 			<entry key="mtom-enabled" value="true" />
@@ -60,8 +60,8 @@
 	<!-- UserWebService的实现Bean定义 -->
 	<bean id="userWebService" class="org.springside.examples.showcase.ws.server.impl.UserWebServiceImpl" />
 
-	<!-- LittleImageWebService的实现Bean定义 -->
-	<bean id="littleImageWebService" class="org.springside.examples.showcase.ws.server.impl.LittleImageWebServiceImpl" />
+	<!-- SmallImageWebService的实现Bean定义 -->
+	<bean id="smallImageWebService" class="org.springside.examples.showcase.ws.server.impl.SmallImageWebServiceImpl" />
 
 	<!-- LargeImageWebService的实现Bean定义 -->
 	<bean id="largeImageWebService" class="org.springside.examples.showcase.ws.server.impl.LargeImageWebServiceImpl" />
@@ -77,5 +77,5 @@
 	<bean id="digestPasswordCallback" class="org.springside.examples.showcase.ws.server.impl.DigestPasswordCallback" />
 
 	<!-- 设定由slf4j处理cxf中java.util.logging打印的日志 -->
-	<bean class="org.springside.modules.log.JulToSlf4jInit" lazy-init="false" />
+	<bean class="org.springside.modules.log.JulToSlf4jHandler" lazy-init="false" />
 </beans>

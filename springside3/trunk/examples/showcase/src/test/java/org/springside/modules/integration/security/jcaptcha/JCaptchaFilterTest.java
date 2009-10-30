@@ -14,7 +14,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockServletContext;
 import org.springside.modules.security.jcaptcha.JCaptchaFilter;
-import org.springside.modules.test.spring.SpringWebMockUtils;
+import org.springside.modules.test.spring.MockWebUtils;
 
 /**
  * sprinside-jee中JCaptchaFilter的测试用例.
@@ -35,7 +35,7 @@ public class JCaptchaFilterTest extends Assert {
 	@Before
 	public void setUp() throws ServletException {
 		MockServletContext context = (MockServletContext) config.getServletContext();
-		SpringWebMockUtils.initWebApplicationContext(context, "/applicationContext.xml",
+		MockWebUtils.initWebApplicationContext(context, "/applicationContext.xml",
 				"/security/applicationContext-security.xml");
 		config.addInitParameter(JCaptchaFilter.PARAM_FAILURE_URL, failUrl);
 
@@ -44,7 +44,7 @@ public class JCaptchaFilterTest extends Assert {
 
 	@After
 	public void tearDown() {
-		SpringWebMockUtils.closeWebApplicationContext(config.getServletContext());
+		MockWebUtils.closeWebApplicationContext(config.getServletContext());
 	}
 
 	@Test

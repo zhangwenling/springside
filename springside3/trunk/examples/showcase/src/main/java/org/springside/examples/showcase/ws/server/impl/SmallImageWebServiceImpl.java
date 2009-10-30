@@ -9,28 +9,28 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.io.Resource;
-import org.springside.examples.showcase.ws.server.api.LittleImageWebService;
+import org.springside.examples.showcase.ws.server.api.SmallImageWebService;
 import org.springside.examples.showcase.ws.server.api.WsConstants;
-import org.springside.examples.showcase.ws.server.api.result.LittleImageResult;
+import org.springside.examples.showcase.ws.server.api.result.SmallImageResult;
 import org.springside.examples.showcase.ws.server.api.result.WSResult;
 
 /**
- * LittleImageWebService实现类.
+ * SmallImageWebService实现类.
  * 
- * @see LittleImageWebService
+ * @see SmallImageWebService
  * 
  * @author calvin
  */
-@WebService(serviceName = "LittleImageService", portName = "LittleImageServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.api.LittleImageWebService", targetNamespace = WsConstants.NS)
-public class LittleImageWebServiceImpl implements LittleImageWebService, ApplicationContextAware {
+@WebService(serviceName = "SmallImageService", portName = "SmallImageServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.api.SmallImageWebService", targetNamespace = WsConstants.NS)
+public class SmallImageWebServiceImpl implements SmallImageWebService, ApplicationContextAware {
 
 	private ApplicationContext cxt;
 
 	/**
-	 * @see LittleImageWebService#getLittleImage()
+	 * @see SmallImageWebService#getImage()
 	 */
-	public LittleImageResult getImage() {
-		LittleImageResult result = new LittleImageResult();
+	public SmallImageResult getImage() {
+		SmallImageResult result = new SmallImageResult();
 		try {
 			Resource imageResource = cxt.getResource("/img/logo.jpg");
 			byte[] imageBytes = IOUtils.toByteArray(imageResource.getInputStream());

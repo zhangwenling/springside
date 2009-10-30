@@ -75,6 +75,6 @@
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
-	<!-- SpringContextUtils定义 -->
-	<bean id="springContextUtils" class="org.springside.modules.utils.SpringContextUtils" lazy-init="false"/>
+	<!-- SpringContextHandler定义 -->
+	<bean class="org.springside.modules.spring.SpringContextHolder" lazy-init="false"/>
 </beans>

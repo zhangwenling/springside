@@ -16,9 +16,9 @@ import org.slf4j.bridge.SLF4JBridgeHandler;
  * 
  * @author calvin
  */
-public class JulToSlf4jInit {
+public class JulToSlf4jHandler {
 
-	//Spring在JulToSlf4jInit函数.
+	//Spring在启动时调用的函数.
 	@PostConstruct
 	public void init() {
 		SLF4JBridgeHandler.install();

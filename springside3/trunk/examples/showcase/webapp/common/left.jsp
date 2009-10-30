@@ -11,7 +11,7 @@
 		<a href="${ctx}/xml/index.action">XML操作演示</a>
 		<a href="${ctx}/schedule/index.action">定时任务演示</a>
 		<a href="${ctx}/security/index.action">安全高级演示</a>
-		<a href="${ctx}/log/log.action">日志高级演示</a>
+		<a href="${ctx}/log/index.action">日志高级演示</a>
 		<a href="${ctx}/web/index.action">Web高级演示</a>
 		<a href="${ctx}/orm/index.action">数据库高级演示</a>
 		<a href="${ctx}/webservice/index.action">Web服务高级演示</a>

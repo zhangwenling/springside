@@ -54,11 +54,7 @@ public class UserWebServiceTest extends SpringContextTestCase {
 		Service service = Service.create(wsdlURL, UserServiceName);
 		UserWebService userWebService = service.getPort(UserWebService.class);
 
-		//定义Client处理UserWebService
-		Client client = ClientProxy.getClient(userWebService);
-		Endpoint endPoint = client.getEndpoint();
-
-		//定义WSS4JOutInterceptor并加入Client
+		//定义WSS4JOutInterceptor
 		Map<String, Object> outProps = new HashMap<String, Object>();
 		outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.USERNAME_TOKEN);
 		outProps.put(WSHandlerConstants.USER, "admin");
@@ -66,6 +62,8 @@ public class UserWebServiceTest extends SpringContextTestCase {
 		outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, PasswordCallback.class.getName());
 		WSS4JOutInterceptor wssOut = new WSS4JOutInterceptor(outProps);
 
+		Client client = ClientProxy.getClient(userWebService);
+		Endpoint endPoint = client.getEndpoint();
 		endPoint.getOutInterceptors().add(wssOut);
 
 		//调用UserWebService

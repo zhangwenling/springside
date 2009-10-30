@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.utils;
+package org.springside.modules.spring;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -15,24 +15,23 @@ import org.springframework.context.ApplicationContextAware;
  * 
  * @author calvin
  */
-public class SpringContextUtils implements ApplicationContextAware {
+public class SpringContextHolder implements ApplicationContextAware {
 
-	private static ApplicationContext staticApplicationContext;
+	private static ApplicationContext applicationContext;
 
 	/**
 	 * 实现ApplicationContextAware接口的context注入函数, 将其存入静态变量.
 	 */
 	public void setApplicationContext(ApplicationContext applicationContext) {
-		staticApplicationContext = applicationContext;
+		this.applicationContext = applicationContext;
 	}
 
 	/**
 	 * 取得存储在静态变量中的ApplicationContext.
 	 */
 	public static ApplicationContext getApplicationContext() {
-		if (staticApplicationContext == null)
-			throw new IllegalStateException("applicaitonContext未注入,请在applicationContext.xml中定义SpringContextUtil");
-		return staticApplicationContext;
+		checkApplicationContext();
+		return applicationContext;
 	}
 
 	/**
@@ -40,6 +39,21 @@ public class SpringContextUtils implements ApplicationContextAware {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T getBean(String name) {
-		return (T) staticApplicationContext.getBean(name);
+		checkApplicationContext();
+		return (T) applicationContext.getBean(name);
+	}
+
+	/**
+	 * 从静态变量ApplicationContext中取得Bean, 自动转型为所赋值对象的类型.
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T getBean(Class<T> clazz) {
+		checkApplicationContext();
+		return (T) applicationContext.getBeansOfType(clazz);
+	}
+
+	private static void checkApplicationContext() {
+		if (applicationContext == null)
+			throw new IllegalStateException("applicaitonContext未注入,请在applicationContext.xml中定义SpringContextUtil");
 	}
 }

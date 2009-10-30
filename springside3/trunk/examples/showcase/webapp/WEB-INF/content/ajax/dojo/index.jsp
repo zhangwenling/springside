@@ -29,9 +29,7 @@
 
 		<p>演示基于Dojo Base的Javascript文件Package化与Script方法OO化.</p>
 	</div>
-	<p><input type="button" value="演示" onclick="demo();"/></p>
-
-	<p>演示内容：</p>
+	<p><input type="button" value="获取演示内容" onclick="demo();"/></p>
 
 	<div id="demoContent"></div>
 </div>
