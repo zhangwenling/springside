@@ -20,18 +20,18 @@ import org.springside.modules.utils.ReflectionUtils;
 public class ResourceDetailsServiceTest extends Assert {
 
 	private ResourceDetailsServiceImpl resourceDetailService;
-	private SecurityEntityManager securityEntityManager;
+	private SecurityEntityManager mockSecurityEntityManager;
 
 	@Before
 	public void setUp() {
 		resourceDetailService = new ResourceDetailsServiceImpl();
-		securityEntityManager = EasyMock.createNiceMock(SecurityEntityManager.class);
-		ReflectionUtils.setFieldValue(resourceDetailService, "securityEntityManager", securityEntityManager);
+		mockSecurityEntityManager = EasyMock.createNiceMock(SecurityEntityManager.class);
+		ReflectionUtils.setFieldValue(resourceDetailService, "securityEntityManager", mockSecurityEntityManager);
 	}
 
 	@After
 	public void tearDown() {
-		EasyMock.verify(securityEntityManager);
+		EasyMock.verify(mockSecurityEntityManager);
 	}
 
 	@Test
@@ -57,8 +57,8 @@ public class ResourceDetailsServiceTest extends Assert {
 		resourceList.add(r3);
 
 		//录制脚本
-		EasyMock.expect(securityEntityManager.getUrlResourceWithAuthorities()).andReturn(resourceList);
-		EasyMock.replay(securityEntityManager);
+		EasyMock.expect(mockSecurityEntityManager.getUrlResourceWithAuthorities()).andReturn(resourceList);
+		EasyMock.replay(mockSecurityEntityManager);
 
 		//验证结果 
 		LinkedHashMap<String, String> requestMap = resourceDetailService.getRequestMap();

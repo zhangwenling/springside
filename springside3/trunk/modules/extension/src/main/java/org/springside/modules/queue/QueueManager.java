@@ -7,6 +7,8 @@
  */
 package org.springside.modules.queue;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -158,7 +160,7 @@ public class QueueManager {
 			ObjectOutputStream oos = null;
 			try {
 				String filePath = getPersistenceFilePath(queueName);
-				oos = new ObjectOutputStream(new FileOutputStream(filePath));
+				oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filePath)));
 				for (Object message : list) {
 					oos.writeObject(message);
 				}
@@ -185,7 +187,7 @@ public class QueueManager {
 
 		if (file.exists()) {
 			try {
-				ois = new ObjectInputStream(new FileInputStream(file));
+				ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));
 				BlockingQueue queue = queueMap.get(queueName);
 				int i = 0;
 				while (true) {
