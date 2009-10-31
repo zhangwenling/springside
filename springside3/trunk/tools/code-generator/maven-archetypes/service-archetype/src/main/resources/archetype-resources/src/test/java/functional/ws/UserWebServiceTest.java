@@ -76,5 +76,9 @@ public class UserWebServiceTest extends SpringContextTestCase {
 
 		GetAllUserResult result = userWebService.getAllUser();
 		assertTrue(result.getUserList().size() > 0);
+
+		UserDTO adminUser = result.getUserList().get(0);
+		assertEquals("admin", adminUser.getLoginName());
+		assertEquals(2, adminUser.getRoleList().size());
 	}
 }

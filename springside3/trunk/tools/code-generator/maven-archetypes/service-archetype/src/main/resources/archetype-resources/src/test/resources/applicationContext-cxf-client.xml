@@ -13,7 +13,6 @@
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 
-	<jaxws:client id="userWebService" serviceClass="${package}.ws.api.UserWebService" address="http://localhost:8080/${artifactId}/services/UserService">
-	</jaxws:client>
+	<jaxws:client id="userWebService" serviceClass="${package}.ws.api.UserWebService" address="http://localhost:8080/${artifactId}/services/UserService"/>
 
 </beans>

@@ -28,18 +28,19 @@ import org.springside.modules.utils.ReflectionUtils;
  */
 public class UserDetailsServiceImplTest extends Assert {
 
-	private UserDetailsServiceImpl userDetailService = new UserDetailsServiceImpl();
-	private SecurityEntityManager securityEntityManager = null;
+	private UserDetailsServiceImpl userDetailService;
+	private SecurityEntityManager mockSecurityEntityManager;
 
 	@Before
 	public void setUp() {
-		securityEntityManager = EasyMock.createNiceMock(SecurityEntityManager.class);
-		ReflectionUtils.setFieldValue(userDetailService, "securityEntityManager", securityEntityManager);
+		userDetailService = new UserDetailsServiceImpl();
+		mockSecurityEntityManager = EasyMock.createNiceMock(SecurityEntityManager.class);
+		ReflectionUtils.setFieldValue(userDetailService, "securityEntityManager", mockSecurityEntityManager);
 	}
 
 	@After
 	public void tearDown() {
-		EasyMock.verify(securityEntityManager);
+		EasyMock.verify(mockSecurityEntityManager);
 	}
 
 	@Test
@@ -55,8 +56,8 @@ public class UserDetailsServiceImplTest extends Assert {
 		role.getAuthorityList().add(auth);
 
 		//录制脚本
-		EasyMock.expect(securityEntityManager.findUserByLoginName(user.getLoginName())).andReturn(user);
-		EasyMock.replay(securityEntityManager);
+		EasyMock.expect(mockSecurityEntityManager.findUserByLoginName(user.getLoginName())).andReturn(user);
+		EasyMock.replay(mockSecurityEntityManager);
 
 		//执行测试
 		UserDetails userDetails = userDetailService.loadUserByUsername(user.getLoginName());
@@ -71,8 +72,8 @@ public class UserDetailsServiceImplTest extends Assert {
 	@Test(expected = UsernameNotFoundException.class)
 	public void loadUserNotExist() {
 		//录制脚本
-		EasyMock.expect(securityEntityManager.findUserByLoginName("userNameNotExist")).andReturn(null);
-		EasyMock.replay(securityEntityManager);
+		EasyMock.expect(mockSecurityEntityManager.findUserByLoginName("userNameNotExist")).andReturn(null);
+		EasyMock.replay(mockSecurityEntityManager);
 		//执行测试
 		userDetailService.loadUserByUsername("userNameNotExist");
 	}

@@ -22,22 +22,23 @@ import org.springside.modules.utils.ReflectionUtils;
 
 public class ResourceDetailsServiceTest extends Assert {
 
-	private ResourceDetailsServiceImpl resourceDetailService = new ResourceDetailsServiceImpl();
-	private SecurityEntityManager securityEntityManager = null;
+	private ResourceDetailsServiceImpl resourceDetailService;
+	private SecurityEntityManager mockSecurityEntityManager;
 
 	@Before
 	public void setUp() {
-		securityEntityManager = EasyMock.createNiceMock(SecurityEntityManager.class);
-		ReflectionUtils.setFieldValue(resourceDetailService, "securityEntityManager", securityEntityManager);
+		resourceDetailService = new ResourceDetailsServiceImpl();
+		mockSecurityEntityManager = EasyMock.createNiceMock(SecurityEntityManager.class);
+		ReflectionUtils.setFieldValue(resourceDetailService, "securityEntityManager", mockSecurityEntityManager);
 	}
 
 	@After
 	public void tearDown() {
-		EasyMock.verify(securityEntityManager);
+		EasyMock.verify(mockSecurityEntityManager);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
+	@SuppressWarnings("unchecked")
 	public void getRequestMap() throws Exception {
 		//准备数据
 		List<Resource> resourceList = new ArrayList<Resource>();
@@ -57,15 +58,16 @@ public class ResourceDetailsServiceTest extends Assert {
 		r3.getAuthorityList().add(a1);
 		r3.getAuthorityList().add(a2);
 		resourceList.add(r3);
+
 		//录制脚本
-		EasyMock.expect(securityEntityManager.getUrlResourceWithAuthorities()).andReturn(resourceList);
-		EasyMock.replay(securityEntityManager);
+		EasyMock.expect(mockSecurityEntityManager.getUrlResourceWithAuthorities()).andReturn(resourceList);
+		EasyMock.replay(mockSecurityEntityManager);
 
 		//验证结果 
 		LinkedHashMap<String, String> requestMap = resourceDetailService.getRequestMap();
 		assertEquals(3, requestMap.size());
 		Object[] requests = requestMap.entrySet().toArray();
-		
+
 		assertEquals(r1.getValue(), ((Entry<String, String>) requests[0]).getKey());
 		assertEquals(a1.getName(), ((Entry<String, String>) requests[0]).getValue());
 
