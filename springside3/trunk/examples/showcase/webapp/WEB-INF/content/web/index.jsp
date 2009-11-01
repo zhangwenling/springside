@@ -26,7 +26,6 @@
 			1.直接显示图片: <img src="${ctx}/content?path=img/logo.jpg"/><br/>
 			2.转向图片服务器:<img src="${ctx}/content?path=img/logo.jpg&redirect=true"/><br/>
 			3.<a href="${ctx}/content?path=img/logo.jpg&download=true">图片下载链接</a></li>
-			
 		</ul>
 
 	</div>

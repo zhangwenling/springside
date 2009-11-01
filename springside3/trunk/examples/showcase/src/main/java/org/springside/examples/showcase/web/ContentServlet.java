@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -24,7 +23,9 @@ public class ContentServlet extends HttpServlet {
 	private static final String PARAMETER_REDIRECT = "redirect";
 	private static final String PARAMETER_DOWNLOAD = "download";
 
-	private static Map<String, Content> contentMap = new ConcurrentHashMap<String, Content>();
+	private static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
+
+	private static Map<String, Content> contentCache = new ConcurrentHashMap<String, Content>();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,16 +34,23 @@ public class ContentServlet extends HttpServlet {
 		if (request.getParameter(PARAMETER_REDIRECT) != null) {
 			redirectToImageServer(response, path);
 		} else {
-			sendFile(request, response, path);
+			sendContent(request, response, path);
 		}
 	}
 
+	/**
+	 * 重定向到图片服务器.
+	 */
 	private void redirectToImageServer(HttpServletResponse response, String path) throws IOException {
 		String imageServerUrl = "http://localhost:8080/showcase/";
-		response.sendRedirect(imageServerUrl + path);
+		String targetUrl = imageServerUrl + path;
+		response.sendRedirect(targetUrl);
 	}
 
-	private void sendFile(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
+	/**
+	 * 读取文件内容并输出.
+	 */
+	private void sendContent(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
 		Content content = getContentFromCache(path);
 
 		//判断文件有否修改过,如无修改则设置返回码为304,返回.
@@ -51,22 +59,31 @@ public class ContentServlet extends HttpServlet {
 			return;
 		}
 
-		//设置Response Header.
-		response.setContentLength(content.length);
+		//设置MIME类型
 		response.setContentType(content.mimeType);
+
+		//设置过期时间
 		WebUtils.setLastModifiedHeader(response, content.lastModified);
+		WebUtils.setExpiresHeader(response, ONE_YEAR_SECONDS);
 
 		//如果是下载请求,设置下载Header
 		if (request.getParameter(PARAMETER_DOWNLOAD) != null) {
 			WebUtils.setDownloadableHeader(response, content.fileName);
 		}
+		//发送文件内容.
+		OutputStream output;
+		if (WebUtils.checkAccetptGzip(request)) {
+			//不设置content-length, 使用http1.1 trunked编码.
+			output = WebUtils.getGzipOutputStream(response);
+		} else {
+			//为http1.0客户端设置content-length.
+			response.setContentLength(content.length);
+			output = response.getOutputStream();
+		}
 
-		//取得Input/Output Stream.
-		OutputStream output = WebUtils.getZipOutputStream(request, response);
 		FileInputStream input = new FileInputStream(content.file);
-
-		//基于byte数组直接读取文件并直接写入OutputStream, 数组默认大小为4k.
 		try {
+			//基于byte数组直接读取文件并直接写入OutputStream, 数组默认大小为4k.
 			IOUtils.copy(input, output);
 			output.flush();
 		} finally {
@@ -76,26 +93,32 @@ public class ContentServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * 从缓存中获取Content基本信息.
+	 */
 	private Content getContentFromCache(String path) {
-		Content content = contentMap.get(path);
+		Content content = contentCache.get(path);
 		if (content == null) {
 			content = createContent(path);
-			contentMap.put(path, content);
+			contentCache.put(path, content);
 		}
 		return content;
 	}
 
+	/**
+	 * 创建Content基本信息.
+	 */
 	private Content createContent(String path) {
 		Content content = new Content();
-		content.path = path;
 
 		String realFilePath = getServletContext().getRealPath(path);
 		File file = new File(realFilePath);
-
+		content.path = path;
 		content.file = file;
+
 		content.fileName = file.getName();
+		content.lastModified = file.lastModified();
 		content.length = (int) file.length();
-		content.lastModified = new Date(file.lastModified());
 
 		String mimeType = getServletContext().getMimeType(realFilePath);
 		if (mimeType == null) {
@@ -110,8 +133,8 @@ public class ContentServlet extends HttpServlet {
 		File file;
 		String path;
 		String fileName;
-		String mimeType;
 		int length;
-		Date lastModified;
+		String mimeType;
+		long lastModified;
 	}
 }
