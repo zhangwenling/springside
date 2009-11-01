@@ -25,7 +25,7 @@
 		</init-param>
 	</filter>
 
-	<!-- SpringSide's Hibernate Open Session In View filter-->
+	<!-- Hibernate Open Session In View filter-->
 	<filter>
 		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
 		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
@@ -56,7 +56,11 @@
 
 	<filter-mapping>
 		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
+		<url-pattern>/j_spring_security_check</url-pattern>
 	</filter-mapping>
 
 	<filter-mapping>
