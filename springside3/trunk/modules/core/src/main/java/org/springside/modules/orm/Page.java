@@ -40,13 +40,8 @@ public class Page<T> {
 	public Page() {
 	}
 
-	public Page(final int pageSize) {
-		setPageSize(pageSize);
-	}
-
-	public Page(final int pageSize, final boolean autoCount) {
-		setPageSize(pageSize);
-		setAutoCount(autoCount);
+	public Page(int pageSize) {
+		this.pageSize = pageSize;
 	}
 
 	//-- 访问查询参数函数 --//
@@ -68,6 +63,11 @@ public class Page<T> {
 		}
 	}
 
+	public Page<T> pageNo(final int thePageNo) {
+		setPageNo(thePageNo);
+		return this;
+	}
+
 	/**
 	 * 获得每页的记录数量,默认为1.
 	 */
@@ -84,6 +84,11 @@ public class Page<T> {
 		if (pageSize < 1) {
 			this.pageSize = 1;
 		}
+	}
+
+	public Page<T> pageSize(final int thePageSize) {
+		setPageSize(thePageSize);
+		return this;
 	}
 
 	/**
@@ -107,11 +112,9 @@ public class Page<T> {
 		this.orderBy = orderBy;
 	}
 
-	/**
-	 * 是否已设置排序字段,无默认值.
-	 */
-	public boolean isOrderBySetted() {
-		return (StringUtils.isNotBlank(orderBy) && StringUtils.isNotBlank(order));
+	public Page<T> orderBy(final String theOrderBy) {
+		setOrderBy(theOrderBy);
+		return this;
 	}
 
 	/**
@@ -137,6 +140,18 @@ public class Page<T> {
 		this.order = StringUtils.lowerCase(order);
 	}
 
+	public Page<T> order(final String theOrder) {
+		setOrder(theOrder);
+		return this;
+	}
+
+	/**
+	 * 是否已设置排序字段,无默认值.
+	 */
+	public boolean isOrderBySetted() {
+		return (StringUtils.isNotBlank(orderBy) && StringUtils.isNotBlank(order));
+	}
+
 	/**
 	 * 查询对象时是否自动另外执行count查询获取总记录数, 默认为false.
 	 */
@@ -149,6 +164,11 @@ public class Page<T> {
 	 */
 	public void setAutoCount(final boolean autoCount) {
 		this.autoCount = autoCount;
+	}
+
+	public Page<T> autoCount(final boolean theAutoCount) {
+		setAutoCount(theAutoCount);
+		return this;
 	}
 
 	//-- 访问查询结果函数 --//
