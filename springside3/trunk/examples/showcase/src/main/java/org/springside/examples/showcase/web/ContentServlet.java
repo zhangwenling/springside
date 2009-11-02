@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.ArrayUtils;
 import org.springside.modules.web.WebUtils;
 
 public class ContentServlet extends HttpServlet {
@@ -25,7 +26,10 @@ public class ContentServlet extends HttpServlet {
 
 	private static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
 
-	private static Map<String, Content> contentCache = new ConcurrentHashMap<String, Content>();
+	private Map<String, Content> contentCache = new ConcurrentHashMap<String, Content>();
+	private String[] gzipMimeTypes = { "text/html", "application/xhtml+xml", "application/xml", "text/css",
+			"text/javascript" };
+	private int gzipMiniLength = 512;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,7 +76,7 @@ public class ContentServlet extends HttpServlet {
 		}
 		//发送文件内容.
 		OutputStream output;
-		if (WebUtils.checkAccetptGzip(request)) {
+		if (WebUtils.checkAccetptGzip(request) && content.needGzip) {
 			//不设置content-length, 使用http1.1 trunked编码.
 			output = WebUtils.getGzipOutputStream(response);
 		} else {
@@ -126,6 +130,12 @@ public class ContentServlet extends HttpServlet {
 		}
 		content.mimeType = mimeType;
 
+		if (content.length >= gzipMiniLength && ArrayUtils.contains(gzipMimeTypes, content.mimeType)) {
+			content.needGzip = true;
+		} else {
+			content.needGzip = false;
+		}
+
 		return content;
 	}
 
@@ -136,5 +146,6 @@ public class ContentServlet extends HttpServlet {
 		int length;
 		String mimeType;
 		long lastModified;
+		boolean needGzip;
 	}
 }

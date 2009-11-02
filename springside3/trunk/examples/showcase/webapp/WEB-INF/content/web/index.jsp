@@ -5,7 +5,7 @@
 <head>
 	<title>Web高级演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
+	<link href="${ctx}/content?path=css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <%@ include file="/common/header.jsp" %>
