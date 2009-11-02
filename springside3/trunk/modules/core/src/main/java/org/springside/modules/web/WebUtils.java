@@ -52,6 +52,17 @@ public class WebUtils {
 	}
 
 	/**
+	 * 设置无缓存Header.
+	 */
+	public static void setNoCacheHeader(HttpServletResponse response) {
+		//Http 1.0 header
+		response.setDateHeader("Expires", 0);
+		//Http 1.1 header
+		response.setHeader("Cache-Control", "max-age=0");
+
+	}
+
+	/**
 	 * 设置304 无修改的状态码.
 	 */
 	public static void setNotModified(HttpServletResponse response) {

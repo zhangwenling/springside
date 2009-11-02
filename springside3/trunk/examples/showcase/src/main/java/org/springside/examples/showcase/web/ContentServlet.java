@@ -27,8 +27,7 @@ public class ContentServlet extends HttpServlet {
 	private static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
 
 	private Map<String, Content> contentCache = new ConcurrentHashMap<String, Content>();
-	private String[] gzipMimeTypes = { "text/html", "application/xhtml+xml", "application/xml", "text/css",
-			"text/javascript" };
+	private String[] gzipMimeTypes = { "text/html", "application/xhtml+xml", "text/css", "text/javascript" };
 	private int gzipMiniLength = 512;
 
 	@Override
@@ -57,7 +56,7 @@ public class ContentServlet extends HttpServlet {
 	private void sendContent(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
 		Content content = getContentFromCache(path);
 
-		//判断文件有否修改过,如无修改则设置返回码为304,返回.
+		//判断客户端的缓存文件有否修改过, 如无修改则设置返回码为304,直接返回.
 		if (!WebUtils.checkIfModified(request, content.lastModified)) {
 			WebUtils.setNotModified(response);
 			return;
@@ -74,20 +73,23 @@ public class ContentServlet extends HttpServlet {
 		if (request.getParameter(PARAMETER_DOWNLOAD) != null) {
 			WebUtils.setDownloadableHeader(response, content.fileName);
 		}
-		//发送文件内容.
+
+		//发送文件内容, 对有需要的内容进行压缩传输.
 		OutputStream output;
 		if (WebUtils.checkAccetptGzip(request) && content.needGzip) {
 			//不设置content-length, 使用http1.1 trunked编码.
+			//使用压缩传输的outputstream.
 			output = WebUtils.getGzipOutputStream(response);
 		} else {
 			//为http1.0客户端设置content-length.
 			response.setContentLength(content.length);
+			//使用普通outputstream.
 			output = response.getOutputStream();
 		}
 
 		FileInputStream input = new FileInputStream(content.file);
 		try {
-			//基于byte数组直接读取文件并直接写入OutputStream, 数组默认大小为4k.
+			//基于byte数组读取文件并直接写入OutputStream, 数组默认大小为4k.
 			IOUtils.copy(input, output);
 			output.flush();
 		} finally {
@@ -139,6 +141,9 @@ public class ContentServlet extends HttpServlet {
 		return content;
 	}
 
+	/**
+	 * 定义Content的基本信息.
+	 */
 	public static class Content {
 		File file;
 		String path;
