@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import org.hibernate.id.UUIDHexGenerator;
 import org.junit.Test;
 import org.springside.modules.security.utils.NonceUtils;
 
@@ -19,7 +20,7 @@ public class NonceUtilsTest {
 	public void noncesCompare() {
 		//Random
 		for (int i = 0; i < 3; i++) {
-			System.out.println("Random Nonce        :" + NonceUtils.nextRandomHexNonce());
+			System.out.println("Random Nonce        :" + NonceUtils.nextRandomHexNonce(16));
 		}
 
 		//标准UUID
@@ -27,7 +28,7 @@ public class NonceUtilsTest {
 			System.out.println("Java UUID Nonce     :" + UUID.randomUUID().toString());
 		}
 		for (int i = 0; i < 3; i++) {
-			System.out.println("Hibernate UUID Nonce:" + NonceUtils.nextUuidNonce());
+			System.out.println("Hibernate UUID Nonce:" + new UUIDHexGenerator().generate(null, null));
 		}
 		for (int i = 0; i < 3; i++) {
 			System.out.println("RMI UID Nonce       :" + new UID().toString());
@@ -36,8 +37,8 @@ public class NonceUtilsTest {
 		//自定义UUID
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Timestamp Nonce     :"
-					+ new StringBuilder().append(NonceUtils.getIp()).append(NonceUtils.getCurrentTimestamp()).append(
-							NonceUtils.getCounter()).toString());
+					+ new StringBuilder().append(NonceUtils.getUnique()).append(NonceUtils.getCurrentTimestamp())
+							.append(NonceUtils.getCounter()).toString());
 		}
 
 		for (int i = 0; i < 3; i++) {
@@ -52,8 +53,9 @@ public class NonceUtilsTest {
 		Runnable uuidNonceRequestTask = new Runnable() {
 			public void run() {
 				for (int i = 0; i < 3; i++) {
-					String nonce = new StringBuilder().append(NonceUtils.getIp()).append(NonceUtils.getCurrentMills())
-							.append(NonceUtils.format(NonceUtils.getCounter(), 2)).toString();
+					String nonce = new StringBuilder().append(NonceUtils.getUnique()).append(
+							NonceUtils.getCurrentMills()).append(NonceUtils.format(NonceUtils.getCounter(), 2))
+							.toString();
 					System.out.println("Mills Nonce         :" + nonce);
 
 				}

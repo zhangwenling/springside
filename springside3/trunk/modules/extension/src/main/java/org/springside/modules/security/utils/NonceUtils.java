@@ -7,16 +7,12 @@
  */
 package org.springside.modules.security.utils;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.codec.binary.Hex;
-import org.hibernate.id.UUIDHexGenerator;
-import org.springside.modules.utils.EncodeUtils;
+import org.apache.commons.lang.RandomStringUtils;
 
 /**
  * 唯一数生成类, 提供纯Random与UUID两种风格的生成函数.
@@ -30,71 +26,51 @@ public class NonceUtils {
 	//定长格式化所用字符串, 含1,2,4,8位的字符串.
 	private static final String[] SPACES = { "0", "00", "0000", "00000000" };
 
-	//SecurtyRandom默认生成的字节长度.
-	private static final int DEFAULT_RANDOM_BYTES = 16;
-
 	//UUID风格同一JVM同一毫秒内请求的计数器.
 	private static Date lastTime;
 	private static int counter = 0;
 
-	//UUID风格Hex编码的IP地址.
-	private static String ip;
-	static {
-		try {
-			byte[] ipbytes = InetAddress.getLocalHost().getAddress();
-			ip = Hex.encodeHexString(ipbytes);
-		} catch (UnknownHostException e) {
-			ip = "00000000";
-		}
-	}
-
 	//-- random nonce generator --//
 	/**
 	 * 生成SHA1PRNG算法的SecureRandom Nonce.
+	 * 
+	 * @param length byte数组长度(单位为字节).
 	 */
 	public static byte[] nextRandomNonce(int length) {
-		try {
-			SecureRandom nonceGenerator = SecureRandom.getInstance("SHA1PRNG");
-			byte[] nonce = new byte[length];
-			nonceGenerator.nextBytes(nonce);
-			return nonce;
-		} catch (NoSuchAlgorithmException e) {
-			return null;
-		}
-	}
-
-	/**
-	 * 生成SHA1PRNG算法的SecureRandom Nonce, 默认长度为16字节.
-	 */
-	public static byte[] nextRandomNonce() {
-		return nextRandomNonce(DEFAULT_RANDOM_BYTES);
+		SecureRandom nonceGenerator = new SecureRandom();
+		byte[] nonce = new byte[length];
+		nonceGenerator.nextBytes(nonce);
+		return nonce;
 	}
 
 	/**
 	 * 生成SHA1PRNG算法的SecureRandom Nonce, 返回Hex编码结果.
+	 * @param length 内部byte数组长度(单位为字节), 返回字符串长度为length*2.
 	 */
 	public static String nextRandomHexNonce(int length) {
 		return Hex.encodeHexString(nextRandomNonce(length));
 	}
 
 	/**
-	 * 生成SHA1PRNG算法的SecureRandom Nonce, 默认长度为16字节, 返回32字符的Hex编码结果.
+	 * 使用较低强度的java.util.Random(),生成带字母与数字字符串.
+	 * 
+	 * @param length 返回字符串长度(单位为字符)
 	 */
-	public static String nextRandomHexNonce() {
-		return EncodeUtils.hexEncode(nextRandomNonce());
-	}
-
-	//-- UUID nonce generator --//
-	/**
-	 * 使用Hibernate的实现生成Timebase的Hex编码的UUID Nonce.
-	 */
-	public static String nextUuidNonce() {
-		return (String) new UUIDHexGenerator().generate(null, null);
+	public static String nextRandomString(int length) {
+		return RandomStringUtils.randomAlphanumeric(length);
 	}
 
 	//-- UUID nonce support function --//
 	/**
-	 * 返回Internate标准格式的当前毫秒级时间戳字符串,  生成自定义UUID的辅助函数.
+	 * 返回Hex编码的8字符唯一值, 可用于标识唯一的机器+JVM, 生成自定义UUID的辅助函数.
+	 */
+	public static String getUnique() {
+		int unique = new SecureRandom().nextInt();
+		return Integer.toHexString(unique);
+	}
+
+	/**
+	 * 返回Internate标准格式的当前毫秒级时间戳字符串, 生成自定义UUID的辅助函数.
 	 * 
 	 * 标准格式为yyyy-MM-dd'T'HH:mm:ss.SSS'Z', 如2009-10-15T14:24:50.316Z.
 	 */
@@ -123,13 +99,6 @@ public class NonceUtils {
 			counter = 0;
 		}
 		return Integer.toHexString(counter);
-	}
-
-	/**
-	 * 返回Hex编码的IP, 生成自定义UUID的辅助函数.
-	 */
-	public static String getIp() {
-		return ip;
 	}
 
 	/**
