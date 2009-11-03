@@ -51,11 +51,17 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 		return definitionSource;
 	}
 
+	/**
+	 * @see FactoryBean#getObjectType()
+	 */
 	@SuppressWarnings("unchecked")
 	public Class getObjectType() {
 		return FilterInvocationDefinitionSource.class;
 	}
 
+	/**
+	 * @see FactoryBean#isSingleton()
+	 */
 	public boolean isSingleton() {
 		return true;
 	}

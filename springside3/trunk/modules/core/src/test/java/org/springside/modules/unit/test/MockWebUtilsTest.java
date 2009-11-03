@@ -14,7 +14,7 @@ public class MockWebUtilsTest extends Assert {
 	@Test
 	public void initByPaths() {
 		MockServletContext servletContext = new MockServletContext();
-		MockWebUtils.initWebApplicationContext(servletContext, "classpath:/applicationContext-log.xml");
+		MockWebUtils.initWebApplicationContext(servletContext, "classpath:/applicationContext-test.xml");
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 		assertNotNull(context);
 		assertNotNull(context.getBeansOfType(JulToSlf4jHandler.class));
@@ -22,7 +22,7 @@ public class MockWebUtilsTest extends Assert {
 
 	@Test
 	public void initByApplicationConetxt() {
-		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("classpath:/applicationContext-log.xml");
+		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("classpath:/applicationContext-test.xml");
 		MockServletContext servletContext = new MockServletContext();
 		MockWebUtils.initWebApplicationContext(servletContext, ac);
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
@@ -33,7 +33,7 @@ public class MockWebUtilsTest extends Assert {
 	@Test
 	public void closeApplicationContext() {
 		MockServletContext servletContext = new MockServletContext();
-		MockWebUtils.initWebApplicationContext(servletContext, "classpath:/applicationContext-log.xml");
+		MockWebUtils.initWebApplicationContext(servletContext, "classpath:/applicationContext-test.xml");
 
 		MockWebUtils.closeWebApplicationContext(servletContext);
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);

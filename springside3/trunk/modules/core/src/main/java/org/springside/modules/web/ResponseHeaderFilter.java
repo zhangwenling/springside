@@ -20,6 +20,9 @@ public class ResponseHeaderFilter implements Filter {
 
 	private FilterConfig fc;
 
+	/**
+	 * 设置Filter在web.xml中定义的所有参数到Response.
+	 */
 	@SuppressWarnings("unchecked")
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException {
@@ -35,10 +38,16 @@ public class ResponseHeaderFilter implements Filter {
 		chain.doFilter(req, response);
 	}
 
+	/**
+	 * @see Filter#init(FilterConfig)
+	 */
 	public void init(FilterConfig filterConfig) {
 		this.fc = filterConfig;
 	}
 
+	/**
+	 * @see Filter#destroy()
+	 */
 	public void destroy() {
 	}
 }

@@ -20,6 +20,7 @@ public class MockAppenderTest extends Assert {
 		logger.warn(testString2);
 		assertEquals(testString1, appender.getFirstLog().getMessage());
 
+		assertEquals(testString2, appender.getLastLog().getMessage());
 		assertEquals(2, appender.getAllLogs().size());
 		assertEquals(testString2, appender.getAllLogs().get(1).getMessage());
 

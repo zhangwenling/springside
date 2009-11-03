@@ -3,8 +3,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 	default-lazy-init="true">
 
-	<description>Log测试配置</description>
+	<description>测试配置</description>
 	
-	<bean class="org.springside.modules.log.JulToSlf4jHandler" lazy-init="false" />
+	<bean id="julToSlf4jHandler" class="org.springside.modules.log.JulToSlf4jHandler" lazy-init="false" />
+	
+	<bean class="org.springside.modules.spring.SpringContextHolder" lazy-init="false"/>
 
 </beans>

@@ -48,7 +48,6 @@ public class WebUtils {
 		response.setDateHeader("Expires", System.currentTimeMillis() + expiresSeconds * 1000);
 		//Http 1.1 header
 		response.setHeader("Cache-Control", "max-age=" + expiresSeconds);
-
 	}
 
 	/**
@@ -59,18 +58,17 @@ public class WebUtils {
 		response.setDateHeader("Expires", 0);
 		//Http 1.1 header
 		response.setHeader("Cache-Control", "max-age=0");
-
 	}
 
 	/**
-	 * 设置304 无修改的状态码.
+	 * 设置304 无修改的status code.
 	 */
 	public static void setNotModified(HttpServletResponse response) {
 		response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
 	}
 
 	/**
-	 * 检查浏览器是否支持gzip编码.
+	 * 检查浏览器客户端是否支持gzip编码.
 	 */
 	public static boolean checkAccetptGzip(HttpServletRequest request) {
 		//Http1.1 header
@@ -92,23 +90,15 @@ public class WebUtils {
 	}
 
 	/**
-	 * 根据浏览器If-Modified-Since 或  If-Unmodified-Since头, 计算文件是否已修改.
+	 * 根据浏览器If-Modified-Since头, 计算文件是否已修改.
 	 * 
 	 * @return 如果文件在浏览器头的时间后有修改, 返回true.
 	 */
 	public static boolean checkIfModified(HttpServletRequest request, long lastModified) {
-		//Http 1.0/1.1 header
 		long ifModifiedSince = request.getDateHeader("If-Modified-Since");
 		if ((ifModifiedSince != -1) && (lastModified < ifModifiedSince + 1000)) {
 			return false;
 		}
-
-		//Http 1.1 header
-		long ifUnmodifiedSince = request.getDateHeader("If-Unmodified-Since");
-		if ((ifUnmodifiedSince != -1) && (lastModified >= ifUnmodifiedSince + 1000)) {
-			return false;
-		}
-
 		return true;
 	}
 
