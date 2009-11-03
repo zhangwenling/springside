@@ -30,14 +30,14 @@ public class AppenderUtils {
 	public static final PatternLayout DEFAULT_PATTERN_LAYOUT = new PatternLayout("%d [%t] %-5p %c - %m");
 
 	/**
-	 * 使用默认的pattern转换事件到日志字符串.
+	 * 使用默认的layoutPattern转换事件到日志字符串.
 	 */
 	public static String convertEventToString(LoggingEvent event) {
 		return DEFAULT_PATTERN_LAYOUT.format(event);
 	}
 
 	/**
-	 * 根据layoutPattern转换事件到日志字符串.
+	 * 根据参数中的layoutPattern转换事件到日志字符串.
 	 */
 	public static String convertEventToString(LoggingEvent event, String layoutPattern) {
 		return new PatternLayout(layoutPattern).format(event);

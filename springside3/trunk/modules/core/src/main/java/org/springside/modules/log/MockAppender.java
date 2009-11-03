@@ -60,6 +60,13 @@ public class MockAppender extends AppenderSkeleton {
 	/**
 	 * 将本Appender添加到logger中.
 	 */
+	public void addToLogger(Logger logger) {
+		logger.addAppender(this);
+	}
+	
+	/**
+	 * 将本Appender添加到logger中.
+	 */
 	public void addToLogger(String loggerName) {
 		Logger logger = Logger.getLogger(loggerName);
 		logger.addAppender(this);
@@ -74,13 +81,6 @@ public class MockAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * 将本Appender添加到logger中.
-	 */
-	public void addToLogger(Logger logger) {
-		logger.addAppender(this);
-	}
-
-	/**
 	 * 实现AppenderSkeleton的append函数, 将log事件加入到内部事件列表.
 	 */
 	@Override
@@ -89,13 +89,13 @@ public class MockAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * 实现AppenderSkeleton的close函数, 不作任何处理.
+	 * @see AppenderSkeleton#close()
 	 */
 	public void close() {
 	}
 
 	/**
-	 * 实现AppenderSkeleton的close函数, 不作任何处理.
+	 * @see AppenderSkeleton#requiresLayout()
 	 */
 	public boolean requiresLayout() {
 		return false;
