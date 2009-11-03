@@ -171,6 +171,14 @@
 		<filter-name>expiresHeaderFilter</filter-name>
 		<url-pattern>/img/*</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>expiresHeaderFilter</filter-name>
+		<url-pattern>/css/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>expiresHeaderFilter</filter-name>
+		<url-pattern>/js/*</url-pattern>
+	</filter-mapping>
 
 	<!--Spring ApplicationContext 载入 -->
 	<listener>

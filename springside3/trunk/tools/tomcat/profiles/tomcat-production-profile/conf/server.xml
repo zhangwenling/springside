@@ -72,7 +72,7 @@
     <Connector port="8080" protocol="HTTP/1.1" redirectPort="8443" 
                connectionTimeout="20000" 
                executor="tomcatThreadPool"
-               acceptCount="256"
+               acceptCount="200"
                useBodyEncodingForURI="true"
                enableLookups="false"
                compression="on" compressionMinSize="2048" compressableMimeType="text/html,application/xhtml+xml,text/xml,text/css,text/javascript"

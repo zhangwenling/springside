@@ -33,13 +33,11 @@ public class JCaptchaFilterTest extends Assert {
 	private String failUrl = "403.jsp";
 
 	@Before
-	public void setUp() throws ServletException {
+	public void setUp() {
 		MockServletContext context = (MockServletContext) config.getServletContext();
 		MockWebUtils.initWebApplicationContext(context, "/applicationContext.xml",
 				"/security/applicationContext-security.xml");
 		config.addInitParameter(JCaptchaFilter.PARAM_FAILURE_URL, failUrl);
-
-		filter.init(config);
 	}
 
 	@After
@@ -49,9 +47,10 @@ public class JCaptchaFilterTest extends Assert {
 
 	@Test
 	public void displayImage() throws ServletException, IOException {
-		//非 filterProcessesUrl 均为图片生成URL.
+		//非 FilterProcessesURL 均为图片生成URL.
 		request.setServletPath("/img/capatcha.jpg");
 
+		filter.init(config);
 		filter.doFilter(request, response, chain);
 
 		assertEquals("image/jpeg", response.getContentType());
@@ -63,6 +62,7 @@ public class JCaptchaFilterTest extends Assert {
 		request.setServletPath(JCaptchaFilter.DEFAULT_FILTER_PROCESSES_URL);
 		request.setParameter(JCaptchaFilter.PARAM_CAPTCHA_PARAMTER_NAME, "12345678ABCDEFG");
 
+		filter.init(config);
 		filter.doFilter(request, response, chain);
 
 		assertEquals(failUrl, response.getRedirectedUrl());
@@ -77,6 +77,7 @@ public class JCaptchaFilterTest extends Assert {
 		request.setServletPath(JCaptchaFilter.DEFAULT_FILTER_PROCESSES_URL);
 		request.setParameter(JCaptchaFilter.DEFAULT_CAPTCHA_PARAMTER_NAME, autoPassValue);
 
+		filter.init(config);
 		filter.doFilter(request, response, chain);
 
 		assertEquals(null, response.getRedirectedUrl());

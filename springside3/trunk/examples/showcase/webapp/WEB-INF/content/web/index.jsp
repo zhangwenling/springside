@@ -17,7 +17,12 @@
 		<h2>技术说明：</h2>
 		<ul>
 			<li>URLRewrite, 使用URL Rewrite转换用户友好的URL.</li>
-			<li>内容下载Servlet, 演示文件高效读取, 客户端缓存控制, 压缩传输, 弹出下载对话框等.</li>
+			<li>高性能Web2.0网站:<br/>
+			    1. 内容Servlet, 演示文件高效读取, 客户端缓存控制, 压缩传输, 弹出下载对话框.<br/>
+			    2. ResponseHeaderFilter为静态内容添加Cache-Control Header<br/>
+			    3. YUI Compressor 压缩js/css<br/>
+			    4. Tomcat gzip 配置压缩传输大于2K的html/xml/css/js文本<br/> 
+			</li>
 		</ul>
 		<h2>用户故事：</h2>
 		<ul>
