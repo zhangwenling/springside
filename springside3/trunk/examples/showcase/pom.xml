@@ -19,7 +19,7 @@
 		<jdbc.user>sa</jdbc.user>
 		<jdbc.password></jdbc.password>
 
-		<jdbc.driver.groupid>com.h2database</jdbc.driver.groupid>
+		<jdbc.driver.groupId>com.h2database</jdbc.driver.groupId>
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
 		<jdbc.driver.version>1.1.119</jdbc.driver.version>
 
@@ -87,7 +87,7 @@
 
 		<!-- jdbc driver -->
 		<dependency>
-			<groupId>${jdbc.driver.groupid}</groupId>
+			<groupId>${jdbc.driver.groupId}</groupId>
 			<artifactId>${jdbc.driver.artifactId}</artifactId>
 			<version>${jdbc.driver.version}</version>
 		</dependency>

@@ -4,9 +4,7 @@
 	default-lazy-init="true">
 
 	<description>测试配置</description>
-	
-	<bean id="julToSlf4jHandler" class="org.springside.modules.log.JulToSlf4jHandler" lazy-init="false" />
-	
-	<bean class="org.springside.modules.spring.SpringContextHolder" lazy-init="false"/>
+		
+	<bean id="springContextHolder" class="org.springside.modules.spring.SpringContextHolder" lazy-init="false"/>
 
 </beans>

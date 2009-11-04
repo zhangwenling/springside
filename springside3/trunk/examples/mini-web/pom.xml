@@ -20,7 +20,7 @@
 		<jdbc.user>sa</jdbc.user>
 		<jdbc.password></jdbc.password>
 		
-		<jdbc.driver.groupid>com.h2database</jdbc.driver.groupid>
+		<jdbc.driver.groupId>com.h2database</jdbc.driver.groupId>
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
 		<jdbc.driver.version>1.1.119</jdbc.driver.version>
 		
@@ -35,7 +35,7 @@
 		<jdbc.password>miniweb</jdbc.password> 
 		<jdbc.schema>MINIWEB</jdbc.schema>
 			
-		<jdbc.driver.groupid>com.oracle</jdbc.driver.groupid> 
+		<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId> 
 		<jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
 		<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version>
 			
@@ -50,7 +50,7 @@
 		<jdbc.user>root</jdbc.user>
 		<jdbc.password></jdbc.password>
 		
-		<jdbc.driver.groupid>mysql</jdbc.driver.groupid>
+		<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
 		<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
 		<jdbc.driver.version>5.1.6</jdbc.driver.version>
 		
@@ -119,7 +119,7 @@
 
 		<!-- jdbc driver -->
 		<dependency>
-			<groupId>${jdbc.driver.groupid}</groupId>
+			<groupId>${jdbc.driver.groupId}</groupId>
 			<artifactId>${jdbc.driver.artifactId}</artifactId>
 			<version>${jdbc.driver.version}</version>
 		</dependency>

@@ -806,7 +806,7 @@
 					</configuration>
 					<dependencies>
 						<dependency>
-							<groupId>${jdbc.driver.groupid}</groupId>
+							<groupId>${jdbc.driver.groupId}</groupId>
 							<artifactId>${jdbc.driver.artifactId}</artifactId>
 							<version>${jdbc.driver.version}</version>
 						</dependency>
@@ -828,7 +828,7 @@
 					</configuration>
 					<dependencies>
 						<dependency>
-							<groupId>${jdbc.driver.groupid}</groupId>
+							<groupId>${jdbc.driver.groupId}</groupId>
 							<artifactId>${jdbc.driver.artifactId}</artifactId>
 							<version>${jdbc.driver.version}</version>
 						</dependency>
