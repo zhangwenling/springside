@@ -1,2 +1,0 @@
-java -jar ..\lib\yuicompressor-2.3.6.jar -o ..\webapp\js\showcase\shape.js ..\webapp\js\showcase\shape_src.js
-java -jar ..\lib\yuicompressor-2.3.6.jar -o ..\webapp\css\style..css ..\webapp\css\style_src.css
