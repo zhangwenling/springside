@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockFilterConfig;
@@ -23,25 +23,25 @@ import org.springside.modules.test.spring.MockWebUtils;
  */
 public class JCaptchaFilterTest extends Assert {
 
-	private MockFilterConfig config = new MockFilterConfig();
+	private static String failUrl = "403.jsp";
+	private static MockFilterConfig config = new MockFilterConfig();
+
 	private MockFilterChain chain = new MockFilterChain();
 	private MockHttpServletRequest request = new MockHttpServletRequest();
 	private MockHttpServletResponse response = new MockHttpServletResponse();
 
 	private JCaptchaFilter filter = new JCaptchaFilter();
 
-	private String failUrl = "403.jsp";
-
-	@Before
-	public void setUp() {
+	@BeforeClass
+	public static void setUpBeforeClass() {
 		MockServletContext context = (MockServletContext) config.getServletContext();
 		MockWebUtils.initWebApplicationContext(context, "/applicationContext.xml",
 				"/security/applicationContext-security.xml");
 		config.addInitParameter(JCaptchaFilter.PARAM_FAILURE_URL, failUrl);
 	}
 
-	@After
-	public void tearDown() {
+	@AfterClass
+	public static void tearDownAfterClass() {
 		MockWebUtils.closeWebApplicationContext(config.getServletContext());
 	}
 

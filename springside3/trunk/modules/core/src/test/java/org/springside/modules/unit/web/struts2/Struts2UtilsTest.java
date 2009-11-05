@@ -9,26 +9,17 @@ import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springside.modules.test.spring.MockWebUtils;
 import org.springside.modules.web.struts2.Struts2Utils;
 
-import com.opensymphony.xwork2.ActionContext;
-
 public class Struts2UtilsTest extends Assert {
-
-	@Before
-	@SuppressWarnings("unchecked")
-	public void setUp() {
-		//初始化 Struts2 ActionContext
-		ActionContext.setContext(new ActionContext(new HashMap()));
-	}
 
 	@Test
 	public void render() throws UnsupportedEncodingException {
 		MockHttpServletResponse response = new MockHttpServletResponse();
-		ServletActionContext.setResponse(response);
+		MockWebUtils.setResponseToStruts2(response);
 
 		Struts2Utils.render("text/plain", "hello");
 		assertEquals("text/plain;charset=UTF-8", response.getContentType());
@@ -60,9 +51,10 @@ public class Struts2UtilsTest extends Assert {
 	@Test
 	@SuppressWarnings("unchecked")
 	public void renderJson() throws UnsupportedEncodingException {
-		//Map
 		MockHttpServletResponse response = new MockHttpServletResponse();
-		ServletActionContext.setResponse(response);
+		MockWebUtils.setResponseToStruts2(response);
+
+		//Map
 		Map map = new LinkedHashMap();
 		map.put("age", 10);
 		map.put("name", "foo");
@@ -97,7 +89,8 @@ public class Struts2UtilsTest extends Assert {
 	@Test
 	public void renderJsonP() throws UnsupportedEncodingException {
 		MockHttpServletResponse response = new MockHttpServletResponse();
-		ServletActionContext.setResponse(response);
+		MockWebUtils.setResponseToStruts2(response);
+
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("html", "<p>helloworld</p>");
 		Struts2Utils.renderJsonp("callback", map, "no-cache:true");
