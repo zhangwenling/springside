@@ -1,4 +1,4 @@
-package org.springside.modules.integration.log;
+package org.springside.examples.showcase.integration.jmx;
 
 import java.util.List;
 

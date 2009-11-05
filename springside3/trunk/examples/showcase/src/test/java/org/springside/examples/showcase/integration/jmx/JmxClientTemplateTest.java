@@ -1,4 +1,4 @@
-package org.springside.modules.integration.jmx;
+package org.springside.examples.showcase.integration.jmx;
 
 import org.junit.After;
 import org.junit.Before;
