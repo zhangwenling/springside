@@ -25,13 +25,13 @@ import org.apache.log4j.MDC;
 public class TraceUtils {
 
 	public static final String TRACE_ID_KEY = "traceId";
-	public static final int TRANCE_ID_LENGTH = 10;
+	public static int tranceIdLength = 10;
 
 	/**
-	 * 开始Trace, 默认生成本次Trace的ID并放入MDC.
+	 * 开始Trace, 默认生成本次Trace的ID(10字符长)并放入MDC.
 	 */
 	public static void beginTrace() {
-		String traceId = RandomStringUtils.randomAlphanumeric(TRANCE_ID_LENGTH);
+		String traceId = RandomStringUtils.randomAlphanumeric(tranceIdLength);
 		MDC.put(TRACE_ID_KEY, traceId);
 	}
 

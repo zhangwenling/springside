@@ -183,11 +183,11 @@ public class Struts2Utils {
 	/**
 	 * 直接输出JSON.
 	 * 
-	 * @param collction Java对象集合, 将被转化为json字符串.
+	 * @param collection Java对象集合, 将被转化为json字符串.
 	 * @see #render(String, String, String...)
 	 */
-	public static void renderJson(final Collection<?> collction, final String... headers) {
-		String jsonString = JSONArray.fromObject(collction).toString();
+	public static void renderJson(final Collection<?> collection, final String... headers) {
+		String jsonString = JSONArray.fromObject(collection).toString();
 		render(JSON_TYPE, jsonString, headers);
 	}
 

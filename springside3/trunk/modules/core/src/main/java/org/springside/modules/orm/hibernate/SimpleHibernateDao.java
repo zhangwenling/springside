@@ -139,7 +139,6 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 *	获取全部对象,支持排序.
-	 *	@param order 排序方向,可选值为asc 或 desc.
 	 */
 	public List<T> getAll(String orderBy, boolean isAsc) {
 		Criteria c = createCriteria();

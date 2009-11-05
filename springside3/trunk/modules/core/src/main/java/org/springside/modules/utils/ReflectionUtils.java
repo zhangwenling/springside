@@ -252,7 +252,9 @@ public class ReflectionUtils {
 			return new IllegalArgumentException("Reflection Exception.", e);
 		else if (e instanceof InvocationTargetException)
 			return new RuntimeException("Reflection Exception.", ((InvocationTargetException) e).getTargetException());
-
-		return new RuntimeException("Unexpected Exception.", e);
+		else if (e instanceof RuntimeException) {
+			return (RuntimeException) e;
+		}
+		return new RuntimeException("Unexpected Checked Exception.", e);
 	}
 }

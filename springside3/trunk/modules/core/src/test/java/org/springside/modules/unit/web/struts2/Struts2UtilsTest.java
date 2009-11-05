@@ -1,12 +1,15 @@
 package org.springside.modules.unit.web.struts2;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springside.modules.web.struts2.Struts2Utils;
@@ -15,10 +18,15 @@ import com.opensymphony.xwork2.ActionContext;
 
 public class Struts2UtilsTest extends Assert {
 
+	@Before
 	@SuppressWarnings("unchecked")
+	public void setUp() {
+		//初始化 Struts2 ActionContext
+		ActionContext.setContext(new ActionContext(new HashMap()));
+	}
+
 	@Test
 	public void render() throws UnsupportedEncodingException {
-		ActionContext.setContext(new ActionContext(new HashMap()));
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		ServletActionContext.setResponse(response);
 
@@ -49,23 +57,51 @@ public class Struts2UtilsTest extends Assert {
 		assertEquals("hello", response.getContentAsString());
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
+	@SuppressWarnings("unchecked")
 	public void renderJson() throws UnsupportedEncodingException {
-		ActionContext.setContext(new ActionContext(new HashMap()));
+		//Map
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		ServletActionContext.setResponse(response);
-
 		Map map = new LinkedHashMap();
 		map.put("age", 10);
 		map.put("name", "foo");
 		Struts2Utils.renderJson(map);
 		assertEquals("{\"age\":10,\"name\":\"foo\"}", response.getContentAsString());
 
+		//Object
 		response = new MockHttpServletResponse();
 		ServletActionContext.setResponse(response);
-		Struts2Utils.renderJson(new TestBean());
+		Object object = new TestBean();
+		Struts2Utils.renderJson(object);
 		assertEquals("{\"age\":10,\"name\":\"foo\"}", response.getContentAsString());
+
+		//Array
+		response = new MockHttpServletResponse();
+		ServletActionContext.setResponse(response);
+		TestBean[] array = { new TestBean(), new TestBean() };
+		Struts2Utils.renderJson(array);
+		assertEquals("[{\"age\":10,\"name\":\"foo\"},{\"age\":10,\"name\":\"foo\"}]", response.getContentAsString());
+
+		//Collection
+		response = new MockHttpServletResponse();
+		ServletActionContext.setResponse(response);
+		List<TestBean> list = new ArrayList<TestBean>();
+		list.add(new TestBean());
+		list.add(new TestBean());
+
+		Struts2Utils.renderJson(list);
+		assertEquals("[{\"age\":10,\"name\":\"foo\"},{\"age\":10,\"name\":\"foo\"}]", response.getContentAsString());
+	}
+
+	@Test
+	public void renderJsonP() throws UnsupportedEncodingException {
+		MockHttpServletResponse response = new MockHttpServletResponse();
+		ServletActionContext.setResponse(response);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("html", "<p>helloworld</p>");
+		Struts2Utils.renderJsonp("callback", map, "no-cache:true");
+		assertEquals("callback({\"html\":\"<p>helloworld<\\/p>\"});", response.getContentAsString());
 	}
 
 	public class TestBean {

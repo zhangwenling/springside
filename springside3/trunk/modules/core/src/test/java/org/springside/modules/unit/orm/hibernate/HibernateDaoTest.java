@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -21,6 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
@@ -39,12 +42,11 @@ public class HibernateDaoTest extends SpringTxTestCase {
 	@Before
 	public void setUp() throws BeansException, SQLException, DatabaseUnitException, IOException {
 		simpleJdbcTemplate.update("drop all objects");
-		simpleJdbcTemplate
-				.update("runscript from 'src/test/java/org/springside/modules/unit/orm/hibernate/data/schema.sql'");
+		simpleJdbcTemplate.update("runscript from 'src/test/resources/schema.sql'");
 
 		DatabaseDataSourceConnection connection = new DatabaseDataSourceConnection((DataSource) applicationContext
 				.getBean("dataSource"));
-		InputStream stream = HibernateDaoTest.class.getResourceAsStream("data/test-data.xml");
+		InputStream stream = new ClassPathResource("/test-data.xml").getInputStream();
 		IDataSet dataSet = new FlatXmlDataSet(stream);
 		DatabaseOperation.INSERT.execute(connection, dataSet);
 		connection.close();
@@ -81,6 +83,22 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		page.setPageNo(2);
 		dao.findPage(page, "from User u where email like ?", "%springside.org.cn%");
 		assertEquals(1, page.getResult().size());
+
+		//命名参数版本
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("email", "%springside.org.cn%");
+		page = new Page<User>(5);
+		dao.findPage(page, "from User u where email like :email", paraMap);
+		assertEquals(5, page.getResult().size());
+
+		//自动统计总数
+		assertEquals(6L, page.getTotalCount());
+
+		//翻页
+		page.setPageNo(2);
+		dao.findPage(page, "from User u where email like :email", paraMap);
+		assertEquals(1, page.getResult().size());
+
 	}
 
 	@Test

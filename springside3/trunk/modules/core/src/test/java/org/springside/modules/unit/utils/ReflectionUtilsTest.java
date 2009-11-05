@@ -1,5 +1,6 @@
 package org.springside.modules.unit.utils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +63,31 @@ public class ReflectionUtilsTest extends Assert {
 		list.add(bean2);
 
 		assertEquals("1,2", ReflectionUtils.convertElementPropertyToString(list, "id", ","));
+	}
+
+	@Test
+	public void convertReflectionExceptionToUnchecked() {
+		IllegalArgumentException iae = new IllegalArgumentException();
+		//ReflectionException,normal
+		RuntimeException e = ReflectionUtils.convertReflectionExceptionToUnchecked(iae);
+		assertEquals(iae, e.getCause());
+		assertEquals("Reflection Exception.", e.getMessage());
+
+		//InvocationTargetException,extract it's target exception.
+		Exception ex = new Exception();
+		e = ReflectionUtils.convertReflectionExceptionToUnchecked(new InvocationTargetException(ex));
+		assertEquals(ex, e.getCause());
+		assertEquals("Reflection Exception.", e.getMessage());
+
+		//UncheckedException, ignore it.
+		RuntimeException re = new RuntimeException("abc");
+		e = ReflectionUtils.convertReflectionExceptionToUnchecked(re);
+		assertEquals("abc", e.getMessage());
+
+		//Unexcepted Checked exception.
+		e = ReflectionUtils.convertReflectionExceptionToUnchecked(ex);
+		assertEquals("Unexpected Checked Exception.", e.getMessage());
+
 	}
 
 	public static class ParentBean<T, PK> {

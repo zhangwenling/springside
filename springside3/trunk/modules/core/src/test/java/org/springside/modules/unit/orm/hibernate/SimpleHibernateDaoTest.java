@@ -14,6 +14,10 @@ import org.dbunit.database.DatabaseDataSourceConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.operation.DatabaseOperation;
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.Hibernate;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
@@ -21,6 +25,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.orm.hibernate.SimpleHibernateDao;
 import org.springside.modules.test.spring.SpringTxTestCase;
@@ -39,12 +44,11 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 	@Before
 	public void setUp() throws BeansException, SQLException, DatabaseUnitException, IOException {
 		simpleJdbcTemplate.update("drop all objects");
-		simpleJdbcTemplate
-				.update("runscript from 'src/test/java/org/springside/modules/unit/orm/hibernate/data/schema.sql'");
+		simpleJdbcTemplate.update("runscript from 'src/test/resources/schema.sql'");
 
 		DatabaseDataSourceConnection connection = new DatabaseDataSourceConnection((DataSource) applicationContext
 				.getBean("dataSource"));
-		InputStream stream = HibernateDaoTest.class.getResourceAsStream("data/test-data.xml");
+		InputStream stream = new ClassPathResource("/test-data.xml").getInputStream();
 		IDataSet dataSet = new FlatXmlDataSet(stream);
 		DatabaseOperation.INSERT.execute(connection, dataSet);
 		connection.close();
@@ -61,6 +65,13 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 		user.setName("boo");
 		dao.save(user);
 		dao.delete(user);
+	}
+
+	@Test
+	public void getAll() {
+		List<User> users = dao.getAll("id", true);
+		assertEquals(6, users.size());
+		assertEquals(DEFAULT_LOGIN_NAME, users.get(0).getLoginName());
 	}
 
 	@Test
@@ -108,7 +119,7 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testBatchUpdate() {
+	public void batchUpdate() {
 		Map map = new HashMap();
 		map.put("ids", new Long[] { 1L, 23L });
 
@@ -117,6 +128,26 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 		assertEquals("disabled", u1.getStatus());
 		User u3 = dao.get(3L);
 		assertEquals("enabled", u3.getStatus());
+	}
+
+	@Test
+	public void eagerFetch() {
+		String sql = "from User u left join fetch u.roleList order by u.id";
+
+		Query query = dao.createQuery(sql);
+		List<User> userList = dao.distinct(query).list();
+		assertEquals(6, userList.size());
+		assertTrue(Hibernate.isInitialized(userList.get(0).getRoleList()));
+
+		Criteria criteria = dao.createCriteria().setFetchMode("roles", FetchMode.JOIN);
+		userList = dao.distinct(criteria).list();
+		assertEquals(6, userList.size());
+		assertTrue(Hibernate.isInitialized(userList.get(0).getRoleList()));
+
+		userList = dao.distinct(dao.find(sql));
+		assertEquals(6, userList.size());
+		assertTrue(Hibernate.isInitialized(userList.get(0).getRoleList()));
+
 	}
 
 	@Test

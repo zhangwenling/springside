@@ -31,7 +31,6 @@ public class UserDaoTest extends SpringTxTestCase {
 		//init by hql
 		List<User> userList1 = userDao.getAllUserWithRoleByDistinctHql();
 		assertEquals(6, userList1.size());
-
 		assertTrue(Hibernate.isInitialized(userList1.get(0).getRoleList()));
 
 		//init by criteria
@@ -42,6 +41,7 @@ public class UserDaoTest extends SpringTxTestCase {
 		//distinct by set
 		List<User> userList3 = userDao.getAllUserWithRoleByHqlDistinctBySet();
 		assertEquals(6, userList3.size());
+		assertTrue(Hibernate.isInitialized(userList2.get(0).getRoleList()));
 	}
 
 	@Test
