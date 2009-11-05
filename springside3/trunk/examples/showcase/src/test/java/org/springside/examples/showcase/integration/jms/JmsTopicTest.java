@@ -18,7 +18,7 @@ public class JmsTopicTest extends SpringContextTestCase {
 
 	@Test
 	public void test() {
-
+		sleep(1000);
 		MockAppender appender = new MockAppender();
 		appender.addToLogger(TopicListener.class);
 
@@ -29,7 +29,8 @@ public class JmsTopicTest extends SpringContextTestCase {
 		producer.sendTopic(user);
 		logger.info("sended message");
 
-		sleep(2000);
+		sleep(1000);
+		assertNotNull(appender.getFirstLog());
 		assertEquals("UserName:calvin, Email:calvin@sringside.org.cn, Property:1234", appender.getFirstLog()
 				.getMessage());
 	}

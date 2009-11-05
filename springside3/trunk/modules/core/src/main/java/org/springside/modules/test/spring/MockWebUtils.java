@@ -24,10 +24,7 @@ import com.opensymphony.xwork2.ActionContext;
  */
 public class MockWebUtils {
 
-	static {
-		//初始化 Struts2 ActionContext
-		ActionContext.setContext(new ActionContext(new HashMap()));
-	}
+	private static boolean struts2Inited = false;
 
 	/**
 	 * 在ServletContext里初始化Spring WebApplicationContext.
@@ -66,6 +63,7 @@ public class MockWebUtils {
 	 * 将request放入Struts2的ServletActionContext,支持待测代码用ServletActionContext.getRequest()取出MockRequest.
 	 */
 	public static void setRequestToStruts2(HttpServletRequest request) {
+		initStruts2();
 		ServletActionContext.setRequest(request);
 	}
 
@@ -73,6 +71,18 @@ public class MockWebUtils {
 	 * 将response放入Struts2的ServletActionContext,支持待测代码用ServletActionContext.getResponse()取出MockResponse.
 	 */
 	public static void setResponseToStruts2(HttpServletResponse response) {
+		initStruts2();
 		ServletActionContext.setResponse(response);
+	}
+
+	/**
+	 * 初始化 Struts2 ActionContext.
+	 */
+	private static void initStruts2() {
+		if (!struts2Inited) {
+			ActionContext.setContext(new ActionContext(new HashMap()));
+			struts2Inited = true;
+		}
+
 	}
 }
