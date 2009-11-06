@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.jms.Producer;
+import org.springside.examples.showcase.jms.NotifyMessageProducer;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
@@ -32,7 +32,7 @@ public class UserManager {
 	@Autowired(required = false)
 	private ServerConfig serverConfig; //系统配置
 	@Autowired(required = false)
-	private Producer notifyProducer; //JMX消息发送
+	private NotifyMessageProducer notifyProducer; //JMX消息发送
 
 	public User getUser(Long id) {
 		return userDao.get(id);

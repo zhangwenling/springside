@@ -4,8 +4,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.jms.Producer;
-import org.springside.examples.showcase.jms.QueueConsumer;
+import org.springside.examples.showcase.jms.NotifyMessageProducer;
+import org.springside.examples.showcase.jms.NotifyQueueConsumer;
 import org.springside.modules.log.MockAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
@@ -14,18 +14,18 @@ import org.springside.modules.test.spring.SpringContextTestCase;
 public class JmsQueueTest extends SpringContextTestCase {
 
 	@Autowired
-	private Producer producer;
+	private NotifyMessageProducer notifyMessageProducer;
 
 	@Test
 	public void test() {
 		MockAppender appender = new MockAppender();
-		appender.addToLogger(QueueConsumer.class);
+		appender.addToLogger(NotifyQueueConsumer.class);
 
 		User user = new User();
 		user.setName("calvin");
 		user.setEmail("calvin@sringside.org.cn");
 
-		producer.sendQueue(user);
+		notifyMessageProducer.sendQueue(user);
 		logger.info("sended message");
 		sleep(1000);
 		assertEquals("UserName:calvin, Email:calvin@sringside.org.cn", appender.getFirstLog().getMessage());

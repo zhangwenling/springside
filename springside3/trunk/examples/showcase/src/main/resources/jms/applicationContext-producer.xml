@@ -5,7 +5,7 @@
 	<description>JMS生产者演示配置</description>
 
 	<!-- 使用Spring JmsTemplate的消息生产者 -->
-	<bean id="producer" class="org.springside.examples.showcase.jms.Producer">
+	<bean id="notifyMessageProducer" class="org.springside.examples.showcase.jms.NotifyMessageProducer">
 		<property name="jmsTemplate" ref="jmsTemplate" />
 		<property name="notifyQueue" ref="notifyQueue" />
 		<property name="notifyTopic" ref="notifyTopic" />

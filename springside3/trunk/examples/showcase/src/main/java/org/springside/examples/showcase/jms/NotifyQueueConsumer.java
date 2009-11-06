@@ -23,9 +23,9 @@ import org.springside.examples.showcase.email.SimpleMailService;
  * @author calvin
  */
 @SuppressWarnings("unchecked")
-public class QueueConsumer implements Runnable {
+public class NotifyQueueConsumer implements Runnable {
 
-	private static Logger logger = LoggerFactory.getLogger(QueueConsumer.class);
+	private static Logger logger = LoggerFactory.getLogger(NotifyQueueConsumer.class);
 
 	@Autowired(required = false)
 	private SimpleMailService simpleMailService;

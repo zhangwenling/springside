@@ -18,9 +18,9 @@ import org.springside.examples.showcase.email.MimeMailService;
  * @author calvin
  *
  */
-public class TopicListener implements MessageListener {
+public class NotifyTopicListener implements MessageListener {
 
-	private static Logger logger = LoggerFactory.getLogger(TopicListener.class);
+	private static Logger logger = LoggerFactory.getLogger(NotifyTopicListener.class);
 
 	@Autowired(required = false)
 	private MimeMailService mimeMailService;
