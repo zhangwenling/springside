@@ -8,12 +8,16 @@
 
 	<!-- 标准的Activemq 连接工厂. -->
 	<bean id="jmsFactory" class="org.apache.activemq.ActiveMQConnectionFactory" depends-on="broker">
-		<property name="brokerURL" value="${jms.broker_url}"/>
+		<property name="brokerURL" value="${jms.broker_url}" />
 	</bean>
 
 	<!-- 池化的Activemq连接工厂 .-->
 	<bean id="pooledJmsFactory" class="org.apache.activemq.pool.PooledConnectionFactoryBean">
-		<property name="connectionFactory" ref="jmsFactory" />
+		<property name="connectionFactory">
+			<bean class="org.apache.activemq.ActiveMQConnectionFactory" depends-on="broker">
+				<property name="brokerURL" value="${jms.broker_url}" />
+			</bean>
+		</property>
 	</bean>
 
 	<!-- Spring JMS Template -->

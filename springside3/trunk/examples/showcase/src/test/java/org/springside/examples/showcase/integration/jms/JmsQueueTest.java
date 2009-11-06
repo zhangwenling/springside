@@ -9,7 +9,7 @@ import org.springside.examples.showcase.jms.NotifyQueueConsumer;
 import org.springside.modules.log.MockAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
-@ContextConfiguration(locations = { "/applicationContext.xml", "/jms/applicationContext-common.xml",
+@ContextConfiguration(locations = { "/applicationContext-test.xml", "/jms/applicationContext-common.xml",
 		"/jms/applicationContext-producer.xml", "/jms/applicationContext-consumer.xml" }, inheritLocations = false)
 public class JmsQueueTest extends SpringContextTestCase {
 
