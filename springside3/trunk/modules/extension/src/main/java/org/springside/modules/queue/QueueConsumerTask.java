@@ -86,6 +86,7 @@ public abstract class QueueConsumerTask implements Runnable {
 	@PostConstruct
 	public void start() throws IOException, ClassNotFoundException {
 		queue = QueueHolder.getQueue(queueName);
+
 		if (persistence) {
 			restore();
 		}

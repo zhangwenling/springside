@@ -24,10 +24,10 @@ public abstract class BlockingConsumerTask extends QueueConsumerTask {
 			}
 		} catch (InterruptedException e) {
 			logger.debug("消费线程阻塞被中断");
+		} finally {
+			//退出线程前调用清理函数.
+			clean();
 		}
-
-		//在线程被中断后,退出线程前调用清理函数.
-		clean();
 	}
 
 	/**
