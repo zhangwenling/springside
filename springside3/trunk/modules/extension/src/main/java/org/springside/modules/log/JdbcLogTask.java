@@ -36,15 +36,14 @@ import org.springside.modules.queue.BlockingConsumerTask;
  * 
  * @author calvin
  */
-public class BlockingFetchJdbcTask extends BlockingConsumerTask {
+public class JdbcLogTask extends BlockingConsumerTask {
 
 	protected String sql;
 	protected int batchSize = 10;
 
+	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
 	protected SimpleJdbcTemplate jdbcTemplate;
 	protected TransactionTemplate transactionTemplate;
-	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
-
 	protected SqlParameterSource[] batchParams;
 
 	/**

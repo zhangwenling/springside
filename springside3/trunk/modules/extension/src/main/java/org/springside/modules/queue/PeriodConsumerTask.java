@@ -42,15 +42,26 @@ public abstract class PeriodConsumerTask extends QueueConsumerTask {
 				List list = new ArrayList(batchSize);
 				queue.drainTo(list, batchSize);
 				processMessageList(list);
-				Thread.sleep(period);
+				if (!Thread.currentThread().isInterrupted()) {
+					Thread.sleep(period);
+				}
 			}
 		} catch (InterruptedException e) {
 			logger.debug("消费线程阻塞被中断");
 		}
+
+		//在线程被中断后,退出线程前调用清理函数.
+		clean();
 	}
 
 	/**
 	 * 批量消息处理函数.
 	 */
 	protected abstract void processMessageList(List<?> messageList);
+
+	/**
+	 * 退出清理函数.
+	 */
+	protected abstract void clean();
+
 }

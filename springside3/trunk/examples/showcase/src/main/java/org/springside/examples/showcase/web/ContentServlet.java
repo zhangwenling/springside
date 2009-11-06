@@ -21,7 +21,6 @@ public class ContentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static final String PARAMETER_PATH = "path";
-	private static final String PARAMETER_REDIRECT = "redirect";
 	private static final String PARAMETER_DOWNLOAD = "download";
 
 	private static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
@@ -33,27 +32,6 @@ public class ContentServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getParameter(PARAMETER_PATH);
-
-		if (request.getParameter(PARAMETER_REDIRECT) != null) {
-			redirectToImageServer(response, path);
-		} else {
-			sendContent(request, response, path);
-		}
-	}
-
-	/**
-	 * 重定向到图片服务器.
-	 */
-	private void redirectToImageServer(HttpServletResponse response, String path) throws IOException {
-		String imageServerUrl = "http://localhost:8080/showcase/";
-		String targetUrl = imageServerUrl + path;
-		response.sendRedirect(targetUrl);
-	}
-
-	/**
-	 * 读取文件内容并输出.
-	 */
-	private void sendContent(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
 		Content content = getContentFromCache(path);
 
 		//判断客户端的缓存文件有否修改过, 如无修改则设置返回码为304,直接返回.
@@ -97,6 +75,7 @@ public class ContentServlet extends HttpServlet {
 			IOUtils.closeQuietly(input);
 			IOUtils.closeQuietly(output);
 		}
+
 	}
 
 	/**

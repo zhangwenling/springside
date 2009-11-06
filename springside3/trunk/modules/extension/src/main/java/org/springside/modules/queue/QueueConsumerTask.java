@@ -7,12 +7,24 @@
  */
 package org.springside.modules.queue;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +34,7 @@ import org.slf4j.LoggerFactory;
  * 
  * 定义了任务的初始化流程及停止流程.
  * 
- * @see QueueManager
+ * @see QueueHolder
  * 
  * @author calvin
  */
@@ -33,6 +45,9 @@ public abstract class QueueConsumerTask implements Runnable {
 
 	protected String queueName;
 	protected int shutdownWait = 10000;
+
+	protected boolean persistence = true;
+	protected String persistencePath = System.getProperty("java.io.tmpdir") + File.separator + "queue";
 
 	protected BlockingQueue queue;
 	protected ExecutorService executor;
@@ -51,26 +66,122 @@ public abstract class QueueConsumerTask implements Runnable {
 		this.shutdownWait = shutdownWait;
 	}
 
+	public void setPersistence(boolean persistence) {
+		this.persistence = persistence;
+	}
+
 	/**
+	 * 系统关闭时将队列中未处理的消息持久化到文件的目录,默认为系统临时文件夹下的queue目录.
+	 */
+	public void setPersistencePath(String persistencePath) {
+		this.persistencePath = persistencePath;
+	}
+
+	/**
+	 * @throws ClassNotFoundException 
 	 * 任务初始化函数.
+	 * @throws IOException 
+	 * @throws  
 	 */
 	@PostConstruct
-	public void start() {
-		queue = QueueManager.getQueue(queueName);
+	public void start() throws IOException, ClassNotFoundException {
+		queue = QueueHolder.getQueue(queueName);
+		if (persistence) {
+			restore();
+		}
+
 		executor = Executors.newSingleThreadExecutor();
 		executor.execute(this);
-		QueueManager.registerTask(this);
 	}
 
 	/**
 	 * 任务结束函数.
 	 */
-	public void stop() {
+	@PreDestroy
+	public void stop() throws IOException {
 		try {
 			executor.shutdownNow();
 			executor.awaitTermination(shutdownWait, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
 			logger.debug("awaitTermination被中断", e);
 		}
+
+		if (persistence) {
+			backup();
+		}
+
+	}
+
+	/**
+	 * 保存队列中的消息到文件.
+	 */
+	public void backup() throws IOException {
+		List list = new ArrayList();
+		queue.drainTo(list);
+
+		if (!list.isEmpty()) {
+			ObjectOutputStream oos = null;
+			try {
+				File dir = getPersistenceDir();
+				File file = new File(dir, queueName);
+				oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+				for (Object message : list) {
+					oos.writeObject(message);
+				}
+				logger.info("队列{}已持久化{}个消息到{}", new Object[] { queueName, list.size(), file.getAbsolutePath() });
+			} finally {
+				if (oos != null) {
+					oos.close();
+				}
+			}
+		} else {
+			logger.debug("队列为空,不需要持久化 .");
+		}
+	}
+
+	/**
+	 * 载入持久化文件中的消息到队列中.
+	 */
+	public void restore() throws ClassNotFoundException, IOException {
+		ObjectInputStream ois = null;
+		File dir = getPersistenceDir();
+		File file = new File(dir, queueName);
+
+		if (file.exists()) {
+			try {
+				ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));
+				int i = 0;
+				while (true) {
+					try {
+						Object message = ois.readObject();
+						queue.offer(message);
+						i++;
+					} catch (EOFException e) {
+						break;
+					}
+				}
+				logger.info("队列{}已从{}中恢复{}个消息.", new Object[] { queueName, file.getAbsolutePath(), i });
+			} finally {
+				if (ois != null) {
+					ois.close();
+				}
+			}
+			file.delete();
+		} else {
+			logger.debug("队列{}不存在", queueName);
+		}
+	}
+
+	/**
+	 * 获取持久化文件路径.
+	 * 持久化文件默认路径为java.io.tmpdir/queue/队列名.
+	 * 如果java.io.tmpdir/queue/目录不存在,会进行创建.
+	 */
+	protected File getPersistenceDir() {
+		File parentDir = new File(persistencePath + File.separator);
+		if (!parentDir.exists()) {
+			parentDir.mkdirs();
+		}
+		return parentDir;
 	}
 }

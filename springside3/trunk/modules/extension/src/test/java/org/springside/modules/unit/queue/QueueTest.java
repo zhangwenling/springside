@@ -12,24 +12,27 @@ import java.util.concurrent.BlockingQueue;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springside.modules.queue.QueueManager;
+import org.springside.modules.queue.QueueConsumerTask;
+import org.springside.modules.queue.QueueHolder;
 
 @SuppressWarnings("unchecked")
-public class QueueManagerTest extends Assert {
+public class QueueTest extends Assert {
 
 	@Test
 	public void backup() throws IOException, ClassNotFoundException {
 		String queueName = "testBackup";
 		String filePath = System.getProperty("java.io.tmpdir") + File.separator + "queue" + File.separator + queueName;
 
-		BlockingQueue queue = QueueManager.getQueue(queueName);
+		BlockingQueue queue = QueueHolder.getQueue(queueName);
 		Date date1 = new Date();
 		Date date2 = new Date();
 		queue.offer(date1);
 		queue.offer(date2);
 
-		QueueManager manager = new QueueManager();
-		manager.stop();
+		MockConsumerTask task = new MockConsumerTask();
+		task.setQueueName(queueName);
+		task.start();
+		task.stop();
 
 		//判断存在持久化文件
 		File file = new File(filePath);
@@ -52,24 +55,27 @@ public class QueueManagerTest extends Assert {
 	}
 
 	@Test
-	public void restore() {
+	public void restore() throws IOException, ClassNotFoundException {
 		String queueName = "testRestore";
 		String filePath = System.getProperty("java.io.tmpdir") + File.separator + "queue" + File.separator + queueName;
 
-		BlockingQueue queue = QueueManager.getQueue(queueName);
+		BlockingQueue queue = QueueHolder.getQueue(queueName);
 		Date date1 = new Date();
 		Date date2 = new Date();
 		queue.offer(date1);
 		queue.offer(date2);
 
-		QueueManager manager = new QueueManager();
-		manager.stop();
+		MockConsumerTask task = new MockConsumerTask();
+		task.setQueueName(queueName);
+		task.start();
+		task.stop();
 
 		//判断存在持久化文件
 		File file = new File(filePath);
 		assertEquals(true, file.exists());
 
-		BlockingQueue newQueue = QueueManager.getQueue(queueName);
+		BlockingQueue newQueue = QueueHolder.getQueue(queueName);
+		task.start();
 
 		List list = new ArrayList();
 		newQueue.drainTo(list);
@@ -80,5 +86,14 @@ public class QueueManagerTest extends Assert {
 		//判断存在持久化文件
 		file = new File(filePath);
 		assertEquals(false, file.exists());
+	}
+
+	static class MockConsumerTask extends QueueConsumerTask {
+
+		public void run() {
+			// TODO Auto-generated method stub
+
+		}
+
 	}
 }

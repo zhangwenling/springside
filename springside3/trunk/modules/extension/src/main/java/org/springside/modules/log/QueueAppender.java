@@ -12,20 +12,20 @@ import java.util.concurrent.BlockingQueue;
 import org.apache.log4j.spi.LoggingEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springside.modules.queue.QueueManager;
+import org.springside.modules.queue.QueueHolder;
 
 /**
  * 轻量级的Log4j异步Appender.
  * 
  * 将所有消息放入QueueManager所管理的Blocking Queue中.
  * 
- * @see QueueManager
+ * @see QueueHolder
  * 
  * @author calvin
  */
-public class AsyncQueueAppender extends org.apache.log4j.AppenderSkeleton {
+public class QueueAppender extends org.apache.log4j.AppenderSkeleton {
 
-	private static Logger logger = LoggerFactory.getLogger(AsyncQueueAppender.class);
+	private static Logger logger = LoggerFactory.getLogger(QueueAppender.class);
 
 	protected String queueName;
 
@@ -37,7 +37,7 @@ public class AsyncQueueAppender extends org.apache.log4j.AppenderSkeleton {
 	@Override
 	public void append(LoggingEvent event) {
 		if (queue == null) {
-			queue = QueueManager.getQueue(queueName);
+			queue = QueueHolder.getQueue(queueName);
 		}
 
 		boolean sucess = queue.offer(event);
