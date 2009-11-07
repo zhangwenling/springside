@@ -1,6 +1,5 @@
 package org.springside.examples.showcase.report;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +16,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.struts2.convention.annotation.Namespace;
+import org.joda.time.DateTime;
 import org.springside.examples.showcase.report.DummyDataFetcher.TemperatureAnomaly;
 import org.springside.modules.web.WebUtils;
 import org.springside.modules.web.struts2.Struts2Utils;
@@ -119,9 +119,7 @@ public class ExcelExportAction extends ActionSupport {
 			Row r = s.createRow(rowIndex++);
 
 			Cell c1 = r.createCell(0);
-			Calendar calendar = Calendar.getInstance();
-			calendar.set(temperatureAnomaly.getYear(), 0, 1);
-			c1.setCellValue(calendar);
+			c1.setCellValue(new DateTime(temperatureAnomaly.getYear(), 1, 1, 0, 0, 0, 0).toDate());
 			c1.setCellStyle(dateCellStyle);
 
 			Cell c2 = r.createCell(1);

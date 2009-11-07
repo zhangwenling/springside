@@ -82,8 +82,8 @@ public class SecurityEntityManager {
 	 * @return loginName在数据库中唯一或等于oldLoginName时返回true.
 	 */
 	@Transactional(readOnly = true)
-	public boolean isLoginNameUnique(String loginName, String oldLoginName) {
-		return userDao.isPropertyUnique("loginName", loginName, oldLoginName);
+	public boolean isLoginNameUnique(String newLoginName, String oldLoginName) {
+		return userDao.isPropertyUnique("loginName", newLoginName, oldLoginName);
 	}
 
 	//-- Role Manager --//

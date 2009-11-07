@@ -83,7 +83,10 @@
 			<artifactId>commons-beanutils</artifactId>
 			<optional>true</optional>
 		</dependency>
-
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
 		<!-- logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

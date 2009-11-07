@@ -252,6 +252,10 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
 		<!-- utils end -->
 
 		<!--  xml begin -->
@@ -314,8 +318,8 @@
 			<artifactId>hibernate-tools</artifactId>
 		</dependency>
 		<dependency>
-				<groupId>com.yahoo.platform.yui</groupId>
-				<artifactId>yuicompressor</artifactId>
+			<groupId>com.yahoo.platform.yui</groupId>
+			<artifactId>yuicompressor</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -337,8 +341,7 @@
 				</executions>
 				<configuration>
 					<tasks>
-						<taskdef name="instrument"
-							classname="org.hibernate.tool.instrument.javassist.InstrumentTask">
+						<taskdef name="instrument" classname="org.hibernate.tool.instrument.javassist.InstrumentTask">
 							<classpath>
 								<path refid="maven.runtime.classpath" />
 								<path refid="maven.plugin.classpath" />

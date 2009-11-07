@@ -2,6 +2,7 @@ package org.springside.modules.unit.orm;
 
 import java.util.Date;
 
+import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springside.modules.orm.PropertyFilter;
@@ -27,7 +28,7 @@ public class PropertyFilterTest extends Assert {
 		assertEquals(MatchType.LT, dateLtFilter.getMatchType());
 		assertEquals(Date.class, dateLtFilter.getPropertyType());
 		assertEquals("foo", dateLtFilter.getPropertyName());
-		assertEquals(new Date(146, 0, 1), dateLtFilter.getPropertyValue());
+		assertEquals(new DateTime(2046, 1, 1, 0, 0, 0, 0).toDate(), dateLtFilter.getPropertyValue());
 
 		//Integer GT filter
 		PropertyFilter intGtFilter = new PropertyFilter("GTI_foo", "123");
