@@ -5,7 +5,7 @@
 	<description>日志高级演示配置</description>
 	
 	<!-- 消息Queue管理器-->
-	<bean class="org.springside.modules.queue.QueueManager" lazy-init="false">
+	<bean class="org.springside.modules.queue.QueueHolder">
 		<property name="queueSize" value="10000"/>
 	</bean>
 
