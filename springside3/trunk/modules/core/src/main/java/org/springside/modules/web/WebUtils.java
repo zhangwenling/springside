@@ -10,6 +10,7 @@ package org.springside.modules.web;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
+import java.util.StringTokenizer;
 import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,13 +62,6 @@ public class WebUtils {
 	}
 
 	/**
-	 * 设置304 无修改的status code.
-	 */
-	public static void setNotModified(HttpServletResponse response) {
-		response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-	}
-
-	/**
 	 * 检查浏览器客户端是否支持gzip编码.
 	 */
 	public static boolean checkAccetptGzip(HttpServletRequest request) {
@@ -90,14 +84,45 @@ public class WebUtils {
 	}
 
 	/**
-	 * 根据浏览器If-Modified-Since头, 计算文件是否已修改.
-	 * 
-	 * @return 如果文件在浏览器头的时间后有修改, 返回true.
+	 * 根据浏览器If-Modified-Since Header, 计算文件是否已修改.
+	 * 如果无修改, checkIfModify返回false ,设置304 not modify status.
 	 */
-	public static boolean checkIfModified(HttpServletRequest request, long lastModified) {
+	public static boolean checkIfModified(HttpServletRequest request, HttpServletResponse response, long lastModified) {
 		long ifModifiedSince = request.getDateHeader("If-Modified-Since");
 		if ((ifModifiedSince != -1) && (lastModified < ifModifiedSince + 1000)) {
+			response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
 			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 根据浏览器 If-None-Match Header,计算Etag是否无效.
+	 * 
+	 * 如果Etag有效,checkIfNoneMatch返回false, 设置304 not modify status.
+	 */
+	public static boolean checkIfNoneMatch(HttpServletRequest request, HttpServletResponse response, String etag) {
+		String headerValue = request.getHeader("If-None-Match");
+		if (headerValue != null) {
+			boolean conditionSatisfied = false;
+			if (!headerValue.equals("*")) {
+				StringTokenizer commaTokenizer = new StringTokenizer(headerValue, ",");
+
+				while (!conditionSatisfied && commaTokenizer.hasMoreTokens()) {
+					String currentToken = commaTokenizer.nextToken();
+					if (currentToken.trim().equals(etag)) {
+						conditionSatisfied = true;
+					}
+				}
+			} else {
+				conditionSatisfied = true;
+			}
+
+			if (conditionSatisfied) {
+				response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+				response.setHeader("ETag", etag);
+				return false;
+			}
 		}
 		return true;
 	}

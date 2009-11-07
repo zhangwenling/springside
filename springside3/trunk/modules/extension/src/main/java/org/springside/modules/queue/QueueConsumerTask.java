@@ -78,10 +78,7 @@ public abstract class QueueConsumerTask implements Runnable {
 	}
 
 	/**
-	 * @throws ClassNotFoundException 
 	 * 任务初始化函数.
-	 * @throws IOException 
-	 * @throws  
 	 */
 	@PostConstruct
 	public void start() throws IOException, ClassNotFoundException {
@@ -141,7 +138,7 @@ public abstract class QueueConsumerTask implements Runnable {
 	}
 
 	/**
-	 * 载入持久化文件中的消息到队列中.
+	 * 载入持久化文件中的消息到队列.
 	 */
 	public void restore() throws ClassNotFoundException, IOException {
 		ObjectInputStream ois = null;

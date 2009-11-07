@@ -35,17 +35,18 @@ public class ContentServlet extends HttpServlet {
 		Content content = getContentFromCache(path);
 
 		//判断客户端的缓存文件有否修改过, 如无修改则设置返回码为304,直接返回.
-		if (!WebUtils.checkIfModified(request, content.lastModified)) {
-			WebUtils.setNotModified(response);
+		if (!WebUtils.checkIfModified(request, response, content.lastModified)
+				|| !WebUtils.checkIfNoneMatch(request, response, content.etag)) {
 			return;
 		}
 
 		//设置MIME类型
 		response.setContentType(content.mimeType);
 
-		//设置过期时间
-		WebUtils.setLastModifiedHeader(response, content.lastModified);
+		//设置Etag/过期时间
 		WebUtils.setExpiresHeader(response, ONE_YEAR_SECONDS);
+		WebUtils.setLastModifiedHeader(response, content.lastModified);
+		response.setHeader("ETag", content.etag);
 
 		//如果是下载请求,设置下载Header
 		if (request.getParameter(PARAMETER_DOWNLOAD) != null) {
@@ -75,12 +76,11 @@ public class ContentServlet extends HttpServlet {
 			IOUtils.closeQuietly(input);
 			IOUtils.closeQuietly(output);
 		}
-
 	}
 
 	/**
-	 * 从缓存中获取Content基本信息.
-	 */
+	* 从缓存中获取Content基本信息.
+	*/
 	private Content getContentFromCache(String path) {
 		Content content = contentCache.get(path);
 		if (content == null) {
@@ -104,6 +104,7 @@ public class ContentServlet extends HttpServlet {
 		content.fileName = file.getName();
 		content.lastModified = file.lastModified();
 		content.length = (int) file.length();
+		content.etag = "W/\"" + file.lastModified() + "\"";
 
 		String mimeType = getServletContext().getMimeType(realFilePath);
 		if (mimeType == null) {
@@ -130,6 +131,7 @@ public class ContentServlet extends HttpServlet {
 		int length;
 		String mimeType;
 		long lastModified;
+		String etag;
 		boolean needGzip;
 	}
 }
