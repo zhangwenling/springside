@@ -7,6 +7,7 @@
 	<description>导入ShowCase中的applicationContext文件列表，可随时通过注释disable不需要的模块
 	</description>
 
+	<import resource="cache/applicationContext-ehcache.xml" />
 	<import resource="email/applicationContext-email.xml" />
 	<import resource="jms/applicationContext-common.xml" />
 	<import resource="jms/applicationContext-consumer.xml" />

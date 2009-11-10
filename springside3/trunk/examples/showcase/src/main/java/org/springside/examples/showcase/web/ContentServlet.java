@@ -4,24 +4,26 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springside.modules.web.WebUtils;
 
 public class ContentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private Map<String, Content> contentCache = new ConcurrentHashMap<String, Content>();
-
+	private Cache contentCache;
 	private String[] gzipMimeTypes = { "text/html", "application/xhtml+xml", "text/css", "text/javascript" };
 	private int gzipMiniLength = 512;
 
@@ -74,14 +76,20 @@ public class ContentServlet extends HttpServlet {
 		}
 	}
 
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		contentCache = (Cache) WebApplicationContextUtils.getWebApplicationContext(config.getServletContext()).getBean(
+				"contentCache");
+	}
+
 	/**
 	* 从缓存中获取Content基本信息.
 	*/
 	private Content getContentFromCache(String path) {
-		Content content = contentCache.get(path);
+		Content content = (Content) contentCache.get(path).getObjectValue();
 		if (content == null) {
 			content = createContent(path);
-			contentCache.put(path, content);
+			contentCache.put(new Element(path, content));
 		}
 		return content;
 	}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache>
 
-	<diskStore path="java.io.tmpdir/hibernate/mini-web" />
+	<diskStore path="java.io.tmpdir" />
 	<!--
 		DefaultCache setting. Modify ehcache-safe.xml for timeToIdleSeconds,timeToLiveSecond,diskExpiryThreadIntervalSeconds.
 		Use ehcache-safe.xml default for maxElementsInMemory,maxElementsOnDisk,overflowToDisk,eternal. Use ehcache default for
@@ -12,9 +12,5 @@
 		diskPersistent="false" />
 
 	<!-- Special objects setting. -->
-	<cache name="org.springside.examples.miniweb.entity.security.User" maxElementsInMemory="500" eternal="true" />
-	<cache name="org.springside.examples.miniweb.entity.security.User.roles" maxElementsInMemory="500" eternal="true" />
-	<cache name="org.springside.examples.miniweb.entity.security.Role" maxElementsInMemory="500" eternal="true" />
-	<cache name="org.springside.examples.miniweb.entity.security.Role.auths" maxElementsInMemory="500" eternal="true" />
-	<cache name="org.springside.examples.miniweb.entity.security.Authority" maxElementsInMemory="500" eternal="true" />
+	<cache name="contentCache" maxElementsInMemory="1000" overflowToDisk="true" eternal="true" />
 </ehcache>

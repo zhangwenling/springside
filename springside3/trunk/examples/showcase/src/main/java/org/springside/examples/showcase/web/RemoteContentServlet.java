@@ -32,6 +32,7 @@ import org.apache.http.protocol.HttpContext;
 public class RemoteContentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final int TOTAL_CONNECTIONS = 100;
 
 	private HttpClient httpClient = null;
 
@@ -71,7 +72,7 @@ public class RemoteContentServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// Create and initialize HTTP parameters
 		HttpParams params = new BasicHttpParams();
-		ConnManagerParams.setMaxTotalConnections(params, 100);
+		ConnManagerParams.setMaxTotalConnections(params, TOTAL_CONNECTIONS);
 		HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
 
 		// Create and initialize scheme registry 
@@ -81,7 +82,6 @@ public class RemoteContentServlet extends HttpServlet {
 		// Create an HttpClient with the ThreadSafeClientConnManager.
 		ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
 		httpClient = new DefaultHttpClient(cm, params);
-
 	}
 
 	@Override
@@ -90,5 +90,4 @@ public class RemoteContentServlet extends HttpServlet {
 			httpClient.getConnectionManager().shutdown();
 		}
 	}
-
 }

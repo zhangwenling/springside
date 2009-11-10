@@ -23,7 +23,7 @@
 			<li>URLRewrite, 使用URL Rewrite转换用户友好的URL.</li>
 			<li>高性能Web2.0网站:<br/>
 			    1. 内容Servlet, 演示静态内容高效读取, 客户端缓存控制, 压缩传输, 弹出下载对话框.<br/>
-			 	2. 远程内容获取Servlet, 演示Apache HttpClient的多线程高效使用.<br/>
+			 	2. Http Client, 多线程高效获取远程Web内容.<br/>
 			    3. ResponseHeaderFilter为静态内容添加Cache-Control Header<br/>
 			    4. YUI Compressor 压缩js/css<br/>
 			    5. Tomcat gzip 配置压缩传输大于2K的MimeType为html/xml/css/js的文本<br/> 
@@ -33,7 +33,7 @@
 		<ul>
 			<li>URLRewrite: 综合示例中的地址为搜索引擎友好的地址, 如用户列表地址为users.htm, 用户1的修改地址为user/1.htm</li>
 			<li>内容下载Servlet:<img src="${ctx}/content?path=img/logo.jpg"/> <a href="${ctx}/content?path=img/logo.jpg&download=true">图片下载链接</a></li>
-			<li>远程内容下载Servlet:<img src="${ctx}/remote-content?url=<%=remoteImageUrl%>"/></li>
+			<li>Http Client远程下载内容:<img src="${ctx}/remote-content?url=<%=remoteImageUrl%>"/></li>
 			<li>ResponseHeaderFilter使用见webapp中的web.xml</li>
 			<li>YUI Compressor见bin/yuicompressor.bat命令及webapp中两个版本的js/css文件.</li>
 			<li>Tomcat 压缩传输见/tools/tomcat/profiles/production中server.xml.</li>
