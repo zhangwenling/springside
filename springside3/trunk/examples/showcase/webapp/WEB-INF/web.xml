@@ -33,15 +33,21 @@
 
 	<!-- Content Servlet 配置 -->
 	<servlet>
-		<description>
-		</description>
-		<display-name>ContentServlet</display-name>
 		<servlet-name>ContentServlet</servlet-name>
 		<servlet-class>org.springside.examples.showcase.web.ContentServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>RemoteContentServlet</servlet-name>
+		<servlet-class>org.springside.examples.showcase.web.RemoteContentServlet</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>ContentServlet</servlet-name>
 		<url-pattern>/content</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RemoteContentServlet</servlet-name>
+		<url-pattern>/remote-content</url-pattern>
 	</servlet-mapping>
 
 	<!-- Filter 定义  -->

@@ -8,6 +8,7 @@
 package org.springside.modules.utils;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 import org.apache.commons.codec.DecoderException;
@@ -76,6 +77,24 @@ public class EncodeUtils {
 	public static String urlEncode(String input, String encoding) {
 		try {
 			return URLEncoder.encode(input, encoding);
+		} catch (UnsupportedEncodingException e) {
+			throw new IllegalArgumentException("Unsupported Encoding Exception", e);
+		}
+	}
+
+	/**
+	 * URL 解码, Encode默认为UTF-8. 
+	 */
+	public static String urlDecode(String input) {
+		return urlDecode(input, DEFAULT_URL_ENCODING);
+	}
+
+	/**
+	 * URL 解码.
+	 */
+	public static String urlDecode(String input, String encoding) {
+		try {
+			return URLDecoder.decode(input, encoding);
 		} catch (UnsupportedEncodingException e) {
 			throw new IllegalArgumentException("Unsupported Encoding Exception", e);
 		}

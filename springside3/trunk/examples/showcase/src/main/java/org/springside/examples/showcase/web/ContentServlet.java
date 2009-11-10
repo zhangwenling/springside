@@ -20,23 +20,19 @@ public class ContentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final String PARAMETER_PATH = "path";
-	private static final String PARAMETER_DOWNLOAD = "download";
-
-	private static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
-
 	private Map<String, Content> contentCache = new ConcurrentHashMap<String, Content>();
+
 	private String[] gzipMimeTypes = { "text/html", "application/xhtml+xml", "text/css", "text/javascript" };
 	private int gzipMiniLength = 512;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = request.getParameter(PARAMETER_PATH);
+		String path = request.getParameter("path");
 		Content content = getContentFromCache(path);
 
 		//判断客户端的缓存文件有否修改过, 如无修改则设置返回码为304,直接返回.
-		if (!WebUtils.checkIfModified(request, response, content.lastModified)
-				|| !WebUtils.checkIfNoneMatch(request, response, content.etag)) {
+		if (!WebUtils.checkIfModifiedSince(request, response, content.lastModified)
+				|| !WebUtils.checkIfNoneMatchEtag(request, response, content.etag)) {
 			return;
 		}
 
@@ -44,12 +40,12 @@ public class ContentServlet extends HttpServlet {
 		response.setContentType(content.mimeType);
 
 		//设置Etag/过期时间
-		WebUtils.setExpiresHeader(response, ONE_YEAR_SECONDS);
+		WebUtils.setExpiresHeader(response, WebUtils.ONE_YEAR_SECONDS);
 		WebUtils.setLastModifiedHeader(response, content.lastModified);
-		response.setHeader("ETag", content.etag);
+		WebUtils.setEtag(response, content.etag);
 
 		//如果是下载请求,设置下载Header
-		if (request.getParameter(PARAMETER_DOWNLOAD) != null) {
+		if (request.getParameter("download") != null) {
 			WebUtils.setDownloadableHeader(response, content.fileName);
 		}
 
@@ -58,7 +54,7 @@ public class ContentServlet extends HttpServlet {
 		if (WebUtils.checkAccetptGzip(request) && content.needGzip) {
 			//不设置content-length, 使用http1.1 trunked编码.
 			//使用压缩传输的outputstream.
-			output = WebUtils.getGzipOutputStream(response);
+			output = WebUtils.buildGzipOutputStream(response);
 		} else {
 			//为http1.0客户端设置content-length.
 			response.setContentLength(content.length);

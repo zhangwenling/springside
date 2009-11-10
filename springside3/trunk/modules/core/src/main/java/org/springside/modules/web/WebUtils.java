@@ -25,6 +25,8 @@ import org.apache.commons.lang.StringUtils;
  */
 public class WebUtils {
 
+	public static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
+
 	/**
 	 * 设置让浏览器弹出下载对话框的Header.
 	 * 
@@ -39,6 +41,13 @@ public class WebUtils {
 	 */
 	public static void setLastModifiedHeader(HttpServletResponse response, long lastModifiedDate) {
 		response.setDateHeader("Last-Modified", lastModifiedDate);
+	}
+
+	/**
+	 * 设置Etag Header.
+	 */
+	public static void setEtag(HttpServletResponse response, String etag) {
+		response.setHeader("ETag", etag);
 	}
 
 	/**
@@ -78,7 +87,7 @@ public class WebUtils {
 	/**
 	 * 设置Gzip Header并返回GZIPOutputStream.
 	 */
-	public static OutputStream getGzipOutputStream(HttpServletResponse response) throws IOException {
+	public static OutputStream buildGzipOutputStream(HttpServletResponse response) throws IOException {
 		response.setHeader("Content-Encoding", "gzip");
 		return new GZIPOutputStream(response.getOutputStream());
 	}
@@ -87,7 +96,8 @@ public class WebUtils {
 	 * 根据浏览器If-Modified-Since Header, 计算文件是否已修改.
 	 * 如果无修改, checkIfModify返回false ,设置304 not modify status.
 	 */
-	public static boolean checkIfModified(HttpServletRequest request, HttpServletResponse response, long lastModified) {
+	public static boolean checkIfModifiedSince(HttpServletRequest request, HttpServletResponse response,
+			long lastModified) {
 		long ifModifiedSince = request.getDateHeader("If-Modified-Since");
 		if ((ifModifiedSince != -1) && (lastModified < ifModifiedSince + 1000)) {
 			response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
@@ -101,7 +111,7 @@ public class WebUtils {
 	 * 
 	 * 如果Etag有效,checkIfNoneMatch返回false, 设置304 not modify status.
 	 */
-	public static boolean checkIfNoneMatch(HttpServletRequest request, HttpServletResponse response, String etag) {
+	public static boolean checkIfNoneMatchEtag(HttpServletRequest request, HttpServletResponse response, String etag) {
 		String headerValue = request.getHeader("If-None-Match");
 		if (headerValue != null) {
 			boolean conditionSatisfied = false;

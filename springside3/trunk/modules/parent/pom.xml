@@ -568,7 +568,13 @@
 				<artifactId>joda-time</artifactId>
 				<version>1.6</version>
 			</dependency>
-			
+
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>4.0</version>
+			</dependency>
+
 			<dependency>
 				<groupId>asm</groupId>
 				<artifactId>asm</artifactId>
