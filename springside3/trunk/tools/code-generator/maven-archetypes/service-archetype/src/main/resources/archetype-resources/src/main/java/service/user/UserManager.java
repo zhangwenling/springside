@@ -33,7 +33,7 @@ public class UserManager {
 	 */
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
-		List<User> userList = userDao.getAll();
+		List<User> userList = userDao.getAll("id", true);
 		userDao.initAllProperties(userList);
 		return userList;
 	}
