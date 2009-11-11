@@ -76,16 +76,14 @@ public class ContentServlet extends HttpServlet {
 		}
 	}
 
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		contentCache = (Cache) WebApplicationContextUtils.getWebApplicationContext(config.getServletContext()).getBean(
-				"contentCache");
-	}
-
 	/**
 	* 从缓存中获取Content基本信息.
 	*/
 	private Content getContentFromCache(String path) {
+		if (contentCache == null) {
+			contentCache = (Cache) WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean(
+					"contentCache");
+		}
 		Content content = (Content) contentCache.get(path).getObjectValue();
 		if (content == null) {
 			content = createContent(path);

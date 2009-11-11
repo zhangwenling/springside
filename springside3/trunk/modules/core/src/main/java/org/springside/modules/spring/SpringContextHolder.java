@@ -7,13 +7,11 @@
  */
 package org.springside.modules.spring;
 
-import java.lang.ref.WeakReference;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 /**
- * 以静态变量保存Spring ApplicationContext.
+ * 以静态变量保存Spring ApplicationContext,可在任意代码中取出ApplicaitonContext.
  * 
  * @author calvin
  */

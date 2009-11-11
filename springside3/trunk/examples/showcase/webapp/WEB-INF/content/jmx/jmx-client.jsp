@@ -50,7 +50,7 @@
 
 		<h2>技术说明：</h2>
 		<ul>
-			<li>服务端演示Interface与Spring annotation两种方式定义MBean</li>
+			<li>服务端演示使用Spring annotation定义MBean</li>
 			<li>客户端演示MBean代理及直接反射读取属性两种方式调用MBean</li>
 		</ul>
 

@@ -30,15 +30,15 @@ call %MAVEN_BAT% -o dependency:copy-dependencies -DoutputDirectory=webapp/WEB-IN
 echo [Step 5] 安装SpringSide3 modules 和archetypes到 本地Maven仓库.
 call %MAVEN_BAT% -o clean install  -Pmodules -Dmaven.test.skip=true
  
-echo [Step 6] 为Mini-Service 初始化数据库，编译、打包.
+echo [Step 6] 为Mini-Service 初始化数据库、编译、打包.
 cd examples\mini-service
 call %MAVEN_BAT% -o clean package -Pinitdb -Dmaven.test.skip=true
 
-echo [Step 7] 为Mini-Web 初始化数据库，编译、打包.
+echo [Step 7] 为Mini-Web 初始化数据库、编译、打包.
 cd ..\mini-web
 call %MAVEN_BAT% -o clean package  -Pinitdb -Dmaven.test.skip=true
 
-echo [Step 8] 为Showcase 初始化数据库，编译、打包.
+echo [Step 8] 为Showcase 初始化数据库、编译、打包.
 cd ..\showcase
 call %MAVEN_BAT% -o clean package  -Pinitdb -Dmaven.test.skip=true
 
