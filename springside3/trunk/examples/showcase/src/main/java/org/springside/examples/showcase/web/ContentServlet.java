@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -84,12 +83,13 @@ public class ContentServlet extends HttpServlet {
 			contentCache = (Cache) WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean(
 					"contentCache");
 		}
-		Content content = (Content) contentCache.get(path).getObjectValue();
-		if (content == null) {
-			content = createContent(path);
-			contentCache.put(new Element(path, content));
+		Element element = contentCache.get(path);
+		if (element == null) {
+			Content content = createContent(path);
+			element = new Element(path, content);
+			contentCache.put(element);
 		}
-		return content;
+		return (Content) element.getObjectValue();
 	}
 
 	/**

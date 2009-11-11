@@ -28,12 +28,14 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RemoteContentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final int TOTAL_CONNECTIONS = 100;
-
+	private static final int TOTAL_CONNECTIONS = 50;
+	private static Logger logger = LoggerFactory.getLogger(RemoteContentServlet.class);
 	private HttpClient httpClient = null;
 
 	@Override
@@ -50,9 +52,10 @@ public class RemoteContentServlet extends HttpServlet {
 
 				//设置Header
 				response.setContentType(entity.getContentType().getValue());
-				if (entity.getContentLength() != -1)
-					response.setContentLength((int) entity.getContentLength());
-
+				if(entity.getContentLength()>0){
+					response.setContentLength((int)entity.getContentLength());
+				}
+				
 				try {
 					//基于byte数组读取文件并直接写入OutputStream, 数组默认大小为4k.
 					IOUtils.copy(input, output);
@@ -64,6 +67,7 @@ public class RemoteContentServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
+			logger.error("fetch remote content" + url + "  error", e);
 			httpget.abort();
 		}
 	}

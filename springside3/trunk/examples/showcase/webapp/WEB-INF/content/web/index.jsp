@@ -2,7 +2,9 @@
 <%@ include file="/common/taglibs.jsp" %>
 <%@ page import="org.springside.modules.utils.EncodeUtils" %>
 <%
-   String remoteImageUrl = EncodeUtils.urlEncode("http://localhost:8080/showcase/img/logo.jpg");
+	
+   String remoteImageUrl = "http://"+request.getServerName()+":"+request.getServerPort()+"/showcase/img/logo.jpg";
+   String encodedImageUrl = EncodeUtils.urlEncode(remoteImageUrl);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -33,7 +35,7 @@
 		<ul>
 			<li>URLRewrite: 综合示例中的地址为搜索引擎友好的地址, 如用户列表地址为users.htm, 用户1的修改地址为user/1.htm</li>
 			<li>内容下载Servlet:<img src="${ctx}/content?path=img/logo.jpg"/> <a href="${ctx}/content?path=img/logo.jpg&download=true">图片下载链接</a></li>
-			<li>Http Client远程下载内容:<img src="${ctx}/remote-content?url=<%=remoteImageUrl%>"/></li>
+			<li>Http Client远程下载内容:<img src="${ctx}/remote-content?url=<%=encodedImageUrl%>"/></li>
 			<li>ResponseHeaderFilter使用见webapp中的web.xml</li>
 			<li>YUI Compressor见bin/yuicompressor.bat命令及webapp中两个版本的js/css文件.</li>
 			<li>Tomcat 压缩传输见/tools/tomcat/profiles/production中server.xml.</li>
