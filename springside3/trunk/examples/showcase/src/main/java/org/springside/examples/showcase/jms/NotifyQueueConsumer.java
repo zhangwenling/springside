@@ -50,7 +50,7 @@ public class NotifyQueueConsumer implements Runnable {
 	@PreDestroy
 	public void stop() {
 		try {
-			executor.shutdown();
+			executor.shutdownNow();
 			executor.awaitTermination(5000, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
 			logger.debug("awaitTermination被中断", e);
