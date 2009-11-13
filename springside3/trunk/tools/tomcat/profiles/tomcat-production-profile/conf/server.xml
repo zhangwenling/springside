@@ -44,8 +44,8 @@
               
     <Resource name="jdbc/ExampleDB" auth="Container" type="javax.sql.DataSource"
               maxActive="100" maxIdle="50" maxWait="10000"
-              username="APP" password="APP" driverClassName="org.apache.derby.jdbc.ClientDriver"
-              url="jdbc:derby://localhost:1527/springside-example;create=true"/>
+              username="sa" password="" driverClassName="org.h2.Driver"
+              url="jdbc:h2:tcp://localhost/~/example-db"/>
               
   </GlobalNamingResources>
 
