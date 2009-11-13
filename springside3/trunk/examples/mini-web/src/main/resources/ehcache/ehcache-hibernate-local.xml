@@ -2,19 +2,22 @@
 <ehcache>
 
 	<diskStore path="java.io.tmpdir/hibernate/mini-web" />
+	
 	<!--
-		DefaultCache setting. Modify ehcache-safe.xml for timeToIdleSeconds,timeToLiveSecond,diskExpiryThreadIntervalSeconds.
-		Use ehcache-safe.xml default for maxElementsInMemory,maxElementsOnDisk,overflowToDisk,eternal. Use ehcache default for
-		memoryStoreEvictionPolicy,diskPersistent.
+		DefaultCache setting. 
+		Modify ehcache-safe.xml for timeToIdleSeconds,timeToLiveSecond,diskExpiryThreadIntervalSeconds.
+		Use ehcache-safe.xml default for maxElementsInMemory,maxElementsOnDisk,overflowToDisk,eternal. 
+		Use ehcache default for memoryStoreEvictionPolicy,diskPersistent.
 	-->
-	<defaultCache maxElementsInMemory="10000" overflowToDisk="true" eternal="false" memoryStoreEvictionPolicy="LRU"
-		maxElementsOnDisk="10000000" diskExpiryThreadIntervalSeconds="600" timeToIdleSeconds="3600" timeToLiveSeconds="100000"
+	<defaultCache maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="false" timeToIdleSeconds="3600" timeToLiveSeconds="100000"
+		overflowToDisk="true" maxElementsOnDisk="10000000" diskExpiryThreadIntervalSeconds="600" 
 		diskPersistent="false" />
 
+
 	<!-- Special objects setting. -->
-	<cache name="org.springside.examples.miniweb.entity.security.User" maxElementsInMemory="500" eternal="true" />
-	<cache name="org.springside.examples.miniweb.entity.security.User.roles" maxElementsInMemory="500" eternal="true" />
-	<cache name="org.springside.examples.miniweb.entity.security.Role" maxElementsInMemory="500" eternal="true" />
-	<cache name="org.springside.examples.miniweb.entity.security.Role.auths" maxElementsInMemory="500" eternal="true" />
-	<cache name="org.springside.examples.miniweb.entity.security.Authority" maxElementsInMemory="500" eternal="true" />
+	<cache name="org.springside.examples.miniweb.entity.security.User" maxElementsInMemory="1000" eternal="true" />
+	<cache name="org.springside.examples.miniweb.entity.security.User.roles" eternal="true" />
+	<cache name="org.springside.examples.miniweb.entity.security.Role" eternal="true" />
+	<cache name="org.springside.examples.miniweb.entity.security.Role.auths" eternal="true" />
+	<cache name="org.springside.examples.miniweb.entity.security.Authority" eternal="true" />
 </ehcache>
