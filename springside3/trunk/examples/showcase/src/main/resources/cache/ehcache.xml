@@ -3,17 +3,11 @@
 
 	<diskStore path="java.io.tmpdir" />
 
-	<!--
-		DefaultCache setting. 
-		Modify ehcache-safe.xml for timeToIdleSeconds,timeToLiveSecond,diskExpiryThreadIntervalSeconds.
-		Use ehcache-safe.xml default for maxElementsInMemory,maxElementsOnDisk,overflowToDisk,eternal. 
-		Use ehcache default for memoryStoreEvictionPolicy,diskPersistent.
-	-->
-	<defaultCache maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="false" timeToIdleSeconds="3600" timeToLiveSeconds="100000"
-		overflowToDisk="true" maxElementsOnDisk="10000000" diskExpiryThreadIntervalSeconds="600" 
-		diskPersistent="false" />
+	<!-- DefaultCache setting. -->
+	<defaultCache maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false"
+		overflowToDisk="true" maxElementsOnDisk="10000000" />
 
 	<!-- Special objects setting. -->
-	<!-- Refresh content meta-data cache every hour. -->
-	<cache name="contentCache" overflowToDisk="false" timeToLiveSeconds="3600"/>
+	<!-- Refresh ContentCache every hour. -->
+	<cache name="contentCache" overflowToDisk="false" timeToLiveSeconds="3600" />
 </ehcache>

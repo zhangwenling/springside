@@ -12,26 +12,21 @@
 		pbcast.GMS(join_timeout=5000;shun=false;print_local_addr=true)"
 		propertySeparator="::" />
 		 	
- 	<!--
-		DefaultCache setting. 
-		Modify ehcache-safe.xml for timeToIdleSeconds,timeToLiveSecond,diskExpiryThreadIntervalSeconds.
-		Use ehcache-safe.xml default for maxElementsInMemory,maxElementsOnDisk,overflowToDisk,eternal. 
-		Use ehcache default for memoryStoreEvictionPolicy,diskPersistent.
-	-->
-	<defaultCache maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="false" timeToIdleSeconds="3600" timeToLiveSeconds="100000"
-		overflowToDisk="true" maxElementsOnDisk="10000000" diskExpiryThreadIntervalSeconds="600" 
-		diskPersistent="false" />
+
+	<!-- DefaultCache setting. -->
+	<defaultCache maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false"
+		overflowToDisk="true" maxElementsOnDisk="10000000" />
 
 	<!-- Special objects setting. -->
-	<cache name="org.springside.examples.miniservice.entity.user.User" maxElementsInMemory="1000" eternal="true">
+	<cache name="org.springside.examples.miniservice.entity.user.User">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
-	<cache name="org.springside.examples.miniservice.entity.user.User.roles" eternal="true">
+	<cache name="org.springside.examples.miniservice.entity.user.User.roles">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
-	<cache name="org.springside.examples.miniservice.entity.user.Role" eternal="true">
+	<cache name="org.springside.examples.miniservice.entity.user.Role">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
