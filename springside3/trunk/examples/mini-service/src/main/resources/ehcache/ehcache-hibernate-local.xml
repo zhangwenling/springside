@@ -8,7 +8,10 @@
 		overflowToDisk="true" maxElementsOnDisk="10000000" />
 
 	<!-- Special objects setting. -->
-	<cache name="org.springside.examples.miniservice.entity.user.User"/>
-	<cache name="org.springside.examples.miniservice.entity.user.User.roles"/>
-	<cache name="org.springside.examples.miniservice.entity.user.Role"/>
+	<cache name="org.springside.examples.miniservice.entity.user.User" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="10000000" />
+	<cache name="org.springside.examples.miniservice.entity.user.User.roles" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="10000000" />
+	<cache name="org.springside.examples.miniservice.entity.user.Role" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="10000000" />
 </ehcache>

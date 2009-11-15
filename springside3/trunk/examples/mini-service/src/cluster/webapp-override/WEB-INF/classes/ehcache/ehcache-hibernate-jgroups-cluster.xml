@@ -11,22 +11,25 @@
 		pbcast.NAKACK(gc_lag=100;retransmit_timeout=3000):
 		pbcast.GMS(join_timeout=5000;shun=false;print_local_addr=true)"
 		propertySeparator="::" />
-		 	
+
 
 	<!-- DefaultCache setting. -->
 	<defaultCache maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false"
 		overflowToDisk="true" maxElementsOnDisk="10000000" />
 
 	<!-- Special objects setting. -->
-	<cache name="org.springside.examples.miniservice.entity.user.User">
+	<cache name="org.springside.examples.miniservice.entity.user.User" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="10000000">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
-	<cache name="org.springside.examples.miniservice.entity.user.User.roles">
+	<cache name="org.springside.examples.miniservice.entity.user.User.roles" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="10000000">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
-	<cache name="org.springside.examples.miniservice.entity.user.Role">
+	<cache name="org.springside.examples.miniservice.entity.user.Role" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="10000000">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>

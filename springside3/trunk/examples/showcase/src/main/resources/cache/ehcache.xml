@@ -9,5 +9,5 @@
 
 	<!-- Special objects setting. -->
 	<!-- Refresh ContentCache every hour. -->
-	<cache name="contentCache" overflowToDisk="false" timeToLiveSeconds="3600" />
+	<cache name="contentCache" overflowToDisk="false" eternal="false" diskPersistent="false" timeToLiveSeconds="3600" timeToIdleSeconds="3600" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU"/>
 </ehcache>

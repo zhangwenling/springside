@@ -31,7 +31,7 @@
 		<table class="noborder">
 			<tr>
 				<td>角色名:</td>
-				<td><input type="text" name="name" size="40" value="${name}" class="required"/></td>
+				<td><input type="text" id="name" name="name" size="40" value="${name}" class="required"/></td>
 			</tr>
 			<tr>
 				<td>授权:</td>

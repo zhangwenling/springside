@@ -7,11 +7,15 @@
 	<defaultCache maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false"
 		overflowToDisk="true" maxElementsOnDisk="10000000" />
 
-
 	<!-- Special objects setting. -->
-	<cache name="org.springside.examples.miniweb.entity.security.User"/>
-	<cache name="org.springside.examples.miniweb.entity.security.User.roles"/>
-	<cache name="org.springside.examples.miniweb.entity.security.Role"/>
-	<cache name="org.springside.examples.miniweb.entity.security.Role.auths"/>
-	<cache name="org.springside.examples.miniweb.entity.security.Authority"/>
+	<cache name="org.springside.examples.miniweb.entity.security.User" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false"
+		overflowToDisk="true" maxElementsOnDisk="10000000" />
+	<cache name="org.springside.examples.miniweb.entity.security.User.roles" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false"
+		overflowToDisk="true" maxElementsOnDisk="10000000" />
+	<cache name="org.springside.examples.miniweb.entity.security.Role" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false"
+		overflowToDisk="true" maxElementsOnDisk="10000000" />
+	<cache name="org.springside.examples.miniweb.entity.security.Role.auths" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false"
+		overflowToDisk="true" maxElementsOnDisk="10000000" />
+	<cache name="org.springside.examples.miniweb.entity.security.Authority" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false"
+		overflowToDisk="true" maxElementsOnDisk="10000000" />
 </ehcache>
