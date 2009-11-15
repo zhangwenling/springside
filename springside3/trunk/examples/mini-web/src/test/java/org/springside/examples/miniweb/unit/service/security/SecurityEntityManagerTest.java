@@ -18,7 +18,6 @@ import org.springside.modules.utils.ReflectionUtils;
  */
 public class SecurityEntityManagerTest extends Assert {
 
-
 	private SecurityEntityManager securityEntityManager;
 	private UserDao userDao;
 
