@@ -29,21 +29,16 @@ public class NotifyTopicListener implements MessageListener {
 	 * MessageListener回调函数.
 	 */
 	public void onMessage(Message message) {
-		MapMessage mapMessage = (MapMessage) message;
-
-		//发送邮件
-		if (mimeMailService != null) {
-			try {
-				mimeMailService.sendNotificationMail(mapMessage.getString("userName"));
-			} catch (Exception e) {
-				logger.error("邮件发送失败", e);
-			}
-		}
-
-		//打印消息详情
 		try {
+			MapMessage mapMessage = (MapMessage) message;
+
+			//打印消息详情
 			logger.info("UserName:" + mapMessage.getString("userName") + ", Email:" + mapMessage.getString("email")
 					+ ", Property:" + mapMessage.getIntProperty("foo"));
+			//发送邮件
+			if (mimeMailService != null) {
+				mimeMailService.sendNotificationMail(mapMessage.getString("userName"));
+			}
 		} catch (JMSException e) {
 			logger.error(e.getMessage(), e);
 		}

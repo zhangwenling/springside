@@ -51,7 +51,7 @@ public class NotifyQueueConsumer implements Runnable {
 	public void stop() {
 		try {
 			executor.shutdownNow();
-			executor.awaitTermination(5000, TimeUnit.MILLISECONDS);
+			executor.awaitTermination(10000, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
 			logger.debug("awaitTermination被中断", e);
 		}
@@ -61,20 +61,14 @@ public class NotifyQueueConsumer implements Runnable {
 	 * 每秒定时运行的主动消息接收方法.
 	 */
 	public void run() {
-
 		Map message = (Map) jmsTemplate.receiveAndConvert(notifyQueue);
-		if (message != null) {
-			//发送邮件
-			if (simpleMailService != null) {
-				try {
-					simpleMailService.sendNotificationMail((String) message.get("userName"));
-				} catch (Exception e) {
-					logger.error("邮件发送失败", e);
-				}
-			}
 
-			//打印消息详情
-			logger.info("UserName:" + message.get("userName") + ", Email:" + message.get("email"));
+		//打印消息详情
+		logger.info("UserName:" + message.get("userName") + ", Email:" + message.get("email"));
+
+		//发送邮件
+		if (simpleMailService != null) {
+			simpleMailService.sendNotificationMail((String) message.get("userName"));
 		}
 	}
 

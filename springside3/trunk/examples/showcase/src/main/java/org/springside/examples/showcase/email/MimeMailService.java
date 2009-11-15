@@ -10,7 +10,6 @@ import javax.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
@@ -70,7 +69,7 @@ public class MimeMailService {
 			logger.info("HTML版邮件已发送至springside3.demo@gmail.com");
 		} catch (MessagingException e) {
 			logger.error("构造邮件失败", e);
-		} catch (MailException e) {
+		} catch (Exception e) {
 			logger.error("发送邮件失败", e);
 		}
 	}

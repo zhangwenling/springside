@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.util.StringUtils;
@@ -36,7 +35,7 @@ public class SimpleMailService {
 		try {
 			mailSender.send(msg);
 			logger.info("纯文本邮件已发送至{}", StringUtils.arrayToCommaDelimitedString(msg.getTo()));
-		} catch (MailException e) {
+		} catch (Exception e) {
 			logger.error("发送邮件失败", e);
 		}
 	}
