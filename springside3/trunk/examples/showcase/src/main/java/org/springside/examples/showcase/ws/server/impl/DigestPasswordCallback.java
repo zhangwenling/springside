@@ -27,7 +27,7 @@ public class DigestPasswordCallback implements CallbackHandler {
 	public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
 		WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];
 		String loginName = pc.getIdentifier();
-		User user = userManager.getUserByLoginName(loginName);
+		User user = userManager.findUserByLoginName(loginName);
 		pc.setPassword(user.getPlainPassword());
 	}
 }

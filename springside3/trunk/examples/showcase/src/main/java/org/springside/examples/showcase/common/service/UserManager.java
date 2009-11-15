@@ -76,7 +76,7 @@ public class UserManager {
 	}
 
 	@Transactional(readOnly = true)
-	public User getUserByLoginName(String loginName) {
+	public User findUserByLoginName(String loginName) {
 		return userDao.findUniqueBy("loginName", loginName);
 	}
 

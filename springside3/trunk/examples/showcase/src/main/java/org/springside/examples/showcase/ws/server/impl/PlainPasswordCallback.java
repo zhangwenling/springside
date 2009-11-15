@@ -31,7 +31,7 @@ public class PlainPasswordCallback implements CallbackHandler {
 
 		WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];
 		PasswordEncoder encoder = new ShaPasswordEncoder();
-		User user = userManager.getUserByLoginName(pc.getIdentifier());
+		User user = userManager.findUserByLoginName(pc.getIdentifier());
 
 		if (user == null)
 			throw new IOException("wrong login name " + pc.getIdentifier());
