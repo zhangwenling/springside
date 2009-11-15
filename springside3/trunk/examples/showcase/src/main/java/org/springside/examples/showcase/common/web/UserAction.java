@@ -18,10 +18,11 @@ import org.springside.examples.showcase.common.service.UserManager;
  * @author calvin
  */
 @Namespace("/common")
-@SuppressWarnings("serial")
 @InterceptorRefs( { @InterceptorRef("paramsPrepareParamsStack") })
 @Results( { @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
 public class UserAction extends CrudActionSupport<User> {
+
+	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private UserManager userManager;

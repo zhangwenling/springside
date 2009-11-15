@@ -27,10 +27,13 @@ import org.springside.modules.web.struts2.Struts2Utils;
  * 
  * @author calvin
  */
-@SuppressWarnings("serial")
+//定义URL映射对应/security/user.action
 @Namespace("/security")
+//定义名为reload的result重定向到user.action, 其他result则按照convention默认.
 @Results( { @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
 public class UserAction extends CrudActionSupport<User> {
+
+	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private SecurityEntityManager securityEntityManager;
