@@ -89,11 +89,7 @@ public class QueueTest extends Assert {
 	}
 
 	static class MockConsumerTask extends QueueConsumerTask {
-
 		public void run() {
-			// TODO Auto-generated method stub
-
 		}
-
 	}
 }

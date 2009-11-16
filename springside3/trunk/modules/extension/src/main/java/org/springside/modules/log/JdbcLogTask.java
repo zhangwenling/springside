@@ -7,6 +7,7 @@
  */
 package org.springside.modules.log;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,7 @@ import org.springside.modules.queue.BlockingConsumerTask;
  */
 public class JdbcLogTask extends BlockingConsumerTask {
 
+	protected final String errorFileName = queueName + ".error";
 	protected String sql;
 	protected int batchSize = 10;
 
@@ -79,6 +81,17 @@ public class JdbcLogTask extends BlockingConsumerTask {
 	}
 
 	/**
+	 * 从错误文件中恢复事件到队列进行重新处理.
+	 */
+	public void restoreErrorFile() {
+		try {
+			restoreFile(errorFileName);
+		} catch (Exception e) {
+			logger.error("从" + errorFileName + "恢复出错事件出错", e);
+		}
+	}
+
+	/**
 	 * 消息处理函数,将消息放入buffer,当buffer达到batchSize时执行批量更新函数.
 	 */
 	@Override
@@ -97,7 +110,7 @@ public class JdbcLogTask extends BlockingConsumerTask {
 	 * 将Buffer中的事件列表批量插入数据库.
 	 */
 	@SuppressWarnings("unchecked")
-	public void updateBatch() {
+	protected void updateBatch() {
 		try {
 			//分析事件列表,转换为jdbc参数.
 			List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
@@ -161,8 +174,10 @@ public class JdbcLogTask extends BlockingConsumerTask {
 			logger.error("other database error", e);
 		}
 
-		for (LoggingEvent event : errorEventBatch) {
-			logger.error("event insert to database error, ignore it, " + AppenderUtils.convertEventToString(event), e);
+		try {
+			this.backupEventList(errorFileName, errorEventBatch);
+		} catch (IOException e1) {
+			logger.error("持久化出错事件到" + errorFileName + "出错", e);
 		}
 	}
 

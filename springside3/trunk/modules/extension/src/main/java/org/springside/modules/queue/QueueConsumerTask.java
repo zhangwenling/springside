@@ -85,7 +85,7 @@ public abstract class QueueConsumerTask implements Runnable {
 		queue = QueueHolder.getQueue(queueName);
 
 		if (persistence) {
-			restore();
+			restoreQueue();
 		}
 
 		executor = Executors.newSingleThreadExecutor();
@@ -105,68 +105,87 @@ public abstract class QueueConsumerTask implements Runnable {
 		}
 
 		if (persistence) {
-			backup();
+			backupQueue();
 		}
 
 	}
 
 	/**
-	 * 保存队列中的消息到文件.
+	 * 保存队列中的所有消息到文件.
 	 */
-	public void backup() throws IOException {
+	public void backupQueue() throws IOException {
 		List list = new ArrayList();
 		queue.drainTo(list);
 
 		if (!list.isEmpty()) {
-			ObjectOutputStream oos = null;
-			try {
-				File dir = getPersistenceDir();
-				File file = new File(dir, queueName);
-				oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
-				for (Object message : list) {
-					oos.writeObject(message);
-				}
-				logger.info("队列{}已持久化{}个消息到{}", new Object[] { queueName, list.size(), file.getAbsolutePath() });
-			} finally {
-				if (oos != null) {
-					oos.close();
-				}
-			}
+			backupEventList(queueName, list);
 		} else {
 			logger.debug("队列为空,不需要持久化 .");
 		}
 	}
 
 	/**
+	 * 保存消息到文件.
+	 */
+	public void backupEventList(String fileName, List list) throws IOException {
+		ObjectOutputStream oos = null;
+		try {
+			File dir = getPersistenceDir();
+			File file = new File(dir, fileName);
+			oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+			for (Object message : list) {
+				oos.writeObject(message);
+			}
+			logger.info("队列{}已持久化{}个消息到{}", new Object[] { queueName, list.size(), file.getAbsolutePath() });
+		} finally {
+			if (oos != null) {
+				oos.close();
+			}
+		}
+	}
+
+	/**
+	 * 载入默认持久化文件中的消息到队列.
+	 */
+	public void restoreQueue() throws ClassNotFoundException, IOException {
+		restoreFile(queueName);
+	}
+
+	/**
 	 * 载入持久化文件中的消息到队列.
 	 */
-	public void restore() throws ClassNotFoundException, IOException {
-		ObjectInputStream ois = null;
+	public void restoreFile(String fileName) throws ClassNotFoundException, IOException {
 		File dir = getPersistenceDir();
-		File file = new File(dir, queueName);
+		File file = new File(dir, fileName);
+		List list = new ArrayList();
+		ObjectInputStream ois = null;
 
 		if (file.exists()) {
 			try {
 				ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));
-				int i = 0;
 				while (true) {
 					try {
 						Object message = ois.readObject();
-						queue.offer(message);
-						i++;
+						list.add(message);
 					} catch (EOFException e) {
 						break;
 					}
 				}
-				logger.info("队列{}已从{}中恢复{}个消息.", new Object[] { queueName, file.getAbsolutePath(), i });
 			} finally {
 				if (ois != null) {
 					ois.close();
 				}
 			}
 			file.delete();
+
+			for (Object message : list) {
+				queue.offer(message);
+			}
+
+			logger.info("队列{}已从{}中恢复{}个消息.", new Object[] { queueName, file.getAbsolutePath(), list.size() });
+
 		} else {
-			logger.debug("队列{}不存在", queueName);
+			logger.debug("持久化文件{}不存在", fileName);
 		}
 	}
 
