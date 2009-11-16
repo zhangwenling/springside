@@ -7,7 +7,6 @@
  */
 package org.springside.modules.log;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -41,8 +40,6 @@ public class JdbcLogTask extends BlockingConsumerTask {
 
 	protected String sql;
 	protected int batchSize = 10;
-	protected String errorFileName = queueName + ".error";
-	protected Object errorFileLock = new Object();
 
 	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
 	protected SimpleJdbcTemplate jdbcTemplate;
@@ -82,33 +79,6 @@ public class JdbcLogTask extends BlockingConsumerTask {
 	}
 
 	/**
-	 * 从错误文件中恢复事件到队列进行重新处理.
-	 */
-	public void restoreErrorFile() {
-		try {
-			synchronized (errorFileLock) {
-				restoreFile(errorFileName);
-			}
-		} catch (Exception e) {
-			logger.error("从" + errorFileName + "恢复出错事件出错", e);
-		}
-	}
-
-	/**
-	 * 备份错误事件到错误文件.
-	 * @param errorEventBatch
-	 */
-	public void backupErrorEventList(List<LoggingEvent> errorEventBatch) {
-		try {
-			synchronized (errorFileLock) {
-				backupEventList(errorFileName, errorEventBatch);
-			}
-		} catch (IOException e) {
-			logger.error("持久化出错事件到" + errorFileName + "出错", e);
-		}
-	}
-
-	/**
 	 * 消息处理函数,将消息放入buffer,当buffer达到batchSize时执行批量更新函数.
 	 */
 	@Override
@@ -127,7 +97,7 @@ public class JdbcLogTask extends BlockingConsumerTask {
 	 * 将Buffer中的事件列表批量插入数据库.
 	 */
 	@SuppressWarnings("unchecked")
-	protected void updateBatch() {
+	public void updateBatch() {
 		try {
 			//分析事件列表,转换为jdbc参数.
 			List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
@@ -182,7 +152,7 @@ public class JdbcLogTask extends BlockingConsumerTask {
 	}
 
 	/**
-	 * 可被子类重载的数据访问错误处理函数.
+	 * 可被子类重载的数据访问错误处理函数,如将出错的事件持久化到文件.
 	 */
 	protected void handleDataAccessException(DataAccessException e, List<LoggingEvent> errorEventBatch) {
 		if (e instanceof DataAccessResourceFailureException) {
@@ -191,7 +161,9 @@ public class JdbcLogTask extends BlockingConsumerTask {
 			logger.error("other database error", e);
 		}
 
-		backupErrorEventList(errorEventBatch);
+		for (LoggingEvent event : errorEventBatch) {
+			logger.error("event insert to database error, ignore it, " + AppenderUtils.convertEventToString(event), e);
+		}
 	}
 
 	/**
