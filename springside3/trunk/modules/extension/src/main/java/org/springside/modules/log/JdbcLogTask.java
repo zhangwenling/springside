@@ -39,9 +39,10 @@ import org.springside.modules.queue.BlockingConsumerTask;
  */
 public class JdbcLogTask extends BlockingConsumerTask {
 
-	protected final String errorFileName = queueName + ".error";
 	protected String sql;
 	protected int batchSize = 10;
+	protected String errorFileName = queueName + ".error";
+	protected Object errorFileLock = new Object();
 
 	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
 	protected SimpleJdbcTemplate jdbcTemplate;
@@ -85,9 +86,25 @@ public class JdbcLogTask extends BlockingConsumerTask {
 	 */
 	public void restoreErrorFile() {
 		try {
-			restoreFile(errorFileName);
+			synchronized (errorFileLock) {
+				restoreFile(errorFileName);
+			}
 		} catch (Exception e) {
 			logger.error("从" + errorFileName + "恢复出错事件出错", e);
+		}
+	}
+
+	/**
+	 * 备份错误事件到错误文件.
+	 * @param errorEventBatch
+	 */
+	public void backupErrorEventList(List<LoggingEvent> errorEventBatch) {
+		try {
+			synchronized (errorFileLock) {
+				backupEventList(errorFileName, errorEventBatch);
+			}
+		} catch (IOException e) {
+			logger.error("持久化出错事件到" + errorFileName + "出错", e);
 		}
 	}
 
@@ -174,11 +191,7 @@ public class JdbcLogTask extends BlockingConsumerTask {
 			logger.error("other database error", e);
 		}
 
-		try {
-			this.backupEventList(errorFileName, errorEventBatch);
-		} catch (IOException e1) {
-			logger.error("持久化出错事件到" + errorFileName + "出错", e);
-		}
+		backupErrorEventList(errorEventBatch);
 	}
 
 	/**

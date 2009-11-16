@@ -48,6 +48,7 @@ public abstract class QueueConsumerTask implements Runnable {
 
 	protected boolean persistence = true;
 	protected String persistencePath = System.getProperty("java.io.tmpdir") + File.separator + "queue";
+	protected Object persistenceLock = new Object();
 
 	protected BlockingQueue queue;
 	protected ExecutorService executor;
@@ -85,7 +86,7 @@ public abstract class QueueConsumerTask implements Runnable {
 		queue = QueueHolder.getQueue(queueName);
 
 		if (persistence) {
-			restoreQueue();
+			restoreWholeQueue();
 		}
 
 		executor = Executors.newSingleThreadExecutor();
@@ -105,20 +106,21 @@ public abstract class QueueConsumerTask implements Runnable {
 		}
 
 		if (persistence) {
-			backupQueue();
+			backupWholeQueue();
 		}
-
 	}
 
 	/**
 	 * 保存队列中的所有消息到文件.
 	 */
-	public void backupQueue() throws IOException {
+	public void backupWholeQueue() throws IOException {
 		List list = new ArrayList();
 		queue.drainTo(list);
 
 		if (!list.isEmpty()) {
-			backupEventList(queueName, list);
+			synchronized (persistenceLock) {
+				backupEventList(queueName, list);
+			}
 		} else {
 			logger.debug("队列为空,不需要持久化 .");
 		}
@@ -133,9 +135,11 @@ public abstract class QueueConsumerTask implements Runnable {
 			File dir = getPersistenceDir();
 			File file = new File(dir, fileName);
 			oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+
 			for (Object message : list) {
 				oos.writeObject(message);
 			}
+
 			logger.info("队列{}已持久化{}个消息到{}", new Object[] { queueName, list.size(), file.getAbsolutePath() });
 		} finally {
 			if (oos != null) {
@@ -147,8 +151,10 @@ public abstract class QueueConsumerTask implements Runnable {
 	/**
 	 * 载入默认持久化文件中的消息到队列.
 	 */
-	public void restoreQueue() throws ClassNotFoundException, IOException {
-		restoreFile(queueName);
+	public void restoreWholeQueue() throws ClassNotFoundException, IOException {
+		synchronized (persistenceLock) {
+			restoreFile(queueName);
+		}
 	}
 
 	/**
