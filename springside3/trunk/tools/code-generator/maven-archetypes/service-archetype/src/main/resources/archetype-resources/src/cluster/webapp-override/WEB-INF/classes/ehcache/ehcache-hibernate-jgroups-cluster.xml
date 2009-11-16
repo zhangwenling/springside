@@ -14,27 +14,25 @@
 		pbcast.NAKACK(gc_lag=100;retransmit_timeout=3000):
 		pbcast.GMS(join_timeout=5000;shun=false;print_local_addr=true)"
 		propertySeparator="::" />
-		 	
- 	<!--
-		DefaultCache setting.
-		Modify ehcache-safe.xml for timeToIdleSeconds,timeToLiveSecond,diskExpiryThreadIntervalSeconds.
-		Use ehcache-safe.xml default for maxElementsInMemory,maxElementsOnDisk,overflowToDisk,eternal.
-		Use ehcache default for memoryStoreEvictionPolicy,diskPersistent.
-	-->
-	<defaultCache maxElementsInMemory="10000" overflowToDisk="true" eternal="false"
-		memoryStoreEvictionPolicy="LRU" maxElementsOnDisk="10000000" diskExpiryThreadIntervalSeconds="600"
-		timeToIdleSeconds="3600" timeToLiveSeconds="100000" diskPersistent="false" />
+
+
+	<!-- DefaultCache setting. -->
+	<defaultCache maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false"
+		overflowToDisk="true" maxElementsOnDisk="10000000" />
 
 	<!-- Special objects setting. -->
-	<cache name="${package}.entity.user.User" maxElementsInMemory="500" eternal="true">
+	<cache name="${package}.entity.user.User" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="10000000">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
-	<cache name="${package}.entity.user.User.roles" maxElementsInMemory="500" eternal="true">
+	<cache name="${package}.entity.user.User.roles" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="10000000">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
-	<cache name="${package}.entity.user.Role" maxElementsInMemory="500" eternal="true">
+	<cache name="${package}.entity.user.Role" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="10000000">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
