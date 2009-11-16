@@ -97,9 +97,7 @@ public abstract class QueueConsumerTask implements Runnable {
 
 		executor = Executors.newSingleThreadExecutor(new ThreadFactory() {
 			public Thread newThread(Runnable runable) {
-				Thread t = new Thread(runable, "Queue Consumer-" + queueName);
-				t.setDaemon(true);
-				return t;
+				return new Thread(runable, "Queue Consumer-" + queueName);
 			}
 		});
 		executor.execute(this);

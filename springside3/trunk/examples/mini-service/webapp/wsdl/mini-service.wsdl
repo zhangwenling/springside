@@ -15,8 +15,17 @@
 </xs:complexType>
 <xs:complexType name="authUserResponse">
 <xs:sequence>
-<xs:element minOccurs="0" name="return" type="tns:WSResult" />
+<xs:element minOccurs="0" name="return" type="tns:AuthUserResult" />
 </xs:sequence>
+</xs:complexType>
+<xs:complexType name="AuthUserResult">
+<xs:complexContent>
+<xs:extension base="tns:WSResult">
+<xs:sequence>
+<xs:element name="valid" type="xs:boolean" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
 </xs:complexType>
 <xs:complexType name="WSResult">
 <xs:sequence>
@@ -53,7 +62,7 @@
 <xs:element minOccurs="0" name="id" type="xs:long" />
 <xs:element minOccurs="0" name="loginName" type="xs:string" />
 <xs:element minOccurs="0" name="name" type="xs:string" />
-<xs:element minOccurs="0" name="roles">
+<xs:element minOccurs="0" name="roleList">
 <xs:complexType>
 <xs:sequence>
 <xs:element maxOccurs="unbounded" minOccurs="0" name="role" type="tns:Role" />

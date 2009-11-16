@@ -44,9 +44,7 @@ public class NotifyQueueConsumer implements Runnable {
 
 		executor = Executors.newScheduledThreadPool(1, new ThreadFactory() {
 			public Thread newThread(Runnable runable) {
-				Thread t = new Thread(runable, "JMS Queue Consumer-notify");
-				t.setDaemon(true);
-				return t;
+				return new Thread(runable, "JMS Notify Queue Consumer");
 			}
 		});
 
