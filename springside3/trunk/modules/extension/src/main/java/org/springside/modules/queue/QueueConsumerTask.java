@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
@@ -94,7 +95,13 @@ public abstract class QueueConsumerTask implements Runnable {
 			}
 		}
 
-		executor = Executors.newSingleThreadExecutor();
+		executor = Executors.newSingleThreadExecutor(new ThreadFactory() {
+			public Thread newThread(Runnable runable) {
+				Thread t = new Thread(runable, "Queue Consumer-" + queueName);
+				t.setDaemon(true);
+				return t;
+			}
+		});
 		executor.execute(this);
 	}
 

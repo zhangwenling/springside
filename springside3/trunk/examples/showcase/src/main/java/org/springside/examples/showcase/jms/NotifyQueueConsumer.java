@@ -3,6 +3,7 @@ package org.springside.examples.showcase.jms;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
@@ -40,7 +41,15 @@ public class NotifyQueueConsumer implements Runnable {
 	 */
 	@PostConstruct
 	public void start() {
-		executor = Executors.newScheduledThreadPool(1);
+
+		executor = Executors.newScheduledThreadPool(1, new ThreadFactory() {
+			public Thread newThread(Runnable runable) {
+				Thread t = new Thread(runable, "JMS Queue Consumer-notify");
+				t.setDaemon(true);
+				return t;
+			}
+		});
+
 		executor.scheduleAtFixedRate(this, 0, 1000, TimeUnit.MILLISECONDS);
 	}
 
