@@ -17,7 +17,7 @@
 
 		<h2>技术说明：</h2>
 		<ul>
-			<li>演示在Spring中使用Ehcache</li>
+			<li>演示在Spring中使用Ehcache.</li>
 		</ul>
 		
 		<h2>用户故事：</h2>

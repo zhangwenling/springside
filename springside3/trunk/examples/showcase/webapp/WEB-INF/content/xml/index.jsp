@@ -16,12 +16,11 @@
 
 		<h2>技术说明：</h2>
 		<ul>
-			<li>基于JAXB2.0的Java-XML绑定, 演示根元素是List, 属性是Map等特殊情况.</li>
+			<li>基于JAXB2.0的Java-XML绑定, 演示根元素是List, 属性是List与Map等特殊情况.</li>
 			<li>万能老倌Dom4j.</li>
 		</ul>
 
 		<h2>用户故事：</h2>
-
 		<p>在JaxbTest测试用例中演示XML与Java对象的转换及Dom4j的使用.</p>
 	</div>
 </div>

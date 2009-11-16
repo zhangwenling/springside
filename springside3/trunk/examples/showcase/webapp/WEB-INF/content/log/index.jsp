@@ -17,10 +17,10 @@
 
 		<h2>技术说明：</h2>
 		<ul>
-			<li>Log4JMBean: JMX动态改变log4j的日志等级,并查询Logger的Appender.</li>
-			<li>MockAppender: 在测试用例中验证日志输出.</li>
-			<li>TraceUtils: 输出可方便追踪的业务系统运行调试信息.</li>
-			<li>AsyncQueueAppender:轻量级日志异步多线程处理框架</li>
+			<li>Log4JMBean: 通过JMX动态查询与改变Logger的日志等级与Appender.</li>
+			<li>QueueAppender/JdbcLogTask:轻量级的日志异步数据库写入框架, 可用于业务日志写入.</li>
+			<li>MockAppender: 在测试用例中验证日志的输出.</li>
+			<li>TraceUtils: 输出方便追踪的业务系统运行调试信息.</li>
 		</ul>
 		
 		<h2>用户故事：</h2>

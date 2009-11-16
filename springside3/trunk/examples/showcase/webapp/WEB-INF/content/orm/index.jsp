@@ -18,11 +18,12 @@
 		<ul>
 			<li>Hibernate Event，在修改User对象时自动加入审计信息。(综合示例)</li>
 			<li>Hibernate @Version字段，在Struts2 Prepareable Action里的使用。(综合示例)</li>
-			<li>Hibernate Clob字段。(综合示例)</li>
-			<li>Hibernate 批量更新操作的HQL。(测试用例)</li>
-			<li>Hibernate Native SQL。(测试用例)</li>
-			<li>Hibernate 查询时预加载Lazy Load关联对象。(测试用例)</li>
-			<li>Hibernate 扩展Dialect，加入数据库特性语句。(测试用例)</li>
+			<li>Hibernate 继承，Post与Subject/Reply类的同表继承。(PostDao) </li>
+			<li>Hibernate Clob字段。(PostDao测试用例)</li>
+			<li>Hibernate 查询时预加载Lazy Load关联对象。(UserDao测试用例)</li>
+			<li>Hibernate Native SQL。(UserDao测试用例)</li>
+			<li>Hibernate 批量更新操作的HQL。(UserDao测试用例)</li>
+			<li>Hibernate 扩展Dialect，加入数据库特性语句。(UserDao测试用例)</li>
 			<li>SQL执行记录及时间分析：基于P6Spy的通用实现。</li>
 			<li>Hibernate Envers，自动记录关键业务对象的修改历史。(计划中)</li>
 		</ul>
