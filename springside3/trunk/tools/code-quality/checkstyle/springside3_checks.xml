@@ -5,7 +5,7 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: SpringSide3
+    Checkstyle-Configuration: springside3
     Description: none
 -->
 <module name="Checker">
@@ -22,7 +22,6 @@
     <module name="ParameterName"/>
     <module name="StaticVariableName"/>
     <module name="TypeName"/>
-    <module name="IllegalImport"/>
     <module name="RedundantImport"/>
     <module name="MethodLength">
       <property name="max" value="50"/>
@@ -43,10 +42,6 @@
     </module>
     <module name="IllegalInstantiation"/>
     <module name="InnerAssignment"/>
-    <module name="MagicNumber">
-      <property name="severity" value="info"/>
-      <property name="tokens" value="NUM_DOUBLE,NUM_FLOAT,NUM_LONG"/>
-    </module>
     <module name="MissingSwitchDefault"/>
     <module name="RedundantThrows">
       <property name="allowUnchecked" value="true"/>
@@ -61,16 +56,9 @@
     <module name="ModifiedControlVariable"/>
     <module name="StringLiteralEquality"/>
     <module name="AnonInnerLength"/>
-    <module name="ExecutableStatementCount">
-      <property name="tokens" value="INSTANCE_INIT,STATIC_INIT,METHOD_DEF,CTOR_DEF"/>
-    </module>
     <module name="EqualsAvoidNull"/>
-    <module name="AvoidStaticImport"/>
-    <module name="OuterTypeNumber"/>
     <module name="MultipleVariableDeclarations"/>
     <module name="IllegalThrows"/>
-    <module name="LeftCurly"/>
-    <module name="RightCurly"/>
     <module name="NestedIfDepth">
       <property name="severity" value="info"/>
       <property name="max" value="3"/>
@@ -82,6 +70,7 @@
     <module name="ReturnCount">
       <property name="max" value="3"/>
     </module>
+    <module name="BooleanExpressionComplexity"/>
   </module>
   <module name="Translation"/>
   <module name="FileLength"/>
