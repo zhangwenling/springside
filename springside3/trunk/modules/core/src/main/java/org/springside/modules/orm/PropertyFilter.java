@@ -54,7 +54,7 @@ public class PropertyFilter {
 	private String[] propertyNames = null;
 	private Class<?> propertyType = null;
 	private Object propertyValue = null;
-	private MatchType matchType = MatchType.EQ;
+	private MatchType matchType = null;
 
 	public PropertyFilter() {
 	}
@@ -90,7 +90,7 @@ public class PropertyFilter {
 	}
 
 	/**
-	 * 是否有多个属性.
+	 * 是否比较多个属性.
 	 */
 	public boolean isMultiProperty() {
 		return (propertyNames.length > 1);
@@ -104,7 +104,7 @@ public class PropertyFilter {
 	}
 
 	/**
-	 * 获取唯一的属性名称.
+	 * 获取唯一的比较属性名称.
 	 */
 	public String getPropertyName() {
 		if (propertyNames.length > 1)
@@ -127,7 +127,7 @@ public class PropertyFilter {
 	}
 
 	/**
-	 * 获取比较类型.
+	 * 获取比较方式类型.
 	 */
 	public MatchType getMatchType() {
 		return matchType;

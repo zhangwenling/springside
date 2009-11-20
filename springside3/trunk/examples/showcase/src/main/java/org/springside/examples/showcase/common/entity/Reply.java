@@ -9,12 +9,12 @@ import javax.persistence.ManyToOne;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * 回复.
+ * 回复贴.
  * 
  * @author calvin
  */
 @Entity
-//标识字段值
+//子类标识字段值
 @DiscriminatorValue("Reply")
 public class Reply extends Post {
 

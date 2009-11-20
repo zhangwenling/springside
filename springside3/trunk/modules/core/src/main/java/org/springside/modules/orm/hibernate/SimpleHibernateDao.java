@@ -8,11 +8,8 @@
 package org.springside.modules.orm.hibernate;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -120,6 +117,24 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 		Assert.notNull(id, "id不能为空");
 		delete(get(id));
 		logger.debug("delete entity {},id is {}", entityClass.getSimpleName(), id);
+	}
+
+	/**
+	 * 批量删除对象.
+	 */
+	public void delete(final List<T> entities) {
+		for (T entity : entities) {
+			delete(entity);
+		}
+	}
+
+	/**
+	 * 按id批量删除对象.
+	 */
+	public void delete(final PK[] ids) {
+		for (PK id : ids) {
+			delete(id);
+		}
 	}
 
 	/**
@@ -326,15 +341,6 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	public Criteria distinct(Criteria criteria) {
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		return criteria;
-	}
-
-	/**
-	 * 通过Set将不唯一的对象列表唯一化.
-	 * 主要用于HQL/Criteria预加载关联集合形成重复记录,又不方便使用distinct查询语句时.
-	 */
-	public <X> List<X> distinct(List list) {
-		Set<X> set = new LinkedHashSet<X>(list);
-		return new ArrayList<X>(set);
 	}
 
 	/**

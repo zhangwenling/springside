@@ -143,11 +143,6 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 		userList = dao.distinct(criteria).list();
 		assertEquals(6, userList.size());
 		assertTrue(Hibernate.isInitialized(userList.get(0).getRoleList()));
-
-		userList = dao.distinct(dao.find(sql));
-		assertEquals(6, userList.size());
-		assertTrue(Hibernate.isInitialized(userList.get(0).getRoleList()));
-
 	}
 
 	@Test

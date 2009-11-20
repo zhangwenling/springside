@@ -110,11 +110,11 @@ public class HibernateWebUtils {
 
 	/**
 	 * 根据按PropertyFilter命名规则的Request参数,创建PropertyFilter列表.
-	 * PropertyFilter命名规则为Filter属性前缀_比较类型_属性名.
+	 * PropertyFilter命名规则为Filter属性前缀_比较类型属性类型_属性名.
 	 * 
 	 * eg.
-	 * filter_EQUAL_name
-	 * filter_LIKE_name_OR_email
+	 * filter_EQS_name
+	 * filter_LIKES_name_OR_email
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<PropertyFilter> buildPropertyFilters(final HttpServletRequest request, final String filterPrefix) {
@@ -128,8 +128,7 @@ public class HibernateWebUtils {
 			String filterName = entry.getKey();
 			String value = entry.getValue();
 			//如果value值为空,则忽略此filter.
-			boolean omit = StringUtils.isBlank(value);
-			if (!omit) {
+			if (StringUtils.isNotBlank(value)) {
 				PropertyFilter filter = new PropertyFilter(filterName, value);
 				filterList.add(filter);
 			}

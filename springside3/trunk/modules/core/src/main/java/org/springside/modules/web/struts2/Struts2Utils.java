@@ -22,6 +22,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springside.modules.web.WebUtils;
 
 /**
  * Struts2 Utils类.
@@ -110,9 +111,7 @@ public class Struts2Utils {
 			String fullContentType = contentType + ";charset=" + encoding;
 			response.setContentType(fullContentType);
 			if (noCache) {
-				response.setHeader("Pragma", "No-cache");
-				response.setHeader("Cache-Control", "no-cache");
-				response.setDateHeader("Expires", 0);
+				WebUtils.setNoCacheHeader(response);
 			}
 
 			response.getWriter().write(content);

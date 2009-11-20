@@ -67,7 +67,7 @@ public class WebUtils {
 		//Http 1.0 header
 		response.setDateHeader("Expires", 0);
 		//Http 1.1 header
-		response.setHeader("Cache-Control", "max-age=0");
+		response.setHeader("Cache-Control", "no-cache");
 	}
 
 	/**

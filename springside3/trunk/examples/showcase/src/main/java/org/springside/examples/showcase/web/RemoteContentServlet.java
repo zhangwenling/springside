@@ -31,6 +31,13 @@ import org.apache.http.protocol.HttpContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 远程静态内容获取并展示的Servlet.
+ * 
+ * 演示使用HttpClient获取内容.
+ * 
+ * @author calvin
+ */
 public class RemoteContentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -52,10 +59,10 @@ public class RemoteContentServlet extends HttpServlet {
 
 				//设置Header
 				response.setContentType(entity.getContentType().getValue());
-				if(entity.getContentLength()>0){
-					response.setContentLength((int)entity.getContentLength());
+				if (entity.getContentLength() > 0) {
+					response.setContentLength((int) entity.getContentLength());
 				}
-				
+
 				try {
 					//基于byte数组读取文件并直接写入OutputStream, 数组默认大小为4k.
 					IOUtils.copy(input, output);

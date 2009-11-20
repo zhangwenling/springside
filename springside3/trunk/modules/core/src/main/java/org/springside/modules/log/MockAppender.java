@@ -29,18 +29,18 @@ public class MockAppender extends AppenderSkeleton {
 	 * 返回之前append的第一个log事件.
 	 */
 	public LoggingEvent getFirstLog() {
-		if (logs.size() == 0)
+		if (logs.isEmpty())
 			return null;
 		return logs.get(0);
 	}
-	
+
 	/**
 	 * 返回之前append的最后一个log事件.
 	 */
 	public LoggingEvent getLastLog() {
-		if (logs.size() == 0)
+		if (logs.isEmpty())
 			return null;
-		return logs.get(logs.size()-1);
+		return logs.get(logs.size() - 1);
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class MockAppender extends AppenderSkeleton {
 	public void addToLogger(Logger logger) {
 		logger.addAppender(this);
 	}
-	
+
 	/**
 	 * 将本Appender添加到logger中.
 	 */

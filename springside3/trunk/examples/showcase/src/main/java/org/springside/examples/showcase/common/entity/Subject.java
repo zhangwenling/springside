@@ -13,12 +13,12 @@ import javax.persistence.OrderBy;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * 主题.
+ * 主题贴.
  * 
  * @author calvin
  */
 @Entity
-//标识字段值
+//子类标识字段值
 @DiscriminatorValue("Subject")
 public class Subject extends Post {
 

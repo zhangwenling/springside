@@ -18,6 +18,11 @@ import org.apache.commons.lang.ArrayUtils;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springside.modules.web.WebUtils;
 
+/**
+ * 本地静态内容展示与下载的Servlet.
+ * 
+ * @author calvin
+ */
 public class ContentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

@@ -53,13 +53,6 @@ public class UserDao extends HibernateDao<User, Long> {
 	}
 
 	/**
-	 * 使用 HQL 预加载lazy init的List<Role>, 用Set排除重复数据.
-	 */
-	public List<User> getAllUserWithRoleByHqlDistinctBySet() {
-		return distinct(find(QUERY_WITH_ROLE));
-	}
-
-	/**
 	 * 使用Criteria 预加载lazy init的List<Role>, 用DISTINCE_ROOT_ENTITY排除重复数据.
 	 */
 	@SuppressWarnings("unchecked")
