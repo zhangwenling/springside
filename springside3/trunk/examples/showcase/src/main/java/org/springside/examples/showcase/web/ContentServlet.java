@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,8 @@ import org.springside.modules.web.WebUtils;
 /**
  * 本地静态内容展示与下载的Servlet.
  * 
+ * 使用Ehcache静态内容, 并对内容进行缓存控制及gzip压缩。
+ * 
  * @author calvin
  */
 public class ContentServlet extends HttpServlet {
@@ -28,11 +31,13 @@ public class ContentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private Cache contentCache;
+
 	private String[] gzipMimeTypes = { "text/html", "application/xhtml+xml", "text/css", "text/javascript" };
 	private int gzipMiniLength = 512;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//获取请求内容的元数据.
 		String path = request.getParameter("path");
 		Content content = getContentFromCache(path);
 
@@ -80,18 +85,20 @@ public class ContentServlet extends HttpServlet {
 		}
 	}
 
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		contentCache = (Cache) WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean(
+				"contentCache");
+	}
+
 	/**
 	* 从缓存中获取Content基本信息.
 	*/
 	private Content getContentFromCache(String path) {
-		if (contentCache == null) {
-			contentCache = (Cache) WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean(
-					"contentCache");
-		}
 		Element element = contentCache.get(path);
 		if (element == null) {
 			Content content = createContent(path);
-			element = new Element(path, content);
+			element = new Element(content.path, content);
 			contentCache.put(element);
 		}
 		return (Content) element.getObjectValue();
@@ -131,9 +138,9 @@ public class ContentServlet extends HttpServlet {
 	/**
 	 * 定义Content的基本信息.
 	 */
-	public static class Content {
-		File file;
+	private static class Content {
 		String path;
+		File file;
 		String fileName;
 		int length;
 		String mimeType;

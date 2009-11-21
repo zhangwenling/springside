@@ -42,6 +42,7 @@ public class RemoteContentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final int TOTAL_CONNECTIONS = 50;
+
 	private static Logger logger = LoggerFactory.getLogger(RemoteContentServlet.class);
 	private HttpClient httpClient = null;
 

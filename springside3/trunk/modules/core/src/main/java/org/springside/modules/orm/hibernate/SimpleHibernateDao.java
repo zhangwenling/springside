@@ -120,24 +120,6 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * 批量删除对象.
-	 */
-	public void delete(final List<T> entities) {
-		for (T entity : entities) {
-			delete(entity);
-		}
-	}
-
-	/**
-	 * 按id批量删除对象.
-	 */
-	public void delete(final PK[] ids) {
-		for (PK id : ids) {
-			delete(id);
-		}
-	}
-
-	/**
 	 * 按id获取对象.
 	 */
 	public T get(final PK id) {
