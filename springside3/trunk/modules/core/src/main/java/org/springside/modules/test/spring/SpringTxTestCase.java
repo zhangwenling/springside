@@ -15,7 +15,7 @@ import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 
 /**
- * Spring的支持数据库事务和依赖注入的JUnit 4 TestCase基类简写.
+ * Spring的支持数据库事务和依赖注入的JUnit4 集成测试基类简写.
  * 
  * @author calvin
  */

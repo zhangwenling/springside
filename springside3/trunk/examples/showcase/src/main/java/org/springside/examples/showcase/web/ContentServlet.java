@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
 import org.apache.commons.io.IOUtils;
@@ -22,24 +23,23 @@ import org.springside.modules.web.WebUtils;
 /**
  * 本地静态内容展示与下载的Servlet.
  * 
- * 使用Ehcache静态内容, 并对内容进行缓存控制及gzip压缩。
+ * 使用EhCache缓存静态内容元数据, 并对内容进行缓存控制及gzip压缩传输.
  * 
  * @author calvin
  */
 public class ContentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
+	private static final String[] GZIP_MIME_TYPES = { "text/html", "application/xhtml+xml", "text/css", "text/javascript" };
+	private static final int GZIP_MINI_LENGTH = 512;
+	
 	private Cache contentCache;
-
-	private String[] gzipMimeTypes = { "text/html", "application/xhtml+xml", "text/css", "text/javascript" };
-	private int gzipMiniLength = 512;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//获取请求内容的元数据.
-		String path = request.getParameter("path");
-		Content content = getContentFromCache(path);
+		String contentPath = request.getParameter("contentPath");
+		Content content = getContentFromCache(contentPath);
 
 		//判断客户端的缓存文件有否修改过, 如无修改则设置返回码为304,直接返回.
 		if (!WebUtils.checkIfModifiedSince(request, response, content.lastModified)
@@ -87,8 +87,9 @@ public class ContentServlet extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		contentCache = (Cache) WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean(
-				"contentCache");
+		CacheManager ehcacheManager =  (CacheManager) WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean(
+				"ehcacheManager");
+		contentCache = ehcacheManager.getCache("contentCache");
 	}
 
 	/**
@@ -98,7 +99,7 @@ public class ContentServlet extends HttpServlet {
 		Element element = contentCache.get(path);
 		if (element == null) {
 			Content content = createContent(path);
-			element = new Element(content.path, content);
+			element = new Element(content.contentPath, content);
 			contentCache.put(element);
 		}
 		return (Content) element.getObjectValue();
@@ -107,17 +108,17 @@ public class ContentServlet extends HttpServlet {
 	/**
 	 * 创建Content基本信息.
 	 */
-	private Content createContent(String path) {
+	private Content createContent(String contentPath) {
 		Content content = new Content();
-
-		String realFilePath = getServletContext().getRealPath(path);
+		String realFilePath = getServletContext().getRealPath(contentPath);
 		File file = new File(realFilePath);
-		content.path = path;
+		
+		content.contentPath = contentPath;
 		content.file = file;
-
 		content.fileName = file.getName();
-		content.lastModified = file.lastModified();
 		content.length = (int) file.length();
+		
+		content.lastModified = file.lastModified();
 		content.etag = "W/\"" + file.lastModified() + "\"";
 
 		String mimeType = getServletContext().getMimeType(realFilePath);
@@ -126,7 +127,7 @@ public class ContentServlet extends HttpServlet {
 		}
 		content.mimeType = mimeType;
 
-		if (content.length >= gzipMiniLength && ArrayUtils.contains(gzipMimeTypes, content.mimeType)) {
+		if (content.length >= GZIP_MINI_LENGTH && ArrayUtils.contains(GZIP_MIME_TYPES, content.mimeType)) {
 			content.needGzip = true;
 		} else {
 			content.needGzip = false;
@@ -139,7 +140,7 @@ public class ContentServlet extends HttpServlet {
 	 * 定义Content的基本信息.
 	 */
 	private static class Content {
-		String path;
+		String contentPath;
 		File file;
 		String fileName;
 		int length;

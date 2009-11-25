@@ -20,6 +20,7 @@ import com.opensymphony.xwork2.ActionContext;
 /**
  * 对Spring MockRequest/MockReponse的Util方法集合.
  * 对Struts2的ServletActionContext.getRequest()/getResponse()方法的支持.
+ * 
  * @author calvin
  */
 public class MockWebUtils {
@@ -83,6 +84,5 @@ public class MockWebUtils {
 			ActionContext.setContext(new ActionContext(new HashMap()));
 			struts2Inited = true;
 		}
-
 	}
 }

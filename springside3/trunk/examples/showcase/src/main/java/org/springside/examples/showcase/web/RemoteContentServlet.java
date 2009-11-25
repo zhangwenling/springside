@@ -48,8 +48,8 @@ public class RemoteContentServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = request.getParameter("url");
-		HttpGet httpget = new HttpGet(url);
+		String remoteUrl = request.getParameter("remoteUrl");
+		HttpGet httpget = new HttpGet(remoteUrl);
 		HttpContext context = new BasicHttpContext();
 		try {
 			HttpResponse remoteResponse = httpClient.execute(httpget, context);
@@ -75,7 +75,7 @@ public class RemoteContentServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-			logger.error("fetch remote content" + url + "  error", e);
+			logger.error("fetch remote content" + remoteUrl + "  error", e);
 			httpget.abort();
 		}
 	}

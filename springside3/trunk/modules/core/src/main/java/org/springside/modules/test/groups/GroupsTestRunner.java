@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
- * $Id$
+ * $Id: GroupsUtils.java 516 2009-10-02 13:55:33Z calvinxiu $
  */
 package org.springside.modules.test.groups;
 
@@ -13,6 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+import org.junit.internal.runners.InitializationError;
+import org.junit.internal.runners.JUnit4ClassRunner;
+import org.junit.runner.notification.RunNotifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -23,7 +26,8 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
  * @author freeman
  * @author calvin
  */
-public class GroupsUtils {
+public class GroupsTestRunner extends JUnit4ClassRunner {
+
 	/**
 	 * 在Properties文件或系统运行参数-D中定义执行分组的变量名称.
 	 */
@@ -34,9 +38,42 @@ public class GroupsUtils {
 	 */
 	public static final String PROPERTY_FILE = "application.test.properties";
 
-	private static Logger logger = LoggerFactory.getLogger(GroupsUtils.class);
+	private static Logger logger = LoggerFactory.getLogger(GroupsTestRunner.class);
 
 	private static List<String> groups;
+
+	public GroupsTestRunner(Class<?> klass) throws InitializationError {
+		super(klass);
+	}
+
+	/**
+	 * 重载加入Class级别控制.
+	 */
+	@Override
+	public void run(RunNotifier notifier) {
+		//对Class是否需要执行测试进行Groups判定.
+		if (!GroupsTestRunner.isTestClassInGroups(getTestClass().getJavaClass())) {
+			notifier.fireTestIgnored(getDescription());
+			return;
+		}
+
+		super.run(notifier);
+	}
+
+	/**
+	 * 重载加入方法级别控制.
+	 */
+	@Override
+	protected void invokeTestMethod(Method method, RunNotifier notifier) {
+
+		//对方法是否需要执行测试进行Groups判定.
+		if (!GroupsTestRunner.isTestMethodInGroups(method)) {
+			notifier.fireTestIgnored(getDescription());
+			return;
+		}
+
+		super.invokeTestMethod(method, notifier);
+	}
 
 	/**
 	 * 判断测试类是否符合分组要求.

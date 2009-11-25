@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 import org.junit.internal.runners.InitializationError;
 import org.junit.runner.notification.RunNotifier;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springside.modules.test.groups.GroupsUtils;
+import org.springside.modules.test.groups.GroupsTestRunner;
 
 /**
  * 实现TestNG Groups功能的Runner,继承于Spring原有的SpringJUnit4ClassRunner.
@@ -33,7 +33,7 @@ public class SpringGroupsTestRunner extends SpringJUnit4ClassRunner {
 	 */
 	@Override
 	public void run(RunNotifier notifier) {
-		if (!GroupsUtils.isTestClassInGroups(getTestClass().getJavaClass())) {
+		if (!GroupsTestRunner.isTestClassInGroups(getTestClass().getJavaClass())) {
 			notifier.fireTestIgnored(getDescription());
 			return;
 		}
@@ -46,7 +46,7 @@ public class SpringGroupsTestRunner extends SpringJUnit4ClassRunner {
 	@Override
 	protected void invokeTestMethod(Method method, RunNotifier notifier) {
 
-		if (!GroupsUtils.isTestMethodInGroups(method)) {
+		if (!GroupsTestRunner.isTestMethodInGroups(method)) {
 			notifier.fireTestIgnored(getDescription());
 			return;
 		}
