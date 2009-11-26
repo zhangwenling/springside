@@ -12,10 +12,7 @@ import org.junit.runner.notification.RunNotifier;
 import org.springside.modules.test.groups.GroupsTestRunner;
 
 /**
- * Selenium的Runner支持在Assert出错时截图, 并支持TestNG Groups式分组执行用例.
- * 
- * @see GroupsTestRunner
- * @see SeleniumTestListener
+ * Selenium的Runner, 支持在Assert出错时截图, 并支持TestNG Groups式分组执行用例.
  * 
  * @author calvin
  */

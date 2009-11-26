@@ -94,6 +94,7 @@ public class WebUtils {
 
 	/**
 	 * 根据浏览器If-Modified-Since Header, 计算文件是否已修改.
+	 * 
 	 * 如果无修改, checkIfModify返回false ,设置304 not modify status.
 	 */
 	public static boolean checkIfModifiedSince(HttpServletRequest request, HttpServletResponse response,
