@@ -34,7 +34,10 @@ import org.slf4j.LoggerFactory;
 /**
  * 远程静态内容获取并展示的Servlet.
  * 
- * 演示使用HttpClient获取内容.
+ * 演示使用多线程安全的可重用的Apache HttpClient获取远程静态内容.
+ * 
+ * 演示访问地址为:
+ * remote-content?remoteUrl=http://localhost:8080/img/logo.jpg
  * 
  * @author calvin
  */
@@ -82,6 +85,7 @@ public class RemoteContentServlet extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
+		// 创建多线程安全的可重用的HttpClient实例.
 		// Create and initialize HTTP parameters
 		HttpParams params = new BasicHttpParams();
 		ConnManagerParams.setMaxTotalConnections(params, TOTAL_CONNECTIONS);

@@ -17,27 +17,37 @@ import net.sf.ehcache.Element;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springside.modules.web.WebUtils;
 
 /**
  * 本地静态内容展示与下载的Servlet.
  * 
- * 使用EhCache缓存静态内容元数据, 并对内容进行缓存控制及gzip压缩传输.
+ * 使用EhCache缓存静态内容元数据, 并对内容进行缓存控制及Gzip压缩传输.
+ * 
+ * 演示访问地址为：
+ * content?contentPath=img/logo.jpg
+ * content?contentPath=img/logo.jpg&download=true
  * 
  * @author calvin
  */
 public class ContentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final String[] GZIP_MIME_TYPES = { "text/html", "application/xhtml+xml", "text/css", "text/javascript" };
-	private static final int GZIP_MINI_LENGTH = 512;
 	
+	/** 需要被Gzip压缩的Mime类型 */
+	private static final String[] GZIP_MIME_TYPES = { "text/html", "application/xhtml+xml", "text/css",
+			"text/javascript" };
+	/** 需要被Gzip压缩的最小文件大小 */
+	private static final int GZIP_MINI_LENGTH = 512;
+
+	/** Content基本信息缓存 */
 	private Cache contentCache;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//获取请求内容的元数据.
+		//获取请求内容的基本信息.
 		String contentPath = request.getParameter("contentPath");
 		Content content = getContentFromCache(contentPath);
 
@@ -87,8 +97,9 @@ public class ContentServlet extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		CacheManager ehcacheManager =  (CacheManager) WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean(
-				"ehcacheManager");
+		ApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(
+				getServletContext());
+		CacheManager ehcacheManager = (CacheManager) ac.getBean("ehcacheManager");
 		contentCache = ehcacheManager.getCache("contentCache");
 	}
 
@@ -110,16 +121,17 @@ public class ContentServlet extends HttpServlet {
 	 */
 	private Content createContent(String contentPath) {
 		Content content = new Content();
+		
 		String realFilePath = getServletContext().getRealPath(contentPath);
 		File file = new File(realFilePath);
-		
+
 		content.contentPath = contentPath;
 		content.file = file;
 		content.fileName = file.getName();
 		content.length = (int) file.length();
-		
+
 		content.lastModified = file.lastModified();
-		content.etag = "W/\"" + file.lastModified() + "\"";
+		content.etag = "W/\"" + content.lastModified + "\"";
 
 		String mimeType = getServletContext().getMimeType(realFilePath);
 		if (mimeType == null) {

@@ -14,6 +14,20 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 为Response设置Expires等Header的Filter.
  * 
+ * eg.在web.xml中设置
+ * 	<filter>
+ * 		<filter-name>expiresHeaderFilter</filter-name>
+ * 		<filter-class>org.springside.modules.web.ResponseHeaderFilter</filter-class>
+ * 		<init-param>
+ * 		<param-name>Cache-Control</param-name>
+ * 			<param-value>public, max-age=31536000</param-value>
+ * 		</init-param>
+ * 	</filter>
+ * 	<filter-mapping>
+ * 		<filter-name>expiresHeaderFilter</filter-name>
+ * 		<url-pattern>/img/*</url-pattern>
+ * 	</filter-mapping>
+ * 
  * @author calvin
  */
 public class ResponseHeaderFilter implements Filter {
