@@ -35,7 +35,7 @@ import org.springside.modules.web.WebUtils;
 public class ContentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/** 需要被Gzip压缩的Mime类型 */
 	private static final String[] GZIP_MIME_TYPES = { "text/html", "application/xhtml+xml", "text/css",
 			"text/javascript" };
@@ -97,9 +97,8 @@ public class ContentServlet extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		ApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(
-				getServletContext());
-		CacheManager ehcacheManager = (CacheManager) ac.getBean("ehcacheManager");
+		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		CacheManager ehcacheManager = (CacheManager) context.getBean("ehcacheManager");
 		contentCache = ehcacheManager.getCache("contentCache");
 	}
 
@@ -121,7 +120,7 @@ public class ContentServlet extends HttpServlet {
 	 */
 	private Content createContent(String contentPath) {
 		Content content = new Content();
-		
+
 		String realFilePath = getServletContext().getRealPath(contentPath);
 		File file = new File(realFilePath);
 
