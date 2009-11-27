@@ -21,7 +21,7 @@ import org.springside.examples.showcase.ws.server.api.result.WSResult;
  * 
  * @author calvin
  */
-@WebService(serviceName = "SmallImageService", portName = "SmallImageServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.api.SmallImageWebService", targetNamespace = WsConstants.NS)
+@WebService(serviceName = WsConstants.SMALL_IMAGE_SERVICE, portName = "SmallImageServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.api.SmallImageWebService", targetNamespace = WsConstants.NS)
 public class SmallImageWebServiceImpl implements SmallImageWebService, ApplicationContextAware {
 
 	private ApplicationContext cxt;

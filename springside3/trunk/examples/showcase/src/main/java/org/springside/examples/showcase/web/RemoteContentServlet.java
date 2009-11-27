@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +36,7 @@ import org.slf4j.LoggerFactory;
  * 演示使用多线程安全的可重用的Apache HttpClient获取远程静态内容.
  * 
  * 演示访问地址为:
- * remote-content?remoteUrl=http://localhost:8080/img/logo.jpg
+ * remote-content?remoteUrl=http%3A%2F%2Flocalhost%3A8080%2Fshowcase%2Fimg%2Flogo.jpg
  * 
  * @author calvin
  */
@@ -84,7 +83,7 @@ public class RemoteContentServlet extends HttpServlet {
 	}
 
 	@Override
-	public void init(ServletConfig config) throws ServletException {
+	public void init() throws ServletException {
 		// 创建多线程安全的可重用的HttpClient实例.
 		// Create and initialize HTTP parameters
 		HttpParams params = new BasicHttpParams();

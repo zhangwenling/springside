@@ -21,7 +21,7 @@ import org.springside.examples.showcase.ws.server.api.WsConstants;
 import org.springside.examples.showcase.ws.server.api.result.LargeImageResult;
 import org.springside.examples.showcase.ws.server.api.result.SmallImageResult;
 
-public class ImageWebServiceTest extends Assert {
+public class BinaryWebServiceTest extends Assert {
 	@Test
 	public void getSmallImage() throws MalformedURLException {
 

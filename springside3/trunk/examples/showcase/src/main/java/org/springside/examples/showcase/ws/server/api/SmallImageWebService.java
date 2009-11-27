@@ -9,7 +9,7 @@ import org.springside.examples.showcase.ws.server.api.result.SmallImageResult;
  * 
  * @author calvin
  */
-@WebService(name = "SmallImageWebService", targetNamespace = WsConstants.NS)
+@WebService(name = WsConstants.SMALL_IMAGE_SERVICE, targetNamespace = WsConstants.NS)
 public interface SmallImageWebService {
 
 	/**

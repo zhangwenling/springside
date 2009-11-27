@@ -70,10 +70,10 @@
          Define a non-SSL HTTP/1.1 Connector on port 8080
     -->
     <Connector port="8080" protocol="HTTP/1.1" redirectPort="8443" 
-               connectionTimeout="20000"
-               keepAliveTimeout="3000"
                executor="tomcatThreadPool"
                acceptCount="200"
+               connectionTimeout="20000"
+               keepAliveTimeout="3000"
                maxKeepAliveRequests="200"
                useBodyEncodingForURI="true"
                enableLookups="false"

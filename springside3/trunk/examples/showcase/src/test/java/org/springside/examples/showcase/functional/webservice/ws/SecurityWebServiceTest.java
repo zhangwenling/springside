@@ -30,7 +30,7 @@ import org.springside.modules.test.spring.SpringContextTestCase;
  * @author calvin
  */
 @ContextConfiguration(locations = { "/webservice/applicationContext-cxf-client.xml" }, inheritLocations = false)
-public class UserWebServiceTest extends SpringContextTestCase {
+public class SecurityWebServiceTest extends SpringContextTestCase {
 
 	/**
 	 * 测试明文密码,在Spring中用<jaxws:client/>创建的Client.

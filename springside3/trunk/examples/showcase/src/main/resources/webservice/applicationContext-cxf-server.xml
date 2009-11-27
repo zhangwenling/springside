@@ -22,7 +22,6 @@
 						<entry key="passwordType" value="PasswordText" />
 						<entry key="passwordCallbackRef" value-ref="plainPasswordCallback" />
 					</map>
-
 				</property>
 			</bean>
 		</jaxws:inInterceptors>

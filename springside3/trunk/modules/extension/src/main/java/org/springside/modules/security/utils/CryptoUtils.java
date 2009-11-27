@@ -8,7 +8,6 @@
 package org.springside.modules.security.utils;
 
 import java.security.GeneralSecurityException;
-import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
@@ -23,7 +22,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springside.modules.utils.EncodeUtils;
 
 /**
- * 支持SHA-1消息摘要, HMAC-SHA1消息签名 及 DES对称加密的Util方法集合.
+ * 支持HMAC-SHA1消息签名 及 DES对称加密的Util方法集合.
  * 
  * 支持Hex与Base64两种编码方式.
  * 
@@ -32,117 +31,18 @@ import org.springside.modules.utils.EncodeUtils;
 public class CryptoUtils {
 
 	private static final String DES = "DES";
-	private static final String SHA1 = "SHA-1";
 	private static final String HMACSHA1 = "HmacSHA1";
 
 	private static final int DEFAULT_HMACSHA1_KEYSIZE = 160;//RFC2401
 
-	//-- SHA1 function --//
-	/**
-	 * 对输入字符串进行sha1散列, 返回Hex编码的结果.
-	 */
-	public static String sha1ToHex(String input) {
-		byte[] digestResult = sha1(input);
-		return EncodeUtils.hexEncode(digestResult);
-	}
-
-	/**
-	 * 对输入字符串进行sha1散列, 返回Base64编码的结果.
-	 */
-	public static String sha1ToBase64(String input) {
-		byte[] digestResult = sha1(input);
-		return EncodeUtils.base64Encode(digestResult);
-	}
-
-	/**
-	 * 对输入字符串进行sha1散列, 返回Base64编码的URL安全的结果.
-	 */
-	public static String sha1ToBase64Url(String input) {
-		byte[] digestResult = sha1(input);
-		return EncodeUtils.base64UrlEncode(digestResult);
-	}
-
-	/**
-	 * 对输入字符串进行sha1散列, 返回字节数组.
-	 */
-	private static byte[] sha1(String input) {
-		try {
-			MessageDigest messageDigest = MessageDigest.getInstance(SHA1);
-			return messageDigest.digest(input.getBytes());
-		} catch (GeneralSecurityException e) {
-			throw new IllegalStateException("Security exception", e);
-		}
-	}
-
 	//-- HMAC-SHA1 funciton --//
-	/**
-	 * 使用HMAC-SHA1进行消息签名, 返回Hex编码的结果.
-	 *
-	 * @param input 原始输入字符串
-	 * @param keyBytes 建议最少160位的密钥
-	 */
-	public static String hmacSha1ToHex(String input, byte[] keyBytes) {
-		byte[] macResult = hmacSha1(input, keyBytes);
-		return EncodeUtils.hexEncode(macResult);
-	}
-
-	/**
-	 * 使用HMAC-SHA1进行消息签名, 返回Base64编码的结果.
-	 * 
-	 * @param input 原始输入字符串
-	 * @param keyBytes 建议最少160位的密钥
-	 */
-	public static String hmacSha1ToBase64(String input, byte[] keyBytes) {
-		byte[] macResult = hmacSha1(input, keyBytes);
-		return EncodeUtils.base64Encode(macResult);
-	}
-
-	/**
-	 * 使用HMAC-SHA1进行消息签名, 返回Base64编码的URL安全的结果.
-	 * 
-	 * @param input 原始输入字符串
-	 * @param keyBytes 建议最少160位的密钥
-	 */
-	public static String hmacSha1ToBase64Url(String input, byte[] keyBytes) {
-		byte[] macResult = hmacSha1(input, keyBytes);
-		return EncodeUtils.base64UrlEncode(macResult);
-	}
-
-	/**
-	 * 校验Hex编码的HMAC-SHA1签名是否正确.
-	 * 
-	 * @param hexMac Hex编码的签名
-	 * @param input 原始输入字符串
-	 * @param keyBytes 建议最少160位的密钥
-	 */
-	public static boolean isHexMacValid(String hexMac, String input, byte[] keyBytes) {
-		byte[] expected = EncodeUtils.hexDecode(hexMac);
-		byte[] actual = hmacSha1(input, keyBytes);
-
-		return Arrays.equals(expected, actual);
-	}
-
-	/**
-	 * 校验Base64编码的HMAC-SHA1签名是否正确.
-	 * 
-	 * @param base64Mac Base64编码的签名
-	 * @param input 原始输入字符串
-	 * @param keyBytes 建议最少160位的密钥
-	 */
-	public static boolean isBase64MacValid(String base64Mac, String input, byte[] keyBytes) {
-		byte[] expected = EncodeUtils.base64Decode(base64Mac);
-		byte[] actual = hmacSha1(input, keyBytes);
-
-		return Arrays.equals(expected, actual);
-	}
-
 	/**
 	 * 使用HMAC-SHA1进行消息签名, 返回字节数组.
 	 * 
 	 * @param input 原始输入字符串
 	 * @param keyBytes 建议最少160位的密钥
 	 */
-	private static byte[] hmacSha1(String input, byte[] keyBytes) {
+	public static byte[] hmacSha1(String input, byte[] keyBytes) {
 		try {
 			SecretKey secretKey = new SecretKeySpec(keyBytes, HMACSHA1);
 			Mac mac = Mac.getInstance(HMACSHA1);
@@ -154,8 +54,66 @@ public class CryptoUtils {
 	}
 
 	/**
+	 * 使用HMAC-SHA1进行消息签名, 返回Hex编码的结果.
+	 *	
+	 * @see #hmacSha1(String, byte[])
+	 */
+	public static String hmacSha1ToHex(String input, byte[] keyBytes) {
+		byte[] macResult = hmacSha1(input, keyBytes);
+		return EncodeUtils.hexEncode(macResult);
+	}
+
+	/**
+	 * 使用HMAC-SHA1进行消息签名, 返回Base64编码的结果.
+	 * 
+	 * @see #hmacSha1(String, byte[])
+	 */
+	public static String hmacSha1ToBase64(String input, byte[] keyBytes) {
+		byte[] macResult = hmacSha1(input, keyBytes);
+		return EncodeUtils.base64Encode(macResult);
+	}
+
+	/**
+	 * 使用HMAC-SHA1进行消息签名, 返回Base64编码的URL安全的结果.
+	 * 
+	 * @see #hmacSha1(String, byte[])
+	 */
+	public static String hmacSha1ToBase64Url(String input, byte[] keyBytes) {
+		byte[] macResult = hmacSha1(input, keyBytes);
+		return EncodeUtils.base64UrlEncode(macResult);
+	}
+
+	/**
+	 * 校验Hex编码的HMAC-SHA1签名是否正确.
+	 * 
+	 * @param hexMac Hex编码的签名
+	 * @param input 原始输入字符串
+	 * @param keyBytes 密钥
+	 */
+	public static boolean isHexMacValid(String hexMac, String input, byte[] keyBytes) {
+		byte[] expected = EncodeUtils.hexDecode(hexMac);
+		byte[] actual = hmacSha1(input, keyBytes);
+
+		return Arrays.equals(expected, actual);
+	}
+
+	/**
+	 * 校验Base64/Base64URLSafe编码的HMAC-SHA1签名是否正确.
+	 * 
+	 * @param base64Mac Base64/Base64URLSafe编码的签名
+	 * @param input 原始输入字符串
+	 * @param keyBytes 密钥
+	 */
+	public static boolean isBase64MacValid(String base64Mac, String input, byte[] keyBytes) {
+		byte[] expected = EncodeUtils.base64Decode(base64Mac);
+		byte[] actual = hmacSha1(input, keyBytes);
+
+		return Arrays.equals(expected, actual);
+	}
+
+	/**
 	 * 生成HMAC-SHA1密钥,返回字节数组.
-	 * HMAC-SHA1算法(RFC2401)建议最少长度为160位.
+	 * HMAC-SHA1算法可使用任意长度的密钥,RFC2401建议最少长度为160位.
 	 */
 	public static byte[] generateMacSha1Key() {
 		try {
@@ -169,8 +127,8 @@ public class CryptoUtils {
 	}
 
 	/**
-	 * 生成HMAC-SHA1密钥, 返回Hex编码的结果.
-	 * HMAC-SHA1算法可使用任意长度的密钥, 默认长度为160位.
+	 * 生成HMAC-SHA1密钥, 返回Hex编码的结果. 
+	 * @see #generateMacSha1Key()
 	 */
 	public static String generateMacSha1HexKey() {
 		return EncodeUtils.hexEncode(generateMacSha1Key());
@@ -178,7 +136,7 @@ public class CryptoUtils {
 
 	/**
 	 * 生成HMAC-SHA1密钥, 返回Base64编码的结果.
-	 * HMAC-SHA1算法可使用任意长度的密钥, 默认长度为160位.
+	 * @see #generateMacSha1Key()
 	 */
 	public static String generateMacSha1Base64Key() {
 		return EncodeUtils.base64Encode(generateMacSha1Key());

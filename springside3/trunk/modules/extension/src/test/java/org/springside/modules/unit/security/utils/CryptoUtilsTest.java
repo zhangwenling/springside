@@ -7,15 +7,6 @@ import org.springside.modules.security.utils.CryptoUtils;
 public class CryptoUtilsTest extends Assert {
 
 	@Test
-	public void digest() {
-		String input = "foo message";
-
-		System.out.println("sha1 in hex result              :" + CryptoUtils.sha1ToHex(input));
-		System.out.print("sha1 in base64 result           :" + CryptoUtils.sha1ToBase64(input));
-		System.out.println("sha1 in base64 url result       :" + CryptoUtils.sha1ToBase64Url(input));
-	}
-
-	@Test
 	public void encrypt() {
 		byte[] key = CryptoUtils.generateDesKey();
 		String input = "foo message";
@@ -54,5 +45,4 @@ public class CryptoUtilsTest extends Assert {
 		assertTrue(CryptoUtils.isHexMacValid(macHexResult, input, key));
 		assertTrue(CryptoUtils.isBase64MacValid(macBase64Result, input, key));
 	}
-
 }

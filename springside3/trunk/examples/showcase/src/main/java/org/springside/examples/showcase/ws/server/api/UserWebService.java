@@ -9,7 +9,7 @@ import org.springside.examples.showcase.ws.server.api.result.GetAllUserResult;
  * 
  * @author calvin
  */
-@WebService(name = "UserService", targetNamespace = WsConstants.NS)
+@WebService(name = WsConstants.USER_SERVICE, targetNamespace = WsConstants.NS)
 public interface UserWebService {
 	/**
 	 * 显示所有用户.

@@ -23,7 +23,7 @@ import org.springside.examples.showcase.ws.server.api.result.WSResult;
  * 
  * @author calvin
  */
-@WebService(serviceName = "LargeImageService", portName = "LargeImageServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.api.LargeImageWebService", targetNamespace = WsConstants.NS)
+@WebService(serviceName = WsConstants.LARGE_IMAGE_SERVICE, portName = "LargeImageServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.api.LargeImageWebService", targetNamespace = WsConstants.NS)
 public class LargeImageWebServiceImpl implements LargeImageWebService, ApplicationContextAware {
 
 	private ApplicationContext cxt;

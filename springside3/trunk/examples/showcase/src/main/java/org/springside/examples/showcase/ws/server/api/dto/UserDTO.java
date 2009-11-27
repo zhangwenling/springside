@@ -10,8 +10,6 @@ import org.springside.examples.showcase.ws.server.api.WsConstants;
 /**
  * Web Service传输User信息的DTO.
  * 
- * 只传输外部接口需要的属性.使用JAXB 2.0的annotation标注JAVA-XML映射,尽量使用默认约定.
- * 
  * @author calvin
  */
 @XmlType(name = "User", namespace = WsConstants.NS)
