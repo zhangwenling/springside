@@ -9,7 +9,7 @@ import org.springside.examples.showcase.ws.server.api.result.LargeImageResult;
  * 
  * @author calvin
  */
-@WebService(name = WsConstants.LARGE_IMAGE_SERVICE, targetNamespace = WsConstants.NS)
+@WebService(name = "LargeImageService", targetNamespace = WsConstants.NS)
 public interface LargeImageWebService {
 
 	public LargeImageResult getImage();

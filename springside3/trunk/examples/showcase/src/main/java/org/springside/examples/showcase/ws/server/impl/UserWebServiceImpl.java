@@ -24,7 +24,7 @@ import org.springside.modules.log.TraceUtils;
  * @author calvin
  */
 //serviceName与portName属性指明WSDL中的名称,endpointInterface属性指向Interface定义类.
-@WebService(serviceName = WsConstants.USER_SERVICE, portName = "UserServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.api.UserWebService", targetNamespace = WsConstants.NS)
+@WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.api.UserWebService", targetNamespace = WsConstants.NS)
 public class UserWebServiceImpl implements UserWebService {
 
 	private static Logger logger = LoggerFactory.getLogger(UserWebServiceImpl.class);

@@ -43,7 +43,7 @@
 		</jaxws:inInterceptors>
 	</jaxws:endpoint>
 
-	<!-- 使用base64Binary传输二进制内容的endpoint定义  -->
+	<!-- 使用Base64Binary传输二进制内容的endpoint定义  -->
 	<jaxws:endpoint id="smallImageServiceEP" address="/SmallImageService">
 		<jaxws:implementor ref="smallImageWebService" />
 	</jaxws:endpoint>

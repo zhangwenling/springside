@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.activation.DataHandler;
@@ -21,9 +20,14 @@ import org.springside.examples.showcase.ws.server.api.WsConstants;
 import org.springside.examples.showcase.ws.server.api.result.LargeImageResult;
 import org.springside.examples.showcase.ws.server.api.result.SmallImageResult;
 
+/**
+ * WebService传输二进制数据测试.
+ * 
+ * @author calvin
+ */
 public class BinaryWebServiceTest extends Assert {
 	@Test
-	public void getSmallImage() throws MalformedURLException {
+	public void getSmallImage() throws IOException {
 
 		//创建SmallImageService
 		URL wsdlURL = new URL("http://localhost:8080/showcase/services/SmallImageService?wsdl");
@@ -34,6 +38,13 @@ public class BinaryWebServiceTest extends Assert {
 		//调用SmallImageService
 		SmallImageResult result = imageService.getImage();
 		assertTrue(result.getImageData().length > 0);
+		
+		//保存图片文件并校验
+		String tempFilePath = System.getProperty("java.io.tmpdir") + "smalllogo.jpg";
+		OutputStream os = new FileOutputStream(tempFilePath);
+		IOUtils.write(result.getImageData(), os);
+		IOUtils.closeQuietly(os);
+		System.out.println("图片已保存至" + tempFilePath);
 	}
 
 	@Test
@@ -50,7 +61,7 @@ public class BinaryWebServiceTest extends Assert {
 		DataHandler dataHandler = result.getImageData();
 
 		//保存图片文件并校验
-		String tempFilePath = System.getProperty("java.io.tmpdir") + "logo.jpg";
+		String tempFilePath = System.getProperty("java.io.tmpdir") + "largelogo.jpg";
 
 		InputStream is = dataHandler.getInputStream();
 		OutputStream os = new FileOutputStream(tempFilePath);
@@ -58,9 +69,10 @@ public class BinaryWebServiceTest extends Assert {
 		IOUtils.copy(is, os);
 		IOUtils.closeQuietly(is);
 		IOUtils.closeQuietly(os);
+		System.out.println("图片已保存至" + tempFilePath);
 
 		File tempFile = new File(tempFilePath);
 		assertTrue(tempFile.length() > 0);
-		System.out.println("图片已保存至" + tempFilePath);
 	}
+	
 }

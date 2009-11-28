@@ -23,9 +23,7 @@ import org.springside.examples.showcase.ws.server.api.result.GetAllUserResult;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 /**
- * UserService Web服务的功能测试, 测试主要的接口调用.
- * 
- * 一般使用在Spring中用<jaxws:client/>创建的Client, 也可以用JAXWS的API自行创建.
+ * WS-Security 测试.
  * 
  * @author calvin
  */
@@ -33,7 +31,7 @@ import org.springside.modules.test.spring.SpringContextTestCase;
 public class SecurityWebServiceTest extends SpringContextTestCase {
 
 	/**
-	 * 测试明文密码,在Spring中用<jaxws:client/>创建的Client.
+	 * 测试明文密码, 在Spring中用<jaxws:client/>创建的Client.
 	 */
 	@Test
 	public void getAllUserWithPlainPassword() {
@@ -43,7 +41,7 @@ public class SecurityWebServiceTest extends SpringContextTestCase {
 	}
 
 	/**
-	 * 测试Digest密码认证,使用JAXWS的API自行创建Client.
+	 * 测试Digest密码认证, 使用JAXWS的API自行创建Client.
 	 */
 	@Test
 	public void getAllUserWithDigestPassword() throws MalformedURLException {
