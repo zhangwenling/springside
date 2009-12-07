@@ -13,7 +13,7 @@
 
 		//演示函数,显示Circle对象的内容.
 		function demo() {
-			c1 = new Circle("red", 100);
+			c1 = new CircleWidget("red", 100);
 			dojo.byId("demoContent").innerHTML = c1.generateContent();
 		}
 	</script>

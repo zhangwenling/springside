@@ -98,11 +98,6 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jul-to-slf4j</artifactId>
-			<optional>true</optional>
-		</dependency>
 
 		<!-- test -->
 		<dependency>

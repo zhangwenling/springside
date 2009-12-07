@@ -18,7 +18,7 @@
 		<spring.version>2.5.6</spring.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<struts2.version>2.1.8</struts2.version>
-		<cxf.version>2.2.4</cxf.version>
+		<cxf.version>2.2.5</cxf.version>
 		<spring-security.version>2.0.5.RELEASE</spring-security.version>
 
 		<!--  Plugin的属性定义  -->
@@ -430,28 +430,21 @@
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
-				<version>1.5.8</version>
+				<version>1.5.10</version>
 			</dependency>
 
 			<!-- slf4j-log4j绑定 -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
-				<version>1.5.8</version>
-			</dependency>
-
-			<!-- slf4j替代java.util.logging -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>jul-to-slf4j</artifactId>
-				<version>1.5.8</version>
+				<version>1.5.10</version>
 			</dependency>
 
 			<!-- slf4j没有log4j的情形 -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-simple</artifactId>
-				<version>1.5.8</version>
+				<version>1.5.10</version>
 			</dependency>
 
 			<dependency>

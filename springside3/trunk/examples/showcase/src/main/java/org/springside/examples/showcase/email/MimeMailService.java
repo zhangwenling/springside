@@ -1,5 +1,6 @@
 package org.springside.examples.showcase.email;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -100,8 +101,8 @@ public class MimeMailService {
 	private void buildAttachment(MimeMessageHelper helper) throws MessagingException {
 		try {
 			//使用Spring的Resource Loader获取打包在classpath中的附件.
-			ClassPathResource attachment = new ClassPathResource("/email/mailAttachment.txt");
-			helper.addAttachment("mailAttachment.txt", attachment.getFile());
+			File attachment = new ClassPathResource("/email/mailAttachment.txt").getFile();
+			helper.addAttachment("mailAttachment.txt", attachment);
 		} catch (IOException e) {
 			logger.error("构造邮件失败,附件文件不存在", e);
 			throw new MessagingException("附件文件不存在", e);

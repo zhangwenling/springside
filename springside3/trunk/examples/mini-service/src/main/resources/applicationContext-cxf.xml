@@ -20,7 +20,4 @@
 	
 	<!-- dozer DTO复制辅助Bean定义 -->
 	<bean id="dozer" class="org.dozer.DozerBeanMapper"/>
-
-	<!-- 设定由slf4j处理cxf中java.util.logging打印的日志 -->
-	<bean class="org.springside.modules.log.JulToSlf4jHandler" lazy-init="false" />
 </beans>

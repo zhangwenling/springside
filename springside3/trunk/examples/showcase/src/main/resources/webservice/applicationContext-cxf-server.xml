@@ -74,7 +74,4 @@
 
 	<!-- Digest密码处理Bean定义 -->
 	<bean id="digestPasswordCallback" class="org.springside.examples.showcase.ws.server.impl.DigestPasswordCallback" />
-
-	<!-- 设定由slf4j处理cxf中java.util.logging打印的日志 -->
-	<bean class="org.springside.modules.log.JulToSlf4jHandler" lazy-init="false" />
 </beans>

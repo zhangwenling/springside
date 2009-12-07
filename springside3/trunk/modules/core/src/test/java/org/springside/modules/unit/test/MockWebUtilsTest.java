@@ -6,7 +6,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springside.modules.log.JulToSlf4jHandler;
 import org.springside.modules.test.spring.MockWebUtils;
 
 public class MockWebUtilsTest extends Assert {
@@ -17,7 +16,7 @@ public class MockWebUtilsTest extends Assert {
 		MockWebUtils.initWebApplicationContext(servletContext, "classpath:/applicationContext-test.xml");
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 		assertNotNull(context);
-		assertNotNull(context.getBeansOfType(JulToSlf4jHandler.class));
+		assertNotNull(context.getBean("springContextHolder"));
 	}
 
 	@Test
@@ -27,7 +26,7 @@ public class MockWebUtilsTest extends Assert {
 		MockWebUtils.initWebApplicationContext(servletContext, ac);
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 		assertNotNull(context);
-		assertNotNull(context.getBeansOfType(JulToSlf4jHandler.class));
+		assertNotNull(context.getBean("springContextHolder"));
 	}
 
 	@Test
