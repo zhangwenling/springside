@@ -79,13 +79,9 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<!-- logging -->
 		<dependency>
