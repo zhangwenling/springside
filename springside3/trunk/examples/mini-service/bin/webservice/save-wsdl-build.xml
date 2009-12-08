@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="save-wsdl" default="save-wsdl">
 	<target name="save-wsdl">
+		<property name="wsdlfile" value="../../webapp/wsdl/mini-service.wsdl"/>
 		<!-- 保存cxf生成的WSDL -->
-		<concat destfile="../../webapp/wsdl/mini-service.wsdl">
-			<url url="http://localhost:8080/mini-service/services/UserService?wsdl" />
-		</concat>
-
+		<get src="http://localhost:8080/mini-service/services/UserService?wsdl" dest="${wsdlfile}"/>
+			
 		<!-- 替换address路径为生产环境路径,请修改replacevalue的值 -->
-		<replace file="../../webapp/wsdl/mini-service.wsdl">
+		<replace file="${wsdlfile}">
 			<replacetoken>
 				<![CDATA[<soap:address location="http://localhost:8080/mini-service/services/UserService" />]]></replacetoken>
 			<replacevalue>
