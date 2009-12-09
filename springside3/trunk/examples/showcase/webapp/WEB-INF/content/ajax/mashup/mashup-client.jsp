@@ -6,6 +6,7 @@
 <head>
 	<title>跨域Mashup演示</title>
 	<%@ include file="/common/meta.jsp" %>
+	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script type="text/javascript">
@@ -19,11 +20,14 @@
 		}
 	</script>
 </head>
+
 <body>
+<div id="doc3" class="yui-t2">
 <%@ include file="/common/header.jsp" %>
-<div id="content">
+<div id="bd">
 	<%@ include file="/common/left.jsp" %>
-	<div id="main">
+	<div id="yui-main">
+		<div class="yui-b">
 		<h1>Mashup演示</h1>
 
 		<h2>技术说明：</h2>
@@ -35,7 +39,10 @@
 		<p>跨域页面内容：</p>
 
 		<div id="mashupContent"></div>
+		</div>
 	</div>
+</div>
+<%@ include file="/common/footer.jsp" %>
 </div>
 </body>
 </html>

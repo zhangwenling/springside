@@ -9,6 +9,7 @@
 <head>
 	<title>Showcase 登录页</title>
 	<%@ include file="/common/meta.jsp" %>
+	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script type="text/javascript">
@@ -18,11 +19,14 @@
 	</script>
 
 </head>
+
 <body>
+<div id="doc3" class="yui-t2">
 <%@ include file="/common/header.jsp" %>
-<div id="content">
+<div id="bd">
 	<%@ include file="/common/left.jsp" %>
-	<div id="main">
+	<div id="yui-main">
+		<div class="yui-b">
 		<%if ("1".equals(request.getParameter("error"))) {%>
 		<span style="color:red"> 用户名密码错误,请重试.</span>
 		<%
@@ -74,7 +78,10 @@
 			</table>
 		</form>
 		<span>（管理员<b>admin/admin</b> ,普通用户<b>user/user</b>）<a href="${ctx}/j_spring_security_logout">退出登录</a></span>
+		</div>
 	</div>
+</div>
+<%@ include file="/common/footer.jsp" %>
 </div>
 </body>
 </html>

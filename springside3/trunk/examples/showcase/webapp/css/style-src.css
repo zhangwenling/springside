@@ -1,0 +1,43 @@
+/* global */
+a {
+	color: #4d87ce;
+}
+
+/* header */
+#hd {
+	/* bottom line */
+	border-bottom: 2px solid #658A16;
+}
+
+#hd h1 {
+	font-size: 150%;
+	letter-spacing: .1em;
+	margin: 20px 0px 0px 35px;
+	color: #658A16;
+}
+
+#hd h2 {
+	letter-spacing: .1em;
+	margin: 0px 0px 15px 45px;
+	color: #BACE87;
+}
+
+/* body */
+#leftbar a {
+	display: block;
+	padding: 5px;
+	padding-right: 0;
+	border-bottom: 1px dashed #eeeeee;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#leftbar a:hover {
+	color: #2a65ad;
+	background-color: #eeeeee;
+}
+
+/* table */
+table.noborder th, table.noborder td {
+	border: none;
+}

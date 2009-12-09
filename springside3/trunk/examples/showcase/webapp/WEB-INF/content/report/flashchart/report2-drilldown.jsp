@@ -5,18 +5,23 @@
 <head>
 	<title>Flash Chart演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-	<script type="text/javascript" src="${ctx}/report/swfobject.js"></script>
+	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
+<div id="doc3" class="yui-t2">
 <%@ include file="/common/header.jsp" %>
-<div id="content">
+<div id="bd">
 	<%@ include file="/common/left.jsp" %>
-	<div id="main">
+	<div id="yui-main">
+		<div class="yui-b">
 		<h1>Flash Chart演示</h1>
 
 		<p>点击Amcharts柱状图进入本页面, 显示<%=Integer.parseInt(request.getParameter("id")) + 1969%>年的数据细节.</p>
+		</div>
 	</div>
+</div>
+<%@ include file="/common/footer.jsp" %>
 </div>
 </body>
 </html>

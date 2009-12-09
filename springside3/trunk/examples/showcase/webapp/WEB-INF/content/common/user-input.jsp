@@ -6,14 +6,17 @@
 <head>
 	<title>综合演示用例</title>
 	<%@ include file="/common/meta.jsp" %>
+	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 
 <body>
+<div id="doc3" class="yui-t2">
 <%@ include file="/common/header.jsp" %>
-<div id="content">
+<div id="bd">
 	<%@ include file="/common/left.jsp" %>
-	<div id="main">
+	<div id="yui-main">
+		<div class="yui-b">
 		<h1><s:if test="id == null">创建</s:if><s:else>修改</s:else>用户</h1>
 
 		<form id="inputForm" action="${ctx}/common/user!save.action" method="post">
@@ -53,6 +56,19 @@
 				</tr>
 			</table>
 		</form>
+		</div>
+	</div>
+</div>
+<%@ include file="/common/footer.jsp" %>
+</div>
+</body>
+
+
+<body>
+<%@ include file="/common/header.jsp" %>
+<div id="content">
+	<%@ include file="/common/left.jsp" %>
+	<div id="main">
 	</div>
 </div>
 </body>

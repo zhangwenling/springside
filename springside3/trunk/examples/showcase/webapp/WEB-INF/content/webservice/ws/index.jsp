@@ -5,13 +5,17 @@
 <head>
 	<title>WebService高级演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
+
 <body>
+<div id="doc3" class="yui-t2">
 <%@ include file="/common/header.jsp" %>
-<div id="content">
+<div id="bd">
 	<%@ include file="/common/left.jsp" %>
-	<div id="main">
+	<div id="yui-main">
+		<div class="yui-b">
 		<h1>WS-*高级协议演示</h1>
 
 		<h2>技术说明:</h2>
@@ -35,7 +39,10 @@
 				WSDL: <a href="http://localhost:8080/showcase/services/LargeImageService?wsdl">http://localhost:8080/showcase/services/LargeImageService?wsdl</a>
 			</li>
 		</ul>
+		</div>
 	</div>
+</div>
+<%@ include file="/common/footer.jsp" %>
 </div>
 </body>
 </html>
