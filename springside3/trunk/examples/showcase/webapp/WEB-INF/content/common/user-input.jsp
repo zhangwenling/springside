@@ -17,7 +17,7 @@
 	<%@ include file="/common/left.jsp" %>
 	<div id="yui-main">
 		<div class="yui-b">
-		<h1><s:if test="id == null">创建</s:if><s:else>修改</s:else>用户</h1>
+		<h2><s:if test="id == null">创建</s:if><s:else>修改</s:else>用户</h2>
 
 		<form id="inputForm" action="${ctx}/common/user!save.action" method="post">
 			<input type="hidden" name="id" value="${id}"/>
@@ -60,16 +60,6 @@
 	</div>
 </div>
 <%@ include file="/common/footer.jsp" %>
-</div>
-</body>
-
-
-<body>
-<%@ include file="/common/header.jsp" %>
-<div id="content">
-	<%@ include file="/common/left.jsp" %>
-	<div id="main">
-	</div>
 </div>
 </body>
 </html>

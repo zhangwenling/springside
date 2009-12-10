@@ -1,9 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
-<div id="header">
+<div id="hd">
 	<div id="title">
 		<h1>Mini-Web示例</h1>
-
 		<h2>--CRUD管理界面演示</h2>
 	</div>
 	<div id="menu">

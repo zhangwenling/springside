@@ -9,6 +9,7 @@
 <head>
 	<title>Mini-Web 登录页</title>
 	<%@ include file="/common/meta.jsp" %>
+	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/jquery.validate.js" type="text/javascript"></script>
@@ -19,10 +20,12 @@
 		});
 	</script>
 </head>
-
 <body>
+<div id="doc3">
 <%@ include file="/common/header.jsp" %>
-<div id="content">
+<div id="bd">
+	<div id="yui-main">
+		<div class="yui-b">
 	<%
 		if (session.getAttribute(AbstractProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY) != null) {
 	%> 
@@ -53,8 +56,11 @@
 		</table>
 	</form>
 	<div>(管理员<b>admin/admin</b>, 普通用户<b>user/user</b>)</div>
+	</div>
+	</div>
 </div>
 <%@ include file="/common/footer.jsp" %>
+</div>
 </body>
 </html>
 

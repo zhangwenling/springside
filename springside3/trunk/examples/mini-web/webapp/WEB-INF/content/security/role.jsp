@@ -7,17 +7,21 @@
 <head>
 	<title>Mini-Web 角色管理</title>
 	<%@ include file="/common/meta.jsp" %>
+	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 
 <body>
+<div id="doc3">
 <%@ include file="/common/header.jsp" %>
-<div id="content">
+<div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
 	<div id="message"><s:actionmessage theme="mytheme"/></div>
 
 	<div id="filter">你好, <%=SpringSecurityUtils.getCurrentUserName()%>.</div>
 
-	<div>
+	<div id="content">
 		<table id="contentTable">
 			<tr>
 				<th>名称</th>
@@ -51,7 +55,10 @@
 			<a href="role!input.action">增加新角色</a>
 		</security:authorize>
 	</div>
+	</div>
+	</div>
 </div>
 <%@ include file="/common/footer.jsp" %>
+</div>
 </body>
 </html>

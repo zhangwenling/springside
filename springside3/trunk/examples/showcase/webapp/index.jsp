@@ -4,16 +4,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 	<title>Showcase 示例</title>
 </head>
 <body>
+<!-- #doc3 = 100% width, #yui-t2 = 180 on left in bd div--> 
+<div id="doc3" class="yui-t2">
 <%@ include file="/common/header.jsp" %>
-<div id="content">
+<div id="bd">
 	<%@ include file="/common/left.jsp" %>
-	<div id="main">
+	<div id="yui-main">
+		<div class="yui-b">
 		<p>各式主流的、实用的、好玩的开源项目大派对。</p>
+		</div>
 	</div>
+</div>
+<%@ include file="/common/footer.jsp" %>
 </div>
 </body>
 </html>

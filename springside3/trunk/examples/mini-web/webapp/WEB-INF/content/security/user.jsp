@@ -7,20 +7,24 @@
 <head>
 	<title>Mini-Web 帐号管理</title>
 	<%@ include file="/common/meta.jsp" %>
+	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script src="${ctx}/js/table.js" type="text/javascript"></script>
 </head>
 
 <body>
+<div id="doc3">
 <%@ include file="/common/header.jsp" %>
-<div id="content">
-	<div id="message"><s:actionmessage theme="mytheme"/></div>
+<div id="bd">
+	<div id="yui-main">
+	<div class="yui-b">
 	<form id="mainForm" action="user.action" method="get">
 		<input type="hidden" name="page.pageNo" id="pageNo" value="${page.pageNo}"/>
 		<input type="hidden" name="page.orderBy" id="orderBy" value="${page.orderBy}"/>
 		<input type="hidden" name="page.order" id="order" value="${page.order}"/>
 
+		<div id="message"><s:actionmessage theme="mytheme"/></div>
 		<div id="filter">
 			你好, <%=SpringSecurityUtils.getCurrentUserName()%>.&nbsp;&nbsp;
 			登录名: <input type="text" name="filter_EQS_loginName" value="${param['filter_EQS_loginName']}" size="9"/>
@@ -28,7 +32,7 @@
 							 value="${param['filter_LIKES_name_OR_email']}" size="9"/>
 			<input class="button" type="button" value="搜索" onclick="search();"/>
 		</div>
-		<div>
+		<div id="content">
 			<table id="contentTable">
 				<tr>
 					<th><a href="javascript:sort('loginName','asc')">登录名</a></th>
@@ -73,7 +77,10 @@
 			</security:authorize>
 		</div>
 	</form>
+	</div>
+	</div>
 </div>
 <%@ include file="/common/footer.jsp" %>
+</div>
 </body>
 </html>
