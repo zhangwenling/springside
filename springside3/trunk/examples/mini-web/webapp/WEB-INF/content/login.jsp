@@ -29,7 +29,7 @@
 	<%
 		if (session.getAttribute(AbstractProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY) != null) {
 	%> 
-	<span style="color: red"> 登录失败，请重试.</span> 
+	<div class="error"> 登录失败，请重试.</div> 
 	<%
 		}
 	%>

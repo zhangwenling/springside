@@ -3,25 +3,29 @@ a {
 	color: #4d87ce;
 }
 
+th, td {border-color: #999;}
+
+table.noborder th,
+table.noborder td {border: none;}
+
+.error,
+.success    { padding: .5em; margin-bottom: 1em; margin-top: 1em; border: 2px solid #ddd; }
+.error      { background: #FBE3E4; color: #8a1f11; border-color: #FBC2C4; }
+.success    { background: #E6EFC2; color: #264409; border-color: #C6D880; }
+.error a    { color: #8a1f11; }
+.success a  { color: #264409; }
+
 /* form */
-input {
-	border: 1px solid #999;
-	margin: 0px 5px;
-	padding: 2px;
+input[type=text], input[type=password],
+textarea, select {
+  background-color:#fff;
+  border:1px solid #bbb;
+  padding:2px;
 }
 
-input.button {
-	font-weight: bold;
-	background: #FFF;
-	padding: 0px 3px;
-}
-
-th, td {
-	border-color: #999;
-}
-
-table.noborder th, table.noborder td {
-	border: none;
+input[type=text]:focus, input[type=password]:focus,
+textarea:focus, select:focus {
+  border-color:#666;
 }
 
 /* header */
@@ -46,9 +50,7 @@ table.noborder th, table.noborder td {
 	border-bottom: 2px solid #658A16;
 }
 
-#menu li {
-	display: inline;
-}
+#menu li {display: inline;}
 
 #menu ul a {
 	padding: 0.5em;
@@ -56,23 +58,10 @@ table.noborder th, table.noborder td {
 	color: #fff;
 }
 
-#menu a:hover {
-	background: #658A16;
-}
-
-#menu a.active {
-	background: #fff;
-	color: #333;
-}
+#menu a:hover {background: #658A16;}
 
 /* body */
-#filter,#content{
-	margin-top:1em;
-}
-
-.actionMessage {
-	font-weight: bold;
-}
+#filter,#content {margin-top:1em;}
 
 /* footer */
 #ft {
@@ -83,7 +72,5 @@ table.noborder th, table.noborder td {
 	border-top: 2px solid #658A16;
 }
 
-#ft a {
-	color: #999;
-}
+#ft a {color: #999;}
 

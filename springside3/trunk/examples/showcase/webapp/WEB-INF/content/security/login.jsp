@@ -27,25 +27,25 @@
 	<%@ include file="/common/left.jsp" %>
 	<div id="yui-main">
 		<div class="yui-b">
-		<%if ("1".equals(request.getParameter("error"))) {%>
-		<span style="color:red"> 用户名密码错误,请重试.</span>
-		<%
-			}
-			if ("2".equals(request.getParameter("error"))) {
-		%>
-		<span style="color:red"> 验证码错误,请重试.</span>
-		<%
-			}
-			if ("3".equals(request.getParameter("error"))) {
-		%>
-		<span style="color:red"> 此帐号已从别处登录.</span>
-		<%}%>
 		<h1>Showcase登录页</h1>
 
 		<h2>技术说明：</h2>
 
 		<p>基于JCaptcha1.0的验证码方案，通过ServletFilter与SpringSecurity简单集成。</p>
-
+		<%if ("1".equals(request.getParameter("error"))) {%>
+			<div class="error"> 用户名密码错误,请重试.</div>
+		<%
+			}
+			if ("2".equals(request.getParameter("error"))) {
+		%>
+			<div class="error"> 验证码错误,请重试.</div>
+		<%
+			}
+			if ("3".equals(request.getParameter("error"))) {
+		%>
+			<div class="error"> 此帐号已从别处登录.</div>
+		<%}%>
+	
 		<form id="loginForm" action="${ctx}/j_spring_security_check" method="post">
 			<table class="noborder">
 				<tr>

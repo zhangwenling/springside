@@ -17,7 +17,7 @@
 <div id="bd">
 	<div id="yui-main">
 	<div class="yui-b">
-	<div id="message"><s:actionmessage theme="mytheme"/></div>
+	<div id="message"><s:actionmessage theme="mytheme" cssClass="success"/></div>
 
 	<div id="filter">你好, <%=SpringSecurityUtils.getCurrentUserName()%>.</div>
 

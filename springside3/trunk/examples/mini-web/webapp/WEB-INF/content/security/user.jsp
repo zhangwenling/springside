@@ -24,7 +24,7 @@
 		<input type="hidden" name="page.orderBy" id="orderBy" value="${page.orderBy}"/>
 		<input type="hidden" name="page.order" id="order" value="${page.order}"/>
 
-		<div id="message"><s:actionmessage theme="mytheme"/></div>
+		<div id="message"><s:actionmessage theme="mytheme" cssClass="success"/></div>
 		<div id="filter">
 			你好, <%=SpringSecurityUtils.getCurrentUserName()%>.&nbsp;&nbsp;
 			登录名: <input type="text" name="filter_EQS_loginName" value="${param['filter_EQS_loginName']}" size="9"/>
