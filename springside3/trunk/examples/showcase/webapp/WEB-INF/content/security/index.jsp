@@ -20,8 +20,9 @@
 		<ul>
 			<li><a href="${ctx}/security/login.action">SpringSecurity与认证码集成演示.</a></li>
 			<li>SpringSecurity Sha1散列密码与同时登录人数限制演示.</li>
-			<li>SHA-1消息摘要, HMAC-SHA1消息签名 及 DES对称加密演示.(见CryptoUtils及其测试用例)</li>
-			<li>Random 与 UUID风格 Nonce演示.(见NonceUtils及其测试用例)</li>
+			<li>SHA-1与MD5消息摘要(见DigestUtils及其测试用例)</li>
+			<li>HMAC-SHA1消息签名 及 DES对称加密演示.(见CryptoUtils及其测试用例)</li>
+			<li>Random 与 UUID风格 Nonce(唯一数)演示.(见NonceUtils及其测试用例)</li>
 			<li>数据级别的权限控制(计划中)</li>
 		</ul>
 		</div>

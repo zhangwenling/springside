@@ -29,16 +29,15 @@
 	<div id="yui-main">
 		<div class="yui-b">
 		<h1>Mashup演示</h1>
-
+	
 		<h2>技术说明：</h2>
-		演示基于JQuery的JSONP实现，绕过浏览器对Ajax访问跨域名网站内容的限制。<br/>
-		请先将本页另存为本地html文件，打开本地文件访问应用服务器即为跨域访问的场景。
-
-		<p><input type="button" value="获取内容" onclick="getMashupContent();"/></p>
-
-		<p>跨域页面内容：</p>
-
-		<div id="mashupContent"></div>
+		<p>
+			演示基于JQuery的JSONP实现，绕过浏览器对Ajax访问跨域名网站内容的限制.<br/>
+			请先将本页另存为本地html文件，打开本地文件访问应用服务器即为跨域访问的场景.
+		</p>
+		<p><input type="button" value="获取内容" onclick="getMashupContent();"/></p>	
+		<p>跨域页面内容:</p>
+		<div id="mashupContent"/>
 		</div>
 	</div>
 </div>

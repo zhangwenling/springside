@@ -3,7 +3,6 @@
 <%@ page import="org.springside.modules.utils.EncodeUtils" %>
 
 <%
-	
    String remoteImageUrl = "http://"+request.getServerName()+":"+request.getServerPort()+"/showcase/img/logo.jpg";
    String encodedImageUrl = EncodeUtils.urlEncode(remoteImageUrl);
 %>
@@ -36,6 +35,7 @@
 			    5. Tomcat gzip 配置压缩传输大于2K的MimeType为html/xml/css/js的文本<br/> 
 			</li>
 		</ul>
+		
 		<h2>用户故事：</h2>
 		<ul>
 			<li>URLRewrite: 综合示例中的地址为搜索引擎友好的地址, 如用户列表地址为users.htm, 用户1的修改地址为user/1.htm</li>

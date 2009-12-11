@@ -28,17 +28,16 @@
 	<div id="yui-main">
 		<div class="yui-b">
 		<h1>Dojo Base演示</h1>
-
+	
 		<h2>技术说明：</h2>
-
 		<p>演示基于Dojo Base的Javascript文件Package化与Script方法OO化.</p>
 		<p><input type="button" value="获取演示内容" onclick="demo();"/></p>
-
-		<div id="demoContent"></div>
+		<p>Dojo Base演示内容:</p>
+		<div id="demoContent"/>
 		</div>
 	</div>
+	<%@ include file="/common/footer.jsp" %>
 </div>
-<%@ include file="/common/footer.jsp" %>
 </div>
 </body>
 </html>

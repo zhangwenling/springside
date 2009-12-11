@@ -59,12 +59,12 @@
 		</ul>
 
 		<h2>用户故事：</h2>
-		<span>
+		<div>
 		使用JMX动态配置服务节点的系统变量与Log4J日志等级,并实时监控Hibernate运行统计。<br/>
 
 		客户端可使用JConsole, 远程进程URL为 service:jmx:rmi:///jndi/rmi://localhost:1099/showcase
-		</span>
-
+		</div>
+		
 		<h2>系统配置(MBean代理)</h2>
 		<form id="configForm">
 			<table class="noborder">
@@ -89,11 +89,11 @@
 		</form>
 
 		<h2>Hibernate运行统计(直接读取属性/调用方法)</h2>
-		<span>
+		<div>
 			打开数据库连接:${hibernateStatistics.sessionOpenCount}<br/>
 			关闭数据库连接:${hibernateStatistics.sessionCloseCount}<br/>
 			<input type="button" value="在日志打印Hibernate统计信息" onclick="logSummary();"/>
-		</span>
+		</div>
 		</div>
 	</div>
 </div>
