@@ -23,28 +23,29 @@ public class Struts2UtilsTest extends Assert {
 
 		Struts2Utils.render("text/plain", "hello");
 		assertEquals("text/plain;charset=UTF-8", response.getContentType());
-		assertEquals("No-cache", response.getHeader("Pragma"));
+		assertEquals("no-cache", response.getHeader("Cache-Control"));
 		assertEquals("hello", response.getContentAsString());
 
 		response = new MockHttpServletResponse();
-		ServletActionContext.setResponse(response);
+		MockWebUtils.setResponseToStruts2(response);
 		Struts2Utils.render("text/plain", "hello", "encoding:GBK");
 		assertEquals("text/plain;charset=GBK", response.getContentType());
-		assertEquals("No-cache", response.getHeader("Pragma"));
+		assertEquals("no-cache", response.getHeader("Cache-Control"));
+
 		assertEquals("hello", response.getContentAsString());
 
 		response = new MockHttpServletResponse();
-		ServletActionContext.setResponse(response);
+		MockWebUtils.setResponseToStruts2(response);
 		Struts2Utils.render("text/plain", "hello", "no-cache:false");
 		assertEquals("text/plain;charset=UTF-8", response.getContentType());
-		assertEquals(null, response.getHeader("Pragma"));
+		assertEquals(null, response.getHeader("Cache-Control"));
 		assertEquals("hello", response.getContentAsString());
 
 		response = new MockHttpServletResponse();
-		ServletActionContext.setResponse(response);
+		MockWebUtils.setResponseToStruts2(response);
 		Struts2Utils.render("text/plain", "hello", "encoding:GBK", "no-cache:false");
 		assertEquals("text/plain;charset=GBK", response.getContentType());
-		assertEquals(null, response.getHeader("Pragma"));
+		assertEquals(null, response.getHeader("Cache-Control"));
 		assertEquals("hello", response.getContentAsString());
 	}
 
@@ -63,21 +64,21 @@ public class Struts2UtilsTest extends Assert {
 
 		//Object
 		response = new MockHttpServletResponse();
-		ServletActionContext.setResponse(response);
+		MockWebUtils.setResponseToStruts2(response);
 		Object object = new TestBean();
 		Struts2Utils.renderJson(object);
 		assertEquals("{\"age\":10,\"name\":\"foo\"}", response.getContentAsString());
 
 		//Array
 		response = new MockHttpServletResponse();
-		ServletActionContext.setResponse(response);
+		MockWebUtils.setResponseToStruts2(response);
 		TestBean[] array = { new TestBean(), new TestBean() };
 		Struts2Utils.renderJson(array);
 		assertEquals("[{\"age\":10,\"name\":\"foo\"},{\"age\":10,\"name\":\"foo\"}]", response.getContentAsString());
 
 		//Collection
 		response = new MockHttpServletResponse();
-		ServletActionContext.setResponse(response);
+		MockWebUtils.setResponseToStruts2(response);
 		List<TestBean> list = new ArrayList<TestBean>();
 		list.add(new TestBean());
 		list.add(new TestBean());
