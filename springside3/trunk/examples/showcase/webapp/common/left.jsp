@@ -15,4 +15,5 @@
 		<a href="${ctx}/web/index.action">Web高级演示</a>
 		<a href="${ctx}/orm/index.action">数据库高级演示</a>
 		<a href="${ctx}/webservice/index.action">Web服务高级演示</a>
+		<a href="${ctx}/j_spring_security_logout">退出登录</a>
 </div>

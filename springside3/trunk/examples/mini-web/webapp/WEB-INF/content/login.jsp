@@ -25,7 +25,7 @@
 <%@ include file="/common/header.jsp" %>
 <div id="bd">
 	<div id="yui-main">
-		<div class="yui-b">
+	<div class="yui-b">
 	<%
 		if (session.getAttribute(AbstractProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY) != null) {
 	%> 
@@ -33,8 +33,7 @@
 	<%
 		}
 	%>
-
-	<form id="loginForm" action="${ctx}/j_spring_security_check" method="post">
+	<form id="loginForm" action="${ctx}/j_spring_security_check" method="post" style="margin-top:1em">
 		<table class="noborder">
 			<tr>
 				<td><label>用户名:</label></td>
