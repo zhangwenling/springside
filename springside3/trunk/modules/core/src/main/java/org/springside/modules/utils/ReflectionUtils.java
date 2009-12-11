@@ -37,6 +37,39 @@ public class ReflectionUtils {
 
 	private static Logger logger = LoggerFactory.getLogger(ReflectionUtils.class);
 
+	static {
+		DateConverter dc = new DateConverter();
+		dc.setUseLocaleFormat(true);
+		dc.setPatterns(new String[] { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss" });
+		ConvertUtils.register(dc, Date.class);
+	}
+
+	/**
+	 * 调用Getter方法.
+	 */
+	public static Object invokeGetterMethod(Object target, String propertyName) {
+		String getterMethodName = "get" + StringUtils.capitalize(propertyName);
+		return invokeMethod(target, getterMethodName, new Class[] {}, new Object[] {});
+	}
+
+	/**
+	 * 调用Setter方法.使用value的Class来查找Setter方法.
+	 */
+	public static void invokeSetterMethod(Object target, String propertyName, Object value) {
+		invokeSetterMethod(target, propertyName, value, null);
+	}
+
+	/**
+	 * 调用Setter方法.
+	 * 
+	 * @propertyType 用于查找Setter方法,为空时使用value的Class替代.
+	 */
+	public static void invokeSetterMethod(Object target, String propertyName, Object value, Class propertyType) {
+		Class type = propertyType != null ? propertyType : value.getClass();
+		String setterMethodName = "set" + StringUtils.capitalize(propertyName);
+		invokeMethod(target, setterMethodName, new Class[] { type }, new Object[] { value });
+	}
+
 	/**
 	 * 直接读取对象属性值, 无视private/protected修饰符, 不经过getter函数.
 	 */
@@ -225,18 +258,13 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 转换字符串类型到clazz的property类型的值.
+	 * 转换字符串到相应类型.
 	 * 
 	 * @param value 待转换的字符串
-	 * @param clazz 提供类型信息的Class
-	 * @param propertyName 提供类型信息的Class的属性.
+	 * @param toType 转换目标类型
 	 */
-	public static Object convertValue(Object value, Class<?> toType) {
+	public static Object convertStringToObject(String value, Class<?> toType) {
 		try {
-			DateConverter dc = new DateConverter();
-			dc.setUseLocaleFormat(true);
-			dc.setPatterns(new String[] { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss" });
-			ConvertUtils.register(dc, Date.class);
 			return ConvertUtils.convert(value, toType);
 		} catch (Exception e) {
 			throw convertReflectionExceptionToUnchecked(e);

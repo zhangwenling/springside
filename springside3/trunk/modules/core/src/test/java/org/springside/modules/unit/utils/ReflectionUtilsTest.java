@@ -11,17 +11,14 @@ import org.springside.modules.utils.ReflectionUtils;
 public class ReflectionUtilsTest extends Assert {
 
 	@Test
-	public void getFieldValue() {
+	public void getAndSetFieldValue() {
 		TestBean bean = new TestBean();
 		//无需getter函数, 直接读取privateField
 		assertEquals(1, ReflectionUtils.getFieldValue(bean, "privateField"));
 		//绕过将publicField+1的getter函数,直接读取publicField的原始值
 		assertEquals(1, ReflectionUtils.getFieldValue(bean, "publicField"));
-	}
 
-	@Test
-	public void setFieldValue() {
-		TestBean bean = new TestBean();
+		bean = new TestBean();
 		//无需setter函数, 直接设置privateField
 		ReflectionUtils.setFieldValue(bean, "privateField", 2);
 		assertEquals(2, bean.inspectPrivateField());
@@ -29,6 +26,16 @@ public class ReflectionUtilsTest extends Assert {
 		//绕过将publicField+1的setter函数,直接设置publicField的原始值
 		ReflectionUtils.setFieldValue(bean, "publicField", 2);
 		assertEquals(2, bean.inspectPublicField());
+	}
+
+	@Test
+	public void invokeGetterAndSetter() {
+		TestBean bean = new TestBean();
+		assertEquals(bean.inspectPublicField() + 1, ReflectionUtils.invokeGetterMethod(bean, "publicField"));
+
+		bean = new TestBean();
+		ReflectionUtils.invokeSetterMethod(bean, "publicField", 10, int.class);
+		assertEquals(10 + 1, bean.inspectPublicField());
 	}
 
 	@Test
@@ -94,7 +101,9 @@ public class ReflectionUtilsTest extends Assert {
 	}
 
 	public static class TestBean extends ParentBean<String, Long> {
+		/** 没有getter/setter的field*/
 		private int privateField = 1;
+		/** 有getter/setter的field */
 		private int publicField = 1;
 
 		public int getPublicField() {

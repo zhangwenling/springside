@@ -64,7 +64,7 @@ public class PropertyFilter {
 	 *                   eg. LIKES_NAME_OR_LOGIN_NAME
 	 * @param value 待比较的值.
 	 */
-	public PropertyFilter(final String filterName, final Object value) {
+	public PropertyFilter(final String filterName, final String value) {
 
 		String matchTypeStr = StringUtils.substringBefore(filterName, "_");
 		String matchTypeCode = StringUtils.substring(matchTypeStr, 0, matchTypeStr.length() - 1);
@@ -86,7 +86,7 @@ public class PropertyFilter {
 
 		Assert.isTrue(propertyNames.length > 0, "filter名称" + filterName + "没有按规则编写,无法得到属性名称.");
 		//按entity property中的类型将字符串转化为实际类型.
-		this.propertyValue = ReflectionUtils.convertValue(value, propertyType);
+		this.propertyValue = ReflectionUtils.convertStringToObject(value, propertyType);
 	}
 
 	/**
