@@ -35,8 +35,11 @@ public class GroupsTestRunnerTest extends Assert {
 		ReflectionUtils.invokeMethod(groupsTestRunner, "initGroups", null, null);
 
 		assertEquals(true, GroupsTestRunner.isTestClassInGroups(TestClassBean1.class));
-		assertEquals(false, GroupsTestRunner.isTestClassInGroups(TestClassBean2.class));
+		assertEquals(true, GroupsTestRunner.isTestClassInGroups(TestClassBean2.class));
 		assertEquals(true, GroupsTestRunner.isTestClassInGroups(TestClassBean3.class));
+		assertEquals(false, GroupsTestRunner.isTestClassInGroups(TestClassBean4.class));
+		assertEquals(false, GroupsTestRunner.isTestClassInGroups(TestClassBean5.class));
+		assertEquals(false, GroupsTestRunner.isTestClassInGroups(TestClassBean6.class));
 	}
 
 	@Test
@@ -46,29 +49,70 @@ public class GroupsTestRunnerTest extends Assert {
 		System.setProperty(GroupsTestRunner.PROPERTY_NAME, "base,exception");
 		ReflectionUtils.invokeMethod(groupsTestRunner, "initGroups", null, null);
 
-		assertEquals(true, GroupsTestRunner.isTestMethodInGroups(TestClassBean1.class.getMethods()[0]));
-		assertEquals(false, GroupsTestRunner.isTestMethodInGroups(TestClassBean2.class.getMethods()[0]));
-		assertEquals(true, GroupsTestRunner.isTestMethodInGroups(TestClassBean3.class.getMethods()[0]));
+		assertEquals(true, GroupsTestRunner.isTestMethodInGroups(TestMethodBean1.class.getMethods()[0]));
+		assertEquals(true, GroupsTestRunner.isTestMethodInGroups(TestMethodBean2.class.getMethods()[0]));
+		assertEquals(false, GroupsTestRunner.isTestMethodInGroups(TestMethodBean3.class.getMethods()[0]));
 	}
 
 	@Groups("exception")
 	public static class TestClassBean1 {
+		@Test
+		public void test() {
+		}
+	}
+
+	public static class TestClassBean2 {
+		@Test
+		public void test() {
+		}
+	}
+
+	public static class TestClassBean3 {
+		public void foo() {
+		}
+
+		@Test
 		@Groups("exception")
 		public void test() {
 		}
 	}
 
 	@Groups("foo")
-	public static class TestClassBean2 {
+	public static class TestClassBean4 {
+		@Test
+		public void test() {
+		}
+	}
 
+	public static class TestClassBean5 {
+		@Test
 		@Groups("foo")
 		public void test() {
 		}
 	}
 
-	public static class TestClassBean3 {
+	public static class TestClassBean6 {
+		public void foo() {
+		}
+	}
+
+	public static class TestMethodBean1 {
+		@Test
+		@Groups("base")
 		public void test() {
 		}
+	}
 
+	public static class TestMethodBean2 {
+		@Test
+		public void test() {
+		}
+	}
+
+	public static class TestMethodBean3 {
+		@Test
+		@Groups("foo")
+		public void test() {
+		}
 	}
 }

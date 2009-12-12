@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.internal.runners.InitializationError;
 import org.junit.internal.runners.JUnit4ClassRunner;
@@ -24,8 +25,7 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 /**
  * 实现TestNG Groups分组执行用例功能的TestRunner函数, 判断测试类与测试方法是否在Groups内.
  * 另提供独立的Utils函数可供其他Runner调用.
- * 
- * 
+ *  
  * @author freeman
  * @author calvin
  */
@@ -83,22 +83,24 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 		if (groups.contains(Groups.ALL))
 			return true;
 
-		//取得类上的Groups annotation, 如果无Groups注解或注解符合分组要求则返回true.
+		//取得类上的Groups annotation, 如果有Groups注解且注解不符合分组要求则返回false.
 		Groups annotationGroup = testClass.getAnnotation(Groups.class);
-		if ((annotationGroup != null) && groups.contains(annotationGroup.value()))
+		if ((annotationGroup != null) && !groups.contains(annotationGroup.value()))
 			return false;
 
+		//继续检查测试方法是否符合Groups定义,如果有一个方法符合定义则返回true.
 		Method[] methods = testClass.getMethods();
 		for (Method method : methods) {
-			if (method.getAnnotation(Test.class) != null && isTestMethodInGroups(method))
+			if (method.getAnnotation(Test.class) != null && method.getAnnotation(Ignore.class) == null
+					&& isTestMethodInGroups(method))
 				return true;
 		}
-		
+
 		return false;
 	}
 
 	/**
-	 * 判断测试方是否符合分组要求.
+	 * 判断测试方法是否符合分组要求.
 	 * 如果@Groups符合定义或无@Groups定义返回true.
 	 */
 	public static boolean isTestMethodInGroups(Method testMethod) {
@@ -106,7 +108,7 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 		if (groups == null) {
 			initGroups();
 		}
-		//如果定义全部执行则返回true
+		//如果groups定义为全部执行则返回true
 		if (groups.contains(Groups.ALL))
 			return true;
 
