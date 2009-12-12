@@ -25,7 +25,7 @@ import org.apache.log4j.MDC;
 public class TraceUtils {
 
 	public static final String TRACE_ID_KEY = "traceId";
-	public static final int TRACE_ID_LENGTH = 10;
+	public static final int TRACE_ID_LENGTH = 8;
 
 	/**
 	 * 开始Trace, 默认生成本次Trace的ID(10字符长)并放入MDC.

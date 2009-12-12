@@ -63,7 +63,7 @@ public class UserManager {
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
 		List<User> list = userDao.getAllUserWithRoleByDistinctHql();
-		logger.trace("get {} user sucessful.", list.size());
+		logger.info("get {} user sucessful.", list.size());
 		return list;
 	}
 

@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 采用定时批量读取Queue中消息策略的Consumer.
  */
-public abstract class PeriodConsumerTask extends QueueConsumerTask {
+public abstract class PeriodConsumer extends QueueConsumer {
 
 	protected int batchSize = 10;
 	protected int period = 1000;

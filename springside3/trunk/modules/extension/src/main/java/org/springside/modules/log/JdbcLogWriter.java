@@ -24,19 +24,19 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
-import org.springside.modules.queue.BlockingConsumerTask;
+import org.springside.modules.queue.BlockingConsumer;
 
 /**
  * 将Queue中的log4j event写入数据库的消费者任务.
  * 
  * 即时阻塞的读取Queue中的事件,达到缓存上限后使用Jdbc批量写入模式.
- * 如需换为定时读取模式,继承于PeriodConsumerTask稍加改造即可.
+ * 如需换为定时读取模式,继承于PeriodConsumer稍加改造即可.
  * 
- * @see BlockingConsumerTask
+ * @see BlockingConsumer
  * 
  * @author calvin
  */
-public class JdbcLogTask extends BlockingConsumerTask {
+public class JdbcLogWriter extends BlockingConsumer {
 
 	protected String sql;
 	protected int batchSize = 10;

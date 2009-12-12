@@ -24,7 +24,7 @@ public class TraceUtilsTest extends Assert {
 		assertEquals(10, ((String) MDC.get(TraceUtils.TRACE_ID_KEY)).length());
 
 		//log message
-		logger.trace("message");
+		logger.info("message");
 		assertEquals("message", appender.getAllLogs().get(0).getMessage());
 		assertNotNull(MDC.get(TraceUtils.TRACE_ID_KEY));
 

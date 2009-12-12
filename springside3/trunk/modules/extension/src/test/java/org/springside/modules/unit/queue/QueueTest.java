@@ -12,7 +12,7 @@ import java.util.concurrent.BlockingQueue;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springside.modules.queue.QueueConsumerTask;
+import org.springside.modules.queue.QueueConsumer;
 import org.springside.modules.queue.QueueHolder;
 
 @SuppressWarnings("unchecked")
@@ -88,7 +88,7 @@ public class QueueTest extends Assert {
 		assertEquals(false, file.exists());
 	}
 
-	static class MockConsumerTask extends QueueConsumerTask {
+	static class MockConsumerTask extends QueueConsumer {
 		public void run() {
 		}
 	}

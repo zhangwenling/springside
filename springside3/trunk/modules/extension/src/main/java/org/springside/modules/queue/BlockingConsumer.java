@@ -10,7 +10,7 @@ package org.springside.modules.queue;
 /**
  * 采用即时阻塞读取Queue中消息策略的Consumer.
  */
-public abstract class BlockingConsumerTask extends QueueConsumerTask {
+public abstract class BlockingConsumer extends QueueConsumer {
 
 	/**
 	 * 线程执行函数,阻塞获取消息并调用processMessage()进行处理.

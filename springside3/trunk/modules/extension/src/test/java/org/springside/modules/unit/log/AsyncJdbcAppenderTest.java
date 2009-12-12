@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 @ContextConfiguration(locations = { "/applicationContext-log.xml" }, inheritLocations = false)
-public class AsyncQueueAppenderTest extends SpringTxTestCase {
+public class AsyncJdbcAppenderTest extends SpringTxTestCase {
 
 	private static final String LOG_TABLE_NAME = "SS_LOG";
 

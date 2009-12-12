@@ -15,7 +15,6 @@ import org.springside.examples.showcase.ws.server.api.UserWebService;
 import org.springside.examples.showcase.ws.server.api.WsConstants;
 import org.springside.examples.showcase.ws.server.api.dto.UserDTO;
 import org.springside.examples.showcase.ws.server.api.result.GetAllUserResult;
-import org.springside.modules.log.TraceUtils;
 
 /**
  * WebService实现类.
@@ -38,13 +37,10 @@ public class UserWebServiceImpl implements UserWebService {
 	 * @see UserWebService#getAllUser()
 	 */
 	public GetAllUserResult getAllUser() {
-		TraceUtils.beginTrace();
-
 		GetAllUserResult result = new GetAllUserResult();
 
 		//获取User列表并转换为UserDTO列表.
 		try {
-
 			List<User> userList = userManager.getAllUser();
 
 			List<UserDTO> userDTOList = new ArrayList<UserDTO>();
@@ -52,13 +48,11 @@ public class UserWebServiceImpl implements UserWebService {
 				userDTOList.add(dozer.map(userEntity, UserDTO.class));
 			}
 			result.setUserList(userDTOList);
-			logger.trace("transfer {} user sucessful.", userDTOList.size());
+			logger.info("transfer {} user sucessful.", userDTOList.size());
 		} catch (RuntimeException e) {
 			result.setSystemError();
 			logger.error(e.getMessage(), e);
 		}
-		TraceUtils.endTrace();
-
 		return result;
 	}
 }
