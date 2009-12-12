@@ -14,7 +14,7 @@
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		function refreshCaptcha() {
-			$('#captchaImg').html('<img src="${ctx}/security/jcaptcha.jpg?' + Math.round(Math.random() * 100000) + '"/>');
+			$('#captchaImg').hide().attr('src','${ctx}/security/jcaptcha.jpg?' + Math.floor(Math.random()*100)).fadeIn();
 		}
 	</script>
 
@@ -56,7 +56,7 @@
 								.getAttribute(AuthenticationProcessingFilter.SPRING_SECURITY_LAST_USERNAME_KEY)%>
 							'</s:if>/>
 					</td>
-					<td rowspan="3"><span id="captchaImg"><img src="${ctx}/security/jcaptcha.jpg"/></span></td>
+					<td rowspan="3"><img id="captchaImg" src="${ctx}/security/jcaptcha.jpg"/></td>
 
 				</tr>
 				<tr>
