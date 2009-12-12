@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+import org.junit.Test;
 import org.junit.internal.runners.InitializationError;
 import org.junit.internal.runners.JUnit4ClassRunner;
 import org.junit.runner.notification.RunNotifier;
@@ -48,8 +49,7 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 	 */
 	@Override
 	public void run(RunNotifier notifier) {
-		//对Class是否需要执行测试进行Groups判定.
-		if (!GroupsTestRunner.isTestClassInGroups(getTestClass().getJavaClass())) {
+		if (!isTestClassInGroups(getTestClass().getJavaClass())) {
 			notifier.fireTestIgnored(getDescription());
 			return;
 		}
@@ -62,9 +62,7 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 	 */
 	@Override
 	protected void invokeTestMethod(Method method, RunNotifier notifier) {
-
-		//对方法是否需要执行测试进行Groups判定.
-		if (!GroupsTestRunner.isTestMethodInGroups(method)) {
+		if (!isTestMethodInGroups(method)) {
 			notifier.fireTestIgnored(getDescription());
 			return;
 		}
@@ -87,9 +85,15 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 
 		//取得类上的Groups annotation, 如果无Groups注解或注解符合分组要求则返回true.
 		Groups annotationGroup = testClass.getAnnotation(Groups.class);
-		if ((annotationGroup == null) || groups.contains(annotationGroup.value()))
-			return true;
+		if ((annotationGroup != null) && groups.contains(annotationGroup.value()))
+			return false;
 
+		Method[] methods = testClass.getMethods();
+		for (Method method : methods) {
+			if (method.getAnnotation(Test.class) != null && isTestMethodInGroups(method))
+				return true;
+		}
+		
 		return false;
 	}
 
