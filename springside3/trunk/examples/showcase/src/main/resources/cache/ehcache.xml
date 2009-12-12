@@ -4,8 +4,8 @@
 	<diskStore path="java.io.tmpdir" />
 
 	<!-- DefaultCache setting. -->
-	<defaultCache maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false"
-		overflowToDisk="true" maxElementsOnDisk="10000000" />
+	<defaultCache maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="false"
+		timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false" diskPersistent="false" />
 
 	<!-- Special objects setting. -->
 	<!-- Refresh ContentCache every hour. -->

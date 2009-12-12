@@ -14,22 +14,22 @@
 
 
 	<!-- DefaultCache setting. -->
-	<defaultCache maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false"
-		overflowToDisk="true" maxElementsOnDisk="10000000" />
+	<defaultCache maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="false"
+		timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false" diskPersistent="false" />
 
 	<!-- Special objects setting. -->
 	<cache name="org.springside.examples.miniservice.entity.user.User" maxElementsInMemory="10000"
-		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="10000000">
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
-	<cache name="org.springside.examples.miniservice.entity.user.User.roles" maxElementsInMemory="10000"
-		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="10000000">
+	<cache name="org.springside.examples.miniservice.entity.user.User.roleList" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
 	<cache name="org.springside.examples.miniservice.entity.user.Role" maxElementsInMemory="10000"
-		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="10000000">
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
