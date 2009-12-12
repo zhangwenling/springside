@@ -46,9 +46,9 @@ public class DigestUtils {
 	/**
 	 * 对输入字符串进行sha1散列, 返回Base64编码的URL安全的结果.
 	 */
-	public static String sha1ToBase64Url(String input) {
+	public static String sha1ToBase64UrlSafe(String input) {
 		byte[] digestResult = digest(input, SHA1);
-		return EncodeUtils.base64UrlEncode(digestResult);
+		return EncodeUtils.base64UrlSafeEncode(digestResult);
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class DigestUtils {
 		}
 	}
 
-	//-- InputStream Hash function --//
+	//-- File Hash function --//
 	/**
 	 * 对文件进行md5散列,返回Hex编码结果.
 	 */

@@ -16,7 +16,7 @@ public class DigestUtilsTest extends Assert {
 
 		System.out.println("sha1 in hex result              :" + DigestUtils.sha1ToHex(input));
 		System.out.println("sha1 in base64 result           :" + DigestUtils.sha1ToBase64(input));
-		System.out.println("sha1 in base64 url result       :" + DigestUtils.sha1ToBase64Url(input));
+		System.out.println("sha1 in base64 url result       :" + DigestUtils.sha1ToBase64UrlSafe(input));
 	}
 
 	@Test

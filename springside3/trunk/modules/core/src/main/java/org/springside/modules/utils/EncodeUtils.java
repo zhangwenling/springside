@@ -51,9 +51,9 @@ public class EncodeUtils {
 	}
 
 	/**
-	 * Base64编码, URL安全(对URL不支持的字符如+,/,=转为其他字符, 见RFC3548).
+	 * Base64编码, URL安全(将Base64中的URL非法字符如+,/=转为其他字符, 见RFC3548).
 	 */
-	public static String base64UrlEncode(byte[] input) {
+	public static String base64UrlSafeEncode(byte[] input) {
 		return Base64.encodeBase64URLSafeString(input);
 	}
 
