@@ -13,14 +13,23 @@ import org.springside.modules.security.utils.NonceUtils;
 public class NonceUtilsTest {
 	@Test
 	public void timestamp() {
-		System.out.println("timestamp:" + NonceUtils.getCurrentTimestamp());
+		System.out.println("timestamp:" + NonceUtils.currentTimestamp());
 	}
 
 	@Test
 	public void noncesCompare() {
 		//Random
 		for (int i = 0; i < 3; i++) {
-			System.out.println("Random Nonce        :" + NonceUtils.nextRandomHexNonce(16));
+			System.out.println("Random String       :" + NonceUtils.randomString(32));
+		}
+		for (int i = 0; i < 3; i++) {
+			System.out.println("Random Bytes        :" + NonceUtils.randomHexBytes(16));
+		}
+		for (int i = 0; i < 3; i++) {
+			System.out.println("Random Int          :" + NonceUtils.randomHexInt());
+		}
+		for (int i = 0; i < 3; i++) {
+			System.out.println("Random Long         :" + NonceUtils.randomHexLong());
 		}
 
 		//标准UUID
@@ -37,13 +46,12 @@ public class NonceUtilsTest {
 		//自定义UUID
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Timestamp Nonce     :"
-					+ new StringBuilder().append(NonceUtils.getUnique()).append(NonceUtils.getCurrentTimestamp())
+					+ new StringBuilder().append(NonceUtils.randomHexInt()).append(NonceUtils.currentTimestamp())
 							.append(NonceUtils.getCounter()).toString());
 		}
-
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Mills Nonce         :"
-					+ new StringBuilder().append(NonceUtils.nextRandomHexNonce(2)).append(NonceUtils.getCurrentMills())
+					+ new StringBuilder().append(NonceUtils.randomHexBytes(2)).append(NonceUtils.currentHexMills())
 							.append(NonceUtils.format(NonceUtils.getCounter(), 2)).toString());
 		}
 	}
@@ -53,8 +61,8 @@ public class NonceUtilsTest {
 		Runnable uuidNonceRequestTask = new Runnable() {
 			public void run() {
 				for (int i = 0; i < 3; i++) {
-					String nonce = new StringBuilder().append(NonceUtils.getUnique()).append(
-							NonceUtils.getCurrentMills()).append(NonceUtils.format(NonceUtils.getCounter(), 2))
+					String nonce = new StringBuilder().append(NonceUtils.randomHexInt()).append(
+							NonceUtils.currentHexMills()).append(NonceUtils.format(NonceUtils.getCounter(), 2))
 							.toString();
 					System.out.println("Mills Nonce         :" + nonce);
 

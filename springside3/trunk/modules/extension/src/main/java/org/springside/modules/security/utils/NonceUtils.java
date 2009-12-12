@@ -30,62 +30,82 @@ public class NonceUtils {
 	private static Date lastTime;
 	private static int counter = 0;
 
-	//-- random nonce generator --//
+	//-- Random function --//
 	/**
-	 * 生成SHA1PRNG算法的SecureRandom Nonce.
-	 * 
-	 * @param length byte数组长度(单位为字节).
-	 */
-	public static byte[] nextRandomNonce(int length) {
-		SecureRandom nonceGenerator = new SecureRandom();
-		byte[] nonce = new byte[length];
-		nonceGenerator.nextBytes(nonce);
-		return nonce;
-	}
-
-	/**
-	 * 生成SHA1PRNG算法的SecureRandom Nonce, 返回Hex编码结果.
-	 * @param length 内部byte数组长度(单位为字节), 返回字符串长度为length*2.
-	 */
-	public static String nextRandomHexNonce(int length) {
-		return Hex.encodeHexString(nextRandomNonce(length));
-	}
-
-	/**
-	 * 使用较低强度的java.util.Random(),生成带字母与数字字符串.
+	 * 使用较低强度的java.util.Random(),生成含所有字母与数字的字符串.
 	 * 
 	 * @param length 返回字符串长度(单位为字符)
 	 */
-	public static String nextRandomString(int length) {
+	public static String randomString(int length) {
 		return RandomStringUtils.randomAlphanumeric(length);
 	}
 
-	//-- UUID nonce support function --//
 	/**
-	 * 返回Hex编码的8字符唯一值, 可用于标识唯一的机器+JVM, 生成自定义UUID的辅助函数.
+	 * 生成SHA1PRNG算法的SecureRandom Int.
 	 */
-	public static String getUnique() {
-		int unique = new SecureRandom().nextInt();
-		return Integer.toHexString(unique);
+	public static int randomInt() {
+		return new SecureRandom().nextInt();
 	}
 
+	/**
+	 * 生成SHA1PRNG算法的SecureRandom Int, 返回长度为8的Hex编码结果 .
+	 */
+	public static String randomHexInt() {
+		return Integer.toHexString(randomInt());
+	}
+
+	/**
+	 * 生成SHA1PRNG算法的SecureRandom Long, 返回长度为16的Hex编码结果.
+	 */
+	public static long randomLong() {
+		return new SecureRandom().nextLong();
+	}
+
+	/**
+	 * 生成SHA1PRNG算法的SecureRandom Long, 返回长度为16的Hex编码结果.
+	 */
+	public static String randomHexLong() {
+		return Long.toHexString(randomLong());
+	}
+
+	/**
+	 * 生成SHA1PRNG算法的SecureRandom Bytes, 返回Hex编码结果.
+	 * 
+	 * @param length 内部byte数组长度(单位为字节), 返回字符串长度为length*2.
+	 */
+	public static String randomHexBytes(int length) {
+		SecureRandom nonceGenerator = new SecureRandom();
+		byte[] nonce = new byte[length];
+		nonceGenerator.nextBytes(nonce);
+		return Hex.encodeHexString(nonce);
+	}
+
+	//-- Timestamp function --//
 	/**
 	 * 返回Internate标准格式的当前毫秒级时间戳字符串, 生成自定义UUID的辅助函数.
 	 * 
 	 * 标准格式为yyyy-MM-dd'T'HH:mm:ss.SSS'Z', 如2009-10-15T14:24:50.316Z.
 	 */
-	public static String getCurrentTimestamp() {
+	public static String currentTimestamp() {
 		Date now = new Date();
 		return INTERNATE_DATE_FORMAT.format(now);
 	}
 
 	/**
-	 * 返回当前距离1970年的毫秒数, 生成自定义UUID的辅助函数.
+	 * 返回当前距离1970年的毫秒数,生成自定义UUID的辅助函数.
 	 */
-	public static String getCurrentMills() {
-		return Long.toHexString(System.currentTimeMillis());
+	public static long currentMills() {
+		return System.currentTimeMillis();
+	}
+	
+	/**
+	 * 返回当前距离1970年的毫秒数, 返回Hex编码的, 生成自定义UUID的辅助函数.
+	 */
+	public static String currentHexMills() {
+		return Long.toHexString(currentMills());
 	}
 
+	//-- Counter function --//
 	/**
 	 * 返回Hex编码的同一毫秒内的Counter, 生成自定义UUID的辅助函数.
 	 */
@@ -101,11 +121,12 @@ public class NonceUtils {
 		return Integer.toHexString(counter);
 	}
 
+	//-- Helper function --//
 	/**
 	 * 格式化字符串, 固定字符串长度, 不足长度在前面补0, 生成自定义UUID的辅助函数.
 	 */
-	public static String format(String hexString, int length) {
-		int spaceLength = length - hexString.length();
+	public static String format(String source, int length) {
+		int spaceLength = length - source.length();
 		StringBuilder buf = new StringBuilder();
 
 		while (spaceLength >= 8) {
@@ -119,7 +140,7 @@ public class NonceUtils {
 			}
 		}
 
-		buf.append(hexString);
+		buf.append(source);
 		return buf.toString();
 	}
 }
