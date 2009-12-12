@@ -10,12 +10,15 @@ package org.springside.modules.security.utils;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang.RandomStringUtils;
 
 /**
- * 唯一数生成类, 提供纯Random与UUID两种风格的生成函数.
+ * 唯一数生成类, 提供各种风格的生成函数.
+ * 
+ * 既可以直接使用随机数，也可以用随机数+时间戳+计数器进行组合.
  * 
  * @author calvin
  */
@@ -26,7 +29,7 @@ public class NonceUtils {
 	//定长格式化所用字符串, 含1,2,4,8位的字符串.
 	private static final String[] SPACES = { "0", "00", "0000", "00000000" };
 
-	//UUID风格同一JVM同一毫秒内请求的计数器.
+	//同一JVM同一毫秒内请求的计数器.
 	private static Date lastTime;
 	private static int counter = 0;
 
@@ -34,55 +37,62 @@ public class NonceUtils {
 	/**
 	 * 使用较低强度的java.util.Random(),生成含所有字母与数字的字符串.
 	 * 
-	 * @param length 返回字符串长度(单位为字符)
+	 * @param length 返回字符串长度
 	 */
 	public static String randomString(int length) {
 		return RandomStringUtils.randomAlphanumeric(length);
 	}
 
 	/**
-	 * 生成SHA1PRNG算法的SecureRandom Int.
+	 * 使用SecureRandom生成字节数组, 返回Hex编码结果.
+	 * 
+	 * @param length 返回字符串长度,必须为双数.
+	 */
+	public static String randomHexString(int length) {
+		SecureRandom nonceGenerator = new SecureRandom();
+		byte[] nonce = new byte[length / 2];
+		nonceGenerator.nextBytes(nonce);
+		return Hex.encodeHexString(nonce);
+	}
+
+	/**
+	 * 使用SecureRandom生成32字符,每8位带的UUID,见rfc4122.
+	 */
+	public static String randomUUID() {
+		return UUID.randomUUID().toString();
+	}
+
+	/**
+	 * 使用SecureRandom生成Integer.
 	 */
 	public static int randomInt() {
 		return new SecureRandom().nextInt();
 	}
 
 	/**
-	 * 生成SHA1PRNG算法的SecureRandom Int, 返回长度为8的Hex编码结果 .
+	 * 使用SecureRandom生成Integer, 返回长度为8的Hex编码结果 .
 	 */
 	public static String randomHexInt() {
 		return Integer.toHexString(randomInt());
 	}
 
 	/**
-	 * 生成SHA1PRNG算法的SecureRandom Long, 返回长度为16的Hex编码结果.
+	 * 使用SecureRandom生成Long.
 	 */
 	public static long randomLong() {
 		return new SecureRandom().nextLong();
 	}
 
 	/**
-	 * 生成SHA1PRNG算法的SecureRandom Long, 返回长度为16的Hex编码结果.
+	 * 使用SecureRandom生成Long, 返回长度为16的Hex编码结果.
 	 */
 	public static String randomHexLong() {
 		return Long.toHexString(randomLong());
 	}
 
-	/**
-	 * 生成SHA1PRNG算法的SecureRandom Bytes, 返回Hex编码结果.
-	 * 
-	 * @param length 内部byte数组长度(单位为字节), 返回字符串长度为length*2.
-	 */
-	public static String randomHexBytes(int length) {
-		SecureRandom nonceGenerator = new SecureRandom();
-		byte[] nonce = new byte[length];
-		nonceGenerator.nextBytes(nonce);
-		return Hex.encodeHexString(nonce);
-	}
-
 	//-- Timestamp function --//
 	/**
-	 * 返回Internate标准格式的当前毫秒级时间戳字符串, 生成自定义UUID的辅助函数.
+	 * 返回Internate标准格式的当前毫秒级时间戳字符串.
 	 * 
 	 * 标准格式为yyyy-MM-dd'T'HH:mm:ss.SSS'Z', 如2009-10-15T14:24:50.316Z.
 	 */
@@ -92,22 +102,22 @@ public class NonceUtils {
 	}
 
 	/**
-	 * 返回当前距离1970年的毫秒数,生成自定义UUID的辅助函数.
+	 * 返回当前距离1970年的毫秒数.
 	 */
 	public static long currentMills() {
 		return System.currentTimeMillis();
 	}
-	
+
 	/**
-	 * 返回当前距离1970年的毫秒数, 返回Hex编码的, 生成自定义UUID的辅助函数.
+	 * 返回当前距离1970年的毫秒数, 返回Hex编码的结果.
 	 */
 	public static String currentHexMills() {
 		return Long.toHexString(currentMills());
 	}
 
-	//-- Counter function --//
+	//-- Helper function --//
 	/**
-	 * 返回Hex编码的同一毫秒内的Counter, 生成自定义UUID的辅助函数.
+	 * 返回Hex编码的同一毫秒内的Counter.
 	 */
 	public static synchronized String getCounter() {
 		Date currentTime = new Date();
@@ -123,7 +133,7 @@ public class NonceUtils {
 
 	//-- Helper function --//
 	/**
-	 * 格式化字符串, 固定字符串长度, 不足长度在前面补0, 生成自定义UUID的辅助函数.
+	 * 格式化字符串, 固定字符串长度, 不足长度在前面补0.
 	 */
 	public static String format(String source, int length) {
 		int spaceLength = length - source.length();

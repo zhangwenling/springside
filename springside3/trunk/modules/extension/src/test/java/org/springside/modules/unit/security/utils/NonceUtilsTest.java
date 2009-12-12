@@ -1,16 +1,16 @@
 package org.springside.modules.unit.security.utils;
 
 import java.rmi.server.UID;
-import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.hibernate.id.UUIDHexGenerator;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springside.modules.security.utils.NonceUtils;
 
-public class NonceUtilsTest {
+public class NonceUtilsTest extends Assert {
 	@Test
 	public void timestamp() {
 		System.out.println("timestamp:" + NonceUtils.currentTimestamp());
@@ -22,37 +22,49 @@ public class NonceUtilsTest {
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Random String       :" + NonceUtils.randomString(32));
 		}
+		assertEquals(32, NonceUtils.randomString(32).length());
+
 		for (int i = 0; i < 3; i++) {
-			System.out.println("Random Bytes        :" + NonceUtils.randomHexBytes(16));
+			System.out.println("Random Hex Bytes    :" + NonceUtils.randomHexString(32));
 		}
+		assertEquals(32, NonceUtils.randomHexString(32).length());
+
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Random Int          :" + NonceUtils.randomHexInt());
 		}
+		assertEquals(8, NonceUtils.randomHexInt().length());
+
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Random Long         :" + NonceUtils.randomHexLong());
 		}
+		assertEquals(16, NonceUtils.randomHexLong().length());
 
-		//标准UUID
+		//UUID
 		for (int i = 0; i < 3; i++) {
-			System.out.println("Java UUID Nonce     :" + UUID.randomUUID().toString());
+			System.out.println("Random UUID         :" + NonceUtils.randomUUID());
 		}
-		for (int i = 0; i < 3; i++) {
-			System.out.println("Hibernate UUID Nonce:" + new UUIDHexGenerator().generate(null, null));
-		}
+		assertEquals(36, NonceUtils.randomUUID().length());
+
 		for (int i = 0; i < 3; i++) {
 			System.out.println("RMI UID Nonce       :" + new UID().toString());
 		}
+		assertEquals(27, new UID().toString().length());
 
-		//自定义UUID
+		for (int i = 0; i < 3; i++) {
+			System.out.println("Hibernate UUID Nonce:" + new UUIDHexGenerator().generate(null, null));
+		}
+		assertEquals(32, new UUIDHexGenerator().generate(null, null).toString().length());
+
+		//组合Nonce
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Timestamp Nonce     :"
 					+ new StringBuilder().append(NonceUtils.randomHexInt()).append(NonceUtils.currentTimestamp())
-							.append(NonceUtils.getCounter()).toString());
+							.append(NonceUtils.format(NonceUtils.getCounter(), 2)).toString());
 		}
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Mills Nonce         :"
-					+ new StringBuilder().append(NonceUtils.randomHexBytes(2)).append(NonceUtils.currentHexMills())
-							.append(NonceUtils.format(NonceUtils.getCounter(), 2)).toString());
+					+ new StringBuilder().append(NonceUtils.randomHexString(4)).append(NonceUtils.currentHexMills())
+							.append(NonceUtils.getCounter()).toString());
 		}
 	}
 
