@@ -1,9 +1,10 @@
 package org.springside.modules.unit.security.utils;
 
 import java.rmi.server.UID;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import org.hibernate.id.UUIDHexGenerator;
 import org.junit.Assert;
@@ -69,6 +70,7 @@ public class NonceUtilsTest extends Assert {
 	}
 
 	@Test
+	@SuppressWarnings("unchecked")
 	public void getUuidNoncesConcurrent() throws InterruptedException {
 		Runnable uuidNonceRequestTask = new Runnable() {
 			public void run() {
@@ -83,11 +85,10 @@ public class NonceUtilsTest extends Assert {
 		};
 
 		ExecutorService executor = Executors.newCachedThreadPool();
+		List tasks = new ArrayList();
 		for (int i = 0; i < 3; i++) {
-			executor.execute(uuidNonceRequestTask);
+			tasks.add(Executors.callable(uuidNonceRequestTask));
 		}
-
-		executor.shutdown();
-		executor.awaitTermination(10000, TimeUnit.MILLISECONDS);
+		executor.invokeAll(tasks);
 	}
 }

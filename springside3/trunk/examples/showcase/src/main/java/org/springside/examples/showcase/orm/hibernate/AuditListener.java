@@ -5,6 +5,8 @@ import java.util.Date;
 import org.hibernate.HibernateException;
 import org.hibernate.event.SaveOrUpdateEvent;
 import org.hibernate.event.SaveOrUpdateEventListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
@@ -16,6 +18,8 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
  */
 @SuppressWarnings("serial")
 public class AuditListener implements SaveOrUpdateEventListener {
+
+	private static Logger logger = LoggerFactory.getLogger(AuditListener.class);
 
 	public void onSaveOrUpdate(SaveOrUpdateEvent event) throws HibernateException {
 		Object object = event.getObject();
@@ -32,6 +36,9 @@ public class AuditListener implements SaveOrUpdateEventListener {
 				//修改旧对象
 				entity.setLastModifyTime(new Date());
 				entity.setLastModifyBy(SpringSecurityUtils.getCurrentUserName());
+
+				logger.info("{}对象(ID:{}) 被 {} 在 {} 修改", new Object[] { object.getClass().getSimpleName(),
+						entity.getId(), SpringSecurityUtils.getCurrentUserName(), new Date() });
 			}
 		}
 	}
