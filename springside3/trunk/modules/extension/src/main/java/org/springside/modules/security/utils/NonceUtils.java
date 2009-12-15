@@ -16,7 +16,7 @@ import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang.RandomStringUtils;
 
 /**
- * 唯一数生成类, 提供各种风格的生成函数.
+ * 唯一数生成工具类, 提供各种风格的生成函数.
  * 
  * 既可以直接使用随机数，也可以用随机数+时间戳+计数器进行组合.
  * 

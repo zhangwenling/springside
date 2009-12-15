@@ -25,7 +25,7 @@ public class ResourceDetailsServiceTest extends Assert {
 	@Before
 	public void setUp() {
 		resourceDetailService = new ResourceDetailsServiceImpl();
-		mockSecurityEntityManager = EasyMock.createNiceMock(SecurityEntityManager.class);
+		mockSecurityEntityManager = EasyMock.createMock(SecurityEntityManager.class);
 		ReflectionUtils.setFieldValue(resourceDetailService, "securityEntityManager", mockSecurityEntityManager);
 	}
 

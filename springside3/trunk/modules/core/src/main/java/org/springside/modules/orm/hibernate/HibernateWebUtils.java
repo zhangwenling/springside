@@ -23,7 +23,7 @@ import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
- * Hibernate针对Web应用的Utils函数集合.
+ * Hibernate针对Web应用的工具类.
  * 
  * @author calvin
  */

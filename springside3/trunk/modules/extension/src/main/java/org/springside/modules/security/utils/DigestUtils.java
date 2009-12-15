@@ -15,7 +15,7 @@ import java.security.MessageDigest;
 import org.springside.modules.utils.EncodeUtils;
 
 /**
- * 支持SHA-1/MD5消息摘要的Util方法集合.
+ * 支持SHA-1/MD5消息摘要的工具类.
  * 
  * 支持Hex与Base64两种编码方式.
  * 

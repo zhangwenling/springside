@@ -18,8 +18,10 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 import com.opensymphony.xwork2.ActionContext;
 
 /**
- * 对Spring MockRequest/MockReponse的Util方法集合.
- * 对Struts2的ServletActionContext.getRequest()/getResponse()方法的支持.
+ * Spring MockRequest/MockReponse的工具类.
+ * 
+ * 1.在ServletContext里初始化Spring WebApplicationContext.
+ * 2.为Struts2的ServletActionContext.getRequest()/getResponse()方法提供支持.
  * 
  * @author calvin
  */
@@ -64,7 +66,7 @@ public class MockWebUtils {
 	 * 将request放入Struts2的ServletActionContext,支持待测代码用ServletActionContext.getRequest()取出MockRequest.
 	 */
 	public static void setRequestToStruts2(HttpServletRequest request) {
-		initStruts2();
+		initStruts2ActionContext();
 		ServletActionContext.setRequest(request);
 	}
 
@@ -72,14 +74,14 @@ public class MockWebUtils {
 	 * 将response放入Struts2的ServletActionContext,支持待测代码用ServletActionContext.getResponse()取出MockResponse.
 	 */
 	public static void setResponseToStruts2(HttpServletResponse response) {
-		initStruts2();
+		initStruts2ActionContext();
 		ServletActionContext.setResponse(response);
 	}
 
 	/**
 	 * 初始化 Struts2 ActionContext.
 	 */
-	private static void initStruts2() {
+	private static void initStruts2ActionContext() {
 		if (!struts2Inited) {
 			ActionContext.setContext(new ActionContext(new HashMap()));
 			struts2Inited = true;

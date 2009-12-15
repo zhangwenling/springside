@@ -31,7 +31,7 @@ public class UserDetailsServiceImplTest extends Assert {
 	@Before
 	public void setUp() {
 		userDetailService = new UserDetailsServiceImpl();
-		mockSecurityEntityManager = EasyMock.createNiceMock(SecurityEntityManager.class);
+		mockSecurityEntityManager = EasyMock.createMock(SecurityEntityManager.class);
 		ReflectionUtils.setFieldValue(userDetailService, "securityEntityManager", mockSecurityEntityManager);
 	}
 

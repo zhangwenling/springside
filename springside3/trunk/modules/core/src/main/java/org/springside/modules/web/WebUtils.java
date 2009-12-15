@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * Web Utils函数集合.
+ * Http与Servlet工具类.
  * 
  * @author calvin
  */
@@ -51,7 +51,7 @@ public class WebUtils {
 	}
 
 	/**
-	 * 设置过期时间 Header.
+	 * 设置客户端缓存过期时间 Header.
 	 */
 	public static void setExpiresHeader(HttpServletResponse response, long expiresSeconds) {
 		//Http 1.0 header
@@ -61,7 +61,7 @@ public class WebUtils {
 	}
 
 	/**
-	 * 设置无缓存Header.
+	 * 设置客户端无缓存Header.
 	 */
 	public static void setNoCacheHeader(HttpServletResponse response) {
 		//Http 1.0 header
@@ -89,11 +89,12 @@ public class WebUtils {
 	 */
 	public static OutputStream buildGzipOutputStream(HttpServletResponse response) throws IOException {
 		response.setHeader("Content-Encoding", "gzip");
+		response.setHeader("Vary", "Accept-Encoding");
 		return new GZIPOutputStream(response.getOutputStream());
 	}
 
 	/**
-	 * 根据浏览器If-Modified-Since Header, 计算文件是否已修改.
+	 * 根据浏览器If-Modified-Since Header, 计算文件是否已被修改.
 	 * 
 	 * 如果无修改, checkIfModify返回false ,设置304 not modify status.
 	 */
@@ -108,9 +109,9 @@ public class WebUtils {
 	}
 
 	/**
-	 * 根据浏览器 If-None-Match Header,计算Etag是否无效.
+	 * 根据浏览器 If-None-Match Header, 计算Etag是否已无效.
 	 * 
-	 * 如果Etag有效,checkIfNoneMatch返回false, 设置304 not modify status.
+	 * 如果Etag有效, checkIfNoneMatch返回false, 设置304 not modify status.
 	 */
 	public static boolean checkIfNoneMatchEtag(HttpServletRequest request, HttpServletResponse response, String etag) {
 		String headerValue = request.getHeader("If-None-Match");

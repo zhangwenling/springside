@@ -19,6 +19,8 @@ import org.apache.commons.lang.StringEscapeUtils;
 /**
  * 各种格式的编码加码工具类.
  * 
+ * 集成Commons-Codec,Commons-Lang及JDK提供的编解码方法.
+ * 
  * @author calvin
  */
 public class EncodeUtils {

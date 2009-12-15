@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springside.modules.web.WebUtils;
 
 /**
- * Struts2 Utils类.
+ * Struts2工具类.
  * 
  * 实现获取Request/Response/Session与绕过jsp/freemaker直接输出文本的简化函数.
  * 

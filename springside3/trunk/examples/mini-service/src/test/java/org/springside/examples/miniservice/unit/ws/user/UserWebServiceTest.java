@@ -35,7 +35,7 @@ public class UserWebServiceTest extends Assert {
 		userWebService = new UserWebServiceImpl();
 		ReflectionUtils.setFieldValue(userWebService, "dozer", new DozerBeanMapper());
 		//创建mock对象
-		mockUserManager = EasyMock.createNiceMock(UserManager.class);
+		mockUserManager = EasyMock.createMock(UserManager.class);
 		ReflectionUtils.setFieldValue(userWebService, "userManager", mockUserManager);
 	}
 

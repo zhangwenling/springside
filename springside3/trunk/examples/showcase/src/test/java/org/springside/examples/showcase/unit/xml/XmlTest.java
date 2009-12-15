@@ -19,6 +19,7 @@ import org.springside.examples.showcase.xml.jaxb.JaxbBinder.ListWrapper;
  * 演示基于JAXB2.0的Java对象-XML转换及Dom4j的使用.
  * 
  * @author calvin
+ * 
  * 演示用xml如下:
  * 
  * <?xml version="1.0" encoding="UTF-8"?>

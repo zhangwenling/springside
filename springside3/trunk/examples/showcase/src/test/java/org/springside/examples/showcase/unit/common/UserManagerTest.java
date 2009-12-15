@@ -11,14 +11,15 @@ import org.springside.examples.showcase.common.service.UserManager;
 import org.springside.modules.utils.ReflectionUtils;
 
 public class UserManagerTest extends Assert {
+
 	private UserManager userManager;
-	private UserDao userDao;
+	private UserDao mockUserDao;
 
 	@Before
 	public void setUp() {
 		userManager = new UserManager();
-		userDao = EasyMock.createNiceMock(UserDao.class);
-		ReflectionUtils.setFieldValue(userManager, "userDao", userDao);
+		mockUserDao = EasyMock.createMock(UserDao.class);
+		ReflectionUtils.setFieldValue(userManager, "userDao", mockUserDao);
 	}
 
 	@Test

@@ -19,13 +19,13 @@ import org.springside.modules.utils.ReflectionUtils;
 public class SecurityEntityManagerTest extends Assert {
 
 	private SecurityEntityManager securityEntityManager;
-	private UserDao userDao;
+	private UserDao mockUserDao;
 
 	@Before
 	public void setUp() {
 		securityEntityManager = new SecurityEntityManager();
-		userDao = EasyMock.createNiceMock(UserDao.class);
-		ReflectionUtils.setFieldValue(securityEntityManager, "userDao", userDao);
+		mockUserDao = EasyMock.createMock(UserDao.class);
+		ReflectionUtils.setFieldValue(securityEntityManager, "userDao", mockUserDao);
 	}
 
 	@Test
