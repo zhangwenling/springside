@@ -319,7 +319,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.unitils</groupId>
-			<artifactId>unitils</artifactId>
+			<artifactId>unitils-core</artifactId>
 		</dependency>
 		<!-- test end -->
 
