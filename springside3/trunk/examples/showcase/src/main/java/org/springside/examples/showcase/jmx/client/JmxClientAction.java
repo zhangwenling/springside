@@ -54,14 +54,13 @@ public class JmxClientAction extends ActionSupport {
 			Struts2Utils.renderText("保存配置成功.");
 		} catch (Exception e) {
 			Struts2Utils.renderText("保存配置失败.");
-			logger.error(e.getMessage(), e);
+			logger.error("保存配置失败.", e);
 		}
-		//因为直接输出而不经过jsp,因此返回null.
 		return null;
 	}
 
 	/**
-	 * 获取最新系统配置的Ajax请求, 返回JSON字符串.
+	 * 获取最新系统配置, 返回JSON字符串.
 	 */
 	@SuppressWarnings("unchecked")
 	public String refreshConfig() {
@@ -69,6 +68,7 @@ public class JmxClientAction extends ActionSupport {
 		try {
 			nodeName = jmxClientService.getNodeName();
 			notificationMailEnabled = jmxClientService.isNotificationMailEnabled();
+
 			map.put("nodeName", nodeName);
 			map.put("notificationMailEnabled", String.valueOf(notificationMailEnabled));
 			map.put("message", "获取配置成功.");

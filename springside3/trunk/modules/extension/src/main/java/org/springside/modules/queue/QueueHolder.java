@@ -18,15 +18,12 @@ import org.springframework.jmx.export.annotation.ManagedOperationParameters;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
 /**
- * 管理BlockingQueue Map.
- * 
- * 当Queue初始化时,负责restore持久化文件中的消息.
- * 当系统关闭时,负责停止Task, 并将未完成的消息持久化到文件.
+ * BlockingQueue Map的持有者.
  * 
  * @author calvin
  */
 @SuppressWarnings("unchecked")
-@ManagedResource(objectName = QueueHolder.QUEUEHOLDER_MBEAN_NAME, description = "Queue Holder Bean")
+@ManagedResource(objectName = QueueHolder.QUEUEHOLDER_MBEAN_NAME, description = "Queues Holder Bean")
 public class QueueHolder {
 	/**
 	 * QueueManager注册的名称.
@@ -37,7 +34,7 @@ public class QueueHolder {
 	private static int queueSize = Integer.MAX_VALUE;
 
 	/**
-	 * 每个队列的长度大小,默认为Integer最大值.
+	 * 设置每个队列的最大长度, 默认为Integer最大值, 设置时不改变已创建队列的最大长度.
 	 */
 	public void setQueueSize(int queueSize) {
 		QueueHolder.queueSize = queueSize;

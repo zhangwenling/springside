@@ -26,7 +26,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
 
 /**
- * JMX客户端工厂.
+ * JMX客户端模板.
  * 
  * 职责有：
  * 1.负责连接和关闭远程JMX Server,并持有连接.
@@ -39,7 +39,7 @@ import org.springframework.util.Assert;
 public class JmxClientTemplate {
 
 	private JMXConnector connector;
-	private MBeanServerConnection mbsc;
+	private MBeanServerConnection connection;
 	private AtomicBoolean connected = new AtomicBoolean(false);
 
 	/**
@@ -51,10 +51,6 @@ public class JmxClientTemplate {
 
 	/**
 	 * 带认证信息的构造函数.
-	 * @param serviceUrl
-	 * @param userName
-	 * @param passwd
-	 * @throws IOException
 	 */
 	public JmxClientTemplate(final String serviceUrl, final String userName, final String passwd) throws IOException {
 		initConnector(serviceUrl, userName, passwd);
@@ -76,7 +72,7 @@ public class JmxClientTemplate {
 			connector = JMXConnectorFactory.connect(url);
 		}
 
-		mbsc = connector.getMBeanServerConnection();
+		connection = connector.getMBeanServerConnection();
 		connected.set(true);
 	}
 
@@ -86,18 +82,19 @@ public class JmxClientTemplate {
 	public void close() throws IOException {
 		connector.close();
 		connected.set(false);
+		connection = null;
 	}
 
 	/**
 	 * 创建标准MBean代理.
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T getMBeanProxy(final String mbeanName, final Class<T> mBeanInterface) {
+	public <T> T createMBeanProxy(final String mbeanName, final Class<T> mBeanInterface) {
 		Assert.hasText(mbeanName, "mbeanName不能为空");
 		assertConnected();
 
 		ObjectName objectName = buildObjectName(mbeanName);
-		return (T) MBeanServerInvocationHandler.newProxyInstance(mbsc, objectName, mBeanInterface, false);
+		return (T) MBeanServerInvocationHandler.newProxyInstance(connection, objectName, mBeanInterface, false);
 	}
 
 	/**
@@ -112,7 +109,7 @@ public class JmxClientTemplate {
 
 		try {
 			ObjectName objectName = buildObjectName(mbeanName);
-			return mbsc.getAttribute(objectName, attributeName);
+			return connection.getAttribute(objectName, attributeName);
 		} catch (JMException e) {
 			throw new IllegalArgumentException("参数不正确", e);
 		} catch (IOException e) {
@@ -133,7 +130,7 @@ public class JmxClientTemplate {
 		try {
 			ObjectName objectName = buildObjectName(mbeanName);
 			Attribute attribute = new Attribute(attributeName, value);
-			mbsc.setAttribute(objectName, attribute);
+			connection.setAttribute(objectName, attribute);
 		} catch (JMException e) {
 			throw new IllegalArgumentException("参数不正确", e);
 		} catch (IOException e) {
@@ -144,7 +141,7 @@ public class JmxClientTemplate {
 	/**
 	 * 按方法名直接调用MBean方法(无MBean的Class文件时使用).
 	 * 
-	 * 所调用方法无参数时的简写函数.
+	 * 调用的方法无参数时的简写函数.
 	 */
 	public void inoke(final String mbeanName, final String methodName) {
 		invoke(mbeanName, methodName, new String[] {}, new Object[] {});
@@ -153,7 +150,7 @@ public class JmxClientTemplate {
 	/**
 	 * 按方法名直接调用MBean方法(无MBean的Class文件时使用).
 	 * 
-	 * @param paramClassNames 所有参数的Class名全称的数组.
+	 * @param paramClassNames 所有参数的Class名全称数组.
 	 */
 	public Object invoke(final String mbeanName, final String methodName, final String[] paramClassNames,
 			final Object[] paramValues) {
@@ -163,7 +160,7 @@ public class JmxClientTemplate {
 
 		try {
 			ObjectName objectName = buildObjectName(mbeanName);
-			return mbsc.invoke(objectName, methodName, paramValues, paramClassNames);
+			return connection.invoke(objectName, methodName, paramValues, paramClassNames);
 		} catch (JMException e) {
 			throw new IllegalArgumentException("参数不正确", e);
 		} catch (IOException e) {
@@ -202,7 +199,7 @@ public class JmxClientTemplate {
 		try {
 			return new ObjectName(mbeanName);
 		} catch (MalformedObjectNameException e) {
-			throw new IllegalArgumentException("mbeanName:" + mbeanName + "不正确", e);
+			throw new IllegalArgumentException("mbeanName:" + mbeanName + "不正确,无法转换为ObjectName.", e);
 		}
 	}
 }

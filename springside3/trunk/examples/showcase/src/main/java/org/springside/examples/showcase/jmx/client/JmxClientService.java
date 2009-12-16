@@ -12,9 +12,9 @@ import org.springside.examples.showcase.jmx.server.ServerConfigMBean;
 import org.springside.modules.jmx.JmxClientTemplate;
 
 /**
- * JMX客户端服务的封装.
+ * JMX客户端对服务端访问的封装.
  * 
- * 分别演示标准MBean代理及无MBean的Class文件时直接读取属性/调用方法两种场景.
+ * 分别演示标准MBean代理及无MBean的Class文件时直接反射读取属性/调用方法两种场景.
  * 
  * @author ben
  * @author calvin
@@ -22,20 +22,20 @@ import org.springside.modules.jmx.JmxClientTemplate;
 public class JmxClientService {
 
 	//ObjectName定义
-	public static final String CONFIG_MBEAN_NAME = "Showcase:name=serverConfig,type=ServerConfig";
+	public static final String SERVER_CONFIG_MBEAN_NAME = "Showcase:name=serverConfig,type=ServerConfig";
 	public static final String HIBERNATE_MBEAN_NAME = "Showcase:name=hibernateStatistics,type=StatisticsService";
 
 	private static Logger logger = LoggerFactory.getLogger(JmxClientService.class);
-
-	//-- jmx客户端工厂及mbean代理 --//
-	private JmxClientTemplate jmxClientTemplate;
-	private ServerConfigMBean serverConfigMBean;
 
 	//-- 可注入的连接参数 --//
 	private String host;
 	private String port;
 	private String userName;
 	private String passwd;
+
+	//-- JMX客户端及Mbean代理 --//
+	private JmxClientTemplate jmxClientTemplate;
+	private ServerConfigMBean serverConfigMBean;
 
 	//-- 连接参数设定函数 --//
 	public void setHost(String host) {
@@ -66,8 +66,7 @@ public class JmxClientService {
 		try {
 			String serviceUrl = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/showcase";
 			jmxClientTemplate = new JmxClientTemplate(serviceUrl, userName, passwd);
-
-			serverConfigMBean = jmxClientTemplate.getMBeanProxy(CONFIG_MBEAN_NAME, ServerConfigMBean.class);
+			serverConfigMBean = jmxClientTemplate.createMBeanProxy(SERVER_CONFIG_MBEAN_NAME, ServerConfigMBean.class);
 		} catch (Exception e) {
 			logger.error("连接Jmx Server 或 创建Mbean Proxy时失败", e);
 		}
@@ -115,11 +114,10 @@ public class JmxClientService {
 	 * 获取Hibernate统计数据.
 	 */
 	public HibernateStatistics getHibernateStatistics() {
-		HibernateStatistics statistics = new HibernateStatistics();
-		statistics.setSessionOpenCount((Long) jmxClientTemplate.getAttribute(HIBERNATE_MBEAN_NAME, "SessionOpenCount"));
-		statistics.setSessionCloseCount((Long) jmxClientTemplate
-				.getAttribute(HIBERNATE_MBEAN_NAME, "SessionCloseCount"));
-		return statistics;
+		long sessionOpenCount = (Long) jmxClientTemplate.getAttribute(HIBERNATE_MBEAN_NAME, "SessionOpenCount");
+		long sessionCloseCount = (Long) jmxClientTemplate.getAttribute(HIBERNATE_MBEAN_NAME, "SessionCloseCount");
+
+		return new HibernateStatistics(sessionOpenCount, sessionCloseCount);
 	}
 
 	/**
@@ -130,11 +128,16 @@ public class JmxClientService {
 	}
 
 	/**
-	 * 封装Hibernate统计数据的本地DTO.
+	 * 保存Hibernate统计数据的本地DTO.
 	 */
 	public static class HibernateStatistics {
 		private long sessionOpenCount;
 		private long sessionCloseCount;
+
+		public HibernateStatistics(long sessionOpenCount, long sessionCloseCount) {
+			this.sessionOpenCount = sessionOpenCount;
+			this.sessionCloseCount = sessionCloseCount;
+		}
 
 		public long getSessionOpenCount() {
 			return sessionOpenCount;

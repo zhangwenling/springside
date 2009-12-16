@@ -28,7 +28,7 @@ public class JmxClientTemplateTest extends SpringContextTestCase {
 	public void setUp() throws Exception {
 		jmxClientTemplate = new JmxClientTemplate("service:jmx:rmi:///jndi/rmi://localhost:1098/showcase");
 		serverConfigMbean = jmxClientTemplate
-				.getMBeanProxy(JmxClientService.CONFIG_MBEAN_NAME, ServerConfigMBean.class);
+				.createMBeanProxy(JmxClientService.SERVER_CONFIG_MBEAN_NAME, ServerConfigMBean.class);
 	}
 
 	@After
@@ -48,12 +48,12 @@ public class JmxClientTemplateTest extends SpringContextTestCase {
 
 	@Test
 	public void accessMBeanAttributeByReflection() {
-		String oldName = (String) jmxClientTemplate.getAttribute(JmxClientService.CONFIG_MBEAN_NAME, "NodeName");
+		String oldName = (String) jmxClientTemplate.getAttribute(JmxClientService.SERVER_CONFIG_MBEAN_NAME, "NodeName");
 
-		jmxClientTemplate.setAttribute(JmxClientService.CONFIG_MBEAN_NAME, "NodeName", "foo");
-		assertEquals("foo", jmxClientTemplate.getAttribute(JmxClientService.CONFIG_MBEAN_NAME, "NodeName"));
+		jmxClientTemplate.setAttribute(JmxClientService.SERVER_CONFIG_MBEAN_NAME, "NodeName", "foo");
+		assertEquals("foo", jmxClientTemplate.getAttribute(JmxClientService.SERVER_CONFIG_MBEAN_NAME, "NodeName"));
 
-		jmxClientTemplate.setAttribute(JmxClientService.CONFIG_MBEAN_NAME, "NodeName", oldName);
+		jmxClientTemplate.setAttribute(JmxClientService.SERVER_CONFIG_MBEAN_NAME, "NodeName", oldName);
 	}
 
 	@Test
