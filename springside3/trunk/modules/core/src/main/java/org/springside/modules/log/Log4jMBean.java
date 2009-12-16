@@ -54,7 +54,7 @@ public class Log4jMBean {
 		Logger root = Logger.getRootLogger();
 		Level level = Level.toLevel(newLevel);
 		root.setLevel(level);
-		mbeanLogger.info("设置rootLogger级别到{}", newLevel);
+		mbeanLogger.info("设置Root Logger级别到{}", newLevel);
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class Log4jMBean {
 	/**
 	 * 设置Logger的日志级别.
 	 */
-	@ManagedOperation(description = "set the new logging level to the logger")
+	@ManagedOperation(description = "Set new logging level to the logger")
 	@ManagedOperationParameters( { @ManagedOperationParameter(name = "loggerName", description = "Logger name"),
 			@ManagedOperationParameter(name = "newlevel", description = "New level") })
 	public void setLoggerLevel(String loggerName, String newLevel) {
@@ -85,20 +85,28 @@ public class Log4jMBean {
 	 */
 	@ManagedAttribute(description = "Get all appenders of the root logger")
 	public List<String> getRootLoggerAppenders() {
-		return getLoggerAppenders("root");
+		Logger root = Logger.getRootLogger();
+		return getLoggerAppenders(root);
 	}
 
 	/**
 	 * 获取Logger的所有Appender的名称.
 	 * 继承而来的Appender名称后将有(parent)标识.
 	 */
-	@SuppressWarnings("unchecked")
 	@ManagedOperation(description = "Get all appenders of the logger")
 	@ManagedOperationParameters( { @ManagedOperationParameter(name = "loggerName", description = "Logger name") })
 	public List<String> getLoggerAppenders(String loggerName) {
-		List<String> appenderNameList = new ArrayList<String>();
 		Logger logger = Logger.getLogger(loggerName);
+		return getLoggerAppenders(logger);
 
+	}
+
+	/**
+	 * 获取Logger的所有Appender的名称.
+	 */
+	@SuppressWarnings("unchecked")
+	private List<String> getLoggerAppenders(Logger logger) {
+		List<String> appenderNameList = new ArrayList<String>();
 		//循环加载logger及其parent的appenders
 		for (Category c = logger; c != null; c = c.getParent()) {
 			Enumeration e = c.getAllAppenders();
