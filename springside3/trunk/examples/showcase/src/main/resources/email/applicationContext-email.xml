@@ -13,7 +13,7 @@
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.auth">true</prop>
-				<!-- gmail smtp server必须参数 -->
+				<!-- 使用gmail smtp server的必须参数 -->
 				<prop key="mail.smtp.starttls.enable">true</prop>
 			</props>
 		</property>

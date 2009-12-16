@@ -26,7 +26,7 @@ public class ExcelExportActionTest extends Assert {
 		Cell cell1970 = wb.getSheetAt(0).getRow(cr.getRow()).getCell(cr.getCol());
 		assertEquals(-0.068, cell1970.getNumericCellValue(), 0.01);
 
-		//按照Cell的坐标取得Cell,读取Cell的公式值
+		//按照Cell的坐标取得Cell,读取Cell的公式计算结果.
 		Cell cellTotal = wb.getSheetAt(0).getRow(32).getCell(1);
 		FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
 		assertEquals(2.373, evaluator.evaluate(cellTotal).getNumberValue(), 0.01);

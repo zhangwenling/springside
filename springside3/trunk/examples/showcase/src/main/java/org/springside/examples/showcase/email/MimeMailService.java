@@ -11,6 +11,7 @@ import javax.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
@@ -28,7 +29,7 @@ import freemarker.template.TemplateException;
  */
 public class MimeMailService {
 
-	private static final String ENCODING = "utf-8";
+	private static final String DEFAULT_ENCODING = "utf-8";
 
 	private static Logger logger = LoggerFactory.getLogger(MimeMailService.class);
 
@@ -47,24 +48,27 @@ public class MimeMailService {
 	 */
 	public void setFreemarkerConfiguration(Configuration freemarkerConfiguration) throws IOException {
 		//根据freemarkerConfiguration的templateLoaderPath载入文件.
-		template = freemarkerConfiguration.getTemplate("mailTemplate.ftl", ENCODING);
+		template = freemarkerConfiguration.getTemplate("mailTemplate.ftl", DEFAULT_ENCODING);
 	}
 
 	/**
 	 * 发送MIME格式的用户修改通知邮件.
 	 */
 	public void sendNotificationMail(String userName) {
-		MimeMessage msg = mailSender.createMimeMessage();
 
 		try {
-			MimeMessageHelper helper = new MimeMessageHelper(msg, true, ENCODING);
+			MimeMessage msg = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(msg, true, DEFAULT_ENCODING);
 
 			helper.setTo("springside3.demo@gmail.com");
 			helper.setFrom("springside3.demo@gmail.com");
 			helper.setSubject("用户修改通知");
 
-			buildContent(helper, userName);
-			buildAttachment(helper);
+			String content = generateContent(userName);
+			helper.setText(content, true);
+
+			File attachment = generateAttachment();
+			helper.addAttachment("mailAttachment.txt", attachment);
 
 			mailSender.send(msg);
 			logger.info("HTML版邮件已发送至springside3.demo@gmail.com");
@@ -79,30 +83,28 @@ public class MimeMailService {
 	 * 使用Freemarker生成html格式内容.
 	 */
 	@SuppressWarnings("unchecked")
-	private void buildContent(MimeMessageHelper helper, String userName) throws MessagingException {
+	private String generateContent(String userName) throws MessagingException {
 
 		try {
 			Map context = new HashMap();
 			context.put("userName", userName);
-			String content = FreeMarkerTemplateUtils.processTemplateIntoString(template, context);
-			helper.setText(content, true);
+			return FreeMarkerTemplateUtils.processTemplateIntoString(template, context);
 		} catch (IOException e) {
-			logger.error("构造邮件失败,FreeMarker模板不存在", e);
+			logger.error("生成邮件内容失败, FreeMarker模板不存在", e);
 			throw new MessagingException("FreeMarker模板不存在", e);
 		} catch (TemplateException e) {
-			logger.error("构造邮件失败,FreeMarker处理失败", e);
+			logger.error("生成邮件内容失败, FreeMarker处理失败", e);
 			throw new MessagingException("FreeMarker处理失败", e);
 		}
 	}
 
 	/**
-	 * 添加附件.
+	 * 获取classpath中的附件.
 	 */
-	private void buildAttachment(MimeMessageHelper helper) throws MessagingException {
+	private File generateAttachment() throws MessagingException {
 		try {
-			//使用Spring的Resource Loader获取打包在classpath中的附件.
-			File attachment = new ClassPathResource("/email/mailAttachment.txt").getFile();
-			helper.addAttachment("mailAttachment.txt", attachment);
+			Resource resource = new ClassPathResource("/email/mailAttachment.txt");
+			return resource.getFile();
 		} catch (IOException e) {
 			logger.error("构造邮件失败,附件文件不存在", e);
 			throw new MessagingException("附件文件不存在", e);

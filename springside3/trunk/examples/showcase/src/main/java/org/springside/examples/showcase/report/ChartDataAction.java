@@ -16,7 +16,7 @@ import org.springside.modules.web.struts2.Struts2Utils;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * FlashChart演示生成Amcharts所需 CVS/XML格式数据的Action.
+ * FlashChart演示, 生成Amcharts所需 CVS/XML格式数据的Action.
  * 
  * @author calvin
  */
@@ -41,7 +41,7 @@ public class ChartDataAction extends ActionSupport {
 	}
 
 	/**
-	 * 生成XML格式内容.
+	 * 使用Dom4j生成XML格式内容.
 	 * 示例:
 	 * <chart>
 	 * 	<series>
@@ -65,27 +65,25 @@ public class ChartDataAction extends ActionSupport {
 		Element root = document.addElement("chart");
 		Element series = root.addElement("series");
 		Element graphs = root.addElement("graphs");
-		Element graph1 = graphs.addElement("graph").addAttribute("gid", "1");
-		Element graph2 = graphs.addElement("graph").addAttribute("gid", "2");
+		Element graphAnomaly = graphs.addElement("graph").addAttribute("gid", "1");
+		Element graphSmoothed = graphs.addElement("graph").addAttribute("gid", "2");
 
-		int index = 1;
-		for (TemperatureAnomaly data : temperatureAnomalyArray) {
-			series.addElement("value").addAttribute("xid", String.valueOf(index)).addText(
-					String.valueOf(data.getYear()));
+		for (int i = 0; i < temperatureAnomalyArray.length; i++) {
+			String xid = String.valueOf(i);
+			TemperatureAnomaly data = temperatureAnomalyArray[i];
 
-			Element graph1Value = graph1.addElement("value").addAttribute("xid", String.valueOf(index)).addText(
-					String.valueOf(data.getAnomaly()));
+			series.addElement("value").addAttribute("xid", xid).addText(String.valueOf(data.getYear()));
 
-			graph1Value.addAttribute("url", url + index);
+			Element graphAnomalyValue = graphAnomaly.addElement("value").addAttribute("xid", String.valueOf(i))
+					.addText(String.valueOf(data.getAnomaly()));
+
+			graphAnomalyValue.addAttribute("url", url + i);
 
 			if (data.getAnomaly() < 0) {
-				graph1Value.addAttribute("color", "#318DBD");
+				graphAnomalyValue.addAttribute("color", "#318DBD");
 			}
 
-			graph2.addElement("value").addAttribute("xid", String.valueOf(index)).addText(
-					String.valueOf(data.getSmoothed()));
-
-			index++;
+			graphSmoothed.addElement("value").addAttribute("xid", xid).addText(String.valueOf(data.getSmoothed()));
 		}
 
 		HttpServletResponse response = Struts2Utils.getResponse();

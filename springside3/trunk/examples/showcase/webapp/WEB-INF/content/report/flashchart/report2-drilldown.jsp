@@ -17,7 +17,7 @@
 		<div class="yui-b">
 		<h1>Flash Chart演示</h1>
 
-		<p>点击Amcharts柱状图进入本页面, 显示<%=Integer.parseInt(request.getParameter("id")) + 1969%>年的数据细节.</p>
+		<p>点击[<%=Integer.parseInt(request.getParameter("id")) + 1970%>]年的数据条柱进入本页面, 演示AmCharts的DrillDown能力交互能力.</p>
 		</div>
 	</div>
 </div>

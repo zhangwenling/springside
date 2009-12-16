@@ -62,7 +62,7 @@ public class ExcelExportAction extends ActionSupport {
 		createStyles(wb);
 
 		//创建工作表.
-		Sheet s = wb.createSheet("temperature anomaly");
+		Sheet s = wb.createSheet("1970-1999");
 
 		//设定冻结表头
 		s.createFreezePane(0, 2, 0, 2);
@@ -87,7 +87,7 @@ public class ExcelExportAction extends ActionSupport {
 	private void generateTitle(Sheet s) {
 		Row r = s.createRow(rowIndex++);
 		Cell c1 = r.createCell(0);
-		c1.setCellValue("Temperature Anomaly");
+		c1.setCellValue("Temperature Anomaly(1970-1999)");
 		c1.setCellStyle(styles.get("header"));
 		//合并单元格
 		s.addMergedRegion(CellRangeAddress.valueOf("$A$1:$C$1"));
@@ -137,12 +137,12 @@ public class ExcelExportAction extends ActionSupport {
 		Row r = s.createRow(rowIndex++);
 		CellStyle totalStyle = styles.get("total");
 
-		//分行的Cell
+		//Cell强行分行
 		Cell c1 = r.createCell(0);
 		c1.setCellStyle(totalStyle);
 		c1.setCellValue("合\n计");
 
-		//合计公式的Cell
+		//合计公式
 		Cell c2 = r.createCell(1);
 		c2.setCellStyle(totalStyle);
 		c2.setCellFormula("SUM(B3:B32)");
@@ -156,7 +156,7 @@ public class ExcelExportAction extends ActionSupport {
 		styles = new HashMap<String, CellStyle>();
 		DataFormat df = wb.createDataFormat();
 
-		// 字体设定 //
+		// --字体设定 --//
 
 		//普通字体
 		Font normalFont = wb.createFont();
@@ -173,7 +173,7 @@ public class ExcelExportAction extends ActionSupport {
 		blueBoldFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
 		blueBoldFont.setColor(IndexedColors.BLUE.getIndex());
 
-		// Cell Style设定 //
+		// --Cell Style设定-- //
 
 		//标题格式
 		CellStyle headerStyle = wb.createCellStyle();
@@ -184,14 +184,14 @@ public class ExcelExportAction extends ActionSupport {
 		CellStyle dateCellStyle = wb.createCellStyle();
 		dateCellStyle.setFont(normalFont);
 		dateCellStyle.setDataFormat(df.getFormat("yyyy"));
-		setBorderAll(dateCellStyle);
+		setBorder(dateCellStyle);
 		styles.put("dateCell", dateCellStyle);
 
 		//数字格式
 		CellStyle numberCellStyle = wb.createCellStyle();
 		numberCellStyle.setFont(normalFont);
 		numberCellStyle.setDataFormat(df.getFormat("#,##0.00"));
-		setBorderAll(numberCellStyle);
+		setBorder(numberCellStyle);
 		styles.put("numberCell", numberCellStyle);
 
 		//合计列格式
@@ -199,19 +199,22 @@ public class ExcelExportAction extends ActionSupport {
 		totalStyle.setFont(blueBoldFont);
 		totalStyle.setWrapText(true);
 		totalStyle.setAlignment(CellStyle.ALIGN_RIGHT);
-		setBorderAll(totalStyle);
+		setBorder(totalStyle);
 		styles.put("total", totalStyle);
 		return styles;
 	}
 
-	private void setBorderAll(CellStyle style) {
+	private void setBorder(CellStyle style) {
 		//设置边框
 		style.setBorderRight(CellStyle.BORDER_THIN);
 		style.setRightBorderColor(IndexedColors.BLACK.getIndex());
+
 		style.setBorderLeft(CellStyle.BORDER_THIN);
 		style.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+
 		style.setBorderTop(CellStyle.BORDER_THIN);
 		style.setTopBorderColor(IndexedColors.BLACK.getIndex());
+
 		style.setBorderBottom(CellStyle.BORDER_THIN);
 		style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
 	}
