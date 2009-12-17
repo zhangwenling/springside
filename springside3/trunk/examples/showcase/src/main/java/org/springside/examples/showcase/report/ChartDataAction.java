@@ -28,6 +28,7 @@ public class ChartDataAction extends ActionSupport {
 	 * 生成CSV格式的内容.
 	 * 示例:
 	 * 1970;-0.068;-0.108
+	 * 1971;-0.120;-0.202
 	 */
 	public String report1() {
 		TemperatureAnomaly[] temperatureAnomalyArray = DummyDataFetcher.getDummyData();

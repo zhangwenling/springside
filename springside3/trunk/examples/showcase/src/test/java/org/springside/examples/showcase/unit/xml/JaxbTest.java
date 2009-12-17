@@ -39,7 +39,7 @@ import org.springside.examples.showcase.xml.jaxb.JaxbBinder.CollectionWrapper;
  * 	</houses>
  * </user>
  */
-public class XmlTest extends Assert {
+public class JaxbTest extends Assert {
 
 	private JaxbBinder binder;
 
