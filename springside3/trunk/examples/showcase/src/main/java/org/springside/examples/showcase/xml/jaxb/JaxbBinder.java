@@ -10,7 +10,6 @@ package org.springside.examples.showcase.xml.jaxb;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Collection;
-import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -21,11 +20,14 @@ import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.namespace.QName;
 
 /**
- * 使用Jaxb2.0持久化XML的Binder.
+ * 使用Jaxb2.0实现XML<->Java Object的Binder.
+ * 
+ * 特别支持Root对象是List的情形.
  * 
  * @author calvin
  */
 public class JaxbBinder {
+	private JAXBContext jaxbContext;
 	private Marshaller marshaller;
 	private Unmarshaller unmarshaller;
 
@@ -34,10 +36,7 @@ public class JaxbBinder {
 	 */
 	public JaxbBinder(Class<?>... types) {
 		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(types);
-			marshaller = jaxbContext.createMarshaller();
-			marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
-			unmarshaller = jaxbContext.createUnmarshaller();
+			jaxbContext = JAXBContext.newInstance(types);
 		} catch (JAXBException e) {
 			throw new RuntimeException(e);
 		}
@@ -49,7 +48,7 @@ public class JaxbBinder {
 	public String toXml(Object root) {
 		try {
 			StringWriter writer = new StringWriter();
-			marshaller.marshal(root, writer);
+			getMarshaller().marshal(root, writer);
 			return writer.toString();
 		} catch (JAXBException e) {
 			throw new RuntimeException(e);
@@ -57,19 +56,19 @@ public class JaxbBinder {
 	}
 
 	/**
-	 * Java List -> Xml, 支持对Root Element是List的情形.
+	 * Java->Xml, 特别支持对Root Element是Collection的情形.
 	 */
 	@SuppressWarnings("unchecked")
-	public String toXml(List root, String rootName) {
+	public String toXml(Collection root, String rootName) {
 		try {
-			ListWrapper wrapper = new ListWrapper();
-			wrapper.list = root;
+			CollectionWrapper wrapper = new CollectionWrapper();
+			wrapper.collection = root;
 
-			JAXBElement<ListWrapper> wrapperElement = new JAXBElement<ListWrapper>(new QName(rootName),
-					ListWrapper.class, wrapper);
+			JAXBElement<CollectionWrapper> wrapperElement = new JAXBElement<CollectionWrapper>(new QName(rootName),
+					CollectionWrapper.class, wrapper);
 
 			StringWriter writer = new StringWriter();
-			marshaller.marshal(wrapperElement, writer);
+			getMarshaller().marshal(wrapperElement, writer);
 
 			return writer.toString();
 		} catch (JAXBException e) {
@@ -84,23 +83,41 @@ public class JaxbBinder {
 	public <T> T fromXml(String xml) {
 		try {
 			StringReader reader = new StringReader(xml);
-			return (T) unmarshaller.unmarshal(reader);
+			return (T) getUnmarshaller().unmarshal(reader);
 		} catch (JAXBException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
 	public Marshaller getMarshaller() {
+		if (marshaller == null) {
+			try {
+				marshaller = jaxbContext.createMarshaller();
+				marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
+			} catch (JAXBException e) {
+				throw new RuntimeException(e);
+			}
+		}
 		return marshaller;
 	}
 
 	public Unmarshaller getUnmarshaller() {
+		if (unmarshaller == null) {
+			try {
+				unmarshaller = jaxbContext.createUnmarshaller();
+			} catch (JAXBException e) {
+				throw new RuntimeException(e);
+			}
+		}
 		return unmarshaller;
 	}
 
-	public static class ListWrapper {
+	/**
+	 * 封装Root Element 是 Collection的情况.
+	 */
+	public static class CollectionWrapper {
 		@SuppressWarnings("unchecked")
 		@XmlAnyElement
-		Collection list;
+		Collection collection;
 	}
 }

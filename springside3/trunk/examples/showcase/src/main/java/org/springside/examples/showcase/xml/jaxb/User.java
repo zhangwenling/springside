@@ -14,7 +14,6 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.springside.examples.showcase.xml.jaxb.HouseMap.HouseMapAdapter;
 
 /**
  * 使用JAXB2.0标注的待转换Java Bean.
