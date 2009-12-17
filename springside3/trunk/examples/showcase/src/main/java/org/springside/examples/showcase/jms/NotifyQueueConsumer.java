@@ -19,7 +19,7 @@ import org.springside.examples.showcase.email.SimpleMailService;
 /**
  * Queue消息的同步主动接收者.
  * 
- * 使用jmsTemplate的receiveAndConvert()主动接收消息,可对并发线程,消息接收处理速度等进行控制.
+ * 使用jmsTemplate的receiveAndConvert()主动接收消息, 用SchduleExecutor控制接收的速度。
  * 
  * @author calvin
  */

@@ -44,7 +44,6 @@ public class JdbcLogWriter extends BlockingConsumer {
 	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
 	protected SimpleJdbcTemplate jdbcTemplate;
 	protected TransactionTemplate transactionTemplate;
-	protected SqlParameterSource[] batchParams;
 
 	/**
 	 * 带Named Parameter的insert sql.
@@ -96,17 +95,16 @@ public class JdbcLogWriter extends BlockingConsumer {
 	/**
 	 * 将Buffer中的事件列表批量插入数据库.
 	 */
-	@SuppressWarnings("unchecked")
 	public void updateBatch() {
 		try {
-			//分析事件列表,转换为jdbc参数.
+			//分析事件列表, 转换为jdbc批处理参数.
 			List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
 			for (LoggingEvent event : eventBuffer) {
 				Map<String, Object> paramMap = parseEvent(event);
 				paramMapList.add(paramMap);
 			}
-			Map[] paramMapArray = paramMapList.toArray(new Map[paramMapList.size()]);
-			batchParams = SqlParameterSourceUtils.createBatch(paramMapArray);
+
+			final SqlParameterSource[] batchParams = SqlParameterSourceUtils.createBatch(paramMapList.toArray());
 
 			//执行批量插入,如果失败调用失败处理函数.
 			try {

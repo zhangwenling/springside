@@ -39,7 +39,7 @@ public class UserManager {
 	}
 
 	/**
-	 * 在保存用户时,发送通知邮件.
+	 * 在保存用户时,发送用户修改通知消息, 由消息接收者异步进行较为耗时的通知邮件发送.
 	 * 如果企图修改超级用户,取出当前操作员用户,打印其信息然后抛出异常.
 	 */
 	public void saveUser(User user) {
@@ -89,6 +89,7 @@ public class UserManager {
 
 	/**
 	 * 发送用户变更消息.
+	 * 同时发送只有一个消费者的Queue消息与发布订阅模式有多个消费者的Topic消息.
 	 */
 	private void sendNotifyMessage(User user) {
 		if (serverConfig != null && serverConfig.isNotificationMailEnabled() && notifyProducer != null) {

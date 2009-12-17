@@ -28,7 +28,7 @@ public class NotifyMessageProducer {
 	private Destination notifyTopic;
 
 	/**
-	 * 将变更用户消息发送到只有单个接收者的queue.
+	 * 将变更用户消息发送到只有单个消费者的queue.
 	 * 使用jmsTemplate最简便的封装convertAndSend()发送Map类型的消息.
 	 */
 	public void sendQueue(final User user) {
@@ -40,7 +40,7 @@ public class NotifyMessageProducer {
 	}
 
 	/**
-	 * 将变更用户消息发送到只有多个订阅接收者的topic.
+	 * 将变更用户消息发送到订阅-发布模式有多个消费者的topic.
 	 * 使用jmsTemplate的send/MessageCreator()发送Map类型的消息并在Message中附加属性.
 	 */
 	public void sendTopic(final User user) {
