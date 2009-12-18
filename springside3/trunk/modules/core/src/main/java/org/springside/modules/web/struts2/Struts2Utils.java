@@ -8,18 +8,14 @@
 package org.springside.modules.web.struts2;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springside.modules.web.WebUtils;
@@ -157,47 +153,20 @@ public class Struts2Utils {
 	}
 
 	/**
-	 * 直接输出JSON.
+	 * 直接输出JSON,使用Jackson转换Java对象.
 	 * 
-	 * @param map Map对象,将被转化为json字符串.
-	 * @see #render(String, String, String...)
-	 */
-	@SuppressWarnings("unchecked")
-	public static void renderJson(final Map map, final String... headers) {
-		String jsonString = JSONObject.fromObject(map).toString();
-		render(JSON_TYPE, jsonString, headers);
-	}
-
-	/**
-	 * 直接输出JSON.
-	 * 
-	 * @param object Java对象,将被转化为json字符串.
+	 * @param object 可以是对象Collection与Array, 单一POJO与Map名值对, 将被转化为json字符串.
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderJson(final Object object, final String... headers) {
-		String jsonString = JSONObject.fromObject(object).toString();
-		render(JSON_TYPE, jsonString, headers);
-	}
+		String jsonString = null;
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			jsonString = mapper.writeValueAsString(object);
+		} catch (IOException e) {
+			throw new IllegalArgumentException(e);
+		}
 
-	/**
-	 * 直接输出JSON.
-	 * 
-	 * @param collection Java对象集合, 将被转化为json字符串.
-	 * @see #render(String, String, String...)
-	 */
-	public static void renderJson(final Collection<?> collection, final String... headers) {
-		String jsonString = JSONArray.fromObject(collection).toString();
-		render(JSON_TYPE, jsonString, headers);
-	}
-
-	/**
-	 * 直接输出JSON.
-	 * 
-	 * @param array Java对象数组, 将被转化为json字符串.
-	 * @see #render(String, String, String...)
-	 */
-	public static void renderJson(final Object[] array, final String... headers) {
-		String jsonString = JSONArray.fromObject(array).toString();
 		render(JSON_TYPE, jsonString, headers);
 	}
 
@@ -205,14 +174,18 @@ public class Struts2Utils {
 	 * 直接输出支持跨域Mashup的JSONP.
 	 * 
 	 * @param callbackName callback函数名.
-	 * @param contentMap Map对象,将被转化为json字符串.
-	 * @see #render(String, String, String...)
+	 * @param Object Map对象,将被转化为json字符串.
 	 */
-	@SuppressWarnings("unchecked")
-	public static void renderJsonp(final String callbackName, final Map contentMap, final String... headers) {
-		String jsonParam = JSONObject.fromObject(contentMap).toString();
+	public static void renderJsonp(final String callbackName, final Object object, final String... headers) {
+		String jsonString = null;
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			jsonString = mapper.writeValueAsString(object);
+		} catch (IOException e) {
+			throw new IllegalArgumentException(e);
+		}
 
-		StringBuilder result = new StringBuilder().append(callbackName).append("(").append(jsonParam).append(");");
+		StringBuilder result = new StringBuilder().append(callbackName).append("(").append(jsonString).append(");");
 
 		//渲染Content-Type为javascript的返回内容,输出结果为javascript语句, 如callback197("{content:'Hello World!!!'}");
 		render(JS_TYPE, result.toString(), headers);

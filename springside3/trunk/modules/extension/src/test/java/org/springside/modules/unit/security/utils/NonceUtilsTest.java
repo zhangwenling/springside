@@ -3,6 +3,7 @@ package org.springside.modules.unit.security.utils;
 import java.rmi.server.UID;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -72,8 +73,8 @@ public class NonceUtilsTest extends Assert {
 	@Test
 	@SuppressWarnings("unchecked")
 	public void getUuidNoncesConcurrent() throws InterruptedException {
-		Runnable uuidNonceRequestTask = new Runnable() {
-			public void run() {
+		Callable uuidNonceRequestTask = new Callable() {
+			public Object call() throws Exception {
 				for (int i = 0; i < 3; i++) {
 					String nonce = new StringBuilder().append(NonceUtils.randomHexInt()).append(
 							NonceUtils.currentHexMills()).append(NonceUtils.format(NonceUtils.getCounter(), 2))
@@ -81,13 +82,14 @@ public class NonceUtilsTest extends Assert {
 					System.out.println("Mills Nonce         :" + nonce);
 
 				}
+				return null;
 			}
 		};
 
 		ExecutorService executor = Executors.newCachedThreadPool();
 		List tasks = new ArrayList();
 		for (int i = 0; i < 3; i++) {
-			tasks.add(Executors.callable(uuidNonceRequestTask));
+			tasks.add(uuidNonceRequestTask);
 		}
 		executor.invokeAll(tasks);
 	}

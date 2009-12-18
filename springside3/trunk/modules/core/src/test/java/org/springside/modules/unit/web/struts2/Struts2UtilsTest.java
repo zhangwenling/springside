@@ -1,5 +1,6 @@
 package org.springside.modules.unit.web.struts2;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +8,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.struts2.ServletActionContext;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -51,7 +51,7 @@ public class Struts2UtilsTest extends Assert {
 
 	@Test
 	@SuppressWarnings("unchecked")
-	public void renderJson() throws UnsupportedEncodingException {
+	public void renderJson() throws IOException {
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		MockWebUtils.setResponseToStruts2(response);
 
@@ -95,7 +95,8 @@ public class Struts2UtilsTest extends Assert {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("html", "<p>helloworld</p>");
 		Struts2Utils.renderJsonp("callback", map, "no-cache:true");
-		assertEquals("callback({\"html\":\"<p>helloworld<\\/p>\"});", response.getContentAsString());
+		assertEquals("callback({\"html\":\"<p>helloworld</p>\"});", response.getContentAsString());
+
 	}
 
 	public class TestBean {
