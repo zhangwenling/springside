@@ -16,8 +16,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springside.modules.web.WebUtils;
 
 /**
@@ -42,7 +40,7 @@ public class Struts2Utils {
 	private static final String HTML_TYPE = "text/html";
 	private static final String JS_TYPE = "text/javascript";
 
-	private static Logger logger = LoggerFactory.getLogger(Struts2Utils.class);
+	private static ObjectMapper mapper = new ObjectMapper();
 
 	//-- 取得Request/Response/Session的简化函数 --//
 	/**
@@ -85,36 +83,12 @@ public class Struts2Utils {
 	 * @param headers 可变的header数组，目前接受的值为"encoding:"或"no-cache:",默认值分别为UTF-8和true.
 	 */
 	public static void render(final String contentType, final String content, final String... headers) {
+		HttpServletResponse response = initResponse(contentType, headers);
 		try {
-			//分析headers参数
-			String encoding = ENCODING_DEFAULT;
-			boolean noCache = NOCACHE_DEFAULT;
-			for (String header : headers) {
-				String headerName = StringUtils.substringBefore(header, ":");
-				String headerValue = StringUtils.substringAfter(header, ":");
-
-				if (StringUtils.equalsIgnoreCase(headerName, ENCODING_PREFIX)) {
-					encoding = headerValue;
-				} else if (StringUtils.equalsIgnoreCase(headerName, NOCACHE_PREFIX)) {
-					noCache = Boolean.parseBoolean(headerValue);
-				} else
-					throw new IllegalArgumentException(headerName + "不是一个合法的header类型");
-			}
-
-			HttpServletResponse response = ServletActionContext.getResponse();
-
-			//设置headers参数
-			String fullContentType = contentType + ";charset=" + encoding;
-			response.setContentType(fullContentType);
-			if (noCache) {
-				WebUtils.setNoCacheHeader(response);
-			}
-
 			response.getWriter().write(content);
 			response.getWriter().flush();
-
 		} catch (IOException e) {
-			logger.error(e.getMessage(), e);
+			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
 
@@ -155,30 +129,26 @@ public class Struts2Utils {
 	/**
 	 * 直接输出JSON,使用Jackson转换Java对象.
 	 * 
-	 * @param object 可以是对象Collection与Array, 单一POJO与Map名值对, 将被转化为json字符串.
+	 * @param data 可以是List<POJO>, POJO[], POJO, 也可以Map名值对.
 	 * @see #render(String, String, String...)
 	 */
-	public static void renderJson(final Object object, final String... headers) {
-		String jsonString = null;
-		ObjectMapper mapper = new ObjectMapper();
+	public static void renderJson(final Object data, final String... headers) {
+		HttpServletResponse response = initResponse(JSON_TYPE, headers);
 		try {
-			jsonString = mapper.writeValueAsString(object);
+			mapper.writeValue(response.getWriter(), data);
 		} catch (IOException e) {
 			throw new IllegalArgumentException(e);
 		}
-
-		render(JSON_TYPE, jsonString, headers);
 	}
 
 	/**
 	 * 直接输出支持跨域Mashup的JSONP.
 	 * 
 	 * @param callbackName callback函数名.
-	 * @param Object Map对象,将被转化为json字符串.
+	 * @param object Java对象,可以是List<POJO>, POJO[], POJO ,也可以Map名值对, 将被转化为json字符串.
 	 */
 	public static void renderJsonp(final String callbackName, final Object object, final String... headers) {
 		String jsonString = null;
-		ObjectMapper mapper = new ObjectMapper();
 		try {
 			jsonString = mapper.writeValueAsString(object);
 		} catch (IOException e) {
@@ -190,4 +160,36 @@ public class Struts2Utils {
 		//渲染Content-Type为javascript的返回内容,输出结果为javascript语句, 如callback197("{content:'Hello World!!!'}");
 		render(JS_TYPE, result.toString(), headers);
 	}
+
+	/**
+	 * 分析contentType与headers.
+	 */
+	private static HttpServletResponse initResponse(final String contentType, final String... headers) {
+		//分析headers参数
+		String encoding = ENCODING_DEFAULT;
+		boolean noCache = NOCACHE_DEFAULT;
+		for (String header : headers) {
+			String headerName = StringUtils.substringBefore(header, ":");
+			String headerValue = StringUtils.substringAfter(header, ":");
+
+			if (StringUtils.equalsIgnoreCase(headerName, ENCODING_PREFIX)) {
+				encoding = headerValue;
+			} else if (StringUtils.equalsIgnoreCase(headerName, NOCACHE_PREFIX)) {
+				noCache = Boolean.parseBoolean(headerValue);
+			} else
+				throw new IllegalArgumentException(headerName + "不是一个合法的header类型");
+		}
+
+		HttpServletResponse response = ServletActionContext.getResponse();
+
+		//设置headers参数
+		String fullContentType = contentType + ";charset=" + encoding;
+		response.setContentType(fullContentType);
+		if (noCache) {
+			WebUtils.setNoCacheHeader(response);
+		}
+
+		return response;
+	}
+
 }
