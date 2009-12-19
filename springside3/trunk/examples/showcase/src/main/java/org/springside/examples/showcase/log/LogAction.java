@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * 生出FlashChart演示AmCharts所需CVS/XML格式数据的Action.
+ * 演示向数据库写入日志的Action.
  * 
  * @author calvin
  */

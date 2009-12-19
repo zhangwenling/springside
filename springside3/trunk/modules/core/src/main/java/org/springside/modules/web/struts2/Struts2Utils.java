@@ -28,10 +28,10 @@ import org.springside.modules.web.WebUtils;
 public class Struts2Utils {
 
 	//-- header 常量定义 --//
-	private static final String ENCODING_PREFIX = "encoding";
-	private static final String NOCACHE_PREFIX = "no-cache";
-	private static final String ENCODING_DEFAULT = "UTF-8";
-	private static final boolean NOCACHE_DEFAULT = true;
+	private static final String HEADER_ENCODING = "encoding";
+	private static final String HEADER_NOCACHE = "no-cache";
+	private static final String DEFAULT_ENCODING = "UTF-8";
+	private static final boolean DEFAULT_NOCACHE = true;
 
 	//-- content-type 常量定义 --//
 	private static final String TEXT_TYPE = "text/plain";
@@ -162,19 +162,19 @@ public class Struts2Utils {
 	}
 
 	/**
-	 * 分析contentType与headers.
+	 * 分析并设置contentType与headers.
 	 */
 	private static HttpServletResponse initResponse(final String contentType, final String... headers) {
 		//分析headers参数
-		String encoding = ENCODING_DEFAULT;
-		boolean noCache = NOCACHE_DEFAULT;
+		String encoding = DEFAULT_ENCODING;
+		boolean noCache = DEFAULT_NOCACHE;
 		for (String header : headers) {
 			String headerName = StringUtils.substringBefore(header, ":");
 			String headerValue = StringUtils.substringAfter(header, ":");
 
-			if (StringUtils.equalsIgnoreCase(headerName, ENCODING_PREFIX)) {
+			if (StringUtils.equalsIgnoreCase(headerName, HEADER_ENCODING)) {
 				encoding = headerValue;
-			} else if (StringUtils.equalsIgnoreCase(headerName, NOCACHE_PREFIX)) {
+			} else if (StringUtils.equalsIgnoreCase(headerName, HEADER_NOCACHE)) {
 				noCache = Boolean.parseBoolean(headerValue);
 			} else
 				throw new IllegalArgumentException(headerName + "不是一个合法的header类型");
