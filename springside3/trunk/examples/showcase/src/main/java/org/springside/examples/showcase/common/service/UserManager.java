@@ -32,7 +32,7 @@ public class UserManager {
 	@Autowired(required = false)
 	private ServerConfig serverConfig; //系统配置
 	@Autowired(required = false)
-	private NotifyMessageProducer notifyProducer; //JMX消息发送
+	private NotifyMessageProducer notifyProducer; //JMS消息发送
 
 	public User getUser(Long id) {
 		return userDao.get(id);
@@ -43,6 +43,7 @@ public class UserManager {
 	 * 如果企图修改超级用户,取出当前操作员用户,打印其信息然后抛出异常.
 	 */
 	public void saveUser(User user) {
+
 		if (user.getId() == 1) {
 			logger.warn("操作员{}尝试修改超级管理员用户", SpringSecurityUtils.getCurrentUserName());
 			throw new ServiceException("不能修改超级管理员用户");
@@ -89,6 +90,7 @@ public class UserManager {
 
 	/**
 	 * 发送用户变更消息.
+	 * 
 	 * 同时发送只有一个消费者的Queue消息与发布订阅模式有多个消费者的Topic消息.
 	 */
 	private void sendNotifyMessage(User user) {

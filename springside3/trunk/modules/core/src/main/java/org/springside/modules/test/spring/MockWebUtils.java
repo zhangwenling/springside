@@ -18,7 +18,7 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 import com.opensymphony.xwork2.ActionContext;
 
 /**
- * Spring MockRequest/MockReponse的工具类.
+ * Spring MockHttpRequest/MockHttpReponse的工具类.
  * 
  * 1.在ServletContext里初始化Spring WebApplicationContext.
  * 2.为Struts2的ServletActionContext.getRequest()/getResponse()方法提供支持.

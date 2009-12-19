@@ -27,18 +27,19 @@ public class AuditListener implements SaveOrUpdateEventListener {
 		//如果对象是AuditableEntity子类,添加审计信息.
 		if (object instanceof AuditableEntity) {
 			AuditableEntity entity = (AuditableEntity) object;
+			String loginName = SpringSecurityUtils.getCurrentUserName();
 
 			if (entity.getId() == null) {
 				//创建新对象
 				entity.setCreateTime(new Date());
-				entity.setCreateBy(SpringSecurityUtils.getCurrentUserName());
+				entity.setCreateBy(loginName);
 			} else {
 				//修改旧对象
 				entity.setLastModifyTime(new Date());
-				entity.setLastModifyBy(SpringSecurityUtils.getCurrentUserName());
+				entity.setLastModifyBy(loginName);
 
-				logger.info("{}对象(ID:{}) 被 {} 在 {} 修改", new Object[] { object.getClass().getSimpleName(),
-						entity.getId(), SpringSecurityUtils.getCurrentUserName(), new Date() });
+				logger.info("{}对象(ID:{}) 被 {} 在 {} 修改", new Object[] { event.getEntityName(), entity.getId(),
+						loginName, new Date() });
 			}
 		}
 	}

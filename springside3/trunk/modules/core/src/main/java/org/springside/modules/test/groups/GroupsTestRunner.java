@@ -23,15 +23,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 /**
- * 实现TestNG Groups分组执行用例功能的TestRunner函数, 判断测试类与测试方法是否在Groups内.
- * 另提供独立的Utils函数可供其他Runner调用.
+ * 实现TestNG Groups分组执行用例功能的TestRunner函数.
+ * 
+ * Runner会只执行测试类的@Groups定义，与在-Dtest.groups=xxx 或 application.test.properties的test.groups=xxx相吻合的测试类及测试方法.
+ * 另提供独立判断的工具方法供其他的Runner调用.
  *  
  * @author freeman
  * @author calvin
  */
 public class GroupsTestRunner extends JUnit4ClassRunner {
 
-	/** 在Properties文件或系统运行参数-D中定义执行分组的变量名称. */
+	/** 在Properties文件或JVM参数-D中定义执行分组的变量名称. */
 	public static final String PROPERTY_NAME = "test.groups";
 	/** 定义了分组变量的Properties文件名. */
 	public static final String PROPERTY_FILE = "application.test.properties";
@@ -72,7 +74,7 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 
 	/**
 	 * 判断测试类是否符合分组要求.
-	 * 如果@Groups符合定义或无@Groups定义返回true.
+	 * 如果@Groups符合定义或无@Groups定义，且至少含有一个符合定义的测试方法时返回true.
 	 */
 	public static boolean isTestClassInGroups(Class<?> testClass) {
 		//初始化Groups定义

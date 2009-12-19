@@ -36,6 +36,7 @@ public class SpringTxTestCase extends AbstractTransactionalJUnit4SpringContextTe
 
 	/**
 	 * 刷新sessionFactory,强制Hibernate执行SQL以验证ORM配置.
+	 * 
 	 * 因为没有执行commit操作,不会更改测试数据库.
 	 * 
 	 * @param sessionFactoryName applicationContext中sessionFactory的名称.
