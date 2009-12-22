@@ -23,7 +23,7 @@ import org.springside.modules.test.spring.SpringContextTestCase;
 /**
  * UserService Web服务的功能测试, 测试主要的接口调用.
  * 
- * 一般使用在Spring中用<jaxws:client/>创建的Client, 也可以用JAXWS的API自行创建.
+ * 一般使用在Spring applicaitonContext.xml中用<jaxws:client/>创建的Client, 也可以用JAXWS的API自行创建.
  * 
  * @author calvin
  */
@@ -31,22 +31,24 @@ import org.springside.modules.test.spring.SpringContextTestCase;
 public class UserWebServiceTest extends SpringContextTestCase {
 
 	/**
-	 * 测试认证用户,在Spring中用<jaxws:client/>创建的Client.
+	 * 测试认证用户,在Spring applicaitonContext.xml中用<jaxws:client/>创建Client.
 	 */
 	@Test
 	public void authUser() {
 		UserWebService userWebService = (UserWebService) applicationContext.getBean("userWebService");
 		AuthUserResult result = userWebService.authUser("admin", "admin");
+
 		assertEquals(true, result.isValid());
 	}
 
 	/**
-	 * 测试创建用户,在Spring中用<jaxws:client/>创建的Client.
+	 * 测试创建用户,在Spring applicaitonContext.xml中用<jaxws:client/>创建Client.
 	 */
 	@Test
 	public void createUser() {
-		UserDTO userDTO = new UserDTO();
 		User user = UserData.getRandomUser();
+
+		UserDTO userDTO = new UserDTO();
 		userDTO.setLoginName(user.getLoginName());
 		userDTO.setName(user.getName());
 		userDTO.setEmail(user.getEmail());
@@ -57,6 +59,7 @@ public class UserWebServiceTest extends SpringContextTestCase {
 
 		UserWebService userWebService = (UserWebService) applicationContext.getBean("userWebService");
 		CreateUserResult result = userWebService.createUser(userDTO);
+
 		assertEquals(WSResult.SUCCESS, result.getCode());
 		assertNotNull(result.getUserId());
 	}
@@ -72,8 +75,8 @@ public class UserWebServiceTest extends SpringContextTestCase {
 		UserWebService userWebService = service.getPort(UserWebService.class);
 
 		GetAllUserResult result = userWebService.getAllUser();
-		assertTrue(result.getUserList().size() > 0);
 
+		assertTrue(result.getUserList().size() > 0);
 		UserDTO adminUser = result.getUserList().get(0);
 		assertEquals("admin", adminUser.getLoginName());
 		assertEquals(2, adminUser.getRoleList().size());

@@ -1,6 +1,5 @@
 package org.springside.examples.miniservice.data;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.springside.examples.miniservice.entity.user.Role;
 import org.springside.examples.miniservice.entity.user.User;
 
@@ -11,13 +10,15 @@ import org.springside.examples.miniservice.entity.user.User;
  */
 public class UserData {
 
+	public static final String DEFAULT_PASSWORD = "123456";
+
 	public static User getRandomUser() {
-		String userName = "User" + random();
+		String userName = DataUtil.random("User");
 
 		User user = new User();
 		user.setLoginName(userName);
 		user.setName(userName);
-		user.setPassword("passwd");
+		user.setPassword(DEFAULT_PASSWORD);
 		user.setEmail(userName + "@springside.org.cn");
 
 		return user;
@@ -30,12 +31,6 @@ public class UserData {
 		return user;
 	}
 
-	public static Role getRandomRole() {
-		Role role = new Role();
-		role.setName("Role" + random());
-
-		return role;
-	}
 
 	public static Role getAdminRole() {
 		Role role = new Role();
@@ -43,9 +38,5 @@ public class UserData {
 		role.setName("Admin");
 
 		return role;
-	}
-
-	public static String random() {
-		return RandomStringUtils.randomAlphanumeric(5);
 	}
 }
