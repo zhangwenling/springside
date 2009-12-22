@@ -23,7 +23,7 @@
 		</ul>
 		<h2>用户故事:</h2>
 		<ul>
-			<li>客户端调用见功能测试用例.</li>
+			<li>客户端调用见功能测试用例UserHessianServiceTest.</li>
 		</ul>
 		</div>
 	</div>

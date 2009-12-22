@@ -31,11 +31,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 远程静态内容获取并展示的Servlet.
+ * 获取远程静态内容并进行展示的Servlet.
  * 
  * 演示使用多线程安全的可重用的Apache HttpClient获取远程静态内容.
  * 
- * 演示访问地址为:
+ * 演示访问地址如下(remoteUrl已经过URL编码):
  * remote-content?remoteUrl=http%3A%2F%2Flocalhost%3A8080%2Fshowcase%2Fimg%2Flogo.jpg
  * 
  * @author calvin
@@ -50,41 +50,57 @@ public class RemoteContentServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//获取Header
 		String remoteUrl = request.getParameter("remoteUrl");
-		HttpGet httpget = new HttpGet(remoteUrl);
-		HttpContext context = new BasicHttpContext();
+		HttpEntity entity = fetchContent(remoteUrl);
+
+		if (entity == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return;
+		}
+
+		//设置Header
+		response.setContentType(entity.getContentType().getValue());
+		if (entity.getContentLength() > 0) {
+			response.setContentLength((int) entity.getContentLength());
+		}
+
+		//输出内容
+		InputStream input = entity.getContent();
+		OutputStream output = response.getOutputStream();
+
 		try {
-			HttpResponse remoteResponse = httpClient.execute(httpget, context);
-			HttpEntity entity = remoteResponse.getEntity();
-			if (entity != null) {
-				InputStream input = entity.getContent();
-				OutputStream output = response.getOutputStream();
-
-				//设置Header
-				response.setContentType(entity.getContentType().getValue());
-				if (entity.getContentLength() > 0) {
-					response.setContentLength((int) entity.getContentLength());
-				}
-
-				try {
-					//基于byte数组读取文件并直接写入OutputStream, 数组默认大小为4k.
-					IOUtils.copy(input, output);
-					output.flush();
-				} finally {
-					//保证Input/Output Stream的关闭.
-					IOUtils.closeQuietly(input);
-					IOUtils.closeQuietly(output);
-				}
-			}
-		} catch (Exception e) {
-			logger.error("fetch remote content" + remoteUrl + "  error", e);
-			httpget.abort();
+			//基于byte数组读取InputStream并直接写入OutputStream, 数组默认大小为4k.
+			IOUtils.copy(input, output);
+			output.flush();
+		} finally {
+			//保证Input/Output Stream的关闭.
+			IOUtils.closeQuietly(input);
+			IOUtils.closeQuietly(output);
 		}
 	}
 
+	/**
+	 * 使用HttpClient取得内容.
+	 */
+	private HttpEntity fetchContent(String targetUrl) {
+		HttpGet httpGet = new HttpGet(targetUrl);
+		HttpContext context = new BasicHttpContext();
+		try {
+			HttpResponse remoteResponse = httpClient.execute(httpGet, context);
+			return remoteResponse.getEntity();
+		} catch (Exception e) {
+			logger.error("fetch remote content" + targetUrl + "  error", e);
+			httpGet.abort();
+			return null;
+		}
+	}
+
+	/**
+	 * 创建多线程安全的可重用的HttpClient实例.
+	 */
 	@Override
 	public void init() throws ServletException {
-		// 创建多线程安全的可重用的HttpClient实例.
 		// Create and initialize HTTP parameters
 		HttpParams params = new BasicHttpParams();
 		ConnManagerParams.setMaxTotalConnections(params, TOTAL_CONNECTIONS);
@@ -99,6 +115,9 @@ public class RemoteContentServlet extends HttpServlet {
 		httpClient = new DefaultHttpClient(cm, params);
 	}
 
+	/**
+	 * 销毁HttpClient实例.
+	 */
 	@Override
 	public void destroy() {
 		if (httpClient != null) {

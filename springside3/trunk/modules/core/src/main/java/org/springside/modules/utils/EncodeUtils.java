@@ -103,28 +103,28 @@ public class EncodeUtils {
 	}
 
 	/**
-	 * Html转码.
+	 * Html 转码.
 	 */
 	public static String htmlEscape(String html) {
 		return StringEscapeUtils.escapeHtml(html);
 	}
 
 	/**
-	 * Html 反转码.
+	 * Html 解码.
 	 */
 	public static String htmlUnescape(String htmlEscaped) {
 		return StringEscapeUtils.unescapeHtml(htmlEscaped);
 	}
 
 	/**
-	 * Xml转码.
+	 * Xml 转码.
 	 */
 	public static String xmlEscape(String xml) {
 		return StringEscapeUtils.escapeXml(xml);
 	}
 
 	/**
-	 * Xml 反转码.
+	 * Xml 解码.
 	 */
 	public static String xtmlUnescape(String xmlEscaped) {
 		return StringEscapeUtils.unescapeXml(xmlEscaped);
