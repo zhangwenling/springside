@@ -19,9 +19,7 @@ import com.opensymphony.xwork2.Preparable;
 @SuppressWarnings("serial")
 public abstract class CrudActionSupport<T> extends ActionSupport implements ModelDriven<T>, Preparable {
 
-	/**
-	 * 进行增删改操作后,以redirect方式重新打开action默认页的result名.
-	 */
+	/** 进行增删改操作后,以redirect方式重新打开action默认页的result名.*/
 	public static final String RELOAD = "reload";
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());

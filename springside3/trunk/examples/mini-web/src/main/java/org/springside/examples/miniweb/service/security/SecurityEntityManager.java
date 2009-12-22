@@ -56,11 +56,18 @@ public class SecurityEntityManager {
 	 * 删除用户,如果尝试删除超级管理员将抛出异常.
 	 */
 	public void deleteUser(Long id) {
-		if (id == 1) {
+		if (isSupervisor(id)) {
 			logger.warn("操作员{}尝试删除超级管理员用户", SpringSecurityUtils.getCurrentUserName());
 			throw new ServiceException("不能删除超级管理员用户");
 		}
 		userDao.delete(id);
+	}
+
+	/**
+	 * 判断是否超级管理员.
+	 */
+	private boolean isSupervisor(Long id) {
+		return id == 1;
 	}
 
 	/**

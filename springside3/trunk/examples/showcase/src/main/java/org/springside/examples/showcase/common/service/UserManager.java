@@ -40,11 +40,12 @@ public class UserManager {
 
 	/**
 	 * 在保存用户时,发送用户修改通知消息, 由消息接收者异步进行较为耗时的通知邮件发送.
+	 * 
 	 * 如果企图修改超级用户,取出当前操作员用户,打印其信息然后抛出异常.
 	 */
 	public void saveUser(User user) {
 
-		if (user.getId() == 1) {
+		if (isSupervisor(user)) {
 			logger.warn("操作员{}尝试修改超级管理员用户", SpringSecurityUtils.getCurrentUserName());
 			throw new ServiceException("不能修改超级管理员用户");
 		}
@@ -56,6 +57,13 @@ public class UserManager {
 		userDao.save(user);
 
 		sendNotifyMessage(user);
+	}
+
+	/**
+	 * 判断是否超级管理员.
+	 */
+	private boolean isSupervisor(User user) {
+		return user.getId() == 1;
 	}
 
 	/**
