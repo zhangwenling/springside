@@ -66,7 +66,7 @@
 	<bean id="largeImageWebService" class="org.springside.examples.showcase.ws.server.impl.LargeImageWebServiceImpl" />
 
 
-	<!-- dozer DTO复制辅助Bean定义 -->
+	<!-- dozer DTO复制工具类定义 -->
 	<bean id="dozer" class="org.dozer.DozerBeanMapper" />
 
 	<!-- 明文密码处理Bean定义 -->

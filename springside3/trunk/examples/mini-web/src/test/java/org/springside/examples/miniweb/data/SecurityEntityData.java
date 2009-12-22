@@ -1,6 +1,5 @@
 package org.springside.examples.miniweb.data;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Resource;
 import org.springside.examples.miniweb.entity.security.Role;
@@ -13,13 +12,15 @@ import org.springside.examples.miniweb.entity.security.User;
  */
 public class SecurityEntityData {
 
+	public static final String DEFAULT_PASSWORD = "123456";
+
 	public static User getRandomUser() {
-		String userName = "User" + random();
+		String userName = DataUtil.random("User");
 
 		User user = new User();
 		user.setLoginName(userName);
 		user.setName(userName);
-		user.setPassword("passwd");
+		user.setPassword(DEFAULT_PASSWORD);
 		user.setEmail(userName + "@springside.org.cn");
 
 		return user;
@@ -29,12 +30,13 @@ public class SecurityEntityData {
 		User user = getRandomUser();
 		Role adminRole = getAdminRole();
 		user.getRoleList().add(adminRole);
+
 		return user;
 	}
 
 	public static Role getRandomRole() {
 		Role role = new Role();
-		role.setName("Role" + random());
+		role.setName(DataUtil.random("Role"));
 
 		return role;
 	}
@@ -48,7 +50,7 @@ public class SecurityEntityData {
 	}
 
 	public static Authority getRandomAuthority() {
-		String authName = "Authority" + random();
+		String authName = DataUtil.random("Authority");
 
 		Authority authority = new Authority();
 		authority.setName(authName);
@@ -59,14 +61,10 @@ public class SecurityEntityData {
 
 	public static Resource getRandomResource() {
 		Resource resource = new Resource();
-		resource.setValue("Resource" + random());
+		resource.setValue(DataUtil.random("Resource"));
 		resource.setResourceType(Resource.URL_TYPE);
 		resource.setPosition(100);
 
 		return resource;
-	}
-
-	public static String random() {
-		return RandomStringUtils.randomAlphanumeric(5);
 	}
 }

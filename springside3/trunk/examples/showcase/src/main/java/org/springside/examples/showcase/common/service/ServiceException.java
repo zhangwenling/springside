@@ -3,7 +3,7 @@ package org.springside.examples.showcase.common.service;
 /**
  * Service层公用的Exception.
  * 
- * 继承自RuntimeException,在函数中抛出会触发Spring的事务管理引起事务回退.
+ * 继承自RuntimeException, 从由Spring管理事务的函数中抛出时会触发事务回滚.
  * 
  * @author calvin
  */

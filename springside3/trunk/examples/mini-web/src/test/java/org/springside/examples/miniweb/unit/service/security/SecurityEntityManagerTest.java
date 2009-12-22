@@ -1,6 +1,7 @@
 package org.springside.examples.miniweb.unit.service.security;
 
 import org.easymock.classextension.EasyMock;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,14 +29,21 @@ public class SecurityEntityManagerTest extends Assert {
 		ReflectionUtils.setFieldValue(securityEntityManager, "userDao", mockUserDao);
 	}
 
+	@After
+	public void tearDown() {
+		EasyMock.verify(mockUserDao);
+	}
+
 	@Test
 	public void deleteUser() {
+		mockUserDao.delete(2L);
+		EasyMock.replay(mockUserDao);
 		//正常删除用户.
 		securityEntityManager.deleteUser(2L);
 		//删除超级管理用户抛出异常.
 		try {
 			securityEntityManager.deleteUser(1L);
-			fail("expected ServicExcepton not be be thrown");
+			fail("expected ServicExcepton not be thrown");
 		} catch (ServiceException e) {
 			//expected exception
 		}

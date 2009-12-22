@@ -22,31 +22,14 @@ public class UserDaoTest extends SpringTxTestCase {
 	@Test
 	//如果你需要真正插入数据库,将Rollback设为false
 	//@Rollback(false) 
-	public void crudEntity() {
-		//新建并保存用户.
-		User entity = UserData.getRandomUser();
-		entityDao.save(entity);
-		//强制执行sql语句
+	public void crudEntityWithRole() {
+		//新建并保存带角色的用户
+		User user = UserData.getRandomUserWithAdminRole();
+		entityDao.save(user);
+		//强制执行保存sql
 		flush();
 
 		//查找用户
-		User entityFromDB = entityDao.findUniqueBy("id", entity.getId());
-		assertReflectionEquals(entity, entityFromDB);
-
-		//删除用户
-		entityDao.delete(entity.getId());
-		flush();
-		entity = entityDao.findUniqueBy("id", entity.getId());
-		assertNull(entity);
-	}
-
-	@Test
-	public void crudEntityWithRole() {
-		//保存带角色的用户
-		User user = UserData.getRandomUserWithAdminRole();
-		entityDao.save(user);
-		flush();
-
 		user = entityDao.findUniqueBy("id", user.getId());
 		assertEquals(1, user.getRoleList().size());
 
@@ -55,6 +38,13 @@ public class UserDaoTest extends SpringTxTestCase {
 		flush();
 		user = entityDao.findUniqueBy("id", user.getId());
 		assertEquals(0, user.getRoleList().size());
+
+		//删除用户
+		entityDao.delete(user.getId());
+		flush();
+		user = entityDao.findUniqueBy("id", user.getId());
+		assertNull(user);
+
 	}
 
 	@Test(expected = org.hibernate.exception.ConstraintViolationException.class)
