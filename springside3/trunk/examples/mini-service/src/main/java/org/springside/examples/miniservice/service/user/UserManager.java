@@ -26,7 +26,7 @@ public class UserManager {
 	private UserDao userDao;
 
 	/**
-	 * 获取全部用户,并对用户及关联角色集合进行初始化.
+	 * 获取全部用户,并对用户的延迟加载关联进行初始化.
 	 */
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
