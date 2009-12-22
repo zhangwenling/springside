@@ -1,7 +1,6 @@
 package org.springside.examples.miniservice.integration.dao.user;
 
 import org.junit.Ignore;
-import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
  * RoleDao的集成测试用例,测试ORM及特殊的DAO操作.
@@ -9,5 +8,5 @@ import org.springside.modules.test.spring.SpringTxTestCase;
  * @author calvin
  */
 @Ignore("因为没有特殊的ORM与DAO操作,所以本用例为空.")
-public class RoleDaoTest extends SpringTxTestCase {
+public class RoleDaoTest {
 }
