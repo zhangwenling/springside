@@ -127,7 +127,7 @@
       <property name="severity" value="warning"/>
     </module>
     <module name="NestedIfDepth">
-      <property name="severity" value="info"/>
+      <property name="severity" value="warning"/>
       <property name="max" value="3"/>
     </module>
     <module name="VisibilityModifier">

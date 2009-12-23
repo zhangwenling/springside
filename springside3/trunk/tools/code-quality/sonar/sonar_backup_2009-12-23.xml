@@ -3956,7 +3956,7 @@
         <active-rule>
           <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.coding.NestedIfDepthCheck]]></key>
           <plugin><![CDATA[checkstyle]]></plugin>
-          <level><![CDATA[INFO]]></level>
+          <level><![CDATA[MAJOR]]></level>
           <params>
             <param>
               <key><![CDATA[max]]></key>
