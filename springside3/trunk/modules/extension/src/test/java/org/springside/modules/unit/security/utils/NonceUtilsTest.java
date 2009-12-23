@@ -50,7 +50,7 @@ public class NonceUtilsTest extends Assert {
 		for (int i = 0; i < 3; i++) {
 			System.out.println("RMI UID Nonce       :" + new UID().toString());
 		}
-		assertEquals(27, new UID().toString().length());
+		//about 26-27 char
 
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Hibernate UUID Nonce:" + new UUIDHexGenerator().generate(null, null));
