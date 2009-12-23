@@ -9,7 +9,7 @@ import org.springside.modules.web.struts2.Struts2Utils;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
- * JSONP Mashup 服务端
+ * JSONP Mashup 服务端.
  * 
  * @author calvin
  */

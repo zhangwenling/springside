@@ -24,7 +24,7 @@ import org.springside.examples.showcase.ws.server.api.result.WSResult;
 @WebService(serviceName = "SmallImageService", portName = "SmallImageServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.api.SmallImageWebService", targetNamespace = WsConstants.NS)
 public class SmallImageWebServiceImpl implements SmallImageWebService, ApplicationContextAware {
 
-	private ApplicationContext cxt;
+	private ApplicationContext applicationContext;
 
 	/**
 	 * @see SmallImageWebService#getImage()
@@ -34,7 +34,7 @@ public class SmallImageWebServiceImpl implements SmallImageWebService, Applicati
 		InputStream is = null;
 		try {
 			//采用applicationContext的getResource()函数获取Web应用中的文件.
-			is = cxt.getResource("/img/logo.jpg").getInputStream();
+			is = applicationContext.getResource("/img/logo.jpg").getInputStream();
 			//读取内容到字节数组.
 			byte[] imageBytes = IOUtils.toByteArray(is);
 			result.setImageData(imageBytes);
@@ -47,7 +47,7 @@ public class SmallImageWebServiceImpl implements SmallImageWebService, Applicati
 		return result;
 	}
 
-	public void setApplicationContext(ApplicationContext cxt) throws BeansException {
-		this.cxt = cxt;
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
 	}
 }

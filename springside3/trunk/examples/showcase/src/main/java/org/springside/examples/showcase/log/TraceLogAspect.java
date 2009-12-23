@@ -6,6 +6,11 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springside.modules.log.TraceUtils;
 
+/**
+ * 为WebService方法加入TraceUtils控制的Aspect.
+ * 
+ * @author calvin
+ */
 @Aspect
 public class TraceLogAspect {
 

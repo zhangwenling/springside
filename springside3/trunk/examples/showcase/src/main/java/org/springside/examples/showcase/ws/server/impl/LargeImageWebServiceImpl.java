@@ -26,7 +26,7 @@ import org.springside.examples.showcase.ws.server.api.result.WSResult;
 @WebService(serviceName = "LargeImageService", portName = "LargeImageServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.api.LargeImageWebService", targetNamespace = WsConstants.NS)
 public class LargeImageWebServiceImpl implements LargeImageWebService, ApplicationContextAware {
 
-	private ApplicationContext cxt;
+	private ApplicationContext applicationContext;
 
 	/**
 	 * @see LargeImageWebService#getImage()
@@ -36,7 +36,7 @@ public class LargeImageWebServiceImpl implements LargeImageWebService, Applicati
 
 		try {
 			//采用applicationContext获取Web应用中的文件.
-			File image = cxt.getResource("/img/logo.jpg").getFile();
+			File image = applicationContext.getResource("/img/logo.jpg").getFile();
 
 			//采用activation的DataHandler实现Streaming传输.
 			DataSource dataSource = new FileDataSource(image);
@@ -49,7 +49,7 @@ public class LargeImageWebServiceImpl implements LargeImageWebService, Applicati
 		return result;
 	}
 
-	public void setApplicationContext(ApplicationContext cxt) throws BeansException {
-		this.cxt = cxt;
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
 	}
 }

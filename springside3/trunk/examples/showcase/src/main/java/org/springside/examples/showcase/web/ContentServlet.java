@@ -35,13 +35,13 @@ public class ContentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	/** 需要被Gzip压缩的Mime类型 */
+	/** 需要被Gzip压缩的Mime类型. */
 	private static final String[] GZIP_MIME_TYPES = { "text/html", "application/xhtml+xml", "text/css",
 			"text/javascript" };
-	/** 需要被Gzip压缩的最小文件大小 */
+	/** 需要被Gzip压缩的最小文件大小. */
 	private static final int GZIP_MINI_LENGTH = 512;
 
-	/** Content基本信息缓存 */
+	/** Content基本信息缓存. */
 	private Cache contentCache;
 
 	@Override
