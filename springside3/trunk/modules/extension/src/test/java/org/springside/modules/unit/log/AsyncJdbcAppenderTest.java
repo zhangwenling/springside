@@ -10,6 +10,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
+/**
+ * 使用内存中数据库进行测试.
+ */
 @ContextConfiguration(locations = { "/applicationContext-log.xml" }, inheritLocations = false)
 public class AsyncJdbcAppenderTest extends SpringTxTestCase {
 

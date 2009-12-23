@@ -38,8 +38,8 @@ public class UserManagerTest extends Assert {
 	 */
 	@Test
 	public void authUser() {
-		EasyMock.expect(mockUserDao.findUnique(UserDao.QUERY_BY_LNAME_PASSWD, "admin", "admin")).andReturn(1);
-		EasyMock.expect(mockUserDao.findUnique(UserDao.QUERY_BY_LNAME_PASSWD, "admin", "errorPasswd")).andReturn(0);
+		EasyMock.expect(mockUserDao.findUnique(UserDao.QUERY_BY_LNAME_PASSWD, "admin", "admin")).andReturn(1L);
+		EasyMock.expect(mockUserDao.findUnique(UserDao.QUERY_BY_LNAME_PASSWD, "admin", "errorPasswd")).andReturn(0L);
 		EasyMock.replay(mockUserDao);
 
 		assertEquals(true, userManager.authenticate("admin", "admin"));

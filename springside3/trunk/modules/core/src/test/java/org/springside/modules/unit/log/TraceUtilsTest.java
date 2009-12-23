@@ -14,7 +14,7 @@ public class TraceUtilsTest extends Assert {
 	Logger logger = LoggerFactory.getLogger(TraceUtilsTest.class);
 
 	@Test
-	public void test() {
+	public void trace() {
 		MockAppender appender = new MockAppender();
 		appender.addToLogger(TraceUtilsTest.class);
 
