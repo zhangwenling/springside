@@ -3757,7 +3757,7 @@
         <active-rule>
           <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocStyleCheck]]></key>
           <plugin><![CDATA[checkstyle]]></plugin>
-          <level><![CDATA[MAJOR]]></level>
+          <level><![CDATA[MINOR]]></level>
           <params>
             <param>
               <key><![CDATA[checkHtml]]></key>
@@ -3916,7 +3916,7 @@
         <active-rule>
           <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.ArrayTypeStyleCheck]]></key>
           <plugin><![CDATA[checkstyle]]></plugin>
-          <level><![CDATA[MAJOR]]></level>
+          <level><![CDATA[MINOR]]></level>
         </active-rule>
         <active-rule>
           <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.UpperEllCheck]]></key>
