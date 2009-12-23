@@ -41,14 +41,14 @@ public class JdbcLogWriter extends BlockingConsumer {
 	protected String sql;
 	protected int batchSize = 10;
 
-	protected List<LoggingEvent> eventBuffer = new ArrayList<LoggingEvent>();
+	protected List<LoggingEvent> eventsBuffer = new ArrayList<LoggingEvent>();
 	protected SimpleJdbcTemplate jdbcTemplate;
 	protected TransactionTemplate transactionTemplate;
 
 	/**
 	 * 带Named Parameter的insert sql.
 	 * 
-	 * Named Parameter的名称见Log4jUtils中的常量定义.
+	 * Named Parameter的名称见AppenderUtils中的常量定义.
 	 */
 	public void setSql(String sql) {
 		this.sql = sql;
@@ -83,11 +83,11 @@ public class JdbcLogWriter extends BlockingConsumer {
 	@Override
 	protected void processMessage(Object message) {
 		LoggingEvent event = (LoggingEvent) message;
-		eventBuffer.add(event);
+		eventsBuffer.add(event);
 		logger.debug("get event, {}", AppenderUtils.convertEventToString(event));
 
 		//已到达BufferSize则执行批量插入操作
-		if (eventBuffer.size() >= batchSize) {
+		if (eventsBuffer.size() >= batchSize) {
 			updateBatch();
 		}
 	}
@@ -99,12 +99,12 @@ public class JdbcLogWriter extends BlockingConsumer {
 		try {
 			//分析事件列表, 转换为jdbc批处理参数.
 			List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
-			for (LoggingEvent event : eventBuffer) {
+			for (LoggingEvent event : eventsBuffer) {
 				Map<String, Object> paramMap = parseEvent(event);
 				paramMapList.add(paramMap);
 			}
-
-			final SqlParameterSource[] batchParams = SqlParameterSourceUtils.createBatch(paramMapList.toArray());
+			Map[] paramMapArray = paramMapList.toArray(new Map[paramMapList.size()]);
+			final SqlParameterSource[] batchParams = SqlParameterSourceUtils.createBatch(paramMapArray);
 
 			//执行批量插入,如果失败调用失败处理函数.
 			try {
@@ -116,16 +116,16 @@ public class JdbcLogWriter extends BlockingConsumer {
 				});
 
 				if (logger.isDebugEnabled()) {
-					for (LoggingEvent event : eventBuffer) {
+					for (LoggingEvent event : eventsBuffer) {
 						logger.debug("saved event, {}", AppenderUtils.convertEventToString(event));
 					}
 				}
 			} catch (DataAccessException e) {
-				handleDataAccessException(e, eventBuffer);
+				handleDataAccessException(e, eventsBuffer);
 			}
 
 			//清除eventBuffer
-			eventBuffer.clear();
+			eventsBuffer.clear();
 		} catch (Exception e) {
 			logger.error("批量提交任务时发生错误.", e);
 		}
@@ -136,7 +136,7 @@ public class JdbcLogWriter extends BlockingConsumer {
 	 */
 	@Override
 	protected void clean() {
-		if (!eventBuffer.isEmpty()) {
+		if (!eventsBuffer.isEmpty()) {
 			updateBatch();
 		}
 		logger.debug("cleaned task {}", this);
