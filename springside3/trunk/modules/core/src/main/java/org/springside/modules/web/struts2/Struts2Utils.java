@@ -155,10 +155,10 @@ public class Struts2Utils {
 			throw new IllegalArgumentException(e);
 		}
 
-		StringBuilder result = new StringBuilder().append(callbackName).append("(").append(jsonString).append(");");
+		String result = new StringBuilder().append(callbackName).append("(").append(jsonString).append(");").toString();
 
-		//渲染Content-Type为javascript的返回内容,输出结果为javascript语句, 如callback197("{content:'Hello World!!!'}");
-		render(JS_TYPE, result.toString(), headers);
+		//渲染Content-Type为javascript的返回内容,输出结果为javascript语句, 如callback197("{html:'Hello World!!!'}");
+		render(JS_TYPE, result, headers);
 	}
 
 	/**

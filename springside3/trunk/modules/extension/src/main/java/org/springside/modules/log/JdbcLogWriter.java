@@ -8,6 +8,7 @@
 package org.springside.modules.log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,10 +21,6 @@ import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.TransactionCallbackWithoutResult;
-import org.springframework.transaction.support.TransactionTemplate;
 import org.springside.modules.queue.BlockingConsumer;
 
 /**
@@ -43,7 +40,6 @@ public class JdbcLogWriter extends BlockingConsumer {
 
 	protected List<LoggingEvent> eventsBuffer = new ArrayList<LoggingEvent>();
 	protected SimpleJdbcTemplate jdbcTemplate;
-	protected TransactionTemplate transactionTemplate;
 
 	/**
 	 * 带Named Parameter的insert sql.
@@ -70,21 +66,16 @@ public class JdbcLogWriter extends BlockingConsumer {
 	}
 
 	/**
-	 * 根据注入的PlatformTransactionManager创建transactionTemplate.
-	 */
-	@Required
-	public void setTransactionManager(PlatformTransactionManager transactionManager) {
-		this.transactionTemplate = new TransactionTemplate(transactionManager);
-	}
-
-	/**
 	 * 消息处理函数,将消息放入buffer,当buffer达到batchSize时执行批量更新函数.
 	 */
 	@Override
 	protected void processMessage(Object message) {
 		LoggingEvent event = (LoggingEvent) message;
 		eventsBuffer.add(event);
-		logger.debug("get event, {}", AppenderUtils.convertEventToString(event));
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("get event, {}", AppenderUtils.convertEventToString(event));
+		}
 
 		//已到达BufferSize则执行批量插入操作
 		if (eventsBuffer.size() >= batchSize) {
@@ -98,22 +89,16 @@ public class JdbcLogWriter extends BlockingConsumer {
 	public void updateBatch() {
 		try {
 			//分析事件列表, 转换为jdbc批处理参数.
-			List<Map<String, Object>> paramMapList = new ArrayList<Map<String, Object>>();
-			for (LoggingEvent event : eventsBuffer) {
-				Map<String, Object> paramMap = parseEvent(event);
-				paramMapList.add(paramMap);
+			Map[] paramMapArray = new HashMap[eventsBuffer.size()];
+			for (int i = 0; i < eventsBuffer.size(); i++) {
+				paramMapArray[i] = parseEvent(eventsBuffer.get(i));
+
 			}
-			Map[] paramMapArray = paramMapList.toArray(new Map[paramMapList.size()]);
 			final SqlParameterSource[] batchParams = SqlParameterSourceUtils.createBatch(paramMapArray);
 
 			//执行批量插入,如果失败调用失败处理函数.
 			try {
-				transactionTemplate.execute(new TransactionCallbackWithoutResult() {
-					@Override
-					public void doInTransactionWithoutResult(TransactionStatus status) {
-						jdbcTemplate.batchUpdate(getActualSql(), batchParams);
-					}
-				});
+				jdbcTemplate.batchUpdate(getActualSql(), batchParams);
 
 				if (logger.isDebugEnabled()) {
 					for (LoggingEvent event : eventsBuffer) {
@@ -124,7 +109,7 @@ public class JdbcLogWriter extends BlockingConsumer {
 				handleDataAccessException(e, eventsBuffer);
 			}
 
-			//清除eventBuffer
+			//清除eventsBuffer
 			eventsBuffer.clear();
 		} catch (Exception e) {
 			logger.error("批量提交任务时发生错误.", e);
