@@ -23,15 +23,15 @@ import org.springside.modules.web.WebUtils;
 /**
  * 本地静态内容展示与下载的Servlet.
  * 
- * 使用EhCache缓存静态内容元数据, 并对内容进行缓存控制及Gzip压缩传输.
+ * 使用EhCache缓存静态内容基本信息, 演示文件高效读取,客户端缓存控制及Gzip压缩传输.
  * 
  * 演示访问地址为：
- * content?contentPath=img/logo.jpg
- * content?contentPath=img/logo.jpg&download=true
+ * static-content?contentPath=img/logo.jpg
+ * static-content?contentPath=img/logo.jpg&download=true
  * 
  * @author calvin
  */
-public class ContentServlet extends HttpServlet {
+public class StaticContentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -42,47 +42,49 @@ public class ContentServlet extends HttpServlet {
 	private static final int GZIP_MINI_LENGTH = 512;
 
 	/** Content基本信息缓存. */
-	private Cache contentCache;
+	private Cache contentInfoCache;
+
+	/** 静态内容仓库存储目录. */
+	private String contentRepositoryPath;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//获取请求内容的基本信息.
 		String contentPath = request.getParameter("contentPath");
-		Content content = getContentFromCache(contentPath);
+		ContentInfo contentInfo = getContentInfoFromCache(contentPath);
 
-		//判断客户端的缓存文件有否修改过, 如无修改则设置返回码为304,直接返回.
-		if (!WebUtils.checkIfModifiedSince(request, response, content.lastModified)
-				|| !WebUtils.checkIfNoneMatchEtag(request, response, content.etag)) {
+		//根据Etag或ModifiedSince Header判断客户端的缓存文件是否有效, 如仍有效则设置返回码为304,直接返回.
+		if (!WebUtils.checkIfModifiedSince(request, response, contentInfo.lastModified)
+				|| !WebUtils.checkIfNoneMatchEtag(request, response, contentInfo.etag)) {
 			return;
 		}
 
-		//设置MIME类型
-		response.setContentType(content.mimeType);
-
 		//设置Etag/过期时间
 		WebUtils.setExpiresHeader(response, WebUtils.ONE_YEAR_SECONDS);
-		WebUtils.setLastModifiedHeader(response, content.lastModified);
-		WebUtils.setEtag(response, content.etag);
+		WebUtils.setLastModifiedHeader(response, contentInfo.lastModified);
+		WebUtils.setEtag(response, contentInfo.etag);
+
+		//设置MIME类型
+		response.setContentType(contentInfo.mimeType);
 
 		//如果是下载请求,设置下载Header
 		if (request.getParameter("download") != null) {
-			WebUtils.setDownloadableHeader(response, content.fileName);
+			WebUtils.setDownloadableHeader(response, contentInfo.fileName);
 		}
 
-		//发送文件内容, 对有需要的内容进行压缩传输.
+		//构造OutputStream
 		OutputStream output;
-		if (WebUtils.checkAccetptGzip(request) && content.needGzip) {
-			//不设置content-length, 使用http1.1 trunked编码.
-			//使用压缩传输的outputstream.
+		if (WebUtils.checkAccetptGzip(request) && contentInfo.needGzip) {
+			//使用压缩传输的outputstream, 使用http1.1 trunked编码不设置content-length.
 			output = WebUtils.buildGzipOutputStream(response);
 		} else {
-			//为http1.0客户端设置content-length.
-			response.setContentLength(content.length);
-			//使用普通outputstream.
+			//使用普通outputstream, 设置content-length.
+			response.setContentLength(contentInfo.length);
 			output = response.getOutputStream();
 		}
 
-		FileInputStream input = new FileInputStream(content.file);
+		//高效读取文件内容并输出.
+		FileInputStream input = new FileInputStream(contentInfo.file);
 		try {
 			//基于byte数组读取文件并直接写入OutputStream, 数组默认大小为4k.
 			IOUtils.copy(input, output);
@@ -94,62 +96,65 @@ public class ContentServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * 在初始化函数中创建内容信息缓存.
+	 */
 	@Override
 	public void init() throws ServletException {
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		CacheManager ehcacheManager = (CacheManager) context.getBean("ehcacheManager");
-		contentCache = ehcacheManager.getCache("contentCache");
+		contentInfoCache = ehcacheManager.getCache("contentInfoCache");
 	}
 
 	/**
-	* 从缓存中获取Content基本信息.
+	* 从缓存中获取Content基本信息, 如不存在则进行创建.
 	*/
-	private Content getContentFromCache(String path) {
-		Element element = contentCache.get(path);
+	private ContentInfo getContentInfoFromCache(String path) {
+		Element element = contentInfoCache.get(path);
 		if (element == null) {
-			Content content = createContent(path);
+			ContentInfo content = createContentInfo(path);
 			element = new Element(content.contentPath, content);
-			contentCache.put(element);
+			contentInfoCache.put(element);
 		}
-		return (Content) element.getObjectValue();
+		return (ContentInfo) element.getObjectValue();
 	}
 
 	/**
 	 * 创建Content基本信息.
 	 */
-	private Content createContent(String contentPath) {
-		Content content = new Content();
+	private ContentInfo createContentInfo(String contentPath) {
+		ContentInfo contentInfo = new ContentInfo();
 
 		String realFilePath = getServletContext().getRealPath(contentPath);
 		File file = new File(realFilePath);
 
-		content.contentPath = contentPath;
-		content.file = file;
-		content.fileName = file.getName();
-		content.length = (int) file.length();
+		contentInfo.contentPath = contentPath;
+		contentInfo.file = file;
+		contentInfo.fileName = file.getName();
+		contentInfo.length = (int) file.length();
 
-		content.lastModified = file.lastModified();
-		content.etag = "W/\"" + content.lastModified + "\"";
+		contentInfo.lastModified = file.lastModified();
+		contentInfo.etag = "W/\"" + contentInfo.lastModified + "\"";
 
 		String mimeType = getServletContext().getMimeType(realFilePath);
 		if (mimeType == null) {
 			mimeType = "application/octet-stream";
 		}
-		content.mimeType = mimeType;
+		contentInfo.mimeType = mimeType;
 
-		if (content.length >= GZIP_MINI_LENGTH && ArrayUtils.contains(GZIP_MIME_TYPES, content.mimeType)) {
-			content.needGzip = true;
+		if (contentInfo.length >= GZIP_MINI_LENGTH && ArrayUtils.contains(GZIP_MIME_TYPES, contentInfo.mimeType)) {
+			contentInfo.needGzip = true;
 		} else {
-			content.needGzip = false;
+			contentInfo.needGzip = false;
 		}
 
-		return content;
+		return contentInfo;
 	}
 
 	/**
 	 * 定义Content的基本信息.
 	 */
-	private static class Content {
+	private static class ContentInfo {
 		String contentPath;
 		File file;
 		String fileName;

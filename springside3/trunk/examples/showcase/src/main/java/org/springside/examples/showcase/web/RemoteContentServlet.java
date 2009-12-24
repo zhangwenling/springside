@@ -33,26 +33,26 @@ import org.slf4j.LoggerFactory;
 /**
  * 获取远程静态内容并进行展示的Servlet.
  * 
- * 演示使用多线程安全的可重用的Apache HttpClient获取远程静态内容.
+ * 演示使用多线程安全的Apache HttpClient获取远程静态内容.
  * 
- * 演示访问地址如下(remoteUrl已经过URL编码):
- * remote-content?remoteUrl=http%3A%2F%2Flocalhost%3A8080%2Fshowcase%2Fimg%2Flogo.jpg
+ * 演示访问地址如下(contentUrl已经过URL编码):
+ * remote-content?contentUrl=http%3A%2F%2Flocalhost%3A8080%2Fshowcase%2Fimg%2Flogo.jpg
  * 
  * @author calvin
  */
 public class RemoteContentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final int TOTAL_CONNECTIONS = 50;
 
 	private static Logger logger = LoggerFactory.getLogger(RemoteContentServlet.class);
+
 	private HttpClient httpClient = null;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//获取Header
-		String remoteUrl = request.getParameter("remoteUrl");
-		HttpEntity entity = fetchContent(remoteUrl);
+		//获取内容
+		String contentUrl = request.getParameter("contentUrl");
+		HttpEntity entity = fetchContent(contentUrl);
 
 		if (entity == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -97,19 +97,18 @@ public class RemoteContentServlet extends HttpServlet {
 	}
 
 	/**
-	 * 创建多线程安全的可重用的HttpClient实例.
+	 * 创建多线程安全的HttpClient实例.
 	 */
 	@Override
 	public void init() throws ServletException {
 		// Create and initialize HTTP parameters
 		HttpParams params = new BasicHttpParams();
-		ConnManagerParams.setMaxTotalConnections(params, TOTAL_CONNECTIONS);
+		ConnManagerParams.setMaxTotalConnections(params, 50);
 		HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
 
 		// Create and initialize scheme registry 
 		SchemeRegistry schemeRegistry = new SchemeRegistry();
 		schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-
 		// Create an HttpClient with the ThreadSafeClientConnManager.
 		ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
 		httpClient = new DefaultHttpClient(cm, params);

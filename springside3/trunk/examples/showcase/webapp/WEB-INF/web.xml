@@ -33,8 +33,8 @@
 
 	<!-- Content Servlet 配置 -->
 	<servlet>
-		<servlet-name>ContentServlet</servlet-name>
-		<servlet-class>org.springside.examples.showcase.web.ContentServlet</servlet-class>
+		<servlet-name>StaticContentServlet</servlet-name>
+		<servlet-class>org.springside.examples.showcase.web.StaticContentServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>RemoteContentServlet</servlet-name>
@@ -42,8 +42,8 @@
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>ContentServlet</servlet-name>
-		<url-pattern>/content</url-pattern>
+		<servlet-name>StaticContentServlet</servlet-name>
+		<url-pattern>/static-content</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>RemoteContentServlet</servlet-name>
