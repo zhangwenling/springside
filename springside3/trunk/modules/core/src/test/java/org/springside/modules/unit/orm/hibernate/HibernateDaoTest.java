@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -85,8 +85,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		assertEquals(1, page.getResult().size());
 
 		//命名参数版本
-		Map<String, Object> paraMap = new HashMap<String, Object>();
-		paraMap.put("email", "%springside.org.cn%");
+		Map<String, String> paraMap = Collections.singletonMap("email", "%springside.org.cn%");
 		page = new Page<User>(5);
 		dao.findPage(page, "from User u where email like :email", paraMap);
 		assertEquals(5, page.getResult().size());

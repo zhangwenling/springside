@@ -89,10 +89,10 @@ public class JdbcLogWriter extends BlockingConsumer {
 	public void updateBatch() {
 		try {
 			//分析事件列表, 转换为jdbc批处理参数.
+			int i = 0;
 			Map[] paramMapArray = new HashMap[eventsBuffer.size()];
-			for (int i = 0; i < eventsBuffer.size(); i++) {
-				paramMapArray[i] = parseEvent(eventsBuffer.get(i));
-
+			for (LoggingEvent event : eventsBuffer) {
+				paramMapArray[i++] = parseEvent(event);
 			}
 			final SqlParameterSource[] batchParams = SqlParameterSourceUtils.createBatch(paramMapArray);
 

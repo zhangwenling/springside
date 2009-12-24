@@ -40,13 +40,6 @@ public class UserDaoTest extends SpringTxTestCase {
 	}
 
 	@Test
-	public void testNativeSql() {
-		User user = userDao.getUserByNativeSql("admin");
-		assertEquals("admin", user.getLoginName());
-		assertEquals("Admin, User", user.getRoleNames());
-	}
-
-	@Test
 	@SuppressWarnings("unchecked")
 	public void testSampleDialect() {
 		//select about 50% record from database.

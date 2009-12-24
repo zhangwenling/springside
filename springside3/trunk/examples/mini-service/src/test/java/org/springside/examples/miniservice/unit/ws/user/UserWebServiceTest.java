@@ -1,6 +1,6 @@
 package org.springside.examples.miniservice.unit.ws.user;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.dozer.DozerBeanMapper;
@@ -51,8 +51,7 @@ public class UserWebServiceTest extends Assert {
 	@Test
 	public void dozerBinding() {
 		User user = UserData.getRandomUserWithAdminRole();
-		List<User> list = new ArrayList<User>();
-		list.add(user);
+		List<User> list = Collections.singletonList(user);
 		EasyMock.expect(mockUserManager.getAllUser()).andReturn(list);
 		EasyMock.replay(mockUserManager);
 

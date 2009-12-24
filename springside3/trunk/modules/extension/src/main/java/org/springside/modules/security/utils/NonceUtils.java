@@ -56,13 +56,6 @@ public class NonceUtils {
 	}
 
 	/**
-	 * 使用SecureRandom生成32字符,每8位带的UUID,见rfc4122.
-	 */
-	public static String randomUUID() {
-		return UUID.randomUUID().toString();
-	}
-
-	/**
 	 * 使用SecureRandom生成Integer.
 	 */
 	public static int randomInt() {
@@ -88,6 +81,13 @@ public class NonceUtils {
 	 */
 	public static String randomHexLong() {
 		return Long.toHexString(randomLong());
+	}
+
+	/**
+	 * 使用SecureRandom生成32字符,每8位带-的UUID,见rfc4122.
+	 */
+	public static String randomUUID() {
+		return UUID.randomUUID().toString();
 	}
 
 	//-- Timestamp function --//

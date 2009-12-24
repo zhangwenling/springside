@@ -8,7 +8,7 @@
 package org.springside.modules.jmx;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -65,8 +65,7 @@ public class JmxClientTemplate {
 
 		boolean hasCredentlals = StringUtils.isNotBlank(userName);
 		if (hasCredentlals) {
-			Map environment = new HashMap();
-			environment.put(JMXConnector.CREDENTIALS, new String[] { userName, passwd });
+			Map environment = Collections.singletonMap(JMXConnector.CREDENTIALS, new String[] { userName, passwd });
 			connector = JMXConnectorFactory.connect(url, environment);
 		} else {
 			connector = JMXConnectorFactory.connect(url);

@@ -3,7 +3,7 @@ package org.springside.modules.unit.web.struts2;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,8 +92,7 @@ public class Struts2UtilsTest extends Assert {
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		MockWebUtils.setResponseToStruts2(response);
 
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("html", "<p>helloworld</p>");
+		Map<String, String> map = Collections.singletonMap("html", "<p>helloworld</p>");
 		Struts2Utils.renderJsonp("callback", map, "no-cache:true");
 		assertEquals("callback({\"html\":\"<p>helloworld</p>\"});", response.getContentAsString());
 

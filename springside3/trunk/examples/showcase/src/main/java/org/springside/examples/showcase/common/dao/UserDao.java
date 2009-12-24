@@ -1,6 +1,6 @@
 package org.springside.examples.showcase.common.dao;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -27,20 +27,8 @@ public class UserDao extends HibernateDao<User, Long> {
 	 * 批量修改用户状态.
 	 */
 	public void disableUsers(List<Long> ids) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("ids", ids);
+		Map<String, List<Long>> map = Collections.singletonMap("ids", ids);
 		batchExecute(UserDao.DISABLE_USERS, map);
-	}
-
-	/**
-	 * 使用NativeSql并装配成User entity.
-	 * 
-	 * 因目前Native SQL预装载多对多关系还必须用hbm.xml来表达,暂时不演示.
-	 */
-	public User getUserByNativeSql(String loginName) {
-		String sql = "select {u.*} from ss_user u where u.LOGIN_NAME=:loginName";
-		return (User) getSession().createSQLQuery(sql).addEntity("u", User.class).setString("loginName", loginName)
-				.uniqueResult();
 	}
 
 	/**

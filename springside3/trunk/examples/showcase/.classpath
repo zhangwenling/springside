@@ -15,6 +15,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/springside3-extension"/>
 	<classpathentry kind="lib" path="lib/easymock-2.5.2.jar"/>
 	<classpathentry kind="lib" path="lib/easymockclassextension-2.4.jar"/>
-	<classpathentry kind="lib" path="lib/unitils-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/unitils-core-3.1.jar"/>
 	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>

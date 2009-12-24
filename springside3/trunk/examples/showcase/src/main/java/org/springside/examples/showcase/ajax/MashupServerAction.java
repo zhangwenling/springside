@@ -1,6 +1,6 @@
 package org.springside.examples.showcase.ajax;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Namespace;
@@ -23,8 +23,7 @@ public class MashupServerAction extends ActionSupport {
 		String callbackName = Struts2Utils.getParameter("callback");
 
 		//设置需要被格式化为JSON字符串的内容.
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("html", "<p>Hello World!</p>");
+		Map<String, String> map = Collections.singletonMap("html", "<p>Hello World!</p>");
 
 		//渲染返回结果.
 		Struts2Utils.renderJsonp(callbackName, map);

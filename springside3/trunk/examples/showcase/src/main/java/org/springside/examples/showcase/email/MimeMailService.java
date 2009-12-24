@@ -2,7 +2,7 @@ package org.springside.examples.showcase.email;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -86,8 +86,7 @@ public class MimeMailService {
 	private String generateContent(String userName) throws MessagingException {
 
 		try {
-			Map context = new HashMap();
-			context.put("userName", userName);
+			Map context = Collections.singletonMap("userName", userName);
 			return FreeMarkerTemplateUtils.processTemplateIntoString(template, context);
 		} catch (IOException e) {
 			logger.error("生成邮件内容失败, FreeMarker模板不存在", e);
