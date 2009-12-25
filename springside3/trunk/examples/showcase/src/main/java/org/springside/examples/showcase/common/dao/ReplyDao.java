@@ -5,7 +5,7 @@ import org.springside.examples.showcase.common.entity.Reply;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
 /**
- * 回复对象的泛型DAO.
+ * 回复对象的泛型Hibernate Dao.
  * 
  * @author calvin
  */

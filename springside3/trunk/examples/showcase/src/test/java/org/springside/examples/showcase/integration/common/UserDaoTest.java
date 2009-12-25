@@ -27,7 +27,7 @@ public class UserDaoTest extends SpringTxTestCase {
 	private UserDao userDao;
 
 	@Test
-	public void testEagerFetchCollection() {
+	public void eagerFetchCollection() {
 		//init by hql
 		List<User> userList1 = userDao.getAllUserWithRoleByDistinctHql();
 		assertEquals(6, userList1.size());
@@ -41,7 +41,7 @@ public class UserDaoTest extends SpringTxTestCase {
 
 	@Test
 	@SuppressWarnings("unchecked")
-	public void testSampleDialect() {
+	public void sampleDialect() {
 		//select about 50% record from database.
 		List<String> values = userDao.createQuery("select u.name from User u where sample()<50").list();
 		for (String name : values) {
@@ -52,13 +52,13 @@ public class UserDaoTest extends SpringTxTestCase {
 	//只在-Dtest.groups=xxxx或application.test.properties的test.groups中包含extension时执行本测试方法.
 	@Test
 	@Groups("extension")
-	public void testUpDialect() {
+	public void upDialect() {
 		Object value = userDao.createQuery("select u.name from User u where up(u.name)='ADMIN'").uniqueResult();
 		assertEquals("Admin", value);
 	}
 
 	@Test
-	public void testBatchDisableUser() {
+	public void batchDisableUser() {
 		List<Long> ids = new ArrayList<Long>();
 		ids.add(1L);
 		ids.add(2L);

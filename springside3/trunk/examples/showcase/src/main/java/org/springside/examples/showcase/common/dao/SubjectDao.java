@@ -7,7 +7,7 @@ import org.springside.examples.showcase.common.entity.Subject;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
 /**
- * 主题对象的泛型DAO.
+ * 主题对象的泛型Hibernate Dao.
  * 
  * @author calvin
  */
