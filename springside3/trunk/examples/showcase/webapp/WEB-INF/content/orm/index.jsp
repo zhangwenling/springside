@@ -18,21 +18,24 @@
 		<div class="yui-b">
 		<h1>数据库访问高级演示</h1>
 
-		<h2>技术说明：</h2>
+		<h2>Hibernate高级应用：</h2>
 		<ul>
 			<li>Hibernate Event，在修改User对象时自动加入审计信息。(综合示例)</li>
 			<li>Hibernate @Version字段，在Struts2 Prepareable Action里的使用。(综合示例)</li>
 			<li>Hibernate 继承，Post与Subject/Reply类的同表继承。(PostDao) </li>
-			<li>Hibernate Clob字段。(PostDao测试用例)</li>
-			<li>Hibernate 查询时预加载Lazy Load关联对象。(UserDao测试用例)</li>
-			<li>Hibernate Native SQL。(UserDao测试用例)</li>
-			<li>Hibernate 批量更新操作的HQL。(UserDao测试用例)</li>
-			<li>Hibernate 扩展Dialect，加入数据库特性语句。(UserDao测试用例)</li>
-			<li>SQL执行记录及时间分析：基于P6Spy的通用实现。</li>
+			<li>Hibernate Clob字段。(PostDao)</li>
+			<li>Hibernate 查询时预加载Lazy Load关联对象。(UserDao)</li>
+			<li>Hibernate 批量更新操作的HQL。(UserDao)</li>
+			<li>Hibernate 扩展Dialect，加入数据库特性语句。(UserDao)</li>
 			<li>Hibernate Envers，自动记录关键业务对象的修改历史。(计划中)</li>
 		</ul>
 		
-		<h2>用户故事：</h2>
+		<h2>Spring JdbcTemplate应用：</h2>
+		<ul>
+			<li>在高性能要求的时候使用Spring JdbcTemplate访问和更新数据库。(UserJdbcDao)</li>
+		</ul>
+		
+		<h2>P6SpySQL执行记录及时间分析</h2>
 		<ul>
 			<li>访问对象列表及修改用户对象，P6Spy将sql记录到c:/spy.log，使用irontracksql观看结果。</li>
 		</ul>

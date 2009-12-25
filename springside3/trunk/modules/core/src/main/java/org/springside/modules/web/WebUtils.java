@@ -25,30 +25,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public class WebUtils {
 
-	public static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
-
-	/**
-	 * 设置让浏览器弹出下载对话框的Header.
-	 * 
-	 * @param fileName 下载后的文件名.
-	 */
-	public static void setDownloadableHeader(HttpServletResponse response, String fileName) {
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
-	}
-
-	/**
-	 * 设置LastModified Header.
-	 */
-	public static void setLastModifiedHeader(HttpServletResponse response, long lastModifiedDate) {
-		response.setDateHeader("Last-Modified", lastModifiedDate);
-	}
-
-	/**
-	 * 设置Etag Header.
-	 */
-	public static void setEtag(HttpServletResponse response, String etag) {
-		response.setHeader("ETag", etag);
-	}
+	public static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;	
 
 	/**
 	 * 设置客户端缓存过期时间 Header.
@@ -71,32 +48,25 @@ public class WebUtils {
 	}
 
 	/**
-	 * 检查浏览器客户端是否支持gzip编码.
+	 * 设置LastModified Header.
 	 */
-	public static boolean checkAccetptGzip(HttpServletRequest request) {
-		//Http1.1 header
-		String acceptEncoding = request.getHeader("Accept-Encoding");
-
-		if (StringUtils.contains(acceptEncoding, "gzip")) {
-			return true;
-		} else {
-			return false;
-		}
+	public static void setLastModifiedHeader(HttpServletResponse response, long lastModifiedDate) {
+		response.setDateHeader("Last-Modified", lastModifiedDate);
 	}
 
 	/**
-	 * 设置Gzip Header并返回GZIPOutputStream.
+	 * 设置Etag Header.
 	 */
-	public static OutputStream buildGzipOutputStream(HttpServletResponse response) throws IOException {
-		response.setHeader("Content-Encoding", "gzip");
-		response.setHeader("Vary", "Accept-Encoding");
-		return new GZIPOutputStream(response.getOutputStream());
+	public static void setEtag(HttpServletResponse response, String etag) {
+		response.setHeader("ETag", etag);
 	}
-
+	
 	/**
 	 * 根据浏览器If-Modified-Since Header, 计算文件是否已被修改.
 	 * 
 	 * 如果无修改, checkIfModify返回false ,设置304 not modify status.
+	 * 
+	 * @param lastModified 内容的最后修改时间.
 	 */
 	public static boolean checkIfModifiedSince(HttpServletRequest request, HttpServletResponse response,
 			long lastModified) {
@@ -112,6 +82,8 @@ public class WebUtils {
 	 * 根据浏览器 If-None-Match Header, 计算Etag是否已无效.
 	 * 
 	 * 如果Etag有效, checkIfNoneMatch返回false, 设置304 not modify status.
+	 * 
+	 * @param etag 内容的ETag.
 	 */
 	public static boolean checkIfNoneMatchEtag(HttpServletRequest request, HttpServletResponse response, String etag) {
 		String headerValue = request.getHeader("If-None-Match");
@@ -137,6 +109,39 @@ public class WebUtils {
 			}
 		}
 		return true;
+	}
+
+
+	/**
+	 * 检查浏览器客户端是否支持gzip编码.
+	 */
+	public static boolean checkAccetptGzip(HttpServletRequest request) {
+		//Http1.1 header
+		String acceptEncoding = request.getHeader("Accept-Encoding");
+
+		if (StringUtils.contains(acceptEncoding, "gzip")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 设置Gzip Header并返回GZIPOutputStream.
+	 */
+	public static OutputStream buildGzipOutputStream(HttpServletResponse response) throws IOException {
+		response.setHeader("Content-Encoding", "gzip");
+		response.setHeader("Vary", "Accept-Encoding");
+		return new GZIPOutputStream(response.getOutputStream());
+	}
+	
+	/**
+	 * 设置让浏览器弹出下载对话框的Header.
+	 * 
+	 * @param fileName 下载后的文件名.
+	 */
+	public static void setDownloadableHeader(HttpServletResponse response, String fileName) {
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
 	}
 
 	/**

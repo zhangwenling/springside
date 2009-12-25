@@ -11,14 +11,13 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springside.examples.showcase.common.entity.User;
 
 /**
- * User对象的JdbcTemplate Dao.
+ * User对象的Jdbc Dao, 演示Spring JdbcTemplate的使用.
  * 
  * @author calvin
  */
@@ -46,40 +45,40 @@ public class UserJdbcDao {
 	 * 查询单个对象.
 	 */
 	public User queryObject(Long id) {
-		return jdbcTemplate.queryForObject("select id,name,login_name from SS_USER where id=?", userMapper, id);
+		return jdbcTemplate.queryForObject("select id, name, login_name from SS_USER where id=?", userMapper, id);
 	}
 
 	/**
 	 * 查询对象列表.
 	 */
 	public List<User> queryObjectList() {
-		return jdbcTemplate.query("select id,name,login_name from SS_USER order by id", userMapper);
+		return jdbcTemplate.query("select id, name, login_name from SS_USER order by id", userMapper);
 	}
 
 	/**
 	 * 查询单个结果Map.
 	 */
 	public Map<String, Object> queryMap(Long id) {
-		return jdbcTemplate.queryForMap("select id,name,login_name from SS_USER where id=?", id);
+		return jdbcTemplate.queryForMap("select id, login_name from SS_USER where id=?", id);
 	}
 
 	/**
 	 * 查询结果Map列表.
 	 */
 	public List<Map<String, Object>> queryMapList() {
-		return jdbcTemplate.queryForList("select id,name,login_name from SS_USER order by id");
+		return jdbcTemplate.queryForList("select id, login_name from SS_USER order by id");
 	}
 
 	/**
-	 * 使用单个命名参数, 以Map形式传入.
+	 * 使用Map形式的单个命名参数.
 	 */
 	public User queryBySingleNamedParameter(Long id) {
 		Map map = Collections.singletonMap("id", id);
-		return jdbcTemplate.queryForObject("select id,name,login_name from SS_USER where id=:id", userMapper, map);
+		return jdbcTemplate.queryForObject("select id, name, login_name from SS_USER where id=:id", userMapper, map);
 	}
 
 	/**
-	 * 使用多个命名参数, 以Map形式传入.
+	 * 使用Map形式的多个命名参数.
 	 */
 	public User queryByMultiNamedParameter(String loginName, String name) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -91,12 +90,12 @@ public class UserJdbcDao {
 	}
 
 	/**
-	 * 创建/更新对象时, 使用Bean形式传入的命名参数, Bean的属性名称应与命名参数一致. 
+	 * 使用Bean形式的命名参数, Bean的属性名称应与命名参数一致. 
 	 */
 	public void createObject(User user) {
 		//使用BeanPropertySqlParameterSource将User的属性映射为命名参数.
 		BeanPropertySqlParameterSource source = new BeanPropertySqlParameterSource(user);
-		jdbcTemplate.update("insert into SS_USER(id,login_name,name) values(:id,:loginName,:name)", source);
+		jdbcTemplate.update("insert into SS_USER(id, login_name, name) values(:id, :loginName, :name)", source);
 	}
 
 	/**
@@ -110,6 +109,6 @@ public class UserJdbcDao {
 			sourceArray[i++] = new BeanPropertySqlParameterSource(user);
 		}
 
-		jdbcTemplate.batchUpdate("insert into SS_USER(id,login_name,name) values(:id,:loginName,:name)", sourceArray);
+		jdbcTemplate.batchUpdate("insert into SS_USER(id, login_name, name) values(:id, :loginName, :name)", sourceArray);
 	}
 }
