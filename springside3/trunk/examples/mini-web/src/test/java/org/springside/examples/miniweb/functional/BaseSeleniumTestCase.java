@@ -9,6 +9,10 @@ import org.springside.modules.test.selenium.SeleniumTestCase;
  * @author calvin
  */
 public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
+	
+	public static final String LOGIN_BUTTON = "//input[@value='登录']";
+	public static final String SUBMIT_BUTTON = "//input[@value='提交']";
+	public static final String SEARCH_BUTTON = "//input[@value='搜索']";
 
 	/**
 	 * 登录管理员角色.
@@ -18,7 +22,7 @@ public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 		selenium.open("/mini-web/login.action");
 		selenium.type("j_username", "admin");
 		selenium.type("j_password", "admin");
-		selenium.click("//input[@value='登录']");
+		selenium.click(LOGIN_BUTTON);
 		waitPageLoad();
 		assertTrue(selenium.isTextPresent("你好, admin."));
 	}
@@ -29,7 +33,14 @@ public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 	protected void clickMenu(String menuName) {
 		selenium.open("/mini-web");
 		waitPageLoad();
-		selenium.click("link=" + menuName);
+		clickLink(menuName);
+	}
+
+	/**
+	 * 点击链接.
+	 */
+	protected void clickLink(String linkText) {
+		selenium.click("link=" + linkText);
 		waitPageLoad();
 	}
 }

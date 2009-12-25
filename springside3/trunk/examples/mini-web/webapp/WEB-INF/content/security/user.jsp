@@ -30,7 +30,7 @@
 			登录名: <input type="text" name="filter_EQS_loginName" value="${param['filter_EQS_loginName']}" size="9"/>
 			姓名或Email: <input type="text" name="filter_LIKES_name_OR_email"
 							 value="${param['filter_LIKES_name_OR_email']}" size="9"/>
-			<input class="button" type="button" value="搜索" onclick="search();"/>
+			<input type="button" value="搜索" onclick="search();"/>
 		</div>
 		<div id="content">
 			<table id="contentTable">

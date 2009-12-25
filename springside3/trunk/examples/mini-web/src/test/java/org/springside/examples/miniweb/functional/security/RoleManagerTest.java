@@ -1,6 +1,7 @@
 package org.springside.examples.miniweb.functional.security;
 
 import org.junit.Test;
+import org.springside.examples.miniweb.data.DataUtils;
 import org.springside.examples.miniweb.data.SecurityEntityData;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
@@ -12,69 +13,83 @@ import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
  */
 public class RoleManagerTest extends BaseSeleniumTestCase {
 
-	/**
-	 * 用户增删改操作查测试.
-	 */
-	@Test
-	public void crudRole() {
-		createRole();
-		String newRoleName = editRole();
-		deleteRole(newRoleName);
-	}
+	private static String commonRoleName = null;
 
 	/**
-	 * 创建用户,并返回创建的用户名.
+	 * 创建公共测试角色.
 	 */
-	private void createRole() {
-		clickMenu("角色列表");
-		selenium.click("link=增加新角色");
-		waitPageLoad();
+	@Test
+	public void createRole() {
+		openOverviewPage();
+		clickLink("增加新角色");
 
 		Role role = SecurityEntityData.getRandomRole();
 
 		selenium.type("name", role.getName());
 		selenium.click("checkedAuthIds-1");
 		selenium.click("checkedAuthIds-3");
-		selenium.click("//input[@value='提交']");
+
+		selenium.click(SUBMIT_BUTTON);
 		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("保存角色成功"));
 		assertEquals(role.getName(), selenium.getTable("contentTable.3.0"));
 		assertEquals("浏览用户, 浏览角色", selenium.getTable("contentTable.3.1"));
+
+		commonRoleName = role.getName();
 	}
 
 	/**
-	 * 根据用户名修改对象.
+	 * 修改公共测试角色.
 	 */
-	private String editRole() {
-		String newRoleName = "newRoleName";
+	@Test
+	public void editRole() {
+		assertCommonRoleExist();
 
-		clickMenu("角色列表");
+		openOverviewPage();
 		selenium.click("//table[@id='contentTable']/tbody/tr[4]/td[3]/a[1]");
 		waitPageLoad();
 
+		String newRoleName = DataUtils.random("Role");
 		selenium.type("name", newRoleName);
 		selenium.click("checkedAuthIds-2");
 		selenium.click("checkedAuthIds-3");
-		selenium.click("//input[@value='提交']");
+
+		selenium.click(SUBMIT_BUTTON);
 		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("保存角色成功"));
 		assertEquals(newRoleName, selenium.getTable("contentTable.3.0"));
 		assertEquals("浏览用户, 修改用户", selenium.getTable("contentTable.3.1"));
-
-		return newRoleName;
 	}
 
 	/**
 	 * 根据用户名删除对象.
 	 */
-	private void deleteRole(String roleName) {
-		clickMenu("角色列表");
+	@Test
+	public void deleteRole() {
+		assertCommonRoleExist();
+
+		openOverviewPage();
 		selenium.click("//table[@id='contentTable']/tbody/tr[4]/td[3]/a[2]");
 		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("删除角色成功"));
-		assertFalse(selenium.isTextPresent(roleName));
+		assertFalse(selenium.isTextPresent(commonRoleName));
+
+		commonRoleName = null;
+	}
+
+	private void openOverviewPage() {
+		clickMenu("角色列表");
+	}
+
+	/**
+	 * 确保公共测试角色已初始化的工具函数.
+	 */
+	private void assertCommonRoleExist() {
+		if (commonRoleName == null) {
+			createRole();
+		}
 	}
 }
