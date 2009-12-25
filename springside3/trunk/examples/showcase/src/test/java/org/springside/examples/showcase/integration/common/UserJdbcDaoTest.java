@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.dao.UserJdbcDao;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.modules.security.utils.NonceUtils;
+import org.springside.examples.showcase.data.DataUtils;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
@@ -58,40 +58,40 @@ public class UserJdbcDaoTest extends SpringTxTestCase {
 
 	@Test
 	public void createObject() {
-		Long id = NonceUtils.randomLong();
+		Long id = DataUtils.randomId();
 		User user = new User();
 		user.setId(id);
-		user.setLoginName("foo");
-		user.setName("Foo");
+		user.setLoginName(DataUtils.random("user"));
+		user.setName(DataUtils.random("User"));
 		userJdbcDao.createObject(user);
 
 		User newUser = userJdbcDao.queryObject(id);
 		assertEquals(user.getLoginName(), newUser.getLoginName());
 	}
-	
+
 	@Test
 	public void batchCreateObject() {
-		Long id1 = NonceUtils.randomLong();
+		Long id1 = DataUtils.randomId();
 		User user1 = new User();
 		user1.setId(id1);
-		user1.setLoginName("foo");
-		user1.setName("Foo");
-		
-		Long id2 = NonceUtils.randomLong();
+		user1.setLoginName(DataUtils.random("user"));
+		user1.setName(DataUtils.random("User"));
+
+		Long id2 = DataUtils.randomId();
 		User user2 = new User();
 		user2.setId(id2);
-		user2.setLoginName("bar");
-		user2.setName("Bar");
-		
-		List list = new ArrayList();	
+		user2.setLoginName(DataUtils.random("user"));
+		user2.setName(DataUtils.random("User"));
+
+		List<User> list = new ArrayList<User>();
 		list.add(user1);
 		list.add(user2);
-		
+
 		userJdbcDao.batchCreateObject(list);
 
 		User newUser1 = userJdbcDao.queryObject(id1);
 		assertEquals(user1.getLoginName(), newUser1.getLoginName());
-		
+
 		User newUser2 = userJdbcDao.queryObject(id2);
 		assertEquals(user2.getLoginName(), newUser2.getLoginName());
 	}

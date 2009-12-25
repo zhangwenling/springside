@@ -13,7 +13,7 @@ public class UserData {
 	public static final String DEFAULT_PASSWORD = "123456";
 
 	public static User getRandomUser() {
-		String userName = DataUtil.random("User");
+		String userName = DataUtils.random("User");
 
 		User user = new User();
 		user.setLoginName(userName);

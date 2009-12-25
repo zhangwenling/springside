@@ -28,14 +28,15 @@ public class UserDaoTest extends SpringTxTestCase {
 
 	@Test
 	public void eagerFetchCollection() {
+		int userCount = countRowsInTable("SS_USER");
 		//init by hql
 		List<User> userList1 = userDao.getAllUserWithRoleByDistinctHql();
-		assertEquals(6, userList1.size());
+		assertEquals(userCount, userList1.size());
 		assertTrue(Hibernate.isInitialized(userList1.get(0).getRoleList()));
 
 		//init by criteria
 		List<User> userList2 = userDao.getAllUserWithRolesByDistinctCriteria();
-		assertEquals(6, userList2.size());
+		assertEquals(userCount, userList2.size());
 		assertTrue(Hibernate.isInitialized(userList2.get(0).getRoleList()));
 	}
 

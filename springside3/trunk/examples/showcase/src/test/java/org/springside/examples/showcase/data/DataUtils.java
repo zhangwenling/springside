@@ -1,8 +1,12 @@
-package org.springside.examples.miniweb.data;
+package org.springside.examples.showcase.data;
+
+import java.util.Random;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-public class DataUtil {
+public class DataUtils {
+
+	private static Random random = new Random();
 
 	public static String random(String prefix) {
 		return prefix + randomNumber();
@@ -16,4 +20,7 @@ public class DataUtil {
 		return RandomStringUtils.randomNumeric(5);
 	}
 
+	public static Long randomId() {
+		return random.nextLong();
+	}
 }

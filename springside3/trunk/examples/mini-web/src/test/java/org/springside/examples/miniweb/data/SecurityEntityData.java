@@ -15,7 +15,7 @@ public class SecurityEntityData {
 	public static final String DEFAULT_PASSWORD = "123456";
 
 	public static User getRandomUser() {
-		String userName = DataUtil.random("User");
+		String userName = DataUtils.random("User");
 
 		User user = new User();
 		user.setLoginName(userName);
@@ -36,7 +36,7 @@ public class SecurityEntityData {
 
 	public static Role getRandomRole() {
 		Role role = new Role();
-		role.setName(DataUtil.random("Role"));
+		role.setName(DataUtils.random("Role"));
 
 		return role;
 	}
@@ -50,7 +50,7 @@ public class SecurityEntityData {
 	}
 
 	public static Authority getRandomAuthority() {
-		String authName = DataUtil.random("Authority");
+		String authName = DataUtils.random("Authority");
 
 		Authority authority = new Authority();
 		authority.setName(authName);
@@ -61,7 +61,7 @@ public class SecurityEntityData {
 
 	public static Resource getRandomResource() {
 		Resource resource = new Resource();
-		resource.setValue(DataUtil.random("Resource"));
+		resource.setValue(DataUtils.random("Resource"));
 		resource.setResourceType(Resource.URL_TYPE);
 		resource.setPosition(100);
 

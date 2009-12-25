@@ -11,7 +11,7 @@ import org.springside.modules.log.Log4jMBean;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 /**
- * springside-jee中{@link JmxClientTemplate}的测试用例.
+ * springside-extension中{@link JmxClientTemplate}的测试用例.
  * 
  * JMX相关用例使用相同的@ContextConfiguration以保证使用同一个ApplicationContext,避免JMX端口重复注册.
  * 
@@ -27,8 +27,8 @@ public class JmxClientTemplateTest extends SpringContextTestCase {
 	@Before
 	public void setUp() throws Exception {
 		jmxClientTemplate = new JmxClientTemplate("service:jmx:rmi:///jndi/rmi://localhost:1098/showcase");
-		serverConfigMbean = jmxClientTemplate
-				.createMBeanProxy(JmxClientService.SERVER_CONFIG_MBEAN_NAME, ServerConfigMBean.class);
+		serverConfigMbean = jmxClientTemplate.createMBeanProxy(JmxClientService.SERVER_CONFIG_MBEAN_NAME,
+				ServerConfigMBean.class);
 	}
 
 	@After

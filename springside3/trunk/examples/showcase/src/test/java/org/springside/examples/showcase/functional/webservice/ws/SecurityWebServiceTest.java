@@ -37,7 +37,7 @@ public class SecurityWebServiceTest extends SpringContextTestCase {
 	public void getAllUserWithPlainPassword() {
 		UserWebService userWebService = (UserWebService) applicationContext.getBean("userServiceWithPlainPassword");
 		GetAllUserResult result = userWebService.getAllUser();
-		assertEquals(6, result.getUserList().size());
+		assertTrue(result.getUserList().size() > 0);
 	}
 
 	/**
@@ -66,6 +66,6 @@ public class SecurityWebServiceTest extends SpringContextTestCase {
 
 		//调用UserWebService
 		GetAllUserResult result = userWebService.getAllUser();
-		assertEquals(6, result.getUserList().size());
+		assertTrue(result.getUserList().size() > 0);
 	}
 }

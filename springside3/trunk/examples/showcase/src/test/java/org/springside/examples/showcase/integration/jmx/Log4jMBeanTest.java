@@ -12,7 +12,7 @@ import org.springside.modules.log.Log4jMBean;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 /**
- * sprinside-jee中Log4jMBean的测试用例.
+ * sprinside-extension中Log4jMBean的测试用例.
  * 
  * JMX相关用例使用相同的@ContextConfiguration以保证使用同一个ApplicationContext,避免JMX端口重复注册.
  * 

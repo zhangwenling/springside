@@ -20,9 +20,8 @@ public class ResourceDaoTest extends SpringTxTestCase {
 	@Test
 	public void getUrlResourceWithAuthorities() {
 		List<Resource> resourceList = entityDao.getUrlResourceWithAuthorities();
-
 		//校验资源的总数、排序及其授权已初始化
-		assertEquals(6, resourceList.size());
+		assertEquals(countRowsInTable("SS_RESOURCE"), resourceList.size());
 		Resource resource = resourceList.get(0);
 		assertEquals(1.0, resource.getPosition());
 		evict(resource);

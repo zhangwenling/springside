@@ -34,7 +34,7 @@ public class PostDaoTest extends SpringTxTestCase {
 	}
 
 	@Test
-	public void newSubject() {
+	public void createSubject() {
 		Subject subject = new Subject();
 		subject.setTitle("Good Night");
 		subject.setContent("Good Night!!");
@@ -50,7 +50,7 @@ public class PostDaoTest extends SpringTxTestCase {
 	}
 
 	@Test
-	public void editSubject() {
+	public void updateSubject() {
 		Subject subject = subjectDao.getDetail(1L);
 		subject.setTitle("Good Afternoon");
 		subject.setContent("Good Afternoon!!!");
@@ -71,7 +71,7 @@ public class PostDaoTest extends SpringTxTestCase {
 	}
 
 	@Test
-	public void newReply() {
+	public void createReply() {
 		Reply reply = new Reply();
 		reply.setTitle("GoodAfternoon");
 		reply.setContent("Good Afternoon!!!");
@@ -88,7 +88,7 @@ public class PostDaoTest extends SpringTxTestCase {
 	}
 
 	@Test
-	public void editReply() {
+	public void updateReply() {
 		Reply reply = replyDao.getDetail(2L);
 		reply.setTitle("GoodEvening");
 		reply.setContent("Good Evening!!!");
