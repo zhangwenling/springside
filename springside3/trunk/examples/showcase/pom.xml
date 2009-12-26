@@ -469,8 +469,6 @@
 							<webAppConfig>
 								<contextPath>/${artifactId}</contextPath>
 								<tempDirectory>${project.build.directory}/work</tempDirectory>
-								<overrideDescriptor>src/test/resources/web-override.xml
-								</overrideDescriptor>
 							</webAppConfig>
 						</configuration>
 					</plugin>

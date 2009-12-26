@@ -79,6 +79,12 @@
 			<param-name>failureUrl</param-name>
 			<param-value>/security/login.action?error=2</param-value>
 		</init-param>
+		<!-- 用于功能测试的设置54321自动通过验证码校验,在生产环境部署时移除该参数或将值设为invalid -->
+		<init-param>
+			<param-name>autoPassValue</param-name>
+			<param-value>RPWT54321</param-value>
+		</init-param>
+		
 	</filter>
 
 	<!-- SpringSecurity filter-->

@@ -47,7 +47,7 @@
 							<td>${email}&nbsp;</td>
 							<td>${roleNames}&nbsp;</td>
 							<td>${status}&nbsp;</td>
-							<td><a href="user/${id}.htm">修改</a></td>
+							<td><a href="user/${id}.htm" id="editLink-${id}">修改</a></td>
 						</tr>
 					</s:iterator>
 				</table>
