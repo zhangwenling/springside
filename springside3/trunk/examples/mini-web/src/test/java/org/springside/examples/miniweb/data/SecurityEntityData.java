@@ -1,5 +1,8 @@
 package org.springside.examples.miniweb.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Resource;
 import org.springside.examples.miniweb.entity.security.Role;
@@ -14,53 +17,57 @@ public class SecurityEntityData {
 
 	public static final String DEFAULT_PASSWORD = "123456";
 
+	public static List<Role> defaultRoleList = new ArrayList<Role>();
+
+	public static List<Authority> defaultAuthorityList = new ArrayList<Authority>();
+
+	static {
+		defaultRoleList.add(new Role(1L, "管理员"));
+		defaultRoleList.add(new Role(2L, "用户"));
+		defaultAuthorityList.add(new Authority(1L, "A_VIEW_USER", "浏览用户"));
+		defaultAuthorityList.add(new Authority(2L, "A_MODIFY_USER", "修改用户"));
+		defaultAuthorityList.add(new Authority(3L, "A_VIEW_ROLE", "浏览角色"));
+		defaultAuthorityList.add(new Authority(4L, "A_MODIFY_ROLE", "修改角色"));
+	}
+
 	public static User getRandomUser() {
-		String userName = DataUtils.random("User");
+		String userName = DataUtils.randomName("User");
 
 		User user = new User();
 		user.setLoginName(userName);
 		user.setName(userName);
 		user.setPassword(DEFAULT_PASSWORD);
 		user.setEmail(userName + "@springside.org.cn");
-		user.getRoleList().add(getUserRole());
 
 		return user;
 	}
 
-	public static User getRandomUserWithAdminRole() {
+	public static User getRandomUserWithRole() {
 		User user = getRandomUser();
-		Role adminRole = getAdminRole();
-		user.getRoleList().add(adminRole);
+		user.getRoleList().add(getRandomDefaultRole());
 
 		return user;
 	}
 
 	public static Role getRandomRole() {
 		Role role = new Role();
-		role.setName(DataUtils.random("Role"));
+		role.setName(DataUtils.randomName("Role"));
 
 		return role;
 	}
 
-	public static Role getAdminRole() {
-		Role role = new Role();
-		role.setId(1L);
-		role.setName("管理员");
-
+	public static Role getRandomRoleWithAuthority() {
+		Role role = getRandomRole();
+		role.getAuthorityList().add(getRandomDefaultAuthority());
 		return role;
 	}
 
-	public static Role getUserRole() {
-		Role role = new Role();
-		role.setId(2L);
-		role.setName("用户");
-
-		return role;
+	public static Role getRandomDefaultRole() {
+		return DataUtils.randomFromList(defaultRoleList);
 	}
-
 
 	public static Authority getRandomAuthority() {
-		String authName = DataUtils.random("Authority");
+		String authName = DataUtils.randomName("Authority");
 
 		Authority authority = new Authority();
 		authority.setName(authName);
@@ -69,9 +76,13 @@ public class SecurityEntityData {
 		return authority;
 	}
 
+	public static Authority getRandomDefaultAuthority() {
+		return DataUtils.randomFromList(defaultAuthorityList);
+	}
+
 	public static Resource getRandomResource() {
 		Resource resource = new Resource();
-		resource.setValue(DataUtils.random("Resource"));
+		resource.setValue(DataUtils.randomName("Resource"));
 		resource.setResourceType(Resource.URL_TYPE);
 		resource.setPosition(100);
 

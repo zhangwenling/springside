@@ -24,6 +24,15 @@ public class Authority extends IdEntity {
 	private String name;
 	private String displayName;
 
+	public Authority() {
+	}
+
+	public Authority(Long id, String name, String displayName) {
+		this.id = id;
+		this.name = name;
+		this.displayName = displayName;
+	}
+
 	@Column(nullable = false, unique = true)
 	public String getName() {
 		return name;

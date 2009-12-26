@@ -41,8 +41,8 @@
 						</security:authorize>
 
 						<security:authorize ifAnyGranted="A_MODIFY_ROLE">
-							<a href="role!input.action?id=${id}">修改</a>&nbsp;
-							<a href="role!delete.action?id=${id}">删除</a>
+							<a href="role!input.action?id=${id}" id="editLink-${name}">修改</a>&nbsp;
+							<a href="role!delete.action?id=${id}" id="deleteLink-${name}">删除</a>
 						</security:authorize>
 					</td>
 				</tr>

@@ -28,7 +28,7 @@ public class RoleDaoTest extends SpringTxTestCase {
 	public void deleteRole() {
 		//新增测试角色并与admin用户绑定.
 		Role role = new Role();
-		role.setName(DataUtils.random("Role"));
+		role.setName(DataUtils.randomName("Role"));
 		roleDao.save(role);
 		
 		User user = userDao.get(1L);

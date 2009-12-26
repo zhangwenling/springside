@@ -3,6 +3,7 @@ package org.springside.examples.miniweb.functional.security;
 import org.junit.Test;
 import org.springside.examples.miniweb.data.DataUtils;
 import org.springside.examples.miniweb.data.SecurityEntityData;
+import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
 
@@ -38,20 +39,22 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 		clickMenu(ROLE_MENU);
 		clickLink("增加新角色");
 
-		Role role = SecurityEntityData.getRandomRole();
+		//生成测试数据
+		Role role = SecurityEntityData.getRandomRoleWithAuthority();
 
+		//输入数据
 		selenium.type("name", role.getName());
-		//TODO
-		selenium.click("checkedAuthIds-1");
-		selenium.click("checkedAuthIds-3");
-
+		for (Authority authority : role.getAuthorityList()) {
+			selenium.check("checkedAuthIds-" + authority.getId());
+		}
 		selenium.click(SUBMIT_BUTTON);
 		waitPageLoad();
 
+		//校验结果
 		assertTrue(selenium.isTextPresent("保存角色成功"));
-		assertEquals(role.getName(), getContentTable(3, RoleColumn.NAME));
-		assertEquals("浏览用户, 浏览角色", getContentTable(3, RoleColumn.AUTHORITIES));
+		verifyRole(role);
 
+		//设置公共测试角色
 		testRole = role;
 	}
 
@@ -62,21 +65,27 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 	public void editRole() {
 		ensureTestRoleExist();
 		clickMenu(ROLE_MENU);
-		//TODO
-		selenium.click("//table[@id='contentTable']/tbody/tr[4]/td[3]/a[1]");
+
+		selenium.click("editLink-" + testRole.getName());
 		waitPageLoad();
 
-		String newRoleName = DataUtils.random("Role");
-		selenium.type("name", newRoleName);
-		selenium.click("checkedAuthIds-2");
-		selenium.click("checkedAuthIds-3");
+		testRole.setName(DataUtils.randomName("Role"));
+		selenium.type("name", testRole.getName());
+
+		for (Authority authority : testRole.getAuthorityList()) {
+			selenium.uncheck("checkedAuthIds-" + authority.getId());
+		}
+		testRole.getAuthorityList().clear();
+
+		Authority authority = SecurityEntityData.getRandomDefaultAuthority();
+		selenium.check("checkedAuthIds-" + authority.getId());
+		testRole.getAuthorityList().add(authority);
 
 		selenium.click(SUBMIT_BUTTON);
 		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("保存角色成功"));
-		assertEquals(newRoleName, selenium.getTable("contentTable.3.0"));
-		assertEquals("浏览用户, 修改用户", selenium.getTable("contentTable.3.1"));
+		verifyRole(testRole);
 	}
 
 	/**
@@ -87,13 +96,24 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 		ensureTestRoleExist();
 		clickMenu(ROLE_MENU);
 
-		selenium.click("//table[@id='contentTable']/tbody/tr[4]/td[3]/a[2]");
+		selenium.click("deleteLink-" + testRole.getName());
 		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("删除角色成功"));
 		assertFalse(selenium.isTextPresent(testRole.getName()));
 
 		testRole = null;
+	}
+
+	private void verifyRole(Role role) {
+		selenium.click("editLink-" + role.getName());
+		waitPageLoad();
+
+		assertEquals(role.getName(), selenium.getValue("name"));
+
+		for (Authority authority : role.getAuthorityList()) {
+			assertTrue(selenium.isChecked("checkedAuthIds-" + authority.getId()));
+		}
 	}
 
 	/**

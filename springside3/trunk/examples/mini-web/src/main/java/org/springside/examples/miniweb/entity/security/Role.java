@@ -35,6 +35,14 @@ public class Role extends IdEntity {
 	private String name;
 	private List<Authority> authorityList = new ArrayList<Authority>();
 
+	public Role() {
+
+	}
+
+	public Role(Long id, String name) {
+		this.id = id;
+		this.name = name;
+	}
 	@Column(nullable = false, unique = true)
 	public String getName() {
 		return name;

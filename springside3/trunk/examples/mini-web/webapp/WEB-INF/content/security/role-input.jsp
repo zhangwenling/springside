@@ -42,7 +42,7 @@
 				<td>
 					<div style="word-break:break-all;width:300px; overflow:auto; ">
 						<s:checkboxlist name="checkedAuthIds" list="allAuthorityList" listKey="id"
-										listValue="displayName" theme="simple"/>
+										listValue="displayName" theme="custom"/>
 					</div>
 				</td>
 			</tr>

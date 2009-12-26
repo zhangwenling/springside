@@ -24,7 +24,7 @@ public class UserDaoTest extends SpringTxTestCase {
 	//@Rollback(false) 
 	public void crudEntityWithRole() {
 		//新建并保存带角色的用户
-		User user = SecurityEntityData.getRandomUserWithAdminRole();
+		User user = SecurityEntityData.getRandomUserWithRole();
 		entityDao.save(user);
 		//强制执行sql语句
 		flush();
