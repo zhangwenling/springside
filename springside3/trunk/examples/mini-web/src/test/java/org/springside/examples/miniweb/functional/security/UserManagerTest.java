@@ -14,7 +14,18 @@ import org.springside.modules.test.groups.Groups;
  */
 public class UserManagerTest extends BaseSeleniumTestCase {
 
-	private static String commonLoginName = null;
+	private static User testUser = null;
+
+	/**
+	 * 检验OverViewPage.
+	 */
+	@Test
+	public void overviewPage() {
+		clickMenu(USER_MENU);
+
+		assertEquals("admin", getTableGrid(1, OverviewColumn.LOGIN_NAME));
+		assertEquals("管理员, 用户", getTableGrid(1, OverviewColumn.ROLES));
+	}
 
 	/**
 	 * 创建公共测试用户.
@@ -22,12 +33,11 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	@Test
 	public void createUser() {
 		//打开新增用户页面
-		openOverviewPage();
+		clickMenu(USER_MENU);
 		clickLink("增加新用户");
 
 		//生成待输入的测试用户数据
 		User user = SecurityEntityData.getRandomUser();
-		String loginName = user.getLoginName();
 
 		//输入数据
 		selenium.type("loginName", user.getLoginName());
@@ -41,12 +51,12 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 
 		//校验结果
 		assertTrue(selenium.isTextPresent("保存用户成功"));
-		findUser(loginName);
-		assertEquals(loginName, selenium.getTable("contentTable.1.1"));
-		assertEquals("用户", selenium.getTable("contentTable.1.3"));
+		searchUser(user.getLoginName());
+		assertEquals(user.getName(), getTableGrid(1, OverviewColumn.NAME));
+		assertEquals("用户", getTableGrid(1, OverviewColumn.ROLES));
 
-		//设置公共测试用户名
-		commonLoginName = loginName;
+		//设置公共测试用户
+		testUser = user;
 	}
 
 	/**
@@ -55,12 +65,18 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	@Test
 	public void editUser() {
 		//确保已创建公共测试用户.
-		assertCommonUserExist();
+		ensureTestUserExist();
 
 		//打开公共测试用户修改页面.
-		openOverviewPage();
-		findUser(commonLoginName);
+		clickMenu(USER_MENU);
+		searchUser(testUser.getLoginName());
 		clickLink("修改");
+		
+		
+		//校验用户页面
+		assertEquals(testUser.getLoginName(), selenium.getValue("loginName"));
+		assertEquals(testUser.getName(), selenium.getValue("name"));
+		selenium.isChecked("checkedRoleIds-1");
 
 		//更改用户名
 		String newUserName = DataUtils.random("User");
@@ -74,9 +90,9 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 
 		//校验结果
 		assertTrue(selenium.isTextPresent("保存用户成功"));
-		findUser(commonLoginName);
-		assertEquals(newUserName, selenium.getTable("contentTable.1.1"));
-		assertEquals("管理员", selenium.getTable("contentTable.1.3"));
+		searchUser(testUser.getLoginName());
+		assertEquals(newUserName, getTableGrid(1, OverviewColumn.NAME));
+		assertEquals("管理员", getTableGrid(1, OverviewColumn.ROLES));
 	}
 
 	/**
@@ -85,22 +101,22 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	@Test
 	public void deleteUser() {
 		//确保已创建公共测试用户.
-		assertCommonUserExist();
+		ensureTestUserExist();
 
 		//查找公共测试用户
-		openOverviewPage();
-		findUser(commonLoginName);
+		clickMenu(USER_MENU);
+		searchUser(testUser.getLoginName());
 
 		//删除用户
 		clickLink("删除");
 
 		//校验结果
 		assertTrue(selenium.isTextPresent("删除用户成功"));
-		findUser(commonLoginName);
-		assertFalse(selenium.isTextPresent(commonLoginName));
+		searchUser(testUser.getLoginName());
+		assertFalse(selenium.isTextPresent(testUser.getLoginName()));
 
-		//清空公共测试用户名
-		commonLoginName = null;
+		//清空公共测试用户
+		testUser = null;
 	}
 
 	/**
@@ -109,7 +125,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	@Test
 	@Groups("extension")
 	public void validateUser() {
-		openOverviewPage();
+		clickMenu(USER_MENU);
 		clickLink("增加新用户");
 
 		selenium.type("loginName", "admin");
@@ -127,14 +143,23 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		assertEquals("请输入正确格式的电子邮件", selenium.getTable("//form[@id='inputForm']/table.4.1"));
 	}
 
-	private void openOverviewPage() {
-		clickMenu("帐号列表");
+
+
+	enum OverviewColumn {
+		LOGIN_NAME, NAME, EMAIL, ROLES
+	}
+
+	/**
+	 * 取得Overview页面内容.
+	 */
+	private static String getTableGrid(int rowIndex, OverviewColumn column) {
+		return selenium.getTable("contentTable." + rowIndex + "." + column.ordinal());
 	}
 
 	/**
 	 * 根据用户名查找用户的工具函数. 
 	 */
-	private void findUser(String loginName) {
+	private void searchUser(String loginName) {
 		selenium.type("filter_EQS_loginName", loginName);
 		selenium.click(SEARCH_BUTTON);
 		waitPageLoad();
@@ -143,8 +168,8 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	/**
 	 * 确保公共测试用户已初始化的工具函数.
 	 */
-	private void assertCommonUserExist() {
-		if (commonLoginName == null) {
+	private void ensureTestUserExist() {
+		if (testUser == null) {
 			createUser();
 		}
 	}

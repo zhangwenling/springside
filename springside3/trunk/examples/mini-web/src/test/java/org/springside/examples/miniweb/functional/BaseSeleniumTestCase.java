@@ -14,6 +14,8 @@ public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 	public static final String SUBMIT_BUTTON = "//input[@value='提交']";
 	public static final String SEARCH_BUTTON = "//input[@value='搜索']";
 
+	public static final String USER_MENU = "帐号列表";
+
 	/**
 	 * 登录管理员角色.
 	 */
@@ -30,10 +32,10 @@ public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 	/**
 	 * 点击菜单.
 	 */
-	protected void clickMenu(String menuName) {
+	protected void clickMenu(String menuText) {
 		selenium.open("/mini-web");
 		waitPageLoad();
-		clickLink(menuName);
+		clickLink(menuText);
 	}
 
 	/**
