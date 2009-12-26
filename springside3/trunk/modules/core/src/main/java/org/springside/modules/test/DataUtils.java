@@ -44,7 +44,7 @@ public class DataUtils {
 	 * 从输入list中随机返回随机个对象.
 	 */
 	public static <T> List<T> randomSome(List<T> list) {
-		return randomSome(list, (int) (Math.random() * list.size()));
+		return randomSome(list, random.nextInt(list.size()));
 	}
 
 	/**
