@@ -88,6 +88,7 @@ public class WebUtils {
 	/**
 	 * 初始化 Struts2 ActionContext.
 	 */
+	@SuppressWarnings("unchecked")
 	private static void initStruts2ActionContext() {
 		if (!struts2ContextInited) {
 			ActionContext.setContext(new ActionContext(new HashMap()));

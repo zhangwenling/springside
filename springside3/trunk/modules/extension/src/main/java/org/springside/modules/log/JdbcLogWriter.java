@@ -86,6 +86,7 @@ public class JdbcLogWriter extends BlockingConsumer {
 	/**
 	 * 将Buffer中的事件列表批量插入数据库.
 	 */
+	@SuppressWarnings("unchecked")
 	public void updateBatch() {
 		try {
 			//分析事件列表, 转换为jdbc批处理参数.

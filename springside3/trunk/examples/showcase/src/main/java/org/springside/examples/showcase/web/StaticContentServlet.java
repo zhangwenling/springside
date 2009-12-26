@@ -44,9 +44,6 @@ public class StaticContentServlet extends HttpServlet {
 	/** Content基本信息缓存. */
 	private Cache contentInfoCache;
 
-	/** 静态内容仓库存储目录. */
-	private String contentRepositoryPath;
-
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//获取请求内容的基本信息.
@@ -154,7 +151,7 @@ public class StaticContentServlet extends HttpServlet {
 	/**
 	 * 定义Content的基本信息.
 	 */
-	private static class ContentInfo {
+	static class ContentInfo {
 		String contentPath;
 		File file;
 		String fileName;

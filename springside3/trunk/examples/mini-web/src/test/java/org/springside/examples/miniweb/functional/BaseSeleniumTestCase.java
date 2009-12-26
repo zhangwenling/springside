@@ -38,6 +38,12 @@ public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 		waitPageLoad();
 	}
 
+	/**
+	 * 从Overview页面的contentTable中取出单元格内容.
+	 * 
+	 * @column 以Enum定义列名.
+	 */
+	@SuppressWarnings("unchecked")
 	protected static String getContentTable(int rowIndex, Enum column) {
 		return selenium.getTable("contentTable." + rowIndex + "." + column.ordinal());
 	}
