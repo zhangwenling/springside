@@ -3,6 +3,7 @@ package org.springside.examples.miniweb.functional.security;
 import org.junit.Test;
 import org.springside.examples.miniweb.data.DataUtils;
 import org.springside.examples.miniweb.data.SecurityEntityData;
+import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
 import org.springside.modules.test.groups.Groups;
@@ -44,7 +45,10 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		selenium.type("name", user.getName());
 		selenium.type("password", user.getPassword());
 		selenium.type("passwordConfirm", user.getPassword());
-		selenium.click("checkedRoleIds-2");
+
+		for(Role role:user.getRoleList()){
+			selenium.check(getRoleCheckId(role.getId()));
+		}
 
 		selenium.click(SUBMIT_BUTTON);
 		waitPageLoad();
@@ -53,7 +57,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		assertTrue(selenium.isTextPresent("保存用户成功"));
 		searchUser(user.getLoginName());
 		assertEquals(user.getName(), getTableGrid(1, OverviewColumn.NAME));
-		assertEquals("用户", getTableGrid(1, OverviewColumn.ROLES));
+		assertEquals(user.getRoleNames(), getTableGrid(1, OverviewColumn.ROLES));
 
 		//设置公共测试用户
 		testUser = user;
@@ -82,8 +86,10 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		String newUserName = DataUtils.random("User");
 		selenium.type("name", newUserName);
 		//取消用户角色,增加管理员角色
-		selenium.click("checkedRoleIds-1");
-		selenium.click("checkedRoleIds-2");
+		selenium.check(getRoleCheckId(1L));
+		selenium.uncheck(getRoleCheckId(2L));
+		testUser.getRoleList().clear();
+		testUser.getRoleList().add(SecurityEntityData.getRole(2L));
 
 		selenium.click(SUBMIT_BUTTON);
 		waitPageLoad();
@@ -92,7 +98,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		assertTrue(selenium.isTextPresent("保存用户成功"));
 		searchUser(testUser.getLoginName());
 		assertEquals(newUserName, getTableGrid(1, OverviewColumn.NAME));
-		assertEquals("管理员", getTableGrid(1, OverviewColumn.ROLES));
+		assertEquals(testUser.getRoleNames(), getTableGrid(1, OverviewColumn.ROLES));
 	}
 
 	/**
@@ -143,8 +149,6 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		assertEquals("请输入正确格式的电子邮件", selenium.getTable("//form[@id='inputForm']/table.4.1"));
 	}
 
-
-
 	enum OverviewColumn {
 		LOGIN_NAME, NAME, EMAIL, ROLES
 	}
@@ -154,6 +158,12 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	 */
 	private static String getTableGrid(int rowIndex, OverviewColumn column) {
 		return selenium.getTable("contentTable." + rowIndex + "." + column.ordinal());
+	}
+
+
+	private String getRoleCheckId(Long roleId) {
+
+		return "checkedRoleIds-" + (SecurityEntityData.getRoleIdList().indexOf(roleId) + 1);
 	}
 
 	/**

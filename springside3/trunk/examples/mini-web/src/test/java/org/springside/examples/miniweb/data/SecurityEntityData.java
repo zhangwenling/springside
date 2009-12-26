@@ -1,9 +1,15 @@
 package org.springside.examples.miniweb.data;
 
+import java.util.List;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Resource;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
+import org.springside.examples.miniweb.service.security.SecurityEntityManager;
+import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * 安全相关实体测试数据生成.
@@ -14,6 +20,15 @@ public class SecurityEntityData {
 
 	public static final String DEFAULT_PASSWORD = "123456";
 
+	private static SecurityEntityManager securityEntityManager;
+
+	private static void initContext() {
+		if (securityEntityManager == null) {
+			ApplicationContext context = new ClassPathXmlApplicationContext("/applicationContext-test.xml");
+			securityEntityManager = (SecurityEntityManager) context.getBean("securityEntityManager");
+		}
+	}
+
 	public static User getRandomUser() {
 		String userName = DataUtils.random("User");
 
@@ -22,6 +37,10 @@ public class SecurityEntityData {
 		user.setName(userName);
 		user.setPassword(DEFAULT_PASSWORD);
 		user.setEmail(userName + "@springside.org.cn");
+
+		Role role = new Role();
+		role.setName("用户");
+		user.getRoleList().add(role);
 
 		return user;
 	}
@@ -66,5 +85,15 @@ public class SecurityEntityData {
 		resource.setPosition(100);
 
 		return resource;
+	}
+
+	public static List<String> getRoleIdList() {
+		initContext();
+		return ReflectionUtils.convertElementPropertyToList(securityEntityManager.getAllRole(),
+ "id");
+	}
+
+	public static Role getRole(Long id) {
+		return securityEntityManager.getRole(id);
 	}
 }

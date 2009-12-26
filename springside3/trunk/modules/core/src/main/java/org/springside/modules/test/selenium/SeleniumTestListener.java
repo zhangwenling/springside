@@ -30,7 +30,7 @@ public class SeleniumTestListener extends RunListener {
 			selenium.captureScreenshot(imgFilePath);
 			System.err.println("Saved screenshot to" + imgFilePath);
 		} catch (Exception e) {
-			System.err.println("Couldn't save screenshot to" + imgFilePath + ": " + e.getMessage());
+			System.err.println("Couldn't save screenshot to " + imgFilePath + ": " + e.getMessage());
 		}
 	}
 }
