@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.apache.commons.collections.ListUtils;
 import org.junit.Test;
-import org.springside.examples.miniweb.data.DataUtils;
 import org.springside.examples.miniweb.data.SecurityEntityData;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
+import org.springside.modules.test.DataUtils;
 
 /**
  * 角色管理的功能测试,测试页面JavaScript及主要用户故事流程.

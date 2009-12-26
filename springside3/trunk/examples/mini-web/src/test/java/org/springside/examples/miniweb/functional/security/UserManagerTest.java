@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.apache.commons.collections.ListUtils;
 import org.junit.Test;
-import org.springside.examples.miniweb.data.DataUtils;
 import org.springside.examples.miniweb.data.SecurityEntityData;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
+import org.springside.modules.test.DataUtils;
 import org.springside.modules.test.groups.Groups;
 
 /**

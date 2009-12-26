@@ -1,15 +1,26 @@
-package org.springside.examples.miniweb.data;
+/**
+ * Copyright (c) 2005-2009 springside.org.cn
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * 
+ * $Id$
+ */
+package org.springside.modules.test;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * 数据生成工具类.
+ * 
+ * @author calvin
+ */
 public class DataUtils {
 	private static Random random = new Random();
 
 	/**
 	 * 返回随机ID.
-	 * @return
 	 */
 	public static long randomId() {
 		return random.nextLong();

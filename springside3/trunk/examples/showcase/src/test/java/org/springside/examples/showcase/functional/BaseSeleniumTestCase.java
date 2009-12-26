@@ -1,5 +1,6 @@
 package org.springside.examples.showcase.functional;
 
+import org.junit.BeforeClass;
 import org.springside.modules.test.selenium.SeleniumTestCase;
 
 /**
@@ -9,10 +10,14 @@ import org.springside.modules.test.selenium.SeleniumTestCase;
  */
 public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 
-	protected void clickMenu(String menuName) {
+	@BeforeClass
+	public static void loginAsAdmin() {
 		selenium.open("/showcase");
 		waitPageLoad();
-		selenium.click("link=" + menuName);
+	}
+
+	protected void clickLink(String linkText) {
+		selenium.click("link=" + linkText);
 		waitPageLoad();
 	}
 }

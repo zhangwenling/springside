@@ -13,7 +13,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	@Test
 	public void manageUser() {
 
-		clickMenu("综合演示");
+		clickLink("综合演示");
 		selenium.click("//table[@id='contentTable']/tbody/tr[7]/td[7]/a");
 		waitPageLoad();
 		//修改用户需要登录管理员权限

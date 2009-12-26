@@ -1,4 +1,11 @@
-package org.springside.modules.test.spring;
+/**
+ * Copyright (c) 2005-2009 springside.org.cn
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * 
+ * $Id$
+ */
+package org.springside.modules.test;
 
 import java.util.HashMap;
 
@@ -18,16 +25,16 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 import com.opensymphony.xwork2.ActionContext;
 
 /**
- * Spring MockHttpRequest/MockHttpReponse的工具类.
+ * Web集成测试工具类.
  * 
  * 1.在ServletContext里初始化Spring WebApplicationContext.
  * 2.为Struts2的ServletActionContext.getRequest()/getResponse()方法提供支持.
  * 
  * @author calvin
  */
-public class MockWebUtils {
+public class WebUtils {
 
-	private static boolean struts2Inited = false;
+	private static boolean struts2ContextInited = false;
 
 	/**
 	 * 在ServletContext里初始化Spring WebApplicationContext.
@@ -82,9 +89,9 @@ public class MockWebUtils {
 	 * 初始化 Struts2 ActionContext.
 	 */
 	private static void initStruts2ActionContext() {
-		if (!struts2Inited) {
+		if (!struts2ContextInited) {
 			ActionContext.setContext(new ActionContext(new HashMap()));
-			struts2Inited = true;
+			struts2ContextInited = true;
 		}
 	}
 }

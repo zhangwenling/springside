@@ -12,7 +12,7 @@ public class JmxTest extends BaseSeleniumTestCase {
 
 	@Test
 	public void test() {
-		clickMenu("JMX演示");
+		clickLink("JMX演示");
 		assertEquals("default", selenium.getValue("nodeName"));
 	}
 }

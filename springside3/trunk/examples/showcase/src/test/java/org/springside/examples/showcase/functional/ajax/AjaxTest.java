@@ -14,9 +14,9 @@ public class AjaxTest extends BaseSeleniumTestCase {
 
 	@Test
 	public void mashup() {
-		clickMenu("Ajax演示");
-		selenium.click("link=跨域Mashup演示");
-		waitPageLoad();
+		clickLink("Ajax演示");
+		clickLink("跨域Mashup演示");
+
 		selenium.click("//input[@value='获取内容']");
 		selenium.waitForCondition("selenium.isTextPresent('Hello World!')==true", "5000");
 		assertTrue(selenium.isTextPresent("Hello World!"));

@@ -7,6 +7,7 @@ import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Resource;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
+import org.springside.modules.test.DataUtils;
 
 /**
  * 安全相关实体测试数据生成.

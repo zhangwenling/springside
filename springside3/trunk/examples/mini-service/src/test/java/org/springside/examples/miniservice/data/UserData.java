@@ -2,6 +2,7 @@ package org.springside.examples.miniservice.data;
 
 import org.springside.examples.miniservice.entity.user.Role;
 import org.springside.examples.miniservice.entity.user.User;
+import org.springside.modules.test.DataUtils;
 
 /**
  * 用户测试数据生成.
