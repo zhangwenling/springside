@@ -11,7 +11,6 @@ import org.springside.modules.test.DataUtils;
  */
 public class UserData {
 
-	public static final String DEFAULT_PASSWORD = "123456";
 
 	public static User getRandomUser() {
 		String userName = DataUtils.randomName("User");
@@ -19,7 +18,7 @@ public class UserData {
 		User user = new User();
 		user.setLoginName(userName);
 		user.setName(userName);
-		user.setPassword(DEFAULT_PASSWORD);
+		user.setPassword("123456");
 		user.setEmail(userName + "@springside.org.cn");
 
 		return user;

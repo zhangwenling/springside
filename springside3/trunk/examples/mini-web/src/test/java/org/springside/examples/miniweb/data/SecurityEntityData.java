@@ -18,18 +18,9 @@ public class SecurityEntityData {
 
 	public static final String DEFAULT_PASSWORD = "123456";
 
-	public static List<Role> defaultRoleList = new ArrayList<Role>();
+	private static List<Role> defaultRoleList = null;
 
-	public static List<Authority> defaultAuthorityList = new ArrayList<Authority>();
-
-	static {
-		defaultRoleList.add(new Role(1L, "管理员"));
-		defaultRoleList.add(new Role(2L, "用户"));
-		defaultAuthorityList.add(new Authority(1L, "A_VIEW_USER", "浏览用户"));
-		defaultAuthorityList.add(new Authority(2L, "A_MODIFY_USER", "修改用户"));
-		defaultAuthorityList.add(new Authority(3L, "A_VIEW_ROLE", "浏览角色"));
-		defaultAuthorityList.add(new Authority(4L, "A_MODIFY_ROLE", "修改角色"));
-	}
+	private static List<Authority> defaultAuthorityList = null;
 
 	public static User getRandomUser() {
 		String userName = DataUtils.randomName("User");
@@ -59,8 +50,17 @@ public class SecurityEntityData {
 
 	public static Role getRandomRoleWithAuthority() {
 		Role role = getRandomRole();
-		role.getAuthorityList().addAll(getRandomDefaultAuthority());
+		role.getAuthorityList().addAll(getRandomDefaultAuthorityList());
 		return role;
+	}
+
+	public static List<Role> getDefaultRoleList() {
+		if (defaultRoleList == null) {
+			defaultRoleList = new ArrayList<Role>();
+			defaultRoleList.add(new Role(1L, "管理员"));
+			defaultRoleList.add(new Role(2L, "用户"));
+		}
+		return defaultRoleList;
 	}
 
 	public static Role getRandomDefaultRole() {
@@ -77,7 +77,18 @@ public class SecurityEntityData {
 		return authority;
 	}
 
-	public static List<Authority> getRandomDefaultAuthority() {
+	public static List<Authority> getDefaultAuthorityList() {
+		if (defaultAuthorityList == null) {
+			defaultAuthorityList = new ArrayList<Authority>();
+			defaultAuthorityList.add(new Authority(1L, "A_VIEW_USER", "浏览用户"));
+			defaultAuthorityList.add(new Authority(2L, "A_MODIFY_USER", "修改用户"));
+			defaultAuthorityList.add(new Authority(3L, "A_VIEW_ROLE", "浏览角色"));
+			defaultAuthorityList.add(new Authority(4L, "A_MODIFY_ROLE", "修改角色"));
+		}
+		return defaultAuthorityList;
+	}
+
+	public static List<Authority> getRandomDefaultAuthorityList() {
 		return DataUtils.randomSome(defaultAuthorityList);
 	}
 

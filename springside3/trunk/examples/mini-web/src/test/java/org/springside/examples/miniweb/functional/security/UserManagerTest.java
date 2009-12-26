@@ -173,7 +173,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 			assertTrue(selenium.isChecked("checkedRoleIds-" + role.getId()));
 		}
 
-		List<Role> uncheckRoleList = ListUtils.subtract(SecurityEntityData.defaultRoleList, user.getRoleList());
+		List<Role> uncheckRoleList = ListUtils.subtract(SecurityEntityData.getDefaultRoleList(), user.getRoleList());
 		for (Role role : uncheckRoleList) {
 			assertFalse(selenium.isChecked("checkedRoleIds-" + role.getId()));
 		}

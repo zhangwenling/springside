@@ -80,7 +80,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 		}
 		testRole.getAuthorityList().clear();
 
-		List<Authority> authorityList = SecurityEntityData.getRandomDefaultAuthority();
+		List<Authority> authorityList = SecurityEntityData.getRandomDefaultAuthorityList();
 		for (Authority authority : authorityList) {
 			selenium.check("checkedAuthIds-" + authority.getId());
 		}
@@ -120,7 +120,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 			assertTrue(selenium.isChecked("checkedAuthIds-" + authority.getId()));
 		}
 
-		List<Authority> uncheckAuthList = ListUtils.subtract(SecurityEntityData.defaultAuthorityList, role
+		List<Authority> uncheckAuthList = ListUtils.subtract(SecurityEntityData.getDefaultAuthorityList(), role
 				.getAuthorityList());
 		for (Authority authority : uncheckAuthList) {
 			assertFalse(selenium.isChecked("checkedAuthIds-" + authority.getId()));
