@@ -26,12 +26,13 @@ import com.thoughtworks.selenium.Selenium;
 @RunWith(SeleniumTestRunner.class)
 public class SeleniumTestCase extends Assert {
 
+	public static final String PROPERTY_FILE = "application.test.properties";
+	
 	public static final String DEFAULT_URL = "http://localhost:8080";
 	public static final String DEFAULT_BROWSER = "*chrome";
 	public static final String DEFAULT_SELENIUM_HOST = "localhost";
 	public static final String DEFAULT_SELENIUM_PORT = "4444";
 
-	public static final String PROPERTY_FILE = "application.test.properties";
 	public static final String PROPERTY_URL_NAME = "selenium.url";
 	public static final String PROPERTY_BROWSER_NAME = "selenium.browser";
 	public static final String PROPERTY_SELENIUM_HOST_NAME = "selenium.host";
@@ -46,7 +47,7 @@ public class SeleniumTestCase extends Assert {
 	 * 从application.test.properties中获取selenium连接参数,否则使用默认配置.
 	 */
 	@BeforeClass
-	public static void setUp() throws Exception {
+	public static void startSelenium() throws Exception {
 		Properties p = PropertiesLoaderUtils.loadAllProperties(PROPERTY_FILE);
 		String browser = p.getProperty(PROPERTY_BROWSER_NAME, DEFAULT_BROWSER);
 		String url = p.getProperty(PROPERTY_URL_NAME, DEFAULT_URL);
@@ -63,7 +64,7 @@ public class SeleniumTestCase extends Assert {
 	 * 关闭selenium变量.
 	 */
 	@AfterClass
-	public static void tearDown() throws Exception {
+	public static void stopSelenium() throws Exception {
 		selenium.stop();
 	}
 
