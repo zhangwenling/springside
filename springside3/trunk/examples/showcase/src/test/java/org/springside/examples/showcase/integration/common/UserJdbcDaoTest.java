@@ -61,8 +61,8 @@ public class UserJdbcDaoTest extends SpringTxTestCase {
 		Long id = DataUtils.randomId();
 		User user = new User();
 		user.setId(id);
-		user.setLoginName(DataUtils.random("user"));
-		user.setName(DataUtils.random("User"));
+		user.setLoginName(DataUtils.randomName("user"));
+		user.setName(DataUtils.randomName("User"));
 		userJdbcDao.createObject(user);
 
 		User newUser = userJdbcDao.queryObject(id);
@@ -74,14 +74,14 @@ public class UserJdbcDaoTest extends SpringTxTestCase {
 		Long id1 = DataUtils.randomId();
 		User user1 = new User();
 		user1.setId(id1);
-		user1.setLoginName(DataUtils.random("user"));
-		user1.setName(DataUtils.random("User"));
+		user1.setLoginName(DataUtils.randomName("user"));
+		user1.setName(DataUtils.randomName("User"));
 
 		Long id2 = DataUtils.randomId();
 		User user2 = new User();
 		user2.setId(id2);
-		user2.setLoginName(DataUtils.random("user"));
-		user2.setName(DataUtils.random("User"));
+		user2.setLoginName(DataUtils.randomName("user"));
+		user2.setName(DataUtils.randomName("User"));
 
 		List<User> list = new ArrayList<User>();
 		list.add(user1);

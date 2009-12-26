@@ -1,5 +1,8 @@
 package org.springside.examples.miniweb.functional.security;
 
+import java.util.List;
+
+import org.apache.commons.collections.ListUtils;
 import org.junit.Test;
 import org.springside.examples.miniweb.data.DataUtils;
 import org.springside.examples.miniweb.data.SecurityEntityData;
@@ -26,7 +29,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	 */
 	@Test
 	public void overviewPage() {
-		clickMenu(USER_MENU);
+		clickLink(USER_MENU);
 
 		assertEquals("admin", getContentTable(1, UserColumn.LOGIN_NAME));
 		assertEquals("管理员, 用户", getContentTable(1, UserColumn.ROLES));
@@ -38,7 +41,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	@Test
 	public void createUser() {
 		//打开新增用户页面
-		clickMenu(USER_MENU);
+		clickLink(USER_MENU);
 		clickLink("增加新用户");
 
 		//生成待输入的测试用户数据
@@ -72,7 +75,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		ensureTestUserExist();
 
 		//打开公共测试用户修改页面.
-		clickMenu(USER_MENU);
+		clickLink(USER_MENU);
 		searchUser(testUser.getLoginName());
 		clickLink("修改");
 
@@ -109,7 +112,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		ensureTestUserExist();
 
 		//查找公共测试用户
-		clickMenu(USER_MENU);
+		clickLink(USER_MENU);
 		searchUser(testUser.getLoginName());
 
 		//删除用户
@@ -130,7 +133,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	@Test
 	@Groups("extension")
 	public void validateUser() {
-		clickMenu(USER_MENU);
+		clickLink(USER_MENU);
 		clickLink("增加新用户");
 
 		selenium.type("loginName", "admin");
@@ -159,7 +162,6 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 
 	/**
 	 * 校验结果的工具函数.
-	 * @param user
 	 */
 	private void verifyUser(User user) {
 		searchUser(user.getLoginName());
@@ -169,6 +171,11 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		assertEquals(user.getName(), selenium.getValue("name"));
 		for (Role role : user.getRoleList()) {
 			assertTrue(selenium.isChecked("checkedRoleIds-" + role.getId()));
+		}
+
+		List<Role> uncheckRoleList = ListUtils.subtract(SecurityEntityData.defaultRoleList, user.getRoleList());
+		for (Role role : uncheckRoleList) {
+			assertFalse(selenium.isChecked("checkedRoleIds-" + role.getId()));
 		}
 	}
 

@@ -31,15 +31,6 @@ public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 	}
 
 	/**
-	 * 点击菜单.
-	 */
-	protected void clickMenu(String menuText) {
-		selenium.open("/mini-web");
-		waitPageLoad();
-		clickLink(menuText);
-	}
-
-	/**
 	 * 点击链接.
 	 */
 	protected void clickLink(String linkText) {

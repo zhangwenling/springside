@@ -1,5 +1,8 @@
 package org.springside.examples.miniweb.functional.security;
 
+import java.util.List;
+
+import org.apache.commons.collections.ListUtils;
 import org.junit.Test;
 import org.springside.examples.miniweb.data.DataUtils;
 import org.springside.examples.miniweb.data.SecurityEntityData;
@@ -25,7 +28,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 	 */
 	@Test
 	public void overviewPage() {
-		clickMenu(ROLE_MENU);
+		clickLink(ROLE_MENU);
 
 		assertEquals("管理员", getContentTable(1, RoleColumn.NAME));
 		assertEquals("浏览用户, 修改用户, 浏览角色, 修改角色", selenium.getTable("contentTable.1." + RoleColumn.AUTHORITIES.ordinal()));
@@ -36,7 +39,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 	 */
 	@Test
 	public void createRole() {
-		clickMenu(ROLE_MENU);
+		clickLink(ROLE_MENU);
 		clickLink("增加新角色");
 
 		//生成测试数据
@@ -64,7 +67,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 	@Test
 	public void editRole() {
 		ensureTestRoleExist();
-		clickMenu(ROLE_MENU);
+		clickLink(ROLE_MENU);
 
 		selenium.click("editLink-" + testRole.getName());
 		waitPageLoad();
@@ -77,9 +80,11 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 		}
 		testRole.getAuthorityList().clear();
 
-		Authority authority = SecurityEntityData.getRandomDefaultAuthority();
-		selenium.check("checkedAuthIds-" + authority.getId());
-		testRole.getAuthorityList().add(authority);
+		List<Authority> authorityList = SecurityEntityData.getRandomDefaultAuthority();
+		for (Authority authority : authorityList) {
+			selenium.check("checkedAuthIds-" + authority.getId());
+		}
+		testRole.getAuthorityList().addAll(authorityList);
 
 		selenium.click(SUBMIT_BUTTON);
 		waitPageLoad();
@@ -94,7 +99,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 	@Test
 	public void deleteRole() {
 		ensureTestRoleExist();
-		clickMenu(ROLE_MENU);
+		clickLink(ROLE_MENU);
 
 		selenium.click("deleteLink-" + testRole.getName());
 		waitPageLoad();
@@ -113,6 +118,12 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 
 		for (Authority authority : role.getAuthorityList()) {
 			assertTrue(selenium.isChecked("checkedAuthIds-" + authority.getId()));
+		}
+
+		List<Authority> uncheckAuthList = ListUtils.subtract(SecurityEntityData.defaultAuthorityList, role
+				.getAuthorityList());
+		for (Authority authority : uncheckAuthList) {
+			assertFalse(selenium.isChecked("checkedAuthIds-" + authority.getId()));
 		}
 	}
 
