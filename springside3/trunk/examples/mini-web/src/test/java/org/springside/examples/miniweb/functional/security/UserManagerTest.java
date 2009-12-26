@@ -17,6 +17,10 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 
 	private static User testUser = null;
 
+	public enum UserColumn {
+		LOGIN_NAME, NAME, EMAIL, ROLES, OPERATIONS
+	}
+
 	/**
 	 * 检验OverViewPage.
 	 */
@@ -24,8 +28,8 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	public void overviewPage() {
 		clickMenu(USER_MENU);
 
-		assertEquals("admin", getFromTable(1, OverviewColumn.LOGIN_NAME));
-		assertEquals("管理员, 用户", getFromTable(1, OverviewColumn.ROLES));
+		assertEquals("admin", getContentTable(1, UserColumn.LOGIN_NAME));
+		assertEquals("管理员, 用户", getContentTable(1, UserColumn.ROLES));
 	}
 
 	/**
@@ -56,8 +60,8 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		//校验结果
 		assertTrue(selenium.isTextPresent("保存用户成功"));
 		searchUser(user.getLoginName());
-		assertEquals(user.getName(), getFromTable(1, OverviewColumn.NAME));
-		assertEquals(user.getRoleNames(), getFromTable(1, OverviewColumn.ROLES));
+		assertEquals(user.getName(), getContentTable(1, UserColumn.NAME));
+		assertEquals(user.getRoleNames(), getContentTable(1, UserColumn.ROLES));
 
 		//设置公共测试用户
 		testUser = user;
@@ -103,8 +107,8 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		//校验结果
 		assertTrue(selenium.isTextPresent("保存用户成功"));
 		searchUser(testUser.getLoginName());
-		assertEquals(newUserName, getFromTable(1, OverviewColumn.NAME));
-		assertEquals(testUser.getRoleNames(), getFromTable(1, OverviewColumn.ROLES));
+		assertEquals(newUserName, getContentTable(1, UserColumn.NAME));
+		assertEquals(testUser.getRoleNames(), getContentTable(1, UserColumn.ROLES));
 	}
 
 	/**
@@ -153,17 +157,6 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		assertEquals("请输入一个长度最少是 3 的字符串", selenium.getTable("//form[@id='inputForm']/table.2.1"));
 		assertEquals("输入与上面相同的密码", selenium.getTable("//form[@id='inputForm']/table.3.1"));
 		assertEquals("请输入正确格式的电子邮件", selenium.getTable("//form[@id='inputForm']/table.4.1"));
-	}
-
-	enum OverviewColumn {
-		LOGIN_NAME, NAME, EMAIL, ROLES
-	}
-
-	/**
-	 * 取得Overview页面内容.
-	 */
-	private static String getFromTable(int rowIndex, OverviewColumn column) {
-		return selenium.getTable("contentTable." + rowIndex + "." + column.ordinal());
 	}
 
 	/**

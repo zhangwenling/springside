@@ -2,6 +2,8 @@ package org.springside.examples.miniweb.functional.security;
 
 import org.junit.Test;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
+import org.springside.examples.miniweb.functional.security.RoleManagerTest.RoleColumn;
+import org.springside.examples.miniweb.functional.security.UserManagerTest.UserColumn;
 
 /**
  * 系统安全控制的功能测试, 测试主要用户故事.
@@ -17,11 +19,11 @@ public class SecurityCheckingTest extends BaseSeleniumTestCase {
 	public void checkAnonymous() {
 		//访问退出登录页面,退出之前的登录
 		selenium.open("/mini-web/j_spring_security_logout");
-		assertTrue(selenium.isElementPresent("//input[@value='登录']"));
+		assertTrue(selenium.isElementPresent(LOGIN_BUTTON));
 
 		//访问任意页面会跳转到登录界面
 		selenium.open("/mini-web/security/user.action");
-		assertTrue(selenium.isElementPresent("//input[@value='登录']"));
+		assertTrue(selenium.isElementPresent(LOGIN_BUTTON));
 	}
 
 	/**
@@ -31,21 +33,21 @@ public class SecurityCheckingTest extends BaseSeleniumTestCase {
 	public void checkUserRole() {
 		//访问退出登录页面,退出之前的登录
 		selenium.open("/mini-web/j_spring_security_logout");
-		assertTrue(selenium.isElementPresent("//input[@value='登录']"));
+		assertTrue(selenium.isElementPresent(LOGIN_BUTTON));
 
 		//登录普通用户
 		selenium.type("j_username", "user");
 		selenium.type("j_password", "user");
-		selenium.click("//input[@value='登录']");
+		selenium.click(LOGIN_BUTTON);
 		waitPageLoad();
 
 		//校验用户角色的操作单元格为空
-		clickMenu("帐号列表");
+		clickMenu(USER_MENU);
 		waitPageLoad();
-		assertEquals("查看", selenium.getTable("contentTable.1.4"));
+		assertEquals("查看", getContentTable(1, UserColumn.OPERATIONS));
 
-		clickMenu("角色列表");
+		clickMenu(ROLE_MENU);
 		waitPageLoad();
-		assertEquals("查看", selenium.getTable("contentTable.1.2"));
+		assertEquals("查看", getContentTable(1, RoleColumn.OPERATIONS));
 	}
 }

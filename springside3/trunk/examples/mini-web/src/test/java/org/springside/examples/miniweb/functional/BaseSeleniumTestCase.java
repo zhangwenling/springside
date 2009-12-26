@@ -46,4 +46,9 @@ public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 		selenium.click("link=" + linkText);
 		waitPageLoad();
 	}
+
+	protected static String getContentTable(int rowIndex, Enum column) {
+		return selenium.getTable("contentTable." + rowIndex + "." + column.ordinal());
+	}
+
 }

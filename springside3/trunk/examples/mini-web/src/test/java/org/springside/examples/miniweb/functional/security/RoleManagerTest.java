@@ -15,6 +15,10 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 
 	private static Role testRole = null;
 
+	public enum RoleColumn {
+		NAME, AUTHORITIES, OPERATIONS
+	}
+
 	/**
 	 * 检验OverViewPage.
 	 */
@@ -22,8 +26,8 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 	public void overviewPage() {
 		clickMenu(ROLE_MENU);
 
-		assertEquals("管理员", getFromTable(1, OverviewColumn.NAME));
-		assertEquals("浏览用户, 修改用户, 浏览角色, 修改角色", getFromTable(1, OverviewColumn.AUTHORITIES));
+		assertEquals("管理员", getContentTable(1, RoleColumn.NAME));
+		assertEquals("浏览用户, 修改用户, 浏览角色, 修改角色", selenium.getTable("contentTable.1." + RoleColumn.AUTHORITIES.ordinal()));
 	}
 
 	/**
@@ -45,8 +49,8 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("保存角色成功"));
-		assertEquals(role.getName(), getFromTable(3, OverviewColumn.NAME));
-		assertEquals("浏览用户, 浏览角色", getFromTable(3, OverviewColumn.AUTHORITIES));
+		assertEquals(role.getName(), getContentTable(3, RoleColumn.NAME));
+		assertEquals("浏览用户, 浏览角色", getContentTable(3, RoleColumn.AUTHORITIES));
 
 		testRole = role;
 	}
@@ -90,17 +94,6 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 		assertFalse(selenium.isTextPresent(testRole.getName()));
 
 		testRole = null;
-	}
-
-	enum OverviewColumn {
-		NAME, AUTHORITIES
-	}
-
-	/**
-	 * 取得Overview表格内容.
-	 */
-	private static String getFromTable(int rowIndex, OverviewColumn column) {
-		return selenium.getTable("contentTable." + rowIndex + "." + column.ordinal());
 	}
 
 	/**
