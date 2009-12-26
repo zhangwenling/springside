@@ -40,10 +40,8 @@
 			<tr>
 				<td>授权:</td>
 				<td>
-					<div style="word-break:break-all;width:300px; overflow:auto; ">
-						<s:checkboxlist name="checkedAuthIds" list="allAuthorityList" listKey="id"
+					<s:checkboxlist name="checkedAuthIds" list="allAuthorityList" listKey="id"
 										listValue="displayName" theme="custom"/>
-					</div>
 				</td>
 			</tr>
 			<tr>

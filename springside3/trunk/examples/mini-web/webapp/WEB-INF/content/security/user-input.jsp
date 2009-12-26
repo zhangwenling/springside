@@ -81,10 +81,7 @@
 			<tr>
 				<td>角色:</td>
 				<td>
-					<div style="word-break:break-all;width:250px; overflow:auto; ">
-						<s:checkboxlist name="checkedRoleIds" list="allRoleList" listKey="id" listValue="name"
-										theme="custom"/>
-					</div>
+					<s:checkboxlist name="checkedRoleIds" list="allRoleList" listKey="id" listValue="name" theme="custom"/>
 				</td>
 			</tr>
 			<tr>
