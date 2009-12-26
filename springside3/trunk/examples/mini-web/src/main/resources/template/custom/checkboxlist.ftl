@@ -12,9 +12,11 @@
         <#else>
             <#assign itemValue = stack.findString('top')/>
         </#if>
-        <#if (itemCount%3) == 0><tr><#rt/></#if>
+        <#if (itemCount%3) == 0>
+<tr><#rt/>
+        </#if>
 <#assign itemKeyStr=itemKey.toString() />
-<td><input type="checkbox" name="${parameters.name?html}" value="${itemKeyStr?html}" id="${parameters.name?html}-${itemKeyStr?html}"<#rt/>
+	<td class="checkboxTd"><input type="checkbox" name="${parameters.name?html}" value="${itemKeyStr?html}" id="${parameters.name?html}-${itemKeyStr?html}"<#rt/>
         <#if tag.contains(parameters.nameValue, itemKey)>
  checked="checked"<#rt/>
         </#if>
@@ -27,12 +29,16 @@
         <#include "/${parameters.templateDir}/simple/scripting-events.ftl" />
         <#include "/${parameters.templateDir}/simple/common-attributes.ftl" />
 />
-<label for="${parameters.name?html}-${itemKeyStr?html}" class="checkboxLabel">${itemValue?html}</label>
-</td><#rt/>
+	<label for="${parameters.name?html}-${itemKeyStr?html}" class="checkboxLabel">${itemValue?html}</label></td>
 	<#assign itemCount = itemCount + 1/>
-    <#if (itemCount%3) == 3></tr><#rt/></#if>
+    <#if (itemCount%3) == 0>
+</tr>
+	</#if>
     </@s.iterator>
-</tr></table>
+    <#if (itemCount%3) != 0>
+</tr>
+	</#if>
+</table>
 <#else>
   &nbsp;
 </#if>
