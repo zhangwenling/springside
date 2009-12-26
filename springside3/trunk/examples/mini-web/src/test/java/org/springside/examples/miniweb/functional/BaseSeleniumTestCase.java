@@ -15,6 +15,7 @@ public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
 	public static final String SEARCH_BUTTON = "//input[@value='搜索']";
 
 	public static final String USER_MENU = "帐号列表";
+	public static final String ROLE_MENU = "角色列表";
 
 	/**
 	 * 登录管理员角色.

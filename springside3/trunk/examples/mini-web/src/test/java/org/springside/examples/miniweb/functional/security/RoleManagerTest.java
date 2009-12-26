@@ -13,19 +13,31 @@ import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
  */
 public class RoleManagerTest extends BaseSeleniumTestCase {
 
-	private static String commonRoleName = null;
+	private static Role testRole = null;
+
+	/**
+	 * 检验OverViewPage.
+	 */
+	@Test
+	public void overviewPage() {
+		clickMenu(ROLE_MENU);
+
+		assertEquals("管理员", getFromTable(1, OverviewColumn.NAME));
+		assertEquals("浏览用户, 修改用户, 浏览角色, 修改角色", getFromTable(1, OverviewColumn.AUTHORITIES));
+	}
 
 	/**
 	 * 创建公共测试角色.
 	 */
 	@Test
 	public void createRole() {
-		openOverviewPage();
+		clickMenu(ROLE_MENU);
 		clickLink("增加新角色");
 
 		Role role = SecurityEntityData.getRandomRole();
 
 		selenium.type("name", role.getName());
+		//TODO
 		selenium.click("checkedAuthIds-1");
 		selenium.click("checkedAuthIds-3");
 
@@ -33,10 +45,10 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("保存角色成功"));
-		assertEquals(role.getName(), selenium.getTable("contentTable.3.0"));
-		assertEquals("浏览用户, 浏览角色", selenium.getTable("contentTable.3.1"));
+		assertEquals(role.getName(), getFromTable(3, OverviewColumn.NAME));
+		assertEquals("浏览用户, 浏览角色", getFromTable(3, OverviewColumn.AUTHORITIES));
 
-		commonRoleName = role.getName();
+		testRole = role;
 	}
 
 	/**
@@ -44,9 +56,9 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 	 */
 	@Test
 	public void editRole() {
-		assertCommonRoleExist();
-
-		openOverviewPage();
+		ensureTestRoleExist();
+		clickMenu(ROLE_MENU);
+		//TODO
 		selenium.click("//table[@id='contentTable']/tbody/tr[4]/td[3]/a[1]");
 		waitPageLoad();
 
@@ -64,31 +76,38 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 	}
 
 	/**
-	 * 根据用户名删除对象.
+	 * 根据测试角色.
 	 */
 	@Test
 	public void deleteRole() {
-		assertCommonRoleExist();
+		ensureTestRoleExist();
+		clickMenu(ROLE_MENU);
 
-		openOverviewPage();
 		selenium.click("//table[@id='contentTable']/tbody/tr[4]/td[3]/a[2]");
 		waitPageLoad();
 
 		assertTrue(selenium.isTextPresent("删除角色成功"));
-		assertFalse(selenium.isTextPresent(commonRoleName));
+		assertFalse(selenium.isTextPresent(testRole.getName()));
 
-		commonRoleName = null;
+		testRole = null;
 	}
 
-	private void openOverviewPage() {
-		clickMenu("角色列表");
+	enum OverviewColumn {
+		NAME, AUTHORITIES
+	}
+
+	/**
+	 * 取得Overview表格内容.
+	 */
+	private static String getFromTable(int rowIndex, OverviewColumn column) {
+		return selenium.getTable("contentTable." + rowIndex + "." + column.ordinal());
 	}
 
 	/**
 	 * 确保公共测试角色已初始化的工具函数.
 	 */
-	private void assertCommonRoleExist() {
-		if (commonRoleName == null) {
+	private void ensureTestRoleExist() {
+		if (testRole == null) {
 			createRole();
 		}
 	}

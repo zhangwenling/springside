@@ -83,7 +83,7 @@
 				<td>
 					<div style="word-break:break-all;width:250px; overflow:auto; ">
 						<s:checkboxlist name="checkedRoleIds" list="allRoleList" listKey="id" listValue="name"
-										theme="simple"/>
+										theme="custom"/>
 					</div>
 				</td>
 			</tr>

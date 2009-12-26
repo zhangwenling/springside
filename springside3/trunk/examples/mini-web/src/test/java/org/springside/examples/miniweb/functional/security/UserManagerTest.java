@@ -24,8 +24,8 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	public void overviewPage() {
 		clickMenu(USER_MENU);
 
-		assertEquals("admin", getTableGrid(1, OverviewColumn.LOGIN_NAME));
-		assertEquals("管理员, 用户", getTableGrid(1, OverviewColumn.ROLES));
+		assertEquals("admin", getFromTable(1, OverviewColumn.LOGIN_NAME));
+		assertEquals("管理员, 用户", getFromTable(1, OverviewColumn.ROLES));
 	}
 
 	/**
@@ -46,8 +46,8 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		selenium.type("password", user.getPassword());
 		selenium.type("passwordConfirm", user.getPassword());
 
-		for(Role role:user.getRoleList()){
-			selenium.check(getRoleCheckId(role.getId()));
+		for (Role role : user.getRoleList()) {
+			selenium.check("checkedRoleIds-" + role.getId());
 		}
 
 		selenium.click(SUBMIT_BUTTON);
@@ -56,8 +56,8 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		//校验结果
 		assertTrue(selenium.isTextPresent("保存用户成功"));
 		searchUser(user.getLoginName());
-		assertEquals(user.getName(), getTableGrid(1, OverviewColumn.NAME));
-		assertEquals(user.getRoleNames(), getTableGrid(1, OverviewColumn.ROLES));
+		assertEquals(user.getName(), getFromTable(1, OverviewColumn.NAME));
+		assertEquals(user.getRoleNames(), getFromTable(1, OverviewColumn.ROLES));
 
 		//设置公共测试用户
 		testUser = user;
@@ -75,9 +75,8 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		clickMenu(USER_MENU);
 		searchUser(testUser.getLoginName());
 		clickLink("修改");
-		
-		
-		//校验用户页面
+
+		//校验修改页面
 		assertEquals(testUser.getLoginName(), selenium.getValue("loginName"));
 		assertEquals(testUser.getName(), selenium.getValue("name"));
 		selenium.isChecked("checkedRoleIds-1");
@@ -85,11 +84,18 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		//更改用户名
 		String newUserName = DataUtils.random("User");
 		selenium.type("name", newUserName);
-		//取消用户角色,增加管理员角色
-		selenium.check(getRoleCheckId(1L));
-		selenium.uncheck(getRoleCheckId(2L));
+
+		//取消用户角色
+		for (Role role : testUser.getRoleList()) {
+			selenium.uncheck("checkedRoleIds-" + role.getId());
+		}
 		testUser.getRoleList().clear();
-		testUser.getRoleList().add(SecurityEntityData.getRole(2L));
+
+		//增加管理员角色
+		testUser.getRoleList().add(SecurityEntityData.getAdminRole());
+		for (Role role : testUser.getRoleList()) {
+			selenium.check("checkedRoleIds-" + role.getId());
+		}
 
 		selenium.click(SUBMIT_BUTTON);
 		waitPageLoad();
@@ -97,8 +103,8 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		//校验结果
 		assertTrue(selenium.isTextPresent("保存用户成功"));
 		searchUser(testUser.getLoginName());
-		assertEquals(newUserName, getTableGrid(1, OverviewColumn.NAME));
-		assertEquals(testUser.getRoleNames(), getTableGrid(1, OverviewColumn.ROLES));
+		assertEquals(newUserName, getFromTable(1, OverviewColumn.NAME));
+		assertEquals(testUser.getRoleNames(), getFromTable(1, OverviewColumn.ROLES));
 	}
 
 	/**
@@ -156,14 +162,8 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	/**
 	 * 取得Overview页面内容.
 	 */
-	private static String getTableGrid(int rowIndex, OverviewColumn column) {
+	private static String getFromTable(int rowIndex, OverviewColumn column) {
 		return selenium.getTable("contentTable." + rowIndex + "." + column.ordinal());
-	}
-
-
-	private String getRoleCheckId(Long roleId) {
-
-		return "checkedRoleIds-" + (SecurityEntityData.getRoleIdList().indexOf(roleId) + 1);
 	}
 
 	/**
