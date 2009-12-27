@@ -38,7 +38,7 @@ public class BinaryWebServiceTest extends Assert {
 		//调用SmallImageService
 		SmallImageResult result = imageService.getImage();
 		assertTrue(result.getImageData().length > 0);
-		
+
 		//保存图片文件并校验
 		String tempFilePath = System.getProperty("java.io.tmpdir") + "smalllogo.jpg";
 		OutputStream os = new FileOutputStream(tempFilePath);
@@ -74,5 +74,5 @@ public class BinaryWebServiceTest extends Assert {
 		File tempFile = new File(tempFilePath);
 		assertTrue(tempFile.length() > 0);
 	}
-	
+
 }

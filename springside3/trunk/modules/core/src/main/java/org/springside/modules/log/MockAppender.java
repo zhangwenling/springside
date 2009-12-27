@@ -29,8 +29,9 @@ public class MockAppender extends AppenderSkeleton {
 	 * 返回之前append的第一个log事件.
 	 */
 	public LoggingEvent getFirstLog() {
-		if (logs.isEmpty())
+		if (logs.isEmpty()) {
 			return null;
+		}
 		return logs.get(0);
 	}
 
@@ -38,8 +39,9 @@ public class MockAppender extends AppenderSkeleton {
 	 * 返回之前append的最后一个log事件.
 	 */
 	public LoggingEvent getLastLog() {
-		if (logs.isEmpty())
+		if (logs.isEmpty()) {
 			return null;
+		}
 		return logs.get(logs.size() - 1);
 	}
 

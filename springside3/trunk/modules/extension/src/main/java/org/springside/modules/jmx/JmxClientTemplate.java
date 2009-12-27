@@ -187,8 +187,9 @@ public class JmxClientTemplate {
 	 * 确保Connection已连接.
 	 */
 	private void assertConnected() {
-		if (!connected.get())
+		if (!connected.get()) {
 			throw new IllegalStateException("connector已关闭");
+		}
 	}
 
 	/**

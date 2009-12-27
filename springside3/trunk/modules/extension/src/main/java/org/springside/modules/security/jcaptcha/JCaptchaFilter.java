@@ -84,8 +84,9 @@ public class JCaptchaFilter implements Filter {
 	 * 初始化web.xml中定义的filter init-param.
 	 */
 	protected void initParameters(final FilterConfig fConfig) {
-		if (StringUtils.isBlank(fConfig.getInitParameter(PARAM_FAILURE_URL)))
+		if (StringUtils.isBlank(fConfig.getInitParameter(PARAM_FAILURE_URL))) {
 			throw new IllegalArgumentException("CaptchaFilter缺少failureUrl参数");
+		}
 
 		failureUrl = fConfig.getInitParameter(PARAM_FAILURE_URL);
 
@@ -175,8 +176,9 @@ public class JCaptchaFilter implements Filter {
 			String challengeResponse = request.getParameter(captchaParamterName);
 
 			//自动通过值存在时,检验输入值是否等于自动通过值
-			if (StringUtils.isNotBlank(autoPassValue) && autoPassValue.equals(challengeResponse))
+			if (StringUtils.isNotBlank(autoPassValue) && autoPassValue.equals(challengeResponse)) {
 				return true;
+			}
 			return captchaService.validateResponseForID(captchaID, challengeResponse);
 		} catch (CaptchaServiceException e) {
 			logger.error(e.getMessage(), e);

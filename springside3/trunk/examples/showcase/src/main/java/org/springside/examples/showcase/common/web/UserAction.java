@@ -69,8 +69,9 @@ public class UserAction extends CrudActionSupport<User> {
 	 */
 	@Override
 	public String save() throws Exception {
-		if (workingVersion < entity.getVersion())
+		if (workingVersion < entity.getVersion()) {
 			throw new StaleStateException("对象已有新的版本");
+		}
 
 		userManager.saveUser(entity);
 		return RELOAD;

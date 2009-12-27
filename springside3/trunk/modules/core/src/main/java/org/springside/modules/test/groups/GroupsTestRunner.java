@@ -82,20 +82,23 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 			initGroups();
 		}
 		//如果定义全部执行则返回true
-		if (groups.contains(Groups.ALL))
+		if (groups.contains(Groups.ALL)) {
 			return true;
+		}
 
 		//取得类上的Groups annotation, 如果有Groups注解且注解不符合分组要求则返回false.
 		Groups annotationGroup = testClass.getAnnotation(Groups.class);
-		if ((annotationGroup != null) && !groups.contains(annotationGroup.value()))
+		if ((annotationGroup != null) && !groups.contains(annotationGroup.value())) {
 			return false;
+		}
 
 		//继续检查测试方法是否符合Groups定义,如果有一个方法符合定义则返回true.
 		Method[] methods = testClass.getMethods();
 		for (Method method : methods) {
 			if (method.getAnnotation(Test.class) != null && method.getAnnotation(Ignore.class) == null
-					&& isTestMethodInGroups(method))
+					&& isTestMethodInGroups(method)) {
 				return true;
+			}
 		}
 
 		return false;
@@ -111,13 +114,15 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 			initGroups();
 		}
 		//如果groups定义为全部执行则返回true
-		if (groups.contains(Groups.ALL))
+		if (groups.contains(Groups.ALL)) {
 			return true;
+		}
 
 		//取得方法上的Groups annotation, 如果无Groups注解或注解符合分组要求则返回true.
 		Groups annotationGroup = testMethod.getAnnotation(Groups.class);
-		if ((annotationGroup == null) || groups.contains(annotationGroup.value()))
+		if ((annotationGroup == null) || groups.contains(annotationGroup.value())) {
 			return true;
+		}
 
 		return false;
 	}

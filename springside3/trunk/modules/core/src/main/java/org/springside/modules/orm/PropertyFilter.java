@@ -107,8 +107,9 @@ public class PropertyFilter {
 	 * 获取唯一的比较属性名称.
 	 */
 	public String getPropertyName() {
-		if (propertyNames.length > 1)
+		if (propertyNames.length > 1) {
 			throw new IllegalArgumentException("There are not only one property");
+		}
 		return propertyNames[0];
 	}
 

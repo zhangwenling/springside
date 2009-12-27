@@ -109,6 +109,7 @@ public class UserJdbcDao {
 			sourceArray[i++] = new BeanPropertySqlParameterSource(user);
 		}
 
-		jdbcTemplate.batchUpdate("insert into SS_USER(id, login_name, name) values(:id, :loginName, :name)", sourceArray);
+		jdbcTemplate.batchUpdate("insert into SS_USER(id, login_name, name) values(:id, :loginName, :name)",
+				sourceArray);
 	}
 }

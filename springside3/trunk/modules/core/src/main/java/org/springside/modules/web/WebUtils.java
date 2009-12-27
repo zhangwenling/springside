@@ -25,7 +25,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public class WebUtils {
 
-	public static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;	
+	public static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
 
 	/**
 	 * 设置客户端缓存过期时间 Header.
@@ -60,7 +60,7 @@ public class WebUtils {
 	public static void setEtag(HttpServletResponse response, String etag) {
 		response.setHeader("ETag", etag);
 	}
-	
+
 	/**
 	 * 根据浏览器If-Modified-Since Header, 计算文件是否已被修改.
 	 * 
@@ -89,7 +89,7 @@ public class WebUtils {
 		String headerValue = request.getHeader("If-None-Match");
 		if (headerValue != null) {
 			boolean conditionSatisfied = false;
-			if (!headerValue.equals("*")) {
+			if (!"*".equals(headerValue)) {
 				StringTokenizer commaTokenizer = new StringTokenizer(headerValue, ",");
 
 				while (!conditionSatisfied && commaTokenizer.hasMoreTokens()) {
@@ -110,7 +110,6 @@ public class WebUtils {
 		}
 		return true;
 	}
-
 
 	/**
 	 * 检查浏览器客户端是否支持gzip编码.
@@ -134,7 +133,7 @@ public class WebUtils {
 		response.setHeader("Vary", "Accept-Encoding");
 		return new GZIPOutputStream(response.getOutputStream());
 	}
-	
+
 	/**
 	 * 设置让浏览器弹出下载对话框的Header.
 	 * 

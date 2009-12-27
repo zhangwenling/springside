@@ -43,6 +43,7 @@ public class Role extends IdEntity {
 		this.id = id;
 		this.name = name;
 	}
+
 	@Column(nullable = false, unique = true)
 	public String getName() {
 		return name;

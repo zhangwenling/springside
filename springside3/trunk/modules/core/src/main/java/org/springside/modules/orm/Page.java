@@ -133,8 +133,9 @@ public class Page<T> {
 		//检查order字符串的合法值
 		String[] orders = StringUtils.split(StringUtils.lowerCase(order), ',');
 		for (String orderStr : orders) {
-			if (!StringUtils.equals(DESC, orderStr) && !StringUtils.equals(ASC, orderStr))
+			if (!StringUtils.equals(DESC, orderStr) && !StringUtils.equals(ASC, orderStr)) {
 				throw new IllegalArgumentException("排序方向" + orderStr + "不是合法值");
+			}
 		}
 
 		this.order = StringUtils.lowerCase(order);
@@ -205,8 +206,9 @@ public class Page<T> {
 	 * 根据pageSize与totalCount计算总页数, 默认值为-1.
 	 */
 	public long getTotalPages() {
-		if (totalCount < 0)
+		if (totalCount < 0) {
 			return -1;
+		}
 
 		long count = totalCount / pageSize;
 		if (totalCount % pageSize > 0) {
@@ -227,10 +229,11 @@ public class Page<T> {
 	 * 当前页为尾页时仍返回尾页序号.
 	 */
 	public int getNextPage() {
-		if (isHasNext())
+		if (isHasNext()) {
 			return pageNo + 1;
-		else
+		} else {
 			return pageNo;
+		}
 	}
 
 	/**
@@ -245,9 +248,10 @@ public class Page<T> {
 	 * 当前页为首页时返回首页序号.
 	 */
 	public int getPrePage() {
-		if (isHasPre())
+		if (isHasPre()) {
 			return pageNo - 1;
-		else
+		} else {
 			return pageNo;
+		}
 	}
 }

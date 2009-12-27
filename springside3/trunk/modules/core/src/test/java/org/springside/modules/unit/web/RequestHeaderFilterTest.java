@@ -21,13 +21,13 @@ public class RequestHeaderFilterTest extends Assert {
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		config.addInitParameter("foo", "1");
 		config.addInitParameter("bar", "2");
-		
+
 		ResponseHeaderFilter filter = new ResponseHeaderFilter();
 		filter.init(config);
 		filter.doFilter(request, response, chain);
-		
-		assertEquals("1",response.getHeader("foo"));
-		assertEquals("2",response.getHeader("bar"));
+
+		assertEquals("1", response.getHeader("foo"));
+		assertEquals("2", response.getHeader("bar"));
 	}
 
 }

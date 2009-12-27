@@ -30,12 +30,12 @@ public class RoleDaoTest extends SpringTxTestCase {
 		Role role = new Role();
 		role.setName(DataUtils.randomName("Role"));
 		roleDao.save(role);
-		
+
 		User user = userDao.get(1L);
 		user.getRoleList().add(role);
 		userDao.save(user);
 		flush();
-		
+
 		int oldJoinTableCount = countRowsInTable("SS_USER_ROLE");
 		int oldUserTableCount = countRowsInTable("SS_USER");
 

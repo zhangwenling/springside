@@ -11,7 +11,6 @@ import org.springside.modules.test.DataUtils;
  */
 public class UserData {
 
-
 	public static User getRandomUser() {
 		String userName = DataUtils.randomName("User");
 
@@ -30,7 +29,6 @@ public class UserData {
 		user.getRoleList().add(adminRole);
 		return user;
 	}
-
 
 	public static Role getAdminRole() {
 		Role role = new Role();

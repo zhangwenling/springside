@@ -27,7 +27,7 @@ import com.thoughtworks.selenium.Selenium;
 public class SeleniumTestCase extends Assert {
 
 	public static final String PROPERTY_FILE = "application.test.properties";
-	
+
 	public static final String DEFAULT_URL = "http://localhost:8080";
 	public static final String DEFAULT_BROWSER = "*chrome";
 	public static final String DEFAULT_SELENIUM_HOST = "localhost";

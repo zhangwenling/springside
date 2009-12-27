@@ -23,8 +23,9 @@ public class SpringSecurityUtils {
 	 */
 	public static String getCurrentUserName() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (auth == null)
+		if (auth == null) {
 			return "";
+		}
 		return auth.getName();
 	}
 
@@ -34,8 +35,9 @@ public class SpringSecurityUtils {
 	@SuppressWarnings("unchecked")
 	public static <T extends User> T getCurrentUser() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (principal == null)
+		if (principal == null) {
 			return null;
+		}
 		return (T) principal;
 	}
 }

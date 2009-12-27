@@ -41,7 +41,7 @@ public class LargeImageWebServiceImpl implements LargeImageWebService, Applicati
 			//采用activation的DataHandler实现Streaming传输.
 			DataSource dataSource = new FileDataSource(image);
 			DataHandler dataHandler = new DataHandler(dataSource);
-			result.setImageData(dataHandler);			
+			result.setImageData(dataHandler);
 		} catch (IOException e) {
 			result.setResult(WSResult.IMAGE_ERROR, "Image reading error.");
 		}

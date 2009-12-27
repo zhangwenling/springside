@@ -32,8 +32,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
 		User user = securityEntityManager.findUserByLoginName(userName);
-		if (user == null)
+		if (user == null) {
 			throw new UsernameNotFoundException("用户" + userName + " 不存在");
+		}
 
 		GrantedAuthority[] grantedAuths = obtainGrantedAuthorities(user);
 

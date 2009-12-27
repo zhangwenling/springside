@@ -9,7 +9,7 @@ import org.springside.modules.test.selenium.SeleniumTestCase;
  * @author calvin
  */
 public abstract class BaseSeleniumTestCase extends SeleniumTestCase {
-	
+
 	public static final String LOGIN_BUTTON = "//input[@value='登录']";
 	public static final String SUBMIT_BUTTON = "//input[@value='提交']";
 	public static final String SEARCH_BUTTON = "//input[@value='搜索']";

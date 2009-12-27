@@ -354,8 +354,9 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 在修改对象的情景下,如果属性新修改的值(value)等于属性原来的值(orgValue)则不作比较.
 	 */
 	public boolean isPropertyUnique(final String propertyName, final Object newValue, final Object oldValue) {
-		if (newValue == null || newValue.equals(oldValue))
+		if (newValue == null || newValue.equals(oldValue)) {
 			return true;
+		}
 		Object object = findUniqueBy(propertyName, newValue);
 		return (object == null);
 	}

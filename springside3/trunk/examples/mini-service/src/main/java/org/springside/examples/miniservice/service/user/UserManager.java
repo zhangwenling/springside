@@ -46,8 +46,9 @@ public class UserManager {
 	 */
 	@Transactional(readOnly = true)
 	public boolean authenticate(String loginName, String password) {
-		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password))
+		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password)) {
 			return false;
+		}
 
 		return ((Long) userDao.findUnique(UserDao.QUERY_BY_LNAME_PASSWD, loginName, password) == 1);
 	}

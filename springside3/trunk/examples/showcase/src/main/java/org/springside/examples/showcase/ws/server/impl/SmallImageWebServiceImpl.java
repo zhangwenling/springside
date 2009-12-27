@@ -40,7 +40,7 @@ public class SmallImageWebServiceImpl implements SmallImageWebService, Applicati
 			result.setImageData(imageBytes);
 		} catch (IOException e) {
 			result.setResult(WSResult.IMAGE_ERROR, "Image reading error.");
-		}finally{
+		} finally {
 			IOUtils.closeQuietly(is);
 		}
 

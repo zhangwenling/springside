@@ -29,9 +29,9 @@ import org.springside.modules.utils.EncodeUtils;
  */
 public class CryptoUtils {
 
-	private static final String DES = "DES";
-	private static final String AES = "AES";
-	private static final String HMACSHA1 = "HmacSHA1";
+	private static final String ALG_DES = "DES";
+	private static final String ALG_AES = "AES";
+	private static final String ALG_HMACSHA1 = "HmacSHA1";
 
 	private static final int DEFAULT_HMACSHA1_KEYSIZE = 160;//RFC2401
 	private static final int DEFAULT_AES_KEYSIZE = 128;
@@ -45,8 +45,8 @@ public class CryptoUtils {
 	 */
 	public static byte[] hmacSha1(String input, byte[] keyBytes) {
 		try {
-			SecretKey secretKey = new SecretKeySpec(keyBytes, HMACSHA1);
-			Mac mac = Mac.getInstance(HMACSHA1);
+			SecretKey secretKey = new SecretKeySpec(keyBytes, ALG_HMACSHA1);
+			Mac mac = Mac.getInstance(ALG_HMACSHA1);
 			mac.init(secretKey);
 			return mac.doFinal(input.getBytes());
 		} catch (GeneralSecurityException e) {
@@ -118,7 +118,7 @@ public class CryptoUtils {
 	 */
 	public static byte[] generateMacSha1Key() {
 		try {
-			KeyGenerator keyGenerator = KeyGenerator.getInstance(HMACSHA1);
+			KeyGenerator keyGenerator = KeyGenerator.getInstance(ALG_HMACSHA1);
 			keyGenerator.init(DEFAULT_HMACSHA1_KEYSIZE);
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
@@ -190,10 +190,10 @@ public class CryptoUtils {
 	private static byte[] des(byte[] inputBytes, byte[] keyBytes, int mode) {
 		try {
 			DESKeySpec desKeySpec = new DESKeySpec(keyBytes);
-			SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(DES);
+			SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALG_DES);
 			SecretKey secretKey = keyFactory.generateSecret(desKeySpec);
 
-			Cipher cipher = Cipher.getInstance(DES);
+			Cipher cipher = Cipher.getInstance(ALG_DES);
 			cipher.init(mode, secretKey);
 			return cipher.doFinal(inputBytes);
 		} catch (GeneralSecurityException e) {
@@ -206,7 +206,7 @@ public class CryptoUtils {
 	 */
 	public static byte[] generateDesKey() {
 		try {
-			KeyGenerator keyGenerator = KeyGenerator.getInstance(DES);
+			KeyGenerator keyGenerator = KeyGenerator.getInstance(ALG_DES);
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
 		} catch (GeneralSecurityException e) {
@@ -275,8 +275,8 @@ public class CryptoUtils {
 	 */
 	private static byte[] aes(byte[] inputBytes, byte[] keyBytes, int mode) {
 		try {
-			SecretKey secretKey = new SecretKeySpec(keyBytes, AES);
-			Cipher cipher = Cipher.getInstance(AES);
+			SecretKey secretKey = new SecretKeySpec(keyBytes, ALG_AES);
+			Cipher cipher = Cipher.getInstance(ALG_AES);
 			cipher.init(mode, secretKey);
 			return cipher.doFinal(inputBytes);
 		} catch (Exception e) {
@@ -289,7 +289,7 @@ public class CryptoUtils {
 	 */
 	public static byte[] generateAesKey() {
 		try {
-			KeyGenerator keyGenerator = KeyGenerator.getInstance(AES);
+			KeyGenerator keyGenerator = KeyGenerator.getInstance(ALG_AES);
 			keyGenerator.init(DEFAULT_AES_KEYSIZE);
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();

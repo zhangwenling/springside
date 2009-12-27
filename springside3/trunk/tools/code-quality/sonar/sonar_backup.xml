@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sonar-config>
-  <version><![CDATA[78]]></version>
-  <date><![CDATA[2009-12-23]]></date>
+  <version><![CDATA[92]]></version>
+  <date><![CDATA[2009-12-28]]></date>
   <metrics/>
   <properties>
     <property>
@@ -3757,7 +3757,7 @@
         <active-rule>
           <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocStyleCheck]]></key>
           <plugin><![CDATA[checkstyle]]></plugin>
-          <level><![CDATA[MINOR]]></level>
+          <level><![CDATA[MAJOR]]></level>
           <params>
             <param>
               <key><![CDATA[checkHtml]]></key>
@@ -3916,12 +3916,12 @@
         <active-rule>
           <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.ArrayTypeStyleCheck]]></key>
           <plugin><![CDATA[checkstyle]]></plugin>
-          <level><![CDATA[MINOR]]></level>
+          <level><![CDATA[MAJOR]]></level>
         </active-rule>
         <active-rule>
           <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.UpperEllCheck]]></key>
           <plugin><![CDATA[checkstyle]]></plugin>
-          <level><![CDATA[MINOR]]></level>
+          <level><![CDATA[INFO]]></level>
         </active-rule>
         <active-rule>
           <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.coding.DeclarationOrderCheck]]></key>
@@ -3998,14 +3998,219 @@
         <active-rule>
           <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.TranslationCheck]]></key>
           <plugin><![CDATA[checkstyle]]></plugin>
-          <level><![CDATA[MINOR]]></level>
+          <level><![CDATA[INFO]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[AvoidCatchingThrowable]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[CRITICAL]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[BrokenNullCheck]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[CRITICAL]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[EmptyFinallyBlock]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[CRITICAL]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[EmptyIfStmt]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[CRITICAL]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[EmptySynchronizedBlock]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[CRITICAL]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[EmptyWhileStmt]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[CRITICAL]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[EqualsNull]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[CRITICAL]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[MisplacedNullCheck]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[CRITICAL]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[SuspiciousEqualsMethodName]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[CRITICAL]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[UnconditionalIfStatement]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[CRITICAL]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[UselessOperationOnImmutable]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[CRITICAL]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[AddEmptyString]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[AvoidArrayLoops]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[AvoidDecimalLiteralsInBigDecimalConstructor]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[AvoidRethrowingException]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[AvoidPrintStackTrace]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[BooleanGetMethodName]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[BooleanInstantiation]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[ClassCastExceptionWithToArray]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[CompareObjectsWithEquals]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[EmptyTryBlock]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[IdempotentOperations]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[IntegerInstantiation]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[LongInstantiation]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[ShortInstantiation]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[LooseCoupling]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[AvoidFieldNameMatchingTypeName]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[AvoidFieldNameMatchingMethodName]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[NonStaticInitializer]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[PositionLiteralsFirstInComparisons]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[PreserveStackTrace]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[SimplifyConditional]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[StringInstantiation]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[StringToString]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[SystemPrintln]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[UnusedPrivateField]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[UnusedLocalVariable]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[UnusedPrivateMethod]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[UseArraysAsList]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[UseIndexOfChar]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[UselessOverridingMethod]]></key>
+          <plugin><![CDATA[pmd]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
         </active-rule>
       </active-rules>
       <alerts>
         <alert>
           <operator><![CDATA[<]]></operator>
-          <value-error><![CDATA[90]]></value-error>
-          <value-warning><![CDATA[95]]></value-warning>
+          <value-error><![CDATA[80]]></value-error>
+          <value-warning><![CDATA[90]]></value-warning>
           <metric-key><![CDATA[violations_density]]></metric-key>
         </alert>
         <alert>

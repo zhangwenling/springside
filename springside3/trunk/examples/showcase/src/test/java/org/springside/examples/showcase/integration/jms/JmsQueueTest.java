@@ -27,7 +27,7 @@ public class JmsQueueTest extends SpringContextTestCase {
 
 		notifyMessageProducer.sendQueue(user);
 		logger.info("sended message");
-		
+
 		sleep(1000);
 		assertEquals("UserName:calvin, Email:calvin@sringside.org.cn", appender.getFirstLog().getMessage());
 		logger.info("received message");
