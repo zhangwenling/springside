@@ -34,12 +34,12 @@ public class NonceUtilsTest extends Assert {
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Random Int          :" + NonceUtils.randomHexInt());
 		}
-		assertEquals(8, NonceUtils.randomHexInt().length());
+		assertTrue(NonceUtils.randomHexInt().length() <= 8);
 
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Random Long         :" + NonceUtils.randomHexLong());
 		}
-		assertEquals(16, NonceUtils.randomHexLong().length());
+		assertTrue(NonceUtils.randomHexLong().length() <= 16);
 
 		//UUID
 		for (int i = 0; i < 3; i++) {

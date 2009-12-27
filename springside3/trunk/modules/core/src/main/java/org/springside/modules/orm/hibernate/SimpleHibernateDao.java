@@ -186,7 +186,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 
 	 * @param values 命名参数,按名称绑定.
 	 */
-	public <X> List<X> find(final String hql, final Map<String, Object> values) {
+	public <X> List<X> find(final String hql, final Map<String, ?> values) {
 		return createQuery(hql, values).list();
 	}
 
@@ -204,7 +204,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 
 	 * @param values 命名参数,按名称绑定.
 	 */
-	public <X> X findUnique(final String hql, final Map<String, Object> values) {
+	public <X> X findUnique(final String hql, final Map<String, ?> values) {
 		return (X) createQuery(hql, values).uniqueResult();
 	}
 
@@ -219,7 +219,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 执行HQL进行批量修改/删除操作.
 	 * @return 更新记录数.
 	 */
-	public int batchExecute(final String hql, final Map<String, Object> values) {
+	public int batchExecute(final String hql, final Map<String, ?> values) {
 		return createQuery(hql, values).executeUpdate();
 	}
 
@@ -246,7 +246,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 
 	 * @param values 命名参数,按名称绑定.
 	 */
-	public Query createQuery(final String queryString, final Map<String, Object> values) {
+	public Query createQuery(final String queryString, final Map<String, ?> values) {
 		Assert.hasText(queryString, "queryString不能为空");
 		Query query = getSession().createQuery(queryString);
 		if (values != null) {

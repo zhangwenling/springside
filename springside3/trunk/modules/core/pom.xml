@@ -157,6 +157,22 @@
 	<build>
 		<outputDirectory>target/classes</outputDirectory>
 		<plugins>
+			<!-- jar插件, 设定manifest文件内容 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<!-- source插件,打包源码 -->
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 				<executions>

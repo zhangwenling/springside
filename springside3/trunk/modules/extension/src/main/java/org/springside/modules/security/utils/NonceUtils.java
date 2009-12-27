@@ -63,7 +63,7 @@ public class NonceUtils {
 	}
 
 	/**
-	 * 使用SecureRandom生成Integer, 返回长度为8的Hex编码结果 .
+	 * 使用SecureRandom生成Integer,返回长度不大于8的Hex编码结果.
 	 */
 	public static String randomHexInt() {
 		return Integer.toHexString(randomInt());
@@ -77,7 +77,7 @@ public class NonceUtils {
 	}
 
 	/**
-	 * 使用SecureRandom生成Long, 返回长度为16的Hex编码结果.
+	 * 使用SecureRandom生成Long, 返回长度不大于16的Hex编码结果.
 	 */
 	public static String randomHexLong() {
 		return Long.toHexString(randomLong());

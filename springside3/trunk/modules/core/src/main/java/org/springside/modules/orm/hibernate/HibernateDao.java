@@ -109,7 +109,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @return 分页查询结果, 附带结果列表及所有查询时的参数.
 	 */
 	@SuppressWarnings("unchecked")
-	public Page<T> findPage(final Page<T> page, final String hql, final Map<String, Object> values) {
+	public Page<T> findPage(final Page<T> page, final String hql, final Map<String, ?> values) {
 		Assert.notNull(page, "page不能为空");
 
 		Query q = createQuery(hql, values);
@@ -212,7 +212,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 
 	 * 本函数只能自动处理简单的hql语句,复杂的hql查询请另行编写count语句查询.
 	 */
-	protected long countHqlResult(final String hql, final Map<String, Object> values) {
+	protected long countHqlResult(final String hql, final Map<String, ?> values) {
 		String fromHql = hql;
 		//select子句与order by子句会影响count查询,进行简单的排除.
 		fromHql = "from " + StringUtils.substringAfter(fromHql, "from");

@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry excluding="**/.svn/" kind="src" path="src/main/java"/>
 	<classpathentry excluding="**/.svn/" kind="src" output="target/test-classes" path="src/test/java"/>
-	<classpathentry kind="src" path="src/test/resources"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/springside3-core"/>
