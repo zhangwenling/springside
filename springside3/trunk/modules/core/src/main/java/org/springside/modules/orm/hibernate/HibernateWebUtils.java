@@ -71,7 +71,7 @@ public class HibernateWebUtils {
 		}
 
 		//遍历源集合,如果其id不在目标ID集合中的对象,进行删除.
-		//同时,在目标集合中删除已在源集合中的id,使得目标集合中剩下的id均为源集合中没有的ID.
+		//同时,在目标集合中删除已在源集合中的id,使得目标集合中剩下的id均为源集合中没有的id.
 		Iterator<T> srcIterator = srcObjects.iterator();
 		try {
 

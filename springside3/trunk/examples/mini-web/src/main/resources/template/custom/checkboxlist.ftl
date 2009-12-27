@@ -1,7 +1,7 @@
 <#assign itemCount = 0/>
 <#assign columnCount = 3/>
 <#if parameters.list??>
-<table style="margin-bottom:0em;">
+<table class="checkboxTable" style="margin-bottom:0em;">
     <@s.iterator value="parameters.list">
         <#if parameters.listKey??>
             <#assign itemKey = stack.findValue(parameters.listKey)/>

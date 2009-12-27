@@ -3,7 +3,7 @@
 
 	<property name="project.runtime.lib" value="../../webapp/WEB-INF/lib" />
 	<property name="project.lib" value="../../lib" />
-	<property name="hibernate-tools-template.path" value="../../../../tools/code-generator/hibernate-tools-templates" />
+	<property name="hibernatetools-templates.path" value="../../../../tools/code-generator/hibernatetools-templates" />
 
 	<path id="toolslib">
 		<path location="${project.lib}/hibernate-tools-3.2.4.GA.jar" />
@@ -41,7 +41,7 @@
 	</target>
 
 	<target name="generate.code">
-		<hibernatetool destdir="generated" templatepath="${hibernate-tools-template.path}/">
+		<hibernatetool destdir="generated" templatepath="${hibernatetools-templates.path}/">
 			<classpath>
 				<path location="../../webapp/WEB-INF/classes" />
 			</classpath>
