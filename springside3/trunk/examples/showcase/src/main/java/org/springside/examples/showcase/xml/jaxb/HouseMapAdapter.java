@@ -20,7 +20,7 @@ import org.springside.examples.showcase.xml.jaxb.HouseMapAdapter.HouseMap.HouseE
  * <houses>
  * 		<house key="bj">house1</item>
  * 		<hosue key="gz">house2</item>
- * 	</houses>
+ * </houses>
  * 
  * @author calvin
  */
@@ -44,20 +44,24 @@ public class HouseMapAdapter extends XmlAdapter<HouseMapAdapter.HouseMap, Map<St
 		return map;
 	}
 
+	/**
+	 * List<HouseEntry>的Adapter类.
+	 * @author calvin
+	 */
 	@XmlType(name = "houses")
 	public static class HouseMap {
 		@XmlElement(name = "house")
 		List<HouseEntry> entries = new ArrayList<HouseEntry>();
 
 		/**
-		 * House Map中的Entry.
+		 * HouseMap中的Entry类.
 		 */
 		static class HouseEntry {
 			@XmlAttribute
-			public String key;
+			String key;
 
 			@XmlValue
-			public String value;
+			String value;
 
 			public HouseEntry() {
 			}

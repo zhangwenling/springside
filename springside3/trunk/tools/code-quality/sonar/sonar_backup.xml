@@ -9,10 +9,6 @@
       <value><![CDATA[INFO=0;MINOR=5;MAJOR=10;CRITICAL=20;BLOCKER=40]]></value>
     </property>
     <property>
-      <key><![CDATA[tendency.depth]]></key>
-      <value><![CDATA[15]]></value>
-    </property>
-    <property>
       <key><![CDATA[sonar.core.projectsdashboard.showTreemap]]></key>
       <value><![CDATA[false]]></value>
     </property>
@@ -27,6 +23,10 @@
     <property>
       <key><![CDATA[timemachine.chartMetrics]]></key>
       <value><![CDATA[comment_lines_density,public_documented_api_density,violations_density,violations,duplicated_lines,ncloc,coverage]]></value>
+    </property>
+    <property>
+      <key><![CDATA[tendency.depth]]></key>
+      <value><![CDATA[10]]></value>
     </property>
   </properties>
   <profiles>
@@ -4132,11 +4132,6 @@
         </active-rule>
         <active-rule>
           <key><![CDATA[AvoidFieldNameMatchingTypeName]]></key>
-          <plugin><![CDATA[pmd]]></plugin>
-          <level><![CDATA[MAJOR]]></level>
-        </active-rule>
-        <active-rule>
-          <key><![CDATA[AvoidFieldNameMatchingMethodName]]></key>
           <plugin><![CDATA[pmd]]></plugin>
           <level><![CDATA[MAJOR]]></level>
         </active-rule>

@@ -77,7 +77,7 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 	 * 将resourceDetailService提供LinkedHashMap<String, String>形式的URL及授权关系定义
 	 * 转化为DefaultFilterInvocationDefinitionSource需要的LinkedHashMap<RequestKey, ConfigAttributeDefinition>形式.
 	 */
-	protected LinkedHashMap<RequestKey, ConfigAttributeDefinition> buildRequestMap() throws Exception {
+	protected LinkedHashMap<RequestKey, ConfigAttributeDefinition> buildRequestMap() throws Exception {//NOSONAR
 		LinkedHashMap<String, String> srcMap = resourceDetailsService.getRequestMap();
 		LinkedHashMap<RequestKey, ConfigAttributeDefinition> distMap = new LinkedHashMap<RequestKey, ConfigAttributeDefinition>();
 		ConfigAttributeEditor editor = new ConfigAttributeEditor();
