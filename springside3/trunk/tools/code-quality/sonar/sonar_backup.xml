@@ -3949,11 +3949,6 @@
           <level><![CDATA[MAJOR]]></level>
         </active-rule>
         <active-rule>
-          <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.coding.IllegalThrowsCheck]]></key>
-          <plugin><![CDATA[checkstyle]]></plugin>
-          <level><![CDATA[MAJOR]]></level>
-        </active-rule>
-        <active-rule>
           <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.coding.NestedIfDepthCheck]]></key>
           <plugin><![CDATA[checkstyle]]></plugin>
           <level><![CDATA[MAJOR]]></level>
@@ -3976,17 +3971,6 @@
             <param>
               <key><![CDATA[protectedAllowed]]></key>
               <value><![CDATA[true]]></value>
-            </param>
-          </params>
-        </active-rule>
-        <active-rule>
-          <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.coding.ReturnCountCheck]]></key>
-          <plugin><![CDATA[checkstyle]]></plugin>
-          <level><![CDATA[MAJOR]]></level>
-          <params>
-            <param>
-              <key><![CDATA[max]]></key>
-              <value><![CDATA[3]]></value>
             </param>
           </params>
         </active-rule>
@@ -4199,6 +4183,11 @@
           <key><![CDATA[UselessOverridingMethod]]></key>
           <plugin><![CDATA[pmd]]></plugin>
           <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.coding.ReturnCountCheck]]></key>
+          <plugin><![CDATA[checkstyle]]></plugin>
+          <level><![CDATA[INFO]]></level>
         </active-rule>
       </active-rules>
       <alerts>
