@@ -779,13 +779,6 @@
 					<version>6.1.22</version>
 				</plugin>
 
-				<!-- cargo插件 -->
-				<plugin>
-					<groupId>org.codehaus.cargo</groupId>
-					<artifactId>cargo-maven2-plugin</artifactId>
-					<version>1.0</version>
-				</plugin>
-
 				<!-- selenium插件 -->
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
