@@ -41,6 +41,7 @@
 								<properties>
 									<context>/mini-service</context>
 								</properties>
+								<pingURL>http://localhost:8080/mini-service</pingURL>
 							</deployable>
 							<deployable>
 								<location>examples/mini-web/target/mini-web.war</location>
@@ -48,6 +49,7 @@
 								<properties>
 									<context>/mini-web</context>
 								</properties>
+								<pingURL>http://localhost:8080/mini-web</pingURL>
 							</deployable>
 							<deployable>
 								<location>examples/showcase/target/showcase.war</location>
@@ -55,6 +57,7 @@
 								<properties>
 									<context>/showcase</context>
 								</properties>
+								<pingURL>http://localhost:8080/showcase</pingURL>
 							</deployable>
 						</deployables>
 					</deployer>
