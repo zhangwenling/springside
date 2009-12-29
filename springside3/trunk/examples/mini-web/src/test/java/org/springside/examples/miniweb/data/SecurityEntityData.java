@@ -64,7 +64,7 @@ public class SecurityEntityData {
 	}
 
 	public static Role getRandomDefaultRole() {
-		return DataUtils.randomOne(defaultRoleList);
+		return DataUtils.randomOne(getDefaultRoleList());
 	}
 
 	public static Authority getRandomAuthority() {
