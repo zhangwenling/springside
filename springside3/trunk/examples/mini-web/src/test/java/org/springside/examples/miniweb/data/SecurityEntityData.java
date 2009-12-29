@@ -89,7 +89,7 @@ public class SecurityEntityData {
 	}
 
 	public static List<Authority> getRandomDefaultAuthorityList() {
-		return DataUtils.randomSome(defaultAuthorityList);
+		return DataUtils.randomSome(getDefaultAuthorityList());
 	}
 
 	public static Resource getRandomResource() {
