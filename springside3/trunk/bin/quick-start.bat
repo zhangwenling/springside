@@ -41,7 +41,7 @@ call %MAVEN_BAT% -o clean package -Pinitdb -Dmaven.test.skip=true
 cd ..\..\
 
 echo [Step 7] 部署3个示例项目到tomcat，启动tomcat.
-call %MAVEN_BAT% cargo:deploy
+call %MAVEN_BAT% -o cargo:deploy
 
 echo [Step 8] 为所有项目初始化依赖Jar包到lib及webapp/WEB-INF/lib目录,方便浏览
 call %MAVEN_BAT% -o dependency:copy-dependencies -DoutputDirectory=lib -Dsilent=true -Pmodules
