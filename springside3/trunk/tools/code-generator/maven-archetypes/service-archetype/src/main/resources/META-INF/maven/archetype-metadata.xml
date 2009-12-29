@@ -89,7 +89,7 @@
         <include>**/*.bat</include>
       </includes>
     </fileSet>
-    <fileSet encoding="GBK">
+    <fileSet filtered="true" encoding="GBK">
       <directory>bin</directory>
       <includes>
         <include>**/*.bat</include>
