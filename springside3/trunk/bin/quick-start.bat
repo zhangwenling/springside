@@ -54,10 +54,6 @@ echo [INFO] http://localhost:8080/mini-service
 echo [INFO] http://localhost:8080/mini-web
 echo [INFO] http://localhost:8080/showcase
 
-start http://localhost:8080/mini-service
-start http://localhost:8080/mini-web
-start http://localhost:8080/showcase
-
 :end
 pause
 
