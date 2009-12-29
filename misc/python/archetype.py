@@ -66,6 +66,9 @@ def commonModifyArchetype(path):
     replaceinfile('.project','		<project>springside3-core</project>\n','')
     replaceinfile('.settings/org.eclipse.wst.common.component','<dependent-module archiveName="springside3-core.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/springside3-core/springside3-core">\n<dependency-type>uses</dependency-type>\n</dependent-module>','')
 
+    replaceinfile('bin/quick-start.bat','mini-service','${artifactId}')
+    replaceinfile('bin/quick-start.bat','mini-web','${artifactId}')
+
 def clean():
     rmfile(base_dir+'\\examples\\mini-service\\pom-parent.xml')
     rmfile(base_dir+'\\examples\\mini-web\\pom-parent.xml')
@@ -85,7 +88,7 @@ def clean():
  
     print 'cleaned temp files.'
 
-springside_version='3.2.0'
+springside_version='3.2.2'
 base_dir = os.path.abspath("../../../")
 
 prepare()
