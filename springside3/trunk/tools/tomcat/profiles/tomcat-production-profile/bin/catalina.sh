@@ -80,8 +80,8 @@
 
 # --------------------------------SpringSide Setting Sample Begin-----------------------------
 
-MEMROY_OPTS="-server -Xms1024m -Xmx1024m -Xmn400m -XX:MaxPermSize=96m -XX:+UseConcMarkSweepGC"
-JAVA_OPTS="$JAVA_OPTS% $MEMROY_OPTS" 
+MEMORY_OPTS="-server -Xms1024m -Xmx1024m -Xmn400m -XX:MaxPermSize=96m -XX:+UseConcMarkSweepGC"
+JAVA_OPTS="$JAVA_OPTS% $MEMORY_OPTS" 
 
 # --------------------------------SpringSide Setting Sample End-----------------------------
 

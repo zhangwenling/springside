@@ -201,6 +201,7 @@ public class ExcelExportAction extends ActionSupport {
 		totalStyle.setAlignment(CellStyle.ALIGN_RIGHT);
 		setBorder(totalStyle);
 		styles.put("total", totalStyle);
+		
 		return styles;
 	}
 

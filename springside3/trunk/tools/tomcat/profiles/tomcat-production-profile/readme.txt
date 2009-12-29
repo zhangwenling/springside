@@ -4,5 +4,6 @@
   b.gzip compression turn on.
   b.database connection pool setting.
   c.load balance setting.
-  d.useBodyEncodingForURI="true" setting
+  d.keeplive setting
+  e.useBodyEncodingForURI="true" setting
 3.context.xml:database connection pool setting.
