@@ -34,7 +34,7 @@ public class SpringGroupsTestRunner extends SpringJUnit4ClassRunner {
 	 */
 	@Override
 	public void run(RunNotifier notifier) {
-		if (!GroupsTestRunner.isTestClassInGroups(getTestClass().getJavaClass())) {
+		if (!GroupsTestRunner.shouldRun(getTestClass().getJavaClass())) {
 			EachTestNotifier testNotifier = new EachTestNotifier(notifier, getDescription());
 			testNotifier.fireTestIgnored();
 		}
@@ -47,7 +47,7 @@ public class SpringGroupsTestRunner extends SpringJUnit4ClassRunner {
 	@Override
 	protected void runChild(FrameworkMethod method, RunNotifier notifier) {
 
-		if (!GroupsTestRunner.isTestMethodInGroups(method.getMethod())) {
+		if (!GroupsTestRunner.shouldRun(method.getMethod())) {
 			Description description = describeChild(method);
 			EachTestNotifier eachNotifier = new EachTestNotifier(notifier, description);
 			eachNotifier.fireTestIgnored();
