@@ -32,7 +32,7 @@ import org.springframework.security.util.UrlMatcher;
  * 
  * @author calvin
  */
-public class DefinitionSourceFactoryBean implements FactoryBean {
+public class DefinitionSourceFactoryBean implements FactoryBean<DefaultFilterInvocationDefinitionSource> {
 
 	private ResourceDetailsService resourceDetailsService;
 
@@ -43,7 +43,7 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 	/**
 	 * 返回注入了Ant Style的URLMatcher和ResourceDetailService提供的RequestMap的DefaultFilterInvocationDefinitionSource.
 	 */
-	public Object getObject() throws Exception {
+	public DefaultFilterInvocationDefinitionSource getObject() throws Exception {
 		LinkedHashMap<RequestKey, ConfigAttributeDefinition> requestMap = buildRequestMap();
 		UrlMatcher matcher = getUrlMatcher();
 		DefaultFilterInvocationDefinitionSource definitionSource = new DefaultFilterInvocationDefinitionSource(matcher,
