@@ -36,5 +36,6 @@
 	<classpathentry kind="lib" path="lib/h2-1.1.119.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.5.10.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.5.10.jar"/>
+	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
