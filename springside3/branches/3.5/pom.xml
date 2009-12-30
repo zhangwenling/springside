@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>springside3-parent</artifactId>
+		<groupId>org.springside</groupId>
+		<version>3.5.0</version>
+		<relativePath>modules/parent/pom.xml</relativePath>
+	</parent>
+	<groupId>org.springside</groupId>
+	<artifactId>springside3-all</artifactId>
+	<name>Springside3's All</name>
+	<packaging>pom</packaging>
+
+	<build>
+		<plugins>
+			<!-- deploy 3 examples to tomcat  -->
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.0</version>
+				<configuration>
+					<container>
+						<containerId>tomcat6x</containerId>
+						<type>installed</type>
+						<home>tools/tomcat/apache-tomcat-6.0.20</home>
+					</container>
+
+					<configuration>
+						<type>existing</type>
+						<home>tools/tomcat/apache-tomcat-6.0.20</home>
+					</configuration>
+
+					<deployer>
+						<type>installed</type>
+						<deployables>
+							<deployable>
+								<location>examples/mini-web/target/mini-web.war</location>
+								<type>war</type>
+								<properties>
+									<context>/mini-web</context>
+								</properties>
+								<pingURL>http://localhost:8080/mini-web</pingURL>
+								<pingTimeout>120000</pingTimeout>
+							</deployable>
+						</deployables>
+					</deployer>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>modules</id>
+			<modules>
+				<module>modules/core</module>
+				<module>modules/parent</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>examples</id>
+			<modules>
+				<module>examples/mini-web</module>
+			</modules>
+		</profile>
+	</profiles>
+</project>
