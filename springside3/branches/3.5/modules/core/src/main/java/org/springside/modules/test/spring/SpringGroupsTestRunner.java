@@ -7,10 +7,11 @@
  */
 package org.springside.modules.test.spring;
 
-import java.lang.reflect.Method;
-
-import org.junit.internal.runners.InitializationError;
+import org.junit.internal.runners.model.EachTestNotifier;
+import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.InitializationError;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springside.modules.test.groups.GroupsTestRunner;
 
@@ -34,8 +35,8 @@ public class SpringGroupsTestRunner extends SpringJUnit4ClassRunner {
 	@Override
 	public void run(RunNotifier notifier) {
 		if (!GroupsTestRunner.isTestClassInGroups(getTestClass().getJavaClass())) {
-			notifier.fireTestIgnored(getDescription());
-			return;
+			EachTestNotifier testNotifier = new EachTestNotifier(notifier, getDescription());
+			testNotifier.fireTestIgnored();
 		}
 		super.run(notifier);
 	}
@@ -44,12 +45,14 @@ public class SpringGroupsTestRunner extends SpringJUnit4ClassRunner {
 	 * 重载加入方法级别过滤.
 	 */
 	@Override
-	protected void invokeTestMethod(Method method, RunNotifier notifier) {
+	protected void runChild(FrameworkMethod method, RunNotifier notifier) {
 
-		if (!GroupsTestRunner.isTestMethodInGroups(method)) {
-			notifier.fireTestIgnored(getDescription());
+		if (!GroupsTestRunner.isTestMethodInGroups(method.getMethod())) {
+			Description description = describeChild(method);
+			EachTestNotifier eachNotifier = new EachTestNotifier(notifier, description);
+			eachNotifier.fireTestIgnored();
 			return;
 		}
-		super.invokeTestMethod(method, notifier);
+		super.runChild(method, notifier);
 	}
 }

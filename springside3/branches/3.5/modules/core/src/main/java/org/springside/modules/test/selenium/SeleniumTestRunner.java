@@ -7,8 +7,8 @@
  */
 package org.springside.modules.test.selenium;
 
-import org.junit.internal.runners.InitializationError;
 import org.junit.runner.notification.RunNotifier;
+import org.junit.runners.model.InitializationError;
 import org.springside.modules.test.groups.GroupsTestRunner;
 
 /**

@@ -226,12 +226,6 @@
 			<artifactId>unitils-core</artifactId>
 		</dependency>
 		<!-- testing end -->
-
-		<!-- hibernate tools -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-tools</artifactId>
-		</dependency>
 	</dependencies>
 
 	<build>

@@ -4,34 +4,36 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.internal.runners.InitializationError;
+import org.junit.runner.RunWith;
+import org.junit.runners.model.InitializationError;
 import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.groups.GroupsTestRunner;
 import org.springside.modules.utils.ReflectionUtils;
 
+@RunWith(GroupsTestRunner.class)
 public class GroupsTestRunnerTest extends Assert {
 
-	@SuppressWarnings("unchecked")
 	@Test
+	@SuppressWarnings("unchecked")
 	public void groupsInit() throws InitializationError {
 		GroupsTestRunner groupsTestRunner = new GroupsTestRunner(GroupsTestRunnerTest.class);
 
-		//从application-test.properties中取出test.groups值
+		//从application-test.properties中取出test.groups值, 为MAJOR
 		ReflectionUtils.invokeMethod(groupsTestRunner, "initGroups", null, null);
-		assertEquals("extension", ((List<String>) ReflectionUtils.getFieldValue(groupsTestRunner, "groups")).get(0));
+		assertEquals("MAJOR", ((List<String>) ReflectionUtils.getFieldValue(groupsTestRunner, "groups")).get(0));
 
-		//设置系统变量值, 覆盖application-test.properties中的值		
-		System.setProperty(GroupsTestRunner.PROPERTY_NAME, "base,exception");
+		//设置系统变量值, 覆盖application-test.properties中的值, 为MINI,MAJOR 		
+		System.setProperty(GroupsTestRunner.PROPERTY_NAME, "MINI,MAJOR");
 		ReflectionUtils.invokeMethod(groupsTestRunner, "initGroups", null, null);
-		assertEquals("base", ((List<String>) ReflectionUtils.getFieldValue(groupsTestRunner, "groups")).get(0));
-		assertEquals("exception", ((List<String>) ReflectionUtils.getFieldValue(groupsTestRunner, "groups")).get(1));
+		assertEquals("MINI", ((List<String>) ReflectionUtils.getFieldValue(groupsTestRunner, "groups")).get(0));
+		assertEquals("MAJOR", ((List<String>) ReflectionUtils.getFieldValue(groupsTestRunner, "groups")).get(1));
 	}
 
 	@Test
 	public void isTestClassInGroups() throws InitializationError {
-		//设置groups为base,exception
+		//设置groups为MINI,MAJOR
 		GroupsTestRunner groupsTestRunner = new GroupsTestRunner(GroupsTestRunnerTest.class);
-		System.setProperty(GroupsTestRunner.PROPERTY_NAME, "base,exception");
+		System.setProperty(GroupsTestRunner.PROPERTY_NAME, "MINI,MAJOR");
 		ReflectionUtils.invokeMethod(groupsTestRunner, "initGroups", null, null);
 
 		assertEquals(true, GroupsTestRunner.isTestClassInGroups(TestClassBean1.class));
@@ -44,9 +46,9 @@ public class GroupsTestRunnerTest extends Assert {
 
 	@Test
 	public void isTestMethodInGroups() throws InitializationError {
-		//设置groups为base,exception
+		//设置groups为MINI,MAJOR
 		GroupsTestRunner groupsTestRunner = new GroupsTestRunner(GroupsTestRunnerTest.class);
-		System.setProperty(GroupsTestRunner.PROPERTY_NAME, "base,exception");
+		System.setProperty(GroupsTestRunner.PROPERTY_NAME, "MINI,MAJOR");
 		ReflectionUtils.invokeMethod(groupsTestRunner, "initGroups", null, null);
 
 		assertEquals(true, GroupsTestRunner.isTestMethodInGroups(TestMethodBean1.class.getMethods()[0]));
@@ -54,7 +56,13 @@ public class GroupsTestRunnerTest extends Assert {
 		assertEquals(false, GroupsTestRunner.isTestMethodInGroups(TestMethodBean3.class.getMethods()[0]));
 	}
 
-	@Groups("exception")
+	@Test
+	@Groups("foo")
+	public void shouldNeverRun() {
+		fail("the method in strange group should never run");
+	}
+
+	@Groups("MAJOR")
 	public static class TestClassBean1 {
 		@Test
 		public void test() {
@@ -72,7 +80,7 @@ public class GroupsTestRunnerTest extends Assert {
 		}
 
 		@Test
-		@Groups("exception")
+		@Groups("MAJOR")
 		public void test() {
 		}
 	}
@@ -98,7 +106,7 @@ public class GroupsTestRunnerTest extends Assert {
 
 	public static class TestMethodBean1 {
 		@Test
-		@Groups("base")
+		@Groups("MINI")
 		public void test() {
 		}
 	}

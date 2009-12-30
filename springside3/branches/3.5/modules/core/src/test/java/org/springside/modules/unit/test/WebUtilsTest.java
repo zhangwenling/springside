@@ -8,7 +8,7 @@ import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springside.modules.test.WebUtils;
 
-public class MockWebUtilsTest extends Assert {
+public class WebUtilsTest extends Assert {
 
 	@Test
 	public void initByPaths() {

@@ -15,9 +15,12 @@ import java.util.Properties;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.internal.runners.InitializationError;
-import org.junit.internal.runners.JUnit4ClassRunner;
+import org.junit.internal.runners.model.EachTestNotifier;
+import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
+import org.junit.runners.BlockJUnit4ClassRunner;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.InitializationError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -31,7 +34,11 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
  * @author freeman
  * @author calvin
  */
-public class GroupsTestRunner extends JUnit4ClassRunner {
+public class GroupsTestRunner extends BlockJUnit4ClassRunner {
+
+	public GroupsTestRunner(Class<?> klass) throws InitializationError {
+		super(klass);
+	}
 
 	/** 在Properties文件或JVM参数-D中定义执行分组的变量名称. */
 	public static final String PROPERTY_NAME = "test.groups";
@@ -42,17 +49,16 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 
 	private static List<String> groups;
 
-	public GroupsTestRunner(Class<?> klass) throws InitializationError {
-		super(klass);
-	}
-
+	//--重载Runner方法--//
+	
 	/**
 	 * 重载加入Class级别控制.
 	 */
 	@Override
 	public void run(RunNotifier notifier) {
 		if (!isTestClassInGroups(getTestClass().getJavaClass())) {
-			notifier.fireTestIgnored(getDescription());
+			EachTestNotifier testNotifier = new EachTestNotifier(notifier, getDescription());
+			testNotifier.fireTestIgnored();
 			return;
 		}
 
@@ -63,15 +69,20 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 	 * 重载加入方法级别控制.
 	 */
 	@Override
-	protected void invokeTestMethod(Method method, RunNotifier notifier) {
-		if (!isTestMethodInGroups(method)) {
-			notifier.fireTestIgnored(getDescription());
+	protected void runChild(FrameworkMethod  method, RunNotifier notifier) {
+		if (!isTestMethodInGroups(method.getMethod())) {
+			Description description= describeChild(method);
+			EachTestNotifier eachNotifier =  new EachTestNotifier(notifier, description);
+			eachNotifier.fireTestIgnored();
 			return;
 		}
 
-		super.invokeTestMethod(method, notifier);
+		super.runChild(method, notifier);
 	}
 
+	
+	//-- 判断测试用例/测试方法是否符合的工具方法 --//
+	
 	/**
 	 * 判断测试类是否符合分组要求.
 	 * 如果@Groups符合定义或无@Groups定义，且至少含有一个符合定义的测试方法时返回true.
