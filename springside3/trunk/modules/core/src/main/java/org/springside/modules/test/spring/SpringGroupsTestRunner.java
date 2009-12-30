@@ -19,6 +19,8 @@ import org.springside.modules.test.groups.GroupsTestRunner;
  * 
  * 使用方法:在TestCase类定义处添加@RunWith(SpringGroupsTestRunner.class)
  * 
+ * 注意, 本类只适用于JUnit 4.4 + Spring 2.5版本.
+ * 
  * @author freeman
  * @author calvin
  */

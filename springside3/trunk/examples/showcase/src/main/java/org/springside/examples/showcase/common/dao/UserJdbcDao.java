@@ -72,6 +72,7 @@ public class UserJdbcDao {
 	/**
 	 * 使用Map形式的单个命名参数.
 	 */
+	@SuppressWarnings("unchecked")
 	public User queryBySingleNamedParameter(Long id) {
 		Map map = Collections.singletonMap("id", id);
 		return jdbcTemplate.queryForObject("select id, name, login_name from SS_USER where id=:id", userMapper, map);

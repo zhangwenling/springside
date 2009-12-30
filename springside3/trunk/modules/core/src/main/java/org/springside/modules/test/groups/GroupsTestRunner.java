@@ -25,8 +25,10 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 /**
  * 实现TestNG Groups分组执行用例功能的TestRunner函数.
  * 
- * Runner会只执行测试类的@Groups定义，与在-Dtest.groups=xxx 或 application.test.properties的test.groups=xxx相吻合的测试类及测试方法.
+ * Runner会只执行测试类的@Groups定义, 与在-Dtest.groups=xxx 或 application.test.properties的test.groups=xxx相吻合的测试类及测试方法.
  * 另提供独立判断的工具方法供其他的Runner调用.
+ * 
+ * 注意, 本类只适用于JUnit 4.4版本.
  *  
  * @author freeman
  * @author calvin
@@ -46,6 +48,7 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 		super(klass);
 	}
 
+	//-- 重载Runner方法 --//
 	/**
 	 * 重载加入Class级别控制.
 	 */
@@ -72,6 +75,8 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 		super.invokeTestMethod(method, notifier);
 	}
 
+	//-- 判断测试用例/测试方法是否符合的工具方法 --//
+	
 	/**
 	 * 判断测试类是否符合分组要求.
 	 * 如果@Groups符合定义或无@Groups定义，且至少含有一个符合定义的测试方法时返回true.
