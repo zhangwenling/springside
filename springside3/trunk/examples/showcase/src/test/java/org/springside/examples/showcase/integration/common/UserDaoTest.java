@@ -50,9 +50,9 @@ public class UserDaoTest extends SpringTxTestCase {
 		}
 	}
 
-	//只在-Dtest.groups=xxxx或application.test.properties的test.groups中包含extension时执行本测试方法.
+	//只在-Dtest.groups=xxxx或application.test.properties的test.groups中包含MAJOR时执行本测试方法.
 	@Test
-	@Groups("extension")
+	@Groups("MAJOR")
 	public void upDialect() {
 		Object value = userDao.createQuery("select u.name from User u where up(u.name)='ADMIN'").uniqueResult();
 		assertEquals("Admin", value);

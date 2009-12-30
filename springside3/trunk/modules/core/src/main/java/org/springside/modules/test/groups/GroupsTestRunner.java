@@ -54,7 +54,7 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 	 */
 	@Override
 	public void run(RunNotifier notifier) {
-		if (!isTestClassInGroups(getTestClass().getJavaClass())) {
+		if (!shouldRun(getTestClass().getJavaClass())) {
 			notifier.fireTestIgnored(getDescription());
 			return;
 		}
@@ -67,8 +67,8 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 	 */
 	@Override
 	protected void invokeTestMethod(Method method, RunNotifier notifier) {
-		if (!isTestMethodInGroups(method)) {
-			notifier.fireTestIgnored(getDescription());
+		if (!shouldRun(method)) {
+			notifier.fireTestIgnored(methodDescription(method));
 			return;
 		}
 
@@ -79,29 +79,13 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 	
 	/**
 	 * 判断测试类是否符合分组要求.
-	 * 如果@Groups符合定义或无@Groups定义，且至少含有一个符合定义的测试方法时返回true.
+	 * 如果至少含有一个符合Groups定义的测试方法时返回true.
 	 */
-	public static boolean isTestClassInGroups(Class<?> testClass) {
-		//初始化Groups定义
-		if (groups == null) {
-			initGroups();
-		}
-		//如果定义全部执行则返回true
-		if (groups.contains(Groups.ALL)) {
-			return true;
-		}
-
-		//取得类上的Groups annotation, 如果有Groups注解且注解不符合分组要求则返回false.
-		Groups annotationGroup = testClass.getAnnotation(Groups.class);
-		if ((annotationGroup != null) && !groups.contains(annotationGroup.value())) {
-			return false;
-		}
-
-		//继续检查测试方法是否符合Groups定义,如果有一个方法符合定义则返回true.
+	public static boolean shouldRun(Class<?> testClass) {
 		Method[] methods = testClass.getMethods();
 		for (Method method : methods) {
 			if (method.getAnnotation(Test.class) != null && method.getAnnotation(Ignore.class) == null
-					&& isTestMethodInGroups(method)) {
+					&& shouldRun(method)) {
 				return true;
 			}
 		}
@@ -110,10 +94,10 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 	}
 
 	/**
-	 * 判断测试方法是否符合分组要求.
-	 * 如果@Groups符合定义或无@Groups定义返回true.
+	 * 判断测试方法是否符合Groups要求.
+	 * 如果@Groups符合定义或Groups定义为ALL或方法上无@Groups定义返回true.
 	 */
-	public static boolean isTestMethodInGroups(Method testMethod) {
+	public static boolean shouldRun(Method testMethod) {
 		//初始化Groups定义
 		if (groups == null) {
 			initGroups();
@@ -124,8 +108,8 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 		}
 
 		//取得方法上的Groups annotation, 如果无Groups注解或注解符合分组要求则返回true.
-		Groups annotationGroup = testMethod.getAnnotation(Groups.class);
-		if ((annotationGroup == null) || groups.contains(annotationGroup.value())) {
+		Groups groupsAnnotation = testMethod.getAnnotation(Groups.class);
+		if ((groupsAnnotation == null) || groups.contains(groupsAnnotation.value())) {
 			return true;
 		}
 
@@ -138,18 +122,18 @@ public class GroupsTestRunner extends JUnit4ClassRunner {
 	 */
 	protected static void initGroups() {
 
-		String groupsDef = getGroupsFromSystemProperty();
+		String groupsDefine = getGroupsFromSystemProperty();
 
 		//如果环境变量未定义test.groups,尝试从property文件读取.
-		if (groupsDef == null) {
-			groupsDef = getGroupsFromPropertyFile();
+		if (groupsDefine == null) {
+			groupsDefine = getGroupsFromPropertyFile();
 			//如果仍未定义,设为全部运行
-			if (groupsDef == null) {
-				groupsDef = Groups.ALL;
+			if (groupsDefine == null) {
+				groupsDefine = Groups.ALL;
 			}
 		}
 
-		groups = Arrays.asList(groupsDef.split(","));
+		groups = Arrays.asList(groupsDefine.split(","));
 	}
 
 	/**
