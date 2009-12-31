@@ -15,7 +15,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.EncodedResource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.jdbc.SimpleJdbcTestUtils;
@@ -26,20 +25,20 @@ import org.unitils.reflectionassert.ReflectionComparatorMode;
 /**
  * Spring的支持数据库事务和依赖注入的JUnit4 集成测试基类.
  * 
+ * @see SpringContextTestCase
+ * 
  * @author calvin
  */
-//默认载入applicationContext-test.xml,子类中的@ContextConfiguration定义将合并父类的定义.
-@ContextConfiguration(locations = { "/applicationContext-test.xml" })
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
+@TestExecutionListeners(TransactionalTestExecutionListener.class)
 public class SpringTxTestCase extends SpringContextTestCase {
-	
-	@Autowired
-	protected SessionFactory sessionFactory;
 	
 	protected SimpleJdbcTemplate simpleJdbcTemplate;
 
 	private String sqlScriptEncoding;
+	
+	@Autowired
+	protected SessionFactory sessionFactory;
 	
 	//-- JdbcTemplate函数--//
 	@Autowired
@@ -86,7 +85,6 @@ public class SpringTxTestCase extends SpringContextTestCase {
 	}
 
 	//-- Assert 函数 --//
-
 	/**
 	 * 反射比较对象间的所有属性,忽略expected对象的Null对象和集合中对象的次序.
 	 */

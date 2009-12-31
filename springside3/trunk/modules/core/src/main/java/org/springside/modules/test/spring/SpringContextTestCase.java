@@ -30,14 +30,14 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 @TestExecutionListeners( { DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class })
 public class SpringContextTestCase extends Assert implements ApplicationContextAware {
 
-	protected ApplicationContext applicationContext;
-	
 	protected Logger logger = LoggerFactory.getLogger(getClass());
+
+	protected ApplicationContext applicationContext;
 
 	public final void setApplicationContext(final ApplicationContext applicationContext) {
 		this.applicationContext = applicationContext;
 	}
-	
+
 	/**
 	 * sleep等待,单位毫秒.
 	 */
