@@ -52,7 +52,7 @@ public class DigestUtils {
 	}
 
 	/**
-	 * 对字符串进行散列.
+	 * 对字符串进行散列, 支持md5与sha1算法.
 	 */
 	private static byte[] digest(String input, String algorithm) {
 		try {
@@ -79,7 +79,7 @@ public class DigestUtils {
 	}
 
 	/**
-	 * 对文件进行散列.
+	 * 对文件进行散列, 支持md5与sha1算法.
 	 */
 	private static String digest(InputStream input, String algorithm) throws IOException {
 		try {

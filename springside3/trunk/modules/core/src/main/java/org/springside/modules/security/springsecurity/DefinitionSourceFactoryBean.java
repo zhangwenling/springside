@@ -27,6 +27,8 @@ import org.springframework.security.util.UrlMatcher;
  * 提供LinkedHashMap<String, String>形式的URL及授权关系定义，
  * 并最终转为SpringSecurity所需的LinkedHashMap<RequestKey, ConfigAttributeDefinition>形式的定义.
  * 
+ * 注意. 本类只支持SpringSecurity 2.0.x.
+ * 
  * @see org.springframework.security.intercept.web.DefaultFilterInvocationDefinitionSource
  * @see ResourceDetailsService
  * 
@@ -46,7 +48,7 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 	public Object getObject() throws Exception {
 		LinkedHashMap<RequestKey, ConfigAttributeDefinition> requestMap = buildRequestMap();
 		UrlMatcher matcher = getUrlMatcher();
-		DefaultFilterInvocationDefinitionSource definitionSource = new DefaultFilterInvocationDefinitionSource(matcher,
+		FilterInvocationDefinitionSource definitionSource = new DefaultFilterInvocationDefinitionSource(matcher,
 				requestMap);
 		return definitionSource;
 	}

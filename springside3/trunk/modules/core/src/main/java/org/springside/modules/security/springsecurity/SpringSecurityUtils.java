@@ -14,6 +14,8 @@ import org.springframework.security.userdetails.User;
 /**
  * SpringSecurity的工具类.
  * 
+ * 注意. 本类只支持SpringSecurity 2.0.x.
+ * 
  * @author calvin
  */
 public class SpringSecurityUtils {

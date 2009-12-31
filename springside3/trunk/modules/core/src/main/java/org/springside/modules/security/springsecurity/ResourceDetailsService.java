@@ -12,6 +12,8 @@ import java.util.LinkedHashMap;
 /**
  * RequestMap生成接口,由用户自行实现从数据库或其它地方查询URL-授权关系定义.
  * 
+ * 注意. 本类只支持SpringSecurity 2.0.x.
+ * 
  * @author calvin
  */
 public interface ResourceDetailsService {
