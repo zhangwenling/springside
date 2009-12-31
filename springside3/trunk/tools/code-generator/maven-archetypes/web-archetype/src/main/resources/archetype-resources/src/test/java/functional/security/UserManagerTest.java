@@ -134,7 +134,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	 * 创建用户时的输入校验测试. 
 	 */
 	@Test
-	@Groups("extension")
+	@Groups("MAJOR")
 	public void validateUser() {
 		clickLink(USER_MENU);
 		clickLink("增加新用户");
