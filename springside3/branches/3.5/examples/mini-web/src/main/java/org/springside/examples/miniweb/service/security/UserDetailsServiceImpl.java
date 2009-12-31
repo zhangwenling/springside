@@ -3,6 +3,8 @@ package org.springside.examples.miniweb.service.security;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.GrantedAuthority;
 import org.springframework.security.GrantedAuthorityImpl;
@@ -14,8 +16,6 @@ import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 
-import com.opensymphony.xwork2.inject.Inject;
-
 /**
  * 实现SpringSecurity的UserDetailsService接口,实现获取用户Detail信息的回调函数.
  * 
@@ -23,7 +23,6 @@ import com.opensymphony.xwork2.inject.Inject;
  */
 @Transactional(readOnly = true)
 public class UserDetailsServiceImpl implements UserDetailsService {
-
 	@Inject
 	private SecurityEntityManager securityEntityManager;
 

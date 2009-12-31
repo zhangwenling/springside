@@ -3,7 +3,8 @@ package org.springside.examples.miniweb.service.security;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.entity.security.Resource;
 import org.springside.modules.security.springsecurity.ResourceDetailsService;
@@ -15,7 +16,7 @@ import org.springside.modules.security.springsecurity.ResourceDetailsService;
  */
 @Transactional(readOnly = true)
 public class ResourceDetailsServiceImpl implements ResourceDetailsService {
-	@Autowired
+	@Inject
 	private SecurityEntityManager securityEntityManager;
 
 	/**

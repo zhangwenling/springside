@@ -2,12 +2,12 @@ package org.springside.examples.miniweb.integration.dao.security;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.junit.Test;
 import org.springside.examples.miniweb.dao.security.ResourceDao;
 import org.springside.examples.miniweb.entity.security.Resource;
 import org.springside.modules.test.spring.SpringTxTestCase;
-
-import com.opensymphony.xwork2.inject.Inject;
 
 /**
  * ResourceDao的集成测试用例,测试ORM映射及特殊的DAO操作.

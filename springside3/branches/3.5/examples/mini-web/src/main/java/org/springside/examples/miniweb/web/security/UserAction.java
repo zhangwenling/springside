@@ -2,6 +2,7 @@ package org.springside.examples.miniweb.web.security;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -17,8 +18,6 @@ import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;
 import org.springside.modules.web.struts2.Struts2Utils;
-
-import com.opensymphony.xwork2.inject.Inject;
 
 /**
  * 用户管理Action.

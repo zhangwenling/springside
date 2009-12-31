@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.dbunit.DatabaseUnitException;
@@ -23,15 +24,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateDao;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.unit.orm.hibernate.data.User;
-
-import com.opensymphony.xwork2.inject.Inject;
 
 @ContextConfiguration(locations = { "/applicationContext-db.xml" }, inheritLocations = false)
 public class HibernateDaoTest extends SpringTxTestCase {
@@ -48,7 +46,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 		DatabaseDataSourceConnection connection = new DatabaseDataSourceConnection((DataSource) applicationContext
 				.getBean("dataSource"));
-		InputStream stream = new ClassPathResource("/test-data.xml").getInputStream();
+		InputStream stream = applicationContext.getResource("classpath:/test-data.xml").getInputStream();
 		IDataSet dataSet = new FlatXmlDataSet(stream);
 		DatabaseOperation.INSERT.execute(connection, dataSet);
 		connection.close();

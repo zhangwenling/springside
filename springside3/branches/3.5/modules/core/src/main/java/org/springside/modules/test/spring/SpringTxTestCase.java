@@ -7,6 +7,7 @@
  */
 package org.springside.modules.test.spring;
 
+import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
@@ -33,7 +34,7 @@ import org.unitils.reflectionassert.ReflectionComparatorMode;
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 public class SpringTxTestCase extends SpringContextTestCase {
 	
-	@Autowired
+	@Inject
 	protected SessionFactory sessionFactory;
 	
 	protected SimpleJdbcTemplate simpleJdbcTemplate;
@@ -41,7 +42,7 @@ public class SpringTxTestCase extends SpringContextTestCase {
 	private String sqlScriptEncoding;
 	
 	//-- JdbcTemplate函数--//
-	@Autowired
+	@Inject
 	public void setDataSource(DataSource dataSource) {
 		this.simpleJdbcTemplate = new SimpleJdbcTemplate(dataSource);
 	}
@@ -80,7 +81,7 @@ public class SpringTxTestCase extends SpringContextTestCase {
 	 * 将对象从session中消除, 用于测试初对象的始化情况.
 	 * 
 	 */
-	protected void evict(final Object entity, final String sessionFactoryName) {
+	protected void evict(final Object entity) {
 		sessionFactory.getCurrentSession().evict(entity);
 	}
 

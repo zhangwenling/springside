@@ -23,6 +23,11 @@
 			<artifactId>jsr250-api</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<optional>true</optional>
+		</dependency>
 
 		<!-- hibernate -->
 		<dependency>

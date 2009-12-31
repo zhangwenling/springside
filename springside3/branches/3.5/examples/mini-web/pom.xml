@@ -19,44 +19,35 @@
 		<jdbc.url>jdbc:h2:tcp://localhost/~/mini-web</jdbc.url>
 		<jdbc.user>sa</jdbc.user>
 		<jdbc.password></jdbc.password>
-		
+
 		<jdbc.driver.groupId>com.h2database</jdbc.driver.groupId>
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
 		<jdbc.driver.version>1.1.119</jdbc.driver.version>
-		
+
 		<dbunit.schema.file>src/main/sql/h2/schema.sql</dbunit.schema.file>
 		<dbunit.datatype>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.datatype>
 		<dbunit.format>flat</dbunit.format>
-		
+
 		<!--
-		<jdbc.driver>oracle.jdbc.driver.OracleDriver</jdbc.driver>
-		<jdbc.url>jdbc:oracle:thin:@127.0.0.1:1521:XE</jdbc.url>
-		<jdbc.user>miniweb</jdbc.user>
-		<jdbc.password>miniweb</jdbc.password> 
-		<jdbc.schema>MINIWEB</jdbc.schema>
-			
-		<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId> 
-		<jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
-		<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version>
-			
-		<dbunit.schema.file>src/main/sql/oracle/schema.sql</dbunit.schema.file>
-		<dbunit.datatype>org.dbunit.ext.oracle.Oracle10DataTypeFactory</dbunit.datatype>
-		<dbunit.format>flat</dbunit.format>
+			<jdbc.driver>oracle.jdbc.driver.OracleDriver</jdbc.driver> <jdbc.url>jdbc:oracle:thin:@127.0.0.1:1521:XE</jdbc.url>
+			<jdbc.user>miniweb</jdbc.user> <jdbc.password>miniweb</jdbc.password> <jdbc.schema>MINIWEB</jdbc.schema>
+
+			<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId> <jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
+			<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version>
+
+			<dbunit.schema.file>src/main/sql/oracle/schema.sql</dbunit.schema.file>
+			<dbunit.datatype>org.dbunit.ext.oracle.Oracle10DataTypeFactory</dbunit.datatype> <dbunit.format>flat</dbunit.format>
 		-->
-		
-		<!--	
-		<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
-		<jdbc.url>jdbc:mysql://localhost/mini-web?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
-		<jdbc.user>root</jdbc.user>
-		<jdbc.password></jdbc.password>
-		
-		<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
-		<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
-		<jdbc.driver.version>5.1.6</jdbc.driver.version>
-		
-		<dbunit.schema.file>src/main/sql/mysql/schema.sql</dbunit.schema.file>
-		<dbunit.datatype>org.dbunit.ext.mysql.MySqlDataTypeFactory</dbunit.datatype>
-		<dbunit.format>flat</dbunit.format>
+
+		<!--
+			<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+			<jdbc.url>jdbc:mysql://localhost/mini-web?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
+			<jdbc.user>root</jdbc.user> <jdbc.password></jdbc.password> <jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+			<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
+			<jdbc.driver.version>5.1.6</jdbc.driver.version>
+
+			<dbunit.schema.file>src/main/sql/mysql/schema.sql</dbunit.schema.file>
+			<dbunit.datatype>org.dbunit.ext.mysql.MySqlDataTypeFactory</dbunit.datatype> <dbunit.format>flat</dbunit.format>
 		-->
 	</properties>
 
@@ -84,6 +75,11 @@
 		<dependency>
 			<groupId>javax.annotation</groupId>
 			<artifactId>jsr250-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
 		</dependency>
 		<!-- spring end -->
 
@@ -230,7 +226,7 @@
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
-		
+
 		<plugins>
 			<!-- Hibernate lazy load bytecode enhancement -->
 			<plugin>
@@ -274,7 +270,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<profiles>
 		<!-- 重载cluster profile,指定finalName -->
 		<profile>

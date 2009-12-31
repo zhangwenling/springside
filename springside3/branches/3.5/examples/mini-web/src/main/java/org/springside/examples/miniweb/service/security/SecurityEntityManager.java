@@ -2,6 +2,8 @@ package org.springside.examples.miniweb.service.security;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,8 +20,6 @@ import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
-
-import com.opensymphony.xwork2.inject.Inject;
 
 /**
  * 安全相关实体的管理类, 包括用户,角色,资源与授权类.

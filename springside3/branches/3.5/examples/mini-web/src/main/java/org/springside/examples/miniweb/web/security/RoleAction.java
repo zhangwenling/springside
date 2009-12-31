@@ -2,6 +2,8 @@ package org.springside.examples.miniweb.web.security;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -11,7 +13,6 @@ import org.springside.examples.miniweb.service.security.SecurityEntityManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;
 
-import com.opensymphony.xwork2.inject.Inject;
 
 /**
  * 角色管理Action.
