@@ -7,51 +7,74 @@
  */
 package org.springside.modules.test.spring;
 
+import javax.sql.DataSource;
+
 import org.hibernate.SessionFactory;
-import org.junit.Assert;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.EncodedResource;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.test.jdbc.SimpleJdbcTestUtils;
+import org.springframework.transaction.annotation.Transactional;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 
 /**
- * Spring的支持数据库事务和依赖注入的JUnit4 集成测试基类简写.
+ * Spring的支持数据库事务和依赖注入的JUnit4 集成测试基类.
  * 
  * @author calvin
  */
 //默认载入applicationContext-test.xml,子类中的@ContextConfiguration定义将合并父类的定义.
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
-public class SpringTxTestCase extends AbstractTransactionalJUnit4SpringContextTests {
+@TestExecutionListeners(TransactionalTestExecutionListener.class)
+@Transactional
+public class SpringTxTestCase extends SpringContextTestCase {
+	
+	@Autowired
+	protected SessionFactory sessionFactory;
+	
+	protected SimpleJdbcTemplate simpleJdbcTemplate;
 
+	private String sqlScriptEncoding;
+	
+	//-- JdbcTemplate函数--//
+	@Autowired
+	public void setDataSource(DataSource dataSource) {
+		this.simpleJdbcTemplate = new SimpleJdbcTemplate(dataSource);
+	}
+	
+	public void setSqlScriptEncoding(String sqlScriptEncoding) {
+		this.sqlScriptEncoding = sqlScriptEncoding;
+	}
+	
+	protected int countRowsInTable(String tableName) {
+		return SimpleJdbcTestUtils.countRowsInTable(this.simpleJdbcTemplate, tableName);
+	}
+	
+	protected int deleteFromTables(String... names) {
+		return SimpleJdbcTestUtils.deleteFromTables(this.simpleJdbcTemplate, names);
+	}
+	
+	protected void executeSqlScript(String sqlResourcePath, boolean continueOnError) throws DataAccessException {
+
+		Resource resource = this.applicationContext.getResource(sqlResourcePath);
+		SimpleJdbcTestUtils.executeSqlScript(this.simpleJdbcTemplate, new EncodedResource(resource,
+			this.sqlScriptEncoding), continueOnError);
+	}
+	
+	//-- SessionFactory函数--//
 	/**
 	 * 刷新sessionFactory,强制Hibernate执行SQL以验证ORM配置.
-	 * 
-	 * sessionFactory名默认为"sessionFactory".
+	 * 因为没有执行commit操作,不会更改测试数据库.
 	 * 
 	 * @see #flush(String)
 	 */
 	protected void flush() {
-		flush("sessionFactory");
-	}
-
-	/**
-	 * 刷新sessionFactory,强制Hibernate执行SQL以验证ORM配置.
-	 * 
-	 * 因为没有执行commit操作,不会更改测试数据库.
-	 * 
-	 * @param sessionFactoryName applicationContext中sessionFactory的名称.
-	 */
-	protected void flush(final String sessionFactoryName) {
-		((SessionFactory) applicationContext.getBean(sessionFactoryName)).getCurrentSession().flush();
-	}
-
-	/**
-	 * 将对象从session中消除, 用于测试初对象的始化情况.
-	 * 
-	 * sessionFactory名默认为"sessionFactory".
-	 */
-	protected void evict(Object entity) {
-		evict(entity, "sessionFactory");
+		sessionFactory.getCurrentSession().flush();
 	}
 
 	/**
@@ -59,17 +82,7 @@ public class SpringTxTestCase extends AbstractTransactionalJUnit4SpringContextTe
 	 * 
 	 */
 	protected void evict(final Object entity, final String sessionFactoryName) {
-		((SessionFactory) applicationContext.getBean(sessionFactoryName)).getCurrentSession().evict(entity);
-	}
-
-	/**
-	 * sleep等待,单位毫秒.
-	 */
-	protected void sleep(long millis) {
-		try {
-			Thread.sleep(millis);
-		} catch (InterruptedException e) {
-		}
+		sessionFactory.getCurrentSession().evict(entity);
 	}
 
 	//-- Assert 函数 --//
@@ -88,45 +101,5 @@ public class SpringTxTestCase extends AbstractTransactionalJUnit4SpringContextTe
 	protected void assertReflectionEquals(String message, Object expected, Object actual) {
 		ReflectionAssert.assertReflectionEquals(message, expected, actual, ReflectionComparatorMode.IGNORE_DEFAULTS,
 				ReflectionComparatorMode.LENIENT_ORDER);
-	}
-
-	protected void assertEquals(Object expected, Object actual) {
-		Assert.assertEquals(expected, actual);
-	}
-
-	protected void assertEquals(String message, Object expected, Object actual) {
-		Assert.assertEquals(message, expected, actual);
-	}
-
-	protected void assertTrue(boolean condition) {
-		Assert.assertTrue(condition);
-	}
-
-	protected void assertTrue(String message, boolean condition) {
-		Assert.assertTrue(message, condition);
-	}
-
-	protected void assertFalse(boolean condition) {
-		Assert.assertFalse(condition);
-	}
-
-	protected void assertFalse(String message, boolean condition) {
-		Assert.assertFalse(message, condition);
-	}
-
-	protected void assertNull(Object object) {
-		Assert.assertNull(object);
-	}
-
-	protected void assertNull(String message, Object object) {
-		Assert.assertNull(message, object);
-	}
-
-	protected void assertNotNull(Object object) {
-		Assert.assertNotNull(object);
-	}
-
-	protected void assertNotNull(String message, Object object) {
-		Assert.assertNotNull(message, object);
 	}
 }
