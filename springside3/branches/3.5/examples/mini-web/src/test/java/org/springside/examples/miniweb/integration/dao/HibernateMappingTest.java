@@ -9,8 +9,9 @@ import org.hibernate.persister.entity.EntityPersister;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.modules.test.spring.SpringTxTestCase;
+
+import com.opensymphony.xwork2.inject.Inject;
 
 /**
  * 简单测试所有Entity类的O/R Mapping.
@@ -20,7 +21,7 @@ import org.springside.modules.test.spring.SpringTxTestCase;
 public class HibernateMappingTest extends SpringTxTestCase {
 	private static Logger logger = LoggerFactory.getLogger(HibernateMappingTest.class);
 
-	@Autowired
+	@Inject
 	private SessionFactory sessionFactory;
 
 	@Test

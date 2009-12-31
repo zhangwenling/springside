@@ -27,6 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springside.modules.utils.ReflectionUtils;
 
+import com.opensymphony.xwork2.inject.Inject;
+
 /**
  * 封装Hibernate原生API的DAO泛型基类.
  * 
@@ -76,9 +78,9 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * 采用@Autowired按类型注入SessionFactory,当有多个SesionFactory的时候Override本函数.
+	 * 采用@Inject按类型注入SessionFactory,当有多个SesionFactory的时候Override本函数.
 	 */
-	@Autowired
+	@Inject
 	public void setSessionFactory(final SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}

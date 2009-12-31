@@ -8,7 +8,6 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.ServiceException;
@@ -18,6 +17,8 @@ import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;
 import org.springside.modules.web.struts2.Struts2Utils;
+
+import com.opensymphony.xwork2.inject.Inject;
 
 /**
  * 用户管理Action.
@@ -35,7 +36,7 @@ public class UserAction extends CrudActionSupport<User> {
 
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
+	@Inject
 	private SecurityEntityManager securityEntityManager;
 
 	//-- 页面属性 --//

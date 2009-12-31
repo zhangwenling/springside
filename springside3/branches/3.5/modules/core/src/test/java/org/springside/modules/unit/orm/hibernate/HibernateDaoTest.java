@@ -31,12 +31,14 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.unit.orm.hibernate.data.User;
 
+import com.opensymphony.xwork2.inject.Inject;
+
 @ContextConfiguration(locations = { "/applicationContext-db.xml" }, inheritLocations = false)
 public class HibernateDaoTest extends SpringTxTestCase {
 
 	private HibernateDao<User, Long> dao;
 
-	@Autowired
+	@Inject
 	private SessionFactory sessionFactory;
 
 	@Before

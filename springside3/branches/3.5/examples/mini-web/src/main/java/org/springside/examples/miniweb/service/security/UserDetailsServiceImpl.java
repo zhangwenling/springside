@@ -3,7 +3,6 @@ package org.springside.examples.miniweb.service.security;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.GrantedAuthority;
 import org.springframework.security.GrantedAuthorityImpl;
@@ -15,6 +14,8 @@ import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 
+import com.opensymphony.xwork2.inject.Inject;
+
 /**
  * 实现SpringSecurity的UserDetailsService接口,实现获取用户Detail信息的回调函数.
  * 
@@ -23,7 +24,7 @@ import org.springside.examples.miniweb.entity.security.User;
 @Transactional(readOnly = true)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	@Autowired
+	@Inject
 	private SecurityEntityManager securityEntityManager;
 
 	/**
@@ -32,9 +33,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
 		User user = securityEntityManager.findUserByLoginName(userName);
-		if (user == null) {
+		if (user == null)
 			throw new UsernameNotFoundException("用户" + userName + " 不存在");
-		}
 
 		GrantedAuthority[] grantedAuths = obtainGrantedAuthorities(user);
 

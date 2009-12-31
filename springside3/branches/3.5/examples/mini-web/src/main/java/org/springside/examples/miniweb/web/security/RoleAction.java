@@ -5,12 +5,13 @@ import java.util.List;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.service.security.SecurityEntityManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;
+
+import com.opensymphony.xwork2.inject.Inject;
 
 /**
  * 角色管理Action.
@@ -25,7 +26,7 @@ public class RoleAction extends CrudActionSupport<Role> {
 
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
+	@Inject
 	private SecurityEntityManager securityEntityManager;
 
 	//-- 页面属性 --//

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.dao.security.AuthorityDao;
@@ -20,6 +19,8 @@ import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
+import com.opensymphony.xwork2.inject.Inject;
+
 /**
  * 安全相关实体的管理类, 包括用户,角色,资源与授权类.
  * 
@@ -33,13 +34,13 @@ public class SecurityEntityManager {
 
 	private static Logger logger = LoggerFactory.getLogger(SecurityEntityManager.class);
 
-	@Autowired
+	@Inject
 	private UserDao userDao;
-	@Autowired
+	@Inject
 	private RoleDao roleDao;
-	@Autowired
+	@Inject
 	private AuthorityDao authorityDao;
-	@Autowired
+	@Inject
 	private ResourceDao resourceDao;
 
 	//-- User Manager --//
