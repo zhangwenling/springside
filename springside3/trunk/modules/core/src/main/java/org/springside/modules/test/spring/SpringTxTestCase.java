@@ -80,7 +80,7 @@ public class SpringTxTestCase extends SpringContextTestCase {
 	 * 将对象从session中消除, 用于测试初对象的始化情况.
 	 * 
 	 */
-	protected void evict(final Object entity, final String sessionFactoryName) {
+	protected void evict(final Object entity) {
 		sessionFactory.getCurrentSession().evict(entity);
 	}
 

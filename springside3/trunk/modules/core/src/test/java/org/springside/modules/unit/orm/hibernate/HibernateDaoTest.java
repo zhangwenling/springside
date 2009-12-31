@@ -23,7 +23,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
@@ -46,7 +45,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 		DatabaseDataSourceConnection connection = new DatabaseDataSourceConnection((DataSource) applicationContext
 				.getBean("dataSource"));
-		InputStream stream = new ClassPathResource("/test-data.xml").getInputStream();
+		InputStream stream = applicationContext.getResource("classpath:/test-data.xml").getInputStream();
 		IDataSet dataSet = new FlatXmlDataSet(stream);
 		DatabaseOperation.INSERT.execute(connection, dataSet);
 		connection.close();

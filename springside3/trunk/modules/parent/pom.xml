@@ -107,6 +107,12 @@
 				<artifactId>spring-context</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+			<!-- only for jdk5.0 -->
+			<dependency>
+				<groupId>javax.annotation</groupId>
+				<artifactId>jsr250-api</artifactId>
+				<version>1.0</version>
+			</dependency>
 
 			<!-- spring aop -->
 			<dependency>
@@ -123,12 +129,6 @@
 				<groupId>cglib</groupId>
 				<artifactId>cglib-nodep</artifactId>
 				<version>2.2</version>
-			</dependency>
-			<!-- only for jdk5.0 -->
-			<dependency>
-				<groupId>javax.annotation</groupId>
-				<artifactId>jsr250-api</artifactId>
-				<version>1.0</version>
 			</dependency>
 			<!-- spring end -->
 
