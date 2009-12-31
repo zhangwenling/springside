@@ -7,32 +7,33 @@
  */
 package org.springside.modules.security.springsecurity;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.security.ConfigAttributeDefinition;
-import org.springframework.security.ConfigAttributeEditor;
-import org.springframework.security.intercept.web.DefaultFilterInvocationDefinitionSource;
-import org.springframework.security.intercept.web.FilterInvocationDefinitionSource;
-import org.springframework.security.intercept.web.RequestKey;
-import org.springframework.security.util.AntUrlPathMatcher;
-import org.springframework.security.util.UrlMatcher;
+import org.springframework.security.access.ConfigAttribute;
+import org.springframework.security.access.SecurityConfig;
+import org.springframework.security.web.access.intercept.DefaultFilterInvocationSecurityMetadataSource;
+import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
+import org.springframework.security.web.access.intercept.RequestKey;
+import org.springframework.security.web.util.AntUrlPathMatcher;
+import org.springframework.security.web.util.UrlMatcher;
 
 /**
  * DefinitionSource工厂.
  * 
  * 由注入的resourceDetailService读取在数据库或其它地方中定义的URL-授权关系,
  * 提供LinkedHashMap<String, String>形式的URL及授权关系定义，
- * 并最终转为SpringSecurity所需的LinkedHashMap<RequestKey, ConfigAttributeDefinition>形式的定义.
+ * 并最终转为SpringSecurity所需的LinkedHashMap<RequestKey, Collection<ConfigAttribute>>形式的定义.
  * 
- * @see org.springframework.security.intercept.web.DefaultFilterInvocationDefinitionSource
  * @see ResourceDetailsService
  * 
  * @author calvin
  */
-public class DefinitionSourceFactoryBean implements FactoryBean<DefaultFilterInvocationDefinitionSource> {
+public class DefinitionSourceFactoryBean implements FactoryBean<FilterInvocationSecurityMetadataSource> {
 
 	private ResourceDetailsService resourceDetailsService;
 
@@ -43,20 +44,16 @@ public class DefinitionSourceFactoryBean implements FactoryBean<DefaultFilterInv
 	/**
 	 * 返回注入了Ant Style的URLMatcher和ResourceDetailService提供的RequestMap的DefaultFilterInvocationDefinitionSource.
 	 */
-	public DefaultFilterInvocationDefinitionSource getObject() throws Exception {
-		LinkedHashMap<RequestKey, ConfigAttributeDefinition> requestMap = buildRequestMap();
+	public FilterInvocationSecurityMetadataSource getObject() throws Exception {
+		LinkedHashMap<RequestKey, Collection<ConfigAttribute>> requestMap = buildRequestMap();
 		UrlMatcher matcher = getUrlMatcher();
-		DefaultFilterInvocationDefinitionSource definitionSource = new DefaultFilterInvocationDefinitionSource(matcher,
-				requestMap);
-		return definitionSource;
+		FilterInvocationSecurityMetadataSource securityMetadataSource = new DefaultFilterInvocationSecurityMetadataSource(
+				matcher, requestMap);
+		return securityMetadataSource;
 	}
 
-	/**
-	 * @see FactoryBean#getObjectType()
-	 */
-	@SuppressWarnings("unchecked")
-	public Class getObjectType() {
-		return FilterInvocationDefinitionSource.class;
+	public Class<? extends FilterInvocationSecurityMetadataSource> getObjectType() {
+		return FilterInvocationSecurityMetadataSource.class;
 	}
 
 	/**
@@ -77,21 +74,20 @@ public class DefinitionSourceFactoryBean implements FactoryBean<DefaultFilterInv
 	 * 将resourceDetailService提供LinkedHashMap<String, String>形式的URL及授权关系定义
 	 * 转化为DefaultFilterInvocationDefinitionSource需要的LinkedHashMap<RequestKey, ConfigAttributeDefinition>形式.
 	 */
-	protected LinkedHashMap<RequestKey, ConfigAttributeDefinition> buildRequestMap() throws Exception {//NOSONAR
+	protected LinkedHashMap<RequestKey, Collection<ConfigAttribute>> buildRequestMap() throws Exception {//NOSONAR
 		LinkedHashMap<String, String> srcMap = resourceDetailsService.getRequestMap();
-		LinkedHashMap<RequestKey, ConfigAttributeDefinition> distMap = new LinkedHashMap<RequestKey, ConfigAttributeDefinition>();
-		ConfigAttributeEditor editor = new ConfigAttributeEditor();
-
+		LinkedHashMap<RequestKey, Collection<ConfigAttribute>> distMap = new LinkedHashMap<RequestKey, Collection<ConfigAttribute>>();
 		for (Map.Entry<String, String> entry : srcMap.entrySet()) {
 			RequestKey key = new RequestKey(entry.getKey(), null);
-			if (StringUtils.isNotBlank(entry.getValue())) {
-				editor.setAsText(entry.getValue());
-				distMap.put(key, (ConfigAttributeDefinition) editor.getValue());
+			String access = entry.getValue();
+			if (StringUtils.isNotBlank(access)) {
+				distMap.put(key, SecurityConfig.createListFromCommaDelimitedString(access));
 			} else {
-				distMap.put(key, ConfigAttributeDefinition.NO_ATTRIBUTES);
+				distMap.put(key, CollectionUtils.EMPTY_COLLECTION);
 			}
 		}
 
 		return distMap;
 	}
+
 }

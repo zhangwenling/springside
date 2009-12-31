@@ -9,7 +9,6 @@
 	<classpathentry kind="lib" path="lib/aopalliance-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/cglib-nodep-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.2.jar"/>
-	<classpathentry kind="lib" path="lib/commons-codec-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-fileupload-1.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-io-1.4.jar"/>
@@ -43,8 +42,6 @@
 	<classpathentry kind="lib" path="lib/spring-expression-3.0.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/spring-jdbc-3.0.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/spring-orm-3.0.0.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-security-core-2.0.5.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-security-core-tiger-2.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/spring-test-3.0.0.RELEASE.jar" sourcepath="F:/software/library/spring-framework-3.0.0.RELEASE/src"/>
 	<classpathentry kind="lib" path="lib/spring-tx-3.0.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/spring-web-3.0.0.RELEASE.jar"/>
@@ -57,5 +54,9 @@
 	<classpathentry kind="lib" path="lib/xwork-core-2.1.6.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api-2.5.jar"/>
 	<classpathentry kind="lib" path="lib/javax.inject-1.jar"/>
+	<classpathentry kind="lib" path="lib/spring-security-core-3.0.0.RELEASE.jar" sourcepath="F:/software/library/spring-security-3.0.0.RELEASE/dist/spring-security-core-3.0.0.RELEASE-sources"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/spring-security-config-3.0.0.RELEASE.jar" sourcepath="F:/software/library/spring-security-3.0.0.RELEASE/dist/spring-security-config-3.0.0.RELEASE-sources"/>
+	<classpathentry kind="lib" path="lib/spring-security-web-3.0.0.RELEASE.jar" sourcepath="F:/software/library/spring-security-3.0.0.RELEASE/dist/spring-security-web-3.0.0.RELEASE-sources"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
