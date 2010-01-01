@@ -3,13 +3,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd"
-	default-autowire="byType" default-lazy-init="true">
+	default-lazy-init="true">
 
 	<description>SpringSecurity安全配置</description>
 
 	<!-- http安全配置 -->
-	<s:http auto-config="true">
+	<s:http>
 		<s:form-login login-page="/login.action" default-target-url="/" authentication-failure-url="/login.action?error=true" />
+		<s:http-basic />
 		<s:logout logout-success-url="/" />
 		<s:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66" />
 	</s:http>
@@ -21,25 +22,13 @@
 	</s:authentication-provider>
 
 	<!-- 重新定义的FilterSecurityInterceptor,使用databaseDefinitionSource提供的url-授权关系定义 -->
-	<bean id="filterSecurityInterceptor" class="org.springframework.security.intercept.web.FilterSecurityInterceptor">
+	<bean id="filterSecurityInterceptor" class="org.springframework.security.intercept.web.FilterSecurityInterceptor"
+		autowire="byType">
 		<s:custom-filter before="FILTER_SECURITY_INTERCEPTOR" />
-		<property name="accessDecisionManager" ref="accessDecisionManager" />
 		<property name="objectDefinitionSource">
 			<bean class="org.springside.modules.security.springsecurity.DefinitionSourceFactoryBean">
 				<property name="resourceDetailsService" ref="resourceDetailsService" />
 			</bean>
-		</property>
-	</bean>
-
-	<!-- 重新定义的accessDecisionManager, 将授权名称的默认前缀由ROLE_改为A_. -->
-	<bean id="accessDecisionManager" class="org.springframework.security.vote.AffirmativeBased">
-		<property name="decisionVoters">
-			<list>
-				<bean class="org.springframework.security.vote.RoleVoter">
-					<property name="rolePrefix" value="A_" />
-				</bean>
-				<bean class="org.springframework.security.vote.AuthenticatedVoter" />
-			</list>
 		</property>
 	</bean>
 

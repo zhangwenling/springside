@@ -72,7 +72,6 @@ public class SecurityEntityData {
 
 		Authority authority = new Authority();
 		authority.setName(authName);
-		authority.setDisplayName(authName);
 
 		return authority;
 	}
@@ -80,10 +79,10 @@ public class SecurityEntityData {
 	public static List<Authority> getDefaultAuthorityList() {
 		if (defaultAuthorityList == null) {
 			defaultAuthorityList = new ArrayList<Authority>();
-			defaultAuthorityList.add(new Authority(1L, "A_VIEW_USER", "浏览用户"));
-			defaultAuthorityList.add(new Authority(2L, "A_MODIFY_USER", "修改用户"));
-			defaultAuthorityList.add(new Authority(3L, "A_VIEW_ROLE", "浏览角色"));
-			defaultAuthorityList.add(new Authority(4L, "A_MODIFY_ROLE", "修改角色"));
+			defaultAuthorityList.add(new Authority(1L, "浏览用户"));
+			defaultAuthorityList.add(new Authority(2L, "修改用户"));
+			defaultAuthorityList.add(new Authority(3L, "浏览角色"));
+			defaultAuthorityList.add(new Authority(4L, "修改角色"));
 		}
 		return defaultAuthorityList;
 	}
