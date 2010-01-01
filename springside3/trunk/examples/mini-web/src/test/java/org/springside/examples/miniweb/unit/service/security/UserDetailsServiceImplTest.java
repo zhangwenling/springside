@@ -63,7 +63,7 @@ public class UserDetailsServiceImplTest extends Assert {
 		assertEquals(user.getLoginName(), userDetails.getUsername());
 		assertEquals(user.getPassword(), userDetails.getPassword());
 		assertEquals(1, userDetails.getAuthorities().length);
-		assertEquals(new GrantedAuthorityImpl(authName), userDetails.getAuthorities()[0]);
+		assertEquals(new GrantedAuthorityImpl("ROLE_" + authName), userDetails.getAuthorities()[0]);
 	}
 
 	@Test(expected = UsernameNotFoundException.class)
