@@ -8,7 +8,7 @@
 	<description>SpringSecurity安全配置</description>
 
 	<!-- http安全配置 -->
-	<s:http  auto-config="true">
+	<s:http>
 		<s:form-login login-page="/login.action" default-target-url="/" authentication-failure-url="/login.action?error=true" />
 		<s:http-basic />
 		<s:logout logout-success-url="/" />
@@ -24,25 +24,13 @@
 	</s:authentication-manager>
 
 	<!-- 重新定义的FilterSecurityInterceptor,使用databaseDefinitionSource提供的url-授权关系定义 -->
-	<bean id="filterSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
-		<property name="authenticationManager" ref="authenticationManager" />
-		<property name="accessDecisionManager" ref="accessDecisionManager" />
+	<bean id="filterSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor"
+		autowire="byType">
+		<property name="authenticationManager" ref="authenticationManager"/>
 		<property name="securityMetadataSource">
 			<bean class="org.springside.modules.security.springsecurity.DefinitionSourceFactoryBean">
 				<property name="resourceDetailsService" ref="resourceDetailsService" />
 			</bean>
-		</property>
-	</bean>
-
-	<!-- 重新定义的accessDecisionManager, 将授权名称的默认前缀由ROLE_改为A_. -->
-	<bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
-		<property name="decisionVoters">
-			<list>
-				<bean class="org.springframework.security.access.vote.RoleVoter">
-					<property name="rolePrefix" value="A_" />
-				</bean>
-				<bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
-			</list>
 		</property>
 	</bean>
 

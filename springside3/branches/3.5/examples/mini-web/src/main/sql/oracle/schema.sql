@@ -17,7 +17,6 @@
 
     create table ss_authority (
         id number(19,0) not null,
-        display_name varchar2(255 char),
         name varchar2(255 char) not null unique,
         primary key (id)
     );

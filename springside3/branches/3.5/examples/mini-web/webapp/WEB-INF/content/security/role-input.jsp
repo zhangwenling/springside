@@ -41,7 +41,7 @@
 				<td>授权:</td>
 				<td>
 					<s:checkboxlist name="checkedAuthIds" list="allAuthorityList" listKey="id"
-										listValue="displayName" theme="custom"/>
+										listValue="name" theme="custom"/>
 				</td>
 			</tr>
 			<tr>
