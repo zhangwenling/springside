@@ -14,6 +14,7 @@ import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.security.SecurityEntityManager;
 import org.springside.examples.miniweb.service.security.UserDetailsServiceImpl;
+import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
@@ -63,7 +64,8 @@ public class UserDetailsServiceImplTest extends Assert {
 		assertEquals(user.getLoginName(), userDetails.getUsername());
 		assertEquals(user.getPassword(), userDetails.getPassword());
 		assertEquals(1, userDetails.getAuthorities().length);
-		assertEquals(new GrantedAuthorityImpl("ROLE_" + authName), userDetails.getAuthorities()[0]);
+		assertEquals(new GrantedAuthorityImpl(SpringSecurityUtils.AUTH_PREFIX + authName),
+				userDetails.getAuthorities()[0]);
 	}
 
 	@Test(expected = UsernameNotFoundException.class)
