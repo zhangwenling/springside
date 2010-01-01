@@ -10,12 +10,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springside.examples.miniweb.entity.IdEntity;
+import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * 受保护的资源.
@@ -88,5 +90,8 @@ public class Resource extends IdEntity {
 		this.authorityList = authorityList;
 	}
 
-
+	@Transient
+	public String getAuthNames() {
+		return ReflectionUtils.convertElementPropertyToString(authorityList, "name", ",");
+	}
 }

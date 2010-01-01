@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Mini-Web 角色管理</title>
+	<title>Mini-Web 资源权限列表</title>
 	<%@ include file="/common/meta.jsp" %>
 	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
@@ -24,36 +24,19 @@
 	<div id="content">
 		<table id="contentTable">
 			<tr>
-				<th>名称</th>
-				<th>授权</th>
-				<th>操作</th>
+				<th>顺序</th>
+				<th>URL</th>
+				<th>授权列表</th>
 			</tr>
 
-			<s:iterator value="allRoleList">
+			<s:iterator value="allResourceList">
 				<tr>
-					<td>${name}</td>
+					<td>${position}</td>
+					<td>${value}</td>
 					<td>${authNames}</td>
-					<td>&nbsp;
-						<security:authorize ifAnyGranted="ROLE_浏览角色">
-							<security:authorize ifNotGranted="ROLE_修改角色">
-								<a href="role!input.action?id=${id}">查看</a>&nbsp;
-							</security:authorize>
-						</security:authorize>
-
-						<security:authorize ifAnyGranted="ROLE_修改角色">
-							<a href="role!input.action?id=${id}" id="editLink-${name}">修改</a>&nbsp;
-							<a href="role!delete.action?id=${id}" id="deleteLink-${name}">删除</a>
-						</security:authorize>
-					</td>
 				</tr>
 			</s:iterator>
 		</table>
-	</div>
-
-	<div>
-		<security:authorize ifAnyGranted="ROLE_修改角色">
-			<a href="role!input.action">增加新角色</a>
-		</security:authorize>
 	</div>
 	</div>
 	</div>
