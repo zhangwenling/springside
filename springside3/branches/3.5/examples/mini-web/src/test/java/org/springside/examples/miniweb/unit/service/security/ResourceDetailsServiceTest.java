@@ -15,6 +15,7 @@ import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Resource;
 import org.springside.examples.miniweb.service.security.ResourceDetailsServiceImpl;
 import org.springside.examples.miniweb.service.security.SecurityEntityManager;
+import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 import org.springside.modules.utils.ReflectionUtils;
 
 public class ResourceDetailsServiceTest extends Assert {
@@ -66,9 +67,11 @@ public class ResourceDetailsServiceTest extends Assert {
 		Object[] requests = requestMap.entrySet().toArray();
 
 		assertEquals(r1.getValue(), ((Entry<String, String>) requests[0]).getKey());
-		assertEquals(a1.getName(), ((Entry<String, String>) requests[0]).getValue());
+		assertEquals(SpringSecurityUtils.AUTH_PREFIX + a1.getName(), ((Entry<String, String>) requests[0]).getValue());
 
 		assertEquals(r3.getValue(), ((Entry<String, String>) requests[2]).getKey());
-		assertEquals(a1.getName() + "," + a2.getName(), ((Entry<String, String>) requests[2]).getValue());
+		assertEquals(SpringSecurityUtils.AUTH_PREFIX + a1.getName() + "," + SpringSecurityUtils.AUTH_PREFIX
+				+ a2.getName(), ((Entry<String, String>) requests[2])
+				.getValue());
 	}
 }

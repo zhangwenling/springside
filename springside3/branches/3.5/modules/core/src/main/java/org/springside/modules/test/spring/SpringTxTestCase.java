@@ -33,12 +33,11 @@ import org.unitils.reflectionassert.ReflectionComparatorMode;
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 public class SpringTxTestCase extends SpringContextTestCase {
 	
-	@Inject
-	protected SessionFactory sessionFactory;
-	
 	protected SimpleJdbcTemplate simpleJdbcTemplate;
 
-	private String sqlScriptEncoding;
+	protected String sqlScriptEncoding;
+	
+	protected SessionFactory sessionFactory;
 	
 	//-- JdbcTemplate函数--//
 	@Inject
@@ -66,6 +65,12 @@ public class SpringTxTestCase extends SpringContextTestCase {
 	}
 	
 	//-- SessionFactory函数--//
+	
+	@Inject
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
 	/**
 	 * 刷新sessionFactory,强制Hibernate执行SQL以验证ORM配置.
 	 * 因为没有执行commit操作,不会更改测试数据库.

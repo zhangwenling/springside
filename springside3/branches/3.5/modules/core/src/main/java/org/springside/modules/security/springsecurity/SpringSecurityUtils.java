@@ -17,6 +17,11 @@ import org.springframework.security.core.userdetails.User;
  * @author calvin
  */
 public class SpringSecurityUtils {
+	
+	/**
+	 * SpringSecurity中默认的角色/授权名前缀.
+	 */
+	public static final String AUTH_PREFIX="ROLE_";
 
 	/**
 	 * 取得当前用户的登录名, 如果当前用户未登录则返回空字符串.
