@@ -12,11 +12,11 @@ import org.junit.Test;
 import org.springside.examples.miniservice.data.UserData;
 import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.service.user.UserManager;
-import org.springside.examples.miniservice.ws.api.dto.UserDTO;
-import org.springside.examples.miniservice.ws.api.result.AuthUserResult;
-import org.springside.examples.miniservice.ws.api.result.GetAllUserResult;
-import org.springside.examples.miniservice.ws.api.result.WSResult;
+import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.impl.UserWebServiceImpl;
+import org.springside.examples.miniservice.ws.result.AuthUserResult;
+import org.springside.examples.miniservice.ws.result.GetAllUserResult;
+import org.springside.examples.miniservice.ws.result.WSResult;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**

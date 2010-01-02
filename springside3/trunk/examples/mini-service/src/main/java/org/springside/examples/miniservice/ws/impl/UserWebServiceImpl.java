@@ -27,7 +27,7 @@ import org.springside.examples.miniservice.ws.result.WSResult;
  * @author calvin
  */
 //serviceName与portName属性指明WSDL中的名称, endpointInterface属性指向Interface定义类.
-@WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "org.springside.examples.miniservice.ws.api.UserWebService", targetNamespace = WsConstants.NS)
+@WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "org.springside.examples.miniservice.ws.UserWebService", targetNamespace = WsConstants.NS)
 public class UserWebServiceImpl implements UserWebService {
 
 	private static Logger logger = LoggerFactory.getLogger(UserWebServiceImpl.class);

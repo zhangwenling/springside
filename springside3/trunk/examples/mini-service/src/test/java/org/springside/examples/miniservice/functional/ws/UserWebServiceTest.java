@@ -10,14 +10,14 @@ import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.miniservice.data.UserData;
 import org.springside.examples.miniservice.entity.user.User;
-import org.springside.examples.miniservice.ws.api.UserWebService;
-import org.springside.examples.miniservice.ws.api.WsConstants;
-import org.springside.examples.miniservice.ws.api.dto.RoleDTO;
-import org.springside.examples.miniservice.ws.api.dto.UserDTO;
-import org.springside.examples.miniservice.ws.api.result.AuthUserResult;
-import org.springside.examples.miniservice.ws.api.result.CreateUserResult;
-import org.springside.examples.miniservice.ws.api.result.GetAllUserResult;
-import org.springside.examples.miniservice.ws.api.result.WSResult;
+import org.springside.examples.miniservice.ws.UserWebService;
+import org.springside.examples.miniservice.ws.WsConstants;
+import org.springside.examples.miniservice.ws.dto.RoleDTO;
+import org.springside.examples.miniservice.ws.dto.UserDTO;
+import org.springside.examples.miniservice.ws.result.AuthUserResult;
+import org.springside.examples.miniservice.ws.result.CreateUserResult;
+import org.springside.examples.miniservice.ws.result.GetAllUserResult;
+import org.springside.examples.miniservice.ws.result.WSResult;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 /**
@@ -27,7 +27,7 @@ import org.springside.modules.test.spring.SpringContextTestCase;
  * 
  * @author calvin
  */
-@ContextConfiguration(locations = { "/applicationContext-cxf-client.xml" }, inheritLocations = false)
+@ContextConfiguration(locations = { "/applicationContext-ws-client.xml" }, inheritLocations = false)
 public class UserWebServiceTest extends SpringContextTestCase {
 
 	/**
@@ -69,7 +69,7 @@ public class UserWebServiceTest extends SpringContextTestCase {
 	 */
 	@Test
 	public void getAllUser() throws MalformedURLException {
-		URL wsdlURL = new URL("http://localhost:8080/mini-service/ws/UserService?wsdl");
+		URL wsdlURL = new URL("http://localhost:8080/mini-service/services/userservice?wsdl");
 		QName UserServiceName = new QName(WsConstants.NS, "UserService");
 		Service service = Service.create(wsdlURL, UserServiceName);
 		UserWebService userWebService = service.getPort(UserWebService.class);
