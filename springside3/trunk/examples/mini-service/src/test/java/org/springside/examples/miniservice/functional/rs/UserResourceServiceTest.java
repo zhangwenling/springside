@@ -2,7 +2,9 @@ package org.springside.examples.miniservice.functional.rs;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.WebApplicationException;
@@ -10,6 +12,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.apache.cxf.jaxrs.provider.JSONProvider;
 import org.dozer.DozerBeanMapper;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,13 +27,20 @@ public class UserResourceServiceTest extends Assert {
 
 	@Before
 	public void setUp() {
-		client = WebClient.create("http://localhost:8080/mini-service/services/rs");
+		List providerList = new ArrayList();
+		JSONProvider jsonProvider = new JSONProvider();
+		//jsonProvider.setDropRootElement(true);
+		//jsonProvider.setSerializeAsArray(true);
+		providerList.add(jsonProvider);
+		client = WebClient.create("http://localhost:8080/mini-service/services/rs", providerList);
 	}
 
 	@Test
 	public void getUser() {
 		UserDTO user = client.path("/users/1").accept("application/json").get(UserDTO.class);
 		assertEquals("admin", user.getLoginName());
+		assertEquals(2, user.getRoleList().size());
+		assertEquals("管理员", user.getRoleList().get(0).getName());
 	}
 
 	@Test

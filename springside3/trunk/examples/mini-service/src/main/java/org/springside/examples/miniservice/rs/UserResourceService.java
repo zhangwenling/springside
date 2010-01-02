@@ -80,6 +80,7 @@ public class UserResourceService {
 	 */
 	@POST
 	@Consumes("application/json")
+	@Produces("text/plain")
 	public Response createUser(UserDTO user) {
 		try {
 			User userEntity = dozer.map(user, User.class);
