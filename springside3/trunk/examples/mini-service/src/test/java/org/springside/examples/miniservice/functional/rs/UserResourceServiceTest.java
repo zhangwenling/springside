@@ -29,9 +29,10 @@ public class UserResourceServiceTest extends Assert {
 	public void setUp() {
 		List providerList = new ArrayList();
 		JSONProvider jsonProvider = new JSONProvider();
-		jsonProvider.setSupportUnwrapped(true);
-		jsonProvider.setDropRootElement(true);
+		//jsonProvider.setSupportUnwrapped(true);
+		//jsonProvider.setDropRootElement(true);
 		providerList.add(jsonProvider);
+
 		client = WebClient.create("http://localhost:8080/mini-service/services/rs", providerList);
 	}
 

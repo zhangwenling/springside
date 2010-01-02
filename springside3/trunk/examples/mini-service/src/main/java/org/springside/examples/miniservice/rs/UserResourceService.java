@@ -61,17 +61,17 @@ public class UserResourceService {
 	@GET
 	@Path("{id}")
 	@Produces( { "application/json", "application/xml" })
-	public Response getUser(@PathParam("id") Long id) {
+	public UserDTO getUser(@PathParam("id") Long id) {
 		try {
 			User entity = userManager.getUser(id);
 			UserDTO dto = dozer.map(entity, UserDTO.class);
-			return Response.ok(dto).build();
+			return dto;
 		} catch (ObjectNotFoundException e) {
 			logger.error(e.getMessage(), e);
-			return Response.status(Status.NOT_FOUND).build();
+			throw new WebApplicationException(Status.NOT_FOUND);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -79,7 +79,7 @@ public class UserResourceService {
 	 * 创建用户.
 	 */
 	@POST
-	@Consumes("application/json")
+	@Consumes( { "application/json", "application/xml" })
 	@Produces("text/plain")
 	public Response createUser(UserDTO user) {
 		try {
