@@ -7,6 +7,7 @@ import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.AuthUserResult;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.result.GetAllUserResult;
+import org.springside.examples.miniservice.ws.result.GetUserResult;
 
 /**
  * JAX-WS2.0的WebService接口定义类.
@@ -21,9 +22,14 @@ import org.springside.examples.miniservice.ws.result.GetAllUserResult;
 @WebService(name = "UserService", targetNamespace = WsConstants.NS)
 public interface UserWebService {
 	/**
-	 * 显示所有用户.
+	 * 获取所有用户.
 	 */
 	public GetAllUserResult getAllUser();
+
+	/**
+	 * 获取用户.
+	 */
+	public GetUserResult getUser(@WebParam(name = "id") Long id);
 
 	/**
 	 * 新建用户.

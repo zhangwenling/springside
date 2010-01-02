@@ -18,6 +18,7 @@ import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.AuthUserResult;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.result.GetAllUserResult;
+import org.springside.examples.miniservice.ws.result.GetUserResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
 
 /**
@@ -41,8 +42,6 @@ public class UserWebServiceImpl implements UserWebService {
 	 * @see UserWebService#getAllUser()
 	 */
 	public GetAllUserResult getAllUser() {
-		GetAllUserResult result = new GetAllUserResult();
-
 		//获取User列表并转换为UserDTO列表.
 		try {
 			List<User> userEntityList = userManager.getAllUser();
@@ -50,70 +49,89 @@ public class UserWebServiceImpl implements UserWebService {
 			for (User userEntity : userEntityList) {
 				userDTOList.add(dozer.map(userEntity, UserDTO.class));
 			}
+
+			GetAllUserResult result = new GetAllUserResult();
 			result.setUserList(userDTOList);
+			return result;
 		} catch (RuntimeException e) {
-			handleException(e, result);
+			logger.error(e.getMessage(), e);
+			return WSResult.buildExceptionResult(GetAllUserResult.class, e);
 		}
-		return result;
+	}
+
+	/**
+	 * @see UserWebService#getUser()
+	 */
+	public GetUserResult getUser(Long id) {
+
+		//校验请求参数
+		if (id == null) {
+			logger.error("id参数为空");
+			return WSResult.buildExceptionResult(GetUserResult.class, WSResult.PARAMETER_ERROR, "id参数为空");
+		}
+
+		//获取用户
+		try {
+			User entity = userManager.getUser(id);
+			UserDTO dto = dozer.map(entity, UserDTO.class);
+
+			GetUserResult result = new GetUserResult();
+			result.setUser(dto);
+			return result;
+		} catch (RuntimeException e) {
+			logger.error(e.getMessage(), e);
+			return WSResult.buildExceptionResult(GetUserResult.class, e);
+		}
+
 	}
 
 	/**
 	 * @see UserWebService#createUser(UserDTO)
 	 */
 	public CreateUserResult createUser(UserDTO user) {
-		CreateUserResult result = new CreateUserResult();
 
 		//校验请求参数
 		if (user == null) {
-			result.setResult(WSResult.PARAMETER_ERROR, "user参数为空");
-			logger.warn(result.getMessage());
-			return result;
+			logger.error("user参数为空");
+			return WSResult.buildExceptionResult(CreateUserResult.class, WSResult.PARAMETER_ERROR, "user参数为空");
 		}
 
 		//保存用户
 		try {
 			User userEntity = dozer.map(user, User.class);
 			userManager.saveUser(userEntity);
-			result.setUserId(userEntity.getId());
-		} catch (RuntimeException e) {
-			handleException(e, result);
-		}
 
-		return result;
+			CreateUserResult result = new CreateUserResult();
+			result.setUserId(userEntity.getId());
+			return result;
+		} catch (RuntimeException e) {
+			logger.error(e.getMessage(), e);
+			return WSResult.buildExceptionResult(CreateUserResult.class, e);
+		}
 	}
 
 	/**
 	 * @see UserWebService#authUser(String, String)
 	 */
 	public AuthUserResult authUser(String loginName, String password) {
-		AuthUserResult result = new AuthUserResult();
 
 		//校验请求参数
 		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password)) {
-			result.setResult(WSResult.PARAMETER_ERROR, "用户名或密码为空");
-			logger.warn(result.getMessage());
-			return result;
+			logger.error("用户名或密码为空");
+			return WSResult.buildExceptionResult(AuthUserResult.class, WSResult.PARAMETER_ERROR, "用户名或密码为空");
 		}
-
 		//认证
 		try {
+			AuthUserResult result = new AuthUserResult();
 			if (userManager.authenticate(loginName, password)) {
 				result.setValid(true);
 			} else {
 				result.setValid(false);
 			}
+			return result;
 		} catch (RuntimeException e) {
-			handleException(e, result);
+			logger.error(e.getMessage(), e);
+			return WSResult.buildExceptionResult(AuthUserResult.class, e);
 		}
-
-		return result;
-	}
-
-	/**
-	 * 默认的异常处理函数.
-	 */
-	private void handleException(Exception e, WSResult result) {
-		result.setDefaultError();
-		logger.error(e.getMessage(), e);
 	}
 }

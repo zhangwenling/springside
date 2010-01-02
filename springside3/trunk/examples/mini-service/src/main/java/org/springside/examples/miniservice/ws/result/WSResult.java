@@ -2,6 +2,7 @@ package org.springside.examples.miniservice.ws.result;
 
 import javax.xml.bind.annotation.XmlType;
 
+import org.springframework.util.ReflectionUtils;
 import org.springside.examples.miniservice.ws.WsConstants;
 
 /**
@@ -19,6 +20,36 @@ public class WSResult {
 	public static final String SYSTEM_ERROR = "500";
 
 	public static final String SYSTEM_ERROR_MESSAGE = "Runtime unknown internal error.";
+
+	/**
+	 * 创建异常结果.
+	 */
+	public static <T extends WSResult> T buildExceptionResult(Class<T> resultClass, String resultCode,
+			String resultMessage) {
+
+		try {
+			T result = resultClass.newInstance();
+			result.setResult(resultCode, resultMessage);
+			return result;
+		} catch (Exception ex) {
+			ReflectionUtils.handleReflectionException(ex);
+			return null;
+		}
+	}
+
+	/**
+	 * 创建默认异常结果.
+	 */
+	public static <T extends WSResult> T buildExceptionResult(Class<T> clazz, Exception e) {
+		try {
+			T result = clazz.newInstance();
+			result.setResult(SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
+			return result;
+		} catch (Exception ex) {
+			ReflectionUtils.handleReflectionException(ex);
+			return null;
+		}
+	}
 
 	//-- WSResult基本属性 --//
 	private String code = SUCCESS;
@@ -48,10 +79,6 @@ public class WSResult {
 		message = resultMessage;
 	}
 
-	/**
-	 * 设置为默认的系统内部未知错误.
-	 */
-	public void setDefaultError() {
-		setResult(SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
-	}
+
+
 }
