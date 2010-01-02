@@ -14,7 +14,6 @@ import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.security.SecurityEntityManager;
 import org.springside.examples.miniweb.service.security.UserDetailsServiceImpl;
-import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
@@ -44,7 +43,7 @@ public class UserDetailsServiceImplTest extends Assert {
 	@Test
 	public void loadUserExist() {
 
-		String authName = "A_foo";
+		String authName = "foo";
 		//准备数据
 		User user = SecurityEntityData.getRandomUser();
 		Role role = SecurityEntityData.getRandomRole();
@@ -64,8 +63,7 @@ public class UserDetailsServiceImplTest extends Assert {
 		assertEquals(user.getLoginName(), userDetails.getUsername());
 		assertEquals(user.getPassword(), userDetails.getPassword());
 		assertEquals(1, userDetails.getAuthorities().size());
-		assertEquals(new GrantedAuthorityImpl(SpringSecurityUtils.AUTH_PREFIX + authName), userDetails.getAuthorities()
-				.iterator().next());
+		assertEquals(new GrantedAuthorityImpl(auth.getPrefixedName()), userDetails.getAuthorities().iterator().next());
 	}
 
 	@Test(expected = UsernameNotFoundException.class)

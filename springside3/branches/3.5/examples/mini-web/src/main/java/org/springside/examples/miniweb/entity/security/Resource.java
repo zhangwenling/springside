@@ -94,4 +94,9 @@ public class Resource extends IdEntity {
 	public String getAuthNames() {
 		return ReflectionUtils.convertElementPropertyToString(authorityList, "name", ",");
 	}
+
+	@Transient
+	public String getPrefixedAuthNames() {
+		return ReflectionUtils.convertElementPropertyToString(authorityList, "prefixedName", ",");
+	}
 }

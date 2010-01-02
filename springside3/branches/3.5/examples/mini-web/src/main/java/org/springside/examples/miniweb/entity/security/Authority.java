@@ -3,6 +3,7 @@ package org.springside.examples.miniweb.entity.security;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
@@ -21,6 +22,11 @@ import org.springside.examples.miniweb.entity.IdEntity;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Authority extends IdEntity {
 
+	/**
+	 * SpringSecurity中默认的角色/授权名前缀.
+	 */
+	public static final String AUTHORITY_PREFIX = "ROLE_";
+
 	private String name;
 
 	public Authority() {
@@ -38,6 +44,11 @@ public class Authority extends IdEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Transient
+	public String getPrefixedName() {
+		return AUTHORITY_PREFIX + name;
 	}
 
 	@Override
