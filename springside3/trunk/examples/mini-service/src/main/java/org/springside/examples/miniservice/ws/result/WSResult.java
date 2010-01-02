@@ -2,8 +2,8 @@ package org.springside.examples.miniservice.ws.result;
 
 import javax.xml.bind.annotation.XmlType;
 
-import org.springframework.util.ReflectionUtils;
 import org.springside.examples.miniservice.ws.WsConstants;
+import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * WebService返回结果基类,定义所有返回码.
@@ -21,39 +21,36 @@ public class WSResult {
 
 	public static final String SYSTEM_ERROR_MESSAGE = "Runtime unknown internal error.";
 
-	/**
-	 * 创建异常结果.
-	 */
-	public static <T extends WSResult> T buildExceptionResult(Class<T> resultClass, String resultCode,
-			String resultMessage) {
+	//-- WSResult基本属性 --//
+	private String code = SUCCESS;
+	private String message;
 
+	/**
+	 * 创建结果.
+	 */
+	public static <T extends WSResult> T buildResult(Class<T> resultClass, String resultCode, String resultMessage) {
 		try {
 			T result = resultClass.newInstance();
 			result.setResult(resultCode, resultMessage);
 			return result;
 		} catch (Exception ex) {
-			ReflectionUtils.handleReflectionException(ex);
-			return null;
+			throw ReflectionUtils.convertReflectionExceptionToUnchecked(ex);
+
 		}
 	}
 
 	/**
 	 * 创建默认异常结果.
 	 */
-	public static <T extends WSResult> T buildExceptionResult(Class<T> clazz, Exception e) {
+	public static <T extends WSResult> T buildDefaultErrorResult(Class<T> clazz) {
 		try {
 			T result = clazz.newInstance();
 			result.setResult(SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
 			return result;
 		} catch (Exception ex) {
-			ReflectionUtils.handleReflectionException(ex);
-			return null;
+			throw ReflectionUtils.convertReflectionExceptionToUnchecked(ex);
 		}
 	}
-
-	//-- WSResult基本属性 --//
-	private String code = SUCCESS;
-	private String message;
 
 	public String getCode() {
 		return code;
@@ -78,7 +75,5 @@ public class WSResult {
 		code = resultCode;
 		message = resultMessage;
 	}
-
-
 
 }

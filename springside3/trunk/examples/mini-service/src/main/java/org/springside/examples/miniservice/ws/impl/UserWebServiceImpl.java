@@ -55,7 +55,7 @@ public class UserWebServiceImpl implements UserWebService {
 			return result;
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return WSResult.buildExceptionResult(GetAllUserResult.class, e);
+			return WSResult.buildDefaultErrorResult(GetAllUserResult.class);
 		}
 	}
 
@@ -67,7 +67,7 @@ public class UserWebServiceImpl implements UserWebService {
 		//校验请求参数
 		if (id == null) {
 			logger.error("id参数为空");
-			return WSResult.buildExceptionResult(GetUserResult.class, WSResult.PARAMETER_ERROR, "id参数为空");
+			return WSResult.buildResult(GetUserResult.class, WSResult.PARAMETER_ERROR, "id参数为空");
 		}
 
 		//获取用户
@@ -80,7 +80,7 @@ public class UserWebServiceImpl implements UserWebService {
 			return result;
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return WSResult.buildExceptionResult(GetUserResult.class, e);
+			return WSResult.buildDefaultErrorResult(GetUserResult.class);
 		}
 
 	}
@@ -93,7 +93,7 @@ public class UserWebServiceImpl implements UserWebService {
 		//校验请求参数
 		if (user == null) {
 			logger.error("user参数为空");
-			return WSResult.buildExceptionResult(CreateUserResult.class, WSResult.PARAMETER_ERROR, "user参数为空");
+			return WSResult.buildResult(CreateUserResult.class, WSResult.PARAMETER_ERROR, "user参数为空");
 		}
 
 		//保存用户
@@ -106,7 +106,7 @@ public class UserWebServiceImpl implements UserWebService {
 			return result;
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return WSResult.buildExceptionResult(CreateUserResult.class, e);
+			return WSResult.buildDefaultErrorResult(CreateUserResult.class);
 		}
 	}
 
@@ -118,7 +118,7 @@ public class UserWebServiceImpl implements UserWebService {
 		//校验请求参数
 		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password)) {
 			logger.error("用户名或密码为空");
-			return WSResult.buildExceptionResult(AuthUserResult.class, WSResult.PARAMETER_ERROR, "用户名或密码为空");
+			return WSResult.buildResult(AuthUserResult.class, WSResult.PARAMETER_ERROR, "用户名或密码为空");
 		}
 		//认证
 		try {
@@ -131,7 +131,7 @@ public class UserWebServiceImpl implements UserWebService {
 			return result;
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return WSResult.buildExceptionResult(AuthUserResult.class, e);
+			return WSResult.buildDefaultErrorResult(AuthUserResult.class);
 		}
 	}
 }
