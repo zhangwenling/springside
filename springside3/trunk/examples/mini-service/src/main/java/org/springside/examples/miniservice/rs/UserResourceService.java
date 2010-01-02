@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.dozer.DozerBeanMapper;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,15 +81,16 @@ public class UserResourceService {
 	 */
 	@POST
 	@Consumes( { "application/json", "application/xml" })
-	@Produces("text/plain")
-	public Response createUser(UserDTO user) {
+	public Long createUser(UserDTO user) {
 		try {
 			User userEntity = dozer.map(user, User.class);
 			userManager.saveUser(userEntity);
-			return Response.ok().entity(userEntity.getId()).build();
+			return userEntity.getId();
+		} catch (ConstraintViolationException e) {
+			throw new WebApplicationException(Response.status(Status.BAD_REQUEST).entity("唯一性冲突").build());
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+			throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).build());
 		}
 	}
 }

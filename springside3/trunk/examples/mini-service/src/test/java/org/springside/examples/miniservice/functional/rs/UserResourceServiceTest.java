@@ -1,16 +1,12 @@
 package org.springside.examples.miniservice.functional.rs;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.cxf.jaxrs.provider.JSONProvider;
 import org.dozer.DozerBeanMapper;
@@ -65,14 +61,11 @@ public class UserResourceServiceTest extends Assert {
 	}
 
 	@Test
-	public void createUser() throws IOException {
+	public void createUser() {
 		User user = UserData.getRandomUser();
 		UserDTO dto = new DozerBeanMapper().map(user, UserDTO.class);
-		Response response = client.path("/users").type("application/json").accept("text/plain").post(dto);
-
-		assertEquals(HttpServletResponse.SC_OK, response.getStatus());
-		InputStream is = (InputStream) response.getEntity();
-		System.out.println("Created user id:" + IOUtils.toString(is));
+		Long id = client.path("/users").type("application/json").post(dto, Long.class);
+		System.out.println("Created user id:" + id);
 	}
 
 }
