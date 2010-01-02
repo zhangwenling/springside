@@ -11,7 +11,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  *
  * @author calvin
  */
-@XmlType(name = "role")
+@XmlType(name = "Role")
 public class RoleDTO {
 
 	private Long id;

@@ -9,6 +9,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -36,16 +37,16 @@ public class UserResourceService {
 	 */
 	@GET
 	@Produces("application/json")
-	public Response getAllUser() {
+	public List<UserDTO> getAllUser() {
 		try {
-			List<User> userEntityList = userManager.getAllUser();
-			List<UserDTO> userDTOList = new ArrayList<UserDTO>();
-			for (User userEntity : userEntityList) {
-				userDTOList.add(dozer.map(userEntity, UserDTO.class));
+			List<User> entityList = userManager.getAllUser();
+			List<UserDTO> dtoList = new ArrayList<UserDTO>();
+			for (User userEntity : entityList) {
+				dtoList.add(dozer.map(userEntity, UserDTO.class));
 			}
-			return Response.ok(userDTOList).build();
+			return dtoList;
 		} catch (RuntimeException e) {
-			return Response.status(Status.BAD_REQUEST).build();
+			throw new WebApplicationException(Status.BAD_REQUEST);
 		}
 	}
 

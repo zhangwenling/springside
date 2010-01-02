@@ -1,10 +1,16 @@
 package org.springside.examples.miniservice.functional.rs;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.dozer.DozerBeanMapper;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,20 +20,13 @@ import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
 
 public class UserResourceServiceTest extends Assert {
-	
-	private WebClient client ;
-	
+
+	private WebClient client;
+
 	@Before
 	public void setUp() {
 		client = WebClient.create("http://localhost:8080/mini-service/services/rs");
 	}
-
-	/*	@Test
-		public void getAllUser() {
-			List<UserDTO> userList = client.path("/users").accept("application/json").get(List.class);
-			assertTrue(userList.size()>2);
-			assertEquals("admin", userList.get(0).getLoginName());
-		}*/
 
 	@Test
 	public void getUser() {
@@ -45,11 +44,28 @@ public class UserResourceServiceTest extends Assert {
 	}
 
 	@Test
-	public void createUser() {
+	public void getUserWithInvalidId2() {
+		Response response = client.path("/users/999").accept("application/json").get();
+		assertEquals(HttpServletResponse.SC_NOT_FOUND, response.getStatus());
+	}
+
+	@Test
+	public void getAllUser() throws JsonParseException, JsonMappingException, IOException {
+		Response response = client.path("/users").accept("application/json").get();
+		assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+		InputStream is = (InputStream) response.getEntity();
+		System.out.println("Get All user:" + IOUtils.toString(is));
+	}
+
+	@Test
+	public void createUser() throws IOException {
 		User user = UserData.getRandomUser();
 		UserDTO dto = new DozerBeanMapper().map(user, UserDTO.class);
-		Response response = client.path("/users").type("application/json").post(dto);
+		Response response = client.path("/users").accept("application/json").type("application/json").post(dto);
+
 		assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+		InputStream is = (InputStream) response.getEntity();
+		System.out.println("Created user id:" + IOUtils.toString(is));
 	}
 
 }
