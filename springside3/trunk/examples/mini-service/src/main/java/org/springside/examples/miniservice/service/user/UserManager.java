@@ -35,6 +35,13 @@ public class UserManager {
 		return userList;
 	}
 
+	@Transactional(readOnly = true)
+	public User getUser(Long id) {
+		User user = userDao.get(id);
+		userDao.initAllProperties(user);
+		return user;
+	}
+
 	public void saveUser(User user) {
 		userDao.save(user);
 	}
@@ -46,9 +53,8 @@ public class UserManager {
 	 */
 	@Transactional(readOnly = true)
 	public boolean authenticate(String loginName, String password) {
-		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password)) {
+		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password))
 			return false;
-		}
 
 		return ((Long) userDao.findUnique(UserDao.QUERY_BY_LNAME_PASSWD, loginName, password) == 1);
 	}

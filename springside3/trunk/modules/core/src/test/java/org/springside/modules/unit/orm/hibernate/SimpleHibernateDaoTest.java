@@ -130,6 +130,7 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 	}
 
 	@Test
+	@SuppressWarnings("unchecked")
 	public void eagerFetch() {
 		String sql = "from User u left join fetch u.roleList order by u.id";
 

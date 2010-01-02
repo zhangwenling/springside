@@ -43,7 +43,7 @@ public class UserDetailsServiceImplTest extends Assert {
 	@Test
 	public void loadUserExist() {
 
-		String authName = "A_foo";
+		String authName = "foo";
 		//准备数据
 		User user = SecurityEntityData.getRandomUser();
 		Role role = SecurityEntityData.getRandomRole();

@@ -110,6 +110,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 		testRole = null;
 	}
 
+	@SuppressWarnings("unchecked")
 	private void verifyRole(Role role) {
 		selenium.click("editLink-" + role.getName());
 		waitPageLoad();

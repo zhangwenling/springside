@@ -13,7 +13,6 @@ import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springside.examples.showcase.common.entity.Role;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.UserManager;
-import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
  * 实现SpringSecurity的UserDetailsService接口,实现获取用户Detail信息的回调函数.
