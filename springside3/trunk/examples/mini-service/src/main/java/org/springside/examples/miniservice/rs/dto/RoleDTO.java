@@ -1,6 +1,6 @@
 package org.springside.examples.miniservice.rs.dto;
 
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -11,7 +11,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  *
  * @author calvin
  */
-@XmlType(name = "Role")
+@XmlRootElement(name = "Role")
 public class RoleDTO {
 
 	private Long id;

@@ -15,6 +15,8 @@ import javax.ws.rs.core.Response.Status;
 
 import org.dozer.DozerBeanMapper;
 import org.hibernate.ObjectNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
@@ -27,6 +29,8 @@ import org.springside.examples.miniservice.service.user.UserManager;
 @Path("/users")
 public class UserResourceService {
 
+	private static Logger logger = LoggerFactory.getLogger(UserResourceService.class);
+
 	@Autowired
 	private UserManager userManager;
 	@Autowired
@@ -36,7 +40,7 @@ public class UserResourceService {
 	 * 获取所有用户, 返回List<UserDTO>.
 	 */
 	@GET
-	@Produces("application/json")
+	@Produces( { "application/json", "application/xml" })
 	public List<UserDTO> getAllUser() {
 		try {
 			List<User> entityList = userManager.getAllUser();
@@ -46,7 +50,8 @@ public class UserResourceService {
 			}
 			return dtoList;
 		} catch (RuntimeException e) {
-			throw new WebApplicationException(Status.BAD_REQUEST);
+			logger.error(e.getMessage(), e);
+			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -55,16 +60,18 @@ public class UserResourceService {
 	 */
 	@GET
 	@Path("{id}")
-	@Produces("application/json")
+	@Produces( { "application/json", "application/xml" })
 	public Response getUser(@PathParam("id") Long id) {
 		try {
 			User entity = userManager.getUser(id);
 			UserDTO dto = dozer.map(entity, UserDTO.class);
 			return Response.ok(dto).build();
 		} catch (ObjectNotFoundException e) {
+			logger.error(e.getMessage(), e);
 			return Response.status(Status.NOT_FOUND).build();
 		} catch (RuntimeException e) {
-			return Response.status(Status.BAD_REQUEST).build();
+			logger.error(e.getMessage(), e);
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 
@@ -79,7 +86,8 @@ public class UserResourceService {
 			userManager.saveUser(userEntity);
 			return Response.ok().entity(userEntity.getId()).build();
 		} catch (RuntimeException e) {
-			return Response.status(Status.BAD_REQUEST).build();
+			logger.error(e.getMessage(), e);
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 }
