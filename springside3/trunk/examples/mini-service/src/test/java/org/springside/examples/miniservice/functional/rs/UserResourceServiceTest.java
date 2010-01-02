@@ -29,8 +29,8 @@ public class UserResourceServiceTest extends Assert {
 	public void setUp() {
 		List providerList = new ArrayList();
 		JSONProvider jsonProvider = new JSONProvider();
-		//jsonProvider.setDropRootElement(true);
-		//jsonProvider.setSerializeAsArray(true);
+		jsonProvider.setSupportUnwrapped(true);
+		jsonProvider.setDropRootElement(true);
 		providerList.add(jsonProvider);
 		client = WebClient.create("http://localhost:8080/mini-service/services/rs", providerList);
 	}
@@ -67,7 +67,7 @@ public class UserResourceServiceTest extends Assert {
 	public void createUser() throws IOException {
 		User user = UserData.getRandomUser();
 		UserDTO dto = new DozerBeanMapper().map(user, UserDTO.class);
-		Response response = client.path("/users").accept("application/json").type("application/json").post(dto);
+		Response response = client.path("/users").type("application/json").accept("text/plain").post(dto);
 
 		assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 		InputStream is = (InputStream) response.getEntity();
