@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
-import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
  * 实现SpringSecurity的UserDetailsService接口,实现获取用户Detail信息的回调函数.
@@ -58,7 +57,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		Set<GrantedAuthority> authSet = new HashSet<GrantedAuthority>();
 		for (Role role : user.getRoleList()) {
 			for (Authority authority : role.getAuthorityList()) {
-				authSet.add(new GrantedAuthorityImpl(SpringSecurityUtils.AUTH_PREFIX + authority.getName()));
+				authSet.add(new GrantedAuthorityImpl(authority.getPrefixedName()));
 			}
 		}
 		return authSet.toArray(new GrantedAuthority[authSet.size()]);
