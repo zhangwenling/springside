@@ -12,13 +12,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.service.user.UserManager;
-import org.springside.examples.miniservice.ws.api.UserWebService;
-import org.springside.examples.miniservice.ws.api.WsConstants;
-import org.springside.examples.miniservice.ws.api.dto.UserDTO;
-import org.springside.examples.miniservice.ws.api.result.AuthUserResult;
-import org.springside.examples.miniservice.ws.api.result.CreateUserResult;
-import org.springside.examples.miniservice.ws.api.result.GetAllUserResult;
-import org.springside.examples.miniservice.ws.api.result.WSResult;
+import org.springside.examples.miniservice.ws.UserWebService;
+import org.springside.examples.miniservice.ws.WsConstants;
+import org.springside.examples.miniservice.ws.dto.UserDTO;
+import org.springside.examples.miniservice.ws.result.AuthUserResult;
+import org.springside.examples.miniservice.ws.result.CreateUserResult;
+import org.springside.examples.miniservice.ws.result.GetAllUserResult;
+import org.springside.examples.miniservice.ws.result.WSResult;
 
 /**
  * WebService实现类.
