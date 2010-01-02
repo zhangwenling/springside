@@ -3,8 +3,6 @@ package org.springside.examples.miniservice.rs.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -56,9 +54,6 @@ public class UserDTO {
 		email = value;
 	}
 
-	//配置输出xml为<roleList><role><id>1</id></role></roleList>
-	@XmlElementWrapper(name = "roleList")
-	@XmlElement(name = "role")
 	public List<RoleDTO> getRoleList() {
 		return roleList;
 	}

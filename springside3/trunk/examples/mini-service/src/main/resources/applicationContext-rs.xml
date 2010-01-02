@@ -16,8 +16,7 @@
 		</jaxrs:serviceBeans>
 	</jaxrs:server>
 
-
 	<!-- REST的实现Bean定义 -->
 	<bean id="userResourceService" class="org.springside.examples.miniservice.rs.UserResourceService" />
-	
+
 </beans>
