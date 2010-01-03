@@ -2,8 +2,6 @@ package org.springside.examples.miniservice.functional.rs;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.dozer.DozerBeanMapper;
 import org.junit.Assert;
 import org.junit.Before;
@@ -46,7 +44,7 @@ public class UserResourceServiceTest extends Assert {
 			client.getUser(999L);
 			fail("Should thrown exception while invalid id");
 		} catch (UniformInterfaceException e) {
-			assertEquals(HttpServletResponse.SC_NOT_FOUND, e.getResponse().getStatus());
+			assertEquals(404, e.getResponse().getStatus());
 		}
 	}
 

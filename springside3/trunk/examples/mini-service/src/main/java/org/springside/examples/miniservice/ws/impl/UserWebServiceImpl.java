@@ -82,8 +82,9 @@ public class UserWebServiceImpl implements UserWebService {
 			result.setUser(dto);
 			return result;
 		} catch (ObjectNotFoundException e) {
-			logger.error(e.getMessage(), e);
-			return WSResult.buildResult(GetUserResult.class, WSResult.PARAMETER_ERROR, "用户不存在");
+			String message = "用户不存在(id:" + id + ")";
+			logger.error(message, e);
+			return WSResult.buildResult(GetUserResult.class, WSResult.PARAMETER_ERROR, message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			return WSResult.buildDefaultErrorResult(GetUserResult.class);
@@ -97,6 +98,8 @@ public class UserWebServiceImpl implements UserWebService {
 		//校验请求参数
 		try {
 			Assert.notNull(user, "用户参数为空");
+			Assert.hasText(user.getLoginName(), "新建用户登录名参数为空");
+			Assert.isNull(user.getId(), "新建用户ID参数必须为空");
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
 			return WSResult.buildResult(CreateUserResult.class, WSResult.PARAMETER_ERROR, e.getMessage());
@@ -111,8 +114,9 @@ public class UserWebServiceImpl implements UserWebService {
 			result.setUserId(userEntity.getId());
 			return result;
 		} catch (ConstraintViolationException e) {
-			logger.error(e.getMessage(), e);
-			return WSResult.buildResult(CreateUserResult.class, WSResult.PARAMETER_ERROR, "输入参数存在唯一性冲突");
+			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
+			logger.error(message, e);
+			return WSResult.buildResult(CreateUserResult.class, WSResult.PARAMETER_ERROR, message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			return WSResult.buildDefaultErrorResult(CreateUserResult.class);
@@ -126,7 +130,7 @@ public class UserWebServiceImpl implements UserWebService {
 
 		//校验请求参数
 		try {
-			Assert.hasText(loginName, "用户名参数为空");
+			Assert.hasText(loginName, "登录名参数为空");
 			Assert.hasText(password, "密码参数为空");
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());

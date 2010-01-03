@@ -35,21 +35,14 @@ public class WSResult {
 			return result;
 		} catch (Exception ex) {
 			throw ReflectionUtils.convertReflectionExceptionToUnchecked(ex);
-
 		}
 	}
 
 	/**
 	 * 创建默认异常结果.
 	 */
-	public static <T extends WSResult> T buildDefaultErrorResult(Class<T> clazz) {
-		try {
-			T result = clazz.newInstance();
-			result.setResult(SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
-			return result;
-		} catch (Exception ex) {
-			throw ReflectionUtils.convertReflectionExceptionToUnchecked(ex);
-		}
+	public static <T extends WSResult> T buildDefaultErrorResult(Class<T> resultClass) {
+		return buildResult(resultClass, SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
 	}
 
 	public String getCode() {
