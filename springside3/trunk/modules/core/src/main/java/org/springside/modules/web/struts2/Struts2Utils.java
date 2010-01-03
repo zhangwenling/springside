@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springside.modules.web.WebUtils;
+import org.springside.modules.web.ServletUtils;
 
 /**
  * Struts2工具类.
@@ -187,7 +187,7 @@ public class Struts2Utils {
 		String fullContentType = contentType + ";charset=" + encoding;
 		response.setContentType(fullContentType);
 		if (noCache) {
-			WebUtils.setNoCacheHeader(response);
+			ServletUtils.setNoCacheHeader(response);
 		}
 
 		return response;

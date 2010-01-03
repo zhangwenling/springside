@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
-import org.springframework.web.util.WebUtils;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.web.ServletUtils;
 
 /**
  * Hibernate针对Web应用的工具类.
@@ -121,7 +121,7 @@ public class HibernateWebUtils {
 		List<PropertyFilter> filterList = new ArrayList<PropertyFilter>();
 
 		//从request中获取含属性前缀名的参数,构造去除前缀名后的参数Map.
-		Map<String, String> filterParamMap = WebUtils.getParametersStartingWith(request, filterPrefix);
+		Map<String, String> filterParamMap = ServletUtils.getParametersStartingWith(request, filterPrefix);
 
 		//分析参数Map,构造PropertyFilter列表
 		for (Map.Entry<String, String> entry : filterParamMap.entrySet()) {

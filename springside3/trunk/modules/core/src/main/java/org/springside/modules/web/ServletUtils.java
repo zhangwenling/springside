@@ -9,21 +9,24 @@ package org.springside.modules.web;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Enumeration;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
 import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.util.Assert;
 
 /**
  * Http与Servlet工具类.
  * 
  * @author calvin
  */
-public class WebUtils {
+public class ServletUtils {
 
 	public static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
 
@@ -149,7 +152,29 @@ public class WebUtils {
 	 * 返回的结果Parameter名已去除前缀.
 	 */
 	@SuppressWarnings("unchecked")
-	public static Map<String, String> getParametersStartingWith(HttpServletRequest request, String prefix) {
-		return org.springframework.web.util.WebUtils.getParametersStartingWith(request, prefix);
+	public static Map getParametersStartingWith(HttpServletRequest request, String prefix) {
+		Assert.notNull(request, "Request must not be null");
+		Enumeration paramNames = request.getParameterNames();
+		Map params = new TreeMap();
+		if (prefix == null) {
+			prefix = "";
+		}
+		while (paramNames != null && paramNames.hasMoreElements()) {
+			String paramName = (String) paramNames.nextElement();
+			if ("".equals(prefix) || paramName.startsWith(prefix)) {
+				String unprefixed = paramName.substring(prefix.length());
+				String[] values = request.getParameterValues(paramName);
+				if (values == null || values.length == 0) {
+					// Do nothing, no values found at all.
+				}
+				else if (values.length > 1) {
+					params.put(unprefixed, values);
+				}
+				else {
+					params.put(unprefixed, values[0]);
+				}
+			}
+		}
+		return params;
 	}
 }

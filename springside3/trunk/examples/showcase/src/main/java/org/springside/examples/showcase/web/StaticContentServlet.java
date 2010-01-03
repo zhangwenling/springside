@@ -18,7 +18,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springside.modules.web.WebUtils;
+import org.springside.modules.web.ServletUtils;
 
 /**
  * 本地静态内容展示与下载的Servlet.
@@ -51,29 +51,29 @@ public class StaticContentServlet extends HttpServlet {
 		ContentInfo contentInfo = getContentInfoFromCache(contentPath);
 
 		//根据Etag或ModifiedSince Header判断客户端的缓存文件是否有效, 如仍有效则设置返回码为304,直接返回.
-		if (!WebUtils.checkIfModifiedSince(request, response, contentInfo.lastModified)
-				|| !WebUtils.checkIfNoneMatchEtag(request, response, contentInfo.etag)) {
+		if (!ServletUtils.checkIfModifiedSince(request, response, contentInfo.lastModified)
+				|| !ServletUtils.checkIfNoneMatchEtag(request, response, contentInfo.etag)) {
 			return;
 		}
 
 		//设置Etag/过期时间
-		WebUtils.setExpiresHeader(response, WebUtils.ONE_YEAR_SECONDS);
-		WebUtils.setLastModifiedHeader(response, contentInfo.lastModified);
-		WebUtils.setEtag(response, contentInfo.etag);
+		ServletUtils.setExpiresHeader(response, ServletUtils.ONE_YEAR_SECONDS);
+		ServletUtils.setLastModifiedHeader(response, contentInfo.lastModified);
+		ServletUtils.setEtag(response, contentInfo.etag);
 
 		//设置MIME类型
 		response.setContentType(contentInfo.mimeType);
 
 		//如果是下载请求,设置下载Header
 		if (request.getParameter("download") != null) {
-			WebUtils.setDownloadableHeader(response, contentInfo.fileName);
+			ServletUtils.setDownloadableHeader(response, contentInfo.fileName);
 		}
 
 		//构造OutputStream
 		OutputStream output;
-		if (WebUtils.checkAccetptGzip(request) && contentInfo.needGzip) {
+		if (ServletUtils.checkAccetptGzip(request) && contentInfo.needGzip) {
 			//使用压缩传输的outputstream, 使用http1.1 trunked编码不设置content-length.
-			output = WebUtils.buildGzipOutputStream(response);
+			output = ServletUtils.buildGzipOutputStream(response);
 		} else {
 			//使用普通outputstream, 设置content-length.
 			response.setContentLength(contentInfo.length);
