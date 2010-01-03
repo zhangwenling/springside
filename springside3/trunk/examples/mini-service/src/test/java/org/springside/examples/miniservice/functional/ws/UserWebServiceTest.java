@@ -69,7 +69,7 @@ public class UserWebServiceTest extends SpringContextTestCase {
 	 */
 	@Test
 	public void getAllUser() throws MalformedURLException {
-		URL wsdlURL = new URL("http://localhost:8080/mini-service/services/userservice?wsdl");
+		URL wsdlURL = new URL("http://localhost:8080/mini-service/ws/userservice?wsdl");
 		QName UserServiceName = new QName(WsConstants.NS, "UserService");
 		Service service = Service.create(wsdlURL, UserServiceName);
 		UserWebService userWebService = service.getPort(UserWebService.class);

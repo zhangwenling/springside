@@ -10,5 +10,5 @@
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 
-	<jaxws:client id="userWebService" serviceClass="org.springside.examples.miniservice.ws.UserWebService" address="http://localhost:8080/mini-service/services/userservice"/>
+	<jaxws:client id="userWebService" serviceClass="org.springside.examples.miniservice.ws.UserWebService" address="http://localhost:8080/mini-service/ws/userservice"/>
 </beans>

@@ -7,6 +7,6 @@
 <body>
 <h1>Mini-Service示例</h1>
 <h2>--Web Service后台服务演示</h2>
-<a href="services">查看所有的WSDL与WADL</a>
+<a href="ws">查看所有的WSDL与WADL</a>
 </body>
 </html>
