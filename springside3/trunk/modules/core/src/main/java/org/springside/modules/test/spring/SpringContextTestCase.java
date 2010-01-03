@@ -44,7 +44,7 @@ public class SpringContextTestCase extends Assert implements ApplicationContextA
 	protected void sleep(long millis) {
 		try {
 			Thread.sleep(millis);
-		} catch (InterruptedException e) {
+		} catch (InterruptedException e) {//NOSONAR
 		}
 	}
 }

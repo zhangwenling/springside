@@ -8,21 +8,26 @@ import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 import javax.xml.bind.JAXBContext;
 
-
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.api.json.JSONJAXBContext;
 
+/**
+ * 设置JSON格式为NATURAL的Provider.
+ * 
+ * @author calvin
+ *
+ */
 @Provider
 @SuppressWarnings("unchecked")
 public class JAXBContextResolver implements ContextResolver<JAXBContext> {
 
-	private JAXBContext context;
-
-	private final Set<Class> typeSet;
-
+	/** 需要被natural格式输出的类. */
 	private Class[] types = { RoleDTO.class, UserDTO.class };
 
-    public JAXBContextResolver() throws Exception {
+	private JAXBContext context;
+	private final Set<Class> typeSet;
+
+	public JAXBContextResolver() throws Exception {
 		this.context = new JSONJAXBContext(JSONConfiguration.natural().build(), types);
 		this.typeSet = new HashSet(Arrays.asList(types));
 	}

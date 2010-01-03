@@ -164,7 +164,7 @@ public class ServletUtils {
 			if ("".equals(prefix) || paramName.startsWith(prefix)) {
 				String unprefixed = paramName.substring(prefix.length());
 				String[] values = request.getParameterValues(paramName);
-				if (values == null || values.length == 0) {
+				if (values == null || values.length == 0) {//NOSONAR
 					// Do nothing, no values found at all.
 				}
 				else if (values.length > 1) {

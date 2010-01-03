@@ -39,7 +39,7 @@ public class UserResourceService {
 	private DozerBeanMapper dozer;
 
 	/**
-	 * 获取所有用户, 返回List<UserDTO>.
+	 * 获取所有用户.
 	 */
 	@GET
 	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -58,7 +58,7 @@ public class UserResourceService {
 	}
 
 	/**
-	 * 获取用户, 返回UserDTO.
+	 * 获取用户.
 	 */
 	@GET
 	@Path("{id}")
@@ -69,8 +69,9 @@ public class UserResourceService {
 			UserDTO dto = dozer.map(entity, UserDTO.class);
 			return dto;
 		} catch (ObjectNotFoundException e) {
-			logger.error(e.getMessage(), e);
-			throw new WebApplicationException(Response.status(Status.NOT_FOUND).entity("用户不存在").build());
+			String message = "用户不存在(id:" + id + ")";
+			logger.error(message, e);
+			throw buildException(Status.NOT_FOUND, message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
@@ -89,10 +90,19 @@ public class UserResourceService {
 			userManager.saveUser(userEntity);
 			return userEntity.getId().toString();
 		} catch (ConstraintViolationException e) {
-			throw new WebApplicationException(Response.status(Status.BAD_REQUEST).entity("唯一性冲突").build());
+			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
+			logger.error(message, e);
+			throw buildException(Status.BAD_REQUEST, message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).build());
+			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	/**
+	 * 创建含出错信息的WebApplicationException.
+	 */
+	private WebApplicationException buildException(Status status, String message) {
+		return new WebApplicationException(Response.status(status).entity(message).build());
 	}
 }

@@ -13,6 +13,11 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
+/**
+ * 使用Jersey Client的User REST客户端.
+ * 
+ * @author calvin
+ */
 public class UserResourceClient {
 	private WebResource client;
 
