@@ -12,7 +12,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * 
  * @author calvin
  */
-@XmlRootElement(name = "User")
+@XmlRootElement
 public class UserDTO {
 
 	private Long id;

@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.rs;
+package org.springside.examples.miniservice.rs.server;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -41,7 +42,7 @@ public class UserResourceService {
 	 * 获取所有用户, 返回List<UserDTO>.
 	 */
 	@GET
-	@Produces( { "application/json", "application/xml" })
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public List<UserDTO> getAllUser() {
 		try {
 			List<User> entityList = userManager.getAllUser();
@@ -61,7 +62,7 @@ public class UserResourceService {
 	 */
 	@GET
 	@Path("{id}")
-	@Produces( { "application/json", "application/xml" })
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public UserDTO getUser(@PathParam("id") Long id) {
 		try {
 			User entity = userManager.getUser(id);
@@ -69,7 +70,7 @@ public class UserResourceService {
 			return dto;
 		} catch (ObjectNotFoundException e) {
 			logger.error(e.getMessage(), e);
-			throw new WebApplicationException(Status.NOT_FOUND);
+			throw new WebApplicationException(Response.status(Status.NOT_FOUND).entity("用户不存在").build());
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
@@ -80,12 +81,13 @@ public class UserResourceService {
 	 * 创建用户.
 	 */
 	@POST
-	@Consumes( { "application/json", "application/xml" })
-	public Long createUser(UserDTO user) {
+	@Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces( { MediaType.TEXT_PLAIN })
+	public String createUser(UserDTO user) {
 		try {
 			User userEntity = dozer.map(user, User.class);
 			userManager.saveUser(userEntity);
-			return userEntity.getId();
+			return userEntity.getId().toString();
 		} catch (ConstraintViolationException e) {
 			throw new WebApplicationException(Response.status(Status.BAD_REQUEST).entity("唯一性冲突").build());
 		} catch (RuntimeException e) {

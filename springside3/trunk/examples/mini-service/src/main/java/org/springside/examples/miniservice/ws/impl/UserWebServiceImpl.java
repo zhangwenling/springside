@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.jws.WebService;
 
-import org.apache.commons.lang.StringUtils;
 import org.dozer.DozerBeanMapper;
+import org.hibernate.ObjectNotFoundException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.service.user.UserManager;
 import org.springside.examples.miniservice.ws.UserWebService;
@@ -63,11 +65,12 @@ public class UserWebServiceImpl implements UserWebService {
 	 * @see UserWebService#getUser()
 	 */
 	public GetUserResult getUser(Long id) {
-
 		//校验请求参数
-		if (id == null) {
-			logger.error("id参数为空");
-			return WSResult.buildResult(GetUserResult.class, WSResult.PARAMETER_ERROR, "id参数为空");
+		try {
+			Assert.notNull(id, "id参数为空");
+		} catch (IllegalArgumentException e) {
+			logger.error(e.getMessage());
+			return WSResult.buildResult(GetUserResult.class, WSResult.PARAMETER_ERROR, e.getMessage());
 		}
 
 		//获取用户
@@ -78,22 +81,25 @@ public class UserWebServiceImpl implements UserWebService {
 			GetUserResult result = new GetUserResult();
 			result.setUser(dto);
 			return result;
+		} catch (ObjectNotFoundException e) {
+			logger.error(e.getMessage(), e);
+			return WSResult.buildResult(GetUserResult.class, WSResult.PARAMETER_ERROR, "用户不存在");
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			return WSResult.buildDefaultErrorResult(GetUserResult.class);
 		}
-
 	}
 
 	/**
 	 * @see UserWebService#createUser(UserDTO)
 	 */
 	public CreateUserResult createUser(UserDTO user) {
-
 		//校验请求参数
-		if (user == null) {
-			logger.error("user参数为空");
-			return WSResult.buildResult(CreateUserResult.class, WSResult.PARAMETER_ERROR, "user参数为空");
+		try {
+			Assert.notNull(user, "用户参数为空");
+		} catch (IllegalArgumentException e) {
+			logger.error(e.getMessage());
+			return WSResult.buildResult(CreateUserResult.class, WSResult.PARAMETER_ERROR, e.getMessage());
 		}
 
 		//保存用户
@@ -104,6 +110,9 @@ public class UserWebServiceImpl implements UserWebService {
 			CreateUserResult result = new CreateUserResult();
 			result.setUserId(userEntity.getId());
 			return result;
+		} catch (ConstraintViolationException e) {
+			logger.error(e.getMessage(), e);
+			return WSResult.buildResult(CreateUserResult.class, WSResult.PARAMETER_ERROR, "输入参数存在唯一性冲突");
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			return WSResult.buildDefaultErrorResult(CreateUserResult.class);
@@ -116,10 +125,14 @@ public class UserWebServiceImpl implements UserWebService {
 	public AuthUserResult authUser(String loginName, String password) {
 
 		//校验请求参数
-		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password)) {
-			logger.error("用户名或密码为空");
-			return WSResult.buildResult(AuthUserResult.class, WSResult.PARAMETER_ERROR, "用户名或密码为空");
+		try {
+			Assert.hasText(loginName, "用户名参数为空");
+			Assert.hasText(password, "密码参数为空");
+		} catch (IllegalArgumentException e) {
+			logger.error(e.getMessage());
+			return WSResult.buildResult(AuthUserResult.class, WSResult.PARAMETER_ERROR, e.getMessage());
 		}
+
 		//认证
 		try {
 			AuthUserResult result = new AuthUserResult();

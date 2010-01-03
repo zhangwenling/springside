@@ -11,7 +11,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  *
  * @author calvin
  */
-@XmlRootElement(name = "Role")
+@XmlRootElement
 public class RoleDTO {
 
 	private Long id;
