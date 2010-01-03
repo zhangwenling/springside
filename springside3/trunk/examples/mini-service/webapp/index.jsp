@@ -7,6 +7,10 @@
 <body>
 <h1>Mini-Service示例</h1>
 <h2>--Web Service后台服务演示</h2>
-<a href="ws">查看所有的WSDL与WADL</a>
+<ul>
+<li><a href="ws">查看所有SOAP服务的WSDL</a></li>
+<li><a href="rs/application.wadl">查看所有REST服务的WADL</a></li>
+</ul>
+
 </body>
 </html>
