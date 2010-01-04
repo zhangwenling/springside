@@ -23,7 +23,7 @@ public class SpringContextHolderTest extends Assert {
 		new ClassPathXmlApplicationContext("classpath:/applicationContext-test.xml");
 		assertNotNull(SpringContextHolder.getApplicationContext());
 		assertNotNull(SpringContextHolder.getBean("springContextHolder"));
-		assertNotNull(SpringContextHolder.getBean(SpringContextHolder.class));
+		assertEquals(SpringContextHolder.class,SpringContextHolder.getBean(SpringContextHolder.class).getClass());
 	}
 
 }

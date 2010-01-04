@@ -19,6 +19,7 @@ import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
+import org.springside.modules.spring.SpringContextHolder;
 
 /**
  * 安全相关实体的管理类, 包括用户,角色,资源与授权类.
@@ -119,6 +120,15 @@ public class SecurityEntityManager {
 	@Transactional(readOnly = true)
 	public List<Resource> getUrlResourceWithAuthorities() {
 		return resourceDao.getUrlResourceWithAuthorities();
+	}
+
+	/**
+	 * 保存资源列表,同时刷新SpringSecurity中的URL-授权配置.
+	 */
+	public void saveResource(Resource entity) throws Exception {
+		resourceDao.save(entity);
+		SpringSecurityUtils.refreshDefinitionSource(SpringContextHolder.getApplicationContext(),
+				"filterSecurityInterceptor", "definitionSource");
 	}
 
 	//-- Authority Manager --//
