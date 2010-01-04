@@ -1,11 +1,12 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.ws.api.result;
+package ${package}.ws.result;
 
 import javax.xml.bind.annotation.XmlType;
 
-import ${package}.ws.api.WsConstants;
+import ${package}.ws.WsConstants;
+import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * WebService返回结果基类,定义所有返回码.
@@ -26,6 +27,26 @@ public class WSResult {
 	//-- WSResult基本属性 --//
 	private String code = SUCCESS;
 	private String message;
+
+	/**
+	 * 创建结果.
+	 */
+	public static <T extends WSResult> T buildResult(Class<T> resultClass, String resultCode, String resultMessage) {
+		try {
+			T result = resultClass.newInstance();
+			result.setResult(resultCode, resultMessage);
+			return result;
+		} catch (Exception ex) {
+			throw ReflectionUtils.convertReflectionExceptionToUnchecked(ex);
+		}
+	}
+
+	/**
+	 * 创建默认异常结果.
+	 */
+	public static <T extends WSResult> T buildDefaultErrorResult(Class<T> resultClass) {
+		return buildResult(resultClass, SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
+	}
 
 	public String getCode() {
 		return code;
@@ -51,10 +72,4 @@ public class WSResult {
 		message = resultMessage;
 	}
 
-	/**
-	 * 设置为默认的系统内部未知错误.
-	 */
-	public void setDefaultError() {
-		setResult(SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
-	}
 }

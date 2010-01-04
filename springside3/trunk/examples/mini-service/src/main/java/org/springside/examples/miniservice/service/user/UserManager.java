@@ -26,7 +26,7 @@ public class UserManager {
 	private UserDao userDao;
 
 	/**
-	 * 获取全部用户,并对用户的延迟加载关联进行初始化.
+	 * 获取全部用户, 并对用户的延迟加载关联进行初始化.
 	 */
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
@@ -35,6 +35,9 @@ public class UserManager {
 		return userList;
 	}
 
+	/**
+	 * 获取用户, 并对用户的延迟加载关联进行初始化.
+	 */
 	@Transactional(readOnly = true)
 	public User getUser(Long id) {
 		User user = userDao.get(id);

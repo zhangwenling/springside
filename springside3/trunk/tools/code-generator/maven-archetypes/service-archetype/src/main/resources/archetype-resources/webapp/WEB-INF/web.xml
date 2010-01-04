@@ -29,6 +29,15 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>CXFServlet</servlet-name>
-		<url-pattern>/services/*</url-pattern>
+		<url-pattern>/ws/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>JerseyServlet</servlet-name>
+		<servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>JerseyServlet</servlet-name>
+		<url-pattern>/rs/*</url-pattern>
 	</servlet-mapping>
 </web-app>

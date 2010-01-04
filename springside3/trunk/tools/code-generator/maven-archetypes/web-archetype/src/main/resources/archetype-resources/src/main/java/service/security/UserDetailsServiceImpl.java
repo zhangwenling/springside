@@ -35,9 +35,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
 		User user = securityEntityManager.findUserByLoginName(userName);
-		if (user == null) {
+		if (user == null)
 			throw new UsernameNotFoundException("用户" + userName + " 不存在");
-		}
 
 		GrantedAuthority[] grantedAuths = obtainGrantedAuthorities(user);
 
@@ -61,7 +60,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		Set<GrantedAuthority> authSet = new HashSet<GrantedAuthority>();
 		for (Role role : user.getRoleList()) {
 			for (Authority authority : role.getAuthorityList()) {
-				authSet.add(new GrantedAuthorityImpl(authority.getName()));
+				authSet.add(new GrantedAuthorityImpl(authority.getPrefixedName()));
 			}
 		}
 		return authSet.toArray(new GrantedAuthority[authSet.size()]);

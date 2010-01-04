@@ -1,11 +1,11 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.ws.api.result;
+package ${package}.ws.result;
 
 import javax.xml.bind.annotation.XmlType;
 
-import ${package}.ws.api.WsConstants;
+import ${package}.ws.WsConstants;
 
 /**
  * CreateUser方法的返回结果.

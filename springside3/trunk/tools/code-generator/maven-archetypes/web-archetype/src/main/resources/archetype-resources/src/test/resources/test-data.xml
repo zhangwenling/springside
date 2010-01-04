@@ -3,10 +3,10 @@
 #set( $symbol_escape = '\' )
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-  <SS_AUTHORITY ID="1" DISPLAY_NAME="浏览用户" NAME="A_VIEW_USER"/>
-  <SS_AUTHORITY ID="2" DISPLAY_NAME="修改用户" NAME="A_MODIFY_USER"/>
-  <SS_AUTHORITY ID="3" DISPLAY_NAME="浏览角色" NAME="A_VIEW_ROLE"/>
-  <SS_AUTHORITY ID="4" DISPLAY_NAME="修改角色" NAME="A_MODIFY_ROLE"/>
+  <SS_AUTHORITY ID="1" NAME="浏览用户" />
+  <SS_AUTHORITY ID="2" NAME="修改用户"/>
+  <SS_AUTHORITY ID="3" NAME="浏览角色"/>
+  <SS_AUTHORITY ID="4" NAME="修改角色"/>
   <SS_RESOURCE ID="1" POSITION="1.0" RESOURCE_TYPE="url" VALUE="/security/user!save*"/>
   <SS_RESOURCE ID="2" POSITION="2.0" RESOURCE_TYPE="url" VALUE="/security/user!delete*"/>
   <SS_RESOURCE ID="3" POSITION="3.0" RESOURCE_TYPE="url" VALUE="/security/user*"/>

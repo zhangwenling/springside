@@ -1,15 +1,16 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.ws.api;
+package ${package}.ws;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-import ${package}.ws.api.dto.UserDTO;
-import ${package}.ws.api.result.AuthUserResult;
-import ${package}.ws.api.result.CreateUserResult;
-import ${package}.ws.api.result.GetAllUserResult;
+import ${package}.ws.dto.UserDTO;
+import ${package}.ws.result.AuthUserResult;
+import ${package}.ws.result.CreateUserResult;
+import ${package}.ws.result.GetAllUserResult;
+import ${package}.ws.result.GetUserResult;
 
 /**
  * JAX-WS2.0的WebService接口定义类.
@@ -24,9 +25,14 @@ import ${package}.ws.api.result.GetAllUserResult;
 @WebService(name = "UserService", targetNamespace = WsConstants.NS)
 public interface UserWebService {
 	/**
-	 * 显示所有用户.
+	 * 获取所有用户.
 	 */
 	public GetAllUserResult getAllUser();
+
+	/**
+	 * 获取用户.
+	 */
+	public GetUserResult getUser(@WebParam(name = "id") Long id);
 
 	/**
 	 * 新建用户.

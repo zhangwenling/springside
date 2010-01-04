@@ -1,7 +1,7 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.ws.api.result;
+package ${package}.ws.result;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
-import ${package}.ws.api.WsConstants;
-import ${package}.ws.api.dto.UserDTO;
+import ${package}.ws.WsConstants;
+import ${package}.ws.dto.UserDTO;
 
 /**
  * GetAllUser方法的返回结果.

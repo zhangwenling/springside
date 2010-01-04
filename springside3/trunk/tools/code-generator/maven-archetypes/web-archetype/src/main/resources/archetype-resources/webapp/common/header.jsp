@@ -2,6 +2,7 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 <%@ page language="java" pageEncoding="UTF-8" %>
+<%@ page import="org.springside.modules.security.springsecurity.SpringSecurityUtils" %>
 <%@ include file="/common/taglibs.jsp" %>
 <div id="hd">
 	<div id="title">
@@ -12,6 +13,9 @@
 		<ul>
 			<li><a href="${symbol_dollar}{ctx}/security/user.action">帐号列表</a></li>
 			<li><a href="${symbol_dollar}{ctx}/security/role.action">角色列表</a></li>
+			<%if("admin".equals(SpringSecurityUtils.getCurrentUserName())){ %>
+				<li><a href="${symbol_dollar}{ctx}/security/resource.action">资源权限列表</a></li>
+			<%} %>
 			<li><a href="${symbol_dollar}{ctx}/j_spring_security_logout">退出登录</a></li>
 		</ul>
 	</div>

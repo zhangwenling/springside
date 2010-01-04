@@ -13,14 +13,14 @@ import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import ${package}.data.UserData;
 import ${package}.entity.user.User;
-import ${package}.ws.api.UserWebService;
-import ${package}.ws.api.WsConstants;
-import ${package}.ws.api.dto.RoleDTO;
-import ${package}.ws.api.dto.UserDTO;
-import ${package}.ws.api.result.AuthUserResult;
-import ${package}.ws.api.result.CreateUserResult;
-import ${package}.ws.api.result.GetAllUserResult;
-import ${package}.ws.api.result.WSResult;
+import ${package}.ws.UserWebService;
+import ${package}.ws.WsConstants;
+import ${package}.ws.dto.RoleDTO;
+import ${package}.ws.dto.UserDTO;
+import ${package}.ws.result.AuthUserResult;
+import ${package}.ws.result.CreateUserResult;
+import ${package}.ws.result.GetAllUserResult;
+import ${package}.ws.result.WSResult;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 /**
@@ -30,7 +30,7 @@ import org.springside.modules.test.spring.SpringContextTestCase;
  * 
  * @author calvin
  */
-@ContextConfiguration(locations = { "/applicationContext-cxf-client.xml" }, inheritLocations = false)
+@ContextConfiguration(locations = { "/applicationContext-ws-client.xml" }, inheritLocations = false)
 public class UserWebServiceTest extends SpringContextTestCase {
 
 	/**
@@ -72,7 +72,7 @@ public class UserWebServiceTest extends SpringContextTestCase {
 	 */
 	@Test
 	public void getAllUser() throws MalformedURLException {
-		URL wsdlURL = new URL("http://localhost:8080/${artifactId}/services/UserService?wsdl");
+		URL wsdlURL = new URL("http://localhost:8080/${artifactId}/ws/userservice?wsdl");
 		QName UserServiceName = new QName(WsConstants.NS, "UserService");
 		Service service = Service.create(wsdlURL, UserServiceName);
 		UserWebService userWebService = service.getPort(UserWebService.class);

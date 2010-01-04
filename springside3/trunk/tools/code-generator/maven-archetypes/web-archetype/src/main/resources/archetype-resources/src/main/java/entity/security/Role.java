@@ -71,7 +71,7 @@ public class Role extends IdEntity {
 
 	@Transient
 	public String getAuthNames() {
-		return ReflectionUtils.convertElementPropertyToString(authorityList, "displayName", ", ");
+		return ReflectionUtils.convertElementPropertyToString(authorityList, "name", ", ");
 	}
 
 	@Transient

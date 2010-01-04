@@ -52,13 +52,13 @@
 						<td>${symbol_dollar}{email}&nbsp;</td>
 						<td>${symbol_dollar}{roleNames}&nbsp;</td>
 						<td>&nbsp;
-							<security:authorize ifAnyGranted="A_VIEW_USER">
-								<security:authorize ifNotGranted="A_MODIFY_USER">
+							<security:authorize ifAnyGranted="ROLE_浏览用户">
+								<security:authorize ifNotGranted="ROLE_修改用户">
 									<a href="user!input.action?id=${symbol_dollar}{id}">查看</a>&nbsp;
 								</security:authorize>
 							</security:authorize>
 
-							<security:authorize ifAnyGranted="A_MODIFY_USER">
+							<security:authorize ifAnyGranted="ROLE_修改用户">
 								<a href="user!input.action?id=${symbol_dollar}{id}">修改</a>&nbsp;
 								<a href="user!delete.action?id=${symbol_dollar}{id}">删除</a>
 							</security:authorize>
@@ -75,7 +75,7 @@
 			<s:if test="page.hasNext"><a href="javascript:jumpPage(${symbol_dollar}{page.nextPage})">下一页</a></s:if>
 			<a href="javascript:jumpPage(${symbol_dollar}{page.totalPages})">末页</a>
 
-			<security:authorize ifAnyGranted="A_MODIFY_USER">
+			<security:authorize ifAnyGranted="ROLE_修改用户">
 				<a href="user!input.action">增加新用户</a>
 			</security:authorize>
 		</div>

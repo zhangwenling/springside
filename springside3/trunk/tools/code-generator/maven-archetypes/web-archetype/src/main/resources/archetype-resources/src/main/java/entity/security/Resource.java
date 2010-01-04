@@ -93,11 +93,13 @@ public class Resource extends IdEntity {
 		this.authorityList = authorityList;
 	}
 
-	/**
-	 * 可访问该资源的授权名称字符串, 多个授权用','分隔.
-	 */
 	@Transient
 	public String getAuthNames() {
 		return ReflectionUtils.convertElementPropertyToString(authorityList, "name", ",");
+	}
+
+	@Transient
+	public String getPrefixedAuthNames() {
+		return ReflectionUtils.convertElementPropertyToString(authorityList, "prefixedName", ",");
 	}
 }

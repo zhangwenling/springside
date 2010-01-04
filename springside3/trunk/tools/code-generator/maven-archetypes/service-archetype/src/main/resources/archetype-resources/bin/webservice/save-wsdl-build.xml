@@ -6,14 +6,14 @@
 	<target name="save-wsdl">
 		<property name="wsdlfile" value="../../webapp/wsdl/${artifactId}.wsdl"/>
 		<!-- 保存cxf生成的WSDL -->
-		<get src="http://localhost:8080/${artifactId}/services/UserService?wsdl" dest="${symbol_dollar}{wsdlfile}"/>
+		<get src="http://localhost:8080/${artifactId}/ws/userservice?wsdl" dest="${symbol_dollar}{wsdlfile}"/>
 			
 		<!-- 替换address路径为生产环境路径,请修改replacevalue的值 -->
 		<replace file="${symbol_dollar}{wsdlfile}">
 			<replacetoken>
-				<![CDATA[<soap:address location="http://localhost:8080/${artifactId}/services/UserService" />]]></replacetoken>
+				<![CDATA[<soap:address location="http://localhost:8080/${artifactId}/ws/userservice" />]]></replacetoken>
 			<replacevalue>
-				<![CDATA[<soap:address location="http://localhost:8080/${artifactId}/services/UserService" />]]></replacevalue>
+				<![CDATA[<soap:address location="http://localhost:8080/${artifactId}/ws/userservice" />]]></replacevalue>
 		</replace>
 	</target>
 </project>

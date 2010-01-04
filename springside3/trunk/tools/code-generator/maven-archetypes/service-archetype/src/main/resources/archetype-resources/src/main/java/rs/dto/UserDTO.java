@@ -1,26 +1,21 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.ws.api.dto;
+package ${package}.rs.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import ${package}.ws.api.WsConstants;
 
 /**
  * Web Service传输User信息的DTO.
  * 
- * 只传输外部接口需要的属性.使用JAXB 2.0的annotation标注JAVA-XML映射,尽量使用默认约定.
- * 
  * @author calvin
  */
-@XmlType(name = "User", namespace = WsConstants.NS)
+@XmlRootElement
 public class UserDTO {
 
 	private Long id;
@@ -62,9 +57,6 @@ public class UserDTO {
 		email = value;
 	}
 
-	//配置输出xml为<roleList><role><id>1</id></role></roleList>
-	@XmlElementWrapper(name = "roleList")
-	@XmlElement(name = "role")
 	public List<RoleDTO> getRoleList() {
 		return roleList;
 	}

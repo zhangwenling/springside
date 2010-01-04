@@ -69,9 +69,10 @@ public class ResourceDetailsServiceTest extends Assert {
 		Object[] requests = requestMap.entrySet().toArray();
 
 		assertEquals(r1.getValue(), ((Entry<String, String>) requests[0]).getKey());
-		assertEquals(a1.getName(), ((Entry<String, String>) requests[0]).getValue());
+		assertEquals(a1.getPrefixedName(), ((Entry<String, String>) requests[0]).getValue());
 
 		assertEquals(r3.getValue(), ((Entry<String, String>) requests[2]).getKey());
-		assertEquals(a1.getName() + "," + a2.getName(), ((Entry<String, String>) requests[2]).getValue());
+		assertEquals(a1.getPrefixedName() + "," + a2.getPrefixedName(), ((Entry<String, String>) requests[2])
+				.getValue());
 	}
 }

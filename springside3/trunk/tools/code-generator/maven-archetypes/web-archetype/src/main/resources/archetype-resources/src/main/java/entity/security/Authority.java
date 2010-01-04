@@ -6,6 +6,7 @@ package ${package}.entity.security;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
@@ -24,16 +25,19 @@ import ${package}.entity.IdEntity;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Authority extends IdEntity {
 
+	/**
+	 * SpringSecurity中默认的角色/授权名前缀.
+	 */
+	public static final String AUTHORITY_PREFIX = "ROLE_";
+
 	private String name;
-	private String displayName;
 
 	public Authority() {
 	}
 
-	public Authority(Long id, String name, String displayName) {
+	public Authority(Long id, String name) {
 		this.id = id;
 		this.name = name;
-		this.displayName = displayName;
 	}
 
 	@Column(nullable = false, unique = true)
@@ -45,12 +49,9 @@ public class Authority extends IdEntity {
 		this.name = name;
 	}
 
-	public String getDisplayName() {
-		return displayName;
-	}
-
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
+	@Transient
+	public String getPrefixedName() {
+		return AUTHORITY_PREFIX + name;
 	}
 
 	@Override

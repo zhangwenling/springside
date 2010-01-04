@@ -29,7 +29,7 @@ public class ResourceDetailsServiceImpl implements ResourceDetailsService {
 
 		LinkedHashMap<String, String> requestMap = new LinkedHashMap<String, String>(resourceList.size());
 		for (Resource resource : resourceList) {
-			requestMap.put(resource.getValue(), resource.getAuthNames());
+			requestMap.put(resource.getValue(), resource.getPrefixedAuthNames());
 		}
 		return requestMap;
 	}

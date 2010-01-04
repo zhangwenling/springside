@@ -1,7 +1,7 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.unit.ws.user;
+package ${package}.unit.ws;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,11 +15,11 @@ import org.junit.Test;
 import ${package}.data.UserData;
 import ${package}.entity.user.User;
 import ${package}.service.user.UserManager;
-import ${package}.ws.api.dto.UserDTO;
-import ${package}.ws.api.result.AuthUserResult;
-import ${package}.ws.api.result.GetAllUserResult;
-import ${package}.ws.api.result.WSResult;
+import ${package}.ws.dto.UserDTO;
 import ${package}.ws.impl.UserWebServiceImpl;
+import ${package}.ws.result.AuthUserResult;
+import ${package}.ws.result.GetAllUserResult;
+import ${package}.ws.result.WSResult;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
