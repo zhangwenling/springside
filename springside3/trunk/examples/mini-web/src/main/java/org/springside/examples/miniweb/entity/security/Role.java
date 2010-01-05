@@ -1,6 +1,5 @@
 package org.springside.examples.miniweb.entity.security;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -20,6 +19,8 @@ import org.hibernate.annotations.FetchMode;
 import org.springside.examples.miniweb.entity.IdEntity;
 import org.springside.modules.utils.ReflectionUtils;
 
+import com.google.common.collect.Lists;
+
 /**
  * 角色.
  * 
@@ -33,7 +34,7 @@ import org.springside.modules.utils.ReflectionUtils;
 public class Role extends IdEntity {
 
 	private String name;
-	private List<Authority> authorityList = new ArrayList<Authority>();
+	private List<Authority> authorityList = Lists.newArrayList();
 
 	public Role() {
 

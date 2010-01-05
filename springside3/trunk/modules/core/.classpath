@@ -53,5 +53,6 @@
 	<classpathentry kind="lib" path="lib/unitils-core-3.1.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-core-asl-1.4.0.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-mapper-asl-1.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/google-collections-1.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

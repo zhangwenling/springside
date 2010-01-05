@@ -1,6 +1,5 @@
 package org.springside.examples.showcase.integration.common;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +9,8 @@ import org.springside.examples.showcase.common.dao.UserJdbcDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.test.DataUtils;
 import org.springside.modules.test.spring.SpringTxTestCase;
+
+import com.google.common.collect.Lists;
 
 /**
  * UserJdbcDao的集成测试用例.
@@ -83,9 +84,7 @@ public class UserJdbcDaoTest extends SpringTxTestCase {
 		user2.setLoginName(DataUtils.randomName("user"));
 		user2.setName(DataUtils.randomName("User"));
 
-		List<User> list = new ArrayList<User>();
-		list.add(user1);
-		list.add(user2);
+		List<User> list = Lists.newArrayList(user1, user2);
 
 		userJdbcDao.batchCreateObject(list);
 

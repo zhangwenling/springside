@@ -20,6 +20,9 @@ import org.springframework.security.intercept.web.RequestKey;
 import org.springframework.security.util.AntUrlPathMatcher;
 import org.springframework.security.util.UrlMatcher;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 /**
  * DefinitionSource工厂.
  * 
@@ -81,7 +84,7 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 	 */
 	protected LinkedHashMap<RequestKey, ConfigAttributeDefinition> buildRequestMap() throws Exception {//NOSONAR
 		LinkedHashMap<String, String> srcMap = resourceDetailsService.getRequestMap();
-		LinkedHashMap<RequestKey, ConfigAttributeDefinition> distMap = new LinkedHashMap<RequestKey, ConfigAttributeDefinition>();
+		LinkedHashMap<RequestKey, ConfigAttributeDefinition> distMap = Maps.newLinkedHashMap();
 		ConfigAttributeEditor editor = new ConfigAttributeEditor();
 
 		for (Map.Entry<String, String> entry : srcMap.entrySet()) {

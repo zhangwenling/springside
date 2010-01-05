@@ -1,6 +1,5 @@
 package org.springside.examples.miniweb.entity.security;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,6 +17,8 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springside.examples.miniweb.entity.IdEntity;
 import org.springside.modules.utils.ReflectionUtils;
+
+import com.google.common.collect.Lists;
 
 /**
  * 受保护的资源.
@@ -37,7 +38,7 @@ public class Resource extends IdEntity {
 	private String resourceType;
 	private String value;
 	private double position;
-	private List<Authority> authorityList = new ArrayList<Authority>();
+	private List<Authority> authorityList = Lists.newArrayList();
 
 	/**
 	 * 资源类型.

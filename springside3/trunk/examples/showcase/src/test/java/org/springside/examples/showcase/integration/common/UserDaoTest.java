@@ -13,6 +13,8 @@ import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.spring.SpringGroupsTestRunner;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
+import com.google.common.collect.Lists;
+
 /**
  * UserDao的集成测试用例,测试ORM映射及特殊的DAO操作.
  * 
@@ -60,9 +62,7 @@ public class UserDaoTest extends SpringTxTestCase {
 
 	@Test
 	public void batchDisableUser() {
-		List<Long> ids = new ArrayList<Long>();
-		ids.add(1L);
-		ids.add(2L);
+		List<Long> ids = Lists.newArrayList(1L,2L);
 
 		userDao.disableUsers(ids);
 

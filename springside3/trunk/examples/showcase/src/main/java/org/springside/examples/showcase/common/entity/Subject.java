@@ -12,6 +12,8 @@ import javax.persistence.OrderBy;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.google.common.collect.Lists;
+
 /**
  * 主题贴.
  * 
@@ -22,7 +24,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @DiscriminatorValue("Subject")
 public class Subject extends Post {
 
-	private List<Reply> replyList = new ArrayList<Reply>();
+	private List<Reply> replyList = Lists.newArrayList();
 
 	//与回帖的一对多关系,在删除主题时cascade删除回帖.
 	@OneToMany(mappedBy = "subject", cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY)

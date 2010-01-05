@@ -30,6 +30,8 @@ import org.springside.modules.orm.hibernate.SimpleHibernateDao;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.unit.orm.hibernate.data.User;
 
+import com.google.common.collect.Maps;
+
 @ContextConfiguration(locations = { "/applicationContext-db.xml" }, inheritLocations = false)
 public class SimpleHibernateDaoTest extends SpringTxTestCase {
 
@@ -93,7 +95,7 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 		User user = dao.findUnique("from User u where loginName=?", DEFAULT_LOGIN_NAME);
 		assertEquals(DEFAULT_LOGIN_NAME, user.getLoginName());
 
-		Map<String, Object> values = new HashMap<String, Object>();
+		Map<String, Object> values = Maps.newHashMap();
 		values.put("loginName", DEFAULT_LOGIN_NAME);
 		users = dao.find("from User u where loginName=:loginName", values);
 		assertEquals(1, users.size());

@@ -15,6 +15,8 @@ import org.springside.examples.showcase.xml.jaxb.Role;
 import org.springside.examples.showcase.xml.jaxb.User;
 import org.springside.examples.showcase.xml.jaxb.JaxbBinder.CollectionWrapper;
 
+import com.google.common.collect.Lists;
+
 /**
  * 演示基于JAXB2.0的Java对象-XML转换及Dom4j的使用.
  * 
@@ -98,9 +100,7 @@ public class JaxbTest extends Assert {
 		user2.setId(2L);
 		user2.setName("kate");
 
-		List<User> userList = new ArrayList<User>();
-		userList.add(user1);
-		userList.add(user2);
+		List<User> userList = Lists.newArrayList(user1,user2);
 
 		String xml = binder.toXml(userList, "userList");
 		System.out.println("Jaxb Object List to Xml result:\n" + xml);

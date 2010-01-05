@@ -1,6 +1,5 @@
 package org.springside.examples.miniservice.entity.user;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,6 +16,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springside.examples.miniservice.entity.IdEntity;
+
+import com.google.common.collect.Lists;
 
 /**
  * 用户.
@@ -37,7 +38,7 @@ public class User extends IdEntity {
 	private String name;
 	private String email;
 
-	private List<Role> roleList = new ArrayList<Role>(0);
+	private List<Role> roleList = Lists.newArrayList();
 
 	@Column(nullable = false, unique = true)
 	public String getLoginName() {

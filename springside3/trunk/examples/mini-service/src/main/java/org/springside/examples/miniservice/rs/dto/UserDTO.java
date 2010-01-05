@@ -1,11 +1,12 @@
 package org.springside.examples.miniservice.rs.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.google.common.collect.Lists;
 
 /**
  * Web Service传输User信息的DTO.
@@ -20,7 +21,7 @@ public class UserDTO {
 	private String name;
 	private String email;
 
-	private List<RoleDTO> roleList = new ArrayList<RoleDTO>(0);
+	private List<RoleDTO> roleList = Lists.newArrayList();
 
 	public Long getId() {
 		return id;

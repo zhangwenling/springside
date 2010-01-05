@@ -15,6 +15,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 /**
  * 使用JAXB2.0标注的待转换Java Bean.
  */
@@ -28,9 +31,9 @@ public class User {
 	private String name;
 	private String password;
 
-	private List<Role> roles = new ArrayList<Role>();
-	private List<String> interests = new ArrayList<String>();
-	private Map<String, String> houses = new HashMap<String, String>();
+	private List<Role> roles = Lists.newArrayList();
+	private List<String> interests = Lists.newArrayList();
+	private Map<String, String> houses = Maps.newHashMap();
 
 	//设置转换为xml节点中的属性
 	@XmlAttribute

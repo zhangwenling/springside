@@ -1,6 +1,5 @@
 package org.springside.examples.miniservice.ws.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.jws.WebService;
@@ -22,6 +21,8 @@ import org.springside.examples.miniservice.ws.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.result.GetAllUserResult;
 import org.springside.examples.miniservice.ws.result.GetUserResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
+
+import com.google.common.collect.Lists;
 
 /**
  * WebService实现类.
@@ -47,7 +48,7 @@ public class UserWebServiceImpl implements UserWebService {
 		//获取User列表并转换为UserDTO列表.
 		try {
 			List<User> userEntityList = userManager.getAllUser();
-			List<UserDTO> userDTOList = new ArrayList<UserDTO>();
+			List<UserDTO> userDTOList = Lists.newArrayList();
 			for (User userEntity : userEntityList) {
 				userDTOList.add(dozer.map(userEntity, UserDTO.class));
 			}

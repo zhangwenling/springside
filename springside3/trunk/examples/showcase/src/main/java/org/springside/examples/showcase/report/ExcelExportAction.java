@@ -21,6 +21,7 @@ import org.springside.examples.showcase.report.DummyDataFetcher.TemperatureAnoma
 import org.springside.modules.web.ServletUtils;
 import org.springside.modules.web.struts2.Struts2Utils;
 
+import com.google.common.collect.Maps;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -153,7 +154,7 @@ public class ExcelExportAction extends ActionSupport {
 	}
 
 	private Map<String, CellStyle> createStyles(Workbook wb) {
-		styles = new HashMap<String, CellStyle>();
+		styles = Maps.newHashMap();
 		DataFormat df = wb.createDataFormat();
 
 		// --字体设定 --//

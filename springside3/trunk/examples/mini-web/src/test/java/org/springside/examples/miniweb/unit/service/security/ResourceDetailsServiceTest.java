@@ -1,6 +1,5 @@
 package org.springside.examples.miniweb.unit.service.security;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -16,6 +15,8 @@ import org.springside.examples.miniweb.entity.security.Resource;
 import org.springside.examples.miniweb.service.security.ResourceDetailsServiceImpl;
 import org.springside.examples.miniweb.service.security.SecurityEntityManager;
 import org.springside.modules.utils.ReflectionUtils;
+
+import com.google.common.collect.Lists;
 
 public class ResourceDetailsServiceTest extends Assert {
 
@@ -38,23 +39,21 @@ public class ResourceDetailsServiceTest extends Assert {
 	@SuppressWarnings("unchecked")
 	public void getRequestMap() throws Exception {
 		//准备数据
-		List<Resource> resourceList = new ArrayList<Resource>();
 
 		Authority a1 = SecurityEntityData.getRandomAuthority();
 		Authority a2 = SecurityEntityData.getRandomAuthority();
 
 		Resource r1 = SecurityEntityData.getRandomResource();
 		r1.getAuthorityList().add(a1);
-		resourceList.add(r1);
 
 		Resource r2 = SecurityEntityData.getRandomResource();
 		r2.getAuthorityList().add(a1);
-		resourceList.add(r2);
 
 		Resource r3 = SecurityEntityData.getRandomResource();
 		r3.getAuthorityList().add(a1);
 		r3.getAuthorityList().add(a2);
-		resourceList.add(r3);
+
+		List<Resource> resourceList = Lists.newArrayList(r1, r2, r3);
 
 		//录制脚本
 		EasyMock.expect(mockSecurityEntityManager.getUrlResourceWithAuthorities()).andReturn(resourceList);

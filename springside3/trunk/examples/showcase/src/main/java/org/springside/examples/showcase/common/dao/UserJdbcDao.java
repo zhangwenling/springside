@@ -16,6 +16,8 @@ import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springside.examples.showcase.common.entity.User;
 
+import com.google.common.collect.Maps;
+
 /**
  * User对象的Jdbc Dao, 演示Spring JdbcTemplate的使用.
  * 
@@ -82,7 +84,7 @@ public class UserJdbcDao {
 	 * 使用Map形式的多个命名参数.
 	 */
 	public User queryByMultiNamedParameter(String loginName, String name) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = Maps.newHashMap();
 		map.put("login_name", loginName);
 		map.put("name", name);
 

@@ -1,6 +1,5 @@
 package org.springside.modules.unit.orm.hibernate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
@@ -9,17 +8,14 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;
 
+import com.google.common.collect.Lists;
+
 public class HibernateWebUtilsTest extends Assert {
 
 	@Test
 	public void mergeByCheckedIds() {
-		List<TestBean> srcList = new ArrayList<TestBean>();
-		srcList.add(new TestBean("A"));
-		srcList.add(new TestBean("B"));
-
-		List<String> idList = new ArrayList<String>();
-		idList.add("A");
-		idList.add("C");
+		List<TestBean> srcList = Lists.newArrayList(new TestBean("A"),new TestBean("B"));
+		List<String> idList = Lists.newArrayList("A","C");
 
 		HibernateWebUtils.mergeByCheckedIds(srcList, idList, TestBean.class);
 

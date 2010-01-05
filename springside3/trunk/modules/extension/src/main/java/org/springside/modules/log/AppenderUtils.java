@@ -14,6 +14,8 @@ import java.util.Map;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.spi.LoggingEvent;
 
+import com.google.common.collect.Maps;
+
 /**
  * Log4j Appender工具类, 转换Logging Event到字符串或Map.
  * 
@@ -47,7 +49,7 @@ public class AppenderUtils {
 	 * 将事件转换到Map, Map中的Key参见本类中定义的常量.
 	 */
 	public static Map<String, Object> convertEventToMap(LoggingEvent event) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = Maps.newHashMap();
 		map.put(MESSAGE, event.getMessage());
 		map.put(LEVEL, event.getLevel().toString());
 		map.put(LOGGER_NAME, event.getLoggerName());

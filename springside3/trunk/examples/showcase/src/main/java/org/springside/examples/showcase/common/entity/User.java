@@ -19,6 +19,8 @@ import org.hibernate.annotations.FetchMode;
 import org.springside.examples.showcase.orm.hibernate.AuditableEntity;
 import org.springside.modules.utils.ReflectionUtils;
 
+import com.google.common.collect.Lists;
+
 /**
  * 用户.
  * 
@@ -35,7 +37,7 @@ public class User extends AuditableEntity {
 	private String status;
 	private Integer version;
 
-	private List<Role> roleList = new ArrayList<Role>(); //有序的关联对象集合
+	private List<Role> roleList = Lists.newArrayList(); //有序的关联对象集合
 
 	//Hibernate自动维护的Version字段
 	@Version

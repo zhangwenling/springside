@@ -7,7 +7,6 @@
  */
 package org.springside.modules.log;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +21,8 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springside.modules.queue.BlockingConsumer;
+
+import com.google.common.collect.Lists;
 
 /**
  * 将Queue中的log4j event写入数据库的消费者任务.
@@ -38,7 +39,7 @@ public class JdbcLogWriter extends BlockingConsumer {
 	protected String sql;
 	protected int batchSize = 10;
 
-	protected List<LoggingEvent> eventsBuffer = new ArrayList<LoggingEvent>();
+	protected List<LoggingEvent> eventsBuffer = Lists.newArrayList();
 	protected SimpleJdbcTemplate jdbcTemplate;
 
 	/**

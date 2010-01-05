@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.springside.examples.showcase.xml.jaxb.HouseMapAdapter.HouseMap.HouseEntry;
 
+import com.google.common.collect.Maps;
+
 /**
  * 为使Map<String,String> houses转化为有业务意义的xml的巨大努力,
  * 分别定义了一个Adapter--HouseMapAdapter, 一个List<HouseEntry> Wrapper类--HouseMap, 一个MapEntry表达类--HouseEntry.
@@ -37,7 +39,7 @@ public class HouseMapAdapter extends XmlAdapter<HouseMapAdapter.HouseMap, Map<St
 
 	@Override
 	public Map<String, String> unmarshal(HouseMap houseMap) throws Exception {
-		Map<String, String> map = new LinkedHashMap<String, String>();
+		Map<String, String> map = Maps.newLinkedHashMap();
 		for (HouseEntry e : houseMap.entries) {
 			map.put(e.key, e.value);
 		}

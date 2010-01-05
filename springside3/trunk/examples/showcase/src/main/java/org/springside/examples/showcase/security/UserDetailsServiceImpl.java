@@ -14,6 +14,8 @@ import org.springside.examples.showcase.common.entity.Role;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.UserManager;
 
+import com.google.common.collect.Sets;
+
 /**
  * 实现SpringSecurity的UserDetailsService接口,实现获取用户Detail信息的回调函数.
  * 
@@ -56,7 +58,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	 * 获得用户所有角色的权限.
 	 */
 	private GrantedAuthority[] obtainGrantedAuthorities(User user) {
-		Set<GrantedAuthority> authSet = new HashSet<GrantedAuthority>();
+		Set<GrantedAuthority> authSet = Sets.newHashSet();
 		for (Role role : user.getRoleList()) {
 			authSet.add(new GrantedAuthorityImpl("ROLE_" + role.getName()));
 		}

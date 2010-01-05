@@ -1,7 +1,6 @@
 package org.springside.examples.miniservice.rs.server;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -26,6 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
 import org.springside.examples.miniservice.service.user.UserManager;
+
+import com.google.common.collect.Lists;
 
 /**
  * 
@@ -52,7 +53,7 @@ public class UserResourceService {
 	public List<UserDTO> getAllUser() {
 		try {
 			List<User> entityList = userManager.getAllUser();
-			List<UserDTO> dtoList = new ArrayList<UserDTO>();
+			List<UserDTO> dtoList = Lists.newArrayList();
 			for (User userEntity : entityList) {
 				dtoList.add(dozer.map(userEntity, UserDTO.class));
 			}

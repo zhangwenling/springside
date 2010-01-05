@@ -16,6 +16,8 @@ import org.springside.examples.showcase.ws.server.api.WsConstants;
 import org.springside.examples.showcase.ws.server.api.dto.UserDTO;
 import org.springside.examples.showcase.ws.server.api.result.GetAllUserResult;
 
+import com.google.common.collect.Lists;
+
 /**
  * WebService实现类.
  * 
@@ -43,7 +45,7 @@ public class UserWebServiceImpl implements UserWebService {
 		try {
 			List<User> userList = userManager.getAllUser();
 
-			List<UserDTO> userDTOList = new ArrayList<UserDTO>();
+			List<UserDTO> userDTOList = Lists.newArrayList();
 			for (User userEntity : userList) {
 				userDTOList.add(dozer.map(userEntity, UserDTO.class));
 			}

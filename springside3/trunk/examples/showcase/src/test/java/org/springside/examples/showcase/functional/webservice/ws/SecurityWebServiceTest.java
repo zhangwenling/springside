@@ -22,6 +22,8 @@ import org.springside.examples.showcase.ws.server.api.WsConstants;
 import org.springside.examples.showcase.ws.server.api.result.GetAllUserResult;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
+import com.google.common.collect.Maps;
+
 /**
  * WS-Security 测试.
  * 
@@ -53,7 +55,7 @@ public class SecurityWebServiceTest extends SpringContextTestCase {
 		UserWebService userWebService = service.getPort(UserWebService.class);
 
 		//定义WSS4JOutInterceptor
-		Map<String, Object> outProps = new HashMap<String, Object>();
+		Map<String, Object> outProps = Maps.newHashMap();
 		outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.USERNAME_TOKEN);
 		outProps.put(WSHandlerConstants.USER, "admin");
 		outProps.put(WSHandlerConstants.PASSWORD_TYPE, WSConstants.PW_DIGEST);
