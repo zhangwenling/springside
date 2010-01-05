@@ -1,5 +1,6 @@
 package org.springside.examples.miniservice.rs.server;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.Status;
 
 import org.dozer.DozerBeanMapper;
@@ -32,6 +35,9 @@ import org.springside.examples.miniservice.service.user.UserManager;
 public class UserResourceService {
 
 	private static Logger logger = LoggerFactory.getLogger(UserResourceService.class);
+
+	@Context
+	private UriInfo uriInfo;
 
 	@Autowired
 	private UserManager userManager;
@@ -83,12 +89,12 @@ public class UserResourceService {
 	 */
 	@POST
 	@Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces( { MediaType.TEXT_PLAIN })
-	public String createUser(UserDTO user) {
+	public Response createUser(UserDTO user) {
 		try {
 			User userEntity = dozer.map(user, User.class);
 			userManager.saveUser(userEntity);
-			return userEntity.getId().toString();
+			URI createdUri = uriInfo.getAbsolutePathBuilder().path(userEntity.getId().toString()).build();
+			return Response.created(createdUri).build();
 		} catch (ConstraintViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
 			logger.error(message, e);

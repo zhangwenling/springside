@@ -1,5 +1,6 @@
 package org.springside.examples.miniservice.functional.rs;
 
+import java.net.URI;
 import java.util.List;
 
 import org.dozer.DozerBeanMapper;
@@ -53,8 +54,8 @@ public class UserResourceServiceTest extends Assert {
 		User user = UserData.getRandomUser();
 		UserDTO dto = new DozerBeanMapper().map(user, UserDTO.class);
 
-		String id = client.createUser(dto);
-		System.out.println("Created user id:" + id);
+		URI uri = client.createUser(dto);
+		System.out.println("Created user uri:" + uri);
 	}
 
 }

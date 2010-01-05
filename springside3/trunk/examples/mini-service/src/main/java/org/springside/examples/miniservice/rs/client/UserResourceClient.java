@@ -1,5 +1,6 @@
 package org.springside.examples.miniservice.rs.client;
 
+import java.net.URI;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
@@ -8,6 +9,7 @@ import org.springside.examples.miniservice.rs.dto.JAXBContextResolver;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
 
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
@@ -37,9 +39,8 @@ public class UserResourceClient {
 		return client.path("/users/" + id).accept(MediaType.APPLICATION_JSON).get(UserDTO.class);
 	}
 
-	public String createUser(UserDTO user) {
-		String id = client.path("/users").type("application/json").accept(MediaType.TEXT_PLAIN)
-				.post(String.class, user);
-		return id;
+	public URI createUser(UserDTO user) {
+		ClientResponse response = client.path("/users").type("application/json").post(ClientResponse.class, user);
+		return response.getLocation();
 	}
 }
