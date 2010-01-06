@@ -32,6 +32,8 @@ import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.PropertyFilter.MatchType;
 import org.springside.modules.utils.ReflectionUtils;
 
+import com.google.common.collect.Lists;
+
 /**
  * 封装SpringSide扩展功能的Hibernat DAO泛型基类.
  * 
@@ -300,7 +302,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 按属性条件列表创建Criterion数组,辅助函数.
 	 */
 	protected Criterion[] buildPropertyFilterCriterions(final List<PropertyFilter> filters) {
-		List<Criterion> criterionList = new ArrayList<Criterion>();
+		List<Criterion> criterionList = Lists.newArrayList();
 		for (PropertyFilter filter : filters) {
 			if (!filter.isMultiProperty()) { //只有一个属性需要比较的情况.
 				Criterion criterion = buildPropertyFilterCriterion(filter.getPropertyName(), filter.getPropertyValue(),

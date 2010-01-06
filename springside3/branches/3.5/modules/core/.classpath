@@ -58,5 +58,6 @@
 	<classpathentry kind="lib" path="lib/commons-codec-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/spring-security-config-3.0.0.RELEASE.jar" sourcepath="F:/software/library/spring-security-3.0.0.RELEASE/dist/spring-security-config-3.0.0.RELEASE-sources"/>
 	<classpathentry kind="lib" path="lib/spring-security-web-3.0.0.RELEASE.jar" sourcepath="F:/software/library/spring-security-3.0.0.RELEASE/dist/spring-security-web-3.0.0.RELEASE-sources"/>
+	<classpathentry kind="lib" path="lib/google-collections-1.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

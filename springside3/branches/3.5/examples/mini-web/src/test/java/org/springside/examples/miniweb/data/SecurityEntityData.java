@@ -1,6 +1,5 @@
 package org.springside.examples.miniweb.data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springside.examples.miniweb.entity.security.Authority;
@@ -8,6 +7,8 @@ import org.springside.examples.miniweb.entity.security.Resource;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.modules.test.DataUtils;
+
+import com.google.common.collect.Lists;
 
 /**
  * 安全相关实体测试数据生成.
@@ -56,7 +57,7 @@ public class SecurityEntityData {
 
 	public static List<Role> getDefaultRoleList() {
 		if (defaultRoleList == null) {
-			defaultRoleList = new ArrayList<Role>();
+			defaultRoleList = Lists.newArrayList();
 			defaultRoleList.add(new Role(1L, "管理员"));
 			defaultRoleList.add(new Role(2L, "用户"));
 		}
@@ -78,7 +79,7 @@ public class SecurityEntityData {
 
 	public static List<Authority> getDefaultAuthorityList() {
 		if (defaultAuthorityList == null) {
-			defaultAuthorityList = new ArrayList<Authority>();
+			defaultAuthorityList = Lists.newArrayList();
 			defaultAuthorityList.add(new Authority(1L, "浏览用户"));
 			defaultAuthorityList.add(new Authority(2L, "修改用户"));
 			defaultAuthorityList.add(new Authority(3L, "浏览角色"));

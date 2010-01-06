@@ -2,7 +2,6 @@ package org.springside.modules.unit.web.struts2;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -13,6 +12,8 @@ import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springside.modules.test.WebUtils;
 import org.springside.modules.web.struts2.Struts2Utils;
+
+import com.google.common.collect.Lists;
 
 public class Struts2UtilsTest extends Assert {
 
@@ -79,9 +80,7 @@ public class Struts2UtilsTest extends Assert {
 		//Collection
 		response = new MockHttpServletResponse();
 		WebUtils.setResponseToStruts2(response);
-		List<TestBean> list = new ArrayList<TestBean>();
-		list.add(new TestBean());
-		list.add(new TestBean());
+		List<TestBean> list = Lists.newArrayList(new TestBean(),new TestBean());
 
 		Struts2Utils.renderJson(list);
 		assertEquals("[{\"age\":10,\"name\":\"foo\"},{\"age\":10,\"name\":\"foo\"}]", response.getContentAsString());

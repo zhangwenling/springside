@@ -3,7 +3,6 @@ package org.springside.modules.unit.orm.hibernate;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +28,8 @@ import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateDao;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.unit.orm.hibernate.data.User;
+
+import com.google.common.collect.Lists;
 
 @ContextConfiguration(locations = { "/applicationContext-db.xml" }, inheritLocations = false)
 public class HibernateDaoTest extends SpringTxTestCase {
@@ -142,10 +143,10 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 	@Test
 	public void findByFilters() {
-		List<PropertyFilter> filters = new ArrayList<PropertyFilter>();
+		List<PropertyFilter> filters;
 		//EQ filter
 		PropertyFilter eqFilter = new PropertyFilter("EQS_loginName", "admin");
-		filters.add(eqFilter);
+		filters = Lists.newArrayList(eqFilter);
 
 		List<User> users = dao.find(filters);
 		assertEquals(1, users.size());
@@ -153,8 +154,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 		//LIKE filter
 		PropertyFilter likeFilter = new PropertyFilter("LIKES_email", "springside.org.cn");
-		filters.clear();
-		filters.add(likeFilter);
+		filters = Lists.newArrayList(likeFilter);
 
 		users = dao.find(filters);
 		assertEquals(6, users.size());
@@ -172,14 +172,12 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 		//Date and LT/GT filter
 		PropertyFilter dateLtFilter = new PropertyFilter("LTD_createTime", "2046-01-01");
-		filters.clear();
-		filters.add(dateLtFilter);
+		filters = Lists.newArrayList(dateLtFilter);
 		users = dao.find(filters);
 		assertEquals(6, users.size());
 
 		PropertyFilter dateGtFilter = new PropertyFilter("GTD_createTime", "2046-01-01 10:00:22");
-		filters.clear();
-		filters.add(dateGtFilter);
+		filters = Lists.newArrayList(dateGtFilter);
 		users = dao.find(filters);
 		assertEquals(0, users.size());
 	}

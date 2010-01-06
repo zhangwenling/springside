@@ -7,7 +7,6 @@
  */
 package org.springside.modules.orm.hibernate;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -18,9 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
-import org.springframework.web.util.WebUtils;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.web.ServletUtils;
+
+import com.google.common.collect.Lists;
 
 /**
  * Hibernate针对Web应用的工具类.
@@ -116,14 +117,15 @@ public class HibernateWebUtils {
 	 * filter_EQS_name
 	 * filter_LIKES_name_OR_email
 	 */
+	@SuppressWarnings("unchecked")
 	public static List<PropertyFilter> buildPropertyFilters(final HttpServletRequest request, final String filterPrefix) {
-		List<PropertyFilter> filterList = new ArrayList<PropertyFilter>();
+		List<PropertyFilter> filterList = Lists.newArrayList();
 
 		//从request中获取含属性前缀名的参数,构造去除前缀名后的参数Map.
-		Map<String, Object> filterParamMap = WebUtils.getParametersStartingWith(request, filterPrefix);
+		Map<String, String> filterParamMap = ServletUtils.getParametersStartingWith(request, filterPrefix);
 
 		//分析参数Map,构造PropertyFilter列表
-		for (Map.Entry<String, Object> entry : filterParamMap.entrySet()) {
+		for (Map.Entry<String, String> entry : filterParamMap.entrySet()) {
 			String filterName = entry.getKey();
 			String value = (String)entry.getValue();
 			//如果value值为空,则忽略此filter.

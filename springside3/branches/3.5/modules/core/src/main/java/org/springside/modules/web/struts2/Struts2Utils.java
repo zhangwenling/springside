@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springside.modules.web.WebUtils;
+import org.springside.modules.web.ServletUtils;
 
 /**
  * Struts2工具类.
@@ -49,6 +49,21 @@ public class Struts2Utils {
 	public static HttpSession getSession() {
 		return ServletActionContext.getRequest().getSession();
 	}
+	
+	/**
+	 * 取得HttpSession的简化函数.
+	 */
+	public static HttpSession getSession(boolean isNew) {
+		return ServletActionContext.getRequest().getSession(isNew);
+	}
+	
+	/**
+	 * 取得HttpSession中属性的简化函数.
+	 */
+    public static Object getSessionAttribute(String name) {
+        HttpSession session = getSession(false);
+        return (session != null ? session.getAttribute(name) : null);
+    }
 
 	/**
 	 * 取得HttpRequest的简化函数.
@@ -58,17 +73,18 @@ public class Struts2Utils {
 	}
 
 	/**
+	 * 取得HttpRequest中Parameter的简化方法.
+	 */
+	public static String getParameter(String name) {
+		return getRequest().getParameter(name);
+	}
+	
+	
+	/**
 	 * 取得HttpResponse的简化函数.
 	 */
 	public static HttpServletResponse getResponse() {
 		return ServletActionContext.getResponse();
-	}
-
-	/**
-	 * 取得Request Parameter的简化方法.
-	 */
-	public static String getParameter(String name) {
-		return getRequest().getParameter(name);
 	}
 
 	//-- 绕过jsp/freemaker直接输出文本的函数 --//
@@ -187,7 +203,7 @@ public class Struts2Utils {
 		String fullContentType = contentType + ";charset=" + encoding;
 		response.setContentType(fullContentType);
 		if (noCache) {
-			WebUtils.setNoCacheHeader(response);
+			ServletUtils.setNoCacheHeader(response);
 		}
 
 		return response;

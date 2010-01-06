@@ -7,12 +7,13 @@
  */
 package org.springside.modules.log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LoggingEvent;
+
+import com.google.common.collect.Lists;
 
 /**
  * 在List中保存日志的Appender, 用于测试日志输出.
@@ -23,7 +24,7 @@ import org.apache.log4j.spi.LoggingEvent;
  */
 public class MockAppender extends AppenderSkeleton {
 
-	private List<LoggingEvent> logs = new ArrayList<LoggingEvent>();
+	private List<LoggingEvent> logs = Lists.newArrayList();
 
 	/**
 	 * 返回之前append的第一个log事件.

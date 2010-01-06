@@ -7,10 +7,11 @@
  */
 package org.springside.modules.orm;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+
+import com.google.common.collect.Lists;
 
 /**
  * 与具体ORM实现无关的分页参数及查询结果封装.
@@ -33,7 +34,7 @@ public class Page<T> {
 	protected boolean autoCount = true;
 
 	//-- 返回结果 --//
-	protected List<T> result = Collections.emptyList();
+	protected List<T> result = Lists.newArrayList();
 	protected long totalCount = -1;
 
 	//-- 构造函数 --//

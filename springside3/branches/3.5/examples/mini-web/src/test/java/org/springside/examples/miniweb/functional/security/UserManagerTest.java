@@ -163,6 +163,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 	/**
 	 * 校验结果的工具函数.
 	 */
+	@SuppressWarnings("unchecked")
 	private void verifyUser(User user) {
 		searchUser(user.getLoginName());
 		clickLink("修改");

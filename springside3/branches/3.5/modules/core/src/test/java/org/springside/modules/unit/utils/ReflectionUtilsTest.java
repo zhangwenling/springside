@@ -1,12 +1,13 @@
 package org.springside.modules.unit.utils;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.springside.modules.utils.ReflectionUtils;
+
+import com.google.common.collect.Lists;
 
 public class ReflectionUtilsTest extends Assert {
 
@@ -61,14 +62,13 @@ public class ReflectionUtilsTest extends Assert {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void convertElementPropertyToString() {
-		List list = new ArrayList();
 		TestBean3 bean1 = new TestBean3();
 		bean1.setId(1);
-		list.add(bean1);
 		TestBean3 bean2 = new TestBean3();
 		bean2.setId(2);
-		list.add(bean2);
-
+		
+		List list = Lists.newArrayList(bean1,bean2);
+		
 		assertEquals("1,2", ReflectionUtils.convertElementPropertyToString(list, "id", ","));
 	}
 

@@ -16,22 +16,23 @@
 		<s:custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="filterSecurityInterceptor" />
 	</s:http>
 
-	<!-- 认证配置 -->
+	<!-- 认证配置, 使用userDetailsService提供的用户信息-->
 	<s:authentication-manager alias="authenticationManager">
 		<s:authentication-provider user-service-ref="userDetailsService">
 			<s:password-encoder hash="plaintext" />
 		</s:authentication-provider>
 	</s:authentication-manager>
 
-	<!-- 重新定义的FilterSecurityInterceptor,使用databaseDefinitionSource提供的url-授权关系定义 -->
+	<!-- 重新定义的FilterSecurityInterceptor, 使用securityMetadataSource提供的url-授权关系定义 -->
 	<bean id="filterSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor"
 		autowire="byType">
-		<property name="authenticationManager" ref="authenticationManager"/>
-		<property name="securityMetadataSource">
-			<bean class="org.springside.modules.security.springsecurity.DefinitionSourceFactoryBean">
-				<property name="resourceDetailsService" ref="resourceDetailsService" />
-			</bean>
-		</property>
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="securityMetadataSource" ref="securityMetadataSource" />
+	</bean>
+
+	<!-- 重新定义的 securityMetadataSource, 使用resourceDetailsService提供的url-授权关系定义.-->
+	<bean id="securityMetadataSource" class="org.springside.modules.security.springsecurity.SecurityMetadataSourceFactoryBean">
+		<property name="resourceDetailsService" ref="resourceDetailsService" />
 	</bean>
 
 	<!-- 项目实现的URL-授权查询服务 -->

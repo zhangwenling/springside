@@ -8,10 +8,10 @@
 package org.springside.modules.security.springsecurity;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.security.access.ConfigAttribute;
@@ -21,6 +21,8 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.security.web.access.intercept.RequestKey;
 import org.springframework.security.web.util.AntUrlPathMatcher;
 import org.springframework.security.web.util.UrlMatcher;
+
+import com.google.common.collect.Maps;
 
 /**
  * DefinitionSource工厂.
@@ -33,7 +35,7 @@ import org.springframework.security.web.util.UrlMatcher;
  * 
  * @author calvin
  */
-public class DefinitionSourceFactoryBean implements FactoryBean<FilterInvocationSecurityMetadataSource> {
+public class SecurityMetadataSourceFactoryBean implements FactoryBean<FilterInvocationSecurityMetadataSource> {
 
 	private ResourceDetailsService resourceDetailsService;
 
@@ -74,16 +76,17 @@ public class DefinitionSourceFactoryBean implements FactoryBean<FilterInvocation
 	 * 将resourceDetailService提供LinkedHashMap<String, String>形式的URL及授权关系定义
 	 * 转化为DefaultFilterInvocationDefinitionSource需要的LinkedHashMap<RequestKey, ConfigAttributeDefinition>形式.
 	 */
+	@SuppressWarnings("unchecked")
 	protected LinkedHashMap<RequestKey, Collection<ConfigAttribute>> buildRequestMap() throws Exception {//NOSONAR
 		LinkedHashMap<String, String> srcMap = resourceDetailsService.getRequestMap();
-		LinkedHashMap<RequestKey, Collection<ConfigAttribute>> distMap = new LinkedHashMap<RequestKey, Collection<ConfigAttribute>>();
+		LinkedHashMap<RequestKey, Collection<ConfigAttribute>> distMap = Maps.newLinkedHashMap();
 		for (Map.Entry<String, String> entry : srcMap.entrySet()) {
 			RequestKey key = new RequestKey(entry.getKey(), null);
 			String access = entry.getValue();
 			if (StringUtils.isNotBlank(access)) {
 				distMap.put(key, SecurityConfig.createListFromCommaDelimitedString(access));
 			} else {
-				distMap.put(key, CollectionUtils.EMPTY_COLLECTION);
+				distMap.put(key, Collections.EMPTY_LIST);
 			}
 		}
 

@@ -7,7 +7,6 @@
  */
 package org.springside.modules.log;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -21,6 +20,8 @@ import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedOperationParameter;
 import org.springframework.jmx.export.annotation.ManagedOperationParameters;
 import org.springframework.jmx.export.annotation.ManagedResource;
+
+import com.google.common.collect.Lists;
 
 /**
  * 基于JMX动态配置Logger日志等级, 获取Logger Appender的MBean.
@@ -106,7 +107,7 @@ public class Log4jMBean {
 	 */
 	@SuppressWarnings("unchecked")
 	private List<String> getLoggerAppenders(Logger logger) {
-		List<String> appenderNameList = new ArrayList<String>();
+		List<String> appenderNameList = Lists.newArrayList();
 		//循环加载logger及其parent的appenders
 		for (Category c = logger; c != null; c = c.getParent()) {
 			Enumeration e = c.getAllAppenders();

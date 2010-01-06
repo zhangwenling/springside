@@ -141,7 +141,7 @@ public class ReflectionUtils {
 				.getSuperclass()) {
 			try {
 				return superClass.getDeclaredField(fieldName);
-			} catch (NoSuchFieldException e) {
+			} catch (NoSuchFieldException e) {//NOSONAR
 				// Field不在当前类定义,继续向上转型
 			}
 		}
@@ -169,7 +169,7 @@ public class ReflectionUtils {
 				.getSuperclass()) {
 			try {
 				return superClass.getDeclaredMethod(methodName, parameterTypes);
-			} catch (NoSuchMethodException e) {
+			} catch (NoSuchMethodException e) {//NOSONAR
 				// Method不在当前类定义,继续向上转型
 			}
 		}
