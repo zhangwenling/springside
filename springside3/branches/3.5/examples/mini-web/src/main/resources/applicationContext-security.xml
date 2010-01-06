@@ -23,15 +23,9 @@
 		</s:authentication-provider>
 	</s:authentication-manager>
 
-	<!-- 重新定义的FilterSecurityInterceptor, 使用securityMetadataSource提供的url-授权关系定义 -->
-	<bean id="filterSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor"
+	<!-- 重新定义的FilterSecurityInterceptor, 使用resourceDetailsService提供的url-授权关系定义 -->
+	<bean id="filterSecurityInterceptor" class="org.springside.modules.security.springsecurity.FilterSecurityInterceptor"
 		autowire="byType">
-		<property name="authenticationManager" ref="authenticationManager" />
-		<property name="securityMetadataSource" ref="securityMetadataSource" />
-	</bean>
-
-	<!-- 重新定义的 securityMetadataSource, 使用resourceDetailsService提供的url-授权关系定义.-->
-	<bean id="securityMetadataSource" class="org.springside.modules.security.springsecurity.SecurityMetadataSourceFactoryBean">
 		<property name="resourceDetailsService" ref="resourceDetailsService" />
 	</bean>
 

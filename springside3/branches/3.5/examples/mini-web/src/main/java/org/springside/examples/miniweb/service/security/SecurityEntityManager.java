@@ -129,12 +129,18 @@ public class SecurityEntityManager {
 	public void saveResource(Resource entity) throws Exception {
 		resourceDao.save(entity);
 		SpringSecurityUtils.refreshDefinitionSource(SpringContextHolder.getApplicationContext(),
-				"filterSecurityInterceptor", "definitionSource");
+				"filterSecurityInterceptor");
 	}
 
 	//-- Authority Manager --//
 	@Transactional(readOnly = true)
 	public List<Authority> getAllAuthority() {
 		return authorityDao.getAll();
+	}
+
+	public void saveAuthority(Authority entity) throws Exception {
+		authorityDao.save(entity);
+		SpringSecurityUtils.refreshDefinitionSource(SpringContextHolder.getApplicationContext(),
+				"filterSecurityInterceptor");
 	}
 }

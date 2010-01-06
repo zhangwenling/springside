@@ -12,8 +12,9 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.FactoryBean;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.access.intercept.DefaultFilterInvocationSecurityMetadataSource;
@@ -25,17 +26,13 @@ import org.springframework.security.web.util.UrlMatcher;
 import com.google.common.collect.Maps;
 
 /**
- * DefinitionSource工厂.
- * 
- * 由注入的resourceDetailService读取在数据库或其它地方中定义的URL-授权关系,
- * 提供LinkedHashMap<String, String>形式的URL及授权关系定义，
- * 并最终转为SpringSecurity所需的LinkedHashMap<RequestKey, Collection<ConfigAttribute>>形式的定义.
+ * 重载FilterSecurityInterceptor, 由注入的resourceDetailService读取在数据库或其它地方中定义的URL-授权关系.* 
  * 
  * @see ResourceDetailsService
  * 
  * @author calvin
  */
-public class SecurityMetadataSourceFactoryBean implements FactoryBean<FilterInvocationSecurityMetadataSource> {
+public class FilterSecurityInterceptor extends org.springframework.security.web.access.intercept.FilterSecurityInterceptor {
 
 	private ResourceDetailsService resourceDetailsService;
 
@@ -44,32 +41,15 @@ public class SecurityMetadataSourceFactoryBean implements FactoryBean<FilterInvo
 	}
 
 	/**
-	 * 返回注入了Ant Style的URLMatcher和ResourceDetailService提供的RequestMap的DefaultFilterInvocationDefinitionSource.
+	 * 调用resourceDetailsService获取URL-授权关系，建立SecurityMetadataSource.
 	 */
-	public FilterInvocationSecurityMetadataSource getObject() throws Exception {
+	@PostConstruct
+	public void buildSecurityMetadataSource() throws Exception {
 		LinkedHashMap<RequestKey, Collection<ConfigAttribute>> requestMap = buildRequestMap();
-		UrlMatcher matcher = getUrlMatcher();
+		UrlMatcher matcher =  new AntUrlPathMatcher();
 		FilterInvocationSecurityMetadataSource securityMetadataSource = new DefaultFilterInvocationSecurityMetadataSource(
 				matcher, requestMap);
-		return securityMetadataSource;
-	}
-
-	public Class<? extends FilterInvocationSecurityMetadataSource> getObjectType() {
-		return FilterInvocationSecurityMetadataSource.class;
-	}
-
-	/**
-	 * @see FactoryBean#isSingleton()
-	 */
-	public boolean isSingleton() {
-		return true;
-	}
-
-	/**
-	 * 提供Ant Style的URLMatcher.
-	 */
-	protected UrlMatcher getUrlMatcher() {
-		return new AntUrlPathMatcher();
+		super.setSecurityMetadataSource(securityMetadataSource);
 	}
 
 	/**
@@ -92,5 +72,4 @@ public class SecurityMetadataSourceFactoryBean implements FactoryBean<FilterInvo
 
 		return distMap;
 	}
-
 }
