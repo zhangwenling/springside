@@ -10,8 +10,9 @@ package org.springside.modules.security.springsecurity;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.FactoryBean;
 import org.springframework.security.ConfigAttributeDefinition;
 import org.springframework.security.ConfigAttributeEditor;
 import org.springframework.security.intercept.web.DefaultFilterInvocationDefinitionSource;
@@ -23,20 +24,13 @@ import org.springframework.security.util.UrlMatcher;
 import com.google.common.collect.Maps;
 
 /**
- * DefinitionSource工厂.
- * 
- * 由注入的resourceDetailService读取在数据库或其它地方中定义的URL-授权关系,
- * 提供LinkedHashMap<String, String>形式的URL及授权关系定义，
- * 并最终转为SpringSecurity所需的LinkedHashMap<RequestKey, ConfigAttributeDefinition>形式的定义.
+ * 重载FilterSecurityInterceptor, 由注入的resourceDetailService读取在数据库或其它地方中定义的URL-授权关系.
  * 
  * 注意. 本类只支持SpringSecurity 2.0.x.
  * 
- * @see org.springframework.security.intercept.web.DefaultFilterInvocationDefinitionSource
- * @see ResourceDetailsService
- * 
  * @author calvin
  */
-public class DefinitionSourceFactoryBean implements FactoryBean {
+public class FilterSecurityInterceptor extends org.springframework.security.intercept.web.FilterSecurityInterceptor  {
 
 	private ResourceDetailsService resourceDetailsService;
 
@@ -45,36 +39,16 @@ public class DefinitionSourceFactoryBean implements FactoryBean {
 	}
 
 	/**
-	 * 返回注入了Ant Style的URLMatcher和ResourceDetailService提供的RequestMap的DefaultFilterInvocationDefinitionSource.
+	 * 调用resourceDetailsService获取URL-授权关系，建立DefinitionSource.
 	 */
-	public Object getObject() throws Exception {
+	@PostConstruct
+	public void buildDefinitionSource() throws Exception {
 		LinkedHashMap<RequestKey, ConfigAttributeDefinition> requestMap = buildRequestMap();
-		UrlMatcher matcher = getUrlMatcher();
+		UrlMatcher matcher = new AntUrlPathMatcher();
 		FilterInvocationDefinitionSource definitionSource = new DefaultFilterInvocationDefinitionSource(matcher,
 				requestMap);
-		return definitionSource;
-	}
-
-	/**
-	 * @see FactoryBean#getObjectType()
-	 */
-	@SuppressWarnings("unchecked")
-	public Class getObjectType() {
-		return FilterInvocationDefinitionSource.class;
-	}
-
-	/**
-	 * @see FactoryBean#isSingleton()
-	 */
-	public boolean isSingleton() {
-		return true;
-	}
-
-	/**
-	 * 提供Ant Style的URLMatcher.
-	 */
-	protected UrlMatcher getUrlMatcher() {
-		return new AntUrlPathMatcher();
+		
+		super.setObjectDefinitionSource(definitionSource);
 	}
 
 	/**
