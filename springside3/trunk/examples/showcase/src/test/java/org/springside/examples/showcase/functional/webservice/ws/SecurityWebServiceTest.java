@@ -2,7 +2,6 @@ package org.springside.examples.showcase.functional.webservice.ws;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.namespace.QName;

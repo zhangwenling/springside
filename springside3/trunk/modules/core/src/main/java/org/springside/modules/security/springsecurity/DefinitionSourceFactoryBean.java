@@ -20,7 +20,6 @@ import org.springframework.security.intercept.web.RequestKey;
 import org.springframework.security.util.AntUrlPathMatcher;
 import org.springframework.security.util.UrlMatcher;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**

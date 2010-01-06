@@ -1,6 +1,5 @@
 package org.springside.examples.showcase.report;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;

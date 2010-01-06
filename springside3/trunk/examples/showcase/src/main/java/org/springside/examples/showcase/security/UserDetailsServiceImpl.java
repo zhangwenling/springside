@@ -1,7 +1,6 @@
 package org.springside.examples.showcase.security;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;

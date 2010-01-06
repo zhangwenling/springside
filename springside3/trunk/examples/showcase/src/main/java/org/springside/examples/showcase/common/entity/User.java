@@ -1,6 +1,5 @@
 package org.springside.examples.showcase.common.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;

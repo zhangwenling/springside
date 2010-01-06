@@ -3,7 +3,6 @@ package org.springside.modules.unit.orm.hibernate;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;

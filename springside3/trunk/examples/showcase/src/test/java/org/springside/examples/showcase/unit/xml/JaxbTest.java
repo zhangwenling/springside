@@ -1,6 +1,5 @@
 package org.springside.examples.showcase.unit.xml;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.dom4j.Document;

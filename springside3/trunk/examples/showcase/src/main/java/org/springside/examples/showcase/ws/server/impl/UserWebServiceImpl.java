@@ -1,6 +1,5 @@
 package org.springside.examples.showcase.ws.server.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.jws.WebService;

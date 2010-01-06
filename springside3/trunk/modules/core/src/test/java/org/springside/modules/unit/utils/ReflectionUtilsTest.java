@@ -1,7 +1,6 @@
 package org.springside.modules.unit.utils;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;

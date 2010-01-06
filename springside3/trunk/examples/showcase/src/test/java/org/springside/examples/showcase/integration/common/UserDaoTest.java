@@ -1,6 +1,5 @@
 package org.springside.examples.showcase.integration.common;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Hibernate;
