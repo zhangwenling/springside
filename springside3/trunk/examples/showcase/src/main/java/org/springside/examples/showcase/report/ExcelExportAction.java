@@ -45,10 +45,11 @@ public class ExcelExportAction extends ActionSupport {
 
 		//输出Excel文件.
 		HttpServletResponse response = Struts2Utils.getResponse();
-		response.setContentType("application/vnd.ms-excel");
+		response.setContentType(ServletUtils.EXCEL_TYPE);
 		ServletUtils.setFileDownloadHeader(response, "温度年表.xls");
+		
 		wb.write(response.getOutputStream());
-		response.getOutputStream().flush();
+		response.getOutputStream().flush();	
 		return null;
 	}
 
