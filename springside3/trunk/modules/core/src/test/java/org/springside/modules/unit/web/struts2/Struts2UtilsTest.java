@@ -80,7 +80,7 @@ public class Struts2UtilsTest extends Assert {
 		//Collection
 		response = new MockHttpServletResponse();
 		WebUtils.setResponseToStruts2(response);
-		List<TestBean> list = Lists.newArrayList(new TestBean(),new TestBean());
+		List<TestBean> list = Lists.newArrayList(new TestBean(), new TestBean());
 
 		Struts2Utils.renderJson(list);
 		assertEquals("[{\"age\":10,\"name\":\"foo\"},{\"age\":10,\"name\":\"foo\"}]", response.getContentAsString());

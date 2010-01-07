@@ -84,7 +84,6 @@
 			<param-name>autoPassValue</param-name>
 			<param-value>RPWT54321</param-value>
 		</init-param>
-
 	</filter>
 
 	<!-- SpringSecurity filter-->
@@ -110,14 +109,10 @@
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
 	</filter>
 
-	<!-- Response Header Added Filter -->
+	<!-- Cache Control Header Filter -->
 	<filter>
-		<filter-name>expiresHeaderFilter</filter-name>
-		<filter-class>org.springside.modules.web.ResponseHeaderFilter</filter-class>
-		<init-param>
-			<param-name>Cache-Control</param-name>
-			<param-value>public, max-age=31536000</param-value>
-		</init-param>
+		<filter-name>cacheControlHeaderFilter</filter-name>
+		<filter-class>org.springside.modules.web.CacheControlHeaderFilter</filter-class>
 	</filter>
 
 	<!-- Filter 映射 -->
@@ -183,15 +178,15 @@
 	</filter-mapping>
 
 	<filter-mapping>
-		<filter-name>expiresHeaderFilter</filter-name>
+		<filter-name>cacheControlHeaderFilter</filter-name>
 		<url-pattern>/img/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>expiresHeaderFilter</filter-name>
+		<filter-name>cacheControlHeaderFilter</filter-name>
 		<url-pattern>/css/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>expiresHeaderFilter</filter-name>
+		<filter-name>cacheControlHeaderFilter</filter-name>
 		<url-pattern>/js/*</url-pattern>
 	</filter-mapping>
 

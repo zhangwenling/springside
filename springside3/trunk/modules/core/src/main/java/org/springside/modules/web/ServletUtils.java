@@ -37,7 +37,7 @@ public class ServletUtils {
 		//Http 1.0 header
 		response.setDateHeader("Expires", System.currentTimeMillis() + expiresSeconds * 1000);
 		//Http 1.1 header
-		response.setHeader("Cache-Control", "max-age=" + expiresSeconds);
+		response.setHeader("Cache-Control", "private, max-age=" + expiresSeconds);
 	}
 
 	/**

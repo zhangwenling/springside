@@ -58,7 +58,7 @@ public class Struts2Utils {
 	}
 	
 	/**
-	 * 取得HttpSession中属性的简化函数.
+	 * 取得HttpSession中Attribute的简化函数.
 	 */
     public static Object getSessionAttribute(String name) {
         HttpSession session = getSession(false);
@@ -107,7 +107,7 @@ public class Struts2Utils {
 			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
-
+	
 	/**
 	 * 直接输出文本.
 	 * @see #render(String, String, String...)
@@ -176,6 +176,7 @@ public class Struts2Utils {
 		//渲染Content-Type为javascript的返回内容,输出结果为javascript语句, 如callback197("{html:'Hello World!!!'}");
 		render(JS_TYPE, result, headers);
 	}
+
 
 	/**
 	 * 分析并设置contentType与headers.
