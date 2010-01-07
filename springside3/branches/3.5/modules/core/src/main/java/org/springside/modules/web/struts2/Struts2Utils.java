@@ -58,7 +58,7 @@ public class Struts2Utils {
 	}
 	
 	/**
-	 * 取得HttpSession中属性的简化函数.
+	 * 取得HttpSession中Attribute的简化函数.
 	 */
     public static Object getSessionAttribute(String name) {
         HttpSession session = getSession(false);
@@ -90,7 +90,6 @@ public class Struts2Utils {
 	//-- 绕过jsp/freemaker直接输出文本的函数 --//
 	/**
 	 * 直接输出内容的简便函数.
-
 	 * eg.
 	 * render("text/plain", "hello", "encoding:GBK");
 	 * render("text/plain", "hello", "no-cache:false");
@@ -107,7 +106,7 @@ public class Struts2Utils {
 			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
-
+	
 	/**
 	 * 直接输出文本.
 	 * @see #render(String, String, String...)

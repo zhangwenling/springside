@@ -10,24 +10,22 @@ import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockFilterConfig;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springside.modules.web.ResponseHeaderFilter;
+import org.springside.modules.web.CacheControlHeaderFilter;
 
-public class RequestHeaderFilterTest extends Assert {
+public class CacheControlHeaderFilterTest extends Assert {
 	@Test
 	public void test() throws IOException, ServletException {
 		MockFilterConfig config = new MockFilterConfig();
 		MockFilterChain chain = new MockFilterChain();
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		MockHttpServletResponse response = new MockHttpServletResponse();
-		config.addInitParameter("foo", "1");
-		config.addInitParameter("bar", "2");
+		config.addInitParameter("expiresSeconds", "123");
 
-		ResponseHeaderFilter filter = new ResponseHeaderFilter();
+		CacheControlHeaderFilter filter = new CacheControlHeaderFilter();
 		filter.init(config);
 		filter.doFilter(request, response, chain);
 
-		assertEquals("1", response.getHeader("foo"));
-		assertEquals("2", response.getHeader("bar"));
+		assertEquals("private, max-age=123", response.getHeader("Cache-Control"));
 	}
 
 }

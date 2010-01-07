@@ -1,7 +1,6 @@
 package org.springside.modules.web;
 
 import java.io.IOException;
-import java.util.Enumeration;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -16,47 +15,41 @@ import javax.servlet.http.HttpServletResponse;
  * 
  * eg.在web.xml中设置
  * 	<filter>
- * 		<filter-name>expiresHeaderFilter</filter-name>
+ * 		<filter-name>cacheControlHeaderFilter</filter-name>
  * 		<filter-class>org.springside.modules.web.ResponseHeaderFilter</filter-class>
  * 		<init-param>
- * 		<param-name>Cache-Control</param-name>
- * 			<param-value>public, max-age=31536000</param-value>
+ * 			<param-name>expiresSeconds</param-name>
+ * 			<param-value>31536000</param-value>
  * 		</init-param>
  * 	</filter>
  * 	<filter-mapping>
- * 		<filter-name>expiresHeaderFilter</filter-name>
+ * 		<filter-name>cacheControlHeaderFilter</filter-name>
  * 		<url-pattern>/img/*</url-pattern>
  * 	</filter-mapping>
  * 
  * @author calvin
  */
-public class ResponseHeaderFilter implements Filter {
+public class CacheControlHeaderFilter implements Filter {
 
-	private FilterConfig fc;
+	private static final String PARAM_EXPIRES_SECOND = "expiresSeconds";
+	private long expiresSeconds;
 
-	/**
-	 * 设置Filter在web.xml中定义的所有参数到Response.
-	 */
-	@SuppressWarnings("unchecked")
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException {
-		HttpServletResponse response = (HttpServletResponse) res;
-
-		// set the provided HTTP response parameters
-		for (Enumeration e = fc.getInitParameterNames(); e.hasMoreElements();) {
-			String headerName = (String) e.nextElement();
-			response.addHeader(headerName, fc.getInitParameter(headerName));
-		}
-
+		ServletUtils.setExpiresHeader((HttpServletResponse) res, expiresSeconds);
 		// pass the request/response on
-		chain.doFilter(req, response);
+		chain.doFilter(req, res);
 	}
 
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig filterConfig) {
-		this.fc = filterConfig;
+		String expiresSecondsParam = filterConfig.getInitParameter(PARAM_EXPIRES_SECOND);
+		if (expiresSecondsParam != null)
+			expiresSeconds = Long.valueOf(expiresSecondsParam);
+		else
+			expiresSeconds = ServletUtils.ONE_YEAR_SECONDS;
 	}
 
 	/**
