@@ -22,7 +22,6 @@
 		<ul>
 			<li>演示基于ActiveMQ的JMS Topic/Queue</li>
 			<li>演示同步Polling receive与异步Message Driven POJO两种消费者模式</li>
-			<li>ActiveMQ的高可用性集群配置演示(计划中)</li>
 		</ul>
 
 		<h2>用户故事：</h2>

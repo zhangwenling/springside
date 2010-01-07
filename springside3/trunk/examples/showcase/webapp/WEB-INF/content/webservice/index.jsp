@@ -19,7 +19,7 @@
 		<ul>
 			<li><a href="${ctx}/webservice/ws/index.action">WS-*高级协议演示(安全、附件)</a></li>
 			<li><a href="${ctx}/webservice/hessian/index.action">Hessian 演示</a></li>
-			<li>RESTful Web Service演示(计划中)</li>
+			<li>RESTful Web Service高级协议演示(计划中)</li>
 		</ul>
 		</div>
 	</div>

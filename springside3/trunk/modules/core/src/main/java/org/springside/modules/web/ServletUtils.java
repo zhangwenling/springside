@@ -129,6 +129,7 @@ public class ServletUtils {
 	 */
 	public static void setFileDownloadHeader(HttpServletResponse response, String fileName) {
 		try {
+			//中文文件名支持
 			String encodedfileName = new String(fileName.getBytes(), "ISO8859-1");
 			response.setHeader("Content-Disposition", "attachment; filename=\"" + encodedfileName + "\"");
 		} catch (UnsupportedEncodingException e) {

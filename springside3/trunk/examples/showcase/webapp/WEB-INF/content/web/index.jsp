@@ -30,7 +30,7 @@
 			<li>高性能Web2.0网站:<br/>
 			    1. 演示Servlet, 演示高效读取静态内容, 控制客户端缓存, 压缩传输, 弹出下载对话框.<br/>
 			 	2. 远程内容Servlet, 演示使用Apache HttpClient多线程高效获取远程网站内容.<br/>
-			    3. ResponseHeaderFilter为静态内容添加Cache-Control Header<br/>
+			    3. CacheControlHeaderFilter为静态内容添加缓存控制 Header<br/>
 			    4. YUI Compressor 压缩js/css<br/>
 			    5. Tomcat gzip 配置压缩传输大于2K的MimeType为html/xml/css/js的文本<br/> 
 			</li>
@@ -41,7 +41,7 @@
 			<li>URLRewrite: 综合示例中的地址为搜索引擎友好的地址, 如用户列表地址为users.htm, 用户1的修改地址为user/1.htm</li>
 			<li>静态内容Servlet:<img src="${ctx}/static-content?contentPath=img/logo.jpg"/> <a href="${ctx}/static-content?contentPath=img/logo.jpg&download=true">图片下载链接</a></li>
 			<li>远程内容Servlet:<img src="${ctx}/remote-content?contentUrl=<%=encodedImageUrl%>"/></li>
-			<li>ResponseHeaderFilter使用见webapp中的web.xml</li>
+			<li>CacheControlHeaderFilter使用见webapp中的web.xml</li>
 			<li>YUI Compressor见bin/yuicompressor.bat命令及webapp中两个版本的js/css文件.</li>
 			<li>Tomcat 压缩传输见/tools/tomcat/profiles/production中server.xml.</li>
 		</ul>

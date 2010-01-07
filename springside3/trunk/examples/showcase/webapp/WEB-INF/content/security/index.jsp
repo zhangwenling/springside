@@ -25,7 +25,6 @@
 			<li>DES及其替代者AES的共享密钥消息加密演示.(见CryptoUtils及其测试用例)</li>
 			<li>Nonce(唯一数)生成演示--随机数+时间戳+计数器(见NonceUtils及其测试用例)</li>
 			<li>支持Hex, Base64及URL安全的Base64URLSafe编码</li>
-			<li>数据级别的权限控制(计划中)</li>
 		</ul>
 		</div>
 	</div>
