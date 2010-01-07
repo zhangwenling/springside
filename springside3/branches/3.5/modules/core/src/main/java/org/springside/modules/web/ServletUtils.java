@@ -7,17 +7,14 @@
  */
 package org.springside.modules.web;
 
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
 
 import com.google.common.collect.Maps;
@@ -29,6 +26,14 @@ import com.google.common.collect.Maps;
  */
 public class ServletUtils {
 
+	//-- content-type 常量定义 --//
+	public static final String TEXT_TYPE = "text/plain";
+	public static final String JSON_TYPE = "application/json";
+	public static final String XML_TYPE = "text/xml";
+	public static final String HTML_TYPE = "text/html";
+	public static final String JS_TYPE = "text/javascript";
+	public static final String  EXCEL_TYPE = "application/vnd.ms-excel";
+	
 	public static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
 
 	/**
@@ -116,35 +121,17 @@ public class ServletUtils {
 	}
 
 	/**
-	 * 检查浏览器客户端是否支持gzip编码.
-	 */
-	public static boolean checkAccetptGzip(HttpServletRequest request) {
-		//Http1.1 header
-		String acceptEncoding = request.getHeader("Accept-Encoding");
-
-		if (StringUtils.contains(acceptEncoding, "gzip")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/**
-	 * 设置Gzip Header并返回GZIPOutputStream.
-	 */
-	public static OutputStream buildGzipOutputStream(HttpServletResponse response) throws IOException {
-		response.setHeader("Content-Encoding", "gzip");
-		response.setHeader("Vary", "Accept-Encoding");
-		return new GZIPOutputStream(response.getOutputStream());
-	}
-
-	/**
 	 * 设置让浏览器弹出下载对话框的Header.
 	 * 
 	 * @param fileName 下载后的文件名.
 	 */
-	public static void setDownloadableHeader(HttpServletResponse response, String fileName) {
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+	public static void setFileDownloadHeader(HttpServletResponse response, String fileName) {
+		try {
+			//中文文件名支持
+			String encodedfileName = new String(fileName.getBytes(), "ISO8859-1");
+			response.setHeader("Content-Disposition", "attachment; filename=\"" + encodedfileName + "\"");
+		} catch (UnsupportedEncodingException e) {
+		}
 	}
 
 	/**

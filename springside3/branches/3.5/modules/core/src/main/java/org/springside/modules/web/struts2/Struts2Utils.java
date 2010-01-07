@@ -33,13 +33,6 @@ public class Struts2Utils {
 	private static final String DEFAULT_ENCODING = "UTF-8";
 	private static final boolean DEFAULT_NOCACHE = true;
 
-	//-- content-type 常量定义 --//
-	private static final String TEXT_TYPE = "text/plain";
-	private static final String JSON_TYPE = "application/json";
-	private static final String XML_TYPE = "text/xml";
-	private static final String HTML_TYPE = "text/html";
-	private static final String JS_TYPE = "text/javascript";
-
 	private static ObjectMapper mapper = new ObjectMapper();
 
 	//-- 取得Request/Response/Session的简化函数 --//
@@ -112,7 +105,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderText(final String text, final String... headers) {
-		render(TEXT_TYPE, text, headers);
+		render(ServletUtils.TEXT_TYPE, text, headers);
 	}
 
 	/**
@@ -120,7 +113,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderHtml(final String html, final String... headers) {
-		render(HTML_TYPE, html, headers);
+		render(ServletUtils.HTML_TYPE, html, headers);
 	}
 
 	/**
@@ -128,7 +121,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderXml(final String xml, final String... headers) {
-		render(XML_TYPE, xml, headers);
+		render(ServletUtils.XML_TYPE, xml, headers);
 	}
 
 	/**
@@ -138,7 +131,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderJson(final String jsonString, final String... headers) {
-		render(JSON_TYPE, jsonString, headers);
+		render(ServletUtils.JSON_TYPE, jsonString, headers);
 	}
 
 	/**
@@ -148,7 +141,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderJson(final Object data, final String... headers) {
-		HttpServletResponse response = initResponse(JSON_TYPE, headers);
+		HttpServletResponse response = initResponse(ServletUtils.JSON_TYPE, headers);
 		try {
 			mapper.writeValue(response.getWriter(), data);
 		} catch (IOException e) {
@@ -173,7 +166,7 @@ public class Struts2Utils {
 		String result = new StringBuilder().append(callbackName).append("(").append(jsonString).append(");").toString();
 
 		//渲染Content-Type为javascript的返回内容,输出结果为javascript语句, 如callback197("{html:'Hello World!!!'}");
-		render(JS_TYPE, result, headers);
+		render(ServletUtils.JS_TYPE, result, headers);
 	}
 
 	/**
