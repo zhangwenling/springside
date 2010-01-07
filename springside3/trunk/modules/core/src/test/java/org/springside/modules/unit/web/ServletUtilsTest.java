@@ -39,19 +39,4 @@ public class ServletUtilsTest extends Assert {
 		//不存在Etag
 		assertEquals(true, ServletUtils.checkIfNoneMatchEtag(request, response, "V2.0"));
 	}
-
-	@Test
-	public void checkAccetptGzip() {
-		MockHttpServletRequest request = new MockHttpServletRequest();
-
-		request.addHeader("Accept-Encoding", "gzip,deflate");
-		assertTrue(ServletUtils.checkAccetptGzip(request));
-
-		request = new MockHttpServletRequest();
-		request.addHeader("Accept-Encoding", "deflate");
-		assertFalse(ServletUtils.checkAccetptGzip(request));
-
-		request = new MockHttpServletRequest();
-		assertFalse(ServletUtils.checkAccetptGzip(request));
-	}
 }

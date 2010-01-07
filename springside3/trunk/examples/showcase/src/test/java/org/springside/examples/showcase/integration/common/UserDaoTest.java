@@ -4,12 +4,9 @@ import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.modules.test.groups.Groups;
-import org.springside.modules.test.spring.SpringGroupsTestRunner;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 import com.google.common.collect.Lists;
@@ -17,12 +14,8 @@ import com.google.common.collect.Lists;
 /**
  * UserDao的集成测试用例,测试ORM映射及特殊的DAO操作.
  * 
- * 同时演示分组执行TestCase功能.
- * 
  * @author calvin
  */
-//分组执行TestCase
-@RunWith(SpringGroupsTestRunner.class)
 public class UserDaoTest extends SpringTxTestCase {
 	@Autowired
 	private UserDao userDao;
@@ -51,9 +44,7 @@ public class UserDaoTest extends SpringTxTestCase {
 		}
 	}
 
-	//只在-Dtest.groups=xxxx或application.test.properties的test.groups中包含MAJOR时执行本测试方法.
 	@Test
-	@Groups("MAJOR")
 	public void upDialect() {
 		Object value = userDao.createQuery("select u.name from User u where up(u.name)='ADMIN'").uniqueResult();
 		assertEquals("Admin", value);

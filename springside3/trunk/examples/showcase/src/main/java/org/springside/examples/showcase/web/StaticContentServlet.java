@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +17,7 @@ import net.sf.ehcache.Element;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springside.modules.web.ServletUtils;
@@ -64,16 +66,16 @@ public class StaticContentServlet extends HttpServlet {
 		//设置MIME类型
 		response.setContentType(contentInfo.mimeType);
 
-		//如果是下载请求,设置下载Header
+		//设置弹出下载文件请求窗口的Header
 		if (request.getParameter("download") != null) {
-			ServletUtils.setDownloadableHeader(response, contentInfo.fileName);
+			ServletUtils.setFileDownloadHeader(response, contentInfo.fileName);
 		}
 
 		//构造OutputStream
 		OutputStream output;
-		if (ServletUtils.checkAccetptGzip(request) && contentInfo.needGzip) {
+		if (checkAccetptGzip(request) && contentInfo.needGzip) {
 			//使用压缩传输的outputstream, 使用http1.1 trunked编码不设置content-length.
-			output = ServletUtils.buildGzipOutputStream(response);
+			output = buildGzipOutputStream(response);
 		} else {
 			//使用普通outputstream, 设置content-length.
 			response.setContentLength(contentInfo.length);
@@ -92,7 +94,29 @@ public class StaticContentServlet extends HttpServlet {
 			IOUtils.closeQuietly(output);
 		}
 	}
+	/**
+	 * 检查浏览器客户端是否支持gzip编码.
+	 */
+	private static boolean checkAccetptGzip(HttpServletRequest request) {
+		//Http1.1 header
+		String acceptEncoding = request.getHeader("Accept-Encoding");
 
+		if (StringUtils.contains(acceptEncoding, "gzip")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 设置Gzip Header并返回GZIPOutputStream.
+	 */
+	private  OutputStream buildGzipOutputStream(HttpServletResponse response) throws IOException {
+		response.setHeader("Content-Encoding", "gzip");
+		response.setHeader("Vary", "Accept-Encoding");
+		return new GZIPOutputStream(response.getOutputStream());
+	}
+	
 	/**
 	 * 在初始化函数中创建内容信息缓存.
 	 */

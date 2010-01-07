@@ -46,7 +46,7 @@ public class ExcelExportAction extends ActionSupport {
 		//输出Excel文件.
 		HttpServletResponse response = Struts2Utils.getResponse();
 		response.setContentType("application/vnd.ms-excel");
-		ServletUtils.setDownloadableHeader(response, "Temperature_Anomaly_Report.xls");
+		ServletUtils.setFileDownloadHeader(response, "温度年表.xls");
 		wb.write(response.getOutputStream());
 		response.getOutputStream().flush();
 		return null;
@@ -201,7 +201,7 @@ public class ExcelExportAction extends ActionSupport {
 		totalStyle.setAlignment(CellStyle.ALIGN_RIGHT);
 		setBorder(totalStyle);
 		styles.put("total", totalStyle);
-		
+
 		return styles;
 	}
 
