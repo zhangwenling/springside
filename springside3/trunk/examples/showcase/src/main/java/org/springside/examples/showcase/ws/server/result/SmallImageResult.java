@@ -1,8 +1,8 @@
-package org.springside.examples.showcase.ws.server.api.result;
+package org.springside.examples.showcase.ws.server.result;
 
 import javax.xml.bind.annotation.XmlType;
 
-import org.springside.examples.showcase.ws.server.api.WsConstants;
+import org.springside.examples.showcase.ws.server.WsConstants;
 
 /**
  * 演示以Base64Binary直接编码整个byte数组的二进制数据传输方式.

@@ -1,11 +1,11 @@
-package org.springside.examples.showcase.ws.server.api.dto;
+package org.springside.examples.showcase.ws.server.dto;
 
 import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.springside.examples.showcase.ws.server.api.WsConstants;
+import org.springside.examples.showcase.ws.server.WsConstants;
 
 /**
  * Web Service传输User信息的DTO.
