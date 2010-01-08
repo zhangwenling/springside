@@ -16,9 +16,9 @@ import org.apache.ws.security.handler.WSHandlerConstants;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.ws.client.PasswordCallback;
-import org.springside.examples.showcase.ws.server.api.UserWebService;
-import org.springside.examples.showcase.ws.server.api.WsConstants;
-import org.springside.examples.showcase.ws.server.api.result.GetAllUserResult;
+import org.springside.examples.showcase.ws.server.UserWebService;
+import org.springside.examples.showcase.ws.server.WsConstants;
+import org.springside.examples.showcase.ws.server.result.GetAllUserResult;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 import com.google.common.collect.Maps;

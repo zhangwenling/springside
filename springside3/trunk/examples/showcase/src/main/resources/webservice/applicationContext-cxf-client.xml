@@ -11,7 +11,7 @@
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 
 	<!-- 使用WS-Security中的明文密码认证机制的客户端 -->
-	<jaxws:client id="userServiceWithPlainPassword" serviceClass="org.springside.examples.showcase.ws.server.api.UserWebService"
+	<jaxws:client id="userServiceWithPlainPassword" serviceClass="org.springside.examples.showcase.ws.server.UserWebService"
 		address="http://localhost:8080/showcase/services/UserServiceWithPlainPassword">
 		<jaxws:outInterceptors>
 			<bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">

@@ -14,11 +14,11 @@ import javax.xml.ws.Service;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
-import org.springside.examples.showcase.ws.server.api.LargeImageWebService;
-import org.springside.examples.showcase.ws.server.api.SmallImageWebService;
-import org.springside.examples.showcase.ws.server.api.WsConstants;
-import org.springside.examples.showcase.ws.server.api.result.LargeImageResult;
-import org.springside.examples.showcase.ws.server.api.result.SmallImageResult;
+import org.springside.examples.showcase.ws.server.LargeImageWebService;
+import org.springside.examples.showcase.ws.server.SmallImageWebService;
+import org.springside.examples.showcase.ws.server.WsConstants;
+import org.springside.examples.showcase.ws.server.result.LargeImageResult;
+import org.springside.examples.showcase.ws.server.result.SmallImageResult;
 
 /**
  * WebService传输二进制数据测试.

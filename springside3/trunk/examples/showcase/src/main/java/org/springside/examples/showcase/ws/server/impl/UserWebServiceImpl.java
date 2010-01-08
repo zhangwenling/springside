@@ -10,10 +10,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.UserManager;
-import org.springside.examples.showcase.ws.server.api.UserWebService;
-import org.springside.examples.showcase.ws.server.api.WsConstants;
-import org.springside.examples.showcase.ws.server.api.dto.UserDTO;
-import org.springside.examples.showcase.ws.server.api.result.GetAllUserResult;
+import org.springside.examples.showcase.ws.server.UserWebService;
+import org.springside.examples.showcase.ws.server.WsConstants;
+import org.springside.examples.showcase.ws.server.dto.UserDTO;
+import org.springside.examples.showcase.ws.server.result.GetAllUserResult;
+import org.springside.examples.showcase.ws.server.result.WSResult;
 
 import com.google.common.collect.Lists;
 
@@ -23,8 +24,8 @@ import com.google.common.collect.Lists;
  * @author sky
  * @author calvin
  */
-//serviceName与portName属性指明WSDL中的名称,endpointInterface属性指向Interface定义类.
-@WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.api.UserWebService", targetNamespace = WsConstants.NS)
+//serviceName与portName属性指明WSDL中的名称, endpointInterface属性指向Interface定义类.
+@WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.UserWebService", targetNamespace = WsConstants.NS)
 public class UserWebServiceImpl implements UserWebService {
 
 	private static Logger logger = LoggerFactory.getLogger(UserWebServiceImpl.class);
@@ -38,22 +39,21 @@ public class UserWebServiceImpl implements UserWebService {
 	 * @see UserWebService#getAllUser()
 	 */
 	public GetAllUserResult getAllUser() {
-		GetAllUserResult result = new GetAllUserResult();
-
 		//获取User列表并转换为UserDTO列表.
 		try {
-			List<User> userList = userManager.getAllUser();
-
+			List<User> userEntityList = userManager.getAllUser();
 			List<UserDTO> userDTOList = Lists.newArrayList();
-			for (User userEntity : userList) {
+			
+			for (User userEntity : userEntityList) {
 				userDTOList.add(dozer.map(userEntity, UserDTO.class));
 			}
+
+			GetAllUserResult result = new GetAllUserResult();
 			result.setUserList(userDTOList);
-			logger.info("transfer {} user sucessful.", userDTOList.size());
+			return result;
 		} catch (RuntimeException e) {
-			result.setSystemError();
 			logger.error(e.getMessage(), e);
+			return WSResult.buildDefaultErrorResult(GetAllUserResult.class);
 		}
-		return result;
 	}
 }

@@ -3,8 +3,8 @@ package org.springside.examples.showcase.functional.webservice.hessian;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.examples.showcase.ws.server.api.UserWebService;
-import org.springside.examples.showcase.ws.server.api.result.GetAllUserResult;
+import org.springside.examples.showcase.ws.server.UserWebService;
+import org.springside.examples.showcase.ws.server.result.GetAllUserResult;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 /**

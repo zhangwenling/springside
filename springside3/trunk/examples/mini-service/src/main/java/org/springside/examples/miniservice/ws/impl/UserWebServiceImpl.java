@@ -49,6 +49,7 @@ public class UserWebServiceImpl implements UserWebService {
 		try {
 			List<User> userEntityList = userManager.getAllUser();
 			List<UserDTO> userDTOList = Lists.newArrayList();
+
 			for (User userEntity : userEntityList) {
 				userDTOList.add(dozer.map(userEntity, UserDTO.class));
 			}

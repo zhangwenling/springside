@@ -7,6 +7,6 @@
 
 	<bean id="userHessianService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
 		<property name="serviceUrl" value="http://localhost:8080/showcase/remoting/UserHessianService" />
-		<property name="serviceInterface" value="org.springside.examples.showcase.ws.server.api.UserWebService" />
+		<property name="serviceInterface" value="org.springside.examples.showcase.ws.server.UserWebService" />
 	</bean>
 </beans>
