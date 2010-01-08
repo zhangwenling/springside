@@ -9,6 +9,13 @@
 
 	<!-- http安全配置 -->
 	<s:http>
+		<s:intercept-url pattern="/security/user!save*" access="ROLE_修改用户" />
+		<s:intercept-url pattern="/security/user!delete*" access="ROLE_修改用户" />
+		<s:intercept-url pattern="/security/user*" access="ROLE_浏览用户" />
+		<s:intercept-url pattern="/security/role!save*" access="ROLE_修改角色" />
+		<s:intercept-url pattern="/security/role!delete*" access="ROLE_修改角色" />
+		<s:intercept-url pattern="/security/role*" access="ROLE_浏览角色" />
+		
 		<s:form-login login-page="/login.action" default-target-url="/" authentication-failure-url="/login.action?error=true" />
 		<s:http-basic />
 		<s:logout logout-success-url="/" />
@@ -21,16 +28,6 @@
 		<s:password-encoder hash="plaintext" />
 	</s:authentication-provider>
 
-	<!-- 重新定义的FilterSecurityInterceptor, 使用resourceDetailsService提供的url-授权关系定义 -->
-	<bean id="filterSecurityInterceptor" class="org.springside.modules.security.springsecurity.FilterSecurityInterceptor"
-		autowire="byType">
-		<s:custom-filter before="FILTER_SECURITY_INTERCEPTOR" />
-		<property name="resourceDetailsService" ref="resourceDetailsService" />
-	</bean>
-
 	<!-- 项目实现的用户查询服务 -->
 	<bean id="userDetailsService" class="org.springside.examples.miniweb.service.security.UserDetailsServiceImpl" />
-
-	<!-- 项目实现的URL-授权查询服务 -->
-	<bean id="resourceDetailsService" class="org.springside.examples.miniweb.service.security.ResourceDetailsServiceImpl" />
 </beans>

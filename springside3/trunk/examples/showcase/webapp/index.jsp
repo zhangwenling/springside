@@ -21,9 +21,10 @@
 			<ul>
 				<li>JBPM演示</li>
 				<li>Memcached演示</li>
+				<li>动态语言DSL演示</li>
 				<li>Jersey缓存与安全演示</li>
 				<li>JQuery Table/Grid控件演示</li>
-				<li>Struts2及插件高级使用演示</li>
+				<li>Struts2及插件的高级使用演示</li>
 				<li>ActiveMQ高性能/高可用性演示</li>
 				<li>Voldemort Key-Value数据库演示</li>
 				<li>SpringSecurity数据级别ACL权限控制</li>

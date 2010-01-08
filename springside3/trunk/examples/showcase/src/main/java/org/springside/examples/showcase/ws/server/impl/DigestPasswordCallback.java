@@ -28,6 +28,10 @@ public class DigestPasswordCallback implements CallbackHandler {
 		WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];
 		String loginName = pc.getIdentifier();
 		User user = userManager.findUserByLoginName(loginName);
+		if (user == null) {
+			throw new IOException("wrong login name " + pc.getIdentifier());
+		}
+		
 		pc.setPassword(user.getPlainPassword());
 	}
 }

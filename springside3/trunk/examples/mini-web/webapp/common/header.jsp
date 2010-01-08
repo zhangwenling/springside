@@ -10,9 +10,6 @@
 		<ul>
 			<li><a href="${ctx}/security/user.action">帐号列表</a></li>
 			<li><a href="${ctx}/security/role.action">角色列表</a></li>
-			<%if("admin".equals(SpringSecurityUtils.getCurrentUserName())){ %>
-				<li><a href="${ctx}/security/resource.action">资源权限列表</a></li>
-			<%} %>
 			<li><a href="${ctx}/j_spring_security_logout">退出登录</a></li>
 		</ul>
 	</div>

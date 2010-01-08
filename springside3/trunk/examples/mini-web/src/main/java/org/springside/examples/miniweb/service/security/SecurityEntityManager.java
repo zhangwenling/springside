@@ -8,18 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.dao.security.AuthorityDao;
-import org.springside.examples.miniweb.dao.security.ResourceDao;
 import org.springside.examples.miniweb.dao.security.RoleDao;
 import org.springside.examples.miniweb.dao.security.UserDao;
 import org.springside.examples.miniweb.entity.security.Authority;
-import org.springside.examples.miniweb.entity.security.Resource;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
-import org.springside.modules.spring.SpringContextHolder;
 
 /**
  * 安全相关实体的管理类, 包括用户,角色,资源与授权类.
@@ -40,8 +37,6 @@ public class SecurityEntityManager {
 	private RoleDao roleDao;
 	@Autowired
 	private AuthorityDao authorityDao;
-	@Autowired
-	private ResourceDao resourceDao;
 
 	//-- User Manager --//
 	@Transactional(readOnly = true)
@@ -113,33 +108,9 @@ public class SecurityEntityManager {
 		roleDao.delete(id);
 	}
 
-	//-- Resource Manager --//
-	/**
-	 * 查找URL类型的资源并初始化可访问该资源的授权.
-	 */
-	@Transactional(readOnly = true)
-	public List<Resource> getUrlResourceWithAuthorities() {
-		return resourceDao.getUrlResourceWithAuthorities();
-	}
-
-	/**
-	 * 保存资源列表,同时刷新SpringSecurity中的URL-授权配置.
-	 */
-	public void saveResource(Resource entity) throws Exception {
-		resourceDao.save(entity);
-		SpringSecurityUtils.refreshDefinitionSource(SpringContextHolder.getApplicationContext(),
-				"filterSecurityInterceptor");
-	}
-
 	//-- Authority Manager --//
 	@Transactional(readOnly = true)
 	public List<Authority> getAllAuthority() {
 		return authorityDao.getAll();
-	}
-
-	public void saveAuthority(Authority entity) throws Exception {
-		authorityDao.save(entity);
-		SpringSecurityUtils.refreshDefinitionSource(SpringContextHolder.getApplicationContext(),
-				"filterSecurityInterceptor");
 	}
 }

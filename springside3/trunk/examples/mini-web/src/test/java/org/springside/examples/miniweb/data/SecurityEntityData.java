@@ -3,7 +3,6 @@ package org.springside.examples.miniweb.data;
 import java.util.List;
 
 import org.springside.examples.miniweb.entity.security.Authority;
-import org.springside.examples.miniweb.entity.security.Resource;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.modules.test.DataUtils;
@@ -90,14 +89,5 @@ public class SecurityEntityData {
 
 	public static List<Authority> getRandomDefaultAuthorityList() {
 		return DataUtils.randomSome(getDefaultAuthorityList());
-	}
-
-	public static Resource getRandomResource() {
-		Resource resource = new Resource();
-		resource.setValue(DataUtils.randomName("Resource"));
-		resource.setResourceType(Resource.URL_TYPE);
-		resource.setPosition(100);
-
-		return resource;
 	}
 }

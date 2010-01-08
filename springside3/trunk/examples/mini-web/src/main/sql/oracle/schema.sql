@@ -1,10 +1,6 @@
 
     drop table ss_authority cascade constraints;
 
-    drop table ss_resource cascade constraints;
-
-    drop table ss_resource_authority cascade constraints;
-
     drop table ss_role cascade constraints;
 
     drop table ss_role_authority cascade constraints;
@@ -19,19 +15,6 @@
         id number(19,0) not null,
         name varchar2(255 char) not null unique,
         primary key (id)
-    );
-
-    create table ss_resource (
-        id number(19,0) not null,
-        position double precision not null,
-        resource_type varchar2(255 char) not null,
-        value varchar2(255 char) not null unique,
-        primary key (id)
-    );
-
-    create table ss_resource_authority (
-        resource_id number(19,0) not null,
-        authority_id number(19,0) not null
     );
 
     create table ss_role (
@@ -58,16 +41,6 @@
         user_id number(19,0) not null,
         role_id number(19,0) not null
     );
-
-    alter table ss_resource_authority 
-        add constraint FKD7216891C67601C1 
-        foreign key (authority_id) 
-        references ss_authority;
-
-    alter table ss_resource_authority 
-        add constraint FKD721689170DB5B33 
-        foreign key (resource_id) 
-        references ss_resource;
 
     alter table ss_role_authority 
         add constraint FKE536BA7993BA26B3 

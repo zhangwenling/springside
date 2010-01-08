@@ -1,12 +1,3 @@
-
-    alter table ss_resource_authority 
-        drop 
-        foreign key FKD7216891C67601C1;
-
-    alter table ss_resource_authority 
-        drop 
-        foreign key FKD721689170DB5B33;
-
     alter table ss_role_authority 
         drop 
         foreign key FKE536BA7993BA26B3;
@@ -25,10 +16,6 @@
 
     drop table if exists ss_authority;
 
-    drop table if exists ss_resource;
-
-    drop table if exists ss_resource_authority;
-
     drop table if exists ss_role;
 
     drop table if exists ss_role_authority;
@@ -41,19 +28,6 @@
         id bigint not null auto_increment,
         name varchar(255) not null unique,
         primary key (id)
-    ) ENGINE=InnoDB;
-
-    create table ss_resource (
-        id bigint not null auto_increment,
-        position double precision not null,
-        resource_type varchar(255) not null,
-        value varchar(255) not null unique,
-        primary key (id)
-    ) ENGINE=InnoDB;
-
-    create table ss_resource_authority (
-        resource_id bigint not null,
-        authority_id bigint not null
     ) ENGINE=InnoDB;
 
     create table ss_role (
@@ -81,17 +55,6 @@
         role_id bigint not null
     ) ENGINE=InnoDB;
 
-    alter table ss_resource_authority 
-        add index FKD7216891C67601C1 (authority_id), 
-        add constraint FKD7216891C67601C1 
-        foreign key (authority_id) 
-        references ss_authority (id);
-
-    alter table ss_resource_authority 
-        add index FKD721689170DB5B33 (resource_id), 
-        add constraint FKD721689170DB5B33 
-        foreign key (resource_id) 
-        references ss_resource (id);
 
     alter table ss_role_authority 
         add index FKE536BA7993BA26B3 (role_id), 

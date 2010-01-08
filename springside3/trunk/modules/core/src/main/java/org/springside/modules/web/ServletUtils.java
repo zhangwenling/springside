@@ -53,6 +53,7 @@ public class ServletUtils {
 	public static void setNoCacheHeader(HttpServletResponse response) {
 		//Http 1.0 header
 		response.setDateHeader("Expires", 0);
+		response.addHeader("Pragma", "no-cache");
 		//Http 1.1 header
 		response.setHeader("Cache-Control", "no-cache");
 	}

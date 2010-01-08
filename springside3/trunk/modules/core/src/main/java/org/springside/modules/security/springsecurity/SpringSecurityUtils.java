@@ -7,7 +7,6 @@
  */
 package org.springside.modules.security.springsecurity;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.security.userdetails.User;
@@ -42,14 +41,5 @@ public class SpringSecurityUtils {
 			return null;
 		}
 		return (T) principal;
-	}
-	
-	/**
-	 * 刷新FilterSecurityInterceptor中的URL-授权定义.
-	 * 使用数据库存储URL-授权关系时, 改变守保护URL资源或授权后需要执行本函数.
-	 */
-	public static void refreshDefinitionSource(ApplicationContext ctx,String filterSecurityInterceptorName) throws Exception{
-		FilterSecurityInterceptor interceptor = (FilterSecurityInterceptor)ctx.getBean(filterSecurityInterceptorName);
-		interceptor.buildDefinitionSource();
 	}
 }
