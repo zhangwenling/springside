@@ -32,7 +32,7 @@ import com.google.common.collect.Maps;
 public class SecurityWebServiceTest extends SpringContextTestCase {
 
 	/**
-	 * 测试明文密码, 在Spring中用<jaxws:client/>创建的Client.
+	 * 测试明文密码, 在Spring ApplicationContext中用<jaxws:client/>创建的Client.
 	 */
 	@Test
 	public void getAllUserWithPlainPassword() {

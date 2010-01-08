@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
- * $Id$ 
+ * $Id: TraceUtils.java 693 2009-12-12 10:17:34Z calvinxiu $ 
  */
 package org.springside.modules.log;
 

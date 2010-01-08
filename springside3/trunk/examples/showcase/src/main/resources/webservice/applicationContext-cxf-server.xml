@@ -42,6 +42,23 @@
 			</bean>
 		</jaxws:inInterceptors>
 	</jaxws:endpoint>
+	
+	<!-- 使用WS-Security中的明文密码认证机制并结合SpringSecurity的Endpoint -->
+	<jaxws:endpoint id="userServiceWithSpringSecurityEP" address="/UserServiceWithSpringSecurity">
+		<jaxws:implementor ref="userWebService" />
+		<jaxws:inInterceptors>
+			<bean class="org.springside.modules.security.springsecurity.WSS4JSpringSecurityInInterceptor">
+				<property name="properties">
+					<map>
+						<entry key="action" value="UsernameToken" />
+						<entry key="passwordType" value="PasswordText" />
+						<entry key="passwordCallbackRef" value-ref="plainPasswordCallback" />
+					</map>
+				</property>
+				<property name="userDetailsService" ref="userDetailsService"/>
+			</bean>
+		</jaxws:inInterceptors>
+	</jaxws:endpoint>
 
 	<!-- 使用Base64Binary传输二进制内容的endpoint定义  -->
 	<jaxws:endpoint id="smallImageServiceEP" address="/SmallImageService">

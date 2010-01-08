@@ -7,9 +7,9 @@
 
 	<description>SpringSecurity安全配置</description>
 
-	<!-- 此处采用原版的配置方式, 数据库方式见mini-web. -->
 	<s:http>
 		<s:intercept-url pattern="/common/user/*" access="ROLE_User" />
+
 		<s:form-login login-page="/security/login.action" default-target-url="/"
 			authentication-failure-url="/security/login.action?error=1" />
 		<s:http-basic />
