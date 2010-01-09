@@ -4,7 +4,10 @@ import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.cxf.binding.soap.SoapMessage;
+import org.apache.cxf.interceptor.Fault;
+import org.apache.cxf.message.Message;
+import org.apache.cxf.phase.AbstractPhaseInterceptor;
+import org.apache.cxf.phase.Phase;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.ws.security.WSConstants;
 import org.apache.ws.security.WSSecurityEngineResult;
@@ -18,24 +21,26 @@ import org.springframework.security.ui.WebAuthenticationDetails;
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UserDetailsService;
 
-public class WSS4JSpringSecurityInInterceptor extends WSS4JInInterceptor {
+/**
+ * 在WSS4J校验后设置SpringSecurity Context的CXF Interceptor.
+ * 
+ * @author calvin
+ */
+public class SpringSecurityInInterceptor extends AbstractPhaseInterceptor<Message> {
 
-	UserDetailsService userDetailsService;
-
-	public UserDetailsService getUserDetailsService() {
-		return userDetailsService;
-	}
+	private UserDetailsService userDetailsService;
 
 	public void setUserDetailsService(UserDetailsService userDetailsService) {
 		this.userDetailsService = userDetailsService;
 	}
 
-	@Override
-	public void handleMessage(SoapMessage message) {
+	public SpringSecurityInInterceptor() {
+		super(Phase.PRE_PROTOCOL);
+		addAfter(WSS4JInInterceptor.class.getName());
+	}
 
-		super.handleMessage(message);
-
-		String userName = getUserNameFromSecurityResult(message);
+	public void handleMessage(Message message) throws Fault {
+		String userName = getUserNameFromWSS4JResult(message);
 		HttpServletRequest request = (HttpServletRequest) message.get("HTTP.REQUEST");
 
 		Authentication authentication = authenticate(userName, request);
@@ -43,8 +48,11 @@ public class WSS4JSpringSecurityInInterceptor extends WSS4JInInterceptor {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 
+	/**
+	 * 从Message中找出WSS4J校验后的用户名.
+	 */
 	@SuppressWarnings("unchecked")
-	private String getUserNameFromSecurityResult(SoapMessage message) {
+	private String getUserNameFromWSS4JResult(Message message) {
 		Vector<WSHandlerResult> results = (Vector<WSHandlerResult>) message
 				.getContextualProperty(WSHandlerConstants.RECV_RESULTS);
 		if (results != null && !results.isEmpty()) {
@@ -62,6 +70,9 @@ public class WSS4JSpringSecurityInInterceptor extends WSS4JInInterceptor {
 		return null;
 	}
 
+	/**
+	 * 使用userName获取UserDetails并生成Authentication.
+	 */
 	private Authentication authenticate(String userName, HttpServletRequest request) {
 		UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
 

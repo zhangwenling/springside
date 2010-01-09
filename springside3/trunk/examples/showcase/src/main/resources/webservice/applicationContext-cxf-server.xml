@@ -42,12 +42,12 @@
 			</bean>
 		</jaxws:inInterceptors>
 	</jaxws:endpoint>
-	
+
 	<!-- 使用WS-Security中的明文密码认证机制并结合SpringSecurity的Endpoint -->
 	<jaxws:endpoint id="userServiceWithSpringSecurityEP" address="/UserServiceWithSpringSecurity">
 		<jaxws:implementor ref="userWebService" />
 		<jaxws:inInterceptors>
-			<bean class="org.springside.modules.security.springsecurity.WSS4JSpringSecurityInInterceptor">
+			<bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
 				<property name="properties">
 					<map>
 						<entry key="action" value="UsernameToken" />
@@ -55,8 +55,11 @@
 						<entry key="passwordCallbackRef" value-ref="plainPasswordCallback" />
 					</map>
 				</property>
-				<property name="userDetailsService" ref="userDetailsService"/>
 			</bean>
+			<bean class="org.springside.modules.security.springsecurity.SpringSecurityInInterceptor">
+				<property name="userDetailsService" ref="userDetailsService" />
+			</bean>
+			<bean class="org.springside.modules.security.springsecurity.SpringSecurityOutInterceptor" />
 		</jaxws:inInterceptors>
 	</jaxws:endpoint>
 
