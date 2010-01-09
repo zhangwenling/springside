@@ -3,10 +3,12 @@ package org.springside.modules.unit.security.utils;
 import java.rmi.server.UID;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.hibernate.id.UUIDHexGenerator;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,9 +24,9 @@ public class NonceUtilsTest extends Assert {
 	public void noncesCompare() {
 		//Random
 		for (int i = 0; i < 3; i++) {
-			System.out.println("Random String       :" + NonceUtils.randomString(32));
+			System.out.println("Random String       :" + RandomStringUtils.randomAlphanumeric(32));
 		}
-		assertEquals(32, NonceUtils.randomString(32).length());
+		assertEquals(32, RandomStringUtils.randomAlphanumeric(32).length());
 
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Random Hex Bytes    :" + NonceUtils.randomHexString(32));
@@ -43,9 +45,9 @@ public class NonceUtilsTest extends Assert {
 
 		//UUID
 		for (int i = 0; i < 3; i++) {
-			System.out.println("Random UUID         :" + NonceUtils.randomUUID());
+			System.out.println("Random UUID         :" + UUID.randomUUID().toString());
 		}
-		assertEquals(36, NonceUtils.randomUUID().length());
+		assertEquals(36, UUID.randomUUID().toString().length());
 
 		for (int i = 0; i < 3; i++) {
 			System.out.println("RMI UID Nonce       :" + new UID().toString());

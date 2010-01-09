@@ -14,10 +14,6 @@ import org.apache.ws.security.WSSecurityEngineResult;
 import org.apache.ws.security.WSUsernameTokenPrincipal;
 import org.apache.ws.security.handler.WSHandlerConstants;
 import org.apache.ws.security.handler.WSHandlerResult;
-import org.springframework.security.Authentication;
-import org.springframework.security.context.SecurityContextHolder;
-import org.springframework.security.providers.preauth.PreAuthenticatedAuthenticationToken;
-import org.springframework.security.ui.WebAuthenticationDetails;
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UserDetailsService;
 
@@ -42,10 +38,8 @@ public class SpringSecurityInInterceptor extends AbstractPhaseInterceptor<Messag
 	public void handleMessage(Message message) throws Fault {
 		String userName = getUserNameFromWSS4JResult(message);
 		HttpServletRequest request = (HttpServletRequest) message.get("HTTP.REQUEST");
-
-		Authentication authentication = authenticate(userName, request);
-
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+		UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+		SpringSecurityUtils.saveUserDetailsToContext(userDetails, request);
 	}
 
 	/**
@@ -68,18 +62,5 @@ public class SpringSecurityInInterceptor extends AbstractPhaseInterceptor<Messag
 			}
 		}
 		return null;
-	}
-
-	/**
-	 * 使用userName获取UserDetails并生成Authentication.
-	 */
-	private Authentication authenticate(String userName, HttpServletRequest request) {
-		UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
-
-		PreAuthenticatedAuthenticationToken authentication = new PreAuthenticatedAuthenticationToken(userDetails,
-				userDetails.getPassword(), userDetails.getAuthorities());
-
-		authentication.setDetails(new WebAuthenticationDetails(request));
-		return authentication;
 	}
 }

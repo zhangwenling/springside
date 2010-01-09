@@ -3,22 +3,21 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
- * $Id$
+ * $Id: NonceUtils.java 762 2009-12-27 14:46:36Z calvinxiu $
  */
 package org.springside.modules.security.utils;
 
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
 import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.lang.RandomStringUtils;
 
 /**
  * 唯一数生成工具类, 提供各种风格的生成函数.
  * 
  * 既可以直接使用随机数，也可以用随机数+时间戳+计数器进行组合.
+ * 其他一些Nonce生成工具类(JDK UUID, Hibernate UUIDGenerator, Apache RandomStringUtils)的使用见NonceUtilsTest.
  * 
  * @author calvin
  */
@@ -34,15 +33,6 @@ public class NonceUtils {
 	private static int counter = 0;
 
 	//-- Random function --//
-	/**
-	 * 使用较低强度的java.util.Random(),生成含所有字母与数字的字符串.
-	 * 
-	 * @param length 返回字符串长度
-	 */
-	public static String randomString(int length) {
-		return RandomStringUtils.randomAlphanumeric(length);
-	}
-
 	/**
 	 * 使用SecureRandom生成字节数组, 返回Hex编码结果.
 	 * 
@@ -81,13 +71,6 @@ public class NonceUtils {
 	 */
 	public static String randomHexLong() {
 		return Long.toHexString(randomLong());
-	}
-
-	/**
-	 * 使用SecureRandom生成32字符,每8位带-的UUID,见rfc4122.
-	 */
-	public static String randomUUID() {
-		return UUID.randomUUID().toString();
 	}
 
 	//-- Timestamp function --//
@@ -131,7 +114,6 @@ public class NonceUtils {
 		return Integer.toHexString(counter);
 	}
 
-	//-- Helper function --//
 	/**
 	 * 格式化字符串, 固定字符串长度, 不足长度在前面补0.
 	 */
