@@ -7,17 +7,19 @@
 
 	<description>SpringSecurity安全配置</description>
 
-	<s:http>
+	<!-- http安全配置 -->
+	<s:http auto-config="true">
 		<s:intercept-url pattern="/common/user/*" access="ROLE_User" />
 
 		<s:form-login login-page="/security/login.action" default-target-url="/"
 			authentication-failure-url="/security/login.action?error=1" />
-		<s:http-basic />
 		<s:logout logout-success-url="/" />
-		<s:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66" />
 		<s:concurrent-session-control max-sessions="1"
 			exception-if-maximum-exceeded="false" expired-url="/security/login.action?error=3" />
 	</s:http>
+		
+	<!-- 方法安全配置 -->
+	<s:global-method-security secured-annotations="enabled"/>
 
 	<!-- 认证配置 -->
 	<s:authentication-provider user-service-ref="userDetailsService">

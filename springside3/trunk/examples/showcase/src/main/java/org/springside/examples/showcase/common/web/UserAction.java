@@ -55,7 +55,7 @@ public class UserAction extends CrudActionSupport<User> {
 	//-- CRUD Action 函数 --//
 	@Override
 	public String list() throws Exception {
-		allUserList = userManager.getAllUser();
+		allUserList = userManager.getAllUserWithRole();
 		return SUCCESS;
 	}
 

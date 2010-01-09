@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
+import javax.xml.ws.soap.SOAPFaultException;
 
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.endpoint.Endpoint;
@@ -19,12 +20,13 @@ import org.springside.examples.showcase.ws.client.PasswordCallback;
 import org.springside.examples.showcase.ws.server.UserWebService;
 import org.springside.examples.showcase.ws.server.WsConstants;
 import org.springside.examples.showcase.ws.server.result.GetAllUserResult;
+import org.springside.examples.showcase.ws.server.result.GetUserResult;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 import com.google.common.collect.Maps;
 
 /**
- * WS-Security 测试.
+ * WS-Security 测试,测试PlainText, Digest, SpringSecurity三种EndPoint.
  * 
  * @author calvin
  */
@@ -68,5 +70,25 @@ public class SecurityWebServiceTest extends SpringContextTestCase {
 		//调用UserWebService
 		GetAllUserResult result = userWebService.getAllUser();
 		assertTrue(result.getUserList().size() > 0);
+	}
+	
+	/**
+	 * 测试访问与SpringSecurity结合的EndPoint, 调用受SpringSecurity保护的方法.
+	 */
+	@Test
+	public void getUserWithSpringSecurity() {
+		UserWebService userWebService = (UserWebService) applicationContext.getBean("userServiceWithSpringSecurity");
+		GetUserResult result = userWebService.getUser(1L);
+		assertEquals("admin",result.getUser().getLoginName());
+	}
+	
+	/**
+	 * 测试访问没有与SpringSecurity结合的EndPoint, 调用受SpringSecurity保护的方法.
+	 */
+	@Test(expected=SOAPFaultException.class)
+	public void getUserWithSpringSecurityWithoutPermission() {
+		UserWebService userWebService = (UserWebService) applicationContext.getBean("userServiceWithPlainPassword");
+		GetUserResult result = userWebService.getUser(1L);
+		assertEquals("admin",result.getUser().getLoginName());
 	}
 }

@@ -8,7 +8,7 @@
 	<description>SpringSecurity安全配置</description>
 
 	<!-- http安全配置 -->
-	<s:http>
+	<s:http auto-config="true">
 		<s:intercept-url pattern="/security/user!save*" access="ROLE_修改用户" />
 		<s:intercept-url pattern="/security/user!delete*" access="ROLE_修改用户" />
 		<s:intercept-url pattern="/security/user*" access="ROLE_浏览用户" />
@@ -17,9 +17,7 @@
 		<s:intercept-url pattern="/security/role*" access="ROLE_浏览角色" />
 		
 		<s:form-login login-page="/login.action" default-target-url="/" authentication-failure-url="/login.action?error=true" />
-		<s:http-basic />
 		<s:logout logout-success-url="/" />
-		<s:remember-me key="e37f4b31-0c45-11dd-bd0b-0800200c9a66" />
 	</s:http>
 
 	<!-- 认证配置, 使用userDetailsService提供的用户信息 -->

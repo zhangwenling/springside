@@ -8,7 +8,8 @@
 		</managementContext>
 		
 		<transportConnectors>
-			<transportConnector uri="tcp://localhost:61616" />
+			<transportConnector uri="vm://showcase" />
+			<!--<transportConnector uri="tcp://localhost:61616" />-->
 		</transportConnectors>
 	</broker>
 </beans>

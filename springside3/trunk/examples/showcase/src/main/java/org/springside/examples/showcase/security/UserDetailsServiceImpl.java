@@ -9,6 +9,7 @@ import org.springframework.security.GrantedAuthority;
 import org.springframework.security.GrantedAuthorityImpl;
 import org.springframework.security.userdetails.UserDetailsService;
 import org.springframework.security.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.showcase.common.entity.Role;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.UserManager;
@@ -22,6 +23,7 @@ import com.google.common.collect.Sets;
  * 
  * @author calvin
  */
+@Transactional(readOnly = true)
 public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	private UserManager userManager;

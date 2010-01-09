@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import org.springside.examples.showcase.common.entity.User;
@@ -47,5 +48,12 @@ public class UserDao extends HibernateDao<User, Long> {
 	public List<User> getAllUserWithRolesByDistinctCriteria() {
 		Criteria criteria = createCriteria().setFetchMode("roles", FetchMode.JOIN);
 		return distinct(criteria).list();
+	}
+	
+	/**
+	 * 初始化User的延迟加载关联roleList.
+	 */
+	public void initAllProperties(User user) {
+		Hibernate.initialize(user.getRoleList());
 	}
 }

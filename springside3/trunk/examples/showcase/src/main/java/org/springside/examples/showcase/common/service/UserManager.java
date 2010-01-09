@@ -37,7 +37,7 @@ public class UserManager {
 	public User getUser(Long id) {
 		return userDao.get(id);
 	}
-
+	
 	/**
 	 * 在保存用户时,发送用户修改通知消息, 由消息接收者异步进行较为耗时的通知邮件发送.
 	 * 
@@ -70,10 +70,19 @@ public class UserManager {
 	 * 取得所有用户,预加载用户的角色.
 	 */
 	@Transactional(readOnly = true)
-	public List<User> getAllUser() {
+	public List<User> getAllUserWithRole() {
 		List<User> list = userDao.getAllUserWithRoleByDistinctHql();
 		logger.info("get {} user sucessful.", list.size());
 		return list;
+	}
+	
+	/**
+	 * 取得用户,预加载用户的角色.
+	 */
+	public User getUserInited(Long id) {
+		User user = userDao.get(id);
+		userDao.initAllProperties(user);
+		return user;
 	}
 
 	/**
