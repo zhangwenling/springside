@@ -2,6 +2,8 @@ package org.springside.modules.security.springsecurity;
 
 import java.util.Vector;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.cxf.binding.soap.SoapMessage;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.ws.security.WSConstants;
@@ -9,15 +11,17 @@ import org.apache.ws.security.WSSecurityEngineResult;
 import org.apache.ws.security.WSUsernameTokenPrincipal;
 import org.apache.ws.security.handler.WSHandlerConstants;
 import org.apache.ws.security.handler.WSHandlerResult;
+import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.security.providers.preauth.PreAuthenticatedAuthenticationToken;
+import org.springframework.security.ui.WebAuthenticationDetails;
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UserDetailsService;
 
 public class WSS4JSpringSecurityInInterceptor extends WSS4JInInterceptor {
-	
+
 	UserDetailsService userDetailsService;
-	
+
 	public UserDetailsService getUserDetailsService() {
 		return userDetailsService;
 	}
@@ -32,10 +36,11 @@ public class WSS4JSpringSecurityInInterceptor extends WSS4JInInterceptor {
 		super.handleMessage(message);
 
 		String userName = getUserNameFromSecurityResult(message);
-		
-		UserDetails userDetails = findUserDetails(userName);
+		HttpServletRequest request = (HttpServletRequest) message.get("HTTP.REQUEST");
 
-		buildSpringSecurityContext(userDetails);
+		Authentication authentication = authenticate(userName, request);
+
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -56,16 +61,14 @@ public class WSS4JSpringSecurityInInterceptor extends WSS4JInInterceptor {
 		}
 		return null;
 	}
-	
-	private UserDetails findUserDetails(String userName){
-		return userDetailsService.loadUserByUsername(userName);
-	}
-	
-	private void buildSpringSecurityContext(UserDetails userDetails) {
 
-		PreAuthenticatedAuthenticationToken authentication = new PreAuthenticatedAuthenticationToken(userDetails
-				.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
+	private Authentication authenticate(String userName, HttpServletRequest request) {
+		UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
 
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+		PreAuthenticatedAuthenticationToken authentication = new PreAuthenticatedAuthenticationToken(userDetails,
+				userDetails.getPassword(), userDetails.getAuthorities());
+
+		authentication.setDetails(new WebAuthenticationDetails(request));
+		return authentication;
 	}
 }
