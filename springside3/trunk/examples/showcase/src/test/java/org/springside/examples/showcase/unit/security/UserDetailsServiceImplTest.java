@@ -12,7 +12,7 @@ import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springside.examples.showcase.common.entity.Role;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.UserManager;
-import org.springside.examples.showcase.security.Operator;
+import org.springside.examples.showcase.security.OperatorDetails;
 import org.springside.examples.showcase.security.UserDetailsServiceImpl;
 import org.springside.modules.utils.ReflectionUtils;
 
@@ -52,7 +52,7 @@ public class UserDetailsServiceImplTest extends Assert {
 		EasyMock.replay(mockUserManager);
 
 		//执行测试
-		Operator operator = (Operator) userDetailsService.loadUserByUsername(user.getLoginName());
+		OperatorDetails operator = (OperatorDetails) userDetailsService.loadUserByUsername(user.getLoginName());
 
 		//校验结果
 		assertEquals(user.getLoginName(), operator.getUsername());

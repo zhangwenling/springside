@@ -52,7 +52,7 @@ public class UserWebServiceTest extends Assert {
 	public void dozerBinding() {
 		User user = UserData.getRandomUserWithAdminRole();
 		List<User> list = Collections.singletonList(user);
-		EasyMock.expect(mockUserManager.getAllUser()).andReturn(list);
+		EasyMock.expect(mockUserManager.getAllLoadedUser()).andReturn(list);
 		EasyMock.replay(mockUserManager);
 
 		GetAllUserResult result = userWebService.getAllUser();
@@ -77,7 +77,7 @@ public class UserWebServiceTest extends Assert {
 	 */
 	@Test
 	public void handleException() {
-		EasyMock.expect(mockUserManager.getAllUser()).andThrow(new RuntimeException("Expected exception.."));
+		EasyMock.expect(mockUserManager.getAllLoadedUser()).andThrow(new RuntimeException("Expected exception.."));
 		EasyMock.replay(mockUserManager);
 
 		GetAllUserResult result = userWebService.getAllUser();

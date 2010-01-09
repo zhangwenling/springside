@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="org.springside.modules.security.springsecurity.SpringSecurityUtils" %>
+<%@ page import="org.springside.examples.showcase.security.OperatorDetails" %>
 <%@ include file="/common/taglibs.jsp" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -25,7 +26,9 @@
 	<div id="yui-main">
 		<div class="yui-b">
 		<h1>综合演示用例</h1>
-
+		<%if(SpringSecurityUtils.getCurrentUser()!=null){ %>
+		<div>你好, 用户<%=SpringSecurityUtils.getCurrentUserName()%>在<%=((OperatorDetails)SpringSecurityUtils.getCurrentUser()).getLoginTime()%>从<%=SpringSecurityUtils.getIpAddress()%>登录.&nbsp;&nbsp;</div>
+		<%} %>
 		<div>
 			<form id="mainForm" action="user!disableUsers.action" method="post">
 				<table id="contentTable">

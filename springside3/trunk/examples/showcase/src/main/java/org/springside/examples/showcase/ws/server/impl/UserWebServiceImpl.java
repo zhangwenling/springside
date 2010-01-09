@@ -77,7 +77,7 @@ public class UserWebServiceImpl implements UserWebService {
 
 		//获取用户
 		try {
-			User entity = userManager.getUserInited(id);
+			User entity = userManager.getLoadedUser(id);
 			UserDTO dto = dozer.map(entity, UserDTO.class);
 
 			GetUserResult result = new GetUserResult();

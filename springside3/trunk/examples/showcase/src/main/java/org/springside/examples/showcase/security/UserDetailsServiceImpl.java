@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.GrantedAuthority;
 import org.springframework.security.GrantedAuthorityImpl;
+import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UserDetailsService;
 import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +20,7 @@ import com.google.common.collect.Sets;
 /**
  * 实现SpringSecurity的UserDetailsService接口,实现获取用户Detail信息的回调函数.
  * 
- * 演示扩展SpringSecurity的User类,加入loginTime信息.
+ * 演示扩展SpringSecurity的User类加入loginTime信息.
  * 
  * @author calvin
  */
@@ -31,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	/**
 	 * 获取用户Detail信息的回调函数.
 	 */
-	public Operator loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
+	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
 
 		User user = userManager.findUserByLoginName(userName);
 		if (user == null) {
@@ -46,13 +47,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
-		Operator operator = new Operator(user.getLoginName(), user.getShaPassword(), enabled, accountNonExpired,
+		OperatorDetails userDetails = new OperatorDetails(user.getLoginName(), user.getShaPassword(), enabled, accountNonExpired,
 				credentialsNonExpired, accountNonLocked, grantedAuths);
-
-		//为Operator类加入登录时间信息.
-		operator.setLoginTime(new Date());
-
-		return operator;
+		//加入登录时间信息
+		userDetails.setLoginTime(new Date());
+		return userDetails;
 	}
 
 	/**

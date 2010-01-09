@@ -53,7 +53,7 @@ public class UserDao extends HibernateDao<User, Long> {
 	/**
 	 * 初始化User的延迟加载关联roleList.
 	 */
-	public void initAllProperties(User user) {
+	public void initUser(User user) {
 		Hibernate.initialize(user.getRoleList());
 	}
 }

@@ -44,11 +44,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
-		org.springframework.security.userdetails.User userdetail = new org.springframework.security.userdetails.User(
+		UserDetails userdetails = new org.springframework.security.userdetails.User(
 				user.getLoginName(), user.getPassword(), enabled, accountNonExpired, credentialsNonExpired,
 				accountNonLocked, grantedAuths);
 
-		return userdetail;
+		return userdetails;
 	}
 
 	/**

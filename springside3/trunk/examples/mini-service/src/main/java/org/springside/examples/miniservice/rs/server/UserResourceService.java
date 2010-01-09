@@ -52,7 +52,7 @@ public class UserResourceService {
 	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public List<UserDTO> getAllUser() {
 		try {
-			List<User> entityList = userManager.getAllUser();
+			List<User> entityList = userManager.getAllLoadedUser();
 			List<UserDTO> dtoList = Lists.newArrayList();
 			for (User userEntity : entityList) {
 				dtoList.add(dozer.map(userEntity, UserDTO.class));
@@ -72,7 +72,7 @@ public class UserResourceService {
 	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public UserDTO getUser(@PathParam("id") Long id) {
 		try {
-			User entity = userManager.getUser(id);
+			User entity = userManager.getLoadedUser(id);
 			UserDTO dto = dozer.map(entity, UserDTO.class);
 			return dto;
 		} catch (ObjectNotFoundException e) {

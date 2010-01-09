@@ -7,7 +7,7 @@
 		</managementContext>
 
 		<transportConnectors>
-			<transportConnector uri="tcp://localhost:${jms.tcp_port}" />
+			<transportConnector uri="${jms.broker_url}" />
 		</transportConnectors>
 	</broker>
 </beans>

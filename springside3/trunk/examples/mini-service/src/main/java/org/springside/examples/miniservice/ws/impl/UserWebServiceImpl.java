@@ -47,7 +47,7 @@ public class UserWebServiceImpl implements UserWebService {
 	public GetAllUserResult getAllUser() {
 		//获取User列表并转换为UserDTO列表.
 		try {
-			List<User> userEntityList = userManager.getAllUser();
+			List<User> userEntityList = userManager.getAllLoadedUser();
 			List<UserDTO> userDTOList = Lists.newArrayList();
 
 			for (User userEntity : userEntityList) {
@@ -77,7 +77,7 @@ public class UserWebServiceImpl implements UserWebService {
 
 		//获取用户
 		try {
-			User entity = userManager.getUser(id);
+			User entity = userManager.getLoadedUser(id);
 			UserDTO dto = dozer.map(entity, UserDTO.class);
 
 			GetUserResult result = new GetUserResult();

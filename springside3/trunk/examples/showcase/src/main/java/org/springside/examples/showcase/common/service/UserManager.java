@@ -33,10 +33,6 @@ public class UserManager {
 	private ServerConfig serverConfig; //系统配置
 	@Autowired(required = false)
 	private NotifyMessageProducer notifyProducer; //JMS消息发送
-
-	public User getUser(Long id) {
-		return userDao.get(id);
-	}
 	
 	/**
 	 * 在保存用户时,发送用户修改通知消息, 由消息接收者异步进行较为耗时的通知邮件发送.
@@ -66,23 +62,27 @@ public class UserManager {
 		return user.getId() == 1;
 	}
 
+	public User getUser(Long id) {
+		return userDao.get(id);
+	}
+	
 	/**
-	 * 取得所有用户,预加载用户的角色.
+	 * 取得用户, 并对用户的延迟加载关联进行初始化.
+	 */
+	public User getLoadedUser(Long id) {
+		User user = userDao.get(id);
+		userDao.initUser(user);
+		return user;
+	}
+	
+	/**
+	 * 取得所有用户, 预加载用户的角色.
 	 */
 	@Transactional(readOnly = true)
 	public List<User> getAllUserWithRole() {
 		List<User> list = userDao.getAllUserWithRoleByDistinctHql();
 		logger.info("get {} user sucessful.", list.size());
 		return list;
-	}
-	
-	/**
-	 * 取得用户,预加载用户的角色.
-	 */
-	public User getUserInited(Long id) {
-		User user = userDao.get(id);
-		userDao.initAllProperties(user);
-		return user;
 	}
 
 	/**
