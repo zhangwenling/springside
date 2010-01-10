@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.util.Assert;
+import org.springside.modules.utils.EncodeUtils;
 
 /**
  * Http与Servlet工具类.
@@ -24,18 +25,19 @@ import org.springframework.util.Assert;
  * @author calvin
  */
 public class ServletUtils {
-	
+
 	//-- content-type 常量定义 --//
 	public static final String TEXT_TYPE = "text/plain";
 	public static final String JSON_TYPE = "application/json";
 	public static final String XML_TYPE = "text/xml";
 	public static final String HTML_TYPE = "text/html";
 	public static final String JS_TYPE = "text/javascript";
-	public static final String  EXCEL_TYPE = "application/vnd.ms-excel";
-	
+	public static final String EXCEL_TYPE = "application/vnd.ms-excel";
+
+	//-- header 定义 --//
+	public static final String AUTHENTICATION_HEADER = "Authorization";
+
 	public static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
-
-
 
 	/**
 	 * 设置客户端缓存过期时间 Header.
@@ -122,7 +124,6 @@ public class ServletUtils {
 		return true;
 	}
 
-	
 	/**
 	 * 设置让浏览器弹出下载对话框的Header.
 	 * 
@@ -157,15 +158,21 @@ public class ServletUtils {
 				String[] values = request.getParameterValues(paramName);
 				if (values == null || values.length == 0) {//NOSONAR
 					// Do nothing, no values found at all.
-				}
-				else if (values.length > 1) {
+				} else if (values.length > 1) {
 					params.put(unprefixed, values);
-				}
-				else {
+				} else {
 					params.put(unprefixed, values[0]);
 				}
 			}
 		}
 		return params;
+	}
+
+	/**
+	 * 对Http Basic Header进行编码.
+	 */
+	public static String encodeHttpBasic(String userName, String password) {
+		String encode = userName + ":" + password;
+		return "Basic " + EncodeUtils.base64Encode(encode.getBytes());
 	}
 }

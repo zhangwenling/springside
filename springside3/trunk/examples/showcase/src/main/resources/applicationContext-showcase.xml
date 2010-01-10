@@ -20,5 +20,6 @@
 	<import resource="schedule/applicationContext-executor.xml" />
 	<import resource="security/applicationContext-security.xml" />
 	<import resource="webservice/applicationContext-cxf-server.xml" />
+	<import resource="webservice/applicationContext-jersey-server.xml" />
 	<import resource="webservice/applicationContext-hessian-server.xml" />
 </beans>

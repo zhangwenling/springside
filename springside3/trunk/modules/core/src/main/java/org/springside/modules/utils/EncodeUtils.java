@@ -49,7 +49,7 @@ public class EncodeUtils {
 	 * Base64编码.
 	 */
 	public static String base64Encode(byte[] input) {
-		return Base64.encodeBase64String(input);
+		return new String(Base64.encodeBase64(input));
 	}
 
 	/**
