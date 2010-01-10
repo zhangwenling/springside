@@ -64,7 +64,7 @@ public class HibernateWebUtils {
 		Assert.hasText(idName, "idName不能为空");
 		Assert.notNull(clazz, "clazz不能为空");
 
-		//目标集合为空,删除源集合中所有对象后直接返回.
+		//目标集合为空, 删除源集合中所有对象后直接返回.
 		if (checkedIds == null) {
 			srcObjects.clear();
 			return;
