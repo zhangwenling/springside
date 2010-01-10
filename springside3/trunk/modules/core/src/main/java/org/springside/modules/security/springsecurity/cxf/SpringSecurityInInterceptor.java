@@ -1,4 +1,4 @@
-package org.springside.modules.security.springsecurity;
+package org.springside.modules.security.springsecurity.cxf;
 
 import java.util.Vector;
 
@@ -16,6 +16,7 @@ import org.apache.ws.security.handler.WSHandlerConstants;
 import org.apache.ws.security.handler.WSHandlerResult;
 import org.springframework.security.userdetails.UserDetails;
 import org.springframework.security.userdetails.UserDetailsService;
+import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
  * 在WSS4J校验后设置SpringSecurity Context的CXF Interceptor.
@@ -38,6 +39,7 @@ public class SpringSecurityInInterceptor extends AbstractPhaseInterceptor<Messag
 	public void handleMessage(Message message) throws Fault {
 		String userName = getUserNameFromWSS4JResult(message);
 		HttpServletRequest request = (HttpServletRequest) message.get("HTTP.REQUEST");
+
 		UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
 		SpringSecurityUtils.saveUserDetailsToContext(userDetails, request);
 	}

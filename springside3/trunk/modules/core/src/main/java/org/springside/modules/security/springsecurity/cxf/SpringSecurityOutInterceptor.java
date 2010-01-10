@@ -1,4 +1,4 @@
-package org.springside.modules.security.springsecurity;
+package org.springside.modules.security.springsecurity.cxf;
 
 import org.apache.cxf.interceptor.Fault;
 import org.apache.cxf.message.Message;
@@ -14,7 +14,7 @@ import org.springframework.security.context.SecurityContextHolder;
 public class SpringSecurityOutInterceptor extends AbstractPhaseInterceptor<Message>{
 
 	public SpringSecurityOutInterceptor() {
-		super(Phase.POST_PROTOCOL);
+		super(Phase.MARSHAL);
 	}
 
 	public void handleMessage(Message message) throws Fault {

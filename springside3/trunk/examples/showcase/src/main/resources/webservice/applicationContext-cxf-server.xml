@@ -56,10 +56,10 @@
 					</map>
 				</property>
 			</bean>
-			<bean class="org.springside.modules.security.springsecurity.SpringSecurityInInterceptor">
+			<bean class="org.springside.modules.security.springsecurity.cxf.SpringSecurityInInterceptor">
 				<property name="userDetailsService" ref="userDetailsService" />
 			</bean>
-			<bean class="org.springside.modules.security.springsecurity.SpringSecurityOutInterceptor" />
+			<bean class="org.springside.modules.security.springsecurity.cxf.SpringSecurityOutInterceptor" />
 		</jaxws:inInterceptors>
 	</jaxws:endpoint>
 
