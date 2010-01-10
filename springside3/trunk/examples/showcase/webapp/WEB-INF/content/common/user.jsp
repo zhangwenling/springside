@@ -27,7 +27,7 @@
 		<div class="yui-b">
 		<h1>综合演示用例</h1>
 		<%if(SpringSecurityUtils.getCurrentUser()!=null){ %>
-		<div>你好, 用户<%=SpringSecurityUtils.getCurrentUserName()%>在<%=((OperatorDetails)SpringSecurityUtils.getCurrentUser()).getLoginTime()%>从<%=SpringSecurityUtils.getIpAddress()%>登录.&nbsp;&nbsp;</div>
+		<div>你好, 用户<%=SpringSecurityUtils.getCurrentUserName()%>在<%=((OperatorDetails)SpringSecurityUtils.getCurrentUser()).getLoginTime()%>从<%=SpringSecurityUtils.getCurrentUserIp()%>登录.&nbsp;&nbsp;</div>
 		<%} %>
 		<div>
 			<form id="mainForm" action="user!disableUsers.action" method="post">

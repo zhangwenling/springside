@@ -15,16 +15,18 @@
 	<%@ include file="/common/left.jsp" %>
 	<div id="yui-main">
 		<div class="yui-b">
-		<h1>XML操作演示</h1>
+		<h1>XML/JSON操作演示</h1>
 
 		<h2>技术说明：</h2>
 		<ul>
 			<li>基于JAXB2.0的Java-XML绑定, 演示根元素是List, 属性是List与Map等特殊情况.</li>
 			<li>万能老倌Dom4j.</li>
+			<li>最快的JSON转换类Jackson.</li>
 		</ul>
 
 		<h2>用户故事：</h2>
 		<p>在JaxbTest测试用例中演示XML与Java对象的转换及Dom4j的使用.</p>
+		<p>在JacksonTest测试用例中演示JSON与Java对象, Map, List, Array的转换.</p>
 		</div>
 	</div>
 </div>
