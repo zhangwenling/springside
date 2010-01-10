@@ -92,7 +92,7 @@ public class Struts2Utils {
 	 * @param headers 可变的header数组，目前接受的值为"encoding:"或"no-cache:",默认值分别为UTF-8和true.
 	 */
 	public static void render(final String contentType, final String content, final String... headers) {
-		HttpServletResponse response = initResponse(contentType, headers);
+		HttpServletResponse response = initResponseHeader(contentType, headers);
 		try {
 			response.getWriter().write(content);
 			response.getWriter().flush();
@@ -142,7 +142,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderJson(final Object data, final String... headers) {
-		HttpServletResponse response = initResponse(ServletUtils.JSON_TYPE, headers);
+		HttpServletResponse response = initResponseHeader(ServletUtils.JSON_TYPE, headers);
 		try {
 			mapper.writeValue(response.getWriter(), data);
 		} catch (IOException e) {
@@ -174,7 +174,7 @@ public class Struts2Utils {
 	/**
 	 * 分析并设置contentType与headers.
 	 */
-	private static HttpServletResponse initResponse(final String contentType, final String... headers) {
+	private static HttpServletResponse initResponseHeader(final String contentType, final String... headers) {
 		//分析headers参数
 		String encoding = DEFAULT_ENCODING;
 		boolean noCache = DEFAULT_NOCACHE;
