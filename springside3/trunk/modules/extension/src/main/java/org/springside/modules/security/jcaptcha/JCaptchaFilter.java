@@ -26,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springside.modules.web.ServletUtils;
 
 import com.octo.captcha.service.CaptchaService;
 import com.octo.captcha.service.CaptchaServiceException;
@@ -149,9 +150,7 @@ public class JCaptchaFilter implements Filter {
 	protected void genernateCaptchaImage(final HttpServletRequest request, final HttpServletResponse response)
 			throws IOException {
 
-		response.setHeader("Cache-Control", "no-store");
-		response.setHeader("Pragma", "no-cache");
-		response.setDateHeader("Expires", 0);
+		ServletUtils.setNoCacheHeader(response);
 		response.setContentType("image/jpeg");
 
 		ServletOutputStream out = response.getOutputStream();
