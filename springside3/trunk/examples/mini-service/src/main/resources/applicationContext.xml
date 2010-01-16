@@ -39,9 +39,8 @@
 		<!-- Connection Pooling Info -->
 		<property name="initialSize" value="5" />
 		<property name="maxActive" value="100" />
-		<property name="maxIdle" value="30" />
-		<property name="maxWait" value="500" />
-		<property name="poolPreparedStatements" value="false" />
+		<property name="maxIdle" value="20" />
+		<property name="maxWait" value="200" />
 		<property name="defaultAutoCommit" value="false" />
 	</bean>
 

@@ -44,7 +44,6 @@ public class UserDaoTest extends SpringTxTestCase {
 		flush();
 		user = entityDao.findUniqueBy("id", user.getId());
 		assertNull(user);
-
 	}
 
 	@Test(expected = org.hibernate.exception.ConstraintViolationException.class)

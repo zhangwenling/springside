@@ -77,7 +77,7 @@ public class JacksonTest extends Assert {
 		}
 	}
 
-	private static class TestBean {
+	public static class TestBean {
 		private String name;
 
 		public TestBean() {
