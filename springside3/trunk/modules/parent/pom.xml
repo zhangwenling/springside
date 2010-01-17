@@ -239,7 +239,7 @@
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-mapper-asl</artifactId>
-				<version>1.4.0</version>
+				<version>1.4.1</version>
 			</dependency>
 
 			<!-- j2ee web spec -->
