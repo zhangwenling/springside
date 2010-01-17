@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -6,7 +6,7 @@
 	<artifactId>springside3-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>Springside3's Parent pom.xml</name>
-	<version>3.2.2</version>
+	<version>3.2.3-SNAPSHOT</version>
 	<organization>
 		<name>SpringSide</name>
 		<url>http://www.springside.org.cn</url>
@@ -14,7 +14,7 @@
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<springside.version>3.2.2</springside.version>
+		<springside.version>3.2.3-SNAPSHOT</springside.version>
 		<spring.version>2.5.6</spring.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<struts2.version>2.1.8</struts2.version>
@@ -33,9 +33,6 @@
 			<id>nexus</id>
 			<name>local nexus server</name>
 			<url>http://localhost:8081/nexus/content/groups/public</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
 		</repository>
 
 		<repository>
@@ -74,12 +71,29 @@
 		<pluginRepository>
 			<id>nexus</id>
 			<name>local nexus server</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url>
+			<url>http://localhost:8081/nexus/content/repositories/releases</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
+
+	<distributionManagement>
+		<repository>
+			<id>nexus</id>
+			<name>local nexus server</name>
+			<url>http://localhost:8081/nexus/content/repositories/release</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus</id>
+			<name>local nexus server</name>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+
+	</distributionManagement>
+
+
+
 
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
 	<dependencyManagement>
@@ -596,7 +610,7 @@
 				<artifactId>commons-io</artifactId>
 				<version>1.4</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.google.collections</groupId>
 				<artifactId>google-collections</artifactId>
@@ -778,7 +792,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.4.3</version>
+					<version>2.5</version>
 					<configuration>
 						<argLine>-Xmx256M</argLine>
 						<includes>
@@ -874,6 +888,18 @@
 						</dependency>
 					</dependencies>
 				</plugin>
+				
+				<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                        <wtpmanifest>true</wtpmanifest>
+                        <wtpapplicationxml>true</wtpapplicationxml>
+                        <wtpversion>2.0</wtpversion>
+                </configuration>
+        </plugin>
+
 			</plugins>
 		</pluginManagement>
 	</build>

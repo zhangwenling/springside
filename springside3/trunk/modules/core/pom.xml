@@ -2,12 +2,11 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>springside3-parent</artifactId>
 		<groupId>org.springside</groupId>
-		<version>3.2.2</version>
+		<artifactId>springside3-parent</artifactId>
+		<version>3.2.3-SNAPSHOT</version>
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
-	<groupId>org.springside</groupId>
 	<artifactId>springside3-core</artifactId>
 	<name>Springside3's Core Module</name>
 
