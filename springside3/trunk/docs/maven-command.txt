@@ -1,0 +1,6 @@
+mvn install
+mvn deploy
+mvn jetty:run
+mvn eclipse:eclipse
+mvn dependency:tree
+mvn dbunit:export

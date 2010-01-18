@@ -762,13 +762,6 @@
 
 		<pluginManagement>
 			<plugins>
-				<!-- war插件-->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>2.1-beta-1</version>
-				</plugin>
-
 				<!-- compiler插件, 设定JDK版本与编码 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -794,6 +787,13 @@
 					</configuration>
 				</plugin>
 
+				<!-- war插件-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.1-beta-1</version>
+				</plugin>
+
 				<!-- resource插件, 设定编码 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -804,7 +804,7 @@
 					</configuration>
 				</plugin>
 
-				<!-- Eclipse 插件 -->
+				<!-- eclipse 插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-eclipse-plugin</artifactId>
@@ -816,7 +816,6 @@
 							<sourceExclude>**/.svn/</sourceExclude>
 						</sourceExcludes>
 						<downloadSources>true</downloadSources>
-						<downloadJavadocs>true</downloadJavadocs>
 					</configuration>
 				</plugin>
 
