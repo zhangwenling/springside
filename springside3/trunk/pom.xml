@@ -69,25 +69,11 @@
 		</plugins>
 	</build>
 
-	<profiles>
-		<profile>
-			<id>modules</id>
-			<modules>
-				<module>modules/core</module>
-				<module>modules/extension</module>
-				<module>modules/parent</module>
-				<module>tools/code-generator/maven-archetypes/service-archetype</module>
-				<module>tools/code-generator/maven-archetypes/web-archetype</module>
-			</modules>
-		</profile>
-
-		<profile>
-			<id>examples</id>
-			<modules>
-				<module>examples/mini-service</module>
-				<module>examples/mini-web</module>
-				<module>examples/showcase</module>
-			</modules>
-		</profile>
-	</profiles>
+	<modules>
+			<module>modules/core</module>
+			<module>modules/extension</module>
+			<module>modules/parent</module>
+			<module>tools/code-generator/maven-archetypes/service-archetype</module>
+			<module>tools/code-generator/maven-archetypes/web-archetype</module>
+	</modules>
 </project>

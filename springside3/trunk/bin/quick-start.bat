@@ -22,31 +22,26 @@ cd  tools\tomcat\apache-tomcat-6.0.20\bin\
 start startup.bat
 cd ..\..\..\..\
 
-echo [Step 3] 安装SpringSide3 modules 和archetypes到 本地Maven仓库.
-call %MAVEN_BAT% -o clean install  -Pmodules -Dmaven.test.skip=true
+echo [Step 4] 安装SpringSide3 modules 和archetypes到 本地Maven仓库.
+call %MAVEN_BAT% -o clean install -Dmaven.test.skip=true
 
-echo [Step 4] 为Mini-Service 初始化数据库、编译、打包.
+echo [Step 5] 为Mini-Service 初始化数据库、编译、打包.
 cd examples\mini-service
 call %MAVEN_BAT% -o clean package -Pinitdb -Dmaven.test.skip=true
 cd ..\..\
 
-echo [Step 5] 为Mini-Web 初始化数据库、编译、打包.
+echo [Step 6] 为Mini-Web 初始化数据库、编译、打包.
 cd examples\mini-web
 call %MAVEN_BAT% -o clean package -Pinitdb -Dmaven.test.skip=true
 cd ..\..\
 
-echo [Step 6] 为Showcase 初始化数据库、编译、打包.
+echo [Step 7] 为Showcase 初始化数据库、编译、打包.
 cd examples\showcase
 call %MAVEN_BAT% -o clean package -Pinitdb -Dmaven.test.skip=true
 cd ..\..\
 
-echo [Step 7] 部署3个示例项目到tomcat，启动tomcat.
+echo [Step 8] 部署3个示例项目到tomcat，启动tomcat.
 call %MAVEN_BAT% -o cargo:deploy
-
-echo [Step 8] 为所有项目初始化依赖Jar包到lib及webapp/WEB-INF/lib目录,方便浏览
-call %MAVEN_BAT% -o dependency:copy-dependencies -DoutputDirectory=lib -Dsilent=true -Pmodules
-call %MAVEN_BAT% -o dependency:copy-dependencies -DoutputDirectory=lib -DexcludeScope=runtime -Dsilent=true -Pexamples
-call %MAVEN_BAT% -o dependency:copy-dependencies -DoutputDirectory=webapp/WEB-INF/lib -DincludeScope=runtime -Dsilent=true -Pexamples
 
 echo [INFO] SpringSide3.0 快速启动完毕.
 echo [INFO] 可访问以下演示网址:
