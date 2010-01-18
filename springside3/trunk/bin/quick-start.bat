@@ -1,8 +1,8 @@
 @echo off
 echo [INFO] 确保默认JDK版本为JDK5.0及以上版本.
 
-if exist "..\tools\tomcat\apache-tomcat-6.0.20\" goto begin
-echo [ERROR] ..\tools\tomcat\apache-tomcat-6.0.20目录不存在，请下载all-in-one版本
+if exist "..\tools\maven\apache-maven-2.2.1\" goto begin
+echo [ERROR] ..\tools\maven\apache-maven-2.2.1目录不存在，请下载all-in-one版本
 goto end
 
 :begin
@@ -17,37 +17,31 @@ cd tools\h2
 call h2w.bat
 cd ..\..\
 
-echo [Step 3] 执行tools/tomcat/apache-tomcat-6.0.20/bin/startup.bat 启动Tomcat服务器.
-cd  tools\tomcat\apache-tomcat-6.0.20\bin\
-start startup.bat
-cd ..\..\..\..\
-
-echo [Step 4] 安装SpringSide3 modules 和archetypes到 本地Maven仓库.
+echo [Step 3] 安装SpringSide3 modules 和archetypes到 本地Maven仓库.
 call %MAVEN_BAT% -o clean install -Dmaven.test.skip=true
 
-echo [Step 5] 为Mini-Service 初始化数据库、编译、打包.
+echo [Step 4] 为Mini-Service 编译, 打包, 初始化数据库, 启动Jetty.
 cd examples\mini-service
-call %MAVEN_BAT% -o clean package -Pinitdb -Dmaven.test.skip=true
+start "Mini-Service" %MAVEN_BAT% -o -Djetty.port=8080 jetty:run
 cd ..\..\
 
-echo [Step 6] 为Mini-Web 初始化数据库、编译、打包.
+echo [Step 5] 为Mini-Web 编译, 打包, 初始化数据库, 启动Jetty.
 cd examples\mini-web
 call %MAVEN_BAT% -o clean package -Pinitdb -Dmaven.test.skip=true
+start "Mini-Web" %MAVEN_BAT% -o -Djetty.port=8082 jetty:run
 cd ..\..\
 
-echo [Step 7] 为Showcase 初始化数据库、编译、打包.
+echo [Step 6] 为Showcase 编译, 打包, 初始化数据库, 启动Jetty.
 cd examples\showcase
 call %MAVEN_BAT% -o clean package -Pinitdb -Dmaven.test.skip=true
+start "Showcase" %MAVEN_BAT% -o -Djetty.port=8084 jetty:run
 cd ..\..\
-
-echo [Step 8] 部署3个示例项目到tomcat，启动tomcat.
-call %MAVEN_BAT% -o cargo:deploy
 
 echo [INFO] SpringSide3.0 快速启动完毕.
 echo [INFO] 可访问以下演示网址:
 echo [INFO] http://localhost:8080/mini-service
-echo [INFO] http://localhost:8080/mini-web
-echo [INFO] http://localhost:8080/showcase
+echo [INFO] http://localhost:8082/mini-web
+echo [INFO] http://localhost:8084/showcase
 
 :end
 pause

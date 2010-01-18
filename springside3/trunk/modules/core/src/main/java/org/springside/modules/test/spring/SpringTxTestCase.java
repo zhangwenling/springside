@@ -66,20 +66,15 @@ public class SpringTxTestCase extends SpringContextTestCase {
 	}
 	
 	//-- SessionFactory函数--//
-	
-	
-	/**
-	 * 刷新sessionFactory,强制Hibernate执行SQL以验证ORM配置.
-	 * 因为没有执行commit操作,不会更改测试数据库.
-	 * 
-	 * @see #flush(String)
-	 */
-	
 	@Autowired(required=false)
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
+	/**
+	 * 刷新sessionFactory,强制Hibernate执行SQL以验证ORM配置.
+	 * 因为没有执行commit操作,不会更改测试数据库.
+	 */	
 	protected void flush() {
 		sessionFactory.getCurrentSession().flush();
 	}

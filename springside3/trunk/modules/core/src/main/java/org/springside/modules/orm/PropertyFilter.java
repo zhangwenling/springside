@@ -22,21 +22,15 @@ import org.springside.modules.utils.ReflectionUtils;
  */
 public class PropertyFilter {
 
-	/**
-	 * 多个属性间OR关系的分隔符.
-	 */
+	/** 多个属性间OR关系的分隔符. */
 	public static final String OR_SEPARATOR = "_OR_";
 
-	/**
-	 * 属性比较类型.
-	 */
+	/** 属性比较类型. */
 	public enum MatchType {
 		EQ, LIKE, LT, GT, LE, GE;
 	}
 
-	/**
-	 * 属性数据类型.
-	 */
+	/** 属性数据类型. */
 	public enum PropertyType {
 		S(String.class), I(Integer.class), L(Long.class), N(Double.class), D(Date.class), B(Boolean.class);
 

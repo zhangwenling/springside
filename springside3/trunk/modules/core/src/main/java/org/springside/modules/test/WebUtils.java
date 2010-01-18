@@ -39,7 +39,7 @@ public class WebUtils {
 	/**
 	 * 在ServletContext里初始化Spring WebApplicationContext.
 	 * 
-	 * @param contexts application context路径列表.
+	 * @param configLocations application context路径列表.
 	 */
 	public static void initWebApplicationContext(MockServletContext servletContext, String... configLocations) {
 		String configLocationsString = StringUtils.join(configLocations, ",");

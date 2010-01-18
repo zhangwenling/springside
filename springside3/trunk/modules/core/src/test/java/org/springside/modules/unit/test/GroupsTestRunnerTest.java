@@ -44,11 +44,10 @@ public class GroupsTestRunnerTest extends Assert {
 	}
 
 	@Test
-	public void isTestMethodShouldRun() throws InitializationError {
-
-		assertEquals(true, GroupsTestRunner.shouldRun(TestClassBean1.class.getMethods()[0]));
-		assertEquals(true, GroupsTestRunner.shouldRun(TestClassBean2.class.getMethods()[0]));
-		assertEquals(false, GroupsTestRunner.shouldRun(TestClassBean3.class.getMethods()[0]));
+	public void isTestMethodShouldRun() throws InitializationError, SecurityException, NoSuchMethodException {
+		assertEquals(true, GroupsTestRunner.shouldRun(TestClassBean1.class.getMethod("shouldRun", new Class[]{})));
+		assertEquals(true, GroupsTestRunner.shouldRun(TestClassBean2.class.getMethod("shouldRun", new Class[]{})));
+		assertEquals(false, GroupsTestRunner.shouldRun(TestClassBean3.class.getMethod("shouldNeverRun", new Class[]{})));
 
 	}
 

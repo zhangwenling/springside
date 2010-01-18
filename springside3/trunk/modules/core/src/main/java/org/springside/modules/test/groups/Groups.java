@@ -30,7 +30,6 @@ public @interface Groups {
 
 	/**
 	 * 组别定义,默认为ALL.
-	 * @return
 	 */
 	public String value() default ALL;
 }

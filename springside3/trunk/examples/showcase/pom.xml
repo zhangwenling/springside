@@ -280,7 +280,7 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
@@ -374,8 +374,7 @@
 				</executions>
 				<configuration>
 					<tasks>
-						<taskdef name="instrument"
-							classname="org.hibernate.tool.instrument.javassist.InstrumentTask">
+						<taskdef name="instrument" classname="org.hibernate.tool.instrument.javassist.InstrumentTask">
 							<classpath>
 								<path refid="maven.runtime.classpath" />
 								<path refid="maven.plugin.classpath" />
@@ -419,9 +418,15 @@
 				<artifactId>maven-jetty-plugin</artifactId>
 			</plugin>
 		</plugins>
-	</build>
-	<profiles>
 
+		<!-- eclipse插件 -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-eclipse-plugin</artifactId>
+		</plugin>
+	</build>
+
+	<profiles>
 		<!-- 重载initdb profile设定,加入对Quartz数据库的初始化 -->
 		<profile>
 			<id>initdb</id>
