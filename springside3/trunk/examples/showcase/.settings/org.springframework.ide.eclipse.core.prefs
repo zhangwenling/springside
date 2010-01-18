@@ -1,4 +1,4 @@
-#Sat Sep 12 15:16:15 CST 2009
+#Mon Jan 18 19:36:09 CST 2010
 eclipse.preferences.version=1
 org.springframework.ide.eclipse.core.builders.enable.beanmetadatabuilder=true
 org.springframework.ide.eclipse.core.enable.project.preferences=false
@@ -15,5 +15,6 @@ org.springframework.ide.eclipse.core.validator.rule.enable.org.springframework.i
 org.springframework.ide.eclipse.core.validator.rule.enable.org.springframework.ide.eclipse.beans.core.beanReference-org.springframework.ide.eclipse.beans.core.beansvalidator=true
 org.springframework.ide.eclipse.core.validator.rule.enable.org.springframework.ide.eclipse.beans.core.methodOverride-org.springframework.ide.eclipse.beans.core.beansvalidator=true
 org.springframework.ide.eclipse.core.validator.rule.enable.org.springframework.ide.eclipse.beans.core.parsingProblems-org.springframework.ide.eclipse.beans.core.beansvalidator=true
-org.springframework.ide.eclipse.core.validator.rule.enable.org.springframework.ide.eclipse.beans.core.requiredProperty-org.springframework.ide.eclipse.beans.core.beansvalidator=true
+org.springframework.ide.eclipse.core.validator.rule.enable.org.springframework.ide.eclipse.beans.core.requiredProperty-org.springframework.ide.eclipse.beans.core.beansvalidator=false
+org.springframework.ide.eclipse.core.validator.rule.enable.org.springframework.ide.eclipse.beans.core.toolAnnotation-org.springframework.ide.eclipse.beans.core.beansvalidator=false
 org.springframework.ide.eclipse.core.validator.rule.enable.org.springframework.ide.eclipse.core.springClasspath-org.springframework.ide.eclipse.core.springvalidator=false

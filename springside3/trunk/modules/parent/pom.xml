@@ -93,8 +93,6 @@
 	</distributionManagement>
 
 
-
-
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
 	<dependencyManagement>
 		<dependencies>
@@ -143,7 +141,7 @@
 			<dependency>
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjweaver</artifactId>
-				<version>1.6.6</version>
+				<version>1.6.8</version>
 			</dependency>
 			<dependency>
 				<groupId>cglib</groupId>
@@ -761,19 +759,13 @@
 		<!-- 命令行输入mvn时，默认执行mvn package  -->
 		<defaultGoal>package</defaultGoal>
 
-		<!-- 设定Web应用中编译结果输出到WEB-INF/classes 中,与使用Eclipse时相同  -->
-		<outputDirectory>webapp/WEB-INF/classes</outputDirectory>
-
 		<pluginManagement>
 			<plugins>
-				<!-- war插件, 设定webapp目录为/webapp -->
+				<!-- war插件-->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
 					<version>2.1-beta-1</version>
-					<configuration>
-						<warSourceDirectory>webapp</warSourceDirectory>
-					</configuration>
 				</plugin>
 
 				<!-- compiler插件, 设定JDK版本与编码 -->
@@ -888,18 +880,22 @@
 						</dependency>
 					</dependencies>
 				</plugin>
-				
-				<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                        <wtpmanifest>true</wtpmanifest>
-                        <wtpapplicationxml>true</wtpapplicationxml>
-                        <wtpversion>2.0</wtpversion>
-                </configuration>
-        </plugin>
 
+				<!-- Eclipse 插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>2.7</version>
+					<configuration>
+						<wtpversion>2.0</wtpversion>
+						<ajdtVersion>none</ajdtVersion>
+						<sourceExcludes>
+							<sourceExclude>**/.svn/</sourceExclude>
+						</sourceExcludes>
+						<downloadSources>true</downloadSources>
+						<downloadJavadocs>true</downloadJavadocs>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
