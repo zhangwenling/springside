@@ -540,12 +540,12 @@
 			<dependency>
 				<groupId>javax.mail</groupId>
 				<artifactId>mail</artifactId>
-				<version>1.4.1</version>
+				<version>1.4.3</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.activation</groupId>
 				<artifactId>activation</artifactId>
-				<version>1.1</version>
+				<version>1.1.1</version>
 			</dependency>
 			<!-- email end -->
 
@@ -804,6 +804,27 @@
 					</configuration>
 				</plugin>
 
+				<!-- clean插件-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+
+				<!-- install插件-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.3</version>
+				</plugin>
+
+				<!-- deploy插件-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+
 				<!-- eclipse 插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -899,6 +920,10 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	<modules>
+		<module>model</module>
+	</modules>
 
 	<profiles>
 		<!-- 以cluster模式打包war文件和运行jetty的profile,以-Dcluster.nodename=xxx 激活 -->
