@@ -1,0 +1,22 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+Add your content here.
+
+
+= Details =
+
+Main Job:
+  * 使用H2 内存模式 + DBUnit 实现 集成测试，取消Integration Test模式
+  * Modules的parent pom.xml
+  * 实现Assembly输出
+
+Other Little things
+  * UserDetails userName->username
+  * entity.* -> entity.security
+  * TimeUtil
+  * Clear SimpleHibernateDAO
+
+Finish:
+  * SpringSecurity Simple
