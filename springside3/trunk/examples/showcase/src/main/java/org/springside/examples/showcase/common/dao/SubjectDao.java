@@ -15,7 +15,7 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 public class SubjectDao extends HibernateDao<Subject, Long> {
 
 	public static final String QUERY_WITH_DETAIL = "select s from Subject s fetch all properties where s.id=?";
-	public static final String QUERY_WITH_DETAIL_AND_REPLY = "select s from Subject s fetch all properties left join s.replyList fetch all properties where s.id=?";
+	public static final String QUERY_WITH_DETAIL_AND_REPLY = "select s from Subject s fetch all properties left join fetch s.replyList fetch all properties where s.id=?";
 
 	/**
 	 * 获取帖子内容.

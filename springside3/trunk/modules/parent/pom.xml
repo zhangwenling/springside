@@ -21,6 +21,7 @@
 		<cxf.version>2.2.5</cxf.version>
 		<jersey.version>1.1.4.1</jersey.version>
 		<spring-security.version>2.0.5.RELEASE</spring-security.version>
+		<h2.version>1.2.127</h2.version>
 
 		<!--  Plugin的属性定义  -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -728,6 +729,12 @@
 				<groupId>org.dbunit</groupId>
 				<artifactId>dbunit</artifactId>
 				<version>2.4.7</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>${h2.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<!-- test end -->

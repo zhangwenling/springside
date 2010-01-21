@@ -21,21 +21,17 @@
 
 		<jdbc.driver.groupId>com.h2database</jdbc.driver.groupId>
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
-		<jdbc.driver.version>1.1.119</jdbc.driver.version>
+		<jdbc.driver.version>${h2.version}</jdbc.driver.version>
 
 		<dbunit.datatype>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.datatype>
 		<dbunit.file>src/test/resources/data/default-data.xml</dbunit.file>
 		<sql.schema.file>src/main/resources/sql/h2/schema.sql</sql.schema.file>
-		
-		<!--
-			<jdbc.driver>oracle.jdbc.driver.OracleDriver</jdbc.driver>
-			<jdbc.url>jdbc:oracle:thin:@127.0.0.1:1521:XE</jdbc.url>
-			<jdbc.user>miniservice</jdbc.user>
-			<jdbc.password>miniservice</jdbc.password>
-			<jdbc.schema>MINISERVICE</jdbc.schema>
 
-			<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId>
-			<jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
+		<!--
+			<jdbc.driver>oracle.jdbc.driver.OracleDriver</jdbc.driver> <jdbc.url>jdbc:oracle:thin:@127.0.0.1:1521:XE</jdbc.url>
+			<jdbc.user>miniservice</jdbc.user> <jdbc.password>miniservice</jdbc.password> <jdbc.schema>MINISERVICE</jdbc.schema>
+
+			<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId> <jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
 			<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version>
 
 			<sql.schema.file>src/main/resources/sql/oracle/schema.sql</sql.schema.file>
@@ -45,8 +41,7 @@
 		<!--
 			<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
 			<jdbc.url>jdbc:mysql://localhost/mini-service?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
-			<jdbc.user>root</jdbc.user> <jdbc.password></jdbc.password>
-			<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+			<jdbc.user>root</jdbc.user> <jdbc.password></jdbc.password> <jdbc.driver.groupId>mysql</jdbc.driver.groupId>
 			<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
 			<jdbc.driver.version>5.1.6</jdbc.driver.version>
 
@@ -117,6 +112,7 @@
 			<groupId>${jdbc.driver.groupId}</groupId>
 			<artifactId>${jdbc.driver.artifactId}</artifactId>
 			<version>${jdbc.driver.version}</version>
+			<scope>runtime</scope>
 		</dependency>
 		<!-- orm end -->
 
@@ -217,6 +213,10 @@
 		<dependency>
 			<groupId>org.unitils</groupId>
 			<artifactId>unitils-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
 		</dependency>
 		<!-- test end -->
 

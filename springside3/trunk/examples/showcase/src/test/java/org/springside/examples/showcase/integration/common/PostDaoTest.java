@@ -29,8 +29,11 @@ public class PostDaoTest extends SpringTxTestCase {
 	@Test
 	public void getSubjectDetail() {
 		Subject subject = subjectDao.getDetailWithReply(1L);
+		this.evict(subject);
+		
 		assertEquals(1, subject.getReplyList().size());
 		assertEquals("Hello World!!", subject.getContent());
+		assertEquals("Good Morning!!",subject.getReplyList().get(0).getContent());
 	}
 
 	@Test
