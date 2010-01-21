@@ -35,6 +35,7 @@
   <classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-transports-http/2.2.5/cxf-rt-transports-http-2.2.5.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-transports-http/2.2.5/cxf-rt-transports-http-2.2.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-ws-addr/2.2.5/cxf-rt-ws-addr-2.2.5.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-ws-addr/2.2.5/cxf-rt-ws-addr-2.2.5-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-tools-common/2.2.5/cxf-tools-common-2.2.5.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-tools-common/2.2.5/cxf-tools-common-2.2.5-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/dbunit/dbunit/2.4.7/dbunit-2.4.7.jar" sourcepath="M2_REPO/org/dbunit/dbunit/2.4.7/dbunit-2.4.7-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar" sourcepath="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/dozer/dozer/5.1/dozer-5.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/easymock/easymock/2.5.2/easymock-2.5.2.jar" sourcepath="M2_REPO/org/easymock/easymock/2.5.2/easymock-2.5.2-sources.jar"/>
@@ -83,7 +84,11 @@
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-test/2.5.6/spring-test-2.5.6.jar" sourcepath="M2_REPO/org/springframework/spring-test/2.5.6/spring-test-2.5.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-tx/2.5.6/spring-tx-2.5.6.jar" sourcepath="M2_REPO/org/springframework/spring-tx/2.5.6/spring-tx-2.5.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-web/2.5.6/spring-web-2.5.6.jar" sourcepath="M2_REPO/org/springframework/spring-web/2.5.6/spring-web-2.5.6-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/springside/springside3-core/3.2.3-SNAPSHOT/springside3-core-3.2.3-SNAPSHOT.jar" sourcepath="M2_REPO/org/springside/springside3-core/3.2.3-SNAPSHOT/springside3-core-3.2.3-SNAPSHOT-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springside/springside3-core/3.2.3-SNAPSHOT/springside3-core-3.2.3-SNAPSHOT.jar" sourcepath="M2_REPO/org/springside/springside3-core/3.2.3-SNAPSHOT/springside3-core-3.2.3-SNAPSHOT-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/ehuaxio/.m2/repository/org/springside/springside3-core/3.2.3-SNAPSHOT/springside3-core-3.2.3-SNAPSHOT-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
   <classpathentry kind="var" path="M2_REPO/stax/stax-api/1.0.1/stax-api-1.0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/unitils/unitils-core/3.1/unitils-core-3.1.jar" sourcepath="M2_REPO/org/unitils/unitils-core/3.1/unitils-core-3.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/wsdl4j/wsdl4j/1.6.2/wsdl4j-1.6.2.jar" sourcepath="M2_REPO/wsdl4j/wsdl4j/1.6.2/wsdl4j-1.6.2-sources.jar"/>

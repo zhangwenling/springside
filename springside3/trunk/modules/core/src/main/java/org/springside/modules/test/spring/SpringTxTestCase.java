@@ -58,8 +58,7 @@ public class SpringTxTestCase extends SpringContextTestCase {
 		return SimpleJdbcTestUtils.deleteFromTables(this.simpleJdbcTemplate, names);
 	}
 	
-	protected void executeSqlScript(String sqlResourcePath, boolean continueOnError) throws DataAccessException {
-
+	protected void runSql(String sqlResourcePath, boolean continueOnError) throws DataAccessException {
 		Resource resource = this.applicationContext.getResource(sqlResourcePath);
 		SimpleJdbcTestUtils.executeSqlScript(this.simpleJdbcTemplate, new EncodedResource(resource,
 			this.sqlScriptEncoding), continueOnError);
