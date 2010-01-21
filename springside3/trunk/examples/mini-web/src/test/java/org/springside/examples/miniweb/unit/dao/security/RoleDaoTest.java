@@ -1,4 +1,4 @@
-package org.springside.examples.miniweb.integration.dao.security;
+package org.springside.examples.miniweb.unit.dao.security;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,15 +6,15 @@ import org.springside.examples.miniweb.dao.security.RoleDao;
 import org.springside.examples.miniweb.dao.security.UserDao;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
+import org.springside.examples.miniweb.unit.dao.BaseTxTestCase;
 import org.springside.modules.test.DataUtils;
-import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
- * UserDao的集成测试用例,测试ORM映射及特殊的DAO操作.
+ * RoleDao的集成测试用例, 测试ORM映射及特殊的DAO操作.
  * 
  * @author calvin
  */
-public class RoleDaoTest extends SpringTxTestCase {
+public class RoleDaoTest extends BaseTxTestCase {
 	@Autowired
 	private RoleDao roleDao;
 

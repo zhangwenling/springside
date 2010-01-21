@@ -1,20 +1,20 @@
-package org.springside.examples.miniweb.integration.dao.security;
+package org.springside.examples.miniweb.unit.dao.security;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.dao.security.UserDao;
 import org.springside.examples.miniweb.data.SecurityEntityData;
 import org.springside.examples.miniweb.entity.security.User;
-import org.springside.modules.test.spring.SpringTxTestCase;
+import org.springside.examples.miniweb.unit.dao.BaseTxTestCase;
 
 /**
- * UserDao的集成测试用例,测试ORM映射及特殊的DAO操作.
+ * UserDao的集成测试用例, 测试ORM映射及特殊的DAO操作.
  * 
  * 默认在每个测试函数后进行回滚.
  * 
  * @author calvin
  */
-public class UserDaoTest extends SpringTxTestCase {
+public class UserDaoTest extends BaseTxTestCase {
 
 	@Autowired
 	private UserDao entityDao;
