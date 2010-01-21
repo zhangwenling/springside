@@ -1,11 +1,11 @@
-package org.springside.examples.miniservice.integration.dao.user;
+package org.springside.examples.miniservice.unit.dao.user;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniservice.dao.UserDao;
 import org.springside.examples.miniservice.data.UserData;
 import org.springside.examples.miniservice.entity.user.User;
-import org.springside.modules.test.spring.SpringTxTestCase;
+import org.springside.examples.miniservice.unit.dao.BaseTxTestCase;
 
 /**
  * UserDao的集成测试用例,测试ORM映射及特殊的DAO操作.
@@ -14,7 +14,7 @@ import org.springside.modules.test.spring.SpringTxTestCase;
  * 
  * @author calvin
  */
-public class UserDaoTest extends SpringTxTestCase {
+public class UserDaoTest extends BaseTxTestCase {
 
 	@Autowired
 	private UserDao entityDao;

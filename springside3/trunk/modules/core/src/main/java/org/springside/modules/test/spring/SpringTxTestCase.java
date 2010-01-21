@@ -7,8 +7,15 @@
  */
 package org.springside.modules.test.spring;
 
+import java.io.File;
+
 import javax.sql.DataSource;
 
+import org.dbunit.database.IDatabaseConnection;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.dbunit.ext.h2.H2Connection;
+import org.dbunit.operation.DatabaseOperation;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -16,6 +23,7 @@ import org.springframework.core.io.support.EncodedResource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.jdbc.SimpleJdbcTestUtils;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,8 +31,17 @@ import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 
 /**
- * Spring的支持数据库事务和依赖注入的JUnit4 集成测试基类.
+ * Spring的支持数据库访问和依赖注入的JUnit4 集成测试基类.
  * 
+ *  1.Spring Context IOC support
+ *  2.Spring Transaction support 
+ *  3.Spring JdbcTemplate and util functions
+ *  4.Hibernate SessionFactory and some util functions
+ *  5.DBUnit functions. 
+ *  6.JUnit Assert functions 
+ *  7.Unitils Reflection Assert funtions
+ *  
+ * @see AbstractTransactionalJUnit4SpringContextTests
  * @see SpringContextTestCase
  * 
  * @author calvin
@@ -32,40 +49,42 @@ import org.unitils.reflectionassert.ReflectionComparatorMode;
 @Transactional
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 public class SpringTxTestCase extends SpringContextTestCase {
-	
+
+	protected DataSource dataSource;
+
 	protected SimpleJdbcTemplate simpleJdbcTemplate;
 
 	protected String sqlScriptEncoding;
-	
+
 	protected SessionFactory sessionFactory;
 
-	
-	//-- JdbcTemplate函数--//
+	//-- JdbcTemplate函数 --//
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.simpleJdbcTemplate = new SimpleJdbcTemplate(dataSource);
+		this.dataSource = dataSource;
 	}
-	
+
 	public void setSqlScriptEncoding(String sqlScriptEncoding) {
 		this.sqlScriptEncoding = sqlScriptEncoding;
 	}
-	
+
 	protected int countRowsInTable(String tableName) {
 		return SimpleJdbcTestUtils.countRowsInTable(this.simpleJdbcTemplate, tableName);
 	}
-	
+
 	protected int deleteFromTables(String... names) {
 		return SimpleJdbcTestUtils.deleteFromTables(this.simpleJdbcTemplate, names);
 	}
-	
+
 	protected void runSql(String sqlResourcePath, boolean continueOnError) throws DataAccessException {
 		Resource resource = this.applicationContext.getResource(sqlResourcePath);
 		SimpleJdbcTestUtils.executeSqlScript(this.simpleJdbcTemplate, new EncodedResource(resource,
-			this.sqlScriptEncoding), continueOnError);
+				this.sqlScriptEncoding), continueOnError);
 	}
-	
-	//-- SessionFactory函数--//
-	@Autowired(required=false)
+
+	//-- Hibernate函数 --//
+	@Autowired(required = false)
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
@@ -73,7 +92,7 @@ public class SpringTxTestCase extends SpringContextTestCase {
 	/**
 	 * 刷新sessionFactory,强制Hibernate执行SQL以验证ORM配置.
 	 * 因为没有执行commit操作,不会更改测试数据库.
-	 */	
+	 */
 	protected void flush() {
 		sessionFactory.getCurrentSession().flush();
 	}
@@ -86,7 +105,7 @@ public class SpringTxTestCase extends SpringContextTestCase {
 		sessionFactory.getCurrentSession().evict(entity);
 	}
 
-	//-- Assert 函数 --//
+	//-- Unitils Assert 函数 --//
 	/**
 	 * 反射比较对象间的所有属性,忽略expected对象的Null对象和集合中对象的次序.
 	 */
@@ -101,5 +120,15 @@ public class SpringTxTestCase extends SpringContextTestCase {
 	protected void assertReflectionEquals(String message, Object expected, Object actual) {
 		ReflectionAssert.assertReflectionEquals(message, expected, actual, ReflectionComparatorMode.IGNORE_DEFAULTS,
 				ReflectionComparatorMode.LENIENT_ORDER);
+	}
+
+	//-- DBUnit 初始化数据函数 --//
+	protected void loadDbUnitData(String xmlPath) throws Exception {
+		IDatabaseConnection connection = new H2Connection(dataSource.getConnection(), "");
+
+		File dataFile = applicationContext.getResource(xmlPath).getFile();
+		IDataSet dataSet = new FlatXmlDataSetBuilder().build(dataFile);
+
+		DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
 	}
 }

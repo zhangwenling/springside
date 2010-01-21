@@ -51,7 +51,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 				credentialsNonExpired, accountNonLocked, grantedAuths);
 		//加入登录时间信息和用户角色
 		userDetails.setLoginTime(new Date());
-		userDetails.setRole(user.getRoleList());
+		userDetails.setRoleList(user.getRoleList());
 		return userDetails;
 	}
 

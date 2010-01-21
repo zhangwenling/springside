@@ -20,7 +20,12 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 
 /**
- * Spring的支持依赖注入的JUnit4 集成测试基类.
+ * Spring的支持依赖注入的JUnit4 集成测试基类, 支持:
+ * 
+ * 1.支持Spring 依赖注入功能.
+ * 2.支持JUnit Assert功能.
+ * 
+ * @see AbstractJUnit4SpringContextTests.
  * 
  * @author calvin
  */
