@@ -2,10 +2,9 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>springside3-parent</artifactId>
 		<groupId>org.springside</groupId>
+		<artifactId>springside3-war-parent</artifactId>
 		<version>3.2.3-SNAPSHOT</version>
-		<relativePath>../../modules/parent/pom.xml</relativePath>
 	</parent>
 	<groupId>org.springside</groupId>
 	<artifactId>mini-service</artifactId>
@@ -24,10 +23,10 @@
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
 		<jdbc.driver.version>1.1.119</jdbc.driver.version>
 
-		<dbunit.schema.file>src/main/sql/h2/schema.sql</dbunit.schema.file>
+		<sql.schema.file>src/main/resources/sql/h2/schema.sql</sql.schema.file>
+		<dbunit.file>src/test/resources/data/default-data.xml</dbunit.file>
 		<dbunit.datatype>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.datatype>
-		<dbunit.format>flat</dbunit.format>
-
+		
 		<!--
 			<jdbc.driver>oracle.jdbc.driver.OracleDriver</jdbc.driver>
 			<jdbc.url>jdbc:oracle:thin:@127.0.0.1:1521:XE</jdbc.url>

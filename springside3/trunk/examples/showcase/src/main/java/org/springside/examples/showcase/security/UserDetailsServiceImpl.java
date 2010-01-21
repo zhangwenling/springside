@@ -32,11 +32,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	/**
 	 * 获取用户Detail信息的回调函数.
 	 */
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
 
-		User user = userManager.findUserByLoginName(userName);
+		User user = userManager.findUserByLoginName(username);
 		if (user == null) {
-			throw new UsernameNotFoundException("用户" + userName + " 不存在");
+			throw new UsernameNotFoundException("用户" + username + " 不存在");
 		}
 
 		GrantedAuthority[] grantedAuths = obtainGrantedAuthorities(user);
@@ -49,8 +49,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		OperatorDetails userDetails = new OperatorDetails(user.getLoginName(), user.getShaPassword(), enabled, accountNonExpired,
 				credentialsNonExpired, accountNonLocked, grantedAuths);
-		//加入登录时间信息
+		//加入登录时间信息和用户角色
 		userDetails.setLoginTime(new Date());
+		userDetails.setRole(user.getRoleList());
 		return userDetails;
 	}
 

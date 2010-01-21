@@ -2,10 +2,9 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>springside3-parent</artifactId>
 		<groupId>org.springside</groupId>
+		<artifactId>springside3-war-parent</artifactId>
 		<version>3.2.3-SNAPSHOT</version>
-		<relativePath>../../modules/parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>showcase</artifactId>
 	<packaging>war</packaging>
@@ -23,7 +22,7 @@
 		<jdbc.driver.version>1.1.119</jdbc.driver.version>
 
 		<dbunit.datatype>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.datatype>
-		<dbunit.format>flat</dbunit.format>
+		<dbunit.file>src/test/resources/data/default-data.xml</dbunit.file>
 	</properties>
 
 	<!-- 依赖项定义 -->
@@ -187,8 +186,8 @@
 			<artifactId>spring-security-core-tiger</artifactId>
 		</dependency>
 		<dependency>
-			<artifactId>jcaptcha</artifactId>
 			<groupId>com.octo.captcha</groupId>
+			<artifactId>jcaptcha</artifactId>
 		</dependency>
 		<!-- security end -->
 
@@ -451,8 +450,8 @@
 								</goals>
 								<configuration>
 									<srcFiles>
-										<srcFile>src/main/sql/h2/schema.sql</srcFile>
-										<srcFile>src/main/sql/h2/quartz.sql</srcFile>
+										<srcFile>src/main/resources/sql/h2/schema.sql</srcFile>
+										<srcFile>src/main/resources/sql/h2/quartz.sql</srcFile>
 									</srcFiles>
 								</configuration>
 							</execution>
@@ -481,8 +480,8 @@
 								</goals>
 								<configuration>
 									<srcFiles>
-										<srcFile>src/main/sql/h2/schema.sql</srcFile>
-										<srcFile>src/main/sql/h2/quartz.sql</srcFile>
+										<srcFile>src/main/resources/sql/h2/schema.sql</srcFile>
+										<srcFile>src/main/resources/sql/h2/quartz.sql</srcFile>
 									</srcFiles>
 								</configuration>
 							</execution>

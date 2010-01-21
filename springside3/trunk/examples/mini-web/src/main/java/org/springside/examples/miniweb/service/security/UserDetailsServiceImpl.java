@@ -30,11 +30,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	/**
 	 * 获取用户Details信息的回调函数.
 	 */
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException, DataAccessException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
 
-		User user = securityEntityManager.findUserByLoginName(userName);
+		User user = securityEntityManager.findUserByLoginName(username);
 		if (user == null)
-			throw new UsernameNotFoundException("用户" + userName + " 不存在");
+			throw new UsernameNotFoundException("用户" + username + " 不存在");
 
 		GrantedAuthority[] grantedAuths = obtainGrantedAuthorities(user);
 

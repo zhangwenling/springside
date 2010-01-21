@@ -417,11 +417,6 @@
 
 			<dependency>
 				<groupId>com.octo.captcha</groupId>
-				<artifactId>jcaptcha-api</artifactId>
-				<version>1.0</version>
-			</dependency>
-			<dependency>
-				<groupId>com.octo.captcha</groupId>
 				<artifactId>jcaptcha</artifactId>
 				<version>1.0</version>
 			</dependency>
@@ -764,9 +759,6 @@
 
 	<!-- 插件配置 -->
 	<build>
-		<!-- 命令行输入mvn时，默认执行mvn package  -->
-		<defaultGoal>package</defaultGoal>
-
 		<pluginManagement>
 			<plugins>
 				<!-- compiler插件, 设定JDK版本与编码 -->
@@ -831,18 +823,17 @@
 					<version>2.5</version>
 				</plugin>
 
-				<!-- eclipse 插件 -->
+				<!-- Eclipse plugin -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-eclipse-plugin</artifactId>
 					<version>2.7</version>
 					<configuration>
-						<wtpversion>2.0</wtpversion>
-						<ajdtVersion>none</ajdtVersion>
 						<sourceExcludes>
 							<sourceExclude>**/.svn/</sourceExclude>
 						</sourceExcludes>
 						<downloadSources>true</downloadSources>
+						<ajdtVersion>none</ajdtVersion>
 					</configuration>
 				</plugin>
 
@@ -858,13 +849,6 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-archetype-plugin</artifactId>
 					<version>2.0-alpha-4</version>
-				</plugin>
-
-				<!-- jetty插件 -->
-				<plugin>
-					<groupId>org.mortbay.jetty</groupId>
-					<artifactId>maven-jetty-plugin</artifactId>
-					<version>6.1.22</version>
 				</plugin>
 
 				<!-- selenium插件 -->
@@ -886,9 +870,9 @@
 						<password>${jdbc.password}</password>
 						<schema>${jdbc.schema}</schema>
 						<type>CLEAN_INSERT</type>
-						<src>src/test/resources/test-data.xml</src>
-						<dest>src/test/resources/test-data.xml</dest>
-						<format>${dbunit.format}</format>
+						<src>${dbunit.file}</src>
+						<dest>${dbunit.file}</dest>
+						<format>flat</format>
 						<transaction>true</transaction>
 						<encoding>${project.build.sourceEncoding}</encoding>
 						<dataTypeFactoryName>${dbunit.datatype}</dataTypeFactoryName>
@@ -926,10 +910,6 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
-	<modules>
-		<module>model</module>
-	</modules>
 
 	<profiles>
 		<!-- 以cluster模式打包war文件和运行jetty的profile,以-Dcluster.nodename=xxx 激活 -->
@@ -1132,7 +1112,7 @@
 								</goals>
 								<configuration>
 									<srcFiles>
-										<srcFile>${dbunit.schema.file}</srcFile>
+										<srcFile>${sql.schema.file}</srcFile>
 									</srcFiles>
 								</configuration>
 							</execution>
@@ -1157,4 +1137,9 @@
 			</build>
 		</profile>
 	</profiles>
+
+	<modules>
+		<module>jar-parent</module>
+		<module>war-parent</module>
+	</modules>
 </project>
