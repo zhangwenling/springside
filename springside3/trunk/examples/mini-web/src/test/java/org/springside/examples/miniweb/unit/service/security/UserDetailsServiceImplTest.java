@@ -17,7 +17,7 @@ import org.springside.examples.miniweb.service.security.UserDetailsServiceImpl;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
- * UserDetailsServiceImpl的单元测试用例, 测试Service层的业务逻辑. 
+ * UserDetailsServiceImpl的测试用例, 测试Service层的业务逻辑. 
  * 
  * 使用EasyMock对UserManager进行模拟.
  * 

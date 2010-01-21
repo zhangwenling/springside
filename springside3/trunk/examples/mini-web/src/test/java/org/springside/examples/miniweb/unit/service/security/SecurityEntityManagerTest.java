@@ -11,7 +11,7 @@ import org.springside.examples.miniweb.service.security.SecurityEntityManager;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
- * SecurityEntityManager的集成测试用例,测试Service层的业务逻辑.
+ * SecurityEntityManager的测试用例, 测试Service层的业务逻辑.
  * 
  * 调用实际的DAO类进行操作,亦可使用MockDAO对象将本用例改为单元测试.
  * 

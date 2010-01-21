@@ -10,7 +10,7 @@ import org.springside.examples.miniweb.unit.dao.BaseTxTestCase;
 import org.springside.modules.test.DataUtils;
 
 /**
- * RoleDao的集成测试用例, 测试ORM映射及特殊的DAO操作.
+ * RoleDao的测试用例, 测试ORM映射及特殊的DAO操作.
  * 
  * @author calvin
  */
