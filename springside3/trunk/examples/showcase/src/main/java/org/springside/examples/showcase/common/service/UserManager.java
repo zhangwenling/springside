@@ -90,7 +90,7 @@ public class UserManager {
 	 */
 	@Transactional(readOnly = true)
 	public Long getUserCount() {
-		return userDao.findUnique(UserDao.COUNT_USERS);
+		return userDao.getUserCount();
 	}
 
 	@Transactional(readOnly = true)

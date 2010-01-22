@@ -14,7 +14,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockServletContext;
 import org.springside.modules.security.jcaptcha.JCaptchaFilter;
-import org.springside.modules.test.WebUtils;
+import org.springside.modules.test.utils.WebUtils;
 
 public class JCaptchaFilterTest extends Assert {
 

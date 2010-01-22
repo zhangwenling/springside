@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.DatabaseDataSourceConnection;
 import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
@@ -47,7 +47,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		DatabaseDataSourceConnection connection = new DatabaseDataSourceConnection((DataSource) applicationContext
 				.getBean("dataSource"));
 		InputStream stream = applicationContext.getResource("classpath:/test-data.xml").getInputStream();
-		IDataSet dataSet = new FlatXmlDataSet(stream);
+		IDataSet dataSet = new FlatXmlDataSetBuilder().build(stream);
 		DatabaseOperation.INSERT.execute(connection, dataSet);
 		connection.close();
 

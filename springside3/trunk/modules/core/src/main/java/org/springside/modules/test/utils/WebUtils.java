@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.test;
+package org.springside.modules.test.utils;
 
 import java.util.HashMap;
 
@@ -70,7 +70,7 @@ public class WebUtils {
 	}
 
 	/**
-	 * 将request放入Struts2的ServletActionContext,支持待测代码用ServletActionContext.getRequest()取出MockRequest.
+	 * 将request放入Struts2的ServletActionContext,支持Struts2待测代码用ServletActionContext.getRequest()取出MockRequest.
 	 */
 	public static void setRequestToStruts2(HttpServletRequest request) {
 		initStruts2ActionContext();
@@ -78,7 +78,7 @@ public class WebUtils {
 	}
 
 	/**
-	 * 将response放入Struts2的ServletActionContext,支持待测代码用ServletActionContext.getResponse()取出MockResponse.
+	 * 将response放入Struts2的ServletActionContext,支持Struts2待测代码用ServletActionContext.getResponse()取出MockResponse.
 	 */
 	public static void setResponseToStruts2(HttpServletResponse response) {
 		initStruts2ActionContext();

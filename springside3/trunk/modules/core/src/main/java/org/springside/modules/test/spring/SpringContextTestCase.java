@@ -42,14 +42,4 @@ public class SpringContextTestCase extends Assert implements ApplicationContextA
 	public final void setApplicationContext(final ApplicationContext applicationContext) {
 		this.applicationContext = applicationContext;
 	}
-
-	/**
-	 * sleep等待,单位毫秒.
-	 */
-	protected void sleep(long millis) {
-		try {
-			Thread.sleep(millis);
-		} catch (InterruptedException e) {//NOSONAR
-		}
-	}
 }

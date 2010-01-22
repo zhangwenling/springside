@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.beans.BeansException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.test.spring.SpringTxTestCase;
+import org.springside.modules.test.utils.TimeUtils;
 
 /**
  * 使用内存中数据库进行测试.
@@ -36,14 +37,14 @@ public class AsyncJdbcAppenderTest extends SpringTxTestCase {
 		for (; i <= 5; i++) {
 			dbLogger.info("helloworld" + i);
 		}
-		sleep(1000);
+		TimeUtils.sleep(1000);
 		assertEquals(oldLogsCount, this.countRowsInTable(LOG_TABLE_NAME));
 
 		//再插入5条记录,达到batchSize(10),插入数据库.
 		for (; i <= 10; i++) {
 			dbLogger.info("helloworld" + i);
 		}
-		sleep(1000);
+		TimeUtils.sleep(1000);
 		assertEquals(oldLogsCount + 10, this.countRowsInTable(LOG_TABLE_NAME));
 	}
 

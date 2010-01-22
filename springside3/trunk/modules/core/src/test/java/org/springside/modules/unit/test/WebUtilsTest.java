@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springside.modules.test.WebUtils;
+import org.springside.modules.test.utils.WebUtils;
 
 public class WebUtilsTest extends Assert {
 

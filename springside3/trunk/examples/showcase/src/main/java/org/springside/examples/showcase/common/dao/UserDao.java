@@ -20,9 +20,9 @@ import org.springside.modules.orm.hibernate.HibernateDao;
 @Repository
 public class UserDao extends HibernateDao<User, Long> {
 
-	public static final String QUERY_USER_WITH_ROLE = "select u from User u left join fetch u.roleList order by u.id";
-	public static final String COUNT_USERS = "select count(u) from User u";
-	public static final String DISABLE_USERS = "update User u set u.status='disabled' where id in(:ids)";
+	private static final String QUERY_USER_WITH_ROLE = "select u from User u left join fetch u.roleList order by u.id";
+	private static final String COUNT_USERS = "select count(u) from User u";
+	private static final String DISABLE_USERS = "update User u set u.status='disabled' where id in(:ids)";
 
 	/**
 	 * 批量修改用户状态.
@@ -49,6 +49,14 @@ public class UserDao extends HibernateDao<User, Long> {
 		Criteria criteria = createCriteria().setFetchMode("roleList", FetchMode.JOIN);
 		return distinct(criteria).list();
 	}
+	
+	/**
+	 * 统计用户数.
+	 */
+	public Long getUserCount() {
+		return findUnique(UserDao.COUNT_USERS);
+	}
+
 	
 	/**
 	 * 初始化User的延迟加载关联roleList.

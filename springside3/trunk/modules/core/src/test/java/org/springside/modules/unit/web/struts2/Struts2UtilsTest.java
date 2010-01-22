@@ -10,7 +10,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springside.modules.test.WebUtils;
+import org.springside.modules.test.utils.WebUtils;
 import org.springside.modules.web.struts2.Struts2Utils;
 
 import com.google.common.collect.Lists;

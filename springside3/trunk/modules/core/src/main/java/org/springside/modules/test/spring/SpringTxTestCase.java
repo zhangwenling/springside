@@ -7,7 +7,7 @@
  */
 package org.springside.modules.test.spring;
 
-import java.io.File;
+import java.io.InputStream;
 
 import javax.sql.DataSource;
 
@@ -126,8 +126,8 @@ public class SpringTxTestCase extends SpringContextTestCase {
 	protected void loadDbUnitData(String xmlPath) throws Exception {
 		IDatabaseConnection connection = new H2Connection(dataSource.getConnection(), "");
 
-		File dataFile = applicationContext.getResource(xmlPath).getFile();
-		IDataSet dataSet = new FlatXmlDataSetBuilder().build(dataFile);
+		InputStream inputstream = applicationContext.getResource(xmlPath).getInputStream();
+		IDataSet dataSet = new FlatXmlDataSetBuilder().build(inputstream);
 
 		DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
 	}
