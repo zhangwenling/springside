@@ -2,21 +2,21 @@
 
 = Introduction =
 
-Add your content here.
-
+SpringSide 3.3 RoadMap
 
 = Details =
 
 Main Job:
-  * 使用H2 内存模式 + DBUnit 实现 集成测试，取消Integration Test模式
-  * Modules的parent pom.xml
-  * 实现Assembly输出
+  * 测试改进: 使用H2 内存模式 + DBUnit 实现 集成测试，取消Integration Test模式
+  * Maven使用改进：
+     * eclipse:eclipse生成项目文件，取消copy jar模式与重定义的webapp目录。
+     * 分开jar与war项目的parent文件。   
+     * Assembly插件生成项目发布包。
 
 Other Little things
-  * UserDetails userName->username
-  * entity.* -> entity.security
   * TimeUtil
-  * Clear SimpleHibernateDAO
+  * Clean SimpleHibernateDAO
 
 Finish:
-  * SpringSecurity Simple
+  * SpringSecurity使用标准化,取消数据库存储资源与授权对应关系的模式
+    支持CXF与Jersy的安全控制.
