@@ -44,8 +44,8 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 
 	@Before
 	public void setUp() throws BeansException, SQLException, DatabaseUnitException, IOException {
-		simpleJdbcTemplate.update("drop all objects");
-		simpleJdbcTemplate.update("runscript from 'src/test/resources/schema.sql'");
+		jdbcTemplate.update("drop all objects");
+		jdbcTemplate.update("runscript from 'src/test/resources/schema.sql'");
 
 		DatabaseDataSourceConnection connection = new DatabaseDataSourceConnection((DataSource) applicationContext
 				.getBean("dataSource"));

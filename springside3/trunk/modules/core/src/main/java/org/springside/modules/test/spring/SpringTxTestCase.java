@@ -52,7 +52,7 @@ public class SpringTxTestCase extends SpringContextTestCase {
 
 	protected DataSource dataSource;
 
-	protected SimpleJdbcTemplate simpleJdbcTemplate;
+	protected SimpleJdbcTemplate jdbcTemplate;
 
 	protected String sqlScriptEncoding;
 
@@ -61,7 +61,7 @@ public class SpringTxTestCase extends SpringContextTestCase {
 	//-- JdbcTemplate函数 --//
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
-		this.simpleJdbcTemplate = new SimpleJdbcTemplate(dataSource);
+		this.jdbcTemplate = new SimpleJdbcTemplate(dataSource);
 		this.dataSource = dataSource;
 	}
 
@@ -70,16 +70,16 @@ public class SpringTxTestCase extends SpringContextTestCase {
 	}
 
 	protected int countRowsInTable(String tableName) {
-		return SimpleJdbcTestUtils.countRowsInTable(this.simpleJdbcTemplate, tableName);
+		return SimpleJdbcTestUtils.countRowsInTable(this.jdbcTemplate, tableName);
 	}
 
 	protected int deleteFromTables(String... names) {
-		return SimpleJdbcTestUtils.deleteFromTables(this.simpleJdbcTemplate, names);
+		return SimpleJdbcTestUtils.deleteFromTables(this.jdbcTemplate, names);
 	}
 
 	protected void runSql(String sqlResourcePath, boolean continueOnError) throws DataAccessException {
 		Resource resource = this.applicationContext.getResource(sqlResourcePath);
-		SimpleJdbcTestUtils.executeSqlScript(this.simpleJdbcTemplate, new EncodedResource(resource,
+		SimpleJdbcTestUtils.executeSqlScript(this.jdbcTemplate, new EncodedResource(resource,
 				this.sqlScriptEncoding), continueOnError);
 	}
 

@@ -20,8 +20,8 @@ public class AsyncJdbcAppenderTest extends SpringTxTestCase {
 
 	@Before
 	public void setUp() throws BeansException {
-		simpleJdbcTemplate.update("drop all objects");
-		simpleJdbcTemplate.update("runscript from 'src/test/resources/schema.sql'");
+		jdbcTemplate.update("drop all objects");
+		jdbcTemplate.update("runscript from 'src/test/resources/schema.sql'");
 	}
 
 	@Test
