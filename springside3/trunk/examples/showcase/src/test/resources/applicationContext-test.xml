@@ -40,7 +40,7 @@
 	</bean>
 	
 	<!-- 运行脚本初始化内存数据库 -->
-	<jdbc:initialize-database data-source="dataSource" ignore-failures="DROPS">
+	<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
 		<jdbc:script location="classpath:sql/h2/schema.sql" />
 		<jdbc:script location="classpath:sql/h2/quartz.sql" />
 	</jdbc:initialize-database>
