@@ -1,7 +1,5 @@
 package org.springside.examples.showcase.unit.common;
 
-import java.io.IOException;
-
 import org.junit.Before;
 import org.junit.Ignore;
 import org.springside.modules.test.spring.SpringTxTestCase;
@@ -9,7 +7,7 @@ import org.springside.modules.test.spring.SpringTxTestCase;
 /**
  * 数据库访问测试基类。
  * 
- * 继承SpringTxTestCase的所有方法, 并在第一个测试方法前初始化内存数据库.
+ * 继承SpringTxTestCase的所有方法, 并在第一个测试方法前初始化数据.
  * 
  * @see SpringTxTestCase
  * 
@@ -18,22 +16,13 @@ import org.springside.modules.test.spring.SpringTxTestCase;
 @Ignore
 public class BaseTxTestCase extends SpringTxTestCase {
 
-	private boolean hasInit = false;
+	private boolean loaded = false;
 
 	@Before
 	public void initDatabase() throws Exception {
-		if (!hasInit) {
-			createSchema();
-			loadDefaultData();
-			hasInit = true;
+		if (!loaded) {
+			loadDbUnitData("/data/default-data.xml");
+			loaded = true;
 		}
-	}
-
-	protected void createSchema() throws IOException {
-		runSql("/sql/h2/schema.sql",true);
-	}
-
-	protected void loadDefaultData() throws Exception {
-		loadDbUnitData("/data/default-data.xml");
 	}
 }

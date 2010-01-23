@@ -1,8 +1,5 @@
 package org.springside.examples.showcase.unit.schedule;
 
-import java.io.IOException;
-
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.schedule.QuartzClusterableJob;
@@ -18,14 +15,7 @@ import org.springside.modules.test.utils.TimeUtils;
  * @author calvin
  */
 @ContextConfiguration(locations = { "/schedule/applicationContext-quartz-timer-cluster.xml" })
-@Ignore("wait Spring3 memory Cache")
 public class QuartzClusterableJobTest extends BaseTxTestCase {
-	
-	@Override
-	protected void createSchema() throws IOException {
-		super.createSchema();
-		runSql("/sql/h2/quartz.sql",true);
-	}
 
 	@Test
 	public void test() {
