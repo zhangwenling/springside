@@ -8,19 +8,19 @@ SpringSide 3.3 RoadMap
 
 Main Job:
   * 改进Maven使用：
-     * eclipse:eclipse生成项目文件。(hibernate tools)
+     * *eclipse:eclipse生成项目文件。(hibernate tools)*
      * maven使用更符合团队多项目开发需求   
      * Assembly插件生成项目发布包。(todo)
      * 取消特别的使用方式，如copy jar模式，重定义的webapp目录等。
-  * 升级Spring 3.0 (todo)
+  * *升级Spring 3.0 (todo)*
   * 增加 Jersy REST应用演示
   * 改进SpringSecurity演示：
-     * 升级3.0(todo)
+     * *升级3.0(todo)*
      * 使用标准化,取消数据库存储资源与授权对应关系的模式
      * 支持CXF WS-Security与Jersy的安全控制.
   * 改进测试改进:
      * 对Selenium的写法大幅改进
-     * 使用Spring + H2 + DBUnit 实现 集成测试，取消Integration Test模式。（showcase项目）
+     * *使用Spring + H2 + DBUnit 实现 集成测试，取消Integration Test模式。（showcase两个遗留测试)*
   * Jackson代替Json-lib
   * 依赖包升级：Jquery1.4 (todo)
      
