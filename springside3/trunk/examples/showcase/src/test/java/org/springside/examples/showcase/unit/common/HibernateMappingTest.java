@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springside.examples.showcase.unit.BaseTxTestCase;
 
 /**
  * 简单测试所有Entity类的O/R Mapping.

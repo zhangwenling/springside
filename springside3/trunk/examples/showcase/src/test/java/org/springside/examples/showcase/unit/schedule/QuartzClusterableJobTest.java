@@ -1,11 +1,13 @@
-package org.springside.examples.showcase.integration.schedule;
+package org.springside.examples.showcase.unit.schedule;
+
+import java.io.IOException;
 
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.schedule.QuartzClusterableJob;
+import org.springside.examples.showcase.unit.common.BaseTxTestCase;
 import org.springside.modules.log.MockAppender;
-import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.TimeUtils;
 
 /**
@@ -16,8 +18,14 @@ import org.springside.modules.test.utils.TimeUtils;
  * @author calvin
  */
 @ContextConfiguration(locations = { "/schedule/applicationContext-quartz-timer-cluster.xml" })
-@Ignore("注意因为任务会被持久化到数据库, 因此本用例仅在清空数据库QRTZ_*表后的第一次运行或距上一次运行5分钟方可通过.")
-public class QuartzClusterableJobTest extends SpringTxTestCase {
+@Ignore("wait Spring3 memory Cache")
+public class QuartzClusterableJobTest extends BaseTxTestCase {
+	
+	@Override
+	protected void createSchema() throws IOException {
+		super.createSchema();
+		runSql("/sql/h2/quartz.sql",true);
+	}
 
 	@Test
 	public void test() {

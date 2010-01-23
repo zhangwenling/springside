@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.modules.test.spring.SpringTxTestCase;
 
 import com.google.common.collect.Lists;
 
@@ -16,7 +15,7 @@ import com.google.common.collect.Lists;
  * 
  * @author calvin
  */
-public class UserDaoTest extends SpringTxTestCase {
+public class UserDaoTest extends BaseTxTestCase {
 	@Autowired
 	private UserDao userDao;
 

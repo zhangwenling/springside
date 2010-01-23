@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.integration.jmx;
+package org.springside.examples.showcase.unit.jmx;
 
 import java.util.List;
 

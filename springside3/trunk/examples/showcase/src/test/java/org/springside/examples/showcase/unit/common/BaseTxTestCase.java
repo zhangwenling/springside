@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.unit;
+package org.springside.examples.showcase.unit.common;
 
 import java.io.IOException;
 

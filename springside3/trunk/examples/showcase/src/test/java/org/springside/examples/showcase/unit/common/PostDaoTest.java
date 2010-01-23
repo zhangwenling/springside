@@ -11,7 +11,6 @@ import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.Reply;
 import org.springside.examples.showcase.common.entity.Subject;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.unit.BaseTxTestCase;
 
 /**
  * PostDao的集成测试用例,测试ORM映射及特殊的DAO操作.
