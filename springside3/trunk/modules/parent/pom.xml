@@ -964,51 +964,6 @@
 			</build>
 		</profile>
 
-		<!-- 在test阶段执行集成测试的profile, 以-Pintegration激活 -->
-		<profile>
-			<id>integration</id>
-			<build>
-				<plugins>
-					<!-- dbunit插件初始化测试数据 -->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>dbunit-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>init-integration-data</id>
-								<phase>test-compile</phase>
-								<goals>
-									<goal>operation</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-
-					<!-- junit插件执行integration目录的用例 -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>integration-test</id>
-								<goals>
-									<goal>test</goal>
-								</goals>
-								<phase>test</phase>
-								<configuration>
-									<includes>
-										<include>**/integration/**/*Test.java</include>
-									</includes>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-
-
 		<!--初始化数据库Schema及测试数据的profile, 以-Pinitdb激活-->
 		<profile>
 			<id>initdb</id>
@@ -1021,7 +976,7 @@
 
 						<executions>
 							<execution>
-								<id>create database</id>
+								<id>create schema</id>
 								<phase>initialize</phase>
 								<goals>
 									<goal>execute</goal>
@@ -1041,7 +996,7 @@
 						<artifactId>dbunit-maven-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>init data</id>
+								<id>load data</id>
 								<phase>initialize</phase>
 								<goals>
 									<goal>operation</goal>
