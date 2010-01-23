@@ -7,8 +7,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.dao.UserJdbcDao;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.modules.test.DataUtils;
 import org.springside.modules.test.spring.SpringTxTestCase;
+import org.springside.modules.test.utils.DataUtils;
 
 import com.google.common.collect.Lists;
 

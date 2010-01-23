@@ -5,6 +5,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.schedule.ExecutorJob;
 import org.springside.modules.log.MockAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
+import org.springside.modules.test.utils.TimeUtils;
 
 @ContextConfiguration(locations = { "/schedule/applicationContext-executor.xml" })
 public class ExecutorJobTest extends SpringContextTestCase {
@@ -15,7 +16,7 @@ public class ExecutorJobTest extends SpringContextTestCase {
 		appender.addToLogger(ExecutorJob.class);
 
 		//等待任务启动
-		sleep(3000);
+		TimeUtils.sleep(3000);
 
 		//验证任务已执行
 		assertEquals(1, appender.getAllLogs().size());

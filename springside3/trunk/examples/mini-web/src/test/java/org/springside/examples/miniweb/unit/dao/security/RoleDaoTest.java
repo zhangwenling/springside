@@ -7,7 +7,7 @@ import org.springside.examples.miniweb.dao.security.UserDao;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.unit.dao.BaseTxTestCase;
-import org.springside.modules.test.DataUtils;
+import org.springside.modules.test.utils.DataUtils;
 
 /**
  * RoleDao的测试用例, 测试ORM映射及特殊的DAO操作.

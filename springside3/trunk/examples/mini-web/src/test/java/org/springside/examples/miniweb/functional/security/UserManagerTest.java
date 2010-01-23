@@ -8,8 +8,8 @@ import org.springside.examples.miniweb.data.SecurityEntityData;
 import org.springside.examples.miniweb.entity.security.Role;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
-import org.springside.modules.test.DataUtils;
 import org.springside.modules.test.groups.Groups;
+import org.springside.modules.test.utils.DataUtils;
 
 /**
  * 用户管理的功能测试, 测试页面JavaScript及主要用户故事流程.

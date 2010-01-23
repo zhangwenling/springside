@@ -8,6 +8,7 @@ import org.springside.examples.showcase.jms.NotifyMessageProducer;
 import org.springside.examples.showcase.jms.NotifyQueueConsumer;
 import org.springside.modules.log.MockAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
+import org.springside.modules.test.utils.TimeUtils;
 
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/jms/applicationContext-common.xml",
 		"/jms/applicationContext-producer.xml", "/jms/applicationContext-consumer.xml" }, inheritLocations = false)
@@ -28,7 +29,7 @@ public class JmsQueueTest extends SpringContextTestCase {
 		notifyMessageProducer.sendQueue(user);
 		logger.info("sended message");
 
-		sleep(1000);
+		TimeUtils.sleep(1000);
 		assertEquals("UserName:calvin, Email:calvin@sringside.org.cn", appender.getFirstLog().getMessage());
 		logger.info("received message");
 	}
