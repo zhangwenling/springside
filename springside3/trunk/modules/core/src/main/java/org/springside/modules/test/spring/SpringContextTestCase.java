@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
@@ -25,7 +26,7 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
  * 1.支持Spring 依赖注入功能.
  * 2.支持JUnit Assert功能.
  * 
- * @see AbstractJUnit4SpringContextTests.
+ * @see AbstractJUnit4SpringContextTests
  * 
  * @author calvin
  */

@@ -2,7 +2,6 @@ package org.springside.examples.showcase.unit.common;
 
 import java.util.Date;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.dao.ReplyDao;
@@ -27,14 +26,13 @@ public class PostDaoTest extends BaseTxTestCase {
 	private UserDao userDao;
 
 	@Test
-	@Ignore("Not Support in H2 memory version")
 	public void getSubjectDetail() {
 		Subject subject = subjectDao.getDetailWithReply(1L);
 		this.evict(subject);
-		
+
 		assertEquals(1, subject.getReplyList().size());
 		assertEquals("Hello World!!", subject.getContent());
-		assertEquals("Good Morning!!",subject.getReplyList().get(0).getContent());
+		assertEquals("Good Morning!!", subject.getReplyList().get(0).getContent());
 	}
 
 	@Test

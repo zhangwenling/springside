@@ -127,7 +127,7 @@ public class SpringTxTestCase extends SpringContextTestCase {
 		IDatabaseConnection connection = new H2Connection(dataSource.getConnection(), "");
 
 		InputStream inputstream = applicationContext.getResource(xmlPath).getInputStream();
-		IDataSet dataSet = new FlatXmlDataSetBuilder().build(inputstream);
+		IDataSet dataSet = new FlatXmlDataSetBuilder().setColumnSensing(true).build(inputstream);
 
 		DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
 	}
