@@ -7,6 +7,9 @@ import java.util.Set;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+
+import org.springframework.stereotype.Component;
 
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.api.json.JSONJAXBContext;
@@ -18,6 +21,7 @@ import com.sun.jersey.api.json.JSONJAXBContext;
  *
  */
 @Provider
+@Component
 @SuppressWarnings("unchecked")
 public class JAXBContextResolver implements ContextResolver<JAXBContext> {
 
@@ -27,8 +31,12 @@ public class JAXBContextResolver implements ContextResolver<JAXBContext> {
 	private JAXBContext context;
 	private final Set<Class> typeSet;
 
-	public JAXBContextResolver() throws Exception {
-		this.context = new JSONJAXBContext(JSONConfiguration.natural().build(), types);
+	public JAXBContextResolver() {
+		try {
+			this.context = new JSONJAXBContext(JSONConfiguration.natural().build(), types);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
 		this.typeSet = new HashSet(Arrays.asList(types));
 	}
 
