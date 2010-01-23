@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.integration.common;
+package org.springside.examples.showcase.unit.common;
 
 import java.util.List;
 

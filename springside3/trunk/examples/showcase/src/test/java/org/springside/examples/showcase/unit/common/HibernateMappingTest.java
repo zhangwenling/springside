@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.integration.common;
+package org.springside.examples.showcase.unit.common;
 
 import java.util.Map;
 
@@ -10,14 +10,14 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springside.modules.test.spring.SpringTxTestCase;
+import org.springside.examples.showcase.unit.BaseTxTestCase;
 
 /**
  * 简单测试所有Entity类的O/R Mapping.
  *  
  * @author calvin
  */
-public class HibernateMappingTest extends SpringTxTestCase {
+public class HibernateMappingTest extends BaseTxTestCase {
 	private static Logger logger = LoggerFactory.getLogger(HibernateMappingTest.class);
 
 	@Autowired

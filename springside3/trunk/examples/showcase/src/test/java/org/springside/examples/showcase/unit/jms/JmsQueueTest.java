@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.integration.jms;
+package org.springside.examples.showcase.unit.jms;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

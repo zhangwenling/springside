@@ -1,7 +1,8 @@
-package org.springside.examples.showcase.integration.common;
+package org.springside.examples.showcase.unit.common;
 
 import java.util.Date;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.dao.ReplyDao;
@@ -10,7 +11,7 @@ import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.Reply;
 import org.springside.examples.showcase.common.entity.Subject;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.unit.dao.BaseTxTestCase;
+import org.springside.examples.showcase.unit.BaseTxTestCase;
 
 /**
  * PostDao的集成测试用例,测试ORM映射及特殊的DAO操作.
@@ -27,6 +28,7 @@ public class PostDaoTest extends BaseTxTestCase {
 	private UserDao userDao;
 
 	@Test
+	@Ignore("Not Support in H2 memory version")
 	public void getSubjectDetail() {
 		Subject subject = subjectDao.getDetailWithReply(1L);
 		this.evict(subject);

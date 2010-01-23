@@ -1,8 +1,9 @@
-package org.springside.examples.showcase.unit.dao;
+package org.springside.examples.showcase.unit;
 
 import java.io.IOException;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
@@ -14,6 +15,7 @@ import org.springside.modules.test.spring.SpringTxTestCase;
  * 
  * @author calvin
  */
+@Ignore
 public class BaseTxTestCase extends SpringTxTestCase {
 
 	private boolean hasInit = false;

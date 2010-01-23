@@ -1,4 +1,4 @@
-package org.springside.examples.miniweb.unit.dao;
+package org.springside.examples.miniservice.unit;
 
 import java.io.IOException;
 

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.dao.security.UserDao;
 import org.springside.examples.miniweb.data.SecurityEntityData;
 import org.springside.examples.miniweb.entity.security.User;
-import org.springside.examples.miniweb.unit.dao.BaseTxTestCase;
+import org.springside.examples.miniweb.unit.BaseTxTestCase;
 
 /**
  * UserDao的测试用例, 测试ORM映射及特殊的DAO操作.
