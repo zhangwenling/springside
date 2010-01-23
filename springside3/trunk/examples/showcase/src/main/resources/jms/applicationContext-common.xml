@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-	<!-- 在测试/演示环境中启动嵌入到应用中的ActiveMQ Server.-->
-	<bean id="broker" class="org.apache.activemq.xbean.BrokerFactoryBean">
-		<property name="config" value="classpath:jms/activemq.xml" />
-	</bean>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:amq="http://activemq.apache.org/schema/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
 
 	<!-- 标准的Activemq 连接工厂. -->
-	<bean id="jmsFactory" class="org.apache.activemq.ActiveMQConnectionFactory" depends-on="broker">
+	<bean id="jmsFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL" value="${jms.broker_url}" />
 	</bean>
 
 	<!-- Spring JMS Template -->
-	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate" depends-on="broker">
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory">
 			<bean class="org.apache.activemq.pool.PooledConnectionFactoryBean">
 				<property name="connectionFactory">

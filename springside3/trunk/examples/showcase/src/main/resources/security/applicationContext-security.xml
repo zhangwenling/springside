@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:s="http://www.springframework.org/schema/security"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd"
 	default-lazy-init="true">
 
 	<description>SpringSecurity安全配置</description>
@@ -11,22 +11,23 @@
 	<s:http auto-config="true">
 		<s:intercept-url pattern="/common/user/*" access="ROLE_User" />
 
-		<s:form-login login-page="/security/login.action" default-target-url="/"
-			authentication-failure-url="/security/login.action?error=1" />
+		<s:form-login login-page="/security/login.action" default-target-url="/" authentication-failure-url="/security/login.action?error=1" />
 		<s:logout logout-success-url="/" />
-		<s:concurrent-session-control max-sessions="1"
-			exception-if-maximum-exceeded="false" expired-url="/security/login.action?error=3" />
+		<s:session-management invalid-session-url="/security/login.action?error=3">
+			<s:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
+		</s:session-management>
 	</s:http>
-		
+
 	<!-- 方法安全配置 -->
-	<s:global-method-security secured-annotations="enabled"/>
+	<s:global-method-security secured-annotations="enabled" />
 
 	<!-- 认证配置 -->
-	<s:authentication-provider user-service-ref="userDetailsService">
-		<!-- 可设置hash使用sha1或md5散列密码后再存入数据库 -->
-		<s:password-encoder hash="sha" />
-	</s:authentication-provider>
-	
+	<s:authentication-manager alias="authenticationManager">
+		<s:authentication-provider user-service-ref="userDetailsService">
+			<s:password-encoder hash="sha" />
+		</s:authentication-provider>
+	</s:authentication-manager>
+
 	<!-- 项目实现的用户查询服务  -->
 	<bean id="userDetailsService" class="org.springside.examples.showcase.security.UserDetailsServiceImpl" />
 

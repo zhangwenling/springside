@@ -5,10 +5,10 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.security.GrantedAuthorityImpl;
-import org.springframework.security.providers.encoding.ShaPasswordEncoder;
-import org.springframework.security.userdetails.UserDetailsService;
-import org.springframework.security.userdetails.UsernameNotFoundException;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springside.examples.showcase.common.entity.Role;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.UserManager;
@@ -57,8 +57,8 @@ public class UserDetailsServiceImplTest extends Assert {
 		//校验结果
 		assertEquals(user.getLoginName(), operator.getUsername());
 		assertEquals(new ShaPasswordEncoder().encodePassword("admin", null), operator.getPassword());
-		assertEquals(2, operator.getAuthorities().length);
-		assertEquals(new GrantedAuthorityImpl("ROLE_admin"), operator.getAuthorities()[0]);
+		assertEquals(2, operator.getAuthorities().size());
+		assertEquals(new GrantedAuthorityImpl("ROLE_admin"), operator.getAuthorities().iterator().next());
 		assertNotNull(operator.getLoginTime());
 	}
 

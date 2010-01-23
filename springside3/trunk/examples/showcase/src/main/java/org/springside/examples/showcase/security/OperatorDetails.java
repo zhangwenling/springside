@@ -1,10 +1,11 @@
 package org.springside.examples.showcase.security;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.userdetails.User;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springside.examples.showcase.common.entity.Role;
 
 /**
@@ -20,7 +21,7 @@ public class OperatorDetails extends User {
 	private List<Role> roleList;
 
 	public OperatorDetails(String username, String password, boolean enabled, boolean accountNonExpired,
-			boolean credentialsNonExpired, boolean accountNonLocked, GrantedAuthority[] authorities)
+			boolean credentialsNonExpired, boolean accountNonLocked, Collection<GrantedAuthority> authorities)
 			throws IllegalArgumentException {
 		super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 	}

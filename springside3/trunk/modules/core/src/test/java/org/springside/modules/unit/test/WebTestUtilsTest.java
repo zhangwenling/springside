@@ -6,14 +6,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springside.modules.test.utils.WebUtils;
+import org.springside.modules.test.utils.WebTestUtils;
 
-public class WebUtilsTest extends Assert {
+public class WebTestUtilsTest extends Assert {
 
 	@Test
 	public void initByPaths() {
 		MockServletContext servletContext = new MockServletContext();
-		WebUtils.initWebApplicationContext(servletContext, "classpath:/applicationContext-test.xml");
+		WebTestUtils.initWebApplicationContext(servletContext, "classpath:/applicationContext-test.xml");
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 		assertNotNull(context);
 		assertNotNull(context.getBean("springContextHolder"));
@@ -23,7 +23,7 @@ public class WebUtilsTest extends Assert {
 	public void initByApplicationConetxt() {
 		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("classpath:/applicationContext-test.xml");
 		MockServletContext servletContext = new MockServletContext();
-		WebUtils.initWebApplicationContext(servletContext, ac);
+		WebTestUtils.initWebApplicationContext(servletContext, ac);
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 		assertNotNull(context);
 		assertNotNull(context.getBean("springContextHolder"));
@@ -32,9 +32,9 @@ public class WebUtilsTest extends Assert {
 	@Test
 	public void closeApplicationContext() {
 		MockServletContext servletContext = new MockServletContext();
-		WebUtils.initWebApplicationContext(servletContext, "classpath:/applicationContext-test.xml");
+		WebTestUtils.initWebApplicationContext(servletContext, "classpath:/applicationContext-test.xml");
 
-		WebUtils.closeWebApplicationContext(servletContext);
+		WebTestUtils.closeWebApplicationContext(servletContext);
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 		assertNull(context);
 	}

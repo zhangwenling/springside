@@ -212,7 +212,7 @@
 
 	<!-- SpringSecuirty 控制并发Session -->
 	<listener>
-		<listener-class>org.springframework.security.ui.session.HttpSessionEventPublisher</listener-class>
+		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
 	</listener>
 
 	<!-- 出错页面定义 -->

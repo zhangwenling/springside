@@ -6,8 +6,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.internal.runners.InitializationError;
 import org.junit.runner.RunWith;
+import org.junit.runners.model.InitializationError;
 import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.groups.GroupsTestRunner;
 import org.springside.modules.utils.ReflectionUtils;
@@ -17,7 +17,7 @@ public class GroupsTestRunnerTest extends Assert {
 
 	@Test
 	@SuppressWarnings("unchecked")
-	public void groupsInit() throws InitializationError {
+	public void groupsInit() throws InitializationError   {
 		GroupsTestRunner groupsTestRunner = new GroupsTestRunner(GroupsTestRunnerTest.class);
 
 		//从application-test.properties中取出test.groups值, 为MAJOR

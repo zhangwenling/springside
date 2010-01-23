@@ -4,11 +4,11 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.GrantedAuthorityImpl;
-import org.springframework.security.userdetails.UserDetails;
-import org.springframework.security.userdetails.UserDetailsService;
-import org.springframework.security.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
@@ -36,7 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if (user == null)
 			throw new UsernameNotFoundException("用户" + username + " 不存在");
 
-		GrantedAuthority[] grantedAuths = obtainGrantedAuthorities(user);
+		Set<GrantedAuthority> grantedAuths = obtainGrantedAuthorities(user);
 
 		//-- mini-web示例中无以下属性, 暂时全部设为true. --//
 		boolean enabled = true;
@@ -44,9 +44,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
-		UserDetails userdetails = new org.springframework.security.userdetails.User(
-				user.getLoginName(), user.getPassword(), enabled, accountNonExpired, credentialsNonExpired,
-				accountNonLocked, grantedAuths);
+		UserDetails userdetails = new org.springframework.security.core.userdetails.User(user.getLoginName(), user
+				.getPassword(), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, grantedAuths);
 
 		return userdetails;
 	}
@@ -54,13 +53,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	/**
 	 * 获得用户所有角色的权限集合.
 	 */
-	private GrantedAuthority[] obtainGrantedAuthorities(User user) {
+	private Set<GrantedAuthority> obtainGrantedAuthorities(User user) {
 		Set<GrantedAuthority> authSet = Sets.newHashSet();
 		for (Role role : user.getRoleList()) {
 			for (Authority authority : role.getAuthorityList()) {
 				authSet.add(new GrantedAuthorityImpl(authority.getPrefixedName()));
 			}
 		}
-		return authSet.toArray(new GrantedAuthority[authSet.size()]);
+		return authSet;
 	}
 }

@@ -5,9 +5,9 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.security.GrantedAuthorityImpl;
-import org.springframework.security.userdetails.UserDetails;
-import org.springframework.security.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springside.examples.miniweb.data.SecurityEntityData;
 import org.springside.examples.miniweb.entity.security.Authority;
 import org.springside.examples.miniweb.entity.security.Role;
@@ -62,9 +62,9 @@ public class UserDetailsServiceImplTest extends Assert {
 		//校验结果
 		assertEquals(user.getLoginName(), userDetails.getUsername());
 		assertEquals(user.getPassword(), userDetails.getPassword());
-		assertEquals(1, userDetails.getAuthorities().length);
+		assertEquals(1, userDetails.getAuthorities().size());
 		assertEquals(new GrantedAuthorityImpl(auth.getPrefixedName()),
-				userDetails.getAuthorities()[0]);
+				userDetails.getAuthorities().iterator().next());
 	}
 
 	@Test(expected = UsernameNotFoundException.class)

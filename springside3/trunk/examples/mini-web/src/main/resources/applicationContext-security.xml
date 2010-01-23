@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:s="http://www.springframework.org/schema/security"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd"
 	default-lazy-init="true">
 
 	<description>SpringSecurity安全配置</description>
@@ -21,10 +21,11 @@
 	</s:http>
 
 	<!-- 认证配置, 使用userDetailsService提供的用户信息 -->
-	<s:authentication-provider user-service-ref="userDetailsService">
-		<!-- 可设置hash使用sha1或md5散列密码后再存入数据库 -->
-		<s:password-encoder hash="plaintext" />
-	</s:authentication-provider>
+	<s:authentication-manager alias="authenticationManager">
+		<s:authentication-provider user-service-ref="userDetailsService">
+			<s:password-encoder hash="plaintext" />
+		</s:authentication-provider>
+	</s:authentication-manager>
 
 	<!-- 项目实现的用户查询服务 -->
 	<bean id="userDetailsService" class="org.springside.examples.miniweb.service.security.UserDetailsServiceImpl" />

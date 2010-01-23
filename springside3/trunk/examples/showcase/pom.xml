@@ -182,9 +182,18 @@
 		<!-- rest end -->
 
 		<!-- security begin -->
+		<!-- spring security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core-tiger</artifactId>
+			<artifactId>spring-security-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.octo.captcha</groupId>
@@ -205,11 +214,6 @@
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-pool</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.xbean</groupId>
-			<artifactId>xbean-spring</artifactId>
 		</dependency>
 		<!-- jms end -->
 
@@ -470,7 +474,7 @@
 			</build>
 		</profile>
 
-		<!-- 重载integration profile设定,每次执行前重新创建数据库 -->
+		<!-- 重载integration profile设定,加入对Quartz数据库的初始化 -->
 		<profile>
 			<id>integration</id>
 			<build>
@@ -495,25 +499,6 @@
 								</configuration>
 							</execution>
 						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<!-- 重载functional profile设定,重载web.xml中设置验证码自动通过值 -->
-		<profile>
-			<id>functional</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.mortbay.jetty</groupId>
-						<artifactId>maven-jetty-plugin</artifactId>
-						<configuration>
-							<webAppConfig>
-								<contextPath>/${artifactId}</contextPath>
-								<tempDirectory>${project.build.directory}/work</tempDirectory>
-							</webAppConfig>
-						</configuration>
 					</plugin>
 				</plugins>
 			</build>

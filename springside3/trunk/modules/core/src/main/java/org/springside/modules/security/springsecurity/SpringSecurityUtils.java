@@ -7,16 +7,18 @@
  */
 package org.springside.modules.security.springsecurity;
 
+import java.util.Collection;
+
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.security.Authentication;
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.context.SecurityContext;
-import org.springframework.security.context.SecurityContextHolder;
-import org.springframework.security.providers.preauth.PreAuthenticatedAuthenticationToken;
-import org.springframework.security.ui.WebAuthenticationDetails;
-import org.springframework.security.userdetails.User;
-import org.springframework.security.userdetails.UserDetails;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 
 /**
  * SpringSecurity的工具类.
@@ -73,7 +75,7 @@ public class SpringSecurityUtils {
 	 */
 	public static boolean hasAnyRole(String[] roles) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		GrantedAuthority[] granteds = authentication.getAuthorities();
+		Collection<GrantedAuthority> granteds = authentication.getAuthorities();
 		for (String role : roles) {
 			for (GrantedAuthority authority : granteds) {
 				if (role.equals(authority.getAuthority())) {

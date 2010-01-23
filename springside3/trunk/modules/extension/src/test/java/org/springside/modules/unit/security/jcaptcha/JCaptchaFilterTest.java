@@ -14,7 +14,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockServletContext;
 import org.springside.modules.security.jcaptcha.JCaptchaFilter;
-import org.springside.modules.test.utils.WebUtils;
+import org.springside.modules.test.utils.WebTestUtils;
 
 public class JCaptchaFilterTest extends Assert {
 
@@ -30,13 +30,18 @@ public class JCaptchaFilterTest extends Assert {
 	@BeforeClass
 	public static void setUpBeforeClass() {
 		MockServletContext context = (MockServletContext) config.getServletContext();
-		WebUtils.initWebApplicationContext(context, "/applicationContext-security.xml");
+		context.setMinorVersion(4);
+		
+		WebTestUtils.initWebApplicationContext(context, "/applicationContext-security.xml");
 		config.addInitParameter(JCaptchaFilter.PARAM_FAILURE_URL, failUrl);
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() {
-		WebUtils.closeWebApplicationContext(config.getServletContext());
+		MockServletContext context = (MockServletContext) config.getServletContext();
+		context.setMinorVersion(4);
+
+		WebTestUtils.closeWebApplicationContext(context);
 	}
 
 	@Test

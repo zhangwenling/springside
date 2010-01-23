@@ -9,7 +9,6 @@ package org.springside.modules.test.utils;
 
 import java.util.HashMap;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,7 +31,7 @@ import com.opensymphony.xwork2.ActionContext;
  * 
  * @author calvin
  */
-public class WebUtils {
+public class WebTestUtils {
 
 	private static boolean struts2ContextInited = false;
 
@@ -43,6 +42,7 @@ public class WebUtils {
 	 */
 	public static void initWebApplicationContext(MockServletContext servletContext, String... configLocations) {
 		String configLocationsString = StringUtils.join(configLocations, ",");
+		servletContext.setMinorVersion(4);
 		servletContext.addInitParameter(ContextLoader.CONFIG_LOCATION_PARAM, configLocationsString);
 		new ContextLoader().initWebApplicationContext(servletContext);
 	}
@@ -58,6 +58,7 @@ public class WebUtils {
 		wac.setParent(applicationContext);
 		wac.setServletContext(servletContext);
 		wac.setConfigLocation("");
+		servletContext.setMinorVersion(4);
 		servletContext.setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, wac);
 		wac.refresh();
 	}
@@ -65,7 +66,8 @@ public class WebUtils {
 	/**
 	 * 关闭ServletContext中的Spring WebApplicationContext.
 	 */
-	public static void closeWebApplicationContext(ServletContext servletContext) {
+	public static void closeWebApplicationContext(MockServletContext servletContext) {
+		servletContext.setMinorVersion(4);
 		new ContextLoader().closeWebApplicationContext(servletContext);
 	}
 

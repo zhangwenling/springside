@@ -7,14 +7,14 @@
  */
 package org.springside.modules.test.selenium;
 
-import org.junit.internal.runners.InitializationError;
 import org.junit.runner.notification.RunNotifier;
+import org.junit.runners.model.InitializationError;
 import org.springside.modules.test.groups.GroupsTestRunner;
 
 /**
  * Selenium的Runner, 支持在Assert出错时截图, 并支持TestNG Groups式分组执行用例.
  * 
- * 注意, 本类只适用于JUnit 4.4版本.
+ * 注意, 本类只适用于JUnit 4.4以上版本.
  * 
  * @author calvin
  */
