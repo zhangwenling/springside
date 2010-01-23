@@ -94,7 +94,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 	}
 
 	/**
-	 * 根据测试角色.
+	 * 删除测试角色.
 	 */
 	@Test
 	public void deleteRole() {

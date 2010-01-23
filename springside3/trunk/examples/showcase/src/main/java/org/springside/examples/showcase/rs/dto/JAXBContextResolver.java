@@ -8,6 +8,8 @@ import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 import javax.xml.bind.JAXBContext;
 
+import org.springframework.stereotype.Component;
+
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.api.json.JSONJAXBContext;
 
@@ -18,6 +20,7 @@ import com.sun.jersey.api.json.JSONJAXBContext;
  *
  */
 @Provider
+@Component
 @SuppressWarnings("unchecked")
 public class JAXBContextResolver implements ContextResolver<JAXBContext> {
 
