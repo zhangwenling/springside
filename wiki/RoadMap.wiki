@@ -11,8 +11,9 @@ Main Job:
      * *eclipse:eclipse生成项目文件。(hibernate tools，h2 用ant runtask)*
      * maven使用更符合团队多项目开发需求   
      * Assembly插件生成项目发布包。(todo)
+     * UnitTest支持代码覆盖率,节省sonar时间
      * 取消特别的使用方式，如copy jar模式，重定义的webapp目录等。
-  * *升级Spring 3.0 (mini-service 有bug)*
+  * 升级Spring 3.0
   * 增加 Jersy REST应用演示
   * 改进SpringSecurity演示：
      * *升级3.0(todo)*
