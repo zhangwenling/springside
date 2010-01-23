@@ -21,15 +21,14 @@ Main Job:
      * 支持CXF WS-Security与Jersy的安全控制.
   * 改进测试改进:
      * 对Selenium的写法大幅改进
-     * *使用Spring + H2 + DBUnit 实现 集成测试，取消Integration Test模式。（showcase一个遗留测试)*
-     * Jetty Bean 与 selenium server的改进.
+     * 使用Spring + H2 + DBUnit 实现 集成测试，取消Integration Test模式。
+     * Jetty Bean 与 selenium server的改进.(todo)
   * Jackson代替Json-lib
   * 依赖包升级：Jquery1.4 (todo)
      
 
 Other Little things:
   * 分开tools 和 server目录
-  * 整理各个case中的ignore
   * jms cluster配置 简化
 
 
