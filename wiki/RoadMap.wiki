@@ -11,7 +11,6 @@ Main Job:
      * eclipse:eclipse生成项目文件。
      * maven使用更符合团队多项目开发需求,取消特别的方式   
      * *Assembly插件生成项目发布包。(todo)*
-     * UnitTest支持代码覆盖率,节省sonar时间 (todo)
   * 升级Spring 3.0
   * 增加 Jersey REST应用演示
   * 改进SpringSecurity演示：
@@ -21,7 +20,7 @@ Main Job:
   * 改进测试改进:
      * 对Selenium的写法大幅改进
      * 使用Spring + H2 + DBUnit 实现 集成测试，取消Integration Test模式。
-     * *Jetty Bean 与 selenium server的改进.(todo)*
+     * *Jetty Bean 与 selenium server的改进.(jettybean)*
   * Jackson代替Json-lib
   * 依赖包升级：Jquery1.4 (todo)
      
