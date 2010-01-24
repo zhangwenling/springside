@@ -10,6 +10,11 @@
 	<artifactId>springside3-jar-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>Springside3's java project parent pom.xml</name>
+
+	<properties>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+
 	<build>
 		<plugins>
 			<!-- Eclipse plugin -->
