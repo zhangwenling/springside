@@ -4,13 +4,13 @@
 
 SpringSide 3.3 RoadMap
 
-= Details =
+= 3.3s =
 
 Main Job:
   * 改进Maven使用：
      * eclipse:eclipse生成项目文件。
      * maven使用更符合团队多项目开发需求,取消特别的方式   
-     * Assembly插件生成项目发布包。(todo)
+     * *Assembly插件生成项目发布包。(todo)*
      * UnitTest支持代码覆盖率,节省sonar时间 (todo)
   * 升级Spring 3.0
   * 增加 Jersey REST应用演示
@@ -26,7 +26,11 @@ Main Job:
   * 依赖包升级：Jquery1.4 (todo)
      
 
-Other Little things:
+= Other Little things =
+  * *生成archetype的脚本* 
+
+= 3.3.1 =
+  * Memcached
   
  
 
