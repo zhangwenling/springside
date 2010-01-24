@@ -336,6 +336,10 @@
 			<artifactId>selenium-java-client-driver</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.seleniumhq.selenium.server</groupId>
+			<artifactId>selenium-server</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.easymock</groupId>
 			<artifactId>easymockclassextension</artifactId>
 		</dependency>
@@ -386,7 +390,8 @@
 				</executions>
 				<configuration>
 					<tasks>
-						<taskdef name="instrument" classname="org.hibernate.tool.instrument.javassist.InstrumentTask">
+						<taskdef name="instrument"
+							classname="org.hibernate.tool.instrument.javassist.InstrumentTask">
 							<classpath>
 								<path refid="maven.runtime.classpath" />
 								<path refid="maven.plugin.classpath" />
@@ -436,7 +441,8 @@
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<configuration>
 					<additionalProjectnatures>
-						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+						<projectnature>org.springframework.ide.eclipse.core.springnature
+						</projectnature>
 					</additionalProjectnatures>
 				</configuration>
 			</plugin>

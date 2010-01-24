@@ -13,6 +13,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.server.SeleniumServer;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 import com.thoughtworks.selenium.DefaultSelenium;
@@ -26,7 +27,7 @@ import com.thoughtworks.selenium.Selenium;
 @RunWith(SeleniumTestRunner.class)
 public class SeleniumTestCase extends Assert {
 
-	public static final String PROPERTY_FILE = "application.test.properties";
+	public static final String DEFAULT_PROPERTY_FILE = "application.test.properties";
 
 	public static final String DEFAULT_URL = "http://localhost:8080";
 	public static final String DEFAULT_BROWSER = "*chrome";
@@ -40,6 +41,8 @@ public class SeleniumTestCase extends Assert {
 
 	public static final String WAIT_FOR_PAGE = "30000";
 
+	protected static SeleniumServer seleniumServer;
+
 	protected static Selenium selenium;
 
 	/**
@@ -48,11 +51,15 @@ public class SeleniumTestCase extends Assert {
 	 */
 	@BeforeClass
 	public static void startSelenium() throws Exception {
-		Properties p = PropertiesLoaderUtils.loadAllProperties(PROPERTY_FILE);
+		Properties p = PropertiesLoaderUtils.loadAllProperties(getSeleniumPropertyFile());
 		String browser = p.getProperty(PROPERTY_BROWSER_NAME, DEFAULT_BROWSER);
 		String url = p.getProperty(PROPERTY_URL_NAME, DEFAULT_URL);
 		String host = p.getProperty(PROPERTY_SELENIUM_HOST_NAME, DEFAULT_SELENIUM_HOST);
 		int port = Integer.valueOf(p.getProperty(PROPERTY_SELENIUM_PORT_NAME, DEFAULT_SELENIUM_PORT));
+
+		if (host.equals("localhost") && seleniumServer == null) {
+			startSeleniumServer();
+		}
 
 		selenium = new DefaultSelenium(host, port, browser, url);
 		selenium.start();
@@ -81,4 +88,32 @@ public class SeleniumTestCase extends Assert {
 	public static void waitPageLoad() {
 		selenium.waitForPageToLoad(WAIT_FOR_PAGE);
 	}
+
+	/**
+	 * 返回Selenium属性文件的路径, 可在子类重载. 
+	 */
+	protected static String getSeleniumPropertyFile() {
+		return DEFAULT_PROPERTY_FILE;
+	}
+
+	private static void startSeleniumServer() throws Exception {
+		seleniumServer = new SeleniumServer();
+		seleniumServer.start();
+		Thread t = new Thread(new StopSeleniumHook(seleniumServer));
+		Runtime.getRuntime().addShutdownHook(t);
+	}
+
+	public static class StopSeleniumHook implements Runnable {
+
+		private SeleniumServer seleniumServer;
+
+		public StopSeleniumHook(SeleniumServer seleniumServer) {
+			this.seleniumServer = seleniumServer;
+		}
+
+		public void run() {
+			seleniumServer.stop();
+		}
+	}
+
 }
