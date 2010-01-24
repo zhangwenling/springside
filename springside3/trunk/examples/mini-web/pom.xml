@@ -23,37 +23,30 @@
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
 		<jdbc.driver.version>${h2.version}</jdbc.driver.version>
 
-		<sql.schema.file>src/main/resources/sql/h2/schema.sql
-		</sql.schema.file>
+		<sql.schema.file>src/main/resources/sql/h2/schema.sql</sql.schema.file>
 		<dbunit.file>src/test/resources/data/default-data.xml</dbunit.file>
 		<dbunit.datatype>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.datatype>
 
 		<!--
-			<jdbc.driver>oracle.jdbc.driver.OracleDriver</jdbc.driver>
-			<jdbc.url>jdbc:oracle:thin:@127.0.0.1:1521:XE</jdbc.url>
-			<jdbc.user>miniweb</jdbc.user> <jdbc.password>miniweb</jdbc.password>
-			<jdbc.schema>MINIWEB</jdbc.schema>
+			<jdbc.driver>oracle.jdbc.driver.OracleDriver</jdbc.driver> <jdbc.url>jdbc:oracle:thin:@127.0.0.1:1521:XE</jdbc.url>
+			<jdbc.user>miniweb</jdbc.user> <jdbc.password>miniweb</jdbc.password> <jdbc.schema>MINIWEB</jdbc.schema>
 
-			<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId>
-			<jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
+			<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId> <jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
 			<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version>
 
 			<dbunit.schema.file>src/main/sql/oracle/schema.sql</dbunit.schema.file>
-			<dbunit.datatype>org.dbunit.ext.oracle.Oracle10DataTypeFactory</dbunit.datatype>
-			<dbunit.format>flat</dbunit.format>
+			<dbunit.datatype>org.dbunit.ext.oracle.Oracle10DataTypeFactory</dbunit.datatype> <dbunit.format>flat</dbunit.format>
 		-->
 
 		<!--
 			<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
 			<jdbc.url>jdbc:mysql://localhost/mini-web?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
-			<jdbc.user>root</jdbc.user> <jdbc.password></jdbc.password>
-			<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+			<jdbc.user>root</jdbc.user> <jdbc.password></jdbc.password> <jdbc.driver.groupId>mysql</jdbc.driver.groupId>
 			<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
 			<jdbc.driver.version>5.1.6</jdbc.driver.version>
 
 			<dbunit.schema.file>src/main/sql/mysql/schema.sql</dbunit.schema.file>
-			<dbunit.datatype>org.dbunit.ext.mysql.MySqlDataTypeFactory</dbunit.datatype>
-			<dbunit.format>flat</dbunit.format>
+			<dbunit.datatype>org.dbunit.ext.mysql.MySqlDataTypeFactory</dbunit.datatype> <dbunit.format>flat</dbunit.format>
 		-->
 	</properties>
 
@@ -254,48 +247,17 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
-
 		<plugins>
-			<!-- dbunit插件 -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>dbunit-maven-plugin</artifactId>
-			</plugin>
-
-			<!-- jetty插件 -->
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-			</plugin>
-
 			<!-- eclipse插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<configuration>
 					<additionalProjectnatures>
-						<projectnature>org.springframework.ide.eclipse.core.springnature
-						</projectnature>
+						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
 					</additionalProjectnatures>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
-	<profiles>
-		<!-- 重载cluster profile,指定finalName -->
-		<profile>
-			<id>cluster</id>
-			<activation>
-				<property>
-					<name>cluster.nodename</name>
-				</property>
-			</activation>
-
-			<build>
-				<finalName>${project.artifactId}-${cluster.nodename}</finalName>
-			</build>
-		</profile>
-	</profiles>
 </project>
