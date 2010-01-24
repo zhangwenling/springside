@@ -4,10 +4,8 @@
 	<property name="hibernatetools-templates.path" value="../../../../tools/code-generator/hibernatetools-templates" />
 
 	<artifact:pom id="mypom" file="../../pom.xml" />
-
 	<artifact:dependencies pathId="toolslib" pomRefId="mypom" />
 	
-
 	<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="toolslib" />
 
 	<target name="generate.pojo">

@@ -1,4 +1,3 @@
 @echo off
-cd ..\tools\h2
-
-h2w.bat
+call mvn initialize -Pstartdb
+pause

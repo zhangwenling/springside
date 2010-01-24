@@ -12,10 +12,9 @@ cd ..\
 echo [Step 1] 复制tools/maven/central-repository 到 %userprofile%\.m2\repository
 xcopy /s/e/i/h/d/y "tools\maven\central-repository" "%USERPROFILE%\.m2\repository"
 
-echo [Step 2] 执行tools/h2/h2w.bat 启动H2数据库.
-cd tools\h2
-call h2w.bat
-cd ..\..\
+echo [Step 2] 启动H2数据库.
+call %MAVEN_BAT% initialize -Pstartdb
+cd ..\
 
 echo [Step 3] 安装SpringSide3 modules 和archetypes到 本地Maven仓库,生成Eclipse项目文件.
 call %MAVEN_BAT% -o eclipse:clean eclipse:eclpse

@@ -8,15 +8,15 @@
 		<relativePath>modules/parent/pom.xml</relativePath>
 	</parent>
 	<groupId>org.springside</groupId>
-	<artifactId>springside3-all</artifactId>
-	<name>Springside3's All</name>
+	<artifactId>springside3-project</artifactId>
+	<name>Springside3's Project</name>
 	<packaging>pom</packaging>
 
 	<modules>
-			<module>modules/core</module>
-			<module>modules/extension</module>
-			<module>modules/parent</module>
-			<module>tools/code-generator/maven-archetypes/service-archetype</module>
-			<module>tools/code-generator/maven-archetypes/web-archetype</module>
+		<module>modules/core</module>
+		<module>modules/extension</module>
+		<module>modules/parent</module>
+		<module>tools/code-generator/maven-archetypes/service-archetype</module>
+		<module>tools/code-generator/maven-archetypes/web-archetype</module>
 	</modules>
 </project>
