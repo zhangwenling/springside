@@ -10,7 +10,6 @@ Main Job:
   * 改进Maven使用：
      * eclipse:eclipse生成项目文件。
      * maven使用更符合团队多项目开发需求,取消特别的方式   
-     * *Assembly插件生成项目发布包。(todo)*
   * 升级Spring 3.0
   * 增加 Jersey REST应用演示
   * 改进SpringSecurity演示：
