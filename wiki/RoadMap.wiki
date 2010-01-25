@@ -26,6 +26,8 @@ Main Job:
 
 = Other Little things =
   * *生成archetype的脚本* 
+  * *生成发行版的脚本*
+  * *清理多数据库的dbunit脚本*
 
 = 3.3.1 =
   * Memcached
