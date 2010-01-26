@@ -21,14 +21,13 @@ Main Job:
      * 使用Spring + H2 + DBUnit 实现 集成测试，取消Integration Test模式。
      * *Jetty Bean 与 selenium server的改进.(jettybean)*
   * Jackson代替Json-lib
-  * 依赖包升级：Jquery1.4 (todo)
+  * 依赖包升级：Jquery1.4
      
 
 = Other Little things =
   * *生成archetype的脚本* 
   * *生成发行版的脚本*
-  * *清理多数据库的maven脚本*
-  * *清理hibernate tools*
+
 
 = 3.3.1 =
   * Memcached
