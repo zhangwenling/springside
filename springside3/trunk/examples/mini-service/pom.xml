@@ -23,18 +23,15 @@
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
 		<jdbc.driver.version>${h2.version}</jdbc.driver.version>
 
+		<sql.type>h2</sql.type>
 		<dbunit.datatype>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.datatype>
-		<dbunit.file>src/test/resources/data/default-data.xml</dbunit.file>
-		<sql.schema.file>src/main/resources/sql/h2/schema.sql</sql.schema.file>
 
 		<!--
 			<jdbc.driver>oracle.jdbc.driver.OracleDriver</jdbc.driver> <jdbc.url>jdbc:oracle:thin:@127.0.0.1:1521:XE</jdbc.url>
 			<jdbc.user>miniservice</jdbc.user> <jdbc.password>miniservice</jdbc.password> <jdbc.schema>MINISERVICE</jdbc.schema>
 
 			<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId> <jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
-			<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version>
-
-			<sql.schema.file>src/main/resources/sql/oracle/schema.sql</sql.schema.file>
+			<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version> <sql.type>oracle</sql.type>
 			<dbunit.datatype>org.dbunit.ext.oracle.Oracle10DataTypeFactory</dbunit.datatype>
 		-->
 
@@ -43,9 +40,7 @@
 			<jdbc.url>jdbc:mysql://localhost/mini-service?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
 			<jdbc.user>root</jdbc.user> <jdbc.password></jdbc.password> <jdbc.driver.groupId>mysql</jdbc.driver.groupId>
 			<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
-			<jdbc.driver.version>5.1.6</jdbc.driver.version>
-
-			<sql.schema.file>src/main/resources/sql/mysql/schema.sql</sql.schema.file>
+			<jdbc.driver.version>5.1.11</jdbc.driver.version> <sql.type>mysql</sql.type>
 			<dbunit.datatype>org.dbunit.ext.mysql.MySqlDataTypeFactory</dbunit.datatype>
 		-->
 	</properties>
@@ -243,6 +238,27 @@
 					<additionalProjectnatures>
 						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
 					</additionalProjectnatures>
+				</configuration>
+			</plugin>
+
+			<!-- dbunit plugin -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>dbunit-maven-plugin</artifactId>
+				<configuration>
+					<src>src/test/resources/data/default-data.xml</src>
+					<dest>src/test/resources/data/default-data.xml</dest>
+				</configuration>
+			</plugin>
+
+			<!-- sql plugin -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sql-maven-plugin</artifactId>
+				<configuration>
+					<srcFiles>
+						<srcFile>src/main/resources/sql/${sql.type}/schema.sql</srcFile>
+					</srcFiles>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -14,6 +14,7 @@ public class ${declarationName}Manager {
 		return ${entityName}Dao.get(id);
 	}
 
+	@Transactional(readOnly = true)
 	public List<${declarationName}> getAll${declarationName}() {
 		return ${entityName}Dao.getAll();
 	}

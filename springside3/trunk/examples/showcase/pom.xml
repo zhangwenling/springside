@@ -21,8 +21,8 @@
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
 		<jdbc.driver.version>${h2.version}</jdbc.driver.version>
 
+		<sql.type>h2</sql.type>
 		<dbunit.datatype>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.datatype>
-		<dbunit.file>src/test/resources/data/default-data.xml</dbunit.file>
 	</properties>
 
 	<!-- 依赖项定义 -->
@@ -388,8 +388,7 @@
 				</executions>
 				<configuration>
 					<tasks>
-						<taskdef name="instrument"
-							classname="org.hibernate.tool.instrument.javassist.InstrumentTask">
+						<taskdef name="instrument" classname="org.hibernate.tool.instrument.javassist.InstrumentTask">
 							<classpath>
 								<path refid="maven.runtime.classpath" />
 								<path refid="maven.plugin.classpath" />
@@ -409,6 +408,8 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>dbunit-maven-plugin</artifactId>
 				<configuration>
+					<src>src/test/resources/data/default-data.xml</src>
+					<dest>src/test/resources/data/default-data.xml</dest>
 					<!-- include export tables -->
 					<tables>
 						<table>
@@ -427,6 +428,17 @@
 				</configuration>
 			</plugin>
 
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sql-maven-plugin</artifactId>
+				<configuration>
+					<srcFiles>
+						<srcFile>src/main/resources/sql/${sql.type}/schema.sql</srcFile>
+						<srcFile>src/main/resources/sql/${sql.type}/quartz.sql</srcFile>
+					</srcFiles>
+				</configuration>
+			</plugin>
+
 			<!-- eclipse插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -436,16 +448,6 @@
 						<projectnature>org.springframework.ide.eclipse.core.springnature
 						</projectnature>
 					</additionalProjectnatures>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>sql-maven-plugin</artifactId>
-				<configuration>
-					<srcFiles>
-						<srcFile>src/main/resources/sql/h2/schema.sql</srcFile>
-						<srcFile>src/main/resources/sql/h2/quartz.sql</srcFile>
-					</srcFiles>
 				</configuration>
 			</plugin>
 		</plugins>

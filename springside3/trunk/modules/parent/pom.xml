@@ -370,6 +370,12 @@
 				<groupId>com.sun.jersey.contribs</groupId>
 				<artifactId>jersey-spring</artifactId>
 				<version>${jersey.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<!-- rest end -->
 
@@ -831,20 +837,22 @@
 						<url>${jdbc.url}</url>
 						<username>${jdbc.user}</username>
 						<password>${jdbc.password}</password>
-						<schema>${jdbc.schema}</schema>
+						<dataTypeFactoryName>${dbunit.datatype}</dataTypeFactoryName>
 						<type>CLEAN_INSERT</type>
-						<src>${dbunit.file}</src>
-						<dest>${dbunit.file}</dest>
 						<format>flat</format>
 						<transaction>true</transaction>
 						<encoding>${project.build.sourceEncoding}</encoding>
-						<dataTypeFactoryName>${dbunit.datatype}</dataTypeFactoryName>
 					</configuration>
 					<dependencies>
 						<dependency>
 							<groupId>${jdbc.driver.groupId}</groupId>
 							<artifactId>${jdbc.driver.artifactId}</artifactId>
 							<version>${jdbc.driver.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.dbunit</groupId>
+							<artifactId>dbunit</artifactId>
+							<version>2.4.7</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -861,9 +869,6 @@
 						<password>${jdbc.password}</password>
 						<onError>continue</onError>
 						<encoding>${project.build.sourceEncoding}</encoding>
-						<srcFiles>
-							<srcFile>${sql.schema.file}</srcFile>
-						</srcFiles>
 					</configuration>
 					<dependencies>
 						<dependency>
@@ -873,6 +878,8 @@
 						</dependency>
 					</dependencies>
 				</plugin>
+
+				<!-- Ant 插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-antrun-plugin</artifactId>

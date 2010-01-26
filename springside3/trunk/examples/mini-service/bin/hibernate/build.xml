@@ -30,7 +30,6 @@
 
 			<hbmtemplate templateprefix="pojo/" template="dao.ftl" filepattern="{class-name}Dao.java" />
 			<hbmtemplate templateprefix="pojo/" template="manager.ftl" filepattern="{class-name}Manager.java" />
-			<hbmtemplate templateprefix="pojo/" template="daoTest.ftl" filepattern="{class-name}DaoTest.java" />
 		</hibernatetool>
 	</target>
 

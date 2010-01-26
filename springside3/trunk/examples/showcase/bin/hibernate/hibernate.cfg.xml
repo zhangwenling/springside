@@ -4,7 +4,7 @@
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<!-- SQL dialect -->
+		<!-- dialect for generate.pojo and generate.ddl-->
 		<property name="dialect">org.hibernate.dialect.H2Dialect</property>
 
 		<!-- jdbc properties for generate.pojo -->
@@ -12,14 +12,13 @@
 		<property name="hibernate.connection.url">jdbc:h2:tcp://localhost/~/showcase</property>
 		<property name="hibernate.connection.username">sa</property>
 		<property name="hibernate.connection.password"></property>
-		
-		<!-- pojos for  generate.code -->
+
+		<!-- entities for generate.code/generate.ddl -->
 		<mapping class="org.springside.examples.showcase.common.entity.IdEntity" />
 		<mapping class="org.springside.examples.showcase.common.entity.User" />
 		<mapping class="org.springside.examples.showcase.common.entity.Role" />
 		<mapping class="org.springside.examples.showcase.common.entity.Post" />
 		<mapping class="org.springside.examples.showcase.common.entity.Subject" />
 		<mapping class="org.springside.examples.showcase.common.entity.Reply" />
-
 	</session-factory>
 </hibernate-configuration>

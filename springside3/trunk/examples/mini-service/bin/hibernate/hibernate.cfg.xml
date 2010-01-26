@@ -4,7 +4,7 @@
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<!-- SQL dialect for generate.pojo and ddl-->
+		<!-- dialect for generate.pojo and generate.ddl-->
 		<property name="dialect">org.hibernate.dialect.H2Dialect</property>
 		<!-- 
 		<property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
@@ -31,7 +31,7 @@
 		<property name="hibernate.connection.password"></property>
 		-->
 		
-		<!-- pojos for  generate.code -->
+		<!-- entity for generate.code and generate.ddl-->
 		<mapping class="org.springside.examples.miniservice.entity.IdEntity" />
 		<mapping class="org.springside.examples.miniservice.entity.user.User" />
 		<mapping class="org.springside.examples.miniservice.entity.user.Role" />
