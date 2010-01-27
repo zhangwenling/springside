@@ -21,14 +21,14 @@ call %MAVEN_BAT% -o clean install -Dmaven.test.skip=true
 
 echo [Step 4] 为Mini-Service 生成Eclipse项目文件, 编译, 打包, 初始化数据库, 启动Jetty.
 cd examples\mini-service
-call %MAVEN_BAT% -o eclipse:clean eclipse:eclpse
+call %MAVEN_BAT% -o eclipse:clean eclipse:eclipse
 call %MAVEN_BAT% -o clean package -Pinitdb -Dmaven.test.skip=true
 start "Mini-Service" %MAVEN_BAT% -o -Djetty.port=8080 jetty:run
 cd ..\..\
 
 echo [Step 5] 为Mini-Web 生成Eclipse项目文件, 编译, 打包, 初始化数据库, 启动Jetty.
 cd examples\mini-web
-call %MAVEN_BAT% -o eclipse:clean eclipse:eclpse
+call %MAVEN_BAT% -o eclipse:clean eclipse:eclipse
 call %MAVEN_BAT% -o clean package -Pinitdb -Dmaven.test.skip=true
 start "Mini-Web" %MAVEN_BAT% -o -Djetty.port=8084 jetty:run
 cd ..\..\
