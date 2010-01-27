@@ -14,10 +14,10 @@ import org.springside.modules.test.spring.SpringTxTestCase;
  */
 public class BaseTxTestCase extends SpringTxTestCase {
 
-	private static boolean loaded = false;
+	private boolean loaded = false;
 
 	@Before
-	public void loadDefaultData() throws Exception {
+	public void loadDefaultDataOnece() throws Exception {
 		if (!loaded) {
 			loadDbUnitData("/data/default-data.xml");
 			loaded = true;

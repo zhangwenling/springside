@@ -7,10 +7,9 @@ goto end
 
 :begin
 set MAVEN_BAT="%cd%\..\tools\maven\apache-maven-2.2.1\bin\mvn.bat"
-cd ..\
 
 echo [Step 1] 复制tools/maven/central-repository 到 %userprofile%\.m2\repository
-xcopy /s/e/i/h/d/y "tools\maven\central-repository" "%USERPROFILE%\.m2\repository"
+xcopy /s/e/i/h/d/y "..\tools\maven\central-repository" "%USERPROFILE%\.m2\repository"
 
 echo [Step 2] 启动H2数据库.
 call %MAVEN_BAT% initialize -Pstartdb
@@ -36,9 +35,9 @@ cd ..\..\
 
 echo [Step 6] 为Showcase 生成Eclipse项目文件, 编译, 打包, 初始化数据库, 启动Jetty.
 cd examples\showcase
-call %MAVEN_BAT% -o eclipse:clean eclipse:eclpse
+call %MAVEN_BAT% -o eclipse:clean eclipse:eclipse
 call %MAVEN_BAT% -o clean package -Pinitdb -Dmaven.test.skip=true
-start "Showcase" %MAVEN_BAT% -o -Djetty.port=9091 jetty:run
+start "Showcase" %MAVEN_BAT% -o -Djetty.port=8088 jetty:run
 cd ..\..\
 
 echo [INFO] SpringSide3.0 快速启动完毕.
