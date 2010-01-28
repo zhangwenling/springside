@@ -27,6 +27,7 @@ Main Job:
 = Other Little things =
   * *生成archetype的脚本* 
   * *生成发行版的脚本*
+  * *Hibernate Tools反向规则, Hibernate Mysql脚本*
 
 
 = 3.3.1 =
