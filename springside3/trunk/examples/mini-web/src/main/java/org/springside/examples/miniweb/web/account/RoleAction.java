@@ -8,7 +8,7 @@ import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.entity.account.Authority;
 import org.springside.examples.miniweb.entity.account.Role;
-import org.springside.examples.miniweb.service.account.SecurityEntityManager;
+import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
 import org.springside.modules.orm.hibernate.HibernateWebUtils;
 
@@ -19,14 +19,14 @@ import org.springside.modules.orm.hibernate.HibernateWebUtils;
  * 
  * @author calvin
  */
-@Namespace("/security")
+@Namespace("/account")
 @Results( { @Result(name = CrudActionSupport.RELOAD, location = "role.action", type = "redirect") })
 public class RoleAction extends CrudActionSupport<Role> {
 
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private SecurityEntityManager securityEntityManager;
+	private AccountManager accountManager;
 
 	//-- 页面属性 --//
 	private Long id;
@@ -46,7 +46,7 @@ public class RoleAction extends CrudActionSupport<Role> {
 	@Override
 	protected void prepareModel() throws Exception {
 		if (id != null) {
-			entity = securityEntityManager.getRole(id);
+			entity = accountManager.getRole(id);
 		} else {
 			entity = new Role();
 		}
@@ -55,7 +55,7 @@ public class RoleAction extends CrudActionSupport<Role> {
 	//-- CRUD Action 函数 --//
 	@Override
 	public String list() throws Exception {
-		allRoleList = securityEntityManager.getAllRole();
+		allRoleList = accountManager.getAllRole();
 		return SUCCESS;
 	}
 
@@ -70,14 +70,14 @@ public class RoleAction extends CrudActionSupport<Role> {
 		//根据页面上的checkbox 整合Role的Authorities Set.
 		HibernateWebUtils.mergeByCheckedIds(entity.getAuthorityList(), checkedAuthIds, Authority.class);
 		//保存用户并放入成功信息.
-		securityEntityManager.saveRole(entity);
+		accountManager.saveRole(entity);
 		addActionMessage("保存角色成功");
 		return RELOAD;
 	}
 
 	@Override
 	public String delete() throws Exception {
-		securityEntityManager.deleteRole(id);
+		accountManager.deleteRole(id);
 		addActionMessage("删除角色成功");
 		return RELOAD;
 	}
@@ -94,7 +94,7 @@ public class RoleAction extends CrudActionSupport<Role> {
 	 * input页面显示所有授权列表.
 	 */
 	public List<Authority> getAllAuthorityList() {
-		return securityEntityManager.getAllAuthority();
+		return accountManager.getAllAuthority();
 	}
 
 	/**

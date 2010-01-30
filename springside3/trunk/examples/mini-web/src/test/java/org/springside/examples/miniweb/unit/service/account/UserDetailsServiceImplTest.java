@@ -12,7 +12,7 @@ import org.springside.examples.miniweb.data.AccountData;
 import org.springside.examples.miniweb.entity.account.Authority;
 import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.entity.account.User;
-import org.springside.examples.miniweb.service.account.SecurityEntityManager;
+import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.examples.miniweb.service.account.UserDetailsServiceImpl;
 import org.springside.modules.utils.ReflectionUtils;
 
@@ -26,18 +26,18 @@ import org.springside.modules.utils.ReflectionUtils;
 public class UserDetailsServiceImplTest extends Assert {
 
 	private UserDetailsServiceImpl userDetailService;
-	private SecurityEntityManager mockSecurityEntityManager;
+	private AccountManager mockAccountManager;
 
 	@Before
 	public void setUp() {
 		userDetailService = new UserDetailsServiceImpl();
-		mockSecurityEntityManager = EasyMock.createMock(SecurityEntityManager.class);
-		ReflectionUtils.setFieldValue(userDetailService, "securityEntityManager", mockSecurityEntityManager);
+		mockAccountManager = EasyMock.createMock(AccountManager.class);
+		ReflectionUtils.setFieldValue(userDetailService, "accountManager", mockAccountManager);
 	}
 
 	@After
 	public void tearDown() {
-		EasyMock.verify(mockSecurityEntityManager);
+		EasyMock.verify(mockAccountManager);
 	}
 
 	@Test
@@ -53,8 +53,8 @@ public class UserDetailsServiceImplTest extends Assert {
 		role.getAuthorityList().add(auth);
 
 		//录制脚本
-		EasyMock.expect(mockSecurityEntityManager.findUserByLoginName(user.getLoginName())).andReturn(user);
-		EasyMock.replay(mockSecurityEntityManager);
+		EasyMock.expect(mockAccountManager.findUserByLoginName(user.getLoginName())).andReturn(user);
+		EasyMock.replay(mockAccountManager);
 
 		//执行测试
 		UserDetails userDetails = userDetailService.loadUserByUsername(user.getLoginName());
@@ -70,8 +70,8 @@ public class UserDetailsServiceImplTest extends Assert {
 	@Test(expected = UsernameNotFoundException.class)
 	public void loadUserNotExist() {
 		//录制脚本
-		EasyMock.expect(mockSecurityEntityManager.findUserByLoginName("userNameNotExist")).andReturn(null);
-		EasyMock.replay(mockSecurityEntityManager);
+		EasyMock.expect(mockAccountManager.findUserByLoginName("userNameNotExist")).andReturn(null);
+		EasyMock.replay(mockAccountManager);
 		//执行测试
 		userDetailService.loadUserByUsername("userNameNotExist");
 	}

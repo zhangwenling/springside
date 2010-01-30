@@ -33,10 +33,10 @@
 	 		
 		<!-- entities for generate.code and generate.ddl -->
 		<mapping class="org.springside.examples.miniweb.entity.IdEntity" />
-		<mapping class="org.springside.examples.miniweb.entity.security.User" />
-		<mapping class="org.springside.examples.miniweb.entity.security.Role" />
-		<mapping class="org.springside.examples.miniweb.entity.security.Authority" />
-		<mapping class="org.springside.examples.miniweb.entity.security.Resource" />
+		<mapping class="org.springside.examples.miniweb.entity.account.User" />
+		<mapping class="org.springside.examples.miniweb.entity.account.Role" />
+		<mapping class="org.springside.examples.miniweb.entity.account.Authority" />
+		<mapping class="org.springside.examples.miniweb.entity.account.Resource" />
 
 	</session-factory>
 </hibernate-configuration>

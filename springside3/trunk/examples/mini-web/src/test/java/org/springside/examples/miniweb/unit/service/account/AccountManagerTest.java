@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springside.examples.miniweb.dao.account.UserDao;
 import org.springside.examples.miniweb.service.ServiceException;
-import org.springside.examples.miniweb.service.account.SecurityEntityManager;
+import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
@@ -19,14 +19,14 @@ import org.springside.modules.utils.ReflectionUtils;
  */
 public class AccountManagerTest extends Assert {
 
-	private SecurityEntityManager securityEntityManager;
+	private AccountManager accountManager;
 	private UserDao mockUserDao;
 
 	@Before
 	public void setUp() {
-		securityEntityManager = new SecurityEntityManager();
+		accountManager = new AccountManager();
 		mockUserDao = EasyMock.createMock(UserDao.class);
-		ReflectionUtils.setFieldValue(securityEntityManager, "userDao", mockUserDao);
+		ReflectionUtils.setFieldValue(accountManager, "userDao", mockUserDao);
 	}
 
 	@After
@@ -39,10 +39,10 @@ public class AccountManagerTest extends Assert {
 		mockUserDao.delete(2L);
 		EasyMock.replay(mockUserDao);
 		//正常删除用户.
-		securityEntityManager.deleteUser(2L);
+		accountManager.deleteUser(2L);
 		//删除超级管理用户抛出异常.
 		try {
-			securityEntityManager.deleteUser(1L);
+			accountManager.deleteUser(1L);
 			fail("expected ServicExcepton not be thrown");
 		} catch (ServiceException e) {
 			//expected exception

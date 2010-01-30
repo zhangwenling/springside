@@ -27,9 +27,9 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 @Service
 //默认将类中的所有函数纳入事务管理.
 @Transactional
-public class SecurityEntityManager {
+public class AccountManager {
 
-	private static Logger logger = LoggerFactory.getLogger(SecurityEntityManager.class);
+	private static Logger logger = LoggerFactory.getLogger(AccountManager.class);
 
 	@Autowired
 	private UserDao userDao;

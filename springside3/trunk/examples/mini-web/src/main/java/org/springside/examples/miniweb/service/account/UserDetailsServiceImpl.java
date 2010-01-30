@@ -25,14 +25,14 @@ import com.google.common.collect.Sets;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private SecurityEntityManager securityEntityManager;
+	private AccountManager accountManager;
 
 	/**
 	 * 获取用户Details信息的回调函数.
 	 */
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
 
-		User user = securityEntityManager.findUserByLoginName(username);
+		User user = accountManager.findUserByLoginName(username);
 		if (user == null)
 			throw new UsernameNotFoundException("用户" + username + " 不存在");
 

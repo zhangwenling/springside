@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.service.ServiceException;
-import org.springside.examples.miniweb.service.account.SecurityEntityManager;
+import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
@@ -27,8 +27,8 @@ import org.springside.modules.web.struts2.Struts2Utils;
  * 
  * @author calvin
  */
-//定义URL映射对应/security/user.action
-@Namespace("/security")
+//定义URL映射对应/account/user.action
+@Namespace("/account")
 //定义名为reload的result重定向到user.action, 其他result则按照convention默认.
 @Results( { @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
 public class UserAction extends CrudActionSupport<User> {
@@ -36,7 +36,7 @@ public class UserAction extends CrudActionSupport<User> {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private SecurityEntityManager securityEntityManager;
+	private AccountManager accountManager;
 
 	//-- 页面属性 --//
 	private Long id;
@@ -56,7 +56,7 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	protected void prepareModel() throws Exception {
 		if (id != null) {
-			entity = securityEntityManager.getUser(id);
+			entity = accountManager.getUser(id);
 		} else {
 			entity = new User();
 		}
@@ -71,7 +71,7 @@ public class UserAction extends CrudActionSupport<User> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
-		page = securityEntityManager.searchUser(page, filters);
+		page = accountManager.searchUser(page, filters);
 		return SUCCESS;
 	}
 
@@ -86,7 +86,7 @@ public class UserAction extends CrudActionSupport<User> {
 		//根据页面上的checkbox选择 整合User的Roles Set
 		HibernateWebUtils.mergeByCheckedIds(entity.getRoleList(), checkedRoleIds, Role.class);
 
-		securityEntityManager.saveUser(entity);
+		accountManager.saveUser(entity);
 		addActionMessage("保存用户成功");
 		return RELOAD;
 	}
@@ -94,7 +94,7 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	public String delete() throws Exception {
 		try {
-			securityEntityManager.deleteUser(id);
+			accountManager.deleteUser(id);
 			addActionMessage("删除用户成功");
 		} catch (ServiceException e) {
 			logger.error(e.getMessage(), e);
@@ -112,7 +112,7 @@ public class UserAction extends CrudActionSupport<User> {
 		String newLoginName = request.getParameter("loginName");
 		String oldLoginName = request.getParameter("oldLoginName");
 
-		if (securityEntityManager.isLoginNameUnique(newLoginName, oldLoginName)) {
+		if (accountManager.isLoginNameUnique(newLoginName, oldLoginName)) {
 			Struts2Utils.renderText("true");
 		} else {
 			Struts2Utils.renderText("false");
@@ -133,7 +133,7 @@ public class UserAction extends CrudActionSupport<User> {
 	 * input页面显示所有角色列表.
 	 */
 	public List<Role> getAllRoleList() {
-		return securityEntityManager.getAllRole();
+		return accountManager.getAllRole();
 	}
 
 	/**

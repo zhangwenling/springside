@@ -9,12 +9,12 @@
 
 	<!-- http安全配置 -->
 	<s:http auto-config="true">
-		<s:intercept-url pattern="/security/user!save*" access="ROLE_修改用户" />
-		<s:intercept-url pattern="/security/user!delete*" access="ROLE_修改用户" />
-		<s:intercept-url pattern="/security/user*" access="ROLE_浏览用户" />
-		<s:intercept-url pattern="/security/role!save*" access="ROLE_修改角色" />
-		<s:intercept-url pattern="/security/role!delete*" access="ROLE_修改角色" />
-		<s:intercept-url pattern="/security/role*" access="ROLE_浏览角色" />
+		<s:intercept-url pattern="/account/user!save*" access="ROLE_修改用户" />
+		<s:intercept-url pattern="/account/user!delete*" access="ROLE_修改用户" />
+		<s:intercept-url pattern="/account/user*" access="ROLE_浏览用户" />
+		<s:intercept-url pattern="/account/role!save*" access="ROLE_修改角色" />
+		<s:intercept-url pattern="/account/role!delete*" access="ROLE_修改角色" />
+		<s:intercept-url pattern="/account/role*" access="ROLE_浏览角色" />
 		
 		<s:form-login login-page="/login.action" default-target-url="/" authentication-failure-url="/login.action?error=true" />
 		<s:logout logout-success-url="/" />

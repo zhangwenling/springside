@@ -17,31 +17,31 @@
 		timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false" diskPersistent="false" />
 
 	<!-- Special objects setting. -->
-	<cache name="org.springside.examples.miniweb.entity.security.User" maxElementsInMemory="10000"
+	<cache name="org.springside.examples.miniweb.entity.account.User" maxElementsInMemory="10000"
 		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
-	<cache name="org.springside.examples.miniweb.entity.security.User.roleList" maxElementsInMemory="10000"
+	<cache name="org.springside.examples.miniweb.entity.account.User.roleList" maxElementsInMemory="10000"
 		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
-	<cache name="org.springside.examples.miniweb.entity.security.Role" maxElementsInMemory="10000"
+	<cache name="org.springside.examples.miniweb.entity.account.Role" maxElementsInMemory="10000"
 		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
-	<cache name="org.springside.examples.miniweb.entity.security.Role.authorityList" maxElementsInMemory="10000"
+	<cache name="org.springside.examples.miniweb.entity.account.Role.authorityList" maxElementsInMemory="10000"
 		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
 			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />
 	</cache>
 
-	<cache name="org.springside.examples.miniweb.entity.security.Authority" maxElementsInMemory="10000"
+	<cache name="org.springside.examples.miniweb.entity.account.Authority" maxElementsInMemory="10000"
 		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
-	<cache name="org.springside.examples.miniweb.entity.security.Resource" maxElementsInMemory="10000"
+	<cache name="org.springside.examples.miniweb.entity.account.Resource" maxElementsInMemory="10000"
 		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
-	<cache name="org.springside.examples.miniweb.entity.security.Resource.authorityList" maxElementsInMemory="10000"
+	<cache name="org.springside.examples.miniweb.entity.account.Resource.authorityList" maxElementsInMemory="10000"
 		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
 </ehcache>
