@@ -55,7 +55,7 @@
 				<prop key="hibernate.cache.provider_configuration_file_resource_path">${hibernate.ehcache_config_file}</prop>
 			</props>
 		</property>
-		<property name="packagesToScan" value="org.springside.examples.miniweb.entity.security" />
+		<property name="packagesToScan" value="org.springside.examples.miniweb.entity.account" />
 	</bean>
 
 	<!-- 事务管理器配置,单数据源事务 -->

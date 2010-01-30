@@ -3,7 +3,7 @@ package org.springside.examples.miniweb.unit.dao.account;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.dao.account.UserDao;
-import org.springside.examples.miniweb.data.SecurityEntityData;
+import org.springside.examples.miniweb.data.AccountData;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.unit.dao.BaseTxTestCase;
 
@@ -24,7 +24,7 @@ public class UserDaoTest extends BaseTxTestCase {
 	//@Rollback(false) 
 	public void crudEntityWithRole() {
 		//新建并保存带角色的用户
-		User user = SecurityEntityData.getRandomUserWithRole();
+		User user = AccountData.getRandomUserWithRole();
 		entityDao.save(user);
 		//强制执行sql语句
 		flush();
@@ -49,7 +49,7 @@ public class UserDaoTest extends BaseTxTestCase {
 	//期望抛出ConstraintViolationException的异常.
 	@Test(expected = org.hibernate.exception.ConstraintViolationException.class)
 	public void savenUserNotUnique() {
-		User user = SecurityEntityData.getRandomUser();
+		User user = AccountData.getRandomUser();
 		user.setLoginName("admin");
 		entityDao.save(user);
 		flush();

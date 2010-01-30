@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.commons.collections.ListUtils;
 import org.junit.Test;
-import org.springside.examples.miniweb.data.SecurityEntityData;
+import org.springside.examples.miniweb.data.AccountData;
 import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
@@ -45,7 +45,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		clickLink("增加新用户");
 
 		//生成待输入的测试用户数据
-		User user = SecurityEntityData.getRandomUserWithRole();
+		User user = AccountData.getRandomUserWithRole();
 
 		//输入数据
 		selenium.type("loginName", user.getLoginName());
@@ -90,7 +90,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 		testUser.getRoleList().clear();
 
 		//增加一个角色
-		Role role = SecurityEntityData.getRandomDefaultRole();
+		Role role = AccountData.getRandomDefaultRole();
 		selenium.check("checkedRoleIds-" + role.getId());
 		testUser.getRoleList().add(role);
 
@@ -174,7 +174,7 @@ public class UserManagerTest extends BaseSeleniumTestCase {
 			assertTrue(selenium.isChecked("checkedRoleIds-" + role.getId()));
 		}
 
-		List<Role> uncheckRoleList = ListUtils.subtract(SecurityEntityData.getDefaultRoleList(), user.getRoleList());
+		List<Role> uncheckRoleList = ListUtils.subtract(AccountData.getDefaultRoleList(), user.getRoleList());
 		for (Role role : uncheckRoleList) {
 			assertFalse(selenium.isChecked("checkedRoleIds-" + role.getId()));
 		}

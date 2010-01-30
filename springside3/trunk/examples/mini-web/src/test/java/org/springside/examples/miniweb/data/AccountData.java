@@ -14,7 +14,7 @@ import com.google.common.collect.Lists;
  * 
  * @author calvin
  */
-public class SecurityEntityData {
+public class AccountData {
 
 	public static final String DEFAULT_PASSWORD = "123456";
 

@@ -17,7 +17,7 @@ import org.springside.modules.utils.ReflectionUtils;
  * 
  * @author calvin
  */
-public class SecurityEntityManagerTest extends Assert {
+public class AccountManagerTest extends Assert {
 
 	private SecurityEntityManager securityEntityManager;
 	private UserDao mockUserDao;

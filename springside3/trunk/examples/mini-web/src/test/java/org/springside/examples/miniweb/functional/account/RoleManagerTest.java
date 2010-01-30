@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.commons.collections.ListUtils;
 import org.junit.Test;
-import org.springside.examples.miniweb.data.SecurityEntityData;
+import org.springside.examples.miniweb.data.AccountData;
 import org.springside.examples.miniweb.entity.account.Authority;
 import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
@@ -43,7 +43,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 		clickLink("增加新角色");
 
 		//生成测试数据
-		Role role = SecurityEntityData.getRandomRoleWithAuthority();
+		Role role = AccountData.getRandomRoleWithAuthority();
 
 		//输入数据
 		selenium.type("name", role.getName());
@@ -80,7 +80,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 		}
 		testRole.getAuthorityList().clear();
 
-		List<Authority> authorityList = SecurityEntityData.getRandomDefaultAuthorityList();
+		List<Authority> authorityList = AccountData.getRandomDefaultAuthorityList();
 		for (Authority authority : authorityList) {
 			selenium.check("checkedAuthIds-" + authority.getId());
 		}
@@ -121,7 +121,7 @@ public class RoleManagerTest extends BaseSeleniumTestCase {
 			assertTrue(selenium.isChecked("checkedAuthIds-" + authority.getId()));
 		}
 
-		List<Authority> uncheckAuthList = ListUtils.subtract(SecurityEntityData.getDefaultAuthorityList(), role
+		List<Authority> uncheckAuthList = ListUtils.subtract(AccountData.getDefaultAuthorityList(), role
 				.getAuthorityList());
 		for (Authority authority : uncheckAuthList) {
 			assertFalse(selenium.isChecked("checkedAuthIds-" + authority.getId()));

@@ -22,7 +22,7 @@ public class SecurityCheckingTest extends BaseSeleniumTestCase {
 		assertTrue(selenium.isElementPresent(LOGIN_BUTTON));
 
 		//访问任意页面会跳转到登录界面
-		selenium.open("/mini-web/security/user.action");
+		selenium.open("/mini-web/account/user.action");
 		assertTrue(selenium.isElementPresent(LOGIN_BUTTON));
 	}
 

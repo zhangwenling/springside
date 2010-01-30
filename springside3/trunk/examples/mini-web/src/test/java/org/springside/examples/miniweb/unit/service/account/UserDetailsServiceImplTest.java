@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springside.examples.miniweb.data.SecurityEntityData;
+import org.springside.examples.miniweb.data.AccountData;
 import org.springside.examples.miniweb.entity.account.Authority;
 import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.entity.account.User;
@@ -45,8 +45,8 @@ public class UserDetailsServiceImplTest extends Assert {
 
 		String authName = "foo";
 		//准备数据
-		User user = SecurityEntityData.getRandomUser();
-		Role role = SecurityEntityData.getRandomRole();
+		User user = AccountData.getRandomUser();
+		Role role = AccountData.getRandomRole();
 		user.getRoleList().add(role);
 		Authority auth = new Authority();
 		auth.setName(authName);
