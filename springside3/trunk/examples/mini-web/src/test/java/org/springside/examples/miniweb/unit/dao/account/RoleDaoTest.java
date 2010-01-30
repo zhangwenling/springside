@@ -1,4 +1,4 @@
-package org.springside.examples.miniweb.unit.dao.security;
+package org.springside.examples.miniweb.unit.dao.account;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

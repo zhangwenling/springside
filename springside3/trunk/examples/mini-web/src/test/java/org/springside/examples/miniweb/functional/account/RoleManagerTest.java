@@ -1,4 +1,4 @@
-package org.springside.examples.miniweb.functional.security;
+package org.springside.examples.miniweb.functional.account;
 
 import java.util.List;
 
