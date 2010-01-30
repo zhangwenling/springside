@@ -7,6 +7,11 @@ import org.hibernate.cfg.reveng.DelegatingReverseEngineeringStrategy;
 import org.hibernate.cfg.reveng.ReverseEngineeringStrategy;
 import org.hibernate.cfg.reveng.TableIdentifier;
 
+/**
+ * Hibernate Tools 从数据库逆向生成Entity POJO时, Class名要去除表名中的前缀的策略.
+ * @author ehuaxio
+ *
+ */
 public class IgnorePrefixReverseEngineeringStrategy extends DelegatingReverseEngineeringStrategy {
 
 	private Set<String> printed = new HashSet<String>();
