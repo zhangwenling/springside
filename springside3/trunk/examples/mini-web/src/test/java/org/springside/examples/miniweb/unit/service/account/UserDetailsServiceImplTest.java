@@ -1,4 +1,4 @@
-package org.springside.examples.miniweb.unit.service.security;
+package org.springside.examples.miniweb.unit.service.account;
 
 import org.easymock.classextension.EasyMock;
 import org.junit.After;
