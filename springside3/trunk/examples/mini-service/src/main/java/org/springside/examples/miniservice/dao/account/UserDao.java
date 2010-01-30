@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
-import org.springside.examples.miniservice.entity.user.User;
+import org.springside.examples.miniservice.entity.account.User;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
 /**

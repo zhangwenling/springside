@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniservice.dao.account.UserDao;
-import org.springside.examples.miniservice.entity.user.User;
+import org.springside.examples.miniservice.entity.account.User;
 
 /**
  * 用户管理类.

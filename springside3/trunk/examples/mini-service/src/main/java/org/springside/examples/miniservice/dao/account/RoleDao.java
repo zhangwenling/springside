@@ -1,7 +1,7 @@
 package org.springside.examples.miniservice.dao.account;
 
 import org.springframework.stereotype.Repository;
-import org.springside.examples.miniservice.entity.user.Role;
+import org.springside.examples.miniservice.entity.account.Role;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
 /**

@@ -9,7 +9,7 @@ import javax.xml.ws.Service;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.miniservice.data.UserData;
-import org.springside.examples.miniservice.entity.user.User;
+import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.ws.UserWebService;
 import org.springside.examples.miniservice.ws.WsConstants;
 import org.springside.examples.miniservice.ws.dto.RoleDTO;

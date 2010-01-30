@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springside.examples.miniservice.data.UserData;
-import org.springside.examples.miniservice.entity.user.User;
+import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.rs.client.UserResourceClient;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
 
