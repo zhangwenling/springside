@@ -29,6 +29,7 @@
 		<url-pattern>/ws/*</url-pattern>
 	</servlet-mapping>
 
+	<!-- Jersey 配置 -->
 	<servlet>
 		<servlet-name>JerseyServlet</servlet-name>
 		<servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>

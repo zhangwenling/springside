@@ -39,7 +39,6 @@
 				<configuration>
 					<scanIntervalSeconds>5</scanIntervalSeconds>
 				</configuration>
-
 			</plugin>
 		</plugins>
 	</build>

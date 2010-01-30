@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-  <SS_AUTHORITY ID="1" NAME="浏览用户" />
+  <SS_AUTHORITY ID="1" NAME="浏览用户"/>
   <SS_AUTHORITY ID="2" NAME="修改用户"/>
   <SS_AUTHORITY ID="3" NAME="浏览角色"/>
   <SS_AUTHORITY ID="4" NAME="修改角色"/>

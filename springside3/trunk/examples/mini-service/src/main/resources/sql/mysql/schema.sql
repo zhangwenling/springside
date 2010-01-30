@@ -30,8 +30,7 @@
 
     create table acct_user_role (
         user_id bigint not null,
-        role_id bigint not null,
-         primary key (user_id,role_id)
+        role_id bigint not null
     ) ENGINE=InnoDB;
 
     alter table acct_user_role 
