@@ -36,7 +36,5 @@
 		<mapping class="org.springside.examples.miniweb.entity.account.User" />
 		<mapping class="org.springside.examples.miniweb.entity.account.Role" />
 		<mapping class="org.springside.examples.miniweb.entity.account.Authority" />
-		<mapping class="org.springside.examples.miniweb.entity.account.Resource" />
-
 	</session-factory>
 </hibernate-configuration>

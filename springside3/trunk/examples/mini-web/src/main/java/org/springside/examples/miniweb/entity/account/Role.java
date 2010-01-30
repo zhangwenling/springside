@@ -29,7 +29,7 @@ import com.google.common.collect.Lists;
  * @author calvin
  */
 @Entity
-@Table(name = "SS_ROLE")
+@Table(name = "ACCT_ROLE")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Role extends IdEntity {
 
@@ -55,7 +55,7 @@ public class Role extends IdEntity {
 	}
 
 	@ManyToMany
-	@JoinTable(name = "SS_ROLE_AUTHORITY", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
+	@JoinTable(name = "ACCT_ROLE_AUTHORITY", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
 	@Fetch(FetchMode.SUBSELECT)
 	@OrderBy("id")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

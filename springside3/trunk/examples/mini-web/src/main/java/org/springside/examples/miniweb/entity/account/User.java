@@ -31,7 +31,7 @@ import com.google.common.collect.Lists;
  */
 @Entity
 //表名与类名不相同时重新定义表名.
-@Table(name = "SS_USER")
+@Table(name = "ACCT_USER")
 //默认的缓存策略.
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User extends IdEntity {
@@ -79,7 +79,7 @@ public class User extends IdEntity {
 	//多对多定义
 	@ManyToMany
 	//中间表定义,表名采用默认命名规则
-	@JoinTable(name = "SS_USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
+	@JoinTable(name = "ACCT_USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
 	//Fecth策略定义
 	@Fetch(FetchMode.SUBSELECT)
 	//集合按id排序.
