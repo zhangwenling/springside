@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.dao;
+package org.springside.examples.miniservice.dao.account;
 
 import java.util.List;
 

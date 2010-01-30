@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.dao;
+package org.springside.examples.miniservice.dao.account;
 
 import org.springframework.stereotype.Repository;
 import org.springside.examples.miniservice.entity.user.Role;

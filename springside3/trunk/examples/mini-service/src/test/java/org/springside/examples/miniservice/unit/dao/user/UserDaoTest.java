@@ -2,7 +2,7 @@ package org.springside.examples.miniservice.unit.dao.user;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springside.examples.miniservice.dao.UserDao;
+import org.springside.examples.miniservice.dao.account.UserDao;
 import org.springside.examples.miniservice.data.UserData;
 import org.springside.examples.miniservice.entity.user.User;
 import org.springside.examples.miniservice.unit.dao.BaseTxTestCase;
