@@ -5,7 +5,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springside.examples.miniweb.dao.security.UserDao;
+import org.springside.examples.miniweb.dao.account.UserDao;
 import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.examples.miniweb.service.security.SecurityEntityManager;
 import org.springside.modules.utils.ReflectionUtils;

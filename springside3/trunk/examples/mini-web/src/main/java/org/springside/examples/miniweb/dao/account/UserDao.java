@@ -1,4 +1,4 @@
-package org.springside.examples.miniweb.dao.security;
+package org.springside.examples.miniweb.dao.account;
 
 import org.springframework.stereotype.Repository;
 import org.springside.examples.miniweb.entity.security.User;

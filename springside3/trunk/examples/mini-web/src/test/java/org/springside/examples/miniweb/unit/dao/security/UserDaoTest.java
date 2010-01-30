@@ -2,7 +2,7 @@ package org.springside.examples.miniweb.unit.dao.security;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springside.examples.miniweb.dao.security.UserDao;
+import org.springside.examples.miniweb.dao.account.UserDao;
 import org.springside.examples.miniweb.data.SecurityEntityData;
 import org.springside.examples.miniweb.entity.security.User;
 import org.springside.examples.miniweb.unit.dao.BaseTxTestCase;
