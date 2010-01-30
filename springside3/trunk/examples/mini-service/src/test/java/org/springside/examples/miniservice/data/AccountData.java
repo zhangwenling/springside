@@ -9,7 +9,7 @@ import org.springside.modules.test.utils.DataUtils;
  * 
  * @author calvin
  */
-public class UserData {
+public class AccountData {
 
 	public static User getRandomUser() {
 		String userName = DataUtils.randomName("User");
@@ -24,8 +24,8 @@ public class UserData {
 	}
 
 	public static User getRandomUserWithAdminRole() {
-		User user = UserData.getRandomUser();
-		Role adminRole = UserData.getAdminRole();
+		User user = AccountData.getRandomUser();
+		Role adminRole = AccountData.getAdminRole();
 		user.getRoleList().add(adminRole);
 		return user;
 	}

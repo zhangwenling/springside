@@ -8,7 +8,7 @@ import javax.xml.ws.Service;
 
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.examples.miniservice.data.UserData;
+import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.ws.UserWebService;
 import org.springside.examples.miniservice.ws.WsConstants;
@@ -46,7 +46,7 @@ public class UserWebServiceTest extends SpringContextTestCase {
 	 */
 	@Test
 	public void createUser() {
-		User user = UserData.getRandomUser();
+		User user = AccountData.getRandomUser();
 
 		UserDTO userDTO = new UserDTO();
 		userDTO.setLoginName(user.getLoginName());

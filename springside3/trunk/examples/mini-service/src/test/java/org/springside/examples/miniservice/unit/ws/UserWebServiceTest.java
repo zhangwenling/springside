@@ -9,9 +9,9 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springside.examples.miniservice.data.UserData;
+import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.User;
-import org.springside.examples.miniservice.service.account.UserManager;
+import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.impl.UserWebServiceImpl;
 import org.springside.examples.miniservice.ws.result.AuthUserResult;
@@ -28,14 +28,14 @@ import org.springside.modules.utils.ReflectionUtils;
  */
 public class UserWebServiceTest extends Assert {
 	private UserWebServiceImpl userWebService;
-	private UserManager mockUserManager;
+	private AccountManager mockUserManager;
 
 	@Before
 	public void setUp() {
 		userWebService = new UserWebServiceImpl();
 		ReflectionUtils.setFieldValue(userWebService, "dozer", new DozerBeanMapper());
 		//创建mock对象
-		mockUserManager = EasyMock.createMock(UserManager.class);
+		mockUserManager = EasyMock.createMock(AccountManager.class);
 		ReflectionUtils.setFieldValue(userWebService, "userManager", mockUserManager);
 	}
 
@@ -50,7 +50,7 @@ public class UserWebServiceTest extends Assert {
 	 */
 	@Test
 	public void dozerBinding() {
-		User user = UserData.getRandomUserWithAdminRole();
+		User user = AccountData.getRandomUserWithAdminRole();
 		List<User> list = Collections.singletonList(user);
 		EasyMock.expect(mockUserManager.getAllLoadedUser()).andReturn(list);
 		EasyMock.replay(mockUserManager);

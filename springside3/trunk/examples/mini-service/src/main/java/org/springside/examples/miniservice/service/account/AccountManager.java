@@ -21,7 +21,7 @@ import org.springside.examples.miniservice.entity.account.User;
 @Service
 //默认将类中的所有函数纳入事务管理.
 @Transactional
-public class UserManager {
+public class AccountManager {
 	@Autowired
 	private UserDao userDao;
 

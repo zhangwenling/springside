@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springside.examples.miniservice.entity.account.User;
-import org.springside.examples.miniservice.service.account.UserManager;
+import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.ws.UserWebService;
 import org.springside.examples.miniservice.ws.WsConstants;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
@@ -37,7 +37,7 @@ public class UserWebServiceImpl implements UserWebService {
 	private static Logger logger = LoggerFactory.getLogger(UserWebServiceImpl.class);
 
 	@Autowired
-	private UserManager userManager;
+	private AccountManager accountManager;
 	@Autowired
 	private DozerBeanMapper dozer;
 
@@ -47,7 +47,7 @@ public class UserWebServiceImpl implements UserWebService {
 	public GetAllUserResult getAllUser() {
 		//获取User列表并转换为UserDTO列表.
 		try {
-			List<User> userEntityList = userManager.getAllLoadedUser();
+			List<User> userEntityList = accountManager.getAllLoadedUser();
 			List<UserDTO> userDTOList = Lists.newArrayList();
 
 			for (User userEntity : userEntityList) {
@@ -77,7 +77,7 @@ public class UserWebServiceImpl implements UserWebService {
 
 		//获取用户
 		try {
-			User entity = userManager.getLoadedUser(id);
+			User entity = accountManager.getLoadedUser(id);
 			UserDTO dto = dozer.map(entity, UserDTO.class);
 
 			GetUserResult result = new GetUserResult();
@@ -110,7 +110,7 @@ public class UserWebServiceImpl implements UserWebService {
 		//保存用户
 		try {
 			User userEntity = dozer.map(user, User.class);
-			userManager.saveUser(userEntity);
+			accountManager.saveUser(userEntity);
 
 			CreateUserResult result = new CreateUserResult();
 			result.setUserId(userEntity.getId());
@@ -142,7 +142,7 @@ public class UserWebServiceImpl implements UserWebService {
 		//认证
 		try {
 			AuthUserResult result = new AuthUserResult();
-			if (userManager.authenticate(loginName, password)) {
+			if (accountManager.authenticate(loginName, password)) {
 				result.setValid(true);
 			} else {
 				result.setValid(false);

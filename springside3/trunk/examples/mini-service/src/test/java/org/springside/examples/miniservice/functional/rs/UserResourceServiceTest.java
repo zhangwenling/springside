@@ -7,7 +7,7 @@ import org.dozer.DozerBeanMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springside.examples.miniservice.data.UserData;
+import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.rs.client.UserResourceClient;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
@@ -51,7 +51,7 @@ public class UserResourceServiceTest extends Assert {
 
 	@Test
 	public void createUser() {
-		User user = UserData.getRandomUser();
+		User user = AccountData.getRandomUser();
 		UserDTO dto = new DozerBeanMapper().map(user, UserDTO.class);
 
 		URI uri = client.createUser(dto);
