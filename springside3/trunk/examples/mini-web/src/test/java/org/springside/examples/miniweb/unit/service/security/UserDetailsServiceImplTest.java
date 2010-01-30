@@ -12,8 +12,8 @@ import org.springside.examples.miniweb.data.SecurityEntityData;
 import org.springside.examples.miniweb.entity.account.Authority;
 import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.entity.account.User;
-import org.springside.examples.miniweb.service.security.SecurityEntityManager;
-import org.springside.examples.miniweb.service.security.UserDetailsServiceImpl;
+import org.springside.examples.miniweb.service.account.SecurityEntityManager;
+import org.springside.examples.miniweb.service.account.UserDetailsServiceImpl;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**

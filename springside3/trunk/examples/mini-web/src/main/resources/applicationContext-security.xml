@@ -28,5 +28,5 @@
 	</s:authentication-manager>
 
 	<!-- 项目实现的用户查询服务 -->
-	<bean id="userDetailsService" class="org.springside.examples.miniweb.service.security.UserDetailsServiceImpl" />
+	<bean id="userDetailsService" class="org.springside.examples.miniweb.service.account.UserDetailsServiceImpl" />
 </beans>
