@@ -10,7 +10,7 @@ import org.apache.struts2.convention.annotation.Results;
 import org.hibernate.StaleStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.common.service.UserManager;
+import org.springside.examples.showcase.common.service.AccountManager;
 
 /**
  * 用户管理Action.
@@ -25,7 +25,7 @@ public class UserAction extends CrudActionSupport<User> {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private UserManager userManager;
+	private AccountManager accountManager;
 
 	//-- 页面属性  --//
 	private Long id;
@@ -46,7 +46,7 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	protected void prepareModel() throws Exception {
 		if (id != null) {
-			entity = userManager.getUser(id);
+			entity = accountManager.getUser(id);
 		} else {
 			entity = new User();
 		}
@@ -55,7 +55,7 @@ public class UserAction extends CrudActionSupport<User> {
 	//-- CRUD Action 函数 --//
 	@Override
 	public String list() throws Exception {
-		allUserList = userManager.getAllUserWithRole();
+		allUserList = accountManager.getAllUserWithRole();
 		return SUCCESS;
 	}
 
@@ -73,7 +73,7 @@ public class UserAction extends CrudActionSupport<User> {
 			throw new StaleStateException("对象已有新的版本");
 		}
 
-		userManager.saveUser(entity);
+		accountManager.saveUser(entity);
 		return RELOAD;
 	}
 
@@ -84,7 +84,7 @@ public class UserAction extends CrudActionSupport<User> {
 
 	//-- 其他Action函数 --//
 	public String disableUsers() {
-		userManager.disableUsers(checkedUserIds);
+		accountManager.disableUsers(checkedUserIds);
 		return RELOAD;
 	}
 

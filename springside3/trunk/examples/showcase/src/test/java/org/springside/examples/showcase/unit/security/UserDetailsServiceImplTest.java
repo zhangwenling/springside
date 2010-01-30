@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springside.examples.showcase.common.entity.Role;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.common.service.UserManager;
+import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.examples.showcase.security.OperatorDetails;
 import org.springside.examples.showcase.security.UserDetailsServiceImpl;
 import org.springside.modules.utils.ReflectionUtils;
@@ -19,12 +19,12 @@ import org.springside.modules.utils.ReflectionUtils;
 public class UserDetailsServiceImplTest extends Assert {
 
 	private UserDetailsService userDetailsService;
-	private UserManager mockUserManager;
+	private AccountManager mockUserManager;
 
 	@Before
 	public void setUp() {
 		userDetailsService = new UserDetailsServiceImpl();
-		mockUserManager = EasyMock.createMock(UserManager.class);
+		mockUserManager = EasyMock.createMock(AccountManager.class);
 		ReflectionUtils.setFieldValue(userDetailsService, "userManager", mockUserManager);
 	}
 

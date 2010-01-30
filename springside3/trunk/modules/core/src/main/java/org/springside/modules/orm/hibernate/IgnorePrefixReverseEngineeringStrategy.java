@@ -19,8 +19,8 @@ public class IgnorePrefixReverseEngineeringStrategy extends DelegatingReverseEng
 	public String tableToClassName(TableIdentifier tableIdentifier) {
 		String delegateResult = super.tableToClassName(tableIdentifier);
 		int index = delegateResult.lastIndexOf('.');
-		String className = delegateResult.substring(0, index) + "."
-				+ delegateResult.substring(index + getPrefixLength());
+		String className = delegateResult.substring(0, index + 1)
+				+ delegateResult.substring(index + getPrefixLength() + 1);
 
 		if (!printed.contains(className)) {
 			System.out.println("<mapping class=\"" + className + "\" >");
@@ -31,6 +31,6 @@ public class IgnorePrefixReverseEngineeringStrategy extends DelegatingReverseEng
 	}
 
 	protected int getPrefixLength() {
-		return 5;
+		return 4;
 	}
 }

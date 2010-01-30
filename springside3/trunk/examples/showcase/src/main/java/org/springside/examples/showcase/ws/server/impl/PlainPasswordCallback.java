@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.common.service.UserManager;
+import org.springside.examples.showcase.common.service.AccountManager;
 
 /**
  * 对WS-Security中Digest式密码的处理Handler.
@@ -21,7 +21,7 @@ import org.springside.examples.showcase.common.service.UserManager;
 public class PlainPasswordCallback implements CallbackHandler {
 
 	@Autowired
-	private UserManager userManager;
+	private AccountManager accountManager;
 
 	/**
 	 * 根据用户名查出数据库中用户已散列的密码,对明文密码进行相同的散列后进行比较.
@@ -31,7 +31,7 @@ public class PlainPasswordCallback implements CallbackHandler {
 
 		WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];
 		PasswordEncoder encoder = new ShaPasswordEncoder();
-		User user = userManager.findUserByLoginName(pc.getIdentifier());
+		User user = accountManager.findUserByLoginName(pc.getIdentifier());
 
 		if (user == null) {
 			throw new IOException("wrong login name " + pc.getIdentifier());

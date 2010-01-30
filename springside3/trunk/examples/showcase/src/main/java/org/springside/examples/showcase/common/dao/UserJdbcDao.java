@@ -2,15 +2,14 @@ package org.springside.examples.showcase.common.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springside.examples.showcase.common.entity.User;
@@ -27,7 +26,7 @@ public class UserJdbcDao {
 
 	private SimpleJdbcTemplate jdbcTemplate;
 
-	private ParameterizedRowMapper<User> userMapper = new ParameterizedRowMapper<User>() {
+	private RowMapper<User> userMapper = new RowMapper<User>() {
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 			User user = new User();
 			user.setId(rs.getLong("id"));
@@ -70,17 +69,9 @@ public class UserJdbcDao {
 		return jdbcTemplate.queryForList("select id, login_name from SS_USER order by id");
 	}
 
-	/**
-	 * 使用Map形式的单个命名参数.
-	 */
-	@SuppressWarnings("unchecked")
-	public User queryBySingleNamedParameter(Long id) {
-		Map map = Collections.singletonMap("id", id);
-		return jdbcTemplate.queryForObject("select id, name, login_name from SS_USER where id=:id", userMapper, map);
-	}
 
 	/**
-	 * 使用Map形式的多个命名参数.
+	 * 使用Map形式的命名参数.
 	 */
 	public User queryByMultiNamedParameter(String loginName, String name) {
 		Map<String, Object> map = Maps.newHashMap();

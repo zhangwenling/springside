@@ -14,7 +14,7 @@
 				<path location="../../target/classes" />
 			</classpath>
 
-			<jdbcconfiguration configurationfile="hibernate.cfg.xml" revengfile="hibernate.reveng.xml" detectmanytomany="true" namingstrategy="org.hibernate.cfg.ImprovedNamingStrategy"  reversestrategy="org.springside.modules.orm.hibernate.IgnorePrefixReverseEngineeringStrategy"/>
+			<jdbcconfiguration configurationfile="hibernate.cfg.xml" revengfile="hibernate.reveng.xml" detectmanytomany="true" namingstrategy="org.hibernate.cfg.ImprovedNamingStrategy"  reversestrategy="org.springside.examples.showcase.common.dao.ShowcaseReverseEngineeringStrategy"/>
 
 			<hbm2java jdk5="true" ejb3="true" />
 		</hibernatetool>

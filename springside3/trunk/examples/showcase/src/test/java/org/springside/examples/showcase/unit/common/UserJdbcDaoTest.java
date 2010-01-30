@@ -45,12 +45,6 @@ public class UserJdbcDaoTest extends BaseTxTestCase {
 	}
 
 	@Test
-	public void queryBySingleNamedParameter() {
-		User user = userJdbcDao.queryBySingleNamedParameter(1L);
-		assertEquals("admin", user.getLoginName());
-	}
-
-	@Test
 	public void queryByMultiNamedParameter() {
 		User user = userJdbcDao.queryByMultiNamedParameter("admin", "Admin");
 		assertEquals("admin", user.getLoginName());

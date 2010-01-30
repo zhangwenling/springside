@@ -8,19 +8,19 @@ import org.junit.Test;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.ServiceException;
-import org.springside.examples.showcase.common.service.UserManager;
+import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.modules.utils.ReflectionUtils;
 
 public class UserManagerTest extends Assert {
 
-	private UserManager userManager;
+	private AccountManager accountManager;
 	private UserDao mockUserDao;
 
 	@Before
 	public void setUp() {
-		userManager = new UserManager();
+		accountManager = new AccountManager();
 		mockUserDao = EasyMock.createMock(UserDao.class);
-		ReflectionUtils.setFieldValue(userManager, "userDao", mockUserDao);
+		ReflectionUtils.setFieldValue(accountManager, "userDao", mockUserDao);
 	}
 
 	@After
@@ -38,10 +38,10 @@ public class UserManagerTest extends Assert {
 		EasyMock.replay(mockUserDao);
 
 		//正常保存用户.
-		userManager.saveUser(user);
+		accountManager.saveUser(user);
 		//保存超级管理用户抛出异常.
 		try {
-			userManager.saveUser(admin);
+			accountManager.saveUser(admin);
 			fail("expected ServicExcepton not be thrown");
 		} catch (ServiceException e) {
 			//expected exception

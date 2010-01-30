@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.util.Assert;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.common.service.UserManager;
+import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.examples.showcase.ws.server.UserWebService;
 import org.springside.examples.showcase.ws.server.WsConstants;
 import org.springside.examples.showcase.ws.server.dto.UserDTO;
@@ -35,7 +35,7 @@ public class UserWebServiceImpl implements UserWebService {
 	private static Logger logger = LoggerFactory.getLogger(UserWebServiceImpl.class);
 
 	@Autowired
-	private UserManager userManager;
+	private AccountManager accountManager;
 	@Autowired
 	private DozerBeanMapper dozer;
 
@@ -45,7 +45,7 @@ public class UserWebServiceImpl implements UserWebService {
 	public GetAllUserResult getAllUser() {
 		//获取User列表并转换为UserDTO列表.
 		try {
-			List<User> userEntityList = userManager.getAllUserWithRole();
+			List<User> userEntityList = accountManager.getAllUserWithRole();
 			List<UserDTO> userDTOList = Lists.newArrayList();
 			
 			for (User userEntity : userEntityList) {
@@ -77,7 +77,7 @@ public class UserWebServiceImpl implements UserWebService {
 
 		//获取用户
 		try {
-			User entity = userManager.getLoadedUser(id);
+			User entity = accountManager.getLoadedUser(id);
 			UserDTO dto = dozer.map(entity, UserDTO.class);
 
 			GetUserResult result = new GetUserResult();

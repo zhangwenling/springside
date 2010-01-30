@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.common.service.UserManager;
+import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.examples.showcase.rs.dto.UserDTO;
 
 import com.google.common.collect.Lists;
@@ -42,7 +42,7 @@ public class UserResourceService {
 	private UriInfo uriInfo;
 
 	@Autowired
-	private UserManager userManager;
+	private AccountManager accountManager;
 	@Autowired
 	private DozerBeanMapper dozer;
 
@@ -54,7 +54,7 @@ public class UserResourceService {
 	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public List<UserDTO> getAllUser() {
 		try {
-			List<User> entityList = userManager.getAllUserWithRole();
+			List<User> entityList = accountManager.getAllUserWithRole();
 			List<UserDTO> dtoList = Lists.newArrayList();
 			for (User userEntity : entityList) {
 				dtoList.add(dozer.map(userEntity, UserDTO.class));
@@ -74,7 +74,7 @@ public class UserResourceService {
 	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public UserDTO getUser(@PathParam("id") Long id) {
 		try {
-			User entity = userManager.getLoadedUser(id);
+			User entity = accountManager.getLoadedUser(id);
 			UserDTO dto = dozer.map(entity, UserDTO.class);
 			return dto;
 		} catch (ObjectNotFoundException e) {
@@ -95,7 +95,7 @@ public class UserResourceService {
 	public Response createUser(UserDTO user) {
 		try {
 			User userEntity = dozer.map(user, User.class);
-			userManager.saveUser(userEntity);
+			accountManager.saveUser(userEntity);
 			URI createdUri = uriInfo.getAbsolutePathBuilder().path(userEntity.getId().toString()).build();
 			return Response.created(createdUri).build();
 		} catch (ConstraintViolationException e) {

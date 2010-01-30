@@ -9,7 +9,7 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 import org.apache.ws.security.WSPasswordCallback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.common.service.UserManager;
+import org.springside.examples.showcase.common.service.AccountManager;
 
 /**
  * 对WS-Security中Digest式密码的处理Handler.
@@ -19,7 +19,7 @@ import org.springside.examples.showcase.common.service.UserManager;
 public class DigestPasswordCallback implements CallbackHandler {
 
 	@Autowired
-	private UserManager userManager;
+	private AccountManager accountManager;
 
 	/**
 	 * 根据用户名查出数据库中用户的明文密码,交由框架进行处理并与客户端提交的Digest进行比较.
@@ -27,7 +27,7 @@ public class DigestPasswordCallback implements CallbackHandler {
 	public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
 		WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];
 		String loginName = pc.getIdentifier();
-		User user = userManager.findUserByLoginName(loginName);
+		User user = accountManager.findUserByLoginName(loginName);
 		if (user == null) {
 			throw new IOException("wrong login name " + pc.getIdentifier());
 		}

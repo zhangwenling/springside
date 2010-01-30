@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.showcase.common.entity.Role;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.common.service.UserManager;
+import org.springside.examples.showcase.common.service.AccountManager;
 
 import com.google.common.collect.Sets;
 
@@ -27,14 +27,14 @@ import com.google.common.collect.Sets;
 @Transactional(readOnly = true)
 public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
-	private UserManager userManager;
+	private AccountManager accountManager;
 
 	/**
 	 * 获取用户Detail信息的回调函数.
 	 */
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
 
-		User user = userManager.findUserByLoginName(username);
+		User user = accountManager.findUserByLoginName(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("用户" + username + " 不存在");
 		}
