@@ -2,9 +2,9 @@ package org.springside.examples.miniweb.data;
 
 import java.util.List;
 
-import org.springside.examples.miniweb.entity.security.Authority;
-import org.springside.examples.miniweb.entity.security.Role;
-import org.springside.examples.miniweb.entity.security.User;
+import org.springside.examples.miniweb.entity.account.Authority;
+import org.springside.examples.miniweb.entity.account.Role;
+import org.springside.examples.miniweb.entity.account.User;
 import org.springside.modules.test.utils.DataUtils;
 
 import com.google.common.collect.Lists;

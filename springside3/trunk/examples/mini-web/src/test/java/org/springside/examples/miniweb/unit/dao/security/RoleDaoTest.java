@@ -4,8 +4,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.dao.account.RoleDao;
 import org.springside.examples.miniweb.dao.account.UserDao;
-import org.springside.examples.miniweb.entity.security.Role;
-import org.springside.examples.miniweb.entity.security.User;
+import org.springside.examples.miniweb.entity.account.Role;
+import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.unit.dao.BaseTxTestCase;
 import org.springside.modules.test.utils.DataUtils;
 

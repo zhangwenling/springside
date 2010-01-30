@@ -10,9 +10,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
-import org.springside.examples.miniweb.entity.security.Authority;
-import org.springside.examples.miniweb.entity.security.Role;
-import org.springside.examples.miniweb.entity.security.User;
+import org.springside.examples.miniweb.entity.account.Authority;
+import org.springside.examples.miniweb.entity.account.Role;
+import org.springside.examples.miniweb.entity.account.User;
 
 import com.google.common.collect.Sets;
 

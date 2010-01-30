@@ -3,8 +3,8 @@ package org.springside.examples.miniweb.dao.account;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-import org.springside.examples.miniweb.entity.security.Role;
-import org.springside.examples.miniweb.entity.security.User;
+import org.springside.examples.miniweb.entity.account.Role;
+import org.springside.examples.miniweb.entity.account.User;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
 /**

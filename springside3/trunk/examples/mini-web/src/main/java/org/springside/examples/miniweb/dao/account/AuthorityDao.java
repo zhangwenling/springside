@@ -1,7 +1,7 @@
 package org.springside.examples.miniweb.dao.account;
 
 import org.springframework.stereotype.Repository;
-import org.springside.examples.miniweb.entity.security.Authority;
+import org.springside.examples.miniweb.entity.account.Authority;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
 /**
