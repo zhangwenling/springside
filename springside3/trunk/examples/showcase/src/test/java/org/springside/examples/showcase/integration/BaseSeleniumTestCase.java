@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.functional;
+package org.springside.examples.showcase.integration;
 
 import org.junit.BeforeClass;
 import org.springside.modules.test.selenium.SeleniumTestCase;

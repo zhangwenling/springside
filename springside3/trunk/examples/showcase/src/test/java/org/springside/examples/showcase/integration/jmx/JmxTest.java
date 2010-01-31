@@ -1,7 +1,7 @@
-package org.springside.examples.showcase.functional.jmx;
+package org.springside.examples.showcase.integration.jmx;
 
 import org.junit.Test;
-import org.springside.examples.showcase.functional.BaseSeleniumTestCase;
+import org.springside.examples.showcase.integration.BaseSeleniumTestCase;
 
 /**
  * JMX演示页面内容简单测试.

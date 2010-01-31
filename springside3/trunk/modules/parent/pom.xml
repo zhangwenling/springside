@@ -772,7 +772,7 @@
 					</configuration>
 				</plugin>
 
-				<!-- surefire插件, 设定单元测试时只执行unit目录下的用例, 增加执行测试的内存.-->
+				<!-- surefire插件, 设定单元测试时只执行unit和functional目录下的用例, 增加执行测试的内存.-->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
@@ -781,6 +781,7 @@
 						<argLine>-Xmx256M</argLine>
 						<includes>
 							<include>**/unit/**/*Test.java</include>
+							<include>**/functional/**/*Test.java</include>
 						</includes>
 					</configuration>
 				</plugin>

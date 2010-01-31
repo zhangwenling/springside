@@ -1,7 +1,7 @@
-package org.springside.examples.showcase.functional.ajax;
+package org.springside.examples.showcase.integration.ajax;
 
 import org.junit.Test;
-import org.springside.examples.showcase.functional.BaseSeleniumTestCase;
+import org.springside.examples.showcase.integration.BaseSeleniumTestCase;
 
 /**
  * 测试Ajax Mashup.

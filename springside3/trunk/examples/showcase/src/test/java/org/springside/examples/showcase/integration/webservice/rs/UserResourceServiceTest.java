@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.functional.webservice.rs;
+package org.springside.examples.showcase.integration.webservice.rs;
 
 import java.net.URI;
 import java.util.List;

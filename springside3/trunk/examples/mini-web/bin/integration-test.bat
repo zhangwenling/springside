@@ -3,6 +3,6 @@ echo [INFO] Ê¹ÓÃmavenÔËĞĞ¹¦ÄÜ²âÊÔ, ½«Ê¹ÓÃJetty²å¼şÔËĞĞWebÓ¦ÓÃ, Ê¹ÓÃSelenium²å¼şÔ
 echo [INFO] Çë±£Ö¤²âÊÔÊı¾İ¿âÒÑÆô¶¯ÇÒ±í½á¹¹ÒÑ¸üĞÂ.
 
 cd ..
-call mvn integration-test -Pfunctional
+call mvn integration-test -Pintegration-test
 cd bin
 pause

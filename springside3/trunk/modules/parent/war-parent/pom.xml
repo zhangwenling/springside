@@ -44,9 +44,9 @@
 	</build>
 
 	<profiles>
-		<!-- 在integration-test阶段执行功能测试的profile, 以-Pfunctional激活 -->
+		<!-- 在integration-test阶段执行功能测试的profile, 以-Pintegration-test激活 -->
 		<profile>
-			<id>functional</id>
+			<id>integration-test</id>
 			<build>
 				<plugins>
 					<!-- dbunit插件初始化测试数据 -->
@@ -92,20 +92,20 @@
 						</executions>
 					</plugin>
 
-					<!-- surefire插件执行functional目录的用例 -->
+					<!-- surefire插件执行integration目录的用例 -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-surefire-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>functional-test</id>
+								<id>integration-test</id>
 								<phase>integration-test</phase>
 								<goals>
 									<goal>test</goal>
 								</goals>
 								<configuration>
 									<includes>
-										<include>**/functional/**/*Test.java</include>
+										<include>**/integration/**/*Test.java</include>
 									</includes>
 								</configuration>
 							</execution>

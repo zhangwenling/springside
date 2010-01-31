@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.functional.webservice.ws;
+package org.springside.examples.showcase.integration.webservice.ws;
 
 import java.net.MalformedURLException;
 import java.net.URL;

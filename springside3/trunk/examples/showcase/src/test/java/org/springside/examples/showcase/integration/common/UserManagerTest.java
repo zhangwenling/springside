@@ -1,7 +1,7 @@
-package org.springside.examples.showcase.functional.common;
+package org.springside.examples.showcase.integration.common;
 
 import org.junit.Test;
-import org.springside.examples.showcase.functional.BaseSeleniumTestCase;
+import org.springside.examples.showcase.integration.BaseSeleniumTestCase;
 
 /**
  * 用户管理的功能测试.

@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.functional.webservice.hessian;
+package org.springside.examples.showcase.integration.webservice.hessian;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
