@@ -23,7 +23,6 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 		client = new UserResourceClient("http://localhost:8080/mini-service/rs");
 	}
 
-
 	@Test
 	public void getAllUser() {
 		List<UserDTO> userList = client.getAllUser();

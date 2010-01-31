@@ -17,13 +17,15 @@ public class BaseFunctionalTestCase extends Assert {
 
 	@BeforeClass
 	public static void startJettyAndLoadDefaultData() throws Exception {
+		
 		if (server == null) {
 			server = JettyUtils.buildServer(8080, "/mini-service");
 			server.start();
-
-			DataSource dataSource = SpringContextHolder.getBean("dataSource");
-			DBUnitUtils.loadDbUnitData(dataSource, BaseFunctionalTestCase.class
-					.getResourceAsStream("/data/default-data.xml"));
 		}
+		
+		DataSource dataSource = SpringContextHolder.getBean("dataSource");
+		DBUnitUtils.loadDbUnitData(dataSource, BaseFunctionalTestCase.class
+				.getResourceAsStream("/data/default-data.xml"));
+
 	}
 }

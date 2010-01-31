@@ -17,7 +17,7 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 	private static UserResourceClient client;
 
 	@BeforeClass
-	public static void setUp() {
+	public static void setUpClient() {
 		client = new UserResourceClient("http://localhost:8080/showcase/rs");
 	}
 
@@ -46,5 +46,4 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 		assertNotNull(uri);
 		System.out.println("Created user uri:" + uri);
 	}
-
 }

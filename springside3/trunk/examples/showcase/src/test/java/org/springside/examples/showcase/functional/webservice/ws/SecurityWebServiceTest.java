@@ -22,7 +22,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springside.examples.showcase.functional.BaseFunctionalTestCase;
 import org.springside.examples.showcase.ws.client.PasswordCallback;
 import org.springside.examples.showcase.ws.server.UserWebService;
@@ -38,16 +37,15 @@ import com.google.common.collect.Maps;
  * @author calvin
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@TestExecutionListeners( { DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class })
+@TestExecutionListeners( { DependencyInjectionTestExecutionListener.class})
 @ContextConfiguration(locations = { "/webservice/applicationContext-cxf-client.xml" })
 public class SecurityWebServiceTest extends BaseFunctionalTestCase implements ApplicationContextAware {
 
-	protected ApplicationContext applicationContext;
+	private ApplicationContext applicationContext;
 
 	public final void setApplicationContext(final ApplicationContext applicationContext) {
 		this.applicationContext = applicationContext;
 	}
-
 
 	/**
 	 * 测试Digest密码认证, 使用JAXWS的API自行创建Client.
@@ -79,7 +77,7 @@ public class SecurityWebServiceTest extends BaseFunctionalTestCase implements Ap
 	}
 
 	/**
-	 * 测试明文密码, 在Spring ApplicationContext中用<jaxws:client/>创建的Client.
+	 * 测试明文密码, 用<jaxws:client/>创建的Client.
 	 */
 	@Test
 	public void getAllUserWithPlainPassword() {
@@ -89,7 +87,7 @@ public class SecurityWebServiceTest extends BaseFunctionalTestCase implements Ap
 	}
 	
 	/**
-	 * 测试访问与SpringSecurity结合的EndPoint, 调用受SpringSecurity保护的方法.
+	 * 测试访问与SpringSecurity结合的EndPoint, 调用受SpringSecurity保护的方法, 用<jaxws:client/>创建的Client.
 	 */
 	@Test
 	public void getUserWithSpringSecurity() {
@@ -99,7 +97,7 @@ public class SecurityWebServiceTest extends BaseFunctionalTestCase implements Ap
 	}
 
 	/**
-	 * 测试访问没有与SpringSecurity结合的EndPoint, 调用受SpringSecurity保护的方法.
+	 * 测试访问没有与SpringSecurity结合的EndPoint, 调用受SpringSecurity保护的方法, 用<jaxws:client/>创建的Client.
 	 */
 	@Test(expected = SOAPFaultException.class)
 	public void getUserWithSpringSecurityWithoutPermission() {

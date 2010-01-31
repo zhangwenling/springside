@@ -21,7 +21,7 @@ public class BaseTxTestCase extends SpringTxTestCase {
 	private boolean loaded = false;
 
 	@Before
-	public void loadDefaultDataOnece() throws Exception {
+	public void loadDefaultData() throws Exception {
 		if (!loaded) {
 			loadDbUnitData("/data/default-data.xml");
 			loaded = true;

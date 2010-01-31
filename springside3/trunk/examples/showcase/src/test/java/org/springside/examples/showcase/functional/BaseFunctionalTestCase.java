@@ -20,10 +20,11 @@ public class BaseFunctionalTestCase extends Assert {
 		if (server == null) {
 			server = JettyUtils.buildServer(8080, "/showcase");
 			server.start();
-
-			DataSource dataSource = SpringContextHolder.getBean("dataSource");
-			DBUnitUtils.loadDbUnitData(dataSource, BaseFunctionalTestCase.class
-					.getResourceAsStream("/data/default-data.xml"));
 		}
+		
+		DataSource dataSource = SpringContextHolder.getBean("dataSource");
+		DBUnitUtils.loadDbUnitData(dataSource, BaseFunctionalTestCase.class
+				.getResourceAsStream("/data/default-data.xml"));
+
 	}
 }
