@@ -1,4 +1,4 @@
-package org.springside.examples.miniweb.functional.account;
+package org.springside.examples.miniweb.integration.account;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.springside.examples.miniweb.data.AccountData;
 import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.entity.account.User;
-import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
+import org.springside.examples.miniweb.integration.BaseSeleniumTestCase;
 import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.utils.DataUtils;
 

@@ -1,6 +1,7 @@
 package org.springside.examples.miniservice.unit.dao;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
@@ -12,6 +13,7 @@ import org.springside.modules.test.spring.SpringTxTestCase;
  * 
  * @author calvin
  */
+@Ignore
 public class BaseTxTestCase extends SpringTxTestCase {
 
 	private boolean loaded = false;

@@ -1,4 +1,4 @@
-package org.springside.examples.miniweb.functional;
+package org.springside.examples.miniweb.integration;
 
 import org.junit.BeforeClass;
 import org.springside.modules.test.selenium.SeleniumTestCase;

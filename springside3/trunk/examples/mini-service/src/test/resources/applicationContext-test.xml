@@ -26,6 +26,9 @@
 	<!-- 使用annotation 自动注册bean,并保证@Required,@Autowired的属性被注入 -->
 	<context:component-scan base-package="org.springside.examples.miniservice" />
 
+	<!-- 以静态变量保存ApplicationContext -->
+	<bean class="org.springside.modules.spring.SpringContextHolder" lazy-init="false"/>
+
 	<!-- 数据源配置,在测试环境使用JDBC直接连接 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driver}" />

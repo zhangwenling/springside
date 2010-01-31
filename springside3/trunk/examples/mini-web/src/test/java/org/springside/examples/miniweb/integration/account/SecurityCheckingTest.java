@@ -1,9 +1,9 @@
-package org.springside.examples.miniweb.functional.account;
+package org.springside.examples.miniweb.integration.account;
 
 import org.junit.Test;
-import org.springside.examples.miniweb.functional.BaseSeleniumTestCase;
-import org.springside.examples.miniweb.functional.account.RoleManagerTest.RoleColumn;
-import org.springside.examples.miniweb.functional.account.UserManagerTest.UserColumn;
+import org.springside.examples.miniweb.integration.BaseSeleniumTestCase;
+import org.springside.examples.miniweb.integration.account.RoleManagerTest.RoleColumn;
+import org.springside.examples.miniweb.integration.account.UserManagerTest.UserColumn;
 
 /**
  * 系统安全控制的功能测试, 测试主要用户故事.

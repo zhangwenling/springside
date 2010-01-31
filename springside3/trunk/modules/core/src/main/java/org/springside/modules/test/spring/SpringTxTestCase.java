@@ -7,15 +7,8 @@
  */
 package org.springside.modules.test.spring;
 
-import java.io.InputStream;
-
 import javax.sql.DataSource;
 
-import org.dbunit.database.IDatabaseConnection;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.ext.h2.H2Connection;
-import org.dbunit.operation.DatabaseOperation;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -27,6 +20,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.jdbc.SimpleJdbcTestUtils;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.modules.test.utils.DBUnitUtils;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 
@@ -124,11 +118,6 @@ public class SpringTxTestCase extends SpringContextTestCase {
 
 	//-- DBUnit 初始化数据函数 --//
 	protected void loadDbUnitData(String xmlPath) throws Exception {
-		IDatabaseConnection connection = new H2Connection(dataSource.getConnection(), "");
-
-		InputStream inputstream = applicationContext.getResource(xmlPath).getInputStream();
-		IDataSet dataSet = new FlatXmlDataSetBuilder().setColumnSensing(true).build(inputstream);
-
-		DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
+		DBUnitUtils.loadDbUnitData(dataSource, applicationContext.getResource(xmlPath).getInputStream());
 	}
 }

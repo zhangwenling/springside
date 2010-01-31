@@ -4,24 +4,25 @@ import java.net.URI;
 import java.util.List;
 
 import org.dozer.DozerBeanMapper;
-import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.User;
+import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniservice.rs.client.UserResourceClient;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
 
 import com.sun.jersey.api.client.UniformInterfaceException;
 
-public class UserResourceServiceTest extends Assert {
+public class UserResourceServiceTest extends BaseFunctionalTestCase {
 
-	private UserResourceClient client;
+	private static UserResourceClient client;
 
-	@Before
-	public void setUp() {
+	@BeforeClass
+	public static void setUpClient() throws Exception {
 		client = new UserResourceClient("http://localhost:8080/mini-service/rs");
 	}
+
 
 	@Test
 	public void getAllUser() {
@@ -55,7 +56,7 @@ public class UserResourceServiceTest extends Assert {
 		UserDTO dto = new DozerBeanMapper().map(user, UserDTO.class);
 
 		URI uri = client.createUser(dto);
+		assertNotNull(uri);
 		System.out.println("Created user uri:" + uri);
 	}
-
 }

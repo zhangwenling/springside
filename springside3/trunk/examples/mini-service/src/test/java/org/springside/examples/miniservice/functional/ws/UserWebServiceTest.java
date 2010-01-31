@@ -6,10 +6,13 @@ import java.net.URL;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.User;
+import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniservice.ws.UserWebService;
 import org.springside.examples.miniservice.ws.WsConstants;
 import org.springside.examples.miniservice.ws.dto.RoleDTO;
@@ -18,7 +21,6 @@ import org.springside.examples.miniservice.ws.result.AuthUserResult;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.result.GetAllUserResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
-import org.springside.modules.test.spring.SpringContextTestCase;
 
 /**
  * UserService Web服务的功能测试, 测试主要的接口调用.
@@ -27,17 +29,22 @@ import org.springside.modules.test.spring.SpringContextTestCase;
  * 
  * @author calvin
  */
-@ContextConfiguration(locations = { "/applicationContext-ws-client.xml" }, inheritLocations = false)
-public class UserWebServiceTest extends SpringContextTestCase {
+public class UserWebServiceTest extends BaseFunctionalTestCase {
+
+	private static UserWebService userWebService;
+
+	@BeforeClass
+	public static void setUpClient() {
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/applicationContext-ws-client.xml");
+		userWebService = (UserWebService) applicationContext.getBean("userWebService");
+	}
 
 	/**
 	 * 测试认证用户,在Spring applicaitonContext.xml中用<jaxws:client/>创建Client.
 	 */
 	@Test
 	public void authUser() {
-		UserWebService userWebService = (UserWebService) applicationContext.getBean("userWebService");
 		AuthUserResult result = userWebService.authUser("admin", "admin");
-
 		assertEquals(true, result.isValid());
 	}
 
@@ -57,7 +64,6 @@ public class UserWebServiceTest extends SpringContextTestCase {
 		roleDTO.setId(1L);
 		userDTO.getRoleList().add(roleDTO);
 
-		UserWebService userWebService = (UserWebService) applicationContext.getBean("userWebService");
 		CreateUserResult result = userWebService.createUser(userDTO);
 
 		assertEquals(WSResult.SUCCESS, result.getCode());

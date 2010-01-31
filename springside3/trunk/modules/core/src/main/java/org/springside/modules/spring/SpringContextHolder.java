@@ -59,6 +59,13 @@ public class SpringContextHolder implements ApplicationContextAware {
 			return null;
 		}
 	}
+	
+	/**
+	 * 清除applicationContext静态变量.
+	 */
+	public static void cleanApplicationContext(){
+		applicationContext = null;
+	}
 
 	private static void checkApplicationContext() {
 		if (applicationContext == null) {
