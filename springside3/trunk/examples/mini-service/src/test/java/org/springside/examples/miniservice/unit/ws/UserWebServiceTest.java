@@ -22,7 +22,7 @@ import org.springside.modules.utils.ReflectionUtils;
 /**
  * User Web Service的单元测试用例,测试WebService操作的返回码.
  * 
- * 使用EasyMock对UserManager进行模拟.
+ * 使用EasyMock对AccountManager进行模拟.
  * 
  * @author calvin
  */

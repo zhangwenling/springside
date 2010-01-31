@@ -1,6 +1,7 @@
 package org.springside.examples.miniweb.unit.dao;
 
 import org.junit.Before;
+import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
@@ -12,6 +13,7 @@ import org.springside.modules.test.spring.SpringTxTestCase;
  * 
  * @author calvin
  */
+@ContextConfiguration(locations = { "/applicationContext-test.xml" })
 public class BaseTxTestCase extends SpringTxTestCase {
 
 	private boolean loaded = false;

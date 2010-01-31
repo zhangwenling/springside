@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.integration.webservice.ws;
+package org.springside.examples.showcase.functional.webservice.ws;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,8 +12,8 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.Assert;
 import org.junit.Test;
+import org.springside.examples.showcase.functional.BaseFunctionalTestCase;
 import org.springside.examples.showcase.ws.server.LargeImageWebService;
 import org.springside.examples.showcase.ws.server.SmallImageWebService;
 import org.springside.examples.showcase.ws.server.WsConstants;
@@ -25,7 +25,8 @@ import org.springside.examples.showcase.ws.server.result.SmallImageResult;
  * 
  * @author calvin
  */
-public class BinaryWebServiceTest extends Assert {
+public class BinaryWebServiceTest extends BaseFunctionalTestCase {
+
 	@Test
 	public void getSmallImage() throws IOException {
 

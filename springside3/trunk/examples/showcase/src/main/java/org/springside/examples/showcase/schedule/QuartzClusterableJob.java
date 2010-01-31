@@ -35,7 +35,7 @@ public class QuartzClusterableJob extends QuartzJobBean {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void executeInternal(JobExecutionContext ctx) throws JobExecutionException {
-		AccountManager accountManager = (AccountManager) applicationContext.getBean("userManager");
+		AccountManager accountManager = applicationContext.getBean(AccountManager.class);
 		Map config = (Map) applicationContext.getBean("timerJobConfig");
 
 		long userCount = accountManager.getUserCount();

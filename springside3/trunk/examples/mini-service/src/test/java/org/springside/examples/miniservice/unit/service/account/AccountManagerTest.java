@@ -10,7 +10,7 @@ import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
- * UserManager的单元测试用例,测试Service层的业务逻辑.
+ * AccountManager的单元测试用例,测试Service层的业务逻辑.
  * 
  * @author calvin
  */

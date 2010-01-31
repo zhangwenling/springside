@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -30,8 +29,6 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
  * 
  * @author calvin
  */
-//默认载入applicationContext-test.xml,子类中的@ContextConfiguration定义将合并父类的定义.
-@ContextConfiguration(locations = { "/applicationContext-test.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestExecutionListeners( { DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class })
 public class SpringContextTestCase extends Assert implements ApplicationContextAware {

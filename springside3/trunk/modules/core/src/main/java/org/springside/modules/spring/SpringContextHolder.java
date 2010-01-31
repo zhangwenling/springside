@@ -7,8 +7,6 @@
  */
 package org.springside.modules.spring;
 
-import java.util.Map;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
@@ -49,15 +47,9 @@ public class SpringContextHolder implements ApplicationContextAware {
 	 * 从静态变量ApplicationContext中取得Bean, 自动转型为所赋值对象的类型.
 	 * 如果有多个Bean符合Class, 取出第一个.
 	 */
-	@SuppressWarnings("unchecked")
-	public static <T> T getBean(Class<T> clazz) {
+	public static <T> T getBean(Class<T> requiredType) {
 		checkApplicationContext();
-		Map beanMaps = applicationContext.getBeansOfType(clazz);
-		if (beanMaps!=null && !beanMaps.isEmpty()) {
-			return (T) beanMaps.values().iterator().next();
-		} else{
-			return null;
-		}
+		return applicationContext.getBean(requiredType);
 	}
 	
 	/**

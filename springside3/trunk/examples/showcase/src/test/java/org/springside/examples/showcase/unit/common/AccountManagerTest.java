@@ -11,7 +11,7 @@ import org.springside.examples.showcase.common.service.ServiceException;
 import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.modules.utils.ReflectionUtils;
 
-public class UserManagerTest extends Assert {
+public class AccountManagerTest extends Assert {
 
 	private AccountManager accountManager;
 	private UserDao mockUserDao;

@@ -42,7 +42,6 @@ public class WebTestUtils {
 	 */
 	public static void initWebApplicationContext(MockServletContext servletContext, String... configLocations) {
 		String configLocationsString = StringUtils.join(configLocations, ",");
-		servletContext.setMinorVersion(4);
 		servletContext.addInitParameter(ContextLoader.CONFIG_LOCATION_PARAM, configLocationsString);
 		new ContextLoader().initWebApplicationContext(servletContext);
 	}
@@ -58,7 +57,6 @@ public class WebTestUtils {
 		wac.setParent(applicationContext);
 		wac.setServletContext(servletContext);
 		wac.setConfigLocation("");
-		servletContext.setMinorVersion(4);
 		servletContext.setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, wac);
 		wac.refresh();
 	}
@@ -67,7 +65,6 @@ public class WebTestUtils {
 	 * 关闭ServletContext中的Spring WebApplicationContext.
 	 */
 	public static void closeWebApplicationContext(MockServletContext servletContext) {
-		servletContext.setMinorVersion(4);
 		new ContextLoader().closeWebApplicationContext(servletContext);
 	}
 

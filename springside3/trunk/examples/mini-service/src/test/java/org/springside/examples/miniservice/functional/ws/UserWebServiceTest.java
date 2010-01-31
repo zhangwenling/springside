@@ -3,13 +3,17 @@ package org.springside.examples.miniservice.functional.ws;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.annotation.Resource;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
@@ -29,15 +33,13 @@ import org.springside.examples.miniservice.ws.result.WSResult;
  * 
  * @author calvin
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@TestExecutionListeners( { DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class })
+@ContextConfiguration(locations = { "/applicationContext-ws-client.xml" })
 public class UserWebServiceTest extends BaseFunctionalTestCase {
 
-	private static UserWebService userWebService;
-
-	@BeforeClass
-	public static void setUpClient() {
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/applicationContext-ws-client.xml");
-		userWebService = (UserWebService) applicationContext.getBean("userWebService");
-	}
+	@Resource
+	private  UserWebService userWebService;
 
 	/**
 	 * 测试认证用户,在Spring applicaitonContext.xml中用<jaxws:client/>创建Client.

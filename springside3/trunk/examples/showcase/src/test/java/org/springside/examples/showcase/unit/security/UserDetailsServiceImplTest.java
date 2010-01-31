@@ -19,18 +19,18 @@ import org.springside.modules.utils.ReflectionUtils;
 public class UserDetailsServiceImplTest extends Assert {
 
 	private UserDetailsService userDetailsService;
-	private AccountManager mockUserManager;
+	private AccountManager mockAccountManager;
 
 	@Before
 	public void setUp() {
 		userDetailsService = new UserDetailsServiceImpl();
-		mockUserManager = EasyMock.createMock(AccountManager.class);
-		ReflectionUtils.setFieldValue(userDetailsService, "userManager", mockUserManager);
+		mockAccountManager = EasyMock.createMock(AccountManager.class);
+		ReflectionUtils.setFieldValue(userDetailsService, "accountManager", mockAccountManager);
 	}
 
 	@After
 	public void tearDown() {
-		EasyMock.verify(mockUserManager);
+		EasyMock.verify(mockAccountManager);
 	}
 
 	@Test
@@ -48,8 +48,8 @@ public class UserDetailsServiceImplTest extends Assert {
 		user.getRoleList().add(role2);
 
 		//录制脚本
-		EasyMock.expect(mockUserManager.findUserByLoginName("admin")).andReturn(user);
-		EasyMock.replay(mockUserManager);
+		EasyMock.expect(mockAccountManager.findUserByLoginName("admin")).andReturn(user);
+		EasyMock.replay(mockAccountManager);
 
 		//执行测试
 		OperatorDetails operator = (OperatorDetails) userDetailsService.loadUserByUsername(user.getLoginName());
@@ -65,8 +65,8 @@ public class UserDetailsServiceImplTest extends Assert {
 	@Test(expected = UsernameNotFoundException.class)
 	public void loadUserByWrongUserName() {
 		//录制脚本
-		EasyMock.expect(mockUserManager.findUserByLoginName("foo")).andReturn(null);
-		EasyMock.replay(mockUserManager);
+		EasyMock.expect(mockAccountManager.findUserByLoginName("foo")).andReturn(null);
+		EasyMock.replay(mockAccountManager);
 
 		assertNull(userDetailsService.loadUserByUsername("foo"));
 	}

@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.functional;
+package org.springside.examples.showcase.functional;
 
 import javax.sql.DataSource;
 
@@ -18,7 +18,7 @@ public class BaseFunctionalTestCase extends Assert {
 	@BeforeClass
 	public static void startJettyAndLoadDefaultData() throws Exception {
 		if (server == null) {
-			server = JettyUtils.buildServer(8080, "/mini-service");
+			server = JettyUtils.buildServer(8080, "/showcase");
 			server.start();
 
 			DataSource dataSource = SpringContextHolder.getBean("dataSource");

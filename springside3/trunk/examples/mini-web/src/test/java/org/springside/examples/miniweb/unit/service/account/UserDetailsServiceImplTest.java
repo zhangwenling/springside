@@ -19,7 +19,7 @@ import org.springside.modules.utils.ReflectionUtils;
 /**
  * UserDetailsServiceImpl的测试用例, 测试Service层的业务逻辑. 
  * 
- * 使用EasyMock对UserManager进行模拟.
+ * 使用EasyMock对AccountManager进行模拟.
  * 
  * @author calvin
  */

@@ -25,10 +25,11 @@
 		</property>
 	</bean>
 
-	<context:property-override location="classpath*:/application.test.override.properties" />
-
 	<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
 	<context:component-scan base-package="org.springside.examples.showcase" />
+
+	<!-- SpringContextHolder定义 -->
+	<bean class="org.springside.modules.spring.SpringContextHolder" lazy-init="false" />
 
 	<!-- 数据源配置,在测试环境使用JDBC直接连接 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -79,7 +80,4 @@
 
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
-
-	<!-- SpringContextHolder定义 -->
-	<bean class="org.springside.modules.spring.SpringContextHolder" lazy-init="false" />
 </beans>
