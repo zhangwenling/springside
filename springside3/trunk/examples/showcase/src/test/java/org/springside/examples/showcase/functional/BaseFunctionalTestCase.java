@@ -14,6 +14,8 @@ import org.springside.modules.test.utils.JettyUtils;
 public class BaseFunctionalTestCase extends Assert {
 
 	private static Server server;
+	
+	protected static final String BASE_URL = "htp://localhost:8080/showcase";
 
 	@BeforeClass
 	public static void startJettyAndLoadDefaultData() throws Exception {
@@ -23,8 +25,6 @@ public class BaseFunctionalTestCase extends Assert {
 		}
 		
 		DataSource dataSource = SpringContextHolder.getBean("dataSource");
-		DBUnitUtils.loadDbUnitData(dataSource, BaseFunctionalTestCase.class
-				.getResourceAsStream("/data/default-data.xml"));
-
+		DBUnitUtils.loadDbUnitData(dataSource, "/data/default-data.xml");
 	}
 }

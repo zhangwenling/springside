@@ -24,8 +24,6 @@ public class BaseFunctionalTestCase extends Assert {
 		}
 		
 		DataSource dataSource = SpringContextHolder.getBean("dataSource");
-		DBUnitUtils.loadDbUnitData(dataSource, BaseFunctionalTestCase.class
-				.getResourceAsStream("/data/default-data.xml"));
-
+		DBUnitUtils.loadDbUnitData(dataSource, "/data/default-data.xml");
 	}
 }

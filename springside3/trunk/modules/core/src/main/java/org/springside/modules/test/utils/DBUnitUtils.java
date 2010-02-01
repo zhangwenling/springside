@@ -11,13 +11,11 @@ import org.dbunit.ext.h2.H2Connection;
 import org.dbunit.operation.DatabaseOperation;
 
 public class DBUnitUtils {
-	
-
-
 	//-- DBUnit 初始化数据函数 --//
-	public static void loadDbUnitData(DataSource dataSource,InputStream dataStream) throws Exception {
+	public static void loadDbUnitData(DataSource dataSource,String xmlPath) throws Exception {
 		IDatabaseConnection connection = new H2Connection(dataSource.getConnection(), "");
-		IDataSet dataSet = new FlatXmlDataSetBuilder().setColumnSensing(true).build(dataStream);
+		InputStream input = DBUnitUtils.class.getResourceAsStream(xmlPath);
+		IDataSet dataSet = new FlatXmlDataSetBuilder().setColumnSensing(true).build(input);
 		DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
 	}
 }

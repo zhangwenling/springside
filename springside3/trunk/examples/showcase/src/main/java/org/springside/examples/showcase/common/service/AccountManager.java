@@ -59,7 +59,7 @@ public class AccountManager {
 	 * 判断是否超级管理员.
 	 */
 	private boolean isSupervisor(User user) {
-		return user.getId() == 1;
+		return (user.getId()!=null && user.getId()==1);
 	}
 
 	public User getUser(Long id) {

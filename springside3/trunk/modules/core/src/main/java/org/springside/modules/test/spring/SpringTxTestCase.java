@@ -73,8 +73,8 @@ public class SpringTxTestCase extends SpringContextTestCase {
 
 	protected void runSql(String sqlResourcePath, boolean continueOnError) throws DataAccessException {
 		Resource resource = this.applicationContext.getResource(sqlResourcePath);
-		SimpleJdbcTestUtils.executeSqlScript(this.jdbcTemplate, new EncodedResource(resource,
-				this.sqlScriptEncoding), continueOnError);
+		SimpleJdbcTestUtils.executeSqlScript(this.jdbcTemplate, new EncodedResource(resource, this.sqlScriptEncoding),
+				continueOnError);
 	}
 
 	//-- Hibernate函数 --//
@@ -118,6 +118,6 @@ public class SpringTxTestCase extends SpringContextTestCase {
 
 	//-- DBUnit 初始化数据函数 --//
 	protected void loadDbUnitData(String xmlPath) throws Exception {
-		DBUnitUtils.loadDbUnitData(dataSource, applicationContext.getResource(xmlPath).getInputStream());
+		DBUnitUtils.loadDbUnitData(dataSource, xmlPath);
 	}
 }

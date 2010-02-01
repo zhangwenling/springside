@@ -18,7 +18,7 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 
 	@BeforeClass
 	public static void setUpClient() {
-		client = new UserResourceClient("http://localhost:8080/showcase/rs");
+		client = new UserResourceClient(BASE_URL+"/rs");
 	}
 
 	@Test
