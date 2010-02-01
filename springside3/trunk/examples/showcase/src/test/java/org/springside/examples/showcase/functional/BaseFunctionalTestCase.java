@@ -15,7 +15,7 @@ public class BaseFunctionalTestCase extends Assert {
 
 	private static Server server;
 	
-	protected static final String BASE_URL = "htp://localhost:8080/showcase";
+	protected static final String BASE_URL = "http://localhost:8080/showcase";
 
 	@BeforeClass
 	public static void startJettyAndLoadDefaultData() throws Exception {

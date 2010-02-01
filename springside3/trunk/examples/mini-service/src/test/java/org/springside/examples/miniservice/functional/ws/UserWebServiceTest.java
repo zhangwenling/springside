@@ -33,12 +33,12 @@ import org.springside.examples.miniservice.ws.result.WSResult;
  * @author calvin
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@TestExecutionListeners( { DependencyInjectionTestExecutionListener.class})
+@TestExecutionListeners( { DependencyInjectionTestExecutionListener.class })
 @ContextConfiguration(locations = { "/applicationContext-ws-client.xml" })
 public class UserWebServiceTest extends BaseFunctionalTestCase {
 
 	@Resource
-	private  UserWebService userWebService;
+	private UserWebService userWebService;
 
 	/**
 	 * 测试认证用户,在Spring applicaitonContext.xml中用<jaxws:client/>创建Client.
@@ -76,7 +76,7 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 	 */
 	@Test
 	public void getAllUser() throws MalformedURLException {
-		URL wsdlURL = new URL("http://localhost:8080/mini-service/ws/userservice?wsdl");
+		URL wsdlURL = new URL(BASE_URL + "/ws/userservice?wsdl");
 		QName UserServiceName = new QName(WsConstants.NS, "UserService");
 		Service service = Service.create(wsdlURL, UserServiceName);
 		UserWebService userWebService = service.getPort(UserWebService.class);

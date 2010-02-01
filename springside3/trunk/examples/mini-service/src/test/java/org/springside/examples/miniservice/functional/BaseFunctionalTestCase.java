@@ -12,6 +12,8 @@ import org.springside.modules.test.utils.JettyUtils;
 
 @Ignore
 public class BaseFunctionalTestCase extends Assert {
+	
+	protected static final String BASE_URL="http://localhost:8080/mini-service";
 
 	private static Server server;
 

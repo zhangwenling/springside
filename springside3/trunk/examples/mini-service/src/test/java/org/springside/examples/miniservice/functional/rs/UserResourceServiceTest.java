@@ -20,7 +20,7 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 
 	@BeforeClass
 	public static void setUpClient() throws Exception {
-		client = new UserResourceClient("http://localhost:8080/mini-service/rs");
+		client = new UserResourceClient(BASE_URL + "/rs");
 	}
 
 	@Test
