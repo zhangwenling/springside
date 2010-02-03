@@ -1,5 +1,5 @@
 @echo off
 
-call mvn install
+call mvn clean install
 
 pause
