@@ -107,6 +107,7 @@
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-spring-plugin</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -121,12 +122,12 @@
 		</dependency>
 
 		<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>standard</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
 		</dependency>
 		<!-- web end -->
 
@@ -174,7 +175,6 @@
 		<!-- rest end -->
 
 		<!-- security begin -->
-		<!-- spring security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
@@ -187,6 +187,7 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>com.octo.captcha</groupId>
 			<artifactId>jcaptcha</artifactId>
@@ -214,7 +215,6 @@
 			<groupId>com.caucho</groupId>
 			<artifactId>hessian</artifactId>
 		</dependency>
-		<!-- hessian end -->
 
 		<!-- quartz -->
 		<dependency>
@@ -363,7 +363,6 @@
 			<groupId>org.seleniumhq.selenium.server</groupId>
 			<artifactId>selenium-server</artifactId>
 		</dependency>
-
 		<!-- test end -->
 
 		<!-- hibernate tools -->

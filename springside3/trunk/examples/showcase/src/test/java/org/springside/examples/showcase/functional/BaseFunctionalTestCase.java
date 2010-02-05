@@ -10,21 +10,30 @@ import org.springside.modules.spring.SpringContextHolder;
 import org.springside.modules.test.utils.DBUnitUtils;
 import org.springside.modules.test.utils.JettyUtils;
 
+/**
+ * 功能测试基类.
+ * 
+ * 在整个测试期间启动一次Jetty Server, 并在每个TestCase执行前中重新载入默认数据.
+ * 
+ * @author calvin
+ */
 @Ignore
 public class BaseFunctionalTestCase extends Assert {
 
+	protected static final String BASE_URL = Start.BASE_URL;
+
 	private static Server server;
-	
-	protected static final String BASE_URL = "http://localhost:8080/showcase";
+
+	private static DataSource dataSource;
 
 	@BeforeClass
 	public static void startJettyAndLoadDefaultData() throws Exception {
 		if (server == null) {
-			server = JettyUtils.buildServer(8080, "/showcase");
+			server = JettyUtils.buildServer(Start.PORT, Start.CONTEXT);
 			server.start();
+			dataSource = SpringContextHolder.getBean("dataSource");
 		}
-		
-		DataSource dataSource = SpringContextHolder.getBean("dataSource");
+
 		DBUnitUtils.loadDbUnitData(dataSource, "/data/default-data.xml");
 	}
 }

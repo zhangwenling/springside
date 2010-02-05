@@ -18,10 +18,7 @@ public class JmxTest extends BaseFunctionalTestCase {
 		HtmlUnitDriver driver = new HtmlUnitDriver();
 		driver.setJavascriptEnabled(true);
 		driver.get(BASE_URL + "/jmx/jmx-client.action");
-Thread.sleep(100000);
+		Thread.sleep(100000);
 		assertEquals("default", driver.findElement(By.id("nodeName")).getText());
-		
-		
-
 	}
 }
