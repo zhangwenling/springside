@@ -104,6 +104,7 @@
 			<id>nexus</id>
 			<name>Team Nexus Snapshot Repository</name>
 			<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
+			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
 	</distributionManagement>
 

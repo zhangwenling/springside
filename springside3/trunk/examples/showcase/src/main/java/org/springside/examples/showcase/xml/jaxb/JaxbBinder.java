@@ -27,9 +27,8 @@ import javax.xml.namespace.QName;
  * @author calvin
  */
 public class JaxbBinder {
+	//多线程安全的Context.
 	private JAXBContext jaxbContext;
-	private Marshaller marshaller;
-	private Unmarshaller unmarshaller;
 
 	/**
 	 * @param types 所有需要序列化的Root对象的类型.
@@ -90,26 +89,21 @@ public class JaxbBinder {
 	}
 
 	public Marshaller getMarshaller() {
-		if (marshaller == null) {
-			try {
-				marshaller = jaxbContext.createMarshaller();
-				marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
-			} catch (JAXBException e) {
-				throw new RuntimeException(e);
-			}
+		try {
+			Marshaller marshaller = jaxbContext.createMarshaller();
+			marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
+			return marshaller;
+		} catch (JAXBException e) {
+			throw new RuntimeException(e);
 		}
-		return marshaller;
 	}
 
 	public Unmarshaller getUnmarshaller() {
-		if (unmarshaller == null) {
-			try {
-				unmarshaller = jaxbContext.createUnmarshaller();
-			} catch (JAXBException e) {
-				throw new RuntimeException(e);
-			}
+		try {
+			return jaxbContext.createUnmarshaller();
+		} catch (JAXBException e) {
+			throw new RuntimeException(e);
 		}
-		return unmarshaller;
 	}
 
 	/**
