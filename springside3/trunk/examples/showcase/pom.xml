@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springside</groupId>
-		<artifactId>springside3-war-parent</artifactId>
+		<artifactId>springside3-parent</artifactId>
 		<version>3.2.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>showcase</artifactId>
@@ -449,9 +449,9 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<configuration>
+					<wtpversion>2.0</wtpversion>
 					<additionalProjectnatures>
-						<projectnature>org.springframework.ide.eclipse.core.springnature
-						</projectnature>
+						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
 					</additionalProjectnatures>
 				</configuration>
 			</plugin>

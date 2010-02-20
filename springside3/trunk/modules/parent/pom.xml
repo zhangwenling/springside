@@ -15,14 +15,14 @@
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
 		<springside.version>3.2.3-SNAPSHOT</springside.version>
-		<spring.version>3.0.0.RELEASE</spring.version>
+		<spring.version>3.0.1.RELEASE</spring.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<struts2.version>2.1.8.1</struts2.version>
 		<cxf.version>2.2.6</cxf.version>
 		<jersey.version>1.1.5</jersey.version>
-		<spring-security.version>3.0.1.RELEASE</spring-security.version>
+		<spring-security.version>3.0.2.RELEASE</spring-security.version>
 		<jetty.version>6.1.22</jetty.version>
-		<h2.version>1.2.128</h2.version>
+		<h2.version>1.2.129</h2.version>
 
 		<!--  Plugin的属性定义  -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -776,7 +776,7 @@
 	<build>
 		<pluginManagement>
 			<plugins>
-				<!-- compiler插件, 设定JDK版本与编码 -->
+				<!-- compiler插件, 设定JDK版本 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
@@ -868,7 +868,6 @@
 								<port>8080</port>
 							</connector>
 						</connectors>
-
 					</configuration>
 				</plugin>
 
