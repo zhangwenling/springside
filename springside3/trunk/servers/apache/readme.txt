@@ -1,1 +1,1 @@
-1.conf/httpd.conf: load balancer setting
+1.conf/httpd.conf: load balancer setting--mod_proxy + ajp
