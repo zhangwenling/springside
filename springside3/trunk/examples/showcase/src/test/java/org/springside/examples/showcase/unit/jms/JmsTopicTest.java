@@ -6,7 +6,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.NotifyMessageProducer;
 import org.springside.examples.showcase.jms.NotifyTopicListener;
-import org.springside.modules.log.MockAppender;
+import org.springside.modules.test.mock.MockAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
 import org.springside.modules.test.utils.TimeUtils;
 

@@ -35,6 +35,9 @@ import org.unitils.reflectionassert.ReflectionComparatorMode;
  *  6.JUnit Assert functions 
  *  7.Unitils Reflection Assert funtions
  *  
+ * 子类需要定义applicationContext文件的位置, 如:
+ * @ContextConfiguration(locations = { "/applicationContext-test.xml" })
+ *  
  * @see AbstractTransactionalJUnit4SpringContextTests
  * @see SpringContextTestCase
  * 

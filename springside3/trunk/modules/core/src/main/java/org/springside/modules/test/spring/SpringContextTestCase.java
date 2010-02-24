@@ -25,6 +25,9 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
  * 1.支持Spring 依赖注入功能.
  * 2.支持JUnit Assert功能.
  * 
+ * 子类需要定义applicationContext文件的位置,如:
+ * @ContextConfiguration(locations = { "/applicationContext-test.xml" })
+ * 
  * @see AbstractJUnit4SpringContextTests
  * 
  * @author calvin

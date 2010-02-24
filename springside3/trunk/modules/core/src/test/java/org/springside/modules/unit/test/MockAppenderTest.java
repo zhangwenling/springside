@@ -1,10 +1,10 @@
-package org.springside.modules.unit.log;
+package org.springside.modules.unit.test;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springside.modules.log.MockAppender;
+import org.springside.modules.test.mock.MockAppender;
 
 public class MockAppenderTest extends Assert {
 
