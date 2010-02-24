@@ -72,7 +72,7 @@
 		</dependency>
 		<!-- spring end -->
 
-		<!-- orm begin -->
+		<!-- database access begin -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -109,7 +109,7 @@
 			<version>${jdbc.driver.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- orm end -->
+		<!-- database access end -->
 
 		<!-- webservice begin -->
 		<dependency>
@@ -257,6 +257,7 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>dbunit-maven-plugin</artifactId>
 				<configuration>
+					<dataTypeFactoryName>${dbunit.datatype}</dataTypeFactoryName>
 					<src>src/test/resources/data/default-data.xml</src>
 					<dest>src/test/resources/data/export-data.xml</dest>
 				</configuration>

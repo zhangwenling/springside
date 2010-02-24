@@ -2,8 +2,8 @@
 2.server.xml:
   a.connector/thread pool tunning.
   b.gzip compression turn on.
-  b.database connection pool setting.
-  c.load balance setting.
-  d.keeplive setting
-  e.useBodyEncodingForURI="true" setting
+  c.database connection pool setting.
+  d.load balance setting.
+  e.keeplive setting
+  f.useBodyEncodingForURI="true" setting
 3.context.xml:database connection pool setting.

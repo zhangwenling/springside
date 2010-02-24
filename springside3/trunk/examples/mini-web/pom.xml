@@ -254,6 +254,7 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>dbunit-maven-plugin</artifactId>
 				<configuration>
+					<dataTypeFactoryName>${dbunit.datatype}</dataTypeFactoryName>
 					<src>src/test/resources/data/default-data.xml</src>
 					<dest>src/test/resources/data/export-data.xml</dest>
 				</configuration>

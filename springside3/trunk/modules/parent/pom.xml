@@ -21,10 +21,11 @@
 		<cxf.version>2.2.6</cxf.version>
 		<jersey.version>1.1.5</jersey.version>
 		<spring-security.version>3.0.2.RELEASE</spring-security.version>
+		<activemq.version>5.3.0</activemq.version>
 		<jetty.version>6.1.22</jetty.version>
 		<h2.version>1.2.129</h2.version>
 
-		<!--  Plugin的属性定义  -->
+		<!-- Plugin的属性定义  -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -38,7 +39,7 @@
 
 		<repository>
 			<id>offical</id>
-			<name>Maven Offical Repository</name>
+			<name>Maven Official Repository</name>
 			<url>http://repo1.maven.org/maven2</url>
 			<snapshots>
 				<enabled>false</enabled>
@@ -165,7 +166,7 @@
 			</dependency>
 			<!-- spring end -->
 
-			<!-- orm begin -->
+			<!-- database access begin -->
 			<!-- hibernate -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -219,7 +220,7 @@
 				<artifactId>p6spy</artifactId>
 				<version>1.3</version>
 			</dependency>
-			<!-- orm end -->
+			<!-- database access end -->
 
 			<!-- web begin -->
 			<!-- struts2 -->
@@ -419,6 +420,7 @@
 				<artifactId>spring-security-taglibs</artifactId>
 				<version>${spring-security.version}</version>
 			</dependency>
+
 			<dependency>
 				<groupId>com.octo.captcha</groupId>
 				<artifactId>jcaptcha</artifactId>
@@ -436,7 +438,7 @@
 			<dependency>
 				<groupId>org.apache.activemq</groupId>
 				<artifactId>activemq-core</artifactId>
-				<version>5.3.0</version>
+				<version>${activemq.version}</version>
 				<exclusions>
 					<exclusion>
 						<groupId>org.apache.camel</groupId>
@@ -447,7 +449,7 @@
 			<dependency>
 				<groupId>org.apache.activemq</groupId>
 				<artifactId>activemq-pool</artifactId>
-				<version>5.3.0</version>
+				<version>${activemq.version}</version>
 				<exclusions>
 					<!-- use javax.transaction.jta instead -->
 					<exclusion>
@@ -543,7 +545,7 @@
 			</dependency>
 			<!-- email end -->
 
-			<!-- xml  begin -->
+			<!-- xml begin -->
 			<dependency>
 				<groupId>com.sun.xml.bind</groupId>
 				<artifactId>jaxb-impl</artifactId>
@@ -569,13 +571,13 @@
 			</dependency>
 			<!-- xml  end -->
 
-			<!-- poi begin -->
+			<!-- excel begin -->
 			<dependency>
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi</artifactId>
 				<version>3.6</version>
 			</dependency>
-			<!-- poi end -->
+			<!-- excel end -->
 
 			<!-- utils begin -->
 			<dependency>
@@ -663,7 +665,7 @@
 				<version>1.3</version>
 			</dependency>
 
-			<!-- object copy (usually for webservice) -->
+			<!-- pojo copy (usually for webservice) -->
 			<dependency>
 				<groupId>net.sf.dozer</groupId>
 				<artifactId>dozer</artifactId>
@@ -728,6 +730,13 @@
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
 				<artifactId>selenium-htmlunit-driver</artifactId>
+				<version>2.0a2</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-firefox-driver</artifactId>
 				<version>2.0a2</version>
 				<scope>test</scope>
 			</dependency>
@@ -798,7 +807,7 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.5</version>
 					<configuration>
-						<argLine>-Xmx256M</argLine>
+						<argLine>-Xmx128M</argLine>
 						<includes>
 							<include>**/unit/**/*Test.java</include>
 							<include>**/functional/**/*Test.java</include>
@@ -892,6 +901,11 @@
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-shade-plugin</artifactId>
+					<version>1.3.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
 					<version>2.1.1</version>
 				</plugin>
@@ -927,7 +941,6 @@
 						<url>${jdbc.url}</url>
 						<username>${jdbc.user}</username>
 						<password>${jdbc.password}</password>
-						<dataTypeFactoryName>${dbunit.datatype}</dataTypeFactoryName>
 						<type>CLEAN_INSERT</type>
 						<format>flat</format>
 						<transaction>true</transaction>
@@ -974,11 +987,6 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-assembly-plugin</artifactId>
 					<version>2.2-beta-5</version>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>appassembler-maven-plugin</artifactId>
-					<version>1.0</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
