@@ -1,5 +1,6 @@
 @echo off
-echo [INFO] 使用maven eclipse plugin 下载所需jar并生成Eclipse项目文件.
+echo [INFO] Use maven eclipse plugin download jar and generate eclipse project files.
+echo [Info] If your eclipse files not in default place, add -Declipse.workspace=<path-to-eclipse-workspace> 
 
-call mvn eclipse:eclipse
+call mvn eclipse:clean eclipse:eclipse
 pause

@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.functional;
+package org.springside.examples.showcase;
 
 import org.mortbay.jetty.Server;
 import org.springside.modules.test.utils.JettyUtils;

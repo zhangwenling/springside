@@ -40,8 +40,8 @@
 	<!-- =========================================================== -->
 	<Set name="handler">
 		<New class="org.mortbay.jetty.webapp.WebAppContext">
-			<Set name="contextPath">${context.path}</Set>
-			<Set name="war">${war.path}</Set>
+			<Set name="contextPath"><project-context-path></context.path></Set>
+			<Set name="war"><path-to-project-war></path></Set>
 		</New>
 	</Set>
 

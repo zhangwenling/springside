@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.functional;
+package org.springside.examples.miniweb;
 
 import org.mortbay.jetty.Server;
 import org.springside.modules.test.utils.JettyUtils;
@@ -11,7 +11,7 @@ import org.springside.modules.test.utils.JettyUtils;
 public class Start {
 
 	public static final int PORT = 8080;
-	public static final String CONTEXT = "/mini-service";
+	public static final String CONTEXT = "/showcase";
 	public static final String BASE_URL = "http://localhost:8080/showcase";
 
 	public static void main(String[] args) throws Exception {
