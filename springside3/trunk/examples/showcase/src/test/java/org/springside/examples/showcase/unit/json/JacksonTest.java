@@ -1,5 +1,6 @@
 package org.springside.examples.showcase.unit.json;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -22,7 +23,7 @@ public class JacksonTest extends Assert {
 	private ObjectMapper mapper = new ObjectMapper();
 
 	@Test
-	public void writeObject() throws Exception {
+	public void writeData() throws Exception {
 		TestBean bean = new TestBean("A");
 		String beanString = mapper.writeValueAsString(bean);
 		System.out.println("Bean:" + beanString);
@@ -47,14 +48,13 @@ public class JacksonTest extends Assert {
 	}
 
 	@Test
-	public void readObject() throws Exception {
+	public void readData() throws Exception {
 		String beanString = "{\"name\":\"A\"}";
 		TestBean bean = mapper.readValue(beanString, TestBean.class);
 		System.out.println("Bean:" + bean);
 
 		String mapString = "{\"name\":\"A\",\"age\":2}";
-		Map<String, Object> map = mapper.readValue(mapString, new TypeReference<Map<String, Object>>() {
-		});
+		Map<String, Object> map = mapper.readValue(mapString, HashMap.class);
 		System.out.println("Map:");
 		for (Entry<String, Object> entry : map.entrySet()) {
 			System.out.println(entry.getKey() + " " + entry.getValue());
