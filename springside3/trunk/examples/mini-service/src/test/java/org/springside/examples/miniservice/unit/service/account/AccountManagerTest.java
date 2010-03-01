@@ -10,7 +10,9 @@ import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
- * AccountManager的单元测试用例,测试Service层的业务逻辑.
+ * AccountManager的单元测试用例, 测试Service层的业务逻辑.
+ * 
+ * 使用EasyMock对UserDao进行模拟.
  * 
  * @author calvin
  */
@@ -38,8 +40,8 @@ public class AccountManagerTest extends Assert {
 	 */
 	@Test
 	public void authUser() {
-		EasyMock.expect(mockUserDao.countUser("admin", "admin")).andReturn(1L);
-		EasyMock.expect(mockUserDao.countUser("admin", "errorPasswd")).andReturn(0L);
+		EasyMock.expect(mockUserDao.countUserByLoginNamePassword("admin", "admin")).andReturn(1L);
+		EasyMock.expect(mockUserDao.countUserByLoginNamePassword("admin", "errorPasswd")).andReturn(0L);
 		EasyMock.replay(mockUserDao);
 
 		assertEquals(true, accountManager.authenticate("admin", "admin"));

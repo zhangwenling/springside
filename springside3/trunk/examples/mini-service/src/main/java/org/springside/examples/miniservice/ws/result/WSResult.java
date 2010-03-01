@@ -3,7 +3,6 @@ package org.springside.examples.miniservice.ws.result;
 import javax.xml.bind.annotation.XmlType;
 
 import org.springside.examples.miniservice.ws.WsConstants;
-import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * WebService返回结果基类,定义所有返回码.
@@ -15,6 +14,7 @@ public class WSResult {
 
 	//-- 返回代码定义 --//
 	// 按项目的规则进行定义, 比如1xx代表客户端参数错误，2xx代表业务错误等.
+
 	public static final String SUCCESS = "0";
 	public static final String PARAMETER_ERROR = "101";
 
@@ -28,21 +28,16 @@ public class WSResult {
 	/**
 	 * 创建结果.
 	 */
-	public static <T extends WSResult> T buildResult(Class<T> resultClass, String resultCode, String resultMessage) {
-		try {
-			T result = resultClass.newInstance();
-			result.setResult(resultCode, resultMessage);
-			return result;
-		} catch (Exception ex) {
-			throw ReflectionUtils.convertReflectionExceptionToUnchecked(ex);
-		}
+	public <T extends WSResult> T buildResult(String resultCode, String resultMessage) {
+		setResult(resultCode, resultMessage);
+		return (T) this;
 	}
 
 	/**
 	 * 创建默认异常结果.
 	 */
-	public static <T extends WSResult> T buildDefaultErrorResult(Class<T> resultClass) {
-		return buildResult(resultClass, SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
+	public <T extends WSResult> T buildDefaultErrorResult() {
+		return buildResult(SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
 	}
 
 	public String getCode() {

@@ -59,6 +59,6 @@ public class AccountManager {
 		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password))
 			return false;
 
-		return (userDao.countUser(loginName, password) == 1);
+		return (userDao.countUserByLoginNamePassword(loginName, password) == 1);
 	}
 }

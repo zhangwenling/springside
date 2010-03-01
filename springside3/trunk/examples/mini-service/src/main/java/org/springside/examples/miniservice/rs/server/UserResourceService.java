@@ -29,6 +29,7 @@ import org.springside.examples.miniservice.service.account.AccountManager;
 import com.google.common.collect.Lists;
 
 /**
+ * User资源的REST服务.
  * 
  * @author calvin
  */
@@ -107,9 +108,9 @@ public class UserResourceService {
 	}
 
 	/**
-	 * 创建含出错信息的WebApplicationException.
+	 * 创建含扩展出错信息的WebApplicationException.
 	 */
 	private WebApplicationException buildException(Status status, String message) {
-		return new WebApplicationException(Response.status(status).entity(message).build());
+		return new WebApplicationException(Response.status(status).entity(message).type("text/plain").build());
 	}
 }

@@ -17,7 +17,7 @@ public class UserDao extends HibernateDao<User, Long> {
 	//-- 统一定义所有以用户为主体的HQL --//
 	private static final String COUNT_BY_LNAME_PASSWD = "select count(u) from User u where u.loginName=? and u.password=?";
 
-	public Long countUser(String loginName, String password) {
+	public Long countUserByLoginNamePassword(String loginName, String password) {
 		return (Long)findUnique(COUNT_BY_LNAME_PASSWD, loginName, password);
 	}
 

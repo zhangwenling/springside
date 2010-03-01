@@ -45,6 +45,9 @@ public class UserWebServiceImpl implements UserWebService {
 	 * @see UserWebService#getAllUser()
 	 */
 	public GetAllUserResult getAllUser() {
+
+		GetAllUserResult result = new GetAllUserResult();
+
 		//获取User列表并转换为UserDTO列表.
 		try {
 			List<User> userEntityList = accountManager.getAllLoadedUser();
@@ -53,13 +56,11 @@ public class UserWebServiceImpl implements UserWebService {
 			for (User userEntity : userEntityList) {
 				userDTOList.add(dozer.map(userEntity, UserDTO.class));
 			}
-
-			GetAllUserResult result = new GetAllUserResult();
 			result.setUserList(userDTOList);
 			return result;
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return WSResult.buildDefaultErrorResult(GetAllUserResult.class);
+			return result.buildDefaultErrorResult();
 		}
 	}
 
@@ -67,12 +68,14 @@ public class UserWebServiceImpl implements UserWebService {
 	 * @see UserWebService#getUser()
 	 */
 	public GetUserResult getUser(Long id) {
+		GetUserResult result = new GetUserResult();
+
 		//校验请求参数
 		try {
 			Assert.notNull(id, "id参数为空");
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
-			return WSResult.buildResult(GetUserResult.class, WSResult.PARAMETER_ERROR, e.getMessage());
+			return result.buildResult(WSResult.PARAMETER_ERROR, e.getMessage());
 		}
 
 		//获取用户
@@ -80,16 +83,15 @@ public class UserWebServiceImpl implements UserWebService {
 			User entity = accountManager.getLoadedUser(id);
 			UserDTO dto = dozer.map(entity, UserDTO.class);
 
-			GetUserResult result = new GetUserResult();
 			result.setUser(dto);
 			return result;
 		} catch (ObjectNotFoundException e) {
 			String message = "用户不存在(id:" + id + ")";
 			logger.error(message, e);
-			return WSResult.buildResult(GetUserResult.class, WSResult.PARAMETER_ERROR, message);
+			return result.buildResult(WSResult.PARAMETER_ERROR, message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return WSResult.buildDefaultErrorResult(GetUserResult.class);
+			return result.buildDefaultErrorResult();
 		}
 	}
 
@@ -97,6 +99,8 @@ public class UserWebServiceImpl implements UserWebService {
 	 * @see UserWebService#createUser(UserDTO)
 	 */
 	public CreateUserResult createUser(UserDTO user) {
+		CreateUserResult result = new CreateUserResult();
+
 		//校验请求参数
 		try {
 			Assert.notNull(user, "用户参数为空");
@@ -104,24 +108,22 @@ public class UserWebServiceImpl implements UserWebService {
 			Assert.isNull(user.getId(), "新建用户ID参数必须为空");
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
-			return WSResult.buildResult(CreateUserResult.class, WSResult.PARAMETER_ERROR, e.getMessage());
+			return result.buildResult(WSResult.PARAMETER_ERROR, e.getMessage());
 		}
 
 		//保存用户
 		try {
 			User userEntity = dozer.map(user, User.class);
 			accountManager.saveUser(userEntity);
-
-			CreateUserResult result = new CreateUserResult();
 			result.setUserId(userEntity.getId());
 			return result;
 		} catch (ConstraintViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
 			logger.error(message, e);
-			return WSResult.buildResult(CreateUserResult.class, WSResult.PARAMETER_ERROR, message);
+			return result.buildResult(WSResult.PARAMETER_ERROR, message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return WSResult.buildDefaultErrorResult(CreateUserResult.class);
+			return result.buildDefaultErrorResult();
 		}
 	}
 
@@ -129,6 +131,7 @@ public class UserWebServiceImpl implements UserWebService {
 	 * @see UserWebService#authUser(String, String)
 	 */
 	public AuthUserResult authUser(String loginName, String password) {
+		AuthUserResult result = new AuthUserResult();
 
 		//校验请求参数
 		try {
@@ -136,12 +139,11 @@ public class UserWebServiceImpl implements UserWebService {
 			Assert.hasText(password, "密码参数为空");
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
-			return WSResult.buildResult(AuthUserResult.class, WSResult.PARAMETER_ERROR, e.getMessage());
+			return result.buildResult(WSResult.PARAMETER_ERROR, e.getMessage());
 		}
 
 		//认证
 		try {
-			AuthUserResult result = new AuthUserResult();
 			if (accountManager.authenticate(loginName, password)) {
 				result.setValid(true);
 			} else {
@@ -150,7 +152,7 @@ public class UserWebServiceImpl implements UserWebService {
 			return result;
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return WSResult.buildDefaultErrorResult(AuthUserResult.class);
+			return result.buildDefaultErrorResult();
 		}
 	}
 }
