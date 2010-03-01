@@ -126,7 +126,7 @@ public class EncodeUtils {
 	/**
 	 * Xml 解码.
 	 */
-	public static String xtmlUnescape(String xmlEscaped) {
+	public static String xmlUnescape(String xmlEscaped) {
 		return StringEscapeUtils.unescapeXml(xmlEscaped);
 	}
 

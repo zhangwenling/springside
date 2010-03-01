@@ -169,7 +169,7 @@ public class ServletUtils {
 	}
 
 	/**
-	 * 对Http Basic Header进行编码.
+	 * 对Http Basic验证的 Header进行编码.
 	 */
 	public static String encodeHttpBasic(String userName, String password) {
 		String encode = userName + ":" + password;

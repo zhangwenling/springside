@@ -1,4 +1,4 @@
-package org.springside.modules.web;
+package org.springside.examples.showcase.web;
 
 import java.io.IOException;
 
@@ -9,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springside.modules.web.ServletUtils;
 
 /**
  * 为Response设置Expires等Header的Filter.

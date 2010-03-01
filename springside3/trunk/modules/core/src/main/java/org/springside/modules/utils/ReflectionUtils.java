@@ -29,7 +29,7 @@ import org.springframework.util.Assert;
 /**
  * 反射工具类.
  * 
- * 提供访问私有变量,获取泛型类型Class,提取集合中元素的属性,转换字符串到对象等Util函数.
+ * 提供访问私有变量,获取泛型类型Class, 提取集合中元素的属性, 转换字符串到对象等Util函数.
  * 
  * @author calvin
  */
@@ -158,7 +158,7 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 循环向上转型,获取对象的DeclaredMethod.
+	 * 循环向上转型, 获取对象的DeclaredMethod.
 	 * 
 	 * 如向上转型到Object仍无法找到, 返回null.
 	 */
@@ -177,7 +177,7 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 通过反射,获得Class定义中声明的父类的泛型参数的类型.
+	 * 通过反射, 获得Class定义中声明的父类的泛型参数的类型.
 	 * 如无法找到, 返回Object.class.
 	 * eg.
 	 * public UserDao extends HibernateDao<User>
@@ -191,7 +191,7 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 通过反射,获得定义Class时声明的父类的泛型参数的类型.
+	 * 通过反射, 获得定义Class时声明的父类的泛型参数的类型.
 	 * 如无法找到, 返回Object.class.
 	 * 
 	 * 如public UserDao extends HibernateDao<User,Long>

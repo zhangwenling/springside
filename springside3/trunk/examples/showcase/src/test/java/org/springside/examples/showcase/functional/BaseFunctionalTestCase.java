@@ -7,9 +7,9 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.mortbay.jetty.Server;
 import org.springside.examples.showcase.Start;
-import org.springside.modules.spring.SpringContextHolder;
 import org.springside.modules.test.utils.DBUnitUtils;
 import org.springside.modules.test.utils.JettyUtils;
+import org.springside.modules.utils.SpringContextHolder;
 
 /**
  * 功能测试基类.

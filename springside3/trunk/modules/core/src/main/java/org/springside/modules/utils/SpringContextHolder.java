@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.spring;
+package org.springside.modules.utils;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

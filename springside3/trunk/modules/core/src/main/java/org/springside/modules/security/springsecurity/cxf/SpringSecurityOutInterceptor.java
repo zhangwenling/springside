@@ -9,7 +9,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
  * 清除SecurityContext的Interceptor.
  * 
  * @author calvin
- *
  */
 public class SpringSecurityOutInterceptor extends AbstractPhaseInterceptor<Message>{
 

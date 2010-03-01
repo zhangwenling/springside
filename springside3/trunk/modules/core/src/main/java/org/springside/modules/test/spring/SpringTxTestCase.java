@@ -30,7 +30,7 @@ import org.unitils.reflectionassert.ReflectionComparatorMode;
  *  1.Spring Context IOC support
  *  2.Spring Transaction support 
  *  3.Spring JdbcTemplate and util functions
- *  4.Hibernate SessionFactory and some util functions
+ *  4.Hibernate SessionFactory and util functions
  *  5.DBUnit functions. 
  *  6.JUnit Assert functions 
  *  7.Unitils Reflection Assert funtions

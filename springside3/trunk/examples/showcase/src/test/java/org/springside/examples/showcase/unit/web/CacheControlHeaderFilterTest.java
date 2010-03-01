@@ -1,4 +1,4 @@
-package org.springside.modules.unit.web;
+package org.springside.examples.showcase.unit.web;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockFilterConfig;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springside.modules.web.CacheControlHeaderFilter;
+import org.springside.examples.showcase.web.CacheControlHeaderFilter;
 
 public class CacheControlHeaderFilterTest extends Assert {
 	@Test
