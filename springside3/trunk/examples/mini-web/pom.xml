@@ -138,6 +138,10 @@
 			<artifactId>standard</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 		</dependency>
@@ -226,6 +230,14 @@
 			<groupId>org.unitils</groupId>
 			<artifactId>unitils-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jetty</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+		</dependency>
 		<!-- testing end -->
 
 		<!-- hibernate tools -->
@@ -248,7 +260,7 @@
 					</additionalProjectnatures>
 				</configuration>
 			</plugin>
-			
+
 			<!-- jetty插件 -->
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>

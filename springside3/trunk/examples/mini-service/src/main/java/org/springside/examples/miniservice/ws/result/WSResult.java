@@ -37,7 +37,7 @@ public class WSResult {
 	 * 创建默认异常结果.
 	 */
 	public <T extends WSResult> T buildDefaultErrorResult() {
-		return buildResult(SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
+		return (T) buildResult(SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
 	}
 
 	public String getCode() {

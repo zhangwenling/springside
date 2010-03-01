@@ -985,45 +985,6 @@
 	</build>
 
 	<profiles>
-		<!--初始化数据库Schema及测试数据的profile, 以-Pinitdb激活, 在子POM中定义实际执行的sql与xml数据-->
-		<profile>
-			<id>initdb</id>
-			<build>
-				<plugins>
-					<!-- sql 插件创建Schema -->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>sql-maven-plugin</artifactId>
-
-						<executions>
-							<execution>
-								<id>create schema</id>
-								<phase>initialize</phase>
-								<goals>
-									<goal>execute</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-
-					<!-- dbunit 插件初始化数据-->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>dbunit-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>load data</id>
-								<phase>initialize</phase>
-								<goals>
-									<goal>operation</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
 		<!-- 在integration-test阶段执行功能测试的profile, 以-Pintegration-test激活 -->
 		<profile>
 			<id>integration-test</id>

@@ -11,14 +11,15 @@ import org.springside.modules.test.utils.JettyUtils;
 public class Start {
 
 	public static final int PORT = 8080;
-	public static final String CONTEXT = "/showcase";
-	public static final String BASE_URL = "http://localhost:8080/showcase";
+	public static final String CONTEXT = "/mini-web";
+	public static final String BASE_URL = "http://localhost:8080/mini-web";
 
 	public static void main(String[] args) throws Exception {
 		Server server = JettyUtils.buildServer(PORT, CONTEXT);
 		server.start();
-		
-		if (System.in.read() != 0) {
+
+	    System.out.println("Hit Enter in console to stop server");
+	    if (System.in.read() != 0) {
 			System.out.println("Server stopping");
 			server.stop();
 			System.out.println("Server stopped");

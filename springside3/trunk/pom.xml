@@ -12,11 +12,60 @@
 	<name>Springside3's Project</name>
 	<packaging>pom</packaging>
 
-	<modules>
-		<module>modules/core</module>
-		<module>modules/extension</module>
-		<module>modules/parent</module>
-		<module>tools/code-generator/maven-archetypes/service-archetype</module>
-		<module>tools/code-generator/maven-archetypes/web-archetype</module>
-	</modules>
+	<profiles>
+		<profile>
+			<id>modules</id>
+			<modules>
+				<module>modules/core</module>
+				<module>modules/extension</module>
+				<module>modules/parent</module>
+				<module>tools/code-generator/maven-archetypes/service-archetype</module>
+				<module>tools/code-generator/maven-archetypes/web-archetype</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>examples</id>
+			<modules>
+				<module>examples/mini-service</module>
+				<module>examples/mini-web</module>
+				<module>examples/showcase</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>startdb</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>startdb</id>
+								<phase>initialize</phase>
+								<configuration>
+									<tasks>
+										<java classname="org.h2.tools.Console" classpathref="maven.plugin.classpath" fork="true" spawn="true">
+										</java>
+									</tasks>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>com.h2database</groupId>
+								<artifactId>h2</artifactId>
+								<version>${h2.version}</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 </project>

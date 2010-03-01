@@ -12,12 +12,12 @@ echo [Step 1] 复制tools/maven/central-repository 到 %userprofile%\.m2\repository
 xcopy /s/e/i/h/d/y "..\tools\maven\central-repository" "%USERPROFILE%\.m2\repository"
 
 echo [Step 2] 启动H2数据库.
-call %MAVEN_BAT% initialize -Pstartdb
 cd ..\
+call %MAVEN_BAT% initialize -Pstartdb
 
-echo [Step 3] 安装SpringSide3 modules 和archetypes到 本地Maven仓库,生成Eclipse项目文件.
-call %MAVEN_BAT% -o eclipse:clean eclipse:eclpse
-call %MAVEN_BAT% -o clean install -Dmaven.test.skip=true
+echo [Step 3] 安装SpringSide3 所有modules 和archetypes项目到 本地Maven仓库,生成Eclipse项目文件.
+call %MAVEN_BAT% -o eclipse:clean eclipse:eclpse -Pmodules
+call %MAVEN_BAT% -o clean install -Dmaven.test.skip=true -Pmodules
 
 echo [Step 4] 为Mini-Service 生成Eclipse项目文件, 编译, 打包, 初始化数据库, 启动Jetty.
 cd examples\mini-service
@@ -48,5 +48,3 @@ echo [INFO] http://localhost:8088/showcase
 
 :end
 pause
-
-
