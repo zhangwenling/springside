@@ -210,12 +210,6 @@
 		</dependency>
 		<!-- jms end -->
 
-		<!-- hessian begin -->
-		<dependency>
-			<groupId>com.caucho</groupId>
-			<artifactId>hessian</artifactId>
-		</dependency>
-
 		<!-- quartz -->
 		<dependency>
 			<artifactId>quartz</artifactId>

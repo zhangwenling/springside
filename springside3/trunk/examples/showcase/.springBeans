@@ -15,11 +15,9 @@
 		<config>src/main/resources/schedule/applicationContext-executor.xml</config>
 		<config>src/main/resources/log/applicationContext-log.xml</config>
 		<config>src/main/resources/webservice/applicationContext-cxf-server.xml</config>
-		<config>src/main/resources/webservice/applicationContext-hessian-server.xml</config>
 		<config>src/main/resources/schedule/applicationContext-quartz-cron-local.xml</config>
 		<config>src/main/resources/schedule/applicationContext-quartz-timer-cluster.xml</config>
 		<config>src/main/resources/webservice/applicationContext-cxf-client.xml</config>
-		<config>src/main/resources/webservice/applicationContext-hessian-client.xml</config>
 		<config>src/main/resources/jms/applicationContext-consumer.xml</config>
 		<config>src/main/resources/jms/applicationContext-producer.xml</config>
 		<config>src/main/resources/jms/applicationContext-common.xml</config>
