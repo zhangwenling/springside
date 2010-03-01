@@ -7,99 +7,124 @@
 <xs:element name="createUserResponse" type="tns:createUserResponse" />
 <xs:element name="getAllUser" type="tns:getAllUser" />
 <xs:element name="getAllUserResponse" type="tns:getAllUserResponse" />
+<xs:element name="getUser" type="tns:getUser" />
+<xs:element name="getUserResponse" type="tns:getUserResponse" />
 <xs:complexType name="authUser">
-<xs:sequence>
-<xs:element minOccurs="0" name="loginName" type="xs:string" />
-<xs:element minOccurs="0" name="password" type="xs:string" />
-</xs:sequence>
-</xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="loginName" type="xs:string" />
+      <xs:element minOccurs="0" name="password" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
 <xs:complexType name="authUserResponse">
-<xs:sequence>
-<xs:element minOccurs="0" name="return" type="tns:AuthUserResult" />
-</xs:sequence>
-</xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:AuthUserResult" />
+    </xs:sequence>
+  </xs:complexType>
 <xs:complexType name="AuthUserResult">
-<xs:complexContent>
-<xs:extension base="tns:WSResult">
-<xs:sequence>
-<xs:element name="valid" type="xs:boolean" />
-</xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
+    <xs:complexContent>
+      <xs:extension base="tns:WSResult">
+        <xs:sequence>
+          <xs:element name="valid" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
 <xs:complexType name="WSResult">
-<xs:sequence>
-<xs:element minOccurs="0" name="code" type="xs:string" />
-<xs:element minOccurs="0" name="message" type="xs:string" />
-</xs:sequence>
-</xs:complexType>
-<xs:complexType name="getAllUser">
-<xs:sequence />
-</xs:complexType>
-<xs:complexType name="getAllUserResponse">
-<xs:sequence>
-<xs:element minOccurs="0" name="return" type="tns:GetAllUserResult" />
-</xs:sequence>
-</xs:complexType>
-<xs:complexType name="GetAllUserResult">
-<xs:complexContent>
-<xs:extension base="tns:WSResult">
-<xs:sequence>
-<xs:element minOccurs="0" name="userList">
-<xs:complexType>
-<xs:sequence>
-<xs:element maxOccurs="unbounded" minOccurs="0" name="user" type="tns:User" />
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-</xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="code" type="xs:string" />
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="getUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="getUserResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:GetUserResult" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="GetUserResult">
+    <xs:complexContent>
+      <xs:extension base="tns:WSResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="user" type="tns:User" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
 <xs:complexType name="User">
-<xs:sequence>
-<xs:element minOccurs="0" name="email" type="xs:string" />
-<xs:element minOccurs="0" name="id" type="xs:long" />
-<xs:element minOccurs="0" name="loginName" type="xs:string" />
-<xs:element minOccurs="0" name="name" type="xs:string" />
-<xs:element minOccurs="0" name="roleList">
-<xs:complexType>
-<xs:sequence>
-<xs:element maxOccurs="unbounded" minOccurs="0" name="role" type="tns:Role" />
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-</xs:sequence>
-</xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="email" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+      <xs:element minOccurs="0" name="loginName" type="xs:string" />
+      <xs:element minOccurs="0" name="name" type="xs:string" />
+      <xs:element minOccurs="0" name="roleList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="role" type="tns:Role" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
 <xs:complexType name="Role">
-<xs:sequence>
-<xs:element minOccurs="0" name="id" type="xs:long" />
-<xs:element minOccurs="0" name="name" type="xs:string" />
-</xs:sequence>
-</xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long" />
+      <xs:element minOccurs="0" name="name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="getAllUser">
+    <xs:sequence />
+  </xs:complexType>
+<xs:complexType name="getAllUserResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:GetAllUserResult" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="GetAllUserResult">
+    <xs:complexContent>
+      <xs:extension base="tns:WSResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="userList">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="user" type="tns:User" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
 <xs:complexType name="createUser">
-<xs:sequence>
-<xs:element minOccurs="0" name="user" type="tns:User" />
-</xs:sequence>
-</xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="user" type="tns:User" />
+    </xs:sequence>
+  </xs:complexType>
 <xs:complexType name="createUserResponse">
-<xs:sequence>
-<xs:element minOccurs="0" name="return" type="tns:CreateUserResult" />
-</xs:sequence>
-</xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:CreateUserResult" />
+    </xs:sequence>
+  </xs:complexType>
 <xs:complexType name="CreateUserResult">
-<xs:complexContent>
-<xs:extension base="tns:WSResult">
-<xs:sequence>
-<xs:element minOccurs="0" name="userId" type="xs:long" />
-</xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
+    <xs:complexContent>
+      <xs:extension base="tns:WSResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="userId" type="xs:long" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
 </xs:schema>
   </wsdl:types>
   <wsdl:message name="createUser">
     <wsdl:part element="tns:createUser" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUser">
+    <wsdl:part element="tns:getUser" name="parameters">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="authUser">
@@ -118,6 +143,10 @@
     <wsdl:part element="tns:getAllUserResponse" name="parameters">
     </wsdl:part>
   </wsdl:message>
+  <wsdl:message name="getUserResponse">
+    <wsdl:part element="tns:getUserResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="authUserResponse">
     <wsdl:part element="tns:authUserResponse" name="parameters">
     </wsdl:part>
@@ -127,6 +156,12 @@
       <wsdl:input message="tns:authUser" name="authUser">
     </wsdl:input>
       <wsdl:output message="tns:authUserResponse" name="authUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUser">
+      <wsdl:input message="tns:getUser" name="getUser">
+    </wsdl:input>
+      <wsdl:output message="tns:getUserResponse" name="getUserResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="getAllUser">
@@ -153,6 +188,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getUser">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getUser">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getUserResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getAllUser">
       <soap:operation soapAction="" style="document" />
       <wsdl:input name="getAllUser">
@@ -174,7 +218,7 @@
   </wsdl:binding>
   <wsdl:service name="UserService">
     <wsdl:port binding="tns:UserServiceSoapBinding" name="UserServicePort">
-      <soap:address location="http://localhost:8080/mini-service/services/UserService" />
+      <soap:address location="http://localhost:8080/mini-service/ws/userservice" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

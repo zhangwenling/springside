@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project name="save-wsdl" default="save-wsdl">
 	<target name="save-wsdl">
-		<property name="wsdlfile" value="../../webapp/wsdl/mini-service.wsdl"/>
+		<property name="wsdlfile" value="../../src/main/webapp/wsdl/mini-service.wsdl"/>
 		<!-- 保存cxf生成的WSDL -->
 		<get src="http://localhost:8080/mini-service/ws/userservice?wsdl" dest="${wsdlfile}"/>
 			

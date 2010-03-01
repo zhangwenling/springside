@@ -384,6 +384,12 @@
 				</configuration>
 			</plugin>
 
+			<!-- jetty插件 -->
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+			</plugin>
+
 			<!-- Hibernate lazy load bytecode enhancement -->
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
