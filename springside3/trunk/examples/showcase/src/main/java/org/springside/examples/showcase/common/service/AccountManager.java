@@ -76,6 +76,15 @@ public class AccountManager {
 	}
 	
 	/**
+	 * 按名称查询用户, 并对用户的延迟加载关联进行初始化.
+	 */
+	public User searchLoadedUserByName(String name) {
+		User user = userDao.findUniqueBy("name", name);
+		userDao.initUser(user);
+		return user;
+	}
+	
+	/**
 	 * 取得所有用户, 预加载用户的角色.
 	 */
 	@Transactional(readOnly = true)

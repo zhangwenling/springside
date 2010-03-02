@@ -1,7 +1,7 @@
 package org.springside.examples.showcase;
 
 import org.mortbay.jetty.Server;
-import org.springside.modules.test.utils.JettyUtils;
+import org.mortbay.jetty.webapp.WebAppContext;
 
 /**
  * 使用Jetty运行调试Web应用, 在Console输入回车停止服务.
@@ -15,7 +15,10 @@ public class Start {
 	public static final String BASE_URL = "http://localhost:8080/showcase";
 
 	public static void main(String[] args) throws Exception {
-		Server server = JettyUtils.buildServer(PORT, CONTEXT);
+		Server server = new Server(PORT);
+		WebAppContext webContext = new WebAppContext("src/main/webapp", CONTEXT);
+		server.setHandler(webContext);
+		server.setStopAtShutdown(true);
 		server.start();
 		
 	    System.out.println("Hit Enter in console to stop server");

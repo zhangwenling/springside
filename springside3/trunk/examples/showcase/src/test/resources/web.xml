@@ -122,7 +122,7 @@
 	<!-- Cache Control Header Filter -->
 	<filter>
 		<filter-name>cacheControlHeaderFilter</filter-name>
-		<filter-class>org.springside.modules.web.CacheControlHeaderFilter</filter-class>
+		<filter-class>org.springside.examples.showcase.web.CacheControlHeaderFilter</filter-class>
 	</filter>
 
 	<!-- Filter 映射 -->

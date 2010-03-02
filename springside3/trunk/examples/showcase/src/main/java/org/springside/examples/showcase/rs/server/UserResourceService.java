@@ -1,14 +1,13 @@
 package org.springside.examples.showcase.rs.server;
 
-import java.net.URI;
 import java.util.List;
 
-import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -18,7 +17,6 @@ import javax.ws.rs.core.Response.Status;
 
 import org.dozer.DozerBeanMapper;
 import org.hibernate.ObjectNotFoundException;
-import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,8 @@ import org.springside.examples.showcase.rs.dto.UserDTO;
 import com.google.common.collect.Lists;
 
 /**
+ * 用户资源 REST服务演示.
+ * 在Mini-Service演示的基础上添加更多演示.
  * 
  * @author calvin
  */
@@ -48,6 +48,7 @@ public class UserResourceService {
 
 	/**
 	 * 获取所有用户.
+	 * 演示SpringSecurity结合.
 	 */
 	@GET
 	@Secured("ROLE_User")
@@ -80,7 +81,7 @@ public class UserResourceService {
 		} catch (ObjectNotFoundException e) {
 			String message = "用户不存在(id:" + id + ")";
 			logger.error(message, e);
-			throw buildException(Status.NOT_FOUND, message);
+			throw buildException(Status.NOT_FOUND.getStatusCode(), message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
@@ -88,20 +89,29 @@ public class UserResourceService {
 	}
 
 	/**
-	 * 创建用户.
+	 * 搜索用户.
+	 * 
+	 * 演示QueryParam的获取与特定格式/内容Response的返回.
 	 */
-	@POST
-	@Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response createUser(UserDTO user) {
+	@GET
+	@Path("/search")
+	public Response searchUser(@QueryParam("name") String name,
+			@QueryParam("format") @DefaultValue("json") String format) {
 		try {
-			User userEntity = dozer.map(user, User.class);
-			accountManager.saveUser(userEntity);
-			URI createdUri = uriInfo.getAbsolutePathBuilder().path(userEntity.getId().toString()).build();
-			return Response.created(createdUri).build();
-		} catch (ConstraintViolationException e) {
-			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
+			User entity = accountManager.searchLoadedUserByName(name);
+			if ("html".equals(format)) {
+				//返回html格式的特定字符串.
+				String html = "<div>" + entity.getName() + ", your mother call you...</div>";
+				return Response.ok(html, MediaType.TEXT_HTML).build();
+			} else {
+				//返回JSON格式的对象.
+				UserDTO dto = dozer.map(entity, UserDTO.class);
+				return Response.ok(dto, MediaType.APPLICATION_JSON).build();
+			}
+		} catch (ObjectNotFoundException e) {
+			String message = "用户不存在(name:" + name + ")";
 			logger.error(message, e);
-			throw buildException(Status.BAD_REQUEST, message);
+			throw buildException(Status.NOT_FOUND.getStatusCode(), message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
@@ -111,7 +121,7 @@ public class UserResourceService {
 	/**
 	 * 创建含出错信息的WebApplicationException.
 	 */
-	private WebApplicationException buildException(Status status, String message) {
+	private WebApplicationException buildException(int status, String message) {
 		return new WebApplicationException(Response.status(status).entity(message).build());
 	}
 }

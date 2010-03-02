@@ -19,9 +19,9 @@
 
 		<h2>技术说明：</h2>
 		<ul>
-			<li>基于JAXB2.0的Java-XML绑定, 演示根元素是List, 属性是List与Map等特殊情况.</li>
-			<li>万能老倌Dom4j.</li>
-			<li>最快的JSON转换类Jackson.</li>
+			<li>基于JAXB2.0的Java-XML绑定, 演示根元素是List, 属性是List与Map等特殊情况. 见JaxbTest</li>
+			<li>万能老倌Dom4j, 见JaxbTest.</li>
+			<li>最快的JSON转换类Jackson, 见JacksonTest.</li>
 		</ul>
 
 		<h2>用户故事：</h2>

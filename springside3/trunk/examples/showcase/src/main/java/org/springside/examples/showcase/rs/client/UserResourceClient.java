@@ -1,16 +1,20 @@
 package org.springside.examples.showcase.rs.client;
 
-import java.net.URI;
+import java.io.IOException;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springside.examples.showcase.rs.dto.JAXBContextResolver;
 import org.springside.examples.showcase.rs.dto.UserDTO;
 import org.springside.modules.web.ServletUtils;
 
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
@@ -18,10 +22,13 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 /**
  * 使用Jersey Client的User REST客户端.
+ * 在Mini-Service演示的基础上添加更多演示.
  * 
  * @author calvin
  */
 public class UserResourceClient {
+
+	private static Logger logger = LoggerFactory.getLogger(UserResourceClient.class);
 
 	private WebResource client;
 
@@ -46,9 +53,31 @@ public class UserResourceClient {
 		return client.path("/users/" + id).accept(MediaType.APPLICATION_JSON).get(UserDTO.class);
 	}
 
-	public URI createUser(UserDTO user) {
-		ClientResponse response = client.path("/users").type("application/json").post(ClientResponse.class, user);
-		return response.getLocation();
+	/**
+	 * 返回html格式的特定内容.
+	 */
+	public String searchUserHtml(String name) {
+		return client.path("/users/search").queryParam("name", name).queryParam("format", "html").get(String.class);
 	}
 
+	/**
+	 * 无公共DTO类定义, 取得返回JSON字符串后自行转换DTO.
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 */
+	public UserDTO searchUserJson(String name) throws IOException {
+		String json = client.path("/users/search").queryParam("name", name).get(String.class);
+		ObjectMapper mapper = new ObjectMapper();
+
+		try {
+			UserDTO user = mapper.readValue(json, UserDTO.class);
+			return user;
+		} catch (JsonParseException e) {
+			logger.error("JSON response error:" + json, e);
+		} catch (JsonMappingException e) {
+			logger.error("JSON response error:" + json, e);
+		}
+
+		return null;
+	}
 }

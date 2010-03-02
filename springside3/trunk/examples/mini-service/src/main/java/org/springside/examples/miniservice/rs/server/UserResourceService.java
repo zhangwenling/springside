@@ -79,7 +79,7 @@ public class UserResourceService {
 		} catch (ObjectNotFoundException e) {
 			String message = "用户不存在(id:" + id + ")";
 			logger.error(message, e);
-			throw buildException(Status.NOT_FOUND, message);
+			throw buildException(Status.NOT_FOUND.getStatusCode(), message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
@@ -87,7 +87,7 @@ public class UserResourceService {
 	}
 
 	/**
-	 * 创建用户.
+	 * 创建用户, 返回表示所创建用户的URI.
 	 */
 	@POST
 	@Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -100,7 +100,7 @@ public class UserResourceService {
 		} catch (ConstraintViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
 			logger.error(message, e);
-			throw buildException(Status.BAD_REQUEST, message);
+			throw buildException(Status.BAD_REQUEST.getStatusCode(), message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
@@ -110,7 +110,7 @@ public class UserResourceService {
 	/**
 	 * 创建含扩展出错信息的WebApplicationException.
 	 */
-	private WebApplicationException buildException(Status status, String message) {
+	private WebApplicationException buildException(int status, String message) {
 		return new WebApplicationException(Response.status(status).entity(message).type("text/plain").build());
 	}
 }
