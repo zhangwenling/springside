@@ -61,7 +61,7 @@ public class UserResourceService {
 			return dtoList;
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+			throw new WebApplicationException();
 		}
 	}
 
@@ -79,10 +79,10 @@ public class UserResourceService {
 		} catch (ObjectNotFoundException e) {
 			String message = "用户不存在(id:" + id + ")";
 			logger.error(message, e);
-			throw buildException(Status.NOT_FOUND.getStatusCode(), message);
+			throw buildException(Status.NOT_FOUND, message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+			throw new WebApplicationException();
 		}
 	}
 
@@ -103,12 +103,19 @@ public class UserResourceService {
 			throw buildException(Status.BAD_REQUEST.getStatusCode(), message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+			throw new WebApplicationException();
 		}
 	}
 
 	/**
-	 * 创建含扩展出错信息的WebApplicationException.
+	 * 创建WebApplicationException, 使用标准状态码与自定义信息.
+	 */
+	private WebApplicationException buildException(Status status, String message) {
+		return new WebApplicationException(Response.status(status).entity(message).type("text/plain").build());
+	}
+
+	/**
+	 * 创建WebApplicationException, 使用自定义状态码与自定义信息.
 	 */
 	private WebApplicationException buildException(int status, String message) {
 		return new WebApplicationException(Response.status(status).entity(message).type("text/plain").build());
