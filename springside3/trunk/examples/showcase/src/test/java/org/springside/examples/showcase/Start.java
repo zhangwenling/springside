@@ -17,12 +17,14 @@ public class Start {
 	public static void main(String[] args) throws Exception {
 		Server server = new Server(PORT);
 		WebAppContext webContext = new WebAppContext("src/main/webapp", CONTEXT);
+		webContext.setClassLoader(Thread.currentThread().getContextClassLoader());
+
 		server.setHandler(webContext);
 		server.setStopAtShutdown(true);
 		server.start();
-		
-	    System.out.println("Hit Enter in console to stop server");
-	    if (System.in.read() != 0) {
+
+		System.out.println("Hit Enter in console to stop server");
+		if (System.in.read() != 0) {
 			System.out.println("Server stopping");
 			server.stop();
 			System.out.println("Server stopped");

@@ -129,6 +129,14 @@
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+		</dependency>
 		<!-- web end -->
 
 		<!-- webservice begin -->
@@ -343,7 +351,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.mortbay.jetty</groupId>
-			<artifactId>jsp-2.1-jetty</artifactId>
+			<artifactId>jsp-2.0</artifactId>
+			<type>pom</type>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>

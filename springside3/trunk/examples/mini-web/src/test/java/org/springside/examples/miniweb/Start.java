@@ -17,6 +17,8 @@ public class Start {
 	public static void main(String[] args) throws Exception {
 		Server server = new Server(PORT);
 		WebAppContext webContext = new WebAppContext("src/main/webapp", CONTEXT);
+		webContext.setClassLoader(Thread.currentThread().getContextClassLoader());
+	
 		server.setHandler(webContext);
 		server.setStopAtShutdown(true);
 		server.start();

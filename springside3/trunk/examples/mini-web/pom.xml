@@ -142,6 +142,11 @@
 			<artifactId>servlet-api</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 		</dependency>
@@ -235,8 +240,9 @@
 			<artifactId>jetty</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jsp-2.0</artifactId>
+			<type>pom</type>
 		</dependency>
 		<!-- testing end -->
 
