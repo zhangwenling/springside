@@ -1,7 +1,8 @@
 @echo off
-echo [INFO] Use maven eclipse plugin download jar and generate eclipse project files.
-echo [Info] Add "-Declipse.workspace=<path-to-eclipse-workspace>"
+echo [INFO] Use maven eclipse-plugin download jars and generate eclipse project files.
+echo [Info] Please add "-Declipse.workspace=<path-to-eclipse-workspace>" at the end.
 
+cd %~dp0
 cd ..
 call mvn eclipse:clean eclipse:eclipse
 cd bin

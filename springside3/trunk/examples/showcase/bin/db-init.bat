@@ -1,6 +1,8 @@
 @echo off
-echo [INFO] 使用maven sql plugin 创建数据库,使用dbunit初始化测试数据.
+echo [INFO] Use maven sql-plugin create schema, maven dbunit-plugin import default data.
 
+cd %~dp0
 cd ..
-call mvn initialize -Pinitdb
+call mvn sql:execute dbunit:operation
+cd bin
 pause

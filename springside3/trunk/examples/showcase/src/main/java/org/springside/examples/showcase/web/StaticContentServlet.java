@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.zip.GZIPOutputStream;
 
+import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,12 +41,15 @@ public class StaticContentServlet extends HttpServlet {
 	/** 需要被Gzip压缩的Mime类型. */
 	private static final String[] GZIP_MIME_TYPES = { "text/html", "application/xhtml+xml", "text/css",
 			"text/javascript" };
+	
 	/** 需要被Gzip压缩的最小文件大小. */
 	private static final int GZIP_MINI_LENGTH = 512;
 
 	/** Content基本信息缓存. */
 	private Cache contentInfoCache;
 
+	private MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//获取请求内容的基本信息.
@@ -94,6 +98,7 @@ public class StaticContentServlet extends HttpServlet {
 			IOUtils.closeQuietly(output);
 		}
 	}
+
 	/**
 	 * 检查浏览器客户端是否支持gzip编码.
 	 */
@@ -111,12 +116,12 @@ public class StaticContentServlet extends HttpServlet {
 	/**
 	 * 设置Gzip Header并返回GZIPOutputStream.
 	 */
-	private  OutputStream buildGzipOutputStream(HttpServletResponse response) throws IOException {
+	private OutputStream buildGzipOutputStream(HttpServletResponse response) throws IOException {
 		response.setHeader("Content-Encoding", "gzip");
 		response.setHeader("Vary", "Accept-Encoding");
 		return new GZIPOutputStream(response.getOutputStream());
 	}
-	
+
 	/**
 	 * 在初始化函数中创建内容信息缓存.
 	 */
@@ -148,16 +153,16 @@ public class StaticContentServlet extends HttpServlet {
 
 		String realFilePath = getServletContext().getRealPath(contentPath);
 		File file = new File(realFilePath);
-
-		contentInfo.contentPath = contentPath;
+		
 		contentInfo.file = file;
+		contentInfo.contentPath = contentPath;
 		contentInfo.fileName = file.getName();
 		contentInfo.length = (int) file.length();
 
 		contentInfo.lastModified = file.lastModified();
 		contentInfo.etag = "W/\"" + contentInfo.lastModified + "\"";
 
-		String mimeType = getServletContext().getMimeType(realFilePath);
+		String mimeType = mimetypesFileTypeMap.getContentType(contentInfo.fileName);
 		if (mimeType == null) {
 			mimeType = "application/octet-stream";
 		}
