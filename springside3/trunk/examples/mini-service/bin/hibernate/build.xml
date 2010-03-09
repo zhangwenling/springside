@@ -3,22 +3,11 @@
 
 	<property name="hibernatetools-templates.path" value="../../../../tools/code-generator/hibernatetools-templates" />
 
-	<artifact:pom id="mypom" file="../../pom.xml" />
-	<artifact:dependencies pathId="toolslib" pomRefId="mypom" />
+	<artifact:dependencies pathId="toolslib">
+		<pom file="../../pom.xml" />
+	</artifact:dependencies>
 
 	<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="toolslib" />
-
-	<target name="generate.pojo">
-		<hibernatetool destdir="generated">
-			<classpath>
-				<path location="../../target/classes" />
-			</classpath>
-			
-			<jdbcconfiguration configurationfile="hibernate.cfg.xml" revengfile="hibernate.reveng.xml" detectmanytomany="true" namingstrategy="org.hibernate.cfg.ImprovedNamingStrategy" reversestrategy="org.springside.modules.orm.hibernate.IgnorePrefixReverseEngineeringStrategy" />
-
-			<hbm2java jdk5="true" ejb3="true" />
-		</hibernatetool>
-	</target>
 
 	<target name="generate.code">
 		<hibernatetool destdir="generated" templatepath="${hibernatetools-templates.path}/">
@@ -26,22 +15,25 @@
 				<path location="../../target/classes" />
 			</classpath>
 
-			<annotationconfiguration configurationfile="hibernate.cfg.xml" />
+			<jdbcconfiguration configurationfile="config/hibernate.cfg.xml" revengfile="config/hibernate.reveng.xml" detectmanytomany="true" namingstrategy="org.hibernate.cfg.ImprovedNamingStrategy" reversestrategy="com.ericsson.aop.adm.common.dao.AdmReverseEngineeringStrategy" />
 
-			<hbmtemplate templateprefix="pojo/" template="dao.ftl" filepattern="{class-name}Dao.java" />
-			<hbmtemplate templateprefix="pojo/" template="manager.ftl" filepattern="{class-name}Manager.java" />
+			<hbmtemplate templateprefix="pojo/" template="pojo/Pojo.ftl" filepattern="{package-name}/{class-name}.java">
+				<property key="jdk5" value="true" />
+				<property key="ejb3" value="true" />
+			</hbmtemplate>
+			<hbmtemplate templateprefix="pojo/" template="dao.ftl" filepattern="dao/{class-name}Dao.java" />
+			<hbmtemplate templateprefix="pojo/" template="manager.ftl" filepattern="manager/{class-name}Manager.java" />
 		</hibernatetool>
 	</target>
 
-	<target name="generate.ddl">
-		<hibernatetool destdir="generated">
-			<classpath>
-				<path location="../../target/classes" />
-			</classpath>
+	<target name="convert.mysql.h2" description="convert mysql/oracle to h2 for testing">
+		<copy todir="../../src/main/resources/sql/h2" overwrite="true">
+			<fileset dir="../../src/main/resources/sql/mysql">
+				<include name="**/*.sql" />
+			</fileset>
+		</copy>
 
-			<annotationconfiguration configurationfile="hibernate.cfg.xml" namingstrategy="org.hibernate.cfg.ImprovedNamingStrategy" />
-
-			<hbm2ddl export="false" update="false" drop="false" create="false" outputfilename="schema.sql" delimiter=";" format="true" haltonerror="false" />
-		</hibernatetool>
+		<replace dir="../../src/main/resources/sql/h2" includes="**/*.sql" token="type = InnoDB" value="" />
+		<replace dir="../../src/main/resources/sql/h2" includes="**/*.sql" token="MySQL 5.0" value="H2" />
 	</target>
 </project>

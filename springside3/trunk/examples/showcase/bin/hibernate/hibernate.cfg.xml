@@ -12,13 +12,5 @@
 		<property name="hibernate.connection.url">jdbc:h2:tcp://localhost/~/showcase</property>
 		<property name="hibernate.connection.username">sa</property>
 		<property name="hibernate.connection.password"></property>
-
-		<!-- entities for generate.code/generate.ddl -->
-		<mapping class="org.springside.examples.showcase.common.entity.IdEntity" />
-		<mapping class="org.springside.examples.showcase.common.entity.User" />
-		<mapping class="org.springside.examples.showcase.common.entity.Role" />
-		<mapping class="org.springside.examples.showcase.common.entity.Post" />
-		<mapping class="org.springside.examples.showcase.common.entity.Subject" />
-		<mapping class="org.springside.examples.showcase.common.entity.Reply" />
 	</session-factory>
 </hibernate-configuration>

@@ -4,14 +4,12 @@
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<!-- dialect for generate.pojo and generate.ddl-->
 		<property name="dialect">org.hibernate.dialect.H2Dialect</property>
 		<!-- 
 		<property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
 		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
 		-->
 
-		<!-- jdbc properties for generate.pojo -->
 		<property name="hibernate.connection.driver_class">org.h2.Driver</property>
 		<property name="hibernate.connection.url">jdbc:h2:tcp://localhost/~/mini-web</property>
 		<property name="hibernate.connection.username">sa</property>
@@ -30,11 +28,5 @@
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password"></property>
 	 	-->
-	 		
-		<!-- entities for generate.code and generate.ddl -->
-		<mapping class="org.springside.examples.miniweb.entity.IdEntity" />
-		<mapping class="org.springside.examples.miniweb.entity.account.User" />
-		<mapping class="org.springside.examples.miniweb.entity.account.Role" />
-		<mapping class="org.springside.examples.miniweb.entity.account.Authority" />
 	</session-factory>
 </hibernate-configuration>
