@@ -19,11 +19,11 @@
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<struts2.version>2.1.8.1</struts2.version>
 		<cxf.version>2.2.6</cxf.version>
-		<jersey.version>1.1.5</jersey.version>
+		<jersey.version>1.1.5.1</jersey.version>
 		<spring-security.version>3.0.2.RELEASE</spring-security.version>
 		<activemq.version>5.3.0</activemq.version>
 		<jetty.version>6.1.22</jetty.version>
-		<h2.version>1.2.130</h2.version>
+		<h2.version>1.2.131</h2.version>
 
 		<!-- Plugin的属性定义  -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -267,12 +267,12 @@
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-core-asl</artifactId>
-				<version>1.4.3</version>
+				<version>1.5.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-mapper-asl</artifactId>
-				<version>1.4.3</version>
+				<version>1.5.0</version>
 			</dependency>
 
 			<!-- j2ee web spec -->

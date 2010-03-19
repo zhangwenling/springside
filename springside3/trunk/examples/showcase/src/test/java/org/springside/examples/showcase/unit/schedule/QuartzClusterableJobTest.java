@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.schedule.QuartzClusterableJob;
 import org.springside.examples.showcase.unit.common.BaseTxTestCase;
-import org.springside.modules.test.mock.MockAppender;
+import org.springside.modules.test.mock.MockLog4jAppender;
 import org.springside.modules.test.utils.TimeUtils;
 
 /**
@@ -20,7 +20,7 @@ public class QuartzClusterableJobTest extends BaseTxTestCase {
 	@Test
 	public void test() {
 		//加载测试用logger appender
-		MockAppender appender = new MockAppender();
+		MockLog4jAppender appender = new MockLog4jAppender();
 		appender.addToLogger(QuartzClusterableJob.class);
 
 		//等待任务启动

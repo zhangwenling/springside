@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springside.modules.log.TraceUtils;
-import org.springside.modules.test.mock.MockAppender;
+import org.springside.modules.test.mock.MockLog4jAppender;
 
 public class TraceUtilsTest extends Assert {
 
@@ -15,7 +15,7 @@ public class TraceUtilsTest extends Assert {
 
 	@Test
 	public void test() {
-		MockAppender appender = new MockAppender();
+		MockLog4jAppender appender = new MockLog4jAppender();
 		appender.addToLogger(TraceUtilsTest.class);
 
 		//begin trace

@@ -6,7 +6,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.NotifyMessageProducer;
 import org.springside.examples.showcase.jms.NotifyTopicListener;
-import org.springside.modules.test.mock.MockAppender;
+import org.springside.modules.test.mock.MockLog4jAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
 import org.springside.modules.test.utils.TimeUtils;
 
@@ -20,7 +20,7 @@ public class JmsTopicTest extends SpringContextTestCase {
 	@Test
 	public void test() {
 		TimeUtils.sleep(1000);
-		MockAppender appender = new MockAppender();
+		MockLog4jAppender appender = new MockLog4jAppender();
 		appender.addToLogger(NotifyTopicListener.class);
 
 		User user = new User();

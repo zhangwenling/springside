@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.internal.runners.model.EachTestNotifier;
@@ -134,10 +135,10 @@ public class GroupsTestRunner extends BlockJUnit4ClassRunner {
 		String groupsDefine = getGroupsFromSystemProperty();
 
 		//如果环境变量未定义test.groups,尝试从property文件读取.
-		if (groupsDefine == null) {
+		if (StringUtils.isBlank(groupsDefine)) {
 			groupsDefine = getGroupsFromPropertyFile();
 			//如果仍未定义,设为全部运行
-			if (groupsDefine == null) {
+			if (StringUtils.isBlank(groupsDefine)) {
 				groupsDefine = Groups.ALL;
 			}
 		}
@@ -158,9 +159,8 @@ public class GroupsTestRunner extends BlockJUnit4ClassRunner {
 	 * 从Classpath中的application.test.properties文件读取test.groups定义, 多个group用逗号分隔.
 	 */
 	protected static String getGroupsFromPropertyFile() {
-		Properties p;
 		try {
-			p = PropertiesLoaderUtils.loadAllProperties(PROPERTY_FILE);
+			Properties p = PropertiesLoaderUtils.loadAllProperties(PROPERTY_FILE);
 			return p.getProperty(PROPERTY_NAME);
 		} catch (IOException e) {
 			logger.warn(e.getMessage(), e);

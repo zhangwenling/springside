@@ -14,10 +14,12 @@ public class DBUnitUtils {
 	/**
 	 * 初始化XML数据文件到H2数据库.
 	 */
-	public static void loadDbUnitData(DataSource h2DataSource,String xmlPath) throws Exception {
+	public static void loadDbUnitData(DataSource h2DataSource, String... xmlPaths) throws Exception {
 		IDatabaseConnection connection = new H2Connection(h2DataSource.getConnection(), "");
-		InputStream input = DBUnitUtils.class.getResourceAsStream(xmlPath);
-		IDataSet dataSet = new FlatXmlDataSetBuilder().setColumnSensing(true).build(input);
-		DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
+		for (String xmlPath : xmlPaths) {
+			InputStream input = DBUnitUtils.class.getResourceAsStream(xmlPath);
+			IDataSet dataSet = new FlatXmlDataSetBuilder().setColumnSensing(true).build(input);
+			DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
+		}
 	}
 }
