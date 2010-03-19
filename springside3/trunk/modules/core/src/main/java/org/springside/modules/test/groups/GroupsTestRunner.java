@@ -148,8 +148,7 @@ public class GroupsTestRunner extends BlockJUnit4ClassRunner {
 
 	/**
 	 * 从环境变量读取test.groups定义, 多个group用逗号分隔.
-	 * eg.
-	 * java -Dtest.groups=basic,extension
+	 * eg. java -Dtest.groups=Mini,Majo
 	 */
 	protected static String getGroupsFromSystemProperty() {
 		return System.getProperty(PROPERTY_NAME);
@@ -157,6 +156,7 @@ public class GroupsTestRunner extends BlockJUnit4ClassRunner {
 
 	/**
 	 * 从Classpath中的application.test.properties文件读取test.groups定义, 多个group用逗号分隔.
+	 * eg. test.groups=Mini,Major
 	 */
 	protected static String getGroupsFromPropertyFile() {
 		try {

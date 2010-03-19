@@ -1,4 +1,4 @@
-package org.springside.examples.showcase;
+package org.springside.examples.showcase.tools;
 
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.webapp.WebAppContext;

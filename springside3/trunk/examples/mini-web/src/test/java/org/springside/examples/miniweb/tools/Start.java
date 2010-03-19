@@ -1,4 +1,4 @@
-package org.springside.examples.miniweb;
+package org.springside.examples.miniweb.tools;
 
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.webapp.WebAppContext;
