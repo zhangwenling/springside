@@ -8,6 +8,7 @@ public class JettyUtils {
 	public static Server buildServer(int port,String contextPath){
 		Server server = new Server(port);
 		WebAppContext webContext = new WebAppContext("src/main/webapp", contextPath);
+		webContext.setClassLoader(Thread.currentThread().getContextClassLoader());
 		webContext.setDescriptor("src/test/resources/web.xml");
 		server.setHandler(webContext);
 		server.setStopAtShutdown(true);
