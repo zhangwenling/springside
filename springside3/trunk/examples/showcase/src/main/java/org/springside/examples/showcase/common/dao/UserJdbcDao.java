@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import org.springside.examples.showcase.common.entity.User;
 
 import com.google.common.collect.Maps;
@@ -21,7 +21,7 @@ import com.google.common.collect.Maps;
  * 
  * @author calvin
  */
-@Repository
+@Component
 public class UserJdbcDao {
 
 	private SimpleJdbcTemplate jdbcTemplate;

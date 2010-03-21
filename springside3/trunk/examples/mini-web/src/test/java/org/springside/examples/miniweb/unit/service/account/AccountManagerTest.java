@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.springside.examples.miniweb.dao.account.UserDao;
 import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.examples.miniweb.service.account.AccountManager;
-import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * SecurityEntityManager的测试用例, 测试Service层的业务逻辑.
@@ -26,7 +25,7 @@ public class AccountManagerTest extends Assert {
 	public void setUp() {
 		accountManager = new AccountManager();
 		mockUserDao = EasyMock.createMock(UserDao.class);
-		ReflectionUtils.setFieldValue(accountManager, "userDao", mockUserDao);
+		accountManager.setUserDao(mockUserDao);
 	}
 
 	@After

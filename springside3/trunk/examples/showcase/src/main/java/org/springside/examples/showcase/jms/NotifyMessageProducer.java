@@ -29,19 +29,21 @@ public class NotifyMessageProducer {
 
 	/**
 	 * 将变更用户消息发送到只有单个消费者的queue.
+	 * 
 	 * 使用jmsTemplate最简便的封装convertAndSend()发送Map类型的消息.
 	 */
-	public void sendQueue(final User user) {
+	public void sendQueue(User user) {
 		Map map = new HashMap();
 		map.put("userName", user.getName());
 		map.put("email", user.getEmail());
-
+	
 		jmsTemplate.convertAndSend(notifyQueue, map);
 	}
 
 	/**
 	 * 将变更用户消息发送到订阅-发布模式有多个消费者的topic.
-	 * 使用jmsTemplate的send/MessageCreator()发送Map类型的消息并在Message中附加属性.
+	 * 
+	 * 使用jmsTemplate的send/MessageCreator()发送Map类型的消息并在Message中附加属性用于消息过滤.
 	 */
 	public void sendTopic(final User user) {
 		jmsTemplate.send(notifyTopic, new MessageCreator() {
@@ -51,8 +53,7 @@ public class NotifyMessageProducer {
 				message.setString("userName", user.getName());
 				message.setString("email", user.getEmail());
 
-				message.setIntProperty("foo", 1234);
-				message.setJMSCorrelationID("123-00001");
+				message.setStringProperty("ObjectType", "User");
 
 				return message;
 			}

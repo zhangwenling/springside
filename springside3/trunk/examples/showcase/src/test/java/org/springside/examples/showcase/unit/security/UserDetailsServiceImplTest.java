@@ -7,25 +7,23 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springside.examples.showcase.common.entity.Role;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.examples.showcase.security.OperatorDetails;
 import org.springside.examples.showcase.security.UserDetailsServiceImpl;
-import org.springside.modules.utils.ReflectionUtils;
 
 public class UserDetailsServiceImplTest extends Assert {
 
-	private UserDetailsService userDetailsService;
+	private UserDetailsServiceImpl userDetailsService;
 	private AccountManager mockAccountManager;
 
 	@Before
 	public void setUp() {
 		userDetailsService = new UserDetailsServiceImpl();
 		mockAccountManager = EasyMock.createMock(AccountManager.class);
-		ReflectionUtils.setFieldValue(userDetailsService, "accountManager", mockAccountManager);
+		userDetailsService.setAccountManager(mockAccountManager);
 	}
 
 	@After

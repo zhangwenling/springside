@@ -2,16 +2,17 @@ package org.springside.examples.showcase.common.dao;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import org.springside.examples.showcase.common.entity.Subject;
 import org.springside.modules.orm.hibernate.HibernateDao;
+
 
 /**
  * 主题对象的泛型Hibernate Dao.
  * 
  * @author calvin
  */
-@Repository
+@Component
 public class SubjectDao extends HibernateDao<Subject, Long> {
 
 	private static final String QUERY_WITH_DETAIL = "select s from Subject s fetch all properties where s.id=?";

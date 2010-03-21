@@ -129,5 +129,4 @@ public class EncodeUtils {
 	public static String xmlUnescape(String xmlEscaped) {
 		return StringEscapeUtils.unescapeXml(xmlEscaped);
 	}
-
 }

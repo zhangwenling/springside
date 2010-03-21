@@ -7,9 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.common.service.ServiceException;
 import org.springside.examples.showcase.common.service.AccountManager;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.examples.showcase.common.service.ServiceException;
 
 public class AccountManagerTest extends Assert {
 
@@ -20,7 +19,7 @@ public class AccountManagerTest extends Assert {
 	public void setUp() {
 		accountManager = new AccountManager();
 		mockUserDao = EasyMock.createMock(UserDao.class);
-		ReflectionUtils.setFieldValue(accountManager, "userDao", mockUserDao);
+		accountManager.setUserDao(mockUserDao);
 	}
 
 	@After

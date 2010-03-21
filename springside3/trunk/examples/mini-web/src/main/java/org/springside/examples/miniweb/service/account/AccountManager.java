@@ -5,7 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.dao.account.AuthorityDao;
 import org.springside.examples.miniweb.dao.account.RoleDao;
@@ -23,19 +23,16 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
  * 
  * @author calvin
  */
-//Spring Service Bean的标识.
-@Service
+//Spring Bean的标识.
+@Component
 //默认将类中的所有函数纳入事务管理.
 @Transactional
 public class AccountManager {
 
 	private static Logger logger = LoggerFactory.getLogger(AccountManager.class);
 
-	@Autowired
 	private UserDao userDao;
-	@Autowired
 	private RoleDao roleDao;
-	@Autowired
 	private AuthorityDao authorityDao;
 
 	//-- User Manager --//
@@ -112,5 +109,20 @@ public class AccountManager {
 	@Transactional(readOnly = true)
 	public List<Authority> getAllAuthority() {
 		return authorityDao.getAll();
+	}
+
+	@Autowired
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
+	@Autowired
+	public void setRoleDao(RoleDao roleDao) {
+		this.roleDao = roleDao;
+	}
+
+	@Autowired
+	public void setAuthorityDao(AuthorityDao authorityDao) {
+		this.authorityDao = authorityDao;
 	}
 }

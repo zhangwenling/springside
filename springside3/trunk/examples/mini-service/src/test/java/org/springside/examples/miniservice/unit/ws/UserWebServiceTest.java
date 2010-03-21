@@ -17,7 +17,6 @@ import org.springside.examples.miniservice.ws.impl.UserWebServiceImpl;
 import org.springside.examples.miniservice.ws.result.AuthUserResult;
 import org.springside.examples.miniservice.ws.result.GetAllUserResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
-import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * User Web Service的单元测试用例,测试WebService操作的返回码.
@@ -33,10 +32,10 @@ public class UserWebServiceTest extends Assert {
 	@Before
 	public void setUp() {
 		userWebService = new UserWebServiceImpl();
-		ReflectionUtils.setFieldValue(userWebService, "dozer", new DozerBeanMapper());
+		userWebService.setDozer(new DozerBeanMapper());
 		//创建mock对象
 		mockAccountManager = EasyMock.createMock(AccountManager.class);
-		ReflectionUtils.setFieldValue(userWebService, "accountManager", mockAccountManager);
+		userWebService.setAccountManager(mockAccountManager);
 	}
 
 	@After

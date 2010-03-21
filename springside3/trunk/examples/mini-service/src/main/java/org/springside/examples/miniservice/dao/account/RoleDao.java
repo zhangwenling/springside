@@ -1,6 +1,6 @@
 package org.springside.examples.miniservice.dao.account;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import org.springside.examples.miniservice.entity.account.Role;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
@@ -9,6 +9,6 @@ import org.springside.modules.orm.hibernate.HibernateDao;
  * 
  * @author calvin
  */
-@Repository
+@Component
 public class RoleDao extends HibernateDao<Role, Long> {
 }

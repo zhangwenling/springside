@@ -14,7 +14,6 @@ import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.examples.miniweb.service.account.UserDetailsServiceImpl;
-import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * UserDetailsServiceImpl的测试用例, 测试Service层的业务逻辑. 
@@ -32,7 +31,7 @@ public class UserDetailsServiceImplTest extends Assert {
 	public void setUp() {
 		userDetailService = new UserDetailsServiceImpl();
 		mockAccountManager = EasyMock.createMock(AccountManager.class);
-		ReflectionUtils.setFieldValue(userDetailService, "accountManager", mockAccountManager);
+		userDetailService.setAccountManager(mockAccountManager);
 	}
 
 	@After

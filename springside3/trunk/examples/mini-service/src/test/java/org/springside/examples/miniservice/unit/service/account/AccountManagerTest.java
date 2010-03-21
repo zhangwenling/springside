@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springside.examples.miniservice.dao.account.UserDao;
 import org.springside.examples.miniservice.service.account.AccountManager;
-import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * AccountManager的单元测试用例, 测试Service层的业务逻辑.
@@ -25,7 +24,7 @@ public class AccountManagerTest extends Assert {
 	public void setUp() {
 		accountManager = new AccountManager();
 		mockUserDao = EasyMock.createMock(UserDao.class);
-		ReflectionUtils.setFieldValue(accountManager, "userDao", mockUserDao);
+		accountManager.setUserDao(mockUserDao);
 	}
 
 	@After

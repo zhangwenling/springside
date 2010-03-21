@@ -75,7 +75,7 @@ public class NonceUtils {
 
 	//-- Timestamp function --//
 	/**
-	 * 返回Internate标准格式的当前毫秒级时间戳字符串.
+	 * 返回Internet标准格式的当前毫秒级时间戳字符串.
 	 * 
 	 * 标准格式为yyyy-MM-dd'T'HH:mm:ss.SSS'Z', 如2009-10-15T14:24:50.316Z.
 	 */
@@ -98,7 +98,6 @@ public class NonceUtils {
 		return Long.toHexString(currentMills());
 	}
 
-	//-- Helper function --//
 	/**
 	 * 返回Hex编码的同一毫秒内的Counter.
 	 */
@@ -114,6 +113,8 @@ public class NonceUtils {
 		return Integer.toHexString(counter);
 	}
 
+
+	//-- Helper function --//
 	/**
 	 * 格式化字符串, 固定字符串长度, 不足长度在前面补0.
 	 */

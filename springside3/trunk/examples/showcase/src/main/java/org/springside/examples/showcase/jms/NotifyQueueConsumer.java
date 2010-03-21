@@ -37,11 +37,11 @@ public class NotifyQueueConsumer implements Runnable {
 	private Destination notifyQueue;
 
 	/**
-	 * 在Spring Context初始化时, 启动Schedule每秒运行一次.
+	 * 在Spring Context初始化时, 启动ScheduledExecutor每秒运行一次.
 	 */
 	@PostConstruct
 	public void start() {
-
+		//创建ScheduledExecutor, 重载ThreadFactory设定线程名称.
 		executor = Executors.newScheduledThreadPool(1, new ThreadFactory() {
 			public Thread newThread(Runnable runable) {
 				return new Thread(runable, "JMS Notify Queue Consumer");
@@ -52,7 +52,7 @@ public class NotifyQueueConsumer implements Runnable {
 	}
 
 	/**
-	 * 在Spring Context关闭时, 停止Schedule.
+	 * 在Spring Context关闭时, 停止ScheduledExecutor.
 	 */
 	@PreDestroy
 	public void stop() {

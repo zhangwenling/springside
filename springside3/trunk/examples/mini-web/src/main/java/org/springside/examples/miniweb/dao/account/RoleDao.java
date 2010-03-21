@@ -2,17 +2,18 @@ package org.springside.examples.miniweb.dao.account;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.modules.orm.hibernate.HibernateDao;
+
 
 /**
  * 角色对象的泛型DAO.
  * 
  * @author calvin
  */
-@Repository
+@Component
 public class RoleDao extends HibernateDao<Role, Long> {
 
 	private static final String QUERY_USER_BY_ROLEID = "select u from User u left join u.roleList r where r.id=?";

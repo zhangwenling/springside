@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniservice.dao.account.UserDao;
 import org.springside.examples.miniservice.entity.account.User;
@@ -18,11 +18,11 @@ import org.springside.examples.miniservice.entity.account.User;
  * @author calvin
  */
 //Spring Service Bean的标识.
-@Service
+@Component
 //默认将类中的所有函数纳入事务管理.
 @Transactional
 public class AccountManager {
-	@Autowired
+
 	private UserDao userDao;
 
 	/**
@@ -60,5 +60,10 @@ public class AccountManager {
 			return false;
 
 		return (userDao.countUserByLoginNamePassword(loginName, password) == 1);
+	}
+
+	@Autowired
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
 	}
 }

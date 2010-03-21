@@ -24,7 +24,6 @@ import com.google.common.collect.Sets;
 @Transactional(readOnly = true)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	@Autowired
 	private AccountManager accountManager;
 
 	/**
@@ -61,5 +60,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			}
 		}
 		return authSet;
+	}
+
+	@Autowired
+	public void setAccountManager(AccountManager accountManager) {
+		this.accountManager = accountManager;
 	}
 }

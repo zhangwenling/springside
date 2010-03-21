@@ -76,7 +76,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * 采用@Autowired按类型注入SessionFactory,当有多个SesionFactory的时候Override本函数.
+	 * 采用@Autowired按类型注入SessionFactory, 当有多个SesionFactory的时候Override本函数.
 	 */
 	@Autowired
 	public void setSessionFactory(final SessionFactory sessionFactory) {
@@ -88,6 +88,13 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 */
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
+	}
+
+	/**
+	 * Flush当前Session.
+	 */
+	public void flush() {
+		getSession().flush();
 	}
 
 	/**

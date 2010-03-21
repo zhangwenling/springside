@@ -3,7 +3,7 @@ package org.springside.examples.miniservice.dao.account;
 import java.util.List;
 
 import org.hibernate.Hibernate;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
@@ -12,7 +12,7 @@ import org.springside.modules.orm.hibernate.HibernateDao;
  * 
  * @author calvin
  */
-@Repository
+@Component
 public class UserDao extends HibernateDao<User, Long> {
 	//-- 统一定义所有以用户为主体的HQL --//
 	private static final String COUNT_BY_LNAME_PASSWD = "select count(u) from User u where u.loginName=? and u.password=?";

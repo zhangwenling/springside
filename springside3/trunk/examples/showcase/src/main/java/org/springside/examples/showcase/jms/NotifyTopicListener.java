@@ -34,7 +34,7 @@ public class NotifyTopicListener implements MessageListener {
 
 			//打印消息详情
 			logger.info("UserName:" + mapMessage.getString("userName") + ", Email:" + mapMessage.getString("email")
-					+ ", Property:" + mapMessage.getIntProperty("foo"));
+					+ ", ObjectType:" + mapMessage.getStringProperty("objectType"));
 			//发送邮件
 			if (mimeMailService != null) {
 				mimeMailService.sendNotificationMail(mapMessage.getString("userName"));

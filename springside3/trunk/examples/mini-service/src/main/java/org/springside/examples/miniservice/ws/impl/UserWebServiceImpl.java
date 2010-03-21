@@ -38,7 +38,7 @@ public class UserWebServiceImpl implements UserWebService {
 
 	@Autowired
 	private AccountManager accountManager;
-	@Autowired
+
 	private DozerBeanMapper dozer;
 
 	/**
@@ -154,5 +154,15 @@ public class UserWebServiceImpl implements UserWebService {
 			logger.error(e.getMessage(), e);
 			return result.buildDefaultErrorResult();
 		}
+	}
+
+	@Autowired
+	public void setAccountManager(AccountManager accountManager) {
+		this.accountManager = accountManager;
+	}
+
+	@Autowired
+	public void setDozer(DozerBeanMapper dozer) {
+		this.dozer = dozer;
 	}
 }

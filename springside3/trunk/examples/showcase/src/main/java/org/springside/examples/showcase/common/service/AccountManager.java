@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
@@ -21,19 +21,18 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
  * @author calvin
  */
 //Spring Service Bean的标识.
-@Service
+@Component
 //默认将类中的所有函数纳入事务管理.
 @Transactional
 public class AccountManager {
 	private static Logger logger = LoggerFactory.getLogger(AccountManager.class);
 
-	@Autowired
 	private UserDao userDao;
 	@Autowired(required = false)
 	private ServerConfig serverConfig; //系统配置
 	@Autowired(required = false)
 	private NotifyMessageProducer notifyProducer; //JMS消息发送
-	
+
 	/**
 	 * 在保存用户时,发送用户修改通知消息, 由消息接收者异步进行较为耗时的通知邮件发送.
 	 * 
@@ -59,13 +58,13 @@ public class AccountManager {
 	 * 判断是否超级管理员.
 	 */
 	private boolean isSupervisor(User user) {
-		return (user.getId()!=null && user.getId()==1);
+		return (user.getId() != null && user.getId() == 1);
 	}
 
 	public User getUser(Long id) {
 		return userDao.get(id);
 	}
-	
+
 	/**
 	 * 取得用户, 并对用户的延迟加载关联进行初始化.
 	 */
@@ -74,7 +73,7 @@ public class AccountManager {
 		userDao.initUser(user);
 		return user;
 	}
-	
+
 	/**
 	 * 按名称查询用户, 并对用户的延迟加载关联进行初始化.
 	 */
@@ -83,7 +82,7 @@ public class AccountManager {
 		userDao.initUser(user);
 		return user;
 	}
-	
+
 	/**
 	 * 取得所有用户, 预加载用户的角色.
 	 */
@@ -128,5 +127,10 @@ public class AccountManager {
 				logger.error("消息发送失败", e);
 			}
 		}
+	}
+
+	@Autowired
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
 	}
 }

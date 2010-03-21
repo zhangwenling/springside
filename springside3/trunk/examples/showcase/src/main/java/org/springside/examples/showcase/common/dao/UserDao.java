@@ -8,7 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
@@ -17,7 +17,7 @@ import org.springside.modules.orm.hibernate.HibernateDao;
  * 
  * @author calvin
  */
-@Repository
+@Component
 public class UserDao extends HibernateDao<User, Long> {
 
 	private static final String QUERY_USER_WITH_ROLE = "select u from User u left join fetch u.roleList order by u.id";

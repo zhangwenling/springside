@@ -32,7 +32,7 @@ public class PropertyUtils {
 	private static PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
 
 	/**
-	 * 载入多个Classpath中的properties文件, 相同的属性将会覆盖之前的载入.
+	 * 载入多个ClassPath中的properties文件, 相同的属性将会覆盖之前的载入.
 	 * @see org.springframework.beans.factory.config.PropertyPlaceholderConfigurer
 	 */
 	public static Properties loadProperties(String... locations) throws IOException {
