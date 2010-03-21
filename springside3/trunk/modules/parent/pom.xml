@@ -24,6 +24,7 @@
 		<activemq.version>5.3.0</activemq.version>
 		<jetty.version>6.1.22</jetty.version>
 		<h2.version>1.2.131</h2.version>
+		<selenium.version>2.0a2</selenium.version>
 
 		<!-- Plugin的属性定义  -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -736,17 +737,39 @@
 				</exclusions>
 			</dependency>
 
+			<!-- selenium 2.0 -->
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
 				<artifactId>selenium-htmlunit-driver</artifactId>
-				<version>2.0a2</version>
+				<version>${selenium.version}</version>
 				<scope>test</scope>
 			</dependency>
 
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
 				<artifactId>selenium-firefox-driver</artifactId>
-				<version>2.0a2</version>
+				<version>${selenium.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-ie-driver</artifactId>
+				<version>${selenium.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-htmlunit-driver</artifactId>
+				<version>${selenium.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-remote-client</artifactId>
+				<version>${selenium.version}</version>
 				<scope>test</scope>
 			</dependency>
 
@@ -760,12 +783,6 @@
 				<groupId>com.h2database</groupId>
 				<artifactId>h2</artifactId>
 				<version>${h2.version}</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.unitils</groupId>
-				<artifactId>unitils-core</artifactId>
-				<version>3.1</version>
 				<scope>test</scope>
 			</dependency>
 			<!-- test end -->

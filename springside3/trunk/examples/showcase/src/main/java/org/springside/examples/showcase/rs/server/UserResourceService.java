@@ -117,7 +117,7 @@ public class UserResourceService {
 			throw new WebApplicationException();
 		}
 	}
-	
+
 	/**
 	 * 创建WebApplicationException, 使用标准状态码与自定义信息.
 	 */

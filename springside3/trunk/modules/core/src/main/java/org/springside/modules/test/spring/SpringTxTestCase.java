@@ -21,8 +21,6 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.test.jdbc.SimpleJdbcTestUtils;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.test.utils.DBUnitUtils;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 
 /**
  * Spring的支持数据库访问和依赖注入的JUnit4 集成测试基类.
@@ -100,23 +98,6 @@ public class SpringTxTestCase extends SpringContextTestCase {
 	 */
 	protected void evict(final Object entity) {
 		sessionFactory.getCurrentSession().evict(entity);
-	}
-
-	//-- Unitils Assert 函数 --//
-	/**
-	 * 反射比较对象间的所有属性,忽略expected对象的Null对象和集合中对象的次序.
-	 */
-	protected void assertReflectionEquals(Object expected, Object actual) {
-		ReflectionAssert.assertReflectionEquals(expected, actual, ReflectionComparatorMode.IGNORE_DEFAULTS,
-				ReflectionComparatorMode.LENIENT_ORDER);
-	}
-
-	/**
-	 * @see #assertReflectionEquals(Object, Object)
-	 */
-	protected void assertReflectionEquals(String message, Object expected, Object actual) {
-		ReflectionAssert.assertReflectionEquals(message, expected, actual, ReflectionComparatorMode.IGNORE_DEFAULTS,
-				ReflectionComparatorMode.LENIENT_ORDER);
 	}
 
 	//-- DBUnit 初始化数据函数 --//
