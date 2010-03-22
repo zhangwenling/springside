@@ -14,7 +14,7 @@ import org.springside.modules.utils.SpringContextHolder;
 /**
  * 功能测试基类.
  * 
- * 在整个测试期间启动一次Jetty Server, 并在每个TestCase执行前中重新载入默认数据.
+ * 在整个测试期间启动一次Jetty Server, 并在每个TestCase执行前重新载入默认数据.
  * 
  * @author calvin
  */
@@ -28,14 +28,35 @@ public class BaseFunctionalTestCase extends Assert {
 	private static DataSource dataSource;
 
 	@BeforeClass
-	public static void startJettyAndLoadDefaultData() throws Exception {
+	public static void initAll() throws Exception {
 
 		if (server == null) {
-			server = JettyUtils.buildServer(Start.PORT, Start.CONTEXT);
-			server.start();
-			dataSource = SpringContextHolder.getBean("dataSource");
+			startJetty();
+			initDataSource();
 		}
 
+		loadDefaultData();
+	}
+
+	/**
+	 * 启动Jetty服务器.
+	 */
+	protected static void startJetty() throws Exception {
+		server = JettyUtils.buildTestServer(Start.PORT, Start.CONTEXT);
+		server.start();
+	}
+
+	/**
+	 * 取出Jetty Server内的DataSource.
+	 */
+	protected static void initDataSource() {
+		dataSource = SpringContextHolder.getBean("dataSource");
+	}
+
+	/**
+	 * 载入默认数据.
+	 */
+	protected static void loadDefaultData() throws Exception {
 		DBUnitUtils.loadDbUnitData(dataSource, "/data/default-data.xml");
 	}
 }

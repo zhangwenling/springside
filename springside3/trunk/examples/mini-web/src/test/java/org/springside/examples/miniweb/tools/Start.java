@@ -1,10 +1,10 @@
 package org.springside.examples.miniweb.tools;
 
 import org.mortbay.jetty.Server;
-import org.mortbay.jetty.webapp.WebAppContext;
+import org.springside.modules.test.utils.JettyUtils;
 
 /**
- * 使用Jetty运行调试Web应用,在Console输入回车停止服务.
+ * 使用Jetty运行调试Web应用, 在Console输入回车停止服务.
  * 
  * @author calvin
  */
@@ -15,12 +15,7 @@ public class Start {
 	public static final String BASE_URL = "http://localhost:8080/mini-web";
 
 	public static void main(String[] args) throws Exception {
-		Server server = new Server(PORT);
-		WebAppContext webContext = new WebAppContext("src/main/webapp", CONTEXT);
-		webContext.setClassLoader(Thread.currentThread().getContextClassLoader());
-	
-		server.setHandler(webContext);
-		server.setStopAtShutdown(true);
+		Server server = JettyUtils.buildDebugServer(PORT, CONTEXT);
 		server.start();
 
 		System.out.println("Hit Enter in console to stop server");

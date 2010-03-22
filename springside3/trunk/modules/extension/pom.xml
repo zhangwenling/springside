@@ -64,12 +64,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- jms -->
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-core</artifactId>
-			<optional>true</optional>
-		</dependency>
 		<!-- logging -->
 		<dependency>
 			<groupId>commons-lang</groupId>

@@ -2,9 +2,9 @@ package org.springside.examples.miniweb.functional.account;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.springside.examples.miniweb.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniweb.functional.Gui;
+import org.springside.examples.miniweb.functional.Gui.UserColumn;
 
 /**
  * 系统安全控制的功能测试, 测试主要用户故事.
@@ -43,9 +43,6 @@ public class SecurityCheckingTest extends BaseFunctionalTestCase {
 
 		//校验用户角色的操作单元格为空
 		driver.findElement(By.linkText(Gui.MENU_USER)).click();
-		WebElement operationsTd = driver.findElement(By.xpath("//table[@id='contentTable']//td[5]"));
-		assertEquals("查看", operationsTd.getText());
-
-		driver.findElement(By.linkText(Gui.MENU_USER)).click();
+		assertEquals("查看", getContentTable(2, UserColumn.OPERATIONS.ordinal() + 1));
 	}
 }

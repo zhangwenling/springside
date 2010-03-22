@@ -30,7 +30,7 @@ public class BaseFunctionalTestCase extends Assert {
 	@BeforeClass
 	public static void startJettyAndLoadDefaultData() throws Exception {
 		if (server == null) {
-			server = JettyUtils.buildServer(Start.PORT, Start.CONTEXT);
+			server = JettyUtils.buildTestServer(Start.PORT, Start.CONTEXT);
 			server.start();
 			dataSource = SpringContextHolder.getBean("dataSource");
 		}
