@@ -4,10 +4,12 @@ import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.persister.entity.EntityPersister;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
 /**
@@ -18,6 +20,9 @@ import org.springframework.test.context.ContextConfiguration;
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
 public class HibernateMappingTest extends BaseTxTestCase {
 	private static Logger logger = LoggerFactory.getLogger(HibernateMappingTest.class);
+
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	@Test
 	@SuppressWarnings("unchecked")

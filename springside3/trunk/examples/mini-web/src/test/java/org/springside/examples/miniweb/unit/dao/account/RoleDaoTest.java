@@ -34,14 +34,14 @@ public class RoleDaoTest extends BaseTxTestCase {
 		User user = userDao.get(1L);
 		user.getRoleList().add(role);
 		userDao.save(user);
-		flush();
+		userDao.flush();
 
 		int oldJoinTableCount = countRowsInTable("ACCT_USER_ROLE");
 		int oldUserTableCount = countRowsInTable("ACCT_USER");
 
 		//删除用户角色, 中间表将减少1条记录,而用户表应该不受影响.
 		roleDao.delete(role.getId());
-		flush();
+		roleDao.flush();
 
 		int newJoinTableCount = countRowsInTable("ACCT_USER_ROLE");
 		int newUserTableCount = countRowsInTable("ACCT_USER");

@@ -9,7 +9,6 @@ package org.springside.modules.test.spring;
 
 import javax.sql.DataSource;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.EncodedResource;
@@ -20,7 +19,6 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.jdbc.SimpleJdbcTestUtils;
 import org.springframework.transaction.annotation.Transactional;
-import org.springside.modules.test.utils.DBUnitUtils;
 
 /**
  * Spring的支持数据库访问和依赖注入的JUnit4 集成测试基类.
@@ -28,10 +26,7 @@ import org.springside.modules.test.utils.DBUnitUtils;
  *  1.Spring Context IOC support
  *  2.Spring Transaction support 
  *  3.Spring JdbcTemplate and util functions
- *  4.Hibernate SessionFactory and util functions
- *  5.DBUnit functions. 
- *  6.JUnit Assert functions 
- *  7.Unitils Reflection Assert funtions
+ *  4.JUnit Assert functions 
  *  
  * 子类需要定义applicationContext文件的位置, 如:
  * @ContextConfiguration(locations = { "/applicationContext-test.xml" })
@@ -51,9 +46,6 @@ public class SpringTxTestCase extends SpringContextTestCase {
 
 	protected String sqlScriptEncoding;
 
-	protected SessionFactory sessionFactory;
-
-	//-- JdbcTemplate函数 --//
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new SimpleJdbcTemplate(dataSource);
@@ -76,32 +68,5 @@ public class SpringTxTestCase extends SpringContextTestCase {
 		Resource resource = this.applicationContext.getResource(sqlResourcePath);
 		SimpleJdbcTestUtils.executeSqlScript(this.jdbcTemplate, new EncodedResource(resource, this.sqlScriptEncoding),
 				continueOnError);
-	}
-
-	//-- Hibernate函数 --//
-	@Autowired(required = false)
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
-	/**
-	 * 刷新sessionFactory,强制Hibernate执行SQL以验证ORM配置.
-	 * 因为没有执行commit操作,不会更改测试数据库.
-	 */
-	protected void flush() {
-		sessionFactory.getCurrentSession().flush();
-	}
-
-	/**
-	 * 将对象从session中消除, 用于测试初对象的始化情况.
-	 * 
-	 */
-	protected void evict(final Object entity) {
-		sessionFactory.getCurrentSession().evict(entity);
-	}
-
-	//-- DBUnit 初始化数据函数 --//
-	protected void loadDbUnitData(String xmlPath) throws Exception {
-		DBUnitUtils.loadDbUnitData(dataSource, xmlPath);
 	}
 }

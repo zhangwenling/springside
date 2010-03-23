@@ -91,13 +91,6 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * Flush当前Session.
-	 */
-	public void flush() {
-		getSession().flush();
-	}
-
-	/**
 	 * 保存新增或修改的对象.
 	 */
 	public void save(final T entity) {
@@ -314,6 +307,13 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 		for (T entity : entityList) {
 			Hibernate.initialize(entity);
 		}
+	}
+	
+	/**
+	 * Flush当前Session.
+	 */
+	public void flush() {
+		getSession().flush();
 	}
 
 	/**

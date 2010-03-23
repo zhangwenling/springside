@@ -28,7 +28,7 @@ public class PostDaoTest extends BaseTxTestCase {
 	@Test
 	public void getSubjectDetail() {
 		Subject subject = subjectDao.getDetailWithReply(1L);
-		this.evict(subject);
+		subjectDao.getSession().evict(subject);
 
 		assertEquals(1, subject.getReplyList().size());
 		assertEquals("Hello World!!", subject.getContent());
@@ -46,7 +46,7 @@ public class PostDaoTest extends BaseTxTestCase {
 		subject.setUser(user);
 
 		subjectDao.save(subject);
-		flush();
+		subjectDao.flush();
 		subject = subjectDao.getDetail(subject.getId());
 		assertEquals("Good Night!!", subject.getContent());
 	}
@@ -59,7 +59,7 @@ public class PostDaoTest extends BaseTxTestCase {
 		subject.setModifyTime(new Date());
 
 		subjectDao.save(subject);
-		flush();
+		subjectDao.flush();
 		subject = subjectDao.getDetail(subject.getId());
 		assertEquals("Good Afternoon!!!", subject.getContent());
 	}
@@ -67,7 +67,7 @@ public class PostDaoTest extends BaseTxTestCase {
 	@Test
 	public void deleteSubject() {
 		subjectDao.delete(1L);
-		flush();
+		subjectDao.flush();
 		Subject subject = subjectDao.findUniqueBy("id", 1L);
 		assertNull(subject);
 	}
@@ -86,7 +86,7 @@ public class PostDaoTest extends BaseTxTestCase {
 		reply.setSubject(subject);
 
 		replyDao.save(reply);
-		flush();
+		replyDao.flush();
 	}
 
 	@Test
@@ -96,7 +96,7 @@ public class PostDaoTest extends BaseTxTestCase {
 		reply.setContent("Good Evening!!!");
 
 		replyDao.save(reply);
-		flush();
+		replyDao.flush();
 	}
 
 	@Test

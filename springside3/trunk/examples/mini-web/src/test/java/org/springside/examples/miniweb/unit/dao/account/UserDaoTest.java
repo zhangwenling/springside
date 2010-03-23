@@ -27,7 +27,7 @@ public class UserDaoTest extends BaseTxTestCase {
 		User user = AccountData.getRandomUserWithRole();
 		entityDao.save(user);
 		//强制执行sql语句
-		flush();
+		entityDao.flush();
 
 		//获取用户
 		user = entityDao.findUniqueBy("id", user.getId());
@@ -35,13 +35,13 @@ public class UserDaoTest extends BaseTxTestCase {
 
 		//删除用户的角色
 		user.getRoleList().remove(0);
-		flush();
+		entityDao.flush();
 		user = entityDao.findUniqueBy("id", user.getId());
 		assertEquals(0, user.getRoleList().size());
 
 		//删除用户
 		entityDao.delete(user.getId());
-		flush();
+		entityDao.flush();
 		user = entityDao.findUniqueBy("id", user.getId());
 		assertNull(user);
 	}
@@ -52,6 +52,6 @@ public class UserDaoTest extends BaseTxTestCase {
 		User user = AccountData.getRandomUser();
 		user.setLoginName("admin");
 		entityDao.save(user);
-		flush();
+		entityDao.flush();
 	}
 }

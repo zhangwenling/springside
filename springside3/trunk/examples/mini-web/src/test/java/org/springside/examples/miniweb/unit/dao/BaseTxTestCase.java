@@ -3,6 +3,7 @@ package org.springside.examples.miniweb.unit.dao;
 import org.junit.Before;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.test.spring.SpringTxTestCase;
+import org.springside.modules.test.utils.DBUnitUtils;
 
 /**
  * 数据库访问测试基类。
@@ -16,13 +17,8 @@ import org.springside.modules.test.spring.SpringTxTestCase;
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
 public class BaseTxTestCase extends SpringTxTestCase {
 
-	private boolean loaded = false;
-
 	@Before
 	public void loadDefaultDatae() throws Exception {
-		if (!loaded) {
-			loadDbUnitData("/data/default-data.xml");
-			loaded = true;
-		}
+		DBUnitUtils.loadDbUnitData(dataSource, "/data/default-data.xml");
 	}
 }
