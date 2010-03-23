@@ -828,6 +828,9 @@
 					<version>2.5</version>
 					<configuration>
 						<argLine>-Xmx128M</argLine>
+						<includes>
+							<include>**/*Test.java</include>
+						</includes>
 					</configuration>
 				</plugin>
 

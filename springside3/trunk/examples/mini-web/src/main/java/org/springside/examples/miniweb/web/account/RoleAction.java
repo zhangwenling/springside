@@ -10,7 +10,7 @@ import org.springside.examples.miniweb.entity.account.Authority;
 import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
-import org.springside.modules.orm.hibernate.HibernateWebUtils;
+import org.springside.modules.orm.hibernate.HibernateUtils;
 
 /**
  * 角色管理Action.
@@ -68,7 +68,7 @@ public class RoleAction extends CrudActionSupport<Role> {
 	@Override
 	public String save() throws Exception {
 		//根据页面上的checkbox 整合Role的Authorities Set.
-		HibernateWebUtils.mergeByCheckedIds(entity.getAuthorityList(), checkedAuthIds, Authority.class);
+		HibernateUtils.mergeByCheckedIds(entity.getAuthorityList(), checkedAuthIds, Authority.class);
 		//保存用户并放入成功信息.
 		accountManager.saveRole(entity);
 		addActionMessage("保存角色成功");

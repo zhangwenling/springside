@@ -13,7 +13,7 @@ public class WebTestUtilsTest extends Assert {
 	@Test
 	public void initByPaths() {
 		MockServletContext servletContext = new MockServletContext();
-		WebTestUtils.initWebApplicationContext(servletContext, "classpath:/applicationContext-test.xml");
+		WebTestUtils.initWebApplicationContext(servletContext, "classpath:/applicationContext-core-test.xml");
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 		assertNotNull(context);
 		assertNotNull(context.getBean("springContextHolder"));
@@ -21,7 +21,8 @@ public class WebTestUtilsTest extends Assert {
 
 	@Test
 	public void initByApplicationConetxt() {
-		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("classpath:/applicationContext-test.xml");
+		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext(
+				"classpath:/applicationContext-core-test.xml");
 		MockServletContext servletContext = new MockServletContext();
 		WebTestUtils.initWebApplicationContext(servletContext, ac);
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
@@ -32,7 +33,7 @@ public class WebTestUtilsTest extends Assert {
 	@Test
 	public void closeApplicationContext() {
 		MockServletContext servletContext = new MockServletContext();
-		WebTestUtils.initWebApplicationContext(servletContext, "classpath:/applicationContext-test.xml");
+		WebTestUtils.initWebApplicationContext(servletContext, "classpath:/applicationContext-core-test.xml");
 
 		WebTestUtils.closeWebApplicationContext(servletContext);
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);

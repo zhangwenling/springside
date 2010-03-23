@@ -6,18 +6,18 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springside.modules.orm.PropertyFilter;
-import org.springside.modules.orm.hibernate.HibernateWebUtils;
+import org.springside.modules.orm.hibernate.HibernateUtils;
 
 import com.google.common.collect.Lists;
 
-public class HibernateWebUtilsTest extends Assert {
+public class HibernateUtilsTest extends Assert {
 
 	@Test
 	public void mergeByCheckedIds() {
-		List<TestBean> srcList = Lists.newArrayList(new TestBean("A"),new TestBean("B"));
-		List<String> idList = Lists.newArrayList("A","C");
+		List<TestBean> srcList = Lists.newArrayList(new TestBean("A"), new TestBean("B"));
+		List<String> idList = Lists.newArrayList("A", "C");
 
-		HibernateWebUtils.mergeByCheckedIds(srcList, idList, TestBean.class);
+		HibernateUtils.mergeByCheckedIds(srcList, idList, TestBean.class);
 
 		assertEquals(2, srcList.size());
 		assertEquals("A", srcList.get(0).getId());
@@ -31,7 +31,7 @@ public class HibernateWebUtilsTest extends Assert {
 		request.setParameter("filter_EQS_loginName", "abcd");
 		request.setParameter("filter_LIKES_name_OR_email", "efg");
 
-		List<PropertyFilter> filters = HibernateWebUtils.buildPropertyFilters(request);
+		List<PropertyFilter> filters = HibernateUtils.buildPropertyFilters(request);
 
 		assertEquals(2, filters.size());
 

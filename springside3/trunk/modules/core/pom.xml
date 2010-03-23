@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springside</groupId>
-		<artifactId>springside3-jar-parent</artifactId>
+		<artifactId>springside3-parent</artifactId>
 		<version>3.2.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>springside3-core</artifactId>

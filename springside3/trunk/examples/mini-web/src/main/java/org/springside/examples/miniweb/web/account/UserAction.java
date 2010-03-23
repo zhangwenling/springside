@@ -16,7 +16,7 @@ import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
-import org.springside.modules.orm.hibernate.HibernateWebUtils;
+import org.springside.modules.orm.hibernate.HibernateUtils;
 import org.springside.modules.web.struts2.Struts2Utils;
 
 /**
@@ -65,7 +65,7 @@ public class UserAction extends CrudActionSupport<User> {
 	//-- CRUD Action 函数 --//
 	@Override
 	public String list() throws Exception {
-		List<PropertyFilter> filters = HibernateWebUtils.buildPropertyFilters(Struts2Utils.getRequest());
+		List<PropertyFilter> filters = HibernateUtils.buildPropertyFilters(Struts2Utils.getRequest());
 		//设置默认排序方式
 		if (!page.isOrderBySetted()) {
 			page.setOrderBy("id");
@@ -84,7 +84,7 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	public String save() throws Exception {
 		//根据页面上的checkbox选择 整合User的Roles Set
-		HibernateWebUtils.mergeByCheckedIds(entity.getRoleList(), checkedRoleIds, Role.class);
+		HibernateUtils.mergeByCheckedIds(entity.getRoleList(), checkedRoleIds, Role.class);
 
 		accountManager.saveUser(entity);
 		addActionMessage("保存用户成功");

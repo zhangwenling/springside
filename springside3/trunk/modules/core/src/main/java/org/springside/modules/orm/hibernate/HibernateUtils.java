@@ -27,9 +27,9 @@ import org.springside.modules.web.ServletUtils;
  * 
  * @author calvin
  */
-public class HibernateWebUtils {
+public class HibernateUtils {
 
-	private HibernateWebUtils() {
+	private HibernateUtils() {
 	}
 
 	/**
