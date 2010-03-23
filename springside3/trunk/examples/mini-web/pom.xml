@@ -291,6 +291,19 @@
 				<artifactId>maven-jetty-plugin</artifactId>
 			</plugin>
 
+			<!-- cobertura插件 ,取消不需要计算覆盖率的类 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<configuration>
+					<instrumentation>
+						<excludes>
+							<exclude>**/entity/**/*.class</exclude>
+						</excludes>
+					</instrumentation>
+				</configuration>
+			</plugin>
+
 			<!-- dbunit plugin -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
