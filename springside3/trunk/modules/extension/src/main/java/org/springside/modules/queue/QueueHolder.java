@@ -31,14 +31,14 @@ public class QueueHolder {
 	 */
 	public static final String QUEUEHOLDER_MBEAN_NAME = "SpringSide:type=QueueManagement,name=queueHolder";
 
-	private static  ConcurrentMap<String, BlockingQueue> queueMap = new MapMaker().concurrencyLevel(32).makeMap();//消息队列
+	private static ConcurrentMap<String, BlockingQueue> queueMap = new MapMaker().concurrencyLevel(32).makeMap();//消息队列
 	private static int queueSize = Integer.MAX_VALUE;
 
 	/**
 	 * 设置每个队列的最大长度, 默认为Integer最大值, 设置时不改变已创建队列的最大长度.
 	 */
 	public void setQueueSize(int queueSize) {
-		QueueHolder.queueSize = queueSize;
+		QueueHolder.queueSize = queueSize; //NOSONAR
 	}
 
 	/**

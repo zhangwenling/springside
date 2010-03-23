@@ -6,7 +6,6 @@
 
 package org.springside.modules.test.utils;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.commons.lang.StringUtils;
@@ -34,7 +33,7 @@ public class SeleniumUtils {
 
 	public static final String REMOTE = "remote";
 
-	public static WebDriver buildDriver(String driverName) throws MalformedURLException, Exception {
+	public static WebDriver buildDriver(String driverName) throws Exception {
 		WebDriver driver = null;
 
 		if (HTMLUNIT.equals(driverName)) {

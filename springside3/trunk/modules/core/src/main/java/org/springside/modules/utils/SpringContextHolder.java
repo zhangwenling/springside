@@ -23,7 +23,7 @@ public class SpringContextHolder implements ApplicationContextAware {
 	 * 实现ApplicationContextAware接口的context注入函数, 将其存入静态变量.
 	 */
 	public void setApplicationContext(ApplicationContext applicationContext) {
-		SpringContextHolder.applicationContext = applicationContext;
+		SpringContextHolder.applicationContext = applicationContext; //NOSONAR
 	}
 
 	/**
@@ -51,11 +51,11 @@ public class SpringContextHolder implements ApplicationContextAware {
 		checkApplicationContext();
 		return applicationContext.getBean(requiredType);
 	}
-	
+
 	/**
 	 * 清除applicationContext静态变量.
 	 */
-	public static void cleanApplicationContext(){
+	public static void cleanApplicationContext() {
 		applicationContext = null;
 	}
 

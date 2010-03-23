@@ -21,6 +21,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
  * @author calvin
  */
 public class UserResourceClient {
+
 	private WebResource client;
 
 	public UserResourceClient(String baseUrl) {

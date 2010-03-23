@@ -23,7 +23,7 @@ import org.springside.examples.miniservice.entity.account.User;
 @Transactional
 public class AccountManager {
 
-	private UserDao userDao;
+	private UserDao userDao = null;
 
 	/**
 	 * 获取全部用户, 并对用户的延迟加载关联进行初始化.
@@ -56,8 +56,9 @@ public class AccountManager {
 	 */
 	@Transactional(readOnly = true)
 	public boolean authenticate(String loginName, String password) {
-		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password))
+		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password)) {
 			return false;
+		}
 
 		return (userDao.countUserByLoginNamePassword(loginName, password) == 1);
 	}
