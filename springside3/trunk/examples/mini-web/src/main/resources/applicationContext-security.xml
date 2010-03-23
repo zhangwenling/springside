@@ -8,14 +8,19 @@
 	<description>SpringSecurity安全配置</description>
 
 	<!-- http安全配置 -->
-	<s:http auto-config="true">
-		<s:intercept-url pattern="/account/user!save*" access="ROLE_修改用户" />
-		<s:intercept-url pattern="/account/user!delete*" access="ROLE_修改用户" />
-		<s:intercept-url pattern="/account/user*" access="ROLE_浏览用户" />
-		<s:intercept-url pattern="/account/role!save*" access="ROLE_修改角色" />
-		<s:intercept-url pattern="/account/role!delete*" access="ROLE_修改角色" />
-		<s:intercept-url pattern="/account/role*" access="ROLE_浏览角色" />
-		
+	<s:http auto-config="true" use-expressions="true">
+		<s:intercept-url pattern="/**/*.js" filters="none" />
+		<s:intercept-url pattern="/**/*.css" filters="none" />
+		<s:intercept-url pattern="/**/*.gif" filters="none" />
+		<s:intercept-url pattern="/**/*.jpg" filters="none" />
+		<s:intercept-url pattern="/**/*.png" filters="none" />
+		<s:intercept-url pattern="/account/user!save*" access="hasAnyRole('ROLE_修改用户')" />
+		<s:intercept-url pattern="/account/user!delete*" access="hasAnyRole('ROLE_修改用户')" />
+		<s:intercept-url pattern="/account/user*" access="hasAnyRole('ROLE_浏览用户')" />
+		<s:intercept-url pattern="/account/role!save*" access="hasAnyRole('ROLE_修改角色')" />
+		<s:intercept-url pattern="/account/role!delete*" access="hasAnyRole('ROLE_修改角色')" />
+		<s:intercept-url pattern="/account/role*" access="hasAnyRole('ROLE_浏览角色')" />
+
 		<s:form-login login-page="/login.action" default-target-url="/" authentication-failure-url="/login.action?error=true" />
 		<s:logout logout-success-url="/" />
 	</s:http>
