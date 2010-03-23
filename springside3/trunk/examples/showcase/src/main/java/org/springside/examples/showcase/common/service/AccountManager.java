@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
@@ -49,9 +50,15 @@ public class AccountManager {
 		String shaPassword = encoder.encodePassword(user.getPlainPassword(), null);
 		user.setShaPassword(shaPassword);
 
-		userDao.save(user);
+		saveUserToDB(user);
 
 		sendNotifyMessage(user);
+	}
+	
+	//设置Propagation, 保证在发送通知消息前数据已保存
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	public void saveUserToDB(User user){
+		userDao.save(user);
 	}
 
 	/**
