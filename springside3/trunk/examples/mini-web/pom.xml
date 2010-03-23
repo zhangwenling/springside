@@ -14,34 +14,18 @@
 
 	<!-- 项目属性 -->
 	<properties>
-		<jdbc.driver>org.h2.Driver</jdbc.driver>
-		<jdbc.url>jdbc:h2:tcp://localhost/~/mini-web</jdbc.url>
-		<jdbc.user>sa</jdbc.user>
-		<jdbc.password></jdbc.password>
-
 		<jdbc.driver.groupId>com.h2database</jdbc.driver.groupId>
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
 		<jdbc.driver.version>${h2.version}</jdbc.driver.version>
-
-		<sql.type>h2</sql.type>
-		<dbunit.datatype>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.datatype>
-
 		<!--
-			<jdbc.driver>oracle.jdbc.driver.OracleDriver</jdbc.driver> <jdbc.url>jdbc:oracle:thin:@127.0.0.1:1521:XE</jdbc.url>
-			<jdbc.user>miniweb</jdbc.user> <jdbc.password>miniweb</jdbc.password> <jdbc.schema>MINIWEB</jdbc.schema>
-
-			<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId> <jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
-			<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version> <sql.type>oracle</sql.type>
-			<dbunit.datatype>org.dbunit.ext.oracle.Oracle10DataTypeFactory</dbunit.datatype> <dbunit.format>flat</dbunit.format>
+			<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId>
+			<jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
+			<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version>
 		-->
-
 		<!--
-			<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
-			<jdbc.url>jdbc:mysql://localhost/mini-web?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
-			<jdbc.user>root</jdbc.user> <jdbc.password></jdbc.password> <jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+			<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
 			<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
-			<jdbc.driver.version>5.1.11</jdbc.driver.version> <sql.type>mysql</sql.type>
-			<dbunit.datatype>org.dbunit.ext.mysql.MySqlDataTypeFactory</dbunit.datatype> <dbunit.format>flat</dbunit.format>
+			<jdbc.driver.version>5.1.11</jdbc.driver.version>
 		-->
 	</properties>
 
@@ -301,28 +285,6 @@
 							<exclude>**/entity/**/*.class</exclude>
 						</excludes>
 					</instrumentation>
-				</configuration>
-			</plugin>
-
-			<!-- dbunit plugin -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>dbunit-maven-plugin</artifactId>
-				<configuration>
-					<dataTypeFactoryName>${dbunit.datatype}</dataTypeFactoryName>
-					<src>src/test/resources/data/default-data.xml</src>
-					<dest>src/test/resources/data/export-data.xml</dest>
-				</configuration>
-			</plugin>
-
-			<!-- sql plugin -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>sql-maven-plugin</artifactId>
-				<configuration>
-					<srcFiles>
-						<srcFile>src/main/resources/sql/${sql.type}/schema.sql</srcFile>
-					</srcFiles>
 				</configuration>
 			</plugin>
 		</plugins>

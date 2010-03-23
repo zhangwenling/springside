@@ -12,17 +12,9 @@
 
 	<!-- 项目属性 -->
 	<properties>
-		<jdbc.driver>org.h2.Driver</jdbc.driver>
-		<jdbc.url>jdbc:h2:tcp://localhost/~/showcase</jdbc.url>
-		<jdbc.user>sa</jdbc.user>
-		<jdbc.password></jdbc.password>
-
 		<jdbc.driver.groupId>com.h2database</jdbc.driver.groupId>
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
 		<jdbc.driver.version>${h2.version}</jdbc.driver.version>
-
-		<sql.type>h2</sql.type>
-		<dbunit.datatype>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.datatype>
 	</properties>
 
 	<!-- 依赖项定义 -->
@@ -434,44 +426,6 @@
 							<exclude>**/entity/**/*.class</exclude>
 						</excludes>
 					</instrumentation>
-				</configuration>
-			</plugin>
-
-			<!-- dbunit插件 -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>dbunit-maven-plugin</artifactId>
-				<configuration>
-					<dataTypeFactoryName>${dbunit.datatype}</dataTypeFactoryName>
-					<src>src/test/resources/data/default-data.xml</src>
-					<dest>src/test/resources/data/export-data.xml</dest>
-					<!-- include export tables -->
-					<tables>
-						<table>
-							<name>SS_USER</name>
-						</table>
-						<table>
-							<name>SS_ROLE</name>
-						</table>
-						<table>
-							<name>SS_USER_ROLE</name>
-						</table>
-						<table>
-							<name>SS_POST</name>
-						</table>
-					</tables>
-				</configuration>
-			</plugin>
-
-			<!-- sql 插件 -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>sql-maven-plugin</artifactId>
-				<configuration>
-					<srcFiles>
-						<srcFile>src/main/resources/sql/${sql.type}/schema.sql</srcFile>
-						<srcFile>src/main/resources/sql/${sql.type}/quartz.sql</srcFile>
-					</srcFiles>
 				</configuration>
 			</plugin>
 		</plugins>

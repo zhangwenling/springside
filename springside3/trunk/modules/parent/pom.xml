@@ -828,10 +828,6 @@
 					<version>2.5</version>
 					<configuration>
 						<argLine>-Xmx128M</argLine>
-						<includes>
-							<include>**/unit/**/*Test.java</include>
-							<include>**/functional/**/*Test.java</include>
-						</includes>
 					</configuration>
 				</plugin>
 
@@ -950,57 +946,6 @@
 					<version>2.0-alpha-4</version>
 				</plugin>
 
-				<!-- dbunit插件 -->
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>dbunit-maven-plugin</artifactId>
-					<version>1.0-beta-3</version>
-					<configuration>
-						<driver>${jdbc.driver}</driver>
-						<url>${jdbc.url}</url>
-						<username>${jdbc.user}</username>
-						<password>${jdbc.password}</password>
-						<type>CLEAN_INSERT</type>
-						<format>flat</format>
-						<transaction>true</transaction>
-						<encoding>${project.build.sourceEncoding}</encoding>
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>${jdbc.driver.groupId}</groupId>
-							<artifactId>${jdbc.driver.artifactId}</artifactId>
-							<version>${jdbc.driver.version}</version>
-						</dependency>
-						<dependency>
-							<groupId>org.dbunit</groupId>
-							<artifactId>dbunit</artifactId>
-							<version>2.4.7</version>
-						</dependency>
-					</dependencies>
-				</plugin>
-
-				<!-- sql插件 -->
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>sql-maven-plugin</artifactId>
-					<version>1.3</version>
-					<configuration>
-						<driver>${jdbc.driver}</driver>
-						<url>${jdbc.url}</url>
-						<username>${jdbc.user}</username>
-						<password>${jdbc.password}</password>
-						<onError>continue</onError>
-						<encoding>${project.build.sourceEncoding}</encoding>
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>${jdbc.driver.groupId}</groupId>
-							<artifactId>${jdbc.driver.artifactId}</artifactId>
-							<version>${jdbc.driver.version}</version>
-						</dependency>
-					</dependencies>
-				</plugin>
-
 				<!-- assembly插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -1010,109 +955,4 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
-	<profiles>
-		<!-- 在integration-test阶段执行功能测试的profile, 以-Pintegration-test激活 -->
-		<profile>
-			<id>integration-test</id>
-			<build>
-				<plugins>
-					<!-- dbunit插件初始化测试数据 -->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>dbunit-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>init-functional-data</id>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>operation</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-
-					<!-- jetty插件启动与关闭应用 -->
-					<plugin>
-						<groupId>org.mortbay.jetty</groupId>
-						<artifactId>maven-jetty-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>start-jetty</id>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-								<configuration>
-									<stopPort>9966</stopPort>
-									<stopKey>STOP</stopKey>
-									<scanIntervalSeconds>0</scanIntervalSeconds>
-									<daemon>true</daemon>
-								</configuration>
-							</execution>
-							<execution>
-								<id>stop-jetty</id>
-								<phase>post-integration-test</phase>
-								<goals>
-									<goal>stop</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-
-					<!-- surefire插件执行integration目录的用例 -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>integration-test</id>
-								<phase>integration-test</phase>
-								<goals>
-									<goal>test</goal>
-								</goals>
-								<configuration>
-									<includes>
-										<include>**/integration/**/*Test.java</include>
-									</includes>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<!-- 以cluster模式打包war文件和运行jetty的profile,以-Dcluster.nodename=xxx 激活,使用assembly插件替代 -->
-		<profile>
-			<id>cluster</id>
-			<activation>
-				<property>
-					<name>cluster.nodename</name>
-				</property>
-			</activation>
-
-			<build>
-				<!-- war插件, 指定打包war文件时加入节点特定的配置文件 -->
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-war-plugin</artifactId>
-						<configuration>
-							<warName>${project.artifactId}-${cluster.nodename}</warName>
-							<filters>
-								<filter>src/cluster/nodes/${cluster.nodename}.properties</filter>
-							</filters>
-							<webResources>
-								<resource>
-									<filtering>true</filtering>
-									<directory>src/cluster/webapp-override</directory>
-								</resource>
-							</webResources>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>

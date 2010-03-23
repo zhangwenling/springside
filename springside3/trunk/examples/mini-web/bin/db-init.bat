@@ -1,8 +1,6 @@
 @echo off
-echo [INFO] Use maven sql-plugin create schema, maven dbunit-plugin import default data.
+echo [INFO] Create schema by sql, and import default data from src/main/resources/data/default-data.xml by dbunit.
 
 cd %~dp0
-cd ..
-call mvn sql:execute dbunit:operation
-cd bin
+call ant init-db
 pause

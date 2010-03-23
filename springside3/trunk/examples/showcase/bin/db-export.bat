@@ -1,8 +1,6 @@
 @echo off
-echo [INFO] Use maven dbunit-plugin export data from local database.
+echo [INFO] Export data  to src/main/resources/data/export-data.xml by dbunit.
 
 cd %~dp0
-cd ..
-call mvn dbunit:export
-cd bin
+call ant exp-db
 pause
