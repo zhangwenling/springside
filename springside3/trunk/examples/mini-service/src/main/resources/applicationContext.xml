@@ -35,10 +35,9 @@
 		<property name="password" value="${jdbc.password}" />
 
 		<!-- Connection Pooling Info -->
-		<property name="initialSize" value="5" />
-		<property name="maxActive" value="100" />
-		<property name="maxIdle" value="20" />
-		<property name="maxWait" value="200" />
+		<property name="initialSize" value="${dbcp.initialSize}" />
+		<property name="maxActive" value="${dbcp.maxActive}" />
+		<property name="maxIdle" value="${dbcp.maxIdle}" />
 		<property name="defaultAutoCommit" value="false" />
 	</bean>
 
