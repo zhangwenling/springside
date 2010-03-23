@@ -1,37 +1,29 @@
 package org.springside.modules.unit.orm.hibernate;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.dbunit.DatabaseUnitException;
-import org.dbunit.database.DatabaseDataSourceConnection;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.operation.DatabaseOperation;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateDao;
 import org.springside.modules.test.spring.SpringTxTestCase;
+import org.springside.modules.test.utils.DBUnitUtils;
 import org.springside.modules.unit.orm.hibernate.data.User;
 
 import com.google.common.collect.Lists;
 
-@ContextConfiguration(locations = { "/applicationContext-db.xml" }, inheritLocations = false)
+@ContextConfiguration(locations = { "/applicationContext-core-test.xml" })
 public class HibernateDaoTest extends SpringTxTestCase {
 
 	private HibernateDao<User, Long> dao;
@@ -40,16 +32,11 @@ public class HibernateDaoTest extends SpringTxTestCase {
 	private SessionFactory sessionFactory;
 
 	@Before
-	public void setUp() throws BeansException, SQLException, DatabaseUnitException, IOException {
+	public void setUp() throws Exception {
 		jdbcTemplate.update("drop all objects");
 		jdbcTemplate.update("runscript from 'src/test/resources/schema.sql'");
 
-		DatabaseDataSourceConnection connection = new DatabaseDataSourceConnection((DataSource) applicationContext
-				.getBean("dataSource"));
-		InputStream stream = applicationContext.getResource("classpath:/test-data.xml").getInputStream();
-		IDataSet dataSet = new FlatXmlDataSetBuilder().build(stream);
-		DatabaseOperation.INSERT.execute(connection, dataSet);
-		connection.close();
+		DBUnitUtils.loadDbUnitData((DataSource) applicationContext.getBean("dataSource"), "/test-data.xml");
 
 		dao = new HibernateDao<User, Long>(sessionFactory, User.class);
 	}
@@ -143,10 +130,10 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 	@Test
 	public void findByFilters() {
-		List<PropertyFilter> filters ;
+		List<PropertyFilter> filters;
 		//EQ filter
 		PropertyFilter eqFilter = new PropertyFilter("EQS_loginName", "admin");
-		filters =Lists.newArrayList(eqFilter);
+		filters = Lists.newArrayList(eqFilter);
 
 		List<User> users = dao.find(filters);
 		assertEquals(1, users.size());
@@ -172,12 +159,12 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 		//Date and LT/GT filter
 		PropertyFilter dateLtFilter = new PropertyFilter("LTD_createTime", "2046-01-01");
-		filters=Lists.newArrayList(dateLtFilter);
+		filters = Lists.newArrayList(dateLtFilter);
 		users = dao.find(filters);
 		assertEquals(6, users.size());
 
 		PropertyFilter dateGtFilter = new PropertyFilter("GTD_createTime", "2046-01-01 10:00:22");
-		filters=Lists.newArrayList(dateGtFilter);
+		filters = Lists.newArrayList(dateGtFilter);
 		users = dao.find(filters);
 		assertEquals(0, users.size());
 	}

@@ -9,7 +9,10 @@ package org.springside.modules.test.utils;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.commons.lang.StringUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -72,4 +75,34 @@ public class SeleniumUtils {
 		return driver;
 	}
 
+	/**
+	 * 兼容Selnium1.0的常用函数.
+	 */
+	public static boolean isTextPresent(WebDriver driver, String text) {
+		return StringUtils.contains(driver.getPageSource(), text);
+	}
+
+	/**
+	 * 兼容Selnium1.0的常用函数.
+	 */
+	public static void type(WebElement element, String text) {
+		element.clear();
+		element.sendKeys(text);
+	}
+
+	/**
+	 * 兼容Selnium1.0的常用函数.
+	 */
+	public static void uncheck(WebElement element) {
+		if (element.isSelected()) {
+			element.click();
+		}
+	}
+
+	/**
+	 * 兼容Selnium1.0的常用函数, 序列从1开始.
+	 */
+	public static String getTable(WebElement table, int rowIndex, int columnIndex) {
+		return table.findElement(By.xpath("//tr[" + rowIndex + "]//td[" + columnIndex + "]")).getText();
+	}
 }

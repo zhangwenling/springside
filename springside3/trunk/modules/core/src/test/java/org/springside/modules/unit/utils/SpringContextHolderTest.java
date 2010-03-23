@@ -14,16 +14,16 @@ public class SpringContextHolderTest extends Assert {
 		ReflectionUtils.setFieldValue(new SpringContextHolder(), "applicationContext", null);
 
 		try {
-			SpringContextHolder.getBean("julToSlf4jHandler");
+			SpringContextHolder.getBean("foo");
 			fail("No exception throw for applicationContxt hadn't been init.");
 		} catch (IllegalStateException e) {
 
 		}
 
-		new ClassPathXmlApplicationContext("classpath:/applicationContext-test.xml");
+		new ClassPathXmlApplicationContext("classpath:/applicationContext-core-test.xml");
 		assertNotNull(SpringContextHolder.getApplicationContext());
 		assertNotNull(SpringContextHolder.getBean("springContextHolder"));
-		assertEquals(SpringContextHolder.class,SpringContextHolder.getBean(SpringContextHolder.class).getClass());
+		assertEquals(SpringContextHolder.class, SpringContextHolder.getBean(SpringContextHolder.class).getClass());
 	}
 
 }

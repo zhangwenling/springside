@@ -110,7 +110,7 @@ public class GroupsTestRunner extends BlockJUnit4ClassRunner {
 	public static boolean shouldRun(Method testMethod) {
 		//初始化Groups定义
 		if (groups == null) {
-			initGroups();
+			initGroups(PROPERTY_FILE);
 		}
 		//如果groups定义为全部执行则返回true
 		if (groups.contains(Groups.ALL)) {
@@ -130,13 +130,13 @@ public class GroupsTestRunner extends BlockJUnit4ClassRunner {
 	 * 从系统变量或Properties文件初始化运行的groups.
 	 * 如果均无定义则返回ALL.
 	 */
-	protected static void initGroups() {
+	protected static void initGroups(String propertyFile) {
 
 		String groupsDefine = getGroupsFromSystemProperty();
 
 		//如果环境变量未定义test.groups,尝试从property文件读取.
 		if (StringUtils.isBlank(groupsDefine)) {
-			groupsDefine = getGroupsFromPropertyFile();
+			groupsDefine = getGroupsFromPropertyFile(propertyFile);
 			//如果仍未定义,设为全部运行
 			if (StringUtils.isBlank(groupsDefine)) {
 				groupsDefine = Groups.ALL;
@@ -158,9 +158,9 @@ public class GroupsTestRunner extends BlockJUnit4ClassRunner {
 	 * 从Classpath中的application.test.properties文件读取test.groups定义, 多个group用逗号分隔.
 	 * eg. test.groups=Mini,Major
 	 */
-	protected static String getGroupsFromPropertyFile() {
+	protected static String getGroupsFromPropertyFile(String propertyFile) {
 		try {
-			Properties p = PropertiesLoaderUtils.loadAllProperties(PROPERTY_FILE);
+			Properties p = PropertiesLoaderUtils.loadAllProperties(propertyFile);
 			return p.getProperty(PROPERTY_NAME);
 		} catch (IOException e) {
 			logger.warn(e.getMessage(), e);

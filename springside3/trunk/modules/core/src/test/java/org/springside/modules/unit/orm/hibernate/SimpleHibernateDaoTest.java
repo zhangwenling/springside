@@ -32,7 +32,7 @@ import org.springside.modules.unit.orm.hibernate.data.User;
 
 import com.google.common.collect.Maps;
 
-@ContextConfiguration(locations = { "/applicationContext-db.xml" }, inheritLocations = false)
+@ContextConfiguration(locations = { "/applicationContext-core-test.xml" })
 public class SimpleHibernateDaoTest extends SpringTxTestCase {
 
 	private static final String DEFAULT_LOGIN_NAME = "admin";
@@ -50,7 +50,7 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 		DatabaseDataSourceConnection connection = new DatabaseDataSourceConnection((DataSource) applicationContext
 				.getBean("dataSource"));
 		InputStream stream = applicationContext.getResource("classpath:/test-data.xml").getInputStream();
-		IDataSet dataSet = new FlatXmlDataSetBuilder().build(stream) ;
+		IDataSet dataSet = new FlatXmlDataSetBuilder().build(stream);
 		DatabaseOperation.INSERT.execute(connection, dataSet);
 		connection.close();
 

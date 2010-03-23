@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 import org.mortbay.jetty.Server;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.springside.examples.miniweb.tools.Start;
 import org.springside.modules.test.groups.GroupsTestRunner;
 import org.springside.modules.test.utils.DBUnitUtils;
@@ -33,6 +32,10 @@ import org.springside.modules.utils.SpringContextHolder;
 public class BaseFunctionalTestCase extends Assert {
 
 	protected final static String BASE_URL = Start.BASE_URL;
+
+	protected final static String DAILY = "DAILY";
+
+	protected final static String NIGHTLY = "NIGHTLY";
 
 	protected static Server server;
 
@@ -98,14 +101,4 @@ public class BaseFunctionalTestCase extends Assert {
 		driver.findElement(By.name("j_password")).sendKeys("admin");
 		driver.findElement(By.xpath(Gui.BUTTON_LOGIN)).click();
 	}
-
-	/**
-	 * 取得Table中的内容, 序列从1开始.
-	 */
-	protected static String getContentTable(int rowIndex, int columnIndex) {
-		WebElement td = driver.findElement(By.xpath("//table[@id='contentTable']//tr[" + rowIndex + "]//td["
-				+ columnIndex + "]"));
-		return td.getText();
-	}
-
 }
