@@ -18,10 +18,10 @@
 		<spring.version>3.0.1.RELEASE</spring.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<struts2.version>2.1.8.1</struts2.version>
-		<cxf.version>2.2.6</cxf.version>
+		<cxf.version>2.2.7</cxf.version>
 		<jersey.version>1.1.5.1</jersey.version>
 		<spring-security.version>3.0.2.RELEASE</spring-security.version>
-		<activemq.version>5.3.0</activemq.version>
+		<activemq.version>5.3.1</activemq.version>
 		<jetty.version>6.1.22</jetty.version>
 		<h2.version>1.2.131</h2.version>
 		<selenium.version>2.0a2</selenium.version>
@@ -463,9 +463,9 @@
 
 			<!-- quartz -->
 			<dependency>
-				<groupId>org.opensymphony.quartz</groupId>
+				<groupId>org.quartz-scheduler</groupId>
 				<artifactId>quartz</artifactId>
-				<version>1.6.6</version>
+				<version>1.7.3</version>
 			</dependency>
 
 			<!-- logging begin-->
@@ -954,6 +954,13 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-assembly-plugin</artifactId>
 					<version>2.2-beta-5</version>
+				</plugin>
+
+				<!-- cobertura插件 -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>cobertura-maven-plugin</artifactId>
+					<version>2.3</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>

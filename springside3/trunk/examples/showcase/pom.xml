@@ -212,8 +212,8 @@
 
 		<!-- quartz -->
 		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
-			<groupId>org.opensymphony.quartz</groupId>
 		</dependency>
 
 		<!-- logging begin -->
