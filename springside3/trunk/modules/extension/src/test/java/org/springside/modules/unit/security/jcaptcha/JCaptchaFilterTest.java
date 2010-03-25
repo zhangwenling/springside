@@ -29,7 +29,7 @@ public class JCaptchaFilterTest extends Assert {
 
 	@BeforeClass
 	public static void setUpBeforeClass() {
-		MockServletContext context = (MockServletContext) config.getServletContext();	
+		MockServletContext context = (MockServletContext) config.getServletContext();
 		WebTestUtils.initWebApplicationContext(context, "/applicationContext-security.xml");
 		config.addInitParameter(JCaptchaFilter.PARAM_FAILURE_URL, failUrl);
 	}

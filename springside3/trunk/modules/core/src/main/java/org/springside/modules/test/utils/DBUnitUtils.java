@@ -22,16 +22,16 @@ public class DBUnitUtils {
 			DatabaseOperation.CLEAN_INSERT.execute(connection, dataSet);
 		}
 	}
-	
+
 	/**
 	 * 插入XML数据文件到H2数据库. 
 	 */
-    public static void appendDbUnitData(DataSource h2DataSource, String... xmlPaths) throws Exception {
-        IDatabaseConnection connection = new H2Connection(h2DataSource.getConnection(), "");
-        for (String xmlPath : xmlPaths) {
-            InputStream input = DBUnitUtils.class.getResourceAsStream(xmlPath);
-            IDataSet dataSet = new FlatXmlDataSetBuilder().setColumnSensing(true).build(input);
-            DatabaseOperation.INSERT.execute(connection, dataSet);
-        }
-    }
+	public static void appendDbUnitData(DataSource h2DataSource, String... xmlPaths) throws Exception {
+		IDatabaseConnection connection = new H2Connection(h2DataSource.getConnection(), "");
+		for (String xmlPath : xmlPaths) {
+			InputStream input = DBUnitUtils.class.getResourceAsStream(xmlPath);
+			IDataSet dataSet = new FlatXmlDataSetBuilder().setColumnSensing(true).build(input);
+			DatabaseOperation.INSERT.execute(connection, dataSet);
+		}
+	}
 }

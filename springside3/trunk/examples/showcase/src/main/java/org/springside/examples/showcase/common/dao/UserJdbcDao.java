@@ -69,7 +69,6 @@ public class UserJdbcDao {
 		return jdbcTemplate.queryForList("select id, login_name from SS_USER order by id");
 	}
 
-
 	/**
 	 * 使用Map形式的命名参数.
 	 */

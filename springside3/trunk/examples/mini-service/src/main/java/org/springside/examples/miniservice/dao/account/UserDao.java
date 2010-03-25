@@ -18,7 +18,7 @@ public class UserDao extends HibernateDao<User, Long> {
 	private static final String COUNT_BY_LNAME_PASSWD = "select count(u) from User u where u.loginName=? and u.password=?";
 
 	public Long countUserByLoginNamePassword(String loginName, String password) {
-		return (Long)findUnique(COUNT_BY_LNAME_PASSWD, loginName, password);
+		return (Long) findUnique(COUNT_BY_LNAME_PASSWD, loginName, password);
 	}
 
 	/**

@@ -31,7 +31,7 @@ public class DigestPasswordCallback implements CallbackHandler {
 		if (user == null) {
 			throw new IOException("wrong login name " + pc.getIdentifier());
 		}
-		
+
 		pc.setPassword(user.getPlainPassword());
 	}
 }

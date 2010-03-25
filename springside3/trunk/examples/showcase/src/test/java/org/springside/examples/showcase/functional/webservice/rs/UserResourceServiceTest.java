@@ -14,7 +14,7 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 
 	@BeforeClass
 	public static void setUpClient() {
-		client = new UserResourceClient(BASE_URL+"/rs");
+		client = new UserResourceClient(BASE_URL + "/rs");
 	}
 
 	@Test
@@ -24,13 +24,13 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 		UserDTO admin = userList.iterator().next();
 		assertEquals("admin", admin.getLoginName());
 	}
-	
+
 	@Test
 	public void searchUserHtml() {
 		String html = client.searchUserHtml("Admin");
 		assertEquals("<div>Admin, your mother call you...</div>", html);
 	}
-	
+
 	@Test
 	public void searchUserJson() throws Exception {
 		UserDTO admin = client.searchUserJson("Admin");

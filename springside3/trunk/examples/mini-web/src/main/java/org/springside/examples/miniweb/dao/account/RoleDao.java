@@ -7,7 +7,6 @@ import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
-
 /**
  * 角色对象的泛型DAO.
  * 

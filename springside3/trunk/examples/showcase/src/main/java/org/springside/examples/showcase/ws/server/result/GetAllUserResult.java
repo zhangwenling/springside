@@ -16,7 +16,7 @@ import org.springside.examples.showcase.ws.server.dto.UserDTO;
  * @author calvin
  */
 @XmlType(name = "GetAllUserResult", namespace = WsConstants.NS)
-public class GetAllUserResult  extends WSResult implements Serializable{
+public class GetAllUserResult extends WSResult implements Serializable {
 	private static final long serialVersionUID = 4739558570080898049L;
 	private List<UserDTO> userList;
 

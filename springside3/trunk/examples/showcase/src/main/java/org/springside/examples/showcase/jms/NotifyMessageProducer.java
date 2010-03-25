@@ -36,7 +36,7 @@ public class NotifyMessageProducer {
 		Map map = new HashMap();
 		map.put("userName", user.getName());
 		map.put("email", user.getEmail());
-	
+
 		jmsTemplate.convertAndSend(notifyQueue, map);
 	}
 

@@ -99,7 +99,7 @@ public class JaxbTest extends Assert {
 		user2.setId(2L);
 		user2.setName("kate");
 
-		List<User> userList = Lists.newArrayList(user1,user2);
+		List<User> userList = Lists.newArrayList(user1, user2);
 
 		String xml = binder.toXml(userList, "userList");
 		System.out.println("Jaxb Object List to Xml result:\n" + xml);

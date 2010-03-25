@@ -51,7 +51,7 @@ public class UserDaoTest extends BaseTxTestCase {
 
 	@Test
 	public void batchDisableUser() {
-		List<Long> ids = Lists.newArrayList(1L,2L);
+		List<Long> ids = Lists.newArrayList(1L, 2L);
 
 		userDao.disableUsers(ids);
 

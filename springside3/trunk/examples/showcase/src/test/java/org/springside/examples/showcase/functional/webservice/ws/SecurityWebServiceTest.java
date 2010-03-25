@@ -37,7 +37,7 @@ import com.google.common.collect.Maps;
  * @author calvin
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@TestExecutionListeners( { DependencyInjectionTestExecutionListener.class})
+@TestExecutionListeners( { DependencyInjectionTestExecutionListener.class })
 @ContextConfiguration(locations = { "/webservice/applicationContext-cxf-client.xml" })
 public class SecurityWebServiceTest extends BaseFunctionalTestCase implements ApplicationContextAware {
 
@@ -85,7 +85,7 @@ public class SecurityWebServiceTest extends BaseFunctionalTestCase implements Ap
 		GetAllUserResult result = userWebService.getAllUser();
 		assertTrue(result.getUserList().size() > 0);
 	}
-	
+
 	/**
 	 * 测试访问与SpringSecurity结合的EndPoint, 调用受SpringSecurity保护的方法, 用<jaxws:client/>创建的Client.
 	 */

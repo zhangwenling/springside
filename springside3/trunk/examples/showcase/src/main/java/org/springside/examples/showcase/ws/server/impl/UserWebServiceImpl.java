@@ -47,7 +47,7 @@ public class UserWebServiceImpl implements UserWebService {
 		try {
 			List<User> userEntityList = accountManager.getAllUserWithRole();
 			List<UserDTO> userDTOList = Lists.newArrayList();
-			
+
 			for (User userEntity : userEntityList) {
 				userDTOList.add(dozer.map(userEntity, UserDTO.class));
 			}
@@ -60,12 +60,12 @@ public class UserWebServiceImpl implements UserWebService {
 			return WSResult.buildDefaultErrorResult(GetAllUserResult.class);
 		}
 	}
-	
+
 	/**
 	 * @see UserWebService#getUser()
 	 */
 	//SpringSecurity 控制的方法
-	@Secured({"ROLE_Admin"})
+	@Secured( { "ROLE_Admin" })
 	public GetUserResult getUser(Long id) {
 		//校验请求参数
 		try {

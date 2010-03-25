@@ -49,7 +49,7 @@ public class UserDao extends HibernateDao<User, Long> {
 		Criteria criteria = createCriteria().setFetchMode("roleList", FetchMode.JOIN);
 		return distinct(criteria).list();
 	}
-	
+
 	/**
 	 * 统计用户数.
 	 */
@@ -57,7 +57,6 @@ public class UserDao extends HibernateDao<User, Long> {
 		return findUnique(UserDao.COUNT_USERS);
 	}
 
-	
 	/**
 	 * 初始化User的延迟加载关联roleList.
 	 */

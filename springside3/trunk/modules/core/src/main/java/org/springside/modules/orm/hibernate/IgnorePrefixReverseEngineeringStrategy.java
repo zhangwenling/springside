@@ -20,11 +20,11 @@ public class IgnorePrefixReverseEngineeringStrategy extends DelegatingReverseEng
 	public String tableToClassName(TableIdentifier tableIdentifier) {
 		String delegateResult = super.tableToClassName(tableIdentifier);
 		int index = delegateResult.lastIndexOf('.');
-		
+
 		String packageName = delegateResult.substring(0, index + 1);
 		String className = delegateResult.substring(index + getPrefixLength() + 1);
 		String fullClassName = packageName + className;
-		
+
 		return fullClassName;
 	}
 

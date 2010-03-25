@@ -42,21 +42,21 @@ public class Struts2Utils {
 	public static HttpSession getSession() {
 		return ServletActionContext.getRequest().getSession();
 	}
-	
+
 	/**
 	 * 取得HttpSession的简化函数.
 	 */
 	public static HttpSession getSession(boolean isNew) {
 		return ServletActionContext.getRequest().getSession(isNew);
 	}
-	
+
 	/**
 	 * 取得HttpSession中Attribute的简化函数.
 	 */
-    public static Object getSessionAttribute(String name) {
-        HttpSession session = getSession(false);
-        return (session != null ? session.getAttribute(name) : null);
-    }
+	public static Object getSessionAttribute(String name) {
+		HttpSession session = getSession(false);
+		return (session != null ? session.getAttribute(name) : null);
+	}
 
 	/**
 	 * 取得HttpRequest的简化函数.
@@ -71,14 +71,13 @@ public class Struts2Utils {
 	public static String getParameter(String name) {
 		return getRequest().getParameter(name);
 	}
-	
+
 	/**
 	 * 取得HttpResponse的简化函数.
 	 */
 	public static HttpServletResponse getResponse() {
 		return ServletActionContext.getResponse();
 	}
-
 
 	//-- 绕过jsp/freemaker直接输出文本的函数 --//
 	/**
@@ -100,7 +99,7 @@ public class Struts2Utils {
 			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
-	
+
 	/**
 	 * 直接输出文本.
 	 * @see #render(String, String, String...)
@@ -169,7 +168,6 @@ public class Struts2Utils {
 		//渲染Content-Type为javascript的返回内容,输出结果为javascript语句, 如callback197("{html:'Hello World!!!'}");
 		render(ServletUtils.JS_TYPE, result, headers);
 	}
-
 
 	/**
 	 * 分析并设置contentType与headers.

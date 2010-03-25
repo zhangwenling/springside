@@ -108,19 +108,18 @@ public class RoleManagerTest extends BaseFunctionalTestCase {
 
 	@SuppressWarnings("unchecked")
 	private void verifyRole(Role role) {
-		driver.findElement(By.id("editLink-" + testRole.getName())).click();
-		waitPageLoad();
+		driver.findElement(By.id("editLink-" + role.getName())).click();
 
-		assertEquals(role.getName(), selenium.getValue("name"));
+		assertEquals(role.getName(), driver.findElement(By.id("name")).getValue());
 
 		for (Authority authority : role.getAuthorityList()) {
-			assertTrue(selenium.isChecked("checkedAuthIds-" + authority.getId()));
+			assertTrue(driver.findElement(By.id("checkedAuthIds-" + authority.getId())).isSelected());
 		}
 
 		List<Authority> uncheckAuthList = ListUtils.subtract(AccountData.getDefaultAuthorityList(), role
 				.getAuthorityList());
 		for (Authority authority : uncheckAuthList) {
-			assertFalse(selenium.isChecked("checkedAuthIds-" + authority.getId()));
+			assertFalse(driver.findElement(By.id("checkedAuthIds-" + authority.getId())).isSelected());
 		}
 	}
 

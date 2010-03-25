@@ -308,7 +308,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 			Hibernate.initialize(entity);
 		}
 	}
-	
+
 	/**
 	 * Flush当前Session.
 	 */

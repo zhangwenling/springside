@@ -28,7 +28,7 @@ public class QuartzClusterableJobTest extends BaseTxTestCase {
 
 		//验证任务已执行
 		assertEquals(1, appender.getAllLogs().size());
-	
+
 		assertEquals("There are 6 user in database, print by default's job.", appender.getFirstLog().getMessage());
 	}
 }

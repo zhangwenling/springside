@@ -17,7 +17,7 @@ public class OperatorDetails extends User {
 	private static final long serialVersionUID = 1919464185097508773L;
 
 	private Date loginTime;
-	
+
 	private List<Role> roleList;
 
 	public OperatorDetails(String username, String password, boolean enabled, boolean accountNonExpired,
@@ -34,11 +34,11 @@ public class OperatorDetails extends User {
 		this.loginTime = loginTime;
 	}
 
-    public List<Role> getRoleList() {
-        return roleList;
-    }
+	public List<Role> getRoleList() {
+		return roleList;
+	}
 
-    public void setRoleList(List<Role> roleList) {
-        this.roleList = roleList;
-    }
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
+	}
 }

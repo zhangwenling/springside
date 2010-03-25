@@ -54,10 +54,10 @@ public class AccountManager {
 
 		sendNotifyMessage(user);
 	}
-	
+
 	//设置Propagation, 保证在发送通知消息前数据已保存
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
-	public void saveUserToDB(User user){
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public void saveUserToDB(User user) {
 		userDao.save(user);
 	}
 

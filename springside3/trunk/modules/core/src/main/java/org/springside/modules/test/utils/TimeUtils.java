@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  * @author calvin
  */
 public class TimeUtils {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(TimeUtils.class);
 
 	private static Stack<Long> times = new Stack<Long>();
@@ -37,7 +37,6 @@ public class TimeUtils {
 		String message = title + " : " + (System.currentTimeMillis() - times.pop());
 		logger.info(message);
 	}
-
 
 	/**
 	 * sleep等待,单位毫秒.

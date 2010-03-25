@@ -17,7 +17,7 @@ public interface UserWebService {
 	 * 显示所有用户.
 	 */
 	public GetAllUserResult getAllUser();
-	
+
 	/**
 	 * 获取用户, 受SpringSecurity保护.
 	 */

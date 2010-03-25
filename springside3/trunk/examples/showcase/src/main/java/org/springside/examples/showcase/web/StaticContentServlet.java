@@ -41,7 +41,7 @@ public class StaticContentServlet extends HttpServlet {
 	/** 需要被Gzip压缩的Mime类型. */
 	private static final String[] GZIP_MIME_TYPES = { "text/html", "application/xhtml+xml", "text/css",
 			"text/javascript" };
-	
+
 	/** 需要被Gzip压缩的最小文件大小. */
 	private static final int GZIP_MINI_LENGTH = 512;
 
@@ -49,7 +49,7 @@ public class StaticContentServlet extends HttpServlet {
 	private Cache contentInfoCache;
 
 	private MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
-	
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//获取请求内容的基本信息.
@@ -153,7 +153,7 @@ public class StaticContentServlet extends HttpServlet {
 
 		String realFilePath = getServletContext().getRealPath(contentPath);
 		File file = new File(realFilePath);
-		
+
 		contentInfo.file = file;
 		contentInfo.contentPath = contentPath;
 		contentInfo.fileName = file.getName();

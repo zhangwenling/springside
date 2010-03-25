@@ -47,9 +47,9 @@ public class ExcelExportAction extends ActionSupport {
 		HttpServletResponse response = Struts2Utils.getResponse();
 		response.setContentType(ServletUtils.EXCEL_TYPE);
 		ServletUtils.setFileDownloadHeader(response, "温度年表.xls");
-		
+
 		wb.write(response.getOutputStream());
-		response.getOutputStream().flush();	
+		response.getOutputStream().flush();
 		return null;
 	}
 

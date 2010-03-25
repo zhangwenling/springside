@@ -36,7 +36,6 @@ public class LargeImageWebServiceImpl implements LargeImageWebService, Applicati
 	 * @see LargeImageWebService#getImage()
 	 */
 	public LargeImageResult getImage() {
-	
 
 		try {
 			//采用applicationContext获取Web应用中的文件.
@@ -45,14 +44,14 @@ public class LargeImageWebServiceImpl implements LargeImageWebService, Applicati
 			//采用activation的DataHandler实现Streaming传输.
 			DataSource dataSource = new FileDataSource(image);
 			DataHandler dataHandler = new DataHandler(dataSource);
-			
+
 			LargeImageResult result = new LargeImageResult();
 			result.setImageData(dataHandler);
 			return result;
 		} catch (IOException e) {
 			logger.error(e.getMessage(), e);
-			return WSResult.buildResult(LargeImageResult.class,WSResult.IMAGE_ERROR, "Image reading error.");
-		} 
+			return WSResult.buildResult(LargeImageResult.class, WSResult.IMAGE_ERROR, "Image reading error.");
+		}
 
 	}
 
