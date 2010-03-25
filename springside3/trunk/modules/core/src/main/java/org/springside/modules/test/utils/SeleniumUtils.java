@@ -94,14 +94,14 @@ public class SeleniumUtils {
 	 */
 	public static void uncheck(WebElement element) {
 		if (element.isSelected()) {
-			element.click();
+			element.toggle();
 		}
 	}
 
 	/**
-	 * 兼容Selnium1.0的常用函数, 序列从1开始.
+	 * 兼容Selnium1.0的常用函数, 序列从0开始.
 	 */
 	public static String getTable(WebElement table, int rowIndex, int columnIndex) {
-		return table.findElement(By.xpath("//tr[" + rowIndex + "]//td[" + columnIndex + "]")).getText();
+		return table.findElement(By.xpath("//tr[" + (rowIndex + 1) + "]//td[" + (columnIndex + 1) + "]")).getText();
 	}
 }

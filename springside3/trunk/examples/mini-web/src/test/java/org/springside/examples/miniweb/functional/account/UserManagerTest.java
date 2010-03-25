@@ -32,12 +32,11 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 	@Test
 	@Groups(BaseFunctionalTestCase.DAILY)
 	public void overviewPage() {
-
 		driver.findElement(By.linkText(Gui.MENU_USER)).click();
 		WebElement table = driver.findElement(By.xpath("//table[@id='contentTable']"));
-		assertEquals("admin", SeleniumUtils.getTable(table, 2, UserColumn.LOGIN_NAME.ordinal() + 1));
-		assertEquals("Admin", SeleniumUtils.getTable(table, 2, UserColumn.NAME.ordinal() + 1));
-		assertEquals("管理员, 用户", SeleniumUtils.getTable(table, 2, UserColumn.ROLES.ordinal() + 1));
+		assertEquals("admin", SeleniumUtils.getTable(table, 1, UserColumn.LOGIN_NAME.ordinal()));
+		assertEquals("Admin", SeleniumUtils.getTable(table, 1, UserColumn.NAME.ordinal()));
+		assertEquals("管理员, 用户", SeleniumUtils.getTable(table, 1, UserColumn.ROLES.ordinal()));
 	}
 
 	/**
@@ -150,11 +149,11 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		driver.findElement(By.xpath(Gui.BUTTON_SUBMIT)).click();
 
 		WebElement table = driver.findElement(By.xpath("//form[@id='inputForm']/table"));
-		assertEquals("用户登录名已存在", SeleniumUtils.getTable(table, 1, 2));
-		assertEquals("必选字段", SeleniumUtils.getTable(table, 2, 2));
-		assertEquals("请输入一个长度最少是 3 的字符串", SeleniumUtils.getTable(table, 3, 2));
-		assertEquals("输入与上面相同的密码", SeleniumUtils.getTable(table, 4, 2));
-		assertEquals("请输入正确格式的电子邮件", SeleniumUtils.getTable(table, 5, 2));
+		assertEquals("用户登录名已存在", SeleniumUtils.getTable(table, 0, 1));
+		assertEquals("必选字段", SeleniumUtils.getTable(table, 1, 1));
+		assertEquals("请输入一个长度最少是 3 的字符串", SeleniumUtils.getTable(table, 2, 1));
+		assertEquals("输入与上面相同的密码", SeleniumUtils.getTable(table, 3, 1));
+		assertEquals("请输入正确格式的电子邮件", SeleniumUtils.getTable(table, 4, 1));
 	}
 
 	/**

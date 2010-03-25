@@ -49,6 +49,6 @@ public class SecurityTest extends BaseFunctionalTestCase {
 		//校验用户角色的操作单元格为空
 		driver.findElement(By.linkText(Gui.MENU_USER)).click();
 		WebElement table = driver.findElement(By.xpath("//table[@id='contentTable']"));
-		assertEquals("查看", SeleniumUtils.getTable(table, 2, UserColumn.OPERATIONS.ordinal() + 1));
+		assertEquals("查看", SeleniumUtils.getTable(table, 1, UserColumn.OPERATIONS.ordinal()));
 	}
 }

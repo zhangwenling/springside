@@ -8,9 +8,12 @@ public class Gui {
 
 	public static final String MENU_USER = "帐号列表";
 	public static final String MENU_ROLE = "角色列表";
-	
+
 	public enum UserColumn {
 		LOGIN_NAME, NAME, EMAIL, ROLES, OPERATIONS
 	}
 
+	public enum RoleColumn {
+		NAME, AUTHORITIES, OPERATIONS
+	}
 }
