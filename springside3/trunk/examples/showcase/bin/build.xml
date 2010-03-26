@@ -20,6 +20,10 @@
 			<classpath refid="project.lib" />
 		</sql>
 
+		<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" src="${sql.dir}/quartz.sql" onerror="continue">
+			<classpath refid="project.lib" />
+		</sql>
+
 		<dbunit driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}">
 			<dbconfig>
 				<property name="datatypeFactory" value="${dbunit.datatype}" />

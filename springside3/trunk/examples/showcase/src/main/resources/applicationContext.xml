@@ -31,14 +31,15 @@
 	<!-- 以静态变量保存ApplicationContext -->
 	<bean class="org.springside.modules.utils.SpringContextHolder" lazy-init="false" />
 
-	<!-- 数据源配置,在测试环境使用 -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<!-- Connection Info, 使用P6spy记录sql -->
+	<!-- 数据源配置,使用应用内的DBCP数据库连接池 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<!-- Connection Info -->
 		<property name="driverClassName" value="${jdbc.driver}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-		<!-- Connection Pool Info -->
+
+		<!-- Connection Pooling Info -->
 		<property name="initialSize" value="${dbcp.initialSize}" />
 		<property name="maxActive" value="${dbcp.maxActive}" />
 		<property name="maxIdle" value="${dbcp.maxIdle}" />
