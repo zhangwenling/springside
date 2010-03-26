@@ -21,7 +21,7 @@
 		<cxf.version>2.2.7</cxf.version>
 		<jersey.version>1.1.5.1</jersey.version>
 		<spring-security.version>3.0.2.RELEASE</spring-security.version>
-		<activemq.version>5.3.1</activemq.version>
+		<activemq.version>5.3.0</activemq.version>
 		<jetty.version>6.1.22</jetty.version>
 		<h2.version>1.2.131</h2.version>
 		<selenium.version>2.0a2</selenium.version>

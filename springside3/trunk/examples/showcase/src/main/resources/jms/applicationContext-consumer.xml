@@ -4,14 +4,15 @@
 
 	<description>JMS消费者演示配置</description>
 
-	<!-- 同步接收Queue消息类 -->
-	<bean id="notifyQueueConsumer" class="org.springside.examples.showcase.jms.NotifyQueueConsumer">
-		<property name="jmsTemplate" ref="jmsTemplate" />
-		<property name="notifyQueue" ref="notifyQueue" />
+	<!-- 异步接收Queue消息Container -->
+	<bean id="queueContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer" lazy-init="false">
+		<property name="connectionFactory" ref="jmsFactory" />
+		<property name="destination" ref="notifyQueue" />
+		<property name="messageListener" ref="notifyQueueListener" />
 	</bean>
 
 	<!-- 异步接收Topic消息Container -->
-	<bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer" lazy-init="false">
+	<bean id="topicContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer" lazy-init="false">
 		<property name="connectionFactory" ref="jmsFactory" />
 		<property name="destination" ref="notifyTopic" />
 		<property name="messageListener" ref="notifyTopicListener" />
@@ -19,4 +20,7 @@
 
 	<!-- 异步接收Topic消息处理类 -->
 	<bean id="notifyTopicListener" class="org.springside.examples.showcase.jms.NotifyTopicListener" />
+
+	<!-- 异步接收Topic消息处理类 -->
+	<bean id="notifyQueueListener" class="org.springside.examples.showcase.jms.NotifyQueueListener" />
 </beans>
