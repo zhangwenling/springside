@@ -68,7 +68,7 @@
 			<groupId>javassist</groupId>
 			<artifactId>javassist</artifactId>
 		</dependency>
-		
+
 		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -78,7 +78,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 		</dependency>
-		
+
 		<!-- dbcp -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -326,26 +326,16 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.easymock</groupId>
 			<artifactId>easymockclassextension</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 		</dependency>
-		<!-- selenium 1.0 -->
-		<dependency>
-			<groupId>org.seleniumhq.selenium.client-drivers</groupId>
-			<artifactId>selenium-java-client-driver</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium.server</groupId>
-			<artifactId>selenium-server</artifactId>
-		</dependency>
-
 
 		<!-- selenium 2.0 -->
 		<dependency>

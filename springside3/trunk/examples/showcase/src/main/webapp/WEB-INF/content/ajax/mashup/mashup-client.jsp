@@ -16,6 +16,7 @@
 		function getMashupContent() {
 			$.getJSON(remoteUrl + "/ajax/mashup/mashup-server.action?callback=?", function(data) {
 				$('#mashupContent').html(data.html);
+				$('#mashupContent').show();
 			});
 		}
 	</script>
@@ -37,7 +38,7 @@
 		</p>
 		<p><input type="button" value="获取内容" onclick="getMashupContent();"/></p>	
 		<p>跨域页面内容:</p>
-		<div id="mashupContent"/>
+		<div id="mashupContent" style="display:none"/>
 		</div>
 	</div>
 </div>

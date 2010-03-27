@@ -11,7 +11,7 @@ import org.springside.examples.miniweb.entity.account.Authority;
 import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniweb.functional.Gui;
-import org.springside.examples.miniweb.integration.account.RoleManagerTest.RoleColumn;
+import org.springside.examples.miniweb.functional.Gui.RoleColumn;
 import org.springside.modules.test.utils.DataUtils;
 import org.springside.modules.test.utils.SeleniumUtils;
 

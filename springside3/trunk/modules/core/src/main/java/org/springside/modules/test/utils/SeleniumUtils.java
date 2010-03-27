@@ -10,6 +10,7 @@ import java.net.URL;
 
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -17,6 +18,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 /**
@@ -32,6 +35,8 @@ public class SeleniumUtils {
 	public static final String IE = "ie";
 
 	public static final String REMOTE = "remote";
+
+	public static Logger logger = LoggerFactory.getLogger(SeleniumUtils.class);
 
 	public static WebDriver buildDriver(String driverName) throws Exception {
 		WebDriver driver = null;
@@ -103,5 +108,17 @@ public class SeleniumUtils {
 	 */
 	public static String getTable(WebElement table, int rowIndex, int columnIndex) {
 		return table.findElement(By.xpath("//tr[" + (rowIndex + 1) + "]//td[" + (columnIndex + 1) + "]")).getText();
+	}
+
+	/**
+	 * 兼容Selnium1.0的常用函数, timeout单位为毫秒.
+	 */
+	public static void waitForDisplay(WebElement element, int timeout) {
+		long timeoutTime = System.currentTimeMillis() + timeout;
+		while (System.currentTimeMillis() < timeoutTime) {
+			if (((RenderedWebElement) element).isDisplayed())
+				return;
+		}
+		logger.warn("waitForDisplay timeout");
 	}
 }
