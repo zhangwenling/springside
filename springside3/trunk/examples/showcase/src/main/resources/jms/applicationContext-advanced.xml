@@ -8,11 +8,11 @@
 	<bean id="advancedJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<!-- 使 deliveryMode, priority, timeToLive设置生效-->
-		<property name="explicitQosEnabled" value="true"/>
+		<property name="explicitQosEnabled" value="true" />
 		<!-- 设置NON_PERSISTENT模式, 默认为PERSISTENT -->
-		<property name="deliveryPersistent" value="false"/>
+		<property name="deliveryPersistent" value="false" />
 		<!-- 设置优先级, 默认为4 -->
-		<property name="priority" value="9"/>
+		<property name="priority" value="9" />
 	</bean>
 
 	<!-- 使用Spring JmsTemplate的消息生产者 -->
@@ -23,14 +23,15 @@
 	</bean>
 
 	<!-- 异步接收Queue消息Container -->
-	<bean id="advancedQueueContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer" lazy-init="false">
+	<bean id="advancedQueueContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="notifyQueue" />
 		<property name="messageListener" ref="notifyQueueListener" />
+		<property name="concurrentConsumers" value="10" />
 	</bean>
 
 	<!-- 异步接收Topic消息Container -->
-	<bean id="advancedTopicContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer" lazy-init="false">
+	<bean id="advancedTopicContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="notifyTopic" />
 		<property name="messageListener" ref="notifyTopicListener" />

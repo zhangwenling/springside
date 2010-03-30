@@ -17,16 +17,15 @@
 	</bean>
 
 	<!-- 异步接收Queue消息Container -->
-	<bean id="queueContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer" lazy-init="false">
+	<bean id="queueContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="notifyQueue" />
 		<property name="messageListener" ref="notifyQueueListener" />
-		<!-- 设置并发数 -->
 		<property name="concurrentConsumers" value="10" />
 	</bean>
 
 	<!-- 异步接收Topic消息Container -->
-	<bean id="topicContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer" lazy-init="false">
+	<bean id="topicContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="notifyTopic" />
 		<property name="messageListener" ref="notifyTopicListener" />
