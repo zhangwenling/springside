@@ -53,7 +53,7 @@ public class NotifyMessageProducer {
 				message.setString("userName", user.getName());
 				message.setString("email", user.getEmail());
 
-				message.setStringProperty("ObjectType", "User");
+				message.setStringProperty("objectType", "User");
 
 				return message;
 			}

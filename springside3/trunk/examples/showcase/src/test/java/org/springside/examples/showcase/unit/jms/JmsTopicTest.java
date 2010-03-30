@@ -11,7 +11,7 @@ import org.springside.modules.test.spring.SpringContextTestCase;
 import org.springside.modules.test.utils.TimeUtils;
 
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/jms/applicationContext-common.xml",
-		"/jms/applicationContext-producer.xml", "/jms/applicationContext-consumer.xml" }, inheritLocations = false)
+		"/jms/applicationContext-simple.xml" }, inheritLocations = false)
 public class JmsTopicTest extends SpringContextTestCase {
 
 	@Autowired
@@ -32,7 +32,7 @@ public class JmsTopicTest extends SpringContextTestCase {
 
 		TimeUtils.sleep(1000);
 		assertNotNull(appender.getFirstLog());
-		assertEquals("UserName:calvin, Email:calvin@sringside.org.cn, Property:1234", appender.getFirstLog()
+		assertEquals("UserName:calvin, Email:calvin@sringside.org.cn, ObjectType:User", appender.getFirstLog()
 				.getMessage());
 	}
 }

@@ -21,7 +21,7 @@
 		<cxf.version>2.2.7</cxf.version>
 		<jersey.version>1.1.5.1</jersey.version>
 		<spring-security.version>3.0.2.RELEASE</spring-security.version>
-		<activemq.version>5.3.0</activemq.version>
+		<activemq.version>5.3.1</activemq.version>
 		<jetty.version>6.1.22</jetty.version>
 		<h2.version>1.2.131</h2.version>
 		<selenium.version>2.0a2</selenium.version>
@@ -444,18 +444,6 @@
 					<exclusion>
 						<groupId>org.apache.camel</groupId>
 						<artifactId>camel-core</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.activemq</groupId>
-				<artifactId>activemq-pool</artifactId>
-				<version>${activemq.version}</version>
-				<exclusions>
-					<!-- use javax.transaction.jta instead -->
-					<exclusion>
-						<groupId>org.apache.geronimo.specs</groupId>
-						<artifactId>geronimo-jta_1.0.1B_spec</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>

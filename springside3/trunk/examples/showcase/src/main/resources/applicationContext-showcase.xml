@@ -10,8 +10,7 @@
 	<import resource="cache/applicationContext-ehcache.xml" />
 	<import resource="email/applicationContext-email.xml" />
 	<import resource="jms/applicationContext-common.xml" />
-	<import resource="jms/applicationContext-consumer.xml" />
-	<import resource="jms/applicationContext-producer.xml" />
+	<import resource="jms/applicationContext-simple.xml" />
 	<import resource="jmx/applicationContext-jmx-server.xml" />
 	<import resource="jmx/applicationContext-jmx-client.xml" />
 	<import resource="log/applicationContext-log.xml" />

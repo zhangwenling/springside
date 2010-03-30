@@ -2,18 +2,32 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<description>JMS消费者演示配置</description>
+	<description>JMS简单应用配置</description>
+
+	<!-- Spring JMS Template -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+	</bean>
+
+	<!-- 使用Spring JmsTemplate的消息生产者 -->
+	<bean id="notifyMessageProducer" class="org.springside.examples.showcase.jms.NotifyMessageProducer">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="notifyQueue" ref="notifyQueue" />
+		<property name="notifyTopic" ref="notifyTopic" />
+	</bean>
 
 	<!-- 异步接收Queue消息Container -->
 	<bean id="queueContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer" lazy-init="false">
-		<property name="connectionFactory" ref="jmsFactory" />
+		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="notifyQueue" />
 		<property name="messageListener" ref="notifyQueueListener" />
+		<!-- 设置并发数 -->
+		<property name="concurrentConsumers" value="10" />
 	</bean>
 
 	<!-- 异步接收Topic消息Container -->
 	<bean id="topicContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer" lazy-init="false">
-		<property name="connectionFactory" ref="jmsFactory" />
+		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="notifyTopic" />
 		<property name="messageListener" ref="notifyTopicListener" />
 	</bean>
