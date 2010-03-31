@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.common.dao.UserJdbcDao;
 import org.springside.examples.showcase.common.entity.User;
+import org.springside.examples.showcase.unit.BaseTxTestCase;
 import org.springside.modules.test.utils.DataUtils;
 
 import com.google.common.collect.Lists;

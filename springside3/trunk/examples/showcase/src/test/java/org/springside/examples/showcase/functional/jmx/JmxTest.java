@@ -1,8 +1,8 @@
 package org.springside.examples.showcase.functional.jmx;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springside.examples.showcase.functional.BaseFunctionalTestCase;
 
 /**
@@ -12,13 +12,16 @@ import org.springside.examples.showcase.functional.BaseFunctionalTestCase;
  */
 public class JmxTest extends BaseFunctionalTestCase {
 
+	@BeforeClass
+	public static void startWebDriver() throws Exception {
+		createWebDriver();
+	}
+
 	@Test
 	public void test() throws InterruptedException {
 
-		HtmlUnitDriver driver = new HtmlUnitDriver();
-		driver.setJavascriptEnabled(true);
 		driver.get(BASE_URL + "/jmx/jmx-client.action");
-		Thread.sleep(100000);
+		Thread.sleep(10000);
 		assertEquals("default", driver.findElement(By.id("nodeName")).getText());
 	}
 }

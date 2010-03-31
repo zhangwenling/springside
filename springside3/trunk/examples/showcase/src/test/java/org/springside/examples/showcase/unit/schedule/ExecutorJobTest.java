@@ -3,7 +3,7 @@ package org.springside.examples.showcase.unit.schedule;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.schedule.ExecutorJob;
-import org.springside.examples.showcase.unit.common.BaseTxTestCase;
+import org.springside.examples.showcase.unit.BaseTxTestCase;
 import org.springside.modules.test.mock.MockLog4jAppender;
 import org.springside.modules.test.utils.TimeUtils;
 

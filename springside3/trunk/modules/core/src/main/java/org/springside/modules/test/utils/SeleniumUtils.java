@@ -83,7 +83,7 @@ public class SeleniumUtils {
 	 * 兼容Selnium1.0的常用函数.
 	 */
 	public static boolean isTextPresent(WebDriver driver, String text) {
-		return StringUtils.contains(driver.getPageSource(), text);
+		return StringUtils.contains(driver.findElement(By.tagName("body")).getText(), text);
 	}
 
 	/**

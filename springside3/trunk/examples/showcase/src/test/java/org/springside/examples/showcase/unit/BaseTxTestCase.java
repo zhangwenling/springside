@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.unit.common;
+package org.springside.examples.showcase.unit;
 
 import org.junit.Before;
 import org.junit.Ignore;

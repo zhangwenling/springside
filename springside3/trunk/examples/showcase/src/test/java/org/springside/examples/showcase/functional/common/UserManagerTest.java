@@ -31,7 +31,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		driver.get(BASE_URL);
 		driver.findElement(By.linkText("综合演示")).click();
 		driver.findElement(By.id("editLink-2")).click();
-		
+
 		//修改用户需要登录管理员权限
 		SeleniumUtils.type(driver.findElement(By.name("j_username")), "admin");
 		SeleniumUtils.type(driver.findElement(By.name("j_password")), "admin");
@@ -42,8 +42,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		driver.findElement(By.xpath("//input[@value='提交']")).click();
 		//重新进入用户修改页面, 检查最后修改者
 		driver.findElement(By.id("editLink-2")).click();
-		System.out.print(driver.getPageSource());
-
-		assertTrue(SeleniumUtils.isTextPresent(driver, "最后修改: admin"));
+		System.out.println(driver.findElement(By.tagName("body")).getText());
+		assertTrue(SeleniumUtils.isTextPresent(driver, "最后修改:admin"));
 	}
 }
