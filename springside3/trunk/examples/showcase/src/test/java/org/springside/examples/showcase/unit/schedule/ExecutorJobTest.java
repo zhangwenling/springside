@@ -7,7 +7,7 @@ import org.springside.examples.showcase.unit.common.BaseTxTestCase;
 import org.springside.modules.test.mock.MockLog4jAppender;
 import org.springside.modules.test.utils.TimeUtils;
 
-@ContextConfiguration(locations = { "/schedule/applicationContext-executor.xml" })
+@ContextConfiguration(locations = { "/applicationContext-test.xml", "/schedule/applicationContext-executor.xml" })
 public class ExecutorJobTest extends BaseTxTestCase {
 	@Test
 	public void test() {

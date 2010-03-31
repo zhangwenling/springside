@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.common.dao.ReplyDao;
 import org.springside.examples.showcase.common.dao.SubjectDao;
 import org.springside.examples.showcase.common.dao.UserDao;
@@ -16,6 +17,7 @@ import org.springside.examples.showcase.common.entity.User;
  * 
  * @author calvin
  */
+@ContextConfiguration(locations = { "/applicationContext-test.xml" })
 public class PostDaoTest extends BaseTxTestCase {
 
 	@Autowired

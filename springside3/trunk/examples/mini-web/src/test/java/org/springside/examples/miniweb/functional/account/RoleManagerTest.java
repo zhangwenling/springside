@@ -84,7 +84,7 @@ public class RoleManagerTest extends BaseFunctionalTestCase {
 		}
 		testRole.getAuthorityList().addAll(authorityList);
 
-		driver.findElement(By.xpath(Gui.BUTTON_SUBMIT));
+		driver.findElement(By.xpath(Gui.BUTTON_SUBMIT)).click();
 
 		assertTrue(SeleniumUtils.isTextPresent(driver, "保存角色成功"));
 		verifyRole(testRole);

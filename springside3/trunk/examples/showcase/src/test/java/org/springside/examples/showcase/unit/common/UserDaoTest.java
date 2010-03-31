@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Hibernate;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
 
@@ -15,6 +16,7 @@ import com.google.common.collect.Lists;
  * 
  * @author calvin
  */
+@ContextConfiguration(locations = { "/applicationContext-test.xml" })
 public class UserDaoTest extends BaseTxTestCase {
 	@Autowired
 	private UserDao userDao;

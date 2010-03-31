@@ -1,6 +1,7 @@
 package org.springside.examples.miniweb.unit.dao;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DBUnitUtils;
@@ -14,6 +15,7 @@ import org.springside.modules.test.utils.DBUnitUtils;
  * 
  * @author calvin
  */
+@Ignore
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
 public class BaseTxTestCase extends SpringTxTestCase {
 

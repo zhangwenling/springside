@@ -14,8 +14,8 @@ import org.springside.modules.test.spring.SpringContextTestCase;
  * 
  * @author calvin
  */
-@ContextConfiguration(locations = { "/jmx/applicationContext-jmx-server.xml", "/jmx/applicationContext-jmx-client.xml",
-		"/log/applicationContext-log.xml" })
+@ContextConfiguration(locations = { "/applicationContext-test.xml", "/jmx/applicationContext-jmx-server.xml",
+		"/jmx/applicationContext-jmx-client.xml", "/log/applicationContext-log.xml" })
 public class JmxClientServiceTest extends SpringContextTestCase {
 
 	@Autowired

@@ -27,5 +27,4 @@ public class CacheControlHeaderFilterTest extends Assert {
 
 		assertEquals("private, max-age=123", response.getHeader("Cache-Control"));
 	}
-
 }

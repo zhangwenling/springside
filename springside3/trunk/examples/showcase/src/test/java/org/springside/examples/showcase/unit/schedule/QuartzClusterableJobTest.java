@@ -14,7 +14,8 @@ import org.springside.modules.test.utils.TimeUtils;
  * 
  * @author calvin
  */
-@ContextConfiguration(locations = { "/schedule/applicationContext-quartz-timer-cluster.xml" })
+@ContextConfiguration(locations = { "/applicationContext-test.xml",
+		"/schedule/applicationContext-quartz-timer-cluster.xml" })
 public class QuartzClusterableJobTest extends BaseTxTestCase {
 
 	@Test

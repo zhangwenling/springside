@@ -13,6 +13,4 @@
 		<property name="targetConnectionFactory" ref="amqConnectionFactory" />
 		<property name="sessionCacheSize" value="10" />
 	</bean>
-
-
 </beans>

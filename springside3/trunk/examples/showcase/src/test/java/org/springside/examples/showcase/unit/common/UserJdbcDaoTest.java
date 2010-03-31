@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.common.dao.UserJdbcDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.test.utils.DataUtils;
@@ -16,6 +17,7 @@ import com.google.common.collect.Lists;
  * 
  * @author calvin
  */
+@ContextConfiguration(locations = { "/applicationContext-test.xml" })
 public class UserJdbcDaoTest extends BaseTxTestCase {
 	@Autowired
 	private UserJdbcDao userJdbcDao;
