@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.jms;
+package org.springside.examples.showcase.jms.simple;
 
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
@@ -18,9 +18,9 @@ import org.springside.examples.showcase.email.SimpleMailService;
  * @author calvin
  *
  */
-public class NotifyQueueListener implements MessageListener {
+public class NotifyMessageListener implements MessageListener {
 
-	private static Logger logger = LoggerFactory.getLogger(NotifyQueueListener.class);
+	private static Logger logger = LoggerFactory.getLogger(NotifyMessageListener.class);
 
 	@Autowired(required = false)
 	private SimpleMailService simpleMailService;

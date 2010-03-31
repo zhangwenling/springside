@@ -14,13 +14,5 @@
 		<property name="sessionCacheSize" value="10" />
 	</bean>
 
-	<!-- Queue定义 -->
-	<bean id="notifyQueue" class="org.apache.activemq.command.ActiveMQQueue">
-		<constructor-arg value="notifyQueue" />
-	</bean>
 
-	<!-- Topic定义 -->
-	<bean id="notifyTopic" class="org.apache.activemq.command.ActiveMQTopic">
-		<constructor-arg value="notifyTopic" />
-	</bean>
 </beans>

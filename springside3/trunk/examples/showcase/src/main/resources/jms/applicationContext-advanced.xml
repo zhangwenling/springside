@@ -2,7 +2,16 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<description>JMS高级应用配置</description>
+	<description>JMS高级应用配置(NON_PERSISTENT,DURIABLE,SELECTOR)</description>
+	<!-- Queue定义 -->
+	<bean id="advancedNotifyQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="advanced.notifyQueue" />
+	</bean>
+
+	<!-- Topic定义 -->
+	<bean id="advancedNotifyTopic" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg value="advanced.notifyTopic" />
+	</bean>
 
 	<!-- Spring JMS Template -->
 	<bean id="advancedJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
@@ -16,30 +25,27 @@
 	</bean>
 
 	<!-- 使用Spring JmsTemplate的消息生产者 -->
-	<bean id="advancedNotifyMessageProducer" class="org.springside.examples.showcase.jms.NotifyMessageProducer">
+	<bean id="advancedNotifyMessageProducer" class="org.springside.examples.showcase.jms.advanced.AdvancedNotifyMessageProducer">
 		<property name="jmsTemplate" ref="advancedJmsTemplate" />
-		<property name="notifyQueue" ref="notifyQueue" />
-		<property name="notifyTopic" ref="notifyTopic" />
+		<property name="notifyQueue" ref="advancedNotifyQueue" />
+		<property name="notifyTopic" ref="advancedNotifyTopic" />
 	</bean>
 
 	<!-- 异步接收Queue消息Container -->
 	<bean id="advancedQueueContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="destination" ref="notifyQueue" />
-		<property name="messageListener" ref="notifyQueueListener" />
+		<property name="destination" ref="advancedNotifyQueue" />
+		<property name="messageListener" ref="advancedNotifyMessageListener" />
 		<property name="concurrentConsumers" value="10" />
 	</bean>
 
 	<!-- 异步接收Topic消息Container -->
 	<bean id="advancedTopicContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="destination" ref="notifyTopic" />
-		<property name="messageListener" ref="notifyTopicListener" />
+		<property name="destination" ref="advancedNotifyTopic" />
+		<property name="messageListener" ref="advancedNotifyMessageListener" />
 	</bean>
 
-	<!-- 异步接收Topic消息处理类 -->
-	<bean id="advancedNotifyTopicListener" class="org.springside.examples.showcase.jms.NotifyTopicListener" />
-
-	<!-- 异步接收Topic消息处理类 -->
-	<bean id="advancedNotifyQueueListener" class="org.springside.examples.showcase.jms.NotifyQueueListener" />
+	<!-- 异步接收消息处理类 -->
+	<bean id="advancedNotifyMessageListener" class="org.springside.examples.showcase.jms.advanced.AdvancedNotifyMessageListener" />
 </beans>

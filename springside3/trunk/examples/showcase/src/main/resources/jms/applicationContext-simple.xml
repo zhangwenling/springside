@@ -4,13 +4,23 @@
 
 	<description>JMS简单应用配置</description>
 
+	<!-- Queue定义 -->
+	<bean id="notifyQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="notifyQueue" />
+	</bean>
+
+	<!-- Topic定义 -->
+	<bean id="notifyTopic" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg value="notifyTopic" />
+	</bean>
+
 	<!-- Spring JMS Template -->
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="connectionFactory" />
 	</bean>
 
 	<!-- 使用Spring JmsTemplate的消息生产者 -->
-	<bean id="notifyMessageProducer" class="org.springside.examples.showcase.jms.NotifyMessageProducer">
+	<bean id="notifyMessageProducer" class="org.springside.examples.showcase.jms.simple.NotifyMessageProducer">
 		<property name="jmsTemplate" ref="jmsTemplate" />
 		<property name="notifyQueue" ref="notifyQueue" />
 		<property name="notifyTopic" ref="notifyTopic" />
@@ -20,7 +30,7 @@
 	<bean id="queueContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="notifyQueue" />
-		<property name="messageListener" ref="notifyQueueListener" />
+		<property name="messageListener" ref="notifyMessageListener" />
 		<property name="concurrentConsumers" value="10" />
 	</bean>
 
@@ -28,12 +38,9 @@
 	<bean id="topicContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="notifyTopic" />
-		<property name="messageListener" ref="notifyTopicListener" />
+		<property name="messageListener" ref="notifyMessageListener" />
 	</bean>
 
-	<!-- 异步接收Topic消息处理类 -->
-	<bean id="notifyTopicListener" class="org.springside.examples.showcase.jms.NotifyTopicListener" />
-
-	<!-- 异步接收Topic消息处理类 -->
-	<bean id="notifyQueueListener" class="org.springside.examples.showcase.jms.NotifyQueueListener" />
+	<!-- 异步接收消息处理类 -->
+	<bean id="notifyMessageListener" class="org.springside.examples.showcase.jms.simple.NotifyMessageListener" />
 </beans>

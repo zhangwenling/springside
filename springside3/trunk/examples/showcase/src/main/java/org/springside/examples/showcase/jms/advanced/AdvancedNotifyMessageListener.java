@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.jms;
+package org.springside.examples.showcase.jms.advanced;
 
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
@@ -18,9 +18,9 @@ import org.springside.examples.showcase.email.MimeMailService;
  * @author calvin
  *
  */
-public class NotifyTopicListener implements MessageListener {
+public class AdvancedNotifyMessageListener implements MessageListener {
 
-	private static Logger logger = LoggerFactory.getLogger(NotifyTopicListener.class);
+	private static Logger logger = LoggerFactory.getLogger(AdvancedNotifyMessageListener.class);
 
 	@Autowired(required = false)
 	private MimeMailService mimeMailService;
