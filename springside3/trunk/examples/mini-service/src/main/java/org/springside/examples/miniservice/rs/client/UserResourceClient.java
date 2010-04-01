@@ -5,14 +5,12 @@ import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
-import org.springside.examples.miniservice.rs.dto.JAXBContextResolver;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 /**
@@ -25,9 +23,7 @@ public class UserResourceClient {
 	private WebResource client;
 
 	public UserResourceClient(String baseUrl) {
-		ClientConfig config = new DefaultClientConfig();
-		config.getClasses().add(JAXBContextResolver.class);
-		Client jerseyClient = Client.create(config);
+		Client jerseyClient = Client.create(new DefaultClientConfig());
 		client = jerseyClient.resource(baseUrl);
 	}
 

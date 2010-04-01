@@ -275,6 +275,11 @@
 				<artifactId>jackson-mapper-asl</artifactId>
 				<version>1.5.0</version>
 			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-jaxrs</artifactId>
+				<version>1.5.0</version>
+			</dependency>
 
 			<!-- j2ee web spec -->
 			<dependency>
@@ -380,11 +385,6 @@
 			<dependency>
 				<groupId>com.sun.jersey</groupId>
 				<artifactId>jersey-client</artifactId>
-				<version>${jersey.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.jersey</groupId>
-				<artifactId>jersey-json</artifactId>
 				<version>${jersey.version}</version>
 			</dependency>
 			<dependency>

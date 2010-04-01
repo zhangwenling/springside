@@ -18,8 +18,7 @@
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
 		<jdbc.driver.version>${h2.version}</jdbc.driver.version>
 		<!--
-			<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId>
-			<jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
+			<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId> <jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
 			<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version>
 		-->
 		<!--
@@ -74,7 +73,7 @@
 			<groupId>javassist</groupId>
 			<artifactId>javassist</artifactId>
 		</dependency>
-		
+
 		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -84,7 +83,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 		</dependency>
-		
+
 		<!-- dbcp -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -129,12 +128,12 @@
 			<artifactId>jersey-client</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-json</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.sun.jersey.contribs</groupId>
 			<artifactId>jersey-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-jaxrs</artifactId>
 		</dependency>
 		<!-- rest end -->
 

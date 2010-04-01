@@ -18,9 +18,11 @@
 		<config>src/main/resources/schedule/applicationContext-quartz-cron-local.xml</config>
 		<config>src/main/resources/schedule/applicationContext-quartz-timer-cluster.xml</config>
 		<config>src/main/resources/webservice/applicationContext-cxf-client.xml</config>
-		<config>src/main/resources/jms/applicationContext-consumer.xml</config>
-		<config>src/main/resources/jms/applicationContext-producer.xml</config>
 		<config>src/main/resources/jms/applicationContext-common.xml</config>
+		<config>src/main/resources/jms/applicationContext-advanced.xml</config>
+		<config>src/main/resources/jms/applicationContext-simple.xml</config>
+		<config>src/main/resources/cache/applicationContext-ehcache.xml</config>
+		<config>src/main/resources/webservice/applicationContext-jersey-server.xml</config>
 	</configs>
 	<configSets>
 	</configSets>
