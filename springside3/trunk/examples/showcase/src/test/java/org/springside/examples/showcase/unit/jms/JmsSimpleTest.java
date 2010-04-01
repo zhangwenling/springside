@@ -10,8 +10,8 @@ import org.springside.modules.test.mock.MockLog4jAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
 import org.springside.modules.test.utils.TimeUtils;
 
-@ContextConfiguration(locations = { "/applicationContext-test.xml", "/jms/applicationContext-common.xml",
-		"/jms/applicationContext-simple.xml", "/jms/applicationContext-advanced.xml" })
+@ContextConfiguration(locations = { "/applicationContext-test.xml", "/jms/applicationContext-simple.xml",
+		"/jms/applicationContext-advanced.xml" })
 public class JmsSimpleTest extends SpringContextTestCase {
 
 	@Autowired

@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.email.SimpleMailService;
 
 /**
- * Queue消息的异步被动接收者.
+ * 消息的异步被动接收者.
  * 
  * 使用Spring的MessageListenerContainer侦听消息并调用本Listener进行处理.
  * 
@@ -30,7 +30,7 @@ public class NotifyMessageListener implements MessageListener {
 	 */
 	public void onMessage(Message message) {
 		try {
-			MapMessage mapMessage =(MapMessage)message;
+			MapMessage mapMessage = (MapMessage) message;
 			//打印消息详情
 			logger.info("UserName:" + mapMessage.getString("userName") + ", Email:" + mapMessage.getString("email"));
 

@@ -4,14 +4,25 @@
 
 	<description>JMS简单应用配置</description>
 
+	<!-- ActiveMQ 连接工厂 -->
+	<bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="${jms.broker_url}" />
+	</bean>
+
+	<!-- Spring Caching 连接工厂 -->
+	<bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+		<property name="targetConnectionFactory" ref="amqConnectionFactory" />
+		<property name="sessionCacheSize" value="10" />
+	</bean>
+
 	<!-- Queue定义 -->
 	<bean id="notifyQueue" class="org.apache.activemq.command.ActiveMQQueue">
-		<constructor-arg value="notifyQueue" />
+		<constructor-arg value="q.notify" />
 	</bean>
 
 	<!-- Topic定义 -->
 	<bean id="notifyTopic" class="org.apache.activemq.command.ActiveMQTopic">
-		<constructor-arg value="notifyTopic" />
+		<constructor-arg value="t.notify" />
 	</bean>
 
 	<!-- Spring JMS Template -->

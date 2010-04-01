@@ -7,11 +7,9 @@ import javax.jms.MessageListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springside.examples.showcase.email.MimeMailService;
 
 /**
- * Topic消息的异步被动接收者.
+ * 消息的异步被动接收者.
  * 
  * 使用Spring的MessageListenerContainer侦听消息并调用本Listener进行处理.
  * 
@@ -21,9 +19,6 @@ import org.springside.examples.showcase.email.MimeMailService;
 public class AdvancedNotifyMessageListener implements MessageListener {
 
 	private static Logger logger = LoggerFactory.getLogger(AdvancedNotifyMessageListener.class);
-
-	@Autowired(required = false)
-	private MimeMailService mimeMailService;
 
 	/**
 	 * MessageListener回调函数.
@@ -35,10 +30,6 @@ public class AdvancedNotifyMessageListener implements MessageListener {
 			//打印消息详情
 			logger.info("UserName:" + mapMessage.getString("userName") + ", Email:" + mapMessage.getString("email")
 					+ ", ObjectType:" + mapMessage.getStringProperty("objectType"));
-			//发送邮件
-			if (mimeMailService != null) {
-				mimeMailService.sendNotificationMail(mapMessage.getString("userName"));
-			}
 		} catch (JMSException e) {
 			logger.error(e.getMessage(), e);
 		}

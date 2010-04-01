@@ -42,7 +42,7 @@ public class AdvancedNotifyMessageProducer {
 				message.setString("userName", user.getName());
 				message.setString("email", user.getEmail());
 
-				message.setStringProperty("objectType", "User");
+				message.setStringProperty("objectType", "user");
 
 				return message;
 			}

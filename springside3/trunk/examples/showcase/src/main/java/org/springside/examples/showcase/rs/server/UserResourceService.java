@@ -91,7 +91,7 @@ public class UserResourceService {
 	/**
 	 * 搜索用户.
 	 * 
-	 * 演示QueryParam的获取与特定格式/内容Response的返回.
+	 * 演示QueryParam与不同格式不同返回内容的Response.
 	 */
 	@GET
 	@Path("/search")
