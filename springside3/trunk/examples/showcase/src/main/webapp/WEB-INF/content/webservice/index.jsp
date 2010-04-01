@@ -18,7 +18,7 @@
 		<h1>Web Service高级演示</h1>
 		<ul>
 			<li><a href="${ctx}/webservice/ws/index.action">WS-*高级协议演示(安全、附件)</a></li>
-			<li>RESTful Web Service高级协议演示(计划中)</li>
+			<li><a href="${ctx}/webservice/rs/index.action">RESTful Web Service高级协议演示</a></li>
 		</ul>
 		</div>
 	</div>

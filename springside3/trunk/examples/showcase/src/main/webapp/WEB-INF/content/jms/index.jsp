@@ -21,14 +21,14 @@
 		<h2>技术说明：</h2>
 		<ul>
 			<li>演示基于ActiveMQ的JMS Topic/Queue</li>
-			<li>演示同步Polling receive与异步Message Driven POJO两种消费者模式</li>
+			<li>演示基于Spring CachingConnectionFactory, JmsTemplate, DefaultMessageListener的应用</li>
+			<li>演示使用默认值的Simple模式与高级设置的Advanced模式</li>
 		</ul>
 
 		<h2>用户故事：</h2>
 		<ul>
 			<li>在综合演示用例中保存用户时,异步发送通知消息邮件</li>
-			<li>使用JConsole查看ActiveMQ
-				Server运行情况.(路径service:jmx:rmi:///jndi/rmi://localhost:1099/showcase,名称org.activemq)
+			<li>可使用JConsole查看ActiveMQ Server运行情况.(路径service:jmx:rmi:///jndi/rmi://localhost:1099/showcase,名称org.activemq)
 			</li>
 		</ul>
 		</div>
