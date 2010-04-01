@@ -62,11 +62,10 @@
 		<property name="connectionFactory" ref="advancedConnectionFactory" />
 		<property name="destination" ref="advancedNotifyTopic" />
 		<property name="messageListener" ref="advancedNotifyMessageListener" />
-		<!-- JMS Selector -->
+		<!-- JMS Selector消息过滤器 -->
 		<property name="messageSelector" value="objectType='user'" />
 		<!-- 持久化订阅者 -->
 		<property name="subscriptionDurable" value="true" />
-
 	</bean>
 
 	<!-- 异步接收消息处理类 -->
