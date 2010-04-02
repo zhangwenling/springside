@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.springside</groupId>
 		<artifactId>springside3-parent</artifactId>
-		<version>3.2.3-SNAPSHOT</version>
+		<version>3.3.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>showcase</artifactId>
 	<packaging>war</packaging>
@@ -45,8 +45,8 @@
 			<artifactId>cglib-nodep</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>javax.annotation</groupId>
-			<artifactId>jsr250-api</artifactId>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-annotation_1.0_spec</artifactId>
 		</dependency>
 		<!-- spring end -->
 

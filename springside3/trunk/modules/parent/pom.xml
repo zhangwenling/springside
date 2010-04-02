@@ -6,7 +6,7 @@
 	<artifactId>springside3-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>Springside3's Parent pom.xml</name>
-	<version>3.2.3-SNAPSHOT</version>
+	<version>3.3.0-SNAPSHOT</version>
 	<organization>
 		<name>SpringSide</name>
 		<url>http://www.springside.org.cn</url>
@@ -14,7 +14,7 @@
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<springside.version>3.2.3-SNAPSHOT</springside.version>
+		<springside.version>3.3.0-SNAPSHOT</springside.version>
 		<spring.version>3.0.1.RELEASE</spring.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<struts2.version>2.1.8.1</struts2.version>
@@ -144,9 +144,9 @@
 			</dependency>
 			<!-- only for jdk5.0 -->
 			<dependency>
-				<groupId>javax.annotation</groupId>
-				<artifactId>jsr250-api</artifactId>
-				<version>1.0</version>
+				<groupId>org.apache.geronimo.specs</groupId>
+				<artifactId>geronimo-annotation_1.0_spec</artifactId>
+				<version>1.1.1</version>
 			</dependency>
 
 			<!-- spring aop -->
@@ -320,11 +320,6 @@
 				<artifactId>cxf-rt-core</artifactId>
 				<version>${cxf.version}</version>
 				<exclusions>
-					<!-- use javax.annotation.jsr250-api instead -->
-					<exclusion>
-						<groupId>org.apache.geronimo.specs</groupId>
-						<artifactId>geronimo-annotation_1.0_spec</artifactId>
-					</exclusion>
 					<!-- use javax.mail.mail instead -->
 					<exclusion>
 						<groupId>org.apache.geronimo.specs</groupId>
@@ -345,10 +340,6 @@
 					<!-- see above -->
 					<exclusion>
 						<groupId>org.apache.geronimo.specs</groupId>
-						<artifactId>geronimo-annotation_1.0_spec</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.geronimo.specs</groupId>
 						<artifactId>geronimo-javamail_1.4_spec</artifactId>
 					</exclusion>
 					<exclusion>
@@ -366,13 +357,6 @@
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-ws-security</artifactId>
 				<version>${cxf.version}</version>
-				<exclusions>
-					<!-- see above -->
-					<exclusion>
-						<groupId>org.apache.geronimo.specs</groupId>
-						<artifactId>geronimo-annotation_1.0_spec</artifactId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 			<!-- webservice end -->
 
@@ -705,27 +689,6 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
-
-			<!-- selenium 1.0 -->
-			<dependency>
-				<groupId>org.seleniumhq.selenium.client-drivers</groupId>
-				<artifactId>selenium-java-client-driver</artifactId>
-				<version>1.0.1</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.seleniumhq.selenium.server</groupId>
-				<artifactId>selenium-server</artifactId>
-				<version>1.0.1</version>
-				<scope>test</scope>
-				<exclusions>
-					<exclusion>
-						<groupId>jetty</groupId>
-						<artifactId>org.mortbay.jetty</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
 			<!-- selenium 2.0 -->
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
