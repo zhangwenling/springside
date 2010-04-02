@@ -11,12 +11,18 @@
 		<!-- <property name="useAsyncSend" value="true" /> -->
 	</bean>
 
+	<!-- 持久化主题订阅者ActiveMQ 连接工厂 -->
+	<bean id="advancedTopicConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="${jms.broker_url}" />
+		<!-- Durable订阅者必须设置ClientId -->
+		<property name="clientID" value="durableTopicListener" />
+	</bean>
+
+
 	<!-- Spring Caching 连接工厂 -->
 	<bean id="advancedCachingConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
 		<property name="targetConnectionFactory" ref="advancedConnectionFactory" />
 		<property name="sessionCacheSize" value="10" />
-		<!-- Durable订阅者必须设置ClientId -->
-		<property name="clientId" value="durableTopicListener" />
 	</bean>
 
 	<!-- Queue定义 -->
@@ -59,7 +65,7 @@
 
 	<!-- 异步接收Topic消息Container -->
 	<bean id="advancedTopicContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-		<property name="connectionFactory" ref="advancedConnectionFactory" />
+		<property name="connectionFactory" ref="advancedTopicConnectionFactory" />
 		<property name="destination" ref="advancedNotifyTopic" />
 		<property name="messageListener" ref="advancedNotifyMessageListener" />
 		<!-- JMS Selector消息过滤器 -->

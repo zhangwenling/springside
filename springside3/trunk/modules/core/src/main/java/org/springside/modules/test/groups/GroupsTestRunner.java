@@ -32,6 +32,7 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
  * 比如可以在白天持续执行速度较快的测试方法, 到了晚上再执行较慢的测试方法.
  * 
  * Runner会只执行测试类的@Groups定义, 与在-Dtest.groups=xxx 或 application.test.properties的test.groups=xxx相吻合的测试类及测试方法.
+ * 如两处均无设置则执行全部.
  * 另提供独立判断的工具方法供其他的Runner调用.
  * 
  * 注意, 本类只适用于JUnit 4.4以上版本.
