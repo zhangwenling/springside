@@ -5,15 +5,15 @@
 	<description>JMS高级应用配置(NON_PERSISTENT,DURIABLE,SELECTOR)</description>
 
 	<!-- ActiveMQ 连接工厂 -->
-	<bean id="advancedAmqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+	<bean id="advancedConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL" value="${jms.broker_url}" />
 		<!-- 对PERSISTENT的消息进行异步发送(NON_PERSISTENT消息默认异步发送) -->
 		<!-- <property name="useAsyncSend" value="true" /> -->
 	</bean>
 
 	<!-- Spring Caching 连接工厂 -->
-	<bean id="advancedConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
-		<property name="targetConnectionFactory" ref="advancedAmqConnectionFactory" />
+	<bean id="advancedCachingConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+		<property name="targetConnectionFactory" ref="advancedConnectionFactory" />
 		<property name="sessionCacheSize" value="10" />
 		<!-- Durable订阅者必须设置ClientId -->
 		<property name="clientId" value="durableTopicListener" />
@@ -31,7 +31,7 @@
 
 	<!-- Spring JMS Template -->
 	<bean id="advancedJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-		<property name="connectionFactory" ref="advancedConnectionFactory" />
+		<property name="connectionFactory" ref="advancedCachingConnectionFactory" />
 		<!-- 使 deliveryMode, priority, timeToLive设置生效-->
 		<property name="explicitQosEnabled" value="true" />
 		<!-- 设置NON_PERSISTENT模式, 默认为PERSISTENT -->
