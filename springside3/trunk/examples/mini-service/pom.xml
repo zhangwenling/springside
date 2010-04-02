@@ -157,7 +157,7 @@
 		<!-- utils begin -->
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
-			<artifactId>ehcache-jgroupsreplication</artifactId>
+			<artifactId>ehcache</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
