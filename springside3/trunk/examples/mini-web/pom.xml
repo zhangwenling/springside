@@ -4,11 +4,9 @@
 	<parent>
 		<groupId>org.springside</groupId>
 		<artifactId>springside3-parent</artifactId>
-		<version>3.2.3-SNAPSHOT</version>
+		<version>3.3.0</version>
 	</parent>
-	<groupId>org.springside</groupId>
 	<artifactId>mini-web</artifactId>
-	<version>3.2.3-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>Springside3's Mini-Web Example</name>
 
