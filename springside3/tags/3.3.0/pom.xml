@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>springside3-parent</artifactId>
+		<groupId>org.springside</groupId>
+		<version>3.3.0</version>
+		<relativePath>modules/parent/pom.xml</relativePath>
+	</parent>
+	<groupId>org.springside</groupId>
+	<artifactId>springside3</artifactId>
+	<name>Springside3's Project</name>
+	<packaging>pom</packaging>
+	<modules>
+		<module>modules/parent</module>
+		<module>modules/core</module>
+		<module>modules/extension</module>
+		<module>examples/mini-service</module>
+		<module>examples/mini-web</module>
+		<module>examples/showcase</module>
+	</modules>
+</project>
