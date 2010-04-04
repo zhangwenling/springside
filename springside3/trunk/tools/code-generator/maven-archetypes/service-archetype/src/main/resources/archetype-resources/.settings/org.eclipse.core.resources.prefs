@@ -1,7 +1,0 @@
-#Sun Jan 03 22:07:59 CST 2010
-eclipse.preferences.version=1
-encoding//bin/init-db.bat=GBK
-encoding//bin/init-jar.bat=GBK
-encoding//bin/webservice/build-client.bat=GBK
-encoding//bin/webservice/save-wsdl.bat=GBK
-encoding/<project>=UTF-8
