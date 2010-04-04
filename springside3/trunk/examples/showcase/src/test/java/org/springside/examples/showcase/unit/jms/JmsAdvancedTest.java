@@ -81,7 +81,6 @@ public class JmsAdvancedTest extends SpringContextTestCase {
 			}
 		});
 
-	
 		TimeUtils.sleep(1000);
 		assertTrue(appender.getAllLogs().isEmpty());
 	}

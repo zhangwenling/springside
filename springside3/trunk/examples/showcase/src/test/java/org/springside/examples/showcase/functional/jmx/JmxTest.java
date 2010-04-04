@@ -21,7 +21,6 @@ public class JmxTest extends BaseFunctionalTestCase {
 	public void test() throws InterruptedException {
 
 		driver.get(BASE_URL + "/jmx/jmx-client.action");
-		Thread.sleep(10000);
-		assertEquals("default", driver.findElement(By.id("nodeName")).getText());
+		assertEquals("default", driver.findElement(By.id("nodeName")).getValue());
 	}
 }
