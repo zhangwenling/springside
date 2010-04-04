@@ -17,7 +17,7 @@
 
 	<!-- WebService的实现Bean定义 -->
 	<bean id="userWebService" class="org.springside.examples.miniservice.ws.impl.UserWebServiceImpl" />
-	
+
 	<!-- dozer DTO复制工具类定义 -->
-	<bean id="dozer" class="org.dozer.DozerBeanMapper"/>
+	<bean id="dozer" class="org.dozer.DozerBeanMapper" />
 </beans>

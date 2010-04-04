@@ -11,7 +11,7 @@
 	<artifactId>h2-starts</artifactId>
 	<name>H2 start Script</name>
 	<packaging>pom</packaging>
-	
+
 	<profiles>
 		<profile>
 			<id>startdb</id>
