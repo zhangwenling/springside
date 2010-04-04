@@ -310,13 +310,6 @@
 		</dependency>
 		<!-- poi end -->
 
-		<!-- profile tools begin -->
-		<dependency>
-			<groupId>p6spy</groupId>
-			<artifactId>p6spy</artifactId>
-		</dependency>
-		<!-- profile tools end -->
-
 		<!-- test begin -->
 		<dependency>
 			<groupId>junit</groupId>

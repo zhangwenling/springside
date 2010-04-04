@@ -33,11 +33,6 @@
 		<ul>
 			<li>在高性能要求的时候使用Spring JdbcTemplate访问和更新数据库。(UserJdbcDao)</li>
 		</ul>
-		
-		<h2>P6SpySQL执行记录及时间分析</h2>
-		<ul>
-			<li>访问对象列表及修改用户对象，P6Spy将sql记录到c:/spy.log，使用irontracksql观看结果。</li>
-		</ul>
 		</div>
 	</div>
 </div>

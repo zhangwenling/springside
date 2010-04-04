@@ -1,12 +1,3 @@
--- Thanks to Amir Kibbar and Peter Rietzler for contributing the schema for H2 database, 
--- and verifying that it works with Quartz's StdJDBCDelegate
---
--- Note, Quartz depends on row-level locking which means you must use the MVCC=TRUE 
--- setting on your H2 database, or you will experience dead-locks
---
---
--- In your Quartz properties file, you'll need to set 
--- org.quartz.jobStore.driverDelegateClass = org.quartz.impl.jdbcjobstore.StdJDBCDelegate
 DROP TABLE QRTZ_LOCKS IF EXISTS;
 DROP TABLE QRTZ_SCHEDULER_STATE IF EXISTS;
 DROP TABLE QRTZ_FIRED_TRIGGERS IF EXISTS;

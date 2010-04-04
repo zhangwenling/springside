@@ -16,15 +16,15 @@
 	<taskdef name="dbunit" classname="org.dbunit.ant.DbUnitTask" classpathref="project.lib" />
 
 	<target name="init-db">
-		<sql driver="org.h2.Driver" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" src="${sql.dir}/schema.sql" onerror="continue">
+		<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" src="${sql.dir}/schema.sql" onerror="continue">
 			<classpath refid="project.lib" />
 		</sql>
 
-		<sql driver="org.h2.Driver" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" src="${sql.dir}/quartz.sql" onerror="continue">
+		<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" src="${sql.dir}/quartz.sql" onerror="continue">
 			<classpath refid="project.lib" />
 		</sql>
 
-		<dbunit driver="org.h2.Driver" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}">
+		<dbunit driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}">
 			<dbconfig>
 				<property name="datatypeFactory" value="${dbunit.datatype}" />
 			</dbconfig>

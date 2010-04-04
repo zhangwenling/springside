@@ -10,8 +10,6 @@ import org.springside.modules.test.utils.TimeUtils;
 /**
  * Quartz可集群Timer Job测试.
  * 
- * 
- * 
  * @author calvin
  */
 @ContextConfiguration(locations = { "/applicationContext-test.xml",

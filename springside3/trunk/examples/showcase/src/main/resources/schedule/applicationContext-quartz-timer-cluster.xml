@@ -5,8 +5,9 @@
 	default-lazy-init="true">
 
 	<description>Quartz的定时集群任务配置</description>
+
 	<!-- Quartz集群Schduler -->
-	<bean id="clusterQuartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
+	<bean id="clusterQuartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<!-- Triggers集成 -->
 		<property name="triggers">
 			<list>
