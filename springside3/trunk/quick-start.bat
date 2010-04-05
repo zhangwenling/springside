@@ -8,7 +8,7 @@ xcopy /s/e/i/h/d/y "tools\maven\central-repository" "%USERPROFILE%\.m2\repositor
 
 echo [Step 2] 启动H2数据库.
 cd tools/h2
-call mvn initialize -Pstartdb
+call mvn initialize -o -Pstartdb
 cd ..\..\
 
 echo [Step 3] 安装SpringSide3 所有modules,examples项目到本地Maven仓库,生成Eclipse项目文件.
