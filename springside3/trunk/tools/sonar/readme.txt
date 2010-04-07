@@ -1,5 +1,5 @@
 1.Configuration->Quality profiles
-  Add SpringSide way, use springside checkstyle/pmd setting.
+  Add SpringSide way, use springside checkstyle/pmd/findbugs setting.
   Set 2 Alert threashod in SpringSide way's :"Rule Complance and "Duplicated lines".
 
 2.Configuration->Settings->Rules weight 

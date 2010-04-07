@@ -87,7 +87,7 @@ public class UserResourceService {
 	}
 
 	/**
-	 * 创建用户, 返回表示所创建用户的URI.
+	 * 创建用户, 请求数据为JSON/XML格式编码的DTO, 返回表示所创建用户的URI.
 	 */
 	@POST
 	@Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })

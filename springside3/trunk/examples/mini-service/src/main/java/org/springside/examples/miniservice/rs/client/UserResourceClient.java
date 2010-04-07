@@ -37,7 +37,8 @@ public class UserResourceClient {
 	}
 
 	public URI createUser(UserDTO user) {
-		ClientResponse response = client.path("/users").type("application/json").post(ClientResponse.class, user);
+		ClientResponse response = client.path("/users").entity(user, MediaType.APPLICATION_JSON).post(
+				ClientResponse.class);
 		return response.getLocation();
 	}
 }

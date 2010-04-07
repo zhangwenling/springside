@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="hibernate tools" default="generate.code" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
 
-	<property name="hibernatetools-templates.path" value="../../../../tools/code-generator/hibernatetools-templates" />
+	<property name="hibernatetools-templates.path" value="../../../../tools/hibernatetools" />
 
 	<artifact:dependencies pathId="toolslib">
 		<pom file="../../pom.xml" />
@@ -15,25 +15,33 @@
 				<path location="../../target/classes" />
 			</classpath>
 
-			<jdbcconfiguration configurationfile="config/hibernate.cfg.xml" revengfile="config/hibernate.reveng.xml" detectmanytomany="true" namingstrategy="org.hibernate.cfg.ImprovedNamingStrategy" reversestrategy="com.ericsson.aop.adm.common.dao.AdmReverseEngineeringStrategy" />
+			<jdbcconfiguration configurationfile="config/hibernate.cfg.xml" revengfile="config/hibernate.reveng.xml" detectmanytomany="true" namingstrategy="org.hibernate.cfg.ImprovedNamingStrategy" reversestrategy="org.springside.modules.orm.hibernate.IgnorePrefixReverseEngineeringStrategy" />
 
-			<hbmtemplate templateprefix="pojo/" template="pojo/Pojo.ftl" filepattern="{package-name}/{class-name}.java">
+			<hbmtemplate templateprefix="pojo/" template="pojo/Pojo.ftl" filepattern="entity/{package-name}/{class-name}.java">
 				<property key="jdk5" value="true" />
 				<property key="ejb3" value="true" />
 			</hbmtemplate>
-			<hbmtemplate templateprefix="pojo/" template="dao.ftl" filepattern="dao/{class-name}Dao.java" />
-			<hbmtemplate templateprefix="pojo/" template="manager.ftl" filepattern="manager/{class-name}Manager.java" />
+			<hbmtemplate templateprefix="pojo/" template="dao.ftl" filepattern="dao/{package-name}/{class-name}Dao.java" />
+			<hbmtemplate templateprefix="pojo/" template="manager.ftl" filepattern="manager/{package-name}/{class-name}Manager.java" />
 		</hibernatetool>
 	</target>
 
-	<target name="convert.mysql.h2" description="convert mysql/oracle to h2 for testing">
+	<target name="convert.mysql2h2" description="convert mysql/oracle to h2 for testing">
 		<copy todir="../../src/main/resources/sql/h2" overwrite="true">
 			<fileset dir="../../src/main/resources/sql/mysql">
 				<include name="**/*.sql" />
 			</fileset>
 		</copy>
 
-		<replace dir="../../src/main/resources/sql/h2" includes="**/*.sql" token="type = InnoDB" value="" />
-		<replace dir="../../src/main/resources/sql/h2" includes="**/*.sql" token="MySQL 5.0" value="H2" />
+		<replace dir="../../src/main/resources/sql/h2" includes="**/*.sql" token="TYPE=InnoDB" value="" />
+		<replace dir="../../src/main/resources/sql/h2" includes="**/*.sql" token="TYPE=MyISAM" value="" />
+
+		<replaceregexp byline="true">
+			<regexp pattern="INDEX (.*)" />
+			<substitution expression=" " />
+			<fileset dir="../../src/main/resources/sql/h2">
+				<include name="*.sql" />
+			</fileset>
+		</replaceregexp>
 	</target>
 </project>
