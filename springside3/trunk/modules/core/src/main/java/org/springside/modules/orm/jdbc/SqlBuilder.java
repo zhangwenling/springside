@@ -1,10 +1,9 @@
-package org.springside.examples.showcase.common.dao;
+package org.springside.modules.orm.jdbc;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.Map;
-
-import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -22,9 +21,11 @@ public class SqlBuilder {
 		}
 	}
 
-	public String getSql(Map conditionMap) {
+	public String getSql(Map model) {
 		try {
-			return FreeMarkerTemplateUtils.processTemplateIntoString(template, conditionMap);
+			StringWriter result = new StringWriter();
+			template.process(model, result);
+			return result.toString();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		} catch (TemplateException e) {

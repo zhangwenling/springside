@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springside.examples.showcase.common.entity.User;
+import org.springside.modules.orm.jdbc.SqlBuilder;
 
 import com.google.common.collect.Maps;
 
