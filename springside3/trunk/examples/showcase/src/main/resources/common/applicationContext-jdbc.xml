@@ -3,27 +3,25 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 	default-lazy-init="true">
 
-	<description>SpringJdbc配置</description>
+	<description>Spring Jdbc Template配置</description>
 
 	<bean id="userJdbcDao" class="org.springside.examples.showcase.common.dao.UserJdbcDao">
 		<property name="searchUserSql">
-			<value>
-			<![CDATA[
+			<value><![CDATA[<#compress>
 			SELECT id, name, login_name 
 			FROM ss_user
 			WHERE 1=1
 			
 			<#-- Dynamic conditions -->
 			<#if loginName??>
-			and login_name=:loginName
+			AND login_name=:loginName
 			</#if>
 			<#if name??>
-			and name=:name
+			AND name=:name
 			</#if>
 			
-			ORDER BY id 
-			]]>
-			</value>
+			ORDER BY id
+			</#compress>]]></value>
 		</property>
 	</bean>
 </beans>

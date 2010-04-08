@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -30,10 +32,12 @@ public class UserJdbcDao {
 	private static final String QUERY_USER_BY_LOGINNAME = "select id,name,login_name from SS_USER where login_name=:login_name";
 	private static final String INSERT_USER = "insert into SS_USER(id, login_name, name) values(:id, :loginName, :name)";
 
-	private SqlBuilder searchUserSqlBuilder;
+	private static Logger logger = LoggerFactory.getLogger(UserJdbcDao.class);
 
 	private SimpleJdbcTemplate jdbcTemplate;
 
+	private SqlBuilder searchUserSqlBuilder;
+	
 	private UserMapper userMapper = new UserMapper();
 
 	private class UserMapper implements RowMapper<User> {
@@ -129,8 +133,9 @@ public class UserJdbcDao {
 	/**
 	 * 使用freemarker创建动态SQL.
 	 */
-	public List<User> searchUserByFreemarkerSqlTemplate(Map conditions) {
+	public List<User> searchUserByFreemarkerSqlTemplate(Map<String,?> conditions) {
 		String sql = searchUserSqlBuilder.getSql(conditions);
+		logger.info(sql);
 		return jdbcTemplate.query(sql, userMapper, conditions);
 	}
 }
