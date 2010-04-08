@@ -9,6 +9,11 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
+/**
+ * 使用Freemarker生成sql的工具类.
+ * 
+ * @author calvin
+ */
 public class SqlBuilder {
 
 	private Template template;

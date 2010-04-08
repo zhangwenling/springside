@@ -2,6 +2,7 @@ package org.springside.examples.showcase.common.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -24,15 +25,18 @@ import com.google.common.collect.Maps;
 public class UserJdbcDao {
 
 	private static final String QUERY_USER_BY_ID = "select id, name, login_name from SS_USER where id=?";
+	private static final String QUERY_USER_BY_IDS = "select id, name, login_name from SS_USER where id in(:ids)";
 	private static final String QUERY_USER = "select id, name, login_name from SS_USER order by id";
-	private static final String QUERY_USER_BY_NAME_LOGINNAME = "select id,name,login_name from SS_USER where name=:name and login_name=:login_name";
+	private static final String QUERY_USER_BY_LOGINNAME = "select id,name,login_name from SS_USER where login_name=:login_name";
 	private static final String INSERT_USER = "insert into SS_USER(id, login_name, name) values(:id, :loginName, :name)";
 
 	private SqlBuilder searchUserSqlBuilder;
 
 	private SimpleJdbcTemplate jdbcTemplate;
 
-	private RowMapper<User> userMapper = new RowMapper<User>() {
+	private UserMapper userMapper = new UserMapper();
+
+	private class UserMapper implements RowMapper<User> {
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 			User user = new User();
 			user.setId(rs.getLong("id"));
@@ -40,7 +44,7 @@ public class UserJdbcDao {
 			user.setLoginName(rs.getString("login_name"));
 			return user;
 		}
-	};
+	}
 
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
@@ -82,12 +86,21 @@ public class UserJdbcDao {
 	/**
 	 * 使用Map形式的命名参数.
 	 */
-	public User queryByMultiNamedParameter(String loginName, String name) {
+	public User queryByNamedParameter(String loginName) {
 		Map<String, Object> map = Maps.newHashMap();
 		map.put("login_name", loginName);
-		map.put("name", name);
 
-		return jdbcTemplate.queryForObject(QUERY_USER_BY_NAME_LOGINNAME, userMapper, map);
+		return jdbcTemplate.queryForObject(QUERY_USER_BY_LOGINNAME, userMapper, map);
+	}
+
+	/**
+	 * 使用Map形式的命名参数.
+	 */
+	public List<User> queryByNamedParameterWithInClause(Long... ids) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("ids", Arrays.asList(ids));
+
+		return jdbcTemplate.query(QUERY_USER_BY_IDS, userMapper, map);
 	}
 
 	/**
@@ -113,8 +126,11 @@ public class UserJdbcDao {
 		jdbcTemplate.batchUpdate(INSERT_USER, sourceArray);
 	}
 
-	public void searchUser(Map conditionsMap) {
-		String sql = searchUserSqlBuilder.getSql(conditionsMap);
+	/**
+	 * 使用freemarker创建动态SQL.
+	 */
+	public List<User> searchUserByFreemarkerSqlTemplate(Map conditions) {
+		String sql = searchUserSqlBuilder.getSql(conditions);
+		return jdbcTemplate.query(sql, userMapper, conditions);
 	}
-
 }

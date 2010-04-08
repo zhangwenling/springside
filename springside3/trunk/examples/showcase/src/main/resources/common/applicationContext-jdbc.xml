@@ -8,11 +8,21 @@
 	<bean id="userJdbcDao" class="org.springside.examples.showcase.common.dao.UserJdbcDao">
 		<property name="searchUserSql">
 			<value>
-	<![CDATA[
-	select id, name, login_name 
-	from SS_USER
-	order by id 
-	]]>
+			<![CDATA[
+			SELECT id, name, login_name 
+			FROM ss_user
+			WHERE 1=1
+			
+			<#-- Dynamic conditions -->
+			<#if loginName??>
+			and login_name=:loginName
+			</#if>
+			<#if name??>
+			and name=:name
+			</#if>
+			
+			ORDER BY id 
+			]]>
 			</value>
 		</property>
 	</bean>

@@ -1,5 +1,6 @@
 package org.springside.examples.showcase.unit.common;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ import com.google.common.collect.Lists;
  * 
  * @author calvin
  */
-@ContextConfiguration(locations = { "/applicationContext-test.xml" })
+@ContextConfiguration(locations = { "/applicationContext-test.xml", "/common/applicationContext-jdbc.xml" })
 public class UserJdbcDaoTest extends BaseTxTestCase {
 	@Autowired
 	private UserJdbcDao userJdbcDao;
@@ -48,9 +49,15 @@ public class UserJdbcDaoTest extends BaseTxTestCase {
 	}
 
 	@Test
-	public void queryByMultiNamedParameter() {
-		User user = userJdbcDao.queryByMultiNamedParameter("admin", "Admin");
+	public void queryByNamedParameter() {
+		User user = userJdbcDao.queryByNamedParameter("admin");
 		assertEquals("admin", user.getLoginName());
+	}
+
+	@Test
+	public void queryByNamedParameterWithInClause() {
+		List<User> users = userJdbcDao.queryByNamedParameterWithInClause(1L, 2L);
+		assertEquals(2, users.size());
 	}
 
 	@Test
@@ -89,5 +96,28 @@ public class UserJdbcDaoTest extends BaseTxTestCase {
 
 		User newUser2 = userJdbcDao.queryObject(id2);
 		assertEquals(user2.getLoginName(), newUser2.getLoginName());
+	}
+
+	@Test
+	public void searchObject() {
+		Map map = new HashMap();
+		List<User> list = userJdbcDao.searchUserByFreemarkerSqlTemplate(map);
+		assertTrue(list.size() > 1);
+
+		map.clear();
+		map.put("loginName", "admin");
+		list = userJdbcDao.searchUserByFreemarkerSqlTemplate(map);
+		assertEquals(1, list.size());
+
+		map.clear();
+		map.put("name", "Admin");
+		list = userJdbcDao.searchUserByFreemarkerSqlTemplate(map);
+		assertEquals(1, list.size());
+
+		map.clear();
+		map.put("loginName", "admin");
+		map.put("name", "Admin");
+		list = userJdbcDao.searchUserByFreemarkerSqlTemplate(map);
+		assertEquals(1, list.size());
 	}
 }

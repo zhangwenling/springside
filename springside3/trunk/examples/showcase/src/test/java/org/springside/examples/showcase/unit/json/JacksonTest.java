@@ -24,24 +24,29 @@ public class JacksonTest extends Assert {
 
 	@Test
 	public void writeData() throws Exception {
+		//Bean
 		TestBean bean = new TestBean("A");
 		String beanString = mapper.writeValueAsString(bean);
 		System.out.println("Bean:" + beanString);
 
+		//Map
 		Map<String, Object> map = Maps.newLinkedHashMap();
 		map.put("name", "A");
 		map.put("age", 2);
 		String mapString = mapper.writeValueAsString(map);
 		System.out.println("Map:" + mapString);
 
+		//List<String>
 		List<String> stringList = Lists.newArrayList("A", "B", "C");
 		String listString = mapper.writeValueAsString(stringList);
 		System.out.println("String List:" + listString);
 
+		//List<Bean>
 		List<TestBean> beanList = Lists.newArrayList(new TestBean("A"), new TestBean("B"));
 		String beanListString = mapper.writeValueAsString(beanList);
 		System.out.println("Bean List:" + beanListString);
 
+		//Bean[]
 		TestBean[] beanArray = new TestBean[] { new TestBean("A"), new TestBean("B") };
 		String beanArrayString = mapper.writeValueAsString(beanArray);
 		System.out.println("Array List:" + beanArrayString);
@@ -49,10 +54,12 @@ public class JacksonTest extends Assert {
 
 	@Test
 	public void readData() throws Exception {
+		//Bean
 		String beanString = "{\"name\":\"A\"}";
 		TestBean bean = mapper.readValue(beanString, TestBean.class);
 		System.out.println("Bean:" + bean);
 
+		//Map
 		String mapString = "{\"name\":\"A\",\"age\":2}";
 		Map<String, Object> map = mapper.readValue(mapString, HashMap.class);
 		System.out.println("Map:");
@@ -60,6 +67,7 @@ public class JacksonTest extends Assert {
 			System.out.println(entry.getKey() + " " + entry.getValue());
 		}
 
+		//List<String>
 		String listString = "[\"A\",\"B\",\"C\"]";
 		List<String> stringList = mapper.readValue(listString, new TypeReference<List<String>>() {
 		});
@@ -68,6 +76,7 @@ public class JacksonTest extends Assert {
 			System.out.println(element);
 		}
 
+		//List<Bean>
 		String beanListString = "[{\"name\":\"A\"},{\"name\":\"B\"}]";
 		List<TestBean> beanList = mapper.readValue(beanListString, new TypeReference<List<TestBean>>() {
 		});
