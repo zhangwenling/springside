@@ -36,7 +36,7 @@ public class UserJdbcDao {
 
 	private SimpleJdbcTemplate jdbcTemplate;
 
-	private SqlBuilder searchUserSqlBuilder;
+	private String searchUserSql;
 	
 	private UserMapper userMapper = new UserMapper();
 
@@ -56,7 +56,7 @@ public class UserJdbcDao {
 	}
 
 	public void setSearchUserSql(String searchUserSql) {
-		this.searchUserSqlBuilder = new SqlBuilder(searchUserSql);
+		this.searchUserSql = searchUserSql;
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class UserJdbcDao {
 	 * 使用freemarker创建动态SQL.
 	 */
 	public List<User> searchUserByFreemarkerSqlTemplate(Map<String,?> conditions) {
-		String sql = searchUserSqlBuilder.getSql(conditions);
+		String sql = SqlBuilder.getSql(searchUserSql, conditions);
 		logger.info(sql);
 		return jdbcTemplate.query(sql, userMapper, conditions);
 	}

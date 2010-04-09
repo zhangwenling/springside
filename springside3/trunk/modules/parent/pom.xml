@@ -588,12 +588,6 @@
 			</dependency>
 
 			<dependency>
-				<groupId>asm</groupId>
-				<artifactId>asm</artifactId>
-				<version>3.2</version>
-			</dependency>
-
-			<dependency>
 				<groupId>ognl</groupId>
 				<artifactId>ognl</artifactId>
 				<version>2.7.3</version>
@@ -606,10 +600,11 @@
 				</exclusions>
 			</dependency>
 
+			<!-- template engine -->
 			<dependency>
-				<groupId>javax.transaction</groupId>
-				<artifactId>jta</artifactId>
-				<version>1.1</version>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity</artifactId>
+				<version>1.6.3</version>
 			</dependency>
 
 			<!-- cache (usually for orm) -->
@@ -624,6 +619,18 @@
 				<groupId>net.sf.dozer</groupId>
 				<artifactId>dozer</artifactId>
 				<version>5.2.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.transaction</groupId>
+				<artifactId>jta</artifactId>
+				<version>1.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>asm</groupId>
+				<artifactId>asm</artifactId>
+				<version>3.2</version>
 			</dependency>
 			<!-- utils end -->
 
@@ -742,6 +749,12 @@
 				<artifactId>yuicompressor</artifactId>
 				<version>2.4.2</version>
 				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>ant</groupId>
+				<artifactId>ant</artifactId>
+				<version>1.7.0</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

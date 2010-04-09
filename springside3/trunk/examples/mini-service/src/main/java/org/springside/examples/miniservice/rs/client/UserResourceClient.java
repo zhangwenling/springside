@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Required;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
 
 import com.sun.jersey.api.client.Client;
@@ -22,7 +23,8 @@ public class UserResourceClient {
 
 	private WebResource client;
 
-	public UserResourceClient(String baseUrl) {
+	@Required
+	public void setBaseUrl(String baseUrl) {
 		Client jerseyClient = Client.create(new DefaultClientConfig());
 		client = jerseyClient.resource(baseUrl);
 	}
@@ -41,4 +43,5 @@ public class UserResourceClient {
 				ClientResponse.class);
 		return response.getLocation();
 	}
+
 }

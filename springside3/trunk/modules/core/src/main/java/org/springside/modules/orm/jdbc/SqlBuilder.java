@@ -1,40 +1,35 @@
 package org.springside.modules.orm.jdbc;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Map;
 
-import freemarker.template.Configuration;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
 
 /**
- * 使用Freemarker生成sql的工具类.
+ * 使用Velocity生成sql的工具类.
  * 
  * @author calvin
  */
 public class SqlBuilder {
 
-	private Template template;
-
-	public SqlBuilder(String sqlTemplate) {
+	static {
 		try {
-			template = new Template("sql", new StringReader(sqlTemplate), new Configuration());
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+			Velocity.init();
+		} catch (Exception e) {
+			throw new RuntimeException("Exception occurs while initialzie the velociy: " + e.getMessage(), e);
 		}
 	}
 
-	public String getSql(Map model) {
+	public static String getSql(String sqlTemplate, Map<String, ?> model) {
 		try {
+			VelocityContext velocityContext = new VelocityContext(model);
 			StringWriter result = new StringWriter();
-			template.process(model, result);
+			Velocity.evaluate(velocityContext, result, "", sqlTemplate);
 			return result.toString();
 		} catch (IOException e) {
-			throw new RuntimeException(e);
-		} catch (TemplateException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException("Parse sql failed", e);
 		}
 	}
 }

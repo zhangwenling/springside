@@ -10,6 +10,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Required;
 import org.springside.examples.showcase.rs.dto.UserDTO;
 import org.springside.modules.web.ServletUtils;
 
@@ -30,7 +31,8 @@ public class UserResourceClient {
 
 	private WebResource client;
 
-	public UserResourceClient(String baseUrl) {
+	@Required
+	public void setBaseUrl(String baseUrl) {
 		Client jerseyClient = Client.create(new DefaultClientConfig());
 		client = jerseyClient.resource(baseUrl);
 	}

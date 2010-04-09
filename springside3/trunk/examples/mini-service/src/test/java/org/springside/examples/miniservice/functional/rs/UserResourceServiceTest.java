@@ -20,7 +20,8 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 
 	@BeforeClass
 	public static void setUpClient() throws Exception {
-		client = new UserResourceClient(BASE_URL + "/rs");
+		client = new UserResourceClient();
+		client.setBaseUrl(BASE_URL + "/rs");
 	}
 
 	@Test

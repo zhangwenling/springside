@@ -1,7 +1,7 @@
 @echo off
 echo [INFO] 确保默认JDK版本为JDK5.0及以上版本.
 echo [INFO] 确保Maven的可执行命令在PATH内.
-echo [INFO] 确保Ant的可执行命令在PATH内.
+echo [INFO] 确保Ant的可执行命令在PATH内, 并已将maven-ant-task.jar放入Ant的lib中.
 
 echo [Step 1] 复制tools/maven/central-repository 到 %userprofile%\.m2\repository
 xcopy /s/e/i/h/d/y "tools\maven\central-repository" "%USERPROFILE%\.m2\repository"

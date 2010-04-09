@@ -25,23 +25,4 @@
 			<hbmtemplate templateprefix="pojo/" template="manager.ftl" filepattern="manager/{package-name}/{class-name}Manager.java" />
 		</hibernatetool>
 	</target>
-
-	<target name="convert.mysql2h2" description="convert mysql/oracle to h2 for testing">
-		<copy todir="../../src/main/resources/sql/h2" overwrite="true">
-			<fileset dir="../../src/main/resources/sql/mysql">
-				<include name="**/*.sql" />
-			</fileset>
-		</copy>
-
-		<replace dir="../../src/main/resources/sql/h2" includes="**/*.sql" token="TYPE=InnoDB" value="" />
-		<replace dir="../../src/main/resources/sql/h2" includes="**/*.sql" token="TYPE=MyISAM" value="" />
-
-		<replaceregexp byline="true">
-			<regexp pattern="INDEX (.*)" />
-			<substitution expression=" " />
-			<fileset dir="../../src/main/resources/sql/h2">
-				<include name="*.sql" />
-			</fileset>
-		</replaceregexp>
-	</target>
 </project>

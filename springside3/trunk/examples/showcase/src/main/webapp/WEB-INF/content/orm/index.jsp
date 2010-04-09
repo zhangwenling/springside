@@ -29,9 +29,10 @@
 			<li>Hibernate 扩展Dialect，加入数据库特性语句。(UserDao)</li>
 		</ul>
 		
-		<h2>Spring JdbcTemplate应用：</h2>
+		<h2>Spring JdbcTemplate应用(UserJdbcDao)</h2>
 		<ul>
-			<li>在高性能要求的时候使用Spring JdbcTemplate访问和更新数据库。(UserJdbcDao)</li>
+			<li>在高性能要求的时候使用Spring JdbcTemplate访问和更新数据库。</li>
+			<li>SqlBuilder支持用Velicity根据查询条件动态生成SQL,SQL模板定义在XML中,可以优雅的换行缩进。</li>
 		</ul>
 		</div>
 	</div>

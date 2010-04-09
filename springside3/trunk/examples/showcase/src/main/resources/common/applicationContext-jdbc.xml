@@ -7,21 +7,21 @@
 
 	<bean id="userJdbcDao" class="org.springside.examples.showcase.common.dao.UserJdbcDao">
 		<property name="searchUserSql">
-			<value><![CDATA[<#compress>
+			<value><![CDATA[
 			SELECT id, name, login_name 
 			FROM ss_user
 			WHERE 1=1
 			
-			<#-- Dynamic conditions -->
-			<#if loginName??>
+			## Dynamic Content
+			#if ($loginName)
 			AND login_name=:loginName
-			</#if>
-			<#if name??>
+			#end
+			#if ($name)
 			AND name=:name
-			</#if>
+			#end
 			
 			ORDER BY id
-			</#compress>]]></value>
+			]]></value>
 		</property>
 	</bean>
 </beans>
