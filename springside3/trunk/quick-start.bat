@@ -8,29 +8,29 @@ xcopy /s/e/i/h/d/y "tools\maven\central-repository" "%USERPROFILE%\.m2\repositor
 
 echo [Step 2] 启动H2数据库.
 cd tools/h2
-call mvn initialize -o -Pstartdb
+call mvn initialize -Pstartdb
 cd ..\..\
 
 echo [Step 3] 安装SpringSide3 所有modules,examples项目到本地Maven仓库,生成Eclipse项目文件.
-call mvn -o eclipse:clean eclipse:eclipse
-call mvn -o clean install -Dmaven.test.skip=true
+call mvn eclipse:clean eclipse:eclipse
+call mvn clean install -Dmaven.test.skip=true
 
 echo [Step 4] 为Mini-Service 初始化数据库, 启动Jetty.
 cd examples\mini-service
 call ant init-db 
-start "Mini-Service" mvn -o -Djetty.port=8080 jetty:run
+start "Mini-Service" mvn -Djetty.port=8080 jetty:run
 cd ..\..\
 
 echo [Step 5] 为Mini-Web 初始化数据库, 启动Jetty.
 cd examples\mini-web
 call ant init-db 
-start "Mini-Web" mvn -o -Djetty.port=8081 jetty:run
+start "Mini-Web" mvn -Djetty.port=8081 jetty:run
 cd ..\..\
 
 echo [Step 6] 为Showcase 生成Eclipse项目文件, 编译, 打包, 初始化数据库, 启动Jetty.
 cd examples\showcase
 call ant init-db
-start "Showcase" mvn -o -Djetty.port=8082 jetty:run
+start "Showcase" mvn -Djetty.port=8082 jetty:run
 cd ..\..\
 
 echo [INFO] SpringSide3.0 快速启动完毕.
