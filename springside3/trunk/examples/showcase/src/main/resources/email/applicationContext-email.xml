@@ -23,12 +23,10 @@
 	<bean id="simpleMailService" class="org.springside.examples.showcase.email.SimpleMailService">
 		<property name="mailSender" ref="mailSender" />
 		<property name="textTemplate">
-			<value>
-			<![CDATA[
+			<value><![CDATA[
 			用戶%1$s在%2$tF被修改.
 					System Administrator.
-			]]>
-			</value>
+			]]></value>
 		</property>
 	</bean>
 

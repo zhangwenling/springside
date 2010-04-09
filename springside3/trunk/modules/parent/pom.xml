@@ -461,6 +461,11 @@
 				<artifactId>commons-logging</artifactId>
 				<version>1.1.1</version>
 			</dependency>
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging-api</artifactId>
+				<version>1.1.1</version>
+			</dependency>
 
 			<dependency>
 				<groupId>log4j</groupId>
@@ -619,12 +624,6 @@
 				<groupId>net.sf.dozer</groupId>
 				<artifactId>dozer</artifactId>
 				<version>5.2.0</version>
-			</dependency>
-
-			<dependency>
-				<groupId>javax.transaction</groupId>
-				<artifactId>jta</artifactId>
-				<version>1.1</version>
 			</dependency>
 
 			<dependency>
