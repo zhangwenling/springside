@@ -12,7 +12,7 @@
 		<s:intercept-url pattern="/css/**" filters="none" />
 		<s:intercept-url pattern="/img/**" filters="none" />
 		<s:intercept-url pattern="/js/**" filters="none" />
-		
+
 		<s:intercept-url pattern="/common/user/*" access="isAuthenticated()" />
 
 		<s:form-login login-page="/security/login.action" default-target-url="/" authentication-failure-url="/security/login.action?error=1" />
@@ -20,6 +20,8 @@
 		<s:session-management invalid-session-url="/security/login.action?error=3">
 			<s:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
 		</s:session-management>
+
+		<s:custom-filter after="SECURITY_CONTEXT_FILTER" ref="autoLoginFilter" />
 	</s:http>
 
 	<!-- 方法安全配置 -->
@@ -34,6 +36,12 @@
 
 	<!-- 项目实现的用户查询服务  -->
 	<bean id="userDetailsService" class="org.springside.examples.showcase.security.UserDetailsServiceImpl" />
+
+	<!-- 开发时自动登录的filter -->
+	<bean id="autoLoginFilter" class="org.springside.examples.showcase.security.AutoLoginFilter">
+		<property name="enabled" value="${security.autologin.enabled}" />
+		<property name="defaultUserName" value="admin" />
+	</bean>
 
 	<!--JCaptcha验证码服务 -->
 	<bean id="captchaService" class="com.octo.captcha.service.image.DefaultManageableImageCaptchaService">

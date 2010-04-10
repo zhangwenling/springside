@@ -90,8 +90,8 @@
 	<bean id="dozer" class="org.dozer.DozerBeanMapper" />
 
 	<!-- 明文密码处理Bean定义 -->
-	<bean id="plainPasswordCallback" class="org.springside.examples.showcase.ws.server.impl.PlainPasswordCallback" />
+	<bean id="plainPasswordCallback" class="org.springside.examples.showcase.ws.server.impl.security.PlainPasswordCallback" />
 
 	<!-- Digest密码处理Bean定义 -->
-	<bean id="digestPasswordCallback" class="org.springside.examples.showcase.ws.server.impl.DigestPasswordCallback" />
+	<bean id="digestPasswordCallback" class="org.springside.examples.showcase.ws.server.impl.security.DigestPasswordCallback" />
 </beans>
