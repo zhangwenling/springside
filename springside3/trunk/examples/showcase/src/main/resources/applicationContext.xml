@@ -18,7 +18,7 @@
 				<!-- 本地开发环境配置 -->
 				<value>classpath*:/application.local.properties</value>
 				<!-- 服务器生产环境配置 -->
-				<value>classpath*:/application.server.properties</value>
+				<value>file:/var/springside/application.server.properties</value>
 			</list>
 		</property>
 	</bean>
