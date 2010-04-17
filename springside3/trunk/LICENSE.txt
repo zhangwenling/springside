@@ -1,4 +1,4 @@
-SpringSide, release 3.2.2 (December 2009)
+SpringSide, release 3.3.1 (Apri 2010)
 --------------------------------------------------------------------------
                                  Apache License
                            Version 2.0, January 2004
