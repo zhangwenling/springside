@@ -1,11 +1,9 @@
 
     alter table acct_user_role 
-        drop 
-        foreign key FKFE85CB3E16A0ABF1;
+        drop foreign key FKFE85CB3E16A0ABF1;
 
     alter table acct_user_role 
-        drop 
-        foreign key FKFE85CB3E7175E811;
+        drop foreign key FKFE85CB3E7175E811;
 
     drop table if exists acct_role;
 

@@ -1,19 +1,15 @@
 
     alter table acct_role_authority 
-        drop 
-        foreign key FKAE243466DE3FB930;
+        drop foreign key FKAE243466DE3FB930;
 
     alter table acct_role_authority 
-        drop 
-        foreign key FKAE2434663FE97564;
+        drop foreign key FKAE2434663FE97564;
 
     alter table acct_user_role 
-        drop 
-        foreign key FKFE85CB3EDE3FB930;
+        drop foreign key FKFE85CB3EDE3FB930;
 
     alter table acct_user_role 
-        drop 
-        foreign key FKFE85CB3E836A7D10;
+        drop foreign key FKFE85CB3E836A7D10;
 
     drop table if exists acct_authority;
 
@@ -57,25 +53,21 @@
     ) ENGINE=InnoDB;
 
     alter table acct_role_authority 
-        add index FKAE243466DE3FB930 (role_id), 
         add constraint FKAE243466DE3FB930 
         foreign key (role_id) 
         references acct_role (id);
 
     alter table acct_role_authority 
-        add index FKAE2434663FE97564 (authority_id), 
         add constraint FKAE2434663FE97564 
         foreign key (authority_id) 
         references acct_authority (id);
 
     alter table acct_user_role 
-        add index FKFE85CB3EDE3FB930 (role_id), 
         add constraint FKFE85CB3EDE3FB930 
         foreign key (role_id) 
         references acct_role (id);
 
     alter table acct_user_role 
-        add index FKFE85CB3E836A7D10 (user_id), 
         add constraint FKFE85CB3E836A7D10 
         foreign key (user_id) 
         references acct_user (id);
