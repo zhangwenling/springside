@@ -1,12 +1,12 @@
-    drop table ss_post if exists;
+    drop table if exists ss_post;
 
-    drop table ss_role if exists;
+    drop table if exists ss_role;
 
-    drop table ss_user if exists;
+    drop table if exists ss_user;
 
-    drop table ss_user_role if exists;
+    drop table if exists ss_user_role;
     
-    drop table ss_log if exists;
+    drop table if exists ss_log;
 
     create table ss_post (
         dtype varchar(31) not null,

@@ -28,7 +28,7 @@
 		<h2>用户故事：</h2>
 		<ul>
 			<li>简单的定时在Console打印当前用户数量.</li>
-			<li>同时运行jetty-run-node1.bat与jetty-run-node2.bat 演示集群运行的效果.</li>
+			<li>设法同时运行两个实例, 演示集群运行的效果.</li>
 		</ul>
 		</div>
 	</div>

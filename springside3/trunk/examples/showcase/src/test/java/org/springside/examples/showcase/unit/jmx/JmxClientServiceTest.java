@@ -22,6 +22,8 @@ public class JmxClientServiceTest extends SpringContextTestCase {
 
 	@Test
 	public void test() {
+		String oldNodeName = jmxClientService.getNodeName();
+		
 		jmxClientService.setNodeName("node1");
 		assertEquals("node1", jmxClientService.getNodeName());
 
@@ -31,5 +33,7 @@ public class JmxClientServiceTest extends SpringContextTestCase {
 		assertEquals(jmxClientService.getHibernateStatistics().getSessionCloseCount(), jmxClientService
 				.getHibernateStatistics().getSessionOpenCount());
 		jmxClientService.logSummary();
+		
+		jmxClientService.setNodeName(oldNodeName);
 	}
 }
