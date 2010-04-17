@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
-	<script type="text/javascript" src="${ctx}/report/swfobject.js"></script>
+	<script type="text/javascript" src="${ctx}/amcharts/swfobject.js"></script>
 </head>
 
 <body>
@@ -30,8 +30,8 @@
 
 		<script type="text/javascript">
 			// <![CDATA[
-			var so = new SWFObject("${ctx}/report/amline.swf", "report1", "640", "420", "8", "#FFFFFF");
-			so.addVariable("settings_file", encodeURIComponent("${ctx}/report/report1-settings.xml"));
+			var so = new SWFObject("${ctx}/amcharts/amline.swf", "report1", "640", "420", "8", "#FFFFFF");
+			so.addVariable("settings_file", encodeURIComponent("${ctx}/amcharts/report1-settings.xml"));
 			so.addVariable("data_file", encodeURIComponent("${ctx}/report/flashchart/chart-data!report1.action"));
 			so.write("report1Content");
 			// ]]>
@@ -41,8 +41,8 @@
 
 		<script type="text/javascript">
 			// <![CDATA[
-			var so = new SWFObject("${ctx}/report/amcolumn.swf", "report2", "640", "420", "8", "#FFFFFF");
-			so.addVariable("settings_file", encodeURIComponent("${ctx}/report/report2-settings.xml"));
+			var so = new SWFObject("${ctx}/amcharts/amcolumn.swf", "report2", "640", "420", "8", "#FFFFFF");
+			so.addVariable("settings_file", encodeURIComponent("${ctx}/amcharts/report2-settings.xml"));
 			so.addVariable("data_file", encodeURIComponent("${ctx}/report/flashchart/chart-data!report2.action"));
 			so.write("report2Content");
 			// ]]>

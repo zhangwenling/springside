@@ -60,8 +60,6 @@ public class UserResourceClient {
 
 	/**
 	 * 无公共DTO类定义, 取得返回JSON字符串后自行转换DTO.
-	 * @throws IOException 
-	 * @throws JsonMappingException 
 	 */
 	public UserDTO searchUserJson(String name) throws IOException {
 		String json = client.path("/users/search").queryParam("name", name).get(String.class);

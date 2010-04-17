@@ -1,16 +1,16 @@
 @echo off
 echo [INFO] 确保默认JDK版本为JDK5.0及以上版本.
 
-rem [INFO]使用ONLINE模式执行Maven命令, 如不能连接网络, 去掉下面一行的注释.
+rem 使用ONLINE模式执行Maven命令, 如不能连接网络, 去掉下面一行的注释.
 rem set OFF_LINE=-o
 
-echo [INFO] All in one版本使用自带的Maven与Ant.
 set MVN=mvn
 set ANT=ant
 
 if exist "tools\maven\apache-maven-2.2.1\" set MVN="%cd%\tools\maven\apache-maven-2.2.1\bin\mvn.bat"
 if exist "tools\ant\aapache-ant-1.7.1\" set ANT="%cd%\tools\ant\apache-ant-1.7.1\bin\ant.bat"
 echo Maven命令为%MVN%
+echo Ant命令为%ANT%
 
 echo [Step 1] 复制tools/maven/central-repository 到 %userprofile%\.m2\repository
 xcopy /s/e/i/h/d/y "tools\maven\central-repository" "%USERPROFILE%\.m2\repository"

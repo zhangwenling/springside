@@ -10,7 +10,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.Status;
@@ -37,9 +39,6 @@ import com.google.common.collect.Lists;
 public class UserResourceService {
 
 	private static Logger logger = LoggerFactory.getLogger(UserResourceService.class);
-
-	@Context
-	private UriInfo uriInfo;
 
 	@Autowired
 	private AccountManager accountManager;
@@ -115,6 +114,22 @@ public class UserResourceService {
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			throw new WebApplicationException();
+		}
+	}
+
+	/**
+	 * 演示获取灵活,不固定的参数.
+	 */
+	@GET
+	public void searchUserByFlexibleParameter(@Context UriInfo ui, @Context HttpHeaders hh) {
+		MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
+
+		//先尝试从Http Header获取参数,如没有再尝试从URL中获取.
+		String userName = null;
+		if (hh.getRequestHeader("agent") != null) {
+			userName = hh.getRequestHeader("userName").get(0);
+		} else {
+			userName = queryParams.getFirst("userName");
 		}
 	}
 

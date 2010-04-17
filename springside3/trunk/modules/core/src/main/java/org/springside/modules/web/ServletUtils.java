@@ -16,7 +16,6 @@ import java.util.TreeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.util.Assert;
 import org.springside.modules.utils.EncodeUtils;
 
 /**
@@ -26,7 +25,7 @@ import org.springside.modules.utils.EncodeUtils;
  */
 public class ServletUtils {
 
-	//-- content-type 常量定义 --//
+	//-- Content Type 定义 --//
 	public static final String TEXT_TYPE = "text/plain";
 	public static final String JSON_TYPE = "application/json";
 	public static final String XML_TYPE = "text/xml";
@@ -34,9 +33,10 @@ public class ServletUtils {
 	public static final String JS_TYPE = "text/javascript";
 	public static final String EXCEL_TYPE = "application/vnd.ms-excel";
 
-	//-- header 定义 --//
+	//-- Header 定义 --//
 	public static final String AUTHENTICATION_HEADER = "Authorization";
 
+	//-- 常用数值定义 --//
 	public static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
 
 	/**
@@ -145,7 +145,6 @@ public class ServletUtils {
 	 */
 	@SuppressWarnings("unchecked")
 	public static Map getParametersStartingWith(HttpServletRequest request, String prefix) {
-		Assert.notNull(request, "Request must not be null");
 		Enumeration paramNames = request.getParameterNames();
 		Map params = new TreeMap();
 		if (prefix == null) {
