@@ -14,7 +14,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.apache.log4j.spi.LoggingEvent;
-import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -66,11 +66,12 @@ public class JdbcLogWriter extends BlockingConsumer {
 	/**
 	 * 根据注入的DataSource创建jdbcTemplate.
 	 */
-	@Required
+	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		jdbcTemplate = new SimpleJdbcTemplate(dataSource);
 	}
 
+	@Autowired
 	public void setTransactionManager(PlatformTransactionManager transactionManager) {
 		transactionTemplate = new TransactionTemplate(transactionManager);
 	}

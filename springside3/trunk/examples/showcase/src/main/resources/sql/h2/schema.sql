@@ -47,7 +47,7 @@
         primary key (user_id, role_id)
     );
     
-    create table SS_LOG (
+    create table ss_log (
     	THREAD_NAME varchar(255),
     	LOGGER_NAME varchar(255),
     	TIMESTAMP timestamp,

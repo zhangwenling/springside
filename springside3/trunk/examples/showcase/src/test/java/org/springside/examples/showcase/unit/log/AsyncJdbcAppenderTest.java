@@ -3,27 +3,17 @@ package org.springside.examples.showcase.unit.log;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.beans.BeansException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.TimeUtils;
 
-/**
- * 使用内存中数据库进行测试.
- */
-@ContextConfiguration(locations = { "/applicationContext-log.xml" }, inheritLocations = false)
+@ContextConfiguration(locations = { "/applicationContext-test.xml", "/jmx/applicationContext-jmx-server.xml",
+		"/jmx/applicationContext-jmx-client.xml", "/log/applicationContext-log.xml" })
 public class AsyncJdbcAppenderTest extends SpringTxTestCase {
 
 	private static final String LOG_TABLE_NAME = "SS_LOG";
-
-	@Before
-	public void setUp() throws BeansException {
-		jdbcTemplate.update("drop all objects");
-		jdbcTemplate.update("runscript from 'src/test/resources/schema.sql'");
-	}
 
 	@Test
 	public void logToDb() {

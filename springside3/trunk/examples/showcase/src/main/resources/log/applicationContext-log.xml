@@ -6,17 +6,20 @@
 	<description>日志高级演示配置</description>
 
 	<!-- 消息Queue管理器-->
-	<bean class="org.springside.modules.queue.QueueHolder">
+	<bean class="org.springside.modules.queue.QueuesHolder">
 		<property name="queueSize" value="10000" />
 	</bean>
 
 	<!-- 读出Queue中日志消息写入数据库的任务 -->
-	<bean id="jdbcLogWriter" class="org.springside.modules.log.JdbcLogWriter">
+	<bean id="jdbcLogWriter" class="org.springside.examples.showcase.log.JdbcLogWriter">
 		<property name="queueName" value="dblog" />
 		<property name="batchSize" value="10" />
-		<property name="dataSource" ref="dataSource" />
-		<property name="sql"
-			value="insert into SS_LOG(THREAD_NAME,LOGGER_NAME,TIMESTAMP,LEVEL,MESSAGE) values(:threadName,:loggerName,:timestamp,:level,:message)" />
+		<property name="sql">
+			<value>
+			insert into SS_LOG(THREAD_NAME,LOGGER_NAME,TIMESTAMP,LEVEL,MESSAGE)
+				values(:threadName,:loggerName,:timestamp,:level,:message)
+			</value>
+		</property>
 	</bean>
 
 	<!-- 动态配置log4j日志级别的JMX MBean -->
@@ -27,5 +30,4 @@
 
 	<!-- 配置执行TraceUtils的Aspect -->
 	<bean class="org.springside.examples.showcase.log.TraceLogAspect" />
-
 </beans>
