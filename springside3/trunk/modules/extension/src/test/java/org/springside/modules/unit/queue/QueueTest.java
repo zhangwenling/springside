@@ -13,7 +13,7 @@ import java.util.concurrent.BlockingQueue;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springside.modules.queue.QueueConsumer;
-import org.springside.modules.queue.QueueHolder;
+import org.springside.modules.queue.QueuesHolder;
 
 @SuppressWarnings("unchecked")
 public class QueueTest extends Assert {
@@ -23,7 +23,7 @@ public class QueueTest extends Assert {
 		String queueName = "testBackup";
 		String filePath = System.getProperty("java.io.tmpdir") + File.separator + "queue" + File.separator + queueName;
 
-		BlockingQueue queue = QueueHolder.getQueue(queueName);
+		BlockingQueue queue = QueuesHolder.getQueue(queueName);
 		Date date1 = new Date();
 		Date date2 = new Date();
 		queue.offer(date1);
@@ -59,7 +59,7 @@ public class QueueTest extends Assert {
 		String queueName = "testRestore";
 		String filePath = System.getProperty("java.io.tmpdir") + File.separator + "queue" + File.separator + queueName;
 
-		BlockingQueue queue = QueueHolder.getQueue(queueName);
+		BlockingQueue queue = QueuesHolder.getQueue(queueName);
 		Date date1 = new Date();
 		Date date2 = new Date();
 		queue.offer(date1);
@@ -74,7 +74,7 @@ public class QueueTest extends Assert {
 		File file = new File(filePath);
 		assertEquals(true, file.exists());
 
-		BlockingQueue newQueue = QueueHolder.getQueue(queueName);
+		BlockingQueue newQueue = QueuesHolder.getQueue(queueName);
 		task.start();
 
 		List list = new ArrayList();

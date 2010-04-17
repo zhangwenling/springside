@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
  * 
  * 定义了任务的初始化流程及停止流程.
  * 
- * @see QueueHolder
+ * @see QueuesHolder
  * 
  * @author calvin
  */
@@ -87,7 +87,7 @@ public abstract class QueueConsumer implements Runnable {
 	 */
 	@PostConstruct
 	public void start() throws IOException, ClassNotFoundException {
-		queue = QueueHolder.getQueue(queueName);
+		queue = QueuesHolder.getQueue(queueName);
 
 		if (persistence) {
 			synchronized (persistenceLock) {

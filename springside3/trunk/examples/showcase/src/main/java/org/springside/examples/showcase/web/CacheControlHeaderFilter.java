@@ -60,4 +60,11 @@ public class CacheControlHeaderFilter implements Filter {
 	 */
 	public void destroy() {
 	}
+	
+	public static void setExpiresHeader(HttpServletResponse response, long expiresSeconds) {
+		//Http 1.0 header
+		response.setDateHeader("Expires", System.currentTimeMillis() + expiresSeconds * 1000);
+		//Http 1.1 header
+		response.setHeader("Cache-Control", "private, max-age=" + expiresSeconds);
+	}
 }

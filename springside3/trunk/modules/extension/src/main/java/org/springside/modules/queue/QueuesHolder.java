@@ -24,8 +24,8 @@ import com.google.common.collect.MapMaker;
  * @author calvin
  */
 @SuppressWarnings("unchecked")
-@ManagedResource(objectName = QueueHolder.QUEUEHOLDER_MBEAN_NAME, description = "Queues Holder Bean")
-public class QueueHolder {
+@ManagedResource(objectName = QueuesHolder.QUEUEHOLDER_MBEAN_NAME, description = "Queues Holder Bean")
+public class QueuesHolder {
 	/**
 	 * QueueManager注册的名称.
 	 */
@@ -38,7 +38,7 @@ public class QueueHolder {
 	 * 设置每个队列的最大长度, 默认为Integer最大值, 设置时不改变已创建队列的最大长度.
 	 */
 	public void setQueueSize(int queueSize) {
-		QueueHolder.queueSize = queueSize; //NOSONAR
+		QueuesHolder.queueSize = queueSize; //NOSONAR
 	}
 
 	/**

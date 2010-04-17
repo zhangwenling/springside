@@ -5,7 +5,7 @@
  * 
  * $Id: JdbcAppenderTask.java 353 2009-08-22 09:33:28Z calvinxiu
  */
-package org.springside.modules.log;
+package org.springside.examples.showcase.log;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +20,10 @@ import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springside.modules.queue.BlockingConsumer;
 
 import com.google.common.collect.Lists;
@@ -41,6 +45,7 @@ public class JdbcLogWriter extends BlockingConsumer {
 
 	protected List<LoggingEvent> eventsBuffer = Lists.newArrayList();
 	protected SimpleJdbcTemplate jdbcTemplate;
+	protected TransactionTemplate transactionTemplate;
 
 	/**
 	 * 带Named Parameter的insert sql.
@@ -64,6 +69,10 @@ public class JdbcLogWriter extends BlockingConsumer {
 	@Required
 	public void setDataSource(DataSource dataSource) {
 		jdbcTemplate = new SimpleJdbcTemplate(dataSource);
+	}
+
+	public void setTransactionManager(PlatformTransactionManager transactionManager) {
+		transactionTemplate = new TransactionTemplate(transactionManager);
 	}
 
 	/**
@@ -99,19 +108,24 @@ public class JdbcLogWriter extends BlockingConsumer {
 			final SqlParameterSource[] batchParams = SqlParameterSourceUtils.createBatch(paramMapArray);
 
 			//执行批量插入,如果失败调用失败处理函数.
-			try {
-				jdbcTemplate.batchUpdate(getActualSql(), batchParams);
-
-				if (logger.isDebugEnabled()) {
-					for (LoggingEvent event : eventsBuffer) {
-						logger.debug("saved event, {}", AppenderUtils.convertEventToString(event));
+			transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+				@Override
+				protected void doInTransactionWithoutResult(TransactionStatus status) {
+					try {
+						jdbcTemplate.batchUpdate(getActualSql(), batchParams);
+						if (logger.isDebugEnabled()) {
+							for (LoggingEvent event : eventsBuffer) {
+								logger.debug("saved event, {}", AppenderUtils.convertEventToString(event));
+							}
+						}
+					} catch (DataAccessException e) {
+						status.setRollbackOnly();
+						handleDataAccessException(e, eventsBuffer);
 					}
 				}
-			} catch (DataAccessException e) {
-				handleDataAccessException(e, eventsBuffer);
-			}
+			});
 
-			//清除eventsBuffer
+			//清除已完成的Buffer
 			eventsBuffer.clear();
 		} catch (Exception e) {
 			logger.error("批量提交任务时发生错误.", e);

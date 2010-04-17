@@ -8,7 +8,6 @@
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 		<config>src/main/resources/applicationContext-ws.xml</config>
-		<config>src/main/resources/applicationContext-rs.xml</config>
 		<config>src/main/resources/applicationContext.xml</config>
 	</configs>
 	<configSets>

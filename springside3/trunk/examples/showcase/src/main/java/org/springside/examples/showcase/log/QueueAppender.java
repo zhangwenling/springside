@@ -5,21 +5,21 @@
  * 
  * $Id$
  */
-package org.springside.modules.log;
+package org.springside.examples.showcase.log;
 
 import java.util.concurrent.BlockingQueue;
 
 import org.apache.log4j.spi.LoggingEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springside.modules.queue.QueueHolder;
+import org.springside.modules.queue.QueuesHolder;
 
 /**
  * 轻量级的Log4j异步Appender.
  * 
  * 将所有消息放入QueueManager所管理的Blocking Queue中.
  * 
- * @see QueueHolder
+ * @see QueuesHolder
  * 
  * @author calvin
  */
@@ -37,7 +37,7 @@ public class QueueAppender extends org.apache.log4j.AppenderSkeleton {
 	@Override
 	public void append(LoggingEvent event) {
 		if (queue == null) {
-			queue = QueueHolder.getQueue(queueName);
+			queue = QueuesHolder.getQueue(queueName);
 		}
 
 		boolean sucess = queue.offer(event);

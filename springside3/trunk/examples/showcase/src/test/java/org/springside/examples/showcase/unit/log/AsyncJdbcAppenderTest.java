@@ -1,4 +1,4 @@
-package org.springside.modules.unit.log;
+package org.springside.examples.showcase.unit.log;
 
 import java.util.Date;
 
