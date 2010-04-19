@@ -15,7 +15,7 @@
 				<path location="../../target/classes" />
 			</classpath>
 
-			<jdbcconfiguration configurationfile="config/hibernate.cfg.xml" revengfile="config/hibernate.reveng.xml" detectmanytomany="true" namingstrategy="org.hibernate.cfg.ImprovedNamingStrategy" reversestrategy="org.springside.modules.orm.hibernate.IgnorePrefixReverseEngineeringStrategy" />
+			<jdbcconfiguration configurationfile="hibernate.cfg.xml" revengfile="hibernate.reveng.xml" detectmanytomany="true" namingstrategy="org.hibernate.cfg.ImprovedNamingStrategy" reversestrategy="org.springside.modules.orm.hibernate.IgnorePrefixReverseEngineeringStrategy" />
 
 			<hbmtemplate templateprefix="pojo/" template="pojo/Pojo.ftl" filepattern="entity/{package-name}/{class-name}.java">
 				<property key="jdk5" value="true" />
