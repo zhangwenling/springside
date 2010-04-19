@@ -39,8 +39,8 @@ public class StaticContentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/** 需要被Gzip压缩的Mime类型. */
-	private static final String[] GZIP_MIME_TYPES = { "text/html", "application/xhtml+xml", "text/css",
-			"text/javascript" };
+	private static final String[] GZIP_MIME_TYPES = { "text/html", "application/xhtml+xml", "text/plain", "text/css",
+			"text/javascript", "application/x-javascript" };
 
 	/** 需要被Gzip压缩的最小文件大小. */
 	private static final int GZIP_MINI_LENGTH = 512;
