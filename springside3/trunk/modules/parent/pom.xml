@@ -15,7 +15,7 @@
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
 		<springside.version>3.3.1</springside.version>
-		<spring.version>3.0.1.RELEASE</spring.version>
+		<spring.version>3.0.2.RELEASE</spring.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<struts2.version>2.1.8.1</struts2.version>
 		<cxf.version>2.2.7</cxf.version>
@@ -279,7 +279,7 @@
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>servlet-api</artifactId>
-				<version>2.5</version>
+				<version>2.4</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
@@ -542,7 +542,7 @@
 			<dependency>
 				<groupId>commons-beanutils</groupId>
 				<artifactId>commons-beanutils</artifactId>
-				<version>1.8.2</version>
+				<version>1.8.3</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-lang</groupId>
@@ -570,6 +570,7 @@
 				<artifactId>google-collections</artifactId>
 				<version>1.0</version>
 			</dependency>
+			
 			<dependency>
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
@@ -618,7 +619,7 @@
 			<dependency>
 				<groupId>net.sf.dozer</groupId>
 				<artifactId>dozer</artifactId>
-				<version>5.2.0</version>
+				<version>5.2.1</version>
 			</dependency>
 
 			<dependency>
@@ -716,6 +717,7 @@
 				<version>2.4.7</version>
 				<scope>test</scope>
 			</dependency>
+			
 			<dependency>
 				<groupId>com.h2database</groupId>
 				<artifactId>h2</artifactId>
