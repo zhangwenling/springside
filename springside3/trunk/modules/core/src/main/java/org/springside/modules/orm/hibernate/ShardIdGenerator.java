@@ -27,12 +27,24 @@ public class ShardIdGenerator extends UUIDHexGenerator {
 				formatOptionalId(getAppId())).append(formatCount()).toString();
 	}
 
+	/**
+	 * 如果有多个数据库实例时需要重载本函数.
+	 * 实现从System Properties, Spring ApplicationContext等地方获得值.
+	 */
 	protected short getShardId() {
 		return 0;
 	}
 
+	/**
+	 * 如果有多个应用实例时需要重载本函数.
+	 * 实现从System Properties, Spring ApplicationContext等地方获得值.
+	 */
 	protected short getAppId() {
 		return 0;
+	}
+
+	protected boolean isOmmitZero() {
+		return true;
 	}
 
 	protected String formatTimestamp() {
@@ -47,10 +59,11 @@ public class ShardIdGenerator extends UUIDHexGenerator {
 	 * 格式化最大值为255的数值成长度为2的字符串,如果值为0则返回空字符串.
 	 */
 	protected String formatOptionalId(short value) {
-		if (value > 0)
-			return format(value);
-		else
+		if (value == 0 && isOmmitZero()) {
 			return "";
+		} else {
+			return format(value);
+		}
 	}
 
 	/**
