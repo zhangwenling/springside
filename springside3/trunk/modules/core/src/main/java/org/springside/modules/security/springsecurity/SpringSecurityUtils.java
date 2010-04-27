@@ -88,6 +88,9 @@ public class SpringSecurityUtils {
 
 	/**
 	 * 将UserDetails保存到Security Context.
+	 * 
+	 * @param userDetails 已初始化好的用户信息.
+	 * @param request 用于获取用户IP地址信息.
 	 */
 	public static void saveUserDetailsToContext(UserDetails userDetails, HttpServletRequest request) {
 		PreAuthenticatedAuthenticationToken authentication = new PreAuthenticatedAuthenticationToken(userDetails,
