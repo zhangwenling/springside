@@ -1,9 +1,10 @@
 package org.springside.examples.showcase.common.entity;
 
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 统一定义id的entity基类.
@@ -20,7 +21,8 @@ public abstract class IdEntity {
 	protected Long id;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(generator = "shardIdGenerator")
+	@GenericGenerator(name = "shardIdGenerator", strategy = "org.springside.modules.orm.hibernate.ShardIdGenerator")
 	public Long getId() {
 		return id;
 	}
