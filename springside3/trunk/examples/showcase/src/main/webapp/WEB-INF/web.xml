@@ -118,15 +118,21 @@
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 
 	<filter-mapping>
 		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
 		<url-pattern>*.action</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
 		<url-pattern>/common/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
@@ -153,6 +159,8 @@
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 
 	<filter-mapping>

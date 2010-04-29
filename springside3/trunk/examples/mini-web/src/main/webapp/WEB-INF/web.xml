@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
 	<display-name>mini-web</display-name>
 	<!-- Spring ApplicationContext配置文件的路径,可使用通配符,多个路径用,号分隔
@@ -57,6 +57,8 @@
 	<filter-mapping>
 		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
 		<url-pattern>*.action</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
@@ -66,6 +68,8 @@
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 
 	<filter-mapping>
