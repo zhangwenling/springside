@@ -16,8 +16,8 @@
 		<property name="batchSize" value="10" />
 		<property name="sql">
 			<value>
-			insert into SS_LOG(THREAD_NAME,LOGGER_NAME,TIMESTAMP,LEVEL,MESSAGE)
-				values(:threadName,:loggerName,:timestamp,:level,:message)
+			insert into SS_LOG(THREAD_NAME,LOGGER_NAME,LOG_TIME,LEVEL,MESSAGE)
+				values(:threadName,:loggerName,:log_time,:level,:message)
 			</value>
 		</property>
 	</bean>

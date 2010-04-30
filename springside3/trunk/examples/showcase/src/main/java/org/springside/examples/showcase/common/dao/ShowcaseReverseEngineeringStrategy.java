@@ -13,5 +13,4 @@ public class ShowcaseReverseEngineeringStrategy extends IgnorePrefixReverseEngin
 	protected int getPrefixLength() {
 		return 2;
 	}
-
 }

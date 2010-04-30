@@ -20,13 +20,14 @@
 
 		<h2>Hibernate高级应用：</h2>
 		<ul>
-			<li>Hibernate Event，在修改User对象时自动加入审计信息。(综合示例)</li>
-			<li>Hibernate @Version字段，在Struts2 Prepareable Action里的使用。(综合示例)</li>
-			<li>Hibernate 继承，Post与Subject/Reply类的同表继承。(PostDao) </li>
-			<li>Hibernate Clob字段。(PostDao)</li>
-			<li>Hibernate 查询时预加载Lazy Load关联对象。(UserDao)</li>
-			<li>Hibernate 批量更新操作的HQL。(UserDao)</li>
-			<li>Hibernate 扩展Dialect，加入数据库特性语句。(UserDao)</li>
+			<li>自定义主键生成</li>
+			<li>Event，在修改User对象时自动加入审计信息。(综合示例)</li>
+			<li>@Version字段，在Struts2 Prepareable Action里的使用。(综合示例)</li>
+			<li>继承，Post与Subject/Reply类的同表继承。(PostDao) </li>
+			<li>Clob字段。(PostDao)</li>
+			<li>查询时预加载Lazy Load关联对象。(UserDao)</li>
+			<li>批量更新操作的HQL。(UserDao)</li>
+			<li>扩展Dialect，加入数据库特性语句。(UserDao)</li>
 		</ul>
 		
 		<h2>Spring JdbcTemplate应用(UserJdbcDao)</h2>

@@ -49,7 +49,7 @@ public class HibernateUtils {
 	 * 
 	 * 页面发送变更后的子对象id列表时,删除原来的子对象集合再根据页面id列表创建一个全新的集合这种看似最简单的做法是不行的.
 	 * 因此采用如此的整合算法：在源集合中删除id不在目标集合中的对象,根据目标集合中的id创建对象并添加到源集合中.
-	 * 因为新建对象只有ID被赋值, 因此本函数不适合于cascade-save-or-update的情形.
+	 * 因为新建对象只有ID被赋值, 因此本函数不适合于cascade-save-or-update自动持久化子对象的设置.
 	 * 
 	 * @param srcObjects 源集合,元素为对象.
 	 * @param checkedIds  目标集合,元素为ID.

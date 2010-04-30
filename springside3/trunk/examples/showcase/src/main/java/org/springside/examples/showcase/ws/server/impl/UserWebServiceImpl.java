@@ -66,7 +66,7 @@ public class UserWebServiceImpl implements UserWebService {
 	 */
 	//SpringSecurity 控制的方法
 	@Secured( { "ROLE_Admin" })
-	public GetUserResult getUser(Long id) {
+	public GetUserResult getUser(String id) {
 		//校验请求参数
 		try {
 			Assert.notNull(id, "id参数为空");

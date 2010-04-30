@@ -43,7 +43,7 @@ public class UserJdbcDao {
 	private class UserMapper implements RowMapper<User> {
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 			User user = new User();
-			user.setId(rs.getLong("id"));
+			user.setId(rs.getString("id"));
 			user.setName(rs.getString("name"));
 			user.setLoginName(rs.getString("login_name"));
 			return user;
@@ -62,7 +62,7 @@ public class UserJdbcDao {
 	/**
 	 * 查询单个对象.
 	 */
-	public User queryObject(Long id) {
+	public User queryObject(String id) {
 		return jdbcTemplate.queryForObject(QUERY_USER_BY_ID, userMapper, id);
 	}
 

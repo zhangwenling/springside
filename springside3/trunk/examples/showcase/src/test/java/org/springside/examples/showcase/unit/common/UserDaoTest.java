@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
+import org.springside.examples.showcase.data.UserData;
 import org.springside.examples.showcase.unit.BaseTxTestCase;
 
 import com.google.common.collect.Lists;
@@ -54,11 +55,19 @@ public class UserDaoTest extends BaseTxTestCase {
 
 	@Test
 	public void batchDisableUser() {
-		List<Long> ids = Lists.newArrayList(1L, 2L);
+		List<String> ids = Lists.newArrayList("1", "2");
 
 		userDao.disableUsers(ids);
 
-		assertEquals("disabled", userDao.get(1L).getStatus());
-		assertEquals("disabled", userDao.get(2L).getStatus());
+		assertEquals("disabled", userDao.get("1").getStatus());
+		assertEquals("disabled", userDao.get("2").getStatus());
+	}
+	
+	@Test
+	public void uidGenerator(){
+		
+		User user = UserData.getRandomUser();
+		userDao.save(user);
+		assertEquals(16,user.getId().length());
 	}
 }

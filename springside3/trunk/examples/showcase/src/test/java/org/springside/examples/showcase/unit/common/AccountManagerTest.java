@@ -30,9 +30,9 @@ public class AccountManagerTest extends Assert {
 	@Test
 	public void saveUser() {
 		User admin = new User();
-		admin.setId(1L);
+		admin.setId("1");
 		User user = new User();
-		user.setId(2L);
+		user.setId("2");
 		mockUserDao.save(user);
 		EasyMock.replay(mockUserDao);
 

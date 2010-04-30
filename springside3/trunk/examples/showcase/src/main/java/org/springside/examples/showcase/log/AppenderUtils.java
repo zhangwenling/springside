@@ -24,7 +24,7 @@ public class AppenderUtils {
 
 	public static final String MESSAGE = "message";
 	public static final String LEVEL = "level";
-	public static final String TIMESTAMP = "timestamp";
+	public static final String LOG_TIME = "log_time";
 	public static final String LOGGER_NAME = "loggerName";
 	public static final String THREAD_NAME = "threadName";
 
@@ -53,7 +53,7 @@ public class AppenderUtils {
 		map.put(LEVEL, event.getLevel().toString());
 		map.put(LOGGER_NAME, event.getLoggerName());
 		map.put(THREAD_NAME, event.getThreadName());
-		map.put(TIMESTAMP, new Date(event.getTimeStamp()));
+		map.put(LOG_TIME, new Date(event.getTimeStamp()));
 		return map;
 	}
 }

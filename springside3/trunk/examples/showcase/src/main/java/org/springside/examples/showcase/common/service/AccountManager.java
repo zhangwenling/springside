@@ -65,17 +65,17 @@ public class AccountManager {
 	 * 判断是否超级管理员.
 	 */
 	private boolean isSupervisor(User user) {
-		return (user.getId() != null && user.getId() == 1);
+		return (user.getId() != null && user.getId().equals("1"));
 	}
 
-	public User getUser(Long id) {
+	public User getUser(String id) {
 		return userDao.get(id);
 	}
 
 	/**
 	 * 取得用户, 并对用户的延迟加载关联进行初始化.
 	 */
-	public User getLoadedUser(Long id) {
+	public User getLoadedUser(String id) {
 		User user = userDao.get(id);
 		userDao.initUser(user);
 		return user;
@@ -116,7 +116,7 @@ public class AccountManager {
 	/**
 	 * 批量修改用户状态.
 	 */
-	public void disableUsers(List<Long> ids) {
+	public void disableUsers(List<String> ids) {
 		userDao.disableUsers(ids);
 	}
 

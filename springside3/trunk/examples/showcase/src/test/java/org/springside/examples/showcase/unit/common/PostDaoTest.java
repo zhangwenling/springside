@@ -30,7 +30,7 @@ public class PostDaoTest extends BaseTxTestCase {
 
 	@Test
 	public void getSubjectDetail() {
-		Subject subject = subjectDao.getDetailWithReply(1L);
+		Subject subject = subjectDao.getDetailWithReply("1");
 		subjectDao.getSession().evict(subject);
 
 		assertEquals(1, subject.getReplyList().size());
@@ -45,7 +45,7 @@ public class PostDaoTest extends BaseTxTestCase {
 		subject.setContent("Good Night!!");
 		subject.setModifyTime(new Date());
 
-		User user = userDao.get(1L);
+		User user = userDao.get("1");
 		subject.setUser(user);
 
 		subjectDao.save(subject);
@@ -56,7 +56,7 @@ public class PostDaoTest extends BaseTxTestCase {
 
 	@Test
 	public void updateSubject() {
-		Subject subject = subjectDao.getDetail(1L);
+		Subject subject = subjectDao.getDetail("1");
 		subject.setTitle("Good Afternoon");
 		subject.setContent("Good Afternoon!!!");
 		subject.setModifyTime(new Date());
@@ -69,9 +69,9 @@ public class PostDaoTest extends BaseTxTestCase {
 
 	@Test
 	public void deleteSubject() {
-		subjectDao.delete(1L);
+		subjectDao.delete("1");
 		subjectDao.flush();
-		Subject subject = subjectDao.findUniqueBy("id", 1L);
+		Subject subject = subjectDao.findUniqueBy("id", "1");
 		assertNull(subject);
 	}
 
@@ -82,10 +82,10 @@ public class PostDaoTest extends BaseTxTestCase {
 		reply.setContent("Good Afternoon!!!");
 		reply.setModifyTime(new Date());
 
-		User user = userDao.get(1L);
+		User user = userDao.get("1");
 		reply.setUser(user);
 
-		Subject subject = subjectDao.get(1L);
+		Subject subject = subjectDao.get("1");
 		reply.setSubject(subject);
 
 		replyDao.save(reply);
@@ -94,7 +94,7 @@ public class PostDaoTest extends BaseTxTestCase {
 
 	@Test
 	public void updateReply() {
-		Reply reply = replyDao.getDetail(2L);
+		Reply reply = replyDao.getDetail("2");
 		reply.setTitle("GoodEvening");
 		reply.setContent("Good Evening!!!");
 
@@ -104,6 +104,6 @@ public class PostDaoTest extends BaseTxTestCase {
 
 	@Test
 	public void deleteReply() {
-		replyDao.delete(2L);
+		replyDao.delete("2");
 	}
 }

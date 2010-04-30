@@ -92,7 +92,7 @@ public class SecurityWebServiceTest extends BaseFunctionalTestCase implements Ap
 	@Test
 	public void getUserWithSpringSecurity() {
 		UserWebService userWebService = (UserWebService) applicationContext.getBean("userServiceWithSpringSecurity");
-		GetUserResult result = userWebService.getUser(1L);
+		GetUserResult result = userWebService.getUser("1");
 		assertEquals("admin", result.getUser().getLoginName());
 	}
 
@@ -102,7 +102,7 @@ public class SecurityWebServiceTest extends BaseFunctionalTestCase implements Ap
 	@Test(expected = SOAPFaultException.class)
 	public void getUserWithSpringSecurityWithoutPermission() {
 		UserWebService userWebService = (UserWebService) applicationContext.getBean("userServiceWithPlainPassword");
-		GetUserResult result = userWebService.getUser(1L);
+		GetUserResult result = userWebService.getUser("1");
 		assertEquals("admin", result.getUser().getLoginName());
 	}
 }

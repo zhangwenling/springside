@@ -1,5 +1,6 @@
 package org.springside.examples.showcase.data;
 
+import org.springside.examples.showcase.common.dao.UIDGenerator;
 import org.springside.examples.showcase.common.entity.Role;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.test.utils.DataUtils;
@@ -10,6 +11,10 @@ import org.springside.modules.test.utils.DataUtils;
  * @author calvin
  */
 public class UserData {
+
+	public static String getUserId() {
+		return (String) new UIDGenerator().generate(null, null);
+	}
 
 	public static User getRandomUser() {
 		String userName = DataUtils.randomName("User");
@@ -32,7 +37,7 @@ public class UserData {
 
 	public static Role getAdminRole() {
 		Role role = new Role();
-		role.setId(1L);
+		role.setId("1");
 		role.setName("Admin");
 
 		return role;

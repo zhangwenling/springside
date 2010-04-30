@@ -6,11 +6,12 @@ import org.hibernate.cfg.reveng.TableIdentifier;
 
 /**
  * Hibernate Tools 从数据库逆向生成Entity POJO时, Class名要去除表名中的前缀的策略.
+ * 
  * 继承子类修改前缀长度.
  * 
  * @author calvin
  */
-public class IgnorePrefixReverseEngineeringStrategy extends DelegatingReverseEngineeringStrategy {
+public abstract class IgnorePrefixReverseEngineeringStrategy extends DelegatingReverseEngineeringStrategy {
 
 	public IgnorePrefixReverseEngineeringStrategy(ReverseEngineeringStrategy delegate) {
 		super(delegate);
@@ -29,9 +30,7 @@ public class IgnorePrefixReverseEngineeringStrategy extends DelegatingReverseEng
 	}
 
 	/**
-	 * 可在子类重载的长度.
+	 * 在子类重载的忽略的长度.
 	 */
-	protected int getPrefixLength() {
-		return 4;
-	}
+	abstract protected int getPrefixLength();
 }

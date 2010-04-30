@@ -73,7 +73,7 @@ public class User extends IdEntity {
 		this.email = email;
 	}
 
-	//多对多定义，cascade操作避免定义CascadeType.REMOVE
+	//多对多定义,无需定义Cascade.
 	@ManyToMany
 	//中间表定义,表名采用默认命名规则
 	@JoinTable(name = "acct_user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })

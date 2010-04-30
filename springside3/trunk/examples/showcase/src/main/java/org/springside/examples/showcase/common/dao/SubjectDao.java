@@ -12,7 +12,7 @@ import org.springside.modules.orm.hibernate.HibernateDao;
  * @author calvin
  */
 @Component
-public class SubjectDao extends HibernateDao<Subject, Long> {
+public class SubjectDao extends HibernateDao<Subject, String> {
 
 	private static final String QUERY_WITH_DETAIL = "select s from Subject s fetch all properties where s.id=?";
 	private static final String QUERY_WITH_DETAIL_AND_REPLY = "select s from Subject s fetch all properties left join fetch s.replyList fetch all properties where s.id=?";
@@ -20,14 +20,14 @@ public class SubjectDao extends HibernateDao<Subject, Long> {
 	/**
 	 * 获取帖子内容.
 	 */
-	public Subject getDetail(Long id) {
+	public Subject getDetail(String id) {
 		return (Subject) findUnique(QUERY_WITH_DETAIL, id);
 	}
 
 	/**
 	 * 获取帖子内容及回复.
 	 */
-	public Subject getDetailWithReply(Long id) {
+	public Subject getDetailWithReply(String id) {
 		Query query = createQuery(QUERY_WITH_DETAIL_AND_REPLY, id);
 		return (Subject) distinct(query).uniqueResult();
 	}

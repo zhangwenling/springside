@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.common.dao.UserJdbcDao;
 import org.springside.examples.showcase.common.entity.User;
+import org.springside.examples.showcase.data.UserData;
 import org.springside.examples.showcase.unit.BaseTxTestCase;
 import org.springside.modules.test.utils.DataUtils;
 
@@ -26,7 +27,7 @@ public class UserJdbcDaoTest extends BaseTxTestCase {
 
 	@Test
 	public void queryObject() {
-		User user = userJdbcDao.queryObject(1L);
+		User user = userJdbcDao.queryObject("1");
 		assertEquals("admin", user.getLoginName());
 	}
 
@@ -62,7 +63,7 @@ public class UserJdbcDaoTest extends BaseTxTestCase {
 
 	@Test
 	public void createObject() {
-		Long id = DataUtils.randomId();
+		String id = UserData.getUserId();
 		User user = new User();
 		user.setId(id);
 		user.setLoginName(DataUtils.randomName("user"));
@@ -75,13 +76,13 @@ public class UserJdbcDaoTest extends BaseTxTestCase {
 
 	@Test
 	public void batchCreateObject() {
-		Long id1 = DataUtils.randomId();
+		String id1 = UserData.getUserId();
 		User user1 = new User();
 		user1.setId(id1);
 		user1.setLoginName(DataUtils.randomName("user"));
 		user1.setName(DataUtils.randomName("User"));
 
-		Long id2 = DataUtils.randomId();
+		String id2 = UserData.getUserId();
 		User user2 = new User();
 		user2.setId(id2);
 		user2.setLoginName(DataUtils.randomName("user"));

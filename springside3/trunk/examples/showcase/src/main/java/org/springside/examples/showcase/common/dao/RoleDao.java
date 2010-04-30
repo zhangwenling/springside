@@ -10,5 +10,5 @@ import org.springside.modules.orm.hibernate.HibernateDao;
  * @author calvin
  */
 @Component
-public class RoleDao extends HibernateDao<Role, Long> {
+public class RoleDao extends HibernateDao<Role, String> {
 }

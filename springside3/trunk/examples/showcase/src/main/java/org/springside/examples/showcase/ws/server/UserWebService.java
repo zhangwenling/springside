@@ -21,5 +21,5 @@ public interface UserWebService {
 	/**
 	 * 获取用户, 受SpringSecurity保护.
 	 */
-	public GetUserResult getUser(@WebParam(name = "id") Long id);
+	public GetUserResult getUser(@WebParam(name = "id") String id);
 }

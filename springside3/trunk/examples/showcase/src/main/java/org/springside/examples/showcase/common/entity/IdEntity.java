@@ -18,16 +18,16 @@ import org.hibernate.annotations.GenericGenerator;
 @MappedSuperclass
 public abstract class IdEntity {
 
-	protected Long id;
+	protected String id;
 
 	@Id
-	@GeneratedValue(generator = "shardIdGenerator")
-	@GenericGenerator(name = "shardIdGenerator", strategy = "org.springside.modules.orm.hibernate.ShardIdGenerator")
-	public Long getId() {
+	@GeneratedValue(generator = "UIDGenerator")
+	@GenericGenerator(name = "UIDGenerator", strategy = "org.springside.examples.showcase.common.dao.UIDGenerator")
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 }
