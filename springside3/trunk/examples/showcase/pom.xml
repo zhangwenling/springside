@@ -361,7 +361,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.mortbay.jetty</groupId>
-			<artifactId>jsp-2.1-glassfish</artifactId>
+			<artifactId>jsp-2.1-jetty</artifactId>
 		</dependency>
 
 		<!-- test end -->

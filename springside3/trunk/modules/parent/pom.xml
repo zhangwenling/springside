@@ -21,7 +21,7 @@
 		<cxf.version>2.2.7</cxf.version>
 		<jersey.version>1.1.5.1</jersey.version>
 		<spring-security.version>3.0.2.RELEASE</spring-security.version>
-		<activemq.version>5.3.1</activemq.version>
+		<activemq.version>5.3.2</activemq.version>
 		<jetty.version>6.1.24</jetty.version>
 		<h2.version>1.2.134</h2.version>
 		<selenium.version>2.0a2</selenium.version>
@@ -253,7 +253,7 @@
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-core-asl</artifactId>
-				<version>1.5.1</version>
+				<version>1.5.2</version>
 			</dependency>
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
