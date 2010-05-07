@@ -42,8 +42,8 @@ public class UserDetailsServiceImplTest extends Assert {
 	@Test
 	public void loadUserExist() {
 
-		String authName = "foo";
 		//准备数据
+		String authName = "foo";
 		User user = AccountData.getRandomUser();
 		Role role = AccountData.getRandomRole();
 		user.getRoleList().add(role);

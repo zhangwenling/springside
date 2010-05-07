@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 /**
+ * Selenium工具类.
  *
  * @author calvin
  */

@@ -3,6 +3,11 @@ package org.springside.modules.test.utils;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.webapp.WebAppContext;
 
+/**
+ * 创建Jetty Server的工具类.
+ * 
+ * @author calvin
+ */
 public class JettyUtils {
 
 	/**

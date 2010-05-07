@@ -26,8 +26,8 @@ import com.opensymphony.xwork2.ActionContext;
 /**
  * Web集成测试工具类.
  * 
- * 1.在ServletContext里初始化Spring WebApplicationContext.
- * 2.为Struts2的ServletActionContext.getRequest()/getResponse()方法提供支持.
+ * 1.Spring WebApplicationContext初始化到ServletContext.
+ * 2.将MockRequest/Response放入Struts2的ServletActionContext.
  * 
  * @author calvin
  */
