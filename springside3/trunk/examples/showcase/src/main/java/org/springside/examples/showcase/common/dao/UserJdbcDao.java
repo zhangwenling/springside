@@ -14,6 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.modules.orm.jdbc.SqlBuilder;
 
@@ -36,8 +41,10 @@ public class UserJdbcDao {
 
 	private SimpleJdbcTemplate jdbcTemplate;
 
+	private TransactionTemplate transactionTemplate;
+
 	private String searchUserSql;
-	
+
 	private UserMapper userMapper = new UserMapper();
 
 	private class UserMapper implements RowMapper<User> {
@@ -53,6 +60,11 @@ public class UserJdbcDao {
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		jdbcTemplate = new SimpleJdbcTemplate(dataSource);
+	}
+
+	@Autowired
+	public void setTransactionManager(PlatformTransactionManager transactionManager) {
+		transactionTemplate = new TransactionTemplate(transactionManager);
 	}
 
 	public void setSearchUserSql(String searchUserSql) {
@@ -133,9 +145,45 @@ public class UserJdbcDao {
 	/**
 	 * 使用freemarker创建动态SQL.
 	 */
-	public List<User> searchUserByFreemarkerSqlTemplate(Map<String,?> conditions) {
+	public List<User> searchUserByFreemarkerSqlTemplate(Map<String, ?> conditions) {
 		String sql = SqlBuilder.getSql(searchUserSql, conditions);
 		logger.info(sql);
 		return jdbcTemplate.query(sql, userMapper, conditions);
+	}
+
+	/**
+	 * 使用TransactionTemplate编程控制事务,一般在Manager/Service层
+	 * 无返回值的情形.
+	 */
+	public void createUserInTransaction(User user) {
+
+		final BeanPropertySqlParameterSource source = new BeanPropertySqlParameterSource(user);
+		transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			public void doInTransactionWithoutResult(TransactionStatus status) {
+				jdbcTemplate.update(INSERT_USER, source);
+			}
+		});
+	}
+
+	/**
+	 * 使用TransactionTemplate编程控制事务,一般在Manager/Service层
+	 * 有返回值的情形,并捕获异常进行先期处理.
+	 */
+	public void createUserInTransaction2(User user) {
+
+		final BeanPropertySqlParameterSource source = new BeanPropertySqlParameterSource(user);
+		transactionTemplate.execute(new TransactionCallback<Boolean>() {
+			public Boolean doInTransaction(TransactionStatus status) {
+				try {
+					jdbcTemplate.update(INSERT_USER, source);
+					return true;
+				} catch (Exception e) {
+					logger.error(e.getMessage(), e);
+					status.setRollbackOnly();
+					return false;
+				}
+			}
+		});
 	}
 }

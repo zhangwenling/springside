@@ -9,9 +9,7 @@ import org.hibernate.id.UUIDHexGenerator;
  * 继承Hibernate的UUIDGenerator, 将GUID长度缩短到15位.
  * UUID主要用于同时使用多个数据库,不能依赖单个数据库自增生成主键的情形.
  * 
- * 
  * 1. AppId   - 使用2位的自定义值代替 原UUID中的IP(8位) + 同一IP上的JVM(8位),节约14位 
- *              子类可重载getShardId()从System Properties, Properties file等地方获得当前运行应用的Id.
  * 2. 时间戳      - 沿用原算法.
  * 3. Count   - 相同JVM同一毫秒内的计数器,长度减为2.
  *

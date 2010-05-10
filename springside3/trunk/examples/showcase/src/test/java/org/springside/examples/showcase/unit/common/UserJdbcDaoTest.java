@@ -16,7 +16,7 @@ import org.springside.modules.test.utils.DataUtils;
 import com.google.common.collect.Lists;
 
 /**
- * UserJdbcDao的集成测试用例.
+ * UserJdbcDao的集成测试用例, 演示Spring Jdbc Template的使用.
  * 
  * @author calvin
  */
