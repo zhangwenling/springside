@@ -12,21 +12,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.Element;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springside.examples.showcase.cache.EhcacheStrategy;
 import org.springside.modules.web.ServletUtils;
 
 /**
  * 本地静态内容展示与下载的Servlet.
  * 
- * 使用EhCache缓存静态内容基本信息, 演示文件高效读取,客户端缓存控制及Gzip压缩传输.
+ * 演示文件高效读取,客户端缓存控制及Gzip压缩传输.
+ * 使用EhCache缓存静态内容基本信息(可切换到其他缓存方案)
  * 
  * 演示访问地址为：
  * static-content?contentPath=img/logo.jpg
@@ -46,7 +44,7 @@ public class StaticContentServlet extends HttpServlet {
 	private static final int GZIP_MINI_LENGTH = 512;
 
 	/** Content基本信息缓存. */
-	private Cache contentInfoCache;
+	private EhcacheStrategy contentInfoCache;
 
 	private MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
 
@@ -128,21 +126,19 @@ public class StaticContentServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-		CacheManager ehcacheManager = (CacheManager) context.getBean("ehcacheManager");
-		contentInfoCache = ehcacheManager.getCache("contentInfoCache");
+		contentInfoCache.init(context);
 	}
 
 	/**
 	* 从缓存中获取Content基本信息, 如不存在则进行创建.
 	*/
 	private ContentInfo getContentInfoFromCache(String path) {
-		Element element = contentInfoCache.get(path);
-		if (element == null) {
+		Object info = contentInfoCache.get(path);
+		if (info == null) {
 			ContentInfo content = createContentInfo(path);
-			element = new Element(content.contentPath, content);
-			contentInfoCache.put(element);
+			contentInfoCache.put(content.contentPath, content);
 		}
-		return (ContentInfo) element.getObjectValue();
+		return (ContentInfo) info;
 	}
 
 	/**
