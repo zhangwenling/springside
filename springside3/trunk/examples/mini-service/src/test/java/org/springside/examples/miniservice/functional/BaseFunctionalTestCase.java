@@ -2,12 +2,13 @@ package org.springside.examples.miniservice.functional;
 
 import javax.sql.DataSource;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.mortbay.jetty.Server;
 import org.springside.examples.miniservice.tools.Start;
-import org.springside.modules.test.utils.DBUnitUtils;
+import org.springside.modules.test.utils.DbUnitUtils;
 import org.springside.modules.test.utils.JettyUtils;
 import org.springside.modules.utils.SpringContextHolder;
 
@@ -39,6 +40,14 @@ public class BaseFunctionalTestCase extends Assert {
 	}
 
 	/**
+	 * 删除默认数据.
+	 */
+	@AfterClass
+	public static void cleanDefaultData() throws Exception{
+		DbUnitUtils.removeData(dataSource, "/data/default-data.xml");
+	}
+
+	/**
 	 * 启动Jetty服务器.
 	 */
 	protected static void startJetty() throws Exception {
@@ -57,6 +66,6 @@ public class BaseFunctionalTestCase extends Assert {
 	 * 载入默认数据.
 	 */
 	protected static void loadDefaultData() throws Exception {
-		DBUnitUtils.loadDbUnitData(dataSource, "/data/default-data.xml");
+		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
 	}
 }

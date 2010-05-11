@@ -3,7 +3,7 @@ package org.springside.examples.showcase.unit;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.springside.modules.test.spring.SpringTxTestCase;
-import org.springside.modules.test.utils.DBUnitUtils;
+import org.springside.modules.test.utils.DbUnitUtils;
 
 /**
  * 数据库访问测试基类。
@@ -19,6 +19,6 @@ public class BaseTxTestCase extends SpringTxTestCase {
 
 	@Before
 	public void loadDefaultData() throws Exception {
-		DBUnitUtils.loadDbUnitData(dataSource, "/data/default-data.xml");
+		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
 	}
 }

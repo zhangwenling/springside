@@ -18,7 +18,7 @@ import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateDao;
 import org.springside.modules.test.spring.SpringTxTestCase;
-import org.springside.modules.test.utils.DBUnitUtils;
+import org.springside.modules.test.utils.DbUnitUtils;
 import org.springside.modules.unit.orm.hibernate.data.User;
 
 import com.google.common.collect.Lists;
@@ -36,7 +36,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		jdbcTemplate.update("drop all objects");
 		jdbcTemplate.update("runscript from 'src/test/resources/schema.sql'");
 
-		DBUnitUtils.loadDbUnitData((DataSource) applicationContext.getBean("dataSource"), "/test-data.xml");
+		DbUnitUtils.loadData((DataSource) applicationContext.getBean("dataSource"), "/test-data.xml");
 
 		dao = new HibernateDao<User, Long>(sessionFactory, User.class);
 	}

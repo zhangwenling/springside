@@ -14,7 +14,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.springside.examples.miniweb.tools.Start;
 import org.springside.modules.test.groups.GroupsTestRunner;
-import org.springside.modules.test.utils.DBUnitUtils;
+import org.springside.modules.test.utils.DbUnitUtils;
 import org.springside.modules.test.utils.JettyUtils;
 import org.springside.modules.test.utils.SeleniumUtils;
 import org.springside.modules.utils.PropertyUtils;
@@ -47,7 +47,7 @@ public class BaseFunctionalTestCase extends Assert {
 	public static void initAll() throws Exception {
 		if (server == null) {
 			startJetty();
-			initDataSource();
+			fetchDataSource();
 		}
 		loadDefaultData();
 		createWebDriver();
@@ -57,6 +57,14 @@ public class BaseFunctionalTestCase extends Assert {
 	@AfterClass
 	public static void stopWebDriver() {
 		driver.close();
+	}
+
+	/**
+	 * 删除默认数据.
+	 */
+	@AfterClass
+	public static void cleanDefaultData() throws Exception{
+		DbUnitUtils.removeData(dataSource, "/data/default-data.xml");
 	}
 
 	/**
@@ -70,7 +78,7 @@ public class BaseFunctionalTestCase extends Assert {
 	/**
 	 * 取出Jetty Server内的DataSource.
 	 */
-	protected static void initDataSource() {
+	protected static void fetchDataSource() {
 		dataSource = SpringContextHolder.getBean("dataSource");
 	}
 
@@ -78,7 +86,7 @@ public class BaseFunctionalTestCase extends Assert {
 	 * 载入默认数据.
 	 */
 	protected static void loadDefaultData() throws Exception {
-		DBUnitUtils.loadDbUnitData(dataSource, "/data/default-data.xml");
+		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
 	}
 
 	/**
