@@ -18,13 +18,15 @@
 		<spring.version>3.0.2.RELEASE</spring.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
 		<struts2.version>2.1.8.1</struts2.version>
-		<cxf.version>2.2.7</cxf.version>
-		<jersey.version>1.1.5.1</jersey.version>
+		<cxf.version>2.2.8</cxf.version>
+		<jersey.version>1.2</jersey.version>
 		<spring-security.version>3.0.2.RELEASE</spring-security.version>
 		<activemq.version>5.3.2</activemq.version>
 		<jetty.version>6.1.24</jetty.version>
-		<h2.version>1.2.134</h2.version>
+		<h2.version>1.2.135</h2.version>
 		<selenium.version>2.0a2</selenium.version>
+		<slf4j.version>1.6.0</slf4j.version>
+		<jackson.version>1.5.2</jackson.version>
 
 		<!-- Plugin的属性定义  -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -253,17 +255,17 @@
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-core-asl</artifactId>
-				<version>1.5.2</version>
+				<version>${jackson.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-mapper-asl</artifactId>
-				<version>1.5.2</version>
+				<version>${jackson.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-jaxrs</artifactId>
-				<version>1.5.2</version>
+				<version>${jackson.version}</version>
 			</dependency>
 
 			<!-- j2ee web spec -->
@@ -424,23 +426,17 @@
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
-				<version>1.5.11</version>
+				<version>${slf4j.version}</version>
 			</dependency>
 
 			<!-- slf4j-log4j绑定 -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
-				<version>1.5.11</version>
+				<version>${slf4j.version}</version>
 			</dependency>
 
 			<!-- slf4j没有log4j的情形 -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-simple</artifactId>
-				<version>1.5.11</version>
-			</dependency>
-
 			<dependency>
 				<groupId>commons-logging</groupId>
 				<artifactId>commons-logging</artifactId>
@@ -625,16 +621,10 @@
 			<dependency>
 				<groupId>org.easymock</groupId>
 				<artifactId>easymock</artifactId>
-				<version>2.5.2</version>
+				<version>3.0</version>
 				<scope>test</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.easymock</groupId>
-				<artifactId>easymockclassextension</artifactId>
-				<version>2.5.2</version>
-				<scope>test</scope>
-			</dependency>
-
+			
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-test</artifactId>
