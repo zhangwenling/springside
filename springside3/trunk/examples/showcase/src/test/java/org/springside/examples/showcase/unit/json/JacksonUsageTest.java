@@ -18,7 +18,7 @@ import com.google.common.collect.Maps;
  * 
  * @author calvin
  */
-public class JacksonTest extends Assert {
+public class JacksonUsageTest extends Assert {
 
 	private ObjectMapper mapper = new ObjectMapper();
 

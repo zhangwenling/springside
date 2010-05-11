@@ -13,7 +13,7 @@ import org.springframework.context.ApplicationContext;
  * 
  * @author calvin
  */
-public class EhcacheStrategy implements CacheStrategy {
+public class EhcacheImpl  {
 	private Cache cache;
 
 	public void init(ApplicationContext context) {

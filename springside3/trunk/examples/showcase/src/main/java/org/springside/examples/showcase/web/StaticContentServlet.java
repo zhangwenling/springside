@@ -17,7 +17,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springside.examples.showcase.cache.EhcacheStrategy;
+import org.springside.examples.showcase.cache.EhcacheImpl;
 import org.springside.modules.web.ServletUtils;
 
 /**
@@ -44,7 +44,7 @@ public class StaticContentServlet extends HttpServlet {
 	private static final int GZIP_MINI_LENGTH = 512;
 
 	/** Content基本信息缓存. */
-	private EhcacheStrategy contentInfoCache;
+	private EhcacheImpl contentInfoCache;
 
 	private MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
 

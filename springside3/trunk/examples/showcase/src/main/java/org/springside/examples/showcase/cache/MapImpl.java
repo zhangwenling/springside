@@ -16,7 +16,7 @@ import com.google.common.collect.MapMaker;
  * 
  * @author calvin
  */
-public class MapStrategy implements CacheStrategy {
+public class MapImpl {
 
 	private ConcurrentMap<String, Object> cache = new MapMaker().concurrencyLevel(32).expiration(1, TimeUnit.DAYS)
 			.softValues().makeMap();

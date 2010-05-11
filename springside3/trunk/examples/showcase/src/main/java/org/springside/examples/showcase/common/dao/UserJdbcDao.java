@@ -168,12 +168,12 @@ public class UserJdbcDao {
 
 	/**
 	 * 使用TransactionTemplate编程控制事务,一般在Manager/Service层
-	 * 有返回值的情形,并捕获异常进行先期处理.
+	 * 有返回值的情形,并捕获异常进行处理不再抛出的情形.
 	 */
-	public void createUserInTransaction2(User user) {
+	public boolean createUserInTransaction2(User user) {
 
 		final BeanPropertySqlParameterSource source = new BeanPropertySqlParameterSource(user);
-		transactionTemplate.execute(new TransactionCallback<Boolean>() {
+		return transactionTemplate.execute(new TransactionCallback<Boolean>() {
 			public Boolean doInTransaction(TransactionStatus status) {
 				try {
 					jdbcTemplate.update(INSERT_USER, source);

@@ -22,6 +22,7 @@
 		<h2>技术说明：</h2>
 		<ul>
 			<li>演示在Spring中使用Ehcache.</li>
+			<li>演示最简单的SoftRerence的,每个元素一天后过期的ConcurrentMap</li>
 		</ul>
 		
 		<h2>用户故事：</h2>
