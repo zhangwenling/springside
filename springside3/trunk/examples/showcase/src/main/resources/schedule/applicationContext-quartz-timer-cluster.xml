@@ -18,8 +18,8 @@
 		<property name="configLocation" value="classpath:schedule/quartz-cluster.properties" />
 		<!-- 启动时延期2秒开始任务 -->
 		<property name="startupDelay" value="2" />
-		<!-- 保存Job数据到数据库所需的带事务数据源 -->
-		<property name="dataSource" ref="dataSource" />
+		<!-- 保存Job数据到数据库所需的数据源 -->
+		<property name="dataSource" ref="quartzDataSource" />
 		<!-- Job接受applicationContext的成员变量名 -->
 		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
 	</bean>

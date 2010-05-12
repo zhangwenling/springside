@@ -79,8 +79,8 @@ public class BaseFunctionalTestCase extends Assert {
 	 * 创建WebDriver.
 	 */
 	protected static void createWebDriver() throws Exception {
-		Properties props = PropertyUtils.loadProperties("classpath*:/application.test.properties",
-				"classpath*:/application.test-local.properties");
+		Properties props = PropertyUtils.loadProperties("classpath:/application.test.properties",
+				"classpath:/application.test-local.properties");
 
 		driver = SeleniumUtils.buildDriver(props.getProperty("selenium.driver"));
 	}
