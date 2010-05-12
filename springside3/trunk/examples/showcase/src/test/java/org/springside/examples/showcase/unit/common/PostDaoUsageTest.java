@@ -19,7 +19,7 @@ import org.springside.examples.showcase.unit.BaseTxTestCase;
  * @author calvin
  */
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
-public class PostDaoTest extends BaseTxTestCase {
+public class PostDaoUsageTest extends BaseTxTestCase {
 
 	@Autowired
 	private SubjectDao subjectDao;

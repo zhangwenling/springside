@@ -21,7 +21,7 @@ import com.google.common.collect.Lists;
  * @author calvin
  */
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/common/applicationContext-jdbc.xml" })
-public class UserJdbcDaoTest extends BaseTxTestCase {
+public class UserJdbcDaoUsageTest extends BaseTxTestCase {
 	@Autowired
 	private UserJdbcDao userJdbcDao;
 
