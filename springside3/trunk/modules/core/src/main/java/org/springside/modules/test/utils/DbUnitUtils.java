@@ -1,5 +1,6 @@
 package org.springside.modules.test.utils;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 
@@ -11,8 +12,17 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.ext.h2.H2Connection;
 import org.dbunit.operation.DatabaseOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.ResourceLoader;
+import org.springside.modules.utils.PropertyUtils;
 
 public class DbUnitUtils {
+
+	private static Logger logger = LoggerFactory.getLogger(PropertyUtils.class);
+	private static ResourceLoader resourceLoader = new DefaultResourceLoader();
+
 	/**
 	 * 初始化XML数据文件到H2数据库, XML数据文件中涉及的表在插入数据前先进行清除. 
 	 */
@@ -41,9 +51,13 @@ public class DbUnitUtils {
 			throws DatabaseUnitException, SQLException {
 		IDatabaseConnection connection = new H2Connection(h2DataSource.getConnection(), "");
 		for (String xmlPath : xmlFilePaths) {
-			InputStream input = DbUnitUtils.class.getResourceAsStream(xmlPath);
-			IDataSet dataSet = new FlatXmlDataSetBuilder().setColumnSensing(true).build(input);
-			operation.execute(connection, dataSet);
+			try {
+				InputStream input = resourceLoader.getResource(xmlPath).getInputStream();
+				IDataSet dataSet = new FlatXmlDataSetBuilder().setColumnSensing(true).build(input);
+				operation.execute(connection, dataSet);
+			} catch (IOException e) {
+				logger.warn(xmlPath + " file not found", e);
+			}
 		}
 	}
 }

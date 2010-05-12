@@ -13,8 +13,9 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.DefaultPropertiesPersister;
 import org.springframework.util.PropertiesPersister;
 
@@ -30,9 +31,10 @@ public class PropertyUtils {
 	private static Logger logger = LoggerFactory.getLogger(PropertyUtils.class);
 
 	private static PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
+	private static ResourceLoader resourceLoader = new DefaultResourceLoader();
 
 	/**
-	 * 载入多个ClassPath中的properties文件, 相同的属性将会覆盖之前的载入.
+	 * 载入多个properties文件, 相同的属性最后载入的文件将会覆盖之前的载入.
 	 * @see org.springframework.beans.factory.config.PropertyPlaceholderConfigurer
 	 */
 	public static Properties loadProperties(String... locations) throws IOException {
@@ -44,7 +46,7 @@ public class PropertyUtils {
 
 			InputStream is = null;
 			try {
-				Resource resource = new ClassPathResource(location);
+				Resource resource = resourceLoader.getResource(location);
 				is = resource.getInputStream();
 				propertiesPersister.load(props, new InputStreamReader(is, DEFAULT_ENCODING));
 			} catch (IOException ex) {
