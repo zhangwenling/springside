@@ -78,6 +78,20 @@
         <managementContext>
             <managementContext createConnector="false"/>
         </managementContext>
+        
+       <!--
+            Configure network connector to use multicast protocol
+            For more information, see
+            
+            http://activemq.apache.org/multicast-transport-reference.html
+        -->
+	    <networkConnectors>
+	      <networkConnector uri="multicast://239.255.2.3:6155?group=springside"
+	        dynamicOnly="true" 
+	        networkTTL="3" 
+	        prefetchSize="1" 
+	        decreaseNetworkConsumerPriority="true" />
+	    </networkConnectors>
 
         <!-- 
             Configure message persistence for the broker. The default persistence
@@ -118,7 +132,7 @@
             http://activemq.apache.org/configuring-transports.html 
         -->
         <transportConnectors>
-            <transportConnector name="openwire" uri="tcp://0.0.0.0:61616"/>
+              <transportConnector name="openwire" uri="tcp://0.0.0.0:61616" discoveryUri="multicast://239.255.2.3:6155?group=springside" />
         </transportConnectors>
 
     </broker>

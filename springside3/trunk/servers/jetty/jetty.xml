@@ -19,7 +19,7 @@
 	<!-- =========================================================== -->
 	<Call name="addConnector">
 		<Arg>
-			<New class="org.mortbay.jetty.nio.SelectChannelConnector">
+			<New class="org.mortbay.jetty.nio.BlockingChannelConnector">
 				<Set name="host">
 					<SystemProperty name="jetty.host" />
 				</Set>
@@ -29,8 +29,7 @@
 				<Set name="maxIdleTime">30000</Set>
 				<Set name="statsOn">true</Set>
 				<Set name="confidentialPort">8443</Set>
-				<Set name="lowResourcesConnections">5000</Set>
-				<Set name="lowResourcesMaxIdleTime">5000</Set>
+
 			</New>
 		</Arg>
 	</Call>
@@ -40,8 +39,8 @@
 	<!-- =========================================================== -->
 	<Set name="handler">
 		<New class="org.mortbay.jetty.webapp.WebAppContext">
-			<Set name="contextPath"><project-context-path></context.path></Set>
-			<Set name="war"><path-to-project-war></path></Set>
+			<Set name="contextPath"><project-context-path></Set>
+			<Set name="war"><path-to-project-war-file-or-webapp-dir></Set>
 		</New>
 	</Set>
 
@@ -51,5 +50,5 @@
 	<Set name="stopAtShutdown">true</Set>
 	<Set name="sendServerVersion">true</Set>
 	<Set name="sendDateHeader">true</Set>
-	<Set name="gracefulShutdown">1000</Set>
+	<Set name="gracefulShutdown">3000</Set>
 </Configure>
