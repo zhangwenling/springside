@@ -19,12 +19,12 @@ public class JodaUsageTest extends Assert {
 		DateTime tomorrow = now.plusHours(25);
 		assertEquals(true, isSameDay(now, nowLater));
 		assertEquals(false, isSameDay(now, tomorrow));
-		
+
 		DateTime oneYearsAgo = now.minusYears(2).plusDays(20);
 		DateTime twoYearsAgo = now.minusYears(2);
-		assertEquals(1,getAge(oneYearsAgo));
-		assertEquals(2,getAge(twoYearsAgo));
-		
+		assertEquals(1, getAge(oneYearsAgo));
+		assertEquals(2, getAge(twoYearsAgo));
+
 	}
 
 	private int getAge(DateTime birthDate) {

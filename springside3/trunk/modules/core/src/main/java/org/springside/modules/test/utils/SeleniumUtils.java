@@ -117,8 +117,9 @@ public class SeleniumUtils {
 	public static void waitForDisplay(WebElement element, int timeout) {
 		long timeoutTime = System.currentTimeMillis() + timeout;
 		while (System.currentTimeMillis() < timeoutTime) {
-			if (((RenderedWebElement) element).isDisplayed())
+			if (((RenderedWebElement) element).isDisplayed()) {
 				return;
+			}
 		}
 		logger.warn("waitForDisplay timeout");
 	}

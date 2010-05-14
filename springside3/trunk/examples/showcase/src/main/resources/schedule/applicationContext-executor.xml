@@ -10,13 +10,13 @@
 		<property name="continueScheduledExecutionAfterException" value="true" />
 		<property name="scheduledExecutorTasks">
 			<list>
-				<ref bean="scheduledExecutorTasks" />
+				<ref bean="scheduledExecutorTask" />
 			</list>
 		</property>
 	</bean>
 
 	<!-- Task的封装 -->
-	<bean id="scheduledExecutorTasks" class="org.springframework.scheduling.concurrent.ScheduledExecutorTask">
+	<bean id="scheduledExecutorTask" class="org.springframework.scheduling.concurrent.ScheduledExecutorTask">
 		<property name="runnable" ref="executorJob" />
 		<!-- 首次执行延期2秒 -->
 		<property name="delay" value="2000" />

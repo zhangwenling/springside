@@ -63,7 +63,7 @@ public class BaseFunctionalTestCase extends Assert {
 	 * 删除默认数据.
 	 */
 	@AfterClass
-	public static void cleanDefaultData() throws Exception{
+	public static void cleanDefaultData() throws Exception {
 		DbUnitUtils.removeData(dataSource, "/data/default-data.xml");
 	}
 

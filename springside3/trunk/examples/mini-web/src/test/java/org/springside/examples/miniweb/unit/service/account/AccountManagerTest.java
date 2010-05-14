@@ -37,10 +37,10 @@ public class AccountManagerTest extends Assert {
 	public void deleteUser() {
 		mockUserDao.delete(2L);
 		EasyMock.replay(mockUserDao);
-		
+
 		//正常删除用户.
 		accountManager.deleteUser(2L);
-		
+
 		//删除超级管理用户抛出异常.
 		try {
 			accountManager.deleteUser(1L);

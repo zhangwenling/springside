@@ -62,12 +62,12 @@ public class UserDaoTest extends BaseTxTestCase {
 		assertEquals("disabled", userDao.get("1").getStatus());
 		assertEquals("disabled", userDao.get("2").getStatus());
 	}
-	
+
 	@Test
-	public void uidGenerator(){
-		
+	public void uidGenerator() {
+
 		User user = UserData.getRandomUser();
 		userDao.save(user);
-		assertEquals(16,user.getId().length());
+		assertEquals(16, user.getId().length());
 	}
 }

@@ -18,8 +18,8 @@ import com.google.common.collect.MapMaker;
  */
 public class MapImpl {
 
-	private ConcurrentMap<String, Object> cache = new MapMaker().concurrencyLevel(32).expiration(1, TimeUnit.DAYS)
-			.softValues().makeMap();
+	private ConcurrentMap<String, Object> cache = new MapMaker().concurrencyLevel(32).expiration(86400,
+			TimeUnit.SECONDS).softValues().makeMap();
 
 	public Object get(String key) {
 		return cache.get(key);
