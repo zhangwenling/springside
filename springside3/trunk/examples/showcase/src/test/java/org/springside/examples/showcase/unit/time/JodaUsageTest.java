@@ -14,6 +14,11 @@ public class JodaUsageTest extends Assert {
 
 	@Test
 	public void demo() {
+		//test day init and print to string
+		DateTime fooDateTime = new DateTime(1978, 6, 1, 12, 10, 8, 0);
+		assertEquals("1978-06-01 12:10:08", fooDateTime.toString("yyyy-MM-dd HH:mm:ss"));
+
+		//test minus/plus and years/days between function
 		DateTime now = new DateTime();
 		DateTime nowLater = now.plusHours(22);
 		DateTime tomorrow = now.plusHours(25);
