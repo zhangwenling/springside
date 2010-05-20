@@ -19,11 +19,9 @@
 			<p>各式主流的、实用的、好玩的开源项目大派对。</p>
 			<p>Coming Soon....</p>
 			<ul>
-				<li>JBPM演示</li>
 				<li>Memcached演示</li>
+				<li>Jetty + JSW 演示</li>
 				<li>Key-Value数据库演示.</li>
-				<li>JQuery Table/Grid控件演示</li>
-				<li>Struts2及插件的高级使用演示</li>
 				<li>ActiveMQ高性能/高可用性演示</li>
 			</ul>
 		</div>

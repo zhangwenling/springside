@@ -24,7 +24,6 @@
 			<groupId>org.springside</groupId>
 			<artifactId>springside3-core</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springside</groupId>
 			<artifactId>springside3-extension</artifactId>
@@ -43,10 +42,6 @@
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.geronimo.specs</groupId>
-			<artifactId>geronimo-annotation_1.0_spec</artifactId>
 		</dependency>
 		<!-- spring end -->
 

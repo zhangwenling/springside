@@ -22,7 +22,7 @@
 		<!--
 			<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
 			<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
-			<jdbc.driver.version>5.1.11</jdbc.driver.version>
+			<jdbc.driver.version>5.1.12</jdbc.driver.version>
 		-->
 	</properties>
 
@@ -46,10 +46,6 @@
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.geronimo.specs</groupId>
-			<artifactId>geronimo-annotation_1.0_spec</artifactId>
 		</dependency>
 		<!-- spring end -->
 

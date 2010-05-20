@@ -21,12 +21,7 @@
 			<artifactId>spring-jdbc</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.geronimo.specs</groupId>
-			<artifactId>geronimo-annotation_1.0_spec</artifactId>
-			<optional>true</optional>
-		</dependency>
-
+	
 		<!-- hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>

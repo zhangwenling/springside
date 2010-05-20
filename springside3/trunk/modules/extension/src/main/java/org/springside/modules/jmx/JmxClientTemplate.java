@@ -87,7 +87,6 @@ public class JmxClientTemplate {
 	/**
 	 * 创建标准MBean代理.
 	 */
-	@SuppressWarnings("unchecked")
 	public <T> T createMBeanProxy(final String mbeanName, final Class<T> mBeanInterface) {
 		Assert.hasText(mbeanName, "mbeanName不能为空");
 		assertConnected();

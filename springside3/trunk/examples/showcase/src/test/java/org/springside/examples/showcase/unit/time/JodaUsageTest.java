@@ -5,12 +5,8 @@ import org.joda.time.Days;
 import org.joda.time.Years;
 import org.junit.Assert;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class JodaUsageTest extends Assert {
-
-	private static Logger logger = LoggerFactory.getLogger(JodaUsageTest.class);
 
 	@Test
 	public void demo() {
