@@ -810,11 +810,6 @@
 					<version>${jetty.version}</version>
 					<configuration>
 						<scanIntervalSeconds>5</scanIntervalSeconds>
-						<connectors>
-							<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-								<port>8080</port>
-							</connector>
-						</connectors>
 					</configuration>
 				</plugin>
 
