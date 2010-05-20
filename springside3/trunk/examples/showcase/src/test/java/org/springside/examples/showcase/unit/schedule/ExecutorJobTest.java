@@ -1,5 +1,8 @@
 package org.springside.examples.showcase.unit.schedule;
 
+import javax.sql.DataSource;
+
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
@@ -14,9 +17,19 @@ import org.springside.modules.test.utils.TimeUtils;
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/schedule/applicationContext-executor.xml" })
 public class ExecutorJobTest extends SpringTxTestCase {
 
+	private static DataSource dataSourceHolder = null;
+
 	@Before
 	public void loadDefaultData() throws Exception {
-		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+		if (dataSourceHolder == null) {
+			DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+			dataSourceHolder = dataSource;
+		}
+	}
+
+	@AfterClass
+	public static void cleanDefaultData() throws Exception {
+		DbUnitUtils.removeData(dataSourceHolder, "/data/default-data.xml");
 	}
 
 	@Test

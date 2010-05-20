@@ -31,7 +31,7 @@ public class BaseFunctionalTestCase extends Assert {
 
 	protected static Server server;
 
-	protected static DataSource dataSource;
+	protected static DataSource dataSourceHolder;
 
 	protected static WebDriver driver;
 
@@ -50,7 +50,7 @@ public class BaseFunctionalTestCase extends Assert {
 	 */
 	@AfterClass
 	public static void cleanDefaultData() throws Exception {
-		DbUnitUtils.removeData(dataSource, "/data/default-data.xml");
+		DbUnitUtils.removeData(dataSourceHolder, "/data/default-data.xml");
 	}
 
 	/**
@@ -65,14 +65,14 @@ public class BaseFunctionalTestCase extends Assert {
 	 * 取出Jetty Server内的DataSource.
 	 */
 	protected static void fetchDataSource() {
-		dataSource = SpringContextHolder.getBean("dataSource");
+		dataSourceHolder = SpringContextHolder.getBean("dataSource");
 	}
 
 	/**
 	 * 载入默认数据.
 	 */
 	protected static void loadDefaultData() throws Exception {
-		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+		DbUnitUtils.loadData(dataSourceHolder, "/data/default-data.xml");
 	}
 
 	/**

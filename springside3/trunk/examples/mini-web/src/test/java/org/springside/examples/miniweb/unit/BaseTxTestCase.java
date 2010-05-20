@@ -12,7 +12,9 @@ import org.springside.modules.test.utils.DbUnitUtils;
 /**
  * 数据库访问测试基类。
  * 
- * 继承SpringTxTestCase的所有方法, 并在第一个测试方法前初始化数据.
+ * 继承SpringTxTestCase的所有方法,并负责默认数据的加载与删除.
+ * 
+ * 在第一个测试方法前初始化数据,在所有方法完毕后删除数据.
  * 
  * @see SpringTxTestCase
  * 
@@ -34,6 +36,6 @@ public class BaseTxTestCase extends SpringTxTestCase {
 
 	@AfterClass
 	public static void cleanDefaultData() throws Exception {
-		DbUnitUtils.loadData(dataSourceHolder, "/data/default-data.xml");
+		DbUnitUtils.removeData(dataSourceHolder, "/data/default-data.xml");
 	}
 }

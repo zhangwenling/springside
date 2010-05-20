@@ -45,7 +45,7 @@ public class PostDaoUsageTest extends SpringTxTestCase {
 
 	@AfterClass
 	public static void cleanDefaultData() throws Exception {
-		DbUnitUtils.loadData(dataSourceHolder, "/data/default-data.xml");
+		DbUnitUtils.removeData(dataSourceHolder, "/data/default-data.xml");
 	}
 
 	@Test

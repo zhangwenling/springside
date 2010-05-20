@@ -10,9 +10,9 @@ import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DbUnitUtils;
 
 /**
- * 数据库访问测试基类。
+ * 继承SpringTxTestCase的所有方法, 并负责默认数据加载与删除.
  * 
- * 继承SpringTxTestCase的所有方法, 并在第一个测试方法前初始化数据.
+ * 在第一个测试方法前初始化数据,在所有方法完毕后删除数据.
  * 
  * @see SpringTxTestCase
  * 
