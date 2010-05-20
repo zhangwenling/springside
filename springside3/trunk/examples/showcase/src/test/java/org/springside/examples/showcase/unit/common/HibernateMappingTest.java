@@ -2,10 +2,13 @@ package org.springside.examples.showcase.unit.common;
 
 import java.util.Map;
 
+import javax.sql.DataSource;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.persister.entity.EntityPersister;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -24,12 +27,22 @@ import org.springside.modules.test.utils.DbUnitUtils;
 public class HibernateMappingTest extends SpringTxTestCase {
 	private static Logger logger = LoggerFactory.getLogger(HibernateMappingTest.class);
 
+	private static DataSource dataSourceHolder = null;
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Before
 	public void loadDefaultData() throws Exception {
-		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+		if (dataSourceHolder == null) {
+			DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+			dataSourceHolder = dataSource;
+		}
+	}
+
+	@AfterClass
+	public static void cleanDefaultData() throws Exception {
+		DbUnitUtils.loadData(dataSourceHolder, "/data/default-data.xml");
 	}
 
 	@Test

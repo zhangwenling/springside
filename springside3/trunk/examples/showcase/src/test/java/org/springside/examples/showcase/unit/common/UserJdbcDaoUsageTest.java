@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +29,21 @@ import com.google.common.collect.Lists;
 @DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/common/applicationContext-jdbc.xml" })
 public class UserJdbcDaoUsageTest extends SpringTxTestCase {
+	private static DataSource dataSourceHolder = null;
 	@Autowired
 	private UserJdbcDao userJdbcDao;
 
 	@Before
 	public void loadDefaultData() throws Exception {
-		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+		if (dataSourceHolder == null) {
+			DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+			dataSourceHolder = dataSource;
+		}
+	}
+
+	@AfterClass
+	public static void cleanDefaultData() throws Exception {
+		DbUnitUtils.loadData(dataSourceHolder, "/data/default-data.xml");
 	}
 
 	@Test

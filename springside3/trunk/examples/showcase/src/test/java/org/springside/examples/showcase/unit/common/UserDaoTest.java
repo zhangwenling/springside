@@ -2,7 +2,10 @@ package org.springside.examples.showcase.unit.common;
 
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.hibernate.Hibernate;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +26,23 @@ import com.google.common.collect.Lists;
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
 public class UserDaoTest extends SpringTxTestCase {
 
-	@Before
-	public void loadDefaultData() throws Exception {
-		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
-	}
+	private static DataSource dataSourceHolder = null;
 
 	@Autowired
 	private UserDao userDao;
+
+	@Before
+	public void loadDefaultData() throws Exception {
+		if (dataSourceHolder == null) {
+			DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+			dataSourceHolder = dataSource;
+		}
+	}
+
+	@AfterClass
+	public static void cleanDefaultData() throws Exception {
+		DbUnitUtils.loadData(dataSourceHolder, "/data/default-data.xml");
+	}
 
 	@Test
 	public void eagerFetchCollection() {

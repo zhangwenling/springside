@@ -1,5 +1,8 @@
 package org.springside.examples.miniservice.unit;
 
+import javax.sql.DataSource;
+
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,8 +22,18 @@ import org.springside.modules.test.utils.DbUnitUtils;
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
 public class BaseTxTestCase extends SpringTxTestCase {
 
+	private static DataSource dataSourceHolder = null;
+
 	@Before
 	public void loadDefaultData() throws Exception {
-		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+		if (dataSourceHolder == null) {
+			DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+			dataSourceHolder = dataSource;
+		}
+	}
+
+	@AfterClass
+	public static void cleanDefaultData() throws Exception {
+		DbUnitUtils.loadData(dataSourceHolder, "/data/default-data.xml");
 	}
 }
