@@ -2,6 +2,7 @@ package org.springside.examples.showcase.unit.common;
 
 import java.util.Date;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -11,7 +12,8 @@ import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.Reply;
 import org.springside.examples.showcase.common.entity.Subject;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.unit.BaseTxTestCase;
+import org.springside.modules.test.spring.SpringTxTestCase;
+import org.springside.modules.test.utils.DbUnitUtils;
 
 /**
  * PostDao的集成测试用例,测试ORM映射及特殊的DAO操作.
@@ -19,7 +21,7 @@ import org.springside.examples.showcase.unit.BaseTxTestCase;
  * @author calvin
  */
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
-public class PostDaoUsageTest extends BaseTxTestCase {
+public class PostDaoUsageTest extends SpringTxTestCase {
 
 	@Autowired
 	private SubjectDao subjectDao;
@@ -27,6 +29,11 @@ public class PostDaoUsageTest extends BaseTxTestCase {
 	private ReplyDao replyDao;
 	@Autowired
 	private UserDao userDao;
+
+	@Before
+	public void loadDefaultData() throws Exception {
+		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+	}
 
 	@Test
 	public void getSubjectDetail() {

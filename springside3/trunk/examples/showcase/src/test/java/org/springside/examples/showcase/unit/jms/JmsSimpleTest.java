@@ -2,6 +2,7 @@ package org.springside.examples.showcase.unit.jms;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.simple.NotifyMessageListener;
@@ -10,8 +11,8 @@ import org.springside.modules.test.mock.MockLog4jAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
 import org.springside.modules.test.utils.TimeUtils;
 
-@ContextConfiguration(locations = { "/applicationContext-test.xml", "/jms/applicationContext-simple.xml",
-		"/jms/applicationContext-advanced.xml" })
+@DirtiesContext
+@ContextConfiguration(locations = { "/applicationContext-test.xml", "/jms/applicationContext-simple.xml" })
 public class JmsSimpleTest extends SpringContextTestCase {
 
 	@Autowired

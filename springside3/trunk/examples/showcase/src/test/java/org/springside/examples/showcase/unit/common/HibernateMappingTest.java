@@ -6,12 +6,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.persister.entity.EntityPersister;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.examples.showcase.unit.BaseTxTestCase;
+import org.springside.modules.test.spring.SpringTxTestCase;
+import org.springside.modules.test.utils.DbUnitUtils;
 
 /**
  * 简单测试所有Entity类的O/R Mapping.
@@ -19,11 +21,16 @@ import org.springside.examples.showcase.unit.BaseTxTestCase;
  * @author calvin
  */
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
-public class HibernateMappingTest extends BaseTxTestCase {
+public class HibernateMappingTest extends SpringTxTestCase {
 	private static Logger logger = LoggerFactory.getLogger(HibernateMappingTest.class);
 
 	@Autowired
 	private SessionFactory sessionFactory;
+
+	@Before
+	public void loadDefaultData() throws Exception {
+		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+	}
 
 	@Test
 	@SuppressWarnings("unchecked")

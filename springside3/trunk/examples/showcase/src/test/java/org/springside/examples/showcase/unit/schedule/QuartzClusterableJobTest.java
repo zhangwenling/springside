@@ -1,10 +1,13 @@
 package org.springside.examples.showcase.unit.schedule;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.schedule.QuartzClusterableJob;
-import org.springside.examples.showcase.unit.BaseTxTestCase;
 import org.springside.modules.test.mock.MockLog4jAppender;
+import org.springside.modules.test.spring.SpringTxTestCase;
+import org.springside.modules.test.utils.DbUnitUtils;
 import org.springside.modules.test.utils.TimeUtils;
 
 /**
@@ -12,9 +15,15 @@ import org.springside.modules.test.utils.TimeUtils;
  * 
  * @author calvin
  */
+@DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext-test.xml",
 		"/schedule/applicationContext-quartz-timer-cluster.xml" })
-public class QuartzClusterableJobTest extends BaseTxTestCase {
+public class QuartzClusterableJobTest extends SpringTxTestCase {
+
+	@Before
+	public void loadDefaultData() throws Exception {
+		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+	}
 
 	@Test
 	public void test() {

@@ -5,12 +5,13 @@ import java.util.Date;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.TimeUtils;
 
-@ContextConfiguration(locations = { "/applicationContext-test.xml", "/jmx/applicationContext-jmx-server.xml",
-		"/jmx/applicationContext-jmx-client.xml", "/log/applicationContext-log.xml" })
+@DirtiesContext
+@ContextConfiguration(locations = { "/applicationContext-test.xml", "/log/applicationContext-log.xml" })
 public class AsyncJdbcAppenderTest extends SpringTxTestCase {
 
 	private static final String LOG_TABLE_NAME = "SS_LOG";

@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.unit.jmx;
+package org.springside.examples.showcase.unit.log;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.jmx.JmxClientTemplate;
 import org.springside.modules.log.Log4jMBean;
@@ -14,12 +15,11 @@ import org.springside.modules.test.spring.SpringContextTestCase;
 /**
  * sprinside-extension中Log4jMBean的测试用例.
  * 
- * JMX相关用例使用相同的@ContextConfiguration以保证使用同一个ApplicationContext,避免JMX端口重复注册.
- * 
  * @author calvin
  */
+@DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/jmx/applicationContext-jmx-server.xml",
-		"/jmx/applicationContext-jmx-client.xml", "/log/applicationContext-log.xml" })
+		"/log/applicationContext-log.xml" })
 public class Log4jMBeanTest extends SpringContextTestCase {
 
 	private JmxClientTemplate jmxClientTemplate;

@@ -3,6 +3,7 @@ package org.springside.examples.showcase.unit.jmx;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.jmx.client.JmxClientService;
 import org.springside.examples.showcase.jmx.server.ServerConfigMBean;
@@ -13,12 +14,11 @@ import org.springside.modules.test.spring.SpringContextTestCase;
 /**
  * springside-extension中{@link JmxClientTemplate}的测试用例.
  * 
- * JMX相关用例使用相同的@ContextConfiguration以保证使用同一个ApplicationContext,避免JMX端口重复注册.
- * 
  * @author calvin
  */
+@DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/jmx/applicationContext-jmx-server.xml",
-		"/jmx/applicationContext-jmx-client.xml", "/log/applicationContext-log.xml" })
+		"/log/applicationContext-log.xml" })
 public class JmxClientTemplateTest extends SpringContextTestCase {
 
 	private JmxClientTemplate jmxClientTemplate;
@@ -26,7 +26,7 @@ public class JmxClientTemplateTest extends SpringContextTestCase {
 
 	@Before
 	public void setUp() throws Exception {
-		jmxClientTemplate = new JmxClientTemplate("service:jmx:rmi:///jndi/rmi://localhost:11099/showcase");
+		jmxClientTemplate = new JmxClientTemplate("service:jmx:rmi:///jndi/rmi://localhost:1099/showcase");
 		serverConfigMbean = jmxClientTemplate.createMBeanProxy(JmxClientService.SERVER_CONFIG_MBEAN_NAME,
 				ServerConfigMBean.class);
 	}

@@ -3,13 +3,15 @@ package org.springside.examples.showcase.unit.common;
 import java.util.List;
 
 import org.hibernate.Hibernate;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.data.UserData;
-import org.springside.examples.showcase.unit.BaseTxTestCase;
+import org.springside.modules.test.spring.SpringTxTestCase;
+import org.springside.modules.test.utils.DbUnitUtils;
 
 import com.google.common.collect.Lists;
 
@@ -19,7 +21,13 @@ import com.google.common.collect.Lists;
  * @author calvin
  */
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
-public class UserDaoTest extends BaseTxTestCase {
+public class UserDaoTest extends SpringTxTestCase {
+
+	@Before
+	public void loadDefaultData() throws Exception {
+		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+	}
+
 	@Autowired
 	private UserDao userDao;
 

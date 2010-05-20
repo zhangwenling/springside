@@ -4,14 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.common.dao.UserJdbcDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.data.UserData;
-import org.springside.examples.showcase.unit.BaseTxTestCase;
+import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DataUtils;
+import org.springside.modules.test.utils.DbUnitUtils;
 
 import com.google.common.collect.Lists;
 
@@ -20,10 +23,16 @@ import com.google.common.collect.Lists;
  * 
  * @author calvin
  */
+@DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/common/applicationContext-jdbc.xml" })
-public class UserJdbcDaoUsageTest extends BaseTxTestCase {
+public class UserJdbcDaoUsageTest extends SpringTxTestCase {
 	@Autowired
 	private UserJdbcDao userJdbcDao;
+
+	@Before
+	public void loadDefaultData() throws Exception {
+		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+	}
 
 	@Test
 	public void queryObject() {

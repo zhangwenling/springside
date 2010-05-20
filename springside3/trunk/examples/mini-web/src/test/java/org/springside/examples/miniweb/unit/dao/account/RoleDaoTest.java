@@ -6,7 +6,7 @@ import org.springside.examples.miniweb.dao.account.RoleDao;
 import org.springside.examples.miniweb.dao.account.UserDao;
 import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.entity.account.User;
-import org.springside.examples.miniweb.unit.dao.BaseTxTestCase;
+import org.springside.examples.miniweb.unit.BaseTxTestCase;
 import org.springside.modules.test.utils.DataUtils;
 
 /**
