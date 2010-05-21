@@ -8,6 +8,8 @@
 	<!-- ScheduledThreadPoolExecutor集成工厂 -->
 	<bean class="org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean" lazy-init="false">
 		<property name="continueScheduledExecutionAfterException" value="true" />
+		<property name="waitForTasksToCompleteOnShutdown" value="true"/>
+		<property name="poolSize" value="1"/>
 		<property name="scheduledExecutorTasks">
 			<list>
 				<ref bean="scheduledExecutorTask" />
