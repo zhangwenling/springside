@@ -14,7 +14,7 @@ import org.springside.examples.showcase.tools.Start;
 import org.springside.modules.test.utils.DbUnitUtils;
 import org.springside.modules.test.utils.JettyUtils;
 import org.springside.modules.test.utils.SeleniumUtils;
-import org.springside.modules.utils.PropertyUtils;
+import org.springside.modules.utils.PropertiesUtils;
 import org.springside.modules.utils.SpringContextHolder;
 
 /**
@@ -79,7 +79,7 @@ public class BaseFunctionalTestCase extends Assert {
 	 * 创建WebDriver.
 	 */
 	protected static void createWebDriver() throws Exception {
-		Properties props = PropertyUtils.loadProperties("classpath:/application.test.properties",
+		Properties props = PropertiesUtils.loadProperties("classpath:/application.test.properties",
 				"classpath:/application.test-local.properties");
 
 		driver = SeleniumUtils.buildDriver(props.getProperty("selenium.driver"));
