@@ -85,7 +85,7 @@ public class JdbcLogWriter extends BlockingConsumer {
 		eventsBuffer.add(event);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("get event, {}", AppenderUtils.convertEventToString(event));
+			logger.debug("get event, {}", LogEventConventer.convertEventToString(event));
 		}
 
 		//已到达BufferSize则执行批量插入操作
@@ -116,7 +116,7 @@ public class JdbcLogWriter extends BlockingConsumer {
 						jdbcTemplate.batchUpdate(getActualSql(), batchParams);
 						if (logger.isDebugEnabled()) {
 							for (LoggingEvent event : eventsBuffer) {
-								logger.debug("saved event, {}", AppenderUtils.convertEventToString(event));
+								logger.debug("saved event, {}", LogEventConventer.convertEventToString(event));
 							}
 						}
 					} catch (DataAccessException e) {
@@ -148,7 +148,7 @@ public class JdbcLogWriter extends BlockingConsumer {
 	 * 分析Event, 建立Parameter Map, 用于绑定sql中的Named Parameter.
 	 */
 	protected Map<String, Object> parseEvent(LoggingEvent event) {
-		return AppenderUtils.convertEventToMap(event);
+		return LogEventConventer.convertEventToMap(event);
 	}
 
 	/**
@@ -162,7 +162,7 @@ public class JdbcLogWriter extends BlockingConsumer {
 		}
 
 		for (LoggingEvent event : errorEventBatch) {
-			logger.error("event insert to database error, ignore it, " + AppenderUtils.convertEventToString(event), e);
+			logger.error("event insert to database error, ignore it, " + LogEventConventer.convertEventToString(event), e);
 		}
 	}
 

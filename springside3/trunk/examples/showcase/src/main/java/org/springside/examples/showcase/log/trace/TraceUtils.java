@@ -18,7 +18,7 @@ import org.apache.log4j.MDC;
  * 
  * 需要在log4j.properties中将ConversionPattern添加%X{traceId},如:
  * 
- * log4j.appender.stdout.layout.ConversionPattern=%d [%t] %p %c %X{traceId}-%m%n
+ * log4j.appender.stdout.layout.ConversionPattern=%d [%c] %X{traceId}-%m%n
  * 
  * @author calvin
  */
@@ -28,7 +28,7 @@ public class TraceUtils {
 	public static final int TRACE_ID_LENGTH = 8;
 
 	/**
-	 * 开始Trace, 默认生成本次Trace的ID(10字符长)并放入MDC.
+	 * 开始Trace, 默认生成本次Trace的ID(8字符长)并放入MDC.
 	 */
 	public static void beginTrace() {
 		String traceId = RandomStringUtils.randomAlphanumeric(TRACE_ID_LENGTH);

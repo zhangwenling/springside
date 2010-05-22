@@ -44,10 +44,10 @@ public class QueueAppender extends org.apache.log4j.AppenderSkeleton {
 
 		if (sucess) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("put event ,{}", AppenderUtils.convertEventToString(event));
+				logger.debug("put event ,{}", LogEventConventer.convertEventToString(event));
 			}
 		} else {
-			logger.error("Put event to queue fail ,{}", AppenderUtils.convertEventToString(event));
+			logger.error("Put event to queue fail ,{}", LogEventConventer.convertEventToString(event));
 		}
 	}
 

@@ -20,7 +20,7 @@ import com.google.common.collect.Maps;
  * 
  * @author calvin
  */
-public class AppenderUtils {
+public class LogEventConventer {
 
 	public static final String MESSAGE = "message";
 	public static final String LEVEL = "level";
