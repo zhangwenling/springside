@@ -5,7 +5,7 @@
  * 
  * $Id: JdbcAppenderTask.java 353 2009-08-22 09:33:28Z calvinxiu
  */
-package org.springside.examples.showcase.log;
+package org.springside.examples.showcase.log.appender;
 
 import java.util.HashMap;
 import java.util.List;

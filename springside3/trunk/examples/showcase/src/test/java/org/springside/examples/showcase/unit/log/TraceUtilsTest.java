@@ -1,4 +1,4 @@
-package org.springside.modules.unit.log;
+package org.springside.examples.showcase.unit.log;
 
 import junit.framework.Assert;
 
@@ -6,7 +6,7 @@ import org.apache.log4j.MDC;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springside.modules.log.TraceUtils;
+import org.springside.examples.showcase.log.trace.TraceUtils;
 import org.springside.modules.test.mock.MockLog4jAppender;
 
 public class TraceUtilsTest extends Assert {

@@ -5,7 +5,7 @@
  * 
  * $Id: TraceUtils.java 693 2009-12-12 10:17:34Z calvinxiu $ 
  */
-package org.springside.modules.log;
+package org.springside.examples.showcase.log.trace;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.MDC;

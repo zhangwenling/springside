@@ -7,11 +7,11 @@
 
 	<!-- 消息Queue管理器-->
 	<bean class="org.springside.modules.queue.QueuesHolder">
-		<property name="queueSize" value="10000" />
+		<property name="queueSize" value="1000" />
 	</bean>
 
 	<!-- 读出Queue中日志消息写入数据库的任务 -->
-	<bean id="jdbcLogWriter" class="org.springside.examples.showcase.log.JdbcLogWriter">
+	<bean id="jdbcLogWriter" class="org.springside.examples.showcase.log.appender.JdbcLogWriter">
 		<property name="queueName" value="dblog" />
 		<property name="batchSize" value="10" />
 		<property name="sql">
@@ -29,5 +29,5 @@
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
 	<!-- 配置执行TraceUtils的Aspect -->
-	<bean class="org.springside.examples.showcase.log.TraceLogAspect" />
+	<bean class="org.springside.examples.showcase.log.trace.TraceLogAspect" />
 </beans>

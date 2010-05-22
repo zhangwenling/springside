@@ -1,10 +1,9 @@
-package org.springside.examples.showcase.log;
+package org.springside.examples.showcase.log.trace;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springside.modules.log.TraceUtils;
 
 /**
  * 为WebService方法加入TraceUtils控制的Aspect.

@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.examples.showcase.log;
+package org.springside.examples.showcase.log.appender;
 
 import java.util.Date;
 import java.util.Map;
