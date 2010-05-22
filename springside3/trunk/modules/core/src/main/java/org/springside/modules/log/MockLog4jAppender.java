@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.test.mock;
+package org.springside.modules.log;
 
 import java.util.ArrayList;
 import java.util.List;

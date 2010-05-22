@@ -7,7 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.simple.NotifyMessageListener;
 import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
-import org.springside.modules.test.mock.MockLog4jAppender;
+import org.springside.modules.log.MockLog4jAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
 import org.springside.modules.test.utils.TimeUtils;
 

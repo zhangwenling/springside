@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.schedule.QuartzClusterableJob;
-import org.springside.modules.test.mock.MockLog4jAppender;
+import org.springside.modules.log.MockLog4jAppender;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DbUnitUtils;
 import org.springside.modules.test.utils.TimeUtils;
