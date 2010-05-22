@@ -1,9 +1,5 @@
 package org.springside.examples.showcase.unit.schedule;
 
-import javax.sql.DataSource;
-
-import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,23 +13,10 @@ import org.springside.modules.test.utils.TimeUtils;
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/schedule/applicationContext-executor.xml" })
 public class ExecutorJobTest extends SpringTxTestCase {
 
-	private static DataSource dataSourceHolder = null;
-
-	@Before
-	public void loadDefaultData() throws Exception {
-		if (dataSourceHolder == null) {
-			DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
-			dataSourceHolder = dataSource;
-		}
-	}
-
-	@AfterClass
-	public static void cleanDefaultData() throws Exception {
-		DbUnitUtils.removeData(dataSourceHolder, "/data/default-data.xml");
-	}
-
 	@Test
-	public void test() {
+	public void scheduleJob() throws Exception {
+		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+
 		//加载测试用logger appender
 		MockLog4jAppender appender = new MockLog4jAppender();
 		appender.addToLogger(ExecutorJob.class);
@@ -44,5 +27,8 @@ public class ExecutorJobTest extends SpringTxTestCase {
 		//验证任务已执行
 		assertEquals(1, appender.getAllLogs().size());
 		assertEquals("There are 6 user in database.", appender.getFirstLog().getMessage());
+
+		DbUnitUtils.removeData(dataSource, "/data/default-data.xml");
+
 	}
 }
