@@ -27,6 +27,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import org.springside.modules.queue.BlockingConsumer;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * 将Queue中的log4j event写入数据库的消费者任务.
@@ -85,7 +86,7 @@ public class JdbcLogWriter extends BlockingConsumer {
 		eventsBuffer.add(event);
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("get event, {}", LogEventConventer.convertEventToString(event));
+			logger.debug("get event: {}", new LoggingEventWrapper(event).convertToString());
 		}
 
 		//已到达BufferSize则执行批量插入操作
@@ -116,7 +117,7 @@ public class JdbcLogWriter extends BlockingConsumer {
 						jdbcTemplate.batchUpdate(getActualSql(), batchParams);
 						if (logger.isDebugEnabled()) {
 							for (LoggingEvent event : eventsBuffer) {
-								logger.debug("saved event, {}", LogEventConventer.convertEventToString(event));
+								logger.debug("saved event: {}", new LoggingEventWrapper(event).convertToString());
 							}
 						}
 					} catch (DataAccessException e) {
@@ -148,7 +149,15 @@ public class JdbcLogWriter extends BlockingConsumer {
 	 * 分析Event, 建立Parameter Map, 用于绑定sql中的Named Parameter.
 	 */
 	protected Map<String, Object> parseEvent(LoggingEvent event) {
-		return LogEventConventer.convertEventToMap(event);
+		Map<String, Object> result = Maps.newHashMap();
+		LoggingEventWrapper eventWrapper = new LoggingEventWrapper(event);
+
+		result.put("thread_name", eventWrapper.getThreadName());
+	  	result.put("logger_name", eventWrapper.getLoggerName());
+	  	result.put("log_time", eventWrapper.getDate());
+	  	result.put("level",eventWrapper.getLevel());
+	  	result.put("message", eventWrapper.getMessage());
+		return result;
 	}
 
 	/**
@@ -162,7 +171,8 @@ public class JdbcLogWriter extends BlockingConsumer {
 		}
 
 		for (LoggingEvent event : errorEventBatch) {
-			logger.error("event insert to database error, ignore it, " + LogEventConventer.convertEventToString(event), e);
+			logger.error("event insert to database error, ignore it: "
+					+ new LoggingEventWrapper(event).convertToString(), e);
 		}
 	}
 

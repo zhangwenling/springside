@@ -9,9 +9,8 @@ package org.springside.examples.showcase.log.appender;
 
 import java.util.concurrent.BlockingQueue;
 
+import org.apache.log4j.helpers.LogLog;
 import org.apache.log4j.spi.LoggingEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springside.modules.queue.QueuesHolder;
 
 /**
@@ -24,8 +23,6 @@ import org.springside.modules.queue.QueuesHolder;
  * @author calvin
  */
 public class QueueAppender extends org.apache.log4j.AppenderSkeleton {
-
-	private static Logger logger = LoggerFactory.getLogger(QueueAppender.class);
 
 	protected String queueName;
 
@@ -43,11 +40,10 @@ public class QueueAppender extends org.apache.log4j.AppenderSkeleton {
 		boolean sucess = queue.offer(event);
 
 		if (sucess) {
-			if (logger.isDebugEnabled()) {
-				logger.debug("put event ,{}", LogEventConventer.convertEventToString(event));
-			}
+			LogLog.debug("put event to queue success:" + new LoggingEventWrapper(event).convertToString());
+
 		} else {
-			logger.error("Put event to queue fail ,{}", LogEventConventer.convertEventToString(event));
+			LogLog.error("Put event to queue fail:" + new LoggingEventWrapper(event).convertToString());
 		}
 	}
 

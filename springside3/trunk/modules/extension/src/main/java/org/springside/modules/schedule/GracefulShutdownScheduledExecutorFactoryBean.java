@@ -4,6 +4,11 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean;
 
+/**
+ * 重载ScheduledExecutorFactoryBean,提供awaitTermination()等待
+ * 
+ * @author Calvin
+ */
 public class GracefulShutdownScheduledExecutorFactoryBean extends ScheduledExecutorFactoryBean {
 
 	private long shutdownTimeout = 1000;
