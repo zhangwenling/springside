@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.apache.log4j.spi.LoggingEvent;
@@ -72,8 +73,8 @@ public class JdbcLogWriter extends BlockingConsumer {
 		jdbcTemplate = new SimpleJdbcTemplate(dataSource);
 	}
 
-	@Autowired
-	public void setTransactionManager(PlatformTransactionManager transactionManager) {
+	@Resource
+	public void setDefaultTransactionManager(PlatformTransactionManager transactionManager) {
 		transactionTemplate = new TransactionTemplate(transactionManager);
 	}
 
@@ -153,10 +154,10 @@ public class JdbcLogWriter extends BlockingConsumer {
 		LoggingEventWrapper eventWrapper = new LoggingEventWrapper(event);
 
 		result.put("thread_name", eventWrapper.getThreadName());
-	  	result.put("logger_name", eventWrapper.getLoggerName());
-	  	result.put("log_time", eventWrapper.getDate());
-	  	result.put("level",eventWrapper.getLevel());
-	  	result.put("message", eventWrapper.getMessage());
+		result.put("logger_name", eventWrapper.getLoggerName());
+		result.put("log_time", eventWrapper.getDate());
+		result.put("level", eventWrapper.getLevel());
+		result.put("message", eventWrapper.getMessage());
 		return result;
 	}
 

@@ -20,7 +20,7 @@
 			<classpath refid="project.lib" />
 		</sql>
 
-		<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" src="${sql.dir}/quartz.sql" onerror="continue">
+		<sql driver="${quartz.jdbc.driver}" url="${quartz.jdbc.url}" userid="${quartz.jdbc.username}" password="${quartz.jdbc.password}" src="${sql.dir}/quartz.sql" onerror="continue">
 			<classpath refid="project.lib" />
 		</sql>
 

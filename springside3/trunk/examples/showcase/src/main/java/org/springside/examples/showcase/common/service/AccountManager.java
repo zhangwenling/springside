@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
@@ -23,22 +22,25 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
  */
 //Spring Service Bean的标识.
 @Component
-//默认将类中的所有函数纳入事务管理.
-@Transactional
 public class AccountManager {
 	private static Logger logger = LoggerFactory.getLogger(AccountManager.class);
 
 	private UserDao userDao;
-	@Autowired(required = false)
+
 	private ServerConfig serverConfig; //系统配置
-	@Autowired(required = false)
+
 	private NotifyMessageProducer notifyProducer; //JMS消息发送
+
+	private PasswordEncoder encoder = new ShaPasswordEncoder();
 
 	/**
 	 * 在保存用户时,发送用户修改通知消息, 由消息接收者异步进行较为耗时的通知邮件发送.
 	 * 
 	 * 如果企图修改超级用户,取出当前操作员用户,打印其信息然后抛出异常.
+	 * 
 	 */
+	//显式指定非默认的TransactionManager.
+	@Transactional("defaultTransactionManager")
 	public void saveUser(User user) {
 
 		if (isSupervisor(user)) {
@@ -46,19 +48,12 @@ public class AccountManager {
 			throw new ServiceException("不能修改超级管理员用户");
 		}
 
-		PasswordEncoder encoder = new ShaPasswordEncoder();
 		String shaPassword = encoder.encodePassword(user.getPlainPassword(), null);
 		user.setShaPassword(shaPassword);
 
-		saveUserToDB(user);
+		userDao.save(user);
 
 		sendNotifyMessage(user);
-	}
-
-	//设置Propagation, 保证在发送通知消息前数据已保存
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public void saveUserToDB(User user) {
-		userDao.save(user);
 	}
 
 	/**
@@ -68,6 +63,7 @@ public class AccountManager {
 		return (user.getId() != null && user.getId().equals("1"));
 	}
 
+	@Transactional(readOnly = true)
 	public User getUser(String id) {
 		return userDao.get(id);
 	}
@@ -75,6 +71,7 @@ public class AccountManager {
 	/**
 	 * 取得用户, 并对用户的延迟加载关联进行初始化.
 	 */
+	@Transactional(readOnly = true)
 	public User getLoadedUser(String id) {
 		User user = userDao.get(id);
 		userDao.initUser(user);
@@ -84,6 +81,7 @@ public class AccountManager {
 	/**
 	 * 按名称查询用户, 并对用户的延迟加载关联进行初始化.
 	 */
+	@Transactional(readOnly = true)
 	public User searchLoadedUserByName(String name) {
 		User user = userDao.findUniqueBy("name", name);
 		userDao.initUser(user);
@@ -139,5 +137,15 @@ public class AccountManager {
 	@Autowired
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
+	}
+
+	@Autowired(required = false)
+	public void setServerConfig(ServerConfig serverConfig) {
+		this.serverConfig = serverConfig;
+	}
+
+	@Autowired(required = false)
+	public void setNotifyProducer(NotifyMessageProducer notifyProducer) {
+		this.notifyProducer = notifyProducer;
 	}
 }

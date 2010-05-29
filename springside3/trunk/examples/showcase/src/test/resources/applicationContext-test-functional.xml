@@ -44,15 +44,19 @@
 	</bean>
 
 	<bean id="quartzDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${jdbc.driver}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
+		<property name="driverClassName" value="${quartz.jdbc.driver}" />
+		<property name="url" value="${quartz.jdbc.url}" />
+		<property name="username" value="${quartz.jdbc.username}" />
+		<property name="password" value="${quartz.jdbc.password}" />
 	</bean>
 
 	<!-- 运行脚本初始化内存数据库 -->
 	<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
 		<jdbc:script location="classpath:sql/h2/schema.sql" />
+	</jdbc:initialize-database>
+
+	<!-- 运行脚本初始化内存数据库 -->
+	<jdbc:initialize-database data-source="quartzDataSource" ignore-failures="ALL">
 		<jdbc:script location="classpath:sql/h2/quartz.sql" />
 	</jdbc:initialize-database>
 
@@ -82,14 +86,18 @@
 			</map>
 		</property>
 	</bean>
-
-	<!-- 事务管理器配置,单数据源事务 -->
-	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	<!-- 事务管理器配置, Hibernate单数据源事务 -->
+	<bean id="defaultTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+	<!-- 另一个事务管理器, Jdbc单数据源事务 -->
+	<bean id="quartzTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="quartzDataSource" />
+	</bean>
+
 	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+	<tx:annotation-driven transaction-manager="defaultTransactionManager" proxy-target-class="true" />
 
 	<!-- SpringContext Holder -->
 	<bean id="springContextHolder" class="org.springside.modules.utils.SpringContextHolder" lazy-init="false" />
