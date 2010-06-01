@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 
 <!DOCTYPE plugin [
+  <!ENTITY jvm-jmx-metrics SYSTEM "/pdk/plugins/jvm-jmx-metrics.xml">
   <!ENTITY process-metrics SYSTEM "/pdk/plugins/process-metrics.xml">
 ]>
 
@@ -12,97 +13,59 @@
 
 	<filter name="template" value="${OBJECT_NAME}:${alias}" />
 
-	<metrics name="Class Loading Metrics">
-		<metric name="Loaded Class Count" indicator="false" category="THROUGHPUT" />
-		<metric name="Total Loaded Class Count" indicator="false" category="THROUGHPUT" />
-		<metric name="Unloaded Class Count" indicator="false" category="THROUGHPUT" />
-	</metrics>
-
-	<metrics name="Compilation">
-		<metric name="Total Compilation Time" indicator="false" category="THROUGHPUT" collectionType="trendsup" units="ms" />
-	</metrics>
-
-	<metrics name="Garbage Collector">
-		<metric name="Collection Count" indicator="false" category="THROUGHPUT" collectionType="trendsup" />
-		<metric name="Collection Time" indicator="false" category="THROUGHPUT" collectionType="trendsup" />
-	</metrics>
-
-	<metrics name="Memory">
-		<metric name="Object Pending Finalization Count" category="THROUGHPUT" indicator="false" />
-	</metrics>
-
-	<metrics name="Threading">
-		<metric name="Thread Count" category="UTILIZATION" indicator="false" />
-		<metric name="Daemon Thread Count" category="UTILIZATION" indicator="false" />
-	</metrics>
-
 	<metrics name="Jetty IO">
-		<metric name="Connections" alias="connections" category="THROUGHPUT" indicator="true" />
-		<metric name="Connections Duration Ave" alias="connectionsDurationAve" category="THROUGHPUT" indicator="true" />
+		<metric name="Connections" alias="connections" category="THROUGHPUT" collectionType="trendsup" rate="1s"
+			indicator="true" />
+		<metric name="Connections Duration Ave" alias="connectionsDurationAve" category="THROUGHPUT" units="ms"
+			indicator="true" />
 		<metric name="Connections Open" alias="connectionsOpen" category="THROUGHPUT" indicator="true" />
 		<metric name="Connections Requests Ave" alias="connectionsRequestsAve" category="THROUGHPUT" indicator="true" />
-		<metric name="Requests" alias="requests" category="THROUGHPUT" indicator="true" />
+		<metric name="Requests" alias="requests" category="THROUGHPUT" collectionType="trendsup" rate="1s" indicator="true" />
 	</metrics>
 
+	<metrics name="Jetty ThreadPool">
+		<metric name="Jetty Threads" alias="threads" category="THROUGHPUT" indicator="true" />
+		<metric name="Jetty Queue Size" alias="queueSize" category="THROUGHPUT" indicator="false" />
+		<metric name="Jetty Idle Threads" alias="idleThreads" category="THROUGHPUT" indicator="false" />
+		<metric name="Jetty Max Threads" alias="maxThreads" category="THROUGHPUT" collectionType="static" indicator="false" />
+	</metrics>
+
+
 	<server name="Jetty" version="6.x">
-
-		<property name="HAS_BUILTIN_SERVICES" value="true" />
-
+		<!-- derive installpath from -Djetty.home=... -->
+		<property name="PROC_HOME_PROPERTY" value="jetty.home" />
 		<property name="VERSION_FILE" value="lib/jetty-6.*.jar" />
 
+		<property name="HAS_BUILTIN_SERVICES" value="true" />
 		<property name="DEFAULT_PROGRAM" value="bin/jetty.sh" />
+		<property name="DEFAULT_LOG_FILE" value="logs/jetty.log" />
 
 		<property name="domain" value="Jetty" />
 
-		<metric name="Availability" template="sigar:Type=ProcState,Arg=%process.query%:State" indicator="true" />
-    &process-metrics;
-
-		<property name="OBJECT_NAME" value="java.lang:type=ClassLoading" />
-		<metrics include="Class Loading Metrics" />
-
-		<property name="OBJECT_NAME" value="java.lang:type=Compilation" />
-		<metrics include="Compilation" />
-
-		<property name="OBJECT_NAME" value="java.lang:type=Memory" />
-		<metrics include="Memory" />
-		<!-- listen for JMX notifications -->
-		<plugin type="log_track" class="org.hyperic.hq.product.jmx.MxNotificationPlugin" />
-
-		<property name="OBJECT_NAME" value="java.lang:type=GarbageCollector,name=PS Scavenge" />
-		<metrics include="Garbage Collector" />
-		<property name="OBJECT_NAME" value="java.lang:type=GarbageCollector,name=PS MarkSweep" />
-		<metrics include="Garbage Collector" />
-
-		<property name="OBJECT_NAME" value="java.lang:type=Threading" />
-		<metrics include="Threading" />
-
-		<property name="DEFAULT_LOG_FILE" value="%logpath%" />
-		<plugin type="log_track" class="org.hyperic.hq.product.Log4JLogTrackPlugin" />
-
-		<config>
-			<option name="logpath" description="Jetty Log File (Full Path)" default="%installpath%/logs/jetty.log" />
-			<option name="jmx.url" description="JMX URL to MBeanServer" default="service:jmx:rmi:///jndi/rmi://localhost:6968/jmxrmi" />
-			<option name="jmx.username" description="JMX username" optional="true" default="" />
-			<option name="jmx.password" description="JMX password" optional="true" default="" type="secret" />
-			<option name="process.query" description="PTQL for Jetty Java Process" default="State.Name.eq=java,Args.*.ct=start.jar" />
+		<config include="jmx">
+			<option name="process.query" description="Process Query" default="State.Name.eq=java,Args.*.ct=start.jar" />
 		</config>
-
-		<!-- derive installpath from -Djetty.home=... -->
-		<property name="PROC_HOME_PROPERTY" value="jetty.home" />
 
 		<plugin type="autoinventory" class="org.hyperic.hq.product.jmx.MxServerDetector" />
 		<plugin type="measurement" class="org.hyperic.hq.product.jmx.MxMeasurementPlugin" />
+		<plugin type="log_track" class="org.hyperic.hq.product.jmx.MxNotificationPlugin" />
+		<plugin type="log_track" class="org.hyperic.hq.product.Log4JLogTrackPlugin" />
+
+		<metric name="Availability" template="sigar:Type=ProcState,Arg=%process.query%:State" indicator="true" />
+	
+	    &process-metrics;
+
+    	&jvm-jmx-metrics;
+
+		<property name="OBJECT_NAME" value="org.mortbay.thread:type=queuedthreadpool,id=0" />
+		<metrics include="Jetty ThreadPool" />
 
 		<service name="Jetty IO">
 			<plugin type="autoinventory" />
-			<config>
-				<option name="id" description="Channel Connector ID" default="" />
-			</config>
 			<property name="domain" value="org.mortbay.jetty.nio" />
-			<property name="OBJECT_NAME" value="${domain}:type=selectchannelconnector,id=*" />
+			<property name="OBJECT_NAME" value="${domain}:type=*,id=*" />
 			<metrics include="Jetty IO" />
 		</service>
-
 	</server>
 
 	<!-- ==================== Plugin Help =========================== -->
