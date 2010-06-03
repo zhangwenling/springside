@@ -32,7 +32,12 @@
         The <broker> element is used to configure the ActiveMQ broker. 
     -->
     <broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost" dataDirectory="${activemq.base}/data" destroyApplicationContextOnStop="true">
- 
+
+ 		<!-- 启动预定义的Queue与Topic -->
+		<destinations>
+			<queue physicalName="Q.ADVANCED.NOTIFY" />
+		</destinations>
+		
         <!--
 			For better performances use VM cursor and small memory limit.
 			For more information, see:
@@ -90,7 +95,8 @@
 	        dynamicOnly="true" 
 	        networkTTL="3" 
 	        prefetchSize="1" 
-	        decreaseNetworkConsumerPriority="true" />
+	        conduitSubscriptions="false"
+	        decreaseNetworkConsumerPriority="false" />
 	    </networkConnectors>
 
         <!-- 
