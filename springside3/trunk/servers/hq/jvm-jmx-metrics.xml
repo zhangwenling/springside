@@ -6,11 +6,11 @@
 
 <property name="OBJECT_NAME" value="java.lang:type=Threading" />
 <metric name="Thread Count" category="UTILIZATION" indicator="true" />
-<metric name="Daemon Thread Count" category="UTILIZATION" indicator="false" />
+<metric name="Daemon Thread Count" category="UTILIZATION" indicator="true" />
 
 <plugin type="control" class="org.hyperic.hq.product.jmx.MxControlPlugin" />
-<property name="OBJECT_NAME" value="java.lang:type=Memory" />
 <actions include="gc" />
+<property name="OBJECT_NAME.gc" value="java.lang:type=Memory" />
 
 <service name="Garbage Collector">
 	<plugin type="autoinventory" />

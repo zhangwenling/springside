@@ -180,5 +180,6 @@
 
 	<server name="ActiveMQ" version="5.x" include="4.x">
 		<property name="VERSION_FILE" value="lib/activemq-core-5.*.jar" />
+		<property name="DEFAULT_LOG_FILE" value="data/activemq.log" />
 	</server>
 </plugin>
