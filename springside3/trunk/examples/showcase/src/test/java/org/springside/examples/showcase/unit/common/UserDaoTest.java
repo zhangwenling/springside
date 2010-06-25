@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.data.UserData;
@@ -24,6 +25,8 @@ import com.google.common.collect.Lists;
  * @author calvin
  */
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
+//演示指定非默认名称的TransactionManager.
+@TransactionConfiguration(transactionManager = "transactionManager")
 public class UserDaoTest extends SpringTxTestCase {
 
 	private static DataSource dataSourceHolder = null;

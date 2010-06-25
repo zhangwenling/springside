@@ -150,15 +150,15 @@ public class JdbcLogWriter extends BlockingConsumer {
 	 * 分析Event, 建立Parameter Map, 用于绑定sql中的Named Parameter.
 	 */
 	protected Map<String, Object> parseEvent(LoggingEvent event) {
-		Map<String, Object> result = Maps.newHashMap();
+		Map<String, Object> parameterMap = Maps.newHashMap();
 		LoggingEventWrapper eventWrapper = new LoggingEventWrapper(event);
 
-		result.put("thread_name", eventWrapper.getThreadName());
-		result.put("logger_name", eventWrapper.getLoggerName());
-		result.put("log_time", eventWrapper.getDate());
-		result.put("level", eventWrapper.getLevel());
-		result.put("message", eventWrapper.getMessage());
-		return result;
+		parameterMap.put("thread_name", eventWrapper.getThreadName());
+		parameterMap.put("logger_name", eventWrapper.getLoggerName());
+		parameterMap.put("log_time", eventWrapper.getDate());
+		parameterMap.put("level", eventWrapper.getLevel());
+		parameterMap.put("message", eventWrapper.getMessage());
+		return parameterMap;
 	}
 
 	/**

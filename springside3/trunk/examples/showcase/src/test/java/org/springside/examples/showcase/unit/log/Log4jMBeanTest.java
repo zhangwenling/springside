@@ -81,6 +81,6 @@ public class Log4jMBeanTest extends SpringContextTestCase {
 
 		assertEquals(2, list.size());
 		assertEquals("Console", list.get(0));
-		assertEquals("DBLog", list.get(1));
+		assertEquals("DB", list.get(1));
 	}
 }

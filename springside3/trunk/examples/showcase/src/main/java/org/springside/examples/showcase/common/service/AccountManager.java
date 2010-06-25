@@ -39,8 +39,8 @@ public class AccountManager {
 	 * 如果企图修改超级用户,取出当前操作员用户,打印其信息然后抛出异常.
 	 * 
 	 */
-	//显式指定非默认的TransactionManager.
-	@Transactional("defaultTransactionManager")
+	//演示指定非默认名称的TransactionManager.
+	@Transactional("transactionManager")
 	public void saveUser(User user) {
 
 		if (isSupervisor(user)) {

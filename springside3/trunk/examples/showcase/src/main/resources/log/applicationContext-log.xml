@@ -17,7 +17,7 @@
 		<property name="sql">
 			<value>
 			insert into SS_LOG(THREAD_NAME,LOGGER_NAME,LOG_TIME,LEVEL,MESSAGE)
-				values(:threadName,:loggerName,:log_time,:level,:message)
+				values(:thread_name,:logger_name,:log_time,:level,:message)
 			</value>
 		</property>
 	</bean>
