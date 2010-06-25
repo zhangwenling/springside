@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.jmx.client.JmxClientService;
+import org.springside.examples.showcase.jmx.server.ServerConfig;
 import org.springside.examples.showcase.jmx.server.ServerConfigMBean;
 import org.springside.modules.jmx.JmxClientTemplate;
 import org.springside.modules.log.Log4jMBean;
@@ -27,7 +28,7 @@ public class JmxClientTemplateTest extends SpringContextTestCase {
 	@Before
 	public void setUp() throws Exception {
 		jmxClientTemplate = new JmxClientTemplate("service:jmx:rmi:///jndi/rmi://localhost:1099/showcase");
-		serverConfigMbean = jmxClientTemplate.createMBeanProxy(JmxClientService.SERVER_CONFIG_MBEAN_NAME,
+		serverConfigMbean = jmxClientTemplate.createMBeanProxy(ServerConfig.SERVER_CONFIG_MBEAN_NAME,
 				ServerConfigMBean.class);
 	}
 
@@ -48,24 +49,24 @@ public class JmxClientTemplateTest extends SpringContextTestCase {
 
 	@Test
 	public void accessMBeanAttributeByReflection() {
-		String oldName = (String) jmxClientTemplate.getAttribute(JmxClientService.SERVER_CONFIG_MBEAN_NAME, "NodeName");
+		String oldName = (String) jmxClientTemplate.getAttribute(ServerConfig.SERVER_CONFIG_MBEAN_NAME, "NodeName");
 
-		jmxClientTemplate.setAttribute(JmxClientService.SERVER_CONFIG_MBEAN_NAME, "NodeName", "foo");
-		assertEquals("foo", jmxClientTemplate.getAttribute(JmxClientService.SERVER_CONFIG_MBEAN_NAME, "NodeName"));
+		jmxClientTemplate.setAttribute(ServerConfig.SERVER_CONFIG_MBEAN_NAME, "NodeName", "foo");
+		assertEquals("foo", jmxClientTemplate.getAttribute(ServerConfig.SERVER_CONFIG_MBEAN_NAME, "NodeName"));
 
-		jmxClientTemplate.setAttribute(JmxClientService.SERVER_CONFIG_MBEAN_NAME, "NodeName", oldName);
+		jmxClientTemplate.setAttribute(ServerConfig.SERVER_CONFIG_MBEAN_NAME, "NodeName", oldName);
 	}
 
 	@Test
 	public void invokeMBeanMethodByReflection() {
 		//无参数
-		jmxClientTemplate.inoke(JmxClientService.HIBERNATE_MBEAN_NAME, "logSummary");
+		jmxClientTemplate.inoke(JmxClientService.TRACE_MBEAN_NAME, "startTrace");
 
 		//以参数Class名描述函数签名		
 		assertEquals("WARN", jmxClientTemplate.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerLevel",
 				new String[] { "java.lang.String" }, new Object[] { "foo" }));
 
-		//参数Class类描述函数签名
+		//以参数Class类描述函数签名
 		assertEquals("WARN", jmxClientTemplate.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerLevel",
 				new Class[] { String.class }, new Object[] { "foo" }));
 	}

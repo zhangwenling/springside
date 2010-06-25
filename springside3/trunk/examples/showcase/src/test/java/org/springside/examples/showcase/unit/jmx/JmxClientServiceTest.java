@@ -21,7 +21,8 @@ public class JmxClientServiceTest extends SpringContextTestCase {
 	private JmxClientService jmxClientService;
 
 	@Test
-	public void test() {
+	public void serverConfig() {
+		//prepare
 		String oldNodeName = jmxClientService.getNodeName();
 
 		jmxClientService.setNodeName("node1");
@@ -30,10 +31,16 @@ public class JmxClientServiceTest extends SpringContextTestCase {
 		jmxClientService.setNotificationMailEnabled(false);
 		assertEquals(false, jmxClientService.isNotificationMailEnabled());
 
-		assertEquals(jmxClientService.getHibernateStatistics().getSessionCloseCount(), jmxClientService
-				.getHibernateStatistics().getSessionOpenCount());
-		jmxClientService.logSummary();
-
+		//clean
 		jmxClientService.setNodeName(oldNodeName);
+	}
+
+	@Test
+	public void trace() {
+		assertEquals(false, jmxClientService.getTraceStatus());
+		jmxClientService.startTrace();
+		assertEquals(true, jmxClientService.getTraceStatus());
+		jmxClientService.stopTrace();
+		assertEquals(false, jmxClientService.getTraceStatus());
 	}
 }

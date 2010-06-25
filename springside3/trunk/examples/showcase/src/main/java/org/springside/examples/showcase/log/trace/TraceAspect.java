@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * @author calvin
  */
 @Aspect
-public class TraceLogAspect {
+public class TraceAspect {
 
 	/**
 	 * 定义WebService层方法

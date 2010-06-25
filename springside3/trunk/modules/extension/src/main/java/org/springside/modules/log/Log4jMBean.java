@@ -31,9 +31,9 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 public class Log4jMBean {
 
 	/**
-	 * Log4jMbean注册的名称.
+	 * Log4jMbean的注册名称.
 	 */
-	public static final String LOG4J_MBEAN_NAME = "SpringSide:type=Log4jManagement,name=log4jManagement";
+	public static final String LOG4J_MBEAN_NAME = "SpringSide:name=log4j,type=Log4j";
 
 	private static org.slf4j.Logger mbeanLogger = LoggerFactory.getLogger(Log4jMBean.class);
 

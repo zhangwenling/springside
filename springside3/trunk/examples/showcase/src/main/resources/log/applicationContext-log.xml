@@ -25,9 +25,9 @@
 	<!-- 动态配置log4j日志级别的JMX MBean -->
 	<bean id="log4jMBean" class="org.springside.modules.log.Log4jMBean" />
 
-	<!-- 使用annotation定义Asepct -->
+	<!-- 使用annotation定义Aspect -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
 	<!-- 配置执行TraceUtils的Aspect -->
-	<bean class="org.springside.examples.showcase.log.trace.TraceLogAspect" />
+	<bean class="org.springside.examples.showcase.log.trace.TraceAspect" />
 </beans>

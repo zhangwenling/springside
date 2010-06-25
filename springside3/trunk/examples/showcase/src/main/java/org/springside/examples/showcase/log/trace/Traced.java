@@ -13,9 +13,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 标识一个方法将通过AOP Traced.
+ * 标识一个方法将通过AOP进行Traced.
  * 
- * @see TraceLogAspect
+ * @see TraceAspect
  * 
  * @author George
  */

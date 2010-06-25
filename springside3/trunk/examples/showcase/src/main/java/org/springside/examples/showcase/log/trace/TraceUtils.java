@@ -17,7 +17,6 @@ import org.apache.log4j.MDC;
  * 可以方便的用grep命令在日志文件中提取该trace的所有日志.
  * 
  * 需要在log4j.properties中将ConversionPattern添加%X{traceId},如:
- * 
  * log4j.appender.stdout.layout.ConversionPattern=%d [%c] %X{traceId}-%m%n
  * 
  * @author calvin
