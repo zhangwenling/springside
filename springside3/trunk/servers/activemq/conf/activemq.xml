@@ -82,7 +82,7 @@
 		<systemUsage>
 			<systemUsage>
 				<memoryUsage>
-					<memoryUsage limit="128 mb" />
+					<memoryUsage limit="512 mb" />
 				</memoryUsage>
 				<storeUsage>
 					<storeUsage limit="10 gb" name="foo" />
