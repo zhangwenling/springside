@@ -40,7 +40,7 @@ import com.google.common.collect.Lists;
  * 	</houses>
  * </user>
  */
-public class JaxbUsageTest extends Assert {
+public class JaxbBinderTest extends Assert {
 
 	private JaxbBinder binder;
 

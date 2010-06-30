@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.unit.json;
+package org.springside.examples.showcase.json;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,8 +7,6 @@ import java.util.Map.Entry;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
-import org.junit.Assert;
-import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -18,11 +16,16 @@ import com.google.common.collect.Maps;
  * 
  * @author calvin
  */
-public class JacksonUsageTest extends Assert {
+public class JacksonDemo {
 
 	private ObjectMapper mapper = new ObjectMapper();
 
-	@Test
+	public static void main(String[] args) throws Exception {
+		JacksonDemo demo = new JacksonDemo();
+		demo.writeData();
+		demo.readData();
+	}
+
 	public void writeData() throws Exception {
 		//Bean
 		TestBean bean = new TestBean("A");
@@ -52,7 +55,6 @@ public class JacksonUsageTest extends Assert {
 		System.out.println("Array List:" + beanArrayString);
 	}
 
-	@Test
 	public void readData() throws Exception {
 		//Bean
 		String beanString = "{\"name\":\"A\"}";

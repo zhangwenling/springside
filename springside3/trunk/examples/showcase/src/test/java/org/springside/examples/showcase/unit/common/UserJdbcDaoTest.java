@@ -28,7 +28,7 @@ import com.google.common.collect.Lists;
  */
 @DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/common/applicationContext-jdbc.xml" })
-public class UserJdbcDaoUsageTest extends SpringTxTestCase {
+public class UserJdbcDaoTest extends SpringTxTestCase {
 	private static DataSource dataSourceHolder = null;
 	@Autowired
 	private UserJdbcDao userJdbcDao;
