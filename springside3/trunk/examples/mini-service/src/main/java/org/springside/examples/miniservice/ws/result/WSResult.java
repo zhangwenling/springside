@@ -13,10 +13,10 @@ import org.springside.examples.miniservice.ws.WsConstants;
 public class WSResult {
 
 	//-- 返回代码定义 --//
-	// 按项目的规则进行定义, 比如1xx代表客户端参数错误，2xx代表业务错误等.
+	// 按项目的规则进行定义, 比如4xx代表客户端参数错误，5xx代表服务端业务错误等.
 
 	public static final String SUCCESS = "0";
-	public static final String PARAMETER_ERROR = "101";
+	public static final String PARAMETER_ERROR = "401";
 
 	public static final String SYSTEM_ERROR = "500";
 	public static final String SYSTEM_ERROR_MESSAGE = "Runtime unknown internal error.";

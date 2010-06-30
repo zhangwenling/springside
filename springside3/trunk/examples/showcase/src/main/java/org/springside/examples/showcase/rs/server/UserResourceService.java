@@ -2,6 +2,7 @@ package org.springside.examples.showcase.rs.server;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -118,13 +119,15 @@ public class UserResourceService {
 	}
 
 	/**
-	 * 演示获取灵活,不固定的参数.
+	 * 演示直接获取灵活,不固定的参数.
+	 * 可以从原版HttpServletRequest中获取,也可以用封装好的更方便的UriInfo和HttpHeaders.
 	 */
 	@GET
-	public void searchUserByFlexibleParameter(@Context UriInfo ui, @Context HttpHeaders hh) {
+	public void searchUserByFlexibleParameter(@Context HttpServletRequest request, @Context UriInfo ui,
+			@Context HttpHeaders hh) {
 		MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
 
-		//先尝试从Http Header获取参数,如没有再尝试从URL中获取.
+		//先尝试从Http Header获取参数,如没有再尝试从URL参数中获取.
 		String userName = null;
 		if (hh.getRequestHeader("agent") != null) {
 			userName = hh.getRequestHeader("userName").get(0);
