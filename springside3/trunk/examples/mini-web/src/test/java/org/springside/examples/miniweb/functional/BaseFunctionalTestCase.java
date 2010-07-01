@@ -33,8 +33,8 @@ public class BaseFunctionalTestCase extends Assert {
 
 	protected final static String BASE_URL = Start.BASE_URL;
 
+	//Test Groups define
 	protected final static String DAILY = "DAILY";
-
 	protected final static String NIGHTLY = "NIGHTLY";
 
 	protected static Server server;
@@ -44,27 +44,22 @@ public class BaseFunctionalTestCase extends Assert {
 	protected static WebDriver driver;
 
 	@BeforeClass
-	public static void initAll() throws Exception {
-		if (server == null) {
-			startJetty();
-			fetchDataSource();
-		}
+	public static void startAll() throws Exception {
+		startJetty();
+
+		fetchDataSource();
 		loadDefaultData();
+
 		createWebDriver();
+
 		loginAsAdmin();
 	}
 
 	@AfterClass
-	public static void stopWebDriver() {
-		driver.close();
-	}
-
-	/**
-	 * 删除默认数据.
-	 */
-	@AfterClass
-	public static void cleanDefaultData() throws Exception {
-		DbUnitUtils.removeData(dataSource, "/data/default-data.xml");
+	public static void stopAll() throws Exception {
+		stopWebDriver();
+		cleanDefaultData();
+		stopJetty();
 	}
 
 	/**
@@ -73,6 +68,13 @@ public class BaseFunctionalTestCase extends Assert {
 	protected static void startJetty() throws Exception {
 		server = JettyUtils.buildTestServer(Start.PORT, Start.CONTEXT);
 		server.start();
+	}
+
+	/**
+	 * 关闭Jetty服务器.
+	 */
+	protected static void stopJetty() throws Exception {
+		server.stop();
 	}
 
 	/**
@@ -90,6 +92,13 @@ public class BaseFunctionalTestCase extends Assert {
 	}
 
 	/**
+	 * 删除默认数据.
+	 */
+	protected static void cleanDefaultData() throws Exception {
+		DbUnitUtils.removeData(dataSource, "/data/default-data.xml");
+	}
+
+	/**
 	 * 创建WebDriver.
 	 */
 	protected static void createWebDriver() throws Exception {
@@ -97,6 +106,13 @@ public class BaseFunctionalTestCase extends Assert {
 				"classpath:/application.test-local.properties");
 
 		driver = SeleniumUtils.buildDriver(props.getProperty("selenium.driver"));
+	}
+
+	/**
+	 * 关闭WebDriver
+	 */
+	protected static void stopWebDriver() {
+		driver.close();
 	}
 
 	/**

@@ -24,7 +24,7 @@ import org.springside.modules.test.utils.DbUnitUtils;
  * @author calvin
  */
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
-public class PostDaoUsageTest extends SpringTxTestCase {
+public class PostDaoTest extends SpringTxTestCase {
 
 	private static DataSource dataSourceHolder = null;
 

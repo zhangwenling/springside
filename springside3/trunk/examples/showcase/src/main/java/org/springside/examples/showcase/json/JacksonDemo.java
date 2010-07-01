@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.type.TypeReference;
 
 import com.google.common.collect.Lists;
@@ -18,12 +19,23 @@ import com.google.common.collect.Maps;
  */
 public class JacksonDemo {
 
-	private ObjectMapper mapper = new ObjectMapper();
+	private ObjectMapper mapper;
 
 	public static void main(String[] args) throws Exception {
 		JacksonDemo demo = new JacksonDemo();
+		demo.initMapper();
 		demo.writeData();
 		demo.readData();
+	}
+
+	public void initMapper() {
+		mapper = new ObjectMapper();
+
+		//忽略等于Null的值,节省空间.
+		//mapper.getSerializationConfig().setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
+
+		//忽略Default值木有变化的属性,更节省空间,用于接收方有相同的Class, 用于对象->字符串->对象的转换过程.
+		mapper.getSerializationConfig().setSerializationInclusion(JsonSerialize.Inclusion.NON_DEFAULT);
 	}
 
 	public void writeData() throws Exception {
@@ -90,6 +102,8 @@ public class JacksonDemo {
 
 	public static class TestBean {
 		private String name;
+		private String defaultValue = "hello";
+		private String nullValue = null;
 
 		public TestBean() {
 		}
@@ -106,9 +120,25 @@ public class JacksonDemo {
 			this.name = name;
 		}
 
+		public String getDefaultValue() {
+			return defaultValue;
+		}
+
+		public void setDefaultValue(String defaultValue) {
+			this.defaultValue = defaultValue;
+		}
+
+		public String getNullValue() {
+			return nullValue;
+		}
+
+		public void setNullValue(String nullValue) {
+			this.nullValue = nullValue;
+		}
+
 		@Override
 		public String toString() {
-			return "TestBean [name=" + name + "]";
+			return "TestBean [defaultValue=" + defaultValue + ", name=" + name + ", nullValue=" + nullValue + "]";
 		}
 	}
 }

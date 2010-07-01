@@ -62,7 +62,7 @@ public class JmxClientService {
 		Assert.hasText(port, "port参数不能为空");
 
 		try {
-			String serviceUrl = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/showcase";
+			String serviceUrl = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/jmxrmi";
 			jmxClientTemplate = new JmxClientTemplate(serviceUrl, userName, passwd);
 			serverConfigMBean = jmxClientTemplate.createMBeanProxy(ServerConfigMBean.SERVER_CONFIG_MBEAN_NAME,
 					ServerConfigMBean.class);

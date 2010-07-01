@@ -12,7 +12,7 @@
 
 	<!-- (可选)配置JMX远程连接,可在命令行用-D定义实现 -->
 	<bean id="serverConnector" class="org.springframework.jmx.support.ConnectorServerFactoryBean" lazy-init="false">
-		<property name="serviceUrl" value="service:jmx:rmi:///jndi/rmi://${server.addr}:${jmx.rmi_port}/showcase" />
+		<property name="serviceUrl" value="service:jmx:rmi:///jndi/rmi://${server.addr}:${jmx.rmi_port}/jmxrmi" />
 		<property name="environment">
 			<map>
 				<!-- 认证配置,文件路径需为绝对路径 -->

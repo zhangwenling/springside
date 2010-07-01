@@ -72,8 +72,6 @@ public class UserDaoTest extends SpringTxTestCase {
 
 	@Test(expected = org.hibernate.exception.ConstraintViolationException.class)
 	public void saveNotUniqueUser() throws Exception {
-		System.out.println(this.countRowsInTable("ACCT_USER"));
-
 		User user = AccountData.getRandomUser();
 		user.setLoginName("admin");
 

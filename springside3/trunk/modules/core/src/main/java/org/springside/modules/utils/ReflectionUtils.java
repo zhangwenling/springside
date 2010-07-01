@@ -73,13 +73,11 @@ public class ReflectionUtils {
 	 * 直接读取对象属性值, 无视private/protected修饰符, 不经过getter函数.
 	 */
 	public static Object getFieldValue(final Object obj, final String fieldName) {
-		Field field = getDeclaredField(obj, fieldName);
+		Field field = getAccessibleField(obj, fieldName);
 
 		if (field == null) {
 			throw new IllegalArgumentException("Could not find field [" + fieldName + "] on target [" + obj + "]");
 		}
-
-		field.setAccessible(true);
 
 		Object result = null;
 		try {
@@ -94,13 +92,11 @@ public class ReflectionUtils {
 	 * 直接设置对象属性值, 无视private/protected修饰符, 不经过setter函数.
 	 */
 	public static void setFieldValue(final Object obj, final String fieldName, final Object value) {
-		Field field = getDeclaredField(obj, fieldName);
+		Field field = getAccessibleField(obj, fieldName);
 
 		if (field == null) {
 			throw new IllegalArgumentException("Could not find field [" + fieldName + "] on target [" + obj + "]");
 		}
-
-		field.setAccessible(true);
 
 		try {
 			field.set(obj, value);
@@ -110,16 +106,18 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 循环向上转型, 获取对象的DeclaredField.
+	 * 循环向上转型, 获取对象的DeclaredField,	 并强制设置为可访问.
 	 * 
 	 * 如向上转型到Object仍无法找到, 返回null.
 	 */
-	protected static Field getDeclaredField(final Object obj, final String fieldName) {
+	public static Field getAccessibleField(final Object obj, final String fieldName) {
 		Assert.notNull(obj, "object不能为空");
 		Assert.hasText(fieldName, "fieldName");
 		for (Class<?> superClass = obj.getClass(); superClass != Object.class; superClass = superClass.getSuperclass()) {
 			try {
-				return superClass.getDeclaredField(fieldName);
+				Field field = superClass.getDeclaredField(fieldName);
+				field.setAccessible(true);
+				return field;
 			} catch (NoSuchFieldException e) {//NOSONAR
 				// Field不在当前类定义,继续向上转型
 			}
@@ -129,6 +127,7 @@ public class ReflectionUtils {
 
 	/**
 	 * 直接调用对象方法, 无视private/protected修饰符.
+	 * 用于一次性调用的情况.
 	 */
 	public static Object invokeMethod(final Object obj, final String methodName, final Class<?>[] parameterTypes,
 			final Object[] args) {
@@ -148,7 +147,7 @@ public class ReflectionUtils {
 	 * 循环向上转型, 获取对象的DeclaredMethod,并强制设置为可访问.
 	 * 如向上转型到Object仍无法找到, 返回null.
 	 * 
-	 * 当方法需要被多次调用时使用本函数先取得Method,然后调用Method.invoke(Object obj, Object... args)
+	 * 用于方法需要被多次调用的情况. 先使用本函数先取得Method,然后调用Method.invoke(Object obj, Object... args)
 	 */
 	public static Method getAccessibleMethod(final Object obj, final String methodName,
 			final Class<?>... parameterTypes) {
