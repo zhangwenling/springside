@@ -11,5 +11,5 @@
 	</bean>
 
 	<!-- 嵌入式的Memcached服务器, 仅在测试或演示时使用 -->
-	<bean class="org.springside.modules.memcached.JmemcachedFactoryBean" lazy-init="false" />
+	<bean class="org.springside.modules.memcached.JmemcachedFactory" lazy-init="false" />
 </beans>

@@ -3,7 +3,6 @@ package org.springside.modules.memcached;
 import net.spy.memcached.AddrUtil;
 
 import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
 import com.thimbleware.jmemcached.Cache;
@@ -15,7 +14,7 @@ import com.thimbleware.jmemcached.storage.hash.LRUCacheStorageDelegate;
  * 
  * @author calvin
  */
-public class JmemcachedFactoryBean implements FactoryBean<MemCacheDaemon>, InitializingBean, DisposableBean {
+public class JmemcachedFactory implements InitializingBean, DisposableBean {
 
 	private MemCacheDaemon jmemcached;
 
@@ -44,21 +43,6 @@ public class JmemcachedFactoryBean implements FactoryBean<MemCacheDaemon>, Initi
 		jmemcached.stop();
 	}
 
-	@Override
-	public MemCacheDaemon getObject() throws Exception {
-		return jmemcached;
-	}
-
-	@Override
-	public Class<?> getObjectType() {
-		return MemCacheDaemon.class;
-	}
-
-	@Override
-	public boolean isSingleton() {
-		return true;
-	}
-
 	public void setServerUrl(String serverUrl) {
 		this.serverUrl = serverUrl;
 	}
@@ -78,5 +62,4 @@ public class JmemcachedFactoryBean implements FactoryBean<MemCacheDaemon>, Initi
 	public void setBinaryProtocol(boolean isBinaryProtocol) {
 		this.isBinaryProtocol = isBinaryProtocol;
 	}
-
 }

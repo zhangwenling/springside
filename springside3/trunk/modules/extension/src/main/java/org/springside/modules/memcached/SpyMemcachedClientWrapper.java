@@ -1,6 +1,9 @@
 package org.springside.modules.memcached;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.Future;
 
 import net.spy.memcached.AddrUtil;
@@ -18,14 +21,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import com.google.common.collect.Maps;
+
 /**
  * 对SpyMemcached Client的二次封装.
- * 负责SpyMemcached Client的启动与关闭.
  * 
- * 提供常用的Get/Set函数并进行简便化封装,未提供封装的函数可直接调用getClient()取出SpyClient调用.
+ * 1.负责SpyMemcached Client的启动与关闭.
+ * 2.提供常用的Get/Set/Delete函数并进行简化封装.
+ * 3.提供JSON格式的Get/Set函数.
+ * 
+ * 未提供封装的函数如incr/decr可直接调用getClient()取出Spy的原版MemcachedClient来使用.
  * 
  * @author calvin
- *
  */
 public class SpyMemcachedClientWrapper implements InitializingBean, DisposableBean {
 
@@ -46,7 +53,7 @@ public class SpyMemcachedClientWrapper implements InitializingBean, DisposableBe
 	private int maxReconnectDelay = 30;//default value in Spy is 30s
 
 	/**
-	 * 直接取出SpyMemcached的Client,当Wrapper未提供Spy的函数时使用.
+	 * 直接取出SpyMemcached的Client,当Wrapper未提供封装的函数时使用.
 	 */
 	public MemcachedClient getClient() throws Exception {
 		return spyClient;
@@ -66,9 +73,35 @@ public class SpyMemcachedClientWrapper implements InitializingBean, DisposableBe
 	}
 
 	/**
+	 * GetBulk方法, 转换结果类型并屏蔽异常.
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> Map<String, T> get(String... keys) {
+		try {
+			return (Map<String, T>) spyClient.getBulk(keys);
+		} catch (RuntimeException e) {
+			logger.warn("Get from memcached server fail,keys are" + keys, e);
+			return null;
+		}
+	}
+
+	/**
+	 * GetBulk方法, 转换结果类型并屏蔽异常.
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> Map<String, T> get(Collection<String> keys) {
+		try {
+			return (Map<String, T>) spyClient.getBulk(keys);
+		} catch (RuntimeException e) {
+			logger.warn("Get from memcached server fail,keys are" + keys, e);
+			return null;
+		}
+	}
+
+	/**
 	 * Get方法, 将JSON字符串转为结果类型.
 	 */
-	public <T> T getFromJson(String key, Class<T> valueClass) {
+	public <T> T getFromJson(Class<T> valueClass, String key) {
 		String jsonString = get(key);
 		if (jsonString != null) {
 			try {
@@ -78,7 +111,40 @@ public class SpyMemcachedClientWrapper implements InitializingBean, DisposableBe
 			}
 		}
 		return null;
+	}
 
+	/**
+	 * GetBulk方法, 将JSON字符串转为结果类型.
+	 */
+	public <T> Map<String, T> getFromJson(Class<T> valueClass, String... keys) {
+		Map<String, String> jsonMap = get(keys);
+		Map<String, T> objectMap = convertJsonMap(valueClass, jsonMap);
+
+		return objectMap;
+	}
+
+	/**
+	 * GetBulk方法, 将JSON字符串转为结果类型.
+	 */
+	public <T> Map<String, T> getFromJson(Class<T> valueClass, Collection<String> keys) {
+		Map<String, String> jsonMap = get(keys);
+		Map<String, T> objectMap = convertJsonMap(valueClass, jsonMap);
+
+		return objectMap;
+	}
+
+	private <T> Map<String, T> convertJsonMap(Class<T> valueClass, Map<String, String> jsonMap) {
+		Map<String, T> objectMap = Maps.newHashMapWithExpectedSize(jsonMap.size());
+
+		try {
+			for (Entry<String, String> entry : jsonMap.entrySet()) {
+				T object = mapper.readValue(entry.getValue(), valueClass);
+				objectMap.put(entry.getKey(), object);
+			}
+		} catch (IOException e) {
+			logger.warn("parse json string error", e);
+		}
+		return objectMap;
 	}
 
 	/**

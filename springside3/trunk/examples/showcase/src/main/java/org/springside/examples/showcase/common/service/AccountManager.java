@@ -84,7 +84,7 @@ public class AccountManager {
 		int expTime = 60 * 60 * 1;//1 hour
 
 		//Get user from memcached.
-		User user = spyClient.getFromJson(key, User.class);
+		User user = spyClient.getFromJson(User.class, key);
 
 		//User not in memcached, get it from database and set it back to memcached.
 		if (user == null) {
