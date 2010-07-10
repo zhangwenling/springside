@@ -20,13 +20,13 @@
 		<struts2.version>2.1.8.1</struts2.version>
 		<cxf.version>2.2.9</cxf.version>
 		<jersey.version>1.3</jersey.version>
-		<spring-security.version>3.0.2.RELEASE</spring-security.version>
+		<spring-security.version>3.0.3.RELEASE</spring-security.version>
 		<activemq.version>5.3.2</activemq.version>
 		<jetty.version>6.1.24</jetty.version>
 		<h2.version>1.2.138</h2.version>
 		<quartz.version>1.8.3</quartz.version>
 		<jackson.version>1.5.4</jackson.version>
-		<slf4j.version>1.6.0</slf4j.version>
+		<slf4j.version>1.6.1</slf4j.version>
 		<selenium.version>2.0a4</selenium.version>
 
 		<!-- Plugin的属性定义  -->
@@ -72,6 +72,24 @@
 			<id>java.net</id>
 			<name>Java.net Repository</name>
 			<url>http://download.java.net/maven/2/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>spy</id>
+			<name>Spy Repository</name>
+			<url>http://bleu.west.spy.net/~dustin/m2repo/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>jmemcached</id>
+			<name>JMemcached Repository</name>
+			<url>http://thimbleware.com/maven</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -410,6 +428,21 @@
 				<artifactId>quartz</artifactId>
 				<version>${quartz.version}</version>
 			</dependency>
+
+			<!-- memcached begin-->
+			<dependency>
+				<groupId>spy</groupId>
+				<artifactId>memcached</artifactId>
+				<version>2.5</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.thimbleware.jmemcached</groupId>
+				<artifactId>jmemcached-core</artifactId>
+				<version>0.8</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- memcached end -->
 
 			<!-- logging begin-->
 			<!-- slf4j -->

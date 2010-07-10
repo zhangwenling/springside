@@ -52,7 +52,7 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- security -->
+		<!-- security begin-->
 		<dependency>
 			<groupId>com.octo.captcha</groupId>
 			<artifactId>jcaptcha</artifactId>
@@ -86,6 +86,34 @@
 			<artifactId>cxf-rt-ws-security</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- security end -->
+
+		<!-- memcached begin-->
+		<dependency>
+			<groupId>spy</groupId>
+			<artifactId>memcached</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thimbleware.jmemcached</groupId>
+			<artifactId>jmemcached-core</artifactId>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- memcached end -->
+
 
 		<!-- logging -->
 		<dependency>

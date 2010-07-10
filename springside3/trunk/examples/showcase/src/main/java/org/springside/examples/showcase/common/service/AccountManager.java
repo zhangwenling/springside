@@ -13,6 +13,7 @@ import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
+import org.springside.modules.memcached.SpyMemcachedClientWrapper;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
@@ -26,6 +27,8 @@ public class AccountManager {
 	private static Logger logger = LoggerFactory.getLogger(AccountManager.class);
 
 	private UserDao userDao;
+
+	private SpyMemcachedClientWrapper spyClient;
 
 	private ServerConfig serverConfig; //系统配置
 
@@ -65,7 +68,33 @@ public class AccountManager {
 
 	@Transactional(readOnly = true)
 	public User getUser(String id) {
-		return userDao.get(id);
+		if (spyClient != null) {
+			return getUserFromMemcached(id);
+		} else {
+			return userDao.get(id);
+		}
+
+	}
+
+	/**
+	 * 访问Memcached, 使用JSON字符串存放对象节约空间.
+	 */
+	private User getUserFromMemcached(String id) {
+		String key = "user:" + id;
+		int expTime = 60 * 60 * 1;//1 hour
+
+		//Get user from memcached.
+		User user = spyClient.getFromJson(key, User.class);
+
+		//User not in memcached, get it from database and set it back to memcached.
+		if (user == null) {
+			user = userDao.get(id);
+			if (user != null) {
+				spyClient.setToJson(key, expTime, user);
+			}
+		}
+
+		return user;
 	}
 
 	/**
@@ -147,5 +176,10 @@ public class AccountManager {
 	@Autowired(required = false)
 	public void setNotifyProducer(NotifyMessageProducer notifyProducer) {
 		this.notifyProducer = notifyProducer;
+	}
+
+	@Autowired(required = false)
+	public void setSpyClient(SpyMemcachedClientWrapper spyClient) {
+		this.spyClient = spyClient;
 	}
 }

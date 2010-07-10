@@ -67,6 +67,7 @@ public class JacksonDemo {
 		System.out.println("Array List:" + beanArrayString);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void readData() throws Exception {
 		//Bean
 		String beanString = "{\"name\":\"A\"}";
