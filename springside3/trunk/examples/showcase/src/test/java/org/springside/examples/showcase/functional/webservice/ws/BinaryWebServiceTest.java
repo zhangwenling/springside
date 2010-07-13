@@ -75,5 +75,4 @@ public class BinaryWebServiceTest extends BaseFunctionalTestCase {
 		File tempFile = new File(tempFilePath);
 		assertTrue(tempFile.length() > 0);
 	}
-
 }

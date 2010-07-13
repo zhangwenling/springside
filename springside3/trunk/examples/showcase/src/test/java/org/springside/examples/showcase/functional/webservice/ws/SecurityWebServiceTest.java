@@ -49,14 +49,15 @@ public class SecurityWebServiceTest extends BaseFunctionalTestCase implements Ap
 
 	/**
 	 * 测试Digest密码认证, 使用JAXWS的API自行创建Client.
+	 * JAXWS API创建Client的其他细节见mini-service中的集成测试用例.
 	 */
 	@Test
 	public void getAllUserWithDigestPassword() throws MalformedURLException {
 
 		//创建UserWebService
 		URL wsdlURL = new URL("http://localhost:8080/showcase/services/UserServiceWithDigestPassword?wsdl");
-		QName UserServiceName = new QName(WsConstants.NS, "UserService");
-		Service service = Service.create(wsdlURL, UserServiceName);
+		QName userServiceName = new QName(WsConstants.NS, "UserService");
+		Service service = Service.create(wsdlURL, userServiceName);
 		UserWebService userWebService = service.getPort(UserWebService.class);
 
 		//定义WSS4JOutInterceptor

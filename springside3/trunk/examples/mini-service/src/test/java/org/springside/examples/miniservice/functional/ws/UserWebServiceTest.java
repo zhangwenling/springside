@@ -5,7 +5,9 @@ import java.net.URL;
 
 import javax.annotation.Resource;
 import javax.xml.namespace.QName;
+import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Service;
+import javax.xml.ws.soap.SOAPBinding;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -72,14 +74,24 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 	}
 
 	/**
-	 * 测试获取全部用户,使用JAXWS的API自行创建Client.
+	 * 测试获取全部用户,使用JAXWS的API自行动态创建Client.
 	 */
 	@Test
 	public void getAllUser() throws MalformedURLException {
-		URL wsdlURL = new URL(BASE_URL + "/ws/userservice?wsdl");
-		QName UserServiceName = new QName(WsConstants.NS, "UserService");
-		Service service = Service.create(wsdlURL, UserServiceName);
-		UserWebService userWebService = service.getPort(UserWebService.class);
+		String serviceName = "UserService";
+		String endpointAddress = BASE_URL + "/ws/userservice";
+		Class<UserWebService> serviceClass = UserWebService.class;
+
+		//option1: 不使用wsdl, 但需要知道portName.
+		String portName = "UserServicePort";
+		UserWebService userWebService = createClientProxyWithoutWsdl(endpointAddress, serviceName, portName,
+				serviceClass);
+
+		//option2: 使用wsdl, 有时需要重新定义endpoint address而不使用wsdl文件内的定义.
+		//String wsdlUrl = BASE_URL + "/ws/userservice?wsdl";
+		//UserWebService userWebService = createClientProxyWithWsdl(wsdlUrl, endpointAddress, serviceName, serviceClass);
+
+		//option3: 使用cxf生成的客户端类.
 
 		GetAllUserResult result = userWebService.getAllUser();
 
@@ -88,4 +100,27 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 		assertEquals("admin", adminUser.getLoginName());
 		assertEquals(2, adminUser.getRoleList().size());
 	}
+
+	private <T> T createClientProxyWithoutWsdl(String endpointAddress, String serviceNameStr, String portNameStr,
+			Class<T> serviceClass) {
+		QName serviceName = new QName(WsConstants.NS, serviceNameStr);
+		QName portName = new QName(WsConstants.NS, portNameStr);
+		Service service = Service.create(serviceName);
+		service.addPort(portName, SOAPBinding.SOAP11HTTP_BINDING, endpointAddress);
+		return service.getPort(serviceClass);
+	}
+
+	private <T> T createClientProxyWithWsdl(String wsdlUrlStr, String endpointAddress, String serviceNameStr,
+			Class<T> serviceClass) throws MalformedURLException {
+		URL wsdlURL = new URL(wsdlUrlStr);
+		QName serviceName = new QName(WsConstants.NS, serviceNameStr);
+		Service service = Service.create(wsdlURL, serviceName);
+
+		T serviceClient = service.getPort(serviceClass);
+
+		//(可选)重新设定endpoint address.
+		((BindingProvider) service).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpointAddress);
+		return serviceClient;
+	}
+
 }
