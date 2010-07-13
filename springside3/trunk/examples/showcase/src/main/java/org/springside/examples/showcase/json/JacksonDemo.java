@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.type.TypeReference;
@@ -101,10 +102,14 @@ public class JacksonDemo {
 		}
 	}
 
+	//此annoation为了截断对象的循环引用.
+	@JsonIgnoreProperties( { "parent" })
 	public static class TestBean {
+
 		private String name;
 		private String defaultValue = "hello";
 		private String nullValue = null;
+		private TestBean parent;
 
 		public TestBean() {
 		}
@@ -135,6 +140,14 @@ public class JacksonDemo {
 
 		public void setNullValue(String nullValue) {
 			this.nullValue = nullValue;
+		}
+
+		public TestBean getParent() {
+			return parent;
+		}
+
+		public void setParent(TestBean parent) {
+			this.parent = parent;
 		}
 
 		@Override
