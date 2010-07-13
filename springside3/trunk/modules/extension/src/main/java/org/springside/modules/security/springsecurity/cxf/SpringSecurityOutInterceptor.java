@@ -14,7 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class SpringSecurityOutInterceptor extends AbstractPhaseInterceptor<Message> {
 
 	public SpringSecurityOutInterceptor() {
-		super(Phase.MARSHAL);
+		super(Phase.PRE_PROTOCOL);
 	}
 
 	public void handleMessage(Message message) throws Fault {

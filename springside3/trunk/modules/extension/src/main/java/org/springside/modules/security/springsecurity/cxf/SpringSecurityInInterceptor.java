@@ -19,7 +19,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
- * 在WSS4J校验后设置SpringSecurity Context的CXF Interceptor.
+ * 在WSS4J校验后利用其用户名放入SpringSecurity Context的CXF Interceptor.
+ * 
  * 
  * @author calvin
  */
@@ -32,7 +33,7 @@ public class SpringSecurityInInterceptor extends AbstractPhaseInterceptor<Messag
 	}
 
 	public SpringSecurityInInterceptor() {
-		super(Phase.PRE_PROTOCOL);
+		super(Phase.POST_PROTOCOL);
 		addAfter(WSS4JInInterceptor.class.getName());
 	}
 

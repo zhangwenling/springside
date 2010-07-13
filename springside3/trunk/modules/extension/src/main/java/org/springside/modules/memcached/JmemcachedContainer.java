@@ -14,7 +14,7 @@ import com.thimbleware.jmemcached.storage.hash.LRUCacheStorageDelegate;
  * 
  * @author calvin
  */
-public class JmemcachedFactory implements InitializingBean, DisposableBean {
+public class JmemcachedContainer implements InitializingBean, DisposableBean {
 
 	private MemCacheDaemon jmemcached;
 
