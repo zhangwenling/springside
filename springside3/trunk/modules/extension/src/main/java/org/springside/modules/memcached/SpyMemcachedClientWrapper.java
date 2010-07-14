@@ -3,7 +3,6 @@ package org.springside.modules.memcached;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.Future;
 
 import net.spy.memcached.AddrUtil;
@@ -14,23 +13,18 @@ import net.spy.memcached.MemcachedClient;
 import net.spy.memcached.ConnectionFactoryBuilder.Locator;
 import net.spy.memcached.ConnectionFactoryBuilder.Protocol;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-import com.google.common.collect.Maps;
-
 /**
  * 对SpyMemcached Client的二次封装.
  * 
  * 1.负责SpyMemcached Client的启动与关闭.
- * 2.提供常用的Get/Set/Delete函数并进行简化封装.
- * 3.提供JSON格式的Get/Set函数.
+ * 2.提供常用的Get/GetBulk/Set/Delete/Incr/Decr函数的封装.
  * 
- * 未提供封装的函数如incr/decr可直接调用getClient()取出Spy的原版MemcachedClient来使用.
+ * 未提供封装的函数可直接调用getClient()取出Spy的原版MemcachedClient来使用.
  * 
  * @author calvin
  */
@@ -40,7 +34,7 @@ public class SpyMemcachedClientWrapper implements InitializingBean, DisposableBe
 
 	private MemcachedClient spyClient;
 
-	private ObjectMapper mapper;
+	private boolean ignoreException = true;
 
 	private String memcachedNodes = "localhost:11211";
 
@@ -67,8 +61,12 @@ public class SpyMemcachedClientWrapper implements InitializingBean, DisposableBe
 		try {
 			return (T) spyClient.get(key);
 		} catch (RuntimeException e) {
-			logger.warn("Get from memcached server fail,key is" + key, e);
-			return null;
+			if (ignoreException) {
+				logger.warn("Get from memcached server fail,key is" + key, e);
+				return null;
+			} else {
+				throw e;
+			}
 		}
 	}
 
@@ -76,12 +74,16 @@ public class SpyMemcachedClientWrapper implements InitializingBean, DisposableBe
 	 * GetBulk方法, 转换结果类型并屏蔽异常.
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> Map<String, T> get(String... keys) {
+	public <T> Map<String, T> getBulk(String... keys) {
 		try {
 			return (Map<String, T>) spyClient.getBulk(keys);
 		} catch (RuntimeException e) {
-			logger.warn("Get from memcached server fail,keys are" + keys, e);
-			return null;
+			if (ignoreException) {
+				logger.warn("Get from memcached server fail,keys are" + keys, e);
+				return null;
+			} else {
+				throw e;
+			}
 		}
 	}
 
@@ -89,62 +91,17 @@ public class SpyMemcachedClientWrapper implements InitializingBean, DisposableBe
 	 * GetBulk方法, 转换结果类型并屏蔽异常.
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> Map<String, T> get(Collection<String> keys) {
+	public <T> Map<String, T> getBulk(Collection<String> keys) {
 		try {
 			return (Map<String, T>) spyClient.getBulk(keys);
 		} catch (RuntimeException e) {
-			logger.warn("Get from memcached server fail,keys are" + keys, e);
-			return null;
-		}
-	}
-
-	/**
-	 * Get方法, 将JSON字符串转为结果类型.
-	 */
-	public <T> T getFromJson(Class<T> valueClass, String key) {
-		String jsonString = get(key);
-		if (jsonString != null) {
-			try {
-				return mapper.readValue(jsonString, valueClass);
-			} catch (IOException e) {
-				logger.warn("parse json string error:" + jsonString, e);
+			if (ignoreException) {
+				logger.warn("Get from memcached server fail,keys are" + keys, e);
+				return null;
+			} else {
+				throw e;
 			}
 		}
-		return null;
-	}
-
-	/**
-	 * GetBulk方法, 将JSON字符串转为结果类型.
-	 */
-	public <T> Map<String, T> getFromJson(Class<T> valueClass, String... keys) {
-		Map<String, String> jsonMap = get(keys);
-		Map<String, T> objectMap = convertJsonMap(valueClass, jsonMap);
-
-		return objectMap;
-	}
-
-	/**
-	 * GetBulk方法, 将JSON字符串转为结果类型.
-	 */
-	public <T> Map<String, T> getFromJson(Class<T> valueClass, Collection<String> keys) {
-		Map<String, String> jsonMap = get(keys);
-		Map<String, T> objectMap = convertJsonMap(valueClass, jsonMap);
-
-		return objectMap;
-	}
-
-	private <T> Map<String, T> convertJsonMap(Class<T> valueClass, Map<String, String> jsonMap) {
-		Map<String, T> objectMap = Maps.newHashMapWithExpectedSize(jsonMap.size());
-
-		try {
-			for (Entry<String, String> entry : jsonMap.entrySet()) {
-				T object = mapper.readValue(entry.getValue(), valueClass);
-				objectMap.put(entry.getKey(), object);
-			}
-		} catch (IOException e) {
-			logger.warn("parse json string error", e);
-		}
-		return objectMap;
 	}
 
 	/**
@@ -155,46 +112,40 @@ public class SpyMemcachedClientWrapper implements InitializingBean, DisposableBe
 	}
 
 	/**
-	 * Set方法, 将value存为JSON字符串. 
-	 */
-	public Future<Boolean> setToJson(String key, int expiredTime, Object value) {
-		String jsonString;
-		try {
-			jsonString = mapper.writeValueAsString(value);
-		} catch (IOException e) {
-			logger.warn("write to json string error:" + value, e);
-			return null;
-		}
-
-		return spyClient.set(key, expiredTime, jsonString);
-	}
-
-	/**
 	 * Delete方法.	 
 	 */
 	public Future<Boolean> delete(String key) {
 		return spyClient.delete(key);
 	}
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		initSpyMemcachedClient();
-		initJacksonMapper();
+	/**
+	 * Incr方法.
+	 */
+	public long incr(String key, int by, long defaultValue) {
+		return spyClient.incr(key, by, defaultValue);
 	}
 
-	protected void initSpyMemcachedClient() throws Exception {
+	/**
+	 * Decr方法.
+	 */
+	public long decr(String key, int by, long defaultValue) {
+		return spyClient.decr(key, by, defaultValue);
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
 		ConnectionFactoryBuilder cfb = new ConnectionFactoryBuilder();
 
 		cfb.setFailureMode(FailureMode.Redistribute);
 		cfb.setDaemon(true);
 		cfb.setProtocol(isBinaryProtocol ? Protocol.BINARY : Protocol.TEXT);
-		cfb.setLocatorType(isConsistentHashing ? Locator.CONSISTENT : Locator.ARRAY_MOD);
-		cfb.setHashAlg(isConsistentHashing ? HashAlgorithm.KETAMA_HASH : HashAlgorithm.NATIVE_HASH);
 
-		//operation timeout in miliseconds
+		if (isConsistentHashing) {
+			cfb.setLocatorType(Locator.CONSISTENT);
+			cfb.setHashAlg(HashAlgorithm.KETAMA_HASH);
+		}
+
 		cfb.setOpTimeout(operationTimeout);
-
-		//maximum reconnect interval in seconds
 		cfb.setMaxReconnectDelay(maxReconnectDelay);
 
 		try {
@@ -203,11 +154,6 @@ public class SpyMemcachedClientWrapper implements InitializingBean, DisposableBe
 			logger.error("MemcachedClient initilization error: ", e);
 			throw e;
 		}
-	}
-
-	protected void initJacksonMapper() {
-		mapper = new ObjectMapper();
-		mapper.getSerializationConfig().setSerializationInclusion(JsonSerialize.Inclusion.NON_DEFAULT);
 	}
 
 	@Override

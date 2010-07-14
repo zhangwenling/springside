@@ -41,44 +41,10 @@ public class MemcachedTest extends SpringContextTestCase {
 		spyClient.set(key1, 60 * 60 * 1, value1);
 		spyClient.set(key2, 60 * 60 * 1, value2);
 
-		Map<String, String> result = spyClient.get(key1, key2);
+		Map<String, String> result = spyClient.getBulk(key1, key2);
 		assertEquals(value1, result.get(key1));
 		assertEquals(value2, result.get(key2));
 		assertNull(result.get(key3));
-	}
-
-	@Test
-	public void json() {
-		//Get
-		String key = "consumer:1";
-		Consumer value = new Consumer();
-		value.setId(1);
-		value.setName("admin");
-
-		spyClient.setToJson(key, 60 * 60 * 1, value);
-		Consumer result = spyClient.getFromJson(Consumer.class, key);
-		assertEquals(value, result);
-
-		//Multi-Get
-		String key1 = "consumer:1";
-		Consumer value1 = new Consumer();
-		value1.setId(1);
-		value1.setName("admin");
-
-		String key2 = "consumer:2";
-		Consumer value2 = new Consumer();
-		value2.setId(2);
-		value2.setName("calvin");
-
-		String key3 = "invalidKey";
-
-		spyClient.setToJson(key1, 60 * 60 * 1, value1);
-		spyClient.setToJson(key2, 60 * 60 * 1, value2);
-
-		Map<String, Consumer> results = spyClient.getFromJson(Consumer.class, key1, key2, key3);
-		assertEquals(value1, results.get(key1));
-		assertEquals(value2, results.get(key2));
-		assertNull(results.get(key3));
 	}
 
 	public static class Consumer {

@@ -2,6 +2,8 @@ package org.springside.modules.memcached;
 
 import net.spy.memcached.AddrUtil;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -16,6 +18,8 @@ import com.thimbleware.jmemcached.storage.hash.LRUCacheStorageDelegate;
  */
 public class JmemcachedContainer implements InitializingBean, DisposableBean {
 
+	private static Logger logger = LoggerFactory.getLogger(JmemcachedContainer.class);
+
 	private MemCacheDaemon jmemcached;
 
 	private String serverUrl = "localhost:11211";
@@ -29,6 +33,8 @@ public class JmemcachedContainer implements InitializingBean, DisposableBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 
+		logger.info("Initializing JMemcached Daemon");
+
 		LRUCacheStorageDelegate cacheStorage = new LRUCacheStorageDelegate(maxItems, maxBytes, ceilingSize);
 
 		jmemcached = new MemCacheDaemon();
@@ -40,6 +46,7 @@ public class JmemcachedContainer implements InitializingBean, DisposableBean {
 
 	@Override
 	public void destroy() throws Exception {
+		logger.info("Shutting down Jmemcached Daemon");
 		jmemcached.stop();
 	}
 

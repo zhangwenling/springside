@@ -2,6 +2,7 @@ package org.springside.examples.showcase.common.service;
 
 import java.util.List;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,12 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.examples.showcase.cache.MemcachedObjectType;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
+import org.springside.modules.binder.JsonBinder;
 import org.springside.modules.memcached.SpyMemcachedClientWrapper;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
@@ -29,6 +32,8 @@ public class AccountManager {
 	private UserDao userDao;
 
 	private SpyMemcachedClientWrapper spyClient;
+
+	private JsonBinder jsonBinder = new JsonBinder(Inclusion.NON_DEFAULT);
 
 	private ServerConfig serverConfig; //系统配置
 
@@ -80,17 +85,18 @@ public class AccountManager {
 	 * 访问Memcached, 使用JSON字符串存放对象节约空间.
 	 */
 	private User getUserFromMemcached(String id) {
-		String key = "user:" + id;
-		int expTime = 60 * 60 * 1;//1 hour
+		String key = MemcachedObjectType.USER.getPrefix() + id;
 
 		//Get user from memcached.
-		User user = spyClient.getFromJson(User.class, key);
+		String jsonString = spyClient.get(key);
+		User user = jsonBinder.fromJson(jsonString, User.class);
 
 		//User not in memcached, get it from database and set it back to memcached.
 		if (user == null) {
 			user = userDao.get(id);
 			if (user != null) {
-				spyClient.setToJson(key, expTime, user);
+				jsonString = jsonBinder.toJson(user);
+				spyClient.set(key, MemcachedObjectType.USER.getExpiredTime(), jsonString);
 			}
 		}
 

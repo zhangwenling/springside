@@ -9,10 +9,8 @@ import org.dom4j.Element;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springside.examples.showcase.xml.jaxb.JaxbBinder;
-import org.springside.examples.showcase.xml.jaxb.Role;
-import org.springside.examples.showcase.xml.jaxb.User;
-import org.springside.examples.showcase.xml.jaxb.JaxbBinder.CollectionWrapper;
+import org.springside.modules.binder.JaxbBinder;
+import org.springside.modules.binder.JaxbBinder.CollectionWrapper;
 
 import com.google.common.collect.Lists;
 

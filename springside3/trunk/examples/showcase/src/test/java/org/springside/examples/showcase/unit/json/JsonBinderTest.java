@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.json;
+package org.springside.examples.showcase.unit.json;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.type.TypeReference;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Test;
+import org.springside.modules.binder.JsonBinder;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -18,66 +18,51 @@ import com.google.common.collect.Maps;
  * 
  * @author calvin
  */
-public class JacksonDemo {
+public class JsonBinderTest {
 
-	private ObjectMapper mapper;
+	private JsonBinder binder = new JsonBinder(Inclusion.NON_DEFAULT);
 
-	public static void main(String[] args) throws Exception {
-		JacksonDemo demo = new JacksonDemo();
-		demo.initMapper();
-		demo.writeData();
-		demo.readData();
-	}
-
-	public void initMapper() {
-		mapper = new ObjectMapper();
-
-		//忽略等于Null的值,节省空间.
-		//mapper.getSerializationConfig().setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
-
-		//忽略Default值木有变化的属性,更节省空间,用于接收方有相同的Class, 用于对象->字符串->对象的转换过程.
-		mapper.getSerializationConfig().setSerializationInclusion(JsonSerialize.Inclusion.NON_DEFAULT);
-	}
-
-	public void writeData() throws Exception {
+	@Test
+	public void toJson() throws Exception {
 		//Bean
 		TestBean bean = new TestBean("A");
-		String beanString = mapper.writeValueAsString(bean);
+		String beanString = binder.toJson(bean);
 		System.out.println("Bean:" + beanString);
 
 		//Map
 		Map<String, Object> map = Maps.newLinkedHashMap();
 		map.put("name", "A");
 		map.put("age", 2);
-		String mapString = mapper.writeValueAsString(map);
+		String mapString = binder.toJson(map);
 		System.out.println("Map:" + mapString);
 
 		//List<String>
 		List<String> stringList = Lists.newArrayList("A", "B", "C");
-		String listString = mapper.writeValueAsString(stringList);
+		String listString = binder.toJson(stringList);
 		System.out.println("String List:" + listString);
 
 		//List<Bean>
 		List<TestBean> beanList = Lists.newArrayList(new TestBean("A"), new TestBean("B"));
-		String beanListString = mapper.writeValueAsString(beanList);
+		String beanListString = binder.toJson(beanList);
 		System.out.println("Bean List:" + beanListString);
 
 		//Bean[]
 		TestBean[] beanArray = new TestBean[] { new TestBean("A"), new TestBean("B") };
-		String beanArrayString = mapper.writeValueAsString(beanArray);
+		String beanArrayString = binder.toJson(beanArray);
 		System.out.println("Array List:" + beanArrayString);
 	}
 
+	@Test
 	@SuppressWarnings("unchecked")
-	public void readData() throws Exception {
+	public void fromJson() throws Exception {
 		//Bean
 		String beanString = "{\"name\":\"A\"}";
-		TestBean bean = mapper.readValue(beanString, TestBean.class);
+		TestBean bean = binder.fromJson(beanString, TestBean.class);
 		System.out.println("Bean:" + bean);
 
 		//Map
 		String mapString = "{\"name\":\"A\",\"age\":2}";
-		Map<String, Object> map = mapper.readValue(mapString, HashMap.class);
+		Map<String, Object> map = binder.fromJson(mapString, HashMap.class);
 		System.out.println("Map:");
 		for (Entry<String, Object> entry : map.entrySet()) {
 			System.out.println(entry.getKey() + " " + entry.getValue());
@@ -85,18 +70,16 @@ public class JacksonDemo {
 
 		//List<String>
 		String listString = "[\"A\",\"B\",\"C\"]";
-		List<String> stringList = mapper.readValue(listString, new TypeReference<List<String>>() {
-		});
-		System.out.println("List:");
+		List<String> stringList = binder.fromJsonToList(listString, String.class);
+		System.out.println("String List:");
 		for (String element : stringList) {
 			System.out.println(element);
 		}
 
 		//List<Bean>
 		String beanListString = "[{\"name\":\"A\"},{\"name\":\"B\"}]";
-		List<TestBean> beanList = mapper.readValue(beanListString, new TypeReference<List<TestBean>>() {
-		});
-		System.out.println("List:");
+		List<TestBean> beanList = binder.fromJsonToList(beanListString, TestBean.class);
+		System.out.println("Bean List:");
 		for (Object element : beanList) {
 			System.out.println(element);
 		}

@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.examples.showcase.xml.jaxb;
+package org.springside.modules.binder;
 
 import java.io.StringReader;
 import java.io.StringWriter;

@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.xml.jaxb;
+package org.springside.examples.showcase.unit.xml;
 
 import java.util.List;
 import java.util.Map;
