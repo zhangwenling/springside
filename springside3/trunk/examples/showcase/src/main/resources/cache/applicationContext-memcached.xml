@@ -10,6 +10,4 @@
 		<property name="operationTimeout" value="200" />
 	</bean>
 
-	<!-- 嵌入式的Memcached服务器, 仅在测试或演示时使用 -->
-	<bean class="org.springside.modules.memcached.JmemcachedContainer" lazy-init="false" />
 </beans>

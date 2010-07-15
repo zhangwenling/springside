@@ -4,21 +4,19 @@ import net.spy.memcached.AddrUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
 
 import com.thimbleware.jmemcached.Cache;
 import com.thimbleware.jmemcached.MemCacheDaemon;
 import com.thimbleware.jmemcached.storage.hash.LRUCacheStorageDelegate;
 
 /**
- * 初始化与关闭JMemcached服务的工厂, 主要用于功能测试.
+ * JMemcached的封装, 主要用于功能测试.
  * 
  * @author calvin
  */
-public class JmemcachedContainer implements InitializingBean, DisposableBean {
+public class JmemcachedServer {
 
-	private static Logger logger = LoggerFactory.getLogger(JmemcachedContainer.class);
+	private static Logger logger = LoggerFactory.getLogger(JmemcachedServer.class);
 
 	private MemCacheDaemon jmemcached;
 
@@ -30,8 +28,7 @@ public class JmemcachedContainer implements InitializingBean, DisposableBean {
 
 	private boolean isBinaryProtocol = false;
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
+	public void start() throws Exception {
 
 		logger.info("Initializing JMemcached Daemon");
 
@@ -44,8 +41,7 @@ public class JmemcachedContainer implements InitializingBean, DisposableBean {
 		jmemcached.start();
 	}
 
-	@Override
-	public void destroy() throws Exception {
+	public void stop() throws Exception {
 		logger.info("Shutting down Jmemcached Daemon");
 		jmemcached.stop();
 	}
