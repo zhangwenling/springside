@@ -76,10 +76,10 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 	public void getAllUser() throws MalformedURLException {
 		String address = BASE_URL + "/ws/userservice";
 
-		JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
-		factory.setAddress(address);
-		factory.setServiceClass(UserWebService.class);
-		UserWebService userWebService = (UserWebService) factory.create();
+		JaxWsProxyFactoryBean proxyFactory = new JaxWsProxyFactoryBean();
+		proxyFactory.setAddress(address);
+		proxyFactory.setServiceClass(UserWebService.class);
+		UserWebService userWebService = (UserWebService) proxyFactory.create();
 
 		//(可选)重新设定endpoint address.
 		((BindingProvider) userWebService).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, address);

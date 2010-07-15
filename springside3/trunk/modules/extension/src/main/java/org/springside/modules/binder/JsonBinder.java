@@ -13,14 +13,12 @@ public class JsonBinder {
 
 	private static Logger logger = LoggerFactory.getLogger(JsonBinder.class);
 
-	private ObjectMapper mapper;
+	private ObjectMapper mapper = new ObjectMapper();
 
 	public JsonBinder() {
-		mapper = new ObjectMapper();
 	}
 
 	public JsonBinder(Inclusion inclusion) {
-		this();
 		setInclusion(inclusion);
 	}
 

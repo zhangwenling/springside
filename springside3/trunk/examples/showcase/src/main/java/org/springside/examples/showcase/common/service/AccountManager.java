@@ -3,6 +3,7 @@ package org.springside.examples.showcase.common.service;
 import java.util.List;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.dozer.DozerBeanMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class AccountManager {
 	private UserDao userDao;
 
 	private SpyMemcachedClientWrapper spyClient;
+
+	private DozerBeanMapper dozer;
 
 	private JsonBinder jsonBinder = new JsonBinder(Inclusion.NON_DEFAULT);
 
@@ -88,18 +91,19 @@ public class AccountManager {
 		String key = MemcachedObjectType.USER.getPrefix() + id;
 
 		//Get user from memcached.
+		User user = null;
 		String jsonString = spyClient.get(key);
-		User user = jsonBinder.fromJson(jsonString, User.class);
-
-		//User not in memcached, get it from database and set it back to memcached.
-		if (user == null) {
+		if (jsonString == null) {
+			//用户不在 memcached中,从数据库中取出并放入memcached.
 			user = userDao.get(id);
 			if (user != null) {
-				jsonString = jsonBinder.toJson(user);
+				//Hibernate的Entity对象为Proxy类,复制洁版User类用于JSON序列化.
+				jsonString = jsonBinder.toJson(dozer.map(user, User.class));
 				spyClient.set(key, MemcachedObjectType.USER.getExpiredTime(), jsonString);
 			}
+		} else {
+			user = jsonBinder.fromJson(jsonString, User.class);
 		}
-
 		return user;
 	}
 
@@ -187,5 +191,10 @@ public class AccountManager {
 	@Autowired(required = false)
 	public void setSpyClient(SpyMemcachedClientWrapper spyClient) {
 		this.spyClient = spyClient;
+	}
+
+	@Autowired(required = false)
+	public void setDozer(DozerBeanMapper dozer) {
+		this.dozer = dozer;
 	}
 }

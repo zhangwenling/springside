@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
+import org.apache.cxf.BusFactory;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.apache.ws.security.WSConstants;
@@ -43,15 +44,17 @@ public class SecurityWebServiceTest extends BaseFunctionalTestCase implements Ap
 
 	/**
 	 * 测试Digest密码认证, 使用CXF的API自行创建Client.
+	 * @throws InterruptedException 
 	 */
 	@Test
-	public void getAllUserWithDigestPassword() throws MalformedURLException {
+	public void getAllUserWithDigestPassword() throws MalformedURLException, InterruptedException {
+
+		BusFactory.setDefaultBus(null);
 
 		String address = BASE_URL + "/services/UserServiceWithDigestPassword";
-
-		JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
-		factory.setAddress(address);
-		factory.setServiceClass(UserWebService.class);
+		JaxWsProxyFactoryBean proxyFactory = new JaxWsProxyFactoryBean();
+		proxyFactory.setAddress(address);
+		proxyFactory.setServiceClass(UserWebService.class);
 
 		//定义WSS4JOutInterceptor
 		Map<String, Object> outProps = Maps.newHashMap();
@@ -62,10 +65,10 @@ public class SecurityWebServiceTest extends BaseFunctionalTestCase implements Ap
 		WSS4JOutInterceptor wss4jOut = new WSS4JOutInterceptor(outProps);
 
 		//将Inteceptor加入factory
-		factory.getOutInterceptors().add(wss4jOut);
+		proxyFactory.getOutInterceptors().add(wss4jOut);
 
 		//生成clientProxy
-		UserWebService userWebService = (UserWebService) factory.create();
+		UserWebService userWebService = (UserWebService) proxyFactory.create();
 
 		//调用UserWebService
 		GetAllUserResult result = userWebService.getAllUser();
