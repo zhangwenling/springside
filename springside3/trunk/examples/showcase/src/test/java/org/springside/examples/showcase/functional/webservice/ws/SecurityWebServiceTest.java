@@ -1,16 +1,11 @@
 package org.springside.examples.showcase.functional.webservice.ws;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Map;
 
-import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
 import javax.xml.ws.soap.SOAPFaultException;
 
-import org.apache.cxf.endpoint.Client;
-import org.apache.cxf.endpoint.Endpoint;
-import org.apache.cxf.frontend.ClientProxy;
+import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.apache.ws.security.WSConstants;
 import org.apache.ws.security.handler.WSHandlerConstants;
@@ -25,7 +20,6 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springside.examples.showcase.functional.BaseFunctionalTestCase;
 import org.springside.examples.showcase.ws.client.PasswordCallback;
 import org.springside.examples.showcase.ws.server.UserWebService;
-import org.springside.examples.showcase.ws.server.WsConstants;
 import org.springside.examples.showcase.ws.server.result.GetAllUserResult;
 import org.springside.examples.showcase.ws.server.result.GetUserResult;
 
@@ -48,29 +42,30 @@ public class SecurityWebServiceTest extends BaseFunctionalTestCase implements Ap
 	}
 
 	/**
-	 * 测试Digest密码认证, 使用JAXWS的API自行创建Client.
-	 * JAXWS API创建Client的其他细节见mini-service中的集成测试用例.
+	 * 测试Digest密码认证, 使用CXF的API自行创建Client.
 	 */
 	@Test
 	public void getAllUserWithDigestPassword() throws MalformedURLException {
 
-		//创建UserWebService
-		URL wsdlURL = new URL("http://localhost:8080/showcase/services/UserServiceWithDigestPassword?wsdl");
-		QName userServiceName = new QName(WsConstants.NS, "UserService");
-		Service service = Service.create(wsdlURL, userServiceName);
-		UserWebService userWebService = service.getPort(UserWebService.class);
+		String address = BASE_URL + "/services/UserServiceWithDigestPassword";
+
+		JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
+		factory.setAddress(address);
+		factory.setServiceClass(UserWebService.class);
 
 		//定义WSS4JOutInterceptor
 		Map<String, Object> outProps = Maps.newHashMap();
 		outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.USERNAME_TOKEN);
 		outProps.put(WSHandlerConstants.USER, "admin");
 		outProps.put(WSHandlerConstants.PASSWORD_TYPE, WSConstants.PW_DIGEST);
-		outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, PasswordCallback.class.getName());
-		WSS4JOutInterceptor wssOut = new WSS4JOutInterceptor(outProps);
+		outProps.put(WSHandlerConstants.PW_CALLBACK_REF, new PasswordCallback());
+		WSS4JOutInterceptor wss4jOut = new WSS4JOutInterceptor(outProps);
 
-		Client client = ClientProxy.getClient(userWebService);
-		Endpoint endPoint = client.getEndpoint();
-		endPoint.getOutInterceptors().add(wssOut);
+		//将Inteceptor加入factory
+		factory.getOutInterceptors().add(wss4jOut);
+
+		//生成clientProxy
+		UserWebService userWebService = (UserWebService) factory.create();
 
 		//调用UserWebService
 		GetAllUserResult result = userWebService.getAllUser();
