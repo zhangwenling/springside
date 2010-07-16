@@ -17,7 +17,7 @@ import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
 import org.springside.modules.binder.JsonBinder;
-import org.springside.modules.memcached.SpyMemcachedClientWrapper;
+import org.springside.modules.memcached.SpyMemcachedClient;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
@@ -32,7 +32,7 @@ public class AccountManager {
 
 	private UserDao userDao;
 
-	private SpyMemcachedClientWrapper spyClient;
+	private SpyMemcachedClient spyClient;
 
 	private DozerBeanMapper dozer;
 
@@ -189,7 +189,7 @@ public class AccountManager {
 	}
 
 	@Autowired(required = false)
-	public void setSpyClient(SpyMemcachedClientWrapper spyClient) {
+	public void setSpyClient(SpyMemcachedClient spyClient) {
 		this.spyClient = spyClient;
 	}
 

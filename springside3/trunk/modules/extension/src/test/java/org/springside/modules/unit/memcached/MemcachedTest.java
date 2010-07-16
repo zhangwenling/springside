@@ -2,17 +2,32 @@ package org.springside.modules.unit.memcached;
 
 import java.util.Map;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.modules.memcached.SpyMemcachedClientWrapper;
+import org.springside.modules.memcached.JmemcachedServer;
+import org.springside.modules.memcached.SpyMemcachedClient;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 @ContextConfiguration(locations = { "/applicationContext-extension-test-memcached.xml" })
 public class MemcachedTest extends SpringContextTestCase {
 
+	private static JmemcachedServer server = new JmemcachedServer();
+
 	@Autowired
-	private SpyMemcachedClientWrapper spyClient;
+	private SpyMemcachedClient spyClient;
+
+	@BeforeClass
+	public static void beforeClass() throws Exception {
+		server.start();
+	}
+
+	@AfterClass
+	public static void afterClass() throws Exception {
+		server.stop();
+	}
 
 	@Test
 	public void normal() {
