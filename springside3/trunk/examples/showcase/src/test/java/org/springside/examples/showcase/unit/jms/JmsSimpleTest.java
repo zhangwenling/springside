@@ -9,7 +9,7 @@ import org.springside.examples.showcase.jms.simple.NotifyMessageListener;
 import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
 import org.springside.modules.log.MockLog4jAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
-import org.springside.modules.test.utils.TimeUtils;
+import org.springside.modules.test.utils.ThreadUtils;
 
 @DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/jms/applicationContext-simple.xml" })
@@ -20,7 +20,7 @@ public class JmsSimpleTest extends SpringContextTestCase {
 
 	@Test
 	public void queueMessage() {
-		TimeUtils.sleep(1000);
+		ThreadUtils.sleep(1000);
 		MockLog4jAppender appender = new MockLog4jAppender();
 		appender.addToLogger(NotifyMessageListener.class);
 
@@ -31,14 +31,14 @@ public class JmsSimpleTest extends SpringContextTestCase {
 		notifyMessageProducer.sendQueue(user);
 		logger.info("sended message");
 
-		TimeUtils.sleep(1000);
+		ThreadUtils.sleep(1000);
 		assertNotNull(appender.getFirstLog());
 		assertEquals("UserName:calvin, Email:calvin@sringside.org.cn", appender.getFirstLog().getMessage());
 	}
 
 	@Test
 	public void topicMessage() {
-		TimeUtils.sleep(1000);
+		ThreadUtils.sleep(1000);
 		MockLog4jAppender appender = new MockLog4jAppender();
 		appender.addToLogger(NotifyMessageListener.class);
 
@@ -49,7 +49,7 @@ public class JmsSimpleTest extends SpringContextTestCase {
 		notifyMessageProducer.sendTopic(user);
 		logger.info("sended message");
 
-		TimeUtils.sleep(1000);
+		ThreadUtils.sleep(1000);
 		assertNotNull(appender.getFirstLog());
 		assertEquals("UserName:calvin, Email:calvin@sringside.org.cn", appender.getFirstLog().getMessage());
 	}

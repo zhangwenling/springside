@@ -7,7 +7,7 @@ import org.springside.examples.showcase.schedule.ExecutorJob;
 import org.springside.modules.log.MockLog4jAppender;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DbUnitUtils;
-import org.springside.modules.test.utils.TimeUtils;
+import org.springside.modules.test.utils.ThreadUtils;
 
 @DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/schedule/applicationContext-executor.xml" })
@@ -22,7 +22,7 @@ public class ExecutorJobTest extends SpringTxTestCase {
 		appender.addToLogger(ExecutorJob.class);
 
 		//等待任务启动
-		TimeUtils.sleep(3000);
+		ThreadUtils.sleep(3000);
 
 		//验证任务已执行
 		assertEquals(1, appender.getAllLogs().size());
