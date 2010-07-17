@@ -370,8 +370,13 @@
 			<groupId>org.mortbay.jetty</groupId>
 			<artifactId>jsp-2.1-jetty</artifactId>
 		</dependency>
-
 		<!-- test end -->
+
+		<!-- perf4j -->
+		<dependency>
+			<groupId>org.perf4j</groupId>
+			<artifactId>perf4j</artifactId>
+		</dependency>
 
 		<!-- hibernate tools -->
 		<dependency>

@@ -16,7 +16,7 @@
 		<property name="batchSize" value="10" />
 		<property name="sql">
 			<value>
-			insert into SS_LOG(THREAD_NAME,LOGGER_NAME,LOG_TIME,LEVEL,MESSAGE)
+				insert into SS_LOG(THREAD_NAME,LOGGER_NAME,LOG_TIME,LEVEL,MESSAGE)
 				values(:thread_name,:logger_name,:log_time,:level,:message)
 			</value>
 		</property>
@@ -30,4 +30,18 @@
 
 	<!-- 配置执行TraceUtils的Aspect -->
 	<bean class="org.springside.examples.showcase.log.trace.TraceAspect" />
+
+
+	<!-- 配置实用perf4j的log4j.xml,仅在性能调试时打开 -->
+	<!-- 
+	<bean id="log4jConfigurer" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
+		<property name="targetMethod" value="initLogging" />
+		<property name="arguments">
+			<list>
+				<value>classpath:log4j-perf4j.xml</value>
+			</list>
+		</property>
+	</bean>
+ 	-->
 </beans>

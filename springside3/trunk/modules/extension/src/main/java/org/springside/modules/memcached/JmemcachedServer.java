@@ -1,5 +1,8 @@
 package org.springside.modules.memcached;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import net.spy.memcached.AddrUtil;
 
 import org.slf4j.Logger;
@@ -28,6 +31,7 @@ public class JmemcachedServer {
 
 	private boolean isBinaryProtocol = false;
 
+	@PostConstruct
 	public void start() throws Exception {
 
 		logger.info("Initializing JMemcached Daemon");
@@ -41,6 +45,7 @@ public class JmemcachedServer {
 		jmemcached.start();
 	}
 
+	@PreDestroy
 	public void stop() throws Exception {
 		logger.info("Shutting down Jmemcached Daemon");
 		jmemcached.stop();

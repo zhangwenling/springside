@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 import org.mortbay.jetty.Server;
 import org.openqa.selenium.WebDriver;
 import org.springside.examples.showcase.tools.Start;
-import org.springside.modules.memcached.JmemcachedServer;
 import org.springside.modules.test.groups.GroupsTestRunner;
 import org.springside.modules.test.utils.DbUnitUtils;
 import org.springside.modules.test.utils.JettyUtils;
@@ -35,15 +34,12 @@ public class BaseFunctionalTestCase extends Assert {
 
 	protected static Server jettyServer;
 
-	protected static JmemcachedServer jmemcachedServer;
-
 	protected static DataSource dataSourceHolder;
 
 	protected static WebDriver driver;
 
 	@BeforeClass
 	public static void startAll() throws Exception {
-		startJmemcached();
 		startJetty();
 
 		fetchDataSource();
@@ -54,7 +50,6 @@ public class BaseFunctionalTestCase extends Assert {
 	public static void stopAll() throws Exception {
 		cleanDefaultData();
 		stopJetty();
-		stopJmemcached();
 	}
 
 	/**
@@ -66,26 +61,10 @@ public class BaseFunctionalTestCase extends Assert {
 	}
 
 	/**
-	 * 启动Jmemcached服务器.
-	 * @throws Exception 
-	 */
-	protected static void startJmemcached() throws Exception {
-		jmemcachedServer = new JmemcachedServer();
-		jmemcachedServer.start();
-	}
-
-	/**
 	 * 关闭Jetty服务器.
 	 */
 	protected static void stopJetty() throws Exception {
 		jettyServer.stop();
-	}
-
-	/**
-	 * 关闭Jmemcached服务器.
-	 */
-	protected static void stopJmemcached() throws Exception {
-		jmemcachedServer.stop();
 	}
 
 	/**
