@@ -62,6 +62,17 @@ public class MemcachedTest extends SpringContextTestCase {
 		assertNull(result.get(key3));
 	}
 
+	@Test
+	public void incr() {
+		String key = "incr_key";
+
+		spyClient.incr(key, 2, 1);
+		assertEquals("1", spyClient.get(key));
+
+		spyClient.incr(key, 2, 1);
+		assertEquals("3", spyClient.get(key));
+	}
+
 	public static class Consumer {
 
 		private int id;

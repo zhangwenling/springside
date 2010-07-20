@@ -91,13 +91,13 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 	}
 
 	/**
-	 * 直接取出SpyMemcached的Client,当Wrapper未提供封装的函数时使用.
+	 * 随机取出Pool中的SpyMemcached Client.
 	 */
 	public MemcachedClient getClient() {
 		return clientPool.get(random.nextInt(poolSize));
 	}
 
-	// 封装方法 //
+	// SpyMemcached封装方法 //
 	/**
 	 * Get方法, 转换结果类型并屏蔽异常.
 	 */
@@ -181,6 +181,10 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 
 	public void setPoolSize(int poolSize) {
 		this.poolSize = poolSize;
+	}
+
+	public void setIgnoreException(boolean ignoreException) {
+		this.ignoreException = ignoreException;
 	}
 
 	/**
