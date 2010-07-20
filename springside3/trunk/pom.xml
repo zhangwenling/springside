@@ -14,5 +14,7 @@
 		<module>examples/mini-service</module>
 		<module>examples/mini-web</module>
 		<module>examples/showcase</module>
-	</modules>
+		<module>tools/maven/archetype</module>
+    <module>helloworld</module>
+  </modules>
 </project>

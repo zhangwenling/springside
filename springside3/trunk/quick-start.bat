@@ -1,5 +1,5 @@
 @echo off
-echo [INFO] 确保默认JDK版本为JDK5.0及以上版本.
+echo [INFO] 确保默认JDK版本为JDK6.0及以上版本.
 
 echo [INFO] 如不能连接Maven官方网站, 修改本文件去掉下面一行的注释.
 rem set OFF_LINE=-o
@@ -20,7 +20,7 @@ cd tools/h2
 call %MVN% %OFF_LINE% initialize -Pstartdb
 cd ..\..\
 
-echo [Step 3] 安装SpringSide3 所有modules,examples项目到本地Maven仓库,生成Eclipse项目文件.
+echo [Step 3] 安装SpringSide3 所有modules, examples项目及mini項目生成模板到本地Maven仓库, 生成Eclipse项目文件.
 call %MVN% %OFF_LINE% eclipse:clean eclipse:eclipse
 call %MVN% %OFF_LINE% clean install -Dmaven.test.skip=true
 
