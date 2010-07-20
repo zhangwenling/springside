@@ -25,7 +25,9 @@ import org.springside.examples.showcase.ws.server.result.WSResult;
 import com.google.common.collect.Lists;
 
 /**
- * UserWebService实现类.
+ * UserWebService服务端实现类.
+ * 
+ * 客户端实现见功能测试用例.
  * 
  * @author sky
  * @author calvin

@@ -25,7 +25,9 @@ import org.springside.examples.miniservice.ws.result.WSResult;
 import com.google.common.collect.Lists;
 
 /**
- * WebService实现类.
+ * WebService服务端实现类.
+ * 
+ * 客户端实现见功能测试用例.
  * 
  * @author sky
  * @author calvin
