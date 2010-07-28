@@ -221,6 +221,8 @@
 		<dependency>
 			<groupId>com.thimbleware.jmemcached</groupId>
 			<artifactId>jmemcached-core</artifactId>
+			<!-- 为演示而改为runtime -->
+			<scope>runtime</scope>
 		</dependency>
 		<!-- memcached end -->
 

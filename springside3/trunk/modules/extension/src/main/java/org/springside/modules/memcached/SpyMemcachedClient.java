@@ -2,7 +2,9 @@ package org.springside.modules.memcached;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.Future;
@@ -34,13 +36,11 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 
 	private static Logger logger = LoggerFactory.getLogger(SpyMemcachedClient.class);
 
-	private ArrayList<MemcachedClient> clientPool;
+	private List<MemcachedClient> clientPool;
 
 	private int poolSize = 1;
 
 	private Random random = new Random();
-
-	private boolean ignoreException = true;
 
 	private String memcachedNodes = "localhost:11211";
 
@@ -106,12 +106,9 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 		try {
 			return (T) getClient().get(key);
 		} catch (RuntimeException e) {
-			if (ignoreException) {
-				logger.warn("Get from memcached server fail,key is" + key, e);
-				return null;
-			} else {
-				throw e;
-			}
+			logger.warn("Get from memcached server fail,key is" + key, e);
+			return null;
+
 		}
 	}
 
@@ -123,12 +120,8 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 		try {
 			return (Map<String, T>) getClient().getBulk(keys);
 		} catch (RuntimeException e) {
-			if (ignoreException) {
-				logger.warn("Get from memcached server fail,keys are" + keys, e);
-				return null;
-			} else {
-				throw e;
-			}
+			logger.warn("Get from memcached server fail,keys are" + Arrays.toString(keys), e);
+			return null;
 		}
 	}
 

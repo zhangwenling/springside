@@ -26,10 +26,10 @@ public @interface Groups {
 	/**
 	 * 执行所有组别的测试.
 	 */
-	public static final String ALL = "all";
+	static final String ALL = "all";
 
 	/**
 	 * 组别定义,默认为ALL.
 	 */
-	public String value() default ALL;
+	String value() default ALL;
 }
