@@ -37,7 +37,7 @@ public class SeleniumUtils {
 
 	public static final String REMOTE = "remote";
 
-	public static Logger logger = LoggerFactory.getLogger(SeleniumUtils.class);
+	private static Logger logger = LoggerFactory.getLogger(SeleniumUtils.class);
 
 	public static WebDriver buildDriver(String driverName) throws Exception {
 		WebDriver driver = null;

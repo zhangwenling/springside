@@ -29,9 +29,6 @@ import org.springside.modules.web.ServletUtils;
  */
 public class HibernateUtils {
 
-	private HibernateUtils() {
-	}
-
 	/**
 	 * 根据对象ID集合,整理合并集合.
 	 * 

@@ -38,7 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
-public class SpringTxTestCase extends SpringContextTestCase {
+public abstract class SpringTxTestCase extends SpringContextTestCase {
 
 	protected DataSource dataSource;
 

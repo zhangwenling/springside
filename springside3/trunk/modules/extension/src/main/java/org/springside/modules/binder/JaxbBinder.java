@@ -112,6 +112,6 @@ public class JaxbBinder {
 	public static class CollectionWrapper {
 		@SuppressWarnings("unchecked")
 		@XmlAnyElement
-		Collection collection;
+		protected Collection collection;
 	}
 }

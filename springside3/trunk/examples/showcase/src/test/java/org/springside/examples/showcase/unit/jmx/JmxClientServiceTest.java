@@ -37,7 +37,6 @@ public class JmxClientServiceTest extends SpringContextTestCase {
 
 	@Test
 	public void trace() {
-		assertEquals(false, jmxClientService.getTraceStatus());
 		jmxClientService.startTrace();
 		assertEquals(true, jmxClientService.getTraceStatus());
 		jmxClientService.stopTrace();

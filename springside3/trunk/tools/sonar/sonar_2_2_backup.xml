@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sonar-config>
   <version><![CDATA[120]]></version>
-  <date><![CDATA[2010-07-29]]></date>
+  <date><![CDATA[2010-08-01]]></date>
   <metrics/>
   <properties>
     <property>
       <key><![CDATA[sonar.core.id]]></key>
-      <value><![CDATA[20100729002526]]></value>
+      <value><![CDATA[20100731154100]]></value>
     </property>
     <property>
       <key><![CDATA[sonar.core.version]]></key>
@@ -14,7 +14,7 @@
     </property>
     <property>
       <key><![CDATA[sonar.core.startTime]]></key>
-      <value><![CDATA[2010-07-29T00:25:26+0800]]></value>
+      <value><![CDATA[2010-07-31T15:41:00+0800]]></value>
     </property>
   </properties>
   <profiles>
@@ -3832,6 +3832,12 @@
           <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.coding.RedundantThrowsCheck]]></key>
           <plugin><![CDATA[checkstyle]]></plugin>
           <level><![CDATA[MINOR]]></level>
+          <params>
+            <param>
+              <key><![CDATA[allowUnchecked]]></key>
+              <value><![CDATA[true]]></value>
+            </param>
+          </params>
         </active-rule>
         <active-rule>
           <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.coding.IllegalThrowsCheck]]></key>
@@ -3916,6 +3922,16 @@
           <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck]]></key>
           <plugin><![CDATA[checkstyle]]></plugin>
           <level><![CDATA[MAJOR]]></level>
+          <params>
+            <param>
+              <key><![CDATA[protectedAllowed]]></key>
+              <value><![CDATA[true]]></value>
+            </param>
+            <param>
+              <key><![CDATA[packageAllowed]]></key>
+              <value><![CDATA[false]]></value>
+            </param>
+          </params>
         </active-rule>
         <active-rule>
           <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck]]></key>
@@ -4506,11 +4522,6 @@
           <key><![CDATA[MS_EXPOSE_REP]]></key>
           <plugin><![CDATA[findbugs]]></plugin>
           <level><![CDATA[CRITICAL]]></level>
-        </active-rule>
-        <active-rule>
-          <key><![CDATA[EI_EXPOSE_REP2]]></key>
-          <plugin><![CDATA[findbugs]]></plugin>
-          <level><![CDATA[MAJOR]]></level>
         </active-rule>
         <active-rule>
           <key><![CDATA[EI_EXPOSE_STATIC_REP2]]></key>
@@ -5933,11 +5944,6 @@
           <level><![CDATA[MAJOR]]></level>
         </active-rule>
         <active-rule>
-          <key><![CDATA[ArrayIsStoredDirectly]]></key>
-          <plugin><![CDATA[pmd]]></plugin>
-          <level><![CDATA[CRITICAL]]></level>
-        </active-rule>
-        <active-rule>
           <key><![CDATA[FinalizeOverloaded]]></key>
           <plugin><![CDATA[pmd]]></plugin>
           <level><![CDATA[MAJOR]]></level>
@@ -6055,11 +6061,6 @@
           <level><![CDATA[MAJOR]]></level>
         </active-rule>
         <active-rule>
-          <key><![CDATA[UnnecessaryLocalBeforeReturn]]></key>
-          <plugin><![CDATA[pmd]]></plugin>
-          <level><![CDATA[MAJOR]]></level>
-        </active-rule>
-        <active-rule>
           <key><![CDATA[AvoidCallingFinalize]]></key>
           <plugin><![CDATA[pmd]]></plugin>
           <level><![CDATA[MAJOR]]></level>
@@ -6153,6 +6154,12 @@
           <key><![CDATA[AvoidDuplicateLiterals]]></key>
           <plugin><![CDATA[pmd]]></plugin>
           <level><![CDATA[MAJOR]]></level>
+          <params>
+            <param>
+              <key><![CDATA[skipAnnotations]]></key>
+              <value><![CDATA[true]]></value>
+            </param>
+          </params>
         </active-rule>
         <active-rule>
           <key><![CDATA[CallToDeprecatedMethod]]></key>
@@ -6179,7 +6186,7 @@
         </alert>
         <alert>
           <operator><![CDATA[<]]></operator>
-          <value-error><![CDATA[60]]></value-error>
+          <value-error><![CDATA[50]]></value-error>
           <value-warning><![CDATA[80]]></value-warning>
           <metric-key><![CDATA[coverage]]></metric-key>
         </alert>
@@ -6197,8 +6204,8 @@
         </alert>
         <alert>
           <operator><![CDATA[>]]></operator>
-          <value-error><![CDATA[5]]></value-error>
-          <value-warning><![CDATA[3]]></value-warning>
+          <value-error><![CDATA[10]]></value-error>
+          <value-warning><![CDATA[5]]></value-warning>
           <metric-key><![CDATA[major_violations]]></metric-key>
         </alert>
       </alerts>
