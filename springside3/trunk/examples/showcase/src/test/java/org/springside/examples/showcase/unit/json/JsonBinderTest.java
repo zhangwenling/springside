@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.codehaus.jackson.type.TypeReference;
 import org.junit.Test;
 import org.springside.modules.binder.JsonBinder;
 
@@ -70,7 +71,8 @@ public class JsonBinderTest {
 
 		//List<String>
 		String listString = "[\"A\",\"B\",\"C\"]";
-		List<String> stringList = binder.fromJsonToList(listString, String.class);
+		List<String> stringList = binder.getMapper().readValue(listString, new TypeReference<List<String>>() {
+		});
 		System.out.println("String List:");
 		for (String element : stringList) {
 			System.out.println(element);
@@ -78,9 +80,10 @@ public class JsonBinderTest {
 
 		//List<Bean>
 		String beanListString = "[{\"name\":\"A\"},{\"name\":\"B\"}]";
-		List<TestBean> beanList = binder.fromJsonToList(beanListString, TestBean.class);
+		List<TestBean> beanList = binder.getMapper().readValue(beanListString, new TypeReference<List<TestBean>>() {
+		});
 		System.out.println("Bean List:");
-		for (Object element : beanList) {
+		for (TestBean element : beanList) {
 			System.out.println(element);
 		}
 	}

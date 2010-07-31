@@ -125,17 +125,21 @@ public class UserResourceService {
 	 * 可以从原版HttpServletRequest中获取,也可以用封装好的更方便的UriInfo和HttpHeaders.
 	 */
 	@GET
-	public void searchUserByFlexibleParameter(@Context HttpServletRequest request, @Context UriInfo ui,
+	public String searchUserByFlexibleParameter(@Context HttpServletRequest request, @Context UriInfo ui,
 			@Context HttpHeaders hh) {
 		MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
 
 		//先尝试从Http Header获取参数,如没有再尝试从URL参数中获取.
 		String userName = null;
-		if (hh.getRequestHeader("agent") != null) {
+		if (hh.getRequestHeader("userName") != null) {
 			userName = hh.getRequestHeader("userName").get(0);
 		} else {
 			userName = queryParams.getFirst("userName");
 		}
+
+		if (userName == null)
+			buildException(450, "用戶名既不在Http Header也不在URL参数中");
+		return userName;
 	}
 
 	/**

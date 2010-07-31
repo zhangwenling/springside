@@ -49,8 +49,9 @@ public class TraceAspect {
 			result = pjp.proceed();
 			return result;
 		} finally {
-			if (result != null)
+			if (result != null && logger.isDebugEnabled()) {
 				logger.debug("{} return {}", pjp.getSignature().toShortString(), result.toString());
+			}
 		}
 	}
 }

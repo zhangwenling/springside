@@ -44,7 +44,7 @@ public class StaticContentServlet extends HttpServlet {
 	private static final int GZIP_MINI_LENGTH = 512;
 
 	/** Content基本信息缓存. */
-	private EhcacheImpl contentInfoCache;
+	private EhcacheImpl contentInfoCache = new EhcacheImpl();
 
 	private MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
 
@@ -104,11 +104,7 @@ public class StaticContentServlet extends HttpServlet {
 		//Http1.1 header
 		String acceptEncoding = request.getHeader("Accept-Encoding");
 
-		if (StringUtils.contains(acceptEncoding, "gzip")) {
-			return true;
-		} else {
-			return false;
-		}
+		return StringUtils.contains(acceptEncoding, "gzip");
 	}
 
 	/**
@@ -177,13 +173,13 @@ public class StaticContentServlet extends HttpServlet {
 	 * 定义Content的基本信息.
 	 */
 	static class ContentInfo {
-		String contentPath;
-		File file;
-		String fileName;
-		int length;
-		String mimeType;
-		long lastModified;
-		String etag;
-		boolean needGzip;
+		protected String contentPath;
+		protected File file;
+		protected String fileName;
+		protected int length;
+		protected String mimeType;
+		protected long lastModified;
+		protected String etag;
+		protected boolean needGzip;
 	}
 }

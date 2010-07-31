@@ -35,7 +35,6 @@ public class UserAction extends CrudActionSupport<User> {
 
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
 	private AccountManager accountManager;
 
 	//-- 页面属性 --//
@@ -148,5 +147,10 @@ public class UserAction extends CrudActionSupport<User> {
 	 */
 	public void setCheckedRoleIds(List<Long> checkedRoleIds) {
 		this.checkedRoleIds = checkedRoleIds;
+	}
+
+	@Autowired
+	public void setAccountManager(AccountManager accountManager) {
+		this.accountManager = accountManager;
 	}
 }
