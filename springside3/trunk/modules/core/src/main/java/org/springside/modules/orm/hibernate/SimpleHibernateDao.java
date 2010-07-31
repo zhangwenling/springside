@@ -296,17 +296,8 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * Hibernate.initialize(user.getRoles())，初始化User的直接属性和关联集合.
 	 * Hibernate.initialize(user.getDescription())，初始化User的直接属性和延迟加载的Description属性.
 	 */
-	public void initEntity(T entity) {
-		Hibernate.initialize(entity);
-	}
-
-	/**
-	 * @see #initEntity(Object)
-	 */
-	public void initEntity(List<T> entityList) {
-		for (T entity : entityList) {
-			Hibernate.initialize(entity);
-		}
+	public void initProxyProperty(Object proxyProperty) {
+		Hibernate.initialize(proxyProperty);
 	}
 
 	/**

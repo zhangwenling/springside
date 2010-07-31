@@ -3,7 +3,6 @@ package org.springside.examples.showcase.common.service;
 import java.util.List;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-import org.dozer.DozerBeanMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.showcase.cache.MemcachedObjectType;
 import org.springside.examples.showcase.common.dao.UserDao;
+import org.springside.examples.showcase.common.dao.UserJdbcDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
@@ -32,9 +32,9 @@ public class AccountManager {
 
 	private UserDao userDao;
 
-	private SpyMemcachedClient spyClient;
+	private UserJdbcDao userJdbcDao;
 
-	private DozerBeanMapper dozer;
+	private SpyMemcachedClient spyClient;
 
 	private JsonBinder jsonBinder = new JsonBinder(Inclusion.NON_DEFAULT);
 
@@ -76,35 +76,7 @@ public class AccountManager {
 
 	@Transactional(readOnly = true)
 	public User getUser(String id) {
-		if (spyClient != null) {
-			return getUserFromMemcached(id);
-		} else {
-			return userDao.get(id);
-		}
-
-	}
-
-	/**
-	 * 访问Memcached, 使用JSON字符串存放对象节约空间.
-	 */
-	private User getUserFromMemcached(String id) {
-		String key = MemcachedObjectType.USER.getPrefix() + id;
-
-		//Get user from memcached.
-		User user = null;
-		String jsonString = spyClient.get(key);
-		if (jsonString == null) {
-			//用户不在 memcached中,从数据库中取出并放入memcached.
-			user = userDao.get(id);
-			if (user != null) {
-				//Hibernate的Entity对象为Proxy类,复制洁版User类用于JSON序列化.
-				jsonString = jsonBinder.toJson(dozer.map(user, User.class));
-				spyClient.set(key, MemcachedObjectType.USER.getExpiredTime(), jsonString);
-			}
-		} else {
-			user = jsonBinder.fromJson(jsonString, User.class);
-		}
-		return user;
+		return userDao.get(id);
 	}
 
 	/**
@@ -112,8 +84,33 @@ public class AccountManager {
 	 */
 	@Transactional(readOnly = true)
 	public User getLoadedUser(String id) {
-		User user = userDao.get(id);
-		userDao.initUser(user);
+		if (spyClient != null) {
+			return getUserFromMemcached(id);
+		} else {
+			return userJdbcDao.queryObject(id);
+		}
+	}
+
+	/**
+	 * 访问Memcached, 使用JSON字符串存放对象以节约空间.
+	 */
+	private User getUserFromMemcached(String id) {
+		String key = MemcachedObjectType.USER.getPrefix() + id;
+
+		User user = null;
+
+		String jsonString = spyClient.get(key);
+
+		if (jsonString == null) {
+			//用户不在 memcached中,从数据库中取出并放入memcached.
+			user = userJdbcDao.queryObject(id);
+			if (user != null) {
+				jsonString = jsonBinder.toJson(user);
+				spyClient.set(key, MemcachedObjectType.USER.getExpiredTime(), jsonString);
+			}
+		} else {
+			user = jsonBinder.fromJson(jsonString, User.class);
+		}
 		return user;
 	}
 
@@ -178,6 +175,11 @@ public class AccountManager {
 		this.userDao = userDao;
 	}
 
+	@Autowired
+	public void setUserJdbcDao(UserJdbcDao userJdbcDao) {
+		this.userJdbcDao = userJdbcDao;
+	}
+
 	@Autowired(required = false)
 	public void setServerConfig(ServerConfig serverConfig) {
 		this.serverConfig = serverConfig;
@@ -193,8 +195,4 @@ public class AccountManager {
 		this.spyClient = spyClient;
 	}
 
-	@Autowired(required = false)
-	public void setDozer(DozerBeanMapper dozer) {
-		this.dozer = dozer;
-	}
 }

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
@@ -29,6 +30,7 @@ import com.google.common.collect.Maps;
  * 
  * @author calvin
  */
+@Component
 public class UserJdbcDao {
 
 	private static final String QUERY_USER_BY_ID = "select id, name, login_name from SS_USER where id=?";

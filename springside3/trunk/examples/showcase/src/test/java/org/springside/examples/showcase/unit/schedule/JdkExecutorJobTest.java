@@ -3,7 +3,7 @@ package org.springside.examples.showcase.unit.schedule;
 import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.examples.showcase.schedule.ExecutorJob;
+import org.springside.examples.showcase.schedule.JdkExecutorJob;
 import org.springside.modules.log.MockLog4jAppender;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DbUnitUtils;
@@ -11,7 +11,7 @@ import org.springside.modules.test.utils.ThreadUtils;
 
 @DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/schedule/applicationContext-executor.xml" })
-public class ExecutorJobTest extends SpringTxTestCase {
+public class JdkExecutorJobTest extends SpringTxTestCase {
 
 	@Test
 	public void scheduleJob() throws Exception {
@@ -19,7 +19,7 @@ public class ExecutorJobTest extends SpringTxTestCase {
 
 		//加载测试用logger appender
 		MockLog4jAppender appender = new MockLog4jAppender();
-		appender.addToLogger(ExecutorJob.class);
+		appender.addToLogger(JdkExecutorJob.class);
 
 		//等待任务启动
 		ThreadUtils.sleep(3000);

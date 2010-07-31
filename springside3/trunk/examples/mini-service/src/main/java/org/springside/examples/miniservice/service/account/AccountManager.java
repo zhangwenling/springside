@@ -31,7 +31,9 @@ public class AccountManager {
 	@Transactional(readOnly = true)
 	public List<User> getAllLoadedUser() {
 		List<User> userList = userDao.getAll("id", true);
-		userDao.initUserList(userList);
+		for (User user : userList) {
+			userDao.initUser(user);
+		}
 		return userList;
 	}
 

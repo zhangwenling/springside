@@ -50,7 +50,7 @@ public class CryptoUtils {
 			mac.init(secretKey);
 			return mac.doFinal(input.getBytes());
 		} catch (GeneralSecurityException e) {
-			throw new IllegalStateException("Security exception", e);
+			throw convertRuntimeException(e);
 		}
 	}
 
@@ -123,7 +123,7 @@ public class CryptoUtils {
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
 		} catch (GeneralSecurityException e) {
-			throw new IllegalStateException("Security exception", e);
+			throw convertRuntimeException(e);
 		}
 	}
 
@@ -197,7 +197,7 @@ public class CryptoUtils {
 			cipher.init(mode, secretKey);
 			return cipher.doFinal(inputBytes);
 		} catch (GeneralSecurityException e) {
-			throw new IllegalStateException("Security exception", e);
+			throw convertRuntimeException(e);
 		}
 	}
 
@@ -210,7 +210,7 @@ public class CryptoUtils {
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
 		} catch (GeneralSecurityException e) {
-			throw new IllegalStateException("Security exception", e);
+			throw convertRuntimeException(e);
 		}
 	}
 
@@ -279,8 +279,8 @@ public class CryptoUtils {
 			Cipher cipher = Cipher.getInstance(AES);
 			cipher.init(mode, secretKey);
 			return cipher.doFinal(inputBytes);
-		} catch (Exception e) {
-			throw new IllegalStateException("Security exception", e);
+		} catch (GeneralSecurityException e) {
+			throw convertRuntimeException(e);
 		}
 	}
 
@@ -294,7 +294,7 @@ public class CryptoUtils {
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
 		} catch (GeneralSecurityException e) {
-			throw new IllegalStateException("Security exception", e);
+			throw convertRuntimeException(e);
 		}
 	}
 
@@ -306,4 +306,7 @@ public class CryptoUtils {
 		return EncodeUtils.hexEncode(generateAesKey());
 	}
 
+	private static IllegalStateException convertRuntimeException(GeneralSecurityException e) {
+		return new IllegalStateException("Security exception", e);
+	}
 }

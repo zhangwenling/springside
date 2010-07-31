@@ -50,8 +50,6 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 
 	private long operationTimeout = 1000; //default value in Spy is 1000ms
 
-	private int maxReconnectDelay = 30;//default value in Spy is 30s
-
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		clientPool = new ArrayList<MemcachedClient>(poolSize);
@@ -69,7 +67,6 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 			}
 
 			cfb.setOpTimeout(operationTimeout);
-			cfb.setMaxReconnectDelay(maxReconnectDelay);
 
 			try {
 				MemcachedClient spyClient = new MemcachedClient(cfb.build(), AddrUtil.getAddresses(memcachedNodes));
@@ -108,7 +105,6 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 		} catch (RuntimeException e) {
 			logger.warn("Get from memcached server fail,key is" + key, e);
 			return null;
-
 		}
 	}
 
@@ -133,12 +129,8 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 		try {
 			return (Map<String, T>) getClient().getBulk(keys);
 		} catch (RuntimeException e) {
-			if (ignoreException) {
-				logger.warn("Get from memcached server fail,keys are" + keys, e);
-				return null;
-			} else {
-				throw e;
-			}
+			logger.warn("Get from memcached server fail,keys are" + keys, e);
+			return null;
 		}
 	}
 
@@ -176,10 +168,6 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 		this.poolSize = poolSize;
 	}
 
-	public void setIgnoreException(boolean ignoreException) {
-		this.ignoreException = ignoreException;
-	}
-
 	/**
 	 *  支持多节点, 以","分割.
 	 *  eg. "localhost:11211,localhost:11212"
@@ -198,9 +186,5 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 
 	public void setOperationTimeout(long operationTimeout) {
 		this.operationTimeout = operationTimeout;
-	}
-
-	public void setMaxReconnectDelay(int maxReconnectDelay) {
-		this.maxReconnectDelay = maxReconnectDelay;
 	}
 }

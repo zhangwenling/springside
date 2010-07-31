@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.springside</groupId>
   <artifactId>mini-web-archetype</artifactId>
-  <version>3.3.2</version>
+  <version>3.3.3</version>
   <packaging>maven-archetype</packaging>
   <name>SpringSide's Mini-Web Archetype</name>
   <build>

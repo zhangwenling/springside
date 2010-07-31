@@ -17,9 +17,9 @@ import org.springside.examples.showcase.common.service.AccountManager;
 /**
  * 使用Spring的ThreadPoolTaskScheduler执行Cron式任务的类.
  */
-public class CronJob implements Runnable {
+public class SpringCronJob implements Runnable {
 
-	private static Logger logger = LoggerFactory.getLogger(CronJob.class);
+	private static Logger logger = LoggerFactory.getLogger(SpringCronJob.class);
 
 	private String cronExpression;
 

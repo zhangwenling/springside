@@ -18,9 +18,9 @@ import org.springside.examples.showcase.common.service.AccountManager;
 /**
  * 被ScheduledThreadPoolExecutor定时执行的任务类.
  */
-public class ExecutorJob implements Runnable {
+public class JdkExecutorJob implements Runnable {
 
-	private static Logger logger = LoggerFactory.getLogger(ExecutorJob.class);
+	private static Logger logger = LoggerFactory.getLogger(JdkExecutorJob.class);
 
 	private int initialDelay = 0;
 
