@@ -6,9 +6,10 @@
 		<artifactId>springside3-parent</artifactId>
 		<version>3.3.3</version>
 	</parent>
+	<groupId>org.springside.examples</groupId>
 	<artifactId>showcase</artifactId>
 	<packaging>war</packaging>
-	<name>Springside3's Showcase Example</name>
+	<name>Springside3 Showcase Example</name>
 
 	<!-- 项目属性 -->
 	<properties>

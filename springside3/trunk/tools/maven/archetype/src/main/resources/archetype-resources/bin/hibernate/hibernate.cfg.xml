@@ -21,8 +21,8 @@
 		<!-- 
 		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
 		<property name="hibernate.connection.url">jdbc:oracle:thin:@127.0.0.1:1521:XE</property>
-		<property name="hibernate.connection.username">miniweb</property>
-		<property name="hibernate.connection.password">miniweb</property>
+		<property name="hibernate.connection.username">${artifactId}</property>
+		<property name="hibernate.connection.password">${artifactId}</property>
 		-->
 		
 		<!-- 	

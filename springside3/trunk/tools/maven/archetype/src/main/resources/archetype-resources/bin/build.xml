@@ -2,7 +2,7 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="mini-service" default="init-db" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+<project name="${artifactId}" default="init-db" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
 
 	<artifact:dependencies pathId="project.lib">
 		<pom file="../pom.xml" />

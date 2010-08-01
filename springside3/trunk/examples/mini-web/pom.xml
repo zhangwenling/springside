@@ -6,10 +6,11 @@
 		<artifactId>springside3-parent</artifactId>
 		<version>3.3.3</version>
 	</parent>
+	<groupId>org.springside.examples</groupId>
 	<artifactId>mini-web</artifactId>
 	<version>3.3.3</version>
 	<packaging>war</packaging>
-	<name>Springside3's Mini-Web Example</name>
+	<name>Springside3 Mini-Web Example</name>
 
 	<!-- 项目属性 -->
 	<properties>

@@ -10,7 +10,7 @@
 	<artifactId>${artifactId}</artifactId>
 	<version>${version}</version>
 	<packaging>war</packaging>
-	<name>Springside3's Mini-Web Example</name>
+	<name>${artifactId}</name>
 
 	<!-- 项目属性 -->
 	<properties>
