@@ -18,7 +18,7 @@ import org.springside.examples.showcase.jms.advanced.AdvancedNotifyMessageListen
 import org.springside.examples.showcase.jms.advanced.AdvancedNotifyMessageProducer;
 import org.springside.modules.log.MockLog4jAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
-import org.springside.modules.test.utils.ThreadUtils;
+import org.springside.modules.utils.ThreadUtils;
 
 @DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/jms/applicationContext-advanced.xml" })

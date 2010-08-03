@@ -23,7 +23,7 @@ public class SpringCronJob implements Runnable {
 
 	private String cronExpression;
 
-	private long shutdownTimeout = 0;
+	private long shutdownTimeout = Integer.MAX_VALUE;
 
 	private ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
@@ -34,6 +34,7 @@ public class SpringCronJob implements Runnable {
 		Assert.hasText(cronExpression);
 
 		threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
+		threadPoolTaskScheduler.setThreadNamePrefix("SpringCronJob");
 		threadPoolTaskScheduler.initialize();
 
 		threadPoolTaskScheduler.schedule(this, new CronTrigger(cronExpression));
@@ -43,12 +44,15 @@ public class SpringCronJob implements Runnable {
 	public void stop() {
 		ScheduledExecutorService scheduledExecutorService = threadPoolTaskScheduler.getScheduledExecutor();
 
+		//shutdownNow(),取消所有等待执行的任务,等待执行中任务执行完毕, 并中断执行中任务的所有阻塞函数.
+		//shutdown(), 等待所有已提交任务执行完毕.
 		scheduledExecutorService.shutdownNow();
 
 		if (shutdownTimeout > 0) {
 			try {
 				scheduledExecutorService.awaitTermination(shutdownTimeout, TimeUnit.SECONDS);
 			} catch (InterruptedException e) {
+				// Ignore.
 			}
 		}
 	}
@@ -65,6 +69,9 @@ public class SpringCronJob implements Runnable {
 		this.cronExpression = cronExpression;
 	}
 
+	/**
+	 * 设置gracefulShutdown的等待时间,单位秒.
+	 */
 	public void setShutdownTimeout(long shutdownTimeout) {
 		this.shutdownTimeout = shutdownTimeout;
 	}

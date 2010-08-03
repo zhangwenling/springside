@@ -7,7 +7,7 @@ import org.springside.examples.showcase.schedule.QuartzClusterableJob;
 import org.springside.modules.log.MockLog4jAppender;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DbUnitUtils;
-import org.springside.modules.test.utils.ThreadUtils;
+import org.springside.modules.utils.ThreadUtils;
 
 /**
  * Quartz可集群Timer Job测试.

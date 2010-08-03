@@ -7,7 +7,7 @@ import org.springside.examples.showcase.schedule.JdkExecutorJob;
 import org.springside.modules.log.MockLog4jAppender;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DbUnitUtils;
-import org.springside.modules.test.utils.ThreadUtils;
+import org.springside.modules.utils.ThreadUtils;
 
 @DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/schedule/applicationContext-executor.xml" })

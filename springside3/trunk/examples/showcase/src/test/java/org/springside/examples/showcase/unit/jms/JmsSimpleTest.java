@@ -9,7 +9,7 @@ import org.springside.examples.showcase.jms.simple.NotifyMessageListener;
 import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
 import org.springside.modules.log.MockLog4jAppender;
 import org.springside.modules.test.spring.SpringContextTestCase;
-import org.springside.modules.test.utils.ThreadUtils;
+import org.springside.modules.utils.ThreadUtils;
 
 @DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/jms/applicationContext-simple.xml" })
