@@ -28,6 +28,7 @@ import javax.annotation.PreDestroy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springside.modules.utils.ThreadUtils;
 import org.springside.modules.utils.ThreadUtils.CustomizableThreadFactory;
 
 /**
@@ -108,17 +109,12 @@ public abstract class QueueConsumer implements Runnable {
 	@PreDestroy
 	public void stop() throws IOException {
 		try {
-			executor.shutdownNow();
-			if (shutdownTimeout > 0) {
-				executor.awaitTermination(shutdownTimeout, TimeUnit.MILLISECONDS);
-			}
-		} catch (InterruptedException e) {
-			// 拦截中断,保证完成后面的持久化工作.
-		}
-
-		if (persistence) {
-			synchronized (persistenceLock) {
-				backupQueue();
+			ThreadUtils.normalShutdown(executor, shutdownTimeout, TimeUnit.MILLISECONDS);
+		} finally {
+			if (persistence) {
+				synchronized (persistenceLock) {
+					backupQueue();
+				}
 			}
 		}
 

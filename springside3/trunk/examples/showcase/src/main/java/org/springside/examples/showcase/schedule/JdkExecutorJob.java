@@ -14,6 +14,7 @@ import org.springframework.scheduling.support.DelegatingErrorHandlingRunnable;
 import org.springframework.scheduling.support.TaskUtils;
 import org.springframework.util.Assert;
 import org.springside.examples.showcase.common.service.AccountManager;
+import org.springside.modules.utils.ThreadUtils;
 import org.springside.modules.utils.ThreadUtils.CustomizableThreadFactory;
 
 /**
@@ -25,7 +26,7 @@ public class JdkExecutorJob implements Runnable {
 
 	private int period = 0;
 
-	private long shutdownTimeout = Integer.MAX_VALUE;
+	private int shutdownTimeout = Integer.MAX_VALUE;
 
 	private ScheduledExecutorService scheduledExecutorService;
 
@@ -35,7 +36,7 @@ public class JdkExecutorJob implements Runnable {
 	public void start() throws Exception {
 		Assert.isTrue(period > 0);
 
-		//任何异常不会中断执行schedule执行
+		//任何异常不会中断schedule执行
 		Runnable task = new DelegatingErrorHandlingRunnable(this, TaskUtils.LOG_AND_SUPPRESS_ERROR_HANDLER);
 
 		scheduledExecutorService = Executors.newSingleThreadScheduledExecutor(new CustomizableThreadFactory(
@@ -48,17 +49,7 @@ public class JdkExecutorJob implements Runnable {
 
 	@PreDestroy
 	public void stop() {
-		//shutdownNow(),取消所有等待执行的任务,等待执行中任务执行完毕, 并中断执行中任务的所有阻塞函数.
-		//shutdown(), 等待所有已提交任务执行完毕.
-		scheduledExecutorService.shutdownNow();
-
-		if (shutdownTimeout > 0) {
-			try {
-				scheduledExecutorService.awaitTermination(shutdownTimeout, TimeUnit.SECONDS);
-			} catch (InterruptedException e) {
-				// Ignore.
-			}
-		}
+		ThreadUtils.normalShutdown(scheduledExecutorService, shutdownTimeout, TimeUnit.SECONDS);
 	}
 
 	/**
@@ -79,7 +70,7 @@ public class JdkExecutorJob implements Runnable {
 	/**
 	 * 设置gracefulShutdown的等待时间,单位秒.
 	 */
-	public void setShutdownTimeout(long shutdownTimeout) {
+	public void setShutdownTimeout(int shutdownTimeout) {
 		this.shutdownTimeout = shutdownTimeout;
 	}
 
