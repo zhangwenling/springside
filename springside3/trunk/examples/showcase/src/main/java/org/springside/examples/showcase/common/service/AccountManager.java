@@ -103,6 +103,7 @@ public class AccountManager {
 
 		if (jsonString == null) {
 			//用户不在 memcached中,从数据库中取出并放入memcached.
+			//因为hibernate的proxy问题多多,此处使用jdbc
 			user = userJdbcDao.queryObject(id);
 			if (user != null) {
 				jsonString = jsonBinder.toJson(user);
