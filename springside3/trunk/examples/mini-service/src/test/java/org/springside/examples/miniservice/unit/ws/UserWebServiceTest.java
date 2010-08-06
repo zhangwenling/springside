@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.dozer.DozerBeanMapper;
 import org.easymock.EasyMock;
+import org.easymock.IMocksControl;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -26,6 +27,9 @@ import org.springside.examples.miniservice.ws.result.WSResult;
  * @author calvin
  */
 public class UserWebServiceTest extends Assert {
+
+	private IMocksControl control = EasyMock.createControl();
+
 	private UserWebServiceImpl userWebService;
 	private AccountManager mockAccountManager;
 
@@ -34,14 +38,14 @@ public class UserWebServiceTest extends Assert {
 		userWebService = new UserWebServiceImpl();
 		userWebService.setDozer(new DozerBeanMapper());
 		//创建mock对象
-		mockAccountManager = EasyMock.createMock(AccountManager.class);
+		mockAccountManager = control.createMock(AccountManager.class);
 		userWebService.setAccountManager(mockAccountManager);
 	}
 
 	@After
 	public void tearDown() {
 		//确认的脚本都已执行
-		EasyMock.verify(mockAccountManager);
+		control.verify();
 	}
 
 	/**
@@ -52,7 +56,7 @@ public class UserWebServiceTest extends Assert {
 		User user = AccountData.getRandomUserWithAdminRole();
 		List<User> list = Collections.singletonList(user);
 		EasyMock.expect(mockAccountManager.getAllLoadedUser()).andReturn(list);
-		EasyMock.replay(mockAccountManager);
+		control.replay();
 
 		GetAllUserResult result = userWebService.getAllUser();
 		assertEquals(WSResult.SUCCESS, result.getCode());
@@ -66,7 +70,7 @@ public class UserWebServiceTest extends Assert {
 	 */
 	@Test
 	public void validateParamter() {
-		EasyMock.replay(mockAccountManager);
+		control.replay();
 		WSResult result = userWebService.createUser(null);
 		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
 	}
@@ -77,7 +81,7 @@ public class UserWebServiceTest extends Assert {
 	@Test
 	public void handleException() {
 		EasyMock.expect(mockAccountManager.getAllLoadedUser()).andThrow(new RuntimeException("Expected exception.."));
-		EasyMock.replay(mockAccountManager);
+		control.replay();
 
 		GetAllUserResult result = userWebService.getAllUser();
 		assertEquals(WSResult.SYSTEM_ERROR, result.getCode());
@@ -93,7 +97,7 @@ public class UserWebServiceTest extends Assert {
 		//准备数据,录制脚本
 		EasyMock.expect(mockAccountManager.authenticate("admin", "admin")).andReturn(true);
 		EasyMock.expect(mockAccountManager.authenticate("admin", "errorPasswd")).andReturn(false);
-		EasyMock.replay(mockAccountManager);
+		control.replay();
 
 		//执行输入正确的测试
 		AuthUserResult result = userWebService.authUser("admin", "admin");

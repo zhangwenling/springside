@@ -1,6 +1,7 @@
 package org.springside.examples.miniservice.unit.service.account;
 
 import org.easymock.EasyMock;
+import org.easymock.IMocksControl;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,19 +18,21 @@ import org.springside.examples.miniservice.service.account.AccountManager;
  */
 public class AccountManagerTest extends Assert {
 
+	private IMocksControl control = EasyMock.createControl();
+
 	private AccountManager accountManager;
 	private UserDao mockUserDao;
 
 	@Before
 	public void setUp() {
 		accountManager = new AccountManager();
-		mockUserDao = EasyMock.createMock(UserDao.class);
+		mockUserDao = control.createMock(UserDao.class);
 		accountManager.setUserDao(mockUserDao);
 	}
 
 	@After
 	public void tearDown() {
-		EasyMock.verify(mockUserDao);
+		control.verify();
 	}
 
 	/**
@@ -41,7 +44,7 @@ public class AccountManagerTest extends Assert {
 	public void authUser() {
 		EasyMock.expect(mockUserDao.countUserByLoginNamePassword("admin", "admin")).andReturn(1L);
 		EasyMock.expect(mockUserDao.countUserByLoginNamePassword("admin", "errorPasswd")).andReturn(0L);
-		EasyMock.replay(mockUserDao);
+		control.replay();
 
 		assertEquals(true, accountManager.authenticate("admin", "admin"));
 		assertEquals(false, accountManager.authenticate("admin", ""));
