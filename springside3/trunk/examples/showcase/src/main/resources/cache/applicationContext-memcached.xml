@@ -4,7 +4,7 @@
 	default-lazy-init="true">
 
 	<!-- SpyMemcached客户端 -->
-	<bean id="spyClient" class="org.springside.modules.memcached.SpyMemcachedClient">
+	<bean id="spyClientFactory" class="org.springside.modules.memcached.SpyMemcachedClientFactory">
 		<!-- 设置Memcached集群 -->
 		<property name="memcachedNodes" value="localhost:11211" />
 		<!-- 缩短Timeout时间到200毫秒 -->

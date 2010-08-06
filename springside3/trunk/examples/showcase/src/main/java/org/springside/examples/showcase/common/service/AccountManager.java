@@ -18,6 +18,7 @@ import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
 import org.springside.modules.binder.JsonBinder;
 import org.springside.modules.memcached.SpyMemcachedClient;
+import org.springside.modules.memcached.SpyMemcachedClientFactory;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
@@ -34,7 +35,7 @@ public class AccountManager {
 
 	private UserJdbcDao userJdbcDao;
 
-	private SpyMemcachedClient spyClient;
+	private SpyMemcachedClientFactory spyClientFactory;
 
 	private JsonBinder jsonBinder = new JsonBinder(Inclusion.NON_DEFAULT);
 
@@ -84,7 +85,7 @@ public class AccountManager {
 	 */
 	@Transactional(readOnly = true)
 	public User getLoadedUser(String id) {
-		if (spyClient != null) {
+		if (spyClientFactory != null) {
 			return getUserFromMemcached(id);
 		} else {
 			return userJdbcDao.queryObject(id);
@@ -95,10 +96,11 @@ public class AccountManager {
 	 * 访问Memcached, 使用JSON字符串存放对象以节约空间.
 	 */
 	private User getUserFromMemcached(String id) {
+		SpyMemcachedClient spyClient = spyClientFactory.getClient();
+
 		String key = MemcachedObjectType.USER.getPrefix() + id;
 
 		User user = null;
-
 		String jsonString = spyClient.get(key);
 
 		if (jsonString == null) {
@@ -192,8 +194,8 @@ public class AccountManager {
 	}
 
 	@Autowired(required = false)
-	public void setSpyClient(SpyMemcachedClient spyClient) {
-		this.spyClient = spyClient;
+	public void setSpyClientFactory(SpyMemcachedClientFactory spyClientFactory) {
+		this.spyClientFactory = spyClientFactory;
 	}
 
 }

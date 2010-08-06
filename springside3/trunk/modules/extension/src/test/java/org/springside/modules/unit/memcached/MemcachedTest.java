@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.memcached.JmemcachedServer;
 import org.springside.modules.memcached.SpyMemcachedClient;
+import org.springside.modules.memcached.SpyMemcachedClientFactory;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 @ContextConfiguration(locations = { "/applicationContext-extension-test-memcached.xml" })
@@ -17,7 +18,7 @@ public class MemcachedTest extends SpringContextTestCase {
 	private static JmemcachedServer server = new JmemcachedServer();
 
 	@Autowired
-	private SpyMemcachedClient spyClient;
+	private SpyMemcachedClientFactory spyClientFactory;
 
 	@BeforeClass
 	public static void beforeClass() throws Exception {
@@ -31,10 +32,12 @@ public class MemcachedTest extends SpringContextTestCase {
 
 	@Test
 	public void normal() {
+		SpyMemcachedClient spyClient = spyClientFactory.getClient();
+
 		String key = "consumer:1";
 		String value = "admin";
 
-		spyClient.set(key, 60 * 60 * 1, value);
+		spyClientFactory.getClient().set(key, 60 * 60 * 1, value);
 		String result = spyClient.get(key);
 		assertEquals(value, result);
 
@@ -45,6 +48,8 @@ public class MemcachedTest extends SpringContextTestCase {
 
 	@Test
 	public void bulk() {
+		SpyMemcachedClient spyClient = spyClientFactory.getClient();
+
 		String key1 = "consumer:1";
 		String value1 = "admin";
 
@@ -64,6 +69,8 @@ public class MemcachedTest extends SpringContextTestCase {
 
 	@Test
 	public void incr() {
+		SpyMemcachedClient spyClient = spyClientFactory.getClient();
+
 		String key = "incr_key";
 
 		spyClient.incr(key, 2, 1);
