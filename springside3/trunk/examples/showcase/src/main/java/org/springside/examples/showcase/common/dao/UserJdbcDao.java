@@ -65,7 +65,7 @@ public class UserJdbcDao {
 	}
 
 	@Resource
-	public void setTransactionManager(PlatformTransactionManager transactionManager) {
+	public void setDefaultTransactionManager(PlatformTransactionManager transactionManager) {
 		transactionTemplate = new TransactionTemplate(transactionManager);
 	}
 

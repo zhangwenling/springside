@@ -15,14 +15,14 @@ echo Ant命令为%ANT%
 echo [Step 1] 复制tools/maven/central-repository 到 %userprofile%\.m2\repository
 xcopy /s/e/i/h/d/y "tools\maven\central-repository" "%USERPROFILE%\.m2\repository"
 
-echo [Step 2] 启动H2数据库.
+echo [Step 2] 安装SpringSide3 所有modules, examples项目及mini項目生成模板到本地Maven仓库, 生成Eclipse项目文件.
+call %MVN% %OFF_LINE% clean install -Dmaven.test.skip=true
+call %MVN% %OFF_LINE% eclipse:clean eclipse:eclipse
+
+echo [Step 3] 启动H2数据库.
 cd tools/h2
 call %MVN% %OFF_LINE% initialize -Pstartdb
 cd ..\..\
-
-echo [Step 3] 安装SpringSide3 所有modules, examples项目及mini項目生成模板到本地Maven仓库, 生成Eclipse项目文件.
-call %MVN% %OFF_LINE% eclipse:clean eclipse:eclipse
-call %MVN% %OFF_LINE% clean install -Dmaven.test.skip=true
 
 echo [Step 4] 为Mini-Service 初始化数据库, 启动Jetty.
 cd examples\mini-service
