@@ -4,6 +4,7 @@
 package ${package}.unit.service.account;
 
 import org.easymock.EasyMock;
+import org.easymock.IMocksControl;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,19 +28,21 @@ import ${package}.service.account.UserDetailsServiceImpl;
  */
 public class UserDetailsServiceImplTest extends Assert {
 
+	private IMocksControl control = EasyMock.createControl();
+
 	private UserDetailsServiceImpl userDetailService;
 	private AccountManager mockAccountManager;
 
 	@Before
 	public void setUp() {
 		userDetailService = new UserDetailsServiceImpl();
-		mockAccountManager = EasyMock.createMock(AccountManager.class);
+		mockAccountManager = control.createMock(AccountManager.class);
 		userDetailService.setAccountManager(mockAccountManager);
 	}
 
 	@After
 	public void tearDown() {
-		EasyMock.verify(mockAccountManager);
+		control.verify();
 	}
 
 	@Test
@@ -56,7 +59,7 @@ public class UserDetailsServiceImplTest extends Assert {
 
 		//录制脚本
 		EasyMock.expect(mockAccountManager.findUserByLoginName(user.getLoginName())).andReturn(user);
-		EasyMock.replay(mockAccountManager);
+		control.replay();
 
 		//执行测试
 		UserDetails userDetails = userDetailService.loadUserByUsername(user.getLoginName());
@@ -72,7 +75,7 @@ public class UserDetailsServiceImplTest extends Assert {
 	public void loadUserNotExist() {
 		//录制脚本
 		EasyMock.expect(mockAccountManager.findUserByLoginName("userNameNotExist")).andReturn(null);
-		EasyMock.replay(mockAccountManager);
+		control.replay();
 		//执行测试
 		userDetailService.loadUserByUsername("userNameNotExist");
 	}

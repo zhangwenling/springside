@@ -23,6 +23,8 @@ import org.springside.modules.utils.ThreadUtils.CustomizableThreadFactory;
 public class JdkExecutorJob implements Runnable {
 
 	private static Logger logger = LoggerFactory.getLogger(JdkExecutorJob.class);
+	
+	private int initialDelay=0;
 
 	private int period = 0;
 
@@ -44,7 +46,7 @@ public class JdkExecutorJob implements Runnable {
 
 		//scheduleAtFixedRatefixRate() 固定任务两次启动之间的时间间隔.
 		//scheduleAtFixedDelay()      固定任务结束后到下一次启动间的时间间隔.
-		scheduledExecutorService.scheduleAtFixedRate(task, 0, period, TimeUnit.SECONDS);
+		scheduledExecutorService.scheduleAtFixedRate(task, initialDelay, period, TimeUnit.SECONDS);
 	}
 
 	@PreDestroy
@@ -58,6 +60,13 @@ public class JdkExecutorJob implements Runnable {
 	public void run() {
 		long userCount = accountManager.getUserCount();
 		logger.info("There are {} user in database.", userCount);
+	}
+	
+	/**
+	 * 设置任务初始启动延时时间.
+	 */
+	public void setInitialDelay(int initialDelay) {
+		this.initialDelay = initialDelay;
 	}
 
 	/**
