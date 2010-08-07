@@ -5,7 +5,9 @@ def prepare():
     move(base_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\classes',base_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-classes')
     rmdir(base_dir+'\\examples\\mini-web\\logs\\')
     rmdir(base_dir+'\\examples\\mini-web\\bin\\hibernate\\logs\\')
-    rmdir(base_dir+'\\examples\\mini-web\\bin\\hibernate\\generated\\')
+    rmdir(base_dir+'\\examples\\mini-web\\bin\\hibernate\\generated\\dao')
+    rmdir(base_dir+'\\examples\\mini-web\\bin\\hibernate\\generated\\entity')
+    rmdir(base_dir+'\\examples\\mini-web\\bin\\hibernate\\generated\\manager')
     rmfile(base_dir+'\\examples\\mini-web\\.project')
     rmfile(base_dir+'\\examples\\mini-web\\.classpath')
     rmfile(base_dir+'\\examples\\mini-web\\.settings\\org.eclipse.jdt.core.prefs')
@@ -27,7 +29,7 @@ def modifyArchetypes():
     print 'modified archetypes.'    
 
 def clean():
-    rmdir(base_dir+'\\examples\\mini-web\\target\\generated-sources')
+    rmdir(base_dir+'\\examples\\mini-web\\target\\generated-sources\\archetype')
 
     move(base_dir+'\\examples\\mini-web\\target\\tmp\\WEB-INF-classes', base_dir+'\\examples\\mini-web\\webapp\\WEB-INF\\classes')
     os.chdir(base_dir+'\\examples\\mini-web')
