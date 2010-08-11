@@ -1,3 +1,4 @@
 @echo off
-call mvn initialize -Pstartdb
+call mvn -e exec:java
 cd bin
+pause
