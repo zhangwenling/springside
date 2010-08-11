@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+	<id>${packageId}</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<baseDirectory>showcase</baseDirectory>
+	<includeBaseDirectory>true</includeBaseDirectory>
+
+	<dependencySets>
+		<dependencySet>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>tanukisoft:jsw</include>
+			</includes>
+			<scope>provided</scope>
+
+			<unpack>true</unpack>
+			<fileMode>0755</fileMode>
+			<directoryMode>0755</directoryMode>
+		</dependencySet>
+
+		<dependencySet>
+			<outputDirectory>/lib</outputDirectory>
+			<includes>
+				<include>org.mortbay.jetty:jetty</include>
+				<include>org.mortbay.jetty:jetty-util</include>
+				<include>org.mortbay.jetty:servlet-api</include>
+			</includes>
+			<scope>test</scope>
+		</dependencySet>
+		<dependencySet>
+			<outputDirectory>/lib</outputDirectory>
+			<includes>
+				<include>org.mortbay.jetty:start</include>
+				<include>org.mortbay.jetty:jetty-management</include>
+			</includes>
+			<scope>provided</scope>
+		</dependencySet>
+
+	</dependencySets>
+
+	<fileSets>
+		<fileSet>
+			<directory>${project.basedir}/target/${artifactId}-${version}</directory>
+			<outputDirectory>/webapp</outputDirectory>
+			<fileMode>0755</fileMode>
+			<directoryMode>0755</directoryMode>
+			<filtered>true</filtered>
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/assembly/bin</directory>
+			<outputDirectory>/bin</outputDirectory>
+			<fileMode>0755</fileMode>
+			<directoryMode>0755</directoryMode>
+			<filtered>true</filtered>
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/assembly/conf/${packageId}</directory>
+			<outputDirectory>/conf</outputDirectory>
+			<fileMode>0755</fileMode>
+			<directoryMode>0755</directoryMode>
+			<filtered>true</filtered>
+		</fileSet>
+	</fileSets>
+</assembly>

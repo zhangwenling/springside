@@ -741,6 +741,27 @@
 				<version>1.7.0</version>
 				<scope>provided</scope>
 			</dependency>
+
+			<!-- jsw + jetty runtime -->
+			<dependency>
+				<groupId>tanukisoft</groupId>
+				<artifactId>jsw</artifactId>
+				<version>3.5.3</version>
+				<scope>provided</scope>
+				<type>zip</type>
+			</dependency>
+			<dependency>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-management</artifactId>
+				<version>${jetty.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>start</artifactId>
+				<version>${jetty.version}</version>
+				<scope>provided</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
