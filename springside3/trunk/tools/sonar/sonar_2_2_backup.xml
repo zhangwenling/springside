@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sonar-config>
   <version><![CDATA[120]]></version>
-  <date><![CDATA[2010-08-01]]></date>
+  <date><![CDATA[2010-08-09]]></date>
   <metrics/>
   <properties>
     <property>
       <key><![CDATA[sonar.core.id]]></key>
-      <value><![CDATA[20100731154100]]></value>
+      <value><![CDATA[20100809224821]]></value>
     </property>
     <property>
       <key><![CDATA[sonar.core.version]]></key>
@@ -14,7 +14,7 @@
     </property>
     <property>
       <key><![CDATA[sonar.core.startTime]]></key>
-      <value><![CDATA[2010-07-31T15:41:00+0800]]></value>
+      <value><![CDATA[2010-08-09T22:48:21+0800]]></value>
     </property>
   </properties>
   <profiles>
@@ -6174,6 +6174,90 @@
         <active-rule>
           <key><![CDATA[UnusedProtectedMethod]]></key>
           <plugin><![CDATA[squid]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.sizes.MethodLengthCheck]]></key>
+          <plugin><![CDATA[checkstyle]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+          <params>
+            <param>
+              <key><![CDATA[max]]></key>
+              <value><![CDATA[50]]></value>
+            </param>
+            <param>
+              <key><![CDATA[countEmpty]]></key>
+              <value><![CDATA[false]]></value>
+            </param>
+          </params>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.sizes.FileLengthCheck]]></key>
+          <plugin><![CDATA[checkstyle]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+          <params>
+            <param>
+              <key><![CDATA[max]]></key>
+              <value><![CDATA[500]]></value>
+            </param>
+          </params>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.coding.NestedIfDepthCheck]]></key>
+          <plugin><![CDATA[checkstyle]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+          <params>
+            <param>
+              <key><![CDATA[max]]></key>
+              <value><![CDATA[2]]></value>
+            </param>
+          </params>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.coding.NestedTryDepthCheck]]></key>
+          <plugin><![CDATA[checkstyle]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+          <params>
+            <param>
+              <key><![CDATA[max]]></key>
+              <value><![CDATA[1]]></value>
+            </param>
+          </params>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.sizes.ParameterNumberCheck]]></key>
+          <plugin><![CDATA[checkstyle]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+          <params>
+            <param>
+              <key><![CDATA[max]]></key>
+              <value><![CDATA[5]]></value>
+            </param>
+          </params>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.coding.DeclarationOrderCheck]]></key>
+          <plugin><![CDATA[checkstyle]]></plugin>
+          <level><![CDATA[INFO]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.blocks.AvoidNestedBlocksCheck]]></key>
+          <plugin><![CDATA[checkstyle]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.coding.EqualsAvoidNullCheck]]></key>
+          <plugin><![CDATA[checkstyle]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.coding.IllegalInstantiationCheck]]></key>
+          <plugin><![CDATA[checkstyle]]></plugin>
+          <level><![CDATA[MAJOR]]></level>
+        </active-rule>
+        <active-rule>
+          <key><![CDATA[com.puppycrawl.tools.checkstyle.checks.coding.ModifiedControlVariableCheck]]></key>
+          <plugin><![CDATA[checkstyle]]></plugin>
           <level><![CDATA[MAJOR]]></level>
         </active-rule>
       </active-rules>
