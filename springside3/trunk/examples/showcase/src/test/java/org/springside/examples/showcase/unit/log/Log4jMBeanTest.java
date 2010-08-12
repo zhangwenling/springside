@@ -26,7 +26,7 @@ public class Log4jMBeanTest extends SpringContextTestCase {
 
 	@Before
 	public void setUp() throws Exception {
-		jmxClientTemplate = new JmxClientTemplate("service:jmx:rmi:///jndi/rmi://localhost:1099/jmxrmi");
+		jmxClientTemplate = new JmxClientTemplate("service:jmx:rmi:///jndi/rmi://localhost:18080/jmxrmi");
 	}
 
 	@After

@@ -28,8 +28,6 @@
 		<h2>用户故事：</h2>
 		<ul>
 			<li>在综合演示用例中保存用户时,异步发送通知消息邮件</li>
-			<li>可使用JConsole查看ActiveMQ Server运行情况.(路径service:jmx:rmi:///jndi/rmi://localhost:1099/showcase,名称org.activemq)
-			</li>
 		</ul>
 		</div>
 	</div>

@@ -1,4 +1,4 @@
 @echo off
-call mvn -e exec:java
+call mvn exec:java
 cd bin
 pause

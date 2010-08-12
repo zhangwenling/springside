@@ -21,7 +21,7 @@ call %MVN% %OFF_LINE% eclipse:clean eclipse:eclipse
 
 echo [Step 3] 启动H2数据库.
 cd tools/h2
-call %MVN% %OFF_LINE% initialize -Pstartdb
+call %MVN% %OFF_LINE% exec:java
 cd ..\..\
 
 echo [Step 4] 为Mini-Service 初始化数据库, 启动Jetty.

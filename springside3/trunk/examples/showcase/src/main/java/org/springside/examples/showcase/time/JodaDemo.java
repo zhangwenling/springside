@@ -1,35 +1,48 @@
 package org.springside.examples.showcase.time;
 
 import org.joda.time.DateTime;
-import org.joda.time.Days;
+import org.joda.time.DateTimeZone;
 import org.joda.time.Years;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.springframework.util.Assert;
 
 public class JodaDemo {
 
-	public static void main(String[] args) throws Exception {
-		//test day init and print to string
-		DateTime fooDateTime = new DateTime(1978, 6, 1, 12, 10, 8, 0);
-		System.out.println(fooDateTime.toString("yyyy-MM-dd HH:mm:ss")); //"1978-06-01 12:10:08"
+	public static void main(String[] args) {
+		testDateAndZone();
+		testGetAge();
+	}
 
-		//test minus/plus and years/days between function
+	public static void testDateAndZone() {
+
+		System.out.println(new DateTime().getMillis() + " " + System.currentTimeMillis());
+
+		DateTime fooDate = new DateTime(1978, 6, 1, 12, 10, 8, 0);
+		System.out.println(fooDate.toString("yyyy-MM-dd HH:mm:sszZ") + " " + fooDate.getMillis()); //"1978-06-01 12:10:08" 
+
+		DateTime zoneWithUTC = fooDate.withZone(DateTimeZone.UTC);
+		System.out.println(zoneWithUTC.toString("yyyy-MM-dd HH:mm:sszZ") + " " + zoneWithUTC.getMillis());//"1978-06-01 04:10:08", sameMills
+
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeZone timeZone = DateTimeZone.forID("US/Pacific");
+		DateTime parserResult1 = fmt.withZone(timeZone).parseDateTime("1978-06-01 12:10:08");
+		DateTime parserResult2 = fmt.withZone(DateTimeZone.UTC).parseDateTime("1978-06-01 12:10:08");
+		System.out.println(parserResult1.toString("yyyy-MM-dd HH:mm:sszZ") + " " + parserResult1.getMillis());
+		System.out.println(parserResult2.toString("yyyy-MM-dd HH:mm:sszZ") + " " + parserResult2.getMillis());
+	}
+
+	public static void testGetAge() {
 		DateTime now = new DateTime();
-		DateTime nowLater = now.plusHours(22);
-		DateTime tomorrow = now.plusHours(25);
-		System.out.println(isSameDay(now, nowLater)); //true
-		System.out.println(isSameDay(now, tomorrow));//false
 
 		DateTime oneYearsAgo = now.minusYears(2).plusDays(20);
 		DateTime twoYearsAgo = now.minusYears(2);
-		System.out.println(getAge(oneYearsAgo));//1
-		System.out.println(getAge(twoYearsAgo));//2
+		Assert.isTrue(1 == getAge(oneYearsAgo));
+		Assert.isTrue(2 == getAge(twoYearsAgo));
 	}
 
 	public static int getAge(DateTime birthDate) {
 		return Years.yearsBetween(birthDate, new DateTime()).getYears();
-	}
-
-	public static boolean isSameDay(DateTime dt1, DateTime dt2) {
-		return (Days.daysBetween(dt1, dt2).getDays() < 1);
 	}
 
 }

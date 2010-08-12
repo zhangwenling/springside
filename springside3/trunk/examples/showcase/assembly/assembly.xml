@@ -20,13 +20,14 @@
 			<fileMode>0755</fileMode>
 			<directoryMode>0755</directoryMode>
 		</dependencySet>
-
+		
 		<dependencySet>
 			<outputDirectory>/lib</outputDirectory>
 			<includes>
 				<include>org.mortbay.jetty:jetty</include>
 				<include>org.mortbay.jetty:jetty-util</include>
 				<include>org.mortbay.jetty:servlet-api</include>
+				<include>org.mortbay.jetty:jsp-2.1-jetty</include>
 			</includes>
 			<scope>test</scope>
 		</dependencySet>
