@@ -5,6 +5,8 @@ set MVN=mvn
 if exist "tools\maven\apache-maven-2.2.1\" set MVN="%cd%\tools\maven\apache-maven-2.2.1\bin\mvn.bat"
 echo MavenÃüÁîÎª%MVN%
 
+mkdir generated-projects
+cd generated-projects
 call mvn archetype:generate -DarchetypeCatalog=local
 
 pause

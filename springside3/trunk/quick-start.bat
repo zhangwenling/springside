@@ -1,5 +1,5 @@
 @echo off
-echo [INFO] 确保默认JDK版本为JDK6.0及以上版本.
+echo [INFO] 确保默认JDK版本为JDK6.0及以上版本,已配置JAVA_HOME.
 
 echo [INFO] 如不能连接Maven官方网站, 修改本文件去掉下面一行的注释.
 rem set OFF_LINE=-o

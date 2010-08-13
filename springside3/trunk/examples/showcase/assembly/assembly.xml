@@ -15,19 +15,20 @@
 				<include>tanukisoft:jsw</include>
 			</includes>
 			<scope>provided</scope>
-
 			<unpack>true</unpack>
 			<fileMode>0755</fileMode>
 			<directoryMode>0755</directoryMode>
 		</dependencySet>
-		
+
 		<dependencySet>
 			<outputDirectory>/lib</outputDirectory>
 			<includes>
 				<include>org.mortbay.jetty:jetty</include>
 				<include>org.mortbay.jetty:jetty-util</include>
 				<include>org.mortbay.jetty:servlet-api</include>
-				<include>org.mortbay.jetty:jsp-2.1-jetty</include>
+				<include>org.mortbay.jetty:jsp*</include>
+				<include>ant:ant</include>
+				<include>org.eclipse.jdt.core.compiler:ecj</include>
 			</includes>
 			<scope>test</scope>
 		</dependencySet>
@@ -39,7 +40,6 @@
 			</includes>
 			<scope>provided</scope>
 		</dependencySet>
-
 	</dependencySets>
 
 	<fileSets>
@@ -48,7 +48,7 @@
 			<outputDirectory>/webapp</outputDirectory>
 			<fileMode>0755</fileMode>
 			<directoryMode>0755</directoryMode>
-			<filtered>true</filtered>
+			<filtered>false</filtered>
 		</fileSet>
 		<fileSet>
 			<directory>${project.basedir}/assembly/bin</directory>
@@ -65,4 +65,12 @@
 			<filtered>true</filtered>
 		</fileSet>
 	</fileSets>
+	<files>
+		<file>
+			<source>${project.basedir}/assembly/VERSION</source>
+			<outputDirectory>/</outputDirectory>
+			<filtered>true</filtered>
+		</file>
+	</files>
+
 </assembly>
