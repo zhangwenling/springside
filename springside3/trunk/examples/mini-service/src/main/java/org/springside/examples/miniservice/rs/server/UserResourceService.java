@@ -38,6 +38,8 @@ import com.google.common.collect.Lists;
 @Path("/users")
 public class UserResourceService {
 
+	private static final String CHARSET = ";charset=UTF-8";
+
 	private static Logger logger = LoggerFactory.getLogger(UserResourceService.class);
 
 	@Context
@@ -52,7 +54,7 @@ public class UserResourceService {
 	 * 获取所有用户.
 	 */
 	@GET
-	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
 	public List<UserDTO> getAllUser() {
 		try {
 			List<User> entityList = accountManager.getAllLoadedUser();
@@ -72,7 +74,7 @@ public class UserResourceService {
 	 */
 	@GET
 	@Path("{id}")
-	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
 	public UserDTO getUser(@PathParam("id") Long id) {
 		try {
 			User entity = accountManager.getLoadedUser(id);
@@ -92,7 +94,7 @@ public class UserResourceService {
 	 * 创建用户, 请求数据为JSON/XML格式编码的DTO, 返回表示所创建用户的URI.
 	 */
 	@POST
-	@Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
 	public Response createUser(UserDTO user) {
 		try {
 			User userEntity = dozer.map(user, User.class);
