@@ -17,7 +17,7 @@
 		<springside.version>3.3.3</springside.version>
 		<spring.version>3.0.3.RELEASE</spring.version>
 		<hibernate.version>3.5.4-Final</hibernate.version>
-		<struts2.version>2.1.8.1</struts2.version>
+		<struts2.version>2.2.1</struts2.version>
 		<cxf.version>2.2.9</cxf.version>
 		<jersey.version>1.3</jersey.version>
 		<spring-security.version>3.0.3.RELEASE</spring-security.version>
@@ -191,13 +191,13 @@
 				<version>${spring.version}</version>
 			</dependency>
 
-			<!-- optional datasource-->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-jdbc</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
 
+			<!-- optional datasource-->
 			<dependency>
 				<groupId>commons-dbcp</groupId>
 				<artifactId>commons-dbcp</artifactId>
@@ -273,7 +273,7 @@
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>jstl</artifactId>
-				<version>1.1.2</version>
+				<version>1.2</version>
 			</dependency>
 			<dependency>
 				<groupId>taglibs</groupId>
@@ -557,9 +557,9 @@
 			</dependency>
 
 			<dependency>
-				<groupId>com.google.collections</groupId>
-				<artifactId>google-collections</artifactId>
-				<version>1.0</version>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>r06</version>
 			</dependency>
 
 			<dependency>
@@ -668,21 +668,18 @@
 				<version>${selenium.version}</version>
 				<scope>test</scope>
 			</dependency>
-
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
 				<artifactId>selenium-firefox-driver</artifactId>
 				<version>${selenium.version}</version>
 				<scope>test</scope>
 			</dependency>
-
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
 				<artifactId>selenium-ie-driver</artifactId>
 				<version>${selenium.version}</version>
 				<scope>test</scope>
 			</dependency>
-
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
 				<artifactId>selenium-remote-client</artifactId>
@@ -713,7 +710,6 @@
 			</dependency>
 
 			<!-- hibernate tools -->
-			<!-- newest version in jboss repository -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-tools</artifactId>
@@ -732,13 +728,6 @@
 				<groupId>com.yahoo.platform.yui</groupId>
 				<artifactId>yuicompressor</artifactId>
 				<version>2.4.2</version>
-				<scope>provided</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>ant</groupId>
-				<artifactId>ant</artifactId>
-				<version>1.7.0</version>
 				<scope>provided</scope>
 			</dependency>
 
@@ -777,6 +766,7 @@
 					<configuration>
 						<source>1.6</source>
 						<target>1.6</target>
+						<showWarnings>true</showWarnings>
 					</configuration>
 				</plugin>
 
@@ -789,6 +779,16 @@
 						<includes>
 							<include>**/*Test.java</include>
 						</includes>
+					</configuration>
+				</plugin>
+
+				<!-- war插件-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.1-beta-1</version>
+					<configuration>
+						<warName>${project.artifactId}</warName>
 					</configuration>
 				</plugin>
 
@@ -833,16 +833,6 @@
 							<sourceExclude>**/.svn/</sourceExclude>
 						</sourceExcludes>
 						<downloadSources>true</downloadSources>
-					</configuration>
-				</plugin>
-
-				<!-- war插件-->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>2.1-beta-1</version>
-					<configuration>
-						<warName>${project.artifactId}</warName>
 					</configuration>
 				</plugin>
 
