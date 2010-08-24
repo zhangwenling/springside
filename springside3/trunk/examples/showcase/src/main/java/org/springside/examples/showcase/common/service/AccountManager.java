@@ -18,7 +18,6 @@ import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
 import org.springside.modules.binder.JsonBinder;
 import org.springside.modules.memcached.SpyMemcachedClient;
-import org.springside.modules.memcached.SpyMemcachedClientFactory;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
@@ -35,7 +34,7 @@ public class AccountManager {
 
 	private UserJdbcDao userJdbcDao;
 
-	private SpyMemcachedClientFactory spyClientFactory;
+	private SpyMemcachedClient spyMemcachedClient;
 
 	private JsonBinder jsonBinder = new JsonBinder(Inclusion.NON_DEFAULT);
 
@@ -85,7 +84,7 @@ public class AccountManager {
 	 */
 	@Transactional(readOnly = true)
 	public User getLoadedUser(String id) {
-		if (spyClientFactory != null) {
+		if (spyMemcachedClient != null) {
 			return getUserFromMemcached(id);
 		} else {
 			return userJdbcDao.queryObject(id);
@@ -96,12 +95,11 @@ public class AccountManager {
 	 * 访问Memcached, 使用JSON字符串存放对象以节约空间.
 	 */
 	private User getUserFromMemcached(String id) {
-		SpyMemcachedClient spyClient = spyClientFactory.getClient();
 
 		String key = MemcachedObjectType.USER.getPrefix() + id;
 
 		User user = null;
-		String jsonString = spyClient.get(key);
+		String jsonString = spyMemcachedClient.get(key);
 
 		if (jsonString == null) {
 			//用户不在 memcached中,从数据库中取出并放入memcached.
@@ -109,7 +107,7 @@ public class AccountManager {
 			user = userJdbcDao.queryObject(id);
 			if (user != null) {
 				jsonString = jsonBinder.toJson(user);
-				spyClient.set(key, MemcachedObjectType.USER.getExpiredTime(), jsonString);
+				spyMemcachedClient.set(key, MemcachedObjectType.USER.getExpiredTime(), jsonString);
 			}
 		} else {
 			user = jsonBinder.fromJson(jsonString, User.class);
@@ -194,8 +192,7 @@ public class AccountManager {
 	}
 
 	@Autowired(required = false)
-	public void setSpyClientFactory(SpyMemcachedClientFactory spyClientFactory) {
-		this.spyClientFactory = spyClientFactory;
+	public void setSpyMemcachedClient(SpyMemcachedClient spyMemcachedClient) {
+		this.spyMemcachedClient = spyMemcachedClient;
 	}
-
 }
