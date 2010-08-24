@@ -3,6 +3,11 @@ package org.springside.examples.showcase.cache;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springside.examples.showcase.common.entity.User;
+import org.springside.examples.showcase.common.service.AccountManager;
+
 import com.google.common.base.Function;
 import com.google.common.collect.MapMaker;
 
@@ -19,7 +24,20 @@ import com.google.common.collect.MapMaker;
  */
 public class MapCacheDemo {
 
-	public static <K, V> ConcurrentMap<K, V> createMapCache(Function<? super K, ? extends V> computingFunction) {
-		return new MapMaker().concurrencyLevel(32).expiration(1, TimeUnit.DAYS).makeComputingMap(computingFunction);
+	public static void main(String[] args) {
+
+		ApplicationContext context = new ClassPathXmlApplicationContext("/applicationContext.xml");
+		final AccountManager userManager = context.getBean(AccountManager.class);
+
+		Function<String, User> computingFunction = new Function<String, User>() {
+			public User apply(String key) {
+				return userManager.getLoadedUser("1");
+			}
+		};
+
+		ConcurrentMap<String, User> userMap = new MapMaker().concurrencyLevel(32).expiration(7, TimeUnit.DAYS)
+				.makeComputingMap(computingFunction);
+
+		System.out.println(userMap.get("1").getName());
 	}
 }

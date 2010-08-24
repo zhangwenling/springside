@@ -4,6 +4,9 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * 本地缓存策略,使用EhCache, 支持限制总数, Idle time/LRU失效, 持久化到磁盘等功能.
  * 
@@ -15,25 +18,32 @@ public class EhcacheDemo {
 
 	private static final String CACHE_NAME = "contentInfoCache";
 
-	private Cache cache;
+	private static Cache cache;
 
-	private CacheManager ehcacheManager;
+	public static void main(String[] args) {
 
-	public void init() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("/cache/applicationContext-ehcache.xml");
+
+		CacheManager ehcacheManager = context.getBean(CacheManager.class);
+
 		cache = ehcacheManager.getCache(CACHE_NAME);
+
+		String key = "foo";
+		String value = "boo";
+
+		put(key, value);
+		Object result = get(key);
+		System.out.println(result);
+
 	}
 
-	public Object get(String key) {
+	public static Object get(String key) {
 		Element element = cache.get(key);
 		return element.getObjectValue();
 	}
 
-	public void put(String key, Object value) {
+	public static void put(String key, Object value) {
 		Element element = new Element(key, value);
 		cache.put(element);
-	}
-
-	public void setEhcacheManager(CacheManager ehcacheManager) {
-		this.ehcacheManager = ehcacheManager;
 	}
 }
