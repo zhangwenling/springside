@@ -1,31 +1,29 @@
-package org.springside.modules.memcached;
+package org.springside.modules.tokyotyrant;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-import net.spy.memcached.CASResponse;
-import net.spy.memcached.CASValue;
 import net.spy.memcached.MemcachedClient;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 对SpyMemcached Client的二次封装,提供常用的Get/GetBulk/Set/Delete/Incr/Decr函数的封装.
+ * SpyMemcached Client针对Tokyotyrant的二次封装,提供常用的Get/GetBulk/Set/Delete/Incr/Decr函数的封装,屏蔽TT不支持的功能.
  * 
  * 未提供封装的函数可直接调用getClient()取出Spy的原版MemcachedClient来使用.
  * 
  * @author calvin
  */
-public class SpyMemcachedClient {
+public class SpyTokyotyrantClient {
 
-	private static Logger logger = LoggerFactory.getLogger(SpyMemcachedClient.class);
+	private static Logger logger = LoggerFactory.getLogger(SpyTokyotyrantClient.class);
 
 	private MemcachedClient client;
 
-	public SpyMemcachedClient(MemcachedClient client) {
+	public SpyTokyotyrantClient(MemcachedClient client) {
 		this.client = client;
 	}
 
@@ -75,8 +73,8 @@ public class SpyMemcachedClient {
 	/**
 	 * Set方法.
 	 */
-	public Future<Boolean> set(String key, int expiredTime, Object value) {
-		return client.set(key, expiredTime, value);
+	public Future<Boolean> set(String key, Object value) {
+		return client.set(key, 0, value);
 	}
 
 	/**
@@ -87,26 +85,6 @@ public class SpyMemcachedClient {
 	}
 
 	/**
-	 * 配合Check and Set的Get方法,转换结果类型并屏蔽异常.
-	 */
-	@SuppressWarnings("unchecked")
-	public <T> CASValue<T> gets(String key) {
-		try {
-			return (CASValue<T>) client.gets(key);
-		} catch (RuntimeException e) {
-			logger.warn("Get from memcached server fail,key is" + key, e);
-			return null;
-		}
-	}
-
-	/**
-	 * Check and Set方法.
-	 */
-	public CASResponse cas(String key, long casId, Object value) {
-		return client.cas(key, casId, value);
-	}
-
-	/**
 	 * Incr方法.
 	 */
 	public long incr(String key, int by, long defaultValue) {
@@ -114,17 +92,17 @@ public class SpyMemcachedClient {
 	}
 
 	/**
-	 * Decr方法.
-	 */
-	public long decr(String key, int by, long defaultValue) {
-		return client.decr(key, by, defaultValue);
-	}
-
-	/**
 	 * 异步Incr方法, 不支持默认值, 若key不存在返回-1.
 	 */
 	public Future<Long> asyncIncr(String key, int by) {
 		return client.asyncIncr(key, by);
+	}
+
+	/**
+	 * Decr方法.
+	 */
+	public long decr(String key, int by, long defaultValue) {
+		return client.decr(key, by, defaultValue);
 	}
 
 	/**
