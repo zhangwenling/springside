@@ -36,9 +36,10 @@
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-		<property name="defaultAutoCommit" value="false"/>
+		<property name="defaultAutoCommit" value="false" />
 	</bean>
 
+	<!-- quartz使用的数据源配置 -->
 	<bean id="quartzDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${quartz.jdbc.driver}" />
 		<property name="url" value="${quartz.jdbc.url}" />
