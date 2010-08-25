@@ -49,39 +49,31 @@ public class JodaDemo {
 
 		System.out.println("演示Locale");
 
-		DateTime dTime = new DateTime().withZone(DateTimeZone.UTC);
+		DateTime dateTime = new DateTime().withZone(DateTimeZone.UTC);
 
 		//打印中文与英文下不同长度的日期格式串
-		DateTimeFormatter formatter = DateTimeFormat.forStyle("SS").withLocale(Locale.CHINA);
-		System.out.println("S:  " + dTime.toString(formatter));
-		formatter = DateTimeFormat.forStyle("MM").withLocale(Locale.CHINA);
-		System.out.println("M:  " + dTime.toString(formatter));
-		formatter = DateTimeFormat.forStyle("LL").withLocale(Locale.CHINA);
-		System.out.println("L:  " + dTime.toString(formatter));
-		formatter = DateTimeFormat.forStyle("FF").withLocale(Locale.CHINA);
-		System.out.println("XL: " + dTime.toString(formatter));
+		System.out.println("S:  " + formatDateTime(dateTime, "SS", "zh"));
+		System.out.println("M:  " + formatDateTime(dateTime, "MM", "zh"));
+		System.out.println("L:  " + formatDateTime(dateTime, "LL", "zh"));
+		System.out.println("XL: " + formatDateTime(dateTime, "FF", "zh"));
 		System.out.println("");
 
-		formatter = DateTimeFormat.forStyle("SS").withLocale(Locale.ENGLISH);
-		System.out.println("S:  " + dTime.toString(formatter));
-		formatter = DateTimeFormat.forStyle("MM").withLocale(Locale.ENGLISH);
-		System.out.println("M:  " + dTime.toString(formatter));
-		formatter = DateTimeFormat.forStyle("LL").withLocale(Locale.ENGLISH);
-		System.out.println("L:  " + dTime.toString(formatter));
-		formatter = DateTimeFormat.forStyle("FF").withLocale(Locale.ENGLISH);
-		System.out.println("XL: " + dTime.toString(formatter));
+		System.out.println("S:  " + formatDateTime(dateTime, "SS", "en"));
+		System.out.println("M:  " + formatDateTime(dateTime, "MM", "en"));
+		System.out.println("L:  " + formatDateTime(dateTime, "LL", "en"));
+		System.out.println("XL: " + formatDateTime(dateTime, "FF", "en"));
+		System.out.println("");
 		System.out.println("");
 
-		//根据语言设定locale
-		formatter = DateTimeFormat.forStyle("FF").withLocale(new Locale("zh"));
-		System.out.println("XL: " + dTime.toString(formatter));
+		//直接打印TimeStamp, 日期是M,时间是L
+		DateTimeFormatter formatter = DateTimeFormat.forStyle("ML").withLocale(new Locale("zh")).withZone(
+				DateTimeZone.UTC);
 
-		//直接打印TimeStamp
-		System.out.println("XL: " + formatter.print(dTime.getMillis()));
+		System.out.println("ML Mix: " + formatter.print(dateTime.getMillis()));
 
 		//只打印日期不打印时间
-		formatter = DateTimeFormat.forStyle("M-").withLocale(Locale.CHINA);
-		System.out.println("Date only : " + dTime.toString(formatter));
+		System.out.println("Date only :" + formatDateTime(dateTime, "M-", "zh"));
+
 	}
 
 	public static void testGetAge() {
@@ -93,8 +85,18 @@ public class JodaDemo {
 		Assert.isTrue(2 == getAge(twoYearsAgo));
 	}
 
+	/**
+	 * 根据生日获得年龄的Utils方法.
+	 */
 	public static int getAge(DateTime birthDate) {
 		return Years.yearsBetween(birthDate, new DateTime()).getYears();
 	}
 
+	/**
+	 * 打印各种语言各种长度默认格式的日期时间串的Utils方法.
+	 */
+	public static String formatDateTime(DateTime dateTime, String style, String lang) {
+		DateTimeFormatter formatter = DateTimeFormat.forStyle("M-").withLocale(new Locale(lang));
+		return dateTime.toString(formatter);
+	}
 }
