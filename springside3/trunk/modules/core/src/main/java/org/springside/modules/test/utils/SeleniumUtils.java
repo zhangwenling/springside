@@ -39,6 +39,11 @@ public class SeleniumUtils {
 
 	private static Logger logger = LoggerFactory.getLogger(SeleniumUtils.class);
 
+	/**
+	 * 根据driverName创建各种WebDriver的简便方法.
+	 * ie,fireforx,htmlunit的名称见常量.
+	 * remote driver的示例为remote:localhost:3000:firefox, 此时要求在http://localhost:3000/wd上启动selnium remote服务.
+	 */
 	public static WebDriver buildDriver(String driverName) throws Exception {
 		WebDriver driver = null;
 
@@ -57,12 +62,13 @@ public class SeleniumUtils {
 
 		if (driverName.startsWith(REMOTE)) {
 			String[] params = driverName.split(":");
-			Assert.isTrue(params.length == 3,
-					"Remote driver is not right, accept format is \"remote:local:firefox\", but the input is\""
+			Assert.isTrue(params.length == 4,
+					"Remote driver is not right, accept format is \"remote:localhost:3000:firefox\", but the input is\""
 							+ driverName + "\"");
 
-			String remoteAddress = params[1];
-			String driverType = params[2];
+			String remoteHost = params[1];
+			String remotePort = params[2];
+			String driverType = params[3];
 			DesiredCapabilities cap = null;
 			if (FIREFOX.equals(driverType)) {
 				cap = DesiredCapabilities.firefox();
@@ -72,7 +78,7 @@ public class SeleniumUtils {
 				cap = DesiredCapabilities.internetExplorer();
 			}
 
-			driver = new RemoteWebDriver(new URL("http://" + remoteAddress + ":3000/wd"), cap);
+			driver = new RemoteWebDriver(new URL("http://" + remoteHost + ":" + remotePort + "/wd"), cap);
 		}
 
 		Assert.notNull(driver, "No driver could be found by name:" + driverName);

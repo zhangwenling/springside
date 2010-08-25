@@ -641,6 +641,13 @@
 			</dependency>
 
 			<dependency>
+				<groupId>mockit</groupId>
+				<artifactId>jmockit</artifactId>
+				<version>0.999.2</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-test</artifactId>
 				<version>${spring.version}</version>

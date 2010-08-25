@@ -202,6 +202,12 @@
 			<artifactId>cglib-nodep</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>mockit</groupId>
+			<artifactId>jmockit</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
