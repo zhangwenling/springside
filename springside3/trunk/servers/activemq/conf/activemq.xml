@@ -26,7 +26,7 @@
 	<broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost" dataDirectory="${activemq.base}/data"
 		destroyApplicationContextOnStop="true">
 
-		<!-- 启动预定义的Queue与Topic -->
+		<!-- 启动预定义的Queue与Topic示例 -->
 		<destinations>
 			<queue physicalName="Q.ADVANCED.NOTIFY" />
 		</destinations>
@@ -41,12 +41,12 @@
 		<destinationPolicy>
 			<policyMap>
 				<policyEntries>
-					<policyEntry topic=">" producerFlowControl="true" memoryLimit="10mb">
+					<policyEntry topic=">" producerFlowControl="true" memoryLimit="20mb">
 						<pendingSubscriberPolicy>
 							<vmCursor />
 						</pendingSubscriberPolicy>
 					</policyEntry>
-					<policyEntry queue=">" producerFlowControl="true" memoryLimit="10mb">
+					<policyEntry queue=">" producerFlowControl="true" memoryLimit="20mb">
 						<!--
 							Use VM cursor for better latency For more information, see: http://activemq.apache.org/message-cursors.html
 

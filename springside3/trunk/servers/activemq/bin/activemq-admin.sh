@@ -131,7 +131,7 @@ ACTIVEMQ_CLASSPATH="${ACTIVEMQ_BASE}/conf;"$ACTIVEMQ_CLASSPATH
 
 if [ $1 = "start" ] ; then
     if [ -z "$ACTIVEMQ_OPTS" ] ; then
-        ACTIVEMQ_OPTS="-Xms2048M -Xmx2048M -Xmn682M-XX:MaxPermSize=96M -Dorg.apache.activemq.UseDedicatedTaskRunner=true -Djava.util.logging.config.file=logging.properties"
+        ACTIVEMQ_OPTS="-Xms2048M -Xmx2048M -Xmn682M -XX:MaxPermSize=96M -Dorg.apache.activemq.UseDedicatedTaskRunner=true -Djava.util.logging.config.file=logging.properties"
     fi
 
     if [ -z "$SUNJMX" ] ; then
@@ -151,5 +151,5 @@ fi
 if [ -n "$CYGHOME" ]; then
     exec "$JAVACMD" $ACTIVEMQ_OPTS $ACTIVEMQ_DEBUG_OPTS -Dactivemq.classpath="${ACTIVEMQ_CLASSPATH}" -Dactivemq.home="${ACTIVEMQ_HOME}" -Dactivemq.base="${ACTIVEMQ_BASE}" -Dcygwin.user.home="$CYGHOME" -jar "${ACTIVEMQ_HOME}/bin/run.jar" $@
 else
-    exec "$JAVACMD" $ACTIVEMQ_OPTS $ACTIVEMQ_DEBUG_OPTS -Dactivemq.classpath="${ACTIVEMQ_CLASSPATH}" -Dactivemq.home="${ACTIVEMQ_HOME}" -Dactivemq.base="${ACTIVEMQ_BASE}" -Dname=msgbus -jar "${ACTIVEMQ_HOME}/bin/run.jar" $@
+    exec "$JAVACMD" $ACTIVEMQ_OPTS $ACTIVEMQ_DEBUG_OPTS -Dactivemq.classpath="${ACTIVEMQ_CLASSPATH}" -Dactivemq.home="${ACTIVEMQ_HOME}" -Dactivemq.base="${ACTIVEMQ_BASE}" -jar "${ACTIVEMQ_HOME}/bin/run.jar" $@
 fi
