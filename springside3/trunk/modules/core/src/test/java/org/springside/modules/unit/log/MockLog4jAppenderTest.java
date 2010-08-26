@@ -59,16 +59,5 @@ public class MockLog4jAppenderTest extends Assert {
 		logger.warn(testString);
 		assertNull(appender.getFirstLog());
 
-		//logger
-		org.apache.log4j.Logger log4jLogger = org.apache.log4j.Logger.getLogger(MockLog4jAppenderTest.class);
-
-		appender.addToLogger(log4jLogger);
-		logger.warn(testString);
-		assertNotNull(appender.getFirstLog());
-
-		appender.clearLogs();
-		appender.removeFromLogger(log4jLogger);
-		logger.warn(testString);
-		assertNull(appender.getFirstLog());
 	}
 }

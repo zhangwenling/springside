@@ -62,13 +62,6 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	/**
 	 * 将此appender添加到logger中.
 	 */
-	public void addToLogger(Logger logger) {
-		logger.addAppender(this);
-	}
-
-	/**
-	 * 将此appender添加到logger中.
-	 */
 	public void addToLogger(String loggerName) {
 		Logger logger = Logger.getLogger(loggerName);
 		logger.addAppender(this);
@@ -80,13 +73,6 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	public void addToLogger(Class<?> loggerClass) {
 		Logger logger = Logger.getLogger(loggerClass);
 		logger.addAppender(this);
-	}
-
-	/**
-	 * 将此appender从logger中清除.
-	 */
-	public void removeFromLogger(Logger logger) {
-		logger.removeAppender(this);
 	}
 
 	/**

@@ -11,9 +11,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springside.modules.log.MockLog4jAppender;
 import org.springside.modules.utils.ThreadUtils;
 import org.springside.modules.utils.ThreadUtils.CustomizableThreadFactory;
@@ -39,9 +40,9 @@ public class ThreadUtilTest extends Assert {
 	@Test
 	public void gracefulShutdown() throws InterruptedException {
 
-		Logger logger = Logger.getLogger("test");
+		Logger logger = LoggerFactory.getLogger("test");
 		MockLog4jAppender appender = new MockLog4jAppender();
-		appender.addToLogger(logger);
+		appender.addToLogger("test");
 
 		//time enough to shutdown
 		ExecutorService pool = Executors.newSingleThreadExecutor();
@@ -86,9 +87,9 @@ public class ThreadUtilTest extends Assert {
 	@Test
 	public void normalShutdown() throws InterruptedException {
 
-		Logger logger = Logger.getLogger("test");
+		Logger logger = LoggerFactory.getLogger("test");
 		MockLog4jAppender appender = new MockLog4jAppender();
-		appender.addToLogger(logger);
+		appender.addToLogger("test");
 
 		//time not enough to shutdown,call shutdownNow
 		appender.clearLogs();

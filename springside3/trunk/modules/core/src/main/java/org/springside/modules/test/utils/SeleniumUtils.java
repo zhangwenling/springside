@@ -41,8 +41,9 @@ public class SeleniumUtils {
 
 	/**
 	 * 根据driverName创建各种WebDriver的简便方法.
-	 * ie,fireforx,htmlunit的名称见常量.
-	 * remote driver的示例为remote:localhost:3000:firefox, 此时要求在http://localhost:3000/wd上启动selnium remote服务.
+	 * 
+	 * 当持续集成服务器安装在非Windows机器上, 没有IE浏览器与XWindows时, 需要使用remote dirver调用远程的Windows机器.
+	 * drivername如remote:192.168.0.2:3000:firefox, 此时要求远程服务器在http://192.168.0.2:3000/wd上启动selnium remote服务.
 	 */
 	public static WebDriver buildDriver(String driverName) throws Exception {
 		WebDriver driver = null;

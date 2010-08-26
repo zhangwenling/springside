@@ -26,7 +26,7 @@ public @interface Groups {
 	/**
 	 * 执行所有组别的测试.
 	 */
-	final String ALL = "all";
+	String ALL = "all";
 
 	/**
 	 * 组别定义,默认为ALL.
