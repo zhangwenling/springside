@@ -6,11 +6,11 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springside.examples.miniweb.dao.HibernateUtils;
 import org.springside.examples.miniweb.entity.account.Authority;
 import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
-import org.springside.modules.orm.hibernate.HibernateUtils;
 
 /**
  * 角色管理Action.

@@ -70,15 +70,8 @@ public class EncodeUtils {
 	 * URL 编码, Encode默认为UTF-8. 
 	 */
 	public static String urlEncode(String input) {
-		return urlEncode(input, DEFAULT_URL_ENCODING);
-	}
-
-	/**
-	 * URL 编码.
-	 */
-	public static String urlEncode(String input, String encoding) {
 		try {
-			return URLEncoder.encode(input, encoding);
+			return URLEncoder.encode(input, DEFAULT_URL_ENCODING);
 		} catch (UnsupportedEncodingException e) {
 			throw new IllegalArgumentException("Unsupported Encoding Exception", e);
 		}
@@ -88,18 +81,12 @@ public class EncodeUtils {
 	 * URL 解码, Encode默认为UTF-8. 
 	 */
 	public static String urlDecode(String input) {
-		return urlDecode(input, DEFAULT_URL_ENCODING);
-	}
-
-	/**
-	 * URL 解码.
-	 */
-	public static String urlDecode(String input, String encoding) {
 		try {
-			return URLDecoder.decode(input, encoding);
+			return URLDecoder.decode(input, DEFAULT_URL_ENCODING);
 		} catch (UnsupportedEncodingException e) {
 			throw new IllegalArgumentException("Unsupported Encoding Exception", e);
 		}
+
 	}
 
 	/**

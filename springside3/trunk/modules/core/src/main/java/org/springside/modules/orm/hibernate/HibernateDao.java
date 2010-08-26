@@ -45,7 +45,7 @@ import org.springside.modules.utils.ReflectionUtils;
  */
 public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao<T, PK> {
 	/**
-	 * 用于Dao层子类使用的构造函数.
+	 * 用于Dao层子类的构造函数.
 	 * 通过子类的泛型定义取得对象类型Class.
 	 * eg.
 	 * public class UserDao extends HibernateDao<User, Long>{
@@ -76,7 +76,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按HQL分页查询.
 	 * 
-	 * @param page 分页参数.不支持其中的orderBy参数.
+	 * @param page 分页参数. 注意不支持其中的orderBy参数.
 	 * @param hql hql语句.
 	 * @param values 数量可变的查询参数,按顺序绑定.
 	 * 

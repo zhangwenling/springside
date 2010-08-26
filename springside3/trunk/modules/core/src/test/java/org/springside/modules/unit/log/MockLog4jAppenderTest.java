@@ -18,13 +18,22 @@ public class MockLog4jAppenderTest extends Assert {
 		Logger logger = LoggerFactory.getLogger(MockLog4jAppenderTest.class);
 		logger.warn(testString1);
 		logger.warn(testString2);
-		assertEquals(testString1, appender.getFirstLog().getMessage());
 
+		//getFirstLog/getLastLog
+		assertEquals(testString1, appender.getFirstLog().getMessage());
 		assertEquals(testString2, appender.getLastLog().getMessage());
+
+		//getAllLogs
 		assertEquals(2, appender.getAllLogs().size());
 		assertEquals(testString2, appender.getAllLogs().get(1).getMessage());
 
+		//clearLogs
 		appender.clearLogs();
+		assertNull(appender.getFirstLog());
+
+		//removeFromLogger
+		appender.removeFromLogger(MockLog4jAppenderTest.class);
+		logger.warn(testString1);
 		assertNull(appender.getFirstLog());
 	}
 

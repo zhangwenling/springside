@@ -74,10 +74,14 @@ public class SpringSecurityUtils {
 	 * 判断用户是否拥有角色, 如果用户拥有参数中的任意一个角色则返回true.
 	 */
 	public static boolean hasAnyRole(String[] roles) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Collection<GrantedAuthority> granteds = authentication.getAuthorities();
+		Authentication authentication = getAuthentication();
+		if (authentication == null) {
+			return false;
+		}
+
+		Collection<GrantedAuthority> grantedAuthorityList = authentication.getAuthorities();
 		for (String role : roles) {
-			for (GrantedAuthority authority : granteds) {
+			for (GrantedAuthority authority : grantedAuthorityList) {
 				if (role.equals(authority.getAuthority())) {
 					return true;
 				}

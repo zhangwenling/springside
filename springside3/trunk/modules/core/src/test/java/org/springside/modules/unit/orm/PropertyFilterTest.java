@@ -1,10 +1,12 @@
 package org.springside.modules.unit.orm;
 
 import java.util.Date;
+import java.util.List;
 
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.PropertyFilter.MatchType;
 
@@ -16,7 +18,7 @@ import org.springside.modules.orm.PropertyFilter.MatchType;
 public class PropertyFilterTest extends Assert {
 
 	@Test
-	public void test() {
+	public void createFilter() {
 		//Boolean EQ filter
 		PropertyFilter booleanEqFilter = new PropertyFilter("EQB_foo", "true");
 		assertEquals(MatchType.EQ, booleanEqFilter.getMatchType());
@@ -60,7 +62,7 @@ public class PropertyFilterTest extends Assert {
 	}
 
 	@Test
-	public void errorFilterName() throws Exception {
+	public void createErrorFilter() throws Exception {
 		int exceptionCount = 0;
 		try {
 			new PropertyFilter("ABS_foo", "hello");
@@ -82,4 +84,28 @@ public class PropertyFilterTest extends Assert {
 
 		assertEquals(3, exceptionCount);
 	}
+
+	@Test
+	public void buildPropertyFiltersFromHttpRequest() {
+		MockHttpServletRequest request = new MockHttpServletRequest();
+		request.setParameter("filter_EQS_loginName", "abcd");
+		request.setParameter("filter_LIKES_name_OR_email", "efg");
+
+		List<PropertyFilter> filters = PropertyFilter.buildPropertyFilters(request);
+
+		assertEquals(2, filters.size());
+
+		PropertyFilter filter1 = filters.get(0);
+		assertEquals(PropertyFilter.MatchType.EQ, filter1.getMatchType());
+		assertEquals("loginName", filter1.getPropertyName());
+		assertEquals(String.class, filter1.getPropertyType());
+		assertEquals("abcd", filter1.getPropertyValue());
+
+		PropertyFilter filter2 = filters.get(1);
+		assertEquals(PropertyFilter.MatchType.LIKE, filter2.getMatchType());
+		assertEquals(String.class, filter2.getPropertyType());
+		assertEquals(true, filter2.isMultiProperty());
+		assertEquals("efg", filter2.getPropertyValue());
+	}
+
 }

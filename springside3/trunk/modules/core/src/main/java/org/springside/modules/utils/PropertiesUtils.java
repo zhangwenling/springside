@@ -35,6 +35,8 @@ public class PropertiesUtils {
 
 	/**
 	 * 载入多个properties文件, 相同的属性最后载入的文件将会覆盖之前的载入.
+	 * 文件路径使用Spring Resource格式, 文件编码使用UTF-8.
+	 * 
 	 * @see org.springframework.beans.factory.config.PropertyPlaceholderConfigurer
 	 */
 	public static Properties loadProperties(String... locations) throws IOException {
@@ -42,7 +44,7 @@ public class PropertiesUtils {
 
 		for (String location : locations) {
 
-			logger.debug("Loading properties file from classpath:" + location);
+			logger.debug("Loading properties file from:" + location);
 
 			InputStream is = null;
 			try {

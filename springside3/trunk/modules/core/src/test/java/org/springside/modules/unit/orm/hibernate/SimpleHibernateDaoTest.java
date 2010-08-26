@@ -30,6 +30,7 @@ import org.springside.modules.orm.hibernate.SimpleHibernateDao;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.unit.orm.hibernate.data.User;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 @ContextConfiguration(locations = { "/applicationContext-core-test.xml" })
@@ -62,17 +63,35 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 		User user = new User();
 		user.setName("foo");
 		user.setLoginName("foo");
+		//add
 		dao.save(user);
+		dao.flush();
+		//update
 		user.setName("boo");
 		dao.save(user);
+		dao.flush();
+		//delete
 		dao.delete(user);
+		dao.flush();
+		User user2 = new User();
+		user2.setName("foo2");
+		user2.setLoginName("foo2");
+		dao.save(user2);
+		dao.flush();
+		dao.delete(user2.getId());
+		dao.flush();
 	}
 
 	@Test
 	public void getAll() {
-		List<User> users = dao.getAll("id", true);
+		List<User> users = dao.getAll();
+		assertEquals(6, users.size());
+
+		users = dao.getAll("id", true);
 		assertEquals(6, users.size());
 		assertEquals(DEFAULT_LOGIN_NAME, users.get(0).getLoginName());
+
+		users = dao.get(Lists.newArrayList(1L, 2L));
 	}
 
 	@Test
@@ -151,5 +170,4 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 	public void getIdName() {
 		assertEquals("id", dao.getIdName());
 	}
-
 }

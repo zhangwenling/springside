@@ -8,6 +8,7 @@
 package org.springside.modules.orm.hibernate;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +31,8 @@ import org.springside.modules.utils.ReflectionUtils;
 /**
  * 封装Hibernate原生API的DAO泛型基类.
  * 
- * 可在Service层直接使用,也可以扩展泛型DAO子类使用.
- * 参考Spring2.5自带的Petlinc例子,取消了HibernateTemplate,直接使用Hibernate原生API.
+ * 可在Service层直接使用, 也可以扩展泛型DAO子类使用, 见两个构造函数的注释.
+ * 参考Spring2.5自带的Petlinc例子, 取消了HibernateTemplate, 直接使用Hibernate原生API.
  * 
  * @param <T> DAO操作的对象类型
  * @param <PK> 主键类型
@@ -76,7 +77,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * 采用@Autowired按类型注入SessionFactory, 当有多个SesionFactory的时候Override本函数.
+	 * 采用@Autowired按类型注入SessionFactory, 当有多个SesionFactory的时候在子类重载本函数.
 	 */
 	@Autowired
 	public void setSessionFactory(final SessionFactory sessionFactory) {
@@ -128,6 +129,13 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 按id列表获取对象列表.
+	 */
+	public List<T> get(final Collection<PK> ids) {
+		return find(Restrictions.in(getIdName(), ids));
+	}
+
+	/**
 	 *	获取全部对象.
 	 */
 	public List<T> getAll() {
@@ -135,20 +143,20 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 *	获取全部对象,支持排序.
+	 *	获取全部对象, 支持按属性行序.
 	 */
-	public List<T> getAll(String orderBy, boolean isAsc) {
+	public List<T> getAll(String orderByProperty, boolean isAsc) {
 		Criteria c = createCriteria();
 		if (isAsc) {
-			c.addOrder(Order.asc(orderBy));
+			c.addOrder(Order.asc(orderByProperty));
 		} else {
-			c.addOrder(Order.desc(orderBy));
+			c.addOrder(Order.desc(orderByProperty));
 		}
 		return c.list();
 	}
 
 	/**
-	 * 按属性查找对象列表,匹配方式为相等.
+	 * 按属性查找对象列表, 匹配方式为相等.
 	 */
 	public List<T> findBy(final String propertyName, final Object value) {
 		Assert.hasText(propertyName, "propertyName不能为空");
@@ -157,19 +165,12 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * 按属性查找唯一对象,匹配方式为相等.
+	 * 按属性查找唯一对象, 匹配方式为相等.
 	 */
 	public T findUniqueBy(final String propertyName, final Object value) {
 		Assert.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = Restrictions.eq(propertyName, value);
 		return (T) createCriteria(criterion).uniqueResult();
-	}
-
-	/**
-	 * 按id列表获取对象.
-	 */
-	public List<T> findByIds(List<PK> ids) {
-		return find(Restrictions.in(getIdName(), ids));
 	}
 
 	/**
@@ -210,6 +211,9 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 执行HQL进行批量修改/删除操作.
+	 * 
+	 * @param values 数量可变的参数,按顺序绑定.
+	 * @return 更新记录数.
 	 */
 	public int batchExecute(final String hql, final Object... values) {
 		return createQuery(hql, values).executeUpdate();
@@ -217,6 +221,8 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 执行HQL进行批量修改/删除操作.
+	 * 
+	 * @param values 命名参数,按名称绑定.
 	 * @return 更新记录数.
 	 */
 	public int batchExecute(final String hql, final Map<String, ?> values) {
@@ -226,7 +232,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	/**
 	 * 根据查询HQL与参数列表创建Query对象.
 	 * 
-	 * 本类封装的find()函数全部默认返回对象类型为T,当不为T时使用本函数.
+	 * 因为所有find()函数都将返回对象转型为T, 当期望返回结果不为T时使用本函数取得Query对象后进行list()操作.
 	 * 
 	 * @param values 数量可变的参数,按顺序绑定.
 	 */
@@ -243,6 +249,8 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 根据查询HQL与参数列表创建Query对象.
+	 * 
+	 * 因为所有find()函数都将返回对象转型为T, 当期望返回结果不为T时使用本函数取得Query对象后进行list()操作.
 	 * 
 	 * @param values 命名参数,按名称绑定.
 	 */
@@ -276,7 +284,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	/**
 	 * 根据Criterion条件创建Criteria.
 	 * 
-	 * 本类封装的find()函数全部默认返回对象类型为T,当不为T时使用本函数.
+	 * 因为所有find()函数都将返回对象转型为T, 当期望返回结果不为T时使用本函数取得Query对象后进行list()操作.
 	 * 
 	 * @param criterions 数量可变的Criterion.
 	 */
@@ -291,13 +299,13 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	/**
 	 * 初始化对象.
 	 * 使用load()方法得到的仅是对象Proxy, 在传到View层前需要进行初始化.
-	 * 只初始化entity的直接属性,但不会初始化延迟加载的关联集合和属性.
-	 * 如需初始化关联属性,可实现新的函数,执行:
+	 * 如果传入entity, 则只初始化entity的直接属性,但不会初始化延迟加载的关联集合和属性.
+	 * 如需初始化关联属性,需执行:
 	 * Hibernate.initialize(user.getRoles())，初始化User的直接属性和关联集合.
 	 * Hibernate.initialize(user.getDescription())，初始化User的直接属性和延迟加载的Description属性.
 	 */
-	public void initProxyProperty(Object proxyProperty) {
-		Hibernate.initialize(proxyProperty);
+	public void initProxyObject(Object proxy) {
+		Hibernate.initialize(proxy);
 	}
 
 	/**
@@ -309,6 +317,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 为Query添加distinct transformer.
+	 * 预加载关联对象的HQL会引起主对象重复, 需要进行distinct处理.
 	 */
 	public Query distinct(Query query) {
 		query.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
@@ -317,6 +326,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 为Criteria添加distinct transformer.
+	 * 预加载关联对象的HQL会引起主对象重复, 需要进行distinct处理.
 	 */
 	public Criteria distinct(Criteria criteria) {
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);

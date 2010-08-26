@@ -34,6 +34,11 @@
 			<artifactId>hibernate-annotations</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 		<!-- web -->
 		<dependency>
@@ -202,7 +207,7 @@
 			<artifactId>cglib-nodep</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>mockit</groupId>
 			<artifactId>jmockit</artifactId>

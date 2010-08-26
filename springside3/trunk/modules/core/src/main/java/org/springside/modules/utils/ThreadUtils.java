@@ -70,7 +70,7 @@ public class ThreadUtils {
 	}
 
 	/**
-	 * 自定义ThreadPool,可定制线程池的名称.
+	 * 自定义ThreadFactory,可定制线程池的名称.
 	 */
 	public static class CustomizableThreadFactory implements ThreadFactory {
 

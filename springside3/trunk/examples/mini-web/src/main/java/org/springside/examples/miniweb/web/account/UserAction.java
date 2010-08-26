@@ -9,6 +9,7 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springside.examples.miniweb.dao.HibernateUtils;
 import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.service.ServiceException;
@@ -16,7 +17,6 @@ import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
-import org.springside.modules.orm.hibernate.HibernateUtils;
 import org.springside.modules.web.struts2.Struts2Utils;
 
 /**
@@ -64,7 +64,7 @@ public class UserAction extends CrudActionSupport<User> {
 	//-- CRUD Action 函数 --//
 	@Override
 	public String list() throws Exception {
-		List<PropertyFilter> filters = HibernateUtils.buildPropertyFilters(Struts2Utils.getRequest());
+		List<PropertyFilter> filters = PropertyFilter.buildPropertyFilters(Struts2Utils.getRequest());
 		//设置默认排序方式
 		if (!page.isOrderBySetted()) {
 			page.setOrderBy("id");

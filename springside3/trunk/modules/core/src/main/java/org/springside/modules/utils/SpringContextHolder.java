@@ -31,7 +31,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 		logger.debug("注入ApplicationContext到SpringContextHolder:" + applicationContext);
 
 		if (SpringContextHolder.applicationContext != null) {
-			logger.warn("SpringContextHolder中的ApplicationContext被覆盖,原有Context为:"
+			logger.warn("SpringContextHolder中的ApplicationContext被覆盖, 原有ApplicationContext为:"
 					+ SpringContextHolder.applicationContext);
 		}
 
@@ -44,7 +44,6 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	@Override
 	public void destroy() throws Exception {
 		SpringContextHolder.cleanApplicationContext();
-
 	}
 
 	/**
@@ -56,7 +55,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	}
 
 	/**
-	 * 从静态变量ApplicationContext中取得Bean, 自动转型为所赋值对象的类型.
+	 * 从静态变量applicationContext中取得Bean, 自动转型为所赋值对象的类型.
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T getBean(String name) {
@@ -65,8 +64,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	}
 
 	/**
-	 * 从静态变量ApplicationContext中取得Bean, 自动转型为所赋值对象的类型.
-	 * 如果有多个Bean符合Class, 取出第一个.
+	 * 从静态变量applicationContext中取得Bean, 自动转型为所赋值对象的类型.
 	 */
 	public static <T> T getBean(Class<T> requiredType) {
 		checkApplicationContext();
@@ -74,7 +72,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	}
 
 	/**
-	 * 清除applicationContext静态变量.
+	 * applicationContext静态变量置为Null.
 	 */
 	public static void cleanApplicationContext() {
 		logger.debug("清除SpringContextHolder中的ApplicationContext:" + applicationContext);
