@@ -66,6 +66,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	}
 
 	//-- 分页查询函数 --//
+
 	/**
 	 * 分页获取全部对象.
 	 */
@@ -80,7 +81,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @param hql hql语句.
 	 * @param values 数量可变的查询参数,按顺序绑定.
 	 * 
-	 * @return 分页查询结果, 附带结果列表及所有查询时的参数.
+	 * @return 分页查询结果, 附带结果列表及所有查询输入参数.
 	 */
 	@SuppressWarnings("unchecked")
 	public Page<T> findPage(final Page<T> page, final String hql, final Object... values) {
@@ -93,7 +94,8 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 			page.setTotalCount(totalCount);
 		}
 
-		setPageParameter(q, page);
+		setPageParameterToQuery(q, page);
+
 		List result = q.list();
 		page.setResult(result);
 		return page;
@@ -102,11 +104,11 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按HQL分页查询.
 	 * 
-	 * @param page 分页参数.
+	 * @param page 分页参数. 注意不支持其中的orderBy参数.
 	 * @param hql hql语句.
 	 * @param values 命名参数,按名称绑定.
 	 * 
-	 * @return 分页查询结果, 附带结果列表及所有查询时的参数.
+	 * @return 分页查询结果, 附带结果列表及所有查询输入参数.
 	 */
 	@SuppressWarnings("unchecked")
 	public Page<T> findPage(final Page<T> page, final String hql, final Map<String, ?> values) {
@@ -119,7 +121,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 			page.setTotalCount(totalCount);
 		}
 
-		setPageParameter(q, page);
+		setPageParameterToQuery(q, page);
 
 		List result = q.list();
 		page.setResult(result);
@@ -132,7 +134,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @param page 分页参数.
 	 * @param criterions 数量可变的Criterion.
 	 * 
-	 * @return 分页查询结果.附带结果列表及所有查询时的参数.
+	 * @return 分页查询结果.附带结果列表及所有查询输入参数.
 	 */
 	@SuppressWarnings("unchecked")
 	public Page<T> findPage(final Page<T> page, final Criterion... criterions) {
@@ -145,7 +147,8 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 			page.setTotalCount(totalCount);
 		}
 
-		setPageParameter(c, page);
+		setPageParameterToCriteria(c, page);
+
 		List result = c.list();
 		page.setResult(result);
 		return page;
@@ -154,7 +157,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 设置分页参数到Query对象,辅助函数.
 	 */
-	protected Query setPageParameter(final Query q, final Page<T> page) {
+	protected Query setPageParameterToQuery(final Query q, final Page<T> page) {
 		//hibernate的firstResult的序号从0开始
 		q.setFirstResult(page.getFirst() - 1);
 		q.setMaxResults(page.getPageSize());
@@ -164,7 +167,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 设置分页参数到Criteria对象,辅助函数.
 	 */
-	protected Criteria setPageParameter(final Criteria c, final Page<T> page) {
+	protected Criteria setPageParameterToCriteria(final Criteria c, final Page<T> page) {
 		//hibernate的firstResult的序号从0开始
 		c.setFirstResult(page.getFirst() - 1);
 		c.setMaxResults(page.getPageSize());
@@ -192,12 +195,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 本函数只能自动处理简单的hql语句,复杂的hql查询请另行编写count语句查询.
 	 */
 	protected long countHqlResult(final String hql, final Object... values) {
-		String fromHql = hql;
-		//select子句与order by子句会影响count查询,进行简单的排除.
-		fromHql = "from " + StringUtils.substringAfter(fromHql, "from");
-		fromHql = StringUtils.substringBefore(fromHql, "order by");
-
-		String countHql = "select count(*) " + fromHql;
+		String countHql = prepareCountHql(hql);
 
 		try {
 			Long count = findUnique(countHql, values);
@@ -213,12 +211,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 本函数只能自动处理简单的hql语句,复杂的hql查询请另行编写count语句查询.
 	 */
 	protected long countHqlResult(final String hql, final Map<String, ?> values) {
-		String fromHql = hql;
-		//select子句与order by子句会影响count查询,进行简单的排除.
-		fromHql = "from " + StringUtils.substringAfter(fromHql, "from");
-		fromHql = StringUtils.substringBefore(fromHql, "order by");
-
-		String countHql = "select count(*) " + fromHql;
+		String countHql = prepareCountHql(hql);
 
 		try {
 			Long count = findUnique(countHql, values);
@@ -226,6 +219,16 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		} catch (Exception e) {
 			throw new RuntimeException("hql can't be auto count, hql is:" + countHql, e);
 		}
+	}
+
+	private String prepareCountHql(String orgHql) {
+		String fromHql = orgHql;
+		//select子句与order by子句会影响count查询,进行简单的排除.
+		fromHql = "from " + StringUtils.substringAfter(fromHql, "from");
+		fromHql = StringUtils.substringBefore(fromHql, "order by");
+
+		String countHql = "select count(*) " + fromHql;
+		return countHql;
 	}
 
 	/**
@@ -276,7 +279,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @param matchType 匹配方式,目前支持的取值见PropertyFilter的MatcheType enum.
 	 */
 	public List<T> findBy(final String propertyName, final Object value, final MatchType matchType) {
-		Criterion criterion = buildPropertyFilterCriterion(propertyName, value, matchType);
+		Criterion criterion = buildCriterion(propertyName, value, matchType);
 		return find(criterion);
 	}
 
@@ -284,7 +287,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 按属性过滤条件列表查找对象列表.
 	 */
 	public List<T> find(List<PropertyFilter> filters) {
-		Criterion[] criterions = buildPropertyFilterCriterions(filters);
+		Criterion[] criterions = buildCriterionByPropertyFilter(filters);
 		return find(criterions);
 	}
 
@@ -292,54 +295,36 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 按属性过滤条件列表分页查找对象.
 	 */
 	public Page<T> findPage(final Page<T> page, final List<PropertyFilter> filters) {
-		Criterion[] criterions = buildPropertyFilterCriterions(filters);
+		Criterion[] criterions = buildCriterionByPropertyFilter(filters);
 		return findPage(page, criterions);
-	}
-
-	/**
-	 * 按属性条件列表创建Criterion数组,辅助函数.
-	 */
-	protected Criterion[] buildPropertyFilterCriterions(final List<PropertyFilter> filters) {
-		List<Criterion> criterionList = new ArrayList<Criterion>();
-		for (PropertyFilter filter : filters) {
-			if (!filter.isMultiProperty()) { //只有一个属性需要比较的情况.
-				Criterion criterion = buildPropertyFilterCriterion(filter.getPropertyName(), filter.getPropertyValue(),
-						filter.getMatchType());
-				criterionList.add(criterion);
-			} else {//包含多个属性需要比较的情况,进行or处理.
-				Disjunction disjunction = Restrictions.disjunction();
-				for (String param : filter.getPropertyNames()) {
-					Criterion criterion = buildPropertyFilterCriterion(param, filter.getPropertyValue(), filter
-							.getMatchType());
-					disjunction.add(criterion);
-				}
-				criterionList.add(disjunction);
-			}
-		}
-		return criterionList.toArray(new Criterion[criterionList.size()]);
 	}
 
 	/**
 	 * 按属性条件参数创建Criterion,辅助函数.
 	 */
-	protected Criterion buildPropertyFilterCriterion(final String propertyName, final Object propertyValue,
-			final MatchType matchType) {
+	protected Criterion buildCriterion(final String propertyName, final Object propertyValue, final MatchType matchType) {
 		Assert.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = null;
 		try {
-
 			//根据MatchType构造criterion
-			if (MatchType.EQ.equals(matchType)) {
+			switch (matchType) {
+			case EQ:
 				criterion = Restrictions.eq(propertyName, propertyValue);
-			} else if (MatchType.LIKE.equals(matchType)) {
+				break;
+			case LIKE:
 				criterion = Restrictions.like(propertyName, (String) propertyValue, MatchMode.ANYWHERE);
-			} else if (MatchType.LE.equals(matchType)) {
+				break;
+
+			case LE:
 				criterion = Restrictions.le(propertyName, propertyValue);
-			} else if (MatchType.LT.equals(matchType)) {
+				break;
+			case LT:
 				criterion = Restrictions.lt(propertyName, propertyValue);
-			} else if (MatchType.GE.equals(matchType)) {
+				break;
+			case GE:
 				criterion = Restrictions.ge(propertyName, propertyValue);
-			} else if (MatchType.GT.equals(matchType)) {
+				break;
+			case GT:
 				criterion = Restrictions.gt(propertyName, propertyValue);
 			}
 		} catch (Exception e) {
@@ -349,15 +334,24 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	}
 
 	/**
-	 * 判断对象的属性值在数据库内是否唯一.
-	 * 
-	 * 在修改对象的情景下,如果属性新修改的值(value)等于属性原来的值(orgValue)则不作比较.
+	 * 按属性条件列表创建Criterion数组,辅助函数.
 	 */
-	public boolean isPropertyUnique(final String propertyName, final Object newValue, final Object oldValue) {
-		if (newValue == null || newValue.equals(oldValue)) {
-			return true;
+	protected Criterion[] buildCriterionByPropertyFilter(final List<PropertyFilter> filters) {
+		List<Criterion> criterionList = new ArrayList<Criterion>();
+		for (PropertyFilter filter : filters) {
+			if (!filter.hasMultiProperties()) { //只有一个属性需要比较的情况.
+				Criterion criterion = buildCriterion(filter.getPropertyName(), filter.getPropertyValue(), filter
+						.getMatchType());
+				criterionList.add(criterion);
+			} else {//包含多个属性需要比较的情况,进行or处理.
+				Disjunction disjunction = Restrictions.disjunction();
+				for (String param : filter.getPropertyNames()) {
+					Criterion criterion = buildCriterion(param, filter.getPropertyValue(), filter.getMatchType());
+					disjunction.add(criterion);
+				}
+				criterionList.add(disjunction);
+			}
 		}
-		Object object = findUniqueBy(propertyName, newValue);
-		return (object == null);
+		return criterionList.toArray(new Criterion[criterionList.size()]);
 	}
 }

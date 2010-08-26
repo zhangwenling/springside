@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.lang.xwork.StringUtils;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
@@ -139,13 +140,13 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		assertEquals(1, users.size());
 		assertEquals("admin", users.get(0).getLoginName());
 
-		//LIKE filter
-		PropertyFilter likeFilter = new PropertyFilter("LIKES_email", "springside.org.cn");
-		filters = Lists.newArrayList(likeFilter);
+		//LIKE filter and OR
+		PropertyFilter likeAndOrFilter = new PropertyFilter("LIKES_email_OR_loginName", "springside.org.cn");
+		filters = Lists.newArrayList(likeAndOrFilter);
 
 		users = dao.find(filters);
 		assertEquals(6, users.size());
-		assertTrue(users.get(0).getEmail().indexOf("springside.org.cn") != -1);
+		assertTrue(StringUtils.contains(users.get(0).getEmail(), "springside.org.cn"));
 
 		//Filter with Page
 		Page<User> page = new Page<User>(5);
@@ -167,13 +168,6 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		filters = Lists.newArrayList(dateGtFilter);
 		users = dao.find(filters);
 		assertEquals(0, users.size());
-	}
-
-	@Test
-	public void isPropertyUnique() {
-		assertEquals(true, dao.isPropertyUnique("loginName", "admin", "admin"));
-		assertEquals(true, dao.isPropertyUnique("loginName", "user6", "admin"));
-		assertEquals(false, dao.isPropertyUnique("loginName", "user2", "admin"));
 	}
 
 	@Test

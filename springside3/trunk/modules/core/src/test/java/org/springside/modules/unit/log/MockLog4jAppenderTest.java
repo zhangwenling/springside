@@ -9,11 +9,11 @@ import org.springside.modules.log.MockLog4jAppender;
 public class MockLog4jAppenderTest extends Assert {
 
 	@Test
-	public void test() {
+	public void normalCase() {
 		String testString1 = "Hello";
 		String testString2 = "World";
 		MockLog4jAppender appender = new MockLog4jAppender();
-		appender.addToLogger("org.springside");
+		appender.addToLogger(MockLog4jAppenderTest.class);
 
 		Logger logger = LoggerFactory.getLogger(MockLog4jAppenderTest.class);
 		logger.warn(testString1);
@@ -30,11 +30,39 @@ public class MockLog4jAppenderTest extends Assert {
 		//clearLogs
 		appender.clearLogs();
 		assertNull(appender.getFirstLog());
-
-		//removeFromLogger
-		appender.removeFromLogger(MockLog4jAppenderTest.class);
-		logger.warn(testString1);
-		assertNull(appender.getFirstLog());
 	}
 
+	public void addAndRemove() {
+		String testString = "Hello";
+		Logger logger = LoggerFactory.getLogger(MockLog4jAppenderTest.class);
+		MockLog4jAppender appender = new MockLog4jAppender();
+		//class
+		appender.addToLogger(MockLog4jAppenderTest.class);
+		logger.warn(testString);
+		assertNotNull(appender.getFirstLog());
+
+		appender.removeFromLogger(MockLog4jAppenderTest.class);
+		logger.warn(testString);
+		assertNull(appender.getFirstLog());
+
+		//name
+		appender.addToLogger("org.springside.modules.unit.log");
+		logger.warn(testString);
+		assertNotNull(appender.getFirstLog());
+
+		appender.removeFromLogger("org.springside.modules.unit.log");
+		logger.warn(testString);
+		assertNull(appender.getFirstLog());
+
+		//logger
+		org.apache.log4j.Logger log4jLogger = org.apache.log4j.Logger.getLogger(MockLog4jAppenderTest.class);
+
+		appender.addToLogger(log4jLogger);
+		logger.warn(testString);
+		assertNotNull(appender.getFirstLog());
+
+		appender.removeFromLogger(log4jLogger);
+		logger.warn(testString);
+		assertNull(appender.getFirstLog());
+	}
 }

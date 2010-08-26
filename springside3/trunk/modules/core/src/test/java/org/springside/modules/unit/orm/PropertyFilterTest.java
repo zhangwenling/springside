@@ -104,7 +104,7 @@ public class PropertyFilterTest extends Assert {
 		PropertyFilter filter2 = filters.get(1);
 		assertEquals(PropertyFilter.MatchType.LIKE, filter2.getMatchType());
 		assertEquals(String.class, filter2.getPropertyType());
-		assertEquals(true, filter2.isMultiProperty());
+		assertEquals(true, filter2.hasMultiProperties());
 		assertEquals("efg", filter2.getPropertyValue());
 	}
 

@@ -232,7 +232,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	/**
 	 * 根据查询HQL与参数列表创建Query对象.
 	 * 
-	 * 因为所有find()函数都将返回对象转型为T, 当期望返回结果不为T时使用本函数取得Query对象后进行list()操作.
+	 * 使用本函数取得Query对象后进行list()操作, 不像其他find()函数那样做泛型转换影响.
 	 * 
 	 * @param values 数量可变的参数,按顺序绑定.
 	 */
@@ -250,7 +250,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	/**
 	 * 根据查询HQL与参数列表创建Query对象.
 	 * 
-	 * 因为所有find()函数都将返回对象转型为T, 当期望返回结果不为T时使用本函数取得Query对象后进行list()操作.
+	 * 使用本函数取得Query对象后进行list()操作, 不像其他find()函数那样做泛型转换影响.
 	 * 
 	 * @param values 命名参数,按名称绑定.
 	 */
@@ -284,7 +284,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	/**
 	 * 根据Criterion条件创建Criteria.
 	 * 
-	 * 因为所有find()函数都将返回对象转型为T, 当期望返回结果不为T时使用本函数取得Query对象后进行list()操作.
+	 * 使用本函数取得Criteria对象后进行list()操作, 不像其他find()函数那样做泛型转换影响.
 	 * 
 	 * @param criterions 数量可变的Criterion.
 	 */
@@ -339,5 +339,18 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	public String getIdName() {
 		ClassMetadata meta = getSessionFactory().getClassMetadata(entityClass);
 		return meta.getIdentifierPropertyName();
+	}
+
+	/**
+	 * 判断对象的属性值在数据库内是否唯一.
+	 * 
+	 * 在修改对象的情景下,如果属性新修改的值(value)等于属性原来的值(orgValue)则不作比较.
+	 */
+	public boolean isPropertyUnique(final String propertyName, final Object newValue, final Object oldValue) {
+		if (newValue == null || newValue.equals(oldValue)) {
+			return true;
+		}
+		Object object = findUniqueBy(propertyName, newValue);
+		return (object == null);
 	}
 }

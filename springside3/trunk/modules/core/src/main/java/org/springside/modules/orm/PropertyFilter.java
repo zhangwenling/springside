@@ -130,7 +130,7 @@ public class PropertyFilter {
 	/**
 	 * 是否比较多个属性.
 	 */
-	public boolean isMultiProperty() {
+	public boolean hasMultiProperties() {
 		return (propertyNames.length > 1);
 	}
 

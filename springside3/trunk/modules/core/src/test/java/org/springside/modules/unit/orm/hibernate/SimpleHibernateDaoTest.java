@@ -170,4 +170,11 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 	public void getIdName() {
 		assertEquals("id", dao.getIdName());
 	}
+
+	@Test
+	public void isPropertyUnique() {
+		assertEquals(true, dao.isPropertyUnique("loginName", "admin", "admin"));
+		assertEquals(true, dao.isPropertyUnique("loginName", "user6", "admin"));
+		assertEquals(false, dao.isPropertyUnique("loginName", "user2", "admin"));
+	}
 }

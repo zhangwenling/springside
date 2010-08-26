@@ -40,6 +40,5 @@ public class Log4jMBeanTest extends Assert {
 		assertEquals("DEBUG", mbean.getLoggerLevel(loggerName));
 
 		mbean.setLoggerLevel(loggerName, orgLevel);
-
 	}
 }
