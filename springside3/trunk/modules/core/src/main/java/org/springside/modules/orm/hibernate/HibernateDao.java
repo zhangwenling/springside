@@ -305,30 +305,26 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	protected Criterion buildCriterion(final String propertyName, final Object propertyValue, final MatchType matchType) {
 		Assert.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = null;
-		try {
-			//根据MatchType构造criterion
-			switch (matchType) {
-			case EQ:
-				criterion = Restrictions.eq(propertyName, propertyValue);
-				break;
-			case LIKE:
-				criterion = Restrictions.like(propertyName, (String) propertyValue, MatchMode.ANYWHERE);
-				break;
+		//根据MatchType构造criterion
+		switch (matchType) {
+		case EQ:
+			criterion = Restrictions.eq(propertyName, propertyValue);
+			break;
+		case LIKE:
+			criterion = Restrictions.like(propertyName, (String) propertyValue, MatchMode.ANYWHERE);
+			break;
 
-			case LE:
-				criterion = Restrictions.le(propertyName, propertyValue);
-				break;
-			case LT:
-				criterion = Restrictions.lt(propertyName, propertyValue);
-				break;
-			case GE:
-				criterion = Restrictions.ge(propertyName, propertyValue);
-				break;
-			case GT:
-				criterion = Restrictions.gt(propertyName, propertyValue);
-			}
-		} catch (Exception e) {
-			throw ReflectionUtils.convertReflectionExceptionToUnchecked(e);
+		case LE:
+			criterion = Restrictions.le(propertyName, propertyValue);
+			break;
+		case LT:
+			criterion = Restrictions.lt(propertyName, propertyValue);
+			break;
+		case GE:
+			criterion = Restrictions.ge(propertyName, propertyValue);
+			break;
+		case GT:
+			criterion = Restrictions.gt(propertyName, propertyValue);
 		}
 		return criterion;
 	}

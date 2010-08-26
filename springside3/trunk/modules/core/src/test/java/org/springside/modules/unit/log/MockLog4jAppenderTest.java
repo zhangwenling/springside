@@ -30,8 +30,11 @@ public class MockLog4jAppenderTest extends Assert {
 		//clearLogs
 		appender.clearLogs();
 		assertNull(appender.getFirstLog());
+		assertNull(appender.getLastLog());
+
 	}
 
+	@Test
 	public void addAndRemove() {
 		String testString = "Hello";
 		Logger logger = LoggerFactory.getLogger(MockLog4jAppenderTest.class);
@@ -41,6 +44,7 @@ public class MockLog4jAppenderTest extends Assert {
 		logger.warn(testString);
 		assertNotNull(appender.getFirstLog());
 
+		appender.clearLogs();
 		appender.removeFromLogger(MockLog4jAppenderTest.class);
 		logger.warn(testString);
 		assertNull(appender.getFirstLog());
@@ -50,6 +54,7 @@ public class MockLog4jAppenderTest extends Assert {
 		logger.warn(testString);
 		assertNotNull(appender.getFirstLog());
 
+		appender.clearLogs();
 		appender.removeFromLogger("org.springside.modules.unit.log");
 		logger.warn(testString);
 		assertNull(appender.getFirstLog());
@@ -61,6 +66,7 @@ public class MockLog4jAppenderTest extends Assert {
 		logger.warn(testString);
 		assertNotNull(appender.getFirstLog());
 
+		appender.clearLogs();
 		appender.removeFromLogger(log4jLogger);
 		logger.warn(testString);
 		assertNull(appender.getFirstLog());
