@@ -35,15 +35,17 @@ public class ThreadUtils {
 	 * 先使用shutdown尝试执行所有任务.
 	 * 超时后调用shutdownNow取消在workQueue中Pending的任务,并中断所有阻塞函数.
 	 * 另对在shutdown时线程本身被调用中断做了处理.
+	 * @param shutdownNowTimeout TODO
 	 */
-	public static void gracefulShutdown(ExecutorService pool, int timeout, TimeUnit timeUnit) {
+	public static void gracefulShutdown(ExecutorService pool, int shutdownTimeout, int shutdownNowTimeout,
+			TimeUnit timeUnit) {
 		pool.shutdown(); // Disable new tasks from being submitted
 		try {
 			// Wait a while for existing tasks to terminate
-			if (!pool.awaitTermination(timeout, timeUnit)) {
+			if (!pool.awaitTermination(shutdownTimeout, timeUnit)) {
 				pool.shutdownNow(); // Cancel currently executing tasks
 				// Wait a while for tasks to respond to being cancelled
-				if (!pool.awaitTermination(timeout, timeUnit)) {
+				if (!pool.awaitTermination(shutdownNowTimeout, timeUnit)) {
 					System.err.println("Pool did not terminate");
 				}
 			}

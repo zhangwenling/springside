@@ -4,7 +4,6 @@ import java.util.Locale;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import org.joda.time.Years;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.util.Assert;
@@ -52,16 +51,16 @@ public class JodaDemo {
 		DateTime dateTime = new DateTime().withZone(DateTimeZone.UTC);
 
 		//打印中文与英文下不同长度的日期格式串
-		System.out.println("S:  " + formatDateTime(dateTime, "SS", "zh"));
-		System.out.println("M:  " + formatDateTime(dateTime, "MM", "zh"));
-		System.out.println("L:  " + formatDateTime(dateTime, "LL", "zh"));
-		System.out.println("XL: " + formatDateTime(dateTime, "FF", "zh"));
+		System.out.println("S:  " + DateUtils.formatDateTime(dateTime, "SS", "zh"));
+		System.out.println("M:  " + DateUtils.formatDateTime(dateTime, "MM", "zh"));
+		System.out.println("L:  " + DateUtils.formatDateTime(dateTime, "LL", "zh"));
+		System.out.println("XL: " + DateUtils.formatDateTime(dateTime, "FF", "zh"));
 		System.out.println("");
 
-		System.out.println("S:  " + formatDateTime(dateTime, "SS", "en"));
-		System.out.println("M:  " + formatDateTime(dateTime, "MM", "en"));
-		System.out.println("L:  " + formatDateTime(dateTime, "LL", "en"));
-		System.out.println("XL: " + formatDateTime(dateTime, "FF", "en"));
+		System.out.println("S:  " + DateUtils.formatDateTime(dateTime, "SS", "en"));
+		System.out.println("M:  " + DateUtils.formatDateTime(dateTime, "MM", "en"));
+		System.out.println("L:  " + DateUtils.formatDateTime(dateTime, "LL", "en"));
+		System.out.println("XL: " + DateUtils.formatDateTime(dateTime, "FF", "en"));
 		System.out.println("");
 		System.out.println("");
 
@@ -72,7 +71,7 @@ public class JodaDemo {
 		System.out.println("ML Mix: " + formatter.print(dateTime.getMillis()));
 
 		//只打印日期不打印时间
-		System.out.println("Date only :" + formatDateTime(dateTime, "M-", "zh"));
+		System.out.println("Date only :" + DateUtils.formatDateTime(dateTime, "M-", "zh"));
 
 	}
 
@@ -81,22 +80,7 @@ public class JodaDemo {
 
 		DateTime oneYearsAgo = now.minusYears(2).plusDays(20);
 		DateTime twoYearsAgo = now.minusYears(2);
-		Assert.isTrue(1 == getAge(oneYearsAgo));
-		Assert.isTrue(2 == getAge(twoYearsAgo));
-	}
-
-	/**
-	 * 根据生日获得年龄的Utils方法.
-	 */
-	public static int getAge(DateTime birthDate) {
-		return Years.yearsBetween(birthDate, new DateTime()).getYears();
-	}
-
-	/**
-	 * 打印各种语言各种长度默认格式的日期时间串的Utils方法.
-	 */
-	public static String formatDateTime(DateTime dateTime, String style, String lang) {
-		DateTimeFormatter formatter = DateTimeFormat.forStyle("M-").withLocale(new Locale(lang));
-		return dateTime.toString(formatter);
+		Assert.isTrue(1 == DateUtils.getAge(oneYearsAgo));
+		Assert.isTrue(2 == DateUtils.getAge(twoYearsAgo));
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springside.modules.utils.ConvertUtils;
 import org.springside.modules.utils.ReflectionUtils;
 
 import com.google.common.collect.Lists;
@@ -69,7 +70,7 @@ public class ReflectionUtilsTest extends Assert {
 
 		List list = Lists.newArrayList(bean1, bean2);
 
-		assertEquals("1,2", ReflectionUtils.convertElementPropertyToString(list, "id", ","));
+		assertEquals("1,2", ConvertUtils.convertElementPropertyToString(list, "id", ","));
 	}
 
 	@Test

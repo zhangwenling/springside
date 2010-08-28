@@ -15,7 +15,6 @@ import org.springframework.core.io.support.EncodedResource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.jdbc.SimpleJdbcTestUtils;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 子类需要定义applicationContext文件的位置, 如:
  * @ContextConfiguration(locations = { "/applicationContext-test.xml" })
  *  
- * @see AbstractTransactionalJUnit4SpringContextTests
+ * @see org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests
  * @see SpringContextTestCase
  * 
  * @author calvin

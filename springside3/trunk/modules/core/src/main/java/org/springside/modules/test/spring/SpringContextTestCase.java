@@ -15,7 +15,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
@@ -29,7 +28,7 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
  * 子类需要定义applicationContext文件的位置,如:
  * @ContextConfiguration(locations = { "/applicationContext-test.xml" })
  * 
- * @see AbstractJUnit4SpringContextTests
+ * @see org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests
  * 
  * @author calvin
  */

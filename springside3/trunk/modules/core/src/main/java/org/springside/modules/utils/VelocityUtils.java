@@ -1,4 +1,4 @@
-package org.springside.modules.orm.jdbc;
+package org.springside.modules.utils;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -12,7 +12,7 @@ import org.apache.velocity.app.Velocity;
  * 
  * @author calvin
  */
-public class SqlBuilder {
+public class VelocityUtils {
 
 	static {
 		try {

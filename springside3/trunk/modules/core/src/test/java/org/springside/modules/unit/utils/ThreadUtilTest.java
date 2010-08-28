@@ -46,18 +46,18 @@ public class ThreadUtilTest extends Assert {
 
 		//time enough to shutdown
 		ExecutorService pool = Executors.newSingleThreadExecutor();
-		Runnable task = new Task(logger, 100, 0);
+		Runnable task = new Task(logger, 1000, 0);
 		pool.execute(task);
-		ThreadUtils.gracefulShutdown(pool, 200, TimeUnit.MILLISECONDS);
+		ThreadUtils.gracefulShutdown(pool, 2000, 2000, TimeUnit.MILLISECONDS);
 		assertTrue(pool.isTerminated());
 		assertNull(appender.getFirstLog());
 
 		//time not enough to shutdown,call shutdownNow
 		appender.clearLogs();
 		pool = Executors.newSingleThreadExecutor();
-		task = new Task(logger, 200, 0);
+		task = new Task(logger, 2000, 0);
 		pool.execute(task);
-		ThreadUtils.gracefulShutdown(pool, 100, TimeUnit.MILLISECONDS);
+		ThreadUtils.gracefulShutdown(pool, 1000, 0, TimeUnit.MILLISECONDS);
 		assertTrue(pool.isTerminated());
 		assertEquals("InterruptedException", appender.getFirstLog().getMessage());
 
@@ -74,7 +74,7 @@ public class ThreadUtilTest extends Assert {
 			@Override
 			public void run() {
 				lock.countDown();
-				ThreadUtils.gracefulShutdown(pool2, 200000, TimeUnit.MILLISECONDS);
+				ThreadUtils.gracefulShutdown(pool2, 200000, 200000, TimeUnit.MILLISECONDS);
 			}
 		});
 		thread.start();
@@ -94,9 +94,9 @@ public class ThreadUtilTest extends Assert {
 		//time not enough to shutdown,call shutdownNow
 		appender.clearLogs();
 		ExecutorService pool = Executors.newSingleThreadExecutor();
-		Runnable task = new Task(logger, 200, 0);
+		Runnable task = new Task(logger, 2000, 0);
 		pool.execute(task);
-		ThreadUtils.normalShutdown(pool, 100, TimeUnit.MILLISECONDS);
+		ThreadUtils.normalShutdown(pool, 1000, TimeUnit.MILLISECONDS);
 		assertTrue(pool.isTerminated());
 		assertEquals("InterruptedException", appender.getFirstLog().getMessage());
 

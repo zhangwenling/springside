@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.ConvertUtils;
 import org.springside.modules.web.ServletUtils;
 
 /**
@@ -86,7 +86,7 @@ public class PropertyFilter {
 
 		Assert.isTrue(propertyNames.length > 0, "filter名称" + filterName + "没有按规则编写,无法得到属性名称.");
 		//按entity property中的类型将字符串转化为实际类型.
-		this.propertyValue = ReflectionUtils.convertStringToObject(value, propertyType);
+		this.propertyValue = ConvertUtils.convertStringToObject(value, propertyType);
 	}
 
 	/**
