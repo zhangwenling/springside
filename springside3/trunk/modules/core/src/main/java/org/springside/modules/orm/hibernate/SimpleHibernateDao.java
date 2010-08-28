@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2005-2009 springside.org.cn
+ * Copyright (c) 2005-2010 springside.org.cn
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
@@ -231,8 +231,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 根据查询HQL与参数列表创建Query对象.
-	 * 
-	 * 使用本函数取得Query对象后进行list()操作, 不像其他find()函数那样做泛型转换影响.
+	 * 与find()函数可进行更加灵活的操作.
 	 * 
 	 * @param values 数量可变的参数,按顺序绑定.
 	 */
@@ -249,8 +248,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 根据查询HQL与参数列表创建Query对象.
-	 * 
-	 * 使用本函数取得Query对象后进行list()操作, 不像其他find()函数那样做泛型转换影响.
+	 * 与find()函数可进行更加灵活的操作.
 	 * 
 	 * @param values 命名参数,按名称绑定.
 	 */
@@ -283,8 +281,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 根据Criterion条件创建Criteria.
-	 * 
-	 * 使用本函数取得Criteria对象后进行list()操作, 不像其他find()函数那样做泛型转换影响.
+	 * 与find()函数可进行更加灵活的操作.
 	 * 
 	 * @param criterions 数量可变的Criterion.
 	 */

@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.utils;
+package org.springside.modules.spring;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2005-2009 springside.org.cn
+ * Copyright (c) 2005-20010 springside.org.cn
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
@@ -20,9 +20,7 @@ import org.springside.modules.utils.ConvertUtils;
 import org.springside.modules.web.ServletUtils;
 
 /**
- * 与具体ORM实现无关的属性过滤条件封装类.
- * 
- * PropertyFilter主要记录页面中简单的搜索过滤条件,比Hibernate的Criterion要简单.
+ * 与具体ORM实现无关的属性过滤条件封装类, 主要记录页面中简单的搜索过滤条件.
  * 
  * @author calvin
  */
@@ -42,7 +40,7 @@ public class PropertyFilter {
 
 		private Class<?> clazz;
 
-		PropertyType(Class<?> clazz) {
+		private PropertyType(Class<?> clazz) {
 			this.clazz = clazz;
 		}
 
@@ -51,10 +49,11 @@ public class PropertyFilter {
 		}
 	}
 
-	private String[] propertyNames = null;
-	private Class<?> propertyType = null;
-	private Object propertyValue = null;
 	private MatchType matchType = null;
+	private Object matchValue = null;
+
+	private Class<?> propertyClass = null;
+	private String[] propertyNames = null;
 
 	public PropertyFilter() {
 	}
@@ -66,9 +65,10 @@ public class PropertyFilter {
 	 */
 	public PropertyFilter(final String filterName, final String value) {
 
-		String matchTypeStr = StringUtils.substringBefore(filterName, "_");
-		String matchTypeCode = StringUtils.substring(matchTypeStr, 0, matchTypeStr.length() - 1);
-		String propertyTypeCode = StringUtils.substring(matchTypeStr, matchTypeStr.length() - 1, matchTypeStr.length());
+		String firstPart = StringUtils.substringBefore(filterName, "_");
+		String matchTypeCode = StringUtils.substring(firstPart, 0, firstPart.length() - 1);
+		String propertyTypeCode = StringUtils.substring(firstPart, firstPart.length() - 1, firstPart.length());
+
 		try {
 			matchType = Enum.valueOf(MatchType.class, matchTypeCode);
 		} catch (RuntimeException e) {
@@ -76,31 +76,29 @@ public class PropertyFilter {
 		}
 
 		try {
-			propertyType = Enum.valueOf(PropertyType.class, propertyTypeCode).getValue();
+			propertyClass = Enum.valueOf(PropertyType.class, propertyTypeCode).getValue();
 		} catch (RuntimeException e) {
 			throw new IllegalArgumentException("filter名称" + filterName + "没有按规则编写,无法得到属性值类型.", e);
 		}
 
 		String propertyNameStr = StringUtils.substringAfter(filterName, "_");
-		propertyNames = StringUtils.split(propertyNameStr, PropertyFilter.OR_SEPARATOR);
+		Assert.isTrue(StringUtils.isNotBlank(propertyNameStr), "filter名称" + filterName + "没有按规则编写,无法得到属性名称.");
+		propertyNames = StringUtils.splitByWholeSeparator(propertyNameStr, PropertyFilter.OR_SEPARATOR);
 
-		Assert.isTrue(propertyNames.length > 0, "filter名称" + filterName + "没有按规则编写,无法得到属性名称.");
-		//按entity property中的类型将字符串转化为实际类型.
-		this.propertyValue = ConvertUtils.convertStringToObject(value, propertyType);
+		this.matchValue = ConvertUtils.convertStringToObject(value, propertyClass);
 	}
 
 	/**
-	 * 根据按PropertyFilter命名规则的Request参数,创建PropertyFilter列表.
-	 * 默认Filter属性名前缀为filter_.
+	 * 从HttpRequest中创建PropertyFilter列表, 默认Filter属性名前缀为filter_.
 	 * 
 	 * @see #buildPropertyFilters(HttpServletRequest, String)
 	 */
 	public static List<PropertyFilter> buildPropertyFilters(final HttpServletRequest request) {
-		return buildPropertyFilters(request, "filter_");
+		return buildPropertyFilters(request, "filter");
 	}
 
 	/**
-	 * 根据按PropertyFilter命名规则的Request参数,创建PropertyFilter列表.
+	 * 从HttpRequest中创建PropertyFilter列表
 	 * PropertyFilter命名规则为Filter属性前缀_比较类型属性类型_属性名.
 	 * 
 	 * eg.
@@ -112,7 +110,7 @@ public class PropertyFilter {
 		List<PropertyFilter> filterList = new ArrayList<PropertyFilter>();
 
 		//从request中获取含属性前缀名的参数,构造去除前缀名后的参数Map.
-		Map<String, String> filterParamMap = ServletUtils.getParametersStartingWith(request, filterPrefix);
+		Map<String, String> filterParamMap = ServletUtils.getParametersStartingWith(request, filterPrefix + "_");
 
 		//分析参数Map,构造PropertyFilter列表
 		for (Map.Entry<String, String> entry : filterParamMap.entrySet()) {
@@ -124,14 +122,29 @@ public class PropertyFilter {
 				filterList.add(filter);
 			}
 		}
+
 		return filterList;
 	}
 
 	/**
-	 * 是否比较多个属性.
+	 * 获取比较值的类型.
 	 */
-	public boolean hasMultiProperties() {
-		return (propertyNames.length > 1);
+	public Class<?> getPropertyClass() {
+		return propertyClass;
+	}
+
+	/**
+	 * 获取比较方式.
+	 */
+	public MatchType getMatchType() {
+		return matchType;
+	}
+
+	/**
+	 * 获取比较值.
+	 */
+	public Object getMatchValue() {
+		return matchValue;
 	}
 
 	/**
@@ -145,30 +158,14 @@ public class PropertyFilter {
 	 * 获取唯一的比较属性名称.
 	 */
 	public String getPropertyName() {
-		if (propertyNames.length > 1) {
-			throw new IllegalArgumentException("There are not only one property");
-		}
+		Assert.isTrue(propertyNames.length == 1, "There are not only one property in this filter.");
 		return propertyNames[0];
 	}
 
 	/**
-	 * 获取比较值.
+	 * 是否比较多个属性.
 	 */
-	public Object getPropertyValue() {
-		return propertyValue;
-	}
-
-	/**
-	 * 获取比较值的类型.
-	 */
-	public Class<?> getPropertyType() {
-		return propertyType;
-	}
-
-	/**
-	 * 获取比较方式类型.
-	 */
-	public MatchType getMatchType() {
-		return matchType;
+	public boolean hasMultiProperties() {
+		return (propertyNames.length > 1);
 	}
 }

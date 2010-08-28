@@ -22,43 +22,43 @@ public class PropertyFilterTest extends Assert {
 		//Boolean EQ filter
 		PropertyFilter booleanEqFilter = new PropertyFilter("EQB_foo", "true");
 		assertEquals(MatchType.EQ, booleanEqFilter.getMatchType());
-		assertEquals(Boolean.class, booleanEqFilter.getPropertyType());
-		assertEquals(true, booleanEqFilter.getPropertyValue());
+		assertEquals(Boolean.class, booleanEqFilter.getPropertyClass());
+		assertEquals(true, booleanEqFilter.getMatchValue());
 
 		//Date LT filter
 		PropertyFilter dateLtFilter = new PropertyFilter("LTD_foo", "2046-01-01");
 		assertEquals(MatchType.LT, dateLtFilter.getMatchType());
-		assertEquals(Date.class, dateLtFilter.getPropertyType());
+		assertEquals(Date.class, dateLtFilter.getPropertyClass());
 		assertEquals("foo", dateLtFilter.getPropertyName());
-		assertEquals(new DateTime(2046, 1, 1, 0, 0, 0, 0).toDate(), dateLtFilter.getPropertyValue());
+		assertEquals(new DateTime(2046, 1, 1, 0, 0, 0, 0).toDate(), dateLtFilter.getMatchValue());
 
 		//Integer GT filter
 		PropertyFilter intGtFilter = new PropertyFilter("GTI_foo", "123");
 		assertEquals(MatchType.GT, intGtFilter.getMatchType());
-		assertEquals(Integer.class, intGtFilter.getPropertyType());
+		assertEquals(Integer.class, intGtFilter.getPropertyClass());
 		assertEquals("foo", intGtFilter.getPropertyName());
-		assertEquals(123, intGtFilter.getPropertyValue());
+		assertEquals(123, intGtFilter.getMatchValue());
 
 		//Double LE filter
 		PropertyFilter doubleLeFilter = new PropertyFilter("LEN_foo", "12.33");
 		assertEquals(MatchType.LE, doubleLeFilter.getMatchType());
-		assertEquals(Double.class, doubleLeFilter.getPropertyType());
+		assertEquals(Double.class, doubleLeFilter.getPropertyClass());
 		assertEquals("foo", doubleLeFilter.getPropertyName());
-		assertEquals(12.33, doubleLeFilter.getPropertyValue());
+		assertEquals(12.33, doubleLeFilter.getMatchValue());
 
 		//Long GE filter
 		PropertyFilter longGeFilter = new PropertyFilter("GEL_foo", "123456789");
 		assertEquals(MatchType.GE, longGeFilter.getMatchType());
-		assertEquals(Long.class, longGeFilter.getPropertyType());
+		assertEquals(Long.class, longGeFilter.getPropertyClass());
 		assertEquals("foo", longGeFilter.getPropertyName());
-		assertEquals(123456789L, longGeFilter.getPropertyValue());
+		assertEquals(123456789L, longGeFilter.getMatchValue());
 
 		//Like OR filter
 		PropertyFilter likeOrFilter = new PropertyFilter("LIKES_foo_OR_bar", "hello");
 		assertEquals(MatchType.LIKE, likeOrFilter.getMatchType());
-		assertEquals(String.class, likeOrFilter.getPropertyType());
+		assertEquals(String.class, likeOrFilter.getPropertyClass());
 		assertArrayEquals(new String[] { "foo", "bar" }, likeOrFilter.getPropertyNames());
-		assertEquals("hello", likeOrFilter.getPropertyValue());
+		assertEquals("hello", likeOrFilter.getMatchValue());
 	}
 
 	@Test
@@ -87,25 +87,30 @@ public class PropertyFilterTest extends Assert {
 
 	@Test
 	public void buildPropertyFiltersFromHttpRequest() {
+		//normal case
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		request.setParameter("filter_EQS_loginName", "abcd");
-		request.setParameter("filter_LIKES_name_OR_email", "efg");
-
 		List<PropertyFilter> filters = PropertyFilter.buildPropertyFilters(request);
 
-		assertEquals(2, filters.size());
+		assertEquals(1, filters.size());
+		PropertyFilter filter = filters.get(0);
+		assertEquals(PropertyFilter.MatchType.EQ, filter.getMatchType());
+		assertEquals("loginName", filter.getPropertyName());
+		assertEquals(String.class, filter.getPropertyClass());
+		assertEquals("abcd", filter.getMatchValue());
 
-		PropertyFilter filter1 = filters.get(0);
-		assertEquals(PropertyFilter.MatchType.EQ, filter1.getMatchType());
-		assertEquals("loginName", filter1.getPropertyName());
-		assertEquals(String.class, filter1.getPropertyType());
-		assertEquals("abcd", filter1.getPropertyValue());
+		//filter prefix name is prefix 
+		request = new MockHttpServletRequest();
+		request.setParameter("prefix_EQS_loginName", "abcd");
+		filters = PropertyFilter.buildPropertyFilters(request, "prefix");
+		assertEquals(1, filters.size());
+		assertEquals(PropertyFilter.MatchType.EQ, filters.get(0).getMatchType());
 
-		PropertyFilter filter2 = filters.get(1);
-		assertEquals(PropertyFilter.MatchType.LIKE, filter2.getMatchType());
-		assertEquals(String.class, filter2.getPropertyType());
-		assertEquals(true, filter2.hasMultiProperties());
-		assertEquals("efg", filter2.getPropertyValue());
+		//ignore filter without value
+		request = new MockHttpServletRequest();
+		request.setParameter("filter_EQS_loginName", "");
+		filters = PropertyFilter.buildPropertyFilters(request);
+		assertEquals(0, filters.size());
+
 	}
-
 }

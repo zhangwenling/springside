@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2005-2009 springside.org.cn
+ * Copyright (c) 2005-2010 springside.org.cn
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
@@ -158,6 +158,9 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 设置分页参数到Query对象,辅助函数.
 	 */
 	protected Query setPageParameterToQuery(final Query q, final Page<T> page) {
+
+		Assert.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
+
 		//hibernate的firstResult的序号从0开始
 		q.setFirstResult(page.getFirst() - 1);
 		q.setMaxResults(page.getPageSize());
@@ -168,6 +171,9 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 设置分页参数到Criteria对象,辅助函数.
 	 */
 	protected Criteria setPageParameterToCriteria(final Criteria c, final Page<T> page) {
+
+		Assert.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
+
 		//hibernate的firstResult的序号从0开始
 		c.setFirstResult(page.getFirst() - 1);
 		c.setMaxResults(page.getPageSize());
@@ -336,13 +342,13 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		List<Criterion> criterionList = new ArrayList<Criterion>();
 		for (PropertyFilter filter : filters) {
 			if (!filter.hasMultiProperties()) { //只有一个属性需要比较的情况.
-				Criterion criterion = buildCriterion(filter.getPropertyName(), filter.getPropertyValue(), filter
+				Criterion criterion = buildCriterion(filter.getPropertyName(), filter.getMatchValue(), filter
 						.getMatchType());
 				criterionList.add(criterion);
 			} else {//包含多个属性需要比较的情况,进行or处理.
 				Disjunction disjunction = Restrictions.disjunction();
 				for (String param : filter.getPropertyNames()) {
-					Criterion criterion = buildCriterion(param, filter.getPropertyValue(), filter.getMatchType());
+					Criterion criterion = buildCriterion(param, filter.getMatchValue(), filter.getMatchType());
 					disjunction.add(criterion);
 				}
 				criterionList.add(disjunction);

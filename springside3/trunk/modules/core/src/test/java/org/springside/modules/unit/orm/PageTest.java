@@ -19,16 +19,13 @@ public class PageTest extends Assert {
 	@Test
 	public void defaultParameter() {
 		assertEquals(1, page.getPageNo());
-		assertEquals(1, page.getPageSize());
+		assertEquals(-1, page.getPageSize());
 		assertEquals(-1, page.getTotalCount());
 		assertEquals(-1, page.getTotalPages());
 		assertEquals(true, page.isAutoCount());
 
 		page.setPageNo(-1);
 		assertEquals(1, page.getPageNo());
-
-		page.setPageSize(-1);
-		assertEquals(1, page.getPageSize());
 
 		assertNull(page.getOrder());
 		assertNull(page.getOrderBy());
@@ -40,7 +37,7 @@ public class PageTest extends Assert {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void checkInValidOrderParameter() {
+	public void checkInvalidOrderParameter() {
 		page.setOrder("asc,abcd");
 	}
 
@@ -102,5 +99,16 @@ public class PageTest extends Assert {
 
 		page.setPageNo(2);
 		assertEquals(2, page.getNextPage());
+	}
+
+	@Test
+	public void setAllParameterInOneLine() {
+		page.pageNo(2).pageSize(10).orderBy("abc").order(Page.ASC).autoCount(true);
+
+		assertEquals(2, page.getPageNo());
+		assertEquals(10, page.getPageSize());
+		assertEquals("abc", page.getOrderBy());
+		assertEquals(Page.ASC, page.getOrder());
+		assertEquals(true, page.isAutoCount());
 	}
 }

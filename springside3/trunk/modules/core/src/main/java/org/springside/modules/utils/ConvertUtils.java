@@ -15,6 +15,8 @@ public class ConvertUtils {
 	static {
 		DateConverter dc = new DateConverter();
 		dc.setUseLocaleFormat(true);
+		//TODO hardcode CHINESE locale is not good.
+		dc.setPatterns(new String[] { "yyyy-MM-dd", "yyyy-MM-dd hh:mm:ss" });
 		org.apache.commons.beanutils.ConvertUtils.register(dc, Date.class);
 	}
 

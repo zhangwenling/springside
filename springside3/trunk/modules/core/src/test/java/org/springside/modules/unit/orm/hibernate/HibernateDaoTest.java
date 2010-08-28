@@ -85,7 +85,6 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		page.setPageNo(2);
 		dao.findPage(page, "from User u where email like :email", paraMap);
 		assertEquals(1, page.getResult().size());
-
 	}
 
 	@Test

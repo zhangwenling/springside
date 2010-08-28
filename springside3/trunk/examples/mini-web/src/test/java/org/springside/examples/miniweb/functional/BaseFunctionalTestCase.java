@@ -13,12 +13,12 @@ import org.mortbay.jetty.Server;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.springside.examples.miniweb.tools.Start;
+import org.springside.modules.spring.SpringContextHolder;
 import org.springside.modules.test.groups.GroupsTestRunner;
 import org.springside.modules.test.utils.DbUnitUtils;
 import org.springside.modules.test.utils.JettyUtils;
 import org.springside.modules.test.utils.SeleniumUtils;
 import org.springside.modules.utils.PropertiesUtils;
-import org.springside.modules.utils.SpringContextHolder;
 
 /**
  * 功能测试基类.

@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2005-2010 springside.org.cn
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * 
+ * $Id: HibernateDao.java 1179 2010-08-26 16:44:26Z calvinxiu $
+ */
 package org.springside.modules.orm.hibernate;
 
 import org.hibernate.cfg.reveng.DelegatingReverseEngineeringStrategy;

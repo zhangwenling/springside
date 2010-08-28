@@ -9,7 +9,7 @@ import org.springside.modules.log.MockLog4jAppender;
 public class MockLog4jAppenderTest extends Assert {
 
 	@Test
-	public void normalCase() {
+	public void normal() {
 		String testString1 = "Hello";
 		String testString2 = "World";
 		MockLog4jAppender appender = new MockLog4jAppender();
@@ -35,7 +35,7 @@ public class MockLog4jAppenderTest extends Assert {
 	}
 
 	@Test
-	public void addAndRemove() {
+	public void addAndRemoveAppender() {
 		String testString = "Hello";
 		Logger logger = LoggerFactory.getLogger(MockLog4jAppenderTest.class);
 		MockLog4jAppender appender = new MockLog4jAppender();

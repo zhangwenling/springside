@@ -71,9 +71,12 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 		user.setName("boo");
 		dao.save(user);
 		dao.flush();
-		//delete
+
+		//delete object
 		dao.delete(user);
 		dao.flush();
+
+		//delete by id
 		User user2 = new User();
 		user2.setName("foo2");
 		user2.setLoginName("foo2");
@@ -84,15 +87,19 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 	}
 
 	@Test
-	public void getAll() {
+	public void getSome() {
+		//get all
 		List<User> users = dao.getAll();
 		assertEquals(6, users.size());
 
+		//get all with order
 		users = dao.getAll("id", true);
 		assertEquals(6, users.size());
 		assertEquals(DEFAULT_LOGIN_NAME, users.get(0).getLoginName());
 
+		//get by id list
 		users = dao.get(Lists.newArrayList(1L, 2L));
+		assertEquals(2, users.size());
 	}
 
 	@Test
@@ -134,8 +141,6 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 
 		User user = dao.findUnique(c);
 		assertEquals(DEFAULT_LOGIN_NAME, user.getLoginName());
-
-		dao.findUnique(c);
 	}
 
 	@SuppressWarnings("unchecked")
