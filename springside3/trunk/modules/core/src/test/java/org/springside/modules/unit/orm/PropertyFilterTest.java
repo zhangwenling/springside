@@ -90,7 +90,7 @@ public class PropertyFilterTest extends Assert {
 		//normal case
 		MockHttpServletRequest request = new MockHttpServletRequest();
 		request.setParameter("filter_EQS_loginName", "abcd");
-		List<PropertyFilter> filters = PropertyFilter.buildPropertyFilters(request);
+		List<PropertyFilter> filters = PropertyFilter.buildFromHttpRequest(request);
 
 		assertEquals(1, filters.size());
 		PropertyFilter filter = filters.get(0);
@@ -102,14 +102,14 @@ public class PropertyFilterTest extends Assert {
 		//filter prefix name is prefix 
 		request = new MockHttpServletRequest();
 		request.setParameter("prefix_EQS_loginName", "abcd");
-		filters = PropertyFilter.buildPropertyFilters(request, "prefix");
+		filters = PropertyFilter.buildFromHttpRequest(request, "prefix");
 		assertEquals(1, filters.size());
 		assertEquals(PropertyFilter.MatchType.EQ, filters.get(0).getMatchType());
 
 		//ignore filter without value
 		request = new MockHttpServletRequest();
 		request.setParameter("filter_EQS_loginName", "");
-		filters = PropertyFilter.buildPropertyFilters(request);
+		filters = PropertyFilter.buildFromHttpRequest(request);
 		assertEquals(0, filters.size());
 
 	}

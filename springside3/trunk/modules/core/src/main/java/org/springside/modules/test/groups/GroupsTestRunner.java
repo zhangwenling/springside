@@ -121,7 +121,7 @@ public class GroupsTestRunner extends BlockJUnit4ClassRunner {
 	/**
 	 * 从环境变量读取test.groups定义, 多个group用逗号分隔.
 	 * eg. java -Dtest.groups=Mini,Major
-	 * 如果均无定义则返回ALL.
+	 * 如果无定义则返回ALL.
 	 */
 	protected static void initGroups() {
 

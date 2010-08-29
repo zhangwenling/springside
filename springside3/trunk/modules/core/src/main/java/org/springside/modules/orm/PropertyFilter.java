@@ -89,12 +89,12 @@ public class PropertyFilter {
 	}
 
 	/**
-	 * 从HttpRequest中创建PropertyFilter列表, 默认Filter属性名前缀为filter_.
+	 * 从HttpRequest中创建PropertyFilter列表, 默认Filter属性名前缀为filter.
 	 * 
-	 * @see #buildPropertyFilters(HttpServletRequest, String)
+	 * @see #buildFromHttpRequest(HttpServletRequest, String)
 	 */
-	public static List<PropertyFilter> buildPropertyFilters(final HttpServletRequest request) {
-		return buildPropertyFilters(request, "filter");
+	public static List<PropertyFilter> buildFromHttpRequest(final HttpServletRequest request) {
+		return buildFromHttpRequest(request, "filter");
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class PropertyFilter {
 	 * filter_LIKES_name_OR_email
 	 */
 	@SuppressWarnings("unchecked")
-	public static List<PropertyFilter> buildPropertyFilters(final HttpServletRequest request, final String filterPrefix) {
+	public static List<PropertyFilter> buildFromHttpRequest(final HttpServletRequest request, final String filterPrefix) {
 		List<PropertyFilter> filterList = new ArrayList<PropertyFilter>();
 
 		//从request中获取含属性前缀名的参数,构造去除前缀名后的参数Map.

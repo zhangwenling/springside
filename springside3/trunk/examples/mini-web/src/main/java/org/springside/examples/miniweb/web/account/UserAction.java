@@ -64,7 +64,7 @@ public class UserAction extends CrudActionSupport<User> {
 	//-- CRUD Action 函数 --//
 	@Override
 	public String list() throws Exception {
-		List<PropertyFilter> filters = PropertyFilter.buildPropertyFilters(Struts2Utils.getRequest());
+		List<PropertyFilter> filters = PropertyFilter.buildFromHttpRequest(Struts2Utils.getRequest());
 		//设置默认排序方式
 		if (!page.isOrderBySetted()) {
 			page.setOrderBy("id");

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * 以静态变量保存Spring ApplicationContext, 可在任何代码任何地方任何时候中取出ApplicaitonContext.
@@ -43,7 +44,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	 */
 	@Override
 	public void destroy() throws Exception {
-		SpringContextHolder.cleanApplicationContext();
+		SpringContextHolder.clearHolder();
 	}
 
 	/**
@@ -72,11 +73,25 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	}
 
 	/**
-	 * applicationContext静态变量置为Null.
+	 * 为静态变量applicationContext注册ShutdownHook, 在程序关闭时调用close()方法.
 	 */
-	public static void cleanApplicationContext() {
+	public static void registerShutdownHook() {
+		((ConfigurableApplicationContext) applicationContext).registerShutdownHook();
+	}
+
+	/**
+	 * 清除SpringContextHolder中的ApplicationContext为Null.
+	 */
+	public static void clearHolder() {
 		logger.debug("清除SpringContextHolder中的ApplicationContext:" + applicationContext);
 		applicationContext = null;
+	}
+
+	/**
+	 * 调用静态变量applicationContext的close()方法.
+	 */
+	public static void closeApplicationContext() {
+		((ConfigurableApplicationContext) applicationContext).close();
 	}
 
 	/**

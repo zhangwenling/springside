@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
- * $Id: HibernateDao.java 1179 2010-08-26 16:44:26Z calvinxiu $
+ * $Id$
  */
 package org.springside.modules.orm.hibernate;
 

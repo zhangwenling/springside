@@ -73,7 +73,7 @@ public class SpringSecurityUtils {
 	/**
 	 * 判断用户是否拥有角色, 如果用户拥有参数中的任意一个角色则返回true.
 	 */
-	public static boolean hasAnyRole(String[] roles) {
+	public static boolean hasAnyRole(String... roles) {
 		Authentication authentication = getAuthentication();
 		if (authentication == null) {
 			return false;
@@ -94,14 +94,14 @@ public class SpringSecurityUtils {
 	 * 将UserDetails保存到Security Context.
 	 * 
 	 * @param userDetails 已初始化好的用户信息.
-	 * @param request 用于获取用户IP地址信息.
+	 * @param request 用于获取用户IP地址信息,可为Null.
 	 */
 	public static void saveUserDetailsToContext(UserDetails userDetails, HttpServletRequest request) {
 		PreAuthenticatedAuthenticationToken authentication = new PreAuthenticatedAuthenticationToken(userDetails,
 				userDetails.getPassword(), userDetails.getAuthorities());
-
-		authentication.setDetails(new WebAuthenticationDetails(request));
-
+		if (request != null) {
+			authentication.setDetails(new WebAuthenticationDetails(request));
+		}
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 

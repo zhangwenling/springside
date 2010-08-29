@@ -1,4 +1,4 @@
-package org.springside.modules.unit.utils;
+package org.springside.modules.unit.spring;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,7 +12,7 @@ public class SpringContextHolderTest extends Assert {
 	@Test
 	public void testGetBean() {
 
-		SpringContextHolder.cleanApplicationContext();
+		SpringContextHolder.clearHolder();
 		try {
 			SpringContextHolder.getBean("foo");
 			fail("No exception throw for applicationContxt hadn't been init.");
