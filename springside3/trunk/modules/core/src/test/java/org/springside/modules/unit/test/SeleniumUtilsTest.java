@@ -1,4 +1,4 @@
-package org.springside.modules.unit.utils;
+package org.springside.modules.unit.test;
 
 import java.net.MalformedURLException;
 import java.net.URL;

@@ -26,18 +26,12 @@
 	<broker xmlns="http://activemq.apache.org/schema/core" brokerName="activemq1" dataDirectory="${activemq.base}/data"
 		destroyApplicationContextOnStop="true">
 
-		<!-- 启动预定义的Queue与Topic示例 -->
-		<destinations>
-			<queue physicalName="Q.ADVANCED.NOTIFY" />
-		</destinations>
-
 		<!--
 			For better performances use VM cursor and small memory limit. For more information, see:
 
 			http://activemq.apache.org/message-cursors.html Also, if your producer is "hanging", it's probably due to producer
 			flow control. For more information, see: http://activemq.apache.org/producer-flow-control.html
 		-->
-
 		<destinationPolicy>
 			<policyMap>
 				<policyEntries>
@@ -108,8 +102,7 @@
 			see: http://activemq.apache.org/configuring-transports.html
 		-->
 		<transportConnectors>
-			<transportConnector name="openwire" uri="tcp://0.0.0.0:61616" discoveryUri="multicast://239.255.2.3:6155?group=springside"
-				updateClusterClients="true" updateClusterClientsOnRemove="ture" rebalanceClusterClients="true"/>
+			<transportConnector name="openwire" uri="tcp://0.0.0.0:61616" discoveryUri="multicast://239.255.2.3:6155?group=springside" />
 		</transportConnectors>
 
 	</broker>

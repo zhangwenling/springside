@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2005-2010 springside.org.cn
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * 
+ * $Id$
+ */
 package org.springside.modules.test.utils;
 
 import java.io.IOException;
@@ -24,7 +31,9 @@ public class DbUnitUtils {
 	private static ResourceLoader resourceLoader = new DefaultResourceLoader();
 
 	/**
-	 * 初始化XML数据文件到H2数据库, XML数据文件中涉及的表在插入数据前先进行清除. 
+	 * 清除并插入XML数据文件到H2数据库.
+	 * 
+	 * XML数据文件中涉及的表在插入数据前会先进行清除. 
 	 */
 	public static void loadData(DataSource h2DataSource, String... xmlFilePaths) throws Exception {
 		execute(DatabaseOperation.CLEAN_INSERT, h2DataSource, xmlFilePaths);

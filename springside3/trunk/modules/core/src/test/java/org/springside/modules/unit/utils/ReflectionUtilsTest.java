@@ -135,7 +135,7 @@ public class ReflectionUtilsTest extends Assert {
 
 	public static class TestBean3 {
 
-		int id;
+		private int id;
 
 		public int getId() {
 			return id;

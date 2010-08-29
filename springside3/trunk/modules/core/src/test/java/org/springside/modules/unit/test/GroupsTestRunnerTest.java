@@ -24,11 +24,15 @@ public class GroupsTestRunnerTest extends Assert {
 	@SuppressWarnings("unchecked")
 	public void groupsInit() throws InitializationError {
 		GroupsTestRunner groupsTestRunner = new GroupsTestRunner(GroupsTestRunnerTest.class);
+		//Get DAILY,NIGHTLY from system properties.
 		ReflectionUtils.invokeMethod(groupsTestRunner, "initGroups", null, null);
-
 		assertEquals("DAILY", ((List<String>) ReflectionUtils.getFieldValue(groupsTestRunner, "groups")).get(0));
 		assertEquals("NIGHTLY", ((List<String>) ReflectionUtils.getFieldValue(groupsTestRunner, "groups")).get(1));
 
+		//Get all while system property is ""
+		System.setProperty(GroupsTestRunner.PROPERTY_NAME, "");
+		ReflectionUtils.invokeMethod(groupsTestRunner, "initGroups", null, null);
+		assertEquals("all", ((List<String>) ReflectionUtils.getFieldValue(groupsTestRunner, "groups")).get(0));
 	}
 
 	@Test

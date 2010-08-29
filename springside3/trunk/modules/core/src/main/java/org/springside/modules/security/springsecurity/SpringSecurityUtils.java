@@ -34,13 +34,17 @@ public class SpringSecurityUtils {
 	@SuppressWarnings("unchecked")
 	public static <T extends User> T getCurrentUser() {
 		Authentication authentication = getAuthentication();
-		if (authentication != null) {
-			Object principal = authentication.getPrincipal();
-			if (principal instanceof User) {
-				return (T) principal;
-			}
+
+		if (authentication == null) {
+			return null;
 		}
-		return null;
+
+		Object principal = authentication.getPrincipal();
+		if (!(principal instanceof User)) {
+			return null;
+		}
+
+		return (T) principal;
 	}
 
 	/**
@@ -48,10 +52,12 @@ public class SpringSecurityUtils {
 	 */
 	public static String getCurrentUserName() {
 		Authentication authentication = getAuthentication();
-		if (authentication != null && authentication.getPrincipal() != null) {
-			return authentication.getName();
+
+		if (authentication == null || authentication.getPrincipal() == null) {
+			return "";
 		}
-		return "";
+
+		return authentication.getName();
 	}
 
 	/**
@@ -59,15 +65,18 @@ public class SpringSecurityUtils {
 	 */
 	public static String getCurrentUserIp() {
 		Authentication authentication = getAuthentication();
-		if (authentication != null) {
-			Object details = authentication.getDetails();
-			if (details instanceof WebAuthenticationDetails) {
-				WebAuthenticationDetails webDetails = (WebAuthenticationDetails) details;
-				return webDetails.getRemoteAddress();
-			}
+
+		if (authentication == null) {
+			return "";
 		}
 
-		return "";
+		Object details = authentication.getDetails();
+		if (!(details instanceof WebAuthenticationDetails)) {
+			return "";
+		}
+
+		WebAuthenticationDetails webDetails = (WebAuthenticationDetails) details;
+		return webDetails.getRemoteAddress();
 	}
 
 	/**
@@ -75,6 +84,7 @@ public class SpringSecurityUtils {
 	 */
 	public static boolean hasAnyRole(String... roles) {
 		Authentication authentication = getAuthentication();
+
 		if (authentication == null) {
 			return false;
 		}
@@ -87,6 +97,7 @@ public class SpringSecurityUtils {
 				}
 			}
 		}
+
 		return false;
 	}
 
@@ -99,9 +110,11 @@ public class SpringSecurityUtils {
 	public static void saveUserDetailsToContext(UserDetails userDetails, HttpServletRequest request) {
 		PreAuthenticatedAuthenticationToken authentication = new PreAuthenticatedAuthenticationToken(userDetails,
 				userDetails.getPassword(), userDetails.getAuthorities());
+
 		if (request != null) {
 			authentication.setDetails(new WebAuthenticationDetails(request));
 		}
+
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 
@@ -110,9 +123,11 @@ public class SpringSecurityUtils {
 	 */
 	private static Authentication getAuthentication() {
 		SecurityContext context = SecurityContextHolder.getContext();
-		if (context != null) {
-			return context.getAuthentication();
+
+		if (context == null) {
+			return null;
 		}
-		return null;
+
+		return context.getAuthentication();
 	}
 }

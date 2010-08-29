@@ -1,9 +1,10 @@
-/*
- * $HeadURL$
+/**
+ * Copyright (c) 2005-2010 springside.org.cn
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * 
  * $Id$
- * Copyright (c) 2010 by Ericsson, all rights reserved.
  */
-
 package org.springside.modules.test.utils;
 
 import java.net.URL;

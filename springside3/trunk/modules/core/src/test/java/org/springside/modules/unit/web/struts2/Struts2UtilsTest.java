@@ -98,8 +98,8 @@ public class Struts2UtilsTest extends Assert {
 	}
 
 	public class TestBean {
-		int age = 10;
-		String name = "foo";
+		private int age = 10;
+		private String name = "foo";
 
 		public int getAge() {
 			return age;

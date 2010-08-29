@@ -91,4 +91,16 @@ public class SpringSecurityUtilsTest extends Assert {
 		Mockit.tearDownMocks();
 	}
 
+	@Test
+	public void saveUserDetailsToContext() {
+		MockHttpServletRequest request = new MockHttpServletRequest();
+		request.setRemoteAddr("localhost");
+		List<GrantedAuthority> list = Lists.newArrayList((GrantedAuthority) new GrantedAuthorityImpl("role_foo"));
+		User user = new User(USER_NAME, "bar", false, false, false, false, list);
+
+		SpringSecurityUtils.saveUserDetailsToContext(user, request);
+
+		assertEquals(USER_NAME, SpringSecurityUtils.getCurrentUserName());
+		assertEquals("localhost", SpringSecurityUtils.getCurrentUserIp());
+	}
 }
