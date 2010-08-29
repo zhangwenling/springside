@@ -25,6 +25,9 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 import org.springside.modules.utils.PropertiesUtils;
 
+/**
+ * 使用DBUnit初始化测试用H2嵌入式数据库数据的工具类.
+ */
 public class DbUnitUtils {
 
 	private static Logger logger = LoggerFactory.getLogger(PropertiesUtils.class);
@@ -34,6 +37,8 @@ public class DbUnitUtils {
 	 * 清除并插入XML数据文件到H2数据库.
 	 * 
 	 * XML数据文件中涉及的表在插入数据前会先进行清除. 
+	 * 
+	 * @param xmlFilePaths 符合Spring Resource路径格式的文件列表.
 	 */
 	public static void loadData(DataSource h2DataSource, String... xmlFilePaths) throws Exception {
 		execute(DatabaseOperation.CLEAN_INSERT, h2DataSource, xmlFilePaths);
@@ -54,7 +59,9 @@ public class DbUnitUtils {
 	}
 
 	/**
-	 * 在ClassPath中查找XML数据文件并执行DBUnit Operation.
+	 * 按DBUnit Operation执行XML数据文件的数据.
+	 * 
+	 * @param xmlFilePaths 符合Spring Resource路径格式的文件列表.
 	 */
 	private static void execute(DatabaseOperation operation, DataSource h2DataSource, String... xmlFilePaths)
 			throws DatabaseUnitException, SQLException {

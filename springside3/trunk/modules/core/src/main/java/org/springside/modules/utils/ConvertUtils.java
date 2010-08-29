@@ -11,13 +11,8 @@ import org.apache.commons.lang.StringUtils;
 
 public class ConvertUtils {
 
-	//定义日期Converter的格式
 	static {
-		DateConverter dc = new DateConverter();
-		dc.setUseLocaleFormat(true);
-		//TODO hardcode CHINESE locale is not good.
-		dc.setPatterns(new String[] { "yyyy-MM-dd", "yyyy-MM-dd hh:mm:ss" });
-		org.apache.commons.beanutils.ConvertUtils.register(dc, Date.class);
+		registerDateConverter();
 	}
 
 	/**
@@ -58,8 +53,8 @@ public class ConvertUtils {
 	/**
 	 * 转换字符串到相应类型.
 	 * 
-	 * @param value 待转换的字符串
-	 * @param toType 转换目标类型
+	 * @param value 待转换的字符串.
+	 * @param toType 转换目标类型.
 	 */
 	public static Object convertStringToObject(String value, Class<?> toType) {
 		try {
@@ -68,4 +63,16 @@ public class ConvertUtils {
 			throw ReflectionUtils.convertReflectionExceptionToUnchecked(e);
 		}
 	}
+
+	/**
+	 * 定义日期Converter的格式
+	 */
+	private static void registerDateConverter() {
+		DateConverter dc = new DateConverter();
+		dc.setUseLocaleFormat(true);
+		//TODO 硬编码 CHINESE locale格式不是个好的做法.
+		dc.setPatterns(new String[] { "yyyy-MM-dd", "yyyy-MM-dd hh:mm:ss" });
+		org.apache.commons.beanutils.ConvertUtils.register(dc, Date.class);
+	}
+
 }

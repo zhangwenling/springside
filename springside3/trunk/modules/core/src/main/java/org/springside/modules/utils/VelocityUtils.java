@@ -1,6 +1,5 @@
 package org.springside.modules.utils;
 
-import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Map;
 
@@ -8,7 +7,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
 /**
- * 使用Velocity生成sql的工具类.
+ * 使用Velocity生成内容的工具类.
  * 
  * @author calvin
  */
@@ -18,18 +17,24 @@ public class VelocityUtils {
 		try {
 			Velocity.init();
 		} catch (Exception e) {
-			throw new RuntimeException("Exception occurs while initialzie the velociy: " + e.getMessage(), e);
+			throw new RuntimeException("Exception occurs while initialize the velociy.", e);
 		}
 	}
 
-	public static String getSql(String sqlTemplate, Map<String, ?> model) {
+	/**
+	 * 渲染内容.
+	 * 
+	 * @param template 模板内容.
+	 * @param model 变量Map.
+	 */
+	public static String render(String template, Map<String, ?> model) {
 		try {
 			VelocityContext velocityContext = new VelocityContext(model);
 			StringWriter result = new StringWriter();
-			Velocity.evaluate(velocityContext, result, "", sqlTemplate);
+			Velocity.evaluate(velocityContext, result, "", template);
 			return result.toString();
-		} catch (IOException e) {
-			throw new RuntimeException("Parse sql failed", e);
+		} catch (Exception e) {
+			throw new RuntimeException("Parse template failed.", e);
 		}
 	}
 }

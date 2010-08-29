@@ -148,7 +148,7 @@ public class UserJdbcDao {
 	 * 使用freemarker创建动态SQL.
 	 */
 	public List<User> searchUserByFreemarkerSqlTemplate(Map<String, ?> conditions) {
-		String sql = VelocityUtils.getSql(searchUserSql, conditions);
+		String sql = VelocityUtils.render(searchUserSql, conditions);
 		logger.info(sql);
 		return jdbcTemplate.query(sql, userMapper, conditions);
 	}
