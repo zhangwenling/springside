@@ -36,9 +36,9 @@ public class SeleniumUtilsTest extends Assert {
 	}
 
 	@MockClass(realClass = FirefoxDriver.class)
-	public static class MockFireFoxDriver {
+	public static class MockFirefoxDriver {
 		@Mock
-		public MockFireFoxDriver() {
+		public MockFirefoxDriver() {
 		}
 	}
 
@@ -51,7 +51,7 @@ public class SeleniumUtilsTest extends Assert {
 
 	@Test
 	public void buildWebDriver() throws Exception {
-		Mockit.setUpMocks(MockFireFoxDriver.class, MockInternetExplorerDriver.class, MockRemoteWebDriver.class);
+		Mockit.setUpMocks(MockFirefoxDriver.class, MockInternetExplorerDriver.class, MockRemoteWebDriver.class);
 
 		WebDriver driver = SeleniumUtils.buildDriver(SeleniumUtils.HTMLUNIT);
 		assertTrue(driver instanceof HtmlUnitDriver);
@@ -65,6 +65,6 @@ public class SeleniumUtilsTest extends Assert {
 		driver = SeleniumUtils.buildDriver(SeleniumUtils.REMOTE + ":localhost:3000:" + SeleniumUtils.FIREFOX);
 		assertTrue(driver instanceof RemoteWebDriver);
 
-		Mockit.tearDownMocks(MockFireFoxDriver.class, MockInternetExplorerDriver.class, MockRemoteWebDriver.class);
+		Mockit.tearDownMocks(FirefoxDriver.class, InternetExplorerDriver.class, RemoteWebDriver.class);
 	}
 }

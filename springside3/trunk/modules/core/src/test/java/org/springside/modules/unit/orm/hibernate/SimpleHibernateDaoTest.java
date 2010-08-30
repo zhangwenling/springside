@@ -1,19 +1,11 @@
 package org.springside.modules.unit.orm.hibernate;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.dbunit.DatabaseUnitException;
-import org.dbunit.database.DatabaseDataSourceConnection;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.operation.DatabaseOperation;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Hibernate;
@@ -23,11 +15,11 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.orm.hibernate.SimpleHibernateDao;
 import org.springside.modules.test.spring.SpringTxTestCase;
+import org.springside.modules.test.utils.DbUnitUtils;
 import org.springside.modules.unit.orm.hibernate.data.User;
 import org.springside.modules.utils.ReflectionUtils;
 
@@ -45,16 +37,12 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 	private SessionFactory sessionFactory;
 
 	@Before
-	public void setUp() throws BeansException, SQLException, DatabaseUnitException, IOException {
+	public void setUp() throws Exception {
 		jdbcTemplate.update("drop all objects");
-		jdbcTemplate.update("runscript from 'src/test/resources/schema.sql'");
 
-		DatabaseDataSourceConnection connection = new DatabaseDataSourceConnection((DataSource) applicationContext
-				.getBean("dataSource"));
-		InputStream stream = applicationContext.getResource("classpath:/test-data.xml").getInputStream();
-		IDataSet dataSet = new FlatXmlDataSetBuilder().build(stream);
-		DatabaseOperation.INSERT.execute(connection, dataSet);
-		connection.close();
+		runSql("classpath:/schema.sql", false);
+
+		DbUnitUtils.loadData((DataSource) applicationContext.getBean("dataSource"), "classpath:/test-data.xml");
 
 		dao = new SimpleHibernateDao<User, Long>(sessionFactory, User.class);
 	}

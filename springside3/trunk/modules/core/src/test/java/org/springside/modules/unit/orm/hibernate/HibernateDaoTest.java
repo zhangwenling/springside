@@ -35,7 +35,8 @@ public class HibernateDaoTest extends SpringTxTestCase {
 	@Before
 	public void setUp() throws Exception {
 		jdbcTemplate.update("drop all objects");
-		jdbcTemplate.update("runscript from 'src/test/resources/schema.sql'");
+
+		runSql("classpath:/schema.sql", false);
 
 		DbUnitUtils.loadData((DataSource) applicationContext.getBean("dataSource"), "/test-data.xml");
 

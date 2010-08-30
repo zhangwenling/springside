@@ -19,7 +19,7 @@ import org.springside.modules.log.MockLog4jAppender;
 import org.springside.modules.utils.ThreadUtils;
 import org.springside.modules.utils.ThreadUtils.CustomizableThreadFactory;
 
-public class ThreadUtilTest extends Assert {
+public class ThreadUtilsTest extends Assert {
 
 	@Test
 	public void customizableThreadFactory() {
@@ -46,27 +46,27 @@ public class ThreadUtilTest extends Assert {
 
 		//time enough to shutdown
 		ExecutorService pool = Executors.newSingleThreadExecutor();
-		Runnable task = new Task(logger, 1000, 0);
+		Runnable task = new Task(logger, 500, 0);
 		pool.execute(task);
-		ThreadUtils.gracefulShutdown(pool, 2000, 2000, TimeUnit.MILLISECONDS);
+		ThreadUtils.gracefulShutdown(pool, 1000, 1000, TimeUnit.MILLISECONDS);
 		assertTrue(pool.isTerminated());
 		assertNull(appender.getFirstLog());
 
 		//time not enough to shutdown,call shutdownNow
 		appender.clearLogs();
 		pool = Executors.newSingleThreadExecutor();
-		task = new Task(logger, 2000, 0);
+		task = new Task(logger, 1000, 0);
 		pool.execute(task);
-		ThreadUtils.gracefulShutdown(pool, 1000, 0, TimeUnit.MILLISECONDS);
+		ThreadUtils.gracefulShutdown(pool, 500, 1000, TimeUnit.MILLISECONDS);
 		assertTrue(pool.isTerminated());
 		assertEquals("InterruptedException", appender.getFirstLog().getMessage());
 
 		//self thread interrupt while calling gracefulShutdown
 		appender.clearLogs();
 
-		final ExecutorService pool2 = Executors.newSingleThreadExecutor();
+		final ExecutorService self = Executors.newSingleThreadExecutor();
 		task = new Task(logger, 100000, 0);
-		pool2.execute(task);
+		self.execute(task);
 
 		final CountDownLatch lock = new CountDownLatch(1);
 		Thread thread = new Thread(new Runnable() {
@@ -74,13 +74,13 @@ public class ThreadUtilTest extends Assert {
 			@Override
 			public void run() {
 				lock.countDown();
-				ThreadUtils.gracefulShutdown(pool2, 200000, 200000, TimeUnit.MILLISECONDS);
+				ThreadUtils.gracefulShutdown(self, 200000, 200000, TimeUnit.MILLISECONDS);
 			}
 		});
 		thread.start();
 		lock.await();
 		thread.interrupt();
-		Thread.sleep(500);
+		ThreadUtils.sleep(500);
 		assertEquals("InterruptedException", appender.getFirstLog().getMessage());
 	}
 
@@ -91,36 +91,34 @@ public class ThreadUtilTest extends Assert {
 		MockLog4jAppender appender = new MockLog4jAppender();
 		appender.addToLogger("test");
 
-		//time not enough to shutdown,call shutdownNow
+		//time not enough to shutdown,write error log.
 		appender.clearLogs();
 		ExecutorService pool = Executors.newSingleThreadExecutor();
-		Runnable task = new Task(logger, 2000, 0);
+		Runnable task = new Task(logger, 1000, 0);
 		pool.execute(task);
-		ThreadUtils.normalShutdown(pool, 1000, TimeUnit.MILLISECONDS);
+		ThreadUtils.normalShutdown(pool, 500, TimeUnit.MILLISECONDS);
 		assertTrue(pool.isTerminated());
 		assertEquals("InterruptedException", appender.getFirstLog().getMessage());
 
-		//self thread interrupt while calling gracefulShutdown
+		//self thread interrupt while calling shutdown
 		appender.clearLogs();
-		//        pool = Executors.newSingleThreadExecutor();
-
-		final ExecutorService pool2 = Executors.newSingleThreadExecutor();
+		final ExecutorService selfpool = Executors.newSingleThreadExecutor();
 		task = new Task(logger, 100000, 1000);
-		pool2.execute(task);
+		selfpool.execute(task);
 
 		final CountDownLatch lock = new CountDownLatch(1);
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				lock.countDown();
-				ThreadUtils.normalShutdown(pool2, 200000, TimeUnit.MILLISECONDS);
+				ThreadUtils.normalShutdown(selfpool, 200000, TimeUnit.MILLISECONDS);
 			}
 		});
 		thread.start();
 		lock.await();
 		thread.interrupt();
 
-		Thread.sleep(1500);
+		ThreadUtils.sleep(1000);
 
 		assertEquals("InterruptedException", appender.getFirstLog().getMessage());
 	}

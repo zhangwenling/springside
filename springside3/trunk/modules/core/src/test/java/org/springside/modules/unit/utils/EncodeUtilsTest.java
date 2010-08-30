@@ -26,4 +26,29 @@ public class EncodeUtilsTest extends Assert {
 		String result = EncodeUtils.base64UrlSafeEncode(input.getBytes());
 		assertEquals(input, new String(EncodeUtils.base64Decode(result)));
 	}
+
+	@Test
+	public void urlEncode() {
+		String input = "http://locahost/?q=中文";
+		String result = EncodeUtils.urlEncode(input);
+		System.out.println(result);
+
+		assertEquals(input, EncodeUtils.urlDecode(result));
+	}
+
+	@Test
+	public void xmlEncode() {
+		String input = "1>2";
+		String result = EncodeUtils.xmlEscape(input);
+		assertEquals("1&gt;2", result);
+		assertEquals(input, EncodeUtils.xmlUnescape(result));
+	}
+
+	@Test
+	public void html() {
+		String input = "1>2";
+		String result = EncodeUtils.htmlEscape(input);
+		assertEquals("1&gt;2", result);
+		assertEquals(input, EncodeUtils.htmlUnescape(result));
+	}
 }

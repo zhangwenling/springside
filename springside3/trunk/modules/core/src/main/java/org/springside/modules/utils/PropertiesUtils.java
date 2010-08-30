@@ -39,10 +39,10 @@ public class PropertiesUtils {
 	 * 
 	 * @see org.springframework.beans.factory.config.PropertyPlaceholderConfigurer
 	 */
-	public static Properties loadProperties(String... locations) throws IOException {
+	public static Properties loadProperties(String... resourcesPaths) throws IOException {
 		Properties props = new Properties();
 
-		for (String location : locations) {
+		for (String location : resourcesPaths) {
 
 			logger.debug("Loading properties file from:" + location);
 
