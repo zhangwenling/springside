@@ -44,25 +44,12 @@ public class JaxbBinder {
 	}
 
 	/**
-	 * Java->Xml.
-	 */
-	public String toXml(Object root) {
-		try {
-			StringWriter writer = new StringWriter();
-			getMarshaller(null).marshal(root, writer);
-			return writer.toString();
-		} catch (JAXBException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	/**
-	 * Java->Xml.
+	 * Java Object->Xml.
 	 */
 	public String toXml(Object root, String encoding) {
 		try {
 			StringWriter writer = new StringWriter();
-			getMarshaller(encoding).marshal(root, writer);
+			createMarshaller(encoding).marshal(root, writer);
 			return writer.toString();
 		} catch (JAXBException e) {
 			throw new RuntimeException(e);
@@ -70,7 +57,7 @@ public class JaxbBinder {
 	}
 
 	/**
-	 * Java->Xml, 特别支持对Root Element是Collection的情形.
+	 * Java Object->Xml, 特别支持对Root Element是Collection的情形.
 	 */
 	@SuppressWarnings("unchecked")
 	public String toXml(Collection root, String rootName, String encoding) {
@@ -82,7 +69,7 @@ public class JaxbBinder {
 					CollectionWrapper.class, wrapper);
 
 			StringWriter writer = new StringWriter();
-			getMarshaller(encoding).marshal(wrapperElement, writer);
+			createMarshaller(encoding).marshal(wrapperElement, writer);
 
 			return writer.toString();
 		} catch (JAXBException e) {
@@ -91,21 +78,25 @@ public class JaxbBinder {
 	}
 
 	/**
-	 * Xml->Java.
+	 * Xml->Java Object.
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T fromXml(String xml) {
 		try {
 			StringReader reader = new StringReader(xml);
-			return (T) getUnmarshaller().unmarshal(reader);
+			return (T) createUnmarshaller().unmarshal(reader);
 		} catch (JAXBException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public Marshaller getMarshaller(String encoding) {
+	/**
+	 * 创建Marshaller, 设定encoding(可为Null).
+	 */
+	public Marshaller createMarshaller(String encoding) {
 		try {
 			Marshaller marshaller = jaxbContext.createMarshaller();
+
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
 			if (StringUtils.isNotBlank(encoding)) {
@@ -117,7 +108,10 @@ public class JaxbBinder {
 		}
 	}
 
-	public Unmarshaller getUnmarshaller() {
+	/**
+	 * 创建UnMarshaller.
+	 */
+	public Unmarshaller createUnmarshaller() {
 		try {
 			return jaxbContext.createUnmarshaller();
 		} catch (JAXBException e) {

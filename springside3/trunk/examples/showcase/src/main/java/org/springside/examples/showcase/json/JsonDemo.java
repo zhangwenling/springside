@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.unit.json;
+package org.springside.examples.showcase.json;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,12 +19,21 @@ import com.google.common.collect.Maps;
  * 
  * @author calvin
  */
-public class JsonBinderTest {
+public class JsonDemo {
 
-	private JsonBinder binder = new JsonBinder(Inclusion.NON_DEFAULT);
+	private static JsonBinder binder = new JsonBinder(Inclusion.NON_DEFAULT);
+
+	public static void main(String[] args) {
+		try {
+			toJson();
+			fromJson();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Test
-	public void toJson() throws Exception {
+	public static void toJson() throws Exception {
 		//Bean
 		TestBean bean = new TestBean("A");
 		String beanString = binder.toJson(bean);
@@ -55,7 +64,7 @@ public class JsonBinderTest {
 
 	@Test
 	@SuppressWarnings("unchecked")
-	public void fromJson() throws Exception {
+	public static void fromJson() throws Exception {
 		//Bean
 		String beanString = "{\"name\":\"A\"}";
 		TestBean bean = binder.fromJson(beanString, TestBean.class);

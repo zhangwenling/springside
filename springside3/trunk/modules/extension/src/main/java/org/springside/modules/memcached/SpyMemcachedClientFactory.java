@@ -34,9 +34,9 @@ public class SpyMemcachedClientFactory implements InitializingBean, DisposableBe
 
 	private String memcachedNodes = "localhost:11211";
 
-	private boolean isBinaryProtocol = false;
+	private boolean isBinaryProtocol = true;
 
-	private boolean isConsistentHashing = false;
+	private boolean isConsistentHashing = true;
 
 	private long operationTimeout = 1000; //default value in Spy is 1000ms
 

@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.unit.xml;
+package org.springside.examples.showcase.xml;
 
 import java.util.List;
 
@@ -7,8 +7,6 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 import org.springside.modules.binder.JaxbBinder;
 import org.springside.modules.binder.JaxbBinder.CollectionWrapper;
 
@@ -38,17 +36,22 @@ import com.google.common.collect.Lists;
  * 	</houses>
  * </user>
  */
-public class JaxbBinderTest extends Assert {
+public class JaxbDemo extends Assert {
 
-	private JaxbBinder binder;
+	private static JaxbBinder binder;
 
-	@Before
-	public void setUp() {
+	public static void main(String[] args) {
+		setUp();
+		objectToXml();
+		xmlToObject();
+		toXmlWithListAsRoot();
+	}
+
+	public static void setUp() {
 		binder = new JaxbBinder(User.class, CollectionWrapper.class);
 	}
 
-	@Test
-	public void objectToXml() throws DocumentException {
+	public static void objectToXml() {
 		User user = new User();
 		user.setId(1L);
 		user.setName("calvin");
@@ -61,13 +64,12 @@ public class JaxbBinderTest extends Assert {
 		user.getHouses().put("bj", "house1");
 		user.getHouses().put("gz", "house2");
 
-		String xml = binder.toXml(user);
+		String xml = binder.toXml(user, "UTF-8");
 		System.out.println("Jaxb Object to Xml result:\n" + xml);
 		assertXmlByDom4j(xml);
 	}
 
-	@Test
-	public void xmlToObject() {
+	public static void xmlToObject() {
 		String xml = generateXmlByDom4j();
 		User user = binder.fromXml(xml);
 
@@ -87,8 +89,7 @@ public class JaxbBinderTest extends Assert {
 	/**
 	 * 测试以List对象作为根节点时的XML输出
 	 */
-	@Test
-	public void toXmlWithListAsRoot() {
+	public static void toXmlWithListAsRoot() {
 		User user1 = new User();
 		user1.setId(1L);
 		user1.setName("calvin");
@@ -99,14 +100,14 @@ public class JaxbBinderTest extends Assert {
 
 		List<User> userList = Lists.newArrayList(user1, user2);
 
-		String xml = binder.toXml(userList, "userList");
+		String xml = binder.toXml(userList, "userList", "UTF-8");
 		System.out.println("Jaxb Object List to Xml result:\n" + xml);
 	}
 
 	/**
 	 * 使用Dom4j生成测试用的XML文档字符串.
 	 */
-	private String generateXmlByDom4j() {
+	private static String generateXmlByDom4j() {
 		Document document = DocumentHelper.createDocument();
 
 		Element root = document.addElement("user").addAttribute("id", "1");
@@ -134,8 +135,13 @@ public class JaxbBinderTest extends Assert {
 	/**
 	 * 使用Dom4j验证Jaxb所生成XML的正确性.
 	 */
-	private void assertXmlByDom4j(String xml) throws DocumentException {
-		Document doc = DocumentHelper.parseText(xml);
+	private static void assertXmlByDom4j(String xml) {
+		Document doc = null;
+		try {
+			doc = DocumentHelper.parseText(xml);
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		}
 		Element user = doc.getRootElement();
 		assertEquals("1", user.attribute("id").getValue());
 

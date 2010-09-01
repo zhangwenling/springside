@@ -11,7 +11,7 @@ import java.util.concurrent.BlockingQueue;
 
 import org.apache.log4j.helpers.LogLog;
 import org.apache.log4j.spi.LoggingEvent;
-import org.springside.modules.queue.QueuesHolder;
+import org.springside.examples.showcase.queue.QueuesHolder;
 
 /**
  * 轻量级的Log4j异步Appender.

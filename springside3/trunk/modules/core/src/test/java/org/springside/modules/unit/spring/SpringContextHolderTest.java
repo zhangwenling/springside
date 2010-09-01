@@ -12,7 +12,7 @@ public class SpringContextHolderTest extends Assert {
 	@Test
 	public void testGetBean() {
 
-		SpringContextHolder.clearContextHolder();
+		SpringContextHolder.clear();
 		try {
 			SpringContextHolder.getBean("foo");
 			fail("No exception throw for applicationContxt hadn't been init.");

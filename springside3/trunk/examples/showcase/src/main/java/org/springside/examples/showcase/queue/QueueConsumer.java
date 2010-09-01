@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.queue;
+package org.springside.examples.showcase.queue;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

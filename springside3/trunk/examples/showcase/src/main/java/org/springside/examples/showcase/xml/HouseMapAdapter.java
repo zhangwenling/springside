@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.unit.xml;
+package org.springside.examples.showcase.xml;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import org.springside.examples.showcase.unit.xml.HouseMapAdapter.HouseMap.HouseEntry;
+import org.springside.examples.showcase.xml.HouseMapAdapter.HouseMap.HouseEntry;
 
 import com.google.common.collect.Maps;
 

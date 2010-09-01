@@ -1,4 +1,4 @@
-package org.springside.modules.unit.queue;
+package org.springside.examples.showcase.unit.queue;
 
 import java.io.EOFException;
 import java.io.File;
@@ -12,8 +12,8 @@ import java.util.concurrent.BlockingQueue;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springside.modules.queue.QueueConsumer;
-import org.springside.modules.queue.QueuesHolder;
+import org.springside.examples.showcase.queue.QueueConsumer;
+import org.springside.examples.showcase.queue.QueuesHolder;
 
 @SuppressWarnings("unchecked")
 public class QueueTest extends Assert {

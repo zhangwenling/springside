@@ -25,7 +25,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
-import org.springside.modules.queue.BlockingConsumer;
+import org.springside.examples.showcase.queue.BlockingConsumer;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

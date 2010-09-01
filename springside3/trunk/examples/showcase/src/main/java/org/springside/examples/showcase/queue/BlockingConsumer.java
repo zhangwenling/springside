@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.queue;
+package org.springside.examples.showcase.queue;
 
 /**
  * 采用即时阻塞读取Queue中消息策略的Consumer.

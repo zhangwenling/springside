@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.unit.xml;
+package org.springside.examples.showcase.xml;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
