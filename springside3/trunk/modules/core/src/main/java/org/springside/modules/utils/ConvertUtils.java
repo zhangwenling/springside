@@ -71,8 +71,7 @@ public class ConvertUtils {
 		DateConverter dc = new DateConverter();
 		dc.setUseLocaleFormat(true);
 		//TODO 硬编码 CHINESE locale格式不是个好的做法.
-		dc.setPatterns(new String[] { "yyyy-MM-dd", "yyyy-MM-dd hh:mm:ss" });
+		dc.setPatterns(new String[] { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss" });
 		org.apache.commons.beanutils.ConvertUtils.register(dc, Date.class);
 	}
-
 }

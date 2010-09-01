@@ -34,7 +34,7 @@ public class PropertiesUtils {
 	private static ResourceLoader resourceLoader = new DefaultResourceLoader();
 
 	/**
-	 * 载入多个properties文件, 相同的属性最后载入的文件将会覆盖之前的载入.
+	 * 载入多个properties文件, 相同的属性在最后载入的文件中的值将会覆盖之前的载入.
 	 * 文件路径使用Spring Resource格式, 文件编码使用UTF-8.
 	 * 
 	 * @see org.springframework.beans.factory.config.PropertyPlaceholderConfigurer

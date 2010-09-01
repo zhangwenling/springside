@@ -40,7 +40,7 @@ public class ServletUtils {
 	public static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
 
 	/**
-	 * 设置客户端缓存过期时间 Header.
+	 * 设置客户端缓存过期时间 的Header.
 	 */
 	public static void setExpiresHeader(HttpServletResponse response, long expiresSeconds) {
 		//Http 1.0 header
@@ -50,7 +50,7 @@ public class ServletUtils {
 	}
 
 	/**
-	 * 设置客户端无缓存Header.
+	 * 设置禁止客户端缓存的Header.
 	 */
 	public static void setNoCacheHeader(HttpServletResponse response) {
 		//Http 1.0 header
@@ -141,7 +141,7 @@ public class ServletUtils {
 	/**
 	 * 取得带相同前缀的Request Parameters.
 	 * 
-	 * 返回的结果Parameter名已去除前缀.
+	 * 返回的结果的Parameter名已去除前缀.
 	 */
 	@SuppressWarnings("unchecked")
 	public static Map getParametersStartingWith(HttpServletRequest request, String prefix) {

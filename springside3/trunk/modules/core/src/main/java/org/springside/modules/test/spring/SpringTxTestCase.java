@@ -6,7 +6,8 @@
  * $Id$
  */
 package org.springside.modules.test.spring;
-import javax.sql.DataSource;
+
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -17,7 +18,6 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.jdbc.SimpleJdbcTestUtils;
 import org.springframework.transaction.annotation.Transactional;
-
 
 /**
  * Spring的支持数据库访问和依赖注入的JUnit4 集成测试基类.

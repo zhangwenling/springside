@@ -86,7 +86,6 @@ public class EncodeUtils {
 		} catch (UnsupportedEncodingException e) {
 			throw new IllegalArgumentException("Unsupported Encoding Exception", e);
 		}
-
 	}
 
 	/**

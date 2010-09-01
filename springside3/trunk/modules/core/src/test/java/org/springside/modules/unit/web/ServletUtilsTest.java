@@ -1,6 +1,7 @@
 package org.springside.modules.unit.web;
 
 import java.util.Date;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -39,4 +40,26 @@ public class ServletUtilsTest extends Assert {
 		//不存在Etag
 		assertEquals(true, ServletUtils.checkIfNoneMatchEtag(request, response, "V2.0"));
 	}
+
+	@Test
+	public void getParametersStartingWith() {
+		MockHttpServletRequest request = new MockHttpServletRequest();
+		request.addParameter("pre_a", "aa");
+		request.addParameter("pre_b", "bb");
+		request.addParameter("c", "c");
+		Map<String, String> result = ServletUtils.getParametersStartingWith(request, "pre_");
+		assertEquals(2, result.size());
+		assertTrue(result.keySet().contains("a"));
+		assertTrue(result.keySet().contains("b"));
+		assertTrue(result.values().contains("aa"));
+		assertTrue(result.values().contains("bb"));
+
+		result = ServletUtils.getParametersStartingWith(request, "error_");
+		assertEquals(0, result.size());
+
+		result = ServletUtils.getParametersStartingWith(request, null);
+		assertEquals(3, result.size());
+
+	}
+
 }

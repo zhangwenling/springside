@@ -19,6 +19,8 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.namespace.QName;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * 使用Jaxb2.0实现XML<->Java Object的Binder.
  * 
@@ -47,7 +49,20 @@ public class JaxbBinder {
 	public String toXml(Object root) {
 		try {
 			StringWriter writer = new StringWriter();
-			getMarshaller().marshal(root, writer);
+			getMarshaller(null).marshal(root, writer);
+			return writer.toString();
+		} catch (JAXBException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Java->Xml.
+	 */
+	public String toXml(Object root, String encoding) {
+		try {
+			StringWriter writer = new StringWriter();
+			getMarshaller(encoding).marshal(root, writer);
 			return writer.toString();
 		} catch (JAXBException e) {
 			throw new RuntimeException(e);
@@ -58,7 +73,7 @@ public class JaxbBinder {
 	 * Java->Xml, 特别支持对Root Element是Collection的情形.
 	 */
 	@SuppressWarnings("unchecked")
-	public String toXml(Collection root, String rootName) {
+	public String toXml(Collection root, String rootName, String encoding) {
 		try {
 			CollectionWrapper wrapper = new CollectionWrapper();
 			wrapper.collection = root;
@@ -67,7 +82,7 @@ public class JaxbBinder {
 					CollectionWrapper.class, wrapper);
 
 			StringWriter writer = new StringWriter();
-			getMarshaller().marshal(wrapperElement, writer);
+			getMarshaller(encoding).marshal(wrapperElement, writer);
 
 			return writer.toString();
 		} catch (JAXBException e) {
@@ -88,10 +103,14 @@ public class JaxbBinder {
 		}
 	}
 
-	public Marshaller getMarshaller() {
+	public Marshaller getMarshaller(String encoding) {
 		try {
 			Marshaller marshaller = jaxbContext.createMarshaller();
-			marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+			if (StringUtils.isNotBlank(encoding)) {
+				marshaller.setProperty(Marshaller.JAXB_ENCODING, encoding);
+			}
 			return marshaller;
 		} catch (JAXBException e) {
 			throw new RuntimeException(e);
