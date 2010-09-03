@@ -424,7 +424,7 @@
 						</systemProperty>
 						<systemProperty>
 							<name>com.sun.management.jmxremote.port</name>
-							<value>1099</value>
+							<value>18080</value>
 						</systemProperty>
 					</systemProperties>
 				</configuration>
