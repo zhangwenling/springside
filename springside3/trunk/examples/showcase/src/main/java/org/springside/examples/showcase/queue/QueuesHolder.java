@@ -29,7 +29,7 @@ public class QueuesHolder {
 	/**
 	 * QueueManager注册的名称.
 	 */
-	public static final String QUEUEHOLDER_MBEAN_NAME = "SpringSide:type=QueueManagement,name=queueHolder";
+	public static final String QUEUEHOLDER_MBEAN_NAME = "Showcase:type=QueueManagement,name=queueHolder";
 
 	private static ConcurrentMap<String, BlockingQueue> queueMap = new MapMaker().concurrencyLevel(32).makeMap();//消息队列
 

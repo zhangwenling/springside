@@ -27,7 +27,7 @@ public class Log4jMBean {
 	/**
 	 * Log4jMbean的注册名称.
 	 */
-	public static final String LOG4J_MBEAN_NAME = "Log4j:name=Log4j";
+	public static final String LOG4J_MBEAN_NAME = "Log4j:name=log4j";
 
 	private static org.slf4j.Logger mbeanLogger = LoggerFactory.getLogger(Log4jMBean.class);
 

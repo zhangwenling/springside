@@ -18,8 +18,8 @@ import org.springside.modules.test.spring.SpringContextTestCase;
  * @author calvin
  */
 @DirtiesContext
-@ContextConfiguration(locations = { "/applicationContext-test.xml", "/jmx/applicationContext-jmx-server.xml",
-		"/log/applicationContext-log.xml" })
+@ContextConfiguration(locations = { "/applicationContext-test.xml", "/applicationContext-test-jmx.xml",
+		"/jmx/applicationContext-jmx-server.xml", "/log/applicationContext-log.xml" })
 public class JmxClientTemplateTest extends SpringContextTestCase {
 
 	private JmxClientTemplate jmxClientTemplate;

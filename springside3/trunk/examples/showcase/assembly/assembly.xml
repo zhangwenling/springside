@@ -64,6 +64,14 @@
 			<directoryMode>0755</directoryMode>
 			<filtered>true</filtered>
 		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/assembly/conf/common</directory>
+			<outputDirectory>/conf</outputDirectory>
+			<fileMode>0755</fileMode>
+			<directoryMode>0755</directoryMode>
+			<filtered>true</filtered>
+		</fileSet>
+
 	</fileSets>
 	<files>
 		<file>

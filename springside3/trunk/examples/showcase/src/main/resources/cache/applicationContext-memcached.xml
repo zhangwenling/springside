@@ -11,5 +11,6 @@
 		<property name="operationTimeout" value="200" />
 	</bean>
 
+	<!-- 演示用的Jmemcached服务端模拟Memcached -->
 	<bean class="org.springside.modules.memcached.JmemcachedServer" lazy-init="false" />
 </beans>
