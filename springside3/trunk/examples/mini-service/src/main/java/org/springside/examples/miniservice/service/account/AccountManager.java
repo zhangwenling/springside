@@ -29,7 +29,7 @@ public class AccountManager {
 	 * 获取全部用户, 并对用户的延迟加载关联进行初始化.
 	 */
 	@Transactional(readOnly = true)
-	public List<User> getAllLoadedUser() {
+	public List<User> getAllInitedUser() {
 		List<User> userList = userDao.getAll("id", true);
 		for (User user : userList) {
 			userDao.initUser(user);
@@ -41,7 +41,7 @@ public class AccountManager {
 	 * 获取用户, 并对用户的延迟加载关联进行初始化.
 	 */
 	@Transactional(readOnly = true)
-	public User getLoadedUser(Long id) {
+	public User getInitedUser(Long id) {
 		User user = userDao.get(id);
 		userDao.initUser(user);
 		return user;

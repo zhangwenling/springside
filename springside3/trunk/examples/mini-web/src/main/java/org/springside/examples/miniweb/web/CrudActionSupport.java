@@ -60,20 +60,20 @@ public abstract class CrudActionSupport<T> extends ActionSupport implements Mode
 
 	//-- Preparable函数 --//
 	/**
-	 * 实现空的prepare()函数,屏蔽所有Action函数公共的二次绑定.
+	 * 实现空的prepare()函数,屏蔽了所有Action函数都会执行的公共的二次绑定.
 	 */
 	public void prepare() throws Exception {
 	}
 
 	/**
-	 * 在input()前执行二次绑定.
+	 * 定义在input()前执行二次绑定.
 	 */
 	public void prepareInput() throws Exception {
 		prepareModel();
 	}
 
 	/**
-	 * 在save()前执行二次绑定.
+	 * 定义在save()前执行二次绑定.
 	 */
 	public void prepareSave() throws Exception {
 		prepareModel();

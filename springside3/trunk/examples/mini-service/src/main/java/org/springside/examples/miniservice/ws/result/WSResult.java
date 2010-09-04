@@ -14,9 +14,8 @@ public class WSResult {
 
 	//-- 返回代码定义 --//
 	// 按项目的规则进行定义, 比如4xx代表客户端参数错误，5xx代表服务端业务错误等.
-
 	public static final String SUCCESS = "0";
-	public static final String PARAMETER_ERROR = "401";
+	public static final String PARAMETER_ERROR = "400";
 
 	public static final String SYSTEM_ERROR = "500";
 	public static final String SYSTEM_ERROR_MESSAGE = "Runtime unknown internal error.";
@@ -29,7 +28,8 @@ public class WSResult {
 	 * 创建结果.
 	 */
 	public <T extends WSResult> T buildResult(String resultCode, String resultMessage) {
-		setResult(resultCode, resultMessage);
+		code = resultCode;
+		message = resultMessage;
 		return (T) this;
 	}
 
@@ -54,13 +54,5 @@ public class WSResult {
 
 	public void setMessage(String message) {
 		this.message = message;
-	}
-
-	/**
-	 * 设置返回结果.
-	 */
-	public void setResult(String resultCode, String resultMessage) {
-		code = resultCode;
-		message = resultMessage;
 	}
 }

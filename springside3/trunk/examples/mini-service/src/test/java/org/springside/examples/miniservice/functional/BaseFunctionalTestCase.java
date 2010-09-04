@@ -39,7 +39,6 @@ public class BaseFunctionalTestCase extends Assert {
 	@AfterClass
 	public static void stopAll() throws Exception {
 		cleanDefaultData();
-
 		stopJetty();
 	}
 

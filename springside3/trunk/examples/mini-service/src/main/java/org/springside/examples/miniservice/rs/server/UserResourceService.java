@@ -47,6 +47,7 @@ public class UserResourceService {
 
 	@Autowired
 	private AccountManager accountManager;
+
 	@Autowired
 	private DozerBeanMapper dozer;
 
@@ -57,11 +58,13 @@ public class UserResourceService {
 	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
 	public List<UserDTO> getAllUser() {
 		try {
-			List<User> entityList = accountManager.getAllLoadedUser();
+			List<User> entityList = accountManager.getAllInitedUser();
+
 			List<UserDTO> dtoList = Lists.newArrayList();
 			for (User userEntity : entityList) {
 				dtoList.add(dozer.map(userEntity, UserDTO.class));
 			}
+
 			return dtoList;
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
@@ -77,8 +80,10 @@ public class UserResourceService {
 	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
 	public UserDTO getUser(@PathParam("id") Long id) {
 		try {
-			User entity = accountManager.getLoadedUser(id);
+			User entity = accountManager.getInitedUser(id);
+
 			UserDTO dto = dozer.map(entity, UserDTO.class);
+
 			return dto;
 		} catch (ObjectNotFoundException e) {
 			String message = "用户不存在(id:" + id + ")";
@@ -98,8 +103,11 @@ public class UserResourceService {
 	public Response createUser(UserDTO user) {
 		try {
 			User userEntity = dozer.map(user, User.class);
+
 			accountManager.saveUser(userEntity);
+
 			URI createdUri = uriInfo.getAbsolutePathBuilder().path(userEntity.getId().toString()).build();
+
 			return Response.created(createdUri).build();
 		} catch (ConstraintViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
@@ -115,13 +123,13 @@ public class UserResourceService {
 	 * 创建WebApplicationException, 使用标准状态码与自定义信息.
 	 */
 	private WebApplicationException buildException(Status status, String message) {
-		return new WebApplicationException(Response.status(status).entity(message).type("text/plain").build());
+		return new WebApplicationException(Response.status(status).entity(message).type(MediaType.TEXT_PLAIN).build());
 	}
 
 	/**
 	 * 创建WebApplicationException, 使用自定义状态码与自定义信息.
 	 */
 	private WebApplicationException buildException(int status, String message) {
-		return new WebApplicationException(Response.status(status).entity(message).type("text/plain").build());
+		return new WebApplicationException(Response.status(status).entity(message).type(MediaType.TEXT_PLAIN).build());
 	}
 }

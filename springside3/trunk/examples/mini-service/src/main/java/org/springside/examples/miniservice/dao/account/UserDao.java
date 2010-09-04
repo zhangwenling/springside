@@ -24,5 +24,4 @@ public class UserDao extends HibernateDao<User, Long> {
 	public void initUser(User user) {
 		initProxyObject(user.getRoleList());
 	}
-
 }
