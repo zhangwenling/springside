@@ -7,6 +7,8 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.springside.modules.binder.JaxbBinder;
 import org.springside.modules.binder.JaxbBinder.CollectionWrapper;
 
@@ -42,16 +44,19 @@ public class JaxbDemo extends Assert {
 
 	public static void main(String[] args) {
 		setUp();
-		objectToXml();
-		xmlToObject();
-		toXmlWithListAsRoot();
+		JaxbDemo demo = new JaxbDemo();
+		demo.objectToXml();
+		demo.xmlToObject();
+		demo.toXmlWithListAsRoot();
 	}
 
+	@BeforeClass
 	public static void setUp() {
 		binder = new JaxbBinder(User.class, CollectionWrapper.class);
 	}
 
-	public static void objectToXml() {
+	@Test
+	public void objectToXml() {
 		User user = new User();
 		user.setId(1L);
 		user.setName("calvin");
@@ -69,7 +74,8 @@ public class JaxbDemo extends Assert {
 		assertXmlByDom4j(xml);
 	}
 
-	public static void xmlToObject() {
+	@Test
+	public void xmlToObject() {
 		String xml = generateXmlByDom4j();
 		User user = binder.fromXml(xml);
 
@@ -89,7 +95,8 @@ public class JaxbDemo extends Assert {
 	/**
 	 * 测试以List对象作为根节点时的XML输出
 	 */
-	public static void toXmlWithListAsRoot() {
+	@Test
+	public void toXmlWithListAsRoot() {
 		User user1 = new User();
 		user1.setId(1L);
 		user1.setName("calvin");
@@ -140,7 +147,7 @@ public class JaxbDemo extends Assert {
 		try {
 			doc = DocumentHelper.parseText(xml);
 		} catch (DocumentException e) {
-			e.printStackTrace();
+			fail(e.getMessage());
 		}
 		Element user = doc.getRootElement();
 		assertEquals("1", user.attribute("id").getValue());

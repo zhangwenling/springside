@@ -139,8 +139,10 @@ public class UserResourceService {
 			userName = queryParams.getFirst("userName");
 		}
 
-		if (userName == null)
+		if (userName == null) {
 			buildException(450, "用戶名既不在Http Header也不在URL参数中");
+		}
+
 		return userName;
 	}
 

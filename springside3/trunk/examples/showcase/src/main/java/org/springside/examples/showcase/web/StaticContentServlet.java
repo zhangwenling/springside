@@ -31,9 +31,8 @@ import org.springside.modules.web.ServletUtils;
  * 
  * @author calvin
  */
+@SuppressWarnings("serial")
 public class StaticContentServlet extends HttpServlet {
-
-	private static final long serialVersionUID = 1L;
 
 	/** 需要被Gzip压缩的Mime类型. */
 	private static final String[] GZIP_MIME_TYPES = { "text/html", "application/xhtml+xml", "text/plain", "text/css",
