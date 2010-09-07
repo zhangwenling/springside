@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springside.examples.showcase.common.dao.UserJdbcDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.data.UserData;
@@ -27,6 +28,7 @@ import com.google.common.collect.Lists;
  * @author calvin
  */
 @DirtiesContext
+@TransactionConfiguration(transactionManager = "defaultTransactionManager")
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/common/applicationContext-jdbc.xml" })
 public class UserJdbcDaoTest extends SpringTxTestCase {
 	private static DataSource dataSourceHolder = null;

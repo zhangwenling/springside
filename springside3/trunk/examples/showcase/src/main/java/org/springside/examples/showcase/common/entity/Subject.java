@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
-import javax.persistence.OrderColumn;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -30,7 +29,6 @@ public class Subject extends Post {
 	@OneToMany(mappedBy = "subject", cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY, orphanRemoval = true)
 	//按时间排序回帖
 	@OrderBy(value = "modifyTime DESC")
-	@OrderColumn
 	public List<Reply> getReplyList() {
 		return replyList;
 	}

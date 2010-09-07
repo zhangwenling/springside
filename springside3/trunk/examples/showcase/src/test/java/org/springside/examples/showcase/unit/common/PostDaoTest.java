@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springside.examples.showcase.common.dao.ReplyDao;
 import org.springside.examples.showcase.common.dao.SubjectDao;
 import org.springside.examples.showcase.common.dao.UserDao;
@@ -24,6 +25,7 @@ import org.springside.modules.test.utils.DbUnitUtils;
  * @author calvin
  */
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
+@TransactionConfiguration(transactionManager = "defaultTransactionManager")
 public class PostDaoTest extends SpringTxTestCase {
 
 	private static DataSource dataSourceHolder = null;

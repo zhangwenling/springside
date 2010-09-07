@@ -6,12 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
@@ -60,16 +59,14 @@ public class UserJdbcDao {
 		}
 	}
 
-	@Autowired
-	@Qualifier("dataSource")
+	@Resource
 	public void setDataSource(DataSource dataSource) {
 		jdbcTemplate = new SimpleJdbcTemplate(dataSource);
 	}
 
-	@Autowired
-	@Qualifier("defaultTransactionManager")
-	public void setDefaultTransactionManager(PlatformTransactionManager transactionManager) {
-		transactionTemplate = new TransactionTemplate(transactionManager);
+	@Resource
+	public void setDefaultTransactionManager(PlatformTransactionManager defaultTransactionManager) {
+		transactionTemplate = new TransactionTemplate(defaultTransactionManager);
 	}
 
 	public void setSearchUserSql(String searchUserSql) {

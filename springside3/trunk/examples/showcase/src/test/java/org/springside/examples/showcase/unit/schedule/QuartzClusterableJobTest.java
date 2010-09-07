@@ -3,6 +3,7 @@ package org.springside.examples.showcase.unit.schedule;
 import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springside.examples.showcase.schedule.QuartzClusterableJob;
 import org.springside.modules.log.MockLog4jAppender;
 import org.springside.modules.test.spring.SpringTxTestCase;
@@ -17,6 +18,7 @@ import org.springside.modules.utils.ThreadUtils;
 @DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext-test.xml",
 		"/schedule/applicationContext-quartz-timer-cluster.xml" })
+@TransactionConfiguration(transactionManager = "defaultTransactionManager")
 public class QuartzClusterableJobTest extends SpringTxTestCase {
 
 	@Test

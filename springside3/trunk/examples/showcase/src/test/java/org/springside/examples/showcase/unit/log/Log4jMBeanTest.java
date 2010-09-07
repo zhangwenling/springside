@@ -1,7 +1,5 @@
 package org.springside.examples.showcase.unit.log;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
@@ -64,23 +62,5 @@ public class Log4jMBeanTest extends SpringContextTestCase {
 		//恢复原级别
 		jmxClientTemplate.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "setLoggerLevel", new Class[] { String.class,
 				String.class }, new Object[] { loggerName, oldLevel });
-	}
-
-	@Test
-	@SuppressWarnings("unchecked")
-	public void getLoggerAppenders() {
-		List<String> list = (List<String>) jmxClientTemplate.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerAppenders",
-				new Class[] { String.class }, new Object[] { "org.springside" });
-
-		assertEquals(2, list.size());
-		assertEquals("Console(parent)", list.get(0));
-		assertEquals("RollingFile(parent)", list.get(1));
-
-		list = (List<String>) jmxClientTemplate.invoke(Log4jMBean.LOG4J_MBEAN_NAME, "getLoggerAppenders",
-				new Class[] { String.class }, new Object[] { "DBLogExample" });
-
-		assertEquals(2, list.size());
-		assertEquals("Console", list.get(0));
-		assertEquals("DB", list.get(1));
 	}
 }
