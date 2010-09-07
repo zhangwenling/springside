@@ -25,15 +25,16 @@ public class JsonDemo {
 
 	public static void main(String[] args) {
 		try {
-			toJson();
-			fromJson();
+			JsonDemo demo = new JsonDemo();
+			demo.toJson();
+			demo.fromJson();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Test
-	public static void toJson() throws Exception {
+	public void toJson() throws Exception {
 		//Bean
 		TestBean bean = new TestBean("A");
 		String beanString = binder.toJson(bean);
@@ -64,7 +65,7 @@ public class JsonDemo {
 
 	@Test
 	@SuppressWarnings("unchecked")
-	public static void fromJson() throws Exception {
+	public void fromJson() throws Exception {
 		//Bean
 		String beanString = "{\"name\":\"A\"}";
 		TestBean bean = binder.fromJson(beanString, TestBean.class);
@@ -80,8 +81,7 @@ public class JsonDemo {
 
 		//List<String>
 		String listString = "[\"A\",\"B\",\"C\"]";
-		List<String> stringList = binder.getMapper().readValue(listString, new TypeReference<List<String>>() {
-		});
+		List<String> stringList = binder.getMapper().readValue(listString, List.class);
 		System.out.println("String List:");
 		for (String element : stringList) {
 			System.out.println(element);

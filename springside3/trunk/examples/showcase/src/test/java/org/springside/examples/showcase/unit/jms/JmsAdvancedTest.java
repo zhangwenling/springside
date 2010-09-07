@@ -1,6 +1,5 @@
 package org.springside.examples.showcase.unit.jms;
 
-import javax.annotation.Resource;
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
@@ -9,6 +8,7 @@ import javax.jms.Session;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.test.annotation.DirtiesContext;
@@ -27,10 +27,12 @@ public class JmsAdvancedTest extends SpringContextTestCase {
 	@Autowired
 	private AdvancedNotifyMessageProducer notifyMessageProducer;
 
-	@Resource
+	@Autowired
+	@Qualifier("advancedJmsTemplate")
 	private JmsTemplate advancedJmsTemplate;
 
-	@Resource
+	@Autowired
+	@Qualifier("advancedNotifyTopic")
 	private Destination advancedNotifyTopic;
 
 	@Test

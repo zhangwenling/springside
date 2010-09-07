@@ -2,12 +2,12 @@ package org.springside.examples.miniservice.functional.ws;
 
 import java.net.MalformedURLException;
 
-import javax.annotation.Resource;
 import javax.xml.ws.BindingProvider;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -35,7 +35,7 @@ import org.springside.examples.miniservice.ws.result.WSResult;
 @ContextConfiguration(locations = { "/applicationContext-ws-client.xml" })
 public class UserWebServiceTest extends BaseFunctionalTestCase {
 
-	@Resource
+	@Autowired
 	private UserWebService userWebService;
 
 	/**

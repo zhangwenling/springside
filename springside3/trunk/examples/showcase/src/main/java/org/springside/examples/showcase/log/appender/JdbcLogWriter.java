@@ -11,11 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.apache.log4j.spi.LoggingEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -69,11 +69,13 @@ public class JdbcLogWriter extends BlockingConsumer {
 	 * 根据注入的DataSource创建jdbcTemplate.
 	 */
 	@Autowired
+	@Qualifier("dataSource")
 	public void setDataSource(DataSource dataSource) {
 		jdbcTemplate = new SimpleJdbcTemplate(dataSource);
 	}
 
-	@Resource
+	@Autowired
+	@Qualifier("defaultTransactionManager")
 	public void setDefaultTransactionManager(PlatformTransactionManager transactionManager) {
 		transactionTemplate = new TransactionTemplate(transactionManager);
 	}
