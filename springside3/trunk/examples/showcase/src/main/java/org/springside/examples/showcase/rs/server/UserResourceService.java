@@ -79,7 +79,7 @@ public class UserResourceService {
 	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
 	public UserDTO getUser(@PathParam("id") String id) {
 		try {
-			User entity = accountManager.getLoadedUser(id);
+			User entity = accountManager.getInitedUser(id);
 			UserDTO dto = dozer.map(entity, UserDTO.class);
 			return dto;
 		} catch (ObjectNotFoundException e) {

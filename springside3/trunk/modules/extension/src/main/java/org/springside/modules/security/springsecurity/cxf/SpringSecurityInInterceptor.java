@@ -28,13 +28,13 @@ public class SpringSecurityInInterceptor extends AbstractPhaseInterceptor<Messag
 
 	private UserDetailsService userDetailsService;
 
-	public void setUserDetailsService(UserDetailsService userDetailsService) {
-		this.userDetailsService = userDetailsService;
-	}
-
 	public SpringSecurityInInterceptor() {
 		super(Phase.POST_PROTOCOL);
 		addAfter(WSS4JInInterceptor.class.getName());
+	}
+
+	public void setUserDetailsService(UserDetailsService userDetailsService) {
+		this.userDetailsService = userDetailsService;
 	}
 
 	public void handleMessage(Message message) throws Fault {

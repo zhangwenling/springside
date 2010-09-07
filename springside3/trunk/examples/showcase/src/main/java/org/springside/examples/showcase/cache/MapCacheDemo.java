@@ -31,7 +31,7 @@ public class MapCacheDemo {
 
 		Function<String, User> computingFunction = new Function<String, User>() {
 			public User apply(String key) {
-				return userManager.getLoadedUser("1");
+				return userManager.getInitedUser("1");
 			}
 		};
 

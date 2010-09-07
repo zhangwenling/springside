@@ -83,7 +83,7 @@ public class AccountManager {
 	 * 取得用户, 并对用户的延迟加载关联进行初始化.
 	 */
 	@Transactional(readOnly = true)
-	public User getLoadedUser(String id) {
+	public User getInitedUser(String id) {
 		if (spyMemcachedClient != null) {
 			return getUserFromMemcached(id);
 		} else {
