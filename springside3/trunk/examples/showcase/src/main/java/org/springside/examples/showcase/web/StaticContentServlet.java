@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.util.zip.GZIPOutputStream;
 
 import javax.activation.MimetypesFileTypeMap;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,20 +36,26 @@ import org.springside.modules.web.ServletUtils;
 public class StaticContentServlet extends HttpServlet {
 
 	/** 需要被Gzip压缩的Mime类型. */
-	private static final String[] GZIP_MIME_TYPES = { "text/html", "application/xhtml+xml", "text/plain", "text/css",
-			"text/javascript", "application/x-javascript" };
+	private static final String[] GZIP_MIME_TYPES = { "text/html", "text/xml", "text/plain", "text/css",
+			"text/javascript", "application/xml", "application/xhtml+xml", "application/x-javascript" };
 
 	/** 需要被Gzip压缩的最小文件大小. */
 	private static final int GZIP_MINI_LENGTH = 512;
 
 	private MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
 
-	private ApplicationContext appcationContext;
+	private ApplicationContext applicationContext;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//获取请求内容的基本信息.
+		//取得参数
 		String contentPath = request.getParameter("contentPath");
+		if (StringUtils.isBlank(contentPath)) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "contentPath parameter is required.");
+			return;
+		}
+
+		//获取请求内容的基本信息.
 		ContentInfo contentInfo = getContentInfo(contentPath);
 
 		//根据Etag或ModifiedSince Header判断客户端的缓存文件是否有效, 如仍有效则设置返回码为304,直接返回.
@@ -114,11 +121,11 @@ public class StaticContentServlet extends HttpServlet {
 	}
 
 	/**
-	 * 保存appcationContext以备后用.
+	 * 保存applicationContext以备后用.
 	 */
 	@Override
-	public void init() throws ServletException {
-		appcationContext = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+	public void init(ServletConfig sc) throws ServletException {
+		applicationContext = WebApplicationContextUtils.getWebApplicationContext(sc.getServletContext());
 	}
 
 	/**
