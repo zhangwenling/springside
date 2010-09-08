@@ -257,7 +257,8 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		}
 
 		// 执行Count查询
-		long totalCount = (Long) c.setProjection(Projections.rowCount()).uniqueResult();
+		Long totalCountObject = (Long) c.setProjection(Projections.rowCount()).uniqueResult();
+		long totalCount = (totalCountObject != null) ? totalCountObject : 0;
 
 		// 将之前的Projection,ResultTransformer和OrderBy条件重新设回去
 		c.setProjection(projection);
