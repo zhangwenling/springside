@@ -7,7 +7,7 @@
 
 # configuration variables
 prog="ttservctl"
-cmd="ttserver"
+cmd="ttserver -thnum 32 -uas"
 basedir="/var/ttserver"
 port="1978"
 pidfile="$basedir/pid"
@@ -15,10 +15,10 @@ logfile="$basedir/log"
 ulogdir="$basedir/ulog"
 ulimsiz="256m"
 sid=2
-mhost="remotehost1"
+mhost="remotehost"
 mport="1978"
 rtsfile="$basedir/rts"
-dbname="$basedir/casket.tch#bnum=1000000#xmsiz=2147483648"
+dbname="$basedir/casket.tch#bnum=10000000#xmsiz=2147483648"
 retval=0
 
 

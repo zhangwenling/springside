@@ -17,7 +17,7 @@ logfile="$basedir/log"
 #sid=1
 #mhost="remotehost1"
 #mport="1978"
-#rtsfile="$basedir/rts"
+#rtsfile="$basedir/rts"   
 dbname="$basedir/casket.tch#bnum=1000000"
 retval=0
 
