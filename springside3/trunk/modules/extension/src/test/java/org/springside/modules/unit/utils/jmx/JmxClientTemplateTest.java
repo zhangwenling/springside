@@ -1,4 +1,4 @@
-package org.springside.modules.unit.jmx;
+package org.springside.modules.unit.utils.jmx;
 
 import org.junit.Ignore;
 

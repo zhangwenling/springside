@@ -1,4 +1,4 @@
-package org.springside.modules.unit.web.struts2;
+package org.springside.modules.unit.utils.web.struts2;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

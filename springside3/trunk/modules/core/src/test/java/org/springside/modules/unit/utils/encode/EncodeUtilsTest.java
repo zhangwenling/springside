@@ -1,4 +1,4 @@
-package org.springside.modules.unit.utils;
+package org.springside.modules.unit.utils.encode;
 
 import org.junit.Assert;
 import org.junit.Test;

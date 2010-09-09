@@ -1,4 +1,4 @@
-package org.springside.modules.unit.web;
+package org.springside.modules.unit.utils.web;
 
 import java.util.Date;
 import java.util.Map;

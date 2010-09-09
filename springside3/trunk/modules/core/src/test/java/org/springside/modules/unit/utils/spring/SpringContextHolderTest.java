@@ -1,4 +1,4 @@
-package org.springside.modules.unit.spring;
+package org.springside.modules.unit.utils.spring;
 
 import org.junit.Assert;
 import org.junit.Test;
