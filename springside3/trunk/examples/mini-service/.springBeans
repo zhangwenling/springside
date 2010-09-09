@@ -9,6 +9,8 @@
 	<configs>
 		<config>src/main/resources/applicationContext.xml</config>
 		<config>src/main/resources/applicationContext-ws-server.xml</config>
+		<config>src/main/resources/applicationContext-ws-client.xml</config>
+		<config>src/test/resources/applicationContext-test.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.codehaus.jackson.type.TypeReference;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springside.modules.binder.JsonBinder;
 
@@ -19,9 +19,9 @@ import com.google.common.collect.Maps;
  * 
  * @author calvin
  */
-public class JsonDemo {
+public class JsonDemo extends Assert {
 
-	private static JsonBinder binder = new JsonBinder(Inclusion.NON_DEFAULT);
+	private static JsonBinder binder = JsonBinder.buildNonDefaultBinder();
 
 	public static void main(String[] args) {
 		try {
@@ -39,6 +39,7 @@ public class JsonDemo {
 		TestBean bean = new TestBean("A");
 		String beanString = binder.toJson(bean);
 		System.out.println("Bean:" + beanString);
+		assertEquals("{\"name\":\"A\"}", beanString);
 
 		//Map
 		Map<String, Object> map = Maps.newLinkedHashMap();
@@ -46,21 +47,35 @@ public class JsonDemo {
 		map.put("age", 2);
 		String mapString = binder.toJson(map);
 		System.out.println("Map:" + mapString);
+		assertEquals("{\"name\":\"A\",\"age\":2}", mapString);
 
 		//List<String>
 		List<String> stringList = Lists.newArrayList("A", "B", "C");
 		String listString = binder.toJson(stringList);
 		System.out.println("String List:" + listString);
+		assertEquals("[\"A\",\"B\",\"C\"]", listString);
 
 		//List<Bean>
 		List<TestBean> beanList = Lists.newArrayList(new TestBean("A"), new TestBean("B"));
 		String beanListString = binder.toJson(beanList);
 		System.out.println("Bean List:" + beanListString);
+		assertEquals("[{\"name\":\"A\"},{\"name\":\"B\"}]", beanListString);
 
 		//Bean[]
 		TestBean[] beanArray = new TestBean[] { new TestBean("A"), new TestBean("B") };
 		String beanArrayString = binder.toJson(beanArray);
 		System.out.println("Array List:" + beanArrayString);
+		assertEquals("[{\"name\":\"A\"},{\"name\":\"B\"}]", beanArrayString);
+
+		//Null Bean
+		TestBean nullBean = null;
+		String nullBeanString = binder.toJson(nullBean);
+		assertNull(nullBeanString);
+
+		//Empty List
+		List<String> emptyList = Lists.newArrayList();
+		String emptyListString = binder.toJson(emptyList);
+		assertEquals("[]", emptyListString);
 	}
 
 	@Test

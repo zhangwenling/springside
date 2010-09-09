@@ -47,7 +47,7 @@ public class ServletUtilsTest extends Assert {
 		request.addParameter("pre_a", "aa");
 		request.addParameter("pre_b", "bb");
 		request.addParameter("c", "c");
-		Map<String, String> result = ServletUtils.getParametersStartingWith(request, "pre_");
+		Map<String, Object> result = ServletUtils.getParametersStartingWith(request, "pre_");
 		assertEquals(2, result.size());
 		assertTrue(result.keySet().contains("a"));
 		assertTrue(result.keySet().contains("b"));

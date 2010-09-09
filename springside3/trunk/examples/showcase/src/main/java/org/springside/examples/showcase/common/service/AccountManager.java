@@ -2,7 +2,6 @@ package org.springside.examples.showcase.common.service;
 
 import java.util.List;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class AccountManager {
 
 	private SpyMemcachedClient spyMemcachedClient;
 
-	private JsonBinder jsonBinder = new JsonBinder(Inclusion.NON_DEFAULT);
+	private JsonBinder jsonBinder = JsonBinder.buildNonDefaultBinder();
 
 	private ServerConfig serverConfig; //系统配置
 

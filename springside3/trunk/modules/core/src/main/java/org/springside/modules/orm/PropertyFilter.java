@@ -105,17 +105,16 @@ public class PropertyFilter {
 	 * filter_EQS_name
 	 * filter_LIKES_name_OR_email
 	 */
-	@SuppressWarnings("unchecked")
 	public static List<PropertyFilter> buildFromHttpRequest(final HttpServletRequest request, final String filterPrefix) {
 		List<PropertyFilter> filterList = new ArrayList<PropertyFilter>();
 
 		//从request中获取含属性前缀名的参数,构造去除前缀名后的参数Map.
-		Map<String, String> filterParamMap = ServletUtils.getParametersStartingWith(request, filterPrefix + "_");
+		Map<String, Object> filterParamMap = ServletUtils.getParametersStartingWith(request, filterPrefix + "_");
 
 		//分析参数Map,构造PropertyFilter列表
-		for (Map.Entry<String, String> entry : filterParamMap.entrySet()) {
+		for (Map.Entry<String, Object> entry : filterParamMap.entrySet()) {
 			String filterName = entry.getKey();
-			String value = entry.getValue();
+			String value = (String) entry.getValue();
 			//如果value值为空,则忽略此filter.
 			if (StringUtils.isNotBlank(value)) {
 				PropertyFilter filter = new PropertyFilter(filterName, value);

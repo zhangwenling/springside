@@ -177,6 +177,7 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 		assertEquals(false, dao.isPropertyUnique("loginName", "user2", "admin"));
 	}
 
+	@SuppressWarnings("unchecked")
 	public void constructor() {
 		MyUserDao myDao = new MyUserDao();
 		Class entityClazz = (Class) ReflectionUtils.getFieldValue(myDao, "entityClass");
