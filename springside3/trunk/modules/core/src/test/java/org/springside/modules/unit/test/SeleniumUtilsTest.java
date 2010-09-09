@@ -65,6 +65,6 @@ public class SeleniumUtilsTest extends Assert {
 		driver = SeleniumUtils.buildDriver(SeleniumUtils.REMOTE + ":localhost:3000:" + SeleniumUtils.FIREFOX);
 		assertTrue(driver instanceof RemoteWebDriver);
 
-		Mockit.tearDownMocks(FirefoxDriver.class, InternetExplorerDriver.class, RemoteWebDriver.class);
+		Mockit.tearDownMocks();
 	}
 }

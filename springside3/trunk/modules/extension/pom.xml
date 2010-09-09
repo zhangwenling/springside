@@ -87,7 +87,6 @@
 			<artifactId>cxf-rt-ws-security</artifactId>
 			<optional>true</optional>
 		</dependency>
-
 		<!-- security end -->
 
 		<!-- memcached begin-->
@@ -108,11 +107,6 @@
 		<!-- jackson begin -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<optional>true</optional>
 		</dependency>
@@ -124,7 +118,8 @@
 			<artifactId>velocity</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!-- logging -->
+
+		<!-- utils -->
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>

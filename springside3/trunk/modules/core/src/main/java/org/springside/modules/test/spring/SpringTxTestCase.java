@@ -29,6 +29,11 @@ import org.springframework.transaction.annotation.Transactional;
  *  
  * 子类需要定义applicationContext文件的位置, 如:
  * @ContextConfiguration(locations = { "/applicationContext-test.xml" })
+ * 
+ * 相比Spring原基类,改进如下：
+ * 1. 名字更短
+ * 2. 继承Assert
+ *  
  *  
  * @see org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests
  * @see SpringContextTestCase

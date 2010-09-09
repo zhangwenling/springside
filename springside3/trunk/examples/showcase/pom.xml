@@ -149,6 +149,7 @@
 			<groupId>net.sf.dozer</groupId>
 			<artifactId>dozer</artifactId>
 		</dependency>
+		<!-- for dozer new version -->
 		<dependency>
 			<groupId>org.apache.xmlbeans</groupId>
 			<artifactId>xmlbeans</artifactId>
@@ -175,10 +176,6 @@
 		<!-- rest end -->
 
 		<!-- security begin -->
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
@@ -480,12 +477,11 @@
 					</instrumentation>
 				</configuration>
 			</plugin>
-
-
 		</plugins>
 	</build>
 
 	<profiles>
+		<!-- 使用Assembly打包jsw+jetty+webapp可运行包的profile -->
 		<profile>
 			<id>package-bin</id>
 			<dependencies>
@@ -494,6 +490,7 @@
 					<artifactId>jsw</artifactId>
 					<type>zip</type>
 				</dependency>
+				
 				<dependency>
 					<groupId>org.mortbay.jetty</groupId>
 					<artifactId>jetty-management</artifactId>
@@ -502,12 +499,6 @@
 					<groupId>org.mortbay.jetty</groupId>
 					<artifactId>start</artifactId>
 				</dependency>
-				<dependency>
-					<groupId>ant</groupId>
-					<artifactId>ant</artifactId>
-					<version>1.6.5</version>
-					<scope>provided</scope>
-				</dependency>
 			</dependencies>
 
 			<build>
@@ -515,6 +506,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-assembly-plugin</artifactId>
+						<version>2.2-beta-5</version>
 						<executions>
 							<execution>
 								<phase>package</phase>

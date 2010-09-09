@@ -7,11 +7,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.jmx.client.JmxClientService;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
-/**
- * JMXClientService的测试用例.
- * 
- * @author calvin
- */
 @DirtiesContext
 @ContextConfiguration(locations = { "/applicationContext-test.xml", "/applicationContext-test-jmx.xml",
 		"/jmx/applicationContext-jmx-server.xml", "/jmx/applicationContext-jmx-client.xml" })

@@ -23,10 +23,7 @@
 		<dependencySet>
 			<outputDirectory>/lib</outputDirectory>
 			<includes>
-				<include>org.mortbay.jetty:jetty</include>
-				<include>org.mortbay.jetty:jetty-util</include>
-				<include>org.mortbay.jetty:servlet-api</include>
-				<include>org.mortbay.jetty:jsp*</include>
+				<include>org.mortbay.jetty:*</include>
 				<include>ant:ant</include>
 				<include>org.eclipse.jdt.core.compiler:ecj</include>
 			</includes>
@@ -35,8 +32,7 @@
 		<dependencySet>
 			<outputDirectory>/lib</outputDirectory>
 			<includes>
-				<include>org.mortbay.jetty:start</include>
-				<include>org.mortbay.jetty:jetty-management</include>
+				<include>org.mortbay.jetty:*</include>
 			</includes>
 			<scope>provided</scope>
 		</dependencySet>

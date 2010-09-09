@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
@@ -28,11 +27,14 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
  * 子类需要定义applicationContext文件的位置,如:
  * @ContextConfiguration(locations = { "/applicationContext-test.xml" })
  * 
+ * 相比Spring原基类,改进如下：
+ * 1. 名字更短
+ * 2. 继承Assert
+ * 
  * @see org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests
  * 
  * @author calvin
  */
-@DirtiesContext
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestExecutionListeners( { DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class })
 public abstract class SpringContextTestCase extends Assert implements ApplicationContextAware {
