@@ -67,15 +67,6 @@ public class JsonDemo extends Assert {
 		System.out.println("Array List:" + beanArrayString);
 		assertEquals("[{\"name\":\"A\"},{\"name\":\"B\"}]", beanArrayString);
 
-		//Null Bean
-		TestBean nullBean = null;
-		String nullBeanString = binder.toJson(nullBean);
-		assertNull(nullBeanString);
-
-		//Empty List
-		List<String> emptyList = Lists.newArrayList();
-		String emptyListString = binder.toJson(emptyList);
-		assertEquals("[]", emptyListString);
 	}
 
 	@Test
@@ -110,6 +101,56 @@ public class JsonDemo extends Assert {
 		for (TestBean element : beanList) {
 			System.out.println(element);
 		}
+	}
+
+	@Test
+	public void NullAndEmptyCollection() {
+		// toJson //
+
+		//Null Bean
+		TestBean nullBean = null;
+		String nullBeanString = binder.toJson(nullBean);
+		assertEquals("null", nullBeanString);
+
+		//Empty List
+		List<String> emptyList = Lists.newArrayList();
+		String emptyListString = binder.toJson(emptyList);
+		assertEquals("[]", emptyListString);
+
+		// fromJson //
+
+		//Null String for bean
+		TestBean nullBeanResult = binder.fromJson(null, TestBean.class);
+		assertNull(nullBeanResult);
+
+		nullBeanResult = binder.fromJson("null", TestBean.class);
+		assertNull(nullBeanResult);
+
+		//Null String for list
+		List nullListResult = binder.fromJson(null, List.class);
+		assertNull(nullListResult);
+
+		nullListResult = binder.fromJson("null", List.class);
+		assertNull(nullListResult);
+
+		nullListResult = binder.fromJson("[]", List.class);
+		assertEquals(0, nullListResult.size());
+	}
+
+	@Test
+	public void binders() {
+		//打印全部属性
+		JsonBinder normalBinder = JsonBinder.buildNormalBinder();
+		TestBean bean = new TestBean("A");
+		assertEquals("{\"nullValue\":null,\"name\":\"A\",\"defaultValue\":\"hello\"}", normalBinder.toJson(bean));
+
+		//不打印nullValue属性
+		JsonBinder nonNullBinder = JsonBinder.buildNonNullBinder();
+		assertEquals("{\"name\":\"A\",\"defaultValue\":\"hello\"}", nonNullBinder.toJson(bean));
+
+		//不打印默认值未改变的nullValue与defaultValue属性
+		JsonBinder nonDefaultBinder = JsonBinder.buildNonNullBinder();
+		assertEquals("{\"name\":\"A\"}", nonDefaultBinder.toJson(bean));
 	}
 
 	//此annoation为了截断对象的循环引用.

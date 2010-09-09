@@ -26,19 +26,33 @@ public class JsonBinder {
 		mapper.getDeserializationConfig().set(Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	}
 
-	public static JsonBinder buildNonDefaultBinder() {
-		return new JsonBinder(Inclusion.NON_DEFAULT);
+	/**
+	 * 创建输出全部属性到Json字符串的Binder.
+	 */
+	public static JsonBinder buildNormalBinder() {
+		return new JsonBinder(Inclusion.ALWAYS);
 	}
 
+	/**
+	 * 创建只输出非空属性到Json字符串的Binder.
+	 */
 	public static JsonBinder buildNonNullBinder() {
 		return new JsonBinder(Inclusion.NON_NULL);
 	}
 
 	/**
-	 * 如果JSON字符串为空,返回Null.
+	 * 创建只输出初始值被改变的属性到Json字符串的Binder.
+	 */
+	public static JsonBinder buildNonDefaultBinder() {
+		return new JsonBinder(Inclusion.NON_DEFAULT);
+	}
+
+	/**
+	 * 如果JSON字符串为Null或"null"字符串,返回Null.
+	 * 如果JSON字符串为"[]",返回空集合.
 	 * 
 	 * 如需读取集合如List/Map,且不是List<String>这种简单类型时使用如下语句:
-	 * List<MyBean> stringList = binder.getMapper().readValue(listString, new TypeReference<List<MyBean>>() {});
+	 * List<MyBean> beanList = binder.getMapper().readValue(listString, new TypeReference<List<MyBean>>() {});
 	 */
 	public <T> T fromJson(String jsonString, Class<T> clazz) {
 		if (StringUtils.isEmpty(jsonString)) {
@@ -54,12 +68,10 @@ public class JsonBinder {
 	}
 
 	/**
-	 * 如果对象为空,返回Null.
+	 * 如果对象为Null,返回"null".
+	 * 如果集合为空集合,返回"[]".
 	 */
 	public String toJson(Object object) {
-		if (object == null) {
-			return null;
-		}
 
 		try {
 			return mapper.writeValueAsString(object);
