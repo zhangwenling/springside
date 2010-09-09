@@ -30,7 +30,7 @@ import org.springframework.util.Assert;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.PropertyFilter.MatchType;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.reflection.ReflectionUtils;
 
 /**
  * 封装SpringSide扩展功能的Hibernat DAO泛型基类.

@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.web;
+package org.springside.modules.utils.web;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.util.Assert;
-import org.springside.modules.utils.EncodeUtils;
+import org.springside.modules.utils.encode.EncodeUtils;
 
 /**
  * Http与Servlet工具类.

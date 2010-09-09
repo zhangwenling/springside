@@ -26,7 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.reflection.ReflectionUtils;
 
 /**
  * 封装Hibernate原生API的DAO泛型基类.

@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springside.modules.test.utils.WebTestUtils;
-import org.springside.modules.web.struts2.Struts2Utils;
+import org.springside.modules.utils.web.struts2.Struts2Utils;
 
 import com.google.common.collect.Lists;
 

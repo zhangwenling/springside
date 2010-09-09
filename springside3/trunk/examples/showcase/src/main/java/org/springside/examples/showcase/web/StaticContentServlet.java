@@ -18,7 +18,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springside.modules.web.ServletUtils;
+import org.springside.modules.utils.web.ServletUtils;
 
 /**
  * 本地静态内容展示与下载的Servlet.

@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 import org.springframework.util.Assert;
 import org.springside.examples.miniweb.entity.IdEntity;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.reflection.ReflectionUtils;
 
 /**
  * 用于项目的Hibernate工具类.

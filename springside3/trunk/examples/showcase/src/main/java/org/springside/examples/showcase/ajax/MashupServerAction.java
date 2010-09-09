@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Namespace;
-import org.springside.modules.web.struts2.Struts2Utils;
+import org.springside.modules.utils.web.struts2.Struts2Utils;
 
 import com.opensymphony.xwork2.ActionSupport;
 

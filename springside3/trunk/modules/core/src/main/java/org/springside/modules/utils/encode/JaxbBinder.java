@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.binder;
+package org.springside.modules.utils.encode;
 
 import java.io.StringReader;
 import java.io.StringWriter;

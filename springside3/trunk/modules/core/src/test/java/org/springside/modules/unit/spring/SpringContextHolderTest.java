@@ -4,8 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springside.modules.spring.SpringContextHolder;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.reflection.ReflectionUtils;
+import org.springside.modules.utils.spring.SpringContextHolder;
 
 public class SpringContextHolderTest extends Assert {
 

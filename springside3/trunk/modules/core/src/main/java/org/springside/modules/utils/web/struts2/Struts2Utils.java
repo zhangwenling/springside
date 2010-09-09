@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.web.struts2;
+package org.springside.modules.utils.web.struts2;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springside.modules.web.ServletUtils;
+import org.springside.modules.utils.web.ServletUtils;
 
 /**
  * Struts2工具类.

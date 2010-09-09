@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.runners.model.InitializationError;
 import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.groups.GroupsTestRunner;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.reflection.ReflectionUtils;
 
 public class GroupsTestRunnerTest extends Assert {
 

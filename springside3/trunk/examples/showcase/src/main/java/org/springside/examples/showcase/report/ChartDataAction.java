@@ -11,7 +11,7 @@ import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 import org.springside.examples.showcase.report.DummyDataFetcher.TemperatureAnomaly;
-import org.springside.modules.web.struts2.Struts2Utils;
+import org.springside.modules.utils.web.struts2.Struts2Utils;
 
 import com.opensymphony.xwork2.ActionSupport;
 

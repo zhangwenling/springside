@@ -1,4 +1,4 @@
-package org.springside.modules.binder;
+package org.springside.modules.utils.encode;
 
 import java.io.IOException;
 

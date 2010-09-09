@@ -17,7 +17,7 @@ import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
-import org.springside.modules.web.struts2.Struts2Utils;
+import org.springside.modules.utils.web.struts2.Struts2Utils;
 
 /**
  * 用户管理Action.

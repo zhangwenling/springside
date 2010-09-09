@@ -4,7 +4,7 @@ import org.hibernate.cfg.reveng.ReverseEngineeringStrategy;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springside.modules.orm.hibernate.IgnorePrefixReverseEngineeringStrategy;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.reflection.ReflectionUtils;
 
 public class IgnorePrefixReverseEngineeringStrategyTest extends Assert {
 

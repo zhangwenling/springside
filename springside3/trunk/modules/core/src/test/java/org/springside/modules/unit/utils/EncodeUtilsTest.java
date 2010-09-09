@@ -2,7 +2,7 @@ package org.springside.modules.unit.utils;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springside.modules.utils.EncodeUtils;
+import org.springside.modules.utils.encode.EncodeUtils;
 
 public class EncodeUtilsTest extends Assert {
 

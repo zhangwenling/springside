@@ -21,7 +21,7 @@ import org.springside.modules.orm.hibernate.SimpleHibernateDao;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DbUnitUtils;
 import org.springside.modules.unit.orm.hibernate.data.User;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.reflection.ReflectionUtils;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

@@ -9,7 +9,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.type.TypeReference;
 import org.junit.Assert;
 import org.junit.Test;
-import org.springside.modules.binder.JsonBinder;
+import org.springside.modules.utils.encode.JsonBinder;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

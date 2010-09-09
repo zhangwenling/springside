@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.reflection.ReflectionUtils;
 
 public class ReflectionUtilsTest extends Assert {
 

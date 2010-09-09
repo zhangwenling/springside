@@ -7,7 +7,7 @@ import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springside.modules.unit.utils.ReflectionUtilsTest.TestBean3;
-import org.springside.modules.utils.ConvertUtils;
+import org.springside.modules.utils.reflection.ConvertUtils;
 
 import com.google.common.collect.Lists;
 

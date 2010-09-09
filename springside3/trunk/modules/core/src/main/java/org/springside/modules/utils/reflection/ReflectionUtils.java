@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.utils;
+package org.springside.modules.utils.reflection;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

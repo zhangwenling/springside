@@ -3,7 +3,7 @@ package org.springside.modules.unit.security.utils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springside.modules.security.utils.CryptoUtils;
-import org.springside.modules.utils.EncodeUtils;
+import org.springside.modules.utils.encode.EncodeUtils;
 
 public class CryptoUtilsTest extends Assert {
 	@Test

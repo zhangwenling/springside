@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springside.modules.web.ServletUtils;
+import org.springside.modules.utils.web.ServletUtils;
 
 public class ServletUtilsTest extends Assert {
 

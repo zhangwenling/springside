@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.jmx;
+package org.springside.modules.utils.jmx;
 
 import java.io.IOException;
 import java.util.Collections;

@@ -6,9 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.modules.jmx.JmxClientTemplate;
 import org.springside.modules.log.Log4jMBean;
 import org.springside.modules.test.spring.SpringContextTestCase;
+import org.springside.modules.utils.jmx.JmxClientTemplate;
 
 /**
  * sprinside-extension中Log4jMBean的测试用例.

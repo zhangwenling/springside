@@ -8,9 +8,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.jmx.client.JmxClientService;
 import org.springside.examples.showcase.jmx.server.ServerConfig;
 import org.springside.examples.showcase.jmx.server.ServerConfigMBean;
-import org.springside.modules.jmx.JmxClientTemplate;
 import org.springside.modules.log.Log4jMBean;
 import org.springside.modules.test.spring.SpringContextTestCase;
+import org.springside.modules.utils.jmx.JmxClientTemplate;
 
 /**
  * springside-extension中{@link JmxClientTemplate}的测试用例.
