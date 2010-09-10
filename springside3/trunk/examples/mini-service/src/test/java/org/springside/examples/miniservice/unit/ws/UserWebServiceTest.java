@@ -1,5 +1,7 @@
 package org.springside.examples.miniservice.unit.ws;
 
+import static org.junit.Assert.*;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -7,7 +9,6 @@ import org.dozer.DozerBeanMapper;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springside.examples.miniservice.data.AccountData;
@@ -26,7 +27,7 @@ import org.springside.examples.miniservice.ws.result.WSResult;
  * 
  * @author calvin
  */
-public class UserWebServiceTest extends Assert {
+public class UserWebServiceTest {
 
 	private IMocksControl control = EasyMock.createControl();
 

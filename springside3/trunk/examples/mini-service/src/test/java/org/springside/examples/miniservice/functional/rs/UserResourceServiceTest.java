@@ -1,5 +1,7 @@
 package org.springside.examples.miniservice.functional.rs;
 
+import static org.junit.Assert.*;
+
 import java.net.URI;
 import java.util.List;
 

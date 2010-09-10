@@ -1,5 +1,7 @@
 package org.springside.examples.showcase.unit.common;
 
+import static org.junit.Assert.*;
+
 import java.util.Date;
 
 import javax.sql.DataSource;

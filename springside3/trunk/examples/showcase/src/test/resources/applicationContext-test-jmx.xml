@@ -6,12 +6,12 @@
 	<description>JMX服务端配置</description>
 
 	<!-- (可选)配置RMI注册服务器,可在命令行用-D定义实现 -->
-	<bean id="registry" class="org.springframework.remoting.rmi.RmiRegistryFactoryBean" lazy-init="false">
+	<bean id="rmiRegistry" class="org.springframework.remoting.rmi.RmiRegistryFactoryBean" lazy-init="false">
 		<property name="port" value="${jmx.rmi_port}" />
 	</bean>
 
 	<!-- (可选)配置JMX远程连接,可在命令行用-D定义实现 -->
-	<bean id="serverConnector" class="org.springframework.jmx.support.ConnectorServerFactoryBean" lazy-init="false">
+	<bean id="serverConnector" class="org.springframework.jmx.support.ConnectorServerFactoryBean" lazy-init="false" depends-on="rmiRegistry">
 		<property name="serviceUrl" value="service:jmx:rmi:///jndi/rmi://${server.addr}:${jmx.rmi_port}/jmxrmi" />
 	</bean>
 </beans>

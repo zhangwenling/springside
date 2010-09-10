@@ -1,10 +1,11 @@
 package org.springside.examples.showcase.unit.report;
 
+import static org.junit.Assert.*;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellReference;
-import org.junit.Assert;
 import org.junit.Test;
 import org.springside.examples.showcase.report.ExcelExportAction;
 import org.springside.modules.utils.reflection.ReflectionUtils;
@@ -14,7 +15,7 @@ import org.springside.modules.utils.reflection.ReflectionUtils;
  * 
  * @author calvin
  */
-public class ExcelExportActionTest extends Assert {
+public class ExcelExportActionTest {
 
 	@Test
 	public void test() throws Exception {

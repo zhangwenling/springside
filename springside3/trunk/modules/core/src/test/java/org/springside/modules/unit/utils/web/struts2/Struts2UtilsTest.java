@@ -1,5 +1,7 @@
 package org.springside.modules.unit.utils.web.struts2;
 
+import static org.junit.Assert.*;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
@@ -7,7 +9,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springside.modules.test.utils.WebTestUtils;
@@ -15,7 +16,7 @@ import org.springside.modules.utils.web.struts2.Struts2Utils;
 
 import com.google.common.collect.Lists;
 
-public class Struts2UtilsTest extends Assert {
+public class Struts2UtilsTest {
 
 	@Test
 	public void render() throws UnsupportedEncodingException {

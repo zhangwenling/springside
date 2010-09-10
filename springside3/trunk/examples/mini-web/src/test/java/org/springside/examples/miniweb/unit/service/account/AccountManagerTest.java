@@ -1,5 +1,7 @@
 package org.springside.examples.miniweb.unit.service.account;
 
+import static org.junit.Assert.*;
+
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.junit.After;
@@ -17,7 +19,7 @@ import org.springside.examples.miniweb.service.account.AccountManager;
  * 
  * @author calvin
  */
-public class AccountManagerTest extends Assert {
+public class AccountManagerTest {
 
 	private IMocksControl control = EasyMock.createControl();
 

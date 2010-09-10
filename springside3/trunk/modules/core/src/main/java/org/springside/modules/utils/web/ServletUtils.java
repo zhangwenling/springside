@@ -54,12 +54,12 @@ public class ServletUtils {
 	/**
 	 * 设置禁止客户端缓存的Header.
 	 */
-	public static void setNoCacheHeader(HttpServletResponse response) {
+	public static void setDisableCacheHeader(HttpServletResponse response) {
 		//Http 1.0 header
-		response.setDateHeader("Expires", 0);
+		response.setDateHeader("Expires", 1L);
 		response.addHeader("Pragma", "no-cache");
 		//Http 1.1 header
-		response.setHeader("Cache-Control", "no-cache");
+		response.setHeader("Cache-Control", "no-cache, no-store, max-age=0");
 	}
 
 	/**

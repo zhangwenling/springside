@@ -1,5 +1,7 @@
 package org.springside.examples.showcase.unit.schedule;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;

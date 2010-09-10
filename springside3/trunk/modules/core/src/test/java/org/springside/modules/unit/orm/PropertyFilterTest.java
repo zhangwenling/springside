@@ -1,10 +1,11 @@
 package org.springside.modules.unit.orm;
 
+import static org.junit.Assert.*;
+
 import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springside.modules.orm.PropertyFilter;
@@ -15,7 +16,7 @@ import org.springside.modules.orm.PropertyFilter.MatchType;
  * 
  * @author calvin
  */
-public class PropertyFilterTest extends Assert {
+public class PropertyFilterTest {
 
 	@Test
 	public void createFilter() {

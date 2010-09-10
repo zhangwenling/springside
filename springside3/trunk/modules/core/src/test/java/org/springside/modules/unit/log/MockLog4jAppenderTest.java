@@ -1,12 +1,13 @@
 package org.springside.modules.unit.log;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springside.modules.log.MockLog4jAppender;
 
-public class MockLog4jAppenderTest extends Assert {
+public class MockLog4jAppenderTest {
 
 	@Test
 	public void normal() {

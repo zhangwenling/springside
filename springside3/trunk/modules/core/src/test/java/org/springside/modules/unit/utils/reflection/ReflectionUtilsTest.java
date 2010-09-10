@@ -1,12 +1,13 @@
 package org.springside.modules.unit.utils.reflection;
 
+import static org.junit.Assert.*;
+
 import java.lang.reflect.InvocationTargetException;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.springside.modules.utils.reflection.ReflectionUtils;
 
-public class ReflectionUtilsTest extends Assert {
+public class ReflectionUtilsTest {
 
 	@Test
 	public void getAndSetFieldValue() {

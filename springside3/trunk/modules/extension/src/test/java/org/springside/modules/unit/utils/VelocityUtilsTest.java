@@ -1,5 +1,7 @@
 package org.springside.modules.unit.utils;
 
+import static org.junit.Assert.*;
+
 import java.util.Map;
 
 import org.junit.Assert;
@@ -8,7 +10,7 @@ import org.springside.modules.utils.VelocityUtils;
 
 import com.google.common.collect.Maps;
 
-public class VelocityUtilsTest extends Assert {
+public class VelocityUtilsTest {
 	private String TEMPLATE = "hello $name";
 	private String ERROR_TEMPLATE = "hello $";
 

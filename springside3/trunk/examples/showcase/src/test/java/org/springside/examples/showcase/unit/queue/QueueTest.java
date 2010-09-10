@@ -1,5 +1,7 @@
 package org.springside.examples.showcase.unit.queue;
 
+import static org.junit.Assert.*;
+
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,13 +12,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.springside.examples.showcase.queue.QueueConsumer;
 import org.springside.examples.showcase.queue.QueuesHolder;
 
 @SuppressWarnings("unchecked")
-public class QueueTest extends Assert {
+public class QueueTest {
 
 	@Test
 	public void backup() throws IOException, ClassNotFoundException, InterruptedException {

@@ -1,5 +1,7 @@
 package org.springside.modules.unit.orm.hibernate;
 
+import static org.junit.Assert.*;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +36,9 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 	@Before
 	public void setUp() throws Exception {
-		jdbcTemplate.update("drop all objects");
+		simpleJdbcTemplate.update("drop all objects");
 
-		runSql("classpath:/schema.sql", false);
+		executeSqlScript("classpath:/schema.sql", false);
 
 		DbUnitUtils.loadData((DataSource) applicationContext.getBean("dataSource"), "/test-data.xml");
 

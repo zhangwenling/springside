@@ -1,13 +1,14 @@
 package org.springside.modules.unit.utils.spring;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springside.modules.utils.reflection.ReflectionUtils;
 import org.springside.modules.utils.spring.SpringContextHolder;
 
-public class SpringContextHolderTest extends Assert {
+public class SpringContextHolderTest {
 
 	@Test
 	public void testGetBean() {

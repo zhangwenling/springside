@@ -1,5 +1,7 @@
 package org.springside.examples.showcase.unit.log;
 
+import static org.junit.Assert.*;
+
 import java.util.Date;
 
 import org.apache.log4j.Logger;

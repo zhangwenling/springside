@@ -1,5 +1,7 @@
 package org.springside.examples.miniservice.functional.ws;
 
+import static org.junit.Assert.*;
+
 import java.net.MalformedURLException;
 
 import javax.xml.ws.BindingProvider;

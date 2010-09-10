@@ -1,13 +1,14 @@
 package org.springside.modules.unit.utils;
 
+import static org.junit.Assert.*;
+
 import java.io.IOException;
 import java.util.Properties;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.springside.modules.utils.PropertiesUtils;
 
-public class PropertiesUtilsTest extends Assert {
+public class PropertiesUtilsTest {
 
 	@Test
 	public void multiPropertiy() throws IOException {

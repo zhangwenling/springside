@@ -29,7 +29,7 @@ import org.springside.modules.utils.spring.SpringContextHolder;
  */
 @Ignore
 @RunWith(GroupsTestRunner.class)
-public class BaseFunctionalTestCase extends Assert {
+public class BaseFunctionalTestCase {
 
 	protected final static String BASE_URL = Start.BASE_URL;
 

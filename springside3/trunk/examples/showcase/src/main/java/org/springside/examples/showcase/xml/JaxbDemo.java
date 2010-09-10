@@ -1,12 +1,13 @@
 package org.springside.examples.showcase.xml;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springside.modules.utils.encode.JaxbBinder;
@@ -38,7 +39,7 @@ import com.google.common.collect.Lists;
  * 	</houses>
  * </user>
  */
-public class JaxbDemo extends Assert {
+public class JaxbDemo {
 
 	private static JaxbBinder binder;
 

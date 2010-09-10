@@ -1,12 +1,13 @@
 package org.springside.modules.unit.orm.hibernate;
 
+import static org.junit.Assert.*;
+
 import org.hibernate.cfg.reveng.ReverseEngineeringStrategy;
-import org.junit.Assert;
 import org.junit.Test;
 import org.springside.modules.orm.hibernate.IgnorePrefixReverseEngineeringStrategy;
 import org.springside.modules.utils.reflection.ReflectionUtils;
 
-public class IgnorePrefixReverseEngineeringStrategyTest extends Assert {
+public class IgnorePrefixReverseEngineeringStrategyTest {
 
 	public static class MyIgnorePrefixReverseEngineeringStrategy extends IgnorePrefixReverseEngineeringStrategy {
 		public MyIgnorePrefixReverseEngineeringStrategy(ReverseEngineeringStrategy delegate) {

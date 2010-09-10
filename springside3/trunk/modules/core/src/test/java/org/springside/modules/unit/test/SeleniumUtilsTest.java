@@ -1,5 +1,7 @@
 package org.springside.modules.unit.test;
 
+import static org.junit.Assert.*;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -7,7 +9,6 @@ import mockit.Mock;
 import mockit.MockClass;
 import mockit.Mockit;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
@@ -18,7 +19,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springside.modules.test.utils.SeleniumUtils;
 
-public class SeleniumUtilsTest extends Assert {
+public class SeleniumUtilsTest {
 
 	@MockClass(realClass = RemoteWebDriver.class)
 	public static class MockRemoteWebDriver {

@@ -1,12 +1,13 @@
 package org.springside.modules.unit.test;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.webapp.WebAppContext;
 import org.springside.modules.test.utils.JettyUtils;
 
-public class JettyUtilsTest extends Assert {
+public class JettyUtilsTest {
 
 	@Test
 	public void buildNormalServer() {

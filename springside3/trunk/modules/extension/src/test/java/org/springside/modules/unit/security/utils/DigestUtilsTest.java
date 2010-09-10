@@ -8,7 +8,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springside.modules.security.utils.DigestUtils;
 
-public class DigestUtilsTest extends Assert {
+public class DigestUtilsTest {
 
 	@Test
 	public void digestString() {

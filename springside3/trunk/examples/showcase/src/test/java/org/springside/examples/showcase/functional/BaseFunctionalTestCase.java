@@ -5,7 +5,6 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
@@ -28,7 +27,7 @@ import org.springside.modules.utils.spring.SpringContextHolder;
  */
 @Ignore
 @RunWith(GroupsTestRunner.class)
-public class BaseFunctionalTestCase extends Assert {
+public class BaseFunctionalTestCase {
 
 	protected static final String BASE_URL = Start.BASE_URL;
 

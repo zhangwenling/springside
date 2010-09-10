@@ -1,12 +1,13 @@
 package org.springside.modules.unit.security.springsecurity;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 
 import mockit.Mock;
 import mockit.MockClass;
 import mockit.Mockit;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +22,7 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 import com.google.common.collect.Lists;
 
-public class SpringSecurityUtilsTest extends Assert {
+public class SpringSecurityUtilsTest {
 	private static final String USER_NAME = "foo";
 
 	@MockClass(realClass = SecurityContextHolder.class)

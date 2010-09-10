@@ -1,12 +1,13 @@
 package org.springside.modules.unit.log;
 
+import static org.junit.Assert.*;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
 import org.junit.Test;
 import org.springside.modules.log.Log4jMBean;
 
-public class Log4jMBeanTest extends Assert {
+public class Log4jMBeanTest {
 
 	@Test
 	public void testRootLoggerLevel() {

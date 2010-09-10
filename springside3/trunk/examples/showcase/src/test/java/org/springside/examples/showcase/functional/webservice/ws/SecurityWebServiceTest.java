@@ -1,5 +1,7 @@
 package org.springside.examples.showcase.functional.webservice.ws;
 
+import static org.junit.Assert.*;
+
 import java.net.MalformedURLException;
 import java.util.Map;
 

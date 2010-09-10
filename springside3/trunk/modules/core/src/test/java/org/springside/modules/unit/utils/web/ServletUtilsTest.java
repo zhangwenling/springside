@@ -1,15 +1,16 @@
 package org.springside.modules.unit.utils.web;
 
+import static org.junit.Assert.*;
+
 import java.util.Date;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springside.modules.utils.web.ServletUtils;
 
-public class ServletUtilsTest extends Assert {
+public class ServletUtilsTest {
 
 	@Test
 	public void checkIfModified() {

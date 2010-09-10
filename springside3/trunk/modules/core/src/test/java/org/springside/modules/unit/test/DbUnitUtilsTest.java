@@ -1,5 +1,7 @@
 package org.springside.modules.unit.test;
 
+import static org.junit.Assert.assertEquals;
+
 import javax.sql.DataSource;
 
 import org.junit.Test;
@@ -13,9 +15,9 @@ public class DbUnitUtilsTest extends SpringTxTestCase {
 
 	@Test
 	public void normal() throws BeansException, Exception {
-		jdbcTemplate.update("drop all objects");
+		simpleJdbcTemplate.update("drop all objects");
 
-		runSql("classpath:/schema.sql", false);
+		executeSqlScript("classpath:/schema.sql", false);
 
 		DbUnitUtils.appendData((DataSource) applicationContext.getBean("dataSource"), "classpath:/test-data.xml");
 		assertEquals(6, countRowsInTable("SS_USER"));

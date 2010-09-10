@@ -1,10 +1,11 @@
 package org.springside.modules.unit.utils.encode;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.springside.modules.utils.encode.EncodeUtils;
 
-public class EncodeUtilsTest extends Assert {
+public class EncodeUtilsTest {
 
 	@Test
 	public void hexEncode() {

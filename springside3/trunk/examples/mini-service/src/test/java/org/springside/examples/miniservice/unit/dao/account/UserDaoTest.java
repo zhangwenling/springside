@@ -1,5 +1,7 @@
 package org.springside.examples.miniservice.unit.dao.account;
 
+import static org.junit.Assert.*;
+
 import javax.sql.DataSource;
 
 import org.junit.AfterClass;

@@ -65,12 +65,11 @@ public class ConvertUtils {
 	}
 
 	/**
-	 * 定义日期Converter的格式
+	 * 定义日期Converter的格式: yyyy-MM-dd 或 yyyy-MM-dd HH:mm:ss
 	 */
 	private static void registerDateConverter() {
 		DateConverter dc = new DateConverter();
 		dc.setUseLocaleFormat(true);
-		//TODO 硬编码 CHINESE locale格式不是个好的做法.
 		dc.setPatterns(new String[] { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss" });
 		org.apache.commons.beanutils.ConvertUtils.register(dc, Date.class);
 	}

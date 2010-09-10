@@ -1,5 +1,7 @@
 package org.springside.examples.showcase.json;
 
+import static org.junit.Assert.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,7 +9,6 @@ import java.util.Map.Entry;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.type.TypeReference;
-import org.junit.Assert;
 import org.junit.Test;
 import org.springside.modules.utils.encode.JsonBinder;
 
@@ -19,7 +20,7 @@ import com.google.common.collect.Maps;
  * 
  * @author calvin
  */
-public class JsonDemo extends Assert {
+public class JsonDemo {
 
 	private static JsonBinder binder = JsonBinder.buildNonDefaultBinder();
 

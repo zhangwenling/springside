@@ -1,11 +1,12 @@
 package org.springside.modules.unit.orm;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springside.modules.orm.Page;
 
-public class PageTest extends Assert {
+public class PageTest {
 	private Page<Object> page;
 
 	@Before

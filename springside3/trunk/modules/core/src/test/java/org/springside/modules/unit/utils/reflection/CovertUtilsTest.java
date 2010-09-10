@@ -1,17 +1,18 @@
 package org.springside.modules.unit.utils.reflection;
 
+import static org.junit.Assert.*;
+
 import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
-import org.junit.Assert;
 import org.junit.Test;
 import org.springside.modules.unit.utils.reflection.ReflectionUtilsTest.TestBean3;
 import org.springside.modules.utils.reflection.ConvertUtils;
 
 import com.google.common.collect.Lists;
 
-public class CovertUtilsTest extends Assert {
+public class CovertUtilsTest {
 
 	@SuppressWarnings("unchecked")
 	@Test

@@ -1,15 +1,16 @@
 package org.springside.examples.miniweb.unit.dao;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.springside.examples.miniweb.dao.HibernateUtils;
 import org.springside.examples.miniweb.entity.account.User;
 
 import com.google.common.collect.Lists;
 
-public class HibernateUtilsTest extends Assert {
+public class HibernateUtilsTest {
 
 	@Test
 	public void mergeByCheckedIds() {
@@ -27,7 +28,6 @@ public class HibernateUtilsTest extends Assert {
 		assertEquals(2, srcList.size());
 		assertTrue(1L == srcList.get(0).getId());
 		assertTrue(3L == srcList.get(1).getId());
-
 	}
 
 }

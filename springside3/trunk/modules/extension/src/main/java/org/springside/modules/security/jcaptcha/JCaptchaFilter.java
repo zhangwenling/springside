@@ -150,7 +150,7 @@ public class JCaptchaFilter implements Filter {
 	protected void genernateCaptchaImage(final HttpServletRequest request, final HttpServletResponse response)
 			throws IOException {
 
-		ServletUtils.setNoCacheHeader(response);
+		ServletUtils.setDisableCacheHeader(response);
 		response.setContentType("image/jpeg");
 
 		ServletOutputStream out = response.getOutputStream();

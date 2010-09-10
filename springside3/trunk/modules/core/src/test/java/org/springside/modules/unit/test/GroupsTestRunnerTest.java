@@ -1,8 +1,9 @@
 package org.springside.modules.unit.test;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -11,7 +12,7 @@ import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.groups.GroupsTestRunner;
 import org.springside.modules.utils.reflection.ReflectionUtils;
 
-public class GroupsTestRunnerTest extends Assert {
+public class GroupsTestRunnerTest {
 
 	@Before
 	public void before() {

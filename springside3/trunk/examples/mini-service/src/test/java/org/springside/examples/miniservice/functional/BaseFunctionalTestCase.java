@@ -3,7 +3,6 @@ package org.springside.examples.miniservice.functional;
 import javax.sql.DataSource;
 
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.mortbay.jetty.Server;
@@ -20,7 +19,7 @@ import org.springside.modules.utils.spring.SpringContextHolder;
  * @author calvin
  */
 @Ignore
-public class BaseFunctionalTestCase extends Assert {
+public class BaseFunctionalTestCase {
 
 	protected static final String BASE_URL = Start.BASE_URL;
 

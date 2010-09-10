@@ -195,7 +195,7 @@ public class Struts2Utils {
 		String fullContentType = contentType + ";charset=" + encoding;
 		response.setContentType(fullContentType);
 		if (noCache) {
-			ServletUtils.setNoCacheHeader(response);
+			ServletUtils.setDisableCacheHeader(response);
 		}
 
 		return response;
