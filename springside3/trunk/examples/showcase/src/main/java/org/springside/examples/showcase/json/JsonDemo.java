@@ -2,6 +2,8 @@ package org.springside.examples.showcase.json;
 
 import static org.junit.Assert.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +11,7 @@ import java.util.Map.Entry;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.type.TypeReference;
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.springside.modules.utils.encode.JsonBinder;
 
@@ -29,11 +32,17 @@ public class JsonDemo {
 			JsonDemo demo = new JsonDemo();
 			demo.toJson();
 			demo.fromJson();
+			demo.nullAndEmpty();
+			demo.threeTypeBinders();
+			demo.enumAndDate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * 序列化对象/集合到Json字符串.
+	 */
 	@Test
 	public void toJson() throws Exception {
 		//Bean
@@ -67,9 +76,11 @@ public class JsonDemo {
 		String beanArrayString = binder.toJson(beanArray);
 		System.out.println("Array List:" + beanArrayString);
 		assertEquals("[{\"name\":\"A\"},{\"name\":\"B\"}]", beanArrayString);
-
 	}
 
+	/**
+	 * 从Json字符串反序列化对象/集合.
+	 */
 	@Test
 	@SuppressWarnings("unchecked")
 	public void fromJson() throws Exception {
@@ -104,9 +115,12 @@ public class JsonDemo {
 		}
 	}
 
+	/**
+	 * 测试传入空对象,空字符串,Empty的集合,"null"字符串的结果.
+	 */
 	@Test
-	public void NullAndEmptyCollection() {
-		// toJson //
+	public void nullAndEmpty() {
+		// toJson测试 //
 
 		//Null Bean
 		TestBean nullBean = null;
@@ -118,16 +132,16 @@ public class JsonDemo {
 		String emptyListString = binder.toJson(emptyList);
 		assertEquals("[]", emptyListString);
 
-		// fromJson //
+		// fromJson测试 //
 
-		//Null String for bean
+		//Null String for Bean
 		TestBean nullBeanResult = binder.fromJson(null, TestBean.class);
 		assertNull(nullBeanResult);
 
 		nullBeanResult = binder.fromJson("null", TestBean.class);
 		assertNull(nullBeanResult);
 
-		//Null String for list
+		//Null/Empty String for List
 		List nullListResult = binder.fromJson(null, List.class);
 		assertNull(nullListResult);
 
@@ -138,8 +152,11 @@ public class JsonDemo {
 		assertEquals(0, nullListResult.size());
 	}
 
+	/**
+	 * 测试三种不同的Binder.
+	 */
 	@Test
-	public void binders() {
+	public void threeTypeBinders() {
 		//打印全部属性
 		JsonBinder normalBinder = JsonBinder.buildNormalBinder();
 		TestBean bean = new TestBean("A");
@@ -152,6 +169,30 @@ public class JsonDemo {
 		//不打印默认值未改变的nullValue与defaultValue属性
 		JsonBinder nonDefaultBinder = JsonBinder.buildNonNullBinder();
 		assertEquals("{\"name\":\"A\"}", nonDefaultBinder.toJson(bean));
+	}
+
+	/**
+	 * 测试对枚举与日期的序列化.
+	 */
+	@Test
+	public void enumAndDate() {
+		//Enum会以名称(name)序列化.
+		assertEquals("\"One\"", binder.toJson(TestEnum.One));
+
+		//Enum可以名称(name)或从0开始的顺序号(ordinal)反序列化.
+		assertEquals(TestEnum.One, binder.fromJson("0", TestEnum.class));
+		assertEquals(TestEnum.One, binder.fromJson("\"One\"", TestEnum.class));
+
+		DateTime jodaTime = new DateTime();
+
+		//日期默认以Timestamp方式存储.
+		Date date = new Date(jodaTime.getMillis());
+		assertEquals(String.valueOf(jodaTime.getMillis()), binder.toJson(date));
+
+		//以设定日期格式存储
+		binder.getMapper().getSerializationConfig().setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
+		assertEquals("\"" + jodaTime.toString("yyyy-MM-dd") + "\"", binder.toJson(date));
+
 	}
 
 	//此annoation为了截断对象的循环引用.
@@ -206,5 +247,9 @@ public class JsonDemo {
 		public String toString() {
 			return "TestBean [defaultValue=" + defaultValue + ", name=" + name + ", nullValue=" + nullValue + "]";
 		}
+	}
+
+	public static enum TestEnum {
+		One, Two, Three
 	}
 }
