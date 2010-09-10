@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2005-2010 springside.org.cn
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * 
+ * $Id$
+ */
 package org.springside.modules.memcached;
 
 import javax.annotation.PostConstruct;

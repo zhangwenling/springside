@@ -1,13 +1,12 @@
 /**
- * Copyright (c) 2005-2009 springside.org.cn
+ * Copyright (c) 2005-2010 springside.org.cn
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
  * $Id$
  */
 package org.springside.modules.security.jcaptcha;
-
-import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -30,6 +29,7 @@ import org.springside.modules.utils.web.ServletUtils;
 
 import com.octo.captcha.service.CaptchaService;
 import com.octo.captcha.service.CaptchaServiceException;
+
 
 /**
  * 集成JCaptcha验证码的Filter.

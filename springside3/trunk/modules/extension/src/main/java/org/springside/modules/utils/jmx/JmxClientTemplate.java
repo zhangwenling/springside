@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2005-2009 springside.org.cn
+ * Copyright (c) 2005-2010 springside.org.cn
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
@@ -92,7 +92,7 @@ public class JmxClientTemplate {
 		assertConnected();
 
 		ObjectName objectName = buildObjectName(mbeanName);
-		return (T) MBeanServerInvocationHandler.newProxyInstance(connection, objectName, mBeanInterface, false);
+		return MBeanServerInvocationHandler.newProxyInstance(connection, objectName, mBeanInterface, false);
 	}
 
 	/**

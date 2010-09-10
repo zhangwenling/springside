@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2005-2009 springside.org.cn
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * 
- * $Id$
- */
 package org.springside.examples.miniweb.dao;
 
 import java.util.Collection;
