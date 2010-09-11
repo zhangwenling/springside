@@ -20,8 +20,7 @@ public class JmxTest extends BaseFunctionalTestCase {
 	}
 
 	@Test
-	public void test() throws InterruptedException {
-
+	public void test() {
 		driver.get(BASE_URL + "/jmx/jmx-client.action");
 		assertEquals("default", driver.findElement(By.id("nodeName")).getValue());
 	}

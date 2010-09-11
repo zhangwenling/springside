@@ -23,7 +23,7 @@ import org.springside.examples.miniweb.web.CrudActionSupport;
 @Results( { @Result(name = CrudActionSupport.RELOAD, location = "role.action", type = "redirect") })
 public class RoleAction extends CrudActionSupport<Role> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4052047494894591406L;
 
 	private AccountManager accountManager;
 

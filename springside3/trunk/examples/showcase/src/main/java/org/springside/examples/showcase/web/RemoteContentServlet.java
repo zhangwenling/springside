@@ -41,8 +41,9 @@ import org.slf4j.LoggerFactory;
  * 
  * @author calvin
  */
-@SuppressWarnings("serial")
 public class RemoteContentServlet extends HttpServlet {
+
+	private static final long serialVersionUID = -8483811141908827663L;
 
 	private static Logger logger = LoggerFactory.getLogger(RemoteContentServlet.class);
 

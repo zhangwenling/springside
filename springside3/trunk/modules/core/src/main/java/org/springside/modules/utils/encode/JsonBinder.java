@@ -8,10 +8,11 @@
 package org.springside.modules.utils.encode;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.DeserializationConfig.Feature;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +33,8 @@ public class JsonBinder {
 		//设置输出包含的属性
 		mapper.getSerializationConfig().setSerializationInclusion(inclusion);
 		//设置输入时忽略JSON字符串中存在而Java对象实际没有的属性
-		mapper.getDeserializationConfig().set(Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.getDeserializationConfig().set(
+				org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	}
 
 	/**
@@ -87,6 +89,17 @@ public class JsonBinder {
 		} catch (IOException e) {
 			logger.warn("write to json string error:" + object, e);
 			return null;
+		}
+	}
+
+	/**
+	 * 设置转换日期类型的format pattern,如果不设置默认打印Timestamp毫秒数.
+	 */
+	public void setDateFormat(String pattern) {
+		if (StringUtils.isNotBlank(pattern)) {
+			DateFormat df = new SimpleDateFormat(pattern);
+			mapper.getSerializationConfig().setDateFormat(df);
+			mapper.getDeserializationConfig().setDateFormat(df);
 		}
 	}
 

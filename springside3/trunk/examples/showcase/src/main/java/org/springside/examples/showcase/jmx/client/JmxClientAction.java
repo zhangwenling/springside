@@ -18,8 +18,9 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author calvin
  */
 @Namespace("/jmx")
-@SuppressWarnings("serial")
 public class JmxClientAction extends ActionSupport {
+
+	private static final long serialVersionUID = -12923147736849709L;
 
 	private static Logger logger = LoggerFactory.getLogger(JmxClientAction.class);
 

@@ -33,7 +33,7 @@ import org.springside.modules.utils.web.struts2.Struts2Utils;
 @Results( { @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
 public class UserAction extends CrudActionSupport<User> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8683878162525847072L;
 
 	private AccountManager accountManager;
 

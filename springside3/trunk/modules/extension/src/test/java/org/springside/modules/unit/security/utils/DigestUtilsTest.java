@@ -2,7 +2,6 @@ package org.springside.modules.unit.security.utils;
 
 import java.io.IOException;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;

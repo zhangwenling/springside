@@ -2,7 +2,6 @@ package org.springside.examples.showcase.json;
 
 import static org.junit.Assert.*;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -118,6 +117,7 @@ public class JsonDemo {
 	/**
 	 * 测试传入空对象,空字符串,Empty的集合,"null"字符串的结果.
 	 */
+	@SuppressWarnings("unchecked")
 	@Test
 	public void nullAndEmpty() {
 		// toJson测试 //
@@ -187,12 +187,21 @@ public class JsonDemo {
 
 		//日期默认以Timestamp方式存储.
 		Date date = new Date(jodaTime.getMillis());
-		assertEquals(String.valueOf(jodaTime.getMillis()), binder.toJson(date));
+		String tsString = String.valueOf(jodaTime.getMillis());
+		assertEquals(tsString, binder.toJson(date));
+		assertEquals(date, binder.fromJson(tsString, Date.class));
 
 		//以设定日期格式存储
-		binder.getMapper().getSerializationConfig().setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
-		assertEquals("\"" + jodaTime.toString("yyyy-MM-dd") + "\"", binder.toJson(date));
+		String dateString = "\"" + jodaTime.toString("yyyy-MM-dd") + "\"";
+		binder.setDateFormat("yyyy-MM-dd");
+		assertEquals(dateString, binder.toJson(date));
+		Date dateResult = binder.fromJson(dateString, Date.class);
+		System.out.println(dateResult);
+		assertEquals(new DateTime(dateResult).getDayOfYear(), jodaTime.getDayOfYear());
 
+		//还原以Timestamp方式存储
+		binder.unsetDateFormat();
+		assertEquals(tsString, binder.toJson(date));
 	}
 
 	//此annoation为了截断对象的循环引用.

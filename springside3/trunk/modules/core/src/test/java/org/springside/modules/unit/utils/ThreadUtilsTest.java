@@ -143,7 +143,6 @@ public class ThreadUtilsTest {
 			if (runTime > 0) {
 				long start = System.currentTimeMillis();
 				while (System.currentTimeMillis() - start < runTime) {
-					;
 				}
 			}
 

@@ -2,8 +2,6 @@ package org.springside.examples.miniservice.functional.ws;
 
 import static org.junit.Assert.*;
 
-import java.net.MalformedURLException;
-
 import javax.xml.ws.BindingProvider;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
@@ -75,18 +73,19 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 	 * 测试获取全部用户,使用CXF的API自行动态创建Client.
 	 */
 	@Test
-	public void getAllUser() throws MalformedURLException {
+	public void getAllUser() {
 		String address = BASE_URL + "/ws/userservice";
 
 		JaxWsProxyFactoryBean proxyFactory = new JaxWsProxyFactoryBean();
 		proxyFactory.setAddress(address);
 		proxyFactory.setServiceClass(UserWebService.class);
-		UserWebService userWebService = (UserWebService) proxyFactory.create();
+		UserWebService userWebServiceCreated = (UserWebService) proxyFactory.create();
 
 		//(可选)重新设定endpoint address.
-		((BindingProvider) userWebService).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, address);
+		((BindingProvider) userWebServiceCreated).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
+				address);
 
-		GetAllUserResult result = userWebService.getAllUser();
+		GetAllUserResult result = userWebServiceCreated.getAllUser();
 
 		assertTrue(result.getUserList().size() > 0);
 		UserDTO adminUser = result.getUserList().get(0);

@@ -25,7 +25,7 @@ public class Struts2UtilsTest {
 
 		Struts2Utils.render("text/plain", "hello");
 		assertEquals("text/plain;charset=UTF-8", response.getContentType());
-		assertEquals("no-cache", response.getHeader("Cache-Control"));
+		assertEquals("no-cache, no-store, max-age=0", response.getHeader("Cache-Control"));
 		assertEquals("hello", response.getContentAsString());
 
 		response = new MockHttpServletResponse();

@@ -48,7 +48,7 @@ public class SpyMemcachedClient {
 		try {
 			return (T) client.get(key);
 		} catch (RuntimeException e) {
-			logger.warn("Get from memcached server fail,key is" + key, e);
+			logger.warn("Get from memcached server fail,key is " + key, e);
 			return null;
 		}
 	}
@@ -61,7 +61,7 @@ public class SpyMemcachedClient {
 		try {
 			return (Map<String, T>) client.getBulk(keys);
 		} catch (RuntimeException e) {
-			logger.warn("Get from memcached server fail,keys are" + Arrays.toString(keys), e);
+			logger.warn("Get from memcached server fail,keys are " + Arrays.toString(keys), e);
 			return null;
 		}
 	}
@@ -74,7 +74,7 @@ public class SpyMemcachedClient {
 		try {
 			return (Map<String, T>) client.getBulk(keys);
 		} catch (RuntimeException e) {
-			logger.warn("Get from memcached server fail,keys are" + keys, e);
+			logger.warn("Get from memcached server fail,keys are " + keys, e);
 			return null;
 		}
 	}

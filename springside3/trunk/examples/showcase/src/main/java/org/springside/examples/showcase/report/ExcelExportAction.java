@@ -29,8 +29,9 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author calvin
  */
 @Namespace("/report/excel")
-@SuppressWarnings("serial")
 public class ExcelExportAction extends ActionSupport {
+
+	private static final long serialVersionUID = 2445469348258130369L;
 
 	private Map<String, CellStyle> styles;
 	private int rowIndex = 0;

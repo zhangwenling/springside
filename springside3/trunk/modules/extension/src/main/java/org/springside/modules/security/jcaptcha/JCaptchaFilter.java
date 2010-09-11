@@ -6,7 +6,8 @@
  * $Id$
  */
 package org.springside.modules.security.jcaptcha;
-import java.awt.image.BufferedImage;
+
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -29,7 +30,6 @@ import org.springside.modules.utils.web.ServletUtils;
 
 import com.octo.captcha.service.CaptchaService;
 import com.octo.captcha.service.CaptchaServiceException;
-
 
 /**
  * 集成JCaptcha验证码的Filter.

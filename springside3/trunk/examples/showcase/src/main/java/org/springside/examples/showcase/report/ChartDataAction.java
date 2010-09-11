@@ -21,8 +21,9 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author calvin
  */
 @Namespace("/report/flashchart")
-@SuppressWarnings("serial")
 public class ChartDataAction extends ActionSupport {
+
+	private static final long serialVersionUID = -7651947806236556649L;
 
 	/**
 	 * 生成CSV格式的内容.

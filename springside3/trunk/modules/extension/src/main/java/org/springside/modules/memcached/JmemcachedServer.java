@@ -50,6 +50,7 @@ public class JmemcachedServer {
 		jmemcached.setAddr(AddrUtil.getAddresses(serverUrl).get(0));
 		jmemcached.setBinary(isBinaryProtocol);
 		jmemcached.start();
+		logger.info("Initialized JMemcached Daemon");
 	}
 
 	@PreDestroy

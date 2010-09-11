@@ -1,6 +1,6 @@
 package org.springside.modules.unit.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import javax.sql.DataSource;
 
