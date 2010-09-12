@@ -3,6 +3,8 @@
 #set( $symbol_escape = '\' )
 package ${package}.functional.account;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

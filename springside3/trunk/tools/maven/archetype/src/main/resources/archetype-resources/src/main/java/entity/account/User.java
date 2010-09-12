@@ -20,7 +20,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import ${package}.entity.IdEntity;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.reflection.ConvertUtils;
 
 import com.google.common.collect.Lists;
 
@@ -103,7 +103,7 @@ public class User extends IdEntity {
 	//非持久化属性.
 	@Transient
 	public String getRoleNames() {
-		return ReflectionUtils.convertElementPropertyToString(roleList, "name", ", ");
+		return ConvertUtils.convertElementPropertyToString(roleList, "name", ", ");
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class User extends IdEntity {
 	@Transient
 	@SuppressWarnings("unchecked")
 	public List<Long> getRoleIds() {
-		return ReflectionUtils.convertElementPropertyToList(roleList, "id");
+		return ConvertUtils.convertElementPropertyToList(roleList, "id");
 	}
 
 	@Override

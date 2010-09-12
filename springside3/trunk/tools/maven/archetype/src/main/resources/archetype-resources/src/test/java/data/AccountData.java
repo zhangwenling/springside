@@ -13,7 +13,7 @@ import org.springside.modules.test.utils.DataUtils;
 import com.google.common.collect.Lists;
 
 /**
- * 安全相关实体测试数据生成.
+ * Account相关实体测试数据生成.
  * 
  * @author calvin
  */

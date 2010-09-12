@@ -3,10 +3,11 @@
 #set( $symbol_escape = '\' )
 package ${package}.unit.service.account;
 
+import static org.junit.Assert.*;
+
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ${package}.dao.account.UserDao;
@@ -20,7 +21,7 @@ import ${package}.service.account.AccountManager;
  * 
  * @author calvin
  */
-public class AccountManagerTest extends Assert {
+public class AccountManagerTest {
 
 	private IMocksControl control = EasyMock.createControl();
 

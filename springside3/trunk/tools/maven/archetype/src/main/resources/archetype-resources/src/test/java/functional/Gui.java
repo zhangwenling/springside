@@ -3,6 +3,9 @@
 #set( $symbol_escape = '\' )
 package ${package}.functional;
 
+/**
+ * 定义页面元素的常量
+ */
 public class Gui {
 
 	public static final String BUTTON_LOGIN = "//input[@value='登录']";

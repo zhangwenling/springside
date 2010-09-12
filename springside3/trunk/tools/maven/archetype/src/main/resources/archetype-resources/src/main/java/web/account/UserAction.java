@@ -12,6 +12,7 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
+import ${package}.dao.HibernateUtils;
 import ${package}.entity.account.Role;
 import ${package}.entity.account.User;
 import ${package}.service.ServiceException;
@@ -19,8 +20,7 @@ import ${package}.service.account.AccountManager;
 import ${package}.web.CrudActionSupport;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
-import org.springside.modules.orm.hibernate.HibernateUtils;
-import org.springside.modules.web.struts2.Struts2Utils;
+import org.springside.modules.utils.web.struts2.Struts2Utils;
 
 /**
  * 用户管理Action.
@@ -36,7 +36,7 @@ import org.springside.modules.web.struts2.Struts2Utils;
 @Results( { @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
 public class UserAction extends CrudActionSupport<User> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8683878162525847072L;
 
 	private AccountManager accountManager;
 
@@ -67,7 +67,7 @@ public class UserAction extends CrudActionSupport<User> {
 	//-- CRUD Action 函数 --//
 	@Override
 	public String list() throws Exception {
-		List<PropertyFilter> filters = HibernateUtils.buildPropertyFilters(Struts2Utils.getRequest());
+		List<PropertyFilter> filters = PropertyFilter.buildFromHttpRequest(Struts2Utils.getRequest());
 		//设置默认排序方式
 		if (!page.isOrderBySetted()) {
 			page.setOrderBy("id");

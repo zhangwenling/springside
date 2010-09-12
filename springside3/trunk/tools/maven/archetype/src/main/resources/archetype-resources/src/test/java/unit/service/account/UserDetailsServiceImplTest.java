@@ -3,10 +3,11 @@
 #set( $symbol_escape = '\' )
 package ${package}.unit.service.account;
 
+import static org.junit.Assert.*;
+
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
@@ -26,7 +27,7 @@ import ${package}.service.account.UserDetailsServiceImpl;
  * 
  * @author calvin
  */
-public class UserDetailsServiceImplTest extends Assert {
+public class UserDetailsServiceImplTest {
 
 	private IMocksControl control = EasyMock.createControl();
 

@@ -3,6 +3,8 @@
 #set( $symbol_escape = '\' )
 package ${package}.functional.account;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 
 import org.apache.commons.collections.ListUtils;

@@ -20,7 +20,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import ${package}.entity.IdEntity;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.reflection.ConvertUtils;
 
 import com.google.common.collect.Lists;
 
@@ -72,13 +72,13 @@ public class Role extends IdEntity {
 
 	@Transient
 	public String getAuthNames() {
-		return ReflectionUtils.convertElementPropertyToString(authorityList, "name", ", ");
+		return ConvertUtils.convertElementPropertyToString(authorityList, "name", ", ");
 	}
 
 	@Transient
 	@SuppressWarnings("unchecked")
 	public List<Long> getAuthIds() {
-		return ReflectionUtils.convertElementPropertyToList(authorityList, "id");
+		return ConvertUtils.convertElementPropertyToList(authorityList, "id");
 	}
 
 	@Override

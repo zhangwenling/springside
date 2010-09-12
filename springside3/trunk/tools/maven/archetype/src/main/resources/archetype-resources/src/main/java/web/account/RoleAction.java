@@ -9,11 +9,11 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
+import ${package}.dao.HibernateUtils;
 import ${package}.entity.account.Authority;
 import ${package}.entity.account.Role;
 import ${package}.service.account.AccountManager;
 import ${package}.web.CrudActionSupport;
-import org.springside.modules.orm.hibernate.HibernateUtils;
 
 /**
  * 角色管理Action.
@@ -26,7 +26,7 @@ import org.springside.modules.orm.hibernate.HibernateUtils;
 @Results( { @Result(name = CrudActionSupport.RELOAD, location = "role.action", type = "redirect") })
 public class RoleAction extends CrudActionSupport<Role> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4052047494894591406L;
 
 	private AccountManager accountManager;
 
