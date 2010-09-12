@@ -10,7 +10,6 @@ package org.springside.modules.test.spring;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 /**
@@ -28,7 +27,7 @@ public abstract class SpringTxTestCase extends AbstractTransactionalJUnit4Spring
 	@Override
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
+		super.setDataSource(dataSource);
 		this.dataSource = dataSource;
-		this.simpleJdbcTemplate = new SimpleJdbcTemplate(dataSource);
 	}
 }
