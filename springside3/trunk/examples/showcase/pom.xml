@@ -149,11 +149,6 @@
 			<groupId>net.sf.dozer</groupId>
 			<artifactId>dozer</artifactId>
 		</dependency>
-		<!-- for dozer new version -->
-		<dependency>
-			<groupId>org.apache.xmlbeans</groupId>
-			<artifactId>xmlbeans</artifactId>
-		</dependency>
 		<!-- webservice end -->
 
 		<!--  rest begin -->

@@ -103,6 +103,9 @@ public class JsonBinder {
 		}
 	}
 
+	/**
+	 * 取出Mapper做进一步的设置或使用其他序列化API.
+	 */
 	public ObjectMapper getMapper() {
 		return mapper;
 	}

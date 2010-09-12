@@ -183,25 +183,26 @@ public class JsonDemo {
 		assertEquals(TestEnum.One, binder.fromJson("0", TestEnum.class));
 		assertEquals(TestEnum.One, binder.fromJson("\"One\"", TestEnum.class));
 
-		DateTime jodaTime = new DateTime();
+		DateTime jodaDate = new DateTime();
 
-		//日期默认以Timestamp方式存储.
-		Date date = new Date(jodaTime.getMillis());
-		String tsString = String.valueOf(jodaTime.getMillis());
+		//日期默认以Timestamp方式存储
+		Date date = new Date(jodaDate.getMillis());
+		String tsString = String.valueOf(jodaDate.getMillis());
+
 		assertEquals(tsString, binder.toJson(date));
+
 		assertEquals(date, binder.fromJson(tsString, Date.class));
 
 		//以设定日期格式存储
-		String dateString = "\"" + jodaTime.toString("yyyy-MM-dd") + "\"";
+		String dateString = "\"" + jodaDate.toString("yyyy-MM-dd") + "\"";
 		binder.setDateFormat("yyyy-MM-dd");
+
 		assertEquals(dateString, binder.toJson(date));
+
 		Date dateResult = binder.fromJson(dateString, Date.class);
 		System.out.println(dateResult);
-		assertEquals(new DateTime(dateResult).getDayOfYear(), jodaTime.getDayOfYear());
+		assertEquals(new DateTime(dateResult).getDayOfYear(), jodaDate.getDayOfYear());
 
-		//还原以Timestamp方式存储
-		binder.unsetDateFormat();
-		assertEquals(tsString, binder.toJson(date));
 	}
 
 	//此annoation为了截断对象的循环引用.

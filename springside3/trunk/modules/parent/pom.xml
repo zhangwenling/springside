@@ -25,7 +25,7 @@
 		<jetty.version>6.1.25</jetty.version>
 		<h2.version>1.2.142</h2.version>
 		<quartz.version>1.8.4</quartz.version>
-		<jackson.version>1.5.6</jackson.version>
+		<jackson.version>1.6.0</jackson.version>
 		<slf4j.version>1.6.1</slf4j.version>
 		<selenium.version>2.0a5</selenium.version>
 
@@ -623,12 +623,7 @@
 			<dependency>
 				<groupId>net.sf.dozer</groupId>
 				<artifactId>dozer</artifactId>
-				<version>5.2.2</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xmlbeans</groupId>
-				<artifactId>xmlbeans</artifactId>
-				<version>2.4.0</version>
+				<version>5.2.1</version>
 			</dependency>
 
 			<dependency>
