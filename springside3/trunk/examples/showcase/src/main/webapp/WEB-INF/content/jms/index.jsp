@@ -23,7 +23,7 @@
 			<li>演示基于ActiveMQ的JMS Topic/Queue应用</li>
 			<li>演示基于Spring CachingConnectionFactory, JmsTemplate, DefaultMessageListener的应用</li>
 			<li>演示使用默认值的Simple模式</li>
-			<li>演示高级设置的Advanced模式(包括发送者的timeToLive,接受者的消息过滤器,消息确认模式与持久化订阅者 )</li>
+			<li>演示Advanced模式, 包括发送者的timeToLive等属性设置, 接受者的消息过滤器,消息确认模式与持久化订阅者 </li>
 		</ul>
 
 		<h2>用户故事：</h2>

@@ -10,8 +10,8 @@ import org.springside.examples.showcase.jmx.client.JmxClientService;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 @DirtiesContext
-@ContextConfiguration(locations = { "/applicationContext-test.xml", "/applicationContext-test-jmx.xml",
-		"/jmx/applicationContext-jmx-server.xml", "/jmx/applicationContext-jmx-client.xml" })
+@ContextConfiguration(locations = { "/applicationContext-test.xml", "/jmx/applicationContext-jmx-server.xml",
+		"/jmx/applicationContext-jmx-client.xml" })
 public class JmxClientServiceTest extends SpringContextTestCase {
 
 	@Autowired

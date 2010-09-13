@@ -22,7 +22,6 @@
 		<config>src/main/resources/common/applicationContext-jdbc.xml</config>
 		<config>src/main/resources/cache/applicationContext-memcached.xml</config>
 		<config>src/test/resources/applicationContext-test-functional.xml</config>
-		<config>src/test/resources/applicationContext-test-jmx.xml</config>
 		<config>src/test/resources/applicationContext-test.xml</config>
 		<config>src/main/resources/jms/applicationContext-jms-simple.xml</config>
 		<config>src/main/resources/jms/applicationContext-jms-advanced.xml</config>

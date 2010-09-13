@@ -403,22 +403,6 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
-				<configuration>
-					<systemProperties>
-						<systemProperty>
-							<name>com.sun.management.jmxremote.ssl</name>
-							<value>false</value>
-						</systemProperty>
-						<systemProperty>
-							<name>com.sun.management.jmxremote.authenticate</name>
-							<value>false</value>
-						</systemProperty>
-						<systemProperty>
-							<name>com.sun.management.jmxremote.port</name>
-							<value>18080</value>
-						</systemProperty>
-					</systemProperties>
-				</configuration>
 			</plugin>
 
 			<!-- Hibernate lazy load bytecode enhancement -->
@@ -485,7 +469,7 @@
 					<artifactId>jsw</artifactId>
 					<type>zip</type>
 				</dependency>
-				
+
 				<dependency>
 					<groupId>org.mortbay.jetty</groupId>
 					<artifactId>jetty-management</artifactId>

@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.util.zip.GZIPOutputStream;
 
 import javax.activation.MimetypesFileTypeMap;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +42,7 @@ public class StaticContentServlet extends HttpServlet {
 	/** 需要被Gzip压缩的最小文件大小. */
 	private static final int GZIP_MINI_LENGTH = 512;
 
-	private MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
+	private MimetypesFileTypeMap mimetypesFileTypeMap;
 
 	private ApplicationContext applicationContext;
 
@@ -122,11 +121,16 @@ public class StaticContentServlet extends HttpServlet {
 	}
 
 	/**
-	 * 保存applicationContext以备后用.
+	 * 初始化.
 	 */
 	@Override
-	public void init(ServletConfig sc) throws ServletException {
-		applicationContext = WebApplicationContextUtils.getWebApplicationContext(sc.getServletContext());
+	public void init() throws ServletException {
+		//保存applicationContext以备后用.
+		applicationContext = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+
+		//初始化mimeTypes, 默认缺少css的定义,添加之.
+		mimetypesFileTypeMap = new MimetypesFileTypeMap();
+		mimetypesFileTypeMap.addMimeTypes("text/css css");
 	}
 
 	/**
@@ -146,11 +150,7 @@ public class StaticContentServlet extends HttpServlet {
 		contentInfo.lastModified = file.lastModified();
 		contentInfo.etag = "W/\"" + contentInfo.lastModified + "\"";
 
-		String mimeType = mimetypesFileTypeMap.getContentType(contentInfo.fileName);
-		if (mimeType == null) {
-			mimeType = "application/octet-stream";
-		}
-		contentInfo.mimeType = mimeType;
+		contentInfo.mimeType = mimetypesFileTypeMap.getContentType(contentInfo.fileName);
 
 		if (contentInfo.length >= GZIP_MINI_LENGTH && ArrayUtils.contains(GZIP_MIME_TYPES, contentInfo.mimeType)) {
 			contentInfo.needGzip = true;
