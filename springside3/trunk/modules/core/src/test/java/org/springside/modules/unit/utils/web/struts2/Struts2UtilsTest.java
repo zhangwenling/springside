@@ -32,7 +32,7 @@ public class Struts2UtilsTest {
 		WebTestUtils.setResponseToStruts2(response);
 		Struts2Utils.render("text/plain", "hello", "encoding:GBK");
 		assertEquals("text/plain;charset=GBK", response.getContentType());
-		assertEquals("no-cache", response.getHeader("Cache-Control"));
+		assertEquals("no-cache, no-store, max-age=0", response.getHeader("Cache-Control"));
 
 		assertEquals("hello", response.getContentAsString());
 

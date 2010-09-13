@@ -18,7 +18,6 @@
 		<property name="clientID" value="${jms.clicentId}" />
 	</bean>
 
-
 	<!-- Spring Caching 连接工厂 -->
 	<bean id="advancedCachingConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
 		<property name="targetConnectionFactory" ref="advancedConnectionFactory" />

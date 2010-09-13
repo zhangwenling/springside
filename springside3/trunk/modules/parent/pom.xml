@@ -857,7 +857,7 @@
 					<artifactId>maven-jetty-plugin</artifactId>
 					<version>${jetty.version}</version>
 					<configuration>
-						<scanIntervalSeconds>5</scanIntervalSeconds>
+						<reload>manual</reload>
 					</configuration>
 				</plugin>
 

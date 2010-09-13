@@ -18,7 +18,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
- * 测试Jackson对Object,Map,List,数组等的持久化.
+ * 测试Jackson对Object,Map,List,数组,枚举,日期类等的持久化.
  * 
  * @author calvin
  */
@@ -193,7 +193,7 @@ public class JsonDemo {
 
 		assertEquals(date, binder.fromJson(tsString, Date.class));
 
-		//以设定日期格式存储
+		//日期以设定日期格式的方式存储,考虑时区与Locale, 慎用.
 		String dateString = "\"" + jodaDate.toString("yyyy-MM-dd") + "\"";
 		binder.setDateFormat("yyyy-MM-dd");
 
