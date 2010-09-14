@@ -1,11 +1,14 @@
 package org.springside.examples.showcase.cache;
 
+import static org.junit.Assert.*;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springside.modules.test.spring.SpringContextTestCase;
 
 /**
  * 本地缓存策略,使用EhCache, 支持限制总数, Idle time/LRU失效, 持久化到磁盘等功能.
@@ -14,17 +17,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * 
  * @author calvin
  */
-public class EhcacheDemo {
+@ContextConfiguration(locations = { "/cache/applicationContext-ehcache.xml" })
+public class EhcacheDemo extends SpringContextTestCase {
 
 	private static final String CACHE_NAME = "contentInfoCache";
 
-	private static Cache cache;
+	@Autowired
+	private CacheManager ehcacheManager;
 
-	public static void main(String[] args) {
+	private Cache cache;
 
-		ApplicationContext context = new ClassPathXmlApplicationContext("/cache/applicationContext-ehcache.xml");
-
-		CacheManager ehcacheManager = context.getBean(CacheManager.class);
+	@Test
+	public void normal() {
 
 		cache = ehcacheManager.getCache(CACHE_NAME);
 
@@ -33,16 +37,16 @@ public class EhcacheDemo {
 
 		put(key, value);
 		Object result = get(key);
-		System.out.println(result);
 
+		assertEquals(value, result);
 	}
 
-	public static Object get(String key) {
+	public Object get(String key) {
 		Element element = cache.get(key);
 		return element.getObjectValue();
 	}
 
-	public static void put(String key, Object value) {
+	public void put(String key, Object value) {
 		Element element = new Element(key, value);
 		cache.put(element);
 	}

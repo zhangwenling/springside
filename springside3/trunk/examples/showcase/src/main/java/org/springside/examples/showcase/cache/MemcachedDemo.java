@@ -32,7 +32,7 @@ public class MemcachedDemo extends SpringContextTestCase {
 	}
 
 	@Test
-	public void bulk() {
+	public void getBulk() {
 
 		String key1 = "consumer:1";
 		String value1 = "admin";
@@ -70,37 +70,5 @@ public class MemcachedDemo extends SpringContextTestCase {
 		spyMemcachedClient.set(key, 60 * 60 * 1, "1");
 		result = spyMemcachedClient.incr(key, 2, 1);
 		assertEquals(3, result);
-
-	}
-
-	public static class Consumer {
-
-		private int id;
-		private String name;
-		private String email = "admin@springside.org.cn";
-
-		public int getId() {
-			return id;
-		}
-
-		public void setId(int id) {
-			this.id = id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public String getEmail() {
-			return email;
-		}
-
-		public void setEmail(String email) {
-			this.email = email;
-		}
 	}
 }
