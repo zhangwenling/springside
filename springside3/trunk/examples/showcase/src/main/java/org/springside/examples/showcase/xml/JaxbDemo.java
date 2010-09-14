@@ -43,14 +43,6 @@ public class JaxbDemo {
 
 	private static JaxbBinder binder;
 
-	public static void main(String[] args) {
-		setUp();
-		JaxbDemo demo = new JaxbDemo();
-		demo.objectToXml();
-		demo.xmlToObject();
-		demo.toXmlWithListAsRoot();
-	}
-
 	@BeforeClass
 	public static void setUp() {
 		binder = new JaxbBinder(User.class, CollectionWrapper.class);

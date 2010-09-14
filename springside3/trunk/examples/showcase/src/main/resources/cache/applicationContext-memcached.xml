@@ -4,15 +4,13 @@
 	default-lazy-init="true">
 
 	<!-- SpyMemcached客户端 -->
-	<bean id="spyMemcachedClient" class="org.springside.modules.memcached.SpyMemcachedClientFactory">
+	<bean id="spyMemcachedClient" class="org.springside.modules.memcached.SpyMemcachedClient" depends-on="jmemcached">
 		<!-- 设置Memcached集群 -->
 		<property name="memcachedNodes" value="localhost:11211" />
 		<!-- 缩短Timeout时间到200毫秒 -->
 		<property name="operationTimeout" value="200" />
-		<!-- 演示用的JmemcachedServer,不支持默认的Binary协议, 需重新设置 -->
-		<property name="binaryProtocol" value="false" />
 	</bean>
 
 	<!-- 演示用的Jmemcached服务端模拟Memcached -->
-	<bean class="org.springside.modules.memcached.JmemcachedServer" lazy-init="false" />
+	<bean id="jmemcached" class="org.springside.modules.memcached.JmemcachedServer" lazy-init="false" />
 </beans>

@@ -21,6 +21,7 @@ import com.thimbleware.jmemcached.storage.hash.LRUCacheStorageDelegate;
 
 /**
  * JMemcached的封装, 主要用于功能测试.
+ * 注意JMemcached对二进制协议支持不好, 尽量使用文本协议.
  * 
  * @author calvin
  */
@@ -36,8 +37,6 @@ public class JmemcachedServer {
 	private long maxBytes = 1024 * 2048;
 	private long ceilingSize = 2048;
 
-	private boolean isBinaryProtocol = false;
-
 	@PostConstruct
 	public void start() throws Exception {
 
@@ -48,7 +47,7 @@ public class JmemcachedServer {
 		jmemcached = new MemCacheDaemon();
 		jmemcached.setCache(new Cache(cacheStorage));
 		jmemcached.setAddr(AddrUtil.getAddresses(serverUrl).get(0));
-		jmemcached.setBinary(isBinaryProtocol);
+		jmemcached.setBinary(false);
 		jmemcached.start();
 		logger.info("Initialized JMemcached Daemon");
 	}
@@ -73,9 +72,5 @@ public class JmemcachedServer {
 
 	public void setCeilingSize(long ceilingSize) {
 		this.ceilingSize = ceilingSize;
-	}
-
-	public void setBinaryProtocol(boolean isBinaryProtocol) {
-		this.isBinaryProtocol = isBinaryProtocol;
 	}
 }

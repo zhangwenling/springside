@@ -1,4 +1,4 @@
-package org.springside.modules.unit.memcached;
+package org.springside.examples.showcase.cache;
 
 import static org.junit.Assert.*;
 
@@ -10,8 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.memcached.SpyMemcachedClient;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
-@ContextConfiguration(locations = { "/applicationContext-extension-test-memcached.xml" })
-public class MemcachedTest extends SpringContextTestCase {
+@ContextConfiguration(locations = { "/cache/applicationContext-memcached.xml" })
+public class MemcachedDemo extends SpringContextTestCase {
 
 	@Autowired
 	private SpyMemcachedClient spyMemcachedClient;
@@ -55,13 +55,21 @@ public class MemcachedTest extends SpringContextTestCase {
 	public void incr() {
 		String key = "incr_key";
 
+		//注意,incr返回的数值使用long表达
 		long result = spyMemcachedClient.incr(key, 2, 1);
 		assertEquals(1, result);
+		//注意,get返回的数值使用字符串表达
 		assertEquals("1", spyMemcachedClient.get(key));
 
 		result = spyMemcachedClient.incr(key, 2, 1);
 		assertEquals(3, result);
 		assertEquals("3", spyMemcachedClient.get(key));
+
+		key = "set_and_incr_key";
+		//注意,set中的数值必须使用字符串,后面的incr操作结果才会正确.
+		spyMemcachedClient.set(key, 60 * 60 * 1, "1");
+		result = spyMemcachedClient.incr(key, 2, 1);
+		assertEquals(3, result);
 
 	}
 

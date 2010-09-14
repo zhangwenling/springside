@@ -26,19 +26,6 @@ public class JsonDemo {
 
 	private static JsonBinder binder = JsonBinder.buildNonDefaultBinder();
 
-	public static void main(String[] args) {
-		try {
-			JsonDemo demo = new JsonDemo();
-			demo.toJson();
-			demo.fromJson();
-			demo.nullAndEmpty();
-			demo.threeTypeBinders();
-			demo.enumAndDate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	/**
 	 * 序列化对象/集合到Json字符串.
 	 */
