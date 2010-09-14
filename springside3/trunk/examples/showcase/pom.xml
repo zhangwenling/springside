@@ -479,7 +479,12 @@
 	<profiles>
 		<!-- 使用Assembly打包jsw+jetty+webapp可运行包的profile -->
 		<profile>
-			<id>package-production</id>
+			<id>package-bin</id>
+			<activation>
+				<property>
+					<name>package.classifier</name>
+				</property>
+			</activation>
 			<build>
 				<plugins>
 					<plugin>
@@ -487,40 +492,13 @@
 						<artifactId>maven-assembly-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>assemble-production</id>
 								<phase>package</phase>
 								<goals>
 									<goal>single</goal>
 								</goals>
 								<configuration>
 									<descriptors>
-										<descriptor>assembly/assembly-production.xml</descriptor>
-									</descriptors>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<id>package-test</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-assembly-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>assemble-test</id>
-								<phase>package</phase>
-								<goals>
-									<goal>single</goal>
-								</goals>
-								<configuration>
-									<descriptors>
-										<descriptor>assembly/assembly-test.xml</descriptor>
+										<descriptor>assembly/assembly.xml</descriptor>
 									</descriptors>
 								</configuration>
 							</execution>
