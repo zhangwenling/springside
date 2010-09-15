@@ -36,6 +36,7 @@
 				<configuration>
 					<mainClass>org.h2.tools.Server</mainClass>
 					<arguments>
+						<argument>-tcp</argument>
 						<argument>-web</argument>
 					</arguments>
 				</configuration>
