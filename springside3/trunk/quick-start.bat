@@ -22,32 +22,32 @@ call %MVN% %OFF_LINE% eclipse:clean eclipse:eclipse
 
 echo [Step 3] 启动H2数据库.
 cd tools/h2
-call %MVN% %OFF_LINE% exec:java
+start "H2" %MVN% %OFF_LINE% exec:java
 cd ..\..\
 
 echo [Step 4] 为Mini-Service 初始化数据库, 启动Jetty.
 cd examples\mini-service
 call %ANT% -f bin/build.xml init-db 
-start "Mini-Service" %MVN% %OFF_LINE% -Djetty.port=8084 jetty:run
+start "Mini-Service" %MVN% %OFF_LINE% -Djetty.port=8083 jetty:run
 cd ..\..\
 
 echo [Step 5] 为Mini-Web 初始化数据库, 启动Jetty.
 cd examples\mini-web
 call %ANT% -f bin/build.xml init-db 
-start "Mini-Web" %MVN% %OFF_LINE% -Djetty.port=8085 jetty:run
+start "Mini-Web" %MVN% %OFF_LINE% -Djetty.port=8084 jetty:run
 cd ..\..\
 
 echo [Step 6] 为Showcase 生成Eclipse项目文件, 编译, 打包, 初始化数据库, 启动Jetty.
 cd examples\showcase
 call %ANT% -f bin/build.xml init-db
-start "Showcase" %MVN% %OFF_LINE% -Djetty.port=8086 jetty:run
+start "Showcase" %MVN% %OFF_LINE% -Djetty.port=8085 jetty:run
 cd ..\..\
 
 echo [INFO] SpringSide3.0 快速启动完毕.
 echo [INFO] 可访问以下演示网址:
-echo [INFO] http://localhost:8084/mini-service
-echo [INFO] http://localhost:8085/mini-web
-echo [INFO] http://localhost:8086/showcase
+echo [INFO] http://localhost:8083/mini-service
+echo [INFO] http://localhost:8084/mini-web
+echo [INFO] http://localhost:8085/showcase
 
 :end
 pause

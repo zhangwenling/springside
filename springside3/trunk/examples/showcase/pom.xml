@@ -316,7 +316,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<!-- only for xxxDemo class -->
+			<!-- for xxxDemo class -->
 			<scope>compile</scope>
 		</dependency>
 
@@ -328,6 +328,8 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
+			<!-- for xxxDemo class -->
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- selenium 2.0 -->
