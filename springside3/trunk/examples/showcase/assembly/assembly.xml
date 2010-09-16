@@ -40,7 +40,7 @@
 
 	<fileSets>
 		<fileSet>
-			<directory>${project.basedir}/target/${artifactId}-${version}</directory>
+			<directory>${project.basedir}/target/${project.build.finalName}</directory>
 			<outputDirectory>/webapp</outputDirectory>
 			<fileMode>0755</fileMode>
 			<directoryMode>0755</directoryMode>
