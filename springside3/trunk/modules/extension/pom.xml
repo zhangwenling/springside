@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.springside</groupId>
 		<artifactId>springside3-parent</artifactId>
-		<version>3.3.4</version>
+		<version>3.4.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>springside3-extension</artifactId>
 	<packaging>jar</packaging>
