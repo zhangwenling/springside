@@ -1,8 +1,11 @@
 package org.springside.examples.miniservice.ws.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.jws.WebService;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 
 import org.dozer.DozerBeanMapper;
 import org.hibernate.ObjectNotFoundException;
@@ -42,6 +45,8 @@ public class UserWebServiceImpl implements UserWebService {
 
 	private DozerBeanMapper dozer;
 
+	private Validator validator;
+
 	/**
 	 * @see UserWebService#getAllUser()
 	 */
@@ -51,7 +56,7 @@ public class UserWebServiceImpl implements UserWebService {
 
 		//获取User列表并转换为UserDTO列表.
 		try {
-			List<User> userEntityList = accountManager.getAllInitedUser();
+			List<User> userEntityList = accountManager.getAllInitializedUser();
 			List<UserDTO> userDTOList = Lists.newArrayList();
 
 			for (User userEntity : userEntityList) {
@@ -82,9 +87,11 @@ public class UserWebServiceImpl implements UserWebService {
 		//获取用户
 		try {
 			User entity = accountManager.getInitedUser(id);
+
 			UserDTO dto = dozer.map(entity, UserDTO.class);
 
 			result.setUser(dto);
+
 			return result;
 		} catch (ObjectNotFoundException e) {
 			String message = "用户不存在(id:" + id + ")";
@@ -105,8 +112,11 @@ public class UserWebServiceImpl implements UserWebService {
 		//校验请求参数
 		try {
 			Assert.notNull(user, "用户参数为空");
-			Assert.hasText(user.getLoginName(), "新建用户登录名参数为空");
 			Assert.isNull(user.getId(), "新建用户ID参数必须为空");
+
+			Set<ConstraintViolation<UserDTO>> constraintViolations = validator.validate(user);
+			Assert.isTrue(constraintViolations.isEmpty(), constraintViolations.iterator().next().getMessage());
+
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
 			return result.buildResult(WSResult.PARAMETER_ERROR, e.getMessage());
@@ -165,5 +175,10 @@ public class UserWebServiceImpl implements UserWebService {
 	@Autowired
 	public void setDozer(DozerBeanMapper dozer) {
 		this.dozer = dozer;
+	}
+
+	@Autowired
+	public void setValidator(Validator validator) {
+		this.validator = validator;
 	}
 }

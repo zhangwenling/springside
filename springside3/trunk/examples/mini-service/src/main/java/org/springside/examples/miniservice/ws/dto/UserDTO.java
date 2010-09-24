@@ -7,6 +7,9 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springside.examples.miniservice.ws.WsConstants;
 
 import com.google.common.collect.Lists;
@@ -36,6 +39,7 @@ public class UserDTO {
 		id = value;
 	}
 
+	@NotBlank
 	public String getLoginName() {
 		return loginName;
 	}
@@ -44,6 +48,7 @@ public class UserDTO {
 		loginName = value;
 	}
 
+	@NotBlank
 	public String getName() {
 		return name;
 	}
@@ -52,6 +57,7 @@ public class UserDTO {
 		name = value;
 	}
 
+	@Email
 	public String getEmail() {
 		return email;
 	}
@@ -63,6 +69,7 @@ public class UserDTO {
 	//配置输出xml为<roleList><role><id>1</id></role></roleList>
 	@XmlElementWrapper(name = "roleList")
 	@XmlElement(name = "role")
+	@NotEmpty
 	public List<RoleDTO> getRoleList() {
 		return roleList;
 	}
