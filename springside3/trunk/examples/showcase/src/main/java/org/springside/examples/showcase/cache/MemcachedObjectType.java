@@ -5,7 +5,7 @@ package org.springside.examples.showcase.cache;
  * 
  * Memcached使用在AccountManager中.
  * 
- * @see org.springside.examples.showcase.common.service.AccountManager#getInitedUser(String)
+ * @see org.springside.examples.showcase.common.service.AccountManager#getInitializedUser(String)
  * 
  * @author calvin
  */

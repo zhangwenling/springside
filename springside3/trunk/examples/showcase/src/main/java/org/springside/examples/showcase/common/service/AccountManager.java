@@ -82,7 +82,7 @@ public class AccountManager {
 	 * 取得用户, 并对用户的延迟加载关联进行初始化.
 	 */
 	@Transactional(readOnly = true)
-	public User getInitedUser(String id) {
+	public User getInitializedUser(String id) {
 		if (spyMemcachedClient != null) {
 			return getUserFromMemcached(id);
 		} else {
@@ -118,7 +118,7 @@ public class AccountManager {
 	 * 按名称查询用户, 并对用户的延迟加载关联进行初始化.
 	 */
 	@Transactional(readOnly = true)
-	public User searchLoadedUserByName(String name) {
+	public User searchInitializedUserByName(String name) {
 		User user = userDao.findUniqueBy("name", name);
 		userDao.initUser(user);
 		return user;

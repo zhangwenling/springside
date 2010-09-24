@@ -79,7 +79,7 @@ public class UserResourceService {
 	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
 	public UserDTO getUser(@PathParam("id") String id) {
 		try {
-			User entity = accountManager.getInitedUser(id);
+			User entity = accountManager.getInitializedUser(id);
 			UserDTO dto = dozer.map(entity, UserDTO.class);
 			return dto;
 		} catch (ObjectNotFoundException e) {
@@ -102,7 +102,7 @@ public class UserResourceService {
 	public Response searchUser(@QueryParam("name") String name,
 			@QueryParam("format") @DefaultValue("json") String format) {
 		try {
-			User entity = accountManager.searchLoadedUserByName(name);
+			User entity = accountManager.searchInitializedUserByName(name);
 			if ("html".equals(format)) {
 				//返回html格式的特定字符串.
 				String html = "<div>" + entity.getName() + ", your mother call you...</div>";

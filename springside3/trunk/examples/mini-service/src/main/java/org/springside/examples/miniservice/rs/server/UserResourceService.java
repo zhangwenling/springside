@@ -58,7 +58,7 @@ public class UserResourceService {
 	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
 	public List<UserDTO> getAllUser() {
 		try {
-			List<User> entityList = accountManager.getAllInitedUser();
+			List<User> entityList = accountManager.getAllInitializedUser();
 
 			List<UserDTO> dtoList = Lists.newArrayList();
 			for (User userEntity : entityList) {
