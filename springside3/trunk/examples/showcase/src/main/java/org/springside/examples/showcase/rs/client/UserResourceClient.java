@@ -1,17 +1,12 @@
 package org.springside.examples.showcase.rs.client;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springside.examples.showcase.rs.dto.UserDTO;
+import org.springside.modules.utils.encode.JsonBinder;
 import org.springside.modules.utils.web.ServletUtils;
 
 import com.sun.jersey.api.client.Client;
@@ -26,8 +21,6 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
  * @author calvin
  */
 public class UserResourceClient {
-
-	private static Logger logger = LoggerFactory.getLogger(UserResourceClient.class);
 
 	private WebResource client;
 
@@ -61,19 +54,8 @@ public class UserResourceClient {
 	/**
 	 * 无公共DTO类定义, 取得返回JSON字符串后自行转换DTO.
 	 */
-	public UserDTO searchUserJson(String name) throws IOException {
-		String json = client.path("/users/search").queryParam("name", name).get(String.class);
-		ObjectMapper mapper = new ObjectMapper();
-
-		try {
-			UserDTO user = mapper.readValue(json, UserDTO.class);
-			return user;
-		} catch (JsonParseException e) {
-			logger.error("JSON response error:" + json, e);
-		} catch (JsonMappingException e) {
-			logger.error("JSON response error:" + json, e);
-		}
-
-		return null;
+	public UserDTO searchUserJson(String name) {
+		String jsonString = client.path("/users/search").queryParam("name", name).get(String.class);
+		return JsonBinder.buildNormalBinder().fromJson(jsonString, UserDTO.class);
 	}
 }

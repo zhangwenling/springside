@@ -11,6 +11,7 @@ import org.springside.examples.miniservice.rs.dto.UserDTO;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
+import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
@@ -41,6 +42,10 @@ public class UserResourceClient {
 	public URI createUser(UserDTO user) {
 		ClientResponse response = client.path("/users").entity(user, MediaType.APPLICATION_JSON).post(
 				ClientResponse.class);
-		return response.getLocation();
+		if (201 == response.getStatus()) {
+			return response.getLocation();
+		} else {
+			throw new UniformInterfaceException(response);
+		}
 	}
 }

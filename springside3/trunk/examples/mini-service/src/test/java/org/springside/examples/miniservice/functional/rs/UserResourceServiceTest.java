@@ -53,11 +53,28 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 
 	@Test
 	public void createUser() {
-		User user = AccountData.getRandomUser();
+		User user = AccountData.getRandomUserWithAdminRole();
 		UserDTO dto = new DozerBeanMapper().map(user, UserDTO.class);
 
 		URI uri = client.createUser(dto);
 		assertNotNull(uri);
 		System.out.println("Created user uri:" + uri);
 	}
+
+	@Test
+	public void createUserWithInvalidLoginName() {
+
+		User user = AccountData.getRandomUserWithAdminRole();
+		UserDTO dto = new DozerBeanMapper().map(user, UserDTO.class);
+		dto.setLoginName(null);
+
+		try {
+
+			URI uri = client.createUser(dto);
+			fail("Should thrown exception while invalid id");
+		} catch (UniformInterfaceException e) {
+			assertEquals(400, e.getResponse().getStatus());
+		}
+	}
+
 }

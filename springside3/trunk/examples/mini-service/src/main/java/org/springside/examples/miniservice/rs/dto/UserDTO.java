@@ -2,9 +2,12 @@ package org.springside.examples.miniservice.rs.dto;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.google.common.collect.Lists;
 
@@ -31,6 +34,7 @@ public class UserDTO {
 		id = value;
 	}
 
+	@NotNull
 	public String getLoginName() {
 		return loginName;
 	}
@@ -39,6 +43,7 @@ public class UserDTO {
 		loginName = value;
 	}
 
+	@NotNull
 	public String getName() {
 		return name;
 	}
@@ -47,6 +52,7 @@ public class UserDTO {
 		name = value;
 	}
 
+	@Email
 	public String getEmail() {
 		return email;
 	}
@@ -55,6 +61,7 @@ public class UserDTO {
 		email = value;
 	}
 
+	@NotEmpty
 	public List<RoleDTO> getRoleList() {
 		return roleList;
 	}

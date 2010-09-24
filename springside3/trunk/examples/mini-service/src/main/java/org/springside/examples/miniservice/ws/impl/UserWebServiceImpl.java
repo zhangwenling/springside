@@ -114,9 +114,13 @@ public class UserWebServiceImpl implements UserWebService {
 			Assert.notNull(user, "用户参数为空");
 			Assert.isNull(user.getId(), "新建用户ID参数必须为空");
 
+			//校验User内容
 			Set<ConstraintViolation<UserDTO>> constraintViolations = validator.validate(user);
-			Assert.isTrue(constraintViolations.isEmpty(), constraintViolations.iterator().next().getMessage());
-
+			if (!constraintViolations.isEmpty()) {
+				ConstraintViolation<UserDTO> violation = constraintViolations.iterator().next();
+				String message = violation.getPropertyPath() + " " + violation.getMessage();
+				throw new IllegalArgumentException(message);
+			}
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
 			return result.buildResult(WSResult.PARAMETER_ERROR, e.getMessage());

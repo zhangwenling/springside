@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import java.util.Collections;
 import java.util.List;
 
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
+
 import org.dozer.DozerBeanMapper;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
@@ -38,6 +41,9 @@ public class UserWebServiceTest {
 	public void setUp() {
 		userWebService = new UserWebServiceImpl();
 		userWebService.setDozer(new DozerBeanMapper());
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		userWebService.setValidator(factory.getValidator());
+
 		//创建mock对象
 		mockAccountManager = control.createMock(AccountManager.class);
 		userWebService.setAccountManager(mockAccountManager);
@@ -67,12 +73,30 @@ public class UserWebServiceTest {
 	}
 
 	/**
-	 * 测试参数错误时的返回码.
+	 * 测试参数校验.
 	 */
 	@Test
 	public void validateParamter() {
 		control.replay();
 		WSResult result = userWebService.createUser(null);
+		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
+
+		User testUser = AccountData.getRandomUserWithAdminRole();
+		UserDTO userDTOWithoutLoginName = new DozerBeanMapper().map(testUser, UserDTO.class);
+		userDTOWithoutLoginName.setLoginName(null);
+		result = userWebService.createUser(userDTOWithoutLoginName);
+		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
+
+		testUser = AccountData.getRandomUserWithAdminRole();
+		UserDTO userDTOWitWrongEmail = new DozerBeanMapper().map(testUser, UserDTO.class);
+		userDTOWitWrongEmail.setEmail("abc");
+		result = userWebService.createUser(userDTOWitWrongEmail);
+		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
+
+		testUser = AccountData.getRandomUserWithAdminRole();
+		UserDTO userDTOWithoutRole = new DozerBeanMapper().map(testUser, UserDTO.class);
+		userDTOWithoutRole.getRoleList().clear();
+		result = userWebService.createUser(userDTOWithoutRole);
 		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
 	}
 
@@ -81,7 +105,8 @@ public class UserWebServiceTest {
 	 */
 	@Test
 	public void handleException() {
-		EasyMock.expect(mockAccountManager.getAllInitializedUser()).andThrow(new RuntimeException("Expected exception.."));
+		EasyMock.expect(mockAccountManager.getAllInitializedUser()).andThrow(
+				new RuntimeException("Expected exception.."));
 		control.replay();
 
 		GetAllUserResult result = userWebService.getAllUser();

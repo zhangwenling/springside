@@ -38,10 +38,10 @@
 		<property name="maxActive" value="${dbcp.maxActive}" />
 		<property name="maxIdle" value="${dbcp.maxIdle}" />
 		<property name="defaultAutoCommit" value="false" />
-		<property name="timeBetweenEvictionRunsMillis" value="3600000"/>
-		<property name="minEvictableIdleTimeMillis" value="3600000"/>
+		<property name="timeBetweenEvictionRunsMillis" value="3600000" />
+		<property name="minEvictableIdleTimeMillis" value="3600000" />
 	</bean>
-	
+
 	<!-- 数据源配置,在生产环境可选择使用应用服务器的数据库连接池 -->
 	<!-- <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/ExampleDB" />-->
 
@@ -70,4 +70,10 @@
 
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+	<!-- JSR303 Validator定义 -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
+	<!-- dozer DTO复制工具类定义 -->
+	<bean id="dozer" class="org.dozer.DozerBeanMapper" />
 </beans>

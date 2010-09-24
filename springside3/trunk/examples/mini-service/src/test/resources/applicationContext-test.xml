@@ -69,4 +69,10 @@
 
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+	<!-- JSR303 Validator定义 -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
+	<!-- dozer DTO复制工具类定义 -->
+	<bean id="dozer" class="org.dozer.DozerBeanMapper" />
 </beans>
