@@ -179,17 +179,6 @@ public class JsonDemo {
 		assertEquals(tsString, binder.toJson(date));
 
 		assertEquals(date, binder.fromJson(tsString, Date.class));
-
-		//日期以设定日期格式的方式存储,考虑时区与Locale, 慎用.
-		String dateString = "\"" + jodaDate.toString("yyyy-MM-dd") + "\"";
-		binder.setDateFormat("yyyy-MM-dd");
-
-		assertEquals(dateString, binder.toJson(date));
-
-		Date dateResult = binder.fromJson(dateString, Date.class);
-		System.out.println(dateResult);
-		assertEquals(new DateTime(dateResult).getDayOfYear(), jodaDate.getDayOfYear());
-
 	}
 
 	//此annoation为了截断对象的循环引用.

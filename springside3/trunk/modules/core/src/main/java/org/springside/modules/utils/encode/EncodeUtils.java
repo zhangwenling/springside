@@ -94,7 +94,7 @@ public class EncodeUtils {
 	/**
 	 * Base62(0_9A_Za_z)解码
 	 */
-	public static long base62Decoding(String str) {
+	public static long base62Decode(String str) {
 		return alphabetDecode(str, 62);
 	}
 
