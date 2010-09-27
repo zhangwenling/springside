@@ -24,7 +24,9 @@ import org.apache.commons.lang.StringUtils;
 /**
  * 使用Jaxb2.0实现XML<->Java Object的Binder.
  * 
+ * 需要在创建时设定所有需要序列化的Root对象的Class.
  * 特别支持Root对象是List的情形.
+ * 
  * 
  * @author calvin
  */
@@ -33,7 +35,7 @@ public class JaxbBinder {
 	private JAXBContext jaxbContext;
 
 	/**
-	 * @param types 所有需要序列化的Root对象的类型.
+	 * @param types 所有需要序列化的Root对象的Class.
 	 */
 	public JaxbBinder(Class<?>... types) {
 		try {
@@ -44,7 +46,14 @@ public class JaxbBinder {
 	}
 
 	/**
-	 * Java Object->Xml.
+	 * Java Object->Xml without encoding.
+	 */
+	public String toXml(Object root) {
+		return toXml(root, null);
+	}
+
+	/**
+	 * Java Object->Xml with encoding.
 	 */
 	public String toXml(Object root, String encoding) {
 		try {
@@ -54,6 +63,14 @@ public class JaxbBinder {
 		} catch (JAXBException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	/**
+	 * Java Object->Xml, 特别支持对Root Element是Collection的情形.
+	 */
+	@SuppressWarnings("unchecked")
+	public String toXml(Collection root, String rootName) {
+		return toXml(root, rootName, null);
 	}
 
 	/**
@@ -91,7 +108,7 @@ public class JaxbBinder {
 	}
 
 	/**
-	 * 创建Marshaller, 设定encoding(可为Null).
+	 * 创建Marshaller并设定encoding(可为Null).
 	 */
 	public Marshaller createMarshaller(String encoding) {
 		try {

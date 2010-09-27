@@ -58,7 +58,7 @@ public class ConvertUtils {
 	}
 
 	/**
-	 * 转换字符串到相应类型.
+	 * 基于Apache BeanUtils转换字符串到相应类型.
 	 * 
 	 * @param value 待转换的字符串.
 	 * @param toType 转换目标类型.
@@ -72,7 +72,7 @@ public class ConvertUtils {
 	}
 
 	/**
-	 * 定义日期Converter的格式: yyyy-MM-dd 或 yyyy-MM-dd HH:mm:ss
+	 * 定义Apache BeanUtils日期Converter的格式: yyyy-MM-dd 或 yyyy-MM-dd HH:mm:ss
 	 */
 	private static void registerDateConverter() {
 		DateConverter dc = new DateConverter();

@@ -27,6 +27,8 @@ import org.springframework.util.Assert;
  */
 public class ReflectionUtils {
 
+	public static final String CGLIB_CLASS_SEPARATOR = "$$";
+
 	private static Logger logger = LoggerFactory.getLogger(ReflectionUtils.class);
 
 	/**
@@ -109,6 +111,19 @@ public class ReflectionUtils {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * 对于被cglib AOP过的对象, 取得真实的Class类型.
+	 */
+	public static Class<?> getUserClass(Class<?> clazz) {
+		if (clazz != null && clazz.getName().contains(CGLIB_CLASS_SEPARATOR)) {
+			Class<?> superClass = clazz.getSuperclass();
+			if (superClass != null && !Object.class.equals(superClass)) {
+				return superClass;
+			}
+		}
+		return clazz;
 	}
 
 	/**
