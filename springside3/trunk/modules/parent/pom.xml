@@ -21,7 +21,7 @@
 		<cxf.version>2.2.10</cxf.version>
 		<jersey.version>1.4</jersey.version>
 		<spring-security.version>3.0.3.RELEASE</spring-security.version>
-		<activemq.version>5.4.0</activemq.version>
+		<activemq.version>5.4.1</activemq.version>
 		<jetty.version>6.1.25</jetty.version>
 		<h2.version>1.2.143</h2.version>
 		<jackson.version>1.6.0</jackson.version>
@@ -96,7 +96,7 @@
 			<url>http://localhost:8081/nexus/content/repositories/releases</url>
 		</repository>
 		<snapshotRepository>
-			<id>nexus</id>
+			<id>nexus-snapshot</id>
 			<name>Team Nexus Snapshot Repository</name>
 			<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
 			<uniqueVersion>false</uniqueVersion>
@@ -448,9 +448,16 @@
 				<groupId>org.apache.solr</groupId>
 				<artifactId>solr-core</artifactId>
 				<version>1.4.1</version>
+				<exclusions>
+					<!-- use org.codehaus.woodstox.wstx-asl -->
+					<exclusion>
+						<groupId>woodstox</groupId>
+						<artifactId>wstx-asl</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<!-- solr end -->
-	
+
 			<!-- logging begin-->
 			<!-- slf4j -->
 			<dependency>
@@ -539,6 +546,12 @@
 				<artifactId>xercesImpl</artifactId>
 				<version>2.9.1</version>
 			</dependency>
+
+			<dependency>
+				<groupId>xml-apis</groupId>
+				<artifactId>xml-apis</artifactId>
+				<version>1.3.04</version>
+			</dependency>
 			<!-- xml  end -->
 
 			<!-- excel begin -->
@@ -587,7 +600,7 @@
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
-				<version>r06</version>
+				<version>r07</version>
 			</dependency>
 
 			<dependency>
@@ -618,6 +631,12 @@
 						<artifactId>javassist</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ibm.icu</groupId>
+				<artifactId>icu4j</artifactId>
+				<version>4.0.1</version>
 			</dependency>
 
 			<!-- template engine -->
@@ -765,7 +784,7 @@
 			<dependency>
 				<groupId>tanukisoft</groupId>
 				<artifactId>jsw</artifactId>
-				<version>3.5.3</version>
+				<version>3.5.4</version>
 				<scope>provided</scope>
 				<type>zip</type>
 			</dependency>
