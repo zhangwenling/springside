@@ -218,6 +218,12 @@
 		</dependency>
 		<!-- memcached end -->
 
+		<!-- solr -->
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-core</artifactId>
+		</dependency>
+
 		<!-- logging begin -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
