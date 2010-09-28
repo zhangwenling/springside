@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2005-2010 springside.org.cn
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * 
+ * $Id$
+ */
 package org.springside.modules.solr;
 
 import org.apache.solr.client.solrj.embedded.JettySolrRunner;
@@ -10,11 +17,10 @@ public class SolrSimulator implements InitializingBean, DisposableBean {
 
 	private static Logger logger = LoggerFactory.getLogger(SolrSimulator.class);
 
-	private String context = "/solr";
-
-	private int port = 8983;
-
 	private JettySolrRunner jettySolrRunner;
+
+	private String context = "/solr";
+	private int port = 8983;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -30,4 +36,13 @@ public class SolrSimulator implements InitializingBean, DisposableBean {
 			jettySolrRunner.stop();
 		}
 	}
+
+	public void setContext(String context) {
+		this.context = context;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
+	}
+
 }

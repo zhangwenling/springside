@@ -14,9 +14,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-import com.thimbleware.jmemcached.Cache;
+import com.thimbleware.jmemcached.CacheImpl;
+import com.thimbleware.jmemcached.LocalCacheElement;
 import com.thimbleware.jmemcached.MemCacheDaemon;
-import com.thimbleware.jmemcached.storage.hash.LRUCacheStorageDelegate;
+import com.thimbleware.jmemcached.storage.CacheStorage;
+import com.thimbleware.jmemcached.storage.hash.ConcurrentLinkedHashMap;
 
 /**
  * JMemcached的封装, 主要用于功能测试.
@@ -28,26 +30,30 @@ public class MemcachedSimulator implements InitializingBean, DisposableBean {
 
 	private static Logger logger = LoggerFactory.getLogger(MemcachedSimulator.class);
 
-	private MemCacheDaemon jmemcached;
+	private MemCacheDaemon<LocalCacheElement> jmemcached;
 
 	private String serverUrl = "localhost:11211";
+	private boolean binary = false;
 
 	private int maxItems = 1024;
 	private long maxBytes = 1024 * 2048;
-	private long ceilingSize = 2048;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 
 		logger.info("Initializing JMemcached Server");
 
-		LRUCacheStorageDelegate cacheStorage = new LRUCacheStorageDelegate(maxItems, maxBytes, ceilingSize);
+		jmemcached = new MemCacheDaemon<LocalCacheElement>();
 
-		jmemcached = new MemCacheDaemon();
-		jmemcached.setCache(new Cache(cacheStorage));
+		CacheStorage<String, LocalCacheElement> storage = ConcurrentLinkedHashMap.create(
+				ConcurrentLinkedHashMap.EvictionPolicy.FIFO, maxItems, maxBytes);
+		jmemcached.setCache(new CacheImpl(storage));
+
 		jmemcached.setAddr(AddrUtil.getAddresses(serverUrl).get(0));
-		jmemcached.setBinary(false);
+		jmemcached.setBinary(binary);
+
 		jmemcached.start();
+
 		logger.info("Initialized JMemcached Server");
 	}
 
@@ -61,15 +67,15 @@ public class MemcachedSimulator implements InitializingBean, DisposableBean {
 		this.serverUrl = serverUrl;
 	}
 
+	public void setBinary(boolean binary) {
+		this.binary = binary;
+	}
+
 	public void setMaxItems(int maxItems) {
 		this.maxItems = maxItems;
 	}
 
 	public void setMaxBytes(long maxBytes) {
 		this.maxBytes = maxBytes;
-	}
-
-	public void setCeilingSize(long ceilingSize) {
-		this.ceilingSize = ceilingSize;
 	}
 }
