@@ -7,13 +7,12 @@
  */
 package org.springside.modules.memcached;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
 import net.spy.memcached.AddrUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 
 import com.thimbleware.jmemcached.Cache;
 import com.thimbleware.jmemcached.MemCacheDaemon;
@@ -25,9 +24,9 @@ import com.thimbleware.jmemcached.storage.hash.LRUCacheStorageDelegate;
  * 
  * @author calvin
  */
-public class JmemcachedServer {
+public class MemcachedSimulator implements InitializingBean, DisposableBean {
 
-	private static Logger logger = LoggerFactory.getLogger(JmemcachedServer.class);
+	private static Logger logger = LoggerFactory.getLogger(MemcachedSimulator.class);
 
 	private MemCacheDaemon jmemcached;
 
@@ -37,10 +36,10 @@ public class JmemcachedServer {
 	private long maxBytes = 1024 * 2048;
 	private long ceilingSize = 2048;
 
-	@PostConstruct
-	public void start() throws Exception {
+	@Override
+	public void afterPropertiesSet() throws Exception {
 
-		logger.info("Initializing JMemcached Daemon");
+		logger.info("Initializing JMemcached Server");
 
 		LRUCacheStorageDelegate cacheStorage = new LRUCacheStorageDelegate(maxItems, maxBytes, ceilingSize);
 
@@ -49,12 +48,12 @@ public class JmemcachedServer {
 		jmemcached.setAddr(AddrUtil.getAddresses(serverUrl).get(0));
 		jmemcached.setBinary(false);
 		jmemcached.start();
-		logger.info("Initialized JMemcached Daemon");
+		logger.info("Initialized JMemcached Server");
 	}
 
-	@PreDestroy
-	public void stop() throws Exception {
-		logger.info("Shutting down Jmemcached Daemon");
+	@Override
+	public void destroy() throws Exception {
+		logger.info("Shutting down Jmemcached Server");
 		jmemcached.stop();
 	}
 
