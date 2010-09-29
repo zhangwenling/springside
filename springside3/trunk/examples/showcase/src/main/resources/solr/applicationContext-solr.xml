@@ -6,9 +6,9 @@
 	<bean id="SolrSimulator" class="org.springside.modules.solr.SolrSimulator" lazy-init="false" />
 
 	<bean id="solrServerFactory" class="org.springside.modules.solr.MultiCoreSolrServerFactory">
-		<property name="serverUrl" value="http://localhost:8080/solr" />
+		<property name="serverUrl" value="http://localhost:8983/solr" />
 		<property name="coreNamePrefix" value="core" />
-		<property name="cores" value="5" />
+		<property name="cores" value="2" />
 	</bean>
 
 	<bean id="postSolrDao" class="org.springside.examples.showcase.solr.PostSolrDao" />

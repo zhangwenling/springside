@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.common.dao.UIDGenerator;
 import org.springside.examples.showcase.common.entity.Post;
 import org.springside.examples.showcase.common.entity.Subject;
+import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.solr.PostSolrDao;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
@@ -22,6 +23,9 @@ public class PostSolrDaoTest extends SpringContextTestCase {
 	public void savePost() throws IOException, SolrServerException {
 		Post post = new Subject();
 		post.setId(new UIDGenerator().generate());
+		User user = new User();
+		user.setLoginName("calvin");
+		post.setUser(user);
 
 		postSolrDao.setAutoCommit(true);
 		postSolrDao.savePost(post);

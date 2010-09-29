@@ -26,18 +26,20 @@ public class SolrSimulator implements InitializingBean, DisposableBean {
 	public void afterPropertiesSet() throws Exception {
 		logger.info("Initializing Solr Server");
 		jettySolrRunner = new JettySolrRunner(context, port);
+
 		new Thread() {
 			@Override
 			public void run() {
 				try {
-					jettySolrRunner.start();
+					jettySolrRunner.start(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 
 		}.start();
-		jettySolrRunner.waitForSolr(context);
+
+		//jettySolrRunner.waitForSolr(context);
 		logger.info("Initialized Solr Server");
 	}
 

@@ -18,45 +18,49 @@ public class PostSolrWrapper {
 		return post;
 	}
 
-	@Field
 	public String getId() {
 		return post.getId();
 	}
 
+	@Field
 	public void setId(String id) {
 		post.setId(id);
 	}
 
-	@Field
 	public String getTitle() {
 		return post.getTitle();
 	}
 
+	@Field
 	public void setTitle(String title) {
 		post.setTitle(title);
 	}
 
-	@Field
 	public String getContent() {
 		return post.getContent();
 	}
 
 	@Field
+	public void setContent(String content) {
+		post.setContent(content);
+	}
+
 	public String getAuthor() {
 		return post.getUser().getLoginName();
 	}
 
+	@Field
 	public void setAuthor(String author) {
 		User user = new User();
 		user.setLoginName(author);
 		post.setUser(user);
 	}
 
-	@Field
 	public Date getModifyTime() {
 		return post.getModifyTime();
 	}
 
+	@Field
 	public void setModifyTime(Date modifyTime) {
 		post.setModifyTime(modifyTime);
 	}

@@ -8,7 +8,7 @@
 -->
 <solr persistent="true">
   <cores adminPath="/admin/cores" shareSchema="true">
-    <core name="core000" instanceDir="core000" config="solr/conf/solrconfig.xml" schema="solr/conf/schema.xml"/>
     <core name="core001" instanceDir="core001" config="solr/conf/solrconfig.xml" schema="solr/conf/schema.xml"/>
+    <core name="core002" instanceDir="core002" config="solr/conf/solrconfig.xml" schema="solr/conf/schema.xml"/>
   </cores>
 </solr>
