@@ -2,28 +2,20 @@ package org.springside.examples.showcase.solr;
 
 import java.util.Date;
 
-import org.apache.solr.client.solrj.beans.DocumentObjectBinder;
 import org.apache.solr.client.solrj.beans.Field;
-import org.apache.solr.common.SolrInputDocument;
 import org.springside.examples.showcase.common.entity.Post;
 import org.springside.examples.showcase.common.entity.User;
 
 public class PostSolrWrapper {
 
-	private static DocumentObjectBinder binder = new DocumentObjectBinder();
-
 	private Post post;
 
-	public void fromEntity(Post post) {
+	public void setEntity(Post post) {
 		this.post = post;
 	}
 
-	public Post toEntity() {
+	public Post getEntity() {
 		return post;
-	}
-
-	public SolrInputDocument toDocument() {
-		return binder.toSolrInputDocument(this);
 	}
 
 	@Field

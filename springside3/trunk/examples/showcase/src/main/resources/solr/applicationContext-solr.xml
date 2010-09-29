@@ -4,4 +4,12 @@
 	default-lazy-init="true">
 	<!-- 演示用的SolrJettyRunner模拟Solr -->
 	<bean id="SolrSimulator" class="org.springside.modules.solr.SolrSimulator" lazy-init="false" />
+
+	<bean id="solrServerFactory" class="org.springside.modules.solr.MultiCoreSolrServerFactory">
+		<property name="serverUrl" value="http://localhost:8080/solr" />
+		<property name="coreNamePrefix" value="core" />
+		<property name="coreSize" value="5" />
+	</bean>
+
+	<bean id="postSolrDao" class="org.springside.examples.showcase.solr.PostSolrDao" />
 </beans>
