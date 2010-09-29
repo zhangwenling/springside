@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
-public abstract class MultiCoreSolrServerFactory implements InitializingBean {
+public class MultiCoreSolrServerFactory implements InitializingBean {
 
 	private static Logger logger = LoggerFactory.getLogger(MultiCoreSolrServerFactory.class);
 
@@ -23,7 +23,7 @@ public abstract class MultiCoreSolrServerFactory implements InitializingBean {
 
 	private String coreNamePrefix;
 
-	private int coresSize;
+	private int cores;
 
 	private List<String> coreNameList;
 
@@ -33,7 +33,7 @@ public abstract class MultiCoreSolrServerFactory implements InitializingBean {
 	 * 以传入字符串的Hash值取模取得SolrServer.
 	 */
 	public SolrServer getServerByHash(String seed) {
-		int index = Math.abs(seed.hashCode()) % coresSize;
+		int index = Math.abs(seed.hashCode()) % cores;
 		return getServerByCoreName(coreNameList.get(index));
 	}
 
@@ -41,7 +41,7 @@ public abstract class MultiCoreSolrServerFactory implements InitializingBean {
 	 * 随机选取SolrServer.
 	 */
 	public SolrServer getServerByRandom() {
-		int index = new Random().nextInt(coresSize);
+		int index = new Random().nextInt(cores);
 		return getServerByCoreName(coreNameList.get(index));
 	}
 
@@ -81,14 +81,14 @@ public abstract class MultiCoreSolrServerFactory implements InitializingBean {
 	public void afterPropertiesSet() {
 		Assert.hasText(serverUrl);
 		Assert.hasText(coreNamePrefix);
-		Assert.isTrue(coresSize > 0);
+		Assert.isTrue(cores > 0);
 
-		coreNameList = new ArrayList<String>(coresSize);
-		for (int i = 1; i <= coresSize; i++) {
+		coreNameList = new ArrayList<String>(cores);
+		for (int i = 1; i <= cores; i++) {
 			coreNameList.add(String.format("%s%03d", coreNamePrefix, i));
 		}
 
-		serverMap = new ConcurrentHashMap<String, SolrServer>(coresSize);
+		serverMap = new ConcurrentHashMap<String, SolrServer>(cores);
 	}
 
 	/**
@@ -108,7 +108,7 @@ public abstract class MultiCoreSolrServerFactory implements InitializingBean {
 	/**
 	 * 设定Core的数量.
 	 */
-	public void setCoresSize(int coresSize) {
-		this.coresSize = coresSize;
+	public void setCores(int cores) {
+		this.cores = cores;
 	}
 }

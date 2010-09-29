@@ -8,7 +8,7 @@
 	<bean id="solrServerFactory" class="org.springside.modules.solr.MultiCoreSolrServerFactory">
 		<property name="serverUrl" value="http://localhost:8080/solr" />
 		<property name="coreNamePrefix" value="core" />
-		<property name="coreSize" value="5" />
+		<property name="cores" value="5" />
 	</bean>
 
 	<bean id="postSolrDao" class="org.springside.examples.showcase.solr.PostSolrDao" />
