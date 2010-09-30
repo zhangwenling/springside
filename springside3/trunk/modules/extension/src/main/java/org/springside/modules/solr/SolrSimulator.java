@@ -7,72 +7,90 @@
  */
 package org.springside.modules.solr;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-
-import org.apache.solr.client.solrj.embedded.JettySolrRunner;
+import org.apache.solr.client.solrj.embedded.JettySolrRunner.Servlet404;
+import org.apache.solr.servlet.SolrDispatchFilter;
+import org.mortbay.jetty.Handler;
+import org.mortbay.jetty.Server;
+import org.mortbay.jetty.servlet.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springside.modules.utils.ThreadUtils;
 
+/**
+ * 参考@{JettySolrRunner},编写Solr服务端模拟器
+ * 
+ * @author calvin
+ */
 public class SolrSimulator implements InitializingBean, DisposableBean {
 
 	private static Logger logger = LoggerFactory.getLogger(SolrSimulator.class);
 
-	private JettySolrRunner jettySolrRunner;
+	private Server server;
 
 	private String context = "/solr";
 	private int port = 8983;
 
 	public void start() {
-		logger.info("Initializing Solr Server");
-		jettySolrRunner = new JettySolrRunner(context, port);
+		logger.info("Starting Solr Server");
 
+		init();
+		startInNewThread();
+		waitForSolr();
+
+		logger.info("Started Solr Server");
+	}
+
+	public void stop() throws Exception {
+		logger.info("Stoping Solr Server");
+
+		if (server != null && server.isRunning()) {
+			server.stop();
+			server.join();
+		}
+	}
+
+	private void init() {
+		server = new Server(port);
+		server.setStopAtShutdown(true);
+
+		// Initialize the servlets
+		Context root = new Context(server, context, Context.SESSIONS);
+
+		// for some reason, there must be a servlet for this to get applied
+		root.addServlet(Servlet404.class, "/*");
+		root.addFilter(SolrDispatchFilter.class, "*", Handler.REQUEST);
+	}
+
+	private void startInNewThread() {
 		new Thread() {
 			@Override
 			public void run() {
 				try {
-					jettySolrRunner.start(false);
+					if (!server.isRunning()) {
+						server.start();
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}.start();
-
-		logger.info("Initialized Solr Server");
 	}
 
-	public void stop() throws Exception {
-		if (jettySolrRunner != null) {
-			jettySolrRunner.stop();
-		}
-	}
-
-	public void waitForSolr(String coreName) throws Exception {
-
-		// A raw term query type doesn't check the schema
-		URL url = new URL("http://localhost:" + port + context + "/" + coreName
-				+ "/select?q={!raw+f=junit_test_query}ping");
-
-		Exception ex = null;
-		// Wait for a total of 20 seconds: 100 tries, 200 milliseconds each
-		for (int i = 0; i < 100; i++) {
-			try {
-				InputStream stream = url.openStream();
-				stream.close();
-			} catch (IOException e) {
-				// e.printStackTrace();
-				ex = e;
-				Thread.sleep(200);
-				continue;
+	/**
+	 * 最多等待10秒
+	 */
+	private void waitForSolr() {
+		for (int i = 0; i < 50; i++) {
+			if (server.isStarted()) {
+				return;
+			} else {
+				ThreadUtils.sleep(200);
 			}
-
-			return;
 		}
 
-		throw new RuntimeException("Jetty/Solr unresponsive", ex);
+		throw new RuntimeException("Start Solr Server timeout");
 	}
 
 	@Override
@@ -92,5 +110,4 @@ public class SolrSimulator implements InitializingBean, DisposableBean {
 	public void setPort(int port) {
 		this.port = port;
 	}
-
 }

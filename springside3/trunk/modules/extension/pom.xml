@@ -108,6 +108,12 @@
 			<optional>true</optional>
 		</dependency>
 
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jetty</artifactId>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
 		<!-- utils -->
 		<dependency>
 			<groupId>commons-lang</groupId>

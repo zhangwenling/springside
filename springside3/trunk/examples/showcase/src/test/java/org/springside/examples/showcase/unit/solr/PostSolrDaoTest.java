@@ -1,6 +1,5 @@
 package org.springside.examples.showcase.unit.solr;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -9,7 +8,6 @@ import org.springside.examples.showcase.common.entity.Post;
 import org.springside.examples.showcase.common.entity.Subject;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.solr.PostSolrDao;
-import org.springside.modules.solr.SolrSimulator;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 @ContextConfiguration(locations = { "/solr/applicationContext-solr.xml" })
@@ -17,14 +15,6 @@ public class PostSolrDaoTest extends SpringContextTestCase {
 
 	@Autowired
 	private PostSolrDao postSolrDao;
-
-	@Autowired
-	private SolrSimulator solr;
-
-	@Before
-	public void before() throws Exception {
-		solr.waitForSolr("forum");
-	}
 
 	@Test
 	public void savePost() throws Exception {
@@ -36,6 +26,5 @@ public class PostSolrDaoTest extends SpringContextTestCase {
 		post.setUser(user);
 
 		postSolrDao.savePost(post);
-
 	}
 }
