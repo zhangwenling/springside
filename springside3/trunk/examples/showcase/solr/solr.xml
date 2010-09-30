@@ -7,8 +7,7 @@
   adminPath: RequestHandler path to manage cores.If 'null' (or absent), cores will not be manageable via request handler
 -->
 <solr persistent="true">
-  <cores adminPath="/admin/cores" shareSchema="true">
-    <core name="core001" instanceDir="core001" config="solr/conf/solrconfig.xml" schema="solr/conf/schema.xml"/>
-    <core name="core002" instanceDir="core002" config="solr/conf/solrconfig.xml" schema="solr/conf/schema.xml"/>
+  <cores adminPath="/admin/cores">
+    <core name="forum" instanceDir="forum" config="solr/conf/solrconfig.xml" schema="solr/conf/forum-schema.xml"/>
   </cores>
 </solr>

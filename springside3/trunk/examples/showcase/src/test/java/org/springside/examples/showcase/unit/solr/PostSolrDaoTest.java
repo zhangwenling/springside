@@ -1,8 +1,6 @@
 package org.springside.examples.showcase.unit.solr;
 
-import java.io.IOException;
-
-import org.apache.solr.client.solrj.SolrServerException;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -11,6 +9,7 @@ import org.springside.examples.showcase.common.entity.Post;
 import org.springside.examples.showcase.common.entity.Subject;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.solr.PostSolrDao;
+import org.springside.modules.solr.SolrSimulator;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 @ContextConfiguration(locations = { "/solr/applicationContext-solr.xml" })
@@ -19,17 +18,24 @@ public class PostSolrDaoTest extends SpringContextTestCase {
 	@Autowired
 	private PostSolrDao postSolrDao;
 
+	@Autowired
+	private SolrSimulator solr;
+
+	@Before
+	public void before() throws Exception {
+		solr.waitForSolr("forum");
+	}
+
 	@Test
-	public void savePost() throws IOException, SolrServerException {
+	public void savePost() throws Exception {
+
 		Post post = new Subject();
 		post.setId(new UIDGenerator().generate());
 		User user = new User();
 		user.setLoginName("calvin");
 		post.setUser(user);
 
-		postSolrDao.setAutoCommit(true);
 		postSolrDao.savePost(post);
 
 	}
-
 }

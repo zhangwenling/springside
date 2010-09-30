@@ -7,39 +7,25 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springside.examples.showcase.common.entity.Post;
-import org.springside.modules.solr.MultiCoreSolrServerFactory;
 
 public class PostSolrDao {
 
-	private MultiCoreSolrServerFactory solrServerFactory;
-
-	private boolean autoCommit;
+	private SolrServer solrServer;
 
 	public void savePost(Post post) throws IOException, SolrServerException {
+
 		Assert.hasText(post.getId());
 
 		PostSolrWrapper postWrapper = new PostSolrWrapper();
 		postWrapper.setEntity(post);
 
-		SolrServer server = solrServerFactory.getServerByHash(post.getId());
-		server.addBean(postWrapper);
-
-		if (autoCommit) {
-			server.commit();
-		}
-	}
-
-	public void findPost() {
-
+		solrServer.addBean(postWrapper);
+		solrServer.commit();
 	}
 
 	@Autowired
-	public void setSolrServerFactory(MultiCoreSolrServerFactory solrServerFactory) {
-		this.solrServerFactory = solrServerFactory;
-	}
-
-	public void setAutoCommit(boolean autoCommit) {
-		this.autoCommit = autoCommit;
+	public void setSolrServer(SolrServer solrServer) {
+		this.solrServer = solrServer;
 	}
 
 }

@@ -68,7 +68,7 @@
   <!-- Used to specify an alternate directory to hold all index data
        other than the default ./data under the Solr home.
        If replication is in use, this should match the replication configuration. -->
- <!-- <dataDir>${solr.data.dir:./solr/data}</dataDir> --> 
+  <dataDir>${solr.data.dir:./solr/data}</dataDir>
 
 
   <!-- WARNING: this <indexDefaults> section only provides defaults for index writers
@@ -805,6 +805,26 @@
     </arr>
   </requestHandler>
 
+
+  <!-- a search component that enables you to configure the top results for
+       a given query regardless of the normal lucene scoring.-->
+  <searchComponent name="elevator" class="solr.QueryElevationComponent" >
+    <!-- pick a fieldType to analyze queries -->
+    <str name="queryFieldType">string</str>
+    <str name="config-file">elevate.xml</str>
+  </searchComponent>
+
+  <!-- a request handler utilizing the elevator component -->
+  <requestHandler name="/elevate" class="solr.SearchHandler" startup="lazy">
+    <lst name="defaults">
+      <str name="echoParams">explicit</str>
+    </lst>
+    <arr name="last-components">
+      <str>elevator</str>
+    </arr>
+  </requestHandler>
+
+
   <!-- Update request handler.  
 
        Note: Since solr1.1 requestHandlers requires a valid content type header if posted in
@@ -1003,7 +1023,7 @@
 
   <!-- config for the admin interface -->
   <admin>
-    <defaultQuery>*:*</defaultQuery>
+    <defaultQuery>solr</defaultQuery>
 
     <!-- configure a healthcheck file for servers behind a loadbalancer
     <healthcheck type="file">server-enabled</healthcheck>

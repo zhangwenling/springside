@@ -12,7 +12,7 @@
  http://wiki.apache.org/solr/SchemaXml
 -->
 
-<schema name="example" version="1.2">
+<schema name="forum" version="1.2">
   <types>
     <!-- field type definitions. The "name" attribute is
        just a label to be used by field definitions.  The "class"

@@ -7,6 +7,10 @@
  */
 package org.springside.modules.solr;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
 import org.apache.solr.client.solrj.embedded.JettySolrRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +26,7 @@ public class SolrSimulator implements InitializingBean, DisposableBean {
 	private String context = "/solr";
 	private int port = 8983;
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
+	public void start() {
 		logger.info("Initializing Solr Server");
 		jettySolrRunner = new JettySolrRunner(context, port);
 
@@ -31,23 +34,55 @@ public class SolrSimulator implements InitializingBean, DisposableBean {
 			@Override
 			public void run() {
 				try {
-					jettySolrRunner.start(true);
+					jettySolrRunner.start(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-
 		}.start();
 
-		//jettySolrRunner.waitForSolr(context);
 		logger.info("Initialized Solr Server");
+	}
+
+	public void stop() throws Exception {
+		if (jettySolrRunner != null) {
+			jettySolrRunner.stop();
+		}
+	}
+
+	public void waitForSolr(String coreName) throws Exception {
+
+		// A raw term query type doesn't check the schema
+		URL url = new URL("http://localhost:" + port + context + "/" + coreName
+				+ "/select?q={!raw+f=junit_test_query}ping");
+
+		Exception ex = null;
+		// Wait for a total of 20 seconds: 100 tries, 200 milliseconds each
+		for (int i = 0; i < 100; i++) {
+			try {
+				InputStream stream = url.openStream();
+				stream.close();
+			} catch (IOException e) {
+				// e.printStackTrace();
+				ex = e;
+				Thread.sleep(200);
+				continue;
+			}
+
+			return;
+		}
+
+		throw new RuntimeException("Jetty/Solr unresponsive", ex);
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		start();
 	}
 
 	@Override
 	public void destroy() throws Exception {
-		if (jettySolrRunner != null) {
-			jettySolrRunner.stop();
-		}
+		stop();
 	}
 
 	public void setContext(String context) {
