@@ -7,7 +7,7 @@
 
 # configuration variables
 prog="ttservctl"
-cmd="ttserver -thnum 32 -uas"
+cmd="ttserver -thnum 64 -uas -le"
 basedir="/var/ttserver"
 port="1978"
 pidfile="$basedir/pid"
@@ -18,6 +18,7 @@ sid=1
 mhost="remotehost"
 mport="1978"
 rtsfile="$basedir/rts"
+# hash table database, 10M bucket, 2G memory  
 dbname="$basedir/casket.tch#bnum=10000000#xmsiz=2147483648"
 retval=0
 
