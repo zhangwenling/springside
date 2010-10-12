@@ -8,6 +8,6 @@
 -->
 <solr persistent="true">
   <cores adminPath="/admin/cores">
-    <core name="forum" instanceDir="forum" config="solr/conf/solrconfig.xml" schema="solr/conf/schema_forum.xml"/>
+    <core name="showcase" instanceDir="forum" config="solr/conf/solrconfig.xml" schema="solr/conf/schema.xml"/>
   </cores>
 </solr>
