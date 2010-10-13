@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import net.spy.memcached.AddrUtil;
 import net.spy.memcached.ConnectionFactoryBuilder;
@@ -51,6 +52,8 @@ public class SpyTokyotyrantClientPool implements InitializingBean, DisposableBea
 
 	private long operationTimeout = 1000; //default value in Spy is 1000ms
 
+	private long shutdownTimeout = 1000;
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		clientPool = new ArrayList<SpyTokyotyrantClient>(poolSize);
@@ -83,7 +86,7 @@ public class SpyTokyotyrantClientPool implements InitializingBean, DisposableBea
 	public void destroy() throws Exception {
 		for (SpyTokyotyrantClient spyClient : clientPool) {
 			if (spyClient != null) {
-				spyClient.getMemcachedClient().shutdown();
+				spyClient.getMemcachedClient().shutdown(shutdownTimeout, TimeUnit.MILLISECONDS);
 			}
 		}
 	}
@@ -113,5 +116,9 @@ public class SpyTokyotyrantClientPool implements InitializingBean, DisposableBea
 
 	public void setOperationTimeout(long operationTimeout) {
 		this.operationTimeout = operationTimeout;
+	}
+
+	public void setShutdownTimeout(long shutdownTimeout) {
+		this.shutdownTimeout = shutdownTimeout;
 	}
 }

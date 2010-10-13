@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import net.spy.memcached.AddrUtil;
 import net.spy.memcached.CASResponse;
@@ -50,6 +51,8 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 
 	private long operationTimeout = 1000; //default value in Spy is 1000ms
 
+	private long shutdownTimeout = 1000;
+
 	// 初始,关闭函数 //
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -77,7 +80,7 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 	@Override
 	public void destroy() throws Exception {
 		if (memcachedClient != null) {
-			memcachedClient.shutdown();
+			memcachedClient.shutdown(shutdownTimeout, TimeUnit.MILLISECONDS);
 		}
 	}
 
@@ -209,4 +212,7 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 		this.operationTimeout = operationTimeout;
 	}
 
+	public void setShutdownTimeout(long shutdownTimeout) {
+		this.shutdownTimeout = shutdownTimeout;
+	}
 }

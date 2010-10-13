@@ -61,6 +61,7 @@ public class MemcachedSimulator implements InitializingBean, DisposableBean {
 	public void destroy() throws Exception {
 		logger.info("Shutting down Jmemcached Server");
 		jmemcached.stop();
+		logger.info("Shutted down Jmemcached Server");
 	}
 
 	public void setServerUrl(String serverUrl) {
