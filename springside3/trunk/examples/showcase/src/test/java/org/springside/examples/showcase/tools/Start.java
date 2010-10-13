@@ -1,6 +1,6 @@
 package org.springside.examples.showcase.tools;
 
-import org.mortbay.jetty.Server;
+import org.eclipse.jetty.server.Server;
 import org.springside.modules.test.utils.JettyUtils;
 
 /**

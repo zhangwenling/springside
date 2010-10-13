@@ -2,9 +2,9 @@ package org.springside.modules.unit.test;
 
 import static org.junit.Assert.*;
 
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.Test;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.webapp.WebAppContext;
 import org.springside.modules.test.utils.JettyUtils;
 
 public class JettyUtilsTest {

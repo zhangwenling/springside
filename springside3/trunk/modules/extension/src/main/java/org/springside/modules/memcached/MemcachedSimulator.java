@@ -22,7 +22,6 @@ import com.thimbleware.jmemcached.storage.hash.ConcurrentLinkedHashMap;
 
 /**
  * JMemcached的封装, 主要用于功能测试.
- * 注意JMemcached对二进制协议支持不好, 尽量使用文本协议.
  * 
  * @author calvin
  */

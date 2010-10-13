@@ -4,11 +4,11 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.eclipse.jetty.server.Server;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
-import org.mortbay.jetty.Server;
 import org.openqa.selenium.WebDriver;
 import org.springside.examples.showcase.tools.Start;
 import org.springside.modules.test.groups.GroupsTestRunner;

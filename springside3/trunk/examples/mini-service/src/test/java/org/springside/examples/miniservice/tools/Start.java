@@ -1,6 +1,6 @@
 package org.springside.examples.miniservice.tools;
 
-import org.mortbay.jetty.Server;
+import org.eclipse.jetty.server.Server;
 import org.springside.modules.test.utils.JettyUtils;
 
 /**

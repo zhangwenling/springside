@@ -7,8 +7,8 @@
  */
 package org.springside.modules.test.utils;
 
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.webapp.WebAppContext;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.webapp.WebAppContext;
 
 /**
  * 创建Jetty Server的工具类.

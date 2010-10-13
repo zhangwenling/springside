@@ -2,10 +2,10 @@ package org.springside.examples.miniservice.functional;
 
 import javax.sql.DataSource;
 
+import org.eclipse.jetty.server.Server;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
-import org.mortbay.jetty.Server;
 import org.springside.examples.miniservice.tools.Start;
 import org.springside.modules.test.utils.DbUnitUtils;
 import org.springside.modules.test.utils.JettyUtils;

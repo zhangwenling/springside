@@ -7,11 +7,13 @@
  */
 package org.springside.modules.solr;
 
+import java.util.EnumSet;
+
 import org.apache.solr.client.solrj.embedded.JettySolrRunner.Servlet404;
 import org.apache.solr.servlet.SolrDispatchFilter;
-import org.mortbay.jetty.Handler;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.servlet.Context;
+import org.eclipse.jetty.server.DispatcherType;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
@@ -56,11 +58,11 @@ public class SolrSimulator implements InitializingBean, DisposableBean {
 		server.setStopAtShutdown(true);
 
 		// Initialize the servlets
-		Context root = new Context(server, context, Context.SESSIONS);
+		ServletContextHandler root = new ServletContextHandler(server, context, ServletContextHandler.SESSIONS);
 
 		// for some reason, there must be a servlet for this to get applied
 		root.addServlet(Servlet404.class, "/*");
-		root.addFilter(SolrDispatchFilter.class, "*", Handler.REQUEST);
+		root.addFilter(SolrDispatchFilter.class, "*", EnumSet.of(DispatcherType.REQUEST));
 	}
 
 	private void startInNewThread() {
