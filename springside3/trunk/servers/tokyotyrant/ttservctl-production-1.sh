@@ -18,7 +18,7 @@ sid=1
 mhost="remotehost"
 mport="1978"
 rtsfile="$basedir/rts"
-# hash table database, 10M bucket, 2G memory  
+# hashtable database, 10M bucket, 2G memory  
 dbname="$basedir/casket.tch#bnum=10000000#xmsiz=2147483648"
 retval=0
 
