@@ -406,7 +406,6 @@
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-start</artifactId>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -450,6 +449,16 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
+				<configuration>
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>9090</port>
+						</connector>
+					</connectors>
+					<webAppConfig>
+						<contextPath>/${artifactId}</contextPath>
+					</webAppConfig>
+				</configuration>
 			</plugin>
 
 			<!-- 执行Hibernate lazy load bytecode enhancement(for列级lazy load) -->

@@ -12,5 +12,7 @@
 	</bean>
 
 	<!-- 演示用的Jmemcached模拟Memcached -->
-	<bean id="memcachedSimulator" class="org.springside.modules.memcached.MemcachedSimulator" lazy-init="false" />
+	<bean id="memcachedSimulator" class="org.springside.modules.memcached.MemcachedSimulator" lazy-init="false">
+		<property name="serverUrl" value="${memcached.url}"/>
+	</bean>
 </beans>

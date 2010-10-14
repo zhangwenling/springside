@@ -34,10 +34,10 @@
 			</li>
 			<li>客户端的用户名与密码设定见测试用例.</li>
 			<li>Base64Binary直接编码字节数组 , 一般用于传输较小的二进制文件.<br/>
-				WSDL: <a href="http://localhost:9090/showcase/services/SmallImageService?wsdl">http://localhost:8080/showcase/services/SmallImageService?wsdl</a>
+				WSDL: <a href="http://localhost:9090/showcase/services/SmallImageService?wsdl">http://localhost:9090/showcase/services/SmallImageService?wsdl</a>
 			</li>
 			<li>MTOM附件传输数据流, 一般用于传输较大的二进制文件.<br/>
-				WSDL: <a href="http://localhost:9090/showcase/services/LargeImageService?wsdl">http://localhost:8080/showcase/services/LargeImageService?wsdl</a>
+				WSDL: <a href="http://localhost:9090/showcase/services/LargeImageService?wsdl">http://localhost:9090/showcase/services/LargeImageService?wsdl</a>
 			</li>
 		</ul>
 		</div>

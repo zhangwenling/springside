@@ -23,7 +23,7 @@
 		<dependencySet>
 			<outputDirectory>/lib</outputDirectory>
 			<includes>
-				<include>org.mortbay.jetty:*</include>
+				<include>org.eclipse.jetty:*</include>
 				<include>ant:ant</include>
 				<include>org.eclipse.jdt.core.compiler:ecj</include>
 			</includes>
@@ -32,7 +32,7 @@
 		<dependencySet>
 			<outputDirectory>/lib</outputDirectory>
 			<includes>
-				<include>org.mortbay.jetty:*</include>
+				<include>org.eclipse.jetty:*</include>
 			</includes>
 			<scope>provided</scope>
 		</dependencySet>
