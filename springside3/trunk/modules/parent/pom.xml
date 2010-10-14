@@ -977,14 +977,14 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-antrun-plugin</artifactId>
-					<version>1.3</version>
+					<version>1.6</version>
 				</plugin>
 
 				<!-- assembly plugin -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-assembly-plugin</artifactId>
-					<version>2.2-beta-5</version>
+					<version>2.2</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
