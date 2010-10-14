@@ -1,4 +1,4 @@
-<jaxws:bindings wsdlLocation="http://localhost:8080/mini-service/ws/userservice?wsdl"
+<jaxws:bindings wsdlLocation="http://localhost:9090/mini-service/ws/userservice?wsdl"
           xmlns:jaxws="http://java.sun.com/xml/ns/jaxws"
           xmlns:xs="http://www.w3.org/2001/XMLSchema"
           xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
