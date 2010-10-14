@@ -28,7 +28,7 @@ public class SolrSimulator implements InitializingBean, DisposableBean {
 
 	private Server server;
 
-	private String context = "/solr";
+	private String contextPath = "/solr";
 	private int port = 8983;
 
 	public void start() {
@@ -55,11 +55,11 @@ public class SolrSimulator implements InitializingBean, DisposableBean {
 		server.setStopAtShutdown(true);
 
 		// Initialize the servlets
-		ServletContextHandler root = new ServletContextHandler(server, context, ServletContextHandler.SESSIONS);
+		ServletContextHandler root = new ServletContextHandler(server, contextPath, ServletContextHandler.SESSIONS);
 
 		// for some reason, there must be a servlet for this to get applied
 		root.addServlet(Servlet404.class, "/*");
-		root.addFilter(SolrDispatchFilter.class, "*", 0);
+		root.addFilter(SolrDispatchFilter.class, "/*", 0);
 	}
 
 	private void startInNewThread() {
@@ -102,8 +102,8 @@ public class SolrSimulator implements InitializingBean, DisposableBean {
 		stop();
 	}
 
-	public void setContext(String context) {
-		this.context = context;
+	public void setContextPath(String contextPath) {
+		this.contextPath = contextPath;
 	}
 
 	public void setPort(int port) {
