@@ -7,11 +7,8 @@
  */
 package org.springside.modules.solr;
 
-import java.util.EnumSet;
-
 import org.apache.solr.client.solrj.embedded.JettySolrRunner.Servlet404;
 import org.apache.solr.servlet.SolrDispatchFilter;
-import org.eclipse.jetty.server.DispatcherType;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.slf4j.Logger;
@@ -62,7 +59,7 @@ public class SolrSimulator implements InitializingBean, DisposableBean {
 
 		// for some reason, there must be a servlet for this to get applied
 		root.addServlet(Servlet404.class, "/*");
-		root.addFilter(SolrDispatchFilter.class, "*", EnumSet.of(DispatcherType.REQUEST));
+		root.addFilter(SolrDispatchFilter.class, "*", 0);
 	}
 
 	private void startInNewThread() {
