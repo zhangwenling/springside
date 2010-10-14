@@ -745,16 +745,6 @@
 				<artifactId>selenium-htmlunit-driver</artifactId>
 				<version>${selenium.version}</version>
 				<scope>test</scope>
-				<exclusions>
-					<exclusion>
-						<groupId>xerces</groupId>
-						<artifactId>xercesImpl</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>xalan</groupId>
-						<artifactId>xalan</artifactId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
