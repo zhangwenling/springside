@@ -12,7 +12,7 @@
 
 	<!-- 使用WS-Security中的明文密码认证机制的客户端 -->
 	<jaxws:client id="userServiceWithPlainPassword" serviceClass="org.springside.examples.showcase.ws.server.UserWebService"
-		address="http://localhost:9090/showcase/services/UserServiceWithPlainPassword">
+		address="http://localhost:9099/showcase/services/UserServiceWithPlainPassword">
 		<jaxws:outInterceptors>
 			<bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
 				<property name="properties">
@@ -31,7 +31,7 @@
 
 	<!-- 使用WS-Security中的明文密码认证机制访问与SpringSecurity权限管理结合EndPoint的客户端 -->
 	<jaxws:client id="userServiceWithSpringSecurity" serviceClass="org.springside.examples.showcase.ws.server.UserWebService"
-		address="http://localhost:9090/showcase/services/UserServiceWithSpringSecurity">
+		address="http://localhost:9099/showcase/services/UserServiceWithSpringSecurity">
 		<jaxws:outInterceptors>
 			<bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
 				<property name="properties">

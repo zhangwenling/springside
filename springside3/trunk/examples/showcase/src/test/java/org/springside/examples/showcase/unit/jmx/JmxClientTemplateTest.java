@@ -28,7 +28,7 @@ public class JmxClientTemplateTest extends SpringContextTestCase {
 
 	@Before
 	public void setUp() throws Exception {
-		jmxClientTemplate = new JmxClientTemplate("service:jmx:rmi:///jndi/rmi://localhost:19090/jmxrmi");
+		jmxClientTemplate = new JmxClientTemplate("service:jmx:rmi:///jndi/rmi://localhost:19099/jmxrmi");
 		serverConfigMbean = jmxClientTemplate.createMBeanProxy(ServerConfigMBean.SERVER_CONFIG_MBEAN_NAME,
 				ServerConfigMBean.class);
 	}
