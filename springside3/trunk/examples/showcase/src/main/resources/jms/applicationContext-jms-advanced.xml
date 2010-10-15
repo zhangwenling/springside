@@ -15,7 +15,7 @@
 	<bean id="advancedTopicConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL" value="${jms.broker_url}" />
 		<!-- Durable订阅者必须设置ClientId -->
-		<property name="clientID" value="${jms.clicentId}" />
+		<property name="clientID" value="${jms.clicent_id}" />
 	</bean>
 
 	<!-- Spring Caching 连接工厂 -->
