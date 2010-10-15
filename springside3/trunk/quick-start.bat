@@ -8,7 +8,7 @@ set MVN=mvn
 set ANT=ant
 set MAVEN_OPTS=%MAVEN_OPTS% -XX:MaxPermSize=128m
 
-if exist "tools\maven\apache-maven-2.2.1\" set MVN="%cd%\tools\maven\apache-maven-2.2.1\bin\mvn.bat"
+if exist "tools\maven\apache-maven-3.0\" set MVN="%cd%\tools\maven\apache-maven-3.0\bin\mvn.bat"
 if exist "tools\ant\apache-ant-1.8.1\" set ANT="%cd%\tools\ant\apache-ant-1.8.1\bin\ant.bat"
 echo Maven命令为%MVN%
 echo Ant命令为%ANT%
@@ -28,26 +28,26 @@ cd ..\..\
 echo [Step 4] 为Mini-Service 初始化数据库, 启动Jetty.
 cd examples\mini-service
 call %ANT% -f bin/build.xml init-db 
-start "Mini-Service" %MVN% %OFF_LINE% -Djetty.port=8083 jetty:run
+start "Mini-Service" %MVN% %OFF_LINE% -Djetty.port=9093 jetty:run
 cd ..\..\
 
 echo [Step 5] 为Mini-Web 初始化数据库, 启动Jetty.
 cd examples\mini-web
 call %ANT% -f bin/build.xml init-db 
-start "Mini-Web" %MVN% %OFF_LINE% -Djetty.port=8084 jetty:run
+start "Mini-Web" %MVN% %OFF_LINE% -Djetty.port=9091 jetty:run
 cd ..\..\
 
 echo [Step 6] 为Showcase 生成Eclipse项目文件, 编译, 打包, 初始化数据库, 启动Jetty.
 cd examples\showcase
 call %ANT% -f bin/build.xml init-db
-start "Showcase" %MVN% %OFF_LINE% -Djetty.port=8085 jetty:run
+start "Showcase" %MVN% %OFF_LINE% -Djetty.port=9090 jetty:run
 cd ..\..\
 
 echo [INFO] SpringSide3.0 快速启动完毕.
 echo [INFO] 可访问以下演示网址:
-echo [INFO] http://localhost:8083/mini-service
-echo [INFO] http://localhost:8084/mini-web
-echo [INFO] http://localhost:8085/showcase
+echo [INFO] http://localhost:9093/mini-service
+echo [INFO] http://localhost:9091/mini-web
+echo [INFO] http://localhost:9090/showcase
 
 :end
 pause
