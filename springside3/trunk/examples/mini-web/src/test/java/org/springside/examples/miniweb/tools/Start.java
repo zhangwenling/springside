@@ -10,9 +10,9 @@ import org.springside.modules.test.utils.JettyUtils;
  */
 public class Start {
 
-	public static final int PORT = 9091;
+	public static final int PORT = 9098;
 	public static final String CONTEXT = "/mini-web";
-	public static final String BASE_URL = "http://localhost:9091/mini-web";
+	public static final String BASE_URL = "http://localhost:9098/mini-web";
 
 	public static void main(String[] args) throws Exception {
 		Server server = JettyUtils.buildNormalServer(PORT, CONTEXT);

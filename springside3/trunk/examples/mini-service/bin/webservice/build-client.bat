@@ -8,7 +8,7 @@ echo [ERROR] 未设置CXF_HOME系统变量
 goto end
 
 :begin
-call "%CXF_HOME%/bin/wsdl2java.bat" -client -b build-client-binding.xml -exsh true http://localhost:9090/mini-service/ws/userservice?wsdl
+call "%CXF_HOME%/bin/wsdl2java.bat" -client -b build-client-binding.xml -exsh true http://localhost:9097/mini-service/ws/userservice?wsdl
 
 echo [INFO] 代码已生成在当前目录下.
 :end

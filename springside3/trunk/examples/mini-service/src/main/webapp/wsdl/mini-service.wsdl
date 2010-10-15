@@ -218,7 +218,7 @@
   </wsdl:binding>
   <wsdl:service name="UserService">
     <wsdl:port binding="tns:UserServiceSoapBinding" name="UserServicePort">
-      <soap:address location="http://localhost:9090/mini-service/ws/userservice" />
+      <soap:address location="http://localhost:9097/mini-service/ws/userservice" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
