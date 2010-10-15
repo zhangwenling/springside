@@ -16,7 +16,7 @@
 		<!-- 主要依赖库的版本定义 -->
 		<springside.version>3.4.0-SNAPSHOT</springside.version>
 		<spring.version>3.0.4.RELEASE</spring.version>
-		<hibernate.version>3.5.6-Final</hibernate.version>
+		<hibernate.version>3.6.0.Final</hibernate.version>
 		<struts2.version>2.2.1</struts2.version>
 		<cxf.version>2.3.0</cxf.version>
 		<jersey.version>1.4</jersey.version>
@@ -174,15 +174,19 @@
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-annotations</artifactId>
+				<artifactId>hibernate-ehcache</artifactId>
 				<version>${hibernate.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-ehcache</artifactId>
+				<artifactId>hibernate-entitymanager</artifactId>
 				<version>${hibernate.version}</version>
 			</dependency>
-			<!-- newest version in jboss repository -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-envers</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>javassist</groupId>
 				<artifactId>javassist</artifactId>
@@ -862,13 +866,13 @@
 					</configuration>
 				</plugin>
 
-				<!-- test插件 -->
+				<!-- test插件, 增大内存且仅测试名称为*Test的类 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.6</version>
 					<configuration>
-						<argLine>-Xmx512M</argLine>
+						<argLine>-Xmx128M</argLine>
 						<includes>
 							<include>**/*Test.java</include>
 						</includes>
@@ -882,7 +886,7 @@
 					<version>2.4</version>
 				</plugin>
 
-				<!-- war插件-->
+				<!-- war插件, 设定war名称不带版本号 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
@@ -902,7 +906,7 @@
 					</configuration>
 				</plugin>
 
-				<!-- jar插件 -->
+				<!-- jar相关插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
@@ -943,7 +947,7 @@
 					<version>2.5</version>
 				</plugin>
 
-				<!-- eclipse插件 -->
+				<!-- eclipse插件,设定下载Source并屏幕svn文件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-eclipse-plugin</artifactId>
@@ -957,7 +961,7 @@
 					</configuration>
 				</plugin>
 
-				<!-- jetty插件 -->
+				<!-- jetty插件,设定重载模式 -->
 				<plugin>
 					<groupId>org.mortbay.jetty</groupId>
 					<artifactId>jetty-maven-plugin</artifactId>
@@ -981,11 +985,28 @@
 					<version>1.6</version>
 				</plugin>
 
-				<!-- assembly plugin -->
+				<!-- assembly插件-->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-assembly-plugin</artifactId>
 					<version>2.2</version>
+				</plugin>
+
+				<!-- release相关插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>release</artifactId>
+					<version>2.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>scm</artifactId>
+					<version>1.4</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>versions</artifactId>
+					<version>1.2</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>

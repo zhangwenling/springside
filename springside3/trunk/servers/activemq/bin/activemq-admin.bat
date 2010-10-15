@@ -74,9 +74,9 @@ if "%ACTIVEMQ_BASE%" == "" set ACTIVEMQ_BASE=%ACTIVEMQ_HOME%
 if /i not "%1" == "start" goto debugOpts
 
 
-if "%ACTIVEMQ_OPTS%" == "" set ACTIVEMQ_OPTS=-Xms2048M -Xmx2048M -Xmn682M -XX:MaxPermSize=96M -Dorg.apache.activemq.UseDedicatedTaskRunner=true -Djava.util.logging.config.file=logging.properties
+if "%ACTIVEMQ_OPTS%" == "" set ACTIVEMQ_OPTS=-Xms2048M -Xmx2048M -XX:MaxPermSize=128M =-XX:+UseConcMarkSweepGC -Xmn682M -Dorg.apache.activemq.UseDedicatedTaskRunner=true -Djava.util.logging.config.file=logging.properties
 
-if "%SUNJMX%" == "" set SUNJMX=-Dcom.sun.management.jmxremote.port=1099 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false
+if "%SUNJMX%" == "" set SUNJMX=-Dcom.sun.management.jmxremote.port=1616 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false
 
 :debugOpts
 REM Uncomment to enable YourKit profiling

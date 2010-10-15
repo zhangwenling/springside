@@ -58,10 +58,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-ehcache</artifactId>
 		</dependency>
 		<dependency>
@@ -228,34 +224,6 @@
 
 	<build>
 		<plugins>
-			<!-- eclipse插件 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<configuration>
-					<wtpversion>2.0</wtpversion>
-					<additionalProjectnatures>
-						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-					</additionalProjectnatures>
-				</configuration>
-			</plugin>
-
-			<!-- jetty插件 -->
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<configuration>
-					<connectors>
-						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-							<port>9097</port>
-						</connector>
-					</connectors>
-					<webAppConfig>
-						<contextPath>/${artifactId}</contextPath>
-					</webAppConfig>
-				</configuration>
-			</plugin>
-
 			<!-- cobertura插件, 取消不需要计算覆盖率的类 -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -267,6 +235,34 @@
 							<exclude>**/dto/**/*.class</exclude>
 						</excludes>
 					</instrumentation>
+				</configuration>
+			</plugin>
+
+			<!-- eclipse插件, 设定wtp版本并添加springIDE nature -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<wtpversion>2.0</wtpversion>
+					<additionalProjectnatures>
+						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+					</additionalProjectnatures>
+				</configuration>
+			</plugin>
+
+			<!-- jetty插件, 设定端口与context path-->
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<configuration>
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>9097</port>
+						</connector>
+					</connectors>
+					<webAppConfig>
+						<contextPath>/${project.artifactId}</contextPath>
+					</webAppConfig>
 				</configuration>
 			</plugin>
 		</plugins>
