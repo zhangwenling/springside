@@ -14,7 +14,7 @@ import com.google.common.collect.Lists;
 
 public class CovertUtilsTest {
 
-	@SuppressWarnings("unchecked")
+	
 	@Test
 	public void convertElementPropertyToString() {
 		TestBean3 bean1 = new TestBean3();
@@ -27,8 +27,9 @@ public class CovertUtilsTest {
 		assertEquals("1,2", ConvertUtils.convertElementPropertyToString(list, "id", ","));
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
+	
+	
 	public void convertElementPropertyToList() {
 		TestBean3 bean1 = new TestBean3();
 		bean1.setId(1);

@@ -73,7 +73,7 @@ public class Role extends IdEntity {
 	}
 
 	@Transient
-	@SuppressWarnings("unchecked")
+	
 	public List<Long> getAuthIds() {
 		return ConvertUtils.convertElementPropertyToList(authorityList, "id");
 	}

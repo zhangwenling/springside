@@ -93,7 +93,7 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 	/**
 	 * Get方法, 转换结果类型并屏蔽异常,仅返回Null.
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public <T> T get(String key) {
 		try {
 			return (T) memcachedClient.get(key);
@@ -106,7 +106,7 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 	/**
 	 * GetBulk方法, 转换结果类型并屏蔽异常.
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public <T> Map<String, T> getBulk(String... keys) {
 		try {
 			return (Map<String, T>) memcachedClient.getBulk(keys);
@@ -119,7 +119,7 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 	/**
 	 * GetBulk方法, 转换结果类型并屏蔽异常.
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public <T> Map<String, T> getBulk(Collection<String> keys) {
 		try {
 			return (Map<String, T>) memcachedClient.getBulk(keys);
@@ -146,7 +146,7 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 	/**
 	 * 配合Check and Set的Get方法,转换结果类型并屏蔽异常.
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public <T> CASValue<T> gets(String key) {
 		try {
 			return (CASValue<T>) memcachedClient.gets(key);

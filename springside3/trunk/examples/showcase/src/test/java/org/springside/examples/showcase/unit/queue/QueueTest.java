@@ -16,10 +16,11 @@ import org.junit.Test;
 import org.springside.examples.showcase.queue.QueueConsumer;
 import org.springside.examples.showcase.queue.QueuesHolder;
 
-@SuppressWarnings("unchecked")
+
 public class QueueTest {
 
 	@Test
+	
 	public void backup() throws IOException, ClassNotFoundException, InterruptedException {
 		String queueName = "testBackup";
 		String filePath = System.getProperty("java.io.tmpdir") + File.separator + "queue" + File.separator + queueName;
@@ -56,6 +57,7 @@ public class QueueTest {
 	}
 
 	@Test
+	
 	public void restore() throws IOException, ClassNotFoundException, InterruptedException {
 		String queueName = "testRestore";
 		String filePath = System.getProperty("java.io.tmpdir") + File.separator + "queue" + File.separator + queueName;

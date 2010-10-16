@@ -133,7 +133,7 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 		assertEquals(DEFAULT_LOGIN_NAME, user.getLoginName());
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	@Test
 	public void batchUpdate() {
 		Map map = new HashMap();
@@ -147,7 +147,7 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 	}
 
 	@Test
-	@SuppressWarnings("unchecked")
+	
 	public void eagerFetch() {
 		String sql = "from User u left join fetch u.roleList order by u.id";
 
@@ -179,7 +179,7 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 		assertEquals(false, dao.isPropertyUnique("loginName", "user2", "admin"));
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public void constructor() {
 		MyUserDao myDao = new MyUserDao();
 		Class entityClazz = (Class) ReflectionUtils.getFieldValue(myDao, "entityClass");

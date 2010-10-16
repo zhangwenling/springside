@@ -42,7 +42,7 @@ import org.springside.modules.utils.ThreadUtils.CustomizableThreadFactory;
  * 
  * @author calvin
  */
-@SuppressWarnings("unchecked")
+
 public abstract class QueueConsumer implements Runnable {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());

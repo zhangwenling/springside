@@ -124,7 +124,7 @@ public class UserJdbcDaoTest extends SpringTxTestCase {
 		assertEquals(user2.getLoginName(), newUser2.getLoginName());
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	@Test
 	public void searchObject() {
 		Map map = new HashMap();

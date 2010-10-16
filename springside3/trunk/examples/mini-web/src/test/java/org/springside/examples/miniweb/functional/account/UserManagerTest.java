@@ -169,7 +169,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 	/**
 	 * 校验用户数据的工具函数.
 	 */
-	@SuppressWarnings("unchecked")
+	
 	private void verifyUser(User user) {
 		searchUser(user.getLoginName());
 		driver.findElement(By.linkText("修改")).click();

@@ -107,13 +107,12 @@ public class ReflectionUtilsTest {
 			return publicField;
 		}
 
-		@SuppressWarnings("unused")
 		private String privateMethod(String text) {
 			return "hello " + text;
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public static class TestBean2 extends ParentBean {
 	}
 

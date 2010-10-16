@@ -48,7 +48,7 @@ public class HibernateMappingTest extends SpringTxTestCase {
 	}
 
 	@Test
-	@SuppressWarnings("unchecked")
+	
 	public void allClassMapping() throws Exception {
 		Session session = sessionFactory.openSession();
 		try {

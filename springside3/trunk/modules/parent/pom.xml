@@ -349,12 +349,6 @@
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-ws-security</artifactId>
 				<version>${cxf.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>xalan</groupId>
-						<artifactId>xalan</artifactId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 			<!-- webservice end -->
 

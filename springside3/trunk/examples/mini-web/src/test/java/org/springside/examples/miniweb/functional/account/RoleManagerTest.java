@@ -108,7 +108,7 @@ public class RoleManagerTest extends BaseFunctionalTestCase {
 		testRole = null;
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	private void verifyRole(Role role) {
 		driver.findElement(By.id("editLink-" + role.getName())).click();
 

@@ -23,7 +23,7 @@ import com.google.common.collect.MapMaker;
  * 
  * @author calvin
  */
-@SuppressWarnings("unchecked")
+
 @ManagedResource(objectName = QueuesHolder.QUEUEHOLDER_MBEAN_NAME, description = "Queues Holder Bean")
 public class QueuesHolder {
 	/**
@@ -39,6 +39,7 @@ public class QueuesHolder {
 	 * 根据queueName获得消息队列的静态函数.
 	 * 如消息队列还不存在, 会自动进行创建.
 	 */
+	
 	public static <T> BlockingQueue<T> getQueue(String queueName) {
 		BlockingQueue queue = queueMap.get(queueName);
 

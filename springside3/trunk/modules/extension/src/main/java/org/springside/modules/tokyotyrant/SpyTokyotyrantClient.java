@@ -41,7 +41,7 @@ public class SpyTokyotyrantClient {
 	/**
 	 * Get方法, 转换结果类型并屏蔽异常,仅返回Null.
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public <T> T get(String key) {
 		try {
 			return (T) client.get(key);
@@ -54,7 +54,7 @@ public class SpyTokyotyrantClient {
 	/**
 	 * GetBulk方法, 转换结果类型并屏蔽异常.
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public <T> Map<String, T> getBulk(String... keys) {
 		try {
 			return (Map<String, T>) client.getBulk(keys);
@@ -67,7 +67,7 @@ public class SpyTokyotyrantClient {
 	/**
 	 * GetBulk方法, 转换结果类型并屏蔽异常.
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public <T> Map<String, T> getBulk(Collection<String> keys) {
 		try {
 			return (Map<String, T>) client.getBulk(keys);

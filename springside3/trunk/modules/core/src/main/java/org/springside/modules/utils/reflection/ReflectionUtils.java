@@ -178,7 +178,7 @@ public class ReflectionUtils {
 	 * @param clazz The class to introspect
 	 * @return the first generic declaration, or Object.class if cannot be determined
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public static <T> Class<T> getSuperClassGenricType(final Class clazz) {
 		return getSuperClassGenricType(clazz, 0);
 	}
@@ -193,7 +193,7 @@ public class ReflectionUtils {
 	 * @param index the Index of the generic ddeclaration,start from 0.
 	 * @return the index generic declaration, or Object.class if cannot be determined
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public static Class getSuperClassGenricType(final Class clazz, final int index) {
 
 		Type genType = clazz.getGenericSuperclass();

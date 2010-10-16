@@ -55,7 +55,7 @@ public class SpringSecurityInInterceptor extends AbstractPhaseInterceptor<Messag
 	/**
 	 * 从Message中找出WSS4J校验后的用户名.
 	 */
-	@SuppressWarnings("unchecked")
+	
 	private String getUserNameFromWSS4JResult(Message message) {
 		Vector<WSHandlerResult> results = (Vector<WSHandlerResult>) message
 				.getContextualProperty(WSHandlerConstants.RECV_RESULTS);

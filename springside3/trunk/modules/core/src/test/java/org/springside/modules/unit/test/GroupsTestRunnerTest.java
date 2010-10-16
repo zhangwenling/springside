@@ -22,7 +22,7 @@ public class GroupsTestRunnerTest {
 	}
 
 	@Test
-	@SuppressWarnings("unchecked")
+	
 	public void groupsInit() throws InitializationError {
 		GroupsTestRunner groupsTestRunner = new GroupsTestRunner(GroupsTestRunnerTest.class);
 		//Get DAILY,NIGHTLY from system properties.

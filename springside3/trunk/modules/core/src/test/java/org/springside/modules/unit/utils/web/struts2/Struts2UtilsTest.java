@@ -52,7 +52,7 @@ public class Struts2UtilsTest {
 	}
 
 	@Test
-	@SuppressWarnings("unchecked")
+	
 	public void renderJson() throws IOException {
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		WebTestUtils.setResponseToStruts2(response);

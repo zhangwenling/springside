@@ -68,7 +68,7 @@ public class JaxbBinder {
 	/**
 	 * Java Object->Xml, 特别支持对Root Element是Collection的情形.
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public String toXml(Collection root, String rootName) {
 		return toXml(root, rootName, null);
 	}
@@ -76,7 +76,7 @@ public class JaxbBinder {
 	/**
 	 * Java Object->Xml, 特别支持对Root Element是Collection的情形.
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public String toXml(Collection root, String rootName, String encoding) {
 		try {
 			CollectionWrapper wrapper = new CollectionWrapper();
@@ -97,7 +97,7 @@ public class JaxbBinder {
 	/**
 	 * Xml->Java Object.
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public <T> T fromXml(String xml) {
 		try {
 			StringReader reader = new StringReader(xml);
@@ -140,7 +140,7 @@ public class JaxbBinder {
 	 * 封装Root Element 是 Collection的情况.
 	 */
 	public static class CollectionWrapper {
-		@SuppressWarnings("unchecked")
+		
 		@XmlAnyElement
 		protected Collection collection;
 	}

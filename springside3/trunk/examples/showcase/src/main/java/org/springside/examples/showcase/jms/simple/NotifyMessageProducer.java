@@ -15,7 +15,7 @@ import org.springside.examples.showcase.common.entity.User;
  * 
  * @author calvin
  */
-@SuppressWarnings("unchecked")
+
 public class NotifyMessageProducer {
 
 	private JmsTemplate jmsTemplate;

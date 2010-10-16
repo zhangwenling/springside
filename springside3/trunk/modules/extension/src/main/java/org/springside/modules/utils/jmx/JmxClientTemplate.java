@@ -59,7 +59,7 @@ public class JmxClientTemplate {
 	/**
 	 * 连接远程JMX Server.
 	 */
-	@SuppressWarnings("unchecked")
+	
 	private void initConnector(final String serviceUrl, final String userName, final String passwd) throws IOException {
 		JMXServiceURL url = new JMXServiceURL(serviceUrl);
 
@@ -171,7 +171,7 @@ public class JmxClientTemplate {
 	 * 
 	 * @param paramClasses 所有参数的Class数组.
 	 */
-	@SuppressWarnings("unchecked")
+	
 	public Object invoke(final String mbeanName, final String methodName, final Class[] paramClasses,
 			final Object[] paramValues) {
 		String[] paramClassNames = new String[paramClasses.length];

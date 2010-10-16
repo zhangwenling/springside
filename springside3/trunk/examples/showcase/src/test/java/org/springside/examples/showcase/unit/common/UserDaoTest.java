@@ -64,7 +64,7 @@ public class UserDaoTest extends SpringTxTestCase {
 	}
 
 	@Test
-	@SuppressWarnings("unchecked")
+	
 	public void sampleDialect() {
 		//select about 50% record from database.
 		List<String> values = userDao.createQuery("select u.name from User u where sample()<50").list();

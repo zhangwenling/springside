@@ -108,7 +108,7 @@ public class User extends IdEntity {
 	 */
 	//非持久化属性.
 	@Transient
-	@SuppressWarnings("unchecked")
+	
 	public List<Long> getRoleIds() {
 		return ConvertUtils.convertElementPropertyToList(roleList, "id");
 	}

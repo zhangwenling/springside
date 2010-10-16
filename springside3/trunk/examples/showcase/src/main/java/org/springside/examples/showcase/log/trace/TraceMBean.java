@@ -45,7 +45,7 @@ public class TraceMBean {
 		setLoggerAppendersLevel(logger, Level.OFF);
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	private void setLoggerAppendersLevel(Logger logger, Level level) {
 		Enumeration e = logger.getAllAppenders();
 		while (e.hasMoreElements()) {
