@@ -493,7 +493,8 @@
 			<id>package-bin</id>
 			<activation>
 				<property>
-					<name>package.classifier</name>
+					<name>package.bin</name>
+					<value>true</value>
 				</property>
 			</activation>
 			<build>
@@ -509,7 +510,8 @@
 								</goals>
 								<configuration>
 									<descriptors>
-										<descriptor>assembly/assembly.xml</descriptor>
+										<descriptor>assembly/assembly-production.xml</descriptor>
+										<descriptor>assembly/assembly-test.xml</descriptor>
 									</descriptors>
 								</configuration>
 							</execution>
