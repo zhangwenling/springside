@@ -11,11 +11,20 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
-public class SolrServerFactoryBean implements FactoryBean<SolrServer>, InitializingBean {
+/**
+ * SolrServer与Spring的简单集成.
+ * 
+ * @author calvin
+ */
+public class SolrServerFactoryBean implements FactoryBean<SolrServer>,
+		InitializingBean {
 
-	private static Logger logger = LoggerFactory.getLogger(SolrServerFactoryBean.class);
+	private static Logger logger = LoggerFactory
+			.getLogger(SolrServerFactoryBean.class);
 
 	private String serverUrl;
+
+	private long connectionTimeout;
 
 	private CommonsHttpSolrServer solrServer;
 
@@ -25,8 +34,12 @@ public class SolrServerFactoryBean implements FactoryBean<SolrServer>, Initializ
 		try {
 			solrServer = new CommonsHttpSolrServer(serverUrl);
 			solrServer.setRequestWriter(new BinaryRequestWriter());
+
+			if (connectionTimeout > 0) {
+				solrServer.setConnectionManagerTimeout(connectionTimeout);
+			}
 		} catch (MalformedURLException e) {
-			logger.error("Solr server error", e);
+			logger.error("Solr server init error", e);
 		}
 	}
 
@@ -47,6 +60,10 @@ public class SolrServerFactoryBean implements FactoryBean<SolrServer>, Initializ
 
 	public void setServerUrl(String serverUrl) {
 		this.serverUrl = serverUrl;
+	}
+
+	public void setConnectionTimeout(long connectionTimeout) {
+		this.connectionTimeout = connectionTimeout;
 	}
 
 }
