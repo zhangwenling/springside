@@ -1,17 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
-<Configure id="Server" class="org.mortbay.jetty.Server">
+<Configure id="Server" class="org.eclipse.jetty.server.Server">
 
 	<!-- =========================================================== -->
 	<!-- Server Thread Pool                                          -->
 	<!-- =========================================================== -->
 	<Set name="ThreadPool">
-		<New class="org.mortbay.thread.QueuedThreadPool">
-			<Set name="minThreads">10</Set>
-			<Set name="maxThreads">200</Set>
-			<Set name="lowThreads">20</Set>
-			<Set name="SpawnOrShrinkAt">2</Set>
-		</New>
+		<New class="org.eclipse.jetty.util.thread.QueuedThreadPool">
+	        <Set name="minThreads">10</Set>
+	        <Set name="maxThreads">200</Set>
+       	</New>
 	</Set>
 
 	<!-- =========================================================== -->
@@ -19,7 +17,7 @@
 	<!-- =========================================================== -->
 	<Call name="addConnector">
 		<Arg>
-			<New class="org.mortbay.jetty.nio.BlockingChannelConnector">
+			<New class="org.eclipse.jetty.server.nio.BlockingChannelConnector">
 				<Set name="host">
 					<SystemProperty name="jetty.host" />
 				</Set>
@@ -27,6 +25,7 @@
 					<SystemProperty name="jetty.port" default="8080" />
 				</Set>
 				<Set name="maxIdleTime">30000</Set>
+				<Set name="Acceptors">2</Set>
 				<Set name="statsOn">false</Set>
 				<Set name="confidentialPort">8443</Set>
 			</New>
@@ -37,7 +36,7 @@
 	<!-- Configure the Webapp Context                                -->
 	<!-- =========================================================== -->
 	<Set name="handler">
-		<New class="org.mortbay.jetty.webapp.WebAppContext">
+		<New class="org.eclipse.jetty.webapp.WebAppContext">
 			<Set name="contextPath"><project-context-path></Set>
 			<Set name="war"><path-to-project-war-file-or-webapp-dir></Set>
 		</New>

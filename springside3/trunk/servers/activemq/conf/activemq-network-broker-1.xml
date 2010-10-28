@@ -35,12 +35,12 @@
 		<destinationPolicy>
 			<policyMap>
 				<policyEntries>
-					<policyEntry topic=">" producerFlowControl="true" memoryLimit="20mb">
+					<policyEntry topic=">" producerFlowControl="true" memoryLimit="32mb">
 						<pendingSubscriberPolicy>
 							<vmCursor />
 						</pendingSubscriberPolicy>
 					</policyEntry>
-					<policyEntry queue=">" producerFlowControl="true" memoryLimit="20mb">
+					<policyEntry queue=">" producerFlowControl="true" memoryLimit="32mb">
 						<!--
 							Use VM cursor for better latency For more information, see: http://activemq.apache.org/message-cursors.html
 
@@ -66,8 +66,7 @@
 			http://activemq.apache.org/multicast-transport-reference.html
 		-->
 		<networkConnectors>
-			<networkConnector uri="multicast://239.255.2.3:6155?group=springside" dynamicOnly="true" networkTTL="3"
-				prefetchSize="1" conduitSubscriptions="false" decreaseNetworkConsumerPriority="false" />
+			<networkConnector uri="multicast://239.255.2.3:6155?group=springside" dynamicOnly="true" networkTTL="3" prefetchSize="1" />
 		</networkConnectors>
 
 		<!--

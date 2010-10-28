@@ -20,7 +20,7 @@
 		<struts2.version>2.2.1</struts2.version>
 		<cxf.version>2.3.0</cxf.version>
 		<jersey.version>1.4</jersey.version>
-		<spring-security.version>3.0.3.RELEASE</spring-security.version>
+		<spring-security.version>3.0.4.RELEASE</spring-security.version>
 		<activemq.version>5.4.1</activemq.version>
 		<jetty.version>7.2.0.v20101020</jetty.version>
 		<h2.version>1.2.144</h2.version>

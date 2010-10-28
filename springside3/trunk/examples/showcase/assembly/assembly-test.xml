@@ -24,17 +24,12 @@
 			<outputDirectory>/lib</outputDirectory>
 			<includes>
 				<include>org.eclipse.jetty:*</include>
+				<include>org.mortbay.jetty:*</include>
 				<include>ant:ant</include>
 				<include>org.eclipse.jdt.core.compiler:ecj</include>
+				<include>javax.servlet:servlet-api</include>
 			</includes>
 			<scope>test</scope>
-		</dependencySet>
-		<dependencySet>
-			<outputDirectory>/lib</outputDirectory>
-			<includes>
-				<include>org.eclipse.jetty:*</include>
-			</includes>
-			<scope>provided</scope>
 		</dependencySet>
 	</dependencySets>
 

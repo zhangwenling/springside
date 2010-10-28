@@ -23,8 +23,9 @@
 	<!-- 
         The <broker> element is used to configure the ActiveMQ broker. 
     -->
-	<broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost" dataDirectory="${activemq.base}/data"
-		destroyApplicationContextOnStop="true">
+	<broker xmlns="http://activemq.apache.org/schema/core" brokerName="activemq2" dataDirectory="${activemq.base}/data"
+		destroyApplicationContextOnStop="true" schedulerSupport="false">
+
 		<!--
 			For better performances use VM cursor and small memory limit. For more information, see:
 
@@ -60,6 +61,15 @@
 		</managementContext>
 
 		<!--
+			Configure network connector to use multicast protocol For more information, see
+
+			http://activemq.apache.org/multicast-transport-reference.html
+		-->
+		<networkConnectors>
+			<networkConnector uri="multicast://239.255.2.3:6155?group=springside" dynamicOnly="true" networkTTL="3" prefetchSize="1" />
+		</networkConnectors>
+
+		<!--
 			Configure message persistence for the broker. The default persistence mechanism is the KahaDB store (identified by
 			the kahaDB tag). For more information, see: http://activemq.apache.org/persistence.html
 		-->
@@ -91,7 +101,7 @@
 			see: http://activemq.apache.org/configuring-transports.html
 		-->
 		<transportConnectors>
-			<transportConnector name="openwire" uri="tcp://0.0.0.0:61616" />
+			<transportConnector name="openwire" uri="tcp://0.0.0.0:61616" discoveryUri="multicast://239.255.2.3:6155?group=springside" />
 		</transportConnectors>
 
 	</broker>
