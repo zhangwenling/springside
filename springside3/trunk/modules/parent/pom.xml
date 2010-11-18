@@ -17,6 +17,7 @@
 		<springside.version>3.4.0-SNAPSHOT</springside.version>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<hibernate.version>3.6.0.Final</hibernate.version>
+		<mybatis.version>3.0.2</mybatis.version>
 		<struts2.version>2.2.1</struts2.version>
 		<cxf.version>2.3.0</cxf.version>
 		<jersey.version>1.4</jersey.version>
@@ -28,7 +29,7 @@
 		<slf4j.version>1.6.1</slf4j.version>
 		<selenium.version>2.0a7</selenium.version>
 
-		<!-- Plugin的属性定义  -->
+		<!-- Plugin的属性定义 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -88,7 +89,7 @@
 		</pluginRepository>
 	</pluginRepositories>
 
-	<!-- 设定团队持续集成发布包服务器  -->
+	<!-- 设定团队持续集成发布包服务器 -->
 	<distributionManagement>
 		<repository>
 			<id>nexus</id>
@@ -192,6 +193,19 @@
 				<version>3.12.1.GA</version>
 			</dependency>
 
+			<!-- mybatis -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>${mybatis.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-spring</artifactId>
+				<version>1.0.0-RC2</version>
+			</dependency>
+
 			<!-- spring orm -->
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -205,7 +219,7 @@
 				<version>${spring.version}</version>
 			</dependency>
 
-			<!-- optional datasource pool-->
+			<!-- optional datasource pool -->
 			<dependency>
 				<groupId>commons-dbcp</groupId>
 				<artifactId>commons-dbcp</artifactId>
@@ -350,7 +364,7 @@
 			</dependency>
 			<!-- webservice end -->
 
-			<!--  rest begin -->
+			<!-- rest begin -->
 			<dependency>
 				<groupId>com.sun.jersey</groupId>
 				<artifactId>jersey-server</artifactId>
@@ -438,7 +452,7 @@
 				<version>1.8.4</version>
 			</dependency>
 
-			<!-- memcached begin-->
+			<!-- memcached begin -->
 			<dependency>
 				<groupId>spy</groupId>
 				<artifactId>memcached</artifactId>
@@ -468,7 +482,7 @@
 			</dependency>
 			<!-- solr end -->
 
-			<!-- logging begin-->
+			<!-- logging begin -->
 			<!-- slf4j -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -517,7 +531,7 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
-			<!-- logging end-->
+			<!-- logging end -->
 
 			<!-- email begin -->
 			<dependency>
@@ -568,7 +582,7 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
-			<!-- xml  end -->
+			<!-- xml end -->
 
 			<!-- excel begin -->
 			<dependency>
@@ -578,7 +592,7 @@
 			</dependency>
 			<!-- excel end -->
 
-			<!-- validator begin-->
+			<!-- validator begin -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-validator</artifactId>
@@ -918,21 +932,21 @@
 					<version>2.1.2</version>
 				</plugin>
 
-				<!-- clean插件-->
+				<!-- clean插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-clean-plugin</artifactId>
 					<version>2.4.1</version>
 				</plugin>
 
-				<!-- install插件-->
+				<!-- install插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-install-plugin</artifactId>
 					<version>2.3.1</version>
 				</plugin>
 
-				<!-- deploy插件-->
+				<!-- deploy插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-deploy-plugin</artifactId>
@@ -977,7 +991,7 @@
 					<version>1.6</version>
 				</plugin>
 
-				<!-- assembly插件-->
+				<!-- assembly插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-assembly-plugin</artifactId>

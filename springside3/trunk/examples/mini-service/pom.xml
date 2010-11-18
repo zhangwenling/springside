@@ -17,7 +17,8 @@
 		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
 		<jdbc.driver.version>${h2.version}</jdbc.driver.version>
 		<!--
-			<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId> <jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
+			<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId>
+			<jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
 			<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version>
 		-->
 		<!--
@@ -65,7 +66,18 @@
 			<artifactId>javassist</artifactId>
 		</dependency>
 
-		<!-- spring -->
+		<!-- mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+		</dependency>
+
+		<!-- spring orm-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
