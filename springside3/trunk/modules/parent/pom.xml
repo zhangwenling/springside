@@ -23,7 +23,7 @@
 		<jersey.version>1.4</jersey.version>
 		<spring-security.version>3.0.4.RELEASE</spring-security.version>
 		<activemq.version>5.4.1</activemq.version>
-		<jetty.version>7.2.0.v20101020</jetty.version>
+		<jetty.version>7.2.1.v20101111</jetty.version>
 		<h2.version>1.2.145</h2.version>
 		<jackson.version>1.6.2</jackson.version>
 		<slf4j.version>1.6.1</slf4j.version>
@@ -151,12 +151,12 @@
 			<dependency>
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjrt</artifactId>
-				<version>1.6.9</version>
+				<version>1.6.10</version>
 			</dependency>
 			<dependency>
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjweaver</artifactId>
-				<version>1.6.9</version>
+				<version>1.6.10</version>
 			</dependency>
 			<dependency>
 				<groupId>cglib</groupId>
@@ -697,7 +697,7 @@
 			<dependency>
 				<groupId>net.sf.dozer</groupId>
 				<artifactId>dozer</artifactId>
-				<version>5.3.0</version>
+				<version>5.3.1</version>
 			</dependency>
 
 			<dependency>
@@ -808,7 +808,7 @@
 			<dependency>
 				<groupId>org.perf4j</groupId>
 				<artifactId>perf4j</artifactId>
-				<version>0.9.13</version>
+				<version>0.9.14</version>
 			</dependency>
 
 			<!-- hibernate tools -->
