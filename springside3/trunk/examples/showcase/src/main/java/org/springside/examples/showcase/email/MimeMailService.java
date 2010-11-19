@@ -82,7 +82,7 @@ public class MimeMailService {
 	/**
 	 * 使用Freemarker生成html格式内容.
 	 */
-	
+
 	private String generateContent(String userName) throws MessagingException {
 
 		try {

@@ -29,6 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	/**
 	 * 获取用户Details信息的回调函数.
 	 */
+	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
 
 		User user = accountManager.findUserByLoginName(username);
@@ -44,8 +45,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
-		UserDetails userdetails = new org.springframework.security.core.userdetails.User(user.getLoginName(), user
-				.getPassword(), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, grantedAuths);
+		UserDetails userdetails = new org.springframework.security.core.userdetails.User(user.getLoginName(),
+				user.getPassword(), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, grantedAuths);
 
 		return userdetails;
 	}

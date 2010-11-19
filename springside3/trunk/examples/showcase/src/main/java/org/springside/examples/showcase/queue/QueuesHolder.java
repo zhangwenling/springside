@@ -39,7 +39,7 @@ public class QueuesHolder {
 	 * 根据queueName获得消息队列的静态函数.
 	 * 如消息队列还不存在, 会自动进行创建.
 	 */
-	
+
 	public static <T> BlockingQueue<T> getQueue(String queueName) {
 		BlockingQueue queue = queueMap.get(queueName);
 
@@ -59,7 +59,7 @@ public class QueuesHolder {
 	 * 根据queueName获得消息队列中未处理消息的数量,支持基于JMX查询.
 	 */
 	@ManagedOperation(description = "Get message count in queue")
-	@ManagedOperationParameters( { @ManagedOperationParameter(name = "queueName", description = "Queue name") })
+	@ManagedOperationParameters({ @ManagedOperationParameter(name = "queueName", description = "Queue name") })
 	public static int getQueueLength(String queueName) {
 		return getQueue(queueName).size();
 	}

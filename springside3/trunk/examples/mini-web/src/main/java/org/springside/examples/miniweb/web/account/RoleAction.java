@@ -20,7 +20,7 @@ import org.springside.examples.miniweb.web.CrudActionSupport;
  * @author calvin
  */
 @Namespace("/account")
-@Results( { @Result(name = CrudActionSupport.RELOAD, location = "role.action", type = "redirect") })
+@Results({ @Result(name = CrudActionSupport.RELOAD, location = "role.action", type = "redirect") })
 public class RoleAction extends CrudActionSupport<Role> {
 
 	private static final long serialVersionUID = -4052047494894591406L;
@@ -34,6 +34,7 @@ public class RoleAction extends CrudActionSupport<Role> {
 	private List<Long> checkedAuthIds;//页面中钩选的权限id列表
 
 	//-- ModelDriven 与 Preparable函数 --//
+	@Override
 	public Role getModel() {
 		return entity;
 	}

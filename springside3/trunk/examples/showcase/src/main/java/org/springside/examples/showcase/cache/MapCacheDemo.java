@@ -58,6 +58,7 @@ public class MapCacheDemo extends SpringTxTestCase {
 	public void normal() {
 
 		Function<String, User> computingFunction = new Function<String, User>() {
+			@Override
 			public User apply(String key) {
 				User user = accountManager.getUser(key);
 				return user;

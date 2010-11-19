@@ -18,8 +18,8 @@ import org.springside.examples.showcase.common.service.AccountManager;
  * @author calvin
  */
 @Namespace("/common")
-@InterceptorRefs( { @InterceptorRef("paramsPrepareParamsStack") })
-@Results( { @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
+@InterceptorRefs({ @InterceptorRef("paramsPrepareParamsStack") })
+@Results({ @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
 public class UserAction extends CrudActionSupport<User> {
 
 	private static final long serialVersionUID = 7240853226114035208L;
@@ -34,6 +34,7 @@ public class UserAction extends CrudActionSupport<User> {
 	private List<String> checkedUserIds;
 
 	//-- ModelDriven 与 Preparable函数 --//
+	@Override
 	public User getModel() {
 		return entity;
 	}

@@ -50,6 +50,7 @@ public class UserJdbcDao {
 	private UserMapper userMapper = new UserMapper();
 
 	private class UserMapper implements RowMapper<User> {
+		@Override
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 			User user = new User();
 			user.setId(rs.getString("id"));
@@ -176,6 +177,7 @@ public class UserJdbcDao {
 
 		final BeanPropertySqlParameterSource source = new BeanPropertySqlParameterSource(user);
 		return transactionTemplate.execute(new TransactionCallback<Boolean>() {
+			@Override
 			public Boolean doInTransaction(TransactionStatus status) {
 				try {
 					jdbcTemplate.update(INSERT_USER, source);

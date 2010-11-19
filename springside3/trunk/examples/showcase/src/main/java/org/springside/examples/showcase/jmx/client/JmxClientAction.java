@@ -62,7 +62,7 @@ public class JmxClientAction extends ActionSupport {
 	/**
 	 * 获取最新系统配置, 返回JSON字符串.
 	 */
-	
+
 	public String refreshConfig() {
 		Map map = new HashMap();
 		try {

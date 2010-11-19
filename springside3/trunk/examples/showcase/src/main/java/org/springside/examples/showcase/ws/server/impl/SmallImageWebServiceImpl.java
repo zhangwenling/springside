@@ -35,6 +35,7 @@ public class SmallImageWebServiceImpl implements SmallImageWebService, Applicati
 	/**
 	 * @see SmallImageWebService#getImage()
 	 */
+	@Override
 	public SmallImageResult getImage() {
 
 		InputStream is = null;
@@ -56,6 +57,7 @@ public class SmallImageWebServiceImpl implements SmallImageWebService, Applicati
 
 	}
 
+	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.applicationContext = applicationContext;
 	}

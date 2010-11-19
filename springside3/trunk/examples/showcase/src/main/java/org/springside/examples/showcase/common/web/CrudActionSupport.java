@@ -65,6 +65,7 @@ public abstract class CrudActionSupport<T> extends ActionSupport implements Mode
 	/**
 	 * 实现空的prepare()函数,屏蔽所有Action函数公共的二次绑定.
 	 */
+	@Override
 	public void prepare() throws Exception {
 	}
 

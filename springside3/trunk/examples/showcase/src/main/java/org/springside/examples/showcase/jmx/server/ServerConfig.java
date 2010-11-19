@@ -12,18 +12,22 @@ public class ServerConfig implements ServerConfigMBean {
 	private String nodeName;
 	private AtomicBoolean notificationMailEnabled = new AtomicBoolean(true);
 
+	@Override
 	public String getNodeName() {
 		return nodeName;
 	}
 
+	@Override
 	public void setNodeName(String nodeName) {
 		this.nodeName = nodeName;
 	}
 
+	@Override
 	public boolean isNotificationMailEnabled() {
 		return notificationMailEnabled.get();
 	}
 
+	@Override
 	public void setNotificationMailEnabled(boolean notificationMailEnabled) {
 		this.notificationMailEnabled.set(notificationMailEnabled);
 	}

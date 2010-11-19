@@ -21,6 +21,7 @@ public class AuditListener implements SaveOrUpdateEventListener {
 	private static final long serialVersionUID = -7481545873785342485L;
 	private static Logger logger = LoggerFactory.getLogger(AuditListener.class);
 
+	@Override
 	public void onSaveOrUpdate(SaveOrUpdateEvent event) throws HibernateException {
 		Object object = event.getObject();
 

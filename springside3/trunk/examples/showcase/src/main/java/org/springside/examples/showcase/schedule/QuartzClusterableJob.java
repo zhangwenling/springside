@@ -32,7 +32,7 @@ public class QuartzClusterableJob extends QuartzJobBean {
 	/**
 	 * 定时打印当前用户数到日志.
 	 */
-	
+
 	@Override
 	protected void executeInternal(JobExecutionContext ctx) throws JobExecutionException {
 		AccountManager accountManager = applicationContext.getBean(AccountManager.class);

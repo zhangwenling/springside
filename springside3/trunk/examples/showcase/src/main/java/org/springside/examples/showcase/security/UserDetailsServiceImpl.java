@@ -32,6 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	/**
 	 * 获取用户Detail信息的回调函数.
 	 */
+	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
 
 		User user = accountManager.findUserByLoginName(username);

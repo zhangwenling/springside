@@ -18,6 +18,7 @@ import org.apache.ws.security.WSPasswordCallback;
  */
 public class PasswordCallback implements CallbackHandler {
 
+	@Override
 	public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
 		WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];
 		//为admin用户设置密码"admin", 为其他用户统一设置密码"user".

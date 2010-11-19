@@ -28,6 +28,7 @@ public class AutoLoginFilter extends GenericFilterBean {
 
 	private String defaultUserName;
 
+	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
 			ServletException {
 		//如果被激活且当前用户未登录则进行登录

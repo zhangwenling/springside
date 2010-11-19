@@ -46,6 +46,7 @@ public class UserWebServiceImpl implements UserWebService {
 	/**
 	 * @see UserWebService#getAllUser()
 	 */
+	@Override
 	public GetAllUserResult getAllUser() {
 		//获取User列表并转换为UserDTO列表.
 		try {
@@ -68,8 +69,9 @@ public class UserWebServiceImpl implements UserWebService {
 	/**
 	 * @see UserWebService#getUser()
 	 */
+	@Override
 	//SpringSecurity 控制的方法
-	@Secured( { "ROLE_Admin" })
+	@Secured({ "ROLE_Admin" })
 	public GetUserResult getUser(String id) {
 		StopWatch totalStopWatch = new Slf4JStopWatch();
 		//校验请求参数

@@ -36,6 +36,7 @@ public class CacheControlHeaderFilter implements Filter {
 	private static final String PARAM_EXPIRES_SECONDS = "expiresSeconds";
 	private long expiresSeconds;
 
+	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException {
 		ServletUtils.setExpiresHeader((HttpServletResponse) res, expiresSeconds);
@@ -45,6 +46,7 @@ public class CacheControlHeaderFilter implements Filter {
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */
+	@Override
 	public void init(FilterConfig filterConfig) {
 		String expiresSecondsParam = filterConfig.getInitParameter(PARAM_EXPIRES_SECONDS);
 		if (expiresSecondsParam != null) {
@@ -57,6 +59,7 @@ public class CacheControlHeaderFilter implements Filter {
 	/**
 	 * @see Filter#destroy()
 	 */
+	@Override
 	public void destroy() {
 	}
 }

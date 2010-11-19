@@ -30,7 +30,7 @@ import org.springside.modules.utils.web.struts2.Struts2Utils;
 //定义URL映射对应/account/user.action
 @Namespace("/account")
 //定义名为reload的result重定向到user.action, 其他result则按照convention默认.
-@Results( { @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
+@Results({ @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
 public class UserAction extends CrudActionSupport<User> {
 
 	private static final long serialVersionUID = 8683878162525847072L;
@@ -48,6 +48,7 @@ public class UserAction extends CrudActionSupport<User> {
 		this.id = id;
 	}
 
+	@Override
 	public User getModel() {
 		return entity;
 	}

@@ -65,8 +65,8 @@ public class JodaDemo {
 		System.out.println("");
 
 		//直接打印TimeStamp, 日期是M,时间是L
-		DateTimeFormatter formatter = DateTimeFormat.forStyle("ML").withLocale(new Locale("zh")).withZone(
-				DateTimeZone.UTC);
+		DateTimeFormatter formatter = DateTimeFormat.forStyle("ML").withLocale(new Locale("zh"))
+				.withZone(DateTimeZone.UTC);
 
 		System.out.println("ML Mix: " + formatter.print(dateTime.getMillis()));
 

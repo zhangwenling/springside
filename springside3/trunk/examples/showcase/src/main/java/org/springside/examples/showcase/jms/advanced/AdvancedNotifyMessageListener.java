@@ -22,6 +22,7 @@ public class AdvancedNotifyMessageListener implements MessageListener {
 	/**
 	 * MessageListener回调函数.
 	 */
+	@Override
 	public void onMessage(Message message) {
 		try {
 			MapMessage mapMessage = (MapMessage) message;

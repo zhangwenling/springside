@@ -26,6 +26,7 @@ public class PlainPasswordCallback implements CallbackHandler {
 	 * 根据用户名查出数据库中用户已散列的密码,对明文密码进行相同的散列后进行比较.
 	 * 如果用户名或密码错误则抛出异常.
 	 */
+	@Override
 	public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
 
 		WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];

@@ -35,9 +35,9 @@ public class UserResourceClient {
 	 */
 	public List<UserDTO> getAllUser() {
 		String authentication = ServletUtils.encodeHttpBasic("admin", "admin");
-		return client.path("/users").header(ServletUtils.AUTHENTICATION_HEADER, authentication).accept(
-				MediaType.APPLICATION_JSON).get(new GenericType<List<UserDTO>>() {
-		});
+		return client.path("/users").header(ServletUtils.AUTHENTICATION_HEADER, authentication)
+				.accept(MediaType.APPLICATION_JSON).get(new GenericType<List<UserDTO>>() {
+				});
 	}
 
 	public UserDTO getUser(Long id) {

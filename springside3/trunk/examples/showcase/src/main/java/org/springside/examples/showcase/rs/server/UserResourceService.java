@@ -56,7 +56,7 @@ public class UserResourceService {
 	 */
 	@GET
 	@Secured("ROLE_User")
-	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
 	public List<UserDTO> getAllUser() {
 		try {
 			List<User> entityList = accountManager.getAllUserWithRole();
@@ -76,7 +76,7 @@ public class UserResourceService {
 	 */
 	@GET
 	@Path("{id}")
-	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
 	public UserDTO getUser(@PathParam("id") String id) {
 		try {
 			User entity = accountManager.getInitializedUser(id);

@@ -50,6 +50,7 @@ public class UserWebServiceImpl implements UserWebService {
 	/**
 	 * @see UserWebService#getAllUser()
 	 */
+	@Override
 	public GetAllUserResult getAllUser() {
 
 		GetAllUserResult result = new GetAllUserResult();
@@ -73,6 +74,7 @@ public class UserWebServiceImpl implements UserWebService {
 	/**
 	 * @see UserWebService#getUser()
 	 */
+	@Override
 	public GetUserResult getUser(Long id) {
 		GetUserResult result = new GetUserResult();
 
@@ -106,6 +108,7 @@ public class UserWebServiceImpl implements UserWebService {
 	/**
 	 * @see UserWebService#createUser(UserDTO)
 	 */
+	@Override
 	public CreateUserResult createUser(UserDTO user) {
 		CreateUserResult result = new CreateUserResult();
 
@@ -145,6 +148,7 @@ public class UserWebServiceImpl implements UserWebService {
 	/**
 	 * @see UserWebService#authUser(String, String)
 	 */
+	@Override
 	public AuthUserResult authUser(String loginName, String password) {
 		AuthUserResult result = new AuthUserResult();
 

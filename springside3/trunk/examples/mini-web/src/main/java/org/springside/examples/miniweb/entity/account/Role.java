@@ -73,7 +73,6 @@ public class Role extends IdEntity {
 	}
 
 	@Transient
-	
 	public List<Long> getAuthIds() {
 		return ConvertUtils.convertElementPropertyToList(authorityList, "id");
 	}

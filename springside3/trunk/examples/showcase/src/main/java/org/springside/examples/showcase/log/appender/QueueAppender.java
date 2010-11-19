@@ -50,12 +50,14 @@ public class QueueAppender extends org.apache.log4j.AppenderSkeleton {
 	/**
 	 * AppenderSkeleton回调函数,关闭Logger时的清理动作.
 	 */
+	@Override
 	public void close() {
 	}
 
 	/**
 	 * AppenderSkeleton回调函数, 设置是否需要定义Layout.
 	 */
+	@Override
 	public boolean requiresLayout() {
 		return false;
 	}

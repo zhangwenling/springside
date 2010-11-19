@@ -23,6 +23,7 @@ public class DigestPasswordCallback implements CallbackHandler {
 	/**
 	 * 根据用户名查出数据库中用户的明文密码,交由框架进行处理并与客户端提交的Digest进行比较.
 	 */
+	@Override
 	public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
 		WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];
 		String loginName = pc.getIdentifier();

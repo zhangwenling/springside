@@ -15,6 +15,7 @@ public abstract class BlockingConsumer extends QueueConsumer {
 	/**
 	 * 线程执行函数,阻塞获取消息并调用processMessage()进行处理.
 	 */
+	@Override
 	public void run() {
 		//循环阻塞获取消息直到线程被中断.
 		try {

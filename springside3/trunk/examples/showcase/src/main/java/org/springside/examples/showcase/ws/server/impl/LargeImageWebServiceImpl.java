@@ -37,6 +37,7 @@ public class LargeImageWebServiceImpl implements LargeImageWebService, Applicati
 	/**
 	 * @see LargeImageWebService#getImage()
 	 */
+	@Override
 	public LargeImageResult getImage() {
 
 		try {
@@ -57,6 +58,7 @@ public class LargeImageWebServiceImpl implements LargeImageWebService, Applicati
 
 	}
 
+	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.applicationContext = applicationContext;
 	}

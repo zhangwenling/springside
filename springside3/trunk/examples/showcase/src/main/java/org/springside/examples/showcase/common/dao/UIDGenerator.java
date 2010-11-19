@@ -25,8 +25,8 @@ public class UIDGenerator extends UUIDHexGenerator {
 	}
 
 	public String generate() {
-		return new StringBuilder(16).append(formatShort(getAppId())).append(format(getHiTime())).append(
-				format(getLoTime())).append(formatShort(getCount())).toString();
+		return new StringBuilder(16).append(formatShort(getAppId())).append(format(getHiTime()))
+				.append(format(getLoTime())).append(formatShort(getCount())).toString();
 	}
 
 	/**

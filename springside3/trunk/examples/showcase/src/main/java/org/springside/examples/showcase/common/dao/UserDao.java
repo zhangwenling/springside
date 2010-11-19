@@ -34,7 +34,7 @@ public class UserDao extends HibernateDao<User, String> {
 	/**
 	 * 使用 HQL 预加载lazy init的List<Role>,用DISTINCE_ROOT_ENTITY排除重复数据.
 	 */
-	
+
 	public List<User> getAllUserWithRoleByDistinctHql() {
 		Query query = createQuery(QUERY_USER_WITH_ROLE);
 		return distinct(query).list();
@@ -43,7 +43,7 @@ public class UserDao extends HibernateDao<User, String> {
 	/**
 	 * 使用Criteria 预加载lazy init的List<Role>, 用DISTINCE_ROOT_ENTITY排除重复数据.
 	 */
-	
+
 	public List<User> getAllUserWithRolesByDistinctCriteria() {
 		Criteria criteria = createCriteria().setFetchMode("roleList", FetchMode.JOIN);
 		return distinct(criteria).list();

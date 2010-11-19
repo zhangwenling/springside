@@ -101,7 +101,7 @@ public class JdbcLogWriter extends BlockingConsumer {
 	/**
 	 * 将Buffer中的事件列表批量插入数据库.
 	 */
-	
+
 	public void updateBatch() {
 		try {
 			//分析事件列表, 转换为jdbc批处理参数.
@@ -174,8 +174,8 @@ public class JdbcLogWriter extends BlockingConsumer {
 		}
 
 		for (LoggingEvent event : errorEventBatch) {
-			logger.error("event insert to database error, ignore it: "
-					+ new LoggingEventWrapper(event).convertToString(), e);
+			logger.error(
+					"event insert to database error, ignore it: " + new LoggingEventWrapper(event).convertToString(), e);
 		}
 	}
 

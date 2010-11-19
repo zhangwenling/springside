@@ -27,17 +27,17 @@
 		<h2>用户故事:</h2>
 		<ul>
 			<li>Plain式密码, 传输时安全度较低, 但不要求服务端必须保存有客户密码的明文.<br/>
-				WSDL: <a href="http://localhost:9099/showcase/services/UserServiceWithPlainPassword?wsdl">http://localhost:9099/showcase/services/UserServiceWithPlainPassword?wsdl</a>
+				WSDL: <a href="http://localhost:8080/showcase/services/UserServiceWithPlainPassword?wsdl">http://localhost:8080/showcase/services/UserServiceWithPlainPassword?wsdl</a>
 			</li>
 			<li>Digest式密码, 传输时较为安全, 但要求服务端必须保存有密码的明文.<br/>
-				WSDL: <a href="http://localhost:9099/showcase/services/UserServiceWithDigestPassword?wsdl">http://localhost:9099/showcase/services/UserServiceWithDigestPassword?wsdl</a>
+				WSDL: <a href="http://localhost:8080/showcase/services/UserServiceWithDigestPassword?wsdl">http://localhost:8080/showcase/services/UserServiceWithDigestPassword?wsdl</a>
 			</li>
 			<li>客户端的用户名与密码设定见测试用例.</li>
 			<li>Base64Binary直接编码字节数组 , 一般用于传输较小的二进制文件.<br/>
-				WSDL: <a href="http://localhost:9099/showcase/services/SmallImageService?wsdl">http://localhost:9099/showcase/services/SmallImageService?wsdl</a>
+				WSDL: <a href="http://localhost:8080/showcase/services/SmallImageService?wsdl">http://localhost:8080/showcase/services/SmallImageService?wsdl</a>
 			</li>
 			<li>MTOM附件传输数据流, 一般用于传输较大的二进制文件.<br/>
-				WSDL: <a href="http://localhost:9099/showcase/services/LargeImageService?wsdl">http://localhost:9099/showcase/services/LargeImageService?wsdl</a>
+				WSDL: <a href="http://localhost:8080/showcase/services/LargeImageService?wsdl">http://localhost:8080/showcase/services/LargeImageService?wsdl</a>
 			</li>
 		</ul>
 		</div>

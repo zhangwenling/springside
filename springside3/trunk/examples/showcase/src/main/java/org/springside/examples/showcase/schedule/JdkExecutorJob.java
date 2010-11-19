@@ -57,6 +57,7 @@ public class JdkExecutorJob implements Runnable {
 	/**
 	 * 定时打印当前用户数到日志.
 	 */
+	@Override
 	public void run() {
 		long userCount = accountManager.getUserCount();
 		logger.info("There are {} user in database.", userCount);

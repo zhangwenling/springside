@@ -68,7 +68,6 @@ public class JsonDemo {
 	 * 从Json字符串反序列化对象/集合.
 	 */
 	@Test
-	
 	public void fromJson() throws Exception {
 		//Bean
 		String beanString = "{\"name\":\"A\"}";
@@ -104,7 +103,7 @@ public class JsonDemo {
 	/**
 	 * 测试传入空对象,空字符串,Empty的集合,"null"字符串的结果.
 	 */
-	
+
 	@Test
 	public void nullAndEmpty() {
 		// toJson测试 //
@@ -182,7 +181,7 @@ public class JsonDemo {
 	}
 
 	//此annoation为了截断对象的循环引用.
-	@JsonIgnoreProperties( { "parent" })
+	@JsonIgnoreProperties({ "parent" })
 	public static class TestBean {
 
 		private String name;
