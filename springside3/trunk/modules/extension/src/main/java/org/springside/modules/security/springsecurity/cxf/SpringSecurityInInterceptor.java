@@ -26,8 +26,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
- * 在WSS4J校验后利用其用户名放入SpringSecurity Context的CXF Interceptor.
- * 
+ * 在WSS4J校验后将得到的用户名放入SpringSecurity Context的CXF Interceptor.
  * 
  * @author calvin
  */
@@ -44,6 +43,7 @@ public class SpringSecurityInInterceptor extends AbstractPhaseInterceptor<Messag
 		this.userDetailsService = userDetailsService;
 	}
 
+	@Override
 	public void handleMessage(Message message) throws Fault {
 		String userName = getUserNameFromWSS4JResult(message);
 		HttpServletRequest request = (HttpServletRequest) message.get("HTTP.REQUEST");
@@ -55,7 +55,7 @@ public class SpringSecurityInInterceptor extends AbstractPhaseInterceptor<Messag
 	/**
 	 * 从Message中找出WSS4J校验后的用户名.
 	 */
-	
+
 	private String getUserNameFromWSS4JResult(Message message) {
 		Vector<WSHandlerResult> results = (Vector<WSHandlerResult>) message
 				.getContextualProperty(WSHandlerConstants.RECV_RESULTS);

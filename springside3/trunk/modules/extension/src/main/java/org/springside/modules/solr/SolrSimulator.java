@@ -18,7 +18,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springside.modules.utils.ThreadUtils;
 
 /**
- * 参考@{JettySolrRunner},编写Solr服务端模拟器
+ * 参考@{JettySolrRunner}, 编写Solr服务端模拟器.
  * 
  * @author calvin
  */
@@ -36,7 +36,7 @@ public class SolrSimulator implements InitializingBean, DisposableBean {
 
 		init();
 		startInNewThread();
-		waitForSolr();
+		waitForServerReady();
 
 		logger.info("Started Solr Server");
 	}
@@ -80,7 +80,7 @@ public class SolrSimulator implements InitializingBean, DisposableBean {
 	/**
 	 * 最多等待10秒
 	 */
-	private void waitForSolr() {
+	private void waitForServerReady() {
 		for (int i = 0; i < 50; i++) {
 			if (server.isStarted()) {
 				return;

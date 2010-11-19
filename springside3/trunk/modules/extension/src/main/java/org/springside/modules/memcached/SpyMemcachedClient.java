@@ -17,12 +17,13 @@ import java.util.concurrent.TimeUnit;
 import net.spy.memcached.AddrUtil;
 import net.spy.memcached.CASResponse;
 import net.spy.memcached.CASValue;
+import net.spy.memcached.ConnectionFactory;
 import net.spy.memcached.ConnectionFactoryBuilder;
+import net.spy.memcached.ConnectionFactoryBuilder.Locator;
+import net.spy.memcached.ConnectionFactoryBuilder.Protocol;
 import net.spy.memcached.FailureMode;
 import net.spy.memcached.HashAlgorithm;
 import net.spy.memcached.MemcachedClient;
-import net.spy.memcached.ConnectionFactoryBuilder.Locator;
-import net.spy.memcached.ConnectionFactoryBuilder.Protocol;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,8 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 
 	private static Logger logger = LoggerFactory.getLogger(SpyMemcachedClient.class);
 
+	private ConnectionFactory cf;
+
 	private MemcachedClient memcachedClient;
 
 	// 配置项 //
@@ -49,13 +52,37 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 
 	private boolean isConsistentHashing = true;
 
-	private long operationTimeout = 1000; //default value in Spy is 1000ms
+	private long operationTimeout = 1000; // default value in Spy is 1000ms
 
 	private long shutdownTimeout = 1000;
 
 	// 初始,关闭函数 //
 	@Override
 	public void afterPropertiesSet() throws Exception {
+		initConnectionFactory();
+		reconfigureNodes(memcachedNodes);
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		if (memcachedClient != null) {
+			memcachedClient.shutdown(shutdownTimeout, TimeUnit.MILLISECONDS);
+		}
+	}
+
+	/**
+	 * 动态重新配置Memcached节点列表.
+	 */
+	public void reconfigureNodes(String newMemcachedNodes) throws Exception {
+		try {
+			memcachedClient = new MemcachedClient(cf, AddrUtil.getAddresses(newMemcachedNodes));
+		} catch (IOException e) {
+			logger.error("MemcachedClient initilization error: ", e);
+			throw e;
+		}
+	}
+
+	private void initConnectionFactory() {
 		ConnectionFactoryBuilder cfb = new ConnectionFactoryBuilder();
 
 		cfb.setFailureMode(FailureMode.Redistribute);
@@ -67,33 +94,21 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 			cfb.setHashAlg(HashAlgorithm.KETAMA_HASH);
 		}
 
+		cf = cfb.build();
+
 		cfb.setOpTimeout(operationTimeout);
 
-		try {
-			memcachedClient = new MemcachedClient(cfb.build(), AddrUtil.getAddresses(memcachedNodes));
-		} catch (IOException e) {
-			logger.error("MemcachedClient initilization error: ", e);
-			throw e;
-		}
 	}
 
-	@Override
-	public void destroy() throws Exception {
-		if (memcachedClient != null) {
-			memcachedClient.shutdown(shutdownTimeout, TimeUnit.MILLISECONDS);
-		}
-	}
-
-	// Memcached访问函数  //
+	// Memcached访问函数 //
 
 	public MemcachedClient getMemcachedClient() {
 		return memcachedClient;
 	}
 
 	/**
-	 * Get方法, 转换结果类型并屏蔽异常,仅返回Null.
+	 * Get方法, 转换结果类型并屏蔽异常, 仅返回Null.
 	 */
-	
 	public <T> T get(String key) {
 		try {
 			return (T) memcachedClient.get(key);
@@ -106,7 +121,6 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 	/**
 	 * GetBulk方法, 转换结果类型并屏蔽异常.
 	 */
-	
 	public <T> Map<String, T> getBulk(String... keys) {
 		try {
 			return (Map<String, T>) memcachedClient.getBulk(keys);
@@ -119,7 +133,6 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 	/**
 	 * GetBulk方法, 转换结果类型并屏蔽异常.
 	 */
-	
 	public <T> Map<String, T> getBulk(Collection<String> keys) {
 		try {
 			return (Map<String, T>) memcachedClient.getBulk(keys);
@@ -137,16 +150,16 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 	}
 
 	/**
-	 * Delete方法.	 
+	 * Delete方法.
 	 */
 	public Future<Boolean> delete(String key) {
 		return memcachedClient.delete(key);
 	}
 
 	/**
-	 * 配合Check and Set的Get方法,转换结果类型并屏蔽异常.
+	 * 配合Check and Set的Get方法, 转换结果类型并屏蔽异常.
 	 */
-	
+
 	public <T> CASValue<T> gets(String key) {
 		try {
 			return (CASValue<T>) memcachedClient.gets(key);
@@ -193,8 +206,7 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 
 	// 配置方法 //
 	/**
-	 *  支持多节点, 以","分割.
-	 *  eg. "localhost:11211,localhost:11212"
+	 * 支持多节点, 以","分割. eg. "localhost:11211,localhost:11212"
 	 */
 	public void setMemcachedNodes(String memcachedNodes) {
 		this.memcachedNodes = memcachedNodes;

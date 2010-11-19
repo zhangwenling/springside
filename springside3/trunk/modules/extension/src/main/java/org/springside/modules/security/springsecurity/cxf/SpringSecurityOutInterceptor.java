@@ -24,6 +24,7 @@ public class SpringSecurityOutInterceptor extends AbstractPhaseInterceptor<Messa
 		super(Phase.PRE_PROTOCOL);
 	}
 
+	@Override
 	public void handleMessage(Message message) throws Fault {
 		SecurityContextHolder.clearContext();
 	}

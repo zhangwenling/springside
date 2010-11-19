@@ -116,7 +116,7 @@ public class JaxbBinder {
 			if (StringUtils.isNotBlank(encoding)) {
 				marshaller.setProperty(Marshaller.JAXB_ENCODING, encoding);
 			}
-			
+
 			return marshaller;
 		} catch (JAXBException e) {
 			throw new RuntimeException(e);
@@ -138,7 +138,7 @@ public class JaxbBinder {
 	 * 封装Root Element 是 Collection的情况.
 	 */
 	public static class CollectionWrapper {
-		
+
 		@XmlAnyElement
 		protected Collection<?> collection;
 	}

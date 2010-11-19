@@ -16,11 +16,9 @@ import org.springframework.util.Assert;
  * 
  * @author calvin
  */
-public class SolrServerFactoryBean implements FactoryBean<SolrServer>,
-		InitializingBean {
+public class SolrServerFactoryBean implements FactoryBean<SolrServer>, InitializingBean {
 
-	private static Logger logger = LoggerFactory
-			.getLogger(SolrServerFactoryBean.class);
+	private static Logger logger = LoggerFactory.getLogger(SolrServerFactoryBean.class);
 
 	private String serverUrl;
 

@@ -30,7 +30,7 @@ import org.springframework.util.Assert;
  * 
  * 职责有：
  * 1.负责连接和关闭远程JMX Server,并持有连接.
- * 2.创建可操作远程MBean的本地MBean代理.
+ * 2.创建可操作远程MBean的本地MBean代理(有Mbean的Class文件时使用).
  * 3.按属性名直接读取或设置远程MBean属性(无MBean的Class文件时使用).
  * 
  * @author ben
@@ -59,7 +59,7 @@ public class JmxClientTemplate {
 	/**
 	 * 连接远程JMX Server.
 	 */
-	
+
 	private void initConnector(final String serviceUrl, final String userName, final String passwd) throws IOException {
 		JMXServiceURL url = new JMXServiceURL(serviceUrl);
 
@@ -171,7 +171,7 @@ public class JmxClientTemplate {
 	 * 
 	 * @param paramClasses 所有参数的Class数组.
 	 */
-	
+
 	public Object invoke(final String mbeanName, final String methodName, final Class[] paramClasses,
 			final Object[] paramValues) {
 		String[] paramClassNames = new String[paramClasses.length];

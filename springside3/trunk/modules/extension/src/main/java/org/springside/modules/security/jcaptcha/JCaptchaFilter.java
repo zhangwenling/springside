@@ -76,6 +76,7 @@ public class JCaptchaFilter implements Filter {
 	/**
 	 * Filter回调初始化函数.
 	 */
+	@Override
 	public void init(final FilterConfig fConfig) throws ServletException {
 		initParameters(fConfig);
 		initCaptchaService(fConfig);
@@ -119,12 +120,14 @@ public class JCaptchaFilter implements Filter {
 	/**
 	 * Filter回调退出函数.
 	 */
+	@Override
 	public void destroy() {
 	}
 
 	/**
 	 * Filter回调请求处理函数.
 	 */
+	@Override
 	public void doFilter(final ServletRequest theRequest, final ServletResponse theResponse, final FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) theRequest;

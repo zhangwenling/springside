@@ -83,7 +83,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 
 	 * @return 分页查询结果, 附带结果列表及所有查询输入参数.
 	 */
-	
+
 	public Page<T> findPage(final Page<T> page, final String hql, final Object... values) {
 		Assert.notNull(page, "page不能为空");
 
@@ -110,7 +110,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 
 	 * @return 分页查询结果, 附带结果列表及所有查询输入参数.
 	 */
-	
+
 	public Page<T> findPage(final Page<T> page, final String hql, final Map<String, ?> values) {
 		Assert.notNull(page, "page不能为空");
 
@@ -136,7 +136,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 
 	 * @return 分页查询结果.附带结果列表及所有查询输入参数.
 	 */
-	
+
 	public Page<T> findPage(final Page<T> page, final Criterion... criterions) {
 		Assert.notNull(page, "page不能为空");
 
@@ -240,7 +240,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 执行count查询获得本次Criteria查询所能获得的对象总数.
 	 */
-	
+
 	protected long countCriteriaResult(final Criteria c) {
 		CriteriaImpl impl = (CriteriaImpl) c;
 
@@ -343,8 +343,8 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		List<Criterion> criterionList = new ArrayList<Criterion>();
 		for (PropertyFilter filter : filters) {
 			if (!filter.hasMultiProperties()) { //只有一个属性需要比较的情况.
-				Criterion criterion = buildCriterion(filter.getPropertyName(), filter.getMatchValue(), filter
-						.getMatchType());
+				Criterion criterion = buildCriterion(filter.getPropertyName(), filter.getMatchValue(),
+						filter.getMatchType());
 				criterionList.add(criterion);
 			} else {//包含多个属性需要比较的情况,进行or处理.
 				Disjunction disjunction = Restrictions.disjunction();

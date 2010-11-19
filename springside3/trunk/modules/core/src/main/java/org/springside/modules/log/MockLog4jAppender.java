@@ -102,12 +102,14 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	/**
 	 * @see AppenderSkeleton#close()
 	 */
+	@Override
 	public void close() {
 	}
 
 	/**
 	 * @see AppenderSkeleton#requiresLayout()
 	 */
+	@Override
 	public boolean requiresLayout() {
 		return false;
 	}

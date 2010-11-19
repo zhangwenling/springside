@@ -39,7 +39,7 @@ public class Log4jMBean {
 	 * 获取Logger的日志级别.
 	 */
 	@ManagedOperation(description = "Get logging level of the logger")
-	@ManagedOperationParameters( { @ManagedOperationParameter(name = "loggerName", description = "Logger name") })
+	@ManagedOperationParameters({ @ManagedOperationParameter(name = "loggerName", description = "Logger name") })
 	public String getLoggerLevel(String loggerName) {
 		Logger logger = Logger.getLogger(loggerName);
 		return logger.getEffectiveLevel().toString();
@@ -50,7 +50,7 @@ public class Log4jMBean {
 	 * 如果日志级别名称错误, 设为DEBUG.
 	 */
 	@ManagedOperation(description = "Set new logging level to the logger")
-	@ManagedOperationParameters( { @ManagedOperationParameter(name = "loggerName", description = "Logger name"),
+	@ManagedOperationParameters({ @ManagedOperationParameter(name = "loggerName", description = "Logger name"),
 			@ManagedOperationParameter(name = "newlevel", description = "New level") })
 	public void setLoggerLevel(String loggerName, String newLevel) {
 		Logger logger = Logger.getLogger(loggerName);
@@ -58,17 +58,17 @@ public class Log4jMBean {
 		logger.setLevel(level);
 		mbeanLogger.info("设置{}级别为{}", loggerName, newLevel);
 	}
-	
+
 	@ManagedOperation(description = "Get project default logging level of the logger")
-	@ManagedOperationParameters( { @ManagedOperationParameter(name = "loggerName", description = "Logger name") })
-	public String getDefaultLoggerLevel(){
+	@ManagedOperationParameters({ @ManagedOperationParameter(name = "loggerName", description = "Logger name") })
+	public String getDefaultLoggerLevel() {
 		return getLoggerLevel(defaultLoggerName);
 	}
-	
+
 	@ManagedOperation(description = "Set new logging level to project default logger")
-	@ManagedOperationParameters( { @ManagedOperationParameter(name = "newlevel", description = "New level") })
-	public void setDefaultLoggerLevel( String newLevel) {
-		setLoggerLevel(defaultLoggerName,newLevel);
+	@ManagedOperationParameters({ @ManagedOperationParameter(name = "newlevel", description = "New level") })
+	public void setDefaultLoggerLevel(String newLevel) {
+		setLoggerLevel(defaultLoggerName, newLevel);
 	}
 
 	public void setDefaultLoggerName(String defaultLoggerName) {
