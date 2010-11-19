@@ -89,14 +89,14 @@ public class SeleniumUtils {
 	}
 
 	/**
-	 * 兼容Selnium1.0的常用函数.
+	 * 兼容Selnium1.0的常用函数, 判断页面内是否存在文本内容.
 	 */
 	public static boolean isTextPresent(WebDriver driver, String text) {
 		return StringUtils.contains(driver.findElement(By.tagName("body")).getText(), text);
 	}
 
 	/**
-	 * 兼容Selnium1.0的常用函数.
+	 * 兼容Selnium1.0的常用函数, 在element中输入文本内容.
 	 */
 	public static void type(WebElement element, String text) {
 		element.clear();
@@ -104,7 +104,7 @@ public class SeleniumUtils {
 	}
 
 	/**
-	 * 兼容Selnium1.0的常用函数.
+	 * 兼容Selnium1.0的常用函数, 取消element的选择.
 	 */
 	public static void uncheck(WebElement element) {
 		if (element.isSelected()) {
@@ -113,14 +113,14 @@ public class SeleniumUtils {
 	}
 
 	/**
-	 * 兼容Selnium1.0的常用函数, 序列从0开始.
+	 * 兼容Selnium1.0的常用函数, 取得单元格的内容, 序列从0开始.
 	 */
 	public static String getTable(WebElement table, int rowIndex, int columnIndex) {
 		return table.findElement(By.xpath("//tr[" + (rowIndex + 1) + "]//td[" + (columnIndex + 1) + "]")).getText();
 	}
 
 	/**
-	 * 兼容Selnium1.0的常用函数, timeout单位为毫秒.
+	 * 兼容Selnium1.0的常用函数, 等待element的内容展现, timeout单位为毫秒.
 	 */
 	public static void waitForDisplay(WebElement element, int timeout) {
 		long timeoutTime = System.currentTimeMillis() + timeout;

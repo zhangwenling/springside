@@ -36,7 +36,7 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * 返回之前append的最后一个log事件.
+	 * 返回之前append的最后一个log.
 	 */
 	public LoggingEvent getLastLog() {
 		if (logs.isEmpty()) {
@@ -46,14 +46,14 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * 返回之前append的log事件List.
+	 * 返回之前append的所有log.
 	 */
 	public List<LoggingEvent> getAllLogs() {
 		return logs;
 	}
 
 	/**
-	 * 清除之前append的log事件List.
+	 * 清除之前append的所有log.
 	 */
 	public void clearLogs() {
 		logs.clear();
@@ -76,7 +76,7 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * 将此appender从logger中清除.
+	 * 将此appender从logger中移除.
 	 */
 	public void removeFromLogger(String loggerName) {
 		Logger logger = Logger.getLogger(loggerName);
@@ -84,7 +84,7 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * 将此appender从logger中清除.
+	 * 将此appender从logger中移除.
 	 */
 	public void removeFromLogger(Class<?> loggerClass) {
 		Logger logger = Logger.getLogger(loggerClass);
@@ -92,7 +92,7 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * 实现AppenderSkeleton的append函数, 将log事件加入到内部的List.
+	 * 实现AppenderSkeleton的append函数, 将log加入到内部的List.
 	 */
 	@Override
 	protected void append(LoggingEvent event) {

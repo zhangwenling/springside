@@ -145,7 +145,6 @@ public class ServletUtils {
 	 * 
 	 * 返回的结果的Parameter名已去除前缀.
 	 */
-	
 	public static Map<String, Object> getParametersStartingWith(ServletRequest request, String prefix) {
 		Assert.notNull(request, "Request must not be null");
 		Enumeration paramNames = request.getParameterNames();

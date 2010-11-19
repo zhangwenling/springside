@@ -39,7 +39,6 @@ import org.springside.modules.utils.reflection.ReflectionUtils;
  * 
  * @author calvin
  */
-
 public class SimpleHibernateDao<T, PK extends Serializable> {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());

@@ -28,7 +28,6 @@ public class ConvertUtils {
 	 * @param collection 来源集合.
 	 * @param propertyName 要提取的属性名.
 	 */
-	
 	public static List convertElementPropertyToList(final Collection collection, final String propertyName) {
 		List list = new ArrayList();
 
@@ -50,7 +49,6 @@ public class ConvertUtils {
 	 * @param propertyName 要提取的属性名.
 	 * @param separator 分隔符.
 	 */
-	
 	public static String convertElementPropertyToString(final Collection collection, final String propertyName,
 			final String separator) {
 		List list = convertElementPropertyToList(collection, propertyName);

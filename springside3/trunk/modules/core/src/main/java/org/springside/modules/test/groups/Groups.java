@@ -14,7 +14,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 实现TestNG Groups分组执行用例功能的annotation.
+ * 模拟TestNG Groups分组执行用例功能的annotation.
  * 
  * @author freeman
  * @author calvin

@@ -14,9 +14,9 @@ import org.hibernate.cfg.reveng.TableIdentifier;
 /**
  * Hibernate Tools从数据库逆向生成Entity POJO时, Class名去除表名中的前缀的策略.
  * 
- * 如T_ACCT_USER默认的Class名为TAcctUser,忽略的前缀长度为5时,处理结果为User.
+ * 如T_ACCT_USER默认的Class名为TAcctUser, 忽略的前缀长度为5时, Class名为User.
  * 
- * 注意必须继承子类以设定前缀的长度.
+ * 注意必须继承子类以设定忽略的前缀长度.
  * 
  * @author calvin
  */

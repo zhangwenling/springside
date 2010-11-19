@@ -21,7 +21,7 @@ import org.springframework.util.Assert;
 /**
  * 反射工具类.
  * 
- * 提供访问私有变量,获取泛型类型Class, 提取集合中元素的属性, 转换字符串到对象等Util函数.
+ * 提供调用getter/setter方法, 访问私有变量, 调用私有方法, 获取泛型类型Class等Util函数.
  * 
  * @author calvin
  */
@@ -178,7 +178,6 @@ public class ReflectionUtils {
 	 * @param clazz The class to introspect
 	 * @return the first generic declaration, or Object.class if cannot be determined
 	 */
-	
 	public static <T> Class<T> getSuperClassGenricType(final Class clazz) {
 		return getSuperClassGenricType(clazz, 0);
 	}

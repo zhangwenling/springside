@@ -10,21 +10,6 @@ import org.springside.modules.log.Log4jMBean;
 public class Log4jMBeanTest {
 
 	@Test
-	public void testRootLoggerLevel() {
-		Log4jMBean mbean = new Log4jMBean();
-
-		String orgLevel = mbean.getRootLoggerLevel();
-		Logger.getRootLogger().setLevel(Level.FATAL);
-
-		assertEquals("FATAL", mbean.getRootLoggerLevel());
-
-		mbean.setRootLoggerLevel("TRACE");
-		assertEquals("TRACE", mbean.getRootLoggerLevel());
-
-		mbean.setRootLoggerLevel(orgLevel);
-	}
-
-	@Test
 	public void testLoggerLevel() {
 
 		String loggerName = "org.springside.modules";

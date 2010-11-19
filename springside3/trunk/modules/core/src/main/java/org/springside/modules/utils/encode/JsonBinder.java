@@ -28,9 +28,9 @@ public class JsonBinder {
 
 	public JsonBinder(Inclusion inclusion) {
 		mapper = new ObjectMapper();
-		//设置输出包含的属性
+		//设置输出时包含属性的风格
 		mapper.getSerializationConfig().setSerializationInclusion(inclusion);
-		//设置输入时忽略JSON字符串中存在而Java对象实际没有的属性
+		//设置输入时忽略在JSON字符串中存在但Java对象实际没有的属性
 		mapper.getDeserializationConfig().set(
 				org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	}

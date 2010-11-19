@@ -38,7 +38,7 @@ public class DbUnitUtils {
 	 * 
 	 * XML数据文件中涉及的表在插入数据前会先进行清除. 
 	 * 
-	 * @param xmlFilePaths 符合Spring Resource路径格式的文件列表.
+	 * @param xmlFilePaths 符合Spring Resource路径格式的文件路径列表.
 	 */
 	public static void loadData(DataSource h2DataSource, String... xmlFilePaths) throws Exception {
 		execute(DatabaseOperation.CLEAN_INSERT, h2DataSource, xmlFilePaths);

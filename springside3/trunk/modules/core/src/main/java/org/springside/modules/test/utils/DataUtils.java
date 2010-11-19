@@ -48,10 +48,10 @@ public class DataUtils {
 	}
 
 	/**
-	 * 从输入list中随机返回count个对象.
+	 * 从输入list中随机返回n个对象.
 	 */
-	public static <T> List<T> randomSome(List<T> list, int count) {
+	public static <T> List<T> randomSome(List<T> list, int n) {
 		Collections.shuffle(list);
-		return list.subList(0, count);
+		return list.subList(0, n);
 	}
 }

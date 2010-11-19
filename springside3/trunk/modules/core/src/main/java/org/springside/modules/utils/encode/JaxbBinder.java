@@ -66,18 +66,16 @@ public class JaxbBinder {
 	}
 
 	/**
-	 * Java Object->Xml, 特别支持对Root Element是Collection的情形.
+	 * Java Object->Xml without encoding, 特别支持Root Element是Collection的情形.
 	 */
-	
-	public String toXml(Collection root, String rootName) {
+	public String toXml(Collection<?> root, String rootName) {
 		return toXml(root, rootName, null);
 	}
 
 	/**
-	 * Java Object->Xml, 特别支持对Root Element是Collection的情形.
+	 * Java Object->Xml with encoding, 特别支持Root Element是Collection的情形.
 	 */
-	
-	public String toXml(Collection root, String rootName, String encoding) {
+	public String toXml(Collection<?> root, String rootName, String encoding) {
 		try {
 			CollectionWrapper wrapper = new CollectionWrapper();
 			wrapper.collection = root;
@@ -97,7 +95,6 @@ public class JaxbBinder {
 	/**
 	 * Xml->Java Object.
 	 */
-	
 	public <T> T fromXml(String xml) {
 		try {
 			StringReader reader = new StringReader(xml);
@@ -119,6 +116,7 @@ public class JaxbBinder {
 			if (StringUtils.isNotBlank(encoding)) {
 				marshaller.setProperty(Marshaller.JAXB_ENCODING, encoding);
 			}
+			
 			return marshaller;
 		} catch (JAXBException e) {
 			throw new RuntimeException(e);
@@ -142,6 +140,6 @@ public class JaxbBinder {
 	public static class CollectionWrapper {
 		
 		@XmlAnyElement
-		protected Collection collection;
+		protected Collection<?> collection;
 	}
 }
