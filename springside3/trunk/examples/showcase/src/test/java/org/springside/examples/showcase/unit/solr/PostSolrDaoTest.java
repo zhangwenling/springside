@@ -3,8 +3,10 @@ package org.springside.examples.showcase.unit.solr;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.solr.client.solrj.SolrQuery.ORDER;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.joda.time.DateTime;
 import org.junit.After;
@@ -33,12 +35,12 @@ public class PostSolrDaoTest extends SpringContextTestCase {
 
 		PostQueryBuilder postQueryBuilder = new PostQueryBuilder();
 		postQueryBuilder.setKeywords("test");
-		List<Post> result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), 10);
+		List<Post> result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), -1,-1,null,null);
 		assertEquals(1, result.size());
 		assertEquals(post.getTitle(), result.get(0).getTitle());
 		
 		postSolrDao.deletePost(postQueryBuilder.buildQueryString());
-		result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), 10);
+		result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), -1,-1,null,null);
 		assertEquals(0, result.size());
 	}
 	
@@ -52,28 +54,56 @@ public class PostSolrDaoTest extends SpringContextTestCase {
 		//查询标题
 		PostQueryBuilder postQueryBuilder = new PostQueryBuilder();
 		postQueryBuilder.setKeywords("test");
-		List<Post> result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), 10);
+		List<Post> result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), -1,-1,null,null);
 		assertEquals(1, result.size());
 		
 		//查询标题与内容
 		postQueryBuilder = new PostQueryBuilder();
 		postQueryBuilder.setKeywords("content");
 		postQueryBuilder.setIncludeContent(true);
-		result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), 10);
+		result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), -1,-1,null,null);
 		assertEquals(1, result.size());
 	
 		
 		//查询时间范围
 		postQueryBuilder = new PostQueryBuilder();
 		postQueryBuilder.setTimeScope(TimeScope.ONE_MONTH);
-		result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), 10);
+		result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), -1,-1,null,null);
 		assertEquals(0, result.size());
 		
 		postQueryBuilder = new PostQueryBuilder();
 		postQueryBuilder.setTimeScope(TimeScope.ONE_YEAR);
-		result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), 10);
+		result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), -1,-1,null,null);
 		assertEquals(1, result.size());
 		
+		//查询参数
+		Post post2 = PostData.getDefaultPost();
+		post2.setTitle("test post2 title");
+		post.setModifyTime(new Date());
+		postSolrDao.savePost(post2);
+		
+		//all
+		result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), -1,-1,null,null);
+		assertEquals(2, result.size());
+		
+		//only return 1
+		result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), -1,1,null,null);
+		assertEquals(1, result.size());
+		assertEquals("test post title",result.get(0).getTitle());
+		
+		//only return 1 and start is 1.
+		result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), 1,1,null,null);
+		assertEquals(1, result.size());
+		assertEquals("test post2 title",result.get(0).getTitle());
+		
+		//order by modifyTime
+		result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), -1,-1,"modifyTime",ORDER.desc);
+		assertEquals(2, result.size());
+		assertEquals("test post2 title",result.get(0).getTitle());
+		
+		result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), -1,-1,"modifyTime",ORDER.asc);
+		assertEquals(2, result.size());
+		assertEquals("test post title",result.get(0).getTitle());
 	}
 	
 	@After

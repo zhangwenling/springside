@@ -11,7 +11,7 @@ public class PostData {
 	public static Post getDefaultPost(){
 		Post post = new Post();
 		post.setId(new UIDGenerator().generate());
-		post.setTitle("test post");
+		post.setTitle("test post title");
 		post.setContent("test post content");
 		
 		User user = new User();
