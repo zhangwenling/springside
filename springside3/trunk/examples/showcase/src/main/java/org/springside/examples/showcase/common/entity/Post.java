@@ -24,7 +24,7 @@ import org.hibernate.annotations.DiscriminatorOptions;
 //单表继承策略
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //查询对象时强制加入子类标识字段
-@DiscriminatorOptions(force=true)
+@DiscriminatorOptions(force = true)
 public class Post extends IdEntity {
 	protected String title;
 	protected String content;
@@ -63,7 +63,7 @@ public class Post extends IdEntity {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public String getAuthorName() {
 		return user.getLoginName();
 	}
@@ -78,6 +78,7 @@ public class Post extends IdEntity {
 		return modifyTime;
 	}
 
+	@Field
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}

@@ -14,8 +14,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.showcase.common.entity.Post;
 import org.springside.examples.showcase.data.PostData;
 import org.springside.examples.showcase.solr.PostQueryBuilder;
-import org.springside.examples.showcase.solr.PostSolrDao;
 import org.springside.examples.showcase.solr.PostQueryBuilder.TimeScope;
+import org.springside.examples.showcase.solr.PostSolrDao;
 import org.springside.modules.test.spring.SpringContextTestCase;
 
 @ContextConfiguration(locations = { "/solr/applicationContext-solr.xml" })
@@ -36,7 +36,7 @@ public class PostSolrDaoTest extends SpringContextTestCase {
 		List<Post> result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), 10);
 		assertEquals(1, result.size());
 		assertEquals(post.getTitle(), result.get(0).getTitle());
-
+		
 		postSolrDao.deletePost(postQueryBuilder.buildQueryString());
 		result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), 10);
 		assertEquals(0, result.size());
@@ -45,7 +45,7 @@ public class PostSolrDaoTest extends SpringContextTestCase {
 	@Test
 	public void queryPost() throws IOException, SolrServerException{
 		Post post = PostData.getDefaultPost();
-		DateTime twoMonthBefore = new DateTime();
+		DateTime twoMonthBefore = new DateTime().minusMonths(2);
 		post.setModifyTime(twoMonthBefore.toDate());
 		postSolrDao.savePost(post);
 	
@@ -54,13 +54,14 @@ public class PostSolrDaoTest extends SpringContextTestCase {
 		postQueryBuilder.setKeywords("test");
 		List<Post> result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), 10);
 		assertEquals(1, result.size());
-	
+		
 		//查询标题与内容
 		postQueryBuilder = new PostQueryBuilder();
 		postQueryBuilder.setKeywords("content");
 		postQueryBuilder.setIncludeContent(true);
 		result = postSolrDao.queryPost(postQueryBuilder.buildQueryString(), 10);
 		assertEquals(1, result.size());
+	
 		
 		//查询时间范围
 		postQueryBuilder = new PostQueryBuilder();

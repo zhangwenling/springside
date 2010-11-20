@@ -18,7 +18,7 @@ public class PostSolrDao {
 	public List<Post> queryPost(String queryString, int returnRows) throws SolrServerException {
 		SolrQuery solrQuery = new SolrQuery(queryString);
 		solrQuery.setRows(returnRows);
-		
+
 		QueryResponse response = solrServer.query(solrQuery);
 		return response.getBeans(Post.class);
 	}
