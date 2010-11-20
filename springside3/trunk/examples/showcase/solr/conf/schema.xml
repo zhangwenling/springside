@@ -57,7 +57,7 @@
    <field name="title" type="text" indexed="true" stored="true"/>
    <field name="content" type="text" indexed="true" stored="false"/>
    <field name="modifyTime" type="date" indexed="true" stored="true"/>
-   <field name="author" type="text" indexed="true" stored="true"/>
+   <field name="authorName" type="text" indexed="true" stored="true"/>
    
 
    <dynamicField name="*_i"  type="int"    indexed="true"  stored="true"/>

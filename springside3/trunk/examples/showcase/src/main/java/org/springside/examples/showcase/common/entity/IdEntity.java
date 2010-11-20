@@ -4,6 +4,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import org.apache.solr.client.solrj.beans.Field;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -27,6 +28,7 @@ public abstract class IdEntity {
 		return id;
 	}
 
+	@Field
 	public void setId(String id) {
 		this.id = id;
 	}

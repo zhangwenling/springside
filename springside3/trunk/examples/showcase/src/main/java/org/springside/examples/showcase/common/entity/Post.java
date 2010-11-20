@@ -13,7 +13,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.ForceDiscriminator;
+import org.apache.solr.client.solrj.beans.Field;
+import org.hibernate.annotations.DiscriminatorOptions;
 
 /**
  * 帖子基类.
@@ -23,8 +24,8 @@ import org.hibernate.annotations.ForceDiscriminator;
 //单表继承策略
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //查询对象时强制加入子类标识字段
-@ForceDiscriminator
-public abstract class Post extends IdEntity {
+@DiscriminatorOptions(force=true)
+public class Post extends IdEntity {
 	protected String title;
 	protected String content;
 	protected User user;
@@ -35,6 +36,7 @@ public abstract class Post extends IdEntity {
 		return title;
 	}
 
+	@Field
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -46,6 +48,7 @@ public abstract class Post extends IdEntity {
 		return content;
 	}
 
+	@Field
 	public void setContent(String content) {
 		this.content = content;
 	}
@@ -59,6 +62,16 @@ public abstract class Post extends IdEntity {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public String getAuthorName() {
+		return user.getLoginName();
+	}
+
+	@Field
+	public void setAuthorName(String authorName) {
+		user = new User();
+		user.setLoginName(authorName);
 	}
 
 	public Date getModifyTime() {
