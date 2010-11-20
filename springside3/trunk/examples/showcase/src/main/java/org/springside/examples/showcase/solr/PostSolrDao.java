@@ -15,10 +15,10 @@ public class PostSolrDao {
 
 	private SolrServer solrServer;
 
-	public List<Post> queryPost(PostQuery postQuery, int returnRows) throws SolrServerException {
-
-		SolrQuery solrQuery = new SolrQuery(postQuery.buildQueryString());
+	public List<Post> queryPost(String queryString, int returnRows) throws SolrServerException {
+		SolrQuery solrQuery = new SolrQuery(queryString);
 		solrQuery.setRows(returnRows);
+		
 		QueryResponse response = solrServer.query(solrQuery);
 		return response.getBeans(Post.class);
 	}
@@ -27,6 +27,11 @@ public class PostSolrDao {
 
 		Assert.hasText(post.getId());
 		solrServer.addBean(post);
+		solrServer.commit();
+	}
+
+	public void deletePost(String queryString) throws SolrServerException, IOException {
+		solrServer.deleteByQuery(queryString);
 		solrServer.commit();
 	}
 
