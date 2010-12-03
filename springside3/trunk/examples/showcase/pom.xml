@@ -205,12 +205,6 @@
 		</dependency>
 		<!-- memcached end -->
 
-		<!-- solr -->
-		<dependency>
-			<groupId>org.apache.solr</groupId>
-			<artifactId>solr-core</artifactId>
-		</dependency>
-
 		<!-- logging begin -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -443,39 +437,40 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		
-		<profiles>
-			<!-- 使用Assembly打包jsw+jetty+webapp可运行包的profile -->
-			<profile>
-				<id>package-bin</id>
-				<activation>
-					<property>
-						<name>package.bin</name>
-						<value>true</value>
-					</property>
-				</activation>
-				<build>
-					<plugins>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-assembly-plugin</artifactId>
-							<executions>
-								<execution>
-									<phase>package</phase>
-									<goals>
-										<goal>single</goal>
-									</goals>
-									<configuration>
-										<descriptors>
-											<descriptor>assembly/assembly-production.xml</descriptor>
-											<descriptor>assembly/assembly-test.xml</descriptor>
-										</descriptors>
-									</configuration>
-								</execution>
-							</executions>
-						</plugin>
-					</plugins>
-				</build>
-			</profile>
-		</profiles>
+	</build>
+	
+	<profiles>
+		<!-- 使用Assembly打包jsw+jetty+webapp可运行包的profile -->
+		<profile>
+			<id>package-bin</id>
+			<activation>
+				<property>
+					<name>package.bin</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+								<configuration>
+									<descriptors>
+										<descriptor>assembly/assembly-production.xml</descriptor>
+										<descriptor>assembly/assembly-test.xml</descriptor>
+									</descriptors>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

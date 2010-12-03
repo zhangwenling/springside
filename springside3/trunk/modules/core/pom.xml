@@ -29,6 +29,11 @@
 			<artifactId>hibernate-core</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 		<!-- web -->
 		<dependency>
