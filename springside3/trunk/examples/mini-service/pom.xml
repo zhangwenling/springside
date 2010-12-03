@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.springside</groupId>
 		<artifactId>springside3-parent</artifactId>
-		<version>3.4.0-SNAPSHOT</version>
+		<version>4.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>org.springside.examples</groupId>
 	<artifactId>mini-service</artifactId>
@@ -220,18 +220,6 @@
 			<artifactId>jsp-2.1-glassfish</artifactId>
 		</dependency>
 		<!-- test end -->
-
-		<!-- hibernate tools -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-tools</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.freemarker</groupId>
-			<artifactId>freemarker</artifactId>
-			<scope>provided</scope>
-		</dependency>
 	</dependencies>
 
 	<build>
