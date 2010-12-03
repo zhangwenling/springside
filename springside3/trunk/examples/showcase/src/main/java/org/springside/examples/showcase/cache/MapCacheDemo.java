@@ -1,9 +1,8 @@
 package org.springside.examples.showcase.cache;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.TimeUnit;
 
 import javax.sql.DataSource;
 
@@ -27,8 +26,7 @@ import com.google.common.collect.MapMaker;
  * 基于Google Collection实现:
  * 
  * 1.加大并发锁数量.
- * 2.每个放入的对象在固定时间后过期.
- * 3.当key不存在时, 需要进行较长时间的计算(如访问数据库)时, 能避免并发访问造成的重复计算.
+ * 2.当key不存在时, 需要进行较长时间的计算(如访问数据库)时, 能避免并发访问造成的重复计算.
  * 
  * @author calvin
  */
@@ -65,8 +63,7 @@ public class MapCacheDemo extends SpringTxTestCase {
 			}
 		};
 
-		ConcurrentMap<String, User> userMap = new MapMaker().concurrencyLevel(32).expiration(7, TimeUnit.DAYS)
-				.makeComputingMap(computingFunction);
+		ConcurrentMap<String, User> userMap = new MapMaker().concurrencyLevel(32).makeComputingMap(computingFunction);
 
 		assertEquals("Admin", userMap.get("1").getName());
 	}

@@ -17,23 +17,13 @@ import com.opensymphony.xwork2.ActionSupport;
 public class LogAction extends ActionSupport {
 
 	private static final long serialVersionUID = 3331334076147567129L;
-	/**
-	 * 在log4j.properties中,本logger已被指定使用asyncAppender.
-	 */
-	public static final String DB_LOGGER_NAME = "DBLogExample";
-
 	@Override
 	public String execute() {
-		logDB();
 		logTrace();
 		logAop(1);
 		return SUCCESS;
 	}
 
-	private void logDB() {
-		Logger logger = LoggerFactory.getLogger(DB_LOGGER_NAME);
-		logger.info("helloworld!!");
-	}
 
 	private void logTrace() {
 		Logger logger = LoggerFactory.getLogger(LogAction.class);

@@ -16,7 +16,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springside.examples.showcase.orm.hibernate.AuditableEntity;
 import org.springside.modules.utils.reflection.ConvertUtils;
 
 import com.google.common.collect.Lists;
@@ -28,7 +27,7 @@ import com.google.common.collect.Lists;
  */
 @Entity
 @Table(name = "SS_USER")
-public class User extends AuditableEntity {
+public class User  extends IdEntity {
 	private String loginName;
 	private String plainPassword;
 	private String shaPassword;
