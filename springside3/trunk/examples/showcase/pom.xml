@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.springside</groupId>
 		<artifactId>springside3-parent</artifactId>
-		<version>3.4.0-SNAPSHOT</version>
+		<version>4.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>org.springside.examples</groupId>
 	<artifactId>showcase</artifactId>
@@ -108,10 +108,6 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.tuckey</groupId>
-			<artifactId>urlrewritefilter</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -147,7 +143,7 @@
 		</dependency>
 		<!-- webservice end -->
 
-		<!--  rest begin -->
+		<!-- rest begin -->
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
@@ -175,11 +171,6 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>com.octo.captcha</groupId>
-			<artifactId>jcaptcha</artifactId>
-		</dependency>
 		<!-- security end -->
 
 		<!-- jms begin -->
@@ -200,7 +191,7 @@
 			<artifactId>quartz</artifactId>
 		</dependency>
 
-		<!-- memcached begin-->
+		<!-- memcached begin -->
 		<dependency>
 			<groupId>spy</groupId>
 			<artifactId>memcached</artifactId>
@@ -246,7 +237,7 @@
 		</dependency>
 		<!-- email end -->
 
-		<!-- utils begin-->
+		<!-- utils begin -->
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
@@ -290,7 +281,7 @@
 		</dependency>
 		<!-- utils end -->
 
-		<!--  xml begin -->
+		<!-- xml begin -->
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
@@ -300,7 +291,7 @@
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
 		</dependency>
-		<!--  xml end -->
+		<!-- xml end -->
 
 		<!-- poi begin -->
 		<dependency>
@@ -377,11 +368,7 @@
 			<artifactId>perf4j</artifactId>
 		</dependency>
 
-		<!-- hibernate tools -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-tools</artifactId>
-		</dependency>
+		<!-- css/javascript compressor -->
 		<dependency>
 			<groupId>com.yahoo.platform.yui</groupId>
 			<artifactId>yuicompressor</artifactId>
@@ -440,7 +427,7 @@
 				</configuration>
 			</plugin>
 
-			<!-- jetty插件, 设定端口与context path-->
+			<!-- jetty插件, 设定端口与context path -->
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
@@ -455,70 +442,40 @@
 					</webAppConfig>
 				</configuration>
 			</plugin>
-
-			<!-- 执行Hibernate lazy load bytecode enhancement(for列级lazy load) -->
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>instrument-hibernate-entity</id>
-						<phase>process-classes</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<tasks>
-						<taskdef name="instrument" classname="org.hibernate.tool.instrument.javassist.InstrumentTask">
-							<classpath>
-								<path refid="maven.runtime.classpath" />
-								<path refid="maven.plugin.classpath" />
-							</classpath>
-						</taskdef>
-						<instrument verbose="false">
-							<fileset dir="${project.build.outputDirectory}">
-								<include name="**/entity/**/*.class" />
-							</fileset>
-						</instrument>
-					</tasks>
-				</configuration>
-			</plugin>
 		</plugins>
-	</build>
-
-	<profiles>
-		<!-- 使用Assembly打包jsw+jetty+webapp可运行包的profile -->
-		<profile>
-			<id>package-bin</id>
-			<activation>
-				<property>
-					<name>package.bin</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-assembly-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>single</goal>
-								</goals>
-								<configuration>
-									<descriptors>
-										<descriptor>assembly/assembly-production.xml</descriptor>
-										<descriptor>assembly/assembly-test.xml</descriptor>
-									</descriptors>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+		
+		<profiles>
+			<!-- 使用Assembly打包jsw+jetty+webapp可运行包的profile -->
+			<profile>
+				<id>package-bin</id>
+				<activation>
+					<property>
+						<name>package.bin</name>
+						<value>true</value>
+					</property>
+				</activation>
+				<build>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-assembly-plugin</artifactId>
+							<executions>
+								<execution>
+									<phase>package</phase>
+									<goals>
+										<goal>single</goal>
+									</goals>
+									<configuration>
+										<descriptors>
+											<descriptor>assembly/assembly-production.xml</descriptor>
+											<descriptor>assembly/assembly-test.xml</descriptor>
+										</descriptors>
+									</configuration>
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+				</build>
+			</profile>
+		</profiles>
 </project>
