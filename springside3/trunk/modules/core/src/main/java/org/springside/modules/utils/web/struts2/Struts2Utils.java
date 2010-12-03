@@ -25,6 +25,7 @@ import org.springside.modules.utils.web.ServletUtils;
  * 
  * @author calvin
  */
+@Deprecated
 public class Struts2Utils {
 
 	//-- header 常量定义 --//

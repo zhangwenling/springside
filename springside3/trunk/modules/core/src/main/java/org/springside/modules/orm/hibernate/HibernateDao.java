@@ -43,6 +43,7 @@ import org.springside.modules.utils.reflection.ReflectionUtils;
  * 
  * @author calvin
  */
+@Deprecated
 public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao<T, PK> {
 	/**
 	 * 用于Dao层子类的构造函数.

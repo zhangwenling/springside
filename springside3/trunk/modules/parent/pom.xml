@@ -14,7 +14,7 @@
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<springside.version>4.4.0-SNAPSHOT</springside.version>
+		<springside.version>4.0.0-SNAPSHOT</springside.version>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<hibernate.version>3.6.0.Final</hibernate.version>
 		<mybatis.version>3.0.3</mybatis.version>
@@ -183,6 +183,11 @@
 				<version>${hibernate.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>3.12.1.GA</version>
+			</dependency>
 			<!-- mybatis -->
 			<dependency>
 				<groupId>org.mybatis</groupId>
