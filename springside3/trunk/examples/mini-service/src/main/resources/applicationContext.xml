@@ -45,6 +45,13 @@
 	<!-- 数据源配置,在生产环境可选择使用应用服务器的数据库连接池 -->
 	<!-- <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/ExampleDB" />-->
 
+
+	<!-- myBatis配置 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:/mapper/sqlMapConfig.xml" />
+	</bean>
+	
 	<!-- Hibernate配置 -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
