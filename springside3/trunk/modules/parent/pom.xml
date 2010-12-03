@@ -6,7 +6,7 @@
 	<artifactId>springside3-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>Springside3's Parent pom.xml</name>
-	<version>3.4.0-SNAPSHOT</version>
+	<version>4.0.0-SNAPSHOT</version>
 	<organization>
 		<name>SpringSide</name>
 		<url>http://www.springside.org.cn</url>
@@ -14,10 +14,10 @@
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<springside.version>3.4.0-SNAPSHOT</springside.version>
+		<springside.version>4.4.0-SNAPSHOT</springside.version>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<hibernate.version>3.6.0.Final</hibernate.version>
-		<mybatis.version>3.0.2</mybatis.version>
+		<mybatis.version>3.0.3</mybatis.version>
 		<struts2.version>2.2.1</struts2.version>
 		<cxf.version>2.3.0</cxf.version>
 		<jersey.version>1.4</jersey.version>
@@ -182,16 +182,6 @@
 				<artifactId>hibernate-entitymanager</artifactId>
 				<version>${hibernate.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-envers</artifactId>
-				<version>${hibernate.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>javassist</groupId>
-				<artifactId>javassist</artifactId>
-				<version>3.12.1.GA</version>
-			</dependency>
 
 			<!-- mybatis -->
 			<dependency>
@@ -202,7 +192,7 @@
 			<dependency>
 				<groupId>org.mybatis</groupId>
 				<artifactId>mybatis-spring</artifactId>
-				<version>1.0.0-RC2</version>
+				<version>1.0.0-RC3</version>
 			</dependency>
 
 			<!-- spring orm -->
@@ -306,13 +296,6 @@
 				<artifactId>standard</artifactId>
 				<version>1.1.2</version>
 			</dependency>
-
-			<!-- url rewrite -->
-			<dependency>
-				<groupId>org.tuckey</groupId>
-				<artifactId>urlrewritefilter</artifactId>
-				<version>3.1.0</version>
-			</dependency>
 			<!-- web end -->
 
 			<!-- webservice begin -->
@@ -407,12 +390,6 @@
 				<artifactId>spring-security-taglibs</artifactId>
 				<version>${spring-security.version}</version>
 			</dependency>
-
-			<dependency>
-				<groupId>com.octo.captcha</groupId>
-				<artifactId>jcaptcha</artifactId>
-				<version>1.0</version>
-			</dependency>
 			<!-- security end -->
 
 			<!-- jms begin -->
@@ -464,21 +441,6 @@
 				<scope>test</scope>
 			</dependency>
 			<!-- memcached end -->
-
-			<!-- solr begin -->
-			<dependency>
-				<groupId>org.apache.solr</groupId>
-				<artifactId>solr-core</artifactId>
-				<version>1.4.1</version>
-				<exclusions>
-					<!-- use org.codehaus.woodstox.wstx-asl -->
-					<exclusion>
-						<groupId>woodstox</groupId>
-						<artifactId>wstx-asl</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<!-- solr end -->
 
 			<!-- logging begin -->
 			<!-- slf4j -->
@@ -557,6 +519,7 @@
 				</exclusions>
 			</dependency>
 
+			<!-- ?? -->
 			<dependency>
 				<groupId>jaxen</groupId>
 				<artifactId>jaxen</artifactId>
@@ -652,12 +615,14 @@
 				<artifactId>httpclient</artifactId>
 				<version>4.0.3</version>
 			</dependency>
+			<!-- ?? -->
 			<dependency>
 				<groupId>net.jcip</groupId>
 				<artifactId>jcip-annotations</artifactId>
 				<version>1.0</version>
 			</dependency>
 
+			<!-- ?? -->
 			<dependency>
 				<groupId>ognl</groupId>
 				<artifactId>ognl</artifactId>
@@ -671,6 +636,7 @@
 				</exclusions>
 			</dependency>
 
+			<!-- ?? -->
 			<dependency>
 				<groupId>com.ibm.icu</groupId>
 				<artifactId>icu4j</artifactId>
@@ -807,20 +773,6 @@
 				<groupId>org.perf4j</groupId>
 				<artifactId>perf4j</artifactId>
 				<version>0.9.14</version>
-			</dependency>
-
-			<!-- hibernate tools -->
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-tools</artifactId>
-				<version>3.2.3.GA</version>
-				<scope>provided</scope>
-				<exclusions>
-					<exclusion>
-						<groupId>freemarker</groupId>
-						<artifactId>freemarker</artifactId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 
 			<!-- javascript/css compress tools -->
