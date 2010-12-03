@@ -1,11 +1,11 @@
-package org.springside.modules.unit.utils;
+package org.springside.modules.unit.utils.velocity;
 
 import static org.junit.Assert.*;
 
 import java.util.Map;
 
 import org.junit.Test;
-import org.springside.modules.utils.VelocityUtils;
+import org.springside.modules.utils.velocity.VelocityUtils;
 
 import com.google.common.collect.Maps;
 

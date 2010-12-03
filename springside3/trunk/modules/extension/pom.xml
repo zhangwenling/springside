@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.springside</groupId>
 		<artifactId>springside3-parent</artifactId>
-		<version>3.4.0-SNAPSHOT</version>
+		<version>4.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>springside3-extension</artifactId>
 	<packaging>jar</packaging>
@@ -37,12 +37,6 @@
 		</dependency>
 
 		<!-- security begin-->
-		<dependency>
-			<groupId>com.octo.captcha</groupId>
-			<artifactId>jcaptcha</artifactId>
-			<optional>true</optional>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
@@ -98,20 +92,6 @@
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<!-- solr -->
-		<dependency>
-			<groupId>org.apache.solr</groupId>
-			<artifactId>solr-core</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-webapp</artifactId>
-			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
 		
