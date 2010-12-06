@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.utils.velocity;
+package org.springside.modules.utils.template;
 
 import java.io.StringWriter;
 import java.util.Map;

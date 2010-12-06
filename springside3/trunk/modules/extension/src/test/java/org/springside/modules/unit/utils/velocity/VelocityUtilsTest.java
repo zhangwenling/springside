@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.util.Map;
 
 import org.junit.Test;
-import org.springside.modules.utils.velocity.VelocityUtils;
+import org.springside.modules.utils.template.VelocityUtils;
 
 import com.google.common.collect.Maps;
 
