@@ -21,7 +21,7 @@ import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.modules.utils.VelocityUtils;
+import org.springside.modules.utils.template.VelocityUtils;
 
 import com.google.common.collect.Maps;
 

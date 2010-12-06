@@ -13,7 +13,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.apache.solr.client.solrj.beans.Field;
 import org.hibernate.annotations.DiscriminatorOptions;
 
 /**
@@ -36,7 +35,6 @@ public class Post extends IdEntity {
 		return title;
 	}
 
-	@Field
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -48,7 +46,6 @@ public class Post extends IdEntity {
 		return content;
 	}
 
-	@Field
 	public void setContent(String content) {
 		this.content = content;
 	}
@@ -68,7 +65,6 @@ public class Post extends IdEntity {
 		return user.getLoginName();
 	}
 
-	@Field
 	public void setAuthorName(String authorName) {
 		user = new User();
 		user.setLoginName(authorName);
@@ -78,7 +74,6 @@ public class Post extends IdEntity {
 		return modifyTime;
 	}
 
-	@Field
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}

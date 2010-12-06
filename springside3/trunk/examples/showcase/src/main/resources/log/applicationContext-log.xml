@@ -5,23 +5,6 @@
 
 	<description>日志高级演示配置</description>
 
-	<!-- 消息Queue管理器-->
-	<bean class="org.springside.examples.showcase.queue.QueuesHolder">
-		<property name="queueSize" value="1000" />
-	</bean>
-
-	<!-- 读出Queue中日志消息写入数据库的任务 -->
-	<bean id="jdbcLogWriter" class="org.springside.examples.showcase.log.appender.JdbcLogWriter">
-		<property name="queueName" value="dblog" />
-		<property name="batchSize" value="10" />
-		<property name="sql">
-			<value>
-				insert into SS_LOG(THREAD_NAME,LOGGER_NAME,LOG_TIME,LEVEL,MESSAGE)
-				values(:thread_name,:logger_name,:log_time,:level,:message)
-			</value>
-		</property>
-	</bean>
-
 	<!-- 动态配置log4j日志级别的JMX MBean -->
 	<bean id="log4jMBean" class="org.springside.modules.log.Log4jMBean" />
 

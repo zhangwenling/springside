@@ -10,6 +10,7 @@ package org.springside.modules.log;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedOperationParameter;
 import org.springframework.jmx.export.annotation.ManagedOperationParameters;
@@ -59,14 +60,12 @@ public class Log4jMBean {
 		mbeanLogger.info("设置{}级别为{}", loggerName, newLevel);
 	}
 
-	@ManagedOperation(description = "Get project default logging level of the logger")
-	@ManagedOperationParameters({ @ManagedOperationParameter(name = "loggerName", description = "Logger name") })
+	@ManagedAttribute(description = "Project default logging level of the logger")
 	public String getDefaultLoggerLevel() {
 		return getLoggerLevel(defaultLoggerName);
 	}
 
-	@ManagedOperation(description = "Set new logging level to project default logger")
-	@ManagedOperationParameters({ @ManagedOperationParameter(name = "newlevel", description = "New level") })
+	@ManagedAttribute(description = "Project default logging level of the logger")
 	public void setDefaultLoggerLevel(String newLevel) {
 		setLoggerLevel(defaultLoggerName, newLevel);
 	}
