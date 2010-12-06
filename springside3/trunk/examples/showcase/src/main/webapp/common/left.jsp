@@ -2,9 +2,9 @@
 <%@ include file="/common/taglibs.jsp" %>
 <div id="leftbar" class="yui-b">
 		<a href="${ctx}/">首页</a>
-		<a href="${ctx}/common/users.htm">综合演示</a>
+		<a href="${ctx}/common/user.action">综合演示</a>
 		<a href="${ctx}/jms/index.action">JMS演示</a>
-		<a href="${ctx}/jmx/jmx-client.action">JMX演示</a>
+		<a href="${ctx}/jmx/index.action">JMX演示</a>
 		<a href="${ctx}/email/index.action">邮件演示</a>
 		<a href="${ctx}/ajax/index.action">Ajax演示</a>
 		<a href="${ctx}/report/index.action">报表演示</a>
