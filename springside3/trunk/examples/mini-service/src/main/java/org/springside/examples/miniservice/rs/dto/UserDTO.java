@@ -3,6 +3,8 @@ package org.springside.examples.miniservice.rs.dto;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -16,7 +18,7 @@ import com.google.common.collect.Lists;
  * 
  * @author calvin
  */
-@XmlRootElement
+@XmlRootElement(name="User")
 public class UserDTO {
 
 	private Long id;
@@ -62,6 +64,8 @@ public class UserDTO {
 	}
 
 	@NotEmpty
+	@XmlElementWrapper(name = "roles")
+	@XmlElement(name = "Role")
 	public List<RoleDTO> getRoleList() {
 		return roleList;
 	}

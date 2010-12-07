@@ -9,7 +9,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  *
  * @author calvin
  */
-@XmlRootElement
+@XmlRootElement(name="Role")
 public class RoleDTO {
 
 	private Long id;
