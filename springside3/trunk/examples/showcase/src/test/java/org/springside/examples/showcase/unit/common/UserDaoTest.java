@@ -1,6 +1,7 @@
 package org.springside.examples.showcase.unit.common;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -61,22 +62,6 @@ public class UserDaoTest extends SpringTxTestCase {
 		List<User> userList2 = userDao.getAllUserWithRolesByDistinctCriteria();
 		assertEquals(userCount, userList2.size());
 		assertTrue(Hibernate.isInitialized(userList2.get(0).getRoleList()));
-	}
-
-	@Test
-	
-	public void sampleDialect() {
-		//select about 50% record from database.
-		List<String> values = userDao.createQuery("select u.name from User u where sample()<50").list();
-		for (String name : values) {
-			System.out.println(name);
-		}
-	}
-
-	@Test
-	public void upDialect() {
-		Object value = userDao.createQuery("select u.name from User u where up(u.name)='ADMIN'").uniqueResult();
-		assertEquals("Admin", value);
 	}
 
 	@Test
