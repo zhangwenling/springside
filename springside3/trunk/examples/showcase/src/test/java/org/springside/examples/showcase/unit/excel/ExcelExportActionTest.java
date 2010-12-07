@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.unit.report;
+package org.springside.examples.showcase.unit.excel;
 
 import static org.junit.Assert.*;
 
@@ -7,7 +7,7 @@ import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellReference;
 import org.junit.Test;
-import org.springside.examples.showcase.report.ExcelExportAction;
+import org.springside.examples.showcase.excel.ExcelExportAction;
 import org.springside.modules.utils.reflection.ReflectionUtils;
 
 /**

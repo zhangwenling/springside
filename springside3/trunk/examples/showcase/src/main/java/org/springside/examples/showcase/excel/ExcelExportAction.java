@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.report;
+package org.springside.examples.showcase.excel;
 
 import java.util.Map;
 
@@ -16,7 +16,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.joda.time.DateTime;
-import org.springside.examples.showcase.report.DummyDataFetcher.TemperatureAnomaly;
+import org.springside.examples.showcase.excel.DummyDataGenerator.TemperatureAnomaly;
 import org.springside.modules.utils.web.ServletUtils;
 import org.springside.modules.utils.web.struts2.Struts2Utils;
 
@@ -55,7 +55,7 @@ public class ExcelExportAction extends ActionSupport {
 	}
 
 	private Workbook exportExcelWorkbook() {
-		TemperatureAnomaly[] temperatureAnomalyArray = DummyDataFetcher.getDummyData();
+		TemperatureAnomaly[] temperatureAnomalyArray = DummyDataGenerator.getDummyData();
 
 		//创建Workbook
 		Workbook wb = new HSSFWorkbook();

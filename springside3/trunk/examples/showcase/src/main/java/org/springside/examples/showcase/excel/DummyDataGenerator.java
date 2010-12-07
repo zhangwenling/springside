@@ -1,11 +1,11 @@
-package org.springside.examples.showcase.report;
+package org.springside.examples.showcase.excel;
 
 /**
  * 报表演示的模拟数据提供类.
  * 
  * @author calvin
  */
-public class DummyDataFetcher {
+public class DummyDataGenerator {
 
 	public static TemperatureAnomaly[] getDummyData() {
 
