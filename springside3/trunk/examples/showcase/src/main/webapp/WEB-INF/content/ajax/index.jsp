@@ -18,7 +18,7 @@
 		<div class="yui-b">
 		<h1>Ajax演示</h1>
 		<ul>
-			<li><a href="${ctx}/ajax/mashup/mashup-client.action">跨域名Mashup演示</a> 演示基于JSONP实现跨域Ajax.</li>
+			<li><a href="${ctx}/ajax/mashup/mashup-client.action">跨域名Mashup演示</a> 演示基于JSONP Mashup 跨域名网站的内容.</li>
 		</ul>
 		</div>
 	</div>

@@ -20,9 +20,10 @@
 
 		<h2>技术说明：</h2>
 		<ul>
-			<li>JDK5.0 ScheduledExecutorService Timer式任务定义, 支持Graceful Shutdown演示.</li>
-			<li>Quartz Timer式与Cron式任务定义.</li>
-			<li>Quartz 任务在内存或数据库中存储, 单机或集群执行演示.</li>
+			<li>JDK5.0 ScheduledExecutorService的Timer式任务定义, 支持Graceful Shutdown演示.</li>
+			<li>Spring的Cront式任务定义</li>
+			<li>Quartz的Timer式与Cron式任务定义.</li>
+			<li>Quartz的任务在内存或数据库中存储, 单机或集群执行演示.</li>
 		</ul>
 
 		<h2>用户故事：</h2>
