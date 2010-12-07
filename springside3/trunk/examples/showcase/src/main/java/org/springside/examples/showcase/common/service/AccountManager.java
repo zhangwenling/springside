@@ -9,7 +9,7 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springside.examples.showcase.cache.MemcachedObjectType;
+import org.springside.examples.showcase.cache.memcached.MemcachedObjectType;
 import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.dao.UserJdbcDao;
 import org.springside.examples.showcase.common.entity.User;

@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.cache;
+package org.springside.examples.showcase.cache.memcached;
 
 import static org.junit.Assert.*;
 

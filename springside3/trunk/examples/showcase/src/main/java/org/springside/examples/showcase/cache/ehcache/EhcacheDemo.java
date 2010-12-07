@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.cache;
+package org.springside.examples.showcase.cache.ehcache;
 
 import static org.junit.Assert.*;
 import net.sf.ehcache.Cache;
