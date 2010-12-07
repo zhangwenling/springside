@@ -14,10 +14,10 @@ import org.apache.commons.io.IOUtils;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.junit.Test;
 import org.springside.examples.showcase.functional.BaseFunctionalTestCase;
-import org.springside.examples.showcase.ws.server.LargeImageWebService;
-import org.springside.examples.showcase.ws.server.SmallImageWebService;
-import org.springside.examples.showcase.ws.server.result.LargeImageResult;
-import org.springside.examples.showcase.ws.server.result.SmallImageResult;
+import org.springside.examples.showcase.webservice.ws.server.LargeImageWebService;
+import org.springside.examples.showcase.webservice.ws.server.SmallImageWebService;
+import org.springside.examples.showcase.webservice.ws.server.result.LargeImageResult;
+import org.springside.examples.showcase.webservice.ws.server.result.SmallImageResult;
 
 /**
  * WebService传输二进制数据测试.

@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.ws.server.impl;
+package org.springside.examples.showcase.webservice.ws.server.impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,10 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springside.examples.showcase.ws.server.LargeImageWebService;
-import org.springside.examples.showcase.ws.server.WsConstants;
-import org.springside.examples.showcase.ws.server.result.LargeImageResult;
-import org.springside.examples.showcase.ws.server.result.WSResult;
+import org.springside.examples.showcase.webservice.ws.server.LargeImageWebService;
+import org.springside.examples.showcase.webservice.ws.server.WsConstants;
+import org.springside.examples.showcase.webservice.ws.server.result.LargeImageResult;
+import org.springside.examples.showcase.webservice.ws.server.result.WSResult;
 
 /**
  * LargeImageWebService服务端实现类.

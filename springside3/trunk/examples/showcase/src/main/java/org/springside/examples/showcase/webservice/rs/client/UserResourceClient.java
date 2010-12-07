@@ -1,11 +1,11 @@
-package org.springside.examples.showcase.rs.client;
+package org.springside.examples.showcase.webservice.rs.client;
 
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Required;
-import org.springside.examples.showcase.rs.dto.UserDTO;
+import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
 import org.springside.modules.utils.encode.JsonBinder;
 import org.springside.modules.utils.web.ServletUtils;
 

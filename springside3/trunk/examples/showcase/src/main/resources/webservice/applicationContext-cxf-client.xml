@@ -11,7 +11,7 @@
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 
 	<!-- 使用WS-Security中的明文密码认证机制的客户端 -->
-	<jaxws:client id="userServiceWithPlainPassword" serviceClass="org.springside.examples.showcase.ws.server.UserWebService"
+	<jaxws:client id="userServiceWithPlainPassword" serviceClass="org.springside.examples.showcase.webservice.ws.server.UserWebService"
 		address="http://localhost:8080/showcase/services/UserServiceWithPlainPassword">
 		<jaxws:outInterceptors>
 			<bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
@@ -30,7 +30,7 @@
 	<!-- 使用WS-Security中的Digest密码认证机制的客户端, 不使用本XML直接在代码中直接定义. -->
 
 	<!-- 使用WS-Security中的明文密码认证机制访问与SpringSecurity权限管理结合EndPoint的客户端 -->
-	<jaxws:client id="userServiceWithSpringSecurity" serviceClass="org.springside.examples.showcase.ws.server.UserWebService"
+	<jaxws:client id="userServiceWithSpringSecurity" serviceClass="org.springside.examples.showcase.webservice.ws.server.UserWebService"
 		address="http://localhost:8080/showcase/services/UserServiceWithSpringSecurity">
 		<jaxws:outInterceptors>
 			<bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
@@ -47,5 +47,5 @@
 	</jaxws:client>
 
 	<!-- 客户端密码配置Bean定义 -->
-	<bean id="passwordCallback" class="org.springside.examples.showcase.ws.client.PasswordCallback" />
+	<bean id="passwordCallback" class="org.springside.examples.showcase.webservice.ws.client.PasswordCallback" />
 </beans>

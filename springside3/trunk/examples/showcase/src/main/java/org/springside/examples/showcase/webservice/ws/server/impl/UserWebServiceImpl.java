@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.ws.server.impl;
+package org.springside.examples.showcase.webservice.ws.server.impl;
 
 import java.util.List;
 
@@ -15,12 +15,12 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.util.Assert;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.AccountManager;
-import org.springside.examples.showcase.ws.server.UserWebService;
-import org.springside.examples.showcase.ws.server.WsConstants;
-import org.springside.examples.showcase.ws.server.dto.UserDTO;
-import org.springside.examples.showcase.ws.server.result.GetAllUserResult;
-import org.springside.examples.showcase.ws.server.result.GetUserResult;
-import org.springside.examples.showcase.ws.server.result.WSResult;
+import org.springside.examples.showcase.webservice.ws.server.UserWebService;
+import org.springside.examples.showcase.webservice.ws.server.WsConstants;
+import org.springside.examples.showcase.webservice.ws.server.dto.UserDTO;
+import org.springside.examples.showcase.webservice.ws.server.result.GetAllUserResult;
+import org.springside.examples.showcase.webservice.ws.server.result.GetUserResult;
+import org.springside.examples.showcase.webservice.ws.server.result.WSResult;
 
 import com.google.common.collect.Lists;
 

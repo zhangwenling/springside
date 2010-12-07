@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.ws.client;
+package org.springside.examples.showcase.webservice.ws.client;
 
 import java.io.IOException;
 

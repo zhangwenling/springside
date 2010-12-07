@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.rs.dto;
+package org.springside.examples.showcase.webservice.rs.dto;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

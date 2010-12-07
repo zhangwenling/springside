@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.ws.server;
+package org.springside.examples.showcase.webservice.ws.server;
 
 /**
  * WebService常量定义.

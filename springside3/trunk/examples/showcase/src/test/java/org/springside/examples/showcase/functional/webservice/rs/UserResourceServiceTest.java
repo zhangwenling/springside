@@ -7,8 +7,8 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springside.examples.showcase.functional.BaseFunctionalTestCase;
-import org.springside.examples.showcase.rs.client.UserResourceClient;
-import org.springside.examples.showcase.rs.dto.UserDTO;
+import org.springside.examples.showcase.webservice.rs.client.UserResourceClient;
+import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
 
 public class UserResourceServiceTest extends BaseFunctionalTestCase {
 

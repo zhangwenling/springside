@@ -20,10 +20,10 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springside.examples.showcase.functional.BaseFunctionalTestCase;
-import org.springside.examples.showcase.ws.client.PasswordCallback;
-import org.springside.examples.showcase.ws.server.UserWebService;
-import org.springside.examples.showcase.ws.server.result.GetAllUserResult;
-import org.springside.examples.showcase.ws.server.result.GetUserResult;
+import org.springside.examples.showcase.webservice.ws.client.PasswordCallback;
+import org.springside.examples.showcase.webservice.ws.server.UserWebService;
+import org.springside.examples.showcase.webservice.ws.server.result.GetAllUserResult;
+import org.springside.examples.showcase.webservice.ws.server.result.GetUserResult;
 
 import com.google.common.collect.Maps;
 

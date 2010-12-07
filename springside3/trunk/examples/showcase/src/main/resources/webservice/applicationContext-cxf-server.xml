@@ -77,21 +77,21 @@
 	</jaxws:endpoint>
 
 	<!-- UserWebService的实现Bean定义 -->
-	<bean id="userWebService" class="org.springside.examples.showcase.ws.server.impl.UserWebServiceImpl" />
+	<bean id="userWebService" class="org.springside.examples.showcase.webservice.ws.server.impl.UserWebServiceImpl" />
 
 	<!-- SmallImageWebService的实现Bean定义 -->
-	<bean id="smallImageWebService" class="org.springside.examples.showcase.ws.server.impl.SmallImageWebServiceImpl" />
+	<bean id="smallImageWebService" class="org.springside.examples.showcase.webservice.ws.server.impl.SmallImageWebServiceImpl" />
 
 	<!-- LargeImageWebService的实现Bean定义 -->
-	<bean id="largeImageWebService" class="org.springside.examples.showcase.ws.server.impl.LargeImageWebServiceImpl" />
+	<bean id="largeImageWebService" class="org.springside.examples.showcase.webservice.ws.server.impl.LargeImageWebServiceImpl" />
 
 
 	<!-- dozer DTO复制工具类定义 -->
 	<bean id="dozer" class="org.dozer.DozerBeanMapper" />
 
 	<!-- 明文密码处理Bean定义 -->
-	<bean id="plainPasswordCallback" class="org.springside.examples.showcase.ws.server.impl.security.PlainPasswordCallback" />
+	<bean id="plainPasswordCallback" class="org.springside.examples.showcase.webservice.ws.server.impl.security.PlainPasswordCallback" />
 
 	<!-- Digest密码处理Bean定义 -->
-	<bean id="digestPasswordCallback" class="org.springside.examples.showcase.ws.server.impl.security.DigestPasswordCallback" />
+	<bean id="digestPasswordCallback" class="org.springside.examples.showcase.webservice.ws.server.impl.security.DigestPasswordCallback" />
 </beans>

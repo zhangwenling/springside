@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.rs.server;
+package org.springside.examples.showcase.webservice.rs.server;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.AccountManager;
-import org.springside.examples.showcase.rs.dto.UserDTO;
+import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
 
 import com.google.common.collect.Lists;
 

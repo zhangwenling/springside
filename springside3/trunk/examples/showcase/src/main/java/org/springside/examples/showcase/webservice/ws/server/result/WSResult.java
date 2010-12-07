@@ -1,8 +1,8 @@
-package org.springside.examples.showcase.ws.server.result;
+package org.springside.examples.showcase.webservice.ws.server.result;
 
 import javax.xml.bind.annotation.XmlType;
 
-import org.springside.examples.showcase.ws.server.WsConstants;
+import org.springside.examples.showcase.webservice.ws.server.WsConstants;
 import org.springside.modules.utils.reflection.ReflectionUtils;
 
 /**

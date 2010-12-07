@@ -1,10 +1,10 @@
-package org.springside.examples.showcase.ws.server.result;
+package org.springside.examples.showcase.webservice.ws.server.result;
 
 import javax.activation.DataHandler;
 import javax.xml.bind.annotation.XmlMimeType;
 import javax.xml.bind.annotation.XmlType;
 
-import org.springside.examples.showcase.ws.server.WsConstants;
+import org.springside.examples.showcase.webservice.ws.server.WsConstants;
 
 /**
  * 演示以MTOM附件协议传输Streaming DataHandler的二进制数据传输的方式. 

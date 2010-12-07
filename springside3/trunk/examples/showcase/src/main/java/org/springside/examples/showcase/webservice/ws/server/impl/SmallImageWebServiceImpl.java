@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.ws.server.impl;
+package org.springside.examples.showcase.webservice.ws.server.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,10 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springside.examples.showcase.ws.server.SmallImageWebService;
-import org.springside.examples.showcase.ws.server.WsConstants;
-import org.springside.examples.showcase.ws.server.result.SmallImageResult;
-import org.springside.examples.showcase.ws.server.result.WSResult;
+import org.springside.examples.showcase.webservice.ws.server.SmallImageWebService;
+import org.springside.examples.showcase.webservice.ws.server.WsConstants;
+import org.springside.examples.showcase.webservice.ws.server.result.SmallImageResult;
+import org.springside.examples.showcase.webservice.ws.server.result.WSResult;
 
 /**
  * SmallImageWebService服务端实现类.

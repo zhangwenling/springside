@@ -1,27 +1,24 @@
-package org.springside.examples.showcase.rs.dto;
+package org.springside.examples.showcase.webservice.ws.server.dto;
 
-import java.util.List;
+import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-
-import com.google.common.collect.Lists;
+import org.springside.examples.showcase.webservice.ws.server.WsConstants;
 
 /**
  * Web Service传输User信息的DTO.
  * 
  * @author calvin
  */
-@XmlRootElement
-public class UserDTO {
+@XmlType(name = "User", namespace = WsConstants.NS)
+public class UserDTO implements Serializable {
+	private static final long serialVersionUID = 5417916547256861781L;
 
 	private Long id;
 	private String loginName;
 	private String name;
-	private String email;
-
-	private List<RoleDTO> roleList = Lists.newArrayList();
 
 	public Long getId() {
 		return id;
@@ -45,22 +42,6 @@ public class UserDTO {
 
 	public void setName(String value) {
 		name = value;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String value) {
-		email = value;
-	}
-
-	public List<RoleDTO> getRoleList() {
-		return roleList;
-	}
-
-	public void setRoleList(List<RoleDTO> roleList) {
-		this.roleList = roleList;
 	}
 
 	/**

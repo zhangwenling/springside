@@ -1,10 +1,10 @@
-package org.springside.examples.showcase.ws.server;
+package org.springside.examples.showcase.webservice.ws.server;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-import org.springside.examples.showcase.ws.server.result.GetAllUserResult;
-import org.springside.examples.showcase.ws.server.result.GetUserResult;
+import org.springside.examples.showcase.webservice.ws.server.result.GetAllUserResult;
+import org.springside.examples.showcase.webservice.ws.server.result.GetUserResult;
 
 /**
  * JAX-WS2.0的WebService接口定义类.
