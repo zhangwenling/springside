@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.xml;
+package org.springside.examples.showcase.encode.xml;
 
 import java.util.List;
 import java.util.Map;

@@ -14,7 +14,6 @@ import org.springside.examples.showcase.common.dao.UserDao;
 import org.springside.examples.showcase.common.dao.UserJdbcDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
-import org.springside.examples.showcase.jmx.server.ServerConfig;
 import org.springside.modules.memcached.SpyMemcachedClient;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 import org.springside.modules.utils.encode.JsonBinder;
@@ -37,8 +36,7 @@ public class AccountManager {
 
 	private JsonBinder jsonBinder = JsonBinder.buildNonDefaultBinder();
 
-	private ServerConfig serverConfig; //系统配置
-
+	
 	private NotifyMessageProducer notifyProducer; //JMS消息发送
 
 	private PasswordEncoder encoder = new ShaPasswordEncoder();
@@ -160,7 +158,7 @@ public class AccountManager {
 	 * 同时发送只有一个消费者的Queue消息与发布订阅模式有多个消费者的Topic消息.
 	 */
 	private void sendNotifyMessage(User user) {
-		if (serverConfig != null && serverConfig.isNotificationMailEnabled() && notifyProducer != null) {
+		if (notifyProducer != null) {
 			try {
 				notifyProducer.sendQueue(user);
 				notifyProducer.sendTopic(user);
@@ -178,11 +176,6 @@ public class AccountManager {
 	@Autowired
 	public void setUserJdbcDao(UserJdbcDao userJdbcDao) {
 		this.userJdbcDao = userJdbcDao;
-	}
-
-	@Autowired(required = false)
-	public void setServerConfig(ServerConfig serverConfig) {
-		this.serverConfig = serverConfig;
 	}
 
 	@Autowired(required = false)

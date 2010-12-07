@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.json;
+package org.springside.examples.showcase.encode.json;
 
 import static org.junit.Assert.*;
 
