@@ -12,12 +12,6 @@
 	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
-	<script type="text/javascript">
-		function refreshCaptcha() {
-			$('#captchaImg').hide().attr('src','${ctx}/security/jcaptcha.jpg?' + Math.floor(Math.random()*100)).fadeIn();
-		}
-	</script>
-
 </head>
 
 <body>
@@ -29,19 +23,16 @@
 		<div class="yui-b">
 		<h1>Showcase登录页</h1>
 
-		<h2>技术说明：</h2>
-
-		<p>基于JCaptcha1.0的验证码方案，通过ServletFilter与SpringSecurity简单集成。</p>
 		<%if ("1".equals(request.getParameter("error"))) {%>
 			<div class="error"> 用户名密码错误,请重试.</div>
 		<%
-			}
-			if ("2".equals(request.getParameter("error"))) {
+		}
+		if ("2".equals(request.getParameter("error"))) {
 		%>
 			<div class="error"> 验证码错误,请重试.</div>
 		<%
-			}
-			if ("3".equals(request.getParameter("error"))) {
+		}
+		if ("3".equals(request.getParameter("error"))) {
 		%>
 			<div class="error"> 此帐号已从别处登录.</div>
 		<%}%>
@@ -55,24 +46,18 @@
 						<s:if test="not empty param.error">
 							value='<%=session.getAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY)%>'</s:if> />
 					</td>
-					<td rowspan="3"><img id="captchaImg" src="${ctx}/security/jcaptcha.jpg"/></td>
-
 				</tr>
 				<tr>
 					<td>密码:</td>
 					<td><input type='password' size='10' name='j_password'/></td>
 				</tr>
 				<tr>
-					<td>验证码:</td>
-					<td><input type='text' name='j_captcha' size='5'/></td>
-				</tr>
-				<tr>
-					<td colspan='3'><input type="checkbox" name="_spring_security_remember_me"/>
-						两周内记住我 <span style="margin-left:25px"><a href="javascript:refreshCaptcha()">看不清楚换一张</a></span>
+					<td><input type="checkbox" name="_spring_security_remember_me"/>
+						两周内记住我</span>
 					</td>
 				</tr>
 				<tr>
-					<td colspan='3'><input value="登录" type="submit"/></td>
+					<td><input value="登录" type="submit"/></td>
 				</tr>
 			</table>
 		</form>

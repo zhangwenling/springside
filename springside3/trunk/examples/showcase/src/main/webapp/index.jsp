@@ -17,14 +17,9 @@
 		<div id="yui-main">
 		<div class="yui-b">
 			<p>各式主流的、实用的、好玩的开源项目大派对。</p>
-			<p>Coming Soon....</p>
+			<p>SpringSide 4.0新张大吉,新增演示：</p>
 			<ul>
-				<li>Spring MVC 3.0 演示</li>
-				<li>myBatis 3.0 在mini-service中演示</li>
-				<li>JQuery UI 与 JqGrid演示</li>
-				<li>Solr搜索引擎使用演示</li>
-				<li>Hibernate Validator演示</li>
-				<li>Tokyo Tyrant Key-Value数据库完整演示Memcached演示</li>
+				<li>MongoDB演示</li>
 			</ul>
 		</div>
 		</div>

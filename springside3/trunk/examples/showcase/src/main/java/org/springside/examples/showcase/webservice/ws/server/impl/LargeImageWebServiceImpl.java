@@ -27,7 +27,7 @@ import org.springside.examples.showcase.webservice.ws.server.result.WSResult;
  * 
  * @author calvin
  */
-@WebService(serviceName = "LargeImageService", portName = "LargeImageServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.LargeImageWebService", targetNamespace = WsConstants.NS)
+@WebService(serviceName = "LargeImageService", portName = "LargeImageServicePort", endpointInterface = "org.springside.examples.showcase.webservice.ws.server.LargeImageWebService", targetNamespace = WsConstants.NS)
 public class LargeImageWebServiceImpl implements LargeImageWebService, ApplicationContextAware {
 
 	private static Logger logger = LoggerFactory.getLogger(LargeImageWebServiceImpl.class);

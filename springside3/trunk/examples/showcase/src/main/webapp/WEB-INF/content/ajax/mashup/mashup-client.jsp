@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>跨域Mashup演示</title>
+	<title>跨域名Mashup演示</title>
 	<%@ include file="/common/meta.jsp" %>
 	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
@@ -12,7 +12,7 @@
 	<script type="text/javascript">
 		var remoteUrl = "http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}";
 
-		//使用JQuery.getJSON(url?callback=?)方式跨域访问内容
+		//使用JQuery.getJSON(url?callback=?)方式跨域名访问内容
 		function getMashupContent() {
 			$.getJSON(remoteUrl + "/ajax/mashup/mashup-server.action?callback=?", function(data) {
 				$('#mashupContent').html(data.html);
@@ -33,7 +33,7 @@
 	
 		<h2>技术说明：</h2>
 		<p>
-			演示基于JQuery的JSONP实现，绕过浏览器对Ajax访问跨域名网站内容的限制.<br/>
+			演示基于JQuery的JSONP实现，绕过浏览器对Ajax访问跨域名网站内容的限制, Mashup不同域名网站的内容.<br/>
 			请先将本页另存为本地html文件，打开本地文件访问应用服务器即为跨域访问的场景.
 		</p>
 		<p><input type="button" value="获取内容" onclick="getMashupContent();"/></p>	

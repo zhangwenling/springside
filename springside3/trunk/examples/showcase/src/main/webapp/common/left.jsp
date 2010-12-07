@@ -7,8 +7,8 @@
 		<a href="${ctx}/jmx/index.action">JMX演示</a>
 		<a href="${ctx}/email/index.action">邮件演示</a>
 		<a href="${ctx}/ajax/index.action">Ajax演示</a>
-		<a href="${ctx}/report/index.action">报表演示</a>
 		<a href="${ctx}/cache/index.action">Cache演示</a>
+		<a href="${ctx}/excel/index.action">Excel演示</a>
 		<a href="${ctx}/schedule/index.action">定时任务演示</a>
 		<a href="${ctx}/xml_json/index.action">XML/JSON操作演示</a>
 		<a href="${ctx}/security/index.action">安全高级演示</a>

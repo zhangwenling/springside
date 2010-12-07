@@ -13,7 +13,7 @@
 		<s:intercept-url pattern="/img/**" filters="none" />
 		<s:intercept-url pattern="/js/**" filters="none" />
 
-		<s:intercept-url pattern="/common/user/*" access="isAuthenticated()" />
+		<s:intercept-url pattern="/common/**" access="isAuthenticated()" />
 
 		<s:form-login login-page="/security/login.action" default-target-url="/" authentication-failure-url="/security/login.action?error=1" />
 		<s:logout logout-success-url="/" />

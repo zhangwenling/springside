@@ -25,7 +25,7 @@ import org.springside.examples.showcase.webservice.ws.server.result.WSResult;
  * 
  * @author calvin
  */
-@WebService(serviceName = "SmallImageService", portName = "SmallImageServicePort", endpointInterface = "org.springside.examples.showcase.ws.server.SmallImageWebService", targetNamespace = WsConstants.NS)
+@WebService(serviceName = "SmallImageService", portName = "SmallImageServicePort", endpointInterface = "org.springside.examples.showcase.webservice.ws.server.SmallImageWebService", targetNamespace = WsConstants.NS)
 public class SmallImageWebServiceImpl implements SmallImageWebService, ApplicationContextAware {
 
 	private static Logger logger = LoggerFactory.getLogger(SmallImageWebServiceImpl.class);
