@@ -1,22 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
-<mapper namespace="User">
+<mapper namespace="Account">
 
-	<resultMap id="userMapper" type="User">
-		<id property="id" column="id" />
-		<result property="name" column="name" />
+	<resultMap id="departmentDetailMap" type="Department">
+		<id property="id" column="department_id" />
+		<result property="name" column="department_name" />
+		<association property="manager" column="manager_id" resultMap="managerMap" />
+		<collection property="userList" resultMap="userMap" />
 	</resultMap>
 
-	<select id="getUser" resultMap="userMapper" parameterType="long">
-		select id, name from acct_user
-		where id=#{id}
+	<resultMap id="managerMap" type="User">
+		<id property="id" column="manager_id" />
+		<result property="name" column="manager_name" />
+	</resultMap>
+
+	<resultMap id="userMap" type="User">
+		<id property="id" column="user_id" />
+		<result property="name" column="user_name" />
+	</resultMap>
+
+	<select id="getAllDepartment" resultType="Department">
+		select id, name from acct_department
 	</select>
 
-	<select id="getAllUser" resultMap="userMapper" parameterType="long">
-		select id, name from acct_user
+	<select id="getDepartmentDetail" resultMap="departmentDetailMap">
+		select d.id as department_id,
+		d.name as department_name,
+		m.id as manager_id,
+		m.name as manager_name,
+		u.id as user_id,
+		u.name as user_name
+		from acct_department d, acct_user m, acct_user u
+		where d.manager_id=m.id and d.id=u.department_id
+		and d.id=#{id}
 	</select>
-	
-	<select id="getAllRole" resultType="Role">
-		select * from acct_role
-	</select>
+
+	<insert id="saveUser" parameterType="User">
+		insert into acct_user (id, name, password)
+		values (#{id},
+		#{name},#{password})
+	</insert>
+
+
+
 </mapper> 

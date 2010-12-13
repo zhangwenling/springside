@@ -22,13 +22,13 @@ public class AccountManagerTest {
 	private IMocksControl control = EasyMock.createControl();
 
 	private AccountManager accountManager;
-	private AccountMyBatisDao mockUserDao;
+	private AccountMyBatisDao mockAccountDao;
 
 	@Before
 	public void setUp() {
 		accountManager = new AccountManager();
-		mockUserDao = control.createMock(AccountMyBatisDao.class);
-		accountManager.setUserDao(mockUserDao);
+		mockAccountDao = control.createMock(AccountMyBatisDao.class);
+		accountManager.setAccountDao(mockAccountDao);
 	}
 
 	@After
@@ -43,8 +43,8 @@ public class AccountManagerTest {
 	 */
 	@Test
 	public void authUser() {
-		EasyMock.expect(mockUserDao.countByLoginNamePassword("admin", "admin")).andReturn(1L);
-		EasyMock.expect(mockUserDao.countByLoginNamePassword("admin", "errorPasswd")).andReturn(0L);
+		EasyMock.expect(mockAccountDao.countByLoginNamePassword("admin", "admin")).andReturn(1L);
+		EasyMock.expect(mockAccountDao.countByLoginNamePassword("admin", "errorPasswd")).andReturn(0L);
 		control.replay();
 
 		assertEquals(true, accountManager.authenticate("admin", "admin"));

@@ -1,9 +1,6 @@
 package org.springside.examples.miniservice.unit.ws;
 
-import static org.junit.Assert.*;
-
-import java.util.Collections;
-import java.util.List;
+import static org.junit.Assert.assertEquals;
 
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
@@ -15,12 +12,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springside.examples.miniservice.data.AccountData;
-import org.springside.examples.miniservice.entity.account.User;
+import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.service.account.AccountManager;
-import org.springside.examples.miniservice.ws.dto.UserDTO;
+import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.impl.UserWebServiceImpl;
 import org.springside.examples.miniservice.ws.result.AuthUserResult;
-import org.springside.examples.miniservice.ws.result.GetAllUserResult;
+import org.springside.examples.miniservice.ws.result.GetAllDepartmentResult;
+import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
 
 /**
@@ -60,28 +58,27 @@ public class UserWebServiceTest {
 	 */
 	@Test
 	public void dozerBinding() {
-		User user = AccountData.getRandomUserWithAdminRole();
-		List<User> list = Collections.singletonList(user);
-		EasyMock.expect(mockAccountManager.getAllUser()).andReturn(list);
+		Department department = AccountData.getRandomDepartment();
+		EasyMock.expect(mockAccountManager.getDepartmentDetail(1L)).andReturn(department);
 		control.replay();
 
-		GetAllUserResult result = userWebService.getAllUser();
+		GetDepartmentDetailResult result = userWebService.getDepartmentDetail(1L);
 		assertEquals(WSResult.SUCCESS, result.getCode());
-		UserDTO dto = result.getUserList().get(0);
-		assertEquals(user.getLoginName(), dto.getLoginName());
-		assertEquals(user.getRoleList().get(0).getName(), dto.getRoleList().get(0).getName());
+		DepartmentDTO dto = result.getDepartment();
+		assertEquals(department.getName(), dto.getName());
+		assertEquals(department.getUserList().get(0).getName(), dto.getUserList().get(0).getName());
 	}
 
 	/**
 	 * 测试参数校验.
 	 */
-	@Test
+/*	@Test
 	public void validateParamter() {
 		control.replay();
 		WSResult result = userWebService.createUser(null);
 		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
 
-		User testUser = AccountData.getRandomUserWithAdminRole();
+		Department testUser = AccountData.getRandomUserWithAdminRole();
 		UserDTO userDTOWithoutLoginName = new DozerBeanMapper().map(testUser, UserDTO.class);
 		userDTOWithoutLoginName.setLoginName(null);
 		result = userWebService.createUser(userDTOWithoutLoginName);
@@ -99,17 +96,18 @@ public class UserWebServiceTest {
 		result = userWebService.createUser(userDTOWithoutRole);
 		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
 	}
+*/
 
 	/**
 	 * 测试系统内部抛出异常时的处理.
 	 */
 	@Test
 	public void handleException() {
-		EasyMock.expect(mockAccountManager.getAllUser()).andThrow(
+		EasyMock.expect(mockAccountManager.getAllDepartment()).andThrow(
 				new RuntimeException("Expected exception.."));
 		control.replay();
 
-		GetAllUserResult result = userWebService.getAllUser();
+		GetAllDepartmentResult result = userWebService.getAllDepartment();
 		assertEquals(WSResult.SYSTEM_ERROR, result.getCode());
 		assertEquals(WSResult.SYSTEM_ERROR_MESSAGE, result.getMessage());
 	}

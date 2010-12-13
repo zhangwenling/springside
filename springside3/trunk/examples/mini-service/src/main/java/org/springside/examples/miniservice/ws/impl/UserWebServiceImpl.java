@@ -12,16 +12,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
+import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.service.ServiceException;
 import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.ws.UserWebService;
 import org.springside.examples.miniservice.ws.WsConstants;
+import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.AuthUserResult;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
-import org.springside.examples.miniservice.ws.result.GetAllUserResult;
-import org.springside.examples.miniservice.ws.result.GetUserResult;
+import org.springside.examples.miniservice.ws.result.GetAllDepartmentResult;
+import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
 
 import com.google.common.collect.Lists;
@@ -49,19 +51,19 @@ public class UserWebServiceImpl implements UserWebService {
 	 * @see UserWebService#getAllUser()
 	 */
 	@Override
-	public GetAllUserResult getAllUser() {
+	public GetAllDepartmentResult getAllDepartment() {
 
-		GetAllUserResult result = new GetAllUserResult();
+		GetAllDepartmentResult result = new GetAllDepartmentResult();
 
 		//获取User列表并转换为UserDTO列表.
 		try {
-			List<User> userEntityList = accountManager.getAllUser();
-			List<UserDTO> userDTOList = Lists.newArrayList();
+			List<Department> departmentEntityList = accountManager.getAllDepartment();
+			List<DepartmentDTO> departmentDTOList = Lists.newArrayList();
 
-			for (User userEntity : userEntityList) {
-				userDTOList.add(dozer.map(userEntity, UserDTO.class));
+			for (Department departmentEntity : departmentEntityList) {
+				departmentDTOList.add(dozer.map(departmentEntity, DepartmentDTO.class));
 			}
-			result.setUserList(userDTOList);
+			result.setDepartmentList(departmentDTOList);
 			return result;
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
@@ -73,8 +75,8 @@ public class UserWebServiceImpl implements UserWebService {
 	 * @see UserWebService#getUser()
 	 */
 	@Override
-	public GetUserResult getUser(Long id) {
-		GetUserResult result = new GetUserResult();
+	public GetDepartmentDetailResult getDepartmentDetail(Long id) {
+		GetDepartmentDetailResult result = new GetDepartmentDetailResult();
 
 		//校验请求参数
 		try {
@@ -86,11 +88,11 @@ public class UserWebServiceImpl implements UserWebService {
 
 		//获取用户
 		try {
-			User entity = accountManager.getUser(id);
+			Department entity = accountManager.getDepartmentDetail(id);
 
-			UserDTO dto = dozer.map(entity, UserDTO.class);
+			DepartmentDTO dto = dozer.map(entity, DepartmentDTO.class);
 
-			result.setUser(dto);
+			result.setDepartment(dto);
 
 			return result;
 		} catch (ServiceException e) {

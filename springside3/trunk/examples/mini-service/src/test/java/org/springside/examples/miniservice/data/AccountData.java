@@ -1,6 +1,6 @@
 package org.springside.examples.miniservice.data;
 
-import org.springside.examples.miniservice.entity.account.Role;
+import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.modules.test.utils.DataUtils;
 
@@ -10,6 +10,19 @@ import org.springside.modules.test.utils.DataUtils;
  * @author calvin
  */
 public class AccountData {
+
+	public static Department getRandomDepartment() {
+		String departmentName = DataUtils.randomName("Department");
+
+		Department department = new Department();
+		department.setName(departmentName);
+		
+		User manager = getRandomUser();
+		department.setManager(manager);
+		department.getUserList().add(manager);
+
+		return department;
+	}
 
 	public static User getRandomUser() {
 		String userName = DataUtils.randomName("User");
@@ -21,20 +34,5 @@ public class AccountData {
 		user.setEmail(userName + "@springside.org.cn");
 
 		return user;
-	}
-
-	public static User getRandomUserWithAdminRole() {
-		User user = AccountData.getRandomUser();
-		Role adminRole = AccountData.getAdminRole();
-		user.getRoleList().add(adminRole);
-		return user;
-	}
-
-	public static Role getAdminRole() {
-		Role role = new Role();
-		role.setId(1L);
-		role.setName("Admin");
-
-		return role;
 	}
 }

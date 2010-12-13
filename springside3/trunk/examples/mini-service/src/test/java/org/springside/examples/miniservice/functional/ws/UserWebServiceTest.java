@@ -1,6 +1,7 @@
 package org.springside.examples.miniservice.functional.ws;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import javax.xml.ws.BindingProvider;
 
@@ -16,11 +17,10 @@ import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniservice.ws.UserWebService;
-import org.springside.examples.miniservice.ws.dto.RoleDTO;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.AuthUserResult;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
-import org.springside.examples.miniservice.ws.result.GetAllUserResult;
+import org.springside.examples.miniservice.ws.result.GetAllDepartmentResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
 
 /**
@@ -59,10 +59,7 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 		userDTO.setName(user.getName());
 		userDTO.setEmail(user.getEmail());
 
-		RoleDTO roleDTO = new RoleDTO();
-		roleDTO.setId(1L);
-		userDTO.getRoleList().add(roleDTO);
-
+		
 		CreateUserResult result = userWebService.createUser(userDTO);
 
 		assertEquals(WSResult.SUCCESS, result.getCode());
@@ -70,10 +67,10 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 	}
 
 	/**
-	 * 测试获取全部用户,使用CXF的API自行动态创建Client.
+	 * 测试获取全部部门,使用CXF的API自行动态创建Client.
 	 */
 	@Test
-	public void getAllUser() {
+	public void getAllDepartment() {
 		String address = BASE_URL + "/ws/userservice";
 
 		JaxWsProxyFactoryBean proxyFactory = new JaxWsProxyFactoryBean();
@@ -85,11 +82,9 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 		((BindingProvider) userWebServiceCreated).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
 				address);
 
-		GetAllUserResult result = userWebServiceCreated.getAllUser();
+		GetAllDepartmentResult result = userWebServiceCreated.getAllDepartment();
 
-		assertTrue(result.getUserList().size() > 0);
-		UserDTO adminUser = result.getUserList().get(0);
-		assertEquals("admin", adminUser.getLoginName());
-		assertEquals(2, adminUser.getRoleList().size());
+		assertEquals(2,result.getDepartmentList().size() );
+		assertEquals("Development", result.getDepartmentList().get(0).getName());
 	}
 }

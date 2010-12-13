@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniservice.dao.account.AccountMyBatisDao;
+import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
 
 /**
- * 用户管理类.
+ * 帐号管理类.
  * 
  * 实现领域对象用户及其相关实体的所有业务管理函数.
  * 使用Spring annotation定义事务管理.
@@ -23,20 +24,20 @@ import org.springside.examples.miniservice.entity.account.User;
 @Transactional
 public class AccountManager {
 
-	private AccountMyBatisDao userDao = null;
+	private AccountMyBatisDao accountDao = null;
 
 	@Transactional(readOnly = true)
-	public List<User> getAllUser() {
-		return userDao.getAllUser();
+	public List<Department> getAllDepartment() {
+		return accountDao.getAllDepartment();
 	}
 
 	@Transactional(readOnly = true)
-	public User getUser(Long id) {
-		return  userDao.getUser(id);
+	public Department getDepartmentDetail(Long id) {
+		return  accountDao.getDepartmentDetail(id);
 	}
 
 	public void saveUser(User user) {
-		userDao.saveUser(user);
+		accountDao.saveUser(user);
 	}
 
 	/**
@@ -50,11 +51,11 @@ public class AccountManager {
 			return false;
 		}
 
-		return (userDao.countByLoginNamePassword(loginName, password) == 1);
+		return (accountDao.countByLoginNamePassword(loginName, password) == 1);
 	}
 
 	@Autowired
-	public void setUserDao(AccountMyBatisDao userDao) {
-		this.userDao = userDao;
+	public void setAccountDao(AccountMyBatisDao accountDao) {
+		this.accountDao = accountDao;
 	}
 }

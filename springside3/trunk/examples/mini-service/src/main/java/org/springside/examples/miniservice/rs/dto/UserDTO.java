@@ -1,17 +1,10 @@
 package org.springside.examples.miniservice.rs.dto;
 
-import java.util.List;
-
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.google.common.collect.Lists;
 
 /**
  * Web Service传输User信息的DTO.
@@ -25,8 +18,6 @@ public class UserDTO {
 	private String loginName;
 	private String name;
 	private String email;
-
-	private List<RoleDTO> roleList = Lists.newArrayList();
 
 	public Long getId() {
 		return id;
@@ -61,17 +52,6 @@ public class UserDTO {
 
 	public void setEmail(String value) {
 		email = value;
-	}
-
-	@NotEmpty
-	@XmlElementWrapper(name = "roleList")
-	@XmlElement(name = "Role")
-	public List<RoleDTO> getRoleList() {
-		return roleList;
-	}
-
-	public void setRoleList(List<RoleDTO> roleList) {
-		this.roleList = roleList;
 	}
 
 	/**

@@ -8,7 +8,7 @@
 	</parent>
 	<groupId>org.springside.examples</groupId>
 	<artifactId>mini-web</artifactId>
-	<version>4..00-SNAPSHOT</version>
+	<version>4.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>Springside3 Mini-Web Example</name>
 
