@@ -5,7 +5,9 @@
 
     drop table acct_user_role cascade constraints;
 
-    drop sequence hibernate_sequence;
+    drop sequence user_sequence;
+    
+    drop sequence role_sequence;
 
     create table acct_role (
         id number(19,0) not null,
@@ -37,4 +39,5 @@
         foreign key (role_id) 
         references acct_role;
 
-    create sequence hibernate_sequence;
+    create sequence user_sequence;
+	create sequence role_sequence;
