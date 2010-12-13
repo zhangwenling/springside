@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import com.google.common.collect.Lists;
 
@@ -34,7 +33,6 @@ public class DepartmentDTO {
 	//配置输出xml为<userList><User><id>1</id></User></userList>
 	@XmlElementWrapper(name = "userList")
 	@XmlElement(name = "User")
-	@NotEmpty
 	public List<UserDTO> getUserList() {
 		return userList;
 	}
