@@ -40,8 +40,8 @@ public class UserResourceClient {
 	}
 
 	public URI createUser(UserDTO user) {
-		ClientResponse response = client.path("/users").entity(user, MediaType.APPLICATION_JSON).post(
-				ClientResponse.class);
+		ClientResponse response = client.path("/users").entity(user, MediaType.APPLICATION_JSON)
+				.post(ClientResponse.class);
 		if (201 == response.getStatus()) {
 			return response.getLocation();
 		} else {

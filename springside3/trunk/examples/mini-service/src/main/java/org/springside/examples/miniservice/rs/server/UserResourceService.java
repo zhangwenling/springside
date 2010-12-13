@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -16,18 +17,17 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 
 import org.dozer.DozerBeanMapper;
-import org.hibernate.ObjectNotFoundException;
-import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
+import org.springside.examples.miniservice.service.ServiceException;
 import org.springside.examples.miniservice.service.account.AccountManager;
 
 import com.google.common.collect.Lists;
@@ -61,7 +61,7 @@ public class UserResourceService {
 	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
 	public List<UserDTO> getAllUser() {
 		try {
-			List<User> entityList = accountManager.getAllInitializedUser();
+			List<User> entityList = accountManager.getAllUser();
 
 			List<UserDTO> dtoList = Lists.newArrayList();
 			for (User userEntity : entityList) {
@@ -83,12 +83,12 @@ public class UserResourceService {
 	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
 	public UserDTO getUser(@PathParam("id") Long id) {
 		try {
-			User entity = accountManager.getInitedUser(id);
+			User entity = accountManager.getUser(id);
 
 			UserDTO dto = dozer.map(entity, UserDTO.class);
 
 			return dto;
-		} catch (ObjectNotFoundException e) {
+		} catch (ServiceException e) {
 			String message = "用户不存在(id:" + id + ")";
 			logger.error(message, e);
 			throw buildException(Status.NOT_FOUND, message);

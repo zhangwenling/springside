@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="User">
+
+	<resultMap id="userMapper" type="User">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+	</resultMap>
+
+	<select id="get" resultMap="userMapper" parameterType="long">
+		select id, name from acct_user
+		where id=#{id}
+	</select>
+
+	<select id="getAll" resultMap="userMapper" parameterType="long">
+		select id, name from acct_user
+	</select>
+</mapper> 

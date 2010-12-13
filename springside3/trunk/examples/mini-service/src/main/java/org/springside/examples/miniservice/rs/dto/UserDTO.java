@@ -18,7 +18,7 @@ import com.google.common.collect.Lists;
  * 
  * @author calvin
  */
-@XmlRootElement(name="User")
+@XmlRootElement(name = "User")
 public class UserDTO {
 
 	private Long id;
@@ -64,7 +64,7 @@ public class UserDTO {
 	}
 
 	@NotEmpty
-	@XmlElementWrapper(name = "roles")
+	@XmlElementWrapper(name = "roleList")
 	@XmlElement(name = "Role")
 	public List<RoleDTO> getRoleList() {
 		return roleList;

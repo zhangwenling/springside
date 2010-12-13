@@ -8,13 +8,12 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.dozer.DozerBeanMapper;
-import org.hibernate.ObjectNotFoundException;
-import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springside.examples.miniservice.entity.account.User;
+import org.springside.examples.miniservice.service.ServiceException;
 import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.ws.UserWebService;
 import org.springside.examples.miniservice.ws.WsConstants;
@@ -32,7 +31,6 @@ import com.google.common.collect.Lists;
  * 
  * 客户端实现见功能测试用例.
  * 
- * @author sky
  * @author calvin
  */
 //serviceName与portName属性指明WSDL中的名称, endpointInterface属性指向Interface定义类.
@@ -57,7 +55,7 @@ public class UserWebServiceImpl implements UserWebService {
 
 		//获取User列表并转换为UserDTO列表.
 		try {
-			List<User> userEntityList = accountManager.getAllInitializedUser();
+			List<User> userEntityList = accountManager.getAllUser();
 			List<UserDTO> userDTOList = Lists.newArrayList();
 
 			for (User userEntity : userEntityList) {
@@ -88,14 +86,14 @@ public class UserWebServiceImpl implements UserWebService {
 
 		//获取用户
 		try {
-			User entity = accountManager.getInitedUser(id);
+			User entity = accountManager.getUser(id);
 
 			UserDTO dto = dozer.map(entity, UserDTO.class);
 
 			result.setUser(dto);
 
 			return result;
-		} catch (ObjectNotFoundException e) {
+		} catch (ServiceException e) {
 			String message = "用户不存在(id:" + id + ")";
 			logger.error(message, e);
 			return result.buildResult(WSResult.PARAMETER_ERROR, message);
@@ -135,7 +133,7 @@ public class UserWebServiceImpl implements UserWebService {
 			accountManager.saveUser(userEntity);
 			result.setUserId(userEntity.getId());
 			return result;
-		} catch (ConstraintViolationException e) {
+		} catch (ServiceException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
 			logger.error(message, e);
 			return result.buildResult(WSResult.PARAMETER_ERROR, message);

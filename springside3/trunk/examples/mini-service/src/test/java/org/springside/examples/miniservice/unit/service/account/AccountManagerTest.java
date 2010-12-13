@@ -1,13 +1,13 @@
 package org.springside.examples.miniservice.unit.service.account;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springside.examples.miniservice.dao.account.UserDao;
+import org.springside.examples.miniservice.dao.account.UserMyBatisDao;
 import org.springside.examples.miniservice.service.account.AccountManager;
 
 /**
@@ -22,12 +22,12 @@ public class AccountManagerTest {
 	private IMocksControl control = EasyMock.createControl();
 
 	private AccountManager accountManager;
-	private UserDao mockUserDao;
+	private UserMyBatisDao mockUserDao;
 
 	@Before
 	public void setUp() {
 		accountManager = new AccountManager();
-		mockUserDao = control.createMock(UserDao.class);
+		mockUserDao = control.createMock(UserMyBatisDao.class);
 		accountManager.setUserDao(mockUserDao);
 	}
 
@@ -43,8 +43,8 @@ public class AccountManagerTest {
 	 */
 	@Test
 	public void authUser() {
-		EasyMock.expect(mockUserDao.countUserByLoginNamePassword("admin", "admin")).andReturn(1L);
-		EasyMock.expect(mockUserDao.countUserByLoginNamePassword("admin", "errorPasswd")).andReturn(0L);
+		EasyMock.expect(mockUserDao.countByLoginNamePassword("admin", "admin")).andReturn(1L);
+		EasyMock.expect(mockUserDao.countByLoginNamePassword("admin", "errorPasswd")).andReturn(0L);
 		control.replay();
 
 		assertEquals(true, accountManager.authenticate("admin", "admin"));

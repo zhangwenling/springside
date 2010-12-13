@@ -6,7 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springside.examples.miniservice.dao.account.UserDao;
+import org.springside.examples.miniservice.dao.account.UserMyBatisDao;
 import org.springside.examples.miniservice.entity.account.User;
 
 /**
@@ -23,28 +23,16 @@ import org.springside.examples.miniservice.entity.account.User;
 @Transactional
 public class AccountManager {
 
-	private UserDao userDao = null;
+	private UserMyBatisDao userDao = null;
 
-	/**
-	 * 获取全部用户, 并对用户的延迟加载关联进行初始化.
-	 */
 	@Transactional(readOnly = true)
-	public List<User> getAllInitializedUser() {
-		List<User> userList = userDao.getAll("id", true);
-		for (User user : userList) {
-			userDao.initUser(user);
-		}
-		return userList;
+	public List<User> getAllUser() {
+		return userDao.getAll();
 	}
 
-	/**
-	 * 获取用户, 并对用户的延迟加载关联进行初始化.
-	 */
 	@Transactional(readOnly = true)
-	public User getInitedUser(Long id) {
-		User user = userDao.get(id);
-		userDao.initUser(user);
-		return user;
+	public User getUser(Long id) {
+		return  userDao.get(id);
 	}
 
 	public void saveUser(User user) {
@@ -54,7 +42,7 @@ public class AccountManager {
 	/**
 	 * 验证用户名密码. 
 	 * 
-	 * @return 验证通过时返回true.用户名或密码错误时返回false.
+	 * @return 验证通过时返回true,用户名或密码错误时返回false.
 	 */
 	@Transactional(readOnly = true)
 	public boolean authenticate(String loginName, String password) {
@@ -62,11 +50,11 @@ public class AccountManager {
 			return false;
 		}
 
-		return (userDao.countUserByLoginNamePassword(loginName, password) == 1);
+		return (userDao.countByLoginNamePassword(loginName, password) == 1);
 	}
 
 	@Autowired
-	public void setUserDao(UserDao userDao) {
+	public void setUserDao(UserMyBatisDao userDao) {
 		this.userDao = userDao;
 	}
 }
