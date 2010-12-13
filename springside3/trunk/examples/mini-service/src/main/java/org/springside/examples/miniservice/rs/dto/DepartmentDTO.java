@@ -10,7 +10,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.google.common.collect.Lists;
 
-@XmlRootElement(name = "Department")
+@XmlRootElement(name = "department")
 public class DepartmentDTO {
 	
 	private String name;
@@ -32,7 +32,7 @@ public class DepartmentDTO {
 	
 	//配置输出xml为<userList><User><id>1</id></User></userList>
 	@XmlElementWrapper(name = "userList")
-	@XmlElement(name = "User")
+	@XmlElement(name = "user")
 	public List<UserDTO> getUserList() {
 		return userList;
 	}

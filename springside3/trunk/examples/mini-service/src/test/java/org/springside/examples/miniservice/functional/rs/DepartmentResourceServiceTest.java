@@ -27,7 +27,7 @@ public class DepartmentResourceServiceTest extends BaseFunctionalTestCase {
 		@Test
 		public void getAllDepartment() {
 			List<DepartmentDTO> departmentList = client.getAllDepartment();
-			assertTrue(departmentList.size() >= 4);
+			assertTrue(departmentList.size() ==2);
 			assertEquals("Development", departmentList.get(0).getName());
 		}
 	

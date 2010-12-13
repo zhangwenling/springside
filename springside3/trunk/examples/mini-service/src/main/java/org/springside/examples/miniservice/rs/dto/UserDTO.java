@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.Email;
  * 
  * @author calvin
  */
-@XmlRootElement(name = "User")
+@XmlRootElement(name = "user")
 public class UserDTO {
 
 	private Long id;
