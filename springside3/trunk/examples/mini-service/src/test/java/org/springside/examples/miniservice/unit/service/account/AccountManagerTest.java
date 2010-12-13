@@ -7,7 +7,7 @@ import org.easymock.IMocksControl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springside.examples.miniservice.dao.account.UserMyBatisDao;
+import org.springside.examples.miniservice.dao.account.AccountMyBatisDao;
 import org.springside.examples.miniservice.service.account.AccountManager;
 
 /**
@@ -22,12 +22,12 @@ public class AccountManagerTest {
 	private IMocksControl control = EasyMock.createControl();
 
 	private AccountManager accountManager;
-	private UserMyBatisDao mockUserDao;
+	private AccountMyBatisDao mockUserDao;
 
 	@Before
 	public void setUp() {
 		accountManager = new AccountManager();
-		mockUserDao = control.createMock(UserMyBatisDao.class);
+		mockUserDao = control.createMock(AccountMyBatisDao.class);
 		accountManager.setUserDao(mockUserDao);
 	}
 

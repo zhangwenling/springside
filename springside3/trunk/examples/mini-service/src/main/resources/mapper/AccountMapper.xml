@@ -7,12 +7,16 @@
 		<result property="name" column="name" />
 	</resultMap>
 
-	<select id="get" resultMap="userMapper" parameterType="long">
+	<select id="getUser" resultMap="userMapper" parameterType="long">
 		select id, name from acct_user
 		where id=#{id}
 	</select>
 
-	<select id="getAll" resultMap="userMapper" parameterType="long">
+	<select id="getAllUser" resultMap="userMapper" parameterType="long">
 		select id, name from acct_user
+	</select>
+	
+	<select id="getAllRole" resultType="Role">
+		select * from acct_role
 	</select>
 </mapper> 

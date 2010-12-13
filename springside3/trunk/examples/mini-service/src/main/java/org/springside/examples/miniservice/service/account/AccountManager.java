@@ -6,7 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springside.examples.miniservice.dao.account.UserMyBatisDao;
+import org.springside.examples.miniservice.dao.account.AccountMyBatisDao;
 import org.springside.examples.miniservice.entity.account.User;
 
 /**
@@ -23,20 +23,20 @@ import org.springside.examples.miniservice.entity.account.User;
 @Transactional
 public class AccountManager {
 
-	private UserMyBatisDao userDao = null;
+	private AccountMyBatisDao userDao = null;
 
 	@Transactional(readOnly = true)
 	public List<User> getAllUser() {
-		return userDao.getAll();
+		return userDao.getAllUser();
 	}
 
 	@Transactional(readOnly = true)
 	public User getUser(Long id) {
-		return  userDao.get(id);
+		return  userDao.getUser(id);
 	}
 
 	public void saveUser(User user) {
-		userDao.save(user);
+		userDao.saveUser(user);
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class AccountManager {
 	}
 
 	@Autowired
-	public void setUserDao(UserMyBatisDao userDao) {
+	public void setUserDao(AccountMyBatisDao userDao) {
 		this.userDao = userDao;
 	}
 }

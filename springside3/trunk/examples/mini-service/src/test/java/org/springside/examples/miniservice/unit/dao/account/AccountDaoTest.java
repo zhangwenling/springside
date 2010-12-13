@@ -1,12 +1,18 @@
 package org.springside.examples.miniservice.unit.dao.account;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.examples.miniservice.dao.account.UserMyBatisDao;
+import org.springside.examples.miniservice.dao.account.AccountMyBatisDao;
+import org.springside.examples.miniservice.entity.account.Role;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DbUnitUtils;
 
@@ -18,12 +24,12 @@ import org.springside.modules.test.utils.DbUnitUtils;
  * @author calvin
  */
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
-public class UserDaoTest extends SpringTxTestCase {
+public class AccountDaoTest extends SpringTxTestCase {
 
 	private static DataSource dataSourceHolder = null;
 
 	@Autowired
-	private UserMyBatisDao entityDao;
+	private AccountMyBatisDao entityDao;
 
 	@Before
 	public void loadDefaultData() throws Exception {
@@ -36,5 +42,12 @@ public class UserDaoTest extends SpringTxTestCase {
 	@AfterClass
 	public static void cleanDefaultData() throws Exception {
 		DbUnitUtils.removeData(dataSourceHolder, "/data/default-data.xml");
+	}
+	
+	@Test
+	public void getAllRole(){
+		List<Role> roleList = entityDao.getAllRole();
+		assertEquals(2,roleList.size());
+		assertEquals("管理员",roleList.get(0).getName());
 	}
 }
