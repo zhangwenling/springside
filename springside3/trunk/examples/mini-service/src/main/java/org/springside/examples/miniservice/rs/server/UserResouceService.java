@@ -8,7 +8,6 @@ import javax.validation.Validator;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -19,10 +18,10 @@ import org.dozer.DozerBeanMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
-import org.springside.examples.miniservice.service.ServiceException;
 import org.springside.examples.miniservice.service.account.AccountManager;
 
 /**
@@ -56,8 +55,7 @@ public class UserResouceService {
 		if (!constraintViolations.isEmpty()) {
 			ConstraintViolation<UserDTO> violation = constraintViolations.iterator().next();
 			String message = violation.getPropertyPath() + " " + violation.getMessage();
-			logger.error(message);
-			throw ResourceUtils.buildException(Status.BAD_REQUEST.getStatusCode(), message);
+			throw ResourceUtils.buildException(logger, Status.BAD_REQUEST.getStatusCode(), message);
 		}
 
 		try {
@@ -69,13 +67,11 @@ public class UserResouceService {
 			URI createdUri = uriInfo.getAbsolutePathBuilder().path(id.toString()).build();
 
 			return Response.created(createdUri).build();
-		} catch (ServiceException e) {
+		} catch (DataIntegrityViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
-			logger.error(message, e);
-			throw ResourceUtils.buildException(Status.BAD_REQUEST.getStatusCode(), message);
+			throw ResourceUtils.buildException(logger, Status.BAD_REQUEST.getStatusCode(), message);
 		} catch (RuntimeException e) {
-			logger.error(e.getMessage(), e);
-			throw new WebApplicationException();
+			throw ResourceUtils.buildException(logger, e);
 		}
 	}
 

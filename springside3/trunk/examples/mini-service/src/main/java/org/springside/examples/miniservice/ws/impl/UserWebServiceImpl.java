@@ -11,10 +11,10 @@ import org.dozer.DozerBeanMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.util.Assert;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
-import org.springside.examples.miniservice.service.ServiceException;
 import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.ws.UserWebService;
 import org.springside.examples.miniservice.ws.WsConstants;
@@ -135,7 +135,7 @@ public class UserWebServiceImpl implements UserWebService {
 			Long userId = accountManager.saveUser(userEntity);
 			result.setUserId(userId);
 			return result;
-		} catch (ServiceException e) {
+		} catch (DataIntegrityViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
 			logger.error(message, e);
 			return result.buildResult(WSResult.PARAMETER_ERROR, message);

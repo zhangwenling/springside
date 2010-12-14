@@ -39,14 +39,23 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 
 	@Test
 	public void createUserWithInvalidLoginName() {
-
+		//必须值为空
 		User user = AccountData.getRandomUser();
 		UserDTO dto = new DozerBeanMapper().map(user, UserDTO.class);
 		dto.setLoginName(null);
 
 		try {
 
-			URI uri = client.createUser(dto);
+			client.createUser(dto);
+			fail("Should thrown exception while invalid id");
+		} catch (UniformInterfaceException e) {
+			assertEquals(400, e.getResponse().getStatus());
+		}
+
+		dto.setLoginName("user2");
+
+		try {
+			client.createUser(dto);
 			fail("Should thrown exception while invalid id");
 		} catch (UniformInterfaceException e) {
 			assertEquals(400, e.getResponse().getStatus());

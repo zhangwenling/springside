@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import javax.xml.ws.BindingProvider;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import org.dozer.DozerBeanMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,23 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 
 		assertEquals(WSResult.SUCCESS, result.getCode());
 		assertNotNull(result.getUserId());
+	}
+
+	/**
+	 * 测试创建用户,在Spring applicaitonContext.xml中用<jaxws:client/>创建Client.
+	 */
+	@Test
+	public void createUserWithInvalidLoginName() {
+		User user = AccountData.getRandomUser();
+		UserDTO userDTO = new DozerBeanMapper().map(user, UserDTO.class);
+
+		userDTO.setLoginName(null);
+		CreateUserResult result = userWebService.createUser(userDTO);
+		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
+
+		userDTO.setLoginName("user2");
+		result = userWebService.createUser(userDTO);
+		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
 	}
 
 	/**

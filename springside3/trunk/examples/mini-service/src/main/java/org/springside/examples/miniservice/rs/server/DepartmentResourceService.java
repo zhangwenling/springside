@@ -6,7 +6,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 
@@ -54,8 +53,7 @@ public class DepartmentResourceService {
 
 			return dtoList;
 		} catch (RuntimeException e) {
-			logger.error(e.getMessage(), e);
-			throw new WebApplicationException();
+			throw ResourceUtils.buildException(logger, e);
 		}
 	}
 
@@ -71,15 +69,13 @@ public class DepartmentResourceService {
 
 			if (entity == null) {
 				String message = "部门不存在(id:" + id + ")";
-				logger.error(message);
-				throw ResourceUtils.buildException(Status.NOT_FOUND, message);
+				throw ResourceUtils.buildException(logger, Status.NOT_FOUND, message);
 			}
 
 			DepartmentDTO dto = dozer.map(entity, DepartmentDTO.class);
 			return dto;
 		} catch (RuntimeException e) {
-			logger.error(e.getMessage(), e);
-			throw new WebApplicationException();
+			throw ResourceUtils.buildException(logger, e);
 		}
 	}
 
