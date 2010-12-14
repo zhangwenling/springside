@@ -2,7 +2,7 @@ package org.springside.examples.miniservice.ws.result;
 
 import javax.xml.bind.annotation.XmlType;
 
-import org.springside.examples.miniservice.ws.WsConstants;
+import org.springside.examples.miniservice.WsConstants;
 
 /**
  * CreateUser方法的返回结果.

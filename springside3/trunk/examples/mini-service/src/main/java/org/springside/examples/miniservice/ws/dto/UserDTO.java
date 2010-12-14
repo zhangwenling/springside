@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import org.springside.examples.miniservice.ws.WsConstants;
+import org.springside.examples.miniservice.WsConstants;
 
 /**
  * Web Service传输User信息的DTO.

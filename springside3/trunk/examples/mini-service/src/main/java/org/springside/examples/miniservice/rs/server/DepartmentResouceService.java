@@ -11,10 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.rs.dto.DepartmentDTO;
 import org.springside.examples.miniservice.service.account.AccountManager;
-import org.springside.examples.miniservice.ws.WsConstants;
 import org.springside.modules.utils.mapping.DozerUtils;
 
 /**
@@ -42,13 +42,12 @@ public class DepartmentResouceService {
 
 			if (entity == null) {
 				String message = "部门不存在(id:" + id + ")";
-				throw JerseyServerUtils.buildException(logger, Status.NOT_FOUND, message);
+				throw JerseyServerUtils.buildException(Status.NOT_FOUND, message, logger);
 			}
 
-			DepartmentDTO dto = DozerUtils.map(entity, DepartmentDTO.class);
-			return dto;
+			return DozerUtils.map(entity, DepartmentDTO.class);
 		} catch (RuntimeException e) {
-			throw JerseyServerUtils.buildException(logger, e);
+			throw JerseyServerUtils.buildException(e, logger);
 		}
 	}
 

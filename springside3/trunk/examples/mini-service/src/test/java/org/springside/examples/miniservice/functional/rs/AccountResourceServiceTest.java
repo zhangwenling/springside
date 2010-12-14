@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.net.URI;
+import java.util.List;
 
 import org.dozer.DozerBeanMapper;
 import org.junit.BeforeClass;
@@ -47,6 +48,15 @@ public class AccountResourceServiceTest extends BaseFunctionalTestCase {
 	}
 
 	@Test
+	public void searchUser() {
+		List<UserDTO> result = client.searchUser(null, null);
+		assertEquals(4, result.size());
+
+		result = client.searchUser("user1", null);
+		assertEquals(1, result.size());
+	}
+
+	@Test
 	public void createUser() {
 		User user = AccountData.getRandomUser();
 		UserDTO dto = new DozerBeanMapper().map(user, UserDTO.class);
@@ -80,5 +90,4 @@ public class AccountResourceServiceTest extends BaseFunctionalTestCase {
 			assertEquals(400, e.getResponse().getStatus());
 		}
 	}
-
 }

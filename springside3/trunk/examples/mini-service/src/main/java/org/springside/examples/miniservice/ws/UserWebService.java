@@ -3,6 +3,7 @@ package org.springside.examples.miniservice.ws;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
+import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
