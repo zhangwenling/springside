@@ -9,6 +9,9 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 public class JerseyClientUtils {
 
+	/**
+	 * 创建JerseyClient, 设定Json使用Jackson解析.
+	 */
 	public static WebResource createClient(String baseUrl) {
 		ClientConfig cc = new DefaultClientConfig();
 		cc.getClasses().add(JacksonJsonProvider.class);

@@ -12,19 +12,19 @@ import org.junit.Test;
 import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
-import org.springside.examples.miniservice.rs.client.UserResourceClient;
+import org.springside.examples.miniservice.rs.client.AccountResourceClient;
 import org.springside.examples.miniservice.rs.dto.DepartmentDTO;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
 
 import com.sun.jersey.api.client.UniformInterfaceException;
 
-public class UserResourceServiceTest extends BaseFunctionalTestCase {
+public class AccountResourceServiceTest extends BaseFunctionalTestCase {
 
-	private static UserResourceClient client;
+	private static AccountResourceClient client;
 
 	@BeforeClass
 	public static void setUpClient() throws Exception {
-		client = new UserResourceClient();
+		client = new AccountResourceClient();
 		client.setBaseUrl(BASE_URL + "/rs");
 	}
 

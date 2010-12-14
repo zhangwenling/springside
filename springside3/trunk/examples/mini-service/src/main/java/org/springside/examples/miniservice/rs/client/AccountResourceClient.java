@@ -13,11 +13,11 @@ import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * 使用Jersey Client的User REST客户端.
+ * 使用Jersey Client的Account Service REST客户端.
  * 
  * @author calvin
  */
-public class UserResourceClient {
+public class AccountResourceClient {
 
 	private WebResource client;
 
@@ -27,7 +27,7 @@ public class UserResourceClient {
 	}
 
 	public DepartmentDTO getDepartmentDetail(Long id) {
-		return client.path("/department/" + id).accept(MediaType.APPLICATION_JSON).get(DepartmentDTO.class);
+		return client.path("/departments/" + id).accept(MediaType.APPLICATION_JSON).get(DepartmentDTO.class);
 	}
 
 	public URI createUser(UserDTO user) {
@@ -38,11 +38,5 @@ public class UserResourceClient {
 		} else {
 			throw new UniformInterfaceException(response);
 		}
-	}
-
-	public boolean authUser(String loginName, String password) {
-		String result = client.path("/users/auth").queryParam("loginName", loginName).queryParam("password", password)
-				.get(String.class);
-		return new Boolean(result);
 	}
 }

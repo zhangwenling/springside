@@ -10,6 +10,11 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.google.common.collect.Lists;
 
+/**
+ * Web Service传输Department信息的DTO.
+ * 
+ * @author calvin
+ */
 @XmlRootElement(name = "department")
 public class DepartmentDTO {
 
@@ -33,7 +38,7 @@ public class DepartmentDTO {
 		this.manager = manager;
 	}
 
-	//配置输出xml为<userList><User><id>1</id></User></userList>
+	//配置输出xml为<userList><user><id>1</id></user></userList>
 	@XmlElementWrapper(name = "userList")
 	@XmlElement(name = "user")
 	public List<UserDTO> getUserList() {
