@@ -44,9 +44,9 @@ public class DepartmentResourceService {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
-	public List<DepartmentDTO> getAllDepartment() {
+	public List<DepartmentDTO> getDepartmentList() {
 		try {
-			List<Department> entityList = accountManager.getAllDepartment();
+			List<Department> entityList = accountManager.getDepartmentList();
 
 			List<DepartmentDTO> dtoList = Lists.newArrayList();
 			for (Department entity : entityList) {

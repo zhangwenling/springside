@@ -5,21 +5,23 @@
 	<resultMap id="departmentDetailMap" type="Department">
 		<id property="id" column="department_id" />
 		<result property="name" column="department_name" />
-		<association property="manager" column="manager_id" resultMap="managerMap" />
-		<collection property="userList" resultMap="userMap" />
+		<association property="manager" column="manager_id" resultMap="departmentDetailMap.managerMap" />
+		<collection property="userList" resultMap="departmentDetailMap.userMap" />
 	</resultMap>
 
-	<resultMap id="managerMap" type="User">
+	<resultMap id="departmentDetailMap.managerMap" type="User">
 		<id property="id" column="manager_id" />
 		<result property="name" column="manager_name" />
+		<result property="email" column="manager_email"/>
 	</resultMap>
 
-	<resultMap id="userMap" type="User">
+	<resultMap id="departmentDetailMap.userMap" type="User">
 		<id property="id" column="user_id" />
 		<result property="name" column="user_name" />
+		<result property="email" column="user_email"/>
 	</resultMap>
 
-	<select id="getAllDepartment" resultType="Department">
+	<select id="getDepartmentList" resultType="Department">
 		select id, name from acct_department
 	</select>
 
@@ -28,17 +30,18 @@
 		d.name as department_name,
 		m.id as manager_id,
 		m.name as manager_name,
+		m.email as manager_email,
 		u.id as user_id,
-		u.name as user_name
+		u.name as user_name,
+		u.email as user_email
 		from acct_department d, acct_user m, acct_user u
 		where d.manager_id=m.id and d.id=u.department_id
 		and d.id=#{id}
 	</select>
 
 	<insert id="saveUser" parameterType="User">
-		insert into acct_user (id, name, password)
-		values (#{id},
-		#{name},#{password})
+		insert into acct_user (id, login_name,name, password,email)
+		values (#{id},#{loginName},#{name},#{password},#{email})
 	</insert>
 
 

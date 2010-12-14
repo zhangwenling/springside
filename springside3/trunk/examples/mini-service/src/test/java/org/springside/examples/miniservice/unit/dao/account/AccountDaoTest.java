@@ -45,8 +45,8 @@ public class AccountDaoTest extends SpringTxTestCase {
 	}
 
 	@Test
-	public void getAllDepartment() {
-		List<Department> departmentList = entityDao.getAllDepartment();
+	public void getDepartmentList() {
+		List<Department> departmentList = entityDao.getDepartmentList();
 		assertEquals(2, departmentList.size());
 		assertEquals("Development", departmentList.get(0).getName());
 	}
@@ -55,8 +55,8 @@ public class AccountDaoTest extends SpringTxTestCase {
 	public void getDepartmentDetail() {
 		Department department = entityDao.getDepartmentDetail(1L);
 		assertEquals("Development", department.getName());
-		assertEquals("Jack",department.getManager().getName());
-		assertEquals(2,department.getUserList().size());
-		assertEquals("Jack",department.getUserList().get(0).getName());
+		assertEquals("Jack", department.getManager().getName());
+		assertEquals(2, department.getUserList().size());
+		assertEquals("Jack", department.getUserList().get(0).getName());
 	}
 }

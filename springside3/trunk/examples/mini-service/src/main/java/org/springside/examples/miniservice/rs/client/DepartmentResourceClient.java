@@ -27,9 +27,10 @@ public class DepartmentResourceClient {
 		client = jerseyClient.resource(baseUrl);
 	}
 
-	public List<DepartmentDTO> getAllDepartment() {
-		return client.path("/departments").accept(MediaType.APPLICATION_JSON).get(new GenericType<List<DepartmentDTO>>() {
-		});
+	public List<DepartmentDTO> getDepartmentList() {
+		return client.path("/departments").accept(MediaType.APPLICATION_JSON)
+				.get(new GenericType<List<DepartmentDTO>>() {
+				});
 	}
 
 	public DepartmentDTO getDepartmentDetail(Long id) {

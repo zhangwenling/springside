@@ -27,13 +27,13 @@ public class AccountManager {
 	private AccountMyBatisDao accountDao = null;
 
 	@Transactional(readOnly = true)
-	public List<Department> getAllDepartment() {
-		return accountDao.getAllDepartment();
+	public List<Department> getDepartmentList() {
+		return accountDao.getDepartmentList();
 	}
 
 	@Transactional(readOnly = true)
 	public Department getDepartmentDetail(Long id) {
-		return  accountDao.getDepartmentDetail(id);
+		return accountDao.getDepartmentDetail(id);
 	}
 
 	public void saveUser(User user) {

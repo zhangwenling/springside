@@ -17,8 +17,8 @@ import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.impl.UserWebServiceImpl;
 import org.springside.examples.miniservice.ws.result.AuthUserResult;
-import org.springside.examples.miniservice.ws.result.GetAllDepartmentResult;
 import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
+import org.springside.examples.miniservice.ws.result.GetDepartmentListResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
 
 /**
@@ -72,42 +72,41 @@ public class UserWebServiceTest {
 	/**
 	 * 测试参数校验.
 	 */
-/*	@Test
-	public void validateParamter() {
-		control.replay();
-		WSResult result = userWebService.createUser(null);
-		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
+	/*	@Test
+		public void validateParamter() {
+			control.replay();
+			WSResult result = userWebService.createUser(null);
+			assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
 
-		Department testUser = AccountData.getRandomUserWithAdminRole();
-		UserDTO userDTOWithoutLoginName = new DozerBeanMapper().map(testUser, UserDTO.class);
-		userDTOWithoutLoginName.setLoginName(null);
-		result = userWebService.createUser(userDTOWithoutLoginName);
-		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
+			Department testUser = AccountData.getRandomUserWithAdminRole();
+			UserDTO userDTOWithoutLoginName = new DozerBeanMapper().map(testUser, UserDTO.class);
+			userDTOWithoutLoginName.setLoginName(null);
+			result = userWebService.createUser(userDTOWithoutLoginName);
+			assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
 
-		testUser = AccountData.getRandomUserWithAdminRole();
-		UserDTO userDTOWitWrongEmail = new DozerBeanMapper().map(testUser, UserDTO.class);
-		userDTOWitWrongEmail.setEmail("abc");
-		result = userWebService.createUser(userDTOWitWrongEmail);
-		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
+			testUser = AccountData.getRandomUserWithAdminRole();
+			UserDTO userDTOWitWrongEmail = new DozerBeanMapper().map(testUser, UserDTO.class);
+			userDTOWitWrongEmail.setEmail("abc");
+			result = userWebService.createUser(userDTOWitWrongEmail);
+			assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
 
-		testUser = AccountData.getRandomUserWithAdminRole();
-		UserDTO userDTOWithoutRole = new DozerBeanMapper().map(testUser, UserDTO.class);
-		userDTOWithoutRole.getRoleList().clear();
-		result = userWebService.createUser(userDTOWithoutRole);
-		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
-	}
-*/
+			testUser = AccountData.getRandomUserWithAdminRole();
+			UserDTO userDTOWithoutRole = new DozerBeanMapper().map(testUser, UserDTO.class);
+			userDTOWithoutRole.getRoleList().clear();
+			result = userWebService.createUser(userDTOWithoutRole);
+			assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
+		}
+	*/
 
 	/**
 	 * 测试系统内部抛出异常时的处理.
 	 */
 	@Test
 	public void handleException() {
-		EasyMock.expect(mockAccountManager.getAllDepartment()).andThrow(
-				new RuntimeException("Expected exception.."));
+		EasyMock.expect(mockAccountManager.getDepartmentList()).andThrow(new RuntimeException("Expected exception.."));
 		control.replay();
 
-		GetAllDepartmentResult result = userWebService.getAllDepartment();
+		GetDepartmentListResult result = userWebService.getDepartmentList();
 		assertEquals(WSResult.SYSTEM_ERROR, result.getCode());
 		assertEquals(WSResult.SYSTEM_ERROR_MESSAGE, result.getMessage());
 	}

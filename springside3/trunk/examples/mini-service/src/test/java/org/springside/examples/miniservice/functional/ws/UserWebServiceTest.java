@@ -20,7 +20,7 @@ import org.springside.examples.miniservice.ws.UserWebService;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.AuthUserResult;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
-import org.springside.examples.miniservice.ws.result.GetAllDepartmentResult;
+import org.springside.examples.miniservice.ws.result.GetDepartmentListResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
 
 /**
@@ -31,7 +31,7 @@ import org.springside.examples.miniservice.ws.result.WSResult;
  * @author calvin
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@TestExecutionListeners( { DependencyInjectionTestExecutionListener.class })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
 @ContextConfiguration(locations = { "/applicationContext-ws-client.xml" })
 public class UserWebServiceTest extends BaseFunctionalTestCase {
 
@@ -59,7 +59,6 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 		userDTO.setName(user.getName());
 		userDTO.setEmail(user.getEmail());
 
-		
 		CreateUserResult result = userWebService.createUser(userDTO);
 
 		assertEquals(WSResult.SUCCESS, result.getCode());
@@ -70,7 +69,7 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 	 * 测试获取全部部门,使用CXF的API自行动态创建Client.
 	 */
 	@Test
-	public void getAllDepartment() {
+	public void getDepartmentList() {
 		String address = BASE_URL + "/ws/userservice";
 
 		JaxWsProxyFactoryBean proxyFactory = new JaxWsProxyFactoryBean();
@@ -82,9 +81,9 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 		((BindingProvider) userWebServiceCreated).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
 				address);
 
-		GetAllDepartmentResult result = userWebServiceCreated.getAllDepartment();
+		GetDepartmentListResult result = userWebServiceCreated.getDepartmentList();
 
-		assertEquals(2,result.getDepartmentList().size() );
+		assertEquals(2, result.getDepartmentList().size());
 		assertEquals("Development", result.getDepartmentList().get(0).getName());
 	}
 }

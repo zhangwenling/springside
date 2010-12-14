@@ -16,36 +16,36 @@ import com.sun.jersey.api.client.UniformInterfaceException;
 
 public class DepartmentResourceServiceTest extends BaseFunctionalTestCase {
 
-		private static DepartmentResourceClient client;
-	
-		@BeforeClass
-		public static void setUpClient() throws Exception {
-			client = new DepartmentResourceClient();
-			client.setBaseUrl(BASE_URL + "/rs");
+	private static DepartmentResourceClient client;
+
+	@BeforeClass
+	public static void setUpClient() throws Exception {
+		client = new DepartmentResourceClient();
+		client.setBaseUrl(BASE_URL + "/rs");
+	}
+
+	@Test
+	public void getDepartmentList() {
+		List<DepartmentDTO> departmentList = client.getDepartmentList();
+		assertTrue(departmentList.size() == 2);
+		assertEquals("Development", departmentList.get(0).getName());
+	}
+
+	@Test
+	public void getDeptartmentDetail() {
+		DepartmentDTO department = client.getDepartmentDetail(1L);
+		assertEquals("Development", department.getName());
+		assertEquals(2, department.getUserList().size());
+		assertEquals("Jack", department.getUserList().get(0).getName());
+	}
+
+	@Test
+	public void getDeptartmentDetailWithInvalidId() {
+		try {
+			client.getDepartmentDetail(999L);
+			fail("Should thrown exception while invalid id");
+		} catch (UniformInterfaceException e) {
+			assertEquals(404, e.getResponse().getStatus());
 		}
-	
-		@Test
-		public void getAllDepartment() {
-			List<DepartmentDTO> departmentList = client.getAllDepartment();
-			assertTrue(departmentList.size() ==2);
-			assertEquals("Development", departmentList.get(0).getName());
-		}
-	
-		@Test
-		public void getDeptartmentDetail() {
-			DepartmentDTO department = client.getDepartmentDetail(1L);
-			assertEquals("Development", department.getName());
-			assertEquals(2, department.getUserList().size());
-			assertEquals("Jack", department.getUserList().get(0).getName());
-		}
-	
-		@Test
-		public void getDeptartmentDetailWithInvalidId() {
-			try {
-				client.getDepartmentDetail(999L);
-				fail("Should thrown exception while invalid id");
-			} catch (UniformInterfaceException e) {
-				assertEquals(404, e.getResponse().getStatus());
-			}
-		}	
+	}
 }

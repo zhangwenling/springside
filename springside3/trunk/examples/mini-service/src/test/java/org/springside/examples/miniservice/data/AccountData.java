@@ -16,7 +16,7 @@ public class AccountData {
 
 		Department department = new Department();
 		department.setName(departmentName);
-		
+
 		User manager = getRandomUser();
 		department.setManager(manager);
 		department.getUserList().add(manager);

@@ -22,8 +22,8 @@ import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.AuthUserResult;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
-import org.springside.examples.miniservice.ws.result.GetAllDepartmentResult;
 import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
+import org.springside.examples.miniservice.ws.result.GetDepartmentListResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
 
 import com.google.common.collect.Lists;
@@ -51,13 +51,13 @@ public class UserWebServiceImpl implements UserWebService {
 	 * @see UserWebService#getAllUser()
 	 */
 	@Override
-	public GetAllDepartmentResult getAllDepartment() {
+	public GetDepartmentListResult getDepartmentList() {
 
-		GetAllDepartmentResult result = new GetAllDepartmentResult();
+		GetDepartmentListResult result = new GetDepartmentListResult();
 
 		//获取User列表并转换为UserDTO列表.
 		try {
-			List<Department> departmentEntityList = accountManager.getAllDepartment();
+			List<Department> departmentEntityList = accountManager.getDepartmentList();
 			List<DepartmentDTO> departmentDTOList = Lists.newArrayList();
 
 			for (Department departmentEntity : departmentEntityList) {
