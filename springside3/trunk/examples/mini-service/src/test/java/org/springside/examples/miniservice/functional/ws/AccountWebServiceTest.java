@@ -14,7 +14,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
-import org.springside.examples.miniservice.ws.UserWebService;
+import org.springside.examples.miniservice.ws.AccountWebService;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
@@ -29,10 +29,10 @@ import org.springside.examples.miniservice.ws.result.WSResult;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
 @ContextConfiguration(locations = { "/applicationContext-ws-client.xml" })
-public class UserWebServiceTest extends BaseFunctionalTestCase {
+public class AccountWebServiceTest extends BaseFunctionalTestCase {
 
 	@Autowired
-	private UserWebService userWebService;
+	private AccountWebService userWebService;
 
 	/**
 	 * 测试创建用户,在Spring applicaitonContext.xml中用<jaxws:client/>创建Client.

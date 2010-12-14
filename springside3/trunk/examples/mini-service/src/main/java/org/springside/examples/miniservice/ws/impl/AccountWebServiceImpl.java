@@ -1,5 +1,7 @@
 package org.springside.examples.miniservice.ws.impl;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.jws.WebService;
@@ -16,12 +18,16 @@ import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.service.account.AccountManager;
-import org.springside.examples.miniservice.ws.UserWebService;
+import org.springside.examples.miniservice.ws.AccountWebService;
 import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
+import org.springside.examples.miniservice.ws.result.SearchUserListResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
+import org.springside.modules.utils.mapping.DozerUtils;
+
+import com.google.common.collect.Maps;
 
 /**
  * WebService服务端实现类.
@@ -31,10 +37,10 @@ import org.springside.examples.miniservice.ws.result.WSResult;
  * @author calvin
  */
 //serviceName与portName属性指明WSDL中的名称, endpointInterface属性指向Interface定义类.
-@WebService(serviceName = "UserService", portName = "UserServicePort", endpointInterface = "org.springside.examples.miniservice.ws.UserWebService", targetNamespace = WsConstants.NS)
-public class UserWebServiceImpl implements UserWebService {
+@WebService(serviceName = "AccountService", portName = "AccountServicePort", endpointInterface = "org.springside.examples.miniservice.ws.AccountWebService", targetNamespace = WsConstants.NS)
+public class AccountWebServiceImpl implements AccountWebService {
 
-	private static Logger logger = LoggerFactory.getLogger(UserWebServiceImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(AccountWebServiceImpl.class);
 
 	private AccountManager accountManager;
 
@@ -43,31 +49,7 @@ public class UserWebServiceImpl implements UserWebService {
 	private Validator validator;
 
 	/**
-	 * @see UserWebService#getDepartmentList()
-	 */
-	/*	@Override
-		public GetDepartmentListResult getDepartmentList() {
-
-			GetDepartmentListResult result = new GetDepartmentListResult();
-
-			//获取User列表并转换为UserDTO列表.
-			try {
-				List<Department> departmentEntityList = accountManager.getDepartmentList();
-				List<DepartmentDTO> departmentDTOList = Lists.newArrayList();
-
-				for (Department departmentEntity : departmentEntityList) {
-					departmentDTOList.add(dozer.map(departmentEntity, DepartmentDTO.class));
-				}
-				result.setDepartmentList(departmentDTOList);
-				return result;
-			} catch (RuntimeException e) {
-				logger.error(e.getMessage(), e);
-				return result.buildDefaultErrorResult();
-			}
-		}
-	*/
-	/**
-	 * @see UserWebService#getDepartmentDetail()
+	 * @see AccountWebService#getDepartmentDetail()
 	 */
 	@Override
 	public GetDepartmentDetailResult getDepartmentDetail(Long id) {
@@ -101,7 +83,30 @@ public class UserWebServiceImpl implements UserWebService {
 	}
 
 	/**
-	 * @see UserWebService#createUser(UserDTO)
+	 * @see UserWebService#searchUserList()
+	 */
+	@Override
+	public SearchUserListResult searchUserList(String loginName, String name) {
+
+		SearchUserListResult result = new SearchUserListResult();
+
+		//获取User列表并转换为UserDTO列表.
+		try {
+			Map<String, String> parameters = Maps.newHashMap();
+			parameters.put("loginName", loginName);
+			parameters.put("name", name);
+			List<User> entityList = accountManager.searchUser(parameters);
+			List<UserDTO> dtoList = DozerUtils.mapList(entityList, UserDTO.class);
+			result.setUserList(dtoList);
+			return result;
+		} catch (RuntimeException e) {
+			logger.error(e.getMessage(), e);
+			return result.buildDefaultErrorResult();
+		}
+	}
+
+	/**
+	 * @see AccountWebService#createUser(UserDTO)
 	 */
 	@Override
 	public CreateUserResult createUser(UserDTO user) {
@@ -140,37 +145,6 @@ public class UserWebServiceImpl implements UserWebService {
 		}
 	}
 
-	/**
-	 * @see UserWebService#authUser(String, String)
-	 */
-	/*
-	@Override
-	public AuthUserResult authUser(String loginName, String password) {
-	AuthUserResult result = new AuthUserResult();
-
-	//校验请求参数
-	try {
-		Assert.hasText(loginName, "登录名参数为空");
-		Assert.hasText(password, "密码参数为空");
-	} catch (IllegalArgumentException e) {
-		logger.error(e.getMessage());
-		return result.buildResult(WSResult.PARAMETER_ERROR, e.getMessage());
-	}
-
-	//认证
-	try {
-		if (accountManager.authenticate(loginName, password)) {
-			result.setValid(true);
-		} else {
-			result.setValid(false);
-		}
-		return result;
-	} catch (RuntimeException e) {
-		logger.error(e.getMessage(), e);
-		return result.buildDefaultErrorResult();
-	}
-	}
-	*/
 	@Autowired
 	public void setAccountManager(AccountManager accountManager) {
 		this.accountManager = accountManager;

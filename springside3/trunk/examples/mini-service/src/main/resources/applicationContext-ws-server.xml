@@ -11,10 +11,10 @@
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 
 	<!-- jax-ws endpoint定义  -->
-	<jaxws:endpoint address="/userservice">
-		<jaxws:implementor ref="userWebService" />
+	<jaxws:endpoint address="/accountservice">
+		<jaxws:implementor ref="accountWebService" />
 	</jaxws:endpoint>
 
 	<!-- WebService的实现Bean定义 -->
-	<bean id="userWebService" class="org.springside.examples.miniservice.ws.impl.UserWebServiceImpl" />
+	<bean id="accountWebService" class="org.springside.examples.miniservice.ws.impl.AccountWebServiceImpl" />
 </beans>

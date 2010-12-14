@@ -17,7 +17,7 @@ import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
-import org.springside.examples.miniservice.ws.impl.UserWebServiceImpl;
+import org.springside.examples.miniservice.ws.impl.AccountWebServiceImpl;
 import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
 
@@ -28,16 +28,16 @@ import org.springside.examples.miniservice.ws.result.WSResult;
  * 
  * @author calvin
  */
-public class UserWebServiceTest {
+public class AccountWebServiceTest {
 
 	private IMocksControl control = EasyMock.createControl();
 
-	private UserWebServiceImpl userWebService;
+	private AccountWebServiceImpl userWebService;
 	private AccountManager mockAccountManager;
 
 	@Before
 	public void setUp() {
-		userWebService = new UserWebServiceImpl();
+		userWebService = new AccountWebServiceImpl();
 		userWebService.setDozer(new DozerBeanMapper());
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		userWebService.setValidator(factory.getValidator());

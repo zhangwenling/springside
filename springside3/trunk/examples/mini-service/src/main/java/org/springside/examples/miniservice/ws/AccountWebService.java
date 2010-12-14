@@ -7,6 +7,7 @@ import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
+import org.springside.examples.miniservice.ws.result.SearchUserListResult;
 
 /**
  * JAX-WS2.0的WebService接口定义类.
@@ -18,26 +19,22 @@ import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
  * @author sky
  * @author calvin
  */
-@WebService(name = "UserService", targetNamespace = WsConstants.NS)
-public interface UserWebService {
-	/**
-	 * 获取所有部门的基本信息.
-	 */
-	/*GetDepartmentListResult getDepartmentList();
-	*/
+@WebService(name = "AccountService", targetNamespace = WsConstants.NS)
+public interface AccountWebService {
 	/**
 	 * 获取部门的详细信息.
 	 */
 	GetDepartmentDetailResult getDepartmentDetail(@WebParam(name = "id") Long id);
 
 	/**
+	 * 搜索用户信息.
+	 */
+	SearchUserListResult searchUserList(@WebParam(name = "loginName") String loginName,
+			@WebParam(name = "name") String name);
+
+	/**
 	 * 新建用户.
 	 */
 	CreateUserResult createUser(@WebParam(name = "user") UserDTO user);
 
-	/**
-	 * 验证用户名密码.
-	 */
-	/*AuthUserResult authUser(@WebParam(name = "loginName") String loginName, @WebParam(name = "password") String password);
-	*/
 }
