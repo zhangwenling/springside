@@ -4,10 +4,8 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import org.springside.examples.miniservice.ws.dto.UserDTO;
-import org.springside.examples.miniservice.ws.result.AuthUserResult;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
-import org.springside.examples.miniservice.ws.result.GetDepartmentListResult;
 
 /**
  * JAX-WS2.0的WebService接口定义类.
@@ -24,8 +22,8 @@ public interface UserWebService {
 	/**
 	 * 获取所有部门的基本信息.
 	 */
-	GetDepartmentListResult getDepartmentList();
-
+	/*GetDepartmentListResult getDepartmentList();
+	*/
 	/**
 	 * 获取部门的详细信息.
 	 */
@@ -39,5 +37,6 @@ public interface UserWebService {
 	/**
 	 * 验证用户名密码.
 	 */
-	AuthUserResult authUser(@WebParam(name = "loginName") String loginName, @WebParam(name = "password") String password);
+	/*AuthUserResult authUser(@WebParam(name = "loginName") String loginName, @WebParam(name = "password") String password);
+	*/
 }

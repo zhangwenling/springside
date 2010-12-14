@@ -10,8 +10,8 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springside.modules.utils.encode.JaxbBinder;
-import org.springside.modules.utils.encode.JaxbBinder.CollectionWrapper;
+import org.springside.modules.utils.mapping.JaxbBinder;
+import org.springside.modules.utils.mapping.JaxbBinder.CollectionWrapper;
 
 import com.google.common.collect.Lists;
 

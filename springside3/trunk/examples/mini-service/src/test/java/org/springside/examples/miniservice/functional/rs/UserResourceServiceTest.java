@@ -1,9 +1,7 @@
 package org.springside.examples.miniservice.functional.rs;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.net.URI;
@@ -15,6 +13,7 @@ import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniservice.rs.client.UserResourceClient;
+import org.springside.examples.miniservice.rs.dto.DepartmentDTO;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
 
 import com.sun.jersey.api.client.UniformInterfaceException;
@@ -27,6 +26,24 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 	public static void setUpClient() throws Exception {
 		client = new UserResourceClient();
 		client.setBaseUrl(BASE_URL + "/rs");
+	}
+
+	@Test
+	public void getDeptartmentDetail() {
+		DepartmentDTO department = client.getDepartmentDetail(1L);
+		assertEquals("Development", department.getName());
+		assertEquals(2, department.getUserList().size());
+		assertEquals("Jack", department.getUserList().get(0).getName());
+	}
+
+	@Test
+	public void getDeptartmentDetailWithInvalidId() {
+		try {
+			client.getDepartmentDetail(999L);
+			fail("Should thrown exception while invalid id");
+		} catch (UniformInterfaceException e) {
+			assertEquals(404, e.getResponse().getStatus());
+		}
 	}
 
 	@Test
@@ -64,9 +81,4 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 		}
 	}
 
-	@Test
-	public void authUser() {
-		assertTrue(client.authUser("user1", "user1"));
-		assertFalse(client.authUser("user1", "error"));
-	}
 }

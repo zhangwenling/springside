@@ -16,7 +16,7 @@ import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
 import org.springside.modules.memcached.SpyMemcachedClient;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
-import org.springside.modules.utils.encode.JsonBinder;
+import org.springside.modules.utils.mapping.JsonBinder;
 
 /**
  * 用户管理类.

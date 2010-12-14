@@ -8,14 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
 
-import com.google.common.collect.Maps;
-
 @Component
 public class AccountMyBatisDao extends SqlSessionDaoSupport {
-
-	public List<Department> getDepartmentList() {
-		return getSqlSession().selectList("Account.getDepartmentList");
-	}
 
 	public Department getDepartmentDetail(Long id) {
 		return (Department) getSqlSession().selectOne("Account.getDepartmentDetail", id);
@@ -26,10 +20,12 @@ public class AccountMyBatisDao extends SqlSessionDaoSupport {
 		return user.getId();
 	}
 
-	public int countByLoginNamePassword(String loginName, String password) {
-		Map<String, String> parameters = Maps.newHashMap();
-		parameters.put("loginName", loginName);
-		parameters.put("password", password);
-		return (Integer) getSqlSession().selectOne("Account.countByLoginNamePasswd", parameters);
+	public User getUser(Long id) {
+		return (User) getSqlSession().selectOne("Account.getUser", id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<User> searchUser(Map<String, String> parameters) {
+		return getSqlSession().selectList("Account.searchUser", parameters);
 	}
 }

@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.utils.encode;
+package org.springside.modules.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

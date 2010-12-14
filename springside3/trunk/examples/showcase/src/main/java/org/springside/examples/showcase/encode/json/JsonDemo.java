@@ -12,7 +12,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.type.TypeReference;
 import org.joda.time.DateTime;
 import org.junit.Test;
-import org.springside.modules.utils.encode.JsonBinder;
+import org.springside.modules.utils.mapping.JsonBinder;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

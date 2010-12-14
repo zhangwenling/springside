@@ -9,8 +9,6 @@ import org.slf4j.Logger;
 
 public class JerseyServerUtils {
 
-	public static final String CHARSET = ";charset=UTF-8";
-
 	/**
 	 * 创建WebApplicationException, 使用标准状态码与自定义信息.
 	 */

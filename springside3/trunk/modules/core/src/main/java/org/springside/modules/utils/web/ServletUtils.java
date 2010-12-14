@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.util.Assert;
-import org.springside.modules.utils.encode.EncodeUtils;
+import org.springside.modules.utils.EncodeUtils;
 
 /**
  * Http与Servlet工具类.

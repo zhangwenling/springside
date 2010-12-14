@@ -1,6 +1,5 @@
 package org.springside.examples.miniservice.ws.impl;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.jws.WebService;
@@ -20,13 +19,9 @@ import org.springside.examples.miniservice.ws.UserWebService;
 import org.springside.examples.miniservice.ws.WsConstants;
 import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
-import org.springside.examples.miniservice.ws.result.AuthUserResult;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
-import org.springside.examples.miniservice.ws.result.GetDepartmentListResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
-
-import com.google.common.collect.Lists;
 
 /**
  * WebService服务端实现类.
@@ -50,27 +45,27 @@ public class UserWebServiceImpl implements UserWebService {
 	/**
 	 * @see UserWebService#getDepartmentList()
 	 */
-	@Override
-	public GetDepartmentListResult getDepartmentList() {
+	/*	@Override
+		public GetDepartmentListResult getDepartmentList() {
 
-		GetDepartmentListResult result = new GetDepartmentListResult();
+			GetDepartmentListResult result = new GetDepartmentListResult();
 
-		//获取User列表并转换为UserDTO列表.
-		try {
-			List<Department> departmentEntityList = accountManager.getDepartmentList();
-			List<DepartmentDTO> departmentDTOList = Lists.newArrayList();
+			//获取User列表并转换为UserDTO列表.
+			try {
+				List<Department> departmentEntityList = accountManager.getDepartmentList();
+				List<DepartmentDTO> departmentDTOList = Lists.newArrayList();
 
-			for (Department departmentEntity : departmentEntityList) {
-				departmentDTOList.add(dozer.map(departmentEntity, DepartmentDTO.class));
+				for (Department departmentEntity : departmentEntityList) {
+					departmentDTOList.add(dozer.map(departmentEntity, DepartmentDTO.class));
+				}
+				result.setDepartmentList(departmentDTOList);
+				return result;
+			} catch (RuntimeException e) {
+				logger.error(e.getMessage(), e);
+				return result.buildDefaultErrorResult();
 			}
-			result.setDepartmentList(departmentDTOList);
-			return result;
-		} catch (RuntimeException e) {
-			logger.error(e.getMessage(), e);
-			return result.buildDefaultErrorResult();
 		}
-	}
-
+	*/
 	/**
 	 * @see UserWebService#getDepartmentDetail()
 	 */
@@ -148,33 +143,34 @@ public class UserWebServiceImpl implements UserWebService {
 	/**
 	 * @see UserWebService#authUser(String, String)
 	 */
+	/*
 	@Override
 	public AuthUserResult authUser(String loginName, String password) {
-		AuthUserResult result = new AuthUserResult();
+	AuthUserResult result = new AuthUserResult();
 
-		//校验请求参数
-		try {
-			Assert.hasText(loginName, "登录名参数为空");
-			Assert.hasText(password, "密码参数为空");
-		} catch (IllegalArgumentException e) {
-			logger.error(e.getMessage());
-			return result.buildResult(WSResult.PARAMETER_ERROR, e.getMessage());
-		}
-
-		//认证
-		try {
-			if (accountManager.authenticate(loginName, password)) {
-				result.setValid(true);
-			} else {
-				result.setValid(false);
-			}
-			return result;
-		} catch (RuntimeException e) {
-			logger.error(e.getMessage(), e);
-			return result.buildDefaultErrorResult();
-		}
+	//校验请求参数
+	try {
+		Assert.hasText(loginName, "登录名参数为空");
+		Assert.hasText(password, "密码参数为空");
+	} catch (IllegalArgumentException e) {
+		logger.error(e.getMessage());
+		return result.buildResult(WSResult.PARAMETER_ERROR, e.getMessage());
 	}
 
+	//认证
+	try {
+		if (accountManager.authenticate(loginName, password)) {
+			result.setValid(true);
+		} else {
+			result.setValid(false);
+		}
+		return result;
+	} catch (RuntimeException e) {
+		logger.error(e.getMessage(), e);
+		return result.buildDefaultErrorResult();
+	}
+	}
+	*/
 	@Autowired
 	public void setAccountManager(AccountManager accountManager) {
 		this.accountManager = accountManager;

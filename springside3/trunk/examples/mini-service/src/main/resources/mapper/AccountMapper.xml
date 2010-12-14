@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="Account">
-
 	<resultMap id="departmentDetailMap" type="Department">
 		<id property="id" column="department_id" />
 		<result property="name" column="department_name" />
@@ -21,10 +20,12 @@
 		<result property="email" column="user_email" />
 	</resultMap>
 
-	<select id="getDepartmentList" resultType="Department">
-		select id, name from acct_department
-	</select>
+	<sql id="selectUserClause">
+		select id, name, login_name as loginName, email 
+		from acct_user
+	</sql>
 
+    <!-- 获取部门详细信息, 输出用resultMap关联嵌套对象 -->
 	<select id="getDepartmentDetail" parameterType="int" resultMap="departmentDetailMap">
 		select d.id as department_id,
 		d.name as department_name,
@@ -40,13 +41,38 @@
 		and d.id=#{id}
 	</select>
 	
-	<select id="countByLoginNamePasswd" parameterType="map" resultType="int">
-		select count(*) from acct_user where login_name=#{loginName} and password=#{password}
+	<!-- 获取用户:
+	     1.重用SQL语句的相同部分
+	     2.login_name列要"as loginName"方便对象映射
+	     3.输出直接映射对象-->
+	<select id="getUser" parameterType="int" resultType="User">
+		<include refid="selectUserClause"/>
+		where id=#{id}
+	</select>
+	
+	<!-- 查询用户,演示:
+	    1.重用SQL语句的相同部分
+	    2.输入用map传入多个参数
+	    3.<where>语句, 智能整理where和or关键字
+	    4.输出直接映射对象 -->
+	<select id="searchUser" parameterType="map" resultType="User">
+		<include refid="selectUserClause"/>
+		<where>
+			<if test="loginName != null">
+				login_name=#{loginName}
+			</if>
+			<if test="name != null">
+				and name=#{name}
+			</if>
+		</where>
 	</select>
 
+	<!-- 插入用户：
+	     1.由数据库生成id并赋值到user对象
+	     2.输入用对象, 嵌套属性表达式#{department.id} -->
 	<insert id="saveUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
 		insert into acct_user (
-		login_name,name, password,email,department_id)
-		values (#{loginName},#{name},#{password},#{email},#{department.id})
+		login_name, name, password, email, department_id)
+		values (#{loginName}, #{name}, #{password}, #{email}, #{department.id})
 	</insert>
 </mapper> 

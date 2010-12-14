@@ -1,8 +1,8 @@
 package org.springside.examples.miniservice.service.account;
 
 import java.util.List;
+import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,31 +27,22 @@ public class AccountManager {
 	private AccountMyBatisDao accountDao = null;
 
 	@Transactional(readOnly = true)
-	public List<Department> getDepartmentList() {
-		return accountDao.getDepartmentList();
-	}
-
-	@Transactional(readOnly = true)
 	public Department getDepartmentDetail(Long id) {
 		return accountDao.getDepartmentDetail(id);
 	}
 
-	public Long saveUser(User user) {
-		return accountDao.saveUser(user);
+	@Transactional(readOnly = true)
+	public User getUser(Long id) {
+		return accountDao.getUser(id);
 	}
 
-	/**
-	 * 验证用户名密码. 
-	 * 
-	 * @return 验证通过时返回true,用户名或密码错误时返回false.
-	 */
 	@Transactional(readOnly = true)
-	public boolean authenticate(String loginName, String password) {
-		if (StringUtils.isBlank(loginName) || StringUtils.isBlank(password)) {
-			return false;
-		}
+	public List<User> searchUser(Map<String, String> parameters) {
+		return accountDao.searchUser(parameters);
+	}
 
-		return (accountDao.countByLoginNamePassword(loginName, password) == 1);
+	public Long saveUser(User user) {
+		return accountDao.saveUser(user);
 	}
 
 	@Autowired

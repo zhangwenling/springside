@@ -23,7 +23,7 @@
 		<jersey.version>1.4</jersey.version>
 		<spring-security.version>3.0.4.RELEASE</spring-security.version>
 		<activemq.version>5.4.2</activemq.version>
-		<jetty.version>7.2.1.v20101111</jetty.version>
+		<jetty.version>7.2.2.v20101205</jetty.version>
 		<h2.version>1.2.147</h2.version>
 		<jackson.version>1.6.3</jackson.version>
 		<slf4j.version>1.6.1</slf4j.version>

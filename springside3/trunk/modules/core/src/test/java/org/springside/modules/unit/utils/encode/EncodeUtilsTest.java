@@ -3,7 +3,7 @@ package org.springside.modules.unit.utils.encode;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.springside.modules.utils.encode.EncodeUtils;
+import org.springside.modules.utils.EncodeUtils;
 
 public class EncodeUtilsTest {
 

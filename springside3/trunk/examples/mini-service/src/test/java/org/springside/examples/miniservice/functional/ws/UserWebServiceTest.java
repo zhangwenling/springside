@@ -3,9 +3,6 @@ package org.springside.examples.miniservice.functional.ws;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import javax.xml.ws.BindingProvider;
-
-import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.dozer.DozerBeanMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,9 +16,7 @@ import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniservice.ws.UserWebService;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
-import org.springside.examples.miniservice.ws.result.AuthUserResult;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
-import org.springside.examples.miniservice.ws.result.GetDepartmentListResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
 
 /**
@@ -38,18 +33,6 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 
 	@Autowired
 	private UserWebService userWebService;
-
-	/**
-	 * 测试认证用户,在Spring applicaitonContext.xml中用<jaxws:client/>创建Client.
-	 */
-	@Test
-	public void authUser() {
-		AuthUserResult result = userWebService.authUser("user1", "user1");
-		assertEquals(true, result.isValid());
-
-		result = userWebService.authUser("user1", "error");
-		assertEquals(false, result.isValid());
-	}
 
 	/**
 	 * 测试创建用户,在Spring applicaitonContext.xml中用<jaxws:client/>创建Client.
@@ -89,8 +72,8 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 	/**
 	 * 测试获取全部部门,使用CXF的API自行动态创建Client.
 	 */
-	@Test
-	public void getDepartmentList() {
+	/*@Test
+	 * public void getDepartmentList() {
 		String address = BASE_URL + "/ws/userservice";
 
 		JaxWsProxyFactoryBean proxyFactory = new JaxWsProxyFactoryBean();
@@ -107,4 +90,5 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 		assertEquals(2, result.getDepartmentList().size());
 		assertEquals("Development", result.getDepartmentList().get(0).getName());
 	}
+	*/
 }

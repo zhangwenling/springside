@@ -18,7 +18,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.springside.modules.utils.encode.EncodeUtils;
+import org.springside.modules.utils.EncodeUtils;
 
 /**
  * 支持HMAC-SHA1消息签名 及 DES/AES对称加密的工具类.
