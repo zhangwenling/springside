@@ -43,8 +43,8 @@ public class AccountManagerTest {
 	 */
 	@Test
 	public void authUser() {
-		EasyMock.expect(mockAccountDao.countByLoginNamePassword("admin", "admin")).andReturn(1L);
-		EasyMock.expect(mockAccountDao.countByLoginNamePassword("admin", "errorPasswd")).andReturn(0L);
+		EasyMock.expect(mockAccountDao.countByLoginNamePassword("admin", "admin")).andReturn(1);
+		EasyMock.expect(mockAccountDao.countByLoginNamePassword("admin", "errorPasswd")).andReturn(0);
 		control.replay();
 
 		assertEquals(true, accountManager.authenticate("admin", "admin"));

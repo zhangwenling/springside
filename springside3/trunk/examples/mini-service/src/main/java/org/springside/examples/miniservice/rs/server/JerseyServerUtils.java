@@ -7,7 +7,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.slf4j.Logger;
 
-public class ResourceUtils {
+public class JerseyServerUtils {
 
 	public static final String CHARSET = ";charset=UTF-8";
 

@@ -71,4 +71,10 @@ public class AccountDaoTest extends SpringTxTestCase {
 		assertEquals(4 + 1, this.countRowsInTable("acct_user"));
 		assertEquals(2 + 1, accountDao.getDepartmentDetail(1L).getUserList().size());
 	}
+
+	@Test
+	public void countLoginNameAndPassword() {
+		assertEquals(1, accountDao.countByLoginNamePassword("user2", "user2"));
+		assertEquals(0, accountDao.countByLoginNamePassword("user2", "error"));
+	}
 }

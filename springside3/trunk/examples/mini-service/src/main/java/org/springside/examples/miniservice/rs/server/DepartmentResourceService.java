@@ -53,7 +53,7 @@ public class DepartmentResourceService {
 
 			return dtoList;
 		} catch (RuntimeException e) {
-			throw ResourceUtils.buildException(logger, e);
+			throw JerseyServerUtils.buildException(logger, e);
 		}
 	}
 
@@ -69,13 +69,13 @@ public class DepartmentResourceService {
 
 			if (entity == null) {
 				String message = "部门不存在(id:" + id + ")";
-				throw ResourceUtils.buildException(logger, Status.NOT_FOUND, message);
+				throw JerseyServerUtils.buildException(logger, Status.NOT_FOUND, message);
 			}
 
 			DepartmentDTO dto = dozer.map(entity, DepartmentDTO.class);
 			return dto;
 		} catch (RuntimeException e) {
-			throw ResourceUtils.buildException(logger, e);
+			throw JerseyServerUtils.buildException(logger, e);
 		}
 	}
 

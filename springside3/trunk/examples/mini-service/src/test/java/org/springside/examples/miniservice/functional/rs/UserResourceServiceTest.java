@@ -1,7 +1,9 @@
 package org.springside.examples.miniservice.functional.rs;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.net.URI;
@@ -60,5 +62,11 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 		} catch (UniformInterfaceException e) {
 			assertEquals(400, e.getResponse().getStatus());
 		}
+	}
+
+	@Test
+	public void authUser() {
+		assertTrue(client.authUser("user1", "user1"));
+		assertFalse(client.authUser("user1", "error"));
 	}
 }

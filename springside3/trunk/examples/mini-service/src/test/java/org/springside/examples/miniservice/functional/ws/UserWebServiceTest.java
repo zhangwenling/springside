@@ -44,8 +44,11 @@ public class UserWebServiceTest extends BaseFunctionalTestCase {
 	 */
 	@Test
 	public void authUser() {
-		AuthUserResult result = userWebService.authUser("admin", "admin");
+		AuthUserResult result = userWebService.authUser("user1", "user1");
 		assertEquals(true, result.isValid());
+
+		result = userWebService.authUser("user1", "error");
+		assertEquals(false, result.isValid());
 	}
 
 	/**

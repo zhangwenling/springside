@@ -6,8 +6,10 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -48,14 +50,14 @@ public class UserResouceService {
 	 * 创建用户, 请求数据为JSON/XML格式编码的DTO, 返回表示所创建用户的URI.
 	 */
 	@POST
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + ResourceUtils.CHARSET })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + JerseyServerUtils.CHARSET })
 	public Response createUser(UserDTO user) {
 
 		Set<ConstraintViolation<UserDTO>> constraintViolations = validator.validate(user);
 		if (!constraintViolations.isEmpty()) {
 			ConstraintViolation<UserDTO> violation = constraintViolations.iterator().next();
 			String message = violation.getPropertyPath() + " " + violation.getMessage();
-			throw ResourceUtils.buildException(logger, Status.BAD_REQUEST.getStatusCode(), message);
+			throw JerseyServerUtils.buildException(logger, Status.BAD_REQUEST.getStatusCode(), message);
 		}
 
 		try {
@@ -69,24 +71,31 @@ public class UserResouceService {
 			return Response.created(createdUri).build();
 		} catch (DataIntegrityViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
-			throw ResourceUtils.buildException(logger, Status.BAD_REQUEST.getStatusCode(), message);
+			throw JerseyServerUtils.buildException(logger, Status.BAD_REQUEST.getStatusCode(), message);
 		} catch (RuntimeException e) {
-			throw ResourceUtils.buildException(logger, e);
+			throw JerseyServerUtils.buildException(logger, e);
 		}
 	}
 
-	public boolean authUser(String loginName, String password) {
-		return true;
-	}
-
-	@Autowired
-	public void setValidator(Validator validator) {
-		this.validator = validator;
+	@GET
+	@Path("auth")
+	public String authUser(@QueryParam("loginName") String loginName, @QueryParam("password") String password) {
+		try {
+			Boolean result = accountManager.authenticate(loginName, password);
+			return result.toString();
+		} catch (RuntimeException e) {
+			throw JerseyServerUtils.buildException(logger, e);
+		}
 	}
 
 	@Autowired
 	public void setAccountManager(AccountManager accountManager) {
 		this.accountManager = accountManager;
+	}
+
+	@Autowired
+	public void setValidator(Validator validator) {
+		this.validator = validator;
 	}
 
 	@Autowired

@@ -1,11 +1,14 @@
 package org.springside.examples.miniservice.dao.account;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Component;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
+
+import com.google.common.collect.Maps;
 
 @Component
 public class AccountMyBatisDao extends SqlSessionDaoSupport {
@@ -23,8 +26,10 @@ public class AccountMyBatisDao extends SqlSessionDaoSupport {
 		return user.getId();
 	}
 
-	public Long countByLoginNamePassword(String loginName, String password) {
-		return 0L;
+	public int countByLoginNamePassword(String loginName, String password) {
+		Map<String, String> parameters = Maps.newHashMap();
+		parameters.put("loginName", loginName);
+		parameters.put("password", password);
+		return (Integer) getSqlSession().selectOne("Account.countByLoginNamePasswd", parameters);
 	}
-
 }

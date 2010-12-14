@@ -25,7 +25,7 @@
 		select id, name from acct_department
 	</select>
 
-	<select id="getDepartmentDetail" resultMap="departmentDetailMap">
+	<select id="getDepartmentDetail" parameterType="int" resultMap="departmentDetailMap">
 		select d.id as department_id,
 		d.name as department_name,
 		m.id as
@@ -38,6 +38,10 @@
 		from acct_department d, acct_user m, acct_user u
 		where d.manager_id=m.id and d.id=u.department_id
 		and d.id=#{id}
+	</select>
+	
+	<select id="countByLoginNamePasswd" parameterType="map" resultType="int">
+		select count(*) from acct_user where login_name=#{loginName} and password=#{password}
 	</select>
 
 	<insert id="saveUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">

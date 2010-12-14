@@ -7,11 +7,9 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Required;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
 
-import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 /**
  * 使用Jersey Client的User REST客户端.
@@ -24,8 +22,7 @@ public class UserResourceClient {
 
 	@Required
 	public void setBaseUrl(String baseUrl) {
-		Client jerseyClient = Client.create(new DefaultClientConfig());
-		client = jerseyClient.resource(baseUrl);
+		client = JerseyClientUtils.createClient(baseUrl);
 	}
 
 	public URI createUser(UserDTO user) {
@@ -36,5 +33,11 @@ public class UserResourceClient {
 		} else {
 			throw new UniformInterfaceException(response);
 		}
+	}
+
+	public boolean authUser(String loginName, String password) {
+		String result = client.path("/users/auth").queryParam("loginName", loginName).queryParam("password", password)
+				.get(String.class);
+		return new Boolean(result);
 	}
 }
