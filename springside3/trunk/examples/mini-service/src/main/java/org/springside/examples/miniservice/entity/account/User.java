@@ -13,6 +13,7 @@ public class User extends IdEntity {
 	private String password;
 	private String name;
 	private String email;
+	private Department department;
 
 	public String getLoginName() {
 		return loginName;
@@ -44,6 +45,14 @@ public class User extends IdEntity {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
 	@Override

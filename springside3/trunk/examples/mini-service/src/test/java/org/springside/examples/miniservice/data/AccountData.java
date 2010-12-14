@@ -26,13 +26,22 @@ public class AccountData {
 
 	public static User getRandomUser() {
 		String userName = DataUtils.randomName("User");
+		Department department = getDefaultDepartment();
 
 		User user = new User();
 		user.setLoginName(userName);
 		user.setName(userName);
 		user.setPassword("123456");
 		user.setEmail(userName + "@springside.org.cn");
+		user.setDepartment(department);
 
 		return user;
+	}
+
+	public static Department getDefaultDepartment() {
+
+		Department department = new Department();
+		department.setId(1L);
+		return department;
 	}
 }

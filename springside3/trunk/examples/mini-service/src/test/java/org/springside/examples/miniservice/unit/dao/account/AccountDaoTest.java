@@ -67,6 +67,8 @@ public class AccountDaoTest extends SpringTxTestCase {
 		User user = AccountData.getRandomUser();
 		Long id = accountDao.saveUser(user);
 		assertEquals(new Long(5L), id);
-		assertEquals(5, this.countRowsInTable("acct_user"));
+
+		assertEquals(4 + 1, this.countRowsInTable("acct_user"));
+		assertEquals(2 + 1, accountDao.getDepartmentDetail(1L).getUserList().size());
 	}
 }

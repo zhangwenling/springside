@@ -1,10 +1,10 @@
 package org.springside.examples.miniservice.rs.dto;
 
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Web Service传输User信息的DTO.
@@ -18,6 +18,7 @@ public class UserDTO {
 	private String loginName;
 	private String name;
 	private String email;
+	private DepartmentDTO department;
 
 	public Long getId() {
 		return id;
@@ -27,7 +28,7 @@ public class UserDTO {
 		id = value;
 	}
 
-	@NotNull
+	@NotBlank
 	public String getLoginName() {
 		return loginName;
 	}
@@ -36,7 +37,7 @@ public class UserDTO {
 		loginName = value;
 	}
 
-	@NotNull
+	@NotBlank
 	public String getName() {
 		return name;
 	}
@@ -52,6 +53,14 @@ public class UserDTO {
 
 	public void setEmail(String value) {
 		email = value;
+	}
+
+	public DepartmentDTO getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(DepartmentDTO department) {
+		this.department = department;
 	}
 
 	/**
