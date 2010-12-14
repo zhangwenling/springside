@@ -132,8 +132,8 @@ public class UserWebServiceImpl implements UserWebService {
 		//保存用户
 		try {
 			User userEntity = dozer.map(user, User.class);
-			accountManager.saveUser(userEntity);
-			result.setUserId(userEntity.getId());
+			Long userId = accountManager.saveUser(userEntity);
+			result.setUserId(userId);
 			return result;
 		} catch (ServiceException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";

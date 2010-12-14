@@ -18,7 +18,9 @@ public class AccountMyBatisDao extends SqlSessionDaoSupport {
 		return (Department) getSqlSession().selectOne("Account.getDepartmentDetail", id);
 	}
 
-	public void saveUser(User user) {
+	public Long saveUser(User user) {
+		getSqlSession().insert("Account.saveUser", user);
+		return user.getId();
 	}
 
 	public Long countByLoginNamePassword(String loginName, String password) {

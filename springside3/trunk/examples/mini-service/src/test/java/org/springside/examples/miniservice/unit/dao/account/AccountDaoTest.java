@@ -12,7 +12,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.miniservice.dao.account.AccountMyBatisDao;
+import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.Department;
+import org.springside.examples.miniservice.entity.account.User;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DbUnitUtils;
 
@@ -29,7 +31,7 @@ public class AccountDaoTest extends SpringTxTestCase {
 	private static DataSource dataSourceHolder = null;
 
 	@Autowired
-	private AccountMyBatisDao entityDao;
+	private AccountMyBatisDao accountDao;
 
 	@Before
 	public void loadDefaultData() throws Exception {
@@ -46,17 +48,25 @@ public class AccountDaoTest extends SpringTxTestCase {
 
 	@Test
 	public void getDepartmentList() {
-		List<Department> departmentList = entityDao.getDepartmentList();
+		List<Department> departmentList = accountDao.getDepartmentList();
 		assertEquals(2, departmentList.size());
 		assertEquals("Development", departmentList.get(0).getName());
 	}
 
 	@Test
 	public void getDepartmentDetail() {
-		Department department = entityDao.getDepartmentDetail(1L);
+		Department department = accountDao.getDepartmentDetail(1L);
 		assertEquals("Development", department.getName());
 		assertEquals("Jack", department.getManager().getName());
 		assertEquals(2, department.getUserList().size());
 		assertEquals("Jack", department.getUserList().get(0).getName());
+	}
+
+	@Test
+	public void saveUser() {
+		User user = AccountData.getRandomUser();
+		Long id = accountDao.saveUser(user);
+		assertEquals(new Long(5L), id);
+		assertEquals(5, this.countRowsInTable("acct_user"));
 	}
 }

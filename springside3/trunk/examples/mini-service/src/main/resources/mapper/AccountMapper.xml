@@ -12,13 +12,13 @@
 	<resultMap id="departmentDetailMap.managerMap" type="User">
 		<id property="id" column="manager_id" />
 		<result property="name" column="manager_name" />
-		<result property="email" column="manager_email"/>
+		<result property="email" column="manager_email" />
 	</resultMap>
 
 	<resultMap id="departmentDetailMap.userMap" type="User">
 		<id property="id" column="user_id" />
 		<result property="name" column="user_name" />
-		<result property="email" column="user_email"/>
+		<result property="email" column="user_email" />
 	</resultMap>
 
 	<select id="getDepartmentList" resultType="Department">
@@ -28,7 +28,8 @@
 	<select id="getDepartmentDetail" resultMap="departmentDetailMap">
 		select d.id as department_id,
 		d.name as department_name,
-		m.id as manager_id,
+		m.id as
+		manager_id,
 		m.name as manager_name,
 		m.email as manager_email,
 		u.id as user_id,
@@ -39,11 +40,10 @@
 		and d.id=#{id}
 	</select>
 
-	<insert id="saveUser" parameterType="User">
-		insert into acct_user (id, login_name,name, password,email)
-		values (#{id},#{loginName},#{name},#{password},#{email})
+	<insert id="saveUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+		insert into acct_user (
+		login_name,name, password,email)
+		values (#{loginName},#{name},#{password},#{email})
 	</insert>
-
-
 
 </mapper> 

@@ -36,8 +36,8 @@ public class AccountManager {
 		return accountDao.getDepartmentDetail(id);
 	}
 
-	public void saveUser(User user) {
-		accountDao.saveUser(user);
+	public Long saveUser(User user) {
+		return accountDao.saveUser(user);
 	}
 
 	/**

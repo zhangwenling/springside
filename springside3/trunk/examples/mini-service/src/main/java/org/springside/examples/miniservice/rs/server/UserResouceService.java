@@ -64,9 +64,9 @@ public class UserResouceService {
 
 			User userEntity = dozer.map(user, User.class);
 
-			accountManager.saveUser(userEntity);
+			Long id = accountManager.saveUser(userEntity);
 
-			URI createdUri = uriInfo.getAbsolutePathBuilder().path(userEntity.getId().toString()).build();
+			URI createdUri = uriInfo.getAbsolutePathBuilder().path(id.toString()).build();
 
 			return Response.created(createdUri).build();
 		} catch (ServiceException e) {
