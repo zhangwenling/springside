@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.rs.dto.DepartmentDTO;
-import org.springside.examples.miniservice.service.ServiceException;
 import org.springside.examples.miniservice.service.account.AccountManager;
 
 import com.google.common.collect.Lists;
@@ -70,13 +69,14 @@ public class DepartmentResourceService {
 		try {
 			Department entity = accountManager.getDepartmentDetail(id);
 
-			DepartmentDTO dto = dozer.map(entity, DepartmentDTO.class);
+			if (entity == null) {
+				String message = "部门不存在(id:" + id + ")";
+				logger.error(message);
+				throw ResourceUtils.buildException(Status.NOT_FOUND, message);
+			}
 
+			DepartmentDTO dto = dozer.map(entity, DepartmentDTO.class);
 			return dto;
-		} catch (ServiceException e) {
-			String message = "用户不存在(id:" + id + ")";
-			logger.error(message, e);
-			throw ResourceUtils.buildException(Status.NOT_FOUND, message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			throw new WebApplicationException();

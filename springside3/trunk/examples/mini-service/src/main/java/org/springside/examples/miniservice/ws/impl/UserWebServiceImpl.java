@@ -48,7 +48,7 @@ public class UserWebServiceImpl implements UserWebService {
 	private Validator validator;
 
 	/**
-	 * @see UserWebService#getAllUser()
+	 * @see UserWebService#getDepartmentList()
 	 */
 	@Override
 	public GetDepartmentListResult getDepartmentList() {
@@ -72,7 +72,7 @@ public class UserWebServiceImpl implements UserWebService {
 	}
 
 	/**
-	 * @see UserWebService#getUser()
+	 * @see UserWebService#getDepartmentDetail()
 	 */
 	@Override
 	public GetDepartmentDetailResult getDepartmentDetail(Long id) {
@@ -86,19 +86,19 @@ public class UserWebServiceImpl implements UserWebService {
 			return result.buildResult(WSResult.PARAMETER_ERROR, e.getMessage());
 		}
 
-		//获取用户
+		//获取部门
 		try {
 			Department entity = accountManager.getDepartmentDetail(id);
 
+			if (entity == null) {
+				String message = "部门不存在(id:" + id + ")";
+				logger.error(message);
+				return result.buildResult(WSResult.PARAMETER_ERROR, message);
+			}
+
 			DepartmentDTO dto = dozer.map(entity, DepartmentDTO.class);
-
 			result.setDepartment(dto);
-
 			return result;
-		} catch (ServiceException e) {
-			String message = "用户不存在(id:" + id + ")";
-			logger.error(message, e);
-			return result.buildResult(WSResult.PARAMETER_ERROR, message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			return result.buildDefaultErrorResult();
