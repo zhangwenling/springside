@@ -38,7 +38,6 @@ public class AccountWebServiceTest {
 	@Before
 	public void setUp() {
 		userWebService = new AccountWebServiceImpl();
-		userWebService.setDozer(new DozerBeanMapper());
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		userWebService.setValidator(factory.getValidator());
 

@@ -73,7 +73,7 @@ public class UserResouceService {
 	}
 
 	/**
-	 * 查询用户, 请求数据为URL中的请求参数.
+	 * 查询用户, 请求数据为URL中的请求参数, 返回用户列表.
 	 */
 	@GET
 	@Path("search")
@@ -83,7 +83,9 @@ public class UserResouceService {
 			Map<String, String> parameters = Maps.newHashMap();
 			parameters.put("loginName", loginName);
 			parameters.put("name", name);
+
 			List<User> entityList = accountManager.searchUser(parameters);
+
 			return DozerUtils.mapList(entityList, UserDTO.class);
 		} catch (RuntimeException e) {
 			throw JerseyServerUtils.buildException(e, logger);
@@ -97,6 +99,7 @@ public class UserResouceService {
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
 	public Response createUser(UserDTO user) {
 
+		//Hibernate Validator校验
 		Set<ConstraintViolation<UserDTO>> constraintViolations = validator.validate(user);
 		if (!constraintViolations.isEmpty()) {
 			ConstraintViolation<UserDTO> violation = constraintViolations.iterator().next();
@@ -104,13 +107,13 @@ public class UserResouceService {
 			throw JerseyServerUtils.buildException(Status.BAD_REQUEST.getStatusCode(), message, logger);
 		}
 
+		//转换并创建用户
 		try {
 			User userEntity = DozerUtils.map(user, User.class);
 
 			Long id = accountManager.saveUser(userEntity);
 
 			URI createdUri = uriInfo.getAbsolutePathBuilder().path(id.toString()).build();
-
 			return Response.created(createdUri).build();
 		} catch (DataIntegrityViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";

@@ -60,7 +60,4 @@
 
 	<!-- JSR303 Validator定义 -->
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
-
-	<!-- Dozer DTO复制工具类定义 -->
-	<bean id="dozer" class="org.dozer.DozerBeanMapper" />
 </beans>

@@ -26,7 +26,7 @@ public class JerseyServerUtils {
 	}
 
 	/**
-	 * 创建WebApplicatonExcetpion并记录日志, 使用状态码为500与RuntimeExcetpion中信息.
+	 * 创建WebApplicatonExcetpion并记录日志, 使用状态码500与RuntimeExcetpion中信息.
 	 * 如RuntimeException为WebApplicatonExcetpion则跳过不进行处理.
 	 */
 	public static WebApplicationException buildException(RuntimeException e, Logger logger) {

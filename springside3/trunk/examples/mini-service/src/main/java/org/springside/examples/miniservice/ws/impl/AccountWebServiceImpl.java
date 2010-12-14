@@ -8,7 +8,6 @@ import javax.jws.WebService;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
-import org.dozer.DozerBeanMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +43,6 @@ public class AccountWebServiceImpl implements AccountWebService {
 
 	private AccountManager accountManager;
 
-	private DozerBeanMapper dozer;
-
 	private Validator validator;
 
 	/**
@@ -73,7 +70,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 				return result.buildResult(WSResult.PARAMETER_ERROR, message);
 			}
 
-			DepartmentDTO dto = dozer.map(entity, DepartmentDTO.class);
+			DepartmentDTO dto = DozerUtils.map(entity, DepartmentDTO.class);
 			result.setDepartment(dto);
 			return result;
 		} catch (RuntimeException e) {
@@ -95,9 +92,12 @@ public class AccountWebServiceImpl implements AccountWebService {
 			Map<String, String> parameters = Maps.newHashMap();
 			parameters.put("loginName", loginName);
 			parameters.put("name", name);
+
 			List<User> entityList = accountManager.searchUser(parameters);
+
 			List<UserDTO> dtoList = DozerUtils.mapList(entityList, UserDTO.class);
 			result.setUserList(dtoList);
+
 			return result;
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
@@ -112,12 +112,11 @@ public class AccountWebServiceImpl implements AccountWebService {
 	public CreateUserResult createUser(UserDTO user) {
 		CreateUserResult result = new CreateUserResult();
 
-		//校验请求参数
+		//Hibernate Validator校验请求参数
 		try {
 			Assert.notNull(user, "用户参数为空");
 			Assert.isNull(user.getId(), "新建用户ID参数必须为空");
 
-			//校验User内容
 			Set<ConstraintViolation<UserDTO>> constraintViolations = validator.validate(user);
 			if (!constraintViolations.isEmpty()) {
 				ConstraintViolation<UserDTO> violation = constraintViolations.iterator().next();
@@ -131,8 +130,10 @@ public class AccountWebServiceImpl implements AccountWebService {
 
 		//保存用户
 		try {
-			User userEntity = dozer.map(user, User.class);
+			User userEntity = DozerUtils.map(user, User.class);
+
 			Long userId = accountManager.saveUser(userEntity);
+
 			result.setUserId(userId);
 			return result;
 		} catch (DataIntegrityViolationException e) {
@@ -148,11 +149,6 @@ public class AccountWebServiceImpl implements AccountWebService {
 	@Autowired
 	public void setAccountManager(AccountManager accountManager) {
 		this.accountManager = accountManager;
-	}
-
-	@Autowired
-	public void setDozer(DozerBeanMapper dozer) {
-		this.dozer = dozer;
 	}
 
 	@Autowired
