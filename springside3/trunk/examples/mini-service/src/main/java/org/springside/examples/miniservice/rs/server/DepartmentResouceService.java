@@ -47,7 +47,7 @@ public class DepartmentResouceService {
 
 			return DozerUtils.map(entity, DepartmentDTO.class);
 		} catch (RuntimeException e) {
-			throw JerseyServerUtils.buildException(e, logger);
+			throw JerseyServerUtils.buildDefaultException(e, logger);
 		}
 	}
 

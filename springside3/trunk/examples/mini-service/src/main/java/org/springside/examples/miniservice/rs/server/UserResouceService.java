@@ -68,7 +68,7 @@ public class UserResouceService {
 
 			return DozerUtils.map(entity, UserDTO.class);
 		} catch (RuntimeException e) {
-			throw JerseyServerUtils.buildException(e, logger);
+			throw JerseyServerUtils.buildDefaultException(e, logger);
 		}
 	}
 
@@ -88,7 +88,7 @@ public class UserResouceService {
 
 			return DozerUtils.mapList(entityList, UserDTO.class);
 		} catch (RuntimeException e) {
-			throw JerseyServerUtils.buildException(e, logger);
+			throw JerseyServerUtils.buildDefaultException(e, logger);
 		}
 	}
 
@@ -119,7 +119,7 @@ public class UserResouceService {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
 			throw JerseyServerUtils.buildException(Status.BAD_REQUEST.getStatusCode(), message, logger);
 		} catch (RuntimeException e) {
-			throw JerseyServerUtils.buildException(e, logger);
+			throw JerseyServerUtils.buildDefaultException(e, logger);
 		}
 	}
 

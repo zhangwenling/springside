@@ -27,7 +27,6 @@ public class WSResult {
 	/**
 	 * 创建结果.
 	 */
-
 	public <T extends WSResult> T buildResult(String resultCode, String resultMessage) {
 		code = resultCode;
 		message = resultMessage;
@@ -37,7 +36,6 @@ public class WSResult {
 	/**
 	 * 创建默认异常结果.
 	 */
-
 	public <T extends WSResult> T buildDefaultErrorResult() {
 		return (T) buildResult(SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
 	}

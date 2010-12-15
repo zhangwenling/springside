@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 public class JerseyServerUtils {
 
 	/**
-	 * 创建WebApplicationException并记录日志, 使用标准状态码与自定义信息并记录错误信息.
+	 * 创建WebApplicationException并记打印日志, 使用标准状态码与自定义信息并记录错误信息.
 	 */
 	public static WebApplicationException buildException(Status status, String message, Logger logger) {
 		logger.error(status.getStatusCode() + ":" + message);
@@ -18,7 +18,7 @@ public class JerseyServerUtils {
 	}
 
 	/**
-	 * 创建WebApplicationException并记录日志, 使用自定义状态码与自定义信息.
+	 * 创建WebApplicationException并打印日志, 使用自定义状态码与自定义信息.
 	 */
 	public static WebApplicationException buildException(int status, String message, Logger logger) {
 		logger.error(status + ":" + message);
@@ -26,10 +26,10 @@ public class JerseyServerUtils {
 	}
 
 	/**
-	 * 创建WebApplicatonExcetpion并记录日志, 使用状态码500与RuntimeExcetpion中信息.
+	 * 创建状态码为500的默认WebApplicatonExcetpion, 并在日志中打印RuntimeExcetpion的信息.
 	 * 如RuntimeException为WebApplicatonExcetpion则跳过不进行处理.
 	 */
-	public static WebApplicationException buildException(RuntimeException e, Logger logger) {
+	public static WebApplicationException buildDefaultException(RuntimeException e, Logger logger) {
 		if (e instanceof WebApplicationException) {
 			return (WebApplicationException) e;
 		} else {
@@ -37,5 +37,4 @@ public class JerseyServerUtils {
 			return new WebApplicationException();
 		}
 	}
-
 }
