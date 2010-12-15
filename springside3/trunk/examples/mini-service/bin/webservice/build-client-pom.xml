@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springside</groupId>
+		<artifactId>springside3-parent</artifactId>
+		<version>4.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>cxf-client-builder</artifactId>
+	<packaging>pom</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>${cxf.version}</version>
+
+				<configuration>
+					<sourceRoot>${basedir}/../../target/generated/</sourceRoot>
+					<wsdlOptions>
+						<wsdlOption>
+							<wsdl>${basedir}/../../src/main/webapp/wsdl/mini-service.wsdl</wsdl>
+						</wsdlOption>
+					</wsdlOptions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
