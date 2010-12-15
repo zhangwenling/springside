@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springside.examples.showcase.webservice.WsConstants;
 import org.springside.examples.showcase.webservice.ws.server.SmallImageWebService;
-import org.springside.examples.showcase.webservice.ws.server.WsConstants;
 import org.springside.examples.showcase.webservice.ws.server.result.SmallImageResult;
 import org.springside.examples.showcase.webservice.ws.server.result.WSResult;
 

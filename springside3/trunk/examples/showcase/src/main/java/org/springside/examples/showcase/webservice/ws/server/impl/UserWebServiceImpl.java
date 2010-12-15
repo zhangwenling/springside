@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.jws.WebService;
 
-import org.dozer.DozerBeanMapper;
 import org.hibernate.ObjectNotFoundException;
 import org.perf4j.StopWatch;
 import org.perf4j.slf4j.Slf4JStopWatch;
@@ -15,12 +14,13 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.util.Assert;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.AccountManager;
+import org.springside.examples.showcase.webservice.WsConstants;
 import org.springside.examples.showcase.webservice.ws.server.UserWebService;
-import org.springside.examples.showcase.webservice.ws.server.WsConstants;
 import org.springside.examples.showcase.webservice.ws.server.dto.UserDTO;
 import org.springside.examples.showcase.webservice.ws.server.result.GetAllUserResult;
 import org.springside.examples.showcase.webservice.ws.server.result.GetUserResult;
 import org.springside.examples.showcase.webservice.ws.server.result.WSResult;
+import org.springside.modules.utils.mapping.DozerUtils;
 
 import com.google.common.collect.Lists;
 
@@ -40,8 +40,6 @@ public class UserWebServiceImpl implements UserWebService {
 
 	@Autowired
 	private AccountManager accountManager;
-	@Autowired
-	private DozerBeanMapper dozer;
 
 	/**
 	 * @see UserWebService#getAllUser()
@@ -54,7 +52,7 @@ public class UserWebServiceImpl implements UserWebService {
 			List<UserDTO> userDTOList = Lists.newArrayList();
 
 			for (User userEntity : userEntityList) {
-				userDTOList.add(dozer.map(userEntity, UserDTO.class));
+				userDTOList.add(DozerUtils.map(userEntity, UserDTO.class));
 			}
 
 			GetAllUserResult result = new GetAllUserResult();
@@ -89,7 +87,7 @@ public class UserWebServiceImpl implements UserWebService {
 			User entity = accountManager.getInitializedUser(id);
 			dbStopWatch.stop();
 
-			UserDTO dto = dozer.map(entity, UserDTO.class);
+			UserDTO dto = DozerUtils.map(entity, UserDTO.class);
 
 			GetUserResult result = new GetUserResult();
 			result.setUser(dto);

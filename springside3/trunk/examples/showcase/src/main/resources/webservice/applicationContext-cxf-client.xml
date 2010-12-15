@@ -6,10 +6,6 @@
 
 	<description>Apache CXF Web Service Client端配置</description>
 
-	<import resource="classpath:META-INF/cxf/cxf.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
-
 	<!-- 使用WS-Security中的明文密码认证机制的客户端 -->
 	<jaxws:client id="userServiceWithPlainPassword" serviceClass="org.springside.examples.showcase.webservice.ws.server.UserWebService"
 		address="http://localhost:8080/showcase/services/UserServiceWithPlainPassword">

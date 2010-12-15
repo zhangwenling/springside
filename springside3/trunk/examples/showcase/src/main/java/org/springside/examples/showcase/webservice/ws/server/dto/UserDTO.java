@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.springside.examples.showcase.webservice.ws.server.WsConstants;
+import org.springside.examples.showcase.webservice.WsConstants;
 
 /**
  * Web Service传输User信息的DTO.

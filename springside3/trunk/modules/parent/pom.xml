@@ -19,7 +19,7 @@
 		<hibernate.version>3.6.0.Final</hibernate.version>
 		<mybatis.version>3.0.3</mybatis.version>
 		<struts2.version>2.2.1</struts2.version>
-		<cxf.version>2.3.0</cxf.version>
+		<cxf.version>2.3.1</cxf.version>
 		<jersey.version>1.4</jersey.version>
 		<spring-security.version>3.0.4.RELEASE</spring-security.version>
 		<activemq.version>5.4.2</activemq.version>
@@ -646,7 +646,7 @@
 			<dependency>
 				<groupId>ognl</groupId>
 				<artifactId>ognl</artifactId>
-				<version>3.0</version>
+				<version>3.0.1</version>
 				<exclusions>
 					<!-- use javassist.javassist instead -->
 					<exclusion>
@@ -660,7 +660,7 @@
 			<dependency>
 				<groupId>com.ibm.icu</groupId>
 				<artifactId>icu4j</artifactId>
-				<version>4.0.1</version>
+				<version>4.6</version>
 			</dependency>
 
 			<!-- template engine -->

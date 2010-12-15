@@ -9,10 +9,8 @@ import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
 import org.springside.modules.utils.mapping.JsonBinder;
 import org.springside.modules.utils.web.ServletUtils;
 
-import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 /**
  * 使用Jersey Client的User REST客户端.
@@ -26,8 +24,7 @@ public class UserResourceClient {
 
 	@Required
 	public void setBaseUrl(String baseUrl) {
-		Client jerseyClient = Client.create(new DefaultClientConfig());
-		client = jerseyClient.resource(baseUrl);
+		client = JerseyClientUtils.createClient(baseUrl);
 	}
 
 	/**
@@ -47,14 +44,14 @@ public class UserResourceClient {
 	/**
 	 * 返回html格式的特定内容.
 	 */
-	public String searchUserHtml(String name) {
+	public String searchUserReturnHtml(String name) {
 		return client.path("/users/search").queryParam("name", name).queryParam("format", "html").get(String.class);
 	}
 
 	/**
 	 * 无公共DTO类定义, 取得返回JSON字符串后自行转换DTO.
 	 */
-	public UserDTO searchUserJson(String name) {
+	public UserDTO searchUserReturnJson(String name) {
 		String jsonString = client.path("/users/search").queryParam("name", name).get(String.class);
 		return JsonBinder.buildNormalBinder().fromJson(jsonString, UserDTO.class);
 	}

@@ -2,6 +2,7 @@ package org.springside.examples.showcase.webservice.ws.server;
 
 import javax.jws.WebService;
 
+import org.springside.examples.showcase.webservice.WsConstants;
 import org.springside.examples.showcase.webservice.ws.server.result.LargeImageResult;
 
 /**

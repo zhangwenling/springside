@@ -15,10 +15,9 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 
-import org.dozer.DozerBeanMapper;
 import org.hibernate.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,9 +26,9 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.AccountManager;
+import org.springside.examples.showcase.webservice.WsConstants;
 import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
-
-import com.google.common.collect.Lists;
+import org.springside.modules.utils.mapping.DozerUtils;
 
 /**
  * 用户资源 REST服务演示.
@@ -41,14 +40,10 @@ import com.google.common.collect.Lists;
 @Path("/users")
 public class UserResourceService {
 
-	private static final String CHARSET = ";charset=UTF-8";
-
 	private static Logger logger = LoggerFactory.getLogger(UserResourceService.class);
 
 	@Autowired
 	private AccountManager accountManager;
-	@Autowired
-	private DozerBeanMapper dozer;
 
 	/**
 	 * 获取所有用户.
@@ -56,18 +51,13 @@ public class UserResourceService {
 	 */
 	@GET
 	@Secured("ROLE_User")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
 	public List<UserDTO> getAllUser() {
 		try {
 			List<User> entityList = accountManager.getAllUserWithRole();
-			List<UserDTO> dtoList = Lists.newArrayList();
-			for (User userEntity : entityList) {
-				dtoList.add(dozer.map(userEntity, UserDTO.class));
-			}
-			return dtoList;
+			return DozerUtils.mapList(entityList, UserDTO.class);
 		} catch (RuntimeException e) {
-			logger.error(e.getMessage(), e);
-			throw new WebApplicationException();
+			throw JerseyServerUtils.buildDefaultException(e, logger);
 		}
 	}
 
@@ -76,16 +66,14 @@ public class UserResourceService {
 	 */
 	@GET
 	@Path("{id}")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + CHARSET })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
 	public UserDTO getUser(@PathParam("id") String id) {
 		try {
 			User entity = accountManager.getInitializedUser(id);
-			UserDTO dto = dozer.map(entity, UserDTO.class);
-			return dto;
+			return DozerUtils.map(entity, UserDTO.class);
 		} catch (ObjectNotFoundException e) {
 			String message = "用户不存在(id:" + id + ")";
-			logger.error(message, e);
-			throw buildException(Status.NOT_FOUND, message);
+			throw JerseyServerUtils.buildException(Status.NOT_FOUND, message, logger);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			throw new WebApplicationException();
@@ -106,16 +94,15 @@ public class UserResourceService {
 			if ("html".equals(format)) {
 				//返回html格式的特定字符串.
 				String html = "<div>" + entity.getName() + ", your mother call you...</div>";
-				return Response.ok(html, MediaType.TEXT_HTML + CHARSET).build();
+				return Response.ok(html, MediaType.TEXT_HTML + WsConstants.CHARSET).build();
 			} else {
 				//返回JSON格式的对象.
-				UserDTO dto = dozer.map(entity, UserDTO.class);
+				UserDTO dto = DozerUtils.map(entity, UserDTO.class);
 				return Response.ok(dto, MediaType.APPLICATION_JSON).build();
 			}
 		} catch (ObjectNotFoundException e) {
 			String message = "用户不存在(name:" + name + ")";
-			logger.error(message, e);
-			throw buildException(Status.NOT_FOUND, message);
+			throw JerseyServerUtils.buildException(Status.NOT_FOUND, message, logger);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			throw new WebApplicationException();
@@ -140,23 +127,9 @@ public class UserResourceService {
 		}
 
 		if (userName == null) {
-			buildException(450, "用戶名既不在Http Header也不在URL参数中");
+			throw JerseyServerUtils.buildException(450, "用戶名既不在Http Header也不在URL参数中", logger);
 		}
 
 		return userName;
-	}
-
-	/**
-	 * 创建WebApplicationException, 使用标准状态码与自定义信息.
-	 */
-	private WebApplicationException buildException(Status status, String message) {
-		return new WebApplicationException(Response.status(status).entity(message).type("text/plain").build());
-	}
-
-	/**
-	 * 创建WebApplicationException, 使用自定义状态码与自定义信息.
-	 */
-	private WebApplicationException buildException(int status, String message) {
-		return new WebApplicationException(Response.status(status).entity(message).type("text/plain").build());
 	}
 }

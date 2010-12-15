@@ -30,13 +30,13 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 
 	@Test
 	public void searchUserHtml() {
-		String html = client.searchUserHtml("Admin");
+		String html = client.searchUserReturnHtml("Admin");
 		assertEquals("<div>Admin, your mother call you...</div>", html);
 	}
 
 	@Test
 	public void searchUserJson() throws Exception {
-		UserDTO admin = client.searchUserJson("Admin");
+		UserDTO admin = client.searchUserReturnJson("Admin");
 		assertEquals("admin", admin.getLoginName());
 	}
 }
