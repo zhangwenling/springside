@@ -30,7 +30,6 @@ public class BaseFunctionalTestCase {
 	@BeforeClass
 	public static void startAll() throws Exception {
 		startJetty();
-		fetchDataSource();
 		loadDefaultData();
 	}
 
@@ -46,6 +45,7 @@ public class BaseFunctionalTestCase {
 	protected static void startJetty() throws Exception {
 		server = JettyUtils.buildTestServer(Start.PORT, Start.CONTEXT);
 		server.start();
+		dataSource = SpringContextHolder.getBean("dataSource");
 	}
 
 	/**
@@ -53,13 +53,7 @@ public class BaseFunctionalTestCase {
 	 */
 	protected static void stopJetty() throws Exception {
 		server.stop();
-	}
-
-	/**
-	 * 取出Jetty Server内的DataSource.
-	 */
-	protected static void fetchDataSource() {
-		dataSource = SpringContextHolder.getBean("dataSource");
+		dataSource = null;
 	}
 
 	/**

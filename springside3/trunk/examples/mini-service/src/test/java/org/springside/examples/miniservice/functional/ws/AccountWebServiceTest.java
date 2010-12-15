@@ -2,6 +2,7 @@ package org.springside.examples.miniservice.functional.ws;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import javax.xml.ws.BindingProvider;
 
@@ -57,24 +58,26 @@ public class AccountWebServiceTest extends BaseFunctionalTestCase {
 	}
 
 	/**
-	 * 测试创建用户,在Spring applicaitonContext.xml中用<jaxws:client/>创建Client.
+	 * 测试创建用户,使用错误的登录名, 在Spring applicaitonContext.xml中用<jaxws:client/>创建Client.
 	 */
 	@Test
 	public void createUserWithInvalidLoginName() {
 		User user = AccountData.getRandomUser();
 		UserDTO userDTO = new DozerBeanMapper().map(user, UserDTO.class);
 
+		//登录名为空
 		userDTO.setLoginName(null);
 		CreateUserResult result = accountWebService.createUser(userDTO);
 		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
 
-		userDTO.setLoginName("user2");
+		//登录名重复
+		userDTO.setLoginName("user1");
 		result = accountWebService.createUser(userDTO);
 		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
 	}
 
 	/**
-	 * 测试获取全部部门,使用CXF的API自行动态创建Client.
+	 * 测试搜索用户,使用CXF的API自行动态创建Client.
 	 */
 	@Test
 	public void searchUser() {
@@ -91,7 +94,7 @@ public class AccountWebServiceTest extends BaseFunctionalTestCase {
 
 		SearchUserResult result = accountWebServiceCreated.searchUser(null, null);
 
-		assertEquals(4, result.getUserList().size());
-		assertEquals("Development", result.getUserList().get(0).getName());
+		assertTrue(result.getUserList().size() >= 4);
+		assertEquals("Jack", result.getUserList().get(0).getName());
 	}
 }
