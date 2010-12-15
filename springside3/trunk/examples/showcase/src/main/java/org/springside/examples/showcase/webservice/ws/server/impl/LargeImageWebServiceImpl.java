@@ -39,6 +39,7 @@ public class LargeImageWebServiceImpl implements LargeImageWebService, Applicati
 	 */
 	@Override
 	public LargeImageResult getImage() {
+		LargeImageResult result = new LargeImageResult();
 
 		try {
 			//采用applicationContext获取Web应用中的文件.
@@ -48,12 +49,11 @@ public class LargeImageWebServiceImpl implements LargeImageWebService, Applicati
 			DataSource dataSource = new FileDataSource(image);
 			DataHandler dataHandler = new DataHandler(dataSource);
 
-			LargeImageResult result = new LargeImageResult();
 			result.setImageData(dataHandler);
 			return result;
 		} catch (IOException e) {
 			logger.error(e.getMessage(), e);
-			return WSResult.buildResult(LargeImageResult.class, WSResult.IMAGE_ERROR, "Image reading error.");
+			return result.setResult(WSResult.IMAGE_ERROR, "Image reading error.");
 		}
 
 	}

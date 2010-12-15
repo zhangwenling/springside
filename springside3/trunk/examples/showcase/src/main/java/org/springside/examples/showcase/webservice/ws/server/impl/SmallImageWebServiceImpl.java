@@ -37,7 +37,7 @@ public class SmallImageWebServiceImpl implements SmallImageWebService, Applicati
 	 */
 	@Override
 	public SmallImageResult getImage() {
-
+		SmallImageResult result = new SmallImageResult();
 		InputStream is = null;
 		try {
 			//采用applicationContext的getResource()函数获取Web应用中的文件.
@@ -45,12 +45,11 @@ public class SmallImageWebServiceImpl implements SmallImageWebService, Applicati
 			//读取内容到字节数组.
 			byte[] imageBytes = IOUtils.toByteArray(is);
 
-			SmallImageResult result = new SmallImageResult();
 			result.setImageData(imageBytes);
 			return result;
 		} catch (IOException e) {
 			logger.error(e.getMessage(), e);
-			return WSResult.buildResult(SmallImageResult.class, WSResult.IMAGE_ERROR, "Image reading error.");
+			return result.setResult(WSResult.IMAGE_ERROR, "Image reading error.");
 		} finally {
 			IOUtils.closeQuietly(is);
 		}

@@ -3,7 +3,6 @@ package org.springside.examples.showcase.webservice.ws.server.result;
 import javax.xml.bind.annotation.XmlType;
 
 import org.springside.examples.showcase.webservice.WsConstants;
-import org.springside.modules.utils.reflection.ReflectionUtils;
 
 /**
  * WebService返回结果基类,定义所有返回码.
@@ -28,21 +27,17 @@ public class WSResult {
 	/**
 	 * 创建结果.
 	 */
-	public static <T extends WSResult> T buildResult(Class<T> resultClass, String resultCode, String resultMessage) {
-		try {
-			T result = resultClass.newInstance();
-			result.setResult(resultCode, resultMessage);
-			return result;
-		} catch (Exception ex) {
-			throw ReflectionUtils.convertReflectionExceptionToUnchecked(ex);
-		}
+	public <T extends WSResult> T setResult(String resultCode, String resultMessage) {
+		code = resultCode;
+		message = resultMessage;
+		return (T) this;
 	}
 
 	/**
 	 * 创建默认异常结果.
 	 */
-	public static <T extends WSResult> T buildDefaultErrorResult(Class<T> resultClass) {
-		return buildResult(resultClass, SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
+	public <T extends WSResult> T setDefaultErrorResult() {
+		return (T) setResult(SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
 	}
 
 	public String getCode() {
@@ -61,11 +56,4 @@ public class WSResult {
 		this.message = message;
 	}
 
-	/**
-	 * 设置返回结果.
-	 */
-	public void setResult(String resultCode, String resultMessage) {
-		this.code = resultCode;
-		this.message = resultMessage;
-	}
 }

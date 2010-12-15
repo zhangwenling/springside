@@ -57,7 +57,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 			Assert.notNull(id, "id参数为空");
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
-			return result.buildResult(WSResult.PARAMETER_ERROR, e.getMessage());
+			return result.setResult(WSResult.PARAMETER_ERROR, e.getMessage());
 		}
 
 		//获取部门
@@ -67,7 +67,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 			if (entity == null) {
 				String message = "部门不存在(id:" + id + ")";
 				logger.error(message);
-				return result.buildResult(WSResult.PARAMETER_ERROR, message);
+				return result.setResult(WSResult.PARAMETER_ERROR, message);
 			}
 
 			DepartmentDTO dto = DozerUtils.map(entity, DepartmentDTO.class);
@@ -75,7 +75,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 			return result;
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return result.buildDefaultErrorResult();
+			return result.setDefaultErrorResult();
 		}
 	}
 
@@ -101,7 +101,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 			return result;
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return result.buildDefaultErrorResult();
+			return result.setDefaultErrorResult();
 		}
 	}
 
@@ -125,7 +125,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 			}
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
-			return result.buildResult(WSResult.PARAMETER_ERROR, e.getMessage());
+			return result.setResult(WSResult.PARAMETER_ERROR, e.getMessage());
 		}
 
 		//保存用户
@@ -139,10 +139,10 @@ public class AccountWebServiceImpl implements AccountWebService {
 		} catch (DataIntegrityViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
 			logger.error(message, e);
-			return result.buildResult(WSResult.PARAMETER_ERROR, message);
+			return result.setResult(WSResult.PARAMETER_ERROR, message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return result.buildDefaultErrorResult();
+			return result.setDefaultErrorResult();
 		}
 	}
 
