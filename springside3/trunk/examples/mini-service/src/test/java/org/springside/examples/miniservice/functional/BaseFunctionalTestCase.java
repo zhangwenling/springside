@@ -30,7 +30,6 @@ public class BaseFunctionalTestCase {
 	@BeforeClass
 	public static void startAll() throws Exception {
 		startJetty();
-
 		fetchDataSource();
 		loadDefaultData();
 	}

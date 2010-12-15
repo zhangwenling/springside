@@ -7,7 +7,7 @@ import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
-import org.springside.examples.miniservice.ws.result.SearchUserListResult;
+import org.springside.examples.miniservice.ws.result.SearchUserResult;
 
 /**
  * JAX-WS2.0的WebService接口定义类.
@@ -29,12 +29,11 @@ public interface AccountWebService {
 	/**
 	 * 搜索用户信息.
 	 */
-	SearchUserListResult searchUserList(@WebParam(name = "loginName") String loginName,
+	SearchUserResult searchUser(@WebParam(name = "loginName") String loginName,
 			@WebParam(name = "name") String name);
 
 	/**
 	 * 新建用户.
 	 */
 	CreateUserResult createUser(@WebParam(name = "user") UserDTO user);
-
 }

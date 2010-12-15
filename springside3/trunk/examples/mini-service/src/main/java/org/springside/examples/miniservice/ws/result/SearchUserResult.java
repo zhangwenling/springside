@@ -10,12 +10,12 @@ import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 
 /**
- * SearchUserList方法的返回结果.
+ * SearchUser方法的返回结果.
  * 
  * @author calvin
  */
 @XmlType(name = "SearchUserResult", namespace = WsConstants.NS)
-public class SearchUserListResult extends WSResult {
+public class SearchUserResult extends WSResult {
 
 	private List<UserDTO> userList;
 

@@ -22,7 +22,7 @@ import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
-import org.springside.examples.miniservice.ws.result.SearchUserListResult;
+import org.springside.examples.miniservice.ws.result.SearchUserResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
 import org.springside.modules.utils.mapping.DozerUtils;
 
@@ -80,12 +80,12 @@ public class AccountWebServiceImpl implements AccountWebService {
 	}
 
 	/**
-	 * @see UserWebService#searchUserList()
+	 * @see AccountWebService#searchUser()
 	 */
 	@Override
-	public SearchUserListResult searchUserList(String loginName, String name) {
+	public SearchUserResult searchUser(String loginName, String name) {
 
-		SearchUserListResult result = new SearchUserListResult();
+		SearchUserResult result = new SearchUserResult();
 
 		//获取User列表并转换为UserDTO列表.
 		try {

@@ -3,6 +3,9 @@ package org.springside.examples.miniservice.functional.ws;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import javax.xml.ws.BindingProvider;
+
+import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.dozer.DozerBeanMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +20,7 @@ import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniservice.ws.AccountWebService;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.CreateUserResult;
+import org.springside.examples.miniservice.ws.result.SearchUserResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
 
 /**
@@ -32,7 +36,7 @@ import org.springside.examples.miniservice.ws.result.WSResult;
 public class AccountWebServiceTest extends BaseFunctionalTestCase {
 
 	@Autowired
-	private AccountWebService userWebService;
+	private AccountWebService accountWebService;
 
 	/**
 	 * 测试创建用户,在Spring applicaitonContext.xml中用<jaxws:client/>创建Client.
@@ -46,7 +50,7 @@ public class AccountWebServiceTest extends BaseFunctionalTestCase {
 		userDTO.setName(user.getName());
 		userDTO.setEmail(user.getEmail());
 
-		CreateUserResult result = userWebService.createUser(userDTO);
+		CreateUserResult result = accountWebService.createUser(userDTO);
 
 		assertEquals(WSResult.SUCCESS, result.getCode());
 		assertNotNull(result.getUserId());
@@ -61,34 +65,33 @@ public class AccountWebServiceTest extends BaseFunctionalTestCase {
 		UserDTO userDTO = new DozerBeanMapper().map(user, UserDTO.class);
 
 		userDTO.setLoginName(null);
-		CreateUserResult result = userWebService.createUser(userDTO);
+		CreateUserResult result = accountWebService.createUser(userDTO);
 		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
 
 		userDTO.setLoginName("user2");
-		result = userWebService.createUser(userDTO);
+		result = accountWebService.createUser(userDTO);
 		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
 	}
 
 	/**
 	 * 测试获取全部部门,使用CXF的API自行动态创建Client.
 	 */
-	/*@Test
-	 * public void getDepartmentList() {
-		String address = BASE_URL + "/ws/userservice";
+	@Test
+	public void searchUser() {
+		String address = BASE_URL + "/ws/accountservice";
 
 		JaxWsProxyFactoryBean proxyFactory = new JaxWsProxyFactoryBean();
 		proxyFactory.setAddress(address);
-		proxyFactory.setServiceClass(UserWebService.class);
-		UserWebService userWebServiceCreated = (UserWebService) proxyFactory.create();
+		proxyFactory.setServiceClass(AccountWebService.class);
+		AccountWebService accountWebServiceCreated = (AccountWebService) proxyFactory.create();
 
 		//(可选)重新设定endpoint address.
-		((BindingProvider) userWebServiceCreated).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
+		((BindingProvider) accountWebServiceCreated).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
 				address);
 
-		GetDepartmentListResult result = userWebServiceCreated.getDepartmentList();
+		SearchUserResult result = accountWebServiceCreated.searchUser(null, null);
 
-		assertEquals(2, result.getDepartmentList().size());
-		assertEquals("Development", result.getDepartmentList().get(0).getName());
+		assertEquals(4, result.getUserList().size());
+		assertEquals("Development", result.getUserList().get(0).getName());
 	}
-	*/
 }

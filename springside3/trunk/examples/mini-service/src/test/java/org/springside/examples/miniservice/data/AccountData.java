@@ -13,11 +13,11 @@ public class AccountData {
 
 	public static Department getRandomDepartment() {
 		String departmentName = DataUtils.randomName("Department");
+		User manager = getRandomUser();
 
 		Department department = new Department();
 		department.setName(departmentName);
 
-		User manager = getRandomUser();
 		department.setManager(manager);
 		department.getUserList().add(manager);
 
@@ -39,7 +39,6 @@ public class AccountData {
 	}
 
 	public static Department getDefaultDepartment() {
-
 		Department department = new Department();
 		department.setId(1L);
 		return department;
