@@ -43,7 +43,6 @@ public class SpyMemcachedClient implements InitializingBean, DisposableBean {
 
 	private ConnectionFactory cf;
 
-	/* Test*/
 	private MemcachedClient memcachedClient;
 
 	// 配置项 //
