@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.rs.server;
+package org.springside.examples.miniservice.utils;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;

@@ -29,6 +29,8 @@ import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
 import org.springside.examples.miniservice.service.account.AccountManager;
+import org.springside.examples.miniservice.utils.JerseyServerUtils;
+import org.springside.examples.miniservice.utils.ValidatorUtils;
 import org.springside.modules.utils.mapping.DozerUtils;
 
 import com.google.common.collect.Maps;
@@ -102,8 +104,7 @@ public class UserResouceService {
 		//Hibernate Validator校验
 		Set<ConstraintViolation<UserDTO>> constraintViolations = validator.validate(user);
 		if (!constraintViolations.isEmpty()) {
-			ConstraintViolation<UserDTO> violation = constraintViolations.iterator().next();
-			String message = violation.getPropertyPath() + " " + violation.getMessage();
+			String message = ValidatorUtils.convertMessage(constraintViolations, UserDTO.class);
 			throw JerseyServerUtils.buildException(Status.BAD_REQUEST.getStatusCode(), message, logger);
 		}
 

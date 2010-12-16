@@ -9,9 +9,9 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springside.examples.miniservice.rs.dto.DepartmentDTO;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
+import org.springside.examples.miniservice.utils.JerseyClientUtils;
 
 import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 
@@ -54,8 +54,7 @@ public class AccountResourceClient {
 		if (StringUtils.isNotBlank(name)) {
 			wr = wr.queryParam("name", name);
 		}
-		return wr.accept(MediaType.APPLICATION_JSON).get(new GenericType<List<UserDTO>>() {
-		});
+		return wr.accept(MediaType.APPLICATION_JSON).get(JerseyClientUtils.listType(UserDTO.class));
 	}
 
 	/**

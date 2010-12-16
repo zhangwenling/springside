@@ -15,6 +15,7 @@ import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.rs.dto.DepartmentDTO;
 import org.springside.examples.miniservice.service.account.AccountManager;
+import org.springside.examples.miniservice.utils.JerseyServerUtils;
 import org.springside.modules.utils.mapping.DozerUtils;
 
 /**
