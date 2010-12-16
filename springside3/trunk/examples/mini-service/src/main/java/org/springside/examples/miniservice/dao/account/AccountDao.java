@@ -9,7 +9,7 @@ import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
 
 @Component
-public class AccountMyBatisDao extends SqlSessionDaoSupport {
+public class AccountDao extends SqlSessionDaoSupport {
 
 	public Department getDepartmentDetail(Long id) {
 		return (Department) getSqlSession().selectOne("Account.getDepartmentDetail", id);

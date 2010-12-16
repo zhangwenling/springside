@@ -10,8 +10,8 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.showcase.cache.memcached.MemcachedObjectType;
-import org.springside.examples.showcase.common.dao.UserDao;
-import org.springside.examples.showcase.common.dao.UserJdbcDao;
+import org.springside.examples.showcase.common.dao.UserHibernateDao;
+import org.springside.examples.showcase.common.dao.UserMyBatisDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
 import org.springside.modules.memcached.SpyMemcachedClient;
@@ -28,15 +28,14 @@ import org.springside.modules.utils.mapping.JsonBinder;
 public class AccountManager {
 	private static Logger logger = LoggerFactory.getLogger(AccountManager.class);
 
-	private UserDao userDao;
+	private UserHibernateDao userDao;
 
-	private UserJdbcDao userJdbcDao;
+	private UserMyBatisDao userMyBatisDao;
 
 	private SpyMemcachedClient spyMemcachedClient;
 
 	private JsonBinder jsonBinder = JsonBinder.buildNonDefaultBinder();
 
-	
 	private NotifyMessageProducer notifyProducer; //JMS消息发送
 
 	private PasswordEncoder encoder = new ShaPasswordEncoder();
@@ -84,7 +83,7 @@ public class AccountManager {
 		if (spyMemcachedClient != null) {
 			return getUserFromMemcached(id);
 		} else {
-			return userJdbcDao.queryObject(id);
+			return userMyBatisDao.getUser(id);
 		}
 	}
 
@@ -101,7 +100,7 @@ public class AccountManager {
 		if (jsonString == null) {
 			//用户不在 memcached中,从数据库中取出并放入memcached.
 			//因为hibernate的proxy问题多多,此处使用jdbc
-			user = userJdbcDao.queryObject(id);
+			user = userMyBatisDao.getUser(id);
 			if (user != null) {
 				jsonString = jsonBinder.toJson(user);
 				spyMemcachedClient.set(key, MemcachedObjectType.USER.getExpiredTime(), jsonString);
@@ -169,13 +168,13 @@ public class AccountManager {
 	}
 
 	@Autowired
-	public void setUserDao(UserDao userDao) {
+	public void setUserDao(UserHibernateDao userDao) {
 		this.userDao = userDao;
 	}
 
 	@Autowired
-	public void setUserJdbcDao(UserJdbcDao userJdbcDao) {
-		this.userJdbcDao = userJdbcDao;
+	public void setUserJdbcDao(UserMyBatisDao userMybatisDao) {
+		this.userMyBatisDao = userMyBatisDao;
 	}
 
 	@Autowired(required = false)

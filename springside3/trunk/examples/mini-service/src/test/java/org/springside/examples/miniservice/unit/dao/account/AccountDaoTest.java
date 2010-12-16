@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.examples.miniservice.dao.account.AccountMyBatisDao;
+import org.springside.examples.miniservice.dao.account.AccountDao;
 import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
@@ -35,7 +35,7 @@ public class AccountDaoTest extends SpringTxTestCase {
 	private static DataSource dataSourceHolder = null;
 
 	@Autowired
-	private AccountMyBatisDao accountDao;
+	private AccountDao accountDao;
 
 	@Before
 	public void loadDefaultData() throws Exception {

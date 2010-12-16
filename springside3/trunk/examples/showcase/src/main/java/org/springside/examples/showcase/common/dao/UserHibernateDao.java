@@ -17,7 +17,7 @@ import org.springside.modules.orm.hibernate.HibernateDao;
  * @author calvin
  */
 @Component
-public class UserDao extends HibernateDao<User, String> {
+public class UserHibernateDao extends HibernateDao<User, String> {
 
 	private static final String QUERY_USER_WITH_ROLE = "select u from User u left join fetch u.roleList order by u.id";
 	private static final String COUNT_USERS = "select count(u) from User u";
@@ -28,7 +28,7 @@ public class UserDao extends HibernateDao<User, String> {
 	 */
 	public void disableUsers(List<String> ids) {
 		Map<String, List<String>> map = Collections.singletonMap("ids", ids);
-		batchExecute(UserDao.DISABLE_USERS, map);
+		batchExecute(UserHibernateDao.DISABLE_USERS, map);
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class UserDao extends HibernateDao<User, String> {
 	 * 统计用户数.
 	 */
 	public Long getUserCount() {
-		return findUnique(UserDao.COUNT_USERS);
+		return findUnique(UserHibernateDao.COUNT_USERS);
 	}
 
 	/**

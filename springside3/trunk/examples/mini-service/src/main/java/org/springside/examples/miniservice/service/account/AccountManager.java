@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springside.examples.miniservice.dao.account.AccountMyBatisDao;
+import org.springside.examples.miniservice.dao.account.AccountDao;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
 
@@ -24,7 +24,7 @@ import org.springside.examples.miniservice.entity.account.User;
 @Transactional
 public class AccountManager {
 
-	private AccountMyBatisDao accountDao = null;
+	private AccountDao accountDao = null;
 
 	@Transactional(readOnly = true)
 	public Department getDepartmentDetail(Long id) {
@@ -46,7 +46,7 @@ public class AccountManager {
 	}
 
 	@Autowired
-	public void setAccountDao(AccountMyBatisDao accountDao) {
+	public void setAccountDao(AccountDao accountDao) {
 		this.accountDao = accountDao;
 	}
 }

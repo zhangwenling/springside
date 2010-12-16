@@ -7,7 +7,7 @@ import org.easymock.IMocksControl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springside.examples.showcase.common.dao.UserDao;
+import org.springside.examples.showcase.common.dao.UserHibernateDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.examples.showcase.common.service.ServiceException;
@@ -17,12 +17,12 @@ public class AccountManagerTest {
 	private IMocksControl control = EasyMock.createControl();
 
 	private AccountManager accountManager;
-	private UserDao mockUserDao;
+	private UserHibernateDao mockUserDao;
 
 	@Before
 	public void setUp() {
 		accountManager = new AccountManager();
-		mockUserDao = control.createMock(UserDao.class);
+		mockUserDao = control.createMock(UserHibernateDao.class);
 		accountManager.setUserDao(mockUserDao);
 	}
 

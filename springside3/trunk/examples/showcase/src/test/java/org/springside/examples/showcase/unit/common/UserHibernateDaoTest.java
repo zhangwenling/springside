@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springside.examples.showcase.common.dao.UserDao;
+import org.springside.examples.showcase.common.dao.UserHibernateDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.data.UserData;
 import org.springside.modules.test.spring.SpringTxTestCase;
@@ -30,12 +30,12 @@ import com.google.common.collect.Lists;
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
 //演示指定非默认名称的TransactionManager.
 @TransactionConfiguration(transactionManager = "defaultTransactionManager")
-public class UserDaoTest extends SpringTxTestCase {
+public class UserHibernateDaoTest extends SpringTxTestCase {
 
 	private static DataSource dataSourceHolder = null;
 
 	@Autowired
-	private UserDao userDao;
+	private UserHibernateDao userDao;
 
 	@Before
 	public void loadDefaultData() throws Exception {
