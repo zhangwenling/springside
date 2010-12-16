@@ -31,7 +31,7 @@ public class UserDTO {
 		id = value;
 	}
 
-	@NotBlank
+	@NotBlank(message = "登录名不能为空")
 	public String getLoginName() {
 		return loginName;
 	}
@@ -40,7 +40,7 @@ public class UserDTO {
 		loginName = value;
 	}
 
-	@NotBlank
+	@NotBlank(message = "姓名不能为空")
 	public String getName() {
 		return name;
 	}

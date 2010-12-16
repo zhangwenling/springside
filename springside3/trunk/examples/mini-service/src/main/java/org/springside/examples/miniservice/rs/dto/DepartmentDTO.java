@@ -15,7 +15,7 @@ import com.google.common.collect.Lists;
  * 
  * @author calvin
  */
-@XmlRootElement(name = "department")
+@XmlRootElement(name = "Department")
 public class DepartmentDTO {
 
 	private String name;
@@ -38,9 +38,9 @@ public class DepartmentDTO {
 		this.manager = manager;
 	}
 
-	//配置输出xml为<userList><user><id>1</id></user></userList>
+	//配置输出xml为<userList><User><id>1</id></User></userList>
 	@XmlElementWrapper(name = "userList")
-	@XmlElement(name = "user")
+	@XmlElement(name = "User")
 	public List<UserDTO> getUserList() {
 		return userList;
 	}
