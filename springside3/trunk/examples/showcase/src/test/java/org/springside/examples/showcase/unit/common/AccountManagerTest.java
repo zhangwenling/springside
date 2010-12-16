@@ -1,6 +1,6 @@
 package org.springside.examples.showcase.unit.common;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
@@ -34,9 +34,9 @@ public class AccountManagerTest {
 	@Test
 	public void saveUser() {
 		User admin = new User();
-		admin.setId("1");
+		admin.setId(1L);
 		User user = new User();
-		user.setId("2");
+		user.setId(2L);
 
 		mockUserDao.save(user);
 		control.replay();

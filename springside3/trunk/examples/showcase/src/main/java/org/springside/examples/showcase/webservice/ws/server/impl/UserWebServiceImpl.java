@@ -64,7 +64,7 @@ public class UserWebServiceImpl implements UserWebService {
 	@Override
 	//SpringSecurity 控制的方法
 	@Secured({ "ROLE_Admin" })
-	public GetUserResult getUser(String id) {
+	public GetUserResult getUser(Long id) {
 		GetUserResult result = new GetUserResult();
 
 		StopWatch totalStopWatch = new Slf4JStopWatch();

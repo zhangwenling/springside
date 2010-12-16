@@ -16,7 +16,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springside.examples.showcase.common.dao.UserHibernateDao;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.examples.showcase.data.UserData;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DbUnitUtils;
 
@@ -72,13 +71,5 @@ public class UserHibernateDaoTest extends SpringTxTestCase {
 
 		assertEquals("disabled", userDao.get("1").getStatus());
 		assertEquals("disabled", userDao.get("2").getStatus());
-	}
-
-	@Test
-	public void uidGenerator() {
-
-		User user = UserData.getRandomUser();
-		userDao.save(user);
-		assertEquals(16, user.getId().length());
 	}
 }

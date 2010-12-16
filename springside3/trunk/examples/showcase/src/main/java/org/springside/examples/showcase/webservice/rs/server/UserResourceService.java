@@ -67,7 +67,7 @@ public class UserResourceService {
 	@GET
 	@Path("{id}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
-	public UserDTO getUser(@PathParam("id") String id) {
+	public UserDTO getUser(@PathParam("id") Long id) {
 		try {
 			User entity = accountManager.getInitializedUser(id);
 			return DozerUtils.map(entity, UserDTO.class);

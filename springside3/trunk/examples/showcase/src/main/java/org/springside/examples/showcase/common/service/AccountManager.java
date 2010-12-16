@@ -79,7 +79,7 @@ public class AccountManager {
 	 * 取得用户, 并对用户的延迟加载关联进行初始化.
 	 */
 	@Transactional(readOnly = true)
-	public User getInitializedUser(String id) {
+	public User getInitializedUser(Long id) {
 		if (spyMemcachedClient != null) {
 			return getUserFromMemcached(id);
 		} else {
@@ -90,7 +90,7 @@ public class AccountManager {
 	/**
 	 * 访问Memcached, 使用JSON字符串存放对象以节约空间.
 	 */
-	private User getUserFromMemcached(String id) {
+	private User getUserFromMemcached(Long id) {
 
 		String key = MemcachedObjectType.USER.getPrefix() + id;
 
@@ -173,7 +173,7 @@ public class AccountManager {
 	}
 
 	@Autowired
-	public void setUserJdbcDao(UserMyBatisDao userMybatisDao) {
+	public void setUserJdbcDao(UserMyBatisDao userMyBatisDao) {
 		this.userMyBatisDao = userMyBatisDao;
 	}
 

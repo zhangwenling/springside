@@ -10,7 +10,7 @@
 		<a href="${ctx}/cache/index.action">Cache演示</a>
 		<a href="${ctx}/excel/index.action">Excel演示</a>
 		<a href="${ctx}/schedule/index.action">定时任务演示</a>
-		<a href="${ctx}/encode/index.action">XML/JSON操作演示</a>
+		<a href="${ctx}/mapping/index.action">XML/JSON操作演示</a>
 		<a href="${ctx}/security/index.action">安全高级演示</a>
 		<a href="${ctx}/log/index.action">日志高级演示</a>
 		<a href="${ctx}/web/index.action">Web高级演示</a>

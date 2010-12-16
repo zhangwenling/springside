@@ -1,6 +1,7 @@
 package org.springside.examples.showcase.functional.webservice.ws;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 
@@ -33,7 +34,7 @@ import com.google.common.collect.Maps;
  * @author calvin
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@TestExecutionListeners( { DependencyInjectionTestExecutionListener.class })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
 @ContextConfiguration(locations = { "/webservice/applicationContext-cxf-client.xml" })
 public class SecurityWebServiceTest extends BaseFunctionalTestCase implements ApplicationContextAware {
 
@@ -92,7 +93,7 @@ public class SecurityWebServiceTest extends BaseFunctionalTestCase implements Ap
 	@Test
 	public void getUserWithSpringSecurity() {
 		UserWebService userWebService = (UserWebService) applicationContext.getBean("userServiceWithSpringSecurity");
-		GetUserResult result = userWebService.getUser("1");
+		GetUserResult result = userWebService.getUser(1L);
 		assertEquals("admin", result.getUser().getLoginName());
 	}
 
@@ -102,7 +103,7 @@ public class SecurityWebServiceTest extends BaseFunctionalTestCase implements Ap
 	@Test(expected = SOAPFaultException.class)
 	public void getUserWithSpringSecurityWithoutPermission() {
 		UserWebService userWebService = (UserWebService) applicationContext.getBean("userServiceWithPlainPassword");
-		GetUserResult result = userWebService.getUser("1");
+		GetUserResult result = userWebService.getUser(1L);
 		assertEquals("admin", result.getUser().getLoginName());
 	}
 }
