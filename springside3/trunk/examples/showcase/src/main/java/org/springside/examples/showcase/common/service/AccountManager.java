@@ -28,7 +28,7 @@ import org.springside.modules.utils.mapping.JsonBinder;
 public class AccountManager {
 	private static Logger logger = LoggerFactory.getLogger(AccountManager.class);
 
-	private UserHibernateDao userDao;
+	private UserHibernateDao userHibernateDao;
 
 	private UserMyBatisDao userMyBatisDao;
 
@@ -58,7 +58,7 @@ public class AccountManager {
 		String shaPassword = encoder.encodePassword(user.getPlainPassword(), null);
 		user.setShaPassword(shaPassword);
 
-		userDao.save(user);
+		userHibernateDao.save(user);
 
 		sendNotifyMessage(user);
 	}
@@ -72,7 +72,7 @@ public class AccountManager {
 
 	@Transactional(readOnly = true)
 	public User getUser(String id) {
-		return userDao.get(id);
+		return userHibernateDao.get(id);
 	}
 
 	/**
@@ -116,8 +116,8 @@ public class AccountManager {
 	 */
 	@Transactional(readOnly = true)
 	public User searchInitializedUserByName(String name) {
-		User user = userDao.findUniqueBy("name", name);
-		userDao.initUser(user);
+		User user = userHibernateDao.findUniqueBy("name", name);
+		userHibernateDao.initUser(user);
 		return user;
 	}
 
@@ -126,7 +126,7 @@ public class AccountManager {
 	 */
 	@Transactional(readOnly = true)
 	public List<User> getAllUserWithRole() {
-		List<User> list = userDao.getAllUserWithRoleByDistinctHql();
+		List<User> list = userHibernateDao.getAllUserWithRoleByDistinctHql();
 		logger.info("get {} user sucessful.", list.size());
 		return list;
 	}
@@ -136,19 +136,19 @@ public class AccountManager {
 	 */
 	@Transactional(readOnly = true)
 	public Long getUserCount() {
-		return userDao.getUserCount();
+		return userHibernateDao.getUserCount();
 	}
 
 	@Transactional(readOnly = true)
 	public User findUserByLoginName(String loginName) {
-		return userDao.findUniqueBy("loginName", loginName);
+		return userHibernateDao.findUniqueBy("loginName", loginName);
 	}
 
 	/**
 	 * 批量修改用户状态.
 	 */
 	public void disableUsers(List<String> ids) {
-		userDao.disableUsers(ids);
+		userHibernateDao.disableUsers(ids);
 	}
 
 	/**
@@ -168,12 +168,12 @@ public class AccountManager {
 	}
 
 	@Autowired
-	public void setUserDao(UserHibernateDao userDao) {
-		this.userDao = userDao;
+	public void setUserHibernateDao(UserHibernateDao userDao) {
+		this.userHibernateDao = userDao;
 	}
 
 	@Autowired
-	public void setUserJdbcDao(UserMyBatisDao userMyBatisDao) {
+	public void setUserMyBatisDao(UserMyBatisDao userMyBatisDao) {
 		this.userMyBatisDao = userMyBatisDao;
 	}
 

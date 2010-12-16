@@ -23,7 +23,7 @@ public class AccountManagerTest {
 	public void setUp() {
 		accountManager = new AccountManager();
 		mockUserDao = control.createMock(UserHibernateDao.class);
-		accountManager.setUserDao(mockUserDao);
+		accountManager.setUserHibernateDao(mockUserDao);
 	}
 
 	@After
