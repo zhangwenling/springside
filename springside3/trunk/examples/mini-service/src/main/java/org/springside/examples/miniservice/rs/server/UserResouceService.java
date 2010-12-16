@@ -104,7 +104,7 @@ public class UserResouceService {
 		//Hibernate Validator校验
 		Set<ConstraintViolation<UserDTO>> constraintViolations = validator.validate(user);
 		if (!constraintViolations.isEmpty()) {
-			String message = ValidatorUtils.convertMessage(constraintViolations, UserDTO.class);
+			String message = ValidatorUtils.convertMessage(constraintViolations, "\n");
 			throw JerseyServerUtils.buildException(Status.BAD_REQUEST.getStatusCode(), message, logger);
 		}
 

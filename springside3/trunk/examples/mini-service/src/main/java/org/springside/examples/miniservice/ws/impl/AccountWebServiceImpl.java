@@ -120,7 +120,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 
 			Set<ConstraintViolation<UserDTO>> constraintViolations = validator.validate(user);
 			if (!constraintViolations.isEmpty()) {
-				String message = ValidatorUtils.convertMessage(constraintViolations, UserDTO.class);
+				String message = ValidatorUtils.convertMessage(constraintViolations, "\n");
 				throw new IllegalArgumentException(message);
 			}
 		} catch (IllegalArgumentException e) {

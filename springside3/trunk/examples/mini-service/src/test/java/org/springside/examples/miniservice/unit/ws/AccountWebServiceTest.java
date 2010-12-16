@@ -88,6 +88,7 @@ public class AccountWebServiceTest {
 		userDTOWitWrongEmail.setEmail("abc");
 		result = accountWebService.createUser(userDTOWitWrongEmail);
 		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
+		System.out.println(result.getMessage());
 	}
 
 	/**

@@ -49,7 +49,7 @@ public class UserDTO {
 		name = value;
 	}
 
-	@Email
+	@Email(message = "邮件地址格式不正确")
 	public String getEmail() {
 		return email;
 	}

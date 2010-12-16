@@ -1,22 +1,24 @@
 package org.springside.examples.miniservice.utils;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
+import org.apache.commons.lang.StringUtils;
+
+import com.google.common.collect.Lists;
+
 public class ValidatorUtils {
 
 	/**
-	 * 转换所有violations信息,如email is abc, not a not a well-formed email address.
+	 * 转换所有violations信息.
 	 */
-	public static <T> String convertMessage(Set<ConstraintViolation<T>> constraintViolations, Class<T> clazz) {
-		char seperateChar = '\n';
-
-		StringBuilder message = new StringBuilder();
-		for (ConstraintViolation<T> violation : constraintViolations) {
-			message.append(violation.getPropertyPath()).append(" is ").append(violation.getInvalidValue()).append(",")
-					.append(violation.getMessage()).append(seperateChar);
+	public static String convertMessage(Set<? extends ConstraintViolation> constraintViolations, String separator) {
+		List<String> errorMessages = Lists.newArrayList();
+		for (ConstraintViolation violation : constraintViolations) {
+			errorMessages.add(violation.getMessage());
 		}
-		return message.toString();
+		return StringUtils.join(errorMessages, separator);
 	}
 }
