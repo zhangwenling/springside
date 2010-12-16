@@ -3,6 +3,6 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias alias="User" type="org.springside.examples.miniservice.entity.account.User" />
+		<typeAlias alias="User" type="org.springside.examples.showcase.common.entity.User" />
 	</typeAliases>
 </configuration>
