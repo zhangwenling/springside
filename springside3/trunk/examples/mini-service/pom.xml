@@ -3,13 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springside</groupId>
-		<artifactId>springside3-parent</artifactId>
+		<artifactId>springside-parent</artifactId>
 		<version>4.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>org.springside.examples</groupId>
 	<artifactId>mini-service</artifactId>
 	<packaging>war</packaging>
-	<name>Springside3 Mini-Service Example</name>
+	<name>Springside Mini-Service Example</name>
 
 	<!-- 项目属性 -->
 	<properties>
@@ -23,7 +23,7 @@
 		<!-- springside -->
 		<dependency>
 			<groupId>org.springside</groupId>
-			<artifactId>springside3-core</artifactId>
+			<artifactId>springside-core</artifactId>
 		</dependency>
 
 		<!-- spring begin -->

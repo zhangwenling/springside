@@ -3,13 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springside</groupId>
-		<artifactId>springside3-parent</artifactId>
+		<artifactId>springside-parent</artifactId>
 		<version>4.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>org.springside.examples</groupId>
 	<artifactId>showcase</artifactId>
 	<packaging>war</packaging>
-	<name>Springside3 Showcase Example</name>
+	<name>Springside Showcase Example</name>
 
 	<!-- 项目属性 -->
 	<properties>
@@ -23,11 +23,11 @@
 		<!-- springside -->
 		<dependency>
 			<groupId>org.springside</groupId>
-			<artifactId>springside3-core</artifactId>
+			<artifactId>springside-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springside</groupId>
-			<artifactId>springside3-extension</artifactId>
+			<artifactId>springside-extension</artifactId>
 		</dependency>
 
 		<!-- spring begin -->
