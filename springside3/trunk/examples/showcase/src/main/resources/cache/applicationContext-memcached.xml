@@ -1,29 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 	default-lazy-init="true">
 
 	<!-- SpyMemcached客户端 -->
-	<bean id="spyMemcachedClient" class="org.springside.modules.memcached.SpyMemcachedClient"
-		depends-on="memcachedSimulator">
-		<!-- 设置Memcached集群 -->
-		<property name="memcachedNodes" value="${memcached.url}" />
-		<!-- 缩短Timeout时间到200毫秒 -->
-		<property name="operationTimeout" value="200" />
-	</bean>
-
-	<bean name="xmemcachedClient"
-		class="org.springside.modules.memcached.XMemcachedClientFactoryBean"
-		destroy-method="shutdown">
+	<bean name="xmemcachedClient" class="org.springside.modules.memcached.XMemcachedClientFactoryBean" destroy-method="shutdown">
 		<property name="servers">
 			<value>${memcached.url}</value>
-		</property>
-		<!-- server's weights -->
-		<property name="weights">
-			<list>
-				<value>1</value>
-			</list>
 		</property>
 		<!-- nio connection pool size -->
 		<property name="connectionPoolSize" value="${memcached.connectionpool.size}"></property>
@@ -45,15 +28,11 @@
 		</property>
 	</bean>
 
-	<bean name="xmemcachedClientWrapper"
-		class="org.springside.modules.memcached.XMemcachedClientWrapper">
-		<property name="xmemcachedClient" ref="xmemcachedClient" />
-	</bean>
+	<bean name="xmemcachedClientWrapper" class="org.springside.modules.memcached.XMemcachedClientWrapper"/>
 
 
 	<!-- 演示用的Jmemcached模拟Memcached -->
-	<bean id="memcachedSimulator" class="org.springside.modules.memcached.MemcachedSimulator"
-		lazy-init="false">
+	<bean id="memcachedSimulator" class="org.springside.modules.memcached.MemcachedSimulator" lazy-init="false">
 		<property name="serverUrl" value="${memcached.url}" />
 	</bean>
 </beans>

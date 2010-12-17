@@ -199,11 +199,6 @@
 
 		<!-- memcached begin -->
 		<dependency>
-			<groupId>spy</groupId>
-			<artifactId>memcached</artifactId>
-		</dependency>
-		
-		<dependency>
 			<groupId>com.googlecode.xmemcached</groupId>
 			<artifactId>xmemcached</artifactId>
 		</dependency>

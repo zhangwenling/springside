@@ -3,8 +3,6 @@ package org.springside.examples.showcase.cache.memcached;
 /**
  * 统一定义Memcached中存储的各种对象的Key前缀和超时时间.
  * 
- * Memcached使用在AccountManager中.
- * 
  * @see org.springside.examples.showcase.common.service.AccountManager#getInitializedUser(String)
  * 
  * @author calvin

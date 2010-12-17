@@ -68,12 +68,6 @@
 
 		<!-- memcached begin-->
 		<dependency>
-			<groupId>spy</groupId>
-			<artifactId>memcached</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
 			<groupId>com.googlecode.xmemcached</groupId>
 			<artifactId>xmemcached</artifactId>
 			<optional>true</optional>
