@@ -50,7 +50,7 @@ import com.google.code.yanf4j.config.Configuration;
 /**
  * Implement spring's factory bean,for integrating to spring framework.
  * 
- * @author dennis
+ * @author Neway
  * 
  */
 public class XMemcachedClientFactoryBean implements FactoryBean {
