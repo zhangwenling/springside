@@ -26,7 +26,7 @@
 			</list>
 		</property>
 		<!-- nio connection pool size -->
-		<property name="connectionPoolSize" value="1"></property>
+		<property name="connectionPoolSize" value="${memcached.connectionpool.size}"></property>
 		<!-- Use binary protocol,default is TextCommandFactory -->
 		<property name="commandFactory">
 			<bean class="net.rubyeye.xmemcached.command.TextCommandFactory"></bean>
