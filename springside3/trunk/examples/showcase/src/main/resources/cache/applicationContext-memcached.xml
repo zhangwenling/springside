@@ -13,44 +13,43 @@
 		<property name="operationTimeout" value="200" />
 	</bean>
 
-	<bean name="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder">
-		<!-- XMemcachedClientBuilder 有两个参数，第一个是server列表，第二个是每个server的权重.-->
-		<constructor-arg>
-			<list>
-				<bean class="java.net.InetSocketAddress">
-					<constructor-arg>
-						<value>localhost</value>
-					</constructor-arg>
-					<constructor-arg>
-						<value>11211</value>
-					</constructor-arg>
-				</bean>
-			</list>
-		</constructor-arg>
-		<constructor-arg>
+	<bean name="xmemcachedClient"
+		class="org.springside.modules.memcached.XMemcachedClientFactoryBean"
+		destroy-method="shutdown">
+		<property name="servers">
+			<value>${memcached.url}</value>
+		</property>
+		<!-- server's weights -->
+		<property name="weights">
 			<list>
 				<value>1</value>
 			</list>
-		</constructor-arg>
+		</property>
+		<!-- nio connection pool size -->
 		<property name="connectionPoolSize" value="1"></property>
+		<!-- Use binary protocol,default is TextCommandFactory -->
 		<property name="commandFactory">
 			<bean class="net.rubyeye.xmemcached.command.TextCommandFactory"></bean>
 		</property>
+		<!-- Distributed strategy -->
 		<property name="sessionLocator">
 			<bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"></bean>
 		</property>
+		<!-- Serializing transcoder -->
 		<property name="transcoder">
 			<bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder" />
 		</property>
+		<!-- ByteBuffer allocator -->
+		<property name="bufferAllocator">
+			<bean class="net.rubyeye.xmemcached.buffer.SimpleBufferAllocator"></bean>
+		</property>
 	</bean>
-	<!-- Use factory bean to build memcached client -->
-	<bean name="xmemcachedClient" factory-bean="memcachedClientBuilder"
-		factory-method="build" destroy-method="shutdown" />
-		
-	<bean name="xmemcachedClientWrapper" class="org.springside.modules.memcached.XMemcachedClientWrapper">
-		<property name="xmemcachedClient" ref="xmemcachedClient"/>
+
+	<bean name="xmemcachedClientWrapper"
+		class="org.springside.modules.memcached.XMemcachedClientWrapper">
+		<property name="xmemcachedClient" ref="xmemcachedClient" />
 	</bean>
-		
+
 
 	<!-- 演示用的Jmemcached模拟Memcached -->
 	<bean id="memcachedSimulator" class="org.springside.modules.memcached.MemcachedSimulator"
