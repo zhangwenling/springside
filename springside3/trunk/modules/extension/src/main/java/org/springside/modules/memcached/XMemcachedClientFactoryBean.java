@@ -31,6 +31,7 @@ import net.rubyeye.xmemcached.transcoders.SerializingTranscoder;
 import net.rubyeye.xmemcached.transcoders.Transcoder;
 import net.rubyeye.xmemcached.utils.AddrUtil;
 
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.FactoryBean;
 
 import com.google.code.yanf4j.config.Configuration;
@@ -40,7 +41,7 @@ import com.google.code.yanf4j.config.Configuration;
  * 
  * @author Neway
  */
-public class XMemcachedClientFactoryBean implements FactoryBean {
+public class XMemcachedClientFactoryBean implements FactoryBean, DisposableBean {
 
 	private MemcachedSessionLocator sessionLocator = new ArrayMemcachedSessionLocator();
 
@@ -230,11 +231,15 @@ public class XMemcachedClientFactoryBean implements FactoryBean {
 	}
 
 	public void shutdown() throws IOException {
-		memcachedClient.shutdown();
+
 	}
 
 	public boolean isSingleton() {
 		return true;
 	}
 
+	@Override
+	public void destroy() throws Exception {
+		memcachedClient.shutdown();
+	}
 }

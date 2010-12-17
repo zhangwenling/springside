@@ -109,7 +109,7 @@ public class XMemcachedClientWrapper {
 	}
 
 	private RuntimeException handleException(Exception e, String key) {
-		logger.warn("xmemcached client receive a exception with key:" + key, e);
+		logger.warn("xmemcached client receive an exception with key:" + key, e);
 		return new RuntimeException(e);
 	}
 
