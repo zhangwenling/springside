@@ -67,7 +67,7 @@ public class AccountManager {
 	 * 判断是否超级管理员.
 	 */
 	private boolean isSupervisor(User user) {
-		return (user.getId() != null && "1".equals(user.getId()));
+		return (user.getId() != null && user.getId() == 1L);
 	}
 
 	@Transactional(readOnly = true)
