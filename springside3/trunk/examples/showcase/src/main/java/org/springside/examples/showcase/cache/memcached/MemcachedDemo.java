@@ -17,7 +17,7 @@ import com.google.common.collect.Lists;
 public class MemcachedDemo extends SpringContextTestCase {
 
     @Autowired
-    private XMemcachedClientWrapper xmemcachedClient;
+    private XMemcachedClientWrapper xmemcachedClientWrapper;
 
     @Test
     public void normal() {
@@ -25,13 +25,13 @@ public class MemcachedDemo extends SpringContextTestCase {
         String key = "consumer:1";
         String value = "admin";
 
-        xmemcachedClient.set(key, 60 * 60 * 1, value);
+        xmemcachedClientWrapper.set(key, 60 * 60 * 1, value);
 
-        String result = xmemcachedClient.get(key);
+        String result = xmemcachedClientWrapper.get(key);
         assertEquals(value, result);
 
-        xmemcachedClient.delete(key);
-        result = xmemcachedClient.get(key);
+        xmemcachedClientWrapper.delete(key);
+        result = xmemcachedClientWrapper.get(key);
         assertNull(result);
     }
 
@@ -46,10 +46,10 @@ public class MemcachedDemo extends SpringContextTestCase {
 
         String key3 = "invalidKey";
 
-        xmemcachedClient.set(key1, 60 * 60 * 1, value1);
-        xmemcachedClient.set(key2, 60 * 60 * 1, value2);
+        xmemcachedClientWrapper.set(key1, 60 * 60 * 1, value1);
+        xmemcachedClientWrapper.set(key2, 60 * 60 * 1, value2);
 
-        Map<String, String> result = xmemcachedClient.getBulk(Lists.newArrayList(key1, key2));
+        Map<String, String> result = xmemcachedClientWrapper.getBulk(Lists.newArrayList(key1, key2));
         assertEquals(value1, result.get(key1));
         assertEquals(value2, result.get(key2));
         assertNull(result.get(key3));
@@ -60,19 +60,19 @@ public class MemcachedDemo extends SpringContextTestCase {
         String key = "incr_key";
 
         //注意,incr返回的数值使用long表达
-        long result = xmemcachedClient.incr(key, 2, 1);
+        long result = xmemcachedClientWrapper.incr(key, 2, 1);
         assertEquals(1, result);
         //注意,get返回的数值使用字符串表达
-        assertEquals("1", xmemcachedClient.get(key));
+        assertEquals("1", xmemcachedClientWrapper.get(key));
 
-        result = xmemcachedClient.incr(key, 2, 1);
+        result = xmemcachedClientWrapper.incr(key, 2, 1);
         assertEquals(3, result);
-        assertEquals("3", xmemcachedClient.get(key));
+        assertEquals("3", xmemcachedClientWrapper.get(key));
 
         key = "set_and_incr_key";
         //注意,set中的数值必须使用字符串,后面的incr操作结果才会正确.
-        xmemcachedClient.set(key, 60 * 60 * 1, "1");
-        result = xmemcachedClient.incr(key, 2, 1);
+        xmemcachedClientWrapper.set(key, 60 * 60 * 1, "1");
+        result = xmemcachedClientWrapper.incr(key, 2, 1);
         assertEquals(3, result);
     }
 }
