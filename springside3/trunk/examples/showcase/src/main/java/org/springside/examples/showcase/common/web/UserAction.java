@@ -27,11 +27,11 @@ public class UserAction extends CrudActionSupport<User> {
 	private AccountManager accountManager;
 
 	//-- 页面属性  --//
-	private String id;
+	private Long id;
 	private User entity;
 	private List<User> allUserList;
 	private Integer workingVersion;//对象版本号, 配合Hibernate的@Version防止并发修改
-	private List<String> checkedUserIds;
+	private List<Long> checkedUserIds;
 
 	//-- ModelDriven 与 Preparable函数 --//
 	@Override
@@ -39,7 +39,7 @@ public class UserAction extends CrudActionSupport<User> {
 		return entity;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -93,7 +93,7 @@ public class UserAction extends CrudActionSupport<User> {
 		return allUserList;
 	}
 
-	public void setCheckedUserIds(List<String> checkedUserIds) {
+	public void setCheckedUserIds(List<Long> checkedUserIds) {
 		this.checkedUserIds = checkedUserIds;
 	}
 

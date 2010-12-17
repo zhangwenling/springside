@@ -65,11 +65,11 @@ public class UserHibernateDaoTest extends SpringTxTestCase {
 
 	@Test
 	public void batchDisableUser() {
-		List<String> ids = Lists.newArrayList("1", "2");
+		List<Long> ids = Lists.newArrayList(1L, 2L);
 
 		userDao.disableUsers(ids);
 
-		assertEquals("disabled", userDao.get("1").getStatus());
-		assertEquals("disabled", userDao.get("2").getStatus());
+		assertEquals("disabled", userDao.get(1L).getStatus());
+		assertEquals("disabled", userDao.get(2L).getStatus());
 	}
 }
