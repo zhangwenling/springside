@@ -1,6 +1,5 @@
-/* global */
+/* table */
 th, td {border-color: #999;}
-
 table.noborder th, table.noborder td {border: none;}
 
 /* header */
@@ -8,14 +7,13 @@ table.noborder th, table.noborder td {border: none;}
 	border-bottom: 2px solid #658A16;
 }
 
-#header h1 {
-	font-size: 153.9%;
+#header h2 {
 	letter-spacing: .1em;
 	margin:0.375em 0;
 	color: #658A16;
 }
 
-#header h2 {
+#header h3 {
 	letter-spacing: .1em;
 	margin:0.375m 0;
 	color: #BACE87;

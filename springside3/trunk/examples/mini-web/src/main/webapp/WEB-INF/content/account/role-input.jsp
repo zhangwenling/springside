@@ -33,7 +33,7 @@
 <%@ include file="/common/header.jsp" %>
 <div id="content">
 	<div class="span-24 last">
-	<h2><s:if test="id == null">创建</s:if><s:else>修改</s:else>角色</h2>
+	<h3><s:if test="id == null">创建</s:if><s:else>修改</s:else>角色</h3>
 	<form action="role!save.action" method="post">
 		<input type="hidden" name="id" value="${id}"/>
 		<table class="noborder">

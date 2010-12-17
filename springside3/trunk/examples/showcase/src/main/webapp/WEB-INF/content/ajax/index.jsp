@@ -19,7 +19,7 @@
 <div id="content">
 	<%@ include file="/common/left.jsp" %>
 	<div class="span-18 last">
-		<h1>Ajax演示</h1>
+		<h2>Ajax演示</h2>
 		<ul>
 			<li><a href="${ctx}/ajax/mashup/mashup-client.action">跨域名Mashup演示</a> 演示基于JSONP Mashup 跨域名网站的内容.</li>
 		</ul>

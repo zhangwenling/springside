@@ -33,7 +33,7 @@
 <div id="content">
 	<%@ include file="/common/left.jsp" %>
 	<div class="span-18 last">
-		<h1>Showcase登录页</h1>
+		<h2>Showcase登录页</h2>
 
 		<%if ("1".equals(request.getParameter("error"))) {%>
 			<div class="error"> 用户名密码错误,请重试.</div>

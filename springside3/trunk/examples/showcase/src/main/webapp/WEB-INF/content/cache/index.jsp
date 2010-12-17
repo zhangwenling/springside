@@ -20,15 +20,15 @@
 <div id="content">
 	<%@ include file="/common/left.jsp" %>
 	<div class="span-18 last">
-		<h1>Cache演示</h1>
+		<h2>Cache演示</h2>
 
-		<h2>技术说明：</h2>
+		<h3>技术说明：</h3>
 		<ul>
 			<li>演示Memcached的使用</li>
 			<li>演示Spring与Ehcache的集成</li>
 		</ul>
 		
-		<h2>用户故事：</h2>
+		<h3>用户故事：</h3>
 		<ul>
 			<li>在AccountManager.java中演示了对Memcached的使用</li>
 			<li>EhcacheDemo.java演示了Ehcache与Spring的集成</li>

@@ -20,9 +20,9 @@
 <div id="content">
 	<%@ include file="/common/left.jsp" %>
 	<div class="span-18 last">
-		<h1>JMX演示用例</h1>
+		<h2>JMX演示用例</h2>
 
-		<h2>技术说明：</h2>
+		<h3>技术说明：</h3>
 		<ul>
 			<li>服务端演示使用Spring annotation定义MBean</li>
 		</ul>

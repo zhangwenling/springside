@@ -12,12 +12,12 @@
 <head>
 	<title>Web高级演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
+	<link href="${ctx}/static-content?contentPath=css/style.css" type="text/css" rel="stylesheet"/>
 	
 	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
 	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
-	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
-	
-	<link href="${ctx}/static-content?contentPath=css/style.css" type="text/css" rel="stylesheet"/>
+	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->	
 </head>
 <body>
 <div class="container">
@@ -25,9 +25,9 @@
 <div id="content">
 	<%@ include file="/common/left.jsp" %>
 	<div class="span-18 last">
-		<h1>Web高级演示</h1>
+		<h2>Web高级演示</h2>
 
-		<h2>技术说明：</h2>
+		<h3>技术说明：</h3>
 		<ul>
 			<li>高性能Web2.0网站:<br/>
 			    1. 演示Servlet, 演示高效读取静态内容, 控制客户端缓存, 压缩传输, 弹出下载对话框.<br/>
@@ -37,7 +37,7 @@
 			</li>
 		</ul>
 		
-		<h2>用户故事：</h2>
+		<h3>用户故事：</h3>
 		<ul>
 			<li>静态内容Servlet:<img src="${ctx}/static-content?contentPath=img/logo.jpg"/> <a href="${ctx}/static-content?contentPath=img/logo.jpg&download=true">图片下载链接</a></li>
 			<li>远程内容Servlet:<img src="${ctx}/remote-content?contentUrl=<%=encodedImageUrl%>"/></li>

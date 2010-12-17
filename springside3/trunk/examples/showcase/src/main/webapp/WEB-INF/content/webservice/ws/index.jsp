@@ -5,11 +5,12 @@
 <head>
 	<title>WebService高级演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
+	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 	
 	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
 	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
 	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
-	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -18,9 +19,9 @@
 <div id="content">
 	<%@ include file="/common/left.jsp" %>
 	<div class="span-18 last">
-		<h1>WS-*高级协议演示</h1>
+		<h2>WS-*高级协议演示</h2>
 
-		<h2>技术说明:</h2>
+		<h3>技术说明:</h3>
 		<ul>
 			<li>WS-Security认证机制: 使用符合WS互操作规范的标准认证机制, 演示Plain与Digest式的密码认证.</li>
 			<li>二进制数据传输机制: 演示直接Base64Binary编码字节数组 与 MTOM附件传输数据流.</li>

@@ -1,16 +1,14 @@
-/* global */
+/* table */
 th, td {border-color: #999;}
-
 table.noborder th, table.noborder td {border: none;}
 
 /* header */
-#title h1 {
-	font-size: 153.9%;
+#title h2 {
 	letter-spacing: .1em;
 	margin:0.5em  0;
 }
 
-#title h2 {
+#title h3 {
 	color: #999;
 	letter-spacing: .1em;
 	margin:0.5em 0;

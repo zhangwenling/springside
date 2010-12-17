@@ -19,7 +19,7 @@
 <div id="content">
 	<%@ include file="/common/left.jsp" %>
 	<div class="span-18 last">
-		<h1>Excel导出演示</h1>
+		<h2>Excel导出演示</h2>
 
 		<p>说明：演示基于POI的Excel操作。</p>
 		<ul>

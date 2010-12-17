@@ -19,7 +19,7 @@
 <div id="content">
 	<%@ include file="/common/left.jsp" %>
 	<div class="span-18 last">
-		<h1>SpringSecurity高级演示</h1>
+		<h2>SpringSecurity高级演示</h2>
 		<ul>
 			<li>SpringSecurity 与 CXF WS-Security集成并控制方法安全演示.(见CXF相关演示)</li>
 			<li>SpringSecurity 与 Jersey Http-Basic集成并控制方法安全演示.(见Jersey相关演示)</li>
@@ -27,7 +27,7 @@
 			<li>SpringSecuirty 开发时自动登录用户的Filter演示.</li>
 		</ul>
 		
-		<h1>安全高级演示</h1>
+		<h2>安全高级演示</h2>
 		<ul>
 			<li>SHA-1与MD5消息摘要(见DigestUtils及其测试用例)</li>
 			<li>HMAC-SHA1共享密钥消息签名演示.(见CryptoUtils及其测试用例)</li>
