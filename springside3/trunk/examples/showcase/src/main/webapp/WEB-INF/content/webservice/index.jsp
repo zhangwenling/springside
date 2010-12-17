@@ -18,7 +18,7 @@
 <%@ include file="/common/header.jsp" %>
 <div id="content">
 	<%@ include file="/common/left.jsp" %>
-	<div class="span-18 last">
+	<div class="span-18 last prepend-top">
 		<h2>Web Service高级演示</h2>
 		<ul>
 			<li><a href="${ctx}/webservice/ws/index.action">WS-*高级协议演示(安全、附件)</a></li>

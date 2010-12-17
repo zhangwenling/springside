@@ -19,7 +19,7 @@
 <%@ include file="/common/header.jsp" %>
 <div id="content">
 	<%@ include file="/common/left.jsp" %>
-	<div class="span-18 last">
+	<div class="span-18 last prepend-top">
 		<h2>JMX演示用例</h2>
 
 		<h3>技术说明：</h3>

@@ -18,7 +18,7 @@
 <%@ include file="/common/header.jsp" %>
 <div id="content">
 	<%@ include file="/common/left.jsp" %>
-	<div class="span-18 last">
+	<div class="span-18 last prepend-top">
 		<h2>SpringSecurity高级演示</h2>
 		<ul>
 			<li>SpringSecurity 与 CXF WS-Security集成并控制方法安全演示.(见CXF相关演示)</li>

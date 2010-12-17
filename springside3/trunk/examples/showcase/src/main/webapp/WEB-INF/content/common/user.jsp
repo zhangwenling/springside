@@ -27,8 +27,8 @@
 <%@ include file="/common/header.jsp" %>
 <div id="content">
 	<%@ include file="/common/left.jsp" %>
-	<div class="span-18 last">
-		<h1>综合演示用例</h1>
+	<div class="span-18 last prepend-top">
+		<h2>综合演示用例</h2>
 		<%if(SpringSecurityUtils.getCurrentUser()!=null){ %>
 		<div>你好, 用户<%=SpringSecurityUtils.getCurrentUserName()%>在<%=((OperatorDetails)SpringSecurityUtils.getCurrentUser()).getLoginTime()%>从<%=SpringSecurityUtils.getCurrentUserIp()%>登录.&nbsp;&nbsp;</div>
 		<%} %>

@@ -19,7 +19,8 @@
 <%@ include file="/common/header.jsp" %>
 <div id="content">
 	<%@ include file="/common/left.jsp" %>
-	<div class="span-18 last">
+	<div class="span-18 last prepend-top">
+		<h2>综合演示用例</h2>
 		<h3><s:if test="id == null">创建</s:if><s:else>修改</s:else>用户</h3>
 
 		<form id="inputForm" action="${ctx}/common/user!save.action" method="post">

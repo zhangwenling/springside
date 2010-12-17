@@ -18,7 +18,7 @@
 <%@ include file="/common/header.jsp" %>
 <div id="content">
 	<%@ include file="/common/left.jsp" %>
-	<div class="span-18 last">
+	<div class="span-18 last prepend-top">
 		<h2>Excel导出演示</h2>
 
 		<p>说明：演示基于POI的Excel操作。</p>

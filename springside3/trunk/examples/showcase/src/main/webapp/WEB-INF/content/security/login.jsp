@@ -32,7 +32,7 @@
 <%@ include file="/common/header.jsp" %>
 <div id="content">
 	<%@ include file="/common/left.jsp" %>
-	<div class="span-18 last">
+	<div class="span-18 last prepend-top">
 		<h2>Showcase登录页</h2>
 
 		<%if ("1".equals(request.getParameter("error"))) {%>
