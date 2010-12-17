@@ -1,18 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 	default-lazy-init="true">
 
 	<!-- SpyMemcached客户端 -->
-	<bean id="spyMemcachedClient" class="org.springside.modules.memcached.SpyMemcachedClient" depends-on="memcachedSimulator">
+	<bean id="spyMemcachedClient" class="org.springside.modules.memcached.SpyMemcachedClient"
+		depends-on="memcachedSimulator">
 		<!-- 设置Memcached集群 -->
 		<property name="memcachedNodes" value="${memcached.url}" />
 		<!-- 缩短Timeout时间到200毫秒 -->
 		<property name="operationTimeout" value="200" />
 	</bean>
 
+	<bean name="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder">
+		<!-- XMemcachedClientBuilder 有两个参数，第一个是server列表，第二个是每个server的权重.-->
+		<constructor-arg>
+			<list>
+				<bean class="java.net.InetSocketAddress">
+					<constructor-arg>
+						<value>localhost</value>
+					</constructor-arg>
+					<constructor-arg>
+						<value>11211</value>
+					</constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+		<constructor-arg>
+			<list>
+				<value>1</value>
+			</list>
+		</constructor-arg>
+		<property name="connectionPoolSize" value="1"></property>
+		<property name="commandFactory">
+			<bean class="net.rubyeye.xmemcached.command.TextCommandFactory"></bean>
+		</property>
+		<property name="sessionLocator">
+			<bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"></bean>
+		</property>
+		<property name="transcoder">
+			<bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder" />
+		</property>
+	</bean>
+	<!-- Use factory bean to build memcached client -->
+	<bean name="xmemcachedClient" factory-bean="memcachedClientBuilder"
+		factory-method="build" destroy-method="shutdown" />
+		
+	<bean name="xmemcachedClientWrapper" class="org.springside.modules.memcached.XMemcachedClientWrapper">
+		<property name="xmemcachedClient" ref="xmemcachedClient"/>
+	</bean>
+		
+
 	<!-- 演示用的Jmemcached模拟Memcached -->
-	<bean id="memcachedSimulator" class="org.springside.modules.memcached.MemcachedSimulator" lazy-init="false">
-		<property name="serverUrl" value="${memcached.url}"/>
+	<bean id="memcachedSimulator" class="org.springside.modules.memcached.MemcachedSimulator"
+		lazy-init="false">
+		<property name="serverUrl" value="${memcached.url}" />
 	</bean>
 </beans>
