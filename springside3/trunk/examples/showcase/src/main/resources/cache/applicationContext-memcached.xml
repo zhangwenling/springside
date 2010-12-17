@@ -4,19 +4,17 @@
 	default-lazy-init="true">
 
 	<!-- XMemcached客户端 -->
-	<bean name="xmemcachedClient" class="org.springside.modules.memcached.XMemcachedClientFactoryBean">
-		<property name="servers">
-			<value>${memcached.url}</value>
-		</property>
+	<bean name="xmemcachedClient" class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean">
+		<property name="servers" value="${memcached.url}" />
 		<!-- nio 连接池大小 -->
-		<property name="connectionPoolSize" value="${memcached.connectionpool.size}"></property>
+		<property name="connectionPoolSize" value="${memcached.connectionpool.size}" />
 		<!-- 使用二进制协议,默认是文本协议 -->
 		<property name="commandFactory">
-			<bean class="net.rubyeye.xmemcached.command.BinaryCommandFactory"></bean>
+			<bean class="net.rubyeye.xmemcached.command.BinaryCommandFactory" />
 		</property>
 		<!-- 使用一致性哈希,默认是Hash值取模 -->
 		<property name="sessionLocator">
-			<bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"></bean>
+			<bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator" />
 		</property>
 	</bean>
 
