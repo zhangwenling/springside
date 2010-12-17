@@ -6,49 +6,20 @@
 <head>
 	<title>JMX演示用例</title>
 	<%@ include file="/common/meta.jsp" %>
-	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
+
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
-	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
-	<script type="text/javascript">
-
-		//系统配置(MBean代理)//
-		//动态提交表单保存服务器配置.
-		function saveConfig() {
-			$.get("jmx-client!saveConfig.action?" + $("form").serialize(), function(data) {
-				$('#saveMessage').text(data).show().fadeOut(2000);
-			});
-		}
-
-		//动态获取服务器最新配置,返回JSON对象.
-		function refreshConfig() {
-			$.getJSON("jmx-client!refreshConfig.action", function(data) {
-				$('#nodeName').val(data.nodeName);
-				$('input:radio[name=notificationMailEnabled]').val([data.notificationMailEnabled]);
-				$('#refreshMessage').text(data.message).show().fadeOut(2000);
-			});
-		}
-
-		//Trace控制(直接读取属性/调用方法)//
-		//动态调用JMX函数start/stopTrace().
-		function startTrace() {
-			$.get("jmx-client!startTrace.action");
-			$('#traceStatus').text("true");
-		}
-
-		function stopTrace() {
-			$.get("jmx-client!stopTrace.action");
-			$('#traceStatus').text("false");
-		}
-	</script>
+		
+	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
+	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
+	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
 </head>
 
 <body>
-<div id="doc3" class="yui-t2">
+<div class="container">
 <%@ include file="/common/header.jsp" %>
-<div id="bd">
+<div id="content">
 	<%@ include file="/common/left.jsp" %>
-	<div id="yui-main">
-		<div class="yui-b">
+	<div class="span-18 last">
 		<h1>JMX演示用例</h1>
 
 		<h2>技术说明：</h2>
@@ -60,8 +31,6 @@
 		<div>
 			使用JMX动态配置查看和配置Log4J日志等级。<br/>
 			客户端可使用JConsole或JManager, 远程进程URL为 localhost:2099 或完整版的service:jmx:rmi:///jndi/rmi://localhost:2099/jmxrmi
-		</div>
-		
 		</div>
 	</div>
 </div>

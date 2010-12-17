@@ -7,16 +7,19 @@
 <head>
 	<title>Mini-Web 角色管理</title>
 	<%@ include file="/common/meta.jsp" %>
-	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
+	
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
+	
+	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
+	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
+	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
 </head>
 
 <body>
-<div id="doc3">
+<div class="container">
 <%@ include file="/common/header.jsp" %>
-<div id="bd">
-	<div id="yui-main">
-	<div class="yui-b">
+<div id="content">
+	<div class="span-24 last">
 	<div id="message"><s:actionmessage theme="custom" cssClass="success"/></div>
 
 	<div id="filter">你好, <%=SpringSecurityUtils.getCurrentUserName()%>.</div>
@@ -54,7 +57,6 @@
 		<security:authorize ifAnyGranted="ROLE_修改角色">
 			<a href="role!input.action">增加新角色</a>
 		</security:authorize>
-	</div>
 	</div>
 	</div>
 </div>

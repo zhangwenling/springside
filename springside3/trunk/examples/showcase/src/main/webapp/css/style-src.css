@@ -23,18 +23,18 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
 }
 
 /* header */
-#hd {
+#header {
 	border-bottom: 2px solid #658A16;
 }
 
-#hd h1 {
+#header h1 {
 	font-size: 153.9%;
 	letter-spacing: .1em;
 	margin:0.375em 0;
 	color: #658A16;
 }
 
-#hd h2 {
+#header h2 {
 	letter-spacing: .1em;
 	margin:0.375m 0;
 	color: #BACE87;

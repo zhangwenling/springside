@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
-<div id="leftbar" class="yui-b">
+<div id="leftbar" class="span-6">
 		<a href="${ctx}/">首页</a>
 		<a href="${ctx}/common/user.action">综合演示</a>
 		<a href="${ctx}/jms/index.action">JMS演示</a>

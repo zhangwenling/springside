@@ -5,17 +5,20 @@
 <head>
 	<title>JMS演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
+	
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
+	
+	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
+	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
+	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
 </head>
 
 <body>
-<div id="doc3" class="yui-t2">
+<div class="container">
 <%@ include file="/common/header.jsp" %>
-<div id="bd">
+<div id="content">
 	<%@ include file="/common/left.jsp" %>
-	<div id="yui-main">
-		<div class="yui-b">
+	<div class="span-18 last">
 		<h1>JMS演示</h1>
 
 		<h2>技术说明：</h2>
@@ -31,7 +34,6 @@
 			<li>在综合演示用例中保存用户时,异步发送通知消息邮件</li>
 			<li>在servers/activemq目录演示优化过的activemq.xml配置文件</li>
 		</ul>
-		</div>
 	</div>
 </div>
 <%@ include file="/common/footer.jsp" %>

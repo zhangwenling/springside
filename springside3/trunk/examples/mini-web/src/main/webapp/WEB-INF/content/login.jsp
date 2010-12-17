@@ -9,8 +9,14 @@
 <head>
 	<title>Mini-Web 登录页</title>
 	<%@ include file="/common/meta.jsp" %>
-	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
+	
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
+	<link href="${ctx}/js/validate/jquery.validate.css" type="text/css" rel="stylesheet"/>
+		
+	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
+	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
+	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
+
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/jquery.validate.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/messages_cn.js" type="text/javascript"></script>
@@ -21,41 +27,40 @@
 	</script>
 </head>
 <body>
-<div id="doc3">
+<div class="container">
 <%@ include file="/common/header.jsp" %>
-<div id="bd">
-	<div id="yui-main">
-	<div class="yui-b">
+<div id="content">
+	<div class="span-24 last">
 	<%
 		if (session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION) != null) {
 	%> 
-	<div class="error"> 登录失败，请重试.</div> 
+		<div class="error"> 登录失败，请重试.</div> 
 	<%
 		}
 	%>
 	<form id="loginForm" action="${ctx}/j_spring_security_check" method="post" style="margin-top:1em">
 		<table class="noborder">
 			<tr>
-				<td><label>用户名:</label></td>
+				<td><label for="j_username">用户名:</label></td>
 				<td><input type='text' id='j_username' name='j_username' class="required"
 					<s:if test="not empty param.error">
 						value='<%=session.getAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY)%>'</s:if> />
 				</td>
 			</tr>
 			<tr>
-				<td><label>密码:</label></td>
+				<td><label for="j_password">密码:</label></td>
 				<td><input type='password' id='j_password' name='j_password' class="required"/></td>
 			</tr>
 			<tr>
-				<td colspan='2' align="right">
-					<input type="checkbox" name="_spring_security_remember_me"/>两周内记住我
+				<td colspan="2" align="right">
+					<input type="checkbox" id="_spring_security_remember_me" name="_spring_security_remember_me"/>
+					<label for="_spring_security_remember_me">两周内记住我</label>
 					<input value="登录" type="submit" class="button"/>
 				</td>
 			</tr>
 		</table>
 	</form>
 	<div>(管理员<b>admin/admin</b>, 普通用户<b>user/user</b>)</div>
-	</div>
 	</div>
 </div>
 <%@ include file="/common/footer.jsp" %>

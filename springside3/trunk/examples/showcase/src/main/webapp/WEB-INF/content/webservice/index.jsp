@@ -5,22 +5,23 @@
 <head>
 	<title>WebService高级演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
+	
+	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
+	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
+	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-<div id="doc3" class="yui-t2">
+<div class="container">
 <%@ include file="/common/header.jsp" %>
-<div id="bd">
+<div id="content">
 	<%@ include file="/common/left.jsp" %>
-	<div id="yui-main">
-		<div class="yui-b">
+	<div class="span-18 last">
 		<h1>Web Service高级演示</h1>
 		<ul>
 			<li><a href="${ctx}/webservice/ws/index.action">WS-*高级协议演示(安全、附件)</a></li>
 			<li><a href="${ctx}/webservice/rs/index.action">RESTful Web Service高级协议演示</a></li>
 		</ul>
-		</div>
 	</div>
 </div>
 <%@ include file="/common/footer.jsp" %>

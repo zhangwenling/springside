@@ -6,9 +6,14 @@
 <head>
 	<title>Mini-Web 帐号管理</title>
 	<%@ include file="/common/meta.jsp" %>
-	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
+
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/js/validate/jquery.validate.css" type="text/css" rel="stylesheet"/>
+	
+	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
+	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
+	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
+
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/jquery.validate.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/messages_cn.js" type="text/javascript"></script>
@@ -48,11 +53,10 @@
 </head>
 
 <body>
-<div id="doc3">
+<div class="container">
 <%@ include file="/common/header.jsp" %>
-<div id="bd">
-	<div id="yui-main">
-	<div class="yui-b">
+<div id="content">
+	<div class="span-24 last">
 	<h2><s:if test="id == null">创建</s:if><s:else>修改</s:else>用户</h2>
 	<form id="inputForm" action="user!save.action" method="post">
 		<input type="hidden" name="id" value="${id}"/>
@@ -94,7 +98,6 @@
 			</tr>
 		</table>
 	</form>
-	</div>
 	</div>
 </div>
 <%@ include file="/common/footer.jsp" %>

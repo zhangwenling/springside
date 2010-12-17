@@ -6,8 +6,13 @@
 <head>
 	<title>跨域名Mashup演示</title>
 	<%@ include file="/common/meta.jsp" %>
-	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
+
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
+	
+	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
+	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
+	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
+	
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		var remoteUrl = "http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}";
@@ -23,12 +28,11 @@
 </head>
 
 <body>
-<div id="doc3" class="yui-t2">
+<div class="container">
 <%@ include file="/common/header.jsp" %>
-<div id="bd">
+<div id="content">
 	<%@ include file="/common/left.jsp" %>
-	<div id="yui-main">
-		<div class="yui-b">
+	<div class="span-18 last">
 		<h1>Mashup演示</h1>
 	
 		<h2>技术说明：</h2>
@@ -39,7 +43,6 @@
 		<p><input type="button" value="获取内容" onclick="getMashupContent();"/></p>	
 		<p>跨域页面内容:</p>
 		<div id="mashupContent" style="display:none"/>
-		</div>
 	</div>
 </div>
 <%@ include file="/common/footer.jsp" %>

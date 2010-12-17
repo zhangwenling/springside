@@ -58,7 +58,7 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
 #filter,#content {margin-top:1em;}
 
 /* footer */
-#ft {
+#footer {
 	margin-top: 15px;
 	padding: 15px 0px 0px 0px;
 	font-size: 95%;
@@ -66,4 +66,4 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
 	border-top: 2px solid #658A16;
 }
 
-#ft a {color: #999;}
+#footer a {color: #999;}

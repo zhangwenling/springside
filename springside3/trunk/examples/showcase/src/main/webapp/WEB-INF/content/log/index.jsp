@@ -6,17 +6,20 @@
 <head>
 	<title>日志高级演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
+	
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
+	
+	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
+	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
+	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
 </head>
 
 <body>
-<div id="doc3" class="yui-t2">
+<div class="container">
 <%@ include file="/common/header.jsp" %>
-<div id="bd">
+<div id="content">
 	<%@ include file="/common/left.jsp" %>
-	<div id="yui-main">
-		<div class="yui-b">
+	<div class="span-18 last">
 		<h1>日志高级演示</h1>
 
 		<h2>技术说明：</h2>
@@ -33,7 +36,6 @@
 			<li>UserWebService服务通过TraceLogAspect, 使用TraceUtils在Log4j MDC中设置TraceId.</li>
 			<li>每次进入本页面, logger都会通过AOP自动生成一条调试记录，记录在另外的showcase_trace.log.</li>
 			</ul>
-		</div>
 	</div>
 </div>
 <%@ include file="/common/footer.jsp" %>

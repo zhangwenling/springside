@@ -9,18 +9,30 @@
 <head>
 	<title>Showcase 登录页</title>
 	<%@ include file="/common/meta.jsp" %>
-	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
+	
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
+	<link href="${ctx}/js/validate/jquery.validate.css" type="text/css" rel="stylesheet"/>
+		
+	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
+	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
+	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
+	
 	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
+	<script src="${ctx}/js/validate/jquery.validate.js" type="text/javascript"></script>
+	<script src="${ctx}/js/validate/messages_cn.js" type="text/javascript"></script>
+	<script>
+		$(document).ready(function() {
+			$("#loginForm").validate();
+		});
+	</script>
 </head>
 
 <body>
-<div id="doc3" class="yui-t2">
+<div class="container">
 <%@ include file="/common/header.jsp" %>
-<div id="bd">
+<div id="content">
 	<%@ include file="/common/left.jsp" %>
-	<div id="yui-main">
-		<div class="yui-b">
+	<div class="span-18 last">
 		<h1>Showcase登录页</h1>
 
 		<%if ("1".equals(request.getParameter("error"))) {%>
@@ -40,29 +52,26 @@
 		<form id="loginForm" action="${ctx}/j_spring_security_check" method="post">
 			<table class="noborder">
 				<tr>
-					<td>用户名:</td>
+					<td><label for="j_username">用户名:</label></td>
 					<td>
-						<input type='text' name='j_username' size='10'
+						<input type='text' name='j_username' size='10' class="required"
 						<s:if test="not empty param.error">
 							value='<%=session.getAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY)%>'</s:if> />
 					</td>
 				</tr>
 				<tr>
-					<td>密码:</td>
-					<td><input type='password' size='10' name='j_password'/></td>
+					<td><label for="j_password">密码:</label></td>
+					<td><input type='password' size='10' name='j_password' class="required"/></td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" name="_spring_security_remember_me"/>
-						两周内记住我</span>
+					<td colspan="2"><input type="checkbox" id="_spring_security_remember_me" name="_spring_security_remember_me"/>
+						<label for="_spring_security_remember_me">两周内记住我</label>
+						<input value="登录" type="submit"/>
 					</td>
-				</tr>
-				<tr>
-					<td><input value="登录" type="submit"/></td>
 				</tr>
 			</table>
 		</form>
-		<span>（管理员<b>admin/admin</b> ,普通用户<b>user/user</b>）<a href="${ctx}/j_spring_security_logout">退出登录</a></span>
-		</div>
+		<div>（管理员<b>admin/admin</b> ,普通用户<b>user/user</b>）<a href="${ctx}/j_spring_security_logout">退出登录</a></div>
 	</div>
 </div>
 <%@ include file="/common/footer.jsp" %>

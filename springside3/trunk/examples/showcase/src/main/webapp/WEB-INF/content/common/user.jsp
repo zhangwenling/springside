@@ -8,8 +8,12 @@
 <head>
 	<title>综合演示用例</title>
 	<%@ include file="/common/meta.jsp" %>
-	<link href="${ctx}/css/yui.css" type="text/css" rel="stylesheet"/>
+
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
+	
+	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
+	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
+	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
 
 	<script language="javascript">
 		function disableUsers() {
@@ -19,12 +23,11 @@
 </head>
 
 <body>
-<div id="doc3" class="yui-t2">
+<div class="container">
 <%@ include file="/common/header.jsp" %>
-<div id="bd">
+<div id="content">
 	<%@ include file="/common/left.jsp" %>
-	<div id="yui-main">
-		<div class="yui-b">
+	<div class="span-18 last">
 		<h1>综合演示用例</h1>
 		<%if(SpringSecurityUtils.getCurrentUser()!=null){ %>
 		<div>你好, 用户<%=SpringSecurityUtils.getCurrentUserName()%>在<%=((OperatorDetails)SpringSecurityUtils.getCurrentUser()).getLoginTime()%>从<%=SpringSecurityUtils.getCurrentUserIp()%>登录.&nbsp;&nbsp;</div>
@@ -56,7 +59,6 @@
 				</table>
 				<input type="submit" value="暂停选中用户"/>
 			</form>
-		</div>
 		</div>
 	</div>
 </div>
