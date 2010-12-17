@@ -20,23 +20,21 @@
 
 <body>
 <div class="container">
-<%@ include file="/common/header.jsp" %>
-<div id="content">
-	<div class="span-24 last">
-	<form id="mainForm" action="user.action" method="get">
-		<input type="hidden" name="page.pageNo" id="pageNo" value="${page.pageNo}"/>
-		<input type="hidden" name="page.orderBy" id="orderBy" value="${page.orderBy}"/>
-		<input type="hidden" name="page.order" id="order" value="${page.order}"/>
-
+	<%@ include file="/common/header.jsp" %>
+	<div id="content" class="span-24 last prepend-top">
 		<div id="message"><s:actionmessage theme="custom" cssClass="success"/></div>
 		<div id="filter">
-			你好, <%=SpringSecurityUtils.getCurrentUserName()%>.&nbsp;&nbsp;
-			登录名: <input type="text" name="filter_EQS_loginName" value="${param['filter_EQS_loginName']}" size="9"/>
-			姓名或Email: <input type="text" name="filter_LIKES_name_OR_email"
-							 value="${param['filter_LIKES_name_OR_email']}" size="9"/>
-			<input type="button" value="搜索" onclick="search();"/>
+			<form id="mainForm" action="user.action" method="get">
+				<input type="hidden" name="page.pageNo" id="pageNo" value="${page.pageNo}"/>
+				<input type="hidden" name="page.orderBy" id="orderBy" value="${page.orderBy}"/>
+				<input type="hidden" name="page.order" id="order" value="${page.order}"/>	
+				你好, <%=SpringSecurityUtils.getCurrentUserName()%>.&nbsp;&nbsp;
+				登录名: <input type="text" name="filter_EQS_loginName" value="${param['filter_EQS_loginName']}" size="9"/>
+				姓名或Email: <input type="text" name="filter_LIKES_name_OR_email" value="${param['filter_LIKES_name_OR_email']}" size="9"/>
+				<input type="button" value="搜索" onclick="search();"/>
+			</form>
 		</div>
-		<div id="content">
+		<div>
 			<table id="contentTable">
 				<tr>
 					<th><a href="javascript:sort('loginName','asc')">登录名</a></th>
@@ -68,7 +66,6 @@
 				</s:iterator>
 			</table>
 		</div>
-
 		<div>
 			第${page.pageNo}页, 共${page.totalPages}页
 			<a href="javascript:jumpPage(1)">首页</a>
@@ -80,10 +77,8 @@
 				<a href="user!input.action">增加新用户</a>
 			</security:authorize>
 		</div>
-	</form>
 	</div>
-</div>
-<%@ include file="/common/footer.jsp" %>
+	<%@ include file="/common/footer.jsp" %>
 </div>
 </body>
 </html>

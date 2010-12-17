@@ -17,15 +17,12 @@
 
 <body>
 <div class="container">
-<%@ include file="/common/header.jsp" %>
-<div id="content">
-	<div class="span-24 last">
-	<div id="message"><s:actionmessage theme="custom" cssClass="success"/></div>
-
-	<div id="filter">你好, <%=SpringSecurityUtils.getCurrentUserName()%>.</div>
-
-	<div id="content">
-		<table id="contentTable">
+	<%@ include file="/common/header.jsp" %>
+	<div id="content" class="span-24 last prepend-top">
+		<div id="message"><s:actionmessage theme="custom" cssClass="success"/></div>
+		<div>你好, <%=SpringSecurityUtils.getCurrentUserName()%>.</div>
+		<div>
+			<table id="contentTable">
 			<tr>
 				<th>名称</th>
 				<th>授权</th>
@@ -50,17 +47,16 @@
 					</td>
 				</tr>
 			</s:iterator>
-		</table>
-	</div>
+			</table>
+		</div>
 
-	<div>
-		<security:authorize ifAnyGranted="ROLE_修改角色">
-			<a href="role!input.action">增加新角色</a>
-		</security:authorize>
+		<div>
+			<security:authorize ifAnyGranted="ROLE_修改角色">
+				<a href="role!input.action">增加新角色</a>
+			</security:authorize>
+		</div>
 	</div>
-	</div>
-</div>
-<%@ include file="/common/footer.jsp" %>
+	<%@ include file="/common/footer.jsp" %>
 </div>
 </body>
 </html>
