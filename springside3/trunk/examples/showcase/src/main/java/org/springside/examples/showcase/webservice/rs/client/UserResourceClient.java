@@ -9,6 +9,7 @@ import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
 import org.springside.modules.utils.mapping.JsonBinder;
 import org.springside.modules.utils.web.ServletUtils;
 
+import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
 /**
@@ -32,7 +33,8 @@ public class UserResourceClient {
 	public List<UserDTO> getAllUser() {
 		String authentication = ServletUtils.encodeHttpBasic("admin", "admin");
 		return client.path("/users").header(ServletUtils.AUTHENTICATION_HEADER, authentication)
-				.accept(MediaType.APPLICATION_JSON).get(JerseyClientUtils.listType(UserDTO.class));
+				.accept(MediaType.APPLICATION_JSON).get(new GenericType<List<UserDTO>>() {
+				});
 	}
 
 	public UserDTO getUser(Long id) {

@@ -1,11 +1,8 @@
 package org.springside.examples.showcase.webservice.rs.client;
 
-import java.util.List;
-
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
@@ -20,13 +17,5 @@ public class JerseyClientUtils {
 		cc.getClasses().add(JacksonJsonProvider.class);
 		Client jerseyClient = Client.create(cc);
 		return jerseyClient.resource(baseUrl);
-	}
-
-	/**
-	 * 返回List<T>类型的Type.
-	 */
-	public static <T> GenericType<List<T>> listType(Class<T> clazz) {
-		return new GenericType<List<T>>() {
-		};
 	}
 }
