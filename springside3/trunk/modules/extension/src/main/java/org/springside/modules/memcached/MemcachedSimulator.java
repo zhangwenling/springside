@@ -7,7 +7,7 @@
  */
 package org.springside.modules.memcached;
 
-import net.spy.memcached.AddrUtil;
+import net.rubyeye.xmemcached.utils.AddrUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
