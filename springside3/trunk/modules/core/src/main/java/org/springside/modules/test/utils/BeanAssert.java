@@ -7,7 +7,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -59,7 +58,8 @@ public class BeanAssert {
 			}
 		}
 	}
-
+	
+	@SuppressWarnings("unchecked")
 	private static class Utils {
     	private static List<PropertyValue> getPropertyValues(Object bean,String... ignoreProperties) throws Error {
     		PropertyDescriptor[] descriptors = BeanUtils.getPropertyDescriptors(bean.getClass());
@@ -75,7 +75,7 @@ public class BeanAssert {
                 }
                 if (readMethod != null && !ignoreList.contains(name)) {
     				Object value = invokeMethod(bean, name, readMethod);
-    				PropertyValue pv = new PropertyValue(name,value,readMethod.getReturnType()); 
+    				PropertyValue pv = new PropertyValue(name,value); 
     				propertyValues.add(pv);
                 }
             }
@@ -120,16 +120,15 @@ public class BeanAssert {
     		return false;
     	}
 	}
+	
     private static class PropertyValue {
         String name;
         Object value;
-        Class<?> returnType;
         
-        public PropertyValue(String name, Object value, Class<?> returnType) {
+        public PropertyValue(String name, Object value) {
             super();
             this.name = name;
             this.value = value;
-            this.returnType = returnType;
         }
         public String getName() {
             return name;
@@ -137,9 +136,7 @@ public class BeanAssert {
         public Object getValue() {
             return value;
         }
-        public Class getReturnType() {
-            return returnType;
-        }
+
         
     }
 }

@@ -28,7 +28,7 @@ import org.springframework.beans.BeanUtils;
 /**
  * 用于为Bean设置属性设置默认值的工具类.
  * 示例应用场景: 
- * 1. 用于BeanUtils.copyProperties()等的测试,如我们需要验证某个属性值是否有拷贝正确.
+ * 1. 用于BeanUtils.copyProperties(),Dozer等的测试,如我们需要验证某个属性值是否有拷贝正确.
  * 这时可以为Bean设置属性值,然后copyProperties(),再验证copy完成后的结果.验证可以使用工具类:BeanAssert
  * 
  * 
@@ -55,6 +55,7 @@ public class BeanDefaultValueUtils {
         return setBeanProperties(obj, DEFAULT_VALUE);
     }
     
+    @SuppressWarnings("unchecked")
     public static <T> T setBeanProperties(T obj,int defaultValue) {
         PropertyDescriptor[] descriptors = BeanUtils.getPropertyDescriptors(obj.getClass());
         for(int i = 0; i < descriptors.length; i++ ) {
@@ -88,6 +89,7 @@ public class BeanDefaultValueUtils {
     	}
     }
 
+    @SuppressWarnings("unchecked")
 	private static Object getDefaultValue0(Class<?> targetType, int defaultValue)
 			throws IllegalAccessException, InvocationTargetException {
 		if(targetType.isArray()) {
@@ -185,6 +187,7 @@ public class BeanDefaultValueUtils {
         return newInstanceByConstructors(targetType, defaultValue);
 	}
 
+    @SuppressWarnings("unchecked")
 	private static Object newInstanceByConstructors(Class<?> targetType,
 			int defaultValue) {
 		Constructor[] cs = targetType.getConstructors();
@@ -200,6 +203,7 @@ public class BeanDefaultValueUtils {
     	return null;
 	}
 
+    @SuppressWarnings("unchecked")
     private static Object newInstance(Constructor c,int defaultValue) {
         c.setAccessible(true);
         Object[] args = new Object[c.getParameterTypes().length];
