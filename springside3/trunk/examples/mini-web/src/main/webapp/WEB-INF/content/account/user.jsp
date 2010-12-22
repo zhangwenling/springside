@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="org.springside.modules.security.springsecurity.SpringSecurityUtils" %>
+<%@ page import="org.apache.shiro.SecurityUtils" %>
 <%@ include file="/common/taglibs.jsp" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -28,7 +29,7 @@
 				<input type="hidden" name="page.pageNo" id="pageNo" value="${page.pageNo}"/>
 				<input type="hidden" name="page.orderBy" id="orderBy" value="${page.orderBy}"/>
 				<input type="hidden" name="page.order" id="order" value="${page.order}"/>	
-				你好, <%=SpringSecurityUtils.getCurrentUserName()%>.&nbsp;&nbsp;
+				你好, <shiro:principal/>.&nbsp;&nbsp;
 				登录名: <input type="text" name="filter_EQS_loginName" value="${param['filter_EQS_loginName']}" size="9"/>
 				姓名或Email: <input type="text" name="filter_LIKES_name_OR_email" value="${param['filter_LIKES_name_OR_email']}" size="9"/>
 				<input type="button" value="搜索" onclick="search();"/>

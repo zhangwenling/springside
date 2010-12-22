@@ -1,5 +1,6 @@
 package org.springside.examples.miniweb.entity.account;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -33,52 +35,71 @@ import com.google.common.collect.Lists;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Role extends IdEntity {
 
-	private String name;
-	private List<Authority> authorityList = Lists.newArrayList();
+    private static final String SEPARATOR_CHARS = ",";
 
-	public Role() {
+    private String              name;
 
-	}
+    private String              authorities;
 
-	public Role(Long id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+    private List<Authority>     authorityList   = Lists.newArrayList();
 
-	@Column(nullable = false, unique = true)
-	public String getName() {
-		return name;
-	}
+    public Role() {
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    }
 
-	@ManyToMany
-	@JoinTable(name = "ACCT_ROLE_AUTHORITY", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
-	@Fetch(FetchMode.SUBSELECT)
-	@OrderBy("id")
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public List<Authority> getAuthorityList() {
-		return authorityList;
-	}
+    public Role(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-	public void setAuthorityList(List<Authority> authorityList) {
-		this.authorityList = authorityList;
-	}
+    @Column(nullable = false, unique = true)
+    public String getName() {
+        return name;
+    }
 
-	@Transient
-	public String getAuthNames() {
-		return ConvertUtils.convertElementPropertyToString(authorityList, "name", ", ");
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@Transient
-	public List<Long> getAuthIds() {
-		return ConvertUtils.convertElementPropertyToList(authorityList, "id");
-	}
+    @Column(nullable = false)
+    public String getAuthorities() {
+        return authorities;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public void setAuthorities(String authorities) {
+        this.authorities = authorities;
+    }
+
+    @Transient
+    public List<String> getPermissions() {
+        return Arrays.asList(StringUtils.split(authorities, SEPARATOR_CHARS));
+    }
+
+    @ManyToMany
+    @JoinTable(name = "ACCT_ROLE_AUTHORITY", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
+    @Fetch(FetchMode.SUBSELECT)
+    @OrderBy("id")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    public List<Authority> getAuthorityList() {
+        return authorityList;
+    }
+
+    public void setAuthorityList(List<Authority> authorityList) {
+        this.authorityList = authorityList;
+    }
+
+    @Transient
+    public String getAuthNames() {
+        return ConvertUtils.convertElementPropertyToString(authorityList, "name", ", ");
+    }
+
+    @Transient
+    public List<Long> getAuthIds() {
+        return ConvertUtils.convertElementPropertyToList(authorityList, "id");
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }

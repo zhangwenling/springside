@@ -10,7 +10,7 @@
 		<ul>
 			<li><a href="${ctx}/account/user.action">帐号列表</a></li>
 			<li><a href="${ctx}/account/role.action">角色列表</a></li>
-			<li><a href="${ctx}/j_spring_security_logout">退出登录</a></li>
+			<li><a href="${ctx}/login!logout.action">退出登录</a></li>
 		</ul>
 	</div>
 </div>
