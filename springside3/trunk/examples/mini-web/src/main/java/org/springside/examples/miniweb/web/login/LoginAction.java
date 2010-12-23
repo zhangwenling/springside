@@ -7,8 +7,6 @@
 package org.springside.examples.miniweb.web.login;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -39,26 +37,8 @@ public class LoginAction extends ActionSupport {
         return "login";
     }
 
-    public String login() {
-        boolean isSuccess = false;
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        try {
-            SecurityUtils.getSubject().login(token);
-            isSuccess = true;
-        } catch (AuthenticationException e) {
-            isSuccess = false;
-        }
-
-        if (isSuccess) {
-            return SUCCESS;
-        } else {
-            return "login";
-        }
-    }
-
     public String logout() {
         SecurityUtils.getSubject().logout();
-
         return "login";
     }
 

@@ -58,13 +58,13 @@
         </property>
 		<property name="filterChainDefinitions">
 			<value>
+				/* = authc
 				/account/user!save* = perms[user:manage]
 				/account/user!input* = perms[user:view]
 				/account/user!delete* = perms[user:manage]
 				/account/role!save* = perms[role:manage]
 				/account/role!input* = perms[role:view]
 				/account/role!delete* = perms[role:manage]
-				/account/** = authc
             </value>
 		</property>
 	</bean>

@@ -38,7 +38,7 @@
 	<%
 		}
 	%>
-	<form id="loginForm" action="login!login.action" method="post" style="margin-top:1em">
+	<form id="loginForm" action="login.action" method="post" style="margin-top:1em">
 		<table class="noborder">
 			<tr>
 				<td><label for="username">用户名:</label></td>
