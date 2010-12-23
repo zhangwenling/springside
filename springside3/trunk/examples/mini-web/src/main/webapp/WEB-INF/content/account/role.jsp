@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="org.springside.modules.security.springsecurity.SpringSecurityUtils" %>
+<%@ page import="org.apache.shiro.SecurityUtils" %>
 <%@ include file="/common/taglibs.jsp" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,7 +21,7 @@
 	<%@ include file="/common/header.jsp" %>
 	<div id="content" class="span-24 last prepend-top">
 		<div id="message"><s:actionmessage theme="custom" cssClass="success"/></div>
-		<div>你好, <%=SpringSecurityUtils.getCurrentUserName()%>.</div>
+		<div>你好, <shiro:principal/>.</div>
 		<div>
 			<table id="contentTable">
 			<tr>
@@ -34,16 +35,16 @@
 					<td>${name}</td>
 					<td>${authNames}</td>
 					<td>&nbsp;
-						<security:authorize ifAnyGranted="ROLE_浏览角色">
-							<security:authorize ifNotGranted="ROLE_修改角色">
+						<shiro:hasPermission name="role:view">
+							<shiro:lacksPermission name="role:manage">
 								<a href="role!input.action?id=${id}">查看</a>&nbsp;
-							</security:authorize>
-						</security:authorize>
-
-						<security:authorize ifAnyGranted="ROLE_修改角色">
+							</shiro:lacksPermission>
+        				</shiro:hasPermission>
+        					
+        				<shiro:hasPermission name="role:manage">
 							<a href="role!input.action?id=${id}" id="editLink-${name}">修改</a>&nbsp;
 							<a href="role!delete.action?id=${id}" id="deleteLink-${name}">删除</a>
-						</security:authorize>
+						</shiro:hasPermission>
 					</td>
 				</tr>
 			</s:iterator>
@@ -51,9 +52,9 @@
 		</div>
 
 		<div>
-			<security:authorize ifAnyGranted="ROLE_修改角色">
+			<shiro:hasPermission name="role:manage">
 				<a href="role!input.action">增加新角色</a>
-			</security:authorize>
+			</shiro:hasPermission>
 		</div>
 	</div>
 	<%@ include file="/common/footer.jsp" %>

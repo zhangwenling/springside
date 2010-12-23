@@ -59,8 +59,8 @@ public class MiniWebRealm extends AuthorizingRealm {
     }
 
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        Long userId = (Long) principals.fromRealm(getName()).iterator().next();
-        User user = accountManager.getUser(userId);
+        String username = (String) principals.fromRealm(getName()).iterator().next();
+        User user = accountManager.findUserByLoginName(username);
         if (user != null) {
             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
             for (Role role : user.getRoleList()) {

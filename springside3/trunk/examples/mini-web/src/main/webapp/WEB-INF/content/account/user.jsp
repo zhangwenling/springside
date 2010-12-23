@@ -52,16 +52,16 @@
 						<td>${email}&nbsp;</td>
 						<td>${roleNames}&nbsp;</td>
 						<td>&nbsp;
-							<security:authorize ifAnyGranted="ROLE_浏览用户">
-								<security:authorize ifNotGranted="ROLE_修改用户">
+							<shiro:hasPermission name="user:view">
+								<shiro:lacksPermission name="user:manage">
 									<a href="user!input.action?id=${id}">查看</a>&nbsp;
-								</security:authorize>
-							</security:authorize>
-
-							<security:authorize ifAnyGranted="ROLE_修改用户">
-								<a href="user!input.action?id=${id}">修改</a>&nbsp;
+								</shiro:lacksPermission>
+        					</shiro:hasPermission>
+        					
+        					<shiro:hasPermission name="user:manage">
+									<a href="user!input.action?id=${id}">修改</a>&nbsp;
 								<a href="user!delete.action?id=${id}">删除</a>
-							</security:authorize>
+							</shiro:hasPermission>
 						</td>
 					</tr>
 				</s:iterator>
@@ -74,9 +74,9 @@
 			<s:if test="page.hasNext"><a href="javascript:jumpPage(${page.nextPage})">下一页</a></s:if>
 			<a href="javascript:jumpPage(${page.totalPages})">末页</a>
 
-			<security:authorize ifAnyGranted="ROLE_修改用户">
+			<shiro:hasPermission name="user:manage">
 				<a href="user!input.action">增加新用户</a>
-			</security:authorize>
+			</shiro:hasPermission>
 		</div>
 	</div>
 	<%@ include file="/common/footer.jsp" %>

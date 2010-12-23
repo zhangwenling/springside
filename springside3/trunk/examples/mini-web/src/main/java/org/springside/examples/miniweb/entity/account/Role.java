@@ -35,7 +35,7 @@ import com.google.common.collect.Lists;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Role extends IdEntity {
 
-    private static final String SEPARATOR_CHARS = ",";
+    private static final String SEPARATOR_CHARS = "|";
 
     private String              name;
 

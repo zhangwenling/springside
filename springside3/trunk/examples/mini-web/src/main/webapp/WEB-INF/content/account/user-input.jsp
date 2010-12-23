@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -90,9 +91,9 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<security:authorize ifAnyGranted="ROLE_修改用户">
-						<input class="button" type="submit" value="提交"/>&nbsp;
-					</security:authorize>
+					<shiro:hasPermission name="user:manage">
+						<input class="button" type="submit" value="提交"/>&nbsp;	
+					</shiro:hasPermission>
 					<input class="button" type="button" value="返回" onclick="history.back()"/>
 				</td>
 			</tr>

@@ -4,8 +4,8 @@
   <ACCT_AUTHORITY ID="2" NAME="修改用户"/>
   <ACCT_AUTHORITY ID="3" NAME="浏览角色"/>
   <ACCT_AUTHORITY ID="4" NAME="修改角色"/>
-  <ACCT_ROLE ID="1" NAME="管理员" AUTHORITIES="user:manage"/>
-  <ACCT_ROLE ID="2" NAME="用户" AUTHORITIES="user:view"/>
+  <ACCT_ROLE ID="1" NAME="管理员" AUTHORITIES="user:manage|role:manage"/>
+  <ACCT_ROLE ID="2" NAME="用户" AUTHORITIES="user:view|role:view"/>
   <ACCT_ROLE_AUTHORITY ROLE_ID="1" AUTHORITY_ID="1"/>
   <ACCT_ROLE_AUTHORITY ROLE_ID="1" AUTHORITY_ID="2"/>
   <ACCT_ROLE_AUTHORITY ROLE_ID="1" AUTHORITY_ID="3"/>

@@ -48,18 +48,14 @@
 		<property name="loginUrl" value="/login.action" />
 		<property name="successUrl" value="/account/user.action" />
 		<property name="unauthorizedUrl" value="/" />
-		<!--
-			The 'filters' property is usually not necessary unless performing an
-			override, which we want to do here (make authc point to a
-			PassthruAuthenticationFilter instead of the default
-			FormAuthenticationFilter:
-		-->
 		<property name="filterChainDefinitions">
 			<value>
 				/account/user!save* = perms[user:manage]
+				/account/user!input* = perms[user:view]
 				/account/user!delete* = perms[user:manage]
-				/account/role!save* = perms[user:manage]
-				/account/role!delete* = perms[user:manage]
+				/account/role!save* = perms[role:manage]
+				/account/role!input* = perms[role:view]
+				/account/role!delete* = perms[role:manage]
 				/account/** = authc
             </value>
 		</property>
