@@ -32,7 +32,7 @@ public class LoginAction extends ActionSupport {
 
     private String            password;
 
-    private String            rememberme;
+    private String            rememberMe;
 
     @Override
     public String execute() throws Exception {
@@ -78,12 +78,12 @@ public class LoginAction extends ActionSupport {
         this.password = password;
     }
 
-    public String getRememberme() {
-        return rememberme;
+    public String getRememberMe() {
+        return rememberMe;
     }
 
-    public void setRememberme(String rememberme) {
-        this.rememberme = rememberme;
+    public void setRememberMe(String rememberMe) {
+        this.rememberMe = rememberMe;
     }
 
 }

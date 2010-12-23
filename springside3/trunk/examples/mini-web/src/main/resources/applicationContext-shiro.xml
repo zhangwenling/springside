@@ -48,6 +48,14 @@
 		<property name="loginUrl" value="/login.action" />
 		<property name="successUrl" value="/account/user.action" />
 		<property name="unauthorizedUrl" value="/" />
+		<!-- 若不设置filters,默认采用FormAuthenticationFilter -->
+		<property name="filters">
+            <util:map>
+                <entry key="authc">
+                    <bean class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter"/>
+                </entry>
+            </util:map>
+        </property>
 		<property name="filterChainDefinitions">
 			<value>
 				/account/user!save* = perms[user:manage]
