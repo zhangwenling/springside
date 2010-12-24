@@ -23,7 +23,6 @@ import org.apache.ws.security.handler.WSHandlerConstants;
 import org.apache.ws.security.handler.WSHandlerResult;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
  * 在WSS4J校验后将得到的用户名放入SpringSecurity Context的CXF Interceptor.
@@ -43,13 +42,12 @@ public class SpringSecurityInInterceptor extends AbstractPhaseInterceptor<Messag
 		this.userDetailsService = userDetailsService;
 	}
 
-	@Override
 	public void handleMessage(Message message) throws Fault {
 		String userName = getUserNameFromWSS4JResult(message);
 		HttpServletRequest request = (HttpServletRequest) message.get("HTTP.REQUEST");
 
 		UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
-		SpringSecurityUtils.saveUserDetailsToContext(userDetails, request);
+		//SpringSecurityUtils.saveUserDetailsToContext(userDetails, request);
 	}
 
 	/**

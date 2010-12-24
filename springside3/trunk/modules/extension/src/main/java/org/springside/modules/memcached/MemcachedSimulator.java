@@ -37,7 +37,6 @@ public class MemcachedSimulator implements InitializingBean, DisposableBean {
 	private int maxItems = 1024;
 	private long maxBytes = 1024 * 2048;
 
-	@Override
 	public void afterPropertiesSet() throws Exception {
 
 		logger.info("Initializing JMemcached Server");
@@ -56,7 +55,6 @@ public class MemcachedSimulator implements InitializingBean, DisposableBean {
 		logger.info("Initialized JMemcached Server");
 	}
 
-	@Override
 	public void destroy() throws Exception {
 		logger.info("Shutting down Jmemcached Server");
 		jmemcached.stop();

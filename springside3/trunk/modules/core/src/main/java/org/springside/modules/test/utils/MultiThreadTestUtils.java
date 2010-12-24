@@ -7,48 +7,47 @@ import java.util.concurrent.CountDownLatch;
  * @author badqiu
  */
 public class MultiThreadTestUtils {
-	
+
 	/**
 	 * 执行测试并等待执行结束,返回值为消耗时间
 	 * 
 	 * @param threadCount 线程数
 	 * @param task 任务
 	 * @return costTime
-	 * @throws InterruptedException 
 	 */
-	public static long execute(int threadCount,final Runnable task) throws InterruptedException {
+	public static long execute(int threadCount, final Runnable task) throws InterruptedException {
 		CountDownLatch doneSignal = execute0(threadCount, task);
 		long startTime = System.currentTimeMillis();
 		doneSignal.await();
 		return System.currentTimeMillis() - startTime;
 	}
-	
-	private static CountDownLatch execute0(int threadCount,final Runnable task) {
+
+	private static CountDownLatch execute0(int threadCount, final Runnable task) {
 		final CountDownLatch startSignal = new CountDownLatch(1);
 		final CountDownLatch startedSignal = new CountDownLatch(threadCount);
 		final CountDownLatch doneSignal = new CountDownLatch(threadCount);
-		for(int i = 0; i < threadCount; i++) {
-			Thread t = new Thread(){
+		for (int i = 0; i < threadCount; i++) {
+			Thread t = new Thread() {
 				public void run() {
 					startedSignal.countDown();
 					try {
 						startSignal.await();
-					}catch(InterruptedException e) {
+					} catch (InterruptedException e) {
 						return;
 					}
-					
+
 					try {
 						task.run();
-					}finally {
+					} finally {
 						doneSignal.countDown();
 					}
-					
+
 				}
 			};
-			
+
 			t.start();
 		}
-		
+
 		try {
 			startedSignal.await();
 		} catch (InterruptedException e) {
@@ -57,5 +56,4 @@ public class MultiThreadTestUtils {
 		startSignal.countDown();
 		return doneSignal;
 	}
-
 }

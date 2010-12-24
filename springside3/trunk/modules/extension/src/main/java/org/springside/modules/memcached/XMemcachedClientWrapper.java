@@ -123,11 +123,10 @@ public class XMemcachedClientWrapper implements DisposableBean {
 		this.memcachedClient = memcachedClient;
 	}
 
-	@Override
 	public void destroy() throws Exception {
-		if(memcachedClient!=null){
+		if (memcachedClient != null) {
 			memcachedClient.shutdown();
 		}
-		
+
 	}
 }
