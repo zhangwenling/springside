@@ -2,6 +2,7 @@ package org.springside.examples.miniweb.service.account;
 
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
-import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
  * 安全相关实体的管理类, 包括用户,角色,资源与授权类.
@@ -50,7 +50,7 @@ public class AccountManager {
 	 */
 	public void deleteUser(Long id) {
 		if (isSupervisor(id)) {
-			logger.warn("操作员{}尝试删除超级管理员用户", SpringSecurityUtils.getCurrentUserName());
+			logger.warn("操作员{}尝试删除超级管理员用户", SecurityUtils.getSubject().getPrincipal());
 			throw new ServiceException("不能删除超级管理员用户");
 		}
 		userDao.delete(id);
