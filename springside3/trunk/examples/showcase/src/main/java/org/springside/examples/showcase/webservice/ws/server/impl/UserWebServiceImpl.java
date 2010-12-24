@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.util.Assert;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.examples.showcase.webservice.WsConstants;
@@ -20,6 +19,7 @@ import org.springside.examples.showcase.webservice.ws.server.dto.UserDTO;
 import org.springside.examples.showcase.webservice.ws.server.result.GetAllUserResult;
 import org.springside.examples.showcase.webservice.ws.server.result.GetUserResult;
 import org.springside.examples.showcase.webservice.ws.server.result.WSResult;
+import org.springside.modules.utils.Asserter;
 import org.springside.modules.utils.mapping.DozerUtils;
 
 /**
@@ -70,7 +70,7 @@ public class UserWebServiceImpl implements UserWebService {
 		StopWatch totalStopWatch = new Slf4JStopWatch();
 		//校验请求参数
 		try {
-			Assert.notNull(id, "id参数为空");
+			Asserter.notNull(id, "id参数为空");
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
 			return result.setResult(WSResult.PARAMETER_ERROR, e.getMessage());

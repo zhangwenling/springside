@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.util.Assert;
 import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
@@ -25,6 +24,7 @@ import org.springside.examples.miniservice.ws.result.CreateUserResult;
 import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
 import org.springside.examples.miniservice.ws.result.SearchUserResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
+import org.springside.modules.utils.Asserter;
 import org.springside.modules.utils.mapping.DozerUtils;
 
 import com.google.common.collect.Maps;
@@ -55,7 +55,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 
 		//校验请求参数
 		try {
-			Assert.notNull(id, "id参数为空");
+			Asserter.notNull(id, "id参数为空");
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
 			return result.setResult(WSResult.PARAMETER_ERROR, e.getMessage());
@@ -115,8 +115,8 @@ public class AccountWebServiceImpl implements AccountWebService {
 
 		//Hibernate Validator校验请求参数
 		try {
-			Assert.notNull(user, "用户参数为空");
-			Assert.isNull(user.getId(), "新建用户ID参数必须为空");
+			Asserter.notNull(user, "用户参数为空");
+			Asserter.isNull(user.getId(), "新建用户ID参数必须为空");
 
 			Set<ConstraintViolation<UserDTO>> constraintViolations = validator.validate(user);
 			if (!constraintViolations.isEmpty()) {

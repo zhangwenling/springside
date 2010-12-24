@@ -6,7 +6,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.springframework.util.Assert;
+import org.junit.Assert;
 
 public class JodaDemo {
 
@@ -80,7 +80,7 @@ public class JodaDemo {
 
 		DateTime oneYearsAgo = now.minusYears(2).plusDays(20);
 		DateTime twoYearsAgo = now.minusYears(2);
-		Assert.isTrue(1 == DateUtils.getAge(oneYearsAgo));
-		Assert.isTrue(2 == DateUtils.getAge(twoYearsAgo));
+		Assert.assertTrue(1 == DateUtils.getAge(oneYearsAgo));
+		Assert.assertTrue(2 == DateUtils.getAge(twoYearsAgo));
 	}
 }
