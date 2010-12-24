@@ -15,7 +15,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.util.Assert;
+import org.springside.modules.utils.Asserter;
 import org.springside.modules.utils.reflection.ConvertUtils;
 import org.springside.modules.utils.web.ServletUtils;
 
@@ -82,7 +82,7 @@ public class PropertyFilter {
 		}
 
 		String propertyNameStr = StringUtils.substringAfter(filterName, "_");
-		Assert.isTrue(StringUtils.isNotBlank(propertyNameStr), "filter名称" + filterName + "没有按规则编写,无法得到属性名称.");
+		Asserter.isTrue(StringUtils.isNotBlank(propertyNameStr), "filter名称" + filterName + "没有按规则编写,无法得到属性名称.");
 		propertyNames = StringUtils.splitByWholeSeparator(propertyNameStr, PropertyFilter.OR_SEPARATOR);
 
 		this.matchValue = ConvertUtils.convertStringToObject(value, propertyClass);
@@ -157,7 +157,7 @@ public class PropertyFilter {
 	 * 获取唯一的比较属性名称.
 	 */
 	public String getPropertyName() {
-		Assert.isTrue(propertyNames.length == 1, "There are not only one property in this filter.");
+		Asserter.isTrue(propertyNames.length == 1, "There are not only one property in this filter.");
 		return propertyNames[0];
 	}
 

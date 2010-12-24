@@ -16,7 +16,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.binary.StringUtils;
 import org.apache.commons.lang.StringEscapeUtils;
-import org.springframework.util.Assert;
 
 /**
  * 各种格式的编码加码工具类.
@@ -98,7 +97,7 @@ public class EncodeUtils {
 	}
 
 	private static String alphabetEncode(long num, int base) {
-		Assert.isTrue(num > 0, "num must be greater than 0.");
+		Asserter.isTrue(num > 0, "num must be greater than 0.");
 
 		StringBuilder sb = new StringBuilder();
 		for (; num > 0; num /= base) {
@@ -109,7 +108,7 @@ public class EncodeUtils {
 	}
 
 	private static long alphabetDecode(String str, int base) {
-		Assert.hasText(str);
+		Asserter.hasText(str);
 
 		long result = 0;
 		for (int i = 0; i < str.length(); i++) {

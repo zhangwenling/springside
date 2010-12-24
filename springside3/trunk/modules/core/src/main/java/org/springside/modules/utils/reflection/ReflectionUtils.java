@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.Assert;
+import org.springside.modules.utils.Asserter;
 
 /**
  * 反射工具类.
@@ -99,8 +99,8 @@ public class ReflectionUtils {
 	 * 如向上转型到Object仍无法找到, 返回null.
 	 */
 	public static Field getAccessibleField(final Object obj, final String fieldName) {
-		Assert.notNull(obj, "object不能为空");
-		Assert.hasText(fieldName, "fieldName");
+		Asserter.notNull(obj, "object不能为空");
+		Asserter.hasText(fieldName, "fieldName");
 		for (Class<?> superClass = obj.getClass(); superClass != Object.class; superClass = superClass.getSuperclass()) {
 			try {
 				Field field = superClass.getDeclaredField(fieldName);
@@ -152,7 +152,7 @@ public class ReflectionUtils {
 	 */
 	public static Method getAccessibleMethod(final Object obj, final String methodName,
 			final Class<?>... parameterTypes) {
-		Assert.notNull(obj, "object不能为空");
+		Asserter.notNull(obj, "object不能为空");
 
 		for (Class<?> superClass = obj.getClass(); superClass != Object.class; superClass = superClass.getSuperclass()) {
 			try {

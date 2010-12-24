@@ -25,7 +25,7 @@ import org.hibernate.metadata.ClassMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
+import org.springside.modules.utils.Asserter;
 import org.springside.modules.utils.reflection.ReflectionUtils;
 
 /**
@@ -94,7 +94,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 保存新增或修改的对象.
 	 */
 	public void save(final T entity) {
-		Assert.notNull(entity, "entity不能为空");
+		Asserter.notNull(entity, "entity不能为空");
 		getSession().saveOrUpdate(entity);
 		logger.debug("save entity: {}", entity);
 	}
@@ -105,7 +105,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * @param entity 对象必须是session中的对象或含id属性的transient对象.
 	 */
 	public void delete(final T entity) {
-		Assert.notNull(entity, "entity不能为空");
+		Asserter.notNull(entity, "entity不能为空");
 		getSession().delete(entity);
 		logger.debug("delete entity: {}", entity);
 	}
@@ -114,7 +114,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 按id删除对象.
 	 */
 	public void delete(final PK id) {
-		Assert.notNull(id, "id不能为空");
+		Asserter.notNull(id, "id不能为空");
 		delete(get(id));
 		logger.debug("delete entity {},id is {}", entityClass.getSimpleName(), id);
 	}
@@ -123,7 +123,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 按id获取对象.
 	 */
 	public T get(final PK id) {
-		Assert.notNull(id, "id不能为空");
+		Asserter.notNull(id, "id不能为空");
 		return (T) getSession().load(entityClass, id);
 	}
 
@@ -158,7 +158,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 按属性查找对象列表, 匹配方式为相等.
 	 */
 	public List<T> findBy(final String propertyName, final Object value) {
-		Assert.hasText(propertyName, "propertyName不能为空");
+		Asserter.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = Restrictions.eq(propertyName, value);
 		return find(criterion);
 	}
@@ -167,7 +167,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * 按属性查找唯一对象, 匹配方式为相等.
 	 */
 	public T findUniqueBy(final String propertyName, final Object value) {
-		Assert.hasText(propertyName, "propertyName不能为空");
+		Asserter.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = Restrictions.eq(propertyName, value);
 		return (T) createCriteria(criterion).uniqueResult();
 	}
@@ -235,7 +235,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * @param values 数量可变的参数,按顺序绑定.
 	 */
 	public Query createQuery(final String queryString, final Object... values) {
-		Assert.hasText(queryString, "queryString不能为空");
+		Asserter.hasText(queryString, "queryString不能为空");
 		Query query = getSession().createQuery(queryString);
 		if (values != null) {
 			for (int i = 0; i < values.length; i++) {
@@ -252,7 +252,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	 * @param values 命名参数,按名称绑定.
 	 */
 	public Query createQuery(final String queryString, final Map<String, ?> values) {
-		Assert.hasText(queryString, "queryString不能为空");
+		Asserter.hasText(queryString, "queryString不能为空");
 		Query query = getSession().createQuery(queryString);
 		if (values != null) {
 			query.setProperties(values);
