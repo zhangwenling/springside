@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2005-2010 springside.org.cn
+ * Copyright (c) 2005-2011 springside.org.cn
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
@@ -72,7 +72,6 @@ public class EncodeUtils {
 	/**
 	 * Base36 (0_9A_Z)编码.
 	 */
-
 	public static String base36Encode(long num) {
 		return alphabetEncode(num, 36);
 	}

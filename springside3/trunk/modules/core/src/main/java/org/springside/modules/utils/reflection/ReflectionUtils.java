@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2005-2010 springside.org.cn
+ * Copyright (c) 2005-2011 springside.org.cn
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
@@ -192,7 +192,6 @@ public class ReflectionUtils {
 	 * @param index the Index of the generic ddeclaration,start from 0.
 	 * @return the index generic declaration, or Object.class if cannot be determined
 	 */
-
 	public static Class getSuperClassGenricType(final Class clazz, final int index) {
 
 		Type genType = clazz.getGenericSuperclass();
