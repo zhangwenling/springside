@@ -18,8 +18,9 @@ import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.impl.AccountWebServiceImpl;
-import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
+import org.springside.examples.miniservice.ws.result.DepartmentResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
+import org.springside.modules.utils.validator.ValidatorHolder;
 
 /**
  * Account WebService的单元测试用例.
@@ -39,7 +40,7 @@ public class AccountWebServiceTest {
 	public void setUp() {
 		accountWebService = new AccountWebServiceImpl();
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-		accountWebService.setValidator(factory.getValidator());
+		new ValidatorHolder().setValidator(factory.getValidator());
 
 		//创建mock对象
 		mockAccountManager = control.createMock(AccountManager.class);
@@ -61,7 +62,7 @@ public class AccountWebServiceTest {
 		EasyMock.expect(mockAccountManager.getDepartmentDetail(1L)).andReturn(department);
 		control.replay();
 
-		GetDepartmentDetailResult result = accountWebService.getDepartmentDetail(1L);
+		DepartmentResult result = accountWebService.getDepartmentDetail(1L);
 		assertEquals(WSResult.SUCCESS, result.getCode());
 		DepartmentDTO dto = result.getDepartment();
 		assertEquals(department.getName(), dto.getName());
@@ -100,7 +101,7 @@ public class AccountWebServiceTest {
 				new RuntimeException("Expected exception."));
 		control.replay();
 
-		GetDepartmentDetailResult result = accountWebService.getDepartmentDetail(1L);
+		DepartmentResult result = accountWebService.getDepartmentDetail(1L);
 		assertEquals(WSResult.SYSTEM_ERROR, result.getCode());
 		assertEquals(WSResult.SYSTEM_ERROR_MESSAGE, result.getMessage());
 	}

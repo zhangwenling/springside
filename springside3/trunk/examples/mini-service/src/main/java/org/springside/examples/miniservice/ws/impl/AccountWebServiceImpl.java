@@ -6,7 +6,6 @@ import java.util.Set;
 
 import javax.jws.WebService;
 import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,12 +19,13 @@ import org.springside.examples.miniservice.utils.ValidatorUtils;
 import org.springside.examples.miniservice.ws.AccountWebService;
 import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
-import org.springside.examples.miniservice.ws.result.CreateUserResult;
-import org.springside.examples.miniservice.ws.result.GetDepartmentDetailResult;
-import org.springside.examples.miniservice.ws.result.SearchUserResult;
+import org.springside.examples.miniservice.ws.result.DepartmentResult;
+import org.springside.examples.miniservice.ws.result.IdResult;
+import org.springside.examples.miniservice.ws.result.UserListResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
 import org.springside.modules.utils.Asserter;
 import org.springside.modules.utils.mapping.DozerUtils;
+import org.springside.modules.utils.validator.ValidatorHolder;
 
 import com.google.common.collect.Maps;
 
@@ -44,14 +44,11 @@ public class AccountWebServiceImpl implements AccountWebService {
 
 	private AccountManager accountManager;
 
-	private Validator validator;
-
 	/**
 	 * @see AccountWebService#getDepartmentDetail()
 	 */
-	@Override
-	public GetDepartmentDetailResult getDepartmentDetail(Long id) {
-		GetDepartmentDetailResult result = new GetDepartmentDetailResult();
+	public DepartmentResult getDepartmentDetail(Long id) {
+		DepartmentResult result = new DepartmentResult();
 
 		//校验请求参数
 		try {
@@ -83,10 +80,9 @@ public class AccountWebServiceImpl implements AccountWebService {
 	/**
 	 * @see AccountWebService#searchUser()
 	 */
-	@Override
-	public SearchUserResult searchUser(String loginName, String name) {
+	public UserListResult searchUser(String loginName, String name) {
 
-		SearchUserResult result = new SearchUserResult();
+		UserListResult result = new UserListResult();
 
 		//获取User列表并转换为UserDTO列表.
 		try {
@@ -109,16 +105,15 @@ public class AccountWebServiceImpl implements AccountWebService {
 	/**
 	 * @see AccountWebService#createUser(UserDTO)
 	 */
-	@Override
-	public CreateUserResult createUser(UserDTO user) {
-		CreateUserResult result = new CreateUserResult();
+	public IdResult createUser(UserDTO user) {
+		IdResult result = new IdResult();
 
 		//Hibernate Validator校验请求参数
 		try {
 			Asserter.notNull(user, "用户参数为空");
 			Asserter.isNull(user.getId(), "新建用户ID参数必须为空");
 
-			Set<ConstraintViolation<UserDTO>> constraintViolations = validator.validate(user);
+			Set<ConstraintViolation<UserDTO>> constraintViolations = ValidatorHolder.validate(user);
 			if (!constraintViolations.isEmpty()) {
 				String message = ValidatorUtils.convertMessage(constraintViolations, "\n");
 				throw new IllegalArgumentException(message);
@@ -134,7 +129,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 
 			Long userId = accountManager.saveUser(userEntity);
 
-			result.setUserId(userId);
+			result.setId(userId);
 			return result;
 		} catch (DataIntegrityViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
@@ -151,8 +146,5 @@ public class AccountWebServiceImpl implements AccountWebService {
 		this.accountManager = accountManager;
 	}
 
-	@Autowired
-	public void setValidator(Validator validator) {
-		this.validator = validator;
-	}
+
 }

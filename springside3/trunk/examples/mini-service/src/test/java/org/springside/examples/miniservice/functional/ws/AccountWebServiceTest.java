@@ -3,11 +3,15 @@ package org.springside.examples.miniservice.functional.ws;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
 import javax.xml.ws.BindingProvider;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.dozer.DozerBeanMapper;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +24,11 @@ import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniservice.ws.AccountWebService;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
-import org.springside.examples.miniservice.ws.result.CreateUserResult;
-import org.springside.examples.miniservice.ws.result.SearchUserResult;
+import org.springside.examples.miniservice.ws.exception.WebServiceException;
+import org.springside.examples.miniservice.ws.result.IdResult;
+import org.springside.examples.miniservice.ws.result.UserListResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
+import org.springside.modules.utils.validator.ValidatorHolder;
 
 /**
  * UserService Web服务的功能测试, 测试主要的接口调用.
@@ -36,9 +42,16 @@ import org.springside.examples.miniservice.ws.result.WSResult;
 @ContextConfiguration(locations = { "/applicationContext-ws-client.xml" })
 public class AccountWebServiceTest extends BaseFunctionalTestCase {
 
+	/** client类主要负责 Result对象的解包及将 error code转换为异常 */
 	@Autowired
-	private AccountWebService accountWebService;
-
+	private AccountWebServiceClient accountWebServiceClient;
+	
+	@BeforeClass
+	public static void init() {
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		new ValidatorHolder().setValidator(factory.getValidator());		
+	}
+	
 	/**
 	 * 测试创建用户,在Spring applicaitonContext.xml中用<jaxws:client/>创建Client.
 	 */
@@ -51,10 +64,15 @@ public class AccountWebServiceTest extends BaseFunctionalTestCase {
 		userDTO.setName(user.getName());
 		userDTO.setEmail(user.getEmail());
 
-		CreateUserResult result = accountWebService.createUser(userDTO);
-
-		assertEquals(WSResult.SUCCESS, result.getCode());
-		assertNotNull(result.getUserId());
+		Long id = accountWebServiceClient.createUser(userDTO);
+		assertNotNull(id);
+		
+		try {
+			accountWebServiceClient.createUser(userDTO);
+			fail("不应该执行到这里,应该已经有存在该用户,将抛异常");
+		}catch(WebServiceException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -67,13 +85,22 @@ public class AccountWebServiceTest extends BaseFunctionalTestCase {
 
 		//登录名为空
 		userDTO.setLoginName(null);
-		CreateUserResult result = accountWebService.createUser(userDTO);
-		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
+		try {
+			Long id = accountWebServiceClient.createUser(userDTO);
+			fail("应该发生登录名为空错误");
+		}catch(WebServiceException e) {
+			assertEquals(e.getErrorCode(),WSResult.PARAMETER_ERROR);
+		}
 
 		//登录名重复
 		userDTO.setLoginName("user1");
-		result = accountWebService.createUser(userDTO);
-		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
+		try {
+			Long id = accountWebServiceClient.createUser(userDTO);
+			accountWebServiceClient.createUser(userDTO);
+			fail("应该发生登录名重复错误");
+		}catch(WebServiceException e) {
+			assertEquals(e.getErrorCode(),WSResult.PARAMETER_ERROR);
+		}
 	}
 
 	/**
@@ -92,7 +119,7 @@ public class AccountWebServiceTest extends BaseFunctionalTestCase {
 		((BindingProvider) accountWebServiceCreated).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
 				address);
 
-		SearchUserResult result = accountWebServiceCreated.searchUser(null, null);
+		UserListResult result = accountWebServiceCreated.searchUser(null, null);
 
 		assertTrue(result.getUserList().size() >= 4);
 		assertEquals("Jack", result.getUserList().get(0).getName());
