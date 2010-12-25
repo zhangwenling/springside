@@ -1,16 +1,4 @@
 
-    alter table acct_role_authority 
-        drop constraint FKAE243466DE3FB930;
-
-    alter table acct_role_authority 
-        drop constraint FKAE2434663FE97564;
-
-    alter table acct_user_role 
-        drop constraint FKFE85CB3EDE3FB930;
-
-    alter table acct_user_role 
-        drop constraint FKFE85CB3E836A7D10;
-
     drop table if exists acct_authority;
 
     drop table if exists acct_role;
@@ -36,7 +24,9 @@
 
     create table acct_role_authority (
         role_id bigint not null,
-        authority_id bigint not null
+        authority_id bigint not null,
+        foreign key(role_id) references acct_role(id),
+        foreign key(authority_id) references acct_authority(id)
     ) ;
 
     create table acct_user (
@@ -50,25 +40,8 @@
 
     create table acct_user_role (
         user_id bigint not null,
-        role_id bigint not null
+        role_id bigint not null,
+        foreign key(user_id) references acct_user(id),
+        foreign key(role_id) references acct_role(id)
     ) ;
 
-    alter table acct_role_authority 
-        add constraint FKAE243466DE3FB930 
-        foreign key (role_id) 
-        references acct_role (id);
-
-    alter table acct_role_authority 
-        add constraint FKAE2434663FE97564 
-        foreign key (authority_id) 
-        references acct_authority (id);
-
-    alter table acct_user_role 
-        add constraint FKFE85CB3EDE3FB930 
-        foreign key (role_id) 
-        references acct_role (id);
-
-    alter table acct_user_role 
-        add constraint FKFE85CB3E836A7D10 
-        foreign key (user_id) 
-        references acct_user (id);
