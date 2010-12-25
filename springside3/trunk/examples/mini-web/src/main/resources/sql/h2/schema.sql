@@ -25,6 +25,7 @@
     create table acct_role_authority (
         role_id bigint not null,
         authority_id bigint not null,
+        primary key(role_id,authority_id),
         foreign key(role_id) references acct_role(id),
         foreign key(authority_id) references acct_authority(id)
     ) ;
@@ -41,6 +42,7 @@
     create table acct_user_role (
         user_id bigint not null,
         role_id bigint not null,
+     	primary key(user_id,role_id),
         foreign key(user_id) references acct_user(id),
         foreign key(role_id) references acct_role(id)
     ) ;
