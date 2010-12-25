@@ -1,4 +1,4 @@
-package org.springside.modules.unit.utils.encode;
+package org.springside.modules.unit.utils;
 
 import static org.junit.Assert.*;
 
