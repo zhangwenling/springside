@@ -196,6 +196,13 @@
 			<artifactId>jmockit</artifactId>
 		</dependency>
 
+		<!-- validator begin -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+		<!-- validator end -->
+
 	</dependencies>
 
 	<build>
