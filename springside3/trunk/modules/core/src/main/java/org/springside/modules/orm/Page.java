@@ -17,12 +17,14 @@ import com.google.common.collect.Lists;
 
 /**
  * 与具体ORM实现无关的分页参数及查询结果封装.
+ * 实现Iterable接口,可以for(Object item : page)遍历使用.
  * 
- * 注意所有序号从1开始. 实现Iterable接口,可以for(Object item : page)遍历使用
+ * 本类只封装输入输出参数,具体的分页逻辑全部封装在Paginator类.
  * 
  * @param <T> Page中记录的类型.
  * 
  * @author calvin
+ * @author badqiu
  */
 public class Page<T> implements Iterable<T> {
 	//-- 公共变量 --//
@@ -217,7 +219,7 @@ public class Page<T> implements Iterable<T> {
 	public void setTotalItems(final long totalItems) {
 		this.totalItems = totalItems;
 	}
-	
+
 	/** 
 	 * 实现Iterable接口,可以for(Object item : page)遍历使用
 	 */

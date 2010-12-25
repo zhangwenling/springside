@@ -4,6 +4,12 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
+/**
+ * 封装所有分页逻辑.
+ * 
+ * @author badqiu
+ * @author calvin
+ */
 public class Paginator {
 
 	/** 分页大小 */
@@ -17,6 +23,13 @@ public class Paginator {
 		this.pageNo = pageNo;
 		this.pageSize = pageSize;
 		this.totalItems = totalItems;
+	}
+
+	/**
+	 * 获得分页大小
+	 */
+	public int getPageSize() {
+		return pageSize;
 	}
 
 	/**
@@ -41,14 +54,6 @@ public class Paginator {
 	 */
 	public int getOffset() {
 		return ((pageNo - 1) * pageSize);
-	}
-
-	/**
-	 * 计算页内大小，考虑最后一页的长度.
-	 * 用于Mysql
-	 */
-	public long getLimit() {
-		return getEndRow() - (pageSize * (pageNo - 1));
 	}
 
 	/**
@@ -112,7 +117,7 @@ public class Paginator {
 	}
 
 	/**
-	 * 根据pageSize与totalCount计算总页数, 默认值为-1.
+	 * 根据pageSize与totalItems计算总页数, 默认值为-1.
 	 */
 	public long getTotalPages() {
 		if (totalItems < 0) {
@@ -126,25 +131,20 @@ public class Paginator {
 		return count;
 	}
 
+	/**
+	 * 计算以当前页为中心的页面列表,如"首页,23,24,25,26,27,末页"
+	 * @param count 居然计算的列表大小
+	 * @return pageNo列表 
+	 */
 	public List<Long> getSlider(int count) {
-		int avg = count / 2;
+		int halfSize = count / 2;
 		long totalPage = getTotalPages();
 
-		long startPageNumber = pageNo - avg;
-		if (startPageNumber <= 0) {
-			startPageNumber = 1;
-		}
-
-		long endPageNumber = startPageNumber + count - 1;
-		if (endPageNumber > totalPage) {
-			endPageNumber = totalPage;
-		}
+		long startPageNumber = Math.max(pageNo - halfSize, 1);
+		long endPageNumber = Math.min(startPageNumber + count - 1, totalPage);
 
 		if (endPageNumber - startPageNumber < count) {
-			startPageNumber = endPageNumber - count;
-			if (startPageNumber <= 0) {
-				startPageNumber = 1;
-			}
+			startPageNumber = Math.max(endPageNumber - count, 1);
 		}
 
 		List<Long> result = Lists.newArrayList();
