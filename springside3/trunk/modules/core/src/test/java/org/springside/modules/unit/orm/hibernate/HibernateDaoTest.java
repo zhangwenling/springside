@@ -53,7 +53,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		assertEquals(5, page.getResult().size());
 
 		//自动统计总数
-		assertEquals(6L, page.getTotalCount());
+		assertEquals(6L, page.getTotalItems());
 
 		page.setPageNo(2);
 		dao.getAll(page);
@@ -68,7 +68,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		assertEquals(5, page.getResult().size());
 
 		//自动统计总数
-		assertEquals(6L, page.getTotalCount());
+		assertEquals(6L, page.getTotalItems());
 
 		//翻页
 		page.setPageNo(2);
@@ -82,7 +82,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		assertEquals(5, page.getResult().size());
 
 		//自动统计总数
-		assertEquals(6L, page.getTotalCount());
+		assertEquals(6L, page.getTotalItems());
 
 		//翻页
 		page.setPageNo(2);
@@ -99,7 +99,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		assertEquals(5, page.getResult().size());
 
 		//自动统计总数
-		assertEquals(6L, page.getTotalCount());
+		assertEquals(6L, page.getTotalItems());
 
 		//翻页
 		page.setPageNo(2);
@@ -154,7 +154,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		Page<User> page = new Page<User>(5);
 		dao.findPage(page, filters);
 		assertEquals(5, page.getResult().size());
-		assertEquals(6L, page.getTotalCount());
+		assertEquals(6L, page.getTotalItems());
 
 		page.setPageNo(2);
 		dao.findPage(page, filters);
@@ -176,12 +176,12 @@ public class HibernateDaoTest extends SpringTxTestCase {
 	public void findPageByHqlAutoCount() {
 		Page<User> page = new Page<User>(5);
 		dao.findPage(page, "from User user");
-		assertEquals(6L, page.getTotalCount());
+		assertEquals(6L, page.getTotalItems());
 
 		dao.findPage(page, "select user from User user");
-		assertEquals(6L, page.getTotalCount());
+		assertEquals(6L, page.getTotalItems());
 
 		dao.findPage(page, "select user from User user order by id");
-		assertEquals(6L, page.getTotalCount());
+		assertEquals(6L, page.getTotalItems());
 	}
 }

@@ -1,6 +1,7 @@
 package org.springside.modules.unit.orm;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,8 +22,8 @@ public class PageTest {
 	public void defaultParameter() {
 		assertEquals(1, page.getPageNo());
 		assertEquals(-1, page.getPageSize());
-		assertEquals(-1, page.getTotalCount());
-		assertEquals(-1, page.getTotalPages());
+		assertEquals(-1, page.getTotalItems());
+		assertEquals(-1, page.getPageinator().getTotalPages());
 		assertEquals(true, page.isAutoCount());
 
 		page.setPageNo(-1);
@@ -47,9 +48,9 @@ public class PageTest {
 		page.setPageSize(10);
 
 		page.setPageNo(1);
-		assertEquals(1, page.getFirst());
+		assertEquals(1, page.getPageinator().getStartRow());
 		page.setPageNo(2);
-		assertEquals(11, page.getFirst());
+		assertEquals(11, page.getPageinator().getStartRow());
 
 	}
 
@@ -57,14 +58,14 @@ public class PageTest {
 	public void getTotalPages() {
 		page.setPageSize(10);
 
-		page.setTotalCount(1);
-		assertEquals(1, page.getTotalPages());
+		page.setTotalItems(1);
+		assertEquals(1, page.getPageinator().getTotalPages());
 
-		page.setTotalCount(10);
-		assertEquals(1, page.getTotalPages());
+		page.setTotalItems(10);
+		assertEquals(1, page.getPageinator().getTotalPages());
 
-		page.setTotalCount(11);
-		assertEquals(2, page.getTotalPages());
+		page.setTotalItems(11);
+		assertEquals(2, page.getPageinator().getTotalPages());
 	}
 
 	@Test
@@ -72,34 +73,34 @@ public class PageTest {
 		page.setPageSize(10);
 		page.setPageNo(1);
 
-		page.setTotalCount(9);
-		assertEquals(false, page.isHasNext());
+		page.setTotalItems(9);
+		assertEquals(false, page.getPageinator().isHasNextPage());
 
-		page.setTotalCount(11);
-		assertEquals(true, page.isHasNext());
+		page.setTotalItems(11);
+		assertEquals(true, page.getPageinator().isHasNextPage());
 
 		page.setPageNo(1);
-		assertEquals(false, page.isHasPre());
+		assertEquals(false, page.getPageinator().isHasPrePage());
 
 		page.setPageNo(2);
-		assertEquals(true, page.isHasPre());
+		assertEquals(true, page.getPageinator().isHasPrePage());
 	}
 
 	@Test
 	public void getNextOrPrePage() {
 		page.setPageNo(1);
-		assertEquals(1, page.getPrePage());
+		assertEquals(1, page.getPageinator().getPrePage());
 
 		page.setPageNo(2);
-		assertEquals(1, page.getPrePage());
+		assertEquals(1, page.getPageinator().getPrePage());
 
 		page.setPageSize(10);
-		page.setTotalCount(11);
+		page.setTotalItems(11);
 		page.setPageNo(1);
-		assertEquals(2, page.getNextPage());
+		assertEquals(2, page.getPageinator().getNextPage());
 
 		page.setPageNo(2);
-		assertEquals(2, page.getNextPage());
+		assertEquals(2, page.getPageinator().getNextPage());
 	}
 
 	@Test

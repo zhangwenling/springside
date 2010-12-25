@@ -29,7 +29,7 @@ public class Page<T> implements Iterable<T> {
 	public static final String ASC = "asc";
 	public static final String DESC = "desc";
 
-	//-- 分页参数 --//
+	//-- 分页查询参数 --//
 	protected int pageNo = 1;
 	protected int pageSize = -1;
 	protected String orderBy = null;
@@ -38,7 +38,7 @@ public class Page<T> implements Iterable<T> {
 
 	//-- 返回结果 --//
 	protected List<T> result = Lists.newArrayList();
-	protected long totalCount = -1;
+	protected long totalItems = -1;
 
 	//-- 构造函数 --//
 	public Page() {
@@ -46,6 +46,13 @@ public class Page<T> implements Iterable<T> {
 
 	public Page(int pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	/**
+	 * 取得分页运算器,封装全部分页逻辑.
+	 */
+	public Paginator getPageinator() {
+		return new Paginator(pageNo, pageSize, totalItems);
 	}
 
 	//-- 分页参数访问函数 --//
@@ -95,13 +102,6 @@ public class Page<T> implements Iterable<T> {
 	public Page<T> pageSize(final int thePageSize) {
 		setPageSize(thePageSize);
 		return this;
-	}
-
-	/**
-	 * 根据pageNo和pageSize计算当前页第一条记录在总结果集中的位置,序号从1开始.
-	 */
-	public int getFirst() {
-		return ((pageNo - 1) * pageSize) + 1;
 	}
 
 	/**
@@ -190,7 +190,6 @@ public class Page<T> implements Iterable<T> {
 	}
 
 	//-- 访问查询结果函数 --//
-
 	/**
 	 * 获得页内的记录列表.
 	 */
@@ -208,68 +207,15 @@ public class Page<T> implements Iterable<T> {
 	/**
 	 * 获得总记录数, 默认值为-1.
 	 */
-	public long getTotalCount() {
-		return totalCount;
+	public long getTotalItems() {
+		return totalItems;
 	}
 
 	/**
 	 * 设置总记录数.
 	 */
-	public void setTotalCount(final long totalCount) {
-		this.totalCount = totalCount;
-	}
-
-	/**
-	 * 根据pageSize与totalCount计算总页数, 默认值为-1.
-	 */
-	public long getTotalPages() {
-		if (totalCount < 0) {
-			return -1;
-		}
-
-		long count = totalCount / pageSize;
-		if (totalCount % pageSize > 0) {
-			count++;
-		}
-		return count;
-	}
-
-	/**
-	 * 是否还有下一页.
-	 */
-	public boolean isHasNext() {
-		return (pageNo + 1 <= getTotalPages());
-	}
-
-	/**
-	 * 取得下页的页号, 序号从1开始.
-	 * 当前页为尾页时仍返回尾页序号.
-	 */
-	public int getNextPage() {
-		if (isHasNext()) {
-			return pageNo + 1;
-		} else {
-			return pageNo;
-		}
-	}
-
-	/**
-	 * 是否还有上一页.
-	 */
-	public boolean isHasPre() {
-		return (pageNo - 1 >= 1);
-	}
-
-	/**
-	 * 取得上页的页号, 序号从1开始.
-	 * 当前页为首页时返回首页序号.
-	 */
-	public int getPrePage() {
-		if (isHasPre()) {
-			return pageNo - 1;
-		} else {
-			return pageNo;
-		}
+	public void setTotalItems(final long totalItems) {
+		this.totalItems = totalItems;
 	}
 	
 	/** 

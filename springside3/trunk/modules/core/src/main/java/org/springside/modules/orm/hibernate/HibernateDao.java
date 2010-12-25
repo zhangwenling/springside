@@ -91,7 +91,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 
 		if (page.isAutoCount()) {
 			long totalCount = countHqlResult(hql, values);
-			page.setTotalCount(totalCount);
+			page.setTotalItems(totalCount);
 		}
 
 		setPageParameterToQuery(q, page);
@@ -118,7 +118,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 
 		if (page.isAutoCount()) {
 			long totalCount = countHqlResult(hql, values);
-			page.setTotalCount(totalCount);
+			page.setTotalItems(totalCount);
 		}
 
 		setPageParameterToQuery(q, page);
@@ -144,7 +144,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 
 		if (page.isAutoCount()) {
 			long totalCount = countCriteriaResult(c);
-			page.setTotalCount(totalCount);
+			page.setTotalItems(totalCount);
 		}
 
 		setPageParameterToCriteria(c, page);
@@ -160,9 +160,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	protected Query setPageParameterToQuery(final Query q, final Page<T> page) {
 
 		Asserter.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
-
-		//hibernate的firstResult的序号从0开始
-		q.setFirstResult(page.getFirst() - 1);
+		q.setFirstResult(page.getPageinator().getFirst());
 		q.setMaxResults(page.getPageSize());
 		return q;
 	}
@@ -174,8 +172,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 
 		Asserter.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
 
-		//hibernate的firstResult的序号从0开始
-		c.setFirstResult(page.getFirst() - 1);
+		c.setFirstResult(page.getPageinator().getFirst());
 		c.setMaxResults(page.getPageSize());
 
 		if (page.isOrderBySetted()) {
