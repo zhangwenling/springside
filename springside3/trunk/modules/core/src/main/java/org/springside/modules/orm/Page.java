@@ -51,7 +51,7 @@ public class Page<T> implements Iterable<T> {
 	/**
 	 * 取得分页运算器,封装全部分页逻辑.
 	 */
-	public Paginator getPageinator() {
+	public Paginator getPaginator() {
 		return new Paginator(pageNo, pageSize, totalItems);
 	}
 

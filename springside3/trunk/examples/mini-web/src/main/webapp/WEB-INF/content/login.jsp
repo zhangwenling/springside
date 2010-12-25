@@ -1,8 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
-<%@ page import="org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter" %>
-<%@ page import="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" %>
-<%@ page import="org.springframework.security.web.WebAttributes" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -31,20 +28,14 @@
 <%@ include file="/common/header.jsp" %>
 <div id="content">
 	<div class="span-24 last">
-	<%
-		if (session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION) != null) {
-	%> 
-		<div class="error"> 登录失败，请重试.</div> 
-	<%
-		}
-	%>
+
 	<form id="loginForm" action="login.action" method="post" style="margin-top:1em">
 		<table class="noborder">
 			<tr>
 				<td><label for="username">用户名:</label></td>
 				<td><input type='text' id='username' name='username' class="required" value="${username}"
 					<s:if test="not empty param.error">
-						value='<%=session.getAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY)%>'</s:if> />
+						value=''</s:if> />
 				</td>
 			</tr>
 			<tr>

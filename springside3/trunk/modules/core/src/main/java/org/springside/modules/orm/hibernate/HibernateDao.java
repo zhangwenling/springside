@@ -160,7 +160,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	protected Query setPageParameterToQuery(final Query q, final Page<T> page) {
 
 		Asserter.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
-		q.setFirstResult(page.getPageinator().getFirst());
+		q.setFirstResult(page.getPaginator().getFirst());
 		q.setMaxResults(page.getPageSize());
 		return q;
 	}
@@ -172,7 +172,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 
 		Asserter.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
 
-		c.setFirstResult(page.getPageinator().getFirst());
+		c.setFirstResult(page.getPaginator().getFirst());
 		c.setMaxResults(page.getPageSize());
 
 		if (page.isOrderBySetted()) {

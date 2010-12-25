@@ -68,11 +68,11 @@
 			</table>
 		</div>
 		<div>
-			第${page.pageNo}页, 共${page.totalPages}页
+			第${page.pageNo}页, 共${page.paginator.totalPages}页
 			<a href="javascript:jumpPage(1)">首页</a>
-			<s:if test="page.hasPre"><a href="javascript:jumpPage(${page.prePage})">上一页</a></s:if>
-			<s:if test="page.hasNext"><a href="javascript:jumpPage(${page.nextPage})">下一页</a></s:if>
-			<a href="javascript:jumpPage(${page.totalPages})">末页</a>
+			<s:if test="page.paginator.hasPrePage"><a href="javascript:jumpPage(${page.paginator.prePage})">上一页</a></s:if>
+			<s:if test="page.paginator.hasNextPage"><a href="javascript:jumpPage(${page.paginator.nextPage})">下一页</a></s:if>
+			<a href="javascript:jumpPage(${page.paginator.totalPages})">末页</a>
 
 			<shiro:hasPermission name="user:manage">
 				<a href="user!input.action">增加新用户</a>
