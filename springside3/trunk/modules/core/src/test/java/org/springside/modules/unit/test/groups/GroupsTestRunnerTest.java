@@ -1,4 +1,4 @@
-package org.springside.modules.unit.test;
+package org.springside.modules.unit.test.groups;
 
 import static org.junit.Assert.*;
 

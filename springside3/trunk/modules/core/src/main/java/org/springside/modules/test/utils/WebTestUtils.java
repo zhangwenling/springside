@@ -31,6 +31,7 @@ import com.opensymphony.xwork2.ActionContext;
  * 
  * @author calvin
  */
+@Deprecated
 public class WebTestUtils {
 
 	/**
