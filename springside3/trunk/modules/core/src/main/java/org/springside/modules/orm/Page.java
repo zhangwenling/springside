@@ -7,8 +7,10 @@
  */
 package org.springside.modules.orm;
 
+import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.collections.IteratorUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.google.common.collect.Lists;
@@ -16,13 +18,13 @@ import com.google.common.collect.Lists;
 /**
  * 与具体ORM实现无关的分页参数及查询结果封装.
  * 
- * 注意所有序号从1开始.
+ * 注意所有序号从1开始. 实现Iterable接口,可以for(Object item : page)遍历使用
  * 
  * @param <T> Page中记录的类型.
  * 
  * @author calvin
  */
-public class Page<T> {
+public class Page<T> implements Iterable<T> {
 	//-- 公共变量 --//
 	public static final String ASC = "asc";
 	public static final String DESC = "desc";
@@ -268,5 +270,13 @@ public class Page<T> {
 		} else {
 			return pageNo;
 		}
+	}
+	
+	/** 
+	 * 实现Iterable接口,可以for(Object item : page)遍历使用
+	 */
+	@SuppressWarnings("unchecked")
+	public Iterator<T> iterator() {
+		return result == null ? IteratorUtils.EMPTY_ITERATOR : result.iterator();
 	}
 }
