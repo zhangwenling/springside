@@ -3,7 +3,8 @@ package org.springside.modules.test.utils;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * 多线程测试的工具类,可以根据指定的线程数并发的同时执行同一个task用于单元测试使用
+ * 多线程测试的工具类, 可以根据指定的线程数并发执行task.
+ * 
  * @author badqiu
  */
 public class MultiThreadTestUtils {
@@ -16,44 +17,34 @@ public class MultiThreadTestUtils {
 	 * @return costTime
 	 */
 	public static long execute(int threadCount, final Runnable task) throws InterruptedException {
-		CountDownLatch doneSignal = execute0(threadCount, task);
+		CountDownLatch endSignal = execute0(threadCount, task);
 		long startTime = System.currentTimeMillis();
-		doneSignal.await();
+		endSignal.await();
 		return System.currentTimeMillis() - startTime;
 	}
 
-	private static CountDownLatch execute0(int threadCount, final Runnable task) {
-		final CountDownLatch startSignal = new CountDownLatch(1);
-		final CountDownLatch startedSignal = new CountDownLatch(threadCount);
-		final CountDownLatch doneSignal = new CountDownLatch(threadCount);
+	private static CountDownLatch execute0(int threadCount, final Runnable task) throws InterruptedException {
+		final CountDownLatch startSignal = new CountDownLatch(threadCount);
+		final CountDownLatch endSignal = new CountDownLatch(threadCount);
+
 		for (int i = 0; i < threadCount; i++) {
 			Thread t = new Thread() {
 				public void run() {
-					startedSignal.countDown();
 					try {
+						startSignal.countDown();
 						startSignal.await();
-					} catch (InterruptedException e) {
-						return;
-					}
-
-					try {
 						task.run();
+					} catch (InterruptedException e) {
+						//ignore
 					} finally {
-						doneSignal.countDown();
+						endSignal.countDown();
 					}
-
 				}
 			};
-
 			t.start();
 		}
 
-		try {
-			startedSignal.await();
-		} catch (InterruptedException e) {
-			//ignore
-		}
-		startSignal.countDown();
-		return doneSignal;
+		startSignal.await();
+		return endSignal;
 	}
 }
