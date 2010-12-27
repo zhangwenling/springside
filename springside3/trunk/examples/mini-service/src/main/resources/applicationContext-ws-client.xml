@@ -9,7 +9,7 @@
 		address="http://localhost:8080/mini-service/ws/accountservice" />
 	
 	<!-- 我们自行创建的一个client,负责Result的解包及将error code转换为异常抛出 -->	
-	<bean id="accountWebServiceClient" class="org.springside.examples.miniservice.functional.ws.AccountWebServiceClient">
+	<bean id="accountWebServiceClient" class="org.springside.examples.miniservice.ws.client.AccountWebServiceClient">
 		<property name="accountWebService" ref="accountWebService"></property>
 	</bean>
 

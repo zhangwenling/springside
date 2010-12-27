@@ -10,12 +10,13 @@ import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 
 /**
- * 包含UserListResult
+ * 包含User的分页result,从PageResult继承
  * 
  * @author calvin
+ * @author badqiu
  */
-@XmlType(name = "UserListResult", namespace = WsConstants.NS)
-public class UserListResult extends PageResult {
+@XmlType(name = "UserPageResult", namespace = WsConstants.NS)
+public class UserPageResult extends PageResult {
 
 	private List<UserDTO> userList;
 

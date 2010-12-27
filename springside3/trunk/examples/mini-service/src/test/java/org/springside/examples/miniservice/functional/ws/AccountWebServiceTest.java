@@ -28,9 +28,10 @@ import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniservice.ws.AccountWebService;
+import org.springside.examples.miniservice.ws.client.AccountWebServiceClient;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.exception.WebServiceException;
-import org.springside.examples.miniservice.ws.result.UserListResult;
+import org.springside.examples.miniservice.ws.result.UserPageResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
@@ -123,7 +124,7 @@ public class AccountWebServiceTest extends BaseFunctionalTestCase {
 		((BindingProvider) accountWebServiceCreated).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
 				address);
 
-		UserListResult result = accountWebServiceCreated.searchUser(null, null);
+		UserPageResult result = accountWebServiceCreated.searchUser(null, null,1,100);
 
 		assertTrue(result.getUserList().size() >= 4);
 		assertEquals("Jack", result.getUserList().get(0).getName());

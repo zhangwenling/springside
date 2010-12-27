@@ -16,8 +16,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.Response.Status;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +29,7 @@ import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
 import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.utils.JerseyServerUtils;
+import org.springside.modules.orm.Page;
 import org.springside.modules.utils.mapping.DozerUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
@@ -83,7 +84,7 @@ public class UserResouceService {
 			parameters.put("loginName", loginName);
 			parameters.put("name", name);
 
-			List<User> entityList = accountManager.searchUser(parameters);
+			Page<User> entityList = accountManager.searchUser(parameters,1,Integer.MAX_VALUE);
 
 			return DozerUtils.mapList(entityList, UserDTO.class);
 		} catch (RuntimeException e) {

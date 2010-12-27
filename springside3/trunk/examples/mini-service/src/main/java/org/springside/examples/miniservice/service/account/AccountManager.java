@@ -38,11 +38,6 @@ public class AccountManager {
 	}
 
 	@Transactional(readOnly = true)
-	public List<User> searchUser(Map<String, String> parameters) {
-		return accountDao.searchUser(parameters);
-	}
-
-	@Transactional(readOnly = true)
 	public Page<User> searchUser(Map<String, String> parameters,int pageNo,int pageSize) {
 		return accountDao.searchUser(parameters, pageNo, pageSize);
 	}

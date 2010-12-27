@@ -1,6 +1,7 @@
 package org.springside.examples.miniservice.ws.result;
 
 import org.springside.modules.orm.Page;
+import org.springside.modules.orm.Paginator;
 
 /**
  * 分页查询返回的基础Result
@@ -16,11 +17,9 @@ public class PageResult extends WSResult {
 
 	public PageResult() {}
 	
-	public PageResult(Page page) {
+	public PageResult(Paginator paginator) {
 		super();
-		this.pageNo = page.getPageNo();
-		this.pageSize = page.getPageSize();
-		this.totalItems = page.getTotalItems();
+		paginator(paginator);
 	}
 	
 	public PageResult(int page, int pageSize, long totalItems) {
@@ -54,4 +53,14 @@ public class PageResult extends WSResult {
 		this.totalItems = totalItems;
 	}
 
+	public PageResult paginator(Paginator paginator ) {
+		this.pageNo = paginator.getPageNo();
+		this.pageSize = paginator.getPageSize();
+		this.totalItems = paginator.getTotalItems();
+		return this;
+	}
+	
+	public Paginator toPaginator() {
+		return new Paginator(pageNo, pageSize, totalItems);
+	}
 }

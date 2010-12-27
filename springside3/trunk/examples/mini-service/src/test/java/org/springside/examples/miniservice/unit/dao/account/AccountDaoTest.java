@@ -75,43 +75,33 @@ public class AccountDaoTest extends SpringTxTestCase {
 
 		parameters.put("loginName", null);
 		parameters.put("name", null);
-		List<User> result = accountDao.searchUser(parameters);
-		assertEquals(4, result.size());
+		Page<User> page = accountDao.searchUser(parameters,1,Integer.MAX_VALUE);
+		assertEquals(4, page.getResult().size());
 
 		parameters.put("loginName", "user1");
 		parameters.put("name", null);
-		result = accountDao.searchUser(parameters);
-		assertEquals(1, result.size());
+		page = accountDao.searchUser(parameters,1,Integer.MAX_VALUE);
+		assertEquals(1, page.getResult().size());
 
 		parameters.clear();
 		parameters.put("name", "Jack");
 		parameters.put("loginName", null);
-		result = accountDao.searchUser(parameters);
-		assertEquals(1, result.size());
+		page = accountDao.searchUser(parameters,1,Integer.MAX_VALUE);
+		assertEquals(1, page.getResult().size());
 
 		parameters.clear();
 		parameters.put("name", "Jack");
 		parameters.put("loginName", "user1");
-		result = accountDao.searchUser(parameters);
-		assertEquals(1, result.size());
+		page = accountDao.searchUser(parameters,1,Integer.MAX_VALUE);
+		assertEquals(1, page.getResult().size());
 
 		parameters.clear();
 		parameters.put("name", "Jack");
 		parameters.put("loginName", "errorName");
-		result = accountDao.searchUser(parameters);
-		assertEquals(0, result.size());
+		page = accountDao.searchUser(parameters,1,Integer.MAX_VALUE);
+		assertEquals(0, page.getResult().size());
 	}
 
-	@Test
-	public void searchUserWithPagedQuery() {
-		Map<String, String> parameters = Maps.newHashMap();
-
-		parameters.put("loginName", null);
-		parameters.put("name", null);
-		Page<User> result = accountDao.searchUser(parameters,1,1);
-		assertEquals(4, result.getTotalItems());
-	}
-	
 	@Test
 	public void saveUser() {
 		User user = AccountData.getRandomUser();

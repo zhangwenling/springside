@@ -1,6 +1,5 @@
 package org.springside.examples.miniservice.ws.impl;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,8 +20,9 @@ import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.DepartmentResult;
 import org.springside.examples.miniservice.ws.result.IdResult;
-import org.springside.examples.miniservice.ws.result.UserListResult;
+import org.springside.examples.miniservice.ws.result.UserPageResult;
 import org.springside.examples.miniservice.ws.result.WSResult;
+import org.springside.modules.orm.Page;
 import org.springside.modules.utils.Asserter;
 import org.springside.modules.utils.mapping.DozerUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
@@ -80,9 +80,9 @@ public class AccountWebServiceImpl implements AccountWebService {
 	/**
 	 * @see AccountWebService#searchUser()
 	 */
-	public UserListResult searchUser(String loginName, String name) {
+	public UserPageResult searchUser(String loginName, String name,int pageNo,int pageSize) {
 
-		UserListResult result = new UserListResult();
+		UserPageResult result = new UserPageResult();
 
 		//获取User列表并转换为UserDTO列表.
 		try {
@@ -90,10 +90,11 @@ public class AccountWebServiceImpl implements AccountWebService {
 			parameters.put("loginName", loginName);
 			parameters.put("name", name);
 
-			List<User> entityList = accountManager.searchUser(parameters);
+			Page<User> page = accountManager.searchUser(parameters,pageNo,pageSize);
 
-			List<UserDTO> dtoList = DozerUtils.mapList(entityList, UserDTO.class);
+			List<UserDTO> dtoList = DozerUtils.mapList(page, UserDTO.class);
 			result.setUserList(dtoList);
+			result.paginator(page.getPaginator());
 
 			return result;
 		} catch (RuntimeException e) {
