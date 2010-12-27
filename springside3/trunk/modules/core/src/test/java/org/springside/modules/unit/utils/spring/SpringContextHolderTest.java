@@ -13,7 +13,7 @@ public class SpringContextHolderTest {
 	@Test
 	public void testGetBean() {
 
-		SpringContextHolder.clear();
+		SpringContextHolder.cleanHolder();
 		try {
 			SpringContextHolder.getBean("foo");
 			fail("No exception throw for applicationContxt hadn't been init.");

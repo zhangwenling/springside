@@ -52,7 +52,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	/**
 	 * 清除SpringContextHolder中的ApplicationContext为Null.
 	 */
-	public static void clear() {
+	public static void cleanHolder() {
 		logger.debug("清除SpringContextHolder中的ApplicationContext:" + applicationContext);
 		applicationContext = null;
 	}
@@ -77,7 +77,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	 */
 	@Override
 	public void destroy() throws Exception {
-		SpringContextHolder.clear();
+		SpringContextHolder.cleanHolder();
 	}
 
 	/**

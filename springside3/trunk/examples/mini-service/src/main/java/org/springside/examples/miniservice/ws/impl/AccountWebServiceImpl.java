@@ -16,7 +16,6 @@ import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.service.account.AccountManager;
-import org.springside.examples.miniservice.utils.ValidatorUtils;
 import org.springside.examples.miniservice.ws.AccountWebService;
 import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
@@ -116,7 +115,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 
 			Set<ConstraintViolation<UserDTO>> constraintViolations = ValidatorHolder.validate(user);
 			if (!constraintViolations.isEmpty()) {
-				String message = ValidatorUtils.convertMessage(constraintViolations, "\n");
+				String message = ValidatorHolder.convertMessage(constraintViolations, "\n");
 				throw new IllegalArgumentException(message);
 			}
 		} catch (IllegalArgumentException e) {

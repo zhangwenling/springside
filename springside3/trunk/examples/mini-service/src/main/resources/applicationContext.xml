@@ -59,11 +59,10 @@
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
 	<!-- JSR303 Validator定义 -->
-	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
-	
-	<!-- 将Validator转变为静态方法使用 -->
 	<bean class="org.springside.modules.utils.validator.ValidatorHolder">
- 	 	<property name="validator" ref="validator"/>
+ 	 	<property name="validator">
+ 	 		<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+ 	 	</property>
  	</bean>
 	
 </beans>
