@@ -30,7 +30,7 @@ public interface AccountWebService {
 	 * 搜索用户信息.
 	 */
 	UserPageResult searchUser(@WebParam(name = "loginName") String loginName,
-			@WebParam(name = "name") String name,int pageNo,int pageSize);
+			@WebParam(name = "name") String name,@WebParam(name = "pageNo") int pageNo,@WebParam(name = "pageSize")int pageSize);
 
 	/**
 	 * 新建用户.
