@@ -50,6 +50,13 @@ public class Page<T> implements Iterable<T> {
 		this.pageSize = pageSize;
 	}
 
+	public Page(List<T> resultList,Paginator paginator) {
+		this.result = resultList;
+		this.pageNo = paginator.getPageNo();
+		this.pageSize = paginator.getPageSize();
+		this.totalItems = paginator.getTotalItems();
+	}
+	
 	/**
 	 * 取得分页运算器,封装全部分页逻辑.
 	 */

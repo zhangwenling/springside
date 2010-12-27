@@ -20,9 +20,25 @@ public class Paginator {
 	private long totalItems;
 
 	public Paginator(int pageNo, int pageSize, long totalItems) {
-		this.pageNo = pageNo;
 		this.pageSize = pageSize;
 		this.totalItems = totalItems;
+		this.pageNo = pageNo < 0 ? 1 : pageNo;
+	}
+	
+	/**
+	 * 获得当前页数
+	 * @return
+	 */
+	public int getPageNo() {
+		return pageNo;
+	}
+	
+	/**
+	 * 获得总记录数
+	 * @return
+	 */
+	public long getTotalItems() {
+		return totalItems;
 	}
 
 	/**
