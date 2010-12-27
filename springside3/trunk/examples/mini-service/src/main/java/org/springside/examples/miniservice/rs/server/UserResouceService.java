@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -30,7 +29,6 @@ import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
 import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.utils.JerseyServerUtils;
-import org.springside.examples.miniservice.utils.ValidatorUtils;
 import org.springside.modules.utils.mapping.DozerUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
@@ -51,7 +49,6 @@ public class UserResouceService {
 
 	@Context
 	private UriInfo uriInfo;
-
 
 	/**
 	 * 获取用户信息.
@@ -104,7 +101,7 @@ public class UserResouceService {
 		//Hibernate Validator校验
 		Set<ConstraintViolation<UserDTO>> constraintViolations = ValidatorHolder.validate(user);
 		if (!constraintViolations.isEmpty()) {
-			String message = ValidatorUtils.convertMessage(constraintViolations, "\n");
+			String message = ValidatorHolder.convertMessage(constraintViolations, "\n");
 			throw JerseyServerUtils.buildException(Status.BAD_REQUEST.getStatusCode(), message, logger);
 		}
 
@@ -128,6 +125,4 @@ public class UserResouceService {
 	public void setAccountManager(AccountManager accountManager) {
 		this.accountManager = accountManager;
 	}
-
-
 }

@@ -1,73 +1,69 @@
 package org.springside.modules.utils.validator;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import javax.validation.metadata.BeanDescriptor;
 
-import org.springframework.beans.factory.InitializingBean;
+import org.apache.commons.lang.xwork.StringUtils;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.modules.utils.Asserter;
+
+import com.google.common.collect.Lists;
+
 /**
  * 用于持有JSR303 Validator(Hibernate Validator),使调用Validator可以当静态方法使用.
  * 
- * <pre>
- * spring配置:
- * &lt;bean class="org.springside.modules.utils.validator.ValidatorHolder">
- * 	 &lt;property name="validator" ref="validator"/>
- * &lt;/bean>
- * 
- * 手工API配置:
- * 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
- *		new ValidatorHolder().setValidator(factory.getValidator());		
- * </pre> 
  * @author badqiu
+ * @author calvin
  *
  */
-public class ValidatorHolder implements InitializingBean{
+public class ValidatorHolder implements DisposableBean {
 	private static Validator validator;
 
-	public void afterPropertiesSet() throws Exception {
-		Asserter.state(validator != null,"not found JSR303(HibernateValidator) 'validator' for ValidatorHolder ");
-	}
-	
+	@Autowired
 	public void setValidator(Validator v) {
-		Asserter.state(validator == null,"ValidatorHolder already holded 'validator'");
 		ValidatorHolder.validator = v;
 	}
 
 	public static Validator getValidator() {
-		Asserter.state(validator != null,"'validator' property is null,ValidatorHolder not yet init.");
+		assertValidatorInjected();
 		return validator;
 	}
 
-	public static <T> Set<ConstraintViolation<T>> validate(T object,
-			Class<?>... groups) {
+	/**
+	 * JSR303的validate方法,返回ConstraintViolation组成的Set.
+	 */
+	public static <T> Set<ConstraintViolation<T>> validate(T object, Class<?>... groups) {
+		assertValidatorInjected();
 		return getValidator().validate(object, groups);
 	}
 
-	public static <T> Set<ConstraintViolation<T>> validateProperty(T object,
-			String propertyName, Class<?>... groups) {
-		return getValidator().validateProperty(object, propertyName, groups);
+	/**
+	 * 辅助方法,转换Set<ConstraintViolation>为信息字符串,以seperator分割.
+	 */
+	public static String convertMessage(Set<? extends ConstraintViolation> constraintViolations, String seperator) {
+		List<String> errorMessages = Lists.newArrayList();
+		for (ConstraintViolation violation : constraintViolations) {
+			errorMessages.add(violation.getMessage());
+		}
+		return StringUtils.join(errorMessages, seperator);
+
 	}
 
-	public static <T> Set<ConstraintViolation<T>> validateValue(Class<T> beanType,
-			String propertyName, Object value, Class<?>... groups) {
-		return getValidator().validateValue(beanType, propertyName, value, groups);
-	}
-
-	public static final BeanDescriptor getConstraintsForClass(Class<?> clazz) {
-		return getValidator().getConstraintsForClass(clazz);
-	}
-	
-	public static final <T> T unwrap(Class<T> type) {
-		return getValidator().unwrap(type);
-	}
-	
 	public static void cleanHolder() {
 		validator = null;
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		ValidatorHolder.cleanHolder();
+
+	}
+
+	private static void assertValidatorInjected() {
+		Asserter.state(validator != null, "'validator' property is null,ValidatorHolder not yet init.");
 	}
 }

@@ -21,7 +21,7 @@
 	<div class="span-18 last prepend-top">
 		<h2>JMS演示</h2>
 
-		<h32>技术说明：</h3>
+		<h3>技术说明：</h3>
 		<ul>
 			<li>演示基于ActiveMQ的JMS Topic/Queue应用</li>
 			<li>演示基于Spring CachingConnectionFactory, JmsTemplate, DefaultMessageListener的应用</li>
