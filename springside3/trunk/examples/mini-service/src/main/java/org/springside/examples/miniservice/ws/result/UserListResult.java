@@ -15,7 +15,7 @@ import org.springside.examples.miniservice.ws.dto.UserDTO;
  * @author calvin
  */
 @XmlType(name = "UserListResult", namespace = WsConstants.NS)
-public class UserListResult extends WSResult {
+public class UserListResult extends PageResult {
 
 	private List<UserDTO> userList;
 

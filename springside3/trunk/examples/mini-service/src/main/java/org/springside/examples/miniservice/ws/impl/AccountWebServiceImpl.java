@@ -1,5 +1,6 @@
 package org.springside.examples.miniservice.ws.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -145,6 +146,5 @@ public class AccountWebServiceImpl implements AccountWebService {
 	public void setAccountManager(AccountManager accountManager) {
 		this.accountManager = accountManager;
 	}
-
 
 }

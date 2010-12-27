@@ -50,6 +50,21 @@
 		where id=#{id}
 	</select>
 	
+	<!-- 分页查询共享的sql段 
+	 mybatis现在使用Ognl表达式,ognl访问静态方法的表达式 为@class@method(args),
+	  以下为调用springside中的Mybatis.isNotEmpty()方法,可以判断String,Collection,Map,Array是否为空 
+	-->
+	<sql id="User.where">
+		<where>
+			<if test="@Mybatis@isNotEmpty(loginName)">
+				login_name=#{loginName}
+			</if>
+			<if test="name != null">
+				and name=#{name}
+			</if>
+		</where>	
+	</sql>
+	
 	<!-- 查询用户,演示:
 	    1.重用SQL语句的相同部分
 	    2.输入用map传入多个参数
@@ -57,16 +72,16 @@
 	    4.输出直接映射对象 -->
 	<select id="searchUser" parameterType="map" resultType="User">
 		<include refid="selectUserClause"/>
-		<where>
-			<if test="loginName != null">
-				login_name=#{loginName}
-			</if>
-			<if test="name != null">
-				and name=#{name}
-			</if>
-		</where>
+		<include refid="User.where"/>
+		limit #{limit} offset #{offset}
 	</select>
-
+	
+	<!-- 分页查询count语句 -->
+	<select id="searchUser.count" resultType="long">
+		select count(*) from acct_user
+		<include refid="User.where"/>
+	</select>
+	
 	<!-- 插入用户：
 	     1.由数据库生成id并赋值到user对象
 	     2.输入用对象, 嵌套属性表达式#{department.id} -->

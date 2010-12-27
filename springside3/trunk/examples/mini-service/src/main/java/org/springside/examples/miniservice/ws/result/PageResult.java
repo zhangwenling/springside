@@ -1,5 +1,7 @@
 package org.springside.examples.miniservice.ws.result;
 
+import org.springside.modules.orm.Page;
+
 /**
  * 分页查询返回的基础Result
  * 
@@ -8,23 +10,32 @@ package org.springside.examples.miniservice.ws.result;
  */
 public class PageResult extends WSResult {
 
-	private int page;
+	private int pageNo;
 	private int pageSize;
 	private long totalItems;
 
+	public PageResult() {}
+	
+	public PageResult(Page page) {
+		super();
+		this.pageNo = page.getPageNo();
+		this.pageSize = page.getPageSize();
+		this.totalItems = page.getTotalItems();
+	}
+	
 	public PageResult(int page, int pageSize, long totalItems) {
 		super();
-		this.page = page;
+		this.pageNo = page;
 		this.pageSize = pageSize;
 		this.totalItems = totalItems;
 	}
 
-	public int getPage() {
-		return page;
+	public int getPageNo() {
+		return pageNo;
 	}
 
-	public void setPage(int page) {
-		this.page = page;
+	public void setPageNo(int page) {
+		this.pageNo = page;
 	}
 
 	public int getPageSize() {

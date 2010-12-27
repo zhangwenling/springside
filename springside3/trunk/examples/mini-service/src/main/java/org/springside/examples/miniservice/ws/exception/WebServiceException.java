@@ -1,6 +1,11 @@
 package org.springside.examples.miniservice.ws.exception;
 
-
+/**
+ * 用于客户端将 WSResult转换为异常
+ * 
+ * @author badqiu
+ *
+ */
 public class WebServiceException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	

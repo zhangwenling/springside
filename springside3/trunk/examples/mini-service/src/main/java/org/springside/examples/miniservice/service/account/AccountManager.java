@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniservice.dao.account.AccountDao;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
+import org.springside.modules.orm.Page;
 
 /**
  * 帐号管理类.
@@ -41,6 +42,11 @@ public class AccountManager {
 		return accountDao.searchUser(parameters);
 	}
 
+	@Transactional(readOnly = true)
+	public Page<User> searchUser(Map<String, String> parameters,int pageNo,int pageSize) {
+		return accountDao.searchUser(parameters, pageNo, pageSize);
+	}
+	
 	public Long saveUser(User user) {
 		return accountDao.saveUser(user);
 	}

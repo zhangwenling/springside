@@ -17,6 +17,7 @@ import org.springside.examples.miniservice.dao.account.AccountDao;
 import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
+import org.springside.modules.orm.Page;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DbUnitUtils;
 
@@ -101,6 +102,16 @@ public class AccountDaoTest extends SpringTxTestCase {
 		assertEquals(0, result.size());
 	}
 
+	@Test
+	public void searchUserWithPagedQuery() {
+		Map<String, String> parameters = Maps.newHashMap();
+
+		parameters.put("loginName", null);
+		parameters.put("name", null);
+		Page<User> result = accountDao.searchUser(parameters,1,1);
+		assertEquals(4, result.getTotalItems());
+	}
+	
 	@Test
 	public void saveUser() {
 		User user = AccountData.getRandomUser();

@@ -36,4 +36,5 @@ public interface AccountWebService {
 	 * 新建用户.
 	 */
 	IdResult createUser(@WebParam(name = "user") UserDTO user);
+	
 }
