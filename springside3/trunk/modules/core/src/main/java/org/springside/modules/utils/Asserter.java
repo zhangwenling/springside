@@ -46,9 +46,9 @@ public class Asserter {
 		isTrue(expression, "[Assertion failed] - this expression must be true");
 	}
 
-	public static void isTrue(boolean expression, RuntimeException exception) {
+	public static void isTrue(boolean expression, RuntimeException throwIfAssertFail) {
 		if (!expression) {
-			throw exception;
+			throw throwIfAssertFail;
 		}
 	}
 
@@ -75,9 +75,9 @@ public class Asserter {
 		isNull(object, "[Assertion failed] - the object argument must be null");
 	}
 
-	public static void isNull(Object object, RuntimeException exception) {
+	public static void isNull(Object object, RuntimeException throwIfAssertFail) {
 		if (object != null) {
-			throw exception;
+			throw throwIfAssertFail;
 		}
 	}
 
@@ -105,9 +105,9 @@ public class Asserter {
 		return notNull(object, "[Assertion failed] - this argument is required; it must not be null");
 	}
 
-	public static <T> T notNull(T object, RuntimeException exception) {
+	public static <T> T notNull(T object, RuntimeException throwIfAssertFail) {
 		if (object == null) {
-			throw exception;
+			throw throwIfAssertFail;
 		}
 		return object;
 	}
@@ -139,9 +139,9 @@ public class Asserter {
 				"[Assertion failed] - this String argument must have length; it must not be null or empty");
 	}
 
-	public static String hasLength(String text, RuntimeException exception) {
+	public static String hasLength(String text, RuntimeException throwIfAssertFail) {
 		if (!StringUtils.hasLength(text)) {
-			throw exception;
+			throw throwIfAssertFail;
 		}
 		return text;
 	}
@@ -173,9 +173,9 @@ public class Asserter {
 				"[Assertion failed] - this String argument must have text; it must not be null, empty, or blank");
 	}
 
-	public static String hasText(String text, RuntimeException exception) {
+	public static String hasText(String text, RuntimeException throwIfAssertFail) {
 		if (!StringUtils.hasText(text)) {
-			throw exception;
+			throw throwIfAssertFail;
 		}
 		return text;
 	}
@@ -207,10 +207,10 @@ public class Asserter {
 				"[Assertion failed] - this String argument must not contain the substring [" + substring + "]");
 	}
 
-	public static String doesNotContain(String textToSearch, String substring, RuntimeException exception) {
+	public static String doesNotContain(String textToSearch, String substring, RuntimeException throwIfAssertFail) {
 		if (StringUtils.hasLength(textToSearch) && StringUtils.hasLength(substring)
 				&& textToSearch.indexOf(substring) != -1) {
-			throw exception;
+			throw throwIfAssertFail;
 		}
 
 		return textToSearch;
@@ -242,9 +242,9 @@ public class Asserter {
 		return notEmpty(array, "[Assertion failed] - this array must not be empty: it must contain at least 1 element");
 	}
 
-	public static Object[] notEmpty(Object[] array, RuntimeException exception) {
+	public static Object[] notEmpty(Object[] array, RuntimeException throwIfAssertFail) {
 		if (ObjectUtils.isEmpty(array)) {
-			throw exception;
+			throw throwIfAssertFail;
 		}
 		return array;
 	}
@@ -279,11 +279,11 @@ public class Asserter {
 		return noNullElements(array, "[Assertion failed] - this array must not contain any null elements");
 	}
 
-	public static Object[] noNullElements(Object[] array, RuntimeException exception) {
+	public static Object[] noNullElements(Object[] array, RuntimeException throwIfAssertFail) {
 		if (array != null) {
 			for (int i = 0; i < array.length; i++) {
 				if (array[i] == null) {
-					throw exception;
+					throw throwIfAssertFail;
 				}
 			}
 		}
@@ -317,9 +317,9 @@ public class Asserter {
 				"[Assertion failed] - this collection must not be empty: it must contain at least 1 element");
 	}
 
-	public static Collection notEmpty(Collection collection, RuntimeException exception) {
+	public static Collection notEmpty(Collection collection, RuntimeException throwIfAssertFail) {
 		if (CollectionUtils.isEmpty(collection)) {
-			throw exception;
+			throw throwIfAssertFail;
 		}
 		return collection;
 	}
@@ -351,9 +351,9 @@ public class Asserter {
 		return notEmpty(map, "[Assertion failed] - this map must not be empty; it must contain at least one entry");
 	}
 
-	public static Map notEmpty(Map map, RuntimeException exception) {
+	public static Map notEmpty(Map map, RuntimeException throwIfAssertFail) {
 		if (CollectionUtils.isEmpty(map)) {
-			throw exception;
+			throw throwIfAssertFail;
 		}
 
 		return map;
@@ -393,10 +393,10 @@ public class Asserter {
 		return isInstanceOf(clazz, obj, "");
 	}
 
-	public static Object isInstanceOf(Class type, Object obj, RuntimeException exception) {
+	public static Object isInstanceOf(Class type, Object obj, RuntimeException throwIfAssertFail) {
 		notNull(type, "Type to check against must not be null");
 		if (!type.isInstance(obj)) {
-			throw exception;
+			throw throwIfAssertFail;
 		}
 
 		return obj;
