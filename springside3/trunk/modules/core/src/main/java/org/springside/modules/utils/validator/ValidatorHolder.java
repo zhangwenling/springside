@@ -4,7 +4,9 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import javax.validation.metadata.BeanDescriptor;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -17,6 +19,10 @@ import org.springside.modules.utils.Asserter;
  * &lt;bean class="org.springside.modules.utils.validator.ValidatorHolder">
  * 	 &lt;property name="validator" ref="validator"/>
  * &lt;/bean>
+ * 
+ * 手工API配置:
+ * 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+ *		new ValidatorHolder().setValidator(factory.getValidator());		
  * </pre> 
  * @author badqiu
  *
