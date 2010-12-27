@@ -45,7 +45,7 @@ public class AccountWebServiceClient {
 		if(WSResult.SUCCESS.equals(result.getCode())) {
 			return result.getDepartment();
 		}else {
-			//为我们的异常增加更加上下文id=?,以便查找是那个用户发生异常. 目的是使用"异常"代替日志的打印
+			//为我们的异常增加上下文id=?,以便查找是那个用户发生异常. 目的是使用"异常"代替日志的打印
 			throw new WebServiceException(result.getCode(),result.getMessage()+" id:"+id);
 		}
 	}

@@ -32,7 +32,7 @@ import org.springside.examples.miniservice.ws.client.AccountWebServiceClient;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.exception.WebServiceException;
 import org.springside.examples.miniservice.ws.result.UserPageResult;
-import org.springside.examples.miniservice.ws.result.WSResult;
+import org.springside.examples.miniservice.ws.result.base.WSResult;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
 /**

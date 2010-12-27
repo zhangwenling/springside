@@ -19,7 +19,7 @@ import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.impl.AccountWebServiceImpl;
 import org.springside.examples.miniservice.ws.result.DepartmentResult;
-import org.springside.examples.miniservice.ws.result.WSResult;
+import org.springside.examples.miniservice.ws.result.base.WSResult;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
 /**
