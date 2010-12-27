@@ -6,15 +6,15 @@ import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.exception.WebServiceException;
 import org.springside.examples.miniservice.ws.result.DepartmentResult;
-import org.springside.examples.miniservice.ws.result.IdResult;
 import org.springside.examples.miniservice.ws.result.UserPageResult;
-import org.springside.examples.miniservice.ws.result.WSResult;
+import org.springside.examples.miniservice.ws.result.base.IdResult;
+import org.springside.examples.miniservice.ws.result.base.WSResult;
 import org.springside.modules.orm.Page;
 import org.springside.modules.utils.Asserter;
 /**
  * 为WebService的一个Client,主要作用为
  * 1. 如果不是Success状态,将Result.code转换为 WebServiceException抛出,避免外部API还要判断方法是否调用成功
- * 2. 将Result的数据解包,如将SearchUserResult解包为List<UserDTO>并返回,避免外部API接触至Result对象
+ * 2. 将Result的数据解包,如将UserPageResult解包为Page<UserDTO>并返回,避免外部API接触至Result对象
  * 
  * 还有另外一种转换为Exception的方式是使用拦截器: 拦截所有返回 WSResult的方法,如果code 不是success,则转换为WebServiceException然后抛出
  * @author badqiu

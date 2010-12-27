@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
+import org.springside.examples.miniservice.ws.result.base.WSResult;
 
 /**
  * GetDepartment方法的返回结果.
@@ -15,6 +16,13 @@ import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 public class DepartmentResult extends WSResult {
 
 	private DepartmentDTO department;
+
+	public DepartmentResult() {}
+	
+	public DepartmentResult(DepartmentDTO department) {
+		super();
+		this.department = department;
+	}
 
 	public DepartmentDTO getDepartment() {
 		return department;

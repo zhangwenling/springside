@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.ws.result;
+package org.springside.examples.miniservice.ws.result.base;
 
 import javax.xml.bind.annotation.XmlType;
 
@@ -39,7 +39,7 @@ public class WSResult {
 	public <T extends WSResult> T setDefaultErrorResult() {
 		return (T) setResult(SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
 	}
-
+	
 	public String getCode() {
 		return code;
 	}

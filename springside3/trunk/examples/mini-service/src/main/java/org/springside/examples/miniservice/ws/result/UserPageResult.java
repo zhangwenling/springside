@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
+import org.springside.examples.miniservice.ws.result.base.PageResult;
+import org.springside.modules.orm.Paginator;
 
 /**
  * 包含User的分页result,从PageResult继承
@@ -19,6 +21,15 @@ import org.springside.examples.miniservice.ws.dto.UserDTO;
 public class UserPageResult extends PageResult {
 
 	private List<UserDTO> userList;
+
+	public UserPageResult() {
+		super();
+	}
+
+	public UserPageResult(List<UserDTO> userList,Paginator paginator) {
+		super(paginator);
+		this.userList = userList;
+	}
 
 	@XmlElementWrapper(name = "userList")
 	@XmlElement(name = "user")

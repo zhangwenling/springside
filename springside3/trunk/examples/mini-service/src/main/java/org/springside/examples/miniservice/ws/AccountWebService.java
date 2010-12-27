@@ -6,8 +6,8 @@ import javax.jws.WebService;
 import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.DepartmentResult;
-import org.springside.examples.miniservice.ws.result.IdResult;
 import org.springside.examples.miniservice.ws.result.UserPageResult;
+import org.springside.examples.miniservice.ws.result.base.IdResult;
 
 /**
  * JAX-WS2.0的WebService接口定义类.

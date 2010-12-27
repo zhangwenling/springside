@@ -1,5 +1,8 @@
-package org.springside.examples.miniservice.ws.result;
+package org.springside.examples.miniservice.ws.result.base;
 
+import javax.xml.bind.annotation.XmlType;
+
+import org.springside.examples.miniservice.WsConstants;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.Paginator;
 
@@ -9,6 +12,7 @@ import org.springside.modules.orm.Paginator;
  * @author badqiu
  * 
  */
+@XmlType(name = "PageResult", namespace = WsConstants.NS)
 public class PageResult extends WSResult {
 
 	private int pageNo;
@@ -53,11 +57,11 @@ public class PageResult extends WSResult {
 		this.totalItems = totalItems;
 	}
 
-	public PageResult paginator(Paginator paginator ) {
+	public <T extends PageResult> T paginator(Paginator paginator ) {
 		this.pageNo = paginator.getPageNo();
 		this.pageSize = paginator.getPageSize();
 		this.totalItems = paginator.getTotalItems();
-		return this;
+		return (T)this;
 	}
 	
 	public Paginator toPaginator() {

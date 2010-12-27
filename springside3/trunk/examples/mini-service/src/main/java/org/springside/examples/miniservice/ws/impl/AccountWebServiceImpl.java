@@ -19,9 +19,9 @@ import org.springside.examples.miniservice.ws.AccountWebService;
 import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.DepartmentResult;
-import org.springside.examples.miniservice.ws.result.IdResult;
 import org.springside.examples.miniservice.ws.result.UserPageResult;
-import org.springside.examples.miniservice.ws.result.WSResult;
+import org.springside.examples.miniservice.ws.result.base.IdResult;
+import org.springside.examples.miniservice.ws.result.base.WSResult;
 import org.springside.modules.orm.Page;
 import org.springside.modules.utils.Asserter;
 import org.springside.modules.utils.mapping.DozerUtils;
@@ -48,14 +48,13 @@ public class AccountWebServiceImpl implements AccountWebService {
 	 * @see AccountWebService#getDepartmentDetail()
 	 */
 	public DepartmentResult getDepartmentDetail(Long id) {
-		DepartmentResult result = new DepartmentResult();
 
 		//校验请求参数
 		try {
 			Asserter.notNull(id, "id参数为空");
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
-			return result.setResult(WSResult.PARAMETER_ERROR, e.getMessage());
+			return new DepartmentResult().setResult(WSResult.PARAMETER_ERROR, e.getMessage());
 		}
 
 		//获取部门
@@ -65,15 +64,14 @@ public class AccountWebServiceImpl implements AccountWebService {
 			if (entity == null) {
 				String message = "部门不存在(id:" + id + ")";
 				logger.error(message);
-				return result.setResult(WSResult.PARAMETER_ERROR, message);
+				return new DepartmentResult().setResult(WSResult.PARAMETER_ERROR, message);
 			}
-
+			
 			DepartmentDTO dto = DozerUtils.map(entity, DepartmentDTO.class);
-			result.setDepartment(dto);
-			return result;
+			return new DepartmentResult(dto);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return result.setDefaultErrorResult();
+			return new DepartmentResult().setDefaultErrorResult();
 		}
 	}
 
@@ -81,8 +79,6 @@ public class AccountWebServiceImpl implements AccountWebService {
 	 * @see AccountWebService#searchUser()
 	 */
 	public UserPageResult searchUser(String loginName, String name,int pageNo,int pageSize) {
-
-		UserPageResult result = new UserPageResult();
 
 		//获取User列表并转换为UserDTO列表.
 		try {
@@ -93,13 +89,11 @@ public class AccountWebServiceImpl implements AccountWebService {
 			Page<User> page = accountManager.searchUser(parameters,pageNo,pageSize);
 
 			List<UserDTO> dtoList = DozerUtils.mapList(page, UserDTO.class);
-			result.setUserList(dtoList);
-			result.paginator(page.getPaginator());
 
-			return result;
+			return new UserPageResult(dtoList,page.getPaginator());
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return result.setDefaultErrorResult();
+			return new UserPageResult().setDefaultErrorResult();
 		}
 	}
 
@@ -107,7 +101,6 @@ public class AccountWebServiceImpl implements AccountWebService {
 	 * @see AccountWebService#createUser(UserDTO)
 	 */
 	public IdResult createUser(UserDTO user) {
-		IdResult result = new IdResult();
 
 		//Hibernate Validator校验请求参数
 		try {
@@ -121,7 +114,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 			}
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
-			return result.setResult(WSResult.PARAMETER_ERROR, e.getMessage());
+			return new IdResult().setResult(WSResult.PARAMETER_ERROR, e.getMessage());
 		}
 
 		//保存用户
@@ -130,15 +123,14 @@ public class AccountWebServiceImpl implements AccountWebService {
 
 			Long userId = accountManager.saveUser(userEntity);
 
-			result.setId(userId);
-			return result;
+			return new IdResult(userId);
 		} catch (DataIntegrityViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
 			logger.error(message, e);
-			return result.setResult(WSResult.PARAMETER_ERROR, message);
+			return new IdResult().setResult(WSResult.PARAMETER_ERROR, message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return result.setDefaultErrorResult();
+			return new IdResult().setDefaultErrorResult();
 		}
 	}
 
