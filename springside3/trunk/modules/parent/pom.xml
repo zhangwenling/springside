@@ -508,6 +508,12 @@
 				<artifactId>log4j</artifactId>
 				<version>1.2.16</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>net.sf.log4jdbc</groupId>
+				<artifactId>log4jdbc3</artifactId>
+				<version>1.2.1</version>	
+			</dependency>			
 			<!-- logging end -->
 
 			<!-- email begin -->

@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.util.ReflectionUtils;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.Paginator;
+import org.springside.modules.utils.Asserter;
 
 /**
  * Mybatis分页查询工具类,为分页查询增加传递:
@@ -31,6 +32,8 @@ public class MybatisPageQueryUtils {
 	public static Page pageQuery(SqlSession sqlSession, String statement,
 			String countStatement, Object parameter, int pageNo,
 			int pageSize) {
+		Asserter.isTrue(pageSize > 0,"pageSize > 0 must be true");
+		
 		Number totalItems = (Number) sqlSession.selectOne(countStatement,parameter);
 
 		if (totalItems != null && totalItems.longValue() > 0) {

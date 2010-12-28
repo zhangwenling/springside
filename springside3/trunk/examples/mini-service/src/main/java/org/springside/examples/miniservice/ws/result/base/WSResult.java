@@ -23,11 +23,14 @@ public class WSResult {
 	//-- WSResult基本属性 --//
 	private String code = SUCCESS;
 	private String message;
+	
+	//-- 服务器端返回的用于查询错误日志的一个标识,如果发生错误,客户端可以根据该ID来服务器端查询日志,用于开发人员查错使用 --//
+	private String logTraceId;
 
 	/**
 	 * 创建结果.
 	 */
-	public <T extends WSResult> T setResult(String resultCode, String resultMessage) {
+	public <T extends WSResult> T setError(String resultCode, String resultMessage) {
 		code = resultCode;
 		message = resultMessage;
 		return (T) this;
@@ -37,7 +40,7 @@ public class WSResult {
 	 * 创建默认异常结果.
 	 */
 	public <T extends WSResult> T setDefaultErrorResult() {
-		return (T) setResult(SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
+		return (T) setError(SYSTEM_ERROR, SYSTEM_ERROR_MESSAGE);
 	}
 	
 	public String getCode() {
@@ -55,4 +58,13 @@ public class WSResult {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	public String getLogTraceId() {
+		return logTraceId;
+	}
+
+	public void setLogTraceId(String traceId) {
+		this.logTraceId = traceId;
+	}
+	
 }
