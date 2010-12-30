@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.util.ReflectionUtils;
 import org.springside.modules.orm.Page;
@@ -63,7 +64,7 @@ public class MybatisPageQueryUtils {
 			return (Map)parameter;
 		}else {
 			try {
-				return BeanUtils.describe(parameter);
+				return PropertyUtils.describe(parameter);
 			} catch (Exception e) {
 				ReflectionUtils.handleReflectionException(e);
 				return null;
