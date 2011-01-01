@@ -53,8 +53,7 @@ public class AccountWebServiceTest extends BaseFunctionalTestCase {
 	
 	@BeforeClass
 	public static void init() {
-		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-		new ValidatorHolder().setValidator(factory.getValidator());		
+		new ValidatorHolder().setValidator(Validation.buildDefaultValidatorFactory().getValidator());		
 	}
 	
 	/**

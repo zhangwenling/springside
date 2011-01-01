@@ -1,7 +1,8 @@
 package org.springside.examples.miniservice.service.account;
 
-import java.util.List;
 import java.util.Map;
+
+import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,10 @@ import org.springside.examples.miniservice.dao.account.AccountDao;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.modules.orm.Page;
+import org.springside.modules.utils.Asserter;
+import org.springside.modules.utils.validator.ValidatorHolder;
+
+import com.google.common.collect.Maps;
 
 /**
  * 帐号管理类.
@@ -29,6 +34,7 @@ public class AccountManager {
 
 	@Transactional(readOnly = true)
 	public Department getDepartmentDetail(Long id) {
+		Asserter.notNull(id, "id参数为空");
 		return accountDao.getDepartmentDetail(id);
 	}
 
@@ -38,11 +44,21 @@ public class AccountManager {
 	}
 
 	@Transactional(readOnly = true)
-	public Page<User> searchUser(Map<String, Object> parameters,int pageNo,int pageSize) {
+	public Page<User> searchUser(String loginName, String name,int pageNo,int pageSize) {
+		
+		Map<String, Object> parameters = Maps.newHashMap();
+		parameters.put("loginName", loginName);
+		parameters.put("name", name);
 		return accountDao.searchUser(parameters, pageNo, pageSize);
 	}
-	
-	public Long saveUser(User user) {
+
+	public Long saveUser(User user) throws ConstraintViolationException {
+		Asserter.notNull(user, "用户参数为空");
+		Asserter.isNull(user.getId(), "新建用户ID参数必须为空");
+		
+		//Hibernate Validator校验请求参数
+		ValidatorHolder.validateWithException(user);
+		
 		return accountDao.saveUser(user);
 	}
 

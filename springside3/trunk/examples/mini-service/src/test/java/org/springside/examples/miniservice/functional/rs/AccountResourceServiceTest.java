@@ -7,6 +7,8 @@ import static org.junit.Assert.fail;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Validation;
+
 import org.dozer.DozerBeanMapper;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,6 +18,7 @@ import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniservice.rs.client.AccountResourceClient;
 import org.springside.examples.miniservice.rs.dto.DepartmentDTO;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
+import org.springside.modules.utils.validator.ValidatorHolder;
 
 import com.sun.jersey.api.client.UniformInterfaceException;
 
@@ -25,6 +28,7 @@ public class AccountResourceServiceTest extends BaseFunctionalTestCase {
 
 	@BeforeClass
 	public static void setUpClient() throws Exception {
+		new ValidatorHolder().setValidator(Validation.buildDefaultValidatorFactory().getValidator());		
 		client = new AccountResourceClient();
 		client.setBaseUrl(BASE_URL + "/rs");
 	}

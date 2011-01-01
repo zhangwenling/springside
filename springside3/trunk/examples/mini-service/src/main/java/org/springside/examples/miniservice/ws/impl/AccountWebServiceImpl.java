@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.jws.WebService;
 import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,26 +50,15 @@ public class AccountWebServiceImpl implements AccountWebService {
 	 */
 	public DepartmentResult getDepartmentDetail(Long id) {
 
-		//校验请求参数
-		try {
-			Asserter.notNull(id, "id参数为空");
-		} catch (IllegalArgumentException e) {
-			logger.error(e.getMessage());
-			return new DepartmentResult().setError(WSResult.PARAMETER_ERROR, e.getMessage());
-		}
-
 		//获取部门
 		try {
 			Department entity = accountManager.getDepartmentDetail(id);
-
-			if (entity == null) {
-				String message = "部门不存在(id:" + id + ")";
-				logger.error(message);
-				return new DepartmentResult().setError(WSResult.PARAMETER_ERROR, message);
-			}
-			
+			Asserter.notNull(entity,"部门不存在(id:" + id + ")");
 			DepartmentDTO dto = DozerUtils.map(entity, DepartmentDTO.class);
 			return new DepartmentResult(dto);
+		} catch (IllegalArgumentException e) {
+			logger.error(e.getMessage());
+			return new DepartmentResult().setError(WSResult.PARAMETER_ERROR, e.getMessage());
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			return new DepartmentResult().setDefaultErrorResult();
@@ -82,11 +72,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 
 		//获取User列表并转换为UserDTO列表.
 		try {
-			Map<String, Object> parameters = Maps.newHashMap();
-			parameters.put("loginName", loginName);
-			parameters.put("name", name);
-
-			Page<User> page = accountManager.searchUser(parameters,pageNo,pageSize);
+			Page<User> page = accountManager.searchUser(loginName,name,pageNo,pageSize);
 
 			List<UserDTO> dtoList = DozerUtils.mapList(page, UserDTO.class);
 
@@ -102,21 +88,6 @@ public class AccountWebServiceImpl implements AccountWebService {
 	 */
 	public IdResult createUser(UserDTO user) {
 
-		//Hibernate Validator校验请求参数
-		try {
-			Asserter.notNull(user, "用户参数为空");
-			Asserter.isNull(user.getId(), "新建用户ID参数必须为空");
-
-			Set<ConstraintViolation<UserDTO>> constraintViolations = ValidatorHolder.validate(user);
-			if (!constraintViolations.isEmpty()) {
-				String message = ValidatorHolder.convertMessage(constraintViolations, "\n");
-				throw new IllegalArgumentException(message);
-			}
-		} catch (IllegalArgumentException e) {
-			logger.error(e.getMessage());
-			return new IdResult().setError(WSResult.PARAMETER_ERROR, e.getMessage());
-		}
-
 		//保存用户
 		try {
 			User userEntity = DozerUtils.map(user, User.class);
@@ -124,9 +95,15 @@ public class AccountWebServiceImpl implements AccountWebService {
 			Long userId = accountManager.saveUser(userEntity);
 
 			return new IdResult(userId);
+		} catch (IllegalArgumentException e) {
+			logger.error(e.getMessage());
+			return new IdResult().setError(WSResult.PARAMETER_ERROR, e.getMessage());
 		} catch (DataIntegrityViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
 			logger.error(message, e);
+			return new IdResult().setError(WSResult.PARAMETER_ERROR, message);
+		} catch (ConstraintViolationException e) {
+			String message = ValidatorHolder.convertMessage(e, "\n");
 			return new IdResult().setError(WSResult.PARAMETER_ERROR, message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);

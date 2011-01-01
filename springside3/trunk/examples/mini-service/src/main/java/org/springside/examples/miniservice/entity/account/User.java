@@ -1,6 +1,8 @@
 package org.springside.examples.miniservice.entity.account;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springside.examples.miniservice.entity.IdEntity;
 
 /**
@@ -14,7 +16,8 @@ public class User extends IdEntity {
 	private String name;
 	private String email;
 	private Department department;
-
+	
+	@NotBlank(message = "登录名不能为空")
 	public String getLoginName() {
 		return loginName;
 	}
@@ -30,7 +33,8 @@ public class User extends IdEntity {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	@NotBlank(message = "姓名不能为空")
 	public String getName() {
 		return name;
 	}
@@ -38,7 +42,8 @@ public class User extends IdEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	@Email(message = "邮件地址格式不正确")
 	public String getEmail() {
 		return email;
 	}
