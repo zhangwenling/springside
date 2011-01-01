@@ -71,7 +71,7 @@ public class AccountDaoTest extends SpringTxTestCase {
 
 	@Test
 	public void searchUser() {
-		Map<String, String> parameters = Maps.newHashMap();
+		Map<String, Object> parameters = Maps.newHashMap();
 
 		parameters.put("loginName", null);
 		parameters.put("name", null);
