@@ -71,6 +71,13 @@ public class ValidatorHolder implements DisposableBean {
 	}	
 	
 	/**
+	 * 辅助方法,转换ConstraintViolationException.getConstraintViolations()为信息字符串,以seperator分割.
+	 */
+	public static String convertMessage(ConstraintViolationException e, String seperator) {
+		return convertMessage(e.getConstraintViolations(),seperator);
+	}
+	
+	/**
 	 * 辅助方法,转换Set<ConstraintViolation>为信息字符串,以seperator分割.
 	 */
 	public static String convertMessage(Set<? extends ConstraintViolation> constraintViolations, String seperator) {
