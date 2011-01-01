@@ -82,7 +82,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 
 		//获取User列表并转换为UserDTO列表.
 		try {
-			Map<String, String> parameters = Maps.newHashMap();
+			Map<String, Object> parameters = Maps.newHashMap();
 			parameters.put("loginName", loginName);
 			parameters.put("name", name);
 

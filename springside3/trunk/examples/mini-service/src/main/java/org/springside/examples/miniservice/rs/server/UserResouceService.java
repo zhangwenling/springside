@@ -80,7 +80,7 @@ public class UserResouceService {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
 	public List<UserDTO> searchUser(@QueryParam("loginName") String loginName, @QueryParam("name") String name) {
 		try {
-			Map<String, String> parameters = Maps.newHashMap();
+			Map<String, Object> parameters = Maps.newHashMap();
 			parameters.put("loginName", loginName);
 			parameters.put("name", name);
 

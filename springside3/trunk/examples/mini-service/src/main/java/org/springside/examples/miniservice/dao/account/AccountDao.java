@@ -27,7 +27,7 @@ public class AccountDao extends SqlSessionDaoSupport {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Page<User> searchUser(Map<String, String> parameters,int pageNo,int pageSize) {
+	public Page<User> searchUser(Map<String, Object> parameters,int pageNo,int pageSize) {
 		return MybatisPageQueryUtils.pageQuery(getSqlSession(),"Account.searchUser", parameters, pageNo,pageSize);
 	}
 
