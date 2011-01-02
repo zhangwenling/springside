@@ -74,16 +74,13 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 
 	 * @return 分页查询结果, 附带结果列表及所有查询输入参数.
 	 */
-
 	public Page<T> findPage(final Page<T> page, final String hql, final Object... values) {
 		Asserter.notNull(page, "page不能为空");
 
 		Query q = createQuery(hql, values);
 
-		if (page.isAutoCount()) {
-			long totalCount = countHqlResult(hql, values);
-			page.setTotalItems(totalCount);
-		}
+		long totalCount = countHqlResult(hql, values);
+		page.setTotalItems(totalCount);
 
 		setPageParameterToQuery(q, page);
 
@@ -106,10 +103,8 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 
 		Query q = createQuery(hql, values);
 
-		if (page.isAutoCount()) {
-			long totalCount = countHqlResult(hql, values);
-			page.setTotalItems(totalCount);
-		}
+		long totalCount = countHqlResult(hql, values);
+		page.setTotalItems(totalCount);
 
 		setPageParameterToQuery(q, page);
 
@@ -131,10 +126,8 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 
 		Criteria c = createCriteria(criterions);
 
-		if (page.isAutoCount()) {
-			long totalCount = countCriteriaResult(c);
-			page.setTotalItems(totalCount);
-		}
+		long totalCount = countCriteriaResult(c);
+		page.setTotalItems(totalCount);
 
 		setPageParameterToCriteria(c, page);
 

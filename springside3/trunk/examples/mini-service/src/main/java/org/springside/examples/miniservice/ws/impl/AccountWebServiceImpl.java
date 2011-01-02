@@ -1,11 +1,8 @@
 package org.springside.examples.miniservice.ws.impl;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.jws.WebService;
-import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 import org.slf4j.Logger;
@@ -27,8 +24,6 @@ import org.springside.modules.orm.Page;
 import org.springside.modules.utils.Asserter;
 import org.springside.modules.utils.mapping.DozerUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
-
-import com.google.common.collect.Maps;
 
 /**
  * WebService服务端实现类.
@@ -53,7 +48,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 		//获取部门
 		try {
 			Department entity = accountManager.getDepartmentDetail(id);
-			Asserter.notNull(entity,"部门不存在(id:" + id + ")");
+			Asserter.notNull(entity, "部门不存在(id:" + id + ")");
 			DepartmentDTO dto = DozerUtils.map(entity, DepartmentDTO.class);
 			return new DepartmentResult(dto);
 		} catch (IllegalArgumentException e) {
@@ -68,15 +63,15 @@ public class AccountWebServiceImpl implements AccountWebService {
 	/**
 	 * @see AccountWebService#searchUser()
 	 */
-	public UserPageResult searchUser(String loginName, String name,int pageNo,int pageSize) {
+	public UserPageResult searchUser(String loginName, String name, int pageNo, int pageSize) {
 
 		//获取User列表并转换为UserDTO列表.
 		try {
-			Page<User> page = accountManager.searchUser(loginName,name,pageNo,pageSize);
+			Page<User> page = accountManager.searchUser(loginName, name, pageNo, pageSize);
 
-			List<UserDTO> dtoList = DozerUtils.mapList(page, UserDTO.class);
+			List<UserDTO> dtoList = DozerUtils.mapList(page.getResult(), UserDTO.class);
 
-			return new UserPageResult(dtoList,page.getPaginator());
+			return new UserPageResult(page.getPageNo(), page.getPageSize(), page.getTotalItems(), dtoList);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			return new UserPageResult().setDefaultErrorResult();

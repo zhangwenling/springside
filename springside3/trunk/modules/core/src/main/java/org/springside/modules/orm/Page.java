@@ -45,7 +45,12 @@ public class Page<T> implements Iterable<T> {
 	}
 
 	public Page(int pageSize) {
-		this.pageSize = pageSize;
+		setPageSize(pageSize);
+	}
+
+	public Page(int pageNo, int pageSize) {
+		setPageNo(pageNo);
+		setPageSize(pageSize);
 	}
 
 	//-- 分页参数访问函数 --//
@@ -79,20 +84,6 @@ public class Page<T> implements Iterable<T> {
 	 */
 	public void setPageSize(final int pageSize) {
 		this.pageSize = pageSize;
-	}
-
-	/**
-	 * 获得查询对象时是否先自动执行count查询获取总记录数, 默认为false.
-	 */
-	public boolean isAutoCount() {
-		return autoCount;
-	}
-
-	/**
-	 * 设置查询对象时是否自动先执行count查询获取总记录数.
-	 */
-	public void setAutoCount(final boolean autoCount) {
-		this.autoCount = autoCount;
 	}
 
 	/**
@@ -140,14 +131,6 @@ public class Page<T> implements Iterable<T> {
 	 */
 	public boolean isOrderBySetted() {
 		return (StringUtils.isNotBlank(orderBy) && StringUtils.isNotBlank(order));
-	}
-
-	/**
-	 * 返回Page对象自身的setAutoCount函数,可用于连续设置。
-	 */
-	public Page<T> autoCount(final boolean theAutoCount) {
-		setAutoCount(theAutoCount);
-		return this;
 	}
 
 	/**

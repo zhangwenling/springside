@@ -2,7 +2,6 @@ package org.springside.examples.miniservice.rs.server;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -17,8 +16,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,13 +29,9 @@ import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
 import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.utils.JerseyServerUtils;
-import org.springside.examples.miniservice.ws.result.base.IdResult;
-import org.springside.examples.miniservice.ws.result.base.WSResult;
 import org.springside.modules.orm.Page;
 import org.springside.modules.utils.mapping.DozerUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
-
-import com.google.common.collect.Maps;
 
 /**
  * User资源的REST服务.
@@ -83,9 +78,8 @@ public class UserResouceService {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
 	public List<UserDTO> searchUser(@QueryParam("loginName") String loginName, @QueryParam("name") String name) {
 		try {
-			Page<User> entityList = accountManager.searchUser(loginName,name,1,Integer.MAX_VALUE);
-
-			return DozerUtils.mapList(entityList, UserDTO.class);
+			Page<User> entityList = accountManager.searchUser(loginName, name, 1, Integer.MAX_VALUE);
+			return DozerUtils.mapList(entityList.getResult(), UserDTO.class);
 		} catch (RuntimeException e) {
 			throw JerseyServerUtils.buildDefaultException(e, logger);
 		}
@@ -115,7 +109,7 @@ public class UserResouceService {
 			return Response.created(createdUri).build();
 		} catch (ConstraintViolationException e) {
 			String message = ValidatorHolder.convertMessage(e, "\n");
-			throw JerseyServerUtils.buildException(Status.BAD_REQUEST.getStatusCode(),message,logger);			
+			throw JerseyServerUtils.buildException(Status.BAD_REQUEST.getStatusCode(), message, logger);
 		} catch (DataIntegrityViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
 			throw JerseyServerUtils.buildException(Status.BAD_REQUEST.getStatusCode(), message, logger);

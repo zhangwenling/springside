@@ -3,8 +3,6 @@ package org.springside.examples.miniservice.ws.result.base;
 import javax.xml.bind.annotation.XmlType;
 
 import org.springside.examples.miniservice.WsConstants;
-import org.springside.modules.orm.Page;
-import org.springside.modules.orm.Paginator;
 
 /**
  * 分页查询返回的基础Result
@@ -19,16 +17,11 @@ public class PageResult extends WSResult {
 	private int pageSize;
 	private long totalItems;
 
-	public PageResult() {}
-	
-	public PageResult(Paginator paginator) {
-		super();
-		paginator(paginator);
+	public PageResult() {
 	}
-	
-	public PageResult(int page, int pageSize, long totalItems) {
-		super();
-		this.pageNo = page;
+
+	public PageResult(int pageNo, int pageSize, long totalItems) {
+		this.pageNo = pageNo;
 		this.pageSize = pageSize;
 		this.totalItems = totalItems;
 	}
@@ -55,16 +48,5 @@ public class PageResult extends WSResult {
 
 	public void setTotalItems(long totalItems) {
 		this.totalItems = totalItems;
-	}
-
-	public <T extends PageResult> T paginator(Paginator paginator ) {
-		this.pageNo = paginator.getPageNo();
-		this.pageSize = paginator.getPageSize();
-		this.totalItems = paginator.getTotalItems();
-		return (T)this;
-	}
-	
-	public Paginator toPaginator() {
-		return new Paginator(pageNo, pageSize, totalItems);
 	}
 }

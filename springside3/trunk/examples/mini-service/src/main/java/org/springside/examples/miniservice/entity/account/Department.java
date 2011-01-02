@@ -6,6 +6,11 @@ import org.springside.examples.miniservice.entity.IdEntity;
 
 import com.google.common.collect.Lists;
 
+/**
+ * 部门.
+ * 
+ * @author calvin
+ */
 public class Department extends IdEntity {
 
 	private String name;

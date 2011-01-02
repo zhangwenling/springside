@@ -17,10 +17,10 @@ public class DepartmentResult extends WSResult {
 
 	private DepartmentDTO department;
 
-	public DepartmentResult() {}
-	
+	public DepartmentResult() {
+	}
+
 	public DepartmentResult(DepartmentDTO department) {
-		super();
 		this.department = department;
 	}
 

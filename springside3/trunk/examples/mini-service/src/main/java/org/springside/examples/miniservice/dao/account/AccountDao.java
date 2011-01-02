@@ -1,17 +1,15 @@
 package org.springside.examples.miniservice.dao.account;
 
-import java.util.List;
 import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Component;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
-import org.springside.examples.miniservice.utils.MybatisPageQueryUtils;
 import org.springside.modules.orm.Page;
+import org.springside.modules.orm.mybatis.MyBatisDao;
 
 @Component
-public class AccountDao extends SqlSessionDaoSupport {
+public class AccountDao extends MyBatisDao {
 
 	public Department getDepartmentDetail(Long id) {
 		return (Department) getSqlSession().selectOne("Account.getDepartmentDetail", id);
@@ -27,8 +25,8 @@ public class AccountDao extends SqlSessionDaoSupport {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Page<User> searchUser(Map<String, Object> parameters,int pageNo,int pageSize) {
-		return MybatisPageQueryUtils.pageQuery(getSqlSession(),"Account.searchUser", parameters, pageNo,pageSize);
+	public Page<User> searchUser(Page page, Map<String, Object> parameters) {
+		return selectPage(page, "Account.searchUser", parameters);
 	}
 
 }

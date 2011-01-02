@@ -23,7 +23,6 @@ public class PageTest {
 		assertEquals(-1, page.getPageSize());
 		assertEquals(-1, page.getTotalItems());
 		assertEquals(-1, page.getTotalPages());
-		assertEquals(true, page.isAutoCount());
 
 		page.setPageNo(-1);
 		assertEquals(1, page.getPageNo());

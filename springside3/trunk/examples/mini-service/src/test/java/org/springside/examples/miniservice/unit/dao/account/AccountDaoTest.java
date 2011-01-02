@@ -1,9 +1,7 @@
 package org.springside.examples.miniservice.unit.dao.account;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -75,30 +73,30 @@ public class AccountDaoTest extends SpringTxTestCase {
 
 		parameters.put("loginName", null);
 		parameters.put("name", null);
-		Page<User> page = accountDao.searchUser(parameters,1,Integer.MAX_VALUE);
+		Page<User> page = accountDao.searchUser(new Page(1, Integer.MAX_VALUE), parameters);
 		assertEquals(4, page.getResult().size());
 
 		parameters.put("loginName", "user1");
 		parameters.put("name", null);
-		page = accountDao.searchUser(parameters,1,Integer.MAX_VALUE);
+		page = accountDao.searchUser(new Page(1, Integer.MAX_VALUE), parameters);
 		assertEquals(1, page.getResult().size());
 
 		parameters.clear();
 		parameters.put("name", "Jack");
 		parameters.put("loginName", null);
-		page = accountDao.searchUser(parameters,1,Integer.MAX_VALUE);
+		page = accountDao.searchUser(new Page(1, Integer.MAX_VALUE), parameters);
 		assertEquals(1, page.getResult().size());
 
 		parameters.clear();
 		parameters.put("name", "Jack");
 		parameters.put("loginName", "user1");
-		page = accountDao.searchUser(parameters,1,Integer.MAX_VALUE);
+		page = accountDao.searchUser(new Page(1, Integer.MAX_VALUE), parameters);
 		assertEquals(1, page.getResult().size());
 
 		parameters.clear();
 		parameters.put("name", "Jack");
 		parameters.put("loginName", "errorName");
-		page = accountDao.searchUser(parameters,1,Integer.MAX_VALUE);
+		page = accountDao.searchUser(new Page(1, Integer.MAX_VALUE), parameters);
 		assertEquals(0, page.getResult().size());
 	}
 

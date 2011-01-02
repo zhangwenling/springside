@@ -44,21 +44,21 @@ public class AccountManager {
 	}
 
 	@Transactional(readOnly = true)
-	public Page<User> searchUser(String loginName, String name,int pageNo,int pageSize) {
-		
+	public Page<User> searchUser(String loginName, String name, int pageNo, int pageSize) {
+
 		Map<String, Object> parameters = Maps.newHashMap();
 		parameters.put("loginName", loginName);
 		parameters.put("name", name);
-		return accountDao.searchUser(parameters, pageNo, pageSize);
+		return accountDao.searchUser(new Page<User>(pageNo, pageSize), parameters);
 	}
 
 	public Long saveUser(User user) throws ConstraintViolationException {
 		Asserter.notNull(user, "用户参数为空");
 		Asserter.isNull(user.getId(), "新建用户ID参数必须为空");
-		
+
 		//Hibernate Validator校验请求参数
 		ValidatorHolder.validateWithException(user);
-		
+
 		return accountDao.saveUser(user);
 	}
 

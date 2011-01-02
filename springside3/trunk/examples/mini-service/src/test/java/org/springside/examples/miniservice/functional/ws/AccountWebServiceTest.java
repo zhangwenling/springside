@@ -1,25 +1,16 @@
 package org.springside.examples.miniservice.functional.ws;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.lang.reflect.InvocationTargetException;
+import static org.junit.Assert.*;
 
 import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
-import javax.xml.soap.SOAPFault;
 import javax.xml.ws.BindingProvider;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.dozer.DozerBeanMapper;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import javax.xml.ws.soap.SOAPFaultException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -28,10 +19,9 @@ import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniservice.ws.AccountWebService;
-import org.springside.examples.miniservice.ws.client.AccountWebServiceClient;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
-import org.springside.examples.miniservice.ws.exception.WebServiceException;
 import org.springside.examples.miniservice.ws.result.UserPageResult;
+import org.springside.examples.miniservice.ws.result.base.IdResult;
 import org.springside.examples.miniservice.ws.result.base.WSResult;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
@@ -49,13 +39,13 @@ public class AccountWebServiceTest extends BaseFunctionalTestCase {
 
 	/** client类主要负责 Result对象的解包及将 error code转换为异常 */
 	@Autowired
-	private AccountWebServiceClient accountWebServiceClient;
-	
+	private AccountWebService accountWebServiceClient;
+
 	@BeforeClass
 	public static void init() {
-		new ValidatorHolder().setValidator(Validation.buildDefaultValidatorFactory().getValidator());		
+		new ValidatorHolder().setValidator(Validation.buildDefaultValidatorFactory().getValidator());
 	}
-	
+
 	/**
 	 * 测试创建用户,在Spring applicaitonContext.xml中用<jaxws:client/>创建Client.
 	 */
@@ -68,15 +58,8 @@ public class AccountWebServiceTest extends BaseFunctionalTestCase {
 		userDTO.setName(user.getName());
 		userDTO.setEmail(user.getEmail());
 
-		Long id = accountWebServiceClient.createUser(userDTO);
-		assertNotNull(id);
-		
-		try {
-			accountWebServiceClient.createUser(userDTO);
-			fail("不应该执行到这里,应该已经有存在该用户,将抛异常");
-		}catch(WebServiceException e) {
-			assertEquals(e.getErrorCode(), WSResult.PARAMETER_ERROR);
-		}
+		IdResult result = accountWebServiceClient.createUser(userDTO);
+		assertNotNull(result.getId());
 	}
 
 	/**
@@ -89,22 +72,13 @@ public class AccountWebServiceTest extends BaseFunctionalTestCase {
 
 		//登录名为空
 		userDTO.setLoginName(null);
-		try {
-			Long id = accountWebServiceClient.createUser(userDTO);
-			fail("应该发生登录名为空错误");
-		}catch(WebServiceException e) {
-			assertEquals(e.getErrorCode(),WSResult.PARAMETER_ERROR);
-		}
+		IdResult result = accountWebServiceClient.createUser(userDTO);
+		assertEquals(result.getCode(), WSResult.PARAMETER_ERROR);
 
 		//登录名重复
 		userDTO.setLoginName("user1");
-		try {
-			Long id = accountWebServiceClient.createUser(userDTO);
-			accountWebServiceClient.createUser(userDTO);
-			fail("应该发生登录名重复错误");
-		}catch(WebServiceException e) {
-			assertEquals(e.getErrorCode(),WSResult.PARAMETER_ERROR);
-		}
+		result = accountWebServiceClient.createUser(userDTO);
+		assertEquals(result.getCode(), WSResult.PARAMETER_ERROR);
 	}
 
 	/**
@@ -123,10 +97,10 @@ public class AccountWebServiceTest extends BaseFunctionalTestCase {
 		((BindingProvider) accountWebServiceCreated).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
 				address);
 
-		UserPageResult result = accountWebServiceCreated.searchUser(null, null,1,100);
+		UserPageResult result = accountWebServiceCreated.searchUser(null, null, 1, 100);
 
 		assertTrue(result.getUserList().size() >= 4);
 		assertEquals("Jack", result.getUserList().get(0).getName());
 	}
-	
+
 }
