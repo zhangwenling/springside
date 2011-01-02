@@ -2,9 +2,7 @@ package org.springside.examples.miniservice.rs.server;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Set;
 
-import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -79,6 +77,7 @@ public class UserResouceService {
 	public List<UserDTO> searchUser(@QueryParam("loginName") String loginName, @QueryParam("name") String name) {
 		try {
 			Page<User> entityList = accountManager.searchUser(loginName, name, 1, Integer.MAX_VALUE);
+
 			return DozerUtils.mapList(entityList.getResult(), UserDTO.class);
 		} catch (RuntimeException e) {
 			throw JerseyServerUtils.buildDefaultException(e, logger);
@@ -91,14 +90,6 @@ public class UserResouceService {
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
 	public Response createUser(UserDTO user) {
-
-		//Hibernate Validator校验
-		Set<ConstraintViolation<UserDTO>> constraintViolations = ValidatorHolder.validate(user);
-		if (!constraintViolations.isEmpty()) {
-			String message = ValidatorHolder.convertMessage(constraintViolations, "\n");
-			throw JerseyServerUtils.buildException(Status.BAD_REQUEST.getStatusCode(), message, logger);
-		}
-
 		//转换并创建用户
 		try {
 			User userEntity = DozerUtils.map(user, User.class);

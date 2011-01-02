@@ -33,11 +33,10 @@ public class MyBatisDao extends SqlSessionDaoSupport {
 			page.setResult(list);
 			page.setTotalItems(totalItems.longValue());
 		}
-
 		return page;
 	}
 
-	public static Map toParameterMap(Object parameter, Page p) {
+	protected static Map toParameterMap(Object parameter, Page p) {
 		Map map = toParameterMap(parameter);
 		map.put("startRow", p.getStartRow());
 		map.put("endRow", p.getEndRow());
@@ -46,7 +45,7 @@ public class MyBatisDao extends SqlSessionDaoSupport {
 		return map;
 	}
 
-	public static Map toParameterMap(Object parameter) {
+	protected static Map toParameterMap(Object parameter) {
 		if (parameter instanceof Map) {
 			return (Map) parameter;
 		} else {

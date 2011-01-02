@@ -3,8 +3,6 @@ package org.springside.examples.miniservice.rs.dto;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Web Service传输User信息的DTO.
@@ -28,7 +26,6 @@ public class UserDTO {
 		id = value;
 	}
 
-	@NotBlank(message = "登录名不能为空")
 	public String getLoginName() {
 		return loginName;
 	}
@@ -37,7 +34,6 @@ public class UserDTO {
 		loginName = value;
 	}
 
-	@NotBlank(message = "姓名不能为空")
 	public String getName() {
 		return name;
 	}
@@ -46,7 +42,6 @@ public class UserDTO {
 		name = value;
 	}
 
-	@Email(message = "邮件地址格式不正确")
 	public String getEmail() {
 		return email;
 	}
