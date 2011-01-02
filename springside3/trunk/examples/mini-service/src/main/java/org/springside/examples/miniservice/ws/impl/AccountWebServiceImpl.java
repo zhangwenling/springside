@@ -56,7 +56,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 			return new DepartmentResult().setError(WSResult.PARAMETER_ERROR, e.getMessage());
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return new DepartmentResult().setDefaultErrorResult();
+			return new DepartmentResult().setDefaultError();
 		}
 	}
 
@@ -74,7 +74,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 			return new UserPageResult(page.getPageNo(), page.getPageSize(), page.getTotalItems(), dtoList);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return new UserPageResult().setDefaultErrorResult();
+			return new UserPageResult().setDefaultError();
 		}
 	}
 
@@ -102,7 +102,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 			return new IdResult().setError(WSResult.PARAMETER_ERROR, message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return new IdResult().setDefaultErrorResult();
+			return new IdResult().setDefaultError();
 		}
 	}
 
