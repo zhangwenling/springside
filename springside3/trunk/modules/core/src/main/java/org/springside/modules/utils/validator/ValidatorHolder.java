@@ -35,7 +35,7 @@ public class ValidatorHolder implements DisposableBean {
 	}
 
 	/**
-	 * JSR303的validate方法,返回ConstraintViolation组成的Set.
+	 * 调用JSR303的validate方法,返回ConstraintViolation组成的Set.
 	 */
 	public static <T> Set<ConstraintViolation<T>> validate(T object, Class<?>... groups) {
 		assertValidatorInjected();
@@ -43,29 +43,10 @@ public class ValidatorHolder implements DisposableBean {
 	}
 
 	/**
-	 * 调用validate方法,验证失败将抛出ConstraintViolationException
+	 * 调用JSR303的validate方法, 验证失败将抛出ConstraintViolationException
 	 */
 	public static <T> void validateWithException(T object, Class<?>... groups) throws ConstraintViolationException {
 		Set set = validate(object, groups);
-		if (!set.isEmpty()) {
-			throw new ConstraintViolationException(set);
-		}
-	}
-
-	/**
-	 * 调用validateProperty方法,返回ConstraintViolation组成的Set.
-	 */
-	public <T> Set<ConstraintViolation<T>> validateProperty(T object, String propertyName, Class<?>... groups)
-			throws ConstraintViolationException {
-		return getValidator().validateProperty(object, propertyName, groups);
-	}
-
-	/**
-	 * 调用validateProperty方法,验证失败将抛出ConstraintViolationException
-	 */
-	public <T> void validatePropertyWithException(T object, String propertyName, Class<?>... groups)
-			throws ConstraintViolationException {
-		Set set = getValidator().validateProperty(object, propertyName, groups);
 		if (!set.isEmpty()) {
 			throw new ConstraintViolationException(set);
 		}

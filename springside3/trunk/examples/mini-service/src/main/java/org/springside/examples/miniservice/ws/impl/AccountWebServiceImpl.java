@@ -71,7 +71,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 
 			List<UserDTO> dtoList = DozerUtils.mapList(page.getResult(), UserDTO.class);
 
-			return new UserPageResult(page.getPageNo(), page.getPageSize(), page.getTotalItems(), dtoList);
+			return new UserPageResult(page.getTotalItems(), dtoList);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			return new UserPageResult().setDefaultError();
@@ -93,12 +93,12 @@ public class AccountWebServiceImpl implements AccountWebService {
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
 			return new IdResult().setError(WSResult.PARAMETER_ERROR, e.getMessage());
+		} catch (ConstraintViolationException e) {
+			String message = ValidatorHolder.convertMessage(e, "\n");
+			return new IdResult().setError(WSResult.PARAMETER_ERROR, message);
 		} catch (DataIntegrityViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
 			logger.error(message, e);
-			return new IdResult().setError(WSResult.PARAMETER_ERROR, message);
-		} catch (ConstraintViolationException e) {
-			String message = ValidatorHolder.convertMessage(e, "\n");
 			return new IdResult().setError(WSResult.PARAMETER_ERROR, message);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
@@ -110,5 +110,4 @@ public class AccountWebServiceImpl implements AccountWebService {
 	public void setAccountManager(AccountManager accountManager) {
 		this.accountManager = accountManager;
 	}
-
 }

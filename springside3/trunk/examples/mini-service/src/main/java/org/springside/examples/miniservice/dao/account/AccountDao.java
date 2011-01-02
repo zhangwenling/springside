@@ -24,8 +24,7 @@ public class AccountDao extends MyBatisDao {
 		return (User) getSqlSession().selectOne("Account.getUser", id);
 	}
 
-	@SuppressWarnings("unchecked")
-	public Page<User> searchUser(Page page, Map<String, Object> parameters) {
+	public Page<User> searchUser(Page<User> page, Map<String, Object> parameters) {
 		return selectPage(page, "Account.searchUser", parameters);
 	}
 

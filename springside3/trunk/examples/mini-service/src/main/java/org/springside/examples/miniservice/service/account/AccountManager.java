@@ -45,11 +45,11 @@ public class AccountManager {
 
 	@Transactional(readOnly = true)
 	public Page<User> searchUser(String loginName, String name, int pageNo, int pageSize) {
-
 		Map<String, Object> parameters = Maps.newHashMap();
 		parameters.put("loginName", loginName);
 		parameters.put("name", name);
-		return accountDao.searchUser(new Page<User>(pageNo, pageSize), parameters);
+		Page<User> page = new Page<User>(pageNo, pageSize);
+		return accountDao.searchUser(page, parameters);
 	}
 
 	public Long saveUser(User user) throws ConstraintViolationException {

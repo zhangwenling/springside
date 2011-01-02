@@ -13,33 +13,13 @@ import org.springside.examples.miniservice.WsConstants;
 @XmlType(name = "PageResult", namespace = WsConstants.NS)
 public class PageResult extends WSResult {
 
-	private int pageNo;
-	private int pageSize;
 	private long totalItems;
 
 	public PageResult() {
 	}
 
-	public PageResult(int pageNo, int pageSize, long totalItems) {
-		this.pageNo = pageNo;
-		this.pageSize = pageSize;
+	public PageResult(long totalItems) {
 		this.totalItems = totalItems;
-	}
-
-	public int getPageNo() {
-		return pageNo;
-	}
-
-	public void setPageNo(int page) {
-		this.pageNo = page;
-	}
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
 	}
 
 	public long getTotalItems() {

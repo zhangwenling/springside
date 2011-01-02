@@ -24,8 +24,8 @@ public class UserPageResult extends PageResult {
 	public UserPageResult() {
 	}
 
-	public UserPageResult(int pageNo, int pageSize, long totalItems, List<UserDTO> userList) {
-		super(pageNo, pageSize, totalItems);
+	public UserPageResult(long totalItems, List<UserDTO> userList) {
+		super(totalItems);
 		this.userList = userList;
 	}
 
