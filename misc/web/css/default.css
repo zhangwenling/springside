@@ -76,16 +76,6 @@ li {
 }
 
 
-.introduction {
-	font-family: helvetica, arial, sans-serif;
-	line-height: 20px;
-	font-size: 12px;
-	text-indent: 15px;
-	padding-left: 0;
-	padding-right: 250px;
-	padding-bottom: 25px;
-	padding-top: 0;
-}
 
 .clearer {
 	clear: both;
@@ -153,17 +143,16 @@ li {
 }
 
 #mainbar p {
-	padding: 10px;
 	line-height: 20px;
 }
 
-#mainbar .articleimg {
-	float: right;
+#mainbar .introduction {
+	font-family: helvetica, arial, sans-serif;
+	line-height: 20px;
+	font-size: 12px;
+	text-indent: 15px;
 	padding: 5px;
-	border: 1px solid #eeeeee;
-	margin-left: 20px;
-	margin-top: 20px;
-	margin-bottom: 20px;
+	
 }
 
 #footer {
@@ -185,6 +174,8 @@ li {
 #footer A:hover {
 	COLOR: #009900
 }
+
+
 
 
 .submenu {
