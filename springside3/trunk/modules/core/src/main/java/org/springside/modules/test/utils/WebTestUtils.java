@@ -86,7 +86,6 @@ public class WebTestUtils {
 	/**
 	 * 如果Struts2 ActionContext未初始化则进行初始化.
 	 */
-
 	private static void initStruts2ActionContext() {
 		if (ActionContext.getContext() == null) {
 			ActionContext.setContext(new ActionContext(new HashMap()));

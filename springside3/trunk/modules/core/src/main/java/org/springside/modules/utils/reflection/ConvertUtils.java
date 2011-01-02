@@ -16,6 +16,11 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.lang.StringUtils;
 
+/**
+ * 转换工具类.
+ * 
+ * @author calvin
+ */
 public class ConvertUtils {
 
 	static {

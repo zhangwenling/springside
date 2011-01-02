@@ -15,7 +15,6 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Disjunction;
@@ -36,7 +35,6 @@ import org.springside.modules.utils.reflection.ReflectionUtils;
  * 封装SpringSide扩展功能的Hibernat DAO泛型基类.
  * 
  * 扩展功能包括分页查询,按属性过滤条件列表查询.
- * 可在Service层直接使用,也可以扩展泛型DAO子类使用,见两个构造函数的注释.
  * 
  * @param <T> DAO操作的对象类型
  * @param <PK> 主键类型
@@ -45,7 +43,6 @@ import org.springside.modules.utils.reflection.ReflectionUtils;
  */
 public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao<T, PK> {
 	/**
-	 * 用于Dao层子类的构造函数.
 	 * 通过子类的泛型定义取得对象类型Class.
 	 * eg.
 	 * public class UserDao extends HibernateDao<User, Long>{
@@ -55,14 +52,8 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 		super();
 	}
 
-	/**
-	 * 用于省略Dao层, Service层直接使用通用HibernateDao的构造函数.
-	 * 在构造函数中定义对象类型Class.
-	 * eg.
-	 * HibernateDao<User, Long> userDao = new HibernateDao<User, Long>(sessionFactory, User.class);
-	 */
-	public HibernateDao(final SessionFactory sessionFactory, final Class<T> entityClass) {
-		super(sessionFactory, entityClass);
+	public HibernateDao(Class<T> entityClass) {
+		super(entityClass);
 	}
 
 	//-- 分页查询函数 --//
@@ -110,7 +101,6 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 
 	 * @return 分页查询结果, 附带结果列表及所有查询输入参数.
 	 */
-
 	public Page<T> findPage(final Page<T> page, final String hql, final Map<String, ?> values) {
 		Asserter.notNull(page, "page不能为空");
 
@@ -136,7 +126,6 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 
 	 * @return 分页查询结果.附带结果列表及所有查询输入参数.
 	 */
-
 	public Page<T> findPage(final Page<T> page, final Criterion... criterions) {
 		Asserter.notNull(page, "page不能为空");
 
@@ -158,10 +147,11 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 设置分页参数到Query对象,辅助函数.
 	 */
 	protected Query setPageParameterToQuery(final Query q, final Page<T> page) {
-
 		Asserter.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
-		q.setFirstResult(page.getPaginator().getFirst());
+
+		q.setFirstResult(page.getOffset());
 		q.setMaxResults(page.getPageSize());
+
 		return q;
 	}
 
@@ -169,10 +159,9 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 设置分页参数到Criteria对象,辅助函数.
 	 */
 	protected Criteria setPageParameterToCriteria(final Criteria c, final Page<T> page) {
-
 		Asserter.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
 
-		c.setFirstResult(page.getPaginator().getFirst());
+		c.setFirstResult(page.getOffset());
 		c.setMaxResults(page.getPageSize());
 
 		if (page.isOrderBySetted()) {
@@ -237,7 +226,6 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 执行count查询获得本次Criteria查询所能获得的对象总数.
 	 */
-
 	protected long countCriteriaResult(final Criteria c) {
 		CriteriaImpl impl = (CriteriaImpl) c;
 

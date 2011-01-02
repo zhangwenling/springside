@@ -15,9 +15,9 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LoggingEvent;
 
 /**
- * 在List中保存日志的Appender, 用于测试日志输出.
+ * 在List中保存日志的Appender, 用于测试Log4j的日志输出.
  * 
- * 在测试开始前,使用addToLogger方法将此appender添加到需要侦听的logger.
+ * 在测试开始前, 使用addToLogger方法将此appender添加到需要侦听的logger.
  * 
  * @author calvin
  */

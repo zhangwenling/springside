@@ -17,7 +17,7 @@ import org.springframework.jmx.export.annotation.ManagedOperationParameters;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
 /**
- * 基于JMX动态配置Logger日志等级, 获取Logger Appender的MBean.
+ * 基于JMX动态配置Logger日志等级的MBean.
  * 
  * @author calvin
  */
@@ -60,16 +60,27 @@ public class Log4jMBean {
 		mbeanLogger.info("设置{}级别为{}", loggerName, newLevel);
 	}
 
+	/**
+	 * 获得项目默认logger的级别.
+	 * 默认logger名称通过#setDefaultLoggerName(String)配置.
+	 */
 	@ManagedAttribute(description = "Project default logging level of the logger")
 	public String getDefaultLoggerLevel() {
 		return getLoggerLevel(defaultLoggerName);
 	}
 
+	/**
+	 * 设置项目默认logger的级别.
+	 * 默认logger名称通过#setDefaultLoggerName(String)配置
+	 */
 	@ManagedAttribute(description = "Project default logging level of the logger")
 	public void setDefaultLoggerLevel(String newLevel) {
 		setLoggerLevel(defaultLoggerName, newLevel);
 	}
 
+	/**
+	 * 设置项目默认的logger名称, 如org.springside.examples.miniweb.
+	 */
 	public void setDefaultLoggerName(String defaultLoggerName) {
 		this.defaultLoggerName = defaultLoggerName;
 	}

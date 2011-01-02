@@ -21,7 +21,7 @@ import org.springframework.util.DefaultPropertiesPersister;
 import org.springframework.util.PropertiesPersister;
 
 /**
- * Properties Util函数.
+ * Properties工具类.
  * 
  * @author calvin
  */

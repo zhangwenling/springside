@@ -18,6 +18,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Jackson的简单封装.
  * 
+ * 封装不同的输出风格, 使用不同的builder函数创建实例.
+ * 
  * @author calvin
  */
 public class JsonBinder {
@@ -26,7 +28,7 @@ public class JsonBinder {
 
 	private ObjectMapper mapper;
 
-	public JsonBinder(Inclusion inclusion) {
+	private JsonBinder(Inclusion inclusion) {
 		mapper = new ObjectMapper();
 		//设置输出时包含属性的风格
 		mapper.getSerializationConfig().setSerializationInclusion(inclusion);

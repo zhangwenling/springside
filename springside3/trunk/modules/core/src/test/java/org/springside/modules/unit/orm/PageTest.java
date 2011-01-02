@@ -1,7 +1,6 @@
 package org.springside.modules.unit.orm;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +22,7 @@ public class PageTest {
 		assertEquals(1, page.getPageNo());
 		assertEquals(-1, page.getPageSize());
 		assertEquals(-1, page.getTotalItems());
-		assertEquals(-1, page.getPaginator().getTotalPages());
+		assertEquals(-1, page.getTotalPages());
 		assertEquals(true, page.isAutoCount());
 
 		page.setPageNo(-1);
@@ -48,9 +47,9 @@ public class PageTest {
 		page.setPageSize(10);
 
 		page.setPageNo(1);
-		assertEquals(1, page.getPaginator().getStartRow());
+		assertEquals(1, page.getStartRow());
 		page.setPageNo(2);
-		assertEquals(11, page.getPaginator().getStartRow());
+		assertEquals(11, page.getStartRow());
 
 	}
 
@@ -59,13 +58,13 @@ public class PageTest {
 		page.setPageSize(10);
 
 		page.setTotalItems(1);
-		assertEquals(1, page.getPaginator().getTotalPages());
+		assertEquals(1, page.getTotalPages());
 
 		page.setTotalItems(10);
-		assertEquals(1, page.getPaginator().getTotalPages());
+		assertEquals(1, page.getTotalPages());
 
 		page.setTotalItems(11);
-		assertEquals(2, page.getPaginator().getTotalPages());
+		assertEquals(2, page.getTotalPages());
 	}
 
 	@Test
@@ -74,43 +73,32 @@ public class PageTest {
 		page.setPageNo(1);
 
 		page.setTotalItems(9);
-		assertEquals(false, page.getPaginator().isHasNextPage());
+		assertEquals(false, page.isHasNextPage());
 
 		page.setTotalItems(11);
-		assertEquals(true, page.getPaginator().isHasNextPage());
+		assertEquals(true, page.isHasNextPage());
 
 		page.setPageNo(1);
-		assertEquals(false, page.getPaginator().isHasPrePage());
+		assertEquals(false, page.isHasPrePage());
 
 		page.setPageNo(2);
-		assertEquals(true, page.getPaginator().isHasPrePage());
+		assertEquals(true, page.isHasPrePage());
 	}
 
 	@Test
 	public void getNextOrPrePage() {
 		page.setPageNo(1);
-		assertEquals(1, page.getPaginator().getPrePage());
+		assertEquals(1, page.getPrePage());
 
 		page.setPageNo(2);
-		assertEquals(1, page.getPaginator().getPrePage());
+		assertEquals(1, page.getPrePage());
 
 		page.setPageSize(10);
 		page.setTotalItems(11);
 		page.setPageNo(1);
-		assertEquals(2, page.getPaginator().getNextPage());
+		assertEquals(2, page.getNextPage());
 
 		page.setPageNo(2);
-		assertEquals(2, page.getPaginator().getNextPage());
-	}
-
-	@Test
-	public void setAllParameterInOneLine() {
-		page.pageNo(2).pageSize(10).orderBy("abc").order(Page.ASC).autoCount(true);
-
-		assertEquals(2, page.getPageNo());
-		assertEquals(10, page.getPageSize());
-		assertEquals("abc", page.getOrderBy());
-		assertEquals(Page.ASC, page.getOrder());
-		assertEquals(true, page.isAutoCount());
+		assertEquals(2, page.getNextPage());
 	}
 }

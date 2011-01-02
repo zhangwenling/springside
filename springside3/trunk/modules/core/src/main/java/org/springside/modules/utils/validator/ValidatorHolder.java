@@ -5,7 +5,6 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import javax.validation.ValidationException;
 import javax.validation.Validator;
 
 import org.apache.commons.lang.xwork.StringUtils;
@@ -47,36 +46,38 @@ public class ValidatorHolder implements DisposableBean {
 	 * 调用validate方法,验证失败将抛出ConstraintViolationException
 	 */
 	public static <T> void validateWithException(T object, Class<?>... groups) throws ConstraintViolationException {
-		Set set = validate(object,groups);
-		if(!set.isEmpty()) {
+		Set set = validate(object, groups);
+		if (!set.isEmpty()) {
 			throw new ConstraintViolationException(set);
 		}
 	}
-	
+
 	/**
 	 * 调用validateProperty方法,返回ConstraintViolation组成的Set.
 	 */
-	public <T> Set<ConstraintViolation<T>> validateProperty(T object,String propertyName,Class<?>... groups) throws ConstraintViolationException {
+	public <T> Set<ConstraintViolation<T>> validateProperty(T object, String propertyName, Class<?>... groups)
+			throws ConstraintViolationException {
 		return getValidator().validateProperty(object, propertyName, groups);
-	}	
+	}
 
 	/**
 	 * 调用validateProperty方法,验证失败将抛出ConstraintViolationException
 	 */
-	public <T> void validatePropertyWithException(T object,String propertyName,Class<?>... groups) throws ConstraintViolationException {
+	public <T> void validatePropertyWithException(T object, String propertyName, Class<?>... groups)
+			throws ConstraintViolationException {
 		Set set = getValidator().validateProperty(object, propertyName, groups);
-		if(!set.isEmpty()) {
+		if (!set.isEmpty()) {
 			throw new ConstraintViolationException(set);
 		}
-	}	
-	
+	}
+
 	/**
 	 * 辅助方法,转换ConstraintViolationException.getConstraintViolations()为信息字符串,以seperator分割.
 	 */
 	public static String convertMessage(ConstraintViolationException e, String seperator) {
-		return convertMessage(e.getConstraintViolations(),seperator);
+		return convertMessage(e.getConstraintViolations(), seperator);
 	}
-	
+
 	/**
 	 * 辅助方法,转换Set<ConstraintViolation>为信息字符串,以seperator分割.
 	 */

@@ -13,6 +13,11 @@ import org.dozer.DozerBeanMapper;
 
 import com.google.common.collect.Lists;
 
+/**
+ * Dozer工具类 , 持有Dozer单例.
+ * 
+ * @author calvin
+ */
 public class DozerUtils {
 
 	private static DozerBeanMapper dozer = new DozerBeanMapper();
@@ -21,13 +26,12 @@ public class DozerUtils {
 		return dozer.map(source, destinationClass);
 	}
 
-	public static <T> List<T> mapList(Iterable<?> sourceList, Class<T> destinationClass) {
+	public static <T> List<T> mapList(List<?> sourceList, Class<T> destinationClass) {
 		List<T> destinationList = Lists.newArrayList();
 		for (Object sourceObject : sourceList) {
 			T destinationObject = dozer.map(sourceObject, destinationClass);
 			destinationList.add(destinationObject);
 		}
 		return destinationList;
-
 	}
 }

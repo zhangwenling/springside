@@ -17,9 +17,7 @@ import com.google.common.collect.Lists;
 
 /**
  * 与具体ORM实现无关的分页参数及查询结果封装.
- * 实现Iterable接口,可以for(Object item : page)遍历使用.
- * 
- * 本类只封装输入输出参数,具体的分页逻辑全部封装在Paginator类.
+ * 本类只封装输入输出参数, 具体的分页逻辑全部封装在Paginator类.
  * 
  * @param <T> Page中记录的类型.
  * 
@@ -34,9 +32,9 @@ public class Page<T> implements Iterable<T> {
 	//-- 分页查询参数 --//
 	protected int pageNo = 1;
 	protected int pageSize = -1;
+	protected boolean autoCount = true;
 	protected String orderBy = null;
 	protected String order = null;
-	protected boolean autoCount = true;
 
 	//-- 返回结果 --//
 	protected List<T> result = Lists.newArrayList();
@@ -48,20 +46,6 @@ public class Page<T> implements Iterable<T> {
 
 	public Page(int pageSize) {
 		this.pageSize = pageSize;
-	}
-
-	public Page(List<T> resultList,Paginator paginator) {
-		this.result = resultList;
-		this.pageNo = paginator.getPageNo();
-		this.pageSize = paginator.getPageSize();
-		this.totalItems = paginator.getTotalItems();
-	}
-	
-	/**
-	 * 取得分页运算器,封装全部分页逻辑.
-	 */
-	public Paginator getPaginator() {
-		return new Paginator(pageNo, pageSize, totalItems);
 	}
 
 	//-- 分页参数访问函数 --//
@@ -84,14 +68,6 @@ public class Page<T> implements Iterable<T> {
 	}
 
 	/**
-	 * 返回Page对象自身的setPageNo函数,可用于连续设置。
-	 */
-	public Page<T> pageNo(final int thePageNo) {
-		setPageNo(thePageNo);
-		return this;
-	}
-
-	/**
 	 * 获得每页的记录数量, 默认为-1.
 	 */
 	public int getPageSize() {
@@ -106,11 +82,17 @@ public class Page<T> implements Iterable<T> {
 	}
 
 	/**
-	 * 返回Page对象自身的setPageSize函数,可用于连续设置。
+	 * 获得查询对象时是否先自动执行count查询获取总记录数, 默认为false.
 	 */
-	public Page<T> pageSize(final int thePageSize) {
-		setPageSize(thePageSize);
-		return this;
+	public boolean isAutoCount() {
+		return autoCount;
+	}
+
+	/**
+	 * 设置查询对象时是否自动先执行count查询获取总记录数.
+	 */
+	public void setAutoCount(final boolean autoCount) {
+		this.autoCount = autoCount;
 	}
 
 	/**
@@ -125,14 +107,6 @@ public class Page<T> implements Iterable<T> {
 	 */
 	public void setOrderBy(final String orderBy) {
 		this.orderBy = orderBy;
-	}
-
-	/**
-	 * 返回Page对象自身的setOrderBy函数,可用于连续设置。
-	 */
-	public Page<T> orderBy(final String theOrderBy) {
-		setOrderBy(theOrderBy);
-		return this;
 	}
 
 	/**
@@ -162,32 +136,10 @@ public class Page<T> implements Iterable<T> {
 	}
 
 	/**
-	 * 返回Page对象自身的setOrder函数,可用于连续设置。
-	 */
-	public Page<T> order(final String theOrder) {
-		setOrder(theOrder);
-		return this;
-	}
-
-	/**
 	 * 是否已设置排序字段,无默认值.
 	 */
 	public boolean isOrderBySetted() {
 		return (StringUtils.isNotBlank(orderBy) && StringUtils.isNotBlank(order));
-	}
-
-	/**
-	 * 获得查询对象时是否先自动执行count查询获取总记录数, 默认为false.
-	 */
-	public boolean isAutoCount() {
-		return autoCount;
-	}
-
-	/**
-	 * 设置查询对象时是否自动先执行count查询获取总记录数.
-	 */
-	public void setAutoCount(final boolean autoCount) {
-		this.autoCount = autoCount;
 	}
 
 	/**
@@ -198,7 +150,32 @@ public class Page<T> implements Iterable<T> {
 		return this;
 	}
 
+	/**
+	 * 根据pageNo和pageSize计算当前页第一条记录在总结果集中的位置,序号从0开始.
+	 * 用于Mysql,Hibernate.
+	 */
+	public int getOffset() {
+		return ((pageNo - 1) * pageSize);
+	}
+
+	/**
+	 * 根据pageNo和pageSize计算当前页第一条记录在总结果集中的位置,序号从1开始.
+	 * 用于Oracle.
+	 */
+	public int getStartRow() {
+		return getOffset() + 1;
+	}
+
+	/**
+	 * 根据pageNo和pageSize计算当前页最后一条记录在总结果集中的位置, 序号从1开始.
+	 * 用于Oracle.
+	 */
+	public int getEndRow() {
+		return pageSize * pageNo;
+	}
+
 	//-- 访问查询结果函数 --//
+
 	/**
 	 * 获得页内的记录列表.
 	 */
@@ -211,6 +188,14 @@ public class Page<T> implements Iterable<T> {
 	 */
 	public void setResult(final List<T> result) {
 		this.result = result;
+	}
+
+	/** 
+	 * 实现Iterable接口,可以for(Object item : page)遍历使用
+	 */
+	@SuppressWarnings("unchecked")
+	public Iterator<T> iterator() {
+		return result == null ? IteratorUtils.EMPTY_ITERATOR : result.iterator();
 	}
 
 	/**
@@ -227,11 +212,93 @@ public class Page<T> implements Iterable<T> {
 		this.totalItems = totalItems;
 	}
 
-	/** 
-	 * 实现Iterable接口,可以for(Object item : page)遍历使用
+	/**
+	 * 是否最后一页.
 	 */
-	@SuppressWarnings("unchecked")
-	public Iterator<T> iterator() {
-		return result == null ? IteratorUtils.EMPTY_ITERATOR : result.iterator();
+	public boolean isLastPage() {
+		return pageNo == getTotalPages();
+	}
+
+	/**
+	 * 是否还有下一页.
+	 */
+	public boolean isHasNextPage() {
+		return (pageNo + 1 <= getTotalPages());
+	}
+
+	/**
+	 * 取得下页的页号, 序号从1开始.
+	 * 当前页为尾页时仍返回尾页序号.
+	 */
+	public int getNextPage() {
+		if (isHasNextPage()) {
+			return pageNo + 1;
+		} else {
+			return pageNo;
+		}
+	}
+
+	/**
+	 * 是否第一页.
+	 */
+	public boolean isFirstPage() {
+		return pageNo == 1;
+	}
+
+	/**
+	 * 是否还有上一页.
+	 */
+	public boolean isHasPrePage() {
+		return (pageNo - 1 >= 1);
+	}
+
+	/**
+	 * 取得上页的页号, 序号从1开始.
+	 * 当前页为首页时返回首页序号.
+	 */
+	public int getPrePage() {
+		if (isHasPrePage()) {
+			return pageNo - 1;
+		} else {
+			return pageNo;
+		}
+	}
+
+	/**
+	 * 根据pageSize与totalItems计算总页数, 默认值为-1.
+	 */
+	public long getTotalPages() {
+		if (totalItems < 0) {
+			return -1;
+		}
+
+		long count = totalItems / pageSize;
+		if (totalItems % pageSize > 0) {
+			count++;
+		}
+		return count;
+	}
+
+	/**
+	 * 计算以当前页为中心的页面列表,如"首页,23,24,25,26,27,末页"
+	 * @param count 需要计算的列表大小
+	 * @return pageNo列表 
+	 */
+	public List<Long> getSlider(int count) {
+		int halfSize = count / 2;
+		long totalPage = getTotalPages();
+
+		long startPageNumber = Math.max(pageNo - halfSize, 1);
+		long endPageNumber = Math.min(startPageNumber + count - 1, totalPage);
+
+		if (endPageNumber - startPageNumber < count) {
+			startPageNumber = Math.max(endPageNumber - count, 1);
+		}
+
+		List<Long> result = Lists.newArrayList();
+		for (long i = startPageNumber; i <= endPageNumber; i++) {
+			result.add(new Long(i));
+		}
+		return result;
 	}
 }

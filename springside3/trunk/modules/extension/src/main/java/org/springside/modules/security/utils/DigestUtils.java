@@ -78,9 +78,6 @@ public class DigestUtils {
 		return digest(input, SHA1);
 	}
 
-	/**
-	 * 对文件进行散列, 支持md5与sha1算法.
-	 */
 	private static String digest(InputStream input, String algorithm) throws IOException {
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance(algorithm);

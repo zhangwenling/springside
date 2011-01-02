@@ -42,7 +42,8 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 		DbUnitUtils.loadData((DataSource) applicationContext.getBean("dataSource"), "/test-data.xml");
 
-		dao = new HibernateDao<User, Long>(sessionFactory, User.class);
+		dao = new HibernateDao<User, Long>(User.class);
+		dao.setSessionFactory(sessionFactory);
 	}
 
 	@Test

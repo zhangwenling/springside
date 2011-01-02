@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 线程相关的Utils函数集合.
+ * 线程相关工具类.
  * 
  * @author calvin
  */

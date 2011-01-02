@@ -8,13 +8,14 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 /**
- * 与Spring Assert类似功能的类,代码基本从org.springframework.util.Assert复制, 增加如下功能:
+ * 与Spring Assert功能类似, 代码基本从org.springframework.util.Assert复制, 增加如下功能:
+ * 
  * 1. 可抛出指定的业务异常类,而不是通用的IllegalArgumentException.
  * 2. 函数会返回输入值, 这样就可以把判断语句与赋值语句写成一句 , 与Google Guava中的Preconditions一致.
- * 3. 修改类名,免得一天到晚和org.junit.Assert冲突.
+ * 3. 修改类名, 免得一天到晚和org.junit.Assert冲突.
  * 
  * 代码示例:
- * <pre class="code">userName=Asserter.hasText(userName, new IllegalBizArgumentsException(ErrorCode.USERNAME_ERROR));</pre>
+ * <pre class="code">userName=Asserter.hasText(uName, new IllegalBizArgumentsException(ErrorCode.USERNAME_ERROR));</pre>
  *   
  * @author badqiu
  * @author calvin

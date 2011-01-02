@@ -46,7 +46,8 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 
 		DbUnitUtils.loadData((DataSource) applicationContext.getBean("dataSource"), "classpath:/test-data.xml");
 
-		dao = new SimpleHibernateDao<User, Long>(sessionFactory, User.class);
+		dao = new SimpleHibernateDao<User, Long>(User.class);
+		dao.setSessionFactory(sessionFactory);
 	}
 
 	@Test
@@ -133,7 +134,6 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 		assertEquals(DEFAULT_LOGIN_NAME, user.getLoginName());
 	}
 
-	
 	@Test
 	public void batchUpdate() {
 		Map map = new HashMap();
@@ -147,7 +147,6 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 	}
 
 	@Test
-	
 	public void eagerFetch() {
 		String sql = "from User u left join fetch u.roleList order by u.id";
 
@@ -179,7 +178,6 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 		assertEquals(false, dao.isPropertyUnique("loginName", "user2", "admin"));
 	}
 
-	
 	public void constructor() {
 		MyUserDao myDao = new MyUserDao();
 		Class entityClazz = (Class) ReflectionUtils.getFieldValue(myDao, "entityClass");

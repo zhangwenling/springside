@@ -31,7 +31,6 @@ import org.springside.modules.utils.reflection.ReflectionUtils;
 /**
  * 封装Hibernate原生API的DAO泛型基类.
  * 
- * 可在Service层直接使用, 也可以扩展泛型DAO子类使用, 见两个构造函数的注释.
  * 参考Spring2.5自带的Petlinc例子, 取消了HibernateTemplate, 直接使用Hibernate原生API.
  * 
  * @param <T> DAO操作的对象类型
@@ -48,7 +47,6 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	protected Class<T> entityClass;
 
 	/**
-	 * 用于Dao层子类使用的构造函数.
 	 * 通过子类的泛型定义取得对象类型Class.
 	 * eg.
 	 * public class UserDao extends SimpleHibernateDao<User, Long>
@@ -57,14 +55,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 		this.entityClass = ReflectionUtils.getSuperClassGenricType(getClass());
 	}
 
-	/**
-	 * 用于用于省略Dao层, 在Service层直接使用通用SimpleHibernateDao的构造函数.
-	 * 在构造函数中定义对象类型Class.
-	 * eg.
-	 * SimpleHibernateDao<User, Long> userDao = new SimpleHibernateDao<User, Long>(sessionFactory, User.class);
-	 */
-	public SimpleHibernateDao(final SessionFactory sessionFactory, final Class<T> entityClass) {
-		this.sessionFactory = sessionFactory;
+	public SimpleHibernateDao(Class<T> entityClass) {
 		this.entityClass = entityClass;
 	}
 
