@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="org.springside.modules.security.springsecurity.SpringSecurityUtils" %>
+<%@ page import="org.apache.shiro.SecurityUtils" %>
 <%@ page import="org.springside.examples.showcase.security.OperatorDetails" %>
 <%@ include file="/common/taglibs.jsp" %>
 
@@ -29,8 +29,8 @@
 	<%@ include file="/common/left.jsp" %>
 	<div class="span-18 last prepend-top">
 		<h2>综合演示用例</h2>
-		<%if(SpringSecurityUtils.getCurrentUser()!=null){ %>
-		<div>你好, 用户<%=SpringSecurityUtils.getCurrentUserName()%>在<%=((OperatorDetails)SpringSecurityUtils.getCurrentUser()).getLoginTime()%>从<%=SpringSecurityUtils.getCurrentUserIp()%>登录.&nbsp;&nbsp;</div>
+		<%if(SecurityUtils.getSubject().getPrincipal()!=null){ %>
+		<div>你好, 用户<%=SecurityUtils.getSubject().getPrincipal()%>登录.&nbsp;&nbsp;</div>
 		<%} %>
 		<div>
 			<form id="mainForm" action="user!disableUsers.action" method="post">

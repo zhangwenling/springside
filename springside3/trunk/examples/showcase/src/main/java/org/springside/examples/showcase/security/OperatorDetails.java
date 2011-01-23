@@ -14,31 +14,42 @@ import org.springside.examples.showcase.common.entity.Role;
  * @author calvin
  */
 public class OperatorDetails extends User {
-	private static final long serialVersionUID = 1919464185097508773L;
+    private static final long serialVersionUID = 1919464185097508773L;
 
-	private Date loginTime;
+    private Date              loginTime;
 
-	private List<Role> roleList;
+    private List<Role>        roleList;
 
-	public OperatorDetails(String username, String password, boolean enabled, boolean accountNonExpired,
-			boolean credentialsNonExpired, boolean accountNonLocked, Collection<GrantedAuthority> authorities)
-			throws IllegalArgumentException {
-		super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
-	}
+    private String            plainPassword;
 
-	public Date getLoginTime() {
-		return loginTime;
-	}
+    public OperatorDetails(String username, String password, boolean enabled, boolean accountNonExpired,
+            boolean credentialsNonExpired, boolean accountNonLocked, Collection<GrantedAuthority> authorities)
+            throws IllegalArgumentException {
+        super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
+    }
 
-	public void setLoginTime(Date loginTime) {
-		this.loginTime = loginTime;
-	}
+    public Date getLoginTime() {
+        return loginTime;
+    }
 
-	public List<Role> getRoleList() {
-		return roleList;
-	}
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
+    }
 
-	public void setRoleList(List<Role> roleList) {
-		this.roleList = roleList;
-	}
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
+
+    public String getPlainPassword() {
+        return plainPassword;
+    }
+
+    public void setPlainPassword(String plainPassword) {
+        this.plainPassword = plainPassword;
+    }
+
 }

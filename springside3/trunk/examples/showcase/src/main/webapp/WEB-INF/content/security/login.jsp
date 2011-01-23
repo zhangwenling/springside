@@ -49,29 +49,29 @@
 			<div class="error"> 此帐号已从别处登录.</div>
 		<%}%>
 	
-		<form id="loginForm" action="${ctx}/j_spring_security_check" method="post">
+		<form id="loginForm" action="login.action" method="post">
 			<table class="noborder">
 				<tr>
-					<td><label for="j_username">用户名:</label></td>
+					<td><label for="username">用户名:</label></td>
 					<td>
-						<input type='text' name='j_username' size='10' class="required"
+						<input type='text' name='username' size='10' class="required"
 						<s:if test="not empty param.error">
-							value='<%=session.getAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY)%>'</s:if> />
+							value=''</s:if> />
 					</td>
 				</tr>
 				<tr>
-					<td><label for="j_password">密码:</label></td>
-					<td><input type='password' size='10' name='j_password' class="required"/></td>
+					<td><label for="password">密码:</label></td>
+					<td><input type='password' size='10' name='password' class="required"/></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="checkbox" id="_spring_security_remember_me" name="_spring_security_remember_me"/>
-						<label for="_spring_security_remember_me">两周内记住我</label>
+					<td colspan="2"><input type="checkbox" id="remember_me" name="remember_me"/>
+						<label for="remember_me">两周内记住我</label>
 						<input value="登录" type="submit"/>
 					</td>
 				</tr>
 			</table>
 		</form>
-		<div>（管理员<b>admin/admin</b> ,普通用户<b>user/user</b>）<a href="${ctx}/j_spring_security_logout">退出登录</a></div>
+		<div>（管理员<b>admin/admin</b> ,普通用户<b>user/user</b>）<a href="logout.action">退出登录</a></div>
 	</div>
 </div>
 <%@ include file="/common/footer.jsp" %>

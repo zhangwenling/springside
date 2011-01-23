@@ -27,48 +27,49 @@ import com.google.common.collect.Sets;
 @Transactional(readOnly = true)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	private AccountManager accountManager;
+    private AccountManager accountManager;
 
-	/**
-	 * 获取用户Detail信息的回调函数.
-	 */
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
+    /**
+     * 获取用户Detail信息的回调函数.
+     */
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
 
-		User user = accountManager.findUserByLoginName(username);
-		if (user == null) {
-			throw new UsernameNotFoundException("用户" + username + " 不存在");
-		}
+        User user = accountManager.findUserByLoginName(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("用户" + username + " 不存在");
+        }
 
-		Set<GrantedAuthority> grantedAuths = obtainGrantedAuthorities(user);
+        Set<GrantedAuthority> grantedAuths = obtainGrantedAuthorities(user);
 
-		//showcase的User类中无以下属性,暂时全部设为true.
-		boolean enabled = true;
-		boolean accountNonExpired = true;
-		boolean credentialsNonExpired = true;
-		boolean accountNonLocked = true;
+        //showcase的User类中无以下属性,暂时全部设为true.
+        boolean enabled = true;
+        boolean accountNonExpired = true;
+        boolean credentialsNonExpired = true;
+        boolean accountNonLocked = true;
 
-		OperatorDetails userDetails = new OperatorDetails(user.getLoginName(), user.getShaPassword(), enabled,
-				accountNonExpired, credentialsNonExpired, accountNonLocked, grantedAuths);
-		//加入登录时间信息和用户角色
-		userDetails.setLoginTime(new Date());
-		userDetails.setRoleList(user.getRoleList());
-		return userDetails;
-	}
+        OperatorDetails userDetails = new OperatorDetails(user.getLoginName(), user.getShaPassword(), enabled,
+                accountNonExpired, credentialsNonExpired, accountNonLocked, grantedAuths);
+        //加入登录时间信息和用户角色
+        userDetails.setLoginTime(new Date());
+        userDetails.setRoleList(user.getRoleList());
+        userDetails.setPlainPassword(user.getPlainPassword());
+        return userDetails;
+    }
 
-	/**
-	 * 获得用户所有角色的权限.
-	 */
-	private Set<GrantedAuthority> obtainGrantedAuthorities(User user) {
-		Set<GrantedAuthority> authSet = Sets.newHashSet();
-		for (Role role : user.getRoleList()) {
-			authSet.add(new GrantedAuthorityImpl("ROLE_" + role.getName()));
-		}
-		return authSet;
-	}
+    /**
+     * 获得用户所有角色的权限.
+     */
+    private Set<GrantedAuthority> obtainGrantedAuthorities(User user) {
+        Set<GrantedAuthority> authSet = Sets.newHashSet();
+        for (Role role : user.getRoleList()) {
+            authSet.add(new GrantedAuthorityImpl("ROLE_" + role.getName()));
+        }
+        return authSet;
+    }
 
-	@Autowired
-	public void setAccountManager(AccountManager accountManager) {
-		this.accountManager = accountManager;
-	}
+    @Autowired
+    public void setAccountManager(AccountManager accountManager) {
+        this.accountManager = accountManager;
+    }
 }

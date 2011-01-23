@@ -3,7 +3,7 @@
 <mapper namespace="Account">
 	<select id="getUser" parameterType="int" resultType="User">
 		select id, name, login_name as loginName, email 
-		from acct_user
+		from ss_user
 		where id=#{id}
 	</select>	
 </mapper> 
