@@ -15,6 +15,7 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
 import com.thimbleware.jmemcached.CacheImpl;
+import com.thimbleware.jmemcached.Key;
 import com.thimbleware.jmemcached.LocalCacheElement;
 import com.thimbleware.jmemcached.MemCacheDaemon;
 import com.thimbleware.jmemcached.storage.CacheStorage;
@@ -43,7 +44,7 @@ public class MemcachedSimulator implements InitializingBean, DisposableBean {
 
 		jmemcached = new MemCacheDaemon<LocalCacheElement>();
 
-		CacheStorage<String, LocalCacheElement> storage = ConcurrentLinkedHashMap.create(
+		CacheStorage<Key, LocalCacheElement> storage = ConcurrentLinkedHashMap.create(
 				ConcurrentLinkedHashMap.EvictionPolicy.FIFO, maxItems, maxBytes);
 		jmemcached.setCache(new CacheImpl(storage));
 
