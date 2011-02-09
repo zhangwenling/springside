@@ -8,10 +8,9 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 
 import org.apache.ws.security.WSPasswordCallback;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.AccountManager;
+import org.springside.modules.security.utils.DigestUtils;
 
 /**
  * 对WS-Security中Digest式密码的处理Handler.
@@ -30,14 +29,14 @@ public class PlainPasswordCallback implements CallbackHandler {
 	public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
 
 		WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];
-		PasswordEncoder encoder = new ShaPasswordEncoder();
 		User user = accountManager.findUserByLoginName(pc.getIdentifier());
 
 		if (user == null) {
 			throw new IOException("wrong login name " + pc.getIdentifier());
 		}
+
 		//对WSPasswordCallback中的明文密码进行sha1散列, 再与数据库中保存的用户sha1散列密码进行比较.
-		if (!encoder.isPasswordValid(user.getShaPassword(), pc.getPassword(), null)) {
+		if (!DigestUtils.sha1ToBase64(pc.getPassword()).equals(user.getShaPassword())) {
 			throw new IOException("wrong password " + pc.getPassword() + " for " + pc.getIdentifier());
 		}
 	}
