@@ -28,7 +28,7 @@ import org.hibernate.transform.ResultTransformer;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.PropertyFilter.MatchType;
-import org.springside.modules.utils.Asserter;
+import org.springside.modules.utils.AssertUtils;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
@@ -75,7 +75,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @return 分页查询结果, 附带结果列表及所有查询输入参数.
 	 */
 	public Page<T> findPage(final Page<T> page, final String hql, final Object... values) {
-		Asserter.notNull(page, "page不能为空");
+		AssertUtils.notNull(page, "page不能为空");
 
 		Query q = createQuery(hql, values);
 
@@ -99,7 +99,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @return 分页查询结果, 附带结果列表及所有查询输入参数.
 	 */
 	public Page<T> findPage(final Page<T> page, final String hql, final Map<String, ?> values) {
-		Asserter.notNull(page, "page不能为空");
+		AssertUtils.notNull(page, "page不能为空");
 
 		Query q = createQuery(hql, values);
 
@@ -122,7 +122,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * @return 分页查询结果.附带结果列表及所有查询输入参数.
 	 */
 	public Page<T> findPage(final Page<T> page, final Criterion... criterions) {
-		Asserter.notNull(page, "page不能为空");
+		AssertUtils.notNull(page, "page不能为空");
 
 		Criteria c = createCriteria(criterions);
 
@@ -140,7 +140,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 设置分页参数到Query对象,辅助函数.
 	 */
 	protected Query setPageParameterToQuery(final Query q, final Page<T> page) {
-		Asserter.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
+		AssertUtils.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
 
 		q.setFirstResult(page.getOffset());
 		q.setMaxResults(page.getPageSize());
@@ -152,7 +152,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 设置分页参数到Criteria对象,辅助函数.
 	 */
 	protected Criteria setPageParameterToCriteria(final Criteria c, final Page<T> page) {
-		Asserter.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
+		AssertUtils.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
 
 		c.setFirstResult(page.getOffset());
 		c.setMaxResults(page.getPageSize());
@@ -161,7 +161,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 			String[] orderByArray = StringUtils.split(page.getOrderBy(), ',');
 			String[] orderArray = StringUtils.split(page.getOrder(), ',');
 
-			Asserter.isTrue(orderByArray.length == orderArray.length, "分页多重排序参数中,排序字段与排序方向的个数不相等");
+			AssertUtils.isTrue(orderByArray.length == orderArray.length, "分页多重排序参数中,排序字段与排序方向的个数不相等");
 
 			for (int i = 0; i < orderByArray.length; i++) {
 				if (Page.ASC.equals(orderArray[i])) {
@@ -288,7 +288,7 @@ public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao
 	 * 按属性条件参数创建Criterion,辅助函数.
 	 */
 	protected Criterion buildCriterion(final String propertyName, final Object propertyValue, final MatchType matchType) {
-		Asserter.hasText(propertyName, "propertyName不能为空");
+		AssertUtils.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = null;
 		//根据MatchType构造criterion
 		switch (matchType) {

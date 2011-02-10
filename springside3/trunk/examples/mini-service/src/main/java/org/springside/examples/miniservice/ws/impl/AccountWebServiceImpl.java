@@ -21,7 +21,7 @@ import org.springside.examples.miniservice.ws.result.UserPageResult;
 import org.springside.examples.miniservice.ws.result.base.IdResult;
 import org.springside.examples.miniservice.ws.result.base.WSResult;
 import org.springside.modules.orm.Page;
-import org.springside.modules.utils.Asserter;
+import org.springside.modules.utils.AssertUtils;
 import org.springside.modules.utils.mapping.ConvertUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
@@ -48,7 +48,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 		//获取部门
 		try {
 			Department entity = accountManager.getDepartmentDetail(id);
-			Asserter.notNull(entity, "部门不存在(id:" + id + ")");
+			AssertUtils.notNull(entity, "部门不存在(id:" + id + ")");
 			DepartmentDTO dto = ConvertUtils.map(entity, DepartmentDTO.class);
 			return new DepartmentResult(dto);
 		} catch (IllegalArgumentException e) {

@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.utils.mapping;
+package org.springside.modules.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -15,7 +15,6 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang.StringEscapeUtils;
-import org.springside.modules.utils.Asserter;
 
 /**
  * 各种格式的编码解码工具类.
@@ -99,7 +98,7 @@ public class EncodeUtils {
 	}
 
 	private static String alphabetEncode(long num, int base) {
-		Asserter.isTrue(num > 0, "num must be greater than 0.");
+		AssertUtils.isTrue(num > 0, "num must be greater than 0.");
 
 		StringBuilder sb = new StringBuilder();
 		for (; num > 0; num /= base) {
@@ -110,7 +109,7 @@ public class EncodeUtils {
 	}
 
 	private static long alphabetDecode(String str, int base) {
-		Asserter.hasText(str);
+		AssertUtils.hasText(str);
 
 		long result = 0;
 		for (int i = 0; i < str.length(); i++) {

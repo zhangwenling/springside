@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springside.examples.showcase.common.service.AccountManager;
-import org.springside.modules.utils.Asserter;
+import org.springside.modules.utils.AssertUtils;
 import org.springside.modules.utils.ThreadUtils;
 
 /**
@@ -32,7 +32,7 @@ public class SpringCronJob implements Runnable {
 
 	@PostConstruct
 	public void start() {
-		Asserter.hasText(cronExpression);
+		AssertUtils.hasText(cronExpression);
 
 		threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
 		threadPoolTaskScheduler.setThreadNamePrefix("SpringCronJob");

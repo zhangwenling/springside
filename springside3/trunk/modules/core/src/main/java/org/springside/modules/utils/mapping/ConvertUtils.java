@@ -21,10 +21,9 @@ import org.springside.modules.utils.ReflectionUtils;
 import com.google.common.collect.Lists;
 
 /**
- * 对象转换工具,包括:
- * 
- * 1.封装Dozer的对象类型转换工具类.
- * 2.封装Apache Commons Bean的字符串->对象转换工具和集合中元素属性
+ * 转换工具类,包括:
+ * 1.封装Dozer, 转换对象类型.
+ * 2.封装Apache Commons BeanUtils,将字符串转换为对象
  * 3.从集合中对象中提取属性组成新的List或带分隔符的字符串.
  * 
  * TODO:看看Spring有没有更好的String To Object方案.
@@ -36,7 +35,7 @@ public class ConvertUtils {
 	/**
 	 * 持有Dozer单例, 避免重复创建Mapper消耗资源.
 	 */
-	private static DozerBeanMapper dozer = new DozerBeanMapper();
+	static DozerBeanMapper dozer = new DozerBeanMapper();
 
 	static {
 		registerDateConverter();
@@ -117,5 +116,4 @@ public class ConvertUtils {
 		List list = extractElementPropertyToList(collection, propertyName);
 		return StringUtils.join(list, separator);
 	}
-
 }

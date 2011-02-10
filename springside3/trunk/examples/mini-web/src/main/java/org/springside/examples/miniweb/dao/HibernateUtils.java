@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import org.springside.examples.miniweb.entity.IdEntity;
-import org.springside.modules.utils.Asserter;
+import org.springside.modules.utils.AssertUtils;
 import org.springside.modules.utils.ReflectionUtils;
 
 /**
@@ -29,8 +29,8 @@ public class HibernateUtils {
 			final Collection<Long> checkedIds, final Class<T> clazz) {
 
 		//参数校验
-		Asserter.notNull(srcObjects, "scrObjects不能为空");
-		Asserter.notNull(clazz, "clazz不能为空");
+		AssertUtils.notNull(srcObjects, "scrObjects不能为空");
+		AssertUtils.notNull(clazz, "clazz不能为空");
 
 		//目标集合为空, 删除源集合中所有对象后直接返回.
 		if (checkedIds == null) {

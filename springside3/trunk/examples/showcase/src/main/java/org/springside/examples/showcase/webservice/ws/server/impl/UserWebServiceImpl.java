@@ -19,7 +19,7 @@ import org.springside.examples.showcase.webservice.ws.server.dto.UserDTO;
 import org.springside.examples.showcase.webservice.ws.server.result.GetAllUserResult;
 import org.springside.examples.showcase.webservice.ws.server.result.GetUserResult;
 import org.springside.examples.showcase.webservice.ws.server.result.WSResult;
-import org.springside.modules.utils.Asserter;
+import org.springside.modules.utils.AssertUtils;
 import org.springside.modules.utils.mapping.ConvertUtils;
 
 /**
@@ -70,7 +70,7 @@ public class UserWebServiceImpl implements UserWebService {
 		StopWatch totalStopWatch = new Slf4JStopWatch();
 		//校验请求参数
 		try {
-			Asserter.notNull(id, "id参数为空");
+			AssertUtils.notNull(id, "id参数为空");
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
 			return result.setResult(WSResult.PARAMETER_ERROR, e.getMessage());

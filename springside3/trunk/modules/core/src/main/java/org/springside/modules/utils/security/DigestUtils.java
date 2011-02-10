@@ -12,7 +12,7 @@ import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 
-import org.springside.modules.utils.mapping.EncodeUtils;
+import org.springside.modules.utils.EncodeUtils;
 
 /**
  * 支持SHA-1/MD5消息摘要的工具类.

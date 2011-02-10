@@ -10,7 +10,7 @@ import javax.validation.Validator;
 import org.apache.commons.lang.xwork.StringUtils;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springside.modules.utils.Asserter;
+import org.springside.modules.utils.AssertUtils;
 
 import com.google.common.collect.Lists;
 
@@ -84,6 +84,6 @@ public class ValidatorHolder implements DisposableBean {
 	}
 
 	private static void assertValidatorInjected() {
-		Asserter.state(validator != null, "Validator属性未注入.");
+		AssertUtils.state(validator != null, "Validator属性未注入.");
 	}
 }

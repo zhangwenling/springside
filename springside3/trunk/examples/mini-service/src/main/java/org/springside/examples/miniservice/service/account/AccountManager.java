@@ -11,7 +11,7 @@ import org.springside.examples.miniservice.dao.account.AccountDao;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
 import org.springside.modules.orm.Page;
-import org.springside.modules.utils.Asserter;
+import org.springside.modules.utils.AssertUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
 import com.google.common.collect.Maps;
@@ -34,7 +34,7 @@ public class AccountManager {
 
 	@Transactional(readOnly = true)
 	public Department getDepartmentDetail(Long id) {
-		Asserter.notNull(id, "id参数为空");
+		AssertUtils.notNull(id, "id参数为空");
 		return accountDao.getDepartmentDetail(id);
 	}
 
@@ -53,8 +53,8 @@ public class AccountManager {
 	}
 
 	public Long saveUser(User user) throws ConstraintViolationException {
-		Asserter.notNull(user, "用户参数为空");
-		Asserter.isNull(user.getId(), "新建用户ID参数必须为空");
+		AssertUtils.notNull(user, "用户参数为空");
+		AssertUtils.isNull(user.getId(), "新建用户ID参数必须为空");
 
 		//Hibernate Validator校验请求参数
 		ValidatorHolder.validateWithException(user);

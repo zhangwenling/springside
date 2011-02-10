@@ -98,8 +98,8 @@ public class ReflectionUtils {
 	 * 如向上转型到Object仍无法找到, 返回null.
 	 */
 	public static Field getAccessibleField(final Object obj, final String fieldName) {
-		Asserter.notNull(obj, "object不能为空");
-		Asserter.hasText(fieldName, "fieldName");
+		AssertUtils.notNull(obj, "object不能为空");
+		AssertUtils.hasText(fieldName, "fieldName");
 		for (Class<?> superClass = obj.getClass(); superClass != Object.class; superClass = superClass.getSuperclass()) {
 			try {
 				Field field = superClass.getDeclaredField(fieldName);
@@ -151,7 +151,7 @@ public class ReflectionUtils {
 	 */
 	public static Method getAccessibleMethod(final Object obj, final String methodName,
 			final Class<?>... parameterTypes) {
-		Asserter.notNull(obj, "object不能为空");
+		AssertUtils.notNull(obj, "object不能为空");
 
 		for (Class<?> superClass = obj.getClass(); superClass != Object.class; superClass = superClass.getSuperclass()) {
 			try {

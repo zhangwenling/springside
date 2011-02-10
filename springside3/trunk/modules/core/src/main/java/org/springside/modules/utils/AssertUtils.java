@@ -19,7 +19,7 @@ import org.springframework.util.StringUtils;
  * @author badqiu
  * @author calvin
  */
-public class Asserter {
+public class AssertUtils {
 
 	/**
 	 * Assert a boolean expression, throwing <code>IllegalArgumentException</code>
