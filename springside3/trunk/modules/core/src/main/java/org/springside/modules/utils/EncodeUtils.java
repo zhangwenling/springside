@@ -70,28 +70,28 @@ public class EncodeUtils {
 	}
 
 	/**
-	 * Base36(0_9A_Z)编码.
+	 * Base36(0_9A_Z)编码, long->String.
 	 */
 	public static String base36Encode(long num) {
 		return alphabetEncode(num, 36);
 	}
 
 	/**
-	 * Base36(0_9A_Z)解码.
+	 * Base36(0_9A_Z)解码, String->long.
 	 */
 	public static long base36Decode(String str) {
 		return alphabetDecode(str, 36);
 	}
 
 	/**
-	 * Base62(0_9A_Za_z)编码.
+	 * Base62(0_9A_Za_z)编码, long->String.
 	 */
 	public static String base62Encode(long num) {
 		return alphabetEncode(num, 62);
 	}
 
 	/**
-	 * Base62(0_9A_Za_z)解码
+	 * Base62(0_9A_Za_z)解码, String->long.
 	 */
 	public static long base62Decode(String str) {
 		return alphabetDecode(str, 62);

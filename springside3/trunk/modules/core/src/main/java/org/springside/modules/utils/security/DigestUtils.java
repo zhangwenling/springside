@@ -65,14 +65,14 @@ public class DigestUtils {
 
 	//-- File Hash function --//
 	/**
-	 * 对文件进行md5散列,返回Hex编码结果.
+	 * 对文件进行md5散列, 返回Hex编码结果.
 	 */
 	public static String md5ToHex(InputStream input) throws IOException {
 		return digest(input, MD5);
 	}
 
 	/**
-	 * 对文件进行sha1散列,返回Hex编码结果.
+	 * 对文件进行sha1散列, 返回Hex编码结果.
 	 */
 	public static String sha1ToHex(InputStream input) throws IOException {
 		return digest(input, SHA1);

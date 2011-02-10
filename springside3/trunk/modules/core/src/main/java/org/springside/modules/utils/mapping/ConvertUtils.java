@@ -21,10 +21,10 @@ import org.springside.modules.utils.ReflectionUtils;
 import com.google.common.collect.Lists;
 
 /**
- * 转换工具类,包括:
- * 1.封装Dozer, 转换对象类型.
- * 2.封装Apache Commons BeanUtils,将字符串转换为对象
- * 3.从集合中对象中提取属性组成新的List或带分隔符的字符串.
+ * 对象转换工具类,包括:
+ * 1. 封装Dozer, 转换对象类型.
+ * 2. 封装Apache Commons BeanUtils, 将字符串转换为对象.
+ * 3. 从集合的对象中提取属性组成新的List或带分隔符的字符串.
  * 
  * TODO:看看Spring有没有更好的String To Object方案.
  * 

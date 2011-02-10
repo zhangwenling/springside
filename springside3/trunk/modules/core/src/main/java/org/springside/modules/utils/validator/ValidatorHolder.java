@@ -15,7 +15,7 @@ import org.springside.modules.utils.AssertUtils;
 import com.google.common.collect.Lists;
 
 /**
- * JSR303 Validator(Hibernate Validator)工具类, 持有单例提供静态的validate方法.
+ * JSR303 Validator(Hibernate Validator)工具类, 持有Validator单例提供静态的validate方法.
  * 
  * @author badqiu
  * @author calvin
@@ -43,12 +43,12 @@ public class ValidatorHolder implements DisposableBean {
 	}
 
 	/**
-	 * 调用JSR303的validate方法, 验证失败时抛出ConstraintViolationException
+	 * 调用JSR303的validate方法, 验证失败时抛出ConstraintViolationException.
 	 */
 	public static <T> void validateWithException(T object, Class<?>... groups) throws ConstraintViolationException {
-		Set set = validate(object, groups);
-		if (!set.isEmpty()) {
-			throw new ConstraintViolationException(set);
+		Set constraintViolations = validate(object, groups);
+		if (!constraintViolations.isEmpty()) {
+			throw new ConstraintViolationException(constraintViolations);
 		}
 	}
 

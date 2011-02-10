@@ -14,7 +14,7 @@ import org.springframework.util.StringUtils;
  * 2. 修改类名, 免得一天到晚和org.junit.Assert冲突.
  * 
  * 代码示例:
- * <pre class="code">userName=Asserter.hasText(uName, new IllegalBizArgumentsException(ErrorCode.USERNAME_ERROR));</pre>
+ * <pre class="code">AssertUtils.hasText(uName, new IllegalBizArgumentsException(ErrorCode.USERNAME_ERROR));</pre>
  *   
  * @author badqiu
  * @author calvin

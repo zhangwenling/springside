@@ -28,12 +28,12 @@ import org.springside.modules.utils.EncodeUtils;
 public class ServletUtils {
 
 	//-- Content Type 定义 --//
-	public static final String TEXT_TYPE = "text/plain";
-	public static final String JSON_TYPE = "application/json";
-	public static final String XML_TYPE = "text/xml";
+	public static final String EXCEL_TYPE = "application/vnd.ms-excel";
 	public static final String HTML_TYPE = "text/html";
 	public static final String JS_TYPE = "text/javascript";
-	public static final String EXCEL_TYPE = "application/vnd.ms-excel";
+	public static final String JSON_TYPE = "application/json";
+	public static final String XML_TYPE = "text/xml";
+	public static final String TEXT_TYPE = "text/plain";
 
 	//-- Header 定义 --//
 	public static final String AUTHENTICATION_HEADER = "Authorization";
