@@ -28,7 +28,7 @@ import org.springside.examples.miniservice.rs.dto.UserDTO;
 import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.utils.JerseyServerUtils;
 import org.springside.modules.orm.Page;
-import org.springside.modules.utils.mapping.DozerUtils;
+import org.springside.modules.utils.reflection.ConvertUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
 /**
@@ -62,7 +62,7 @@ public class UserResouceService {
 				throw JerseyServerUtils.buildException(Status.NOT_FOUND, message, logger);
 			}
 
-			return DozerUtils.map(entity, UserDTO.class);
+			return ConvertUtils.map(entity, UserDTO.class);
 		} catch (RuntimeException e) {
 			throw JerseyServerUtils.buildDefaultException(e, logger);
 		}
@@ -78,7 +78,7 @@ public class UserResouceService {
 		try {
 			Page<User> entityList = accountManager.searchUser(loginName, name, 1, Integer.MAX_VALUE);
 
-			return DozerUtils.mapList(entityList.getResult(), UserDTO.class);
+			return ConvertUtils.mapList(entityList.getResult(), UserDTO.class);
 		} catch (RuntimeException e) {
 			throw JerseyServerUtils.buildDefaultException(e, logger);
 		}
@@ -92,7 +92,7 @@ public class UserResouceService {
 	public Response createUser(UserDTO user) {
 		//转换并创建用户
 		try {
-			User userEntity = DozerUtils.map(user, User.class);
+			User userEntity = ConvertUtils.map(user, User.class);
 
 			Long id = accountManager.saveUser(userEntity);
 

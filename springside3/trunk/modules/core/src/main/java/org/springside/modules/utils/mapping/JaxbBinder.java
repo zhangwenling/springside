@@ -34,11 +34,11 @@ public class JaxbBinder {
 	private JAXBContext jaxbContext;
 
 	/**
-	 * @param types 所有需要序列化的Root对象的Class.
+	 * @param rootTypes 所有需要序列化的Root对象的Class.
 	 */
-	public JaxbBinder(Class<?>... types) {
+	public JaxbBinder(Class<?>... rootTypes) {
 		try {
-			jaxbContext = JAXBContext.newInstance(types);
+			jaxbContext = JAXBContext.newInstance(rootTypes);
 		} catch (JAXBException e) {
 			throw new RuntimeException(e);
 		}
@@ -104,7 +104,7 @@ public class JaxbBinder {
 	}
 
 	/**
-	 * 创建Marshaller并设定encoding(可为Null).
+	 * 创建Marshaller并设定encoding(可为null).
 	 */
 	public Marshaller createMarshaller(String encoding) {
 		try {

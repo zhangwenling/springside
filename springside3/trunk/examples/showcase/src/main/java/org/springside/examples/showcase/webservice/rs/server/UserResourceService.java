@@ -28,7 +28,7 @@ import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.examples.showcase.webservice.WsConstants;
 import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
-import org.springside.modules.utils.mapping.DozerUtils;
+import org.springside.modules.utils.reflection.ConvertUtils;
 
 /**
  * 用户资源 REST服务演示.
@@ -55,7 +55,7 @@ public class UserResourceService {
 	public List<UserDTO> getAllUser() {
 		try {
 			List<User> entityList = accountManager.getAllUserWithRole();
-			return DozerUtils.mapList(entityList, UserDTO.class);
+			return ConvertUtils.mapList(entityList, UserDTO.class);
 		} catch (RuntimeException e) {
 			throw JerseyServerUtils.buildDefaultException(e, logger);
 		}
@@ -70,7 +70,7 @@ public class UserResourceService {
 	public UserDTO getUser(@PathParam("id") Long id) {
 		try {
 			User entity = accountManager.getInitializedUser(id);
-			return DozerUtils.map(entity, UserDTO.class);
+			return ConvertUtils.map(entity, UserDTO.class);
 		} catch (ObjectNotFoundException e) {
 			String message = "用户不存在(id:" + id + ")";
 			throw JerseyServerUtils.buildException(Status.NOT_FOUND, message, logger);
@@ -97,7 +97,7 @@ public class UserResourceService {
 				return Response.ok(html, MediaType.TEXT_HTML + WsConstants.CHARSET).build();
 			} else {
 				//返回JSON格式的对象.
-				UserDTO dto = DozerUtils.map(entity, UserDTO.class);
+				UserDTO dto = ConvertUtils.map(entity, UserDTO.class);
 				return Response.ok(dto, MediaType.APPLICATION_JSON).build();
 			}
 		} catch (ObjectNotFoundException e) {

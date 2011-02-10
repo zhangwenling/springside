@@ -18,8 +18,8 @@
 		var remoteUrl = "http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}";
 
 		//使用JQuery.getJSON(url?callback=?)方式跨域名访问内容
-		function getMashupContent() {
-			$.getJSON(remoteUrl + "/ajax/mashup/mashup-server.action?callback=?", function(data) {
+		function fetchMashupContent() {
+			$.getJSON(remoteUrl + "/web/mashup/mashup-server.action?callback=?", function(data) {
 				$('#mashupContent').html(data.html);
 				$('#mashupContent').show();
 			});
@@ -37,10 +37,10 @@
 	
 		<h3>技术说明：</h3>
 		<p>
-			演示基于JQuery的JSONP实现，绕过浏览器对Ajax访问跨域名网站内容的限制, Mashup不同域名网站的内容.<br/>
-			请先将本页另存为本地html文件，打开本地文件访问应用服务器即为跨域访问的场景.
+			演示基于JQuery的JSONP实现，绕过浏览器对Ajax不能访问跨域名网站内容的限制实现Mashup.<br/>
+			请先将本页另存为本地html文件，打开本地文件访问本地应用服务器中的内容即为跨域访问的场景.
 		</p>
-		<p><input type="button" value="获取内容" onclick="getMashupContent();"/></p>	
+		<p><input type="button" value="获取内容" onclick="fetchMashupContent();"/></p>	
 		<p>跨域页面内容:</p>
 		<div id="mashupContent" style="display:none"/>
 	</div>

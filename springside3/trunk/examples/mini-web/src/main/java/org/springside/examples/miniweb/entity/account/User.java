@@ -100,7 +100,7 @@ public class User extends IdEntity {
 	//非持久化属性.
 	@Transient
 	public String getRoleNames() {
-		return ConvertUtils.convertElementPropertyToString(roleList, "name", ", ");
+		return ConvertUtils.extractElementPropertyToString(roleList, "name", ", ");
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class User extends IdEntity {
 	//非持久化属性.
 	@Transient
 	public List<Long> getRoleIds() {
-		return ConvertUtils.convertElementPropertyToList(roleList, "id");
+		return ConvertUtils.extractElementPropertyToList(roleList, "id");
 	}
 
 	@Override

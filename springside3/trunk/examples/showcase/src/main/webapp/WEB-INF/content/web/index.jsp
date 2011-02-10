@@ -30,7 +30,7 @@
 		<h3>技术说明：</h3>
 		<ul>
 			<li>高性能Web2.0网站:<br/>
-			    1. 演示Servlet, 演示高效读取静态内容, 控制客户端缓存, 压缩传输, 弹出下载对话框.<br/>
+			    1. 静态内容Servlet, 演示高效读取静态内容, 控制客户端缓存, 压缩传输, 弹出下载对话框.<br/>
 			 	2. 远程内容Servlet, 演示使用Apache HttpClient多线程高效获取远程网站内容.<br/>
 			    3. CacheControlHeaderFilter为静态内容添加缓存控制 Header<br/>
 			    4. YUI Compressor 压缩js/css<br/>

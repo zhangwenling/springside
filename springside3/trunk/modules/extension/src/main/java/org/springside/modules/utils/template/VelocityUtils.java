@@ -14,7 +14,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
 /**
- * 使用Velocity生成内容的工具类.
+ * 使用Velocity根据模板生成内容的工具类.
  * 
  * @author calvin
  */
@@ -29,7 +29,7 @@ public class VelocityUtils {
 	}
 
 	/**
-	 * 渲染内容.
+	 * 渲染模板内容.
 	 * 
 	 * @param template 模板内容.
 	 * @param model 变量Map.

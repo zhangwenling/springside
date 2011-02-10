@@ -16,7 +16,7 @@ import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.rs.dto.DepartmentDTO;
 import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.utils.JerseyServerUtils;
-import org.springside.modules.utils.mapping.DozerUtils;
+import org.springside.modules.utils.reflection.ConvertUtils;
 
 /**
  * Department资源的REST服务.
@@ -46,7 +46,7 @@ public class DepartmentResouceService {
 				throw JerseyServerUtils.buildException(Status.NOT_FOUND, message, logger);
 			}
 
-			return DozerUtils.map(entity, DepartmentDTO.class);
+			return ConvertUtils.map(entity, DepartmentDTO.class);
 		} catch (RuntimeException e) {
 			throw JerseyServerUtils.buildDefaultException(e, logger);
 		}

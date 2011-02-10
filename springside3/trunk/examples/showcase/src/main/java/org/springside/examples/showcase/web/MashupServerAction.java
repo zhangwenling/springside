@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.ajax;
+package org.springside.examples.showcase.web;
 
 import java.util.Collections;
 import java.util.Map;
@@ -13,7 +13,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * 
  * @author calvin
  */
-@Namespace("/ajax/mashup")
+@Namespace("/web/mashup")
 public class MashupServerAction extends ActionSupport {
 
 	private static final long serialVersionUID = 668305397469726147L;

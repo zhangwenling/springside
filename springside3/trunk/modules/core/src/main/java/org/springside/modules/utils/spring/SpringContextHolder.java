@@ -15,7 +15,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springside.modules.utils.Asserter;
 
 /**
- * 以静态变量保存Spring ApplicationContext, 可在任何代码任何地方任何时候中取出ApplicaitonContext.
+ * 以静态变量保存Spring ApplicationContext, 可在任何代码任何地方任何时候取出ApplicaitonContext.
  * 
  * @author calvin
  */
@@ -52,7 +52,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	/**
 	 * 清除SpringContextHolder中的ApplicationContext为Null.
 	 */
-	public static void cleanHolder() {
+	public static void clearHolder() {
 		logger.debug("清除SpringContextHolder中的ApplicationContext:" + applicationContext);
 		applicationContext = null;
 	}
@@ -77,7 +77,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	 */
 	@Override
 	public void destroy() throws Exception {
-		SpringContextHolder.cleanHolder();
+		SpringContextHolder.clearHolder();
 	}
 
 	/**
@@ -85,6 +85,6 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	 */
 	private static void assertContextInjected() {
 		Asserter.state(applicationContext != null,
-				"applicaitonContext未注入,请在applicationContext.xml中定义SpringContextHolder");
+				"applicaitonContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
 	}
 }

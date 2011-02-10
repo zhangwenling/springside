@@ -15,49 +15,49 @@ import java.util.List;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.lang.StringUtils;
+import org.dozer.DozerBeanMapper;
+
+import com.google.common.collect.Lists;
 
 /**
- * 转换工具类.
+ * 对象转换工具,包括:
+ * 
+ * 1.封装Dozer的对象类型转换工具类.
+ * 2.封装Apache Commons Bean的字符串->对象转换工具和集合中元素属性
+ * 3.从集合中对象中提取属性组成新的List或带分隔符的字符串.
+ * 
+ * TODO:看看Spring有没有更好的String To Object方案.
  * 
  * @author calvin
  */
 public class ConvertUtils {
+
+	/**
+	 * 持有Dozer单例, 避免重复创建Mapper消耗资源.
+	 */
+	private static DozerBeanMapper dozer = new DozerBeanMapper();
 
 	static {
 		registerDateConverter();
 	}
 
 	/**
-	 * 提取集合中的对象的属性(通过getter函数), 组合成List.
-	 * 
-	 * @param collection 来源集合.
-	 * @param propertyName 要提取的属性名.
+	 * 基于Dozer转换对象的类型.
 	 */
-	public static List convertElementPropertyToList(final Collection collection, final String propertyName) {
-		List list = new ArrayList();
-
-		try {
-			for (Object obj : collection) {
-				list.add(PropertyUtils.getProperty(obj, propertyName));
-			}
-		} catch (Exception e) {
-			throw ReflectionUtils.convertReflectionExceptionToUnchecked(e);
-		}
-
-		return list;
+	public static <T> T map(Object source, Class<T> destinationClass) {
+		return dozer.map(source, destinationClass);
 	}
 
 	/**
-	 * 提取集合中的对象的属性(通过getter函数), 组合成由分割符分隔的字符串.
-	 * 
-	 * @param collection 来源集合.
-	 * @param propertyName 要提取的属性名.
-	 * @param separator 分隔符.
+	 * 基于Dozer转换List中对象的类型.
 	 */
-	public static String convertElementPropertyToString(final Collection collection, final String propertyName,
-			final String separator) {
-		List list = convertElementPropertyToList(collection, propertyName);
-		return StringUtils.join(list, separator);
+	public static <T> List<T> mapList(Collection sourceList, Class<T> destinationClass) {
+		List<T> destinationList = Lists.newArrayList();
+		for (Object sourceObject : sourceList) {
+			T destinationObject = dozer.map(sourceObject, destinationClass);
+			destinationList.add(destinationObject);
+		}
+		return destinationList;
 	}
 
 	/**
@@ -83,4 +83,38 @@ public class ConvertUtils {
 		dc.setPatterns(new String[] { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss" });
 		org.apache.commons.beanutils.ConvertUtils.register(dc, Date.class);
 	}
+
+	/**
+	 * 提取集合中的对象的属性(通过Getter函数), 组合成List.
+	 * 
+	 * @param collection 来源集合.
+	 * @param propertyName 要提取的属性名.
+	 */
+	public static List extractElementPropertyToList(final Collection collection, final String propertyName) {
+		List list = new ArrayList();
+
+		try {
+			for (Object obj : collection) {
+				list.add(PropertyUtils.getProperty(obj, propertyName));
+			}
+		} catch (Exception e) {
+			throw ReflectionUtils.convertReflectionExceptionToUnchecked(e);
+		}
+
+		return list;
+	}
+
+	/**
+	 * 提取集合中的对象的属性(通过Getter函数), 组合成由分割符分隔的字符串.
+	 * 
+	 * @param collection 来源集合.
+	 * @param propertyName 要提取的属性名.
+	 * @param separator 分隔符.
+	 */
+	public static String extractElementPropertyToString(final Collection collection, final String propertyName,
+			final String separator) {
+		List list = extractElementPropertyToList(collection, propertyName);
+		return StringUtils.join(list, separator);
+	}
+
 }

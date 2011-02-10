@@ -122,7 +122,7 @@ public class User  extends IdEntity {
 	@Transient
 	@JsonIgnore
 	public String getRoleNames() {
-		return ConvertUtils.convertElementPropertyToString(roleList, "name", ", ");
+		return ConvertUtils.extractElementPropertyToString(roleList, "name", ", ");
 	}
 
 	@Override

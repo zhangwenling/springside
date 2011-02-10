@@ -22,7 +22,7 @@ import org.springside.examples.miniservice.ws.result.base.IdResult;
 import org.springside.examples.miniservice.ws.result.base.WSResult;
 import org.springside.modules.orm.Page;
 import org.springside.modules.utils.Asserter;
-import org.springside.modules.utils.mapping.DozerUtils;
+import org.springside.modules.utils.reflection.ConvertUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
 /**
@@ -49,7 +49,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 		try {
 			Department entity = accountManager.getDepartmentDetail(id);
 			Asserter.notNull(entity, "部门不存在(id:" + id + ")");
-			DepartmentDTO dto = DozerUtils.map(entity, DepartmentDTO.class);
+			DepartmentDTO dto = ConvertUtils.map(entity, DepartmentDTO.class);
 			return new DepartmentResult(dto);
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
@@ -69,7 +69,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 		try {
 			Page<User> page = accountManager.searchUser(loginName, name, pageNo, pageSize);
 
-			List<UserDTO> dtoList = DozerUtils.mapList(page.getResult(), UserDTO.class);
+			List<UserDTO> dtoList = ConvertUtils.mapList(page.getResult(), UserDTO.class);
 
 			return new UserPageResult(page.getTotalItems(), dtoList);
 		} catch (RuntimeException e) {
@@ -85,7 +85,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 
 		//保存用户
 		try {
-			User userEntity = DozerUtils.map(user, User.class);
+			User userEntity = ConvertUtils.map(user, User.class);
 
 			Long userId = accountManager.saveUser(userEntity);
 

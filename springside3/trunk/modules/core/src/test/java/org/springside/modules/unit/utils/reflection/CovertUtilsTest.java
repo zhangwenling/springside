@@ -24,7 +24,7 @@ public class CovertUtilsTest {
 
 		List list = Lists.newArrayList(bean1, bean2);
 
-		assertEquals("1,2", ConvertUtils.convertElementPropertyToString(list, "id", ","));
+		assertEquals("1,2", ConvertUtils.extractElementPropertyToString(list, "id", ","));
 	}
 
 	@Test
@@ -37,7 +37,7 @@ public class CovertUtilsTest {
 		bean2.setId(2);
 
 		List list = Lists.newArrayList(bean1, bean2);
-		List<String> result = ConvertUtils.convertElementPropertyToList(list, "id");
+		List<String> result = ConvertUtils.extractElementPropertyToList(list, "id");
 		assertEquals(2, result.size());
 		assertEquals(1, result.get(0));
 	}

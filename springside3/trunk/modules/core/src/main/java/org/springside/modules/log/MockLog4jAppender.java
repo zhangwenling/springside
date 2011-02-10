@@ -17,7 +17,7 @@ import org.apache.log4j.spi.LoggingEvent;
 /**
  * 在List中保存日志的Appender, 用于测试Log4j的日志输出.
  * 
- * 在测试开始前, 使用addToLogger方法将此appender添加到需要侦听的logger.
+ * 在测试开始前, 使用addToLogger方法将此appender添加到需要侦听的logger中.
  * 
  * @author calvin
  */
@@ -26,7 +26,7 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	private List<LoggingEvent> logs = new ArrayList<LoggingEvent>();
 
 	/**
-	 * 返回之前append的第一个log事件.
+	 * 返回之前append的第一个log.
 	 */
 	public LoggingEvent getFirstLog() {
 		if (logs.isEmpty()) {

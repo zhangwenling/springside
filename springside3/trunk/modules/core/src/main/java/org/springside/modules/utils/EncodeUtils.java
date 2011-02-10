@@ -14,13 +14,14 @@ import java.net.URLEncoder;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.binary.StringUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 
 /**
- * 各种格式的编码加码工具类.
+ * 各种格式的编码解码工具类.
  * 
  * 集成Commons-Codec, Commons-Lang及JDK提供的编解码方法.
+ * 
+ * TODO:用Base62替代Base64UrlSafe.
  * 
  * @author calvin
  */
@@ -30,14 +31,14 @@ public class EncodeUtils {
 	private static final String DEFAULT_URL_ENCODING = "UTF-8";
 
 	/**
-	 * Hex编码.
+	 * Hex编码, byte[]->String.
 	 */
 	public static String hexEncode(byte[] input) {
 		return Hex.encodeHexString(input);
 	}
 
 	/**
-	 * Hex解码.
+	 * Hex解码, String->byte[].
 	 */
 	public static byte[] hexDecode(String input) {
 		try {
@@ -48,10 +49,10 @@ public class EncodeUtils {
 	}
 
 	/**
-	 * Base64编码.
+	 * Base64编码, byte[]->String.
 	 */
 	public static String base64Encode(byte[] input) {
-		return StringUtils.newStringUtf8((Base64.encodeBase64(input)));
+		return Base64.encodeBase64String(input);
 	}
 
 	/**
@@ -62,21 +63,21 @@ public class EncodeUtils {
 	}
 
 	/**
-	 * Base64解码.
+	 * Base64解码, String->byte[].
 	 */
 	public static byte[] base64Decode(String input) {
 		return Base64.decodeBase64(input);
 	}
 
 	/**
-	 * Base36 (0_9A_Z)编码.
+	 * Base36(0_9A_Z)编码.
 	 */
 	public static String base36Encode(long num) {
 		return alphabetEncode(num, 36);
 	}
 
 	/**
-	 * Base36 (0_9A_Z)解码.
+	 * Base36(0_9A_Z)解码.
 	 */
 	public static long base36Decode(String str) {
 		return alphabetDecode(str, 36);

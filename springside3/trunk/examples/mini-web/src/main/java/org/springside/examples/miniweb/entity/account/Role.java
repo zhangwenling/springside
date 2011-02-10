@@ -90,12 +90,12 @@ public class Role extends IdEntity {
 
     @Transient
     public String getAuthNames() {
-        return ConvertUtils.convertElementPropertyToString(authorityList, "name", ", ");
+        return ConvertUtils.extractElementPropertyToString(authorityList, "name", ", ");
     }
 
     @Transient
     public List<Long> getAuthIds() {
-        return ConvertUtils.convertElementPropertyToList(authorityList, "id");
+        return ConvertUtils.extractElementPropertyToList(authorityList, "id");
     }
 
     @Override
