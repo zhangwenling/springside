@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.utils.reflection;
+package org.springside.modules.utils.mapping;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,6 +16,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.lang.StringUtils;
 import org.dozer.DozerBeanMapper;
+import org.springside.modules.utils.ReflectionUtils;
 
 import com.google.common.collect.Lists;
 

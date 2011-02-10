@@ -20,7 +20,7 @@ import org.springside.examples.showcase.webservice.ws.server.result.GetAllUserRe
 import org.springside.examples.showcase.webservice.ws.server.result.GetUserResult;
 import org.springside.examples.showcase.webservice.ws.server.result.WSResult;
 import org.springside.modules.utils.Asserter;
-import org.springside.modules.utils.reflection.ConvertUtils;
+import org.springside.modules.utils.mapping.ConvertUtils;
 
 /**
  * UserWebService服务端实现类.

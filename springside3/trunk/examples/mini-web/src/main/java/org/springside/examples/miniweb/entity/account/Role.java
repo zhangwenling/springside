@@ -19,7 +19,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springside.examples.miniweb.entity.IdEntity;
-import org.springside.modules.utils.reflection.ConvertUtils;
+import org.springside.modules.utils.mapping.ConvertUtils;
 
 import com.google.common.collect.Lists;
 

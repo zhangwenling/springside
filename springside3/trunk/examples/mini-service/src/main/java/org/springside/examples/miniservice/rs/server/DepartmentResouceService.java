@@ -16,7 +16,7 @@ import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.rs.dto.DepartmentDTO;
 import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.utils.JerseyServerUtils;
-import org.springside.modules.utils.reflection.ConvertUtils;
+import org.springside.modules.utils.mapping.ConvertUtils;
 
 /**
  * Department资源的REST服务.

@@ -10,7 +10,7 @@ import org.apache.ws.security.WSPasswordCallback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.AccountManager;
-import org.springside.modules.security.utils.DigestUtils;
+import org.springside.modules.utils.security.DigestUtils;
 
 /**
  * 对WS-Security中Digest式密码的处理Handler.

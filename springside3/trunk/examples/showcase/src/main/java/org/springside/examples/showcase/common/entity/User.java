@@ -16,7 +16,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springside.modules.utils.reflection.ConvertUtils;
+import org.springside.modules.utils.mapping.ConvertUtils;
 
 import com.google.common.collect.Lists;
 

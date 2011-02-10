@@ -1,10 +1,10 @@
-package org.springside.modules.unit.security.utils;
+package org.springside.modules.unit.utils.security;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.springside.modules.security.utils.CryptoUtils;
-import org.springside.modules.utils.EncodeUtils;
+import org.springside.modules.utils.mapping.EncodeUtils;
+import org.springside.modules.utils.security.CryptoUtils;
 
 public class CryptoUtilsTest {
 	@Test

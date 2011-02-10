@@ -17,25 +17,6 @@
 			<artifactId>springside-core</artifactId>
 		</dependency>
 
-		<!-- spring -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<!-- web -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<optional>true</optional>
-		</dependency>
-
 		<!-- memcached begin -->
 		<dependency>
 			<groupId>com.googlecode.xmemcached</groupId>
@@ -58,12 +39,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- template engine -->
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<optional>true</optional>
-		</dependency>
 
 		<!-- utils -->
 		<dependency>

@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import org.springside.examples.miniweb.entity.IdEntity;
 import org.springside.modules.utils.Asserter;
-import org.springside.modules.utils.reflection.ReflectionUtils;
+import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * 用于项目的Hibernate工具类.

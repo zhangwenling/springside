@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springside.modules.utils.Asserter;
-import org.springside.modules.utils.EncodeUtils;
+import org.springside.modules.utils.mapping.EncodeUtils;
 
 /**
  * Http与Servlet工具类.

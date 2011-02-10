@@ -1,4 +1,4 @@
-package org.springside.modules.unit.utils.velocity;
+package org.springside.modules.unit.utils.template;
 
 import static org.junit.Assert.*;
 

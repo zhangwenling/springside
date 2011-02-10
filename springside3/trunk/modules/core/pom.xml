@@ -69,6 +69,13 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- template engine -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 		<!-- utils -->
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
@@ -95,6 +102,7 @@
 			<artifactId>guava</artifactId>
 			<optional>true</optional>
 		</dependency>
+		
 		<!-- logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

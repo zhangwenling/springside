@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runners.model.InitializationError;
 import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.groups.GroupsTestRunner;
-import org.springside.modules.utils.reflection.ReflectionUtils;
+import org.springside.modules.utils.ReflectionUtils;
 
 public class GroupsTestRunnerTest {
 

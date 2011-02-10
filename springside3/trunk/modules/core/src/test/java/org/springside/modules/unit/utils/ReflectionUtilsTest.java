@@ -1,11 +1,11 @@
-package org.springside.modules.unit.utils.reflection;
+package org.springside.modules.unit.utils;
 
 import static org.junit.Assert.*;
 
 import java.lang.reflect.InvocationTargetException;
 
 import org.junit.Test;
-import org.springside.modules.utils.reflection.ReflectionUtils;
+import org.springside.modules.utils.ReflectionUtils;
 
 public class ReflectionUtilsTest {
 

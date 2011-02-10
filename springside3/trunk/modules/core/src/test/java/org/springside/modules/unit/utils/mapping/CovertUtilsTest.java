@@ -1,4 +1,4 @@
-package org.springside.modules.unit.utils.reflection;
+package org.springside.modules.unit.utils.mapping;
 
 import static org.junit.Assert.*;
 
@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
-import org.springside.modules.unit.utils.reflection.ReflectionUtilsTest.TestBean3;
-import org.springside.modules.utils.reflection.ConvertUtils;
+import org.springside.modules.unit.utils.ReflectionUtilsTest.TestBean3;
+import org.springside.modules.utils.mapping.ConvertUtils;
 
 import com.google.common.collect.Lists;
 

@@ -5,7 +5,7 @@
  * 
  * $Id: CryptoUtils.java 764 2009-12-27 19:13:59Z calvinxiu $
  */
-package org.springside.modules.security.utils;
+package org.springside.modules.utils.security;
 
 import java.security.GeneralSecurityException;
 import java.util.Arrays;
@@ -18,7 +18,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.springside.modules.utils.EncodeUtils;
+import org.springside.modules.utils.mapping.EncodeUtils;
 
 /**
  * 支持HMAC-SHA1消息签名 及 DES/AES对称加密的工具类.

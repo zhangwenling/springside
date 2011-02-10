@@ -8,7 +8,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellReference;
 import org.junit.Test;
 import org.springside.examples.showcase.excel.ExcelExportAction;
-import org.springside.modules.utils.reflection.ReflectionUtils;
+import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * 测试ExcelExportAction测试,演示Excel的读取.

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.springside.modules.utils.Asserter;
-import org.springside.modules.utils.reflection.ConvertUtils;
+import org.springside.modules.utils.mapping.ConvertUtils;
 import org.springside.modules.utils.web.ServletUtils;
 
 /**

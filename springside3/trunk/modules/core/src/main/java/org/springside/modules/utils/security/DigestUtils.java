@@ -5,14 +5,14 @@
  * 
  * $Id: DigestUtils.java 799 2009-12-31 15:34:10Z calvinxiu $
  */
-package org.springside.modules.security.utils;
+package org.springside.modules.utils.security;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 
-import org.springside.modules.utils.EncodeUtils;
+import org.springside.modules.utils.mapping.EncodeUtils;
 
 /**
  * 支持SHA-1/MD5消息摘要的工具类.
