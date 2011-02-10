@@ -17,6 +17,13 @@
 			<artifactId>springside-core</artifactId>
 		</dependency>
 
+		<!-- spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 		<!-- memcached begin -->
 		<dependency>
 			<groupId>com.googlecode.xmemcached</groupId>
@@ -38,7 +45,6 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<optional>true</optional>
 		</dependency>
-
 
 		<!-- utils -->
 		<dependency>

@@ -35,8 +35,8 @@ public class MemcachedSimulator implements InitializingBean, DisposableBean {
 	private String serverUrl = "localhost:11211";
 	private boolean binary = false;
 
-	private int maxItems = 1024;
-	private long maxBytes = 1024 * 2048;
+	private int maxItems = 1024 * 100;
+	private long maxBytes = 1024 * 100 * 2048;
 
 	public void afterPropertiesSet() throws Exception {
 
@@ -57,9 +57,9 @@ public class MemcachedSimulator implements InitializingBean, DisposableBean {
 	}
 
 	public void destroy() throws Exception {
-		logger.info("Shutting down Jmemcached Server");
+		logger.info("Shutdowning Jmemcached Server");
 		jmemcached.stop();
-		logger.info("Shutted down Jmemcached Server");
+		logger.info("Shutdowned Jmemcached Server");
 	}
 
 	public void setServerUrl(String serverUrl) {

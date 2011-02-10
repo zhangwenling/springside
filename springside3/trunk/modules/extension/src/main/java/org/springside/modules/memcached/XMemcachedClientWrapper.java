@@ -15,7 +15,6 @@ import net.rubyeye.xmemcached.MemcachedClient;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -24,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Neway
  * @author Calvin
  */
-public class XMemcachedClientWrapper implements DisposableBean {
+public class XMemcachedClientWrapper {
 
 	private static Logger logger = LoggerFactory.getLogger(XMemcachedClientWrapper.class);
 
@@ -121,12 +120,5 @@ public class XMemcachedClientWrapper implements DisposableBean {
 	@Autowired(required = false)
 	public void setMemcachedClient(MemcachedClient memcachedClient) {
 		this.memcachedClient = memcachedClient;
-	}
-
-	public void destroy() throws Exception {
-		if (memcachedClient != null) {
-			memcachedClient.shutdown();
-		}
-
 	}
 }
