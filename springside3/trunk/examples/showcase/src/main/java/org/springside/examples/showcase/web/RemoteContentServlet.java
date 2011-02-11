@@ -13,19 +13,10 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.conn.ClientConnectionManager;
-import org.apache.http.conn.params.ConnManagerParams;
-import org.apache.http.conn.scheme.PlainSocketFactory;
-import org.apache.http.conn.scheme.Scheme;
-import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.slf4j.Logger;
@@ -106,17 +97,9 @@ public class RemoteContentServlet extends HttpServlet {
 	 */
 	@Override
 	public void init() throws ServletException {
-		// Create and initialize HTTP parameters
-		HttpParams params = new BasicHttpParams();
-		ConnManagerParams.setMaxTotalConnections(params, 50);
-		HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-
-		// Create and initialize scheme registry 
-		SchemeRegistry schemeRegistry = new SchemeRegistry();
-		schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-		// Create an HttpClient with the ThreadSafeClientConnManager.
-		ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
-		httpClient = new DefaultHttpClient(cm, params);
+		ThreadSafeClientConnManager cm = new ThreadSafeClientConnManager();
+		cm.setMaxTotal(100);
+		httpClient = new DefaultHttpClient(cm);
 	}
 
 	/**
