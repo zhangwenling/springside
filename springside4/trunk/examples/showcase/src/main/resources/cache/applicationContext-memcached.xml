@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+	default-lazy-init="true">
+
+	<!-- XMemcached客户端 -->
+	<bean name="xmemcachedClient" class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean" destroy-method="shutdown">
+		<property name="servers" value="${memcached.url}" />
+		<!-- nio 连接池大小 -->
+		<property name="connectionPoolSize" value="${memcached.connectionpool.size}" />
+		<!-- 使用二进制协议,默认是文本协议 -->
+		<property name="commandFactory">
+			<bean class="net.rubyeye.xmemcached.command.BinaryCommandFactory" />
+		</property>
+		<!-- 使用一致性哈希,默认是Hash值取模 -->
+		<property name="sessionLocator">
+			<bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator" />
+		</property>
+	</bean>
+
+	<!-- XMemcached的Wrapper -->
+	<bean name="xmemcachedClientWrapper" class="org.springside.modules.memcached.XMemcachedClientWrapper" />
+
+	<!-- 演示用的Jmemcached, 模拟Memcached服务器 -->
+	<bean id="memcachedSimulator" class="org.springside.modules.memcached.MemcachedSimulator" lazy-init="false">
+		<property name="serverUrl" value="${memcached.url}" />
+	</bean>
+</beans>
