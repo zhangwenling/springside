@@ -45,7 +45,7 @@ public class ValidatorHolder implements DisposableBean {
 	/**
 	 * 调用JSR303的validate方法, 验证失败时抛出ConstraintViolationException.
 	 */
-	public static <T> void validateWithException(T object, Class<?>... groups) throws ConstraintViolationException {
+	public static void validateWithException(Object object, Class<?>... groups) throws ConstraintViolationException {
 		Set constraintViolations = validate(object, groups);
 		if (!constraintViolations.isEmpty()) {
 			throw new ConstraintViolationException(constraintViolations);
