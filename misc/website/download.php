@@ -61,6 +61,7 @@
     SpringSide使用Subversion管理源码，代码托管于Google Code。<br>
        <ul type="square">
         <li>3.0版 URL: <a href="http://springside.googlecode.com/svn/springside3/trunk/" target="_blank">http://springside.googlecode.com/svn/springside3/trunk/</a>
+		<li>4.0版 URL: <a href="http://springside.googlecode.com/svn/springside3/trunk/" target="_blank">http://springside.googlecode.com/svn/springside4/trunk/</a>
       </li>
   </ul>
         &nbsp;&nbsp;&nbsp;&nbsp;推荐SVN工具--绿毛小海龟<a href="http://www.tortoisesvn.org/" target="_blank">TortoiseSVN</a>。<br>
