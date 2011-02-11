@@ -3,8 +3,6 @@ TODO部分
 1.主要改动
   * 演示Hibernate Validator验证
       -- 学习Validator 4.2Beta1更新
-  * CSS框架从YUI转为Blueprint
-      -- 取消Blueprint.css table间隔变蓝色的定义
   * DAO部分参考Spring-Data项目进行升级
       -- 分页使用Spring-Data-Commons的基础类,PK改为
   * DAO框架增加MyBatis的使用，与Hibernate在不同的场景各展所长:
@@ -13,6 +11,7 @@ TODO部分
   * MVC框架 从Struts2转为Spring MVC.
   * 安全框架从SpringSecurity转为Apache Shiro.
       -- Review安全框架Shiro的使用，增加annotation方法级别的控制
+  * Wiki内容重新编写
 
 
 2.小改动
@@ -49,6 +48,7 @@ TODO部分
 
 已完成部分
 1. 主要改动
+   * CSS框架从YUI转为Blueprint
    * Memcached客户端从SpyMemcached转为XMemcached.
    * 重要版本升级如：Maven 3.0, Hibernate 3.6
    * springside-core与spring-extension项目的类进行注释，rename/remove等小重构.
