@@ -10,7 +10,6 @@ TODO部分
 	  -- !改名core Mapping包参考OAM，改名两个Binder类，ConvertUtils参考Spring的转换类。
 
   * DAO部分参考Spring-Data项目重写
-      -- !PK改为ID
 	  -- 分页使用Spring-Data-Commons的基础类
   * DAO框架增加MyBatis的使用，与Hibernate在不同的场景各展所长:
       -- 综合JPetstore 6.0, 和myBatis生成器的代码，整理mini-service中MyBatis的使用
@@ -28,7 +27,6 @@ TODO部分
   * Review log4jdbc3使用
 
 3.其他非代码改动
-  * !Jetty.xml删除graceful shutdown定义
   * 依赖包次要版本升级	
     -- 打包JSW 3.5.7
 	-- 学习Selenium 2.0B1更新

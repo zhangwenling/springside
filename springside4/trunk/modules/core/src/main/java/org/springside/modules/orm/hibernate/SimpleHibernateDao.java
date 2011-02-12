@@ -34,11 +34,11 @@ import org.springside.modules.utils.ReflectionUtils;
  * 参考Spring2.5自带的Petlinc例子, 取消了HibernateTemplate, 直接使用Hibernate原生API.
  * 
  * @param <T> DAO操作的对象类型
- * @param <PK> 主键类型
+ * @param <ID> 主键类型
  * 
  * @author calvin
  */
-public class SimpleHibernateDao<T, PK extends Serializable> {
+public class SimpleHibernateDao<T, ID extends Serializable> {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -104,7 +104,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	/**
 	 * 按id删除对象.
 	 */
-	public void delete(final PK id) {
+	public void delete(final ID id) {
 		AssertUtils.notNull(id, "id不能为空");
 		delete(get(id));
 		logger.debug("delete entity {},id is {}", entityClass.getSimpleName(), id);
@@ -113,7 +113,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	/**
 	 * 按id获取对象.
 	 */
-	public T get(final PK id) {
+	public T get(final ID id) {
 		AssertUtils.notNull(id, "id不能为空");
 		return (T) getSession().load(entityClass, id);
 	}
@@ -121,7 +121,7 @@ public class SimpleHibernateDao<T, PK extends Serializable> {
 	/**
 	 * 按id列表获取对象列表.
 	 */
-	public List<T> get(final Collection<PK> ids) {
+	public List<T> get(final Collection<ID> ids) {
 		return find(Restrictions.in(getIdName(), ids));
 	}
 

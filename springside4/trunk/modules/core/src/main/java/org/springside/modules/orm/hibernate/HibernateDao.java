@@ -37,11 +37,11 @@ import org.springside.modules.utils.ReflectionUtils;
  * 扩展功能包括分页查询,按属性过滤条件列表查询.
  * 
  * @param <T> DAO操作的对象类型
- * @param <PK> 主键类型
+ * @param <ID> 主键类型
  * 
  * @author calvin
  */
-public class HibernateDao<T, PK extends Serializable> extends SimpleHibernateDao<T, PK> {
+public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao<T, ID> {
 	/**
 	 * 通过子类的泛型定义取得对象类型Class.
 	 * eg.
