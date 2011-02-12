@@ -82,7 +82,7 @@ public class ReflectionUtilsTest {
 
 	}
 
-	public static class ParentBean<T, PK> {
+	public static class ParentBean<T, ID> {
 	}
 
 	public static class TestBean extends ParentBean<String, Long> {
@@ -112,7 +112,6 @@ public class ReflectionUtilsTest {
 		}
 	}
 
-	
 	public static class TestBean2 extends ParentBean {
 	}
 

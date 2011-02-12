@@ -17,7 +17,7 @@
 	<!-- =========================================================== -->
 	<Call name="addConnector">
 		<Arg>
-			<New class="org.eclipse.jetty.server.nio.BlockingChannelConnector">
+			<New class="org.eclipse.jetty.server.nio.SelectChannelConnector">
 				<Set name="host">
 					<SystemProperty name="jetty.host" />
 				</Set>
@@ -28,6 +28,8 @@
 				<Set name="Acceptors">2</Set>
 				<Set name="statsOn">false</Set>
 				<Set name="confidentialPort">8443</Set>
+				<Set name="lowResourcesConnections">20000</Set> 
+				<Set name="lowResourcesMaxIdleTime">5000</Set> 
 			</New>
 		</Arg>
 	</Call>
@@ -37,16 +39,18 @@
 	<!-- =========================================================== -->
 	<Set name="handler">
 		<New class="org.eclipse.jetty.webapp.WebAppContext">
-			<Set name="contextPath"><project-context-path></Set>
-			<Set name="war"><path-to-project-war-file-or-webapp-dir></Set>
+			<Set name="contextPath">project-context-path</Set>
+			<Set name="war">path-to-project-war-file-or-webapp-dir</Set>
 		</New>
 	</Set>
 
 	<!-- =========================================================== -->
 	<!-- Extra options                                               -->
 	<!-- =========================================================== -->
-	<Set name="stopAtShutdown">true</Set>
-	<Set name="sendServerVersion">true</Set>
-	<Set name="sendDateHeader">true</Set>
-	<Set name="gracefulShutdown">5000</Set>
+	<Set name="stopAtShutdown">true</Set> 
+	<Set name="sendServerVersion">true</Set> 
+	<Set name="sendDateHeader">true</Set> 
+	<Set name="gracefulShutdown">1000</Set> 
+	<Set name="dumpAfterStart">false</Set> 
+	<Set name="dumpBeforeStop">false</Set> 
 </Configure>
