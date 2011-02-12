@@ -8,13 +8,14 @@ import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springside.modules.utils.template.VelocityFileProcessor;
+import org.springside.modules.utils.template.VelocityUtils;
 
 /**
  * MIME邮件服务类.
@@ -31,7 +32,7 @@ public class MimeMailService {
 
 	private JavaMailSender mailSender;
 
-	private VelocityFileProcessor velocityFileProcessor;
+	private VelocityEngine velocityEngine;
 
 	private String templateFileName;
 
@@ -69,7 +70,7 @@ public class MimeMailService {
 	private String generateContent(String userName) throws MessagingException {
 
 		Map context = Collections.singletonMap("userName", userName);
-		return VelocityFileProcessor.render(templateFileName, DEFAULT_ENCODING, context);
+		return VelocityUtils.renderFile(templateFileName, velocityEngine, DEFAULT_ENCODING, context);
 	}
 
 	/**
@@ -92,8 +93,8 @@ public class MimeMailService {
 		this.mailSender = mailSender;
 	}
 
-	public void setVelocityFileProcessor(VelocityFileProcessor velocityFileProcessor) {
-		this.velocityFileProcessor = velocityFileProcessor;
+	public void setVelocityEngine(VelocityEngine velocityEngine) {
+		this.velocityEngine = velocityEngine;
 	}
 
 	public void setTemplateFileName(String templateFileName) {

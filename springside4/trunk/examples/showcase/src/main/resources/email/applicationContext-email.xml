@@ -33,12 +33,12 @@
 	<!-- MIME邮件服务类 -->
 	<bean id="mimeMailService" class="org.springside.examples.showcase.email.MimeMailService">
 		<property name="mailSender" ref="mailSender" />
-		<property name="velocityFileProcessor" ref="mailTemplateProcessor" />
+		<property name="velocityFileProcessor" ref="mailVelocityEngine" />
 		<property name="templateFileName" value="mailTemplate.vm" />
 	</bean>
 
 	<!-- VelocityEngine -->
-	<bean id="mailTemplateProcessor" class="org.springside.modules.utils.template.VelocityFileProcessor">
+	<bean id="mailVelocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
 		<property name="resourceLoaderPath" value="classpath:/email/" />
 	</bean>
 
