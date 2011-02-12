@@ -5,26 +5,26 @@ import static org.junit.Assert.*;
 import java.util.Map;
 
 import org.junit.Test;
-import org.springside.modules.utils.template.VelocityUtils;
+import org.springside.modules.utils.template.VelocityStringUtils;
 
 import com.google.common.collect.Maps;
 
-public class VelocityUtilsTest {
-	private String TEMPLATE = "hello $name";
+public class VelocityStringUtilsTest {
+	private String TEMPLATE = "hello $userName";
 	private String ERROR_TEMPLATE = "hello $";
 
 	@Test
-	public void render() {
+	public void renderContent() {
 		Map<String, String> model = Maps.newHashMap();
-		model.put("name", "calvin");
-		String result = VelocityUtils.render(TEMPLATE, model);
+		model.put("userName", "calvin");
+		String result = VelocityStringUtils.render(TEMPLATE, model);
 		assertEquals("hello calvin", result);
 	}
 
 	@Test(expected = Exception.class)
-	public void renderErrorTemplate() {
+	public void renderContentWithErrorTemplate() {
 		Map<String, String> model = Maps.newHashMap();
-		model.put("name", "calvin");
-		VelocityUtils.render(ERROR_TEMPLATE, model);
+		model.put("userName", "calvin");
+		VelocityStringUtils.render(ERROR_TEMPLATE, model);
 	}
 }

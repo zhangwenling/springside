@@ -14,16 +14,12 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
-
-import freemarker.template.Configuration;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
+import org.springside.modules.utils.template.VelocityFileProcessor;
 
 /**
  * MIME邮件服务类.
  * 
- * 演示由Freemarker引擎生成的的html格式邮件, 并带有附件.
+ * 演示由Velocity引擎生成的的html格式邮件, 并带有附件.
  * TODO 改为Velocity引擎
  * @author calvin
  */
@@ -34,22 +30,10 @@ public class MimeMailService {
 	private static Logger logger = LoggerFactory.getLogger(MimeMailService.class);
 
 	private JavaMailSender mailSender;
-	private Template template;
 
-	/**
-	 * Spring的MailSender.
-	 */
-	public void setMailSender(JavaMailSender mailSender) {
-		this.mailSender = mailSender;
-	}
+	private VelocityFileProcessor velocityFileProcessor;
 
-	/**
-	 * 注入Freemarker引擎配置,构造Freemarker 邮件内容模板.
-	 */
-	public void setFreemarkerConfiguration(Configuration freemarkerConfiguration) throws IOException {
-		//根据freemarkerConfiguration的templateLoaderPath载入文件.
-		template = freemarkerConfiguration.getTemplate("mailTemplate.ftl", DEFAULT_ENCODING);
-	}
+	private String templateFileName;
 
 	/**
 	 * 发送MIME格式的用户修改通知邮件.
@@ -80,21 +64,12 @@ public class MimeMailService {
 	}
 
 	/**
-	 * 使用Freemarker生成html格式内容.
+	 * 使用Velocity生成html格式内容.
 	 */
-
 	private String generateContent(String userName) throws MessagingException {
 
-		try {
-			Map context = Collections.singletonMap("userName", userName);
-			return FreeMarkerTemplateUtils.processTemplateIntoString(template, context);
-		} catch (IOException e) {
-			logger.error("生成邮件内容失败, FreeMarker模板不存在", e);
-			throw new MessagingException("FreeMarker模板不存在", e);
-		} catch (TemplateException e) {
-			logger.error("生成邮件内容失败, FreeMarker处理失败", e);
-			throw new MessagingException("FreeMarker处理失败", e);
-		}
+		Map context = Collections.singletonMap("userName", userName);
+		return VelocityFileProcessor.render(templateFileName, DEFAULT_ENCODING, context);
 	}
 
 	/**
@@ -109,4 +84,20 @@ public class MimeMailService {
 			throw new MessagingException("附件文件不存在", e);
 		}
 	}
+
+	/**
+	 * Spring的MailSender.
+	 */
+	public void setMailSender(JavaMailSender mailSender) {
+		this.mailSender = mailSender;
+	}
+
+	public void setVelocityFileProcessor(VelocityFileProcessor velocityFileProcessor) {
+		this.velocityFileProcessor = velocityFileProcessor;
+	}
+
+	public void setTemplateFileName(String templateFileName) {
+		this.templateFileName = templateFileName;
+	}
+
 }

@@ -14,18 +14,16 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
 /**
- * 使用Velocity根据模板生成内容的工具类.
+ * 使用Velocity渲染模板内容的工具类, 用于动态模板内容或字符串替换.
+ * 
+ * 如果是固定的模板文件请使用VelocityEngineHolder.
  * 
  * @author calvin
  */
-public class VelocityUtils {
+public class VelocityStringUtils {
 
 	static {
-		try {
-			Velocity.init();
-		} catch (Exception e) {
-			throw new RuntimeException("Exception occurs while initialize the velociy.", e);
-		}
+		Velocity.init();
 	}
 
 	/**
@@ -35,13 +33,10 @@ public class VelocityUtils {
 	 * @param context 变量Map.
 	 */
 	public static String render(String templateContent, Map<String, ?> context) {
-		try {
-			VelocityContext velocityContext = new VelocityContext(context);
-			StringWriter result = new StringWriter();
-			Velocity.evaluate(velocityContext, result, "", templateContent);
-			return result.toString();
-		} catch (Exception e) {
-			throw new RuntimeException("Parse template failed.", e);
-		}
+		VelocityContext velocityContext = new VelocityContext(context);
+
+		StringWriter result = new StringWriter();
+		Velocity.evaluate(velocityContext, result, "", templateContent);
+		return result.toString();
 	}
 }
