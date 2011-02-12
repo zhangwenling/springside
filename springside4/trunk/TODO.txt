@@ -15,9 +15,7 @@ TODO部分
       -- 综合JPetstore 6.0, 和myBatis生成器的代码，整理mini-service中MyBatis的使用
   * 使用DataFactory生成测试数据，删除DataUtils.
   * MVC框架 从Struts2转为Spring MVC.
-      -- !观察Struts2.5有无惊喜
   * 安全框架从SpringSecurity转为Apache Shiro.
-      -- !观察SpringSecurity3.1RC1有无惊喜
 	  -- Review安全框架Shiro的使用，增加annotation方法级别的控制
   * Wiki内容重新编写
 
@@ -31,8 +29,9 @@ TODO部分
     -- 打包JSW 3.5.7
 	-- 学习Selenium 2.0B1更新
     -- 学习guva r06->r08更新
+	-- 学习Velocity 1.7更新
 	-- 学习Jersy1.5指南，JAX-RS1.1的改进
-	-- !学习Spring的RestTemplate
+	-- !观察Spring的RestTemplate
   * 依赖包重要版本升级如：Jetty 7
       -- Jetty7跑功能测试时出现死锁
   * Python脚本改进，不发布依赖jar包
