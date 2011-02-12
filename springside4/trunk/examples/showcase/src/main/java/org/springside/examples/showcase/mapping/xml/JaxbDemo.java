@@ -10,8 +10,8 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springside.modules.utils.mapping.JaxbBinder;
-import org.springside.modules.utils.mapping.JaxbBinder.CollectionWrapper;
+import org.springside.modules.utils.mapper.JaxbMapper;
+import org.springside.modules.utils.mapper.JaxbMapper.CollectionWrapper;
 
 import com.google.common.collect.Lists;
 
@@ -41,11 +41,11 @@ import com.google.common.collect.Lists;
  */
 public class JaxbDemo {
 
-	private static JaxbBinder binder;
+	private static JaxbMapper binder;
 
 	@BeforeClass
 	public static void setUp() {
-		binder = new JaxbBinder(User.class, CollectionWrapper.class);
+		binder = new JaxbMapper(User.class, CollectionWrapper.class);
 	}
 
 	@Test

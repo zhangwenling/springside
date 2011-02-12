@@ -28,7 +28,7 @@ import org.springside.examples.miniservice.rs.dto.UserDTO;
 import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.utils.JerseyServerUtils;
 import org.springside.modules.orm.Page;
-import org.springside.modules.utils.mapping.ConvertUtils;
+import org.springside.modules.utils.mapper.ConvertUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
 /**

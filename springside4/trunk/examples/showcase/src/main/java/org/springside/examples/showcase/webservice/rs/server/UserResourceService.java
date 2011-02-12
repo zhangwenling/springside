@@ -28,7 +28,7 @@ import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.examples.showcase.webservice.WsConstants;
 import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
-import org.springside.modules.utils.mapping.ConvertUtils;
+import org.springside.modules.utils.mapper.ConvertUtils;
 
 /**
  * 用户资源 REST服务演示.

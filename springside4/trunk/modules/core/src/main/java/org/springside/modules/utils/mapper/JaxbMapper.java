@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.utils.mapping;
+package org.springside.modules.utils.mapper;
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -29,14 +29,14 @@ import org.apache.commons.lang.StringUtils;
  * 
  * @author calvin
  */
-public class JaxbBinder {
+public class JaxbMapper {
 	//多线程安全的Context.
 	private JAXBContext jaxbContext;
 
 	/**
 	 * @param rootTypes 所有需要序列化的Root对象的Class.
 	 */
-	public JaxbBinder(Class<?>... rootTypes) {
+	public JaxbMapper(Class<?>... rootTypes) {
 		try {
 			jaxbContext = JAXBContext.newInstance(rootTypes);
 		} catch (JAXBException e) {

@@ -3,12 +3,10 @@ TODO部分
 1.主要改动
   * springside-core与spring-extension项目大规模重构
       -- 注释，rename/remove等小重构. (finish)
-      -- 改名RemovteServlet,Wiki编写HttpClient，调整Demo页面
-	  -- Review所有测试Utils
-	  -- !补回NonceUtils，集成JDK UUID，短URL式的Token及可任意控制位数的数字。
+	  -- !补回IdUtils，集成JDK UUID，短URL式的Token及可任意控制位数的数字。
       -- !补回TraceUtils，Showcase进行演示
-	  -- !改名core Mapping包参考OAM，改名两个Binder类，ConvertUtils参考Spring的转换类。
-
+	  -- Review所有测试Utils
+	  -- ConvertUtils使用Spring的ConvertService
   * DAO部分参考Spring-Data项目重写
 	  -- 分页使用Spring-Data-Commons的基础类
   * DAO框架增加MyBatis的使用，与Hibernate在不同的场景各展所长:
@@ -16,12 +14,15 @@ TODO部分
   * 使用DataFactory生成测试数据，删除DataUtils.
   * MVC框架 从Struts2转为Spring MVC.
   * 安全框架从SpringSecurity转为Apache Shiro.
+      -- Mini-Web中的数据结构更新
 	  -- Review安全框架Shiro的使用，增加annotation方法级别的控制
+  * 所有测试用例重新编写
   * Wiki内容重新编写
 
 2.次要改动
   * 补回LocalCache演示，使用Guava r08的新特性
   * 补回Hibernaet Auditable的演示，及其他Hibernate的有用演示。
+  * 改名RemovteServlet, 调整Demo页面
   * Review log4jdbc3使用
 
 3.其他非代码改动

@@ -8,7 +8,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.junit.Test;
 import org.springside.modules.unit.utils.ReflectionUtilsTest.TestBean3;
-import org.springside.modules.utils.mapping.ConvertUtils;
+import org.springside.modules.utils.mapper.ConvertUtils;
 
 import com.google.common.collect.Lists;
 

@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.utils.mapping;
+package org.springside.modules.utils.mapper;
 
 import java.io.IOException;
 
@@ -22,13 +22,13 @@ import org.slf4j.LoggerFactory;
  * 
  * @author calvin
  */
-public class JsonBinder {
+public class JsonMapper {
 
-	private static Logger logger = LoggerFactory.getLogger(JsonBinder.class);
+	private static Logger logger = LoggerFactory.getLogger(JsonMapper.class);
 
 	private ObjectMapper mapper;
 
-	private JsonBinder(Inclusion inclusion) {
+	private JsonMapper(Inclusion inclusion) {
 		mapper = new ObjectMapper();
 		//设置输出时包含属性的风格
 		mapper.getSerializationConfig().setSerializationInclusion(inclusion);
@@ -40,22 +40,22 @@ public class JsonBinder {
 	/**
 	 * 创建输出全部属性到Json字符串的Binder.
 	 */
-	public static JsonBinder buildNormalBinder() {
-		return new JsonBinder(Inclusion.ALWAYS);
+	public static JsonMapper buildNormalBinder() {
+		return new JsonMapper(Inclusion.ALWAYS);
 	}
 
 	/**
 	 * 创建只输出非空属性到Json字符串的Binder.
 	 */
-	public static JsonBinder buildNonNullBinder() {
-		return new JsonBinder(Inclusion.NON_NULL);
+	public static JsonMapper buildNonNullBinder() {
+		return new JsonMapper(Inclusion.NON_NULL);
 	}
 
 	/**
 	 * 创建只输出初始值被改变的属性到Json字符串的Binder.
 	 */
-	public static JsonBinder buildNonDefaultBinder() {
-		return new JsonBinder(Inclusion.NON_DEFAULT);
+	public static JsonMapper buildNonDefaultBinder() {
+		return new JsonMapper(Inclusion.NON_DEFAULT);
 	}
 
 	/**

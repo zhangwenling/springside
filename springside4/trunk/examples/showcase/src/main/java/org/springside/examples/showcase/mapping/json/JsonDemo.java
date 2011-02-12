@@ -12,7 +12,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.type.TypeReference;
 import org.joda.time.DateTime;
 import org.junit.Test;
-import org.springside.modules.utils.mapping.JsonBinder;
+import org.springside.modules.utils.mapper.JsonMapper;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -24,7 +24,7 @@ import com.google.common.collect.Maps;
  */
 public class JsonDemo {
 
-	private static JsonBinder binder = JsonBinder.buildNonDefaultBinder();
+	private static JsonMapper binder = JsonMapper.buildNonDefaultBinder();
 
 	/**
 	 * 序列化对象/集合到Json字符串.
@@ -144,16 +144,16 @@ public class JsonDemo {
 	@Test
 	public void threeTypeBinders() {
 		//打印全部属性
-		JsonBinder normalBinder = JsonBinder.buildNormalBinder();
+		JsonMapper normalBinder = JsonMapper.buildNormalBinder();
 		TestBean bean = new TestBean("A");
 		assertEquals("{\"nullValue\":null,\"name\":\"A\",\"defaultValue\":\"hello\"}", normalBinder.toJson(bean));
 
 		//不打印nullValue属性
-		JsonBinder nonNullBinder = JsonBinder.buildNonNullBinder();
+		JsonMapper nonNullBinder = JsonMapper.buildNonNullBinder();
 		assertEquals("{\"name\":\"A\",\"defaultValue\":\"hello\"}", nonNullBinder.toJson(bean));
 
 		//不打印默认值未改变的nullValue与defaultValue属性
-		JsonBinder nonDefaultBinder = JsonBinder.buildNonNullBinder();
+		JsonMapper nonDefaultBinder = JsonMapper.buildNonNullBinder();
 		assertEquals("{\"name\":\"A\"}", nonDefaultBinder.toJson(bean));
 	}
 

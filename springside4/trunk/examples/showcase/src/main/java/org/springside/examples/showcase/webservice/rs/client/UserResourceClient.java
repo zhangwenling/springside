@@ -6,7 +6,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Required;
 import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
-import org.springside.modules.utils.mapping.JsonBinder;
+import org.springside.modules.utils.mapper.JsonMapper;
 import org.springside.modules.utils.web.ServletUtils;
 
 import com.sun.jersey.api.client.GenericType;
@@ -53,6 +53,6 @@ public class UserResourceClient {
 	 */
 	public UserDTO searchUserReturnJson(String name) {
 		String jsonString = client.path("/users/search").queryParam("name", name).get(String.class);
-		return JsonBinder.buildNormalBinder().fromJson(jsonString, UserDTO.class);
+		return JsonMapper.buildNormalBinder().fromJson(jsonString, UserDTO.class);
 	}
 }

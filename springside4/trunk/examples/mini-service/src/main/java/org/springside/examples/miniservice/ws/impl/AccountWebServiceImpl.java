@@ -22,7 +22,7 @@ import org.springside.examples.miniservice.ws.result.base.IdResult;
 import org.springside.examples.miniservice.ws.result.base.WSResult;
 import org.springside.modules.orm.Page;
 import org.springside.modules.utils.AssertUtils;
-import org.springside.modules.utils.mapping.ConvertUtils;
+import org.springside.modules.utils.mapper.ConvertUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
 /**

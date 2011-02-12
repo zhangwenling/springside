@@ -15,7 +15,7 @@ import org.apache.velocity.app.Velocity;
 import org.apache.velocity.app.VelocityEngine;
 
 /**
- * 使用Velocity渲染模板内容的工具类, 用于动态模板内容或字符串替换.
+ * 使用Velocity渲染模板内容的工具类.
  * 
  * @author calvin
  */

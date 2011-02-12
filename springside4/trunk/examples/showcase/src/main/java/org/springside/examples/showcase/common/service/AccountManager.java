@@ -14,7 +14,7 @@ import org.springside.examples.showcase.common.dao.UserMyBatisDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
 import org.springside.modules.memcached.XMemcachedClientWrapper;
-import org.springside.modules.utils.mapping.JsonBinder;
+import org.springside.modules.utils.mapper.JsonMapper;
 import org.springside.modules.utils.security.DigestUtils;
 
 /**
@@ -33,7 +33,7 @@ public class AccountManager {
 
 	private XMemcachedClientWrapper xmemcachedClient;
 
-	private JsonBinder jsonBinder = JsonBinder.buildNonDefaultBinder();
+	private JsonMapper jsonBinder = JsonMapper.buildNonDefaultBinder();
 
 	private NotifyMessageProducer notifyProducer; //JMS消息发送
 

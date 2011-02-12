@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springside.modules.utils.mapping.ConvertUtils;
+import org.springside.modules.utils.mapper.ConvertUtils;
 
 import com.google.common.collect.Lists;
 
