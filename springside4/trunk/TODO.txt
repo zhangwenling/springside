@@ -9,30 +9,33 @@ TODO部分
   * MVC框架 从Struts2转为Spring MVC.
   * 安全框架从SpringSecurity转为Apache Shiro.
       -- Review安全框架Shiro的使用，增加annotation方法级别的控制
+  * springside-core与spring-extension项目进行大型重构
+      -- 注释，rename/remove等小重构.
+	  -- 改名Core的utils/web包为web
+      -- 改名RemovteServlet,Wiki编写HttpClient，调整Demo页面
+	  -- Review 测试Utils
+	  -- 补回NonceUtils，集成JDK UUID，短URL式的Token及可任意控制位数的数字。
+      -- 补回TraceUtils，Showcase进行演示
+	  -- 改名core Mapping包参考OAM，改名两个Binder类，ConvertUtils参考Spring的转换类。
+  * Template工具从Freemarker转为Velocity
+	  -- VelocityTemplate加一个读取文件模板的方法
+	  -- 学习Velocity 1.7更新
+	  -- Email演示模板引擎从Freemarker换为Velocity
   * Wiki内容重新编写
 
 
 2.小改动
-  * springside-core与spring-extension项目的类进行注释，rename/remove等小重构.
-      -- 改名Core的utils/web包为web
-      -- 改名RemovteServlet,Wiki编写HttpClient，调整Demo页面
-  * VelocityTemplate加一个读取文件模板的方法。
-  * 补回NonceUtils，集成JDK UUID，短URL式的Token及可任意控制位数的数字。
-  * 补回TraceUtils，Showcase进行演示
   * 补回LocalCache演示，使用Guava r08的新特性
   * 补回Hibernaet Auditable的演示，及其他Hibernate的有用演示。
-  * 改名core Mapping包参考OAM，改名两个Binder类，ConvertUtils参考Spring的转换类。
-  * Email演示模板引擎从Freemarker换为Velocity
   * Review log4jdbc3使用
 
 3.其他
   * Jetty.xml删除graceful shutdown定义
-  * 小版本升级	
+  * 依赖包小版本升级	
     -- 学习Selenium 2.0B1更新
     -- 打包JSW 3.5.7
-    -- 学习Velocity 1.7更新
     -- 学习guva r06->r08更新
-  * 重要版本升级如：Jetty 7
+  * 依赖包重要版本升级如：Jetty 7
       -- Jetty7跑功能测试时出现死锁
   * Python脚本改进，不发布依赖jar包
   * 发布前打包项目生成模板
@@ -48,13 +51,10 @@ TODO部分
    * 演示Hibernate Validator验证
    * CSS框架从YUI转为Blueprint
    * Memcached客户端从SpyMemcached转为XMemcached.
-   * 重要版本升级如：Maven 3.0, Hibernate 3.6
-   * springside-core与spring-extension项目的类进行注释，rename/remove等小重构.
-     -- 增加AssertUtils类代替Spring Assert类.
-
+   * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6
 
 2. 小改动
-   * 小版本升级
+   * 依赖包小版本升级
        -- Spring 3.0.4->3.0.5, CXF 2.2.10->2.3.3, Activemq 5.4.0->5.4.2, H2 1.2.142->1.3.149
        -- Jackson 1.6->1.7.2, Selenium 2.0a5->2.0b1, Jquery 1.4->1.5, HttpClient 4.0.1->4.1, Velocity 1.6.4->1.7, Dozer 5.2.1->5.3.1
        -- Jmemcached 0.8->1.0, Commons-lang 2.5->2.6, Commons-io 1.4->2.0, Guava r06->r08, Joda-time 1.6.1->1.6.2
