@@ -7,6 +7,9 @@
  */
 package org.springside.modules.log;
 
+import java.util.Enumeration;
+
+import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +18,7 @@ import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedOperationParameter;
 import org.springframework.jmx.export.annotation.ManagedOperationParameters;
 import org.springframework.jmx.export.annotation.ManagedResource;
+import org.springside.modules.utils.AssertUtils;
 
 /**
  * 基于JMX动态配置Log4J日志级别的MBean.
@@ -32,6 +36,8 @@ public class Log4jMBean {
 	private static org.slf4j.Logger mbeanLogger = LoggerFactory.getLogger(Log4jMBean.class);
 
 	private String defaultLoggerName;
+
+	private String traceAppenderName;
 
 	/**
 	 * 获取Logger的日志级别.
@@ -75,10 +81,48 @@ public class Log4jMBean {
 		setLoggerLevel(defaultLoggerName, newLevel);
 	}
 
+	@ManagedOperation(description = "Start trace")
+	public void startTrace() {
+		assertTraceInfoInjected();
+		Logger logger = Logger.getLogger(defaultLoggerName);
+		logger.setLevel(Level.DEBUG);
+		setTraceAppenderThreshold(logger, Level.DEBUG);
+		mbeanLogger.info("Start trace");
+	}
+
+	@ManagedOperation(description = "Stop trace")
+	public void stopTrace() {
+		assertTraceInfoInjected();
+		Logger logger = Logger.getLogger(defaultLoggerName);
+		logger.setLevel(Level.INFO);
+		setTraceAppenderThreshold(logger, Level.OFF);
+		mbeanLogger.info("Stop trace");
+	}
+
+	private void setTraceAppenderThreshold(Logger logger, Level level) {
+		Enumeration e = logger.getAllAppenders();
+		while (e.hasMoreElements()) {
+			AppenderSkeleton appender = (AppenderSkeleton) e.nextElement();
+			if (appender.getName().equals(traceAppenderName)) {
+				appender.setThreshold(level);
+			}
+		}
+	}
+
+	private void assertTraceInfoInjected() {
+		AssertUtils.hasText(defaultLoggerName);
+		AssertUtils.hasText(traceAppenderName);
+	}
+
 	/**
 	 * 设置项目默认的logger名称, 如org.springside.examples.miniweb.
 	 */
 	public void setDefaultLoggerName(String defaultLoggerName) {
 		this.defaultLoggerName = defaultLoggerName;
 	}
+
+	public void setTraceAppenderName(String traceAppenderName) {
+		this.traceAppenderName = traceAppenderName;
+	}
+
 }

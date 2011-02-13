@@ -3,12 +3,12 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
- * $Id: TraceUtils.java 693 2009-12-12 10:17:34Z calvinxiu $ 
+ * $Id$ 
  */
-package org.springside.examples.showcase.log.trace;
+package org.springside.modules.log;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.MDC;
+import org.springside.modules.utils.IdUtils;
 
 /**
  * 系统运行时打印方便调试与追踪信息的工具类.
@@ -24,20 +24,12 @@ import org.apache.log4j.MDC;
 public class TraceUtils {
 
 	public static final String TRACE_ID_KEY = "traceId";
-	public static final int TRACE_ID_LENGTH = 8;
 
 	/**
 	 * 开始Trace, 默认生成本次Trace的ID(8字符长)并放入MDC.
 	 */
 	public static void beginTrace() {
-		String traceId = RandomStringUtils.randomAlphanumeric(TRACE_ID_LENGTH);
-		MDC.put(TRACE_ID_KEY, traceId);
-	}
-
-	/**
-	 * 开始Trace, 将traceId放入MDC.
-	 */
-	public static void beginTrace(String traceId) {
+		String traceId = IdUtils.randomBase62();
 		MDC.put(TRACE_ID_KEY, traceId);
 	}
 

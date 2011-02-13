@@ -19,9 +19,9 @@ import org.apache.commons.lang.StringEscapeUtils;
 /**
  * 各种格式的编码解码工具类.
  * 
- * 集成Commons-Codec, Commons-Lang及JDK提供的编解码方法.
- * 
- * TODO:用Base62替代Base64UrlSafe.
+ * 1.Commons-Codec的hex/base64
+ * 2.Commons-Lang的xml/html escape
+ * 3. JDK提供URLEncoder
  * 
  * @author calvin
  */
@@ -98,8 +98,7 @@ public class EncodeUtils {
 	}
 
 	private static String alphabetEncode(long num, int base) {
-		AssertUtils.isTrue(num > 0, "num must be greater than 0.");
-
+		num = Math.abs(num);
 		StringBuilder sb = new StringBuilder();
 		for (; num > 0; num /= base) {
 			sb.append(ALPHABET.charAt((int) (num % base)));

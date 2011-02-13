@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 import org.apache.log4j.spi.LoggingEvent;
 
 /**
@@ -36,6 +37,20 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	}
 
 	/**
+	 * 返回之前append的第一个log的信息.
+	 */
+	public String getFirstMessage() {
+		return getFirstLog().getMessage().toString();
+	}
+
+	/**
+	 * 返回之前appender的第一个log的按layout pattern格式化的信息.
+	 */
+	public String getFirstRenderedMessage() {
+		return getLayout().format(getFirstLog());
+	}
+
+	/**
 	 * 返回之前append的最后一个log.
 	 */
 	public LoggingEvent getLastLog() {
@@ -46,6 +61,20 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	}
 
 	/**
+	 * 返回之前append的最后一个log的信息.
+	 */
+	public String getLastMessage() {
+		return getLastLog().getMessage().toString();
+	}
+
+	/**
+	 * 返回之前appender的最后一个log的按layout pattern格式化的信息.
+	 */
+	public String getLastRenderedMessage() {
+		return getLayout().format(getLastLog());
+	}
+
+	/**
 	 * 返回之前append的所有log.
 	 */
 	public List<LoggingEvent> getAllLogs() {
@@ -53,10 +82,21 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	}
 
 	/**
+	 * 判断是否有alog.
+	 */
+	public boolean isEmpty() {
+		return logs.isEmpty();
+	}
+
+	/**
 	 * 清除之前append的所有log.
 	 */
 	public void clearLogs() {
 		logs.clear();
+	}
+
+	public void setLayout(String pattern) {
+		super.setLayout(new PatternLayout(pattern));
 	}
 
 	/**
@@ -104,6 +144,7 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	 */
 	@Override
 	public void close() {
+		logs.clear();
 	}
 
 	/**
