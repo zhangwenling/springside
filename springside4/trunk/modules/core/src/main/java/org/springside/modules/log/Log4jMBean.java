@@ -90,7 +90,7 @@ public class Log4jMBean {
 	 */
 	@ManagedOperation(description = "Start trace")
 	public void startTrace() {
-		assertTraceAppenderNameInjected();
+		AssertUtils.hasText(traceAppenderName);
 		Logger logger = Logger.getLogger(defaultLoggerName);
 		defaultLoggerOrgLevel = logger.getLevel();
 		logger.setLevel(Level.DEBUG);

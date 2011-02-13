@@ -31,8 +31,7 @@ import com.opensymphony.xwork2.ActionContext;
  * 
  * @author calvin
  */
-@Deprecated
-public class WebTestUtils {
+public abstract class WebTestUtils {
 
 	/**
 	 * 在ServletContext里初始化Spring WebApplicationContext.

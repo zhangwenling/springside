@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author calvin
  */
-public class ReflectionUtils {
+public abstract class ReflectionUtils {
 
 	public static final String CGLIB_CLASS_SEPARATOR = "$$";
 

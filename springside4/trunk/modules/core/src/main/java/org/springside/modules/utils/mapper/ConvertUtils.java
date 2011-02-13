@@ -30,12 +30,12 @@ import com.google.common.collect.Lists;
  * 
  * @author calvin
  */
-public class ConvertUtils {
+public abstract class ConvertUtils {
 
 	/**
 	 * 持有Dozer单例, 避免重复创建Mapper消耗资源.
 	 */
-	static DozerBeanMapper dozer = new DozerBeanMapper();
+	private static DozerBeanMapper dozer = new DozerBeanMapper();
 
 	static {
 		registerDateConverter();

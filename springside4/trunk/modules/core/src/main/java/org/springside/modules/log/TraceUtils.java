@@ -21,7 +21,7 @@ import org.springside.modules.utils.IdUtils;
  * 
  * @author calvin
  */
-public class TraceUtils {
+public abstract class TraceUtils {
 
 	public static final String TRACE_ID_KEY = "traceId";
 

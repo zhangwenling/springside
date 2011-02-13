@@ -8,7 +8,7 @@ import java.util.concurrent.CountDownLatch;
  * @author badqiu
  * @author calvin
  */
-public class MultiThreadTestUtils {
+public abstract class MultiThreadTestUtils {
 
 	/**
 	 * 指定线程数并行的执行task并等待执行结束,返回总共消耗的时间.

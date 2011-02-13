@@ -21,7 +21,7 @@ import org.springside.modules.utils.EncodeUtils;
  * 
  * @author calvin
  */
-public class DigestUtils {
+public abstract class DigestUtils {
 
 	private static final String SHA1 = "SHA-1";
 	private static final String MD5 = "MD5";

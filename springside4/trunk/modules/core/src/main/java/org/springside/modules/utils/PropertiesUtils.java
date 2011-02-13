@@ -25,7 +25,7 @@ import org.springframework.util.PropertiesPersister;
  * 
  * @author calvin
  */
-public class PropertiesUtils {
+public abstract class PropertiesUtils {
 
 	private static final String DEFAULT_ENCODING = "UTF-8";
 

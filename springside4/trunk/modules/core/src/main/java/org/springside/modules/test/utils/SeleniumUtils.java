@@ -28,7 +28,7 @@ import org.springframework.util.Assert;
  *
  * @author calvin
  */
-public class SeleniumUtils {
+public abstract class SeleniumUtils {
 
 	public static final String HTMLUNIT = "htmlunit";
 

@@ -25,8 +25,7 @@ import org.springside.modules.utils.web.ServletUtils;
  * 
  * @author calvin
  */
-@Deprecated
-public class Struts2Utils {
+public abstract class Struts2Utils {
 
 	//-- header 常量定义 --//
 	private static final String HEADER_ENCODING = "encoding";

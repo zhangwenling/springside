@@ -26,7 +26,7 @@ public class ValidatorHolder implements DisposableBean {
 
 	@Autowired
 	public void setValidator(Validator validator) {
-		ValidatorHolder.validator = validator;
+		ValidatorHolder.validator = validator; //NOSONAR
 	}
 
 	public static Validator getValidator() {

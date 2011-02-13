@@ -28,7 +28,7 @@ import org.springside.modules.utils.PropertiesUtils;
 /**
  * 使用DBUnit初始化测试用H2嵌入式数据库数据的工具类.
  */
-public class DbUnitUtils {
+public abstract class DbUnitUtils {
 
 	private static Logger logger = LoggerFactory.getLogger(PropertiesUtils.class);
 	private static ResourceLoader resourceLoader = new DefaultResourceLoader();

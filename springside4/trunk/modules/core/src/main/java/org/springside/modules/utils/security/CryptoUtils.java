@@ -27,7 +27,7 @@ import org.springside.modules.utils.EncodeUtils;
  * 
  * @author calvin
  */
-public class CryptoUtils {
+public abstract class CryptoUtils {
 
 	private static final String DES = "DES";
 	private static final String AES = "AES";

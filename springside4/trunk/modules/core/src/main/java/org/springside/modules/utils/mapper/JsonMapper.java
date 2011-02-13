@@ -28,7 +28,7 @@ public class JsonMapper {
 
 	private ObjectMapper mapper;
 
-	private JsonMapper(Inclusion inclusion) {
+	public JsonMapper(Inclusion inclusion) {
 		mapper = new ObjectMapper();
 		//设置输出时包含属性的风格
 		mapper.getSerializationConfig().setSerializationInclusion(inclusion);

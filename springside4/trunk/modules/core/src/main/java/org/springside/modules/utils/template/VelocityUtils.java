@@ -19,7 +19,7 @@ import org.apache.velocity.app.VelocityEngine;
  * 
  * @author calvin
  */
-public class VelocityUtils {
+public abstract class VelocityUtils {
 
 	static {
 		Velocity.init();

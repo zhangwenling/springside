@@ -8,7 +8,7 @@ import java.util.UUID;
  * 
  * @author calvin
  */
-public class IdUtils {
+public abstract class IdUtils {
 
 	private static SecureRandom random = new SecureRandom();
 

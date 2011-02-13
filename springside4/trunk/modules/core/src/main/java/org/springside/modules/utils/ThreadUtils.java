@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 
  * @author calvin
  */
-public class ThreadUtils {
+public abstract class ThreadUtils {
 
 	/**
 	 * sleep等待,单位毫秒,忽略InterruptedException.

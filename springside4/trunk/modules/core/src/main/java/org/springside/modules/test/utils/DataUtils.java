@@ -16,7 +16,7 @@ import java.util.Random;
  * 
  * @author calvin
  */
-public class DataUtils {
+public abstract class DataUtils {
 	private static Random random = new Random();
 
 	/**

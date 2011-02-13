@@ -25,7 +25,7 @@ import org.springside.modules.utils.EncodeUtils;
  * 
  * @author calvin
  */
-public class ServletUtils {
+public abstract class ServletUtils {
 
 	//-- Content Type 定义 --//
 	public static final String EXCEL_TYPE = "application/vnd.ms-excel";

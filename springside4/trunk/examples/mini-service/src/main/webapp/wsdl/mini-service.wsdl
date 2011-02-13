@@ -8,97 +8,108 @@
 <xs:element name="searchUser" type="tns:searchUser"/>
 <xs:element name="searchUserResponse" type="tns:searchUserResponse"/>
 <xs:complexType name="searchUser">
-<xs:sequence>
-<xs:element minOccurs="0" name="loginName" type="xs:string"/>
-<xs:element minOccurs="0" name="name" type="xs:string"/>
-</xs:sequence>
-</xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="loginName" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element name="pageNo" type="xs:int"/>
+      <xs:element name="pageSize" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
 <xs:complexType name="searchUserResponse">
-<xs:sequence>
-<xs:element minOccurs="0" name="return" type="tns:SearchUserResult"/>
-</xs:sequence>
-</xs:complexType>
-<xs:complexType name="SearchUserResult">
-<xs:complexContent>
-<xs:extension base="tns:WSResult">
-<xs:sequence>
-<xs:element minOccurs="0" name="userList">
-<xs:complexType>
-<xs:sequence>
-<xs:element maxOccurs="unbounded" minOccurs="0" name="user" type="tns:User"/>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-</xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:UserPageResult"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="UserPageResult">
+    <xs:complexContent>
+      <xs:extension base="tns:PageResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="userList">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="user" type="tns:User"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="PageResult">
+    <xs:complexContent>
+      <xs:extension base="tns:WSResult">
+        <xs:sequence>
+          <xs:element name="totalItems" type="xs:long"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
 <xs:complexType name="WSResult">
-<xs:sequence>
-<xs:element minOccurs="0" name="code" type="xs:string"/>
-<xs:element minOccurs="0" name="message" type="xs:string"/>
-</xs:sequence>
-</xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="code" type="xs:string"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
 <xs:complexType name="User">
-<xs:sequence>
-<xs:element minOccurs="0" name="department" type="tns:departmentDTO"/>
-<xs:element minOccurs="0" name="email" type="xs:string"/>
-<xs:element minOccurs="0" name="id" type="xs:long"/>
-<xs:element minOccurs="0" name="loginName" type="xs:string"/>
-<xs:element minOccurs="0" name="name" type="xs:string"/>
-</xs:sequence>
-</xs:complexType>
-<xs:complexType name="departmentDTO">
-<xs:sequence>
-<xs:element minOccurs="0" name="manager" type="tns:User"/>
-<xs:element minOccurs="0" name="name" type="xs:string"/>
-<xs:element minOccurs="0" name="userList">
-<xs:complexType>
-<xs:sequence>
-<xs:element maxOccurs="unbounded" minOccurs="0" name="User" type="tns:User"/>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-</xs:sequence>
-</xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="department" type="tns:Department"/>
+      <xs:element minOccurs="0" name="email" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="loginName" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="Department">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="manager" type="tns:User"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="userList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="User" type="tns:User"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
 <xs:complexType name="getDepartmentDetail">
-<xs:sequence>
-<xs:element minOccurs="0" name="id" type="xs:long"/>
-</xs:sequence>
-</xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
 <xs:complexType name="getDepartmentDetailResponse">
-<xs:sequence>
-<xs:element minOccurs="0" name="return" type="tns:GetDepartmentResult"/>
-</xs:sequence>
-</xs:complexType>
-<xs:complexType name="GetDepartmentResult">
-<xs:complexContent>
-<xs:extension base="tns:WSResult">
-<xs:sequence>
-<xs:element minOccurs="0" name="department" type="tns:departmentDTO"/>
-</xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:DepartmentResult"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="DepartmentResult">
+    <xs:complexContent>
+      <xs:extension base="tns:WSResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="department" type="tns:Department"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
 <xs:complexType name="createUser">
-<xs:sequence>
-<xs:element minOccurs="0" name="user" type="tns:User"/>
-</xs:sequence>
-</xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="user" type="tns:User"/>
+    </xs:sequence>
+  </xs:complexType>
 <xs:complexType name="createUserResponse">
-<xs:sequence>
-<xs:element minOccurs="0" name="return" type="tns:CreateUserResult"/>
-</xs:sequence>
-</xs:complexType>
-<xs:complexType name="CreateUserResult">
-<xs:complexContent>
-<xs:extension base="tns:WSResult">
-<xs:sequence>
-<xs:element minOccurs="0" name="userId" type="xs:long"/>
-</xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:IdResult"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="IdResult">
+    <xs:complexContent>
+      <xs:extension base="tns:WSResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
 </xs:schema>
   </wsdl:types>
   <wsdl:message name="searchUserResponse">
