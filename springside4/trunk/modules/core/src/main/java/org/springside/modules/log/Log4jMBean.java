@@ -39,6 +39,8 @@ public class Log4jMBean {
 
 	private String traceAppenderName;
 
+	private Level defaultLoggerOrgLevel;
+
 	/**
 	 * 获取Logger的日志级别.
 	 */
@@ -81,20 +83,31 @@ public class Log4jMBean {
 		setLoggerLevel(defaultLoggerName, newLevel);
 	}
 
+	/**
+	 * 开始Trace.
+	 * 降低项目默认Logger的级别到DEBUG, 打开traceAppender的阀值到Debug.
+	 * 需要先注入项目默认Logger名称及traceAppender名称.
+	 */
 	@ManagedOperation(description = "Start trace")
 	public void startTrace() {
-		assertTraceInfoInjected();
+		assertTraceAppenderNameInjected();
 		Logger logger = Logger.getLogger(defaultLoggerName);
+		defaultLoggerOrgLevel = logger.getLevel();
 		logger.setLevel(Level.DEBUG);
 		setTraceAppenderThreshold(logger, Level.DEBUG);
 		mbeanLogger.info("Start trace");
 	}
 
+	/**
+	 * 结束Trace.
+	 * 提升项目默认Logger的级别回到原来的值, 关闭traceAppender的阀值到Off.
+	 * 需要先注入项目默认Logger名称及traceAppender名称.
+	 */
 	@ManagedOperation(description = "Stop trace")
 	public void stopTrace() {
-		assertTraceInfoInjected();
+		AssertUtils.hasText(traceAppenderName);
 		Logger logger = Logger.getLogger(defaultLoggerName);
-		logger.setLevel(Level.INFO);
+		logger.setLevel(defaultLoggerOrgLevel);
 		setTraceAppenderThreshold(logger, Level.OFF);
 		mbeanLogger.info("Stop trace");
 	}
@@ -109,18 +122,16 @@ public class Log4jMBean {
 		}
 	}
 
-	private void assertTraceInfoInjected() {
-		AssertUtils.hasText(defaultLoggerName);
-		AssertUtils.hasText(traceAppenderName);
-	}
-
 	/**
-	 * 设置项目默认的logger名称, 如org.springside.examples.miniweb.
+	 * 根据log4j.properties中的定义, 设置项目默认的logger名称, 如org.springside.examples.miniweb.
 	 */
 	public void setDefaultLoggerName(String defaultLoggerName) {
 		this.defaultLoggerName = defaultLoggerName;
 	}
 
+	/**
+	 * 根据log4j.properties中的定义,设置项目中的TraceAppender的名称
+	 */
 	public void setTraceAppenderName(String traceAppenderName) {
 		this.traceAppenderName = traceAppenderName;
 	}
