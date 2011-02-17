@@ -165,7 +165,7 @@
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-remote-client</artifactId>
+			<artifactId>selenium-remote-driver</artifactId>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>

@@ -27,8 +27,9 @@
 	</pluginRepositories>
 	
 	<modules>
+		<module>modules/parent</module>
 		<module>modules/core</module>
 		<module>modules/extension</module>
 		<module>tools/maven/archetype</module>
-  	</modules>
+  </modules>
 </project>
