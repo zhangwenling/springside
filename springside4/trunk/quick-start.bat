@@ -1,8 +1,6 @@
 @echo off
 echo [INFO] 确保默认JDK版本为JDK6.0及以上版本,已配置JAVA_HOME.
 
-echo [INFO] 如不能连接Maven官方网站, 修改本文件去掉下面一行的注释.
-
 set MVN=mvn
 set ANT=ant
 set MAVEN_OPTS=%MAVEN_OPTS% -XX:MaxPermSize=128m
@@ -12,34 +10,41 @@ if exist "tools\ant\apache-ant-1.8.2\" set ANT="%cd%\tools\ant\apache-ant-1.8.2\
 echo Maven命令为%MVN%
 echo Ant命令为%ANT%
 
-
 echo [Step 1] 安装SpringSide 所有modules到本地Maven仓库, 生成Eclipse项目文件.
 call %MVN% clean install -Dmaven.test.skip=true
+if errorlevel 1 goto error
 call %MVN% eclipse:clean eclipse:eclipse
+if errorlevel 1 goto error
 
 echo [Step 2] 启动H2数据库.
 cd tools/h2
-start "H2" %MVN% exec:java
+start "H2" %MVN% exe:java
 cd ..\..\
 
 echo [Step 3] 为Mini-Service 初始化数据库, 启动Jetty.
 cd examples\mini-service
 call %MVN% eclipse:clean eclipse:eclipse
-call %ANT% -f bin/build.xml init-db 
+if errorlevel 1 goto error
+call %ANT% -f bin/build.xml init-db
+if errorlevel 1 goto error
 start "Mini-Service" %MVN% jetty:run -Djetty.port=8083
 cd ..\..\
 
 echo [Step 4] 为Mini-Web 初始化数据库, 启动Jetty.
 cd examples\mini-web
 call %MVN% eclipse:clean eclipse:eclipse
+if errorlevel 1 goto error
 call %ANT% -f bin/build.xml init-db 
+if errorlevel 1 goto error
 start "Mini-Web" %MVN% jetty:run -Djetty.port=8084
 cd ..\..\
 
 echo [Step 5] 为Showcase 生成Eclipse项目文件, 编译, 打包, 初始化数据库, 启动Jetty.
 cd examples\showcase
 call %MVN% eclipse:clean eclipse:eclipse
+if errorlevel 1 goto error
 call %ANT% -f bin/build.xml init-db
+if errorlevel 1 goto error
 start "Showcase" %MVN% jetty:run
 cd ..\..\
 
@@ -49,5 +54,8 @@ echo [INFO] http://localhost:8083/mini-service
 echo [INFO] http://localhost:8084/mini-web
 echo [INFO] http://localhost:8080/showcase
 
+goto end
+:error
+echo "有错误发生"
 :end
 pause
