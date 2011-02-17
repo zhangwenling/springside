@@ -35,7 +35,7 @@
 
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
 	<repositories>
-	  <!-- 如有私服, 取消注释并指向正确的服务器地址.
+	  <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址.
 		<repository>
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
@@ -79,7 +79,8 @@
 		</repository>
 	</repositories>
   
-  <!-- 如有私服, 取消注释并指向正确的服务器地址.
+  <!--  设定插件仓库 
+        如有Nexus私服, 取消注释并指向正确的服务器地址.
 	<pluginRepositories>
 		<pluginRepository>
 			<id>nexus</id>
@@ -92,7 +93,8 @@
 	</pluginRepositories>
   -->
   
-	<!-- 如有私服, 设定团队持续集成发布包服务器
+	<!-- 设定使用Release插件发布的仓库服务器
+	     如有Nexus私服, 取消注释并指向正确的服务器地址.
 	<distributionManagement>
 		<repository>
 			<id>nexus</id>
