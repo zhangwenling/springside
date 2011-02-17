@@ -1,44 +1,26 @@
 import os,shutil
-from common import zipfolder,rmdir,zipfolder,emptydir,rmfile
-
-
+from common import zipfolder,rmdir,rmfile
 
 def prepare():
-   rmdir(export_dir+'springside3')
-   os.chdir(base_dir)
-   os.system('svn export . '+export_dir+'springside3')
+   rmdir(export_dir+target_name)
+   os.chdir(source_dir)
+   os.system('svn export . '+export_dir+target_name)
    os.chdir(export_dir)
-   rmfile(springside_dir+'-src.zip')
-   rmfile(springside_dir+'-all-in-one.zip')
-
-def packageSource():
-   os.rename('springside3',springside_dir)
-   zipfolder(springside_dir,springside_dir+'-src.zip')
+   rmfile(target_name+'.zip')
 
 def packageAll():
-   ## copy maven and repository
-   os.system('xcopy /s/e/i/y '+base_dir+'\\tools\\ant\\apache-ant-1.7.1 '+springside_dir+'\\tools\\ant\\apache-ant-1.7.1')
-   os.system('xcopy /s/e/i/y '+base_dir+'\\tools\\maven\\apache-maven-2.2.1 '+springside_dir+'\\tools\\maven\\apache-maven-2.2.1')
-   os.system('xcopy /s/e/i/h %USERPROFILE%\\.m2\\repository '+export_dir+springside_dir + '\\tools\\maven\\central-repository')
    os.chdir(export_dir)
-   zipfolder(springside_dir,"springside-"+springside_version+'-all-in-one.zip')
-   
-def clean():
-   rmdir(springside_dir)
+   #os.system('xcopy /s/e/i/y '+source_dir+'\\tools\\ant\\apache-ant-1.8.2 '+target_name+'\\tools\\ant\\apache-ant-1.8.2')
+   #os.system('xcopy /s/e/i/y '+source_dir+'\\tools\\maven\\apache-maven-3.0.2 '+target_name+'\\tools\\maven\\apache-maven-3.0.2')
 
-base_dir = os.path.abspath("../../../")
+   zipfolder(target_name, target_name+'.zip')
+
+
+source_dir = os.path.abspath("F:\\springside\\springside4")
 export_dir='C:\\'
-springside_version='3.3.3'
-springside_dir="springside-"+springside_version
+springside_version='4.0.0'
+target_name="springside-"+springside_version
 
 
-prepare()
-packageSource()
+#prepare()
 packageAll()
-##clean()
-##   move .m2 to nuxus central   
-##   os.chdir("F:\\springside\\springside3\\tools\\misc\\nexus-webapp-1.4.1-bundle\\nexus-webapp-1.4.1\\bin\\jsw\\windows-x86-32")
-##   os.system('Nexus.bat')
-##   os.chdir(base_dir)
-##   os.system('quick-start.bat')
-##   delete .m2 springside

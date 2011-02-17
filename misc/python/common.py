@@ -28,14 +28,16 @@ def replaceinfile(path,src,target):
     f.write(writelines)
     f.close()
 
-def zipfolder(foldername,filename):
-    empty_dirs=[]
-    zip=zipfile.ZipFile(filename,'w',zipfile.ZIP_DEFLATED)
-    for root,dirs,files in os.walk(foldername):
-        empty_dirs.extend([dir for dir in dirs if os.listdir(join(root,dir))==[]])
-        for filename in files:
-            zip.write(join(root,filename).encode("gbk"))
-    for dir in empty_dirs:
-        zif=zipfile.ZipInfo(join(root,dir).encode("gbk"+"/"))
-        zip.writestr(zif,"")
-    zip.close()
+def zipfolder(foldername, filename, includeEmptyDIr=True):   
+     empty_dirs = []  
+     zip = zipfile.ZipFile(filename, 'w', zipfile.ZIP_DEFLATED)  
+     for root, dirs, files in os.walk(foldername):  
+         empty_dirs.extend([dir for dir in dirs if os.listdir(join(root, dir)) == []])  
+         for name in files:  
+             zip.write(join(root ,name))  
+         if includeEmptyDIr:  
+             for dir in empty_dirs:  
+                 zif = zipfile.ZipInfo(join(root, dir) + "/")  
+                 zip.writestr(zif, "")  
+         empty_dirs = []  
+     zip.close()  
