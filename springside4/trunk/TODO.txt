@@ -2,38 +2,35 @@ TODO部分
 
 1.主要改动
   * springside-core与spring-extension项目大规模重构
- 	  -- Review所有测试Utils
-	  -- ConvertUtils使用Spring的ConvertService(Optional)
+ 	  -- Review所有测试Utils(Calvin)
   * DAO部分参考Spring-Data项目重写
-	  -- 分页使用Spring-Data-Commons的基础类
+	  -- 分页使用Spring-Data-Commons的基础类(Calvin)
   * DAO框架增加MyBatis的使用，与Hibernate在不同的场景各展所长:
-      -- 综合JPetstore 6.0, 和myBatis生成器的代码，整理mini-service中MyBatis的使用
-  * 使用DataFactory生成测试数据，删除DataUtils.
+      -- 综合JPetstore 6.0, 和myBatis生成器的代码，整理mini-service中MyBatis的使用(Calvin)
+  * 使用DataFactory生成测试数据，删除DataUtils.(Calvin)
   * MVC框架 从Struts2转为Spring MVC.
   * 安全框架从SpringSecurity转为Apache Shiro.
-      -- Mini-Web中的数据结构更新
-	  -- Review安全框架Shiro的使用，增加annotation方法级别的控制
+      -- Mini-Web中的数据结构更新 (Calvin)
+	  -- Review安全框架Shiro的使用，增加annotation方法级别的控制 (Calvin)
   * Sonar 2.5/Hudson
-	 --  跟進Hudson變更.
-     --  Jetty7跑功能测试时出现死锁	 
-	 --  讓所有項目正常運行，測試通過
-	 --  補充測試用例
-	 --  修正代碼質量問
-  * Wiki内容重新编写
+     --  Jetty7连续跑多个功能测试时出现死锁	 
+	 --  Modules覆盖率达到80%，Examples的可测试代码达到70%
+	 --  修正Sonar报告的代碼質量问题
+  * Wiki内容重新编写(Calvin)
 
 2.次要改动
   * 补回LocalCache演示，使用Guava r08的新特性
-  * 补回Hibernaet Auditable的演示，及其他Hibernate的有用演示。
-  * 改名RemovteServlet, 调整Demo页面
-  * Review log4jdbc3使用
+  * 改名RemovteServlet, 调整Demo页面(Calvin)
+  * Review log4jdbc3使用(Calvin)
 
 3.其他非代码改动
+  * 发布前打包项目生成模板(Calvin)
+  
+4.可放到4.0.1的
+  * 补回Hibernaet Auditable的演示，及其他Hibernate的有用演示。
   * 依赖包次要版本升级	
-    -- 打包JSW 3.5.7
-    -- 学习Jersy1.5指南，JAX-RS1.1的改进
-  * 发布前打包项目生成模板
-  * Wiki说明Maven如何使用Http Proxy,删除team proxy定义
- 
+  	-- 学习Jersy1.5指南，JAX-RS1.1的改进
+	-- 打包JSW 3.5.7
 ------------------------------------------------------------------------------------
 
 已完成部分
