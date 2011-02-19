@@ -60,12 +60,12 @@ public class XMemcachedClientWrapper {
 		try {
 			memcachedClient.setWithNoReply(key, expiredTime, value);
 		} catch (Exception e) {
-			handleException(e, key);
+			throw handleException(e, key);
 		}
 	}
 
 	/**
-	 * Set方法,等待操作返回结果,失败抛出RuntimeException..
+	 * Set方法, 等待操作返回结果, 失败抛出RuntimeException..
 	 */
 	public boolean set(String key, int expiredTime, Object value) {
 		try {
