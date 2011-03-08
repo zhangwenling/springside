@@ -26,8 +26,6 @@ import com.google.common.collect.Lists;
  * 2. 封装Apache Commons BeanUtils, 将字符串转换为对象.
  * 3. 从集合的对象中提取属性组成新的List或带分隔符的字符串.
  * 
- * TODO:看看Spring有没有更好的String To Object方案.
- * 
  * @author calvin
  */
 public abstract class ConvertUtils {

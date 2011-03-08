@@ -5,15 +5,9 @@
  * 
  * $Id$
  */
-package org.springside.modules.test.utils;
-
-import java.util.HashMap;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+package org.springside.modules.test.spring;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.struts2.ServletActionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
@@ -21,17 +15,12 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
-import com.opensymphony.xwork2.ActionContext;
-
 /**
- * Web集成测试工具类.
- * 
- * 1.Spring WebApplicationContext初始化到ServletContext.
- * 2.将MockRequest/MockResponse放入Struts2的ServletActionContext.
+ * 将Spring WebApplicationContext初始化到ServletContext的集成测试工具类.
  * 
  * @author calvin
  */
-public abstract class WebTestUtils {
+public abstract class SpringWebTestUtils {
 
 	/**
 	 * 在ServletContext里初始化Spring WebApplicationContext.
@@ -64,30 +53,5 @@ public abstract class WebTestUtils {
 	 */
 	public static void closeWebApplicationContext(MockServletContext servletContext) {
 		new ContextLoader().closeWebApplicationContext(servletContext);
-	}
-
-	/**
-	 * 将request放入Struts2的ServletActionContext,支持Struts2待测代码用ServletActionContext.getRequest()取出MockRequest.
-	 */
-	public static void setRequestToStruts2(HttpServletRequest request) {
-		initStruts2ActionContext();
-		ServletActionContext.setRequest(request);
-	}
-
-	/**
-	 * 将response放入Struts2的ServletActionContext,支持Struts2待测代码用ServletActionContext.getResponse()取出MockResponse.
-	 */
-	public static void setResponseToStruts2(HttpServletResponse response) {
-		initStruts2ActionContext();
-		ServletActionContext.setResponse(response);
-	}
-
-	/**
-	 * 如果Struts2 ActionContext未初始化则进行初始化.
-	 */
-	private static void initStruts2ActionContext() {
-		if (ActionContext.getContext() == null) {
-			ActionContext.setContext(new ActionContext(new HashMap()));
-		}
 	}
 }

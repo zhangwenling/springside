@@ -53,6 +53,6 @@ public class UserResourceClient {
 	 */
 	public UserDTO searchUserReturnJson(String name) {
 		String jsonString = client.path("/users/search").queryParam("name", name).get(String.class);
-		return JsonMapper.buildNormalBinder().fromJson(jsonString, UserDTO.class);
+		return JsonMapper.buildNormalMapper().fromJson(jsonString, UserDTO.class);
 	}
 }

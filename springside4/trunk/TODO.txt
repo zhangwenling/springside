@@ -7,7 +7,6 @@ TODO部分
 	  -- 分页使用Spring-Data-Commons的基础类(Calvin)
   * DAO框架增加MyBatis的使用，与Hibernate在不同的场景各展所长:
       -- 综合JPetstore 6.0, 和myBatis生成器的代码，整理mini-service中MyBatis的使用(Calvin)
-  * 使用DataFactory生成测试数据，删除DataUtils.(Calvin)
   * MVC框架 从Struts2转为Spring MVC.
   * 安全框架从SpringSecurity转为Apache Shiro.
       -- Mini-Web中的数据结构更新 (Calvin)

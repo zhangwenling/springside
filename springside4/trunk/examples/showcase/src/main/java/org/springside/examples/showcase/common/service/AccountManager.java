@@ -33,7 +33,7 @@ public class AccountManager {
 
 	private XMemcachedClientWrapper xmemcachedClient;
 
-	private JsonMapper jsonBinder = JsonMapper.buildNonDefaultBinder();
+	private JsonMapper jsonBinder = JsonMapper.buildNonDefaultMapper();
 
 	private NotifyMessageProducer notifyProducer; //JMS消息发送
 

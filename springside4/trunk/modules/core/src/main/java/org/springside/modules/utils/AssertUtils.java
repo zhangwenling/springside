@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
 /**
  * 与Spring Assert功能类似, 代码基本从org.springframework.util.Assert复制, 增加如下功能:
  * 
- * 1. 可抛出指定的业务异常类,而不是通用的IllegalArgumentException.
+ * 1. 可抛出指定的业务异常类, 而不是通用的IllegalArgumentException.
  * 2. 修改类名, 免得一天到晚和org.junit.Assert冲突.
  * 
  * 代码示例:

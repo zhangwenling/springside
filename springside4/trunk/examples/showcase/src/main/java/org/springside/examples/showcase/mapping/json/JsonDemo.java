@@ -23,7 +23,7 @@ import com.google.common.collect.Maps;
  */
 public class JsonDemo {
 
-	private static JsonMapper binder = JsonMapper.buildNonDefaultBinder();
+	private static JsonMapper binder = JsonMapper.buildNonDefaultMapper();
 
 	/**
 	 * 序列化对象/集合到Json字符串.
@@ -138,16 +138,16 @@ public class JsonDemo {
 	 */
 	public void threeTypeBinders() {
 		//打印全部属性
-		JsonMapper normalBinder = JsonMapper.buildNormalBinder();
+		JsonMapper normalBinder = JsonMapper.buildNormalMapper();
 		TestBean bean = new TestBean("A");
 		assertEquals("{\"nullValue\":null,\"name\":\"A\",\"defaultValue\":\"hello\"}", normalBinder.toJson(bean));
 
 		//不打印nullValue属性
-		JsonMapper nonNullBinder = JsonMapper.buildNonNullBinder();
+		JsonMapper nonNullBinder = JsonMapper.buildNonNullMapper();
 		assertEquals("{\"name\":\"A\",\"defaultValue\":\"hello\"}", nonNullBinder.toJson(bean));
 
 		//不打印默认值未改变的nullValue与defaultValue属性
-		JsonMapper nonDefaultBinder = JsonMapper.buildNonDefaultBinder();
+		JsonMapper nonDefaultBinder = JsonMapper.buildNonDefaultMapper();
 		assertEquals("{\"name\":\"A\"}", nonDefaultBinder.toJson(bean));
 	}
 

@@ -16,13 +16,15 @@ public abstract class MultiThreadTestUtils {
 	public static long execute(int threadCount, final Runnable task) throws InterruptedException {
 		final CountDownLatch startSignal = new CountDownLatch(threadCount);
 		final CountDownLatch endSignal = new CountDownLatch(threadCount);
+		final CountDownLatch runSignal = new CountDownLatch(1);
 
 		for (int i = 0; i < threadCount; i++) {
-			Thread t = new Worker(startSignal, endSignal, task);
+			Thread t = new Worker(startSignal, endSignal, runSignal, task);
 			t.start();
 		}
 
 		startSignal.await();
+		runSignal.countDown();
 		long startTime = System.currentTimeMillis();
 		endSignal.await();
 		return System.currentTimeMillis() - startTime;
@@ -31,9 +33,10 @@ public abstract class MultiThreadTestUtils {
 	private static class Worker extends Thread {
 		private CountDownLatch startSignal;
 		private CountDownLatch endSignal;
+		private CountDownLatch runSignal;
 		private Runnable task;
 
-		public Worker(CountDownLatch startSignal, CountDownLatch endSignal, Runnable task) {
+		public Worker(CountDownLatch startSignal, CountDownLatch endSignal, CountDownLatch runSignal, Runnable task) {
 			this.startSignal = startSignal;
 			this.endSignal = endSignal;
 			this.task = task;
@@ -42,7 +45,7 @@ public abstract class MultiThreadTestUtils {
 		public void run() {
 			try {
 				startSignal.countDown();
-				startSignal.await();
+				runSignal.await();
 				task.run();
 			} catch (InterruptedException e) {
 				//ignore

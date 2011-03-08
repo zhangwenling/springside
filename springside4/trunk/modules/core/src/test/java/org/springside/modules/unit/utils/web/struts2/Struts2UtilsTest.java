@@ -11,7 +11,7 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springside.modules.test.utils.WebTestUtils;
+import org.springside.modules.test.utils.Struts2TestUtils;
 import org.springside.modules.utils.web.struts2.Struts2Utils;
 
 import com.google.common.collect.Lists;
@@ -21,7 +21,7 @@ public class Struts2UtilsTest {
 	@Test
 	public void render() throws UnsupportedEncodingException {
 		MockHttpServletResponse response = new MockHttpServletResponse();
-		WebTestUtils.setResponseToStruts2(response);
+		Struts2TestUtils.setResponseToStruts2(response);
 
 		Struts2Utils.render("text/plain", "hello");
 		assertEquals("text/plain;charset=UTF-8", response.getContentType());
@@ -29,7 +29,7 @@ public class Struts2UtilsTest {
 		assertEquals("hello", response.getContentAsString());
 
 		response = new MockHttpServletResponse();
-		WebTestUtils.setResponseToStruts2(response);
+		Struts2TestUtils.setResponseToStruts2(response);
 		Struts2Utils.render("text/plain", "hello", "encoding:GBK");
 		assertEquals("text/plain;charset=GBK", response.getContentType());
 		assertEquals("no-cache, no-store, max-age=0", response.getHeader("Cache-Control"));
@@ -37,14 +37,14 @@ public class Struts2UtilsTest {
 		assertEquals("hello", response.getContentAsString());
 
 		response = new MockHttpServletResponse();
-		WebTestUtils.setResponseToStruts2(response);
+		Struts2TestUtils.setResponseToStruts2(response);
 		Struts2Utils.render("text/plain", "hello", "no-cache:false");
 		assertEquals("text/plain;charset=UTF-8", response.getContentType());
 		assertEquals(null, response.getHeader("Cache-Control"));
 		assertEquals("hello", response.getContentAsString());
 
 		response = new MockHttpServletResponse();
-		WebTestUtils.setResponseToStruts2(response);
+		Struts2TestUtils.setResponseToStruts2(response);
 		Struts2Utils.render("text/plain", "hello", "encoding:GBK", "no-cache:false");
 		assertEquals("text/plain;charset=GBK", response.getContentType());
 		assertEquals(null, response.getHeader("Cache-Control"));
@@ -55,7 +55,7 @@ public class Struts2UtilsTest {
 	
 	public void renderJson() throws IOException {
 		MockHttpServletResponse response = new MockHttpServletResponse();
-		WebTestUtils.setResponseToStruts2(response);
+		Struts2TestUtils.setResponseToStruts2(response);
 
 		//Map
 		Map map = new LinkedHashMap();
@@ -65,21 +65,21 @@ public class Struts2UtilsTest {
 
 		//Object
 		response = new MockHttpServletResponse();
-		WebTestUtils.setResponseToStruts2(response);
+		Struts2TestUtils.setResponseToStruts2(response);
 		Object object = new TestBean();
 		Struts2Utils.renderJson(object);
 		assertEquals("{\"name\":\"foo\"}", response.getContentAsString());
 
 		//Array
 		response = new MockHttpServletResponse();
-		WebTestUtils.setResponseToStruts2(response);
+		Struts2TestUtils.setResponseToStruts2(response);
 		TestBean[] array = { new TestBean(), new TestBean() };
 		Struts2Utils.renderJson(array);
 		assertEquals("[{\"name\":\"foo\"},{\"name\":\"foo\"}]", response.getContentAsString());
 
 		//Collection
 		response = new MockHttpServletResponse();
-		WebTestUtils.setResponseToStruts2(response);
+		Struts2TestUtils.setResponseToStruts2(response);
 		List<TestBean> list = Lists.newArrayList(new TestBean(), new TestBean());
 
 		Struts2Utils.renderJson(list);
@@ -89,7 +89,7 @@ public class Struts2UtilsTest {
 	@Test
 	public void renderJsonP() throws UnsupportedEncodingException {
 		MockHttpServletResponse response = new MockHttpServletResponse();
-		WebTestUtils.setResponseToStruts2(response);
+		Struts2TestUtils.setResponseToStruts2(response);
 
 		Map<String, String> map = Collections.singletonMap("html", "<p>helloworld</p>");
 		Struts2Utils.renderJsonp("callback", map, "no-cache:true");

@@ -17,6 +17,7 @@ import java.util.Random;
  * @author calvin
  */
 public abstract class DataUtils {
+
 	private static Random random = new Random();
 
 	/**
@@ -41,17 +42,17 @@ public abstract class DataUtils {
 	}
 
 	/**
-	 * 从输入list中随机返回随机个对象.
-	 */
-	public static <T> List<T> randomSome(List<T> list) {
-		return randomSome(list, random.nextInt(list.size()));
-	}
-
-	/**
 	 * 从输入list中随机返回n个对象.
 	 */
 	public static <T> List<T> randomSome(List<T> list, int n) {
 		Collections.shuffle(list);
 		return list.subList(0, n);
+	}
+
+	/**
+	 * 从输入list中随机返回随机个对象.
+	 */
+	public static <T> List<T> randomSome(List<T> list) {
+		return randomSome(list, random.nextInt(list.size()));
 	}
 }

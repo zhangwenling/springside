@@ -18,7 +18,7 @@ import org.apache.log4j.spi.LoggingEvent;
 /**
  * 在List中保存日志的Appender, 用于测试Log4j的日志输出.
  * 
- * 在测试开始前, 使用addToLogger方法将此appender添加到需要侦听的logger中.
+ * 在测试开始前, 使用任意一种addToLogger()方法将此appender添加到需要侦听的logger中.
  * 
  * @author calvin
  */
@@ -82,7 +82,7 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * 判断是否有alog.
+	 * 判断是否有log.
 	 */
 	public boolean isEmpty() {
 		return logs.isEmpty();
@@ -93,10 +93,6 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	 */
 	public void clearLogs() {
 		logs.clear();
-	}
-
-	public void setLayout(String pattern) {
-		super.setLayout(new PatternLayout(pattern));
 	}
 
 	/**
@@ -129,6 +125,13 @@ public class MockLog4jAppender extends AppenderSkeleton {
 	public void removeFromLogger(Class<?> loggerClass) {
 		Logger logger = Logger.getLogger(loggerClass);
 		logger.removeAppender(this);
+	}
+
+	/**
+	 * 设置输出格式.
+	 */
+	public void setLayout(String pattern) {
+		super.setLayout(new PatternLayout(pattern));
 	}
 
 	/**

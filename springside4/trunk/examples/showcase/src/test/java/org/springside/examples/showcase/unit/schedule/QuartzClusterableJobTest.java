@@ -37,7 +37,7 @@ public class QuartzClusterableJobTest extends SpringTxTestCase {
 		//验证任务已执行
 		assertEquals(1, appender.getAllLogs().size());
 
-		assertEquals("There are 6 user in database, print by default's job.", appender.getFirstLog().getMessage());
+		assertEquals("There are 6 user in database, print by default's job.", appender.getFirstMessage());
 
 		DbUnitUtils.removeData(dataSource, "/data/default-data.xml");
 	}

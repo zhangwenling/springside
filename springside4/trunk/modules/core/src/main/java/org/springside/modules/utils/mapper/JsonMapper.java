@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 简单封装Jackson实现JSON<->Java Object的Binder..
+ * 简单封装Jackson实现JSON<->Java Object的Mapper.
  * 
  * 封装不同的输出风格, 使用不同的builder函数创建实例.
  * 
@@ -38,23 +38,23 @@ public class JsonMapper {
 	}
 
 	/**
-	 * 创建输出全部属性到Json字符串的Binder.
+	 * 创建输出全部属性到Json字符串的Mapper.
 	 */
-	public static JsonMapper buildNormalBinder() {
+	public static JsonMapper buildNormalMapper() {
 		return new JsonMapper(Inclusion.ALWAYS);
 	}
 
 	/**
-	 * 创建只输出非空属性到Json字符串的Binder.
+	 * 创建只输出非空属性到Json字符串的Mapper.
 	 */
-	public static JsonMapper buildNonNullBinder() {
+	public static JsonMapper buildNonNullMapper() {
 		return new JsonMapper(Inclusion.NON_NULL);
 	}
 
 	/**
-	 * 创建只输出初始值被改变的属性到Json字符串的Binder.
+	 * 创建只输出初始值被改变的属性到Json字符串的Mapper.
 	 */
-	public static JsonMapper buildNonDefaultBinder() {
+	public static JsonMapper buildNonDefaultMapper() {
 		return new JsonMapper(Inclusion.NON_DEFAULT);
 	}
 

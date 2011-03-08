@@ -22,7 +22,7 @@ import javax.xml.namespace.QName;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * 使用Jaxb2.0实现XML<->Java Object的Binder.
+ * 使用Jaxb2.0实现XML<->Java Object的Mapper.
  * 
  * 在创建时需要设定所有需要序列化的Root对象的Class.
  * 特别支持Root对象是Collection的情形.

@@ -21,8 +21,8 @@ public class MockLog4jAppenderTest {
 		logger.warn(testString2);
 
 		//getFirstLog/getLastLog
-		assertEquals(testString1, appender.getFirstLog().getMessage());
-		assertEquals(testString2, appender.getLastLog().getMessage());
+		assertEquals(testString1, appender.getFirstMessage());
+		assertEquals(testString2, appender.getLastMessage());
 
 		//getAllLogs
 		assertEquals(2, appender.getAllLogs().size());

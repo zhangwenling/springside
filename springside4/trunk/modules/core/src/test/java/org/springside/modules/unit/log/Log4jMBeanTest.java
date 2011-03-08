@@ -39,7 +39,7 @@ public class Log4jMBeanTest {
 		org.slf4j.Logger logger = LoggerFactory.getLogger(loggerName);
 
 		Log4jMBean mbean = new Log4jMBean();
-		mbean.setDefaultLoggerName(loggerName);
+		mbean.setProjectLoggerName(loggerName);
 		mbean.setTraceAppenderName(traceAppenderName);
 
 		MockLog4jAppender normalAppender = new MockLog4jAppender();
@@ -84,7 +84,7 @@ public class Log4jMBeanTest {
 		//结束trace,逻辑与未开始Trace一样
 		mbean.stopTrace();
 		logger.info("after trace");
-		assertEquals("after trace", normalAppender.getFirstLog().getMessage());
+		assertEquals("after trace", normalAppender.getFirstMessage());
 		assertTrue(traceAppender.isEmpty());
 		normalAppender.clearLogs();
 		traceAppender.clearLogs();

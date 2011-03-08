@@ -34,8 +34,7 @@ public abstract class TraceUtils {
 	}
 
 	/**
-	 * 结束一次Trace.
-	 * 清除traceId.
+	 * 结束一次Trace, 清除traceId.
 	 */
 	public static void endTrace() {
 		MDC.remove(TRACE_ID_KEY);

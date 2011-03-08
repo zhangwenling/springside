@@ -17,11 +17,11 @@ import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang.StringEscapeUtils;
 
 /**
- * 各种格式的编码解码工具类.
+ * 封装各种格式的编码解码工具类.
  * 
- * 1.Commons-Codec的hex/base64
+ * 1.Commons-Codec的hex/base64 编码
  * 2.Commons-Lang的xml/html escape
- * 3. JDK提供URLEncoder
+ * 3.JDK提供的URLEncoder
  * 
  * @author calvin
  */
