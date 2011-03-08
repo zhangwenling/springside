@@ -76,6 +76,13 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- validator begin -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+		<!-- validator end -->
+
 		<!-- utils -->
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
@@ -102,7 +109,7 @@
 			<artifactId>guava</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+
 		<!-- logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -199,13 +206,17 @@
 			<artifactId>jmockit</artifactId>
 		</dependency>
 
-		<!-- validator begin -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<scope>test</scope>
 		</dependency>
-		<!-- validator end -->
 
+		<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

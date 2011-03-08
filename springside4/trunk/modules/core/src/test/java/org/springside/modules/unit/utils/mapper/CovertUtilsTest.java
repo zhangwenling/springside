@@ -1,4 +1,4 @@
-package org.springside.modules.unit.utils.mapping;
+package org.springside.modules.unit.utils.mapper;
 
 import static org.junit.Assert.*;
 

@@ -1,16 +1,14 @@
-package org.springside.examples.showcase.mapping.json;
+package org.springside.modules.unit.utils.mapper;
 
 import static org.junit.Assert.*;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.type.TypeReference;
-import org.joda.time.DateTime;
+import org.junit.Test;
 import org.springside.modules.utils.mapper.JsonMapper;
 
 import com.google.common.collect.Lists;
@@ -21,13 +19,14 @@ import com.google.common.collect.Maps;
  * 
  * @author calvin
  */
-public class JsonDemo {
+public class JsonMapperTest {
 
 	private static JsonMapper binder = JsonMapper.buildNonDefaultBinder();
 
 	/**
 	 * 序列化对象/集合到Json字符串.
 	 */
+	@Test
 	public void toJson() throws Exception {
 		//Bean
 		TestBean bean = new TestBean("A");
@@ -65,6 +64,7 @@ public class JsonDemo {
 	/**
 	 * 从Json字符串反序列化对象/集合.
 	 */
+	@Test
 	public void fromJson() throws Exception {
 		//Bean
 		String beanString = "{\"name\":\"A\"}";
@@ -100,6 +100,7 @@ public class JsonDemo {
 	/**
 	 * 测试传入空对象,空字符串,Empty的集合,"null"字符串的结果.
 	 */
+	@Test
 	public void nullAndEmpty() {
 		// toJson测试 //
 
@@ -136,6 +137,7 @@ public class JsonDemo {
 	/**
 	 * 测试三种不同的Binder.
 	 */
+	@Test
 	public void threeTypeBinders() {
 		//打印全部属性
 		JsonMapper normalBinder = JsonMapper.buildNormalBinder();
@@ -151,36 +153,11 @@ public class JsonDemo {
 		assertEquals("{\"name\":\"A\"}", nonDefaultBinder.toJson(bean));
 	}
 
-	/**
-	 * 测试对枚举与日期的序列化.
-	 */
-	public void enumAndDate() {
-		//Enum会以名称(name)序列化.
-		assertEquals("\"One\"", binder.toJson(TestEnum.One));
-
-		//Enum可以名称(name)或从0开始的顺序号(ordinal)反序列化.
-		assertEquals(TestEnum.One, binder.fromJson("0", TestEnum.class));
-		assertEquals(TestEnum.One, binder.fromJson("\"One\"", TestEnum.class));
-
-		DateTime jodaDate = new DateTime();
-
-		//日期默认以Timestamp方式存储
-		Date date = new Date(jodaDate.getMillis());
-		String tsString = String.valueOf(jodaDate.getMillis());
-
-		assertEquals(tsString, binder.toJson(date));
-
-		assertEquals(date, binder.fromJson(tsString, Date.class));
-	}
-
-	//此annotation为了截断对象的循环引用.
-	@JsonIgnoreProperties({ "parent" })
 	public static class TestBean {
 
 		private String name;
 		private String defaultValue = "hello";
 		private String nullValue = null;
-		private TestBean parent;
 
 		public TestBean() {
 		}
@@ -213,21 +190,10 @@ public class JsonDemo {
 			this.nullValue = nullValue;
 		}
 
-		public TestBean getParent() {
-			return parent;
-		}
-
-		public void setParent(TestBean parent) {
-			this.parent = parent;
-		}
-
 		@Override
 		public String toString() {
 			return "TestBean [defaultValue=" + defaultValue + ", name=" + name + ", nullValue=" + nullValue + "]";
 		}
 	}
 
-	public static enum TestEnum {
-		One, Two, Three
-	}
 }

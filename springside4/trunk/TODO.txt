@@ -39,7 +39,7 @@ TODO部分
    * CSS框架从YUI转为Blueprint
    * Memcached客户端从SpyMemcached转为XMemcached.
    * Template工具引擎从Freemarker转为Velocity, 见Email演示.
-   * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6, Jetty 7, Sonar 2.5
+   * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6, Jetty 7, Sonar 2.6
 
 2. 次要改动
    * springside-core与spring-extension项目大规模重构

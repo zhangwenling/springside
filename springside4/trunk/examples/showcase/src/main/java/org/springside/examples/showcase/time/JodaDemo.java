@@ -16,6 +16,10 @@ public class JodaDemo {
 		testGetAge();
 	}
 
+	public static void test() {
+
+	}
+
 	public static void testTimeZone() {
 
 		System.out.println("演示时区");

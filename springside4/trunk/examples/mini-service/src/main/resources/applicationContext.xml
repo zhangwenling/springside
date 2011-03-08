@@ -78,7 +78,7 @@
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
 	<!-- JSR303 Validator定义 -->
-	<bean class="org.springside.modules.utils.validator.ValidatorHolder">
+	<bean class="org.springside.modules.utils.validator.ValidatorHolder" lazy-init="false">
  	 	<property name="validator">
  	 		<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
  	 	</property>

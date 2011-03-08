@@ -29,6 +29,24 @@ public class EncodeUtilsTest {
 	}
 
 	@Test
+	public void base62Encode() {
+		long num = 63;
+
+		String result = EncodeUtils.base62Encode(num);
+		assertEquals("11", result);
+		assertEquals(num, EncodeUtils.base62Decode(result));
+	}
+
+	@Test
+	public void base36Encode() {
+		long num = 37;
+
+		String result = EncodeUtils.base36Encode(num);
+		assertEquals("11", result);
+		assertEquals(num, EncodeUtils.base36Decode(result));
+	}
+
+	@Test
 	public void urlEncode() {
 		String input = "http://locahost/?q=中文";
 		String result = EncodeUtils.urlEncode(input);

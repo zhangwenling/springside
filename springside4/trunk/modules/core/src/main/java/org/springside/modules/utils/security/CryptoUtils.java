@@ -306,7 +306,7 @@ public abstract class CryptoUtils {
 		return EncodeUtils.hexEncode(generateAesKey());
 	}
 
-	private static IllegalStateException convertRuntimeException(GeneralSecurityException e) {
-		return new IllegalStateException("Security exception", e);
+	private static RuntimeException convertRuntimeException(GeneralSecurityException e) {
+		return new RuntimeException("Crypto exception", e);
 	}
 }

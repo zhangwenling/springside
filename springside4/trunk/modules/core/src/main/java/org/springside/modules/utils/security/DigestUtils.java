@@ -59,7 +59,7 @@ public abstract class DigestUtils {
 			MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
 			return messageDigest.digest(input.getBytes());
 		} catch (GeneralSecurityException e) {
-			throw new IllegalStateException("Security exception", e);
+			throw convertRuntimeException(e);
 		}
 	}
 
@@ -93,7 +93,11 @@ public abstract class DigestUtils {
 			return EncodeUtils.hexEncode(messageDigest.digest());
 
 		} catch (GeneralSecurityException e) {
-			throw new IllegalStateException("Security exception", e);
+			throw convertRuntimeException(e);
 		}
+	}
+
+	private static RuntimeException convertRuntimeException(GeneralSecurityException e) {
+		return new RuntimeException("Digest exception", e);
 	}
 }
