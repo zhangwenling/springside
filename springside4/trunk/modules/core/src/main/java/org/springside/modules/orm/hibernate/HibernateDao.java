@@ -7,12 +7,16 @@
  */
 package org.springside.modules.orm.hibernate;
 
+import static java.util.regex.Pattern.CASE_INSENSITIVE;
+import static java.util.regex.Pattern.compile;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -28,6 +32,7 @@ import org.hibernate.transform.ResultTransformer;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PageRequest;
 import org.springside.modules.orm.PropertyFilter;
+import org.springside.modules.orm.PageRequest.Sort;
 import org.springside.modules.orm.PropertyFilter.MatchType;
 import org.springside.modules.utils.AssertUtils;
 import org.springside.modules.utils.ReflectionUtils;
@@ -43,6 +48,25 @@ import org.springside.modules.utils.ReflectionUtils;
  * @author calvin
  */
 public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao<T, ID> {
+
+	public static final String DEFAULT_ALIAS = "x";
+
+	private static final String IDENTIFIER = "[\\p{L}._$]+";
+	private static final String IDENTIFIER_GROUP = String.format("(%s)", IDENTIFIER);
+	private static final Pattern COUNT_MATCH;
+
+	static {
+
+		StringBuilder builder = new StringBuilder();
+		builder.append("(select\\s+((distinct )?.+?)\\s+)?(from\\s+");
+		builder.append(IDENTIFIER);
+		builder.append("(?:\\s+as)?\\s+)");
+		builder.append(IDENTIFIER_GROUP);
+		builder.append("(.*)");
+
+		COUNT_MATCH = compile(builder.toString(), CASE_INSENSITIVE);
+	}
+
 	/**
 	 * 通过子类的泛型定义取得对象类型Class.
 	 * eg.
@@ -69,23 +93,26 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按HQL分页查询.
 	 * 
-	 * @param pageRequest 分页参数. 注意不支持其中的orderBy参数.
+	 * @param pageRequest 分页参数.
 	 * @param hql hql语句.
 	 * @param values 数量可变的查询参数,按顺序绑定.
 	 * 
 	 * @return 分页查询结果, 附带结果列表及所有查询输入参数.
 	 */
-	public Page<T> findPage(final PageRequest pageRequest, final String hql, final Object... values) {
+	public Page<T> findPage(final PageRequest pageRequest, String hql, final Object... values) {
 		AssertUtils.notNull(pageRequest, "pageRequest不能为空");
 
 		Page<T> page = new Page<T>(pageRequest);
-
-		Query q = createQuery(hql, values);
 
 		if (pageRequest.isCountTotal()) {
 			long totalCount = countHqlResult(hql, values);
 			page.setTotalItems(totalCount);
 		}
+
+		if (pageRequest.isOrderBySetted()) {
+			hql = setOrderParameterToHql(hql, pageRequest);
+		}
+		Query q = createQuery(hql, values);
 
 		setPageParameterToQuery(q, pageRequest);
 
@@ -97,22 +124,27 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按HQL分页查询.
 	 * 
-	 * @param page 分页参数. 注意不支持其中的orderBy参数.
+	 * @param page 分页参数.
 	 * @param hql hql语句.
 	 * @param values 命名参数,按名称绑定.
 	 * 
 	 * @return 分页查询结果, 附带结果列表及所有查询输入参数.
 	 */
-	public Page<T> findPage(final PageRequest pageRequest, final String hql, final Map<String, ?> values) {
+	public Page<T> findPage(final PageRequest pageRequest, String hql, final Map<String, ?> values) {
 		AssertUtils.notNull(pageRequest, "page不能为空");
 
 		Page<T> page = new Page<T>(pageRequest);
 
+		if (pageRequest.isCountTotal()) {
+			long totalCount = countHqlResult(hql, values);
+			page.setTotalItems(totalCount);
+		}
+
+		if (pageRequest.isOrderBySetted()) {
+			hql = setOrderParameterToHql(hql, pageRequest);
+		}
+
 		Query q = createQuery(hql, values);
-
-		long totalCount = countHqlResult(hql, values);
-		page.setTotalItems(totalCount);
-
 		setPageParameterToQuery(q, pageRequest);
 
 		List result = q.list();
@@ -135,10 +167,12 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 
 		Criteria c = createCriteria(criterions);
 
-		long totalCount = countCriteriaResult(c);
-		page.setTotalItems(totalCount);
+		if (pageRequest.isCountTotal()) {
+			long totalCount = countCriteriaResult(c);
+			page.setTotalItems(totalCount);
+		}
 
-		setPageParameterToCriteria(c, pageRequest);
+		setPageRequestToCriteria(c, pageRequest);
 
 		List result = c.list();
 		page.setResult(result);
@@ -146,37 +180,45 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	}
 
 	/**
+	 * 在HQL的后面添加分页参数定义的orderBy, 辅助函数.
+	 */
+	protected String setOrderParameterToHql(final String hql, final PageRequest pageRequest) {
+		StringBuilder builder = new StringBuilder(hql);
+		builder.append(" order by");
+
+		for (Sort orderBy : pageRequest.getSort()) {
+			builder.append(String.format(" %s.%s %s,", DEFAULT_ALIAS, orderBy.getProperty(), orderBy.getDir()));
+		}
+
+		builder.deleteCharAt(builder.length() - 1);
+
+		return builder.toString();
+	}
+
+	/**
 	 * 设置分页参数到Query对象,辅助函数.
 	 */
 	protected Query setPageParameterToQuery(final Query q, final PageRequest pageRequest) {
-		AssertUtils.isTrue(pageRequest.getPageSize() > 0, "Page Size must larger than zero");
-
 		q.setFirstResult(pageRequest.getOffset());
 		q.setMaxResults(pageRequest.getPageSize());
-
 		return q;
 	}
 
 	/**
 	 * 设置分页参数到Criteria对象,辅助函数.
 	 */
-	protected Criteria setPageParameterToCriteria(final Criteria c, final PageRequest pageRequest) {
+	protected Criteria setPageRequestToCriteria(final Criteria c, final PageRequest pageRequest) {
 		AssertUtils.isTrue(pageRequest.getPageSize() > 0, "Page Size must larger than zero");
 
 		c.setFirstResult(pageRequest.getOffset());
 		c.setMaxResults(pageRequest.getPageSize());
 
 		if (pageRequest.isOrderBySetted()) {
-			String[] orderByArray = StringUtils.split(pageRequest.getOrderBy(), ',');
-			String[] orderArray = StringUtils.split(pageRequest.getOrderDir(), ',');
-
-			AssertUtils.isTrue(orderByArray.length == orderArray.length, "分页多重排序参数中,排序字段与排序方向的个数不相等");
-
-			for (int i = 0; i < orderByArray.length; i++) {
-				if (PageRequest.ASC.equals(orderArray[i])) {
-					c.addOrder(Order.asc(orderByArray[i]));
+			for (Sort sort : pageRequest.getSort()) {
+				if (Sort.ASC.equals(sort.getDir())) {
+					c.addOrder(Order.asc(sort.getProperty()));
 				} else {
-					c.addOrder(Order.desc(orderByArray[i]));
+					c.addOrder(Order.desc(sort.getProperty()));
 				}
 			}
 		}
@@ -216,13 +258,8 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	}
 
 	private String prepareCountHql(String orgHql) {
-		String fromHql = orgHql;
-		//select子句与order by子句会影响count查询,进行简单的排除.
-		fromHql = "from " + StringUtils.substringAfter(fromHql, "from");
-		fromHql = StringUtils.substringBefore(fromHql, "order by");
-
-		String countHql = "select count(*) " + fromHql;
-		return countHql;
+		Matcher matcher = COUNT_MATCH.matcher(orgHql);
+		return matcher.replaceFirst("select count($3$5) $4$5$6");
 	}
 
 	/**

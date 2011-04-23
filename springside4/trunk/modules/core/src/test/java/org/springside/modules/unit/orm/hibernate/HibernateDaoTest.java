@@ -21,6 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PageRequest;
 import org.springside.modules.orm.PropertyFilter;
+import org.springside.modules.orm.PageRequest.Sort;
 import org.springside.modules.orm.hibernate.HibernateDao;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DbUnitUtils;
@@ -115,7 +116,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		//初始化数据中共有6个email为@springside.org.cn的用户
 		PageRequest pageRequest = new PageRequest(1, 5);
 		pageRequest.setOrderBy("name,loginName");
-		pageRequest.setOrderDir(PageRequest.DESC + "," + PageRequest.ASC);
+		pageRequest.setOrderDir(Sort.DESC + "," + Sort.ASC);
 
 		Criterion c = Restrictions.like("email", "springside.org.cn", MatchMode.ANYWHERE);
 		Page<User> page = dao.findPage(pageRequest, c);

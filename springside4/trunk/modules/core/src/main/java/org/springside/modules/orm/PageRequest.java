@@ -1,13 +1,16 @@
 package org.springside.modules.orm;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
+import org.springside.modules.utils.AssertUtils;
 
+import com.google.common.collect.Lists;
+
+/**
+ * 分页参数封装类.
+ */
 public class PageRequest {
-	//-- 公共变量 --//
-	public static final String ASC = "asc";
-	public static final String DESC = "desc";
-
-	//-- 分页查询参数 --//
 	protected int pageNo = 1;
 	protected int pageSize = 10;
 
@@ -92,12 +95,28 @@ public class PageRequest {
 		//检查order字符串的合法值
 		String[] orderDirs = StringUtils.split(lowcaseOrderDir, ',');
 		for (String orderDirStr : orderDirs) {
-			if (!StringUtils.equals(DESC, orderDirStr) && !StringUtils.equals(ASC, orderDirStr)) {
+			if (!StringUtils.equals(Sort.DESC, orderDirStr) && !StringUtils.equals(Sort.ASC, orderDirStr)) {
 				throw new IllegalArgumentException("排序方向" + orderDirStr + "不是合法值");
 			}
 		}
 
 		this.orderDir = lowcaseOrderDir;
+	}
+
+	/**
+	 * 获得排序参数.
+	 */
+	public List<Sort> getSort() {
+		String[] orderBys = StringUtils.split(orderBy, ',');
+		String[] orderDirs = StringUtils.split(orderDir, ',');
+		AssertUtils.isTrue(orderBys.length == orderDirs.length, "分页多重排序参数中,排序字段与排序方向的个数不相等");
+
+		List<Sort> orders = Lists.newArrayList();
+		for (int i = 0; i < orderBys.length; i++) {
+			orders.add(new Sort(orderBys[i], orderDirs[i]));
+		}
+
+		return orders;
 	}
 
 	/**
@@ -122,9 +141,30 @@ public class PageRequest {
 	}
 
 	/**
-	 * 根据pageNo和pageSize计算当前页第一条记录在总结果集中的位置,序号从0开始.
+	 * 根据pageNo和pageSize计算当前页第一条记录在总结果集中的位置, 序号从0开始.
 	 */
 	public int getOffset() {
 		return ((pageNo - 1) * pageSize);
+	}
+
+	public static class Sort {
+		public static final String ASC = "asc";
+		public static final String DESC = "desc";
+
+		private final String property;
+		private final String dir;
+
+		public Sort(String property, String dir) {
+			this.property = property;
+			this.dir = dir;
+		}
+
+		public String getProperty() {
+			return property;
+		}
+
+		public String getDir() {
+			return dir;
+		}
 	}
 }

@@ -38,17 +38,8 @@ public class EncodeUtilsTest {
 	}
 
 	@Test
-	public void base36Encode() {
-		long num = 37;
-
-		String result = EncodeUtils.base36Encode(num);
-		assertEquals("11", result);
-		assertEquals(num, EncodeUtils.base36Decode(result));
-	}
-
-	@Test
 	public void urlEncode() {
-		String input = "http://locahost/?q=中文";
+		String input = "http://locahost/?q=中文&t=1";
 		String result = EncodeUtils.urlEncode(input);
 		System.out.println(result);
 

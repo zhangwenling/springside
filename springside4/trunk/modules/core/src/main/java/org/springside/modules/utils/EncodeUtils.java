@@ -70,20 +70,6 @@ public abstract class EncodeUtils {
 	}
 
 	/**
-	 * Base36(0_9A_Z)编码, long->String.
-	 */
-	public static String base36Encode(long num) {
-		return alphabetEncode(num, 36);
-	}
-
-	/**
-	 * Base36(0_9A_Z)解码, String->long.
-	 */
-	public static long base36Decode(String str) {
-		return alphabetDecode(str, 36);
-	}
-
-	/**
 	 * Base62(0_9A_Za_z)编码, long->String.
 	 */
 	public static String base62Encode(long num) {
@@ -133,6 +119,7 @@ public abstract class EncodeUtils {
 	 * URL 解码, Encode默认为UTF-8. 
 	 */
 	public static String urlDecode(String input) {
+
 		try {
 			return URLDecoder.decode(input, DEFAULT_URL_ENCODING);
 		} catch (UnsupportedEncodingException e) {
