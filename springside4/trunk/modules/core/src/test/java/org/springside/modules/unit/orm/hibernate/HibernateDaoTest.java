@@ -1,6 +1,7 @@
 package org.springside.modules.unit.orm.hibernate;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +19,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.orm.Page;
+import org.springside.modules.orm.PageRequest;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateDao;
 import org.springside.modules.test.spring.SpringTxTestCase;
@@ -49,74 +51,74 @@ public class HibernateDaoTest extends SpringTxTestCase {
 	@Test
 	public void getAll() {
 		//初始化数据中共有6个用户
-		Page<User> page = new Page<User>(5);
-		dao.getAll(page);
+		PageRequest pageRequest = new PageRequest(1, 5);
+		Page<User> page = dao.getAll(pageRequest);
 		assertEquals(5, page.getResult().size());
 
 		//自动统计总数
 		assertEquals(6L, page.getTotalItems());
 
-		page.setPageNo(2);
-		dao.getAll(page);
+		pageRequest.setPageNo(2);
+		page = dao.getAll(pageRequest);
 		assertEquals(1, page.getResult().size());
 	}
 
 	@Test
 	public void findByHQL() {
 		//初始化数据中共有6个email为@springside.org.cn的用户
-		Page<User> page = new Page<User>(5);
-		dao.findPage(page, "from User u where email like ?", "%springside.org.cn%");
+		PageRequest pageRequest = new PageRequest(1, 5);
+		Page<User> page = dao.findPage(pageRequest, "from User u where email like ?", "%springside.org.cn%");
 		assertEquals(5, page.getResult().size());
 
 		//自动统计总数
 		assertEquals(6L, page.getTotalItems());
 
 		//翻页
-		page.setPageNo(2);
-		dao.findPage(page, "from User u where email like ?", "%springside.org.cn%");
+		pageRequest.setPageNo(2);
+		page = dao.findPage(pageRequest, "from User u where email like ?", "%springside.org.cn%");
 		assertEquals(1, page.getResult().size());
 
 		//命名参数版本
 		Map<String, String> paraMap = Collections.singletonMap("email", "%springside.org.cn%");
-		page = new Page<User>(5);
-		dao.findPage(page, "from User u where email like :email", paraMap);
+		pageRequest = new PageRequest(1, 5);
+		page = dao.findPage(pageRequest, "from User u where email like :email", paraMap);
 		assertEquals(5, page.getResult().size());
 
 		//自动统计总数
 		assertEquals(6L, page.getTotalItems());
 
 		//翻页
-		page.setPageNo(2);
-		dao.findPage(page, "from User u where email like :email", paraMap);
+		pageRequest.setPageNo(2);
+		page = dao.findPage(pageRequest, "from User u where email like :email", paraMap);
 		assertEquals(1, page.getResult().size());
 	}
 
 	@Test
 	public void findByCriterion() {
 		//初始化数据中共有6个email为@springside.org.cn的用户
-		Page<User> page = new Page<User>(5);
+		PageRequest pageRequest = new PageRequest(1, 5);
 		Criterion c = Restrictions.like("email", "springside.org.cn", MatchMode.ANYWHERE);
-		dao.findPage(page, c);
+		Page<User> page = dao.findPage(pageRequest, c);
 		assertEquals(5, page.getResult().size());
 
 		//自动统计总数
 		assertEquals(6L, page.getTotalItems());
 
 		//翻页
-		page.setPageNo(2);
-		dao.findPage(page, c);
+		pageRequest.setPageNo(2);
+		page = dao.findPage(pageRequest, c);
 		assertEquals(1, page.getResult().size());
 	}
 
 	@Test
 	public void findByCriterionWithOrder() {
 		//初始化数据中共有6个email为@springside.org.cn的用户
-		Page<User> page = new Page<User>(5);
-		page.setOrderBy("name,loginName");
-		page.setOrder(Page.DESC + "," + Page.ASC);
+		PageRequest pageRequest = new PageRequest(1, 5);
+		pageRequest.setOrderBy("name,loginName");
+		pageRequest.setOrderDir(PageRequest.DESC + "," + PageRequest.ASC);
 
 		Criterion c = Restrictions.like("email", "springside.org.cn", MatchMode.ANYWHERE);
-		dao.findPage(page, c);
+		Page<User> page = dao.findPage(pageRequest, c);
 
 		assertEquals("Sawyer", page.getResult().get(0).getName());
 	}
@@ -152,13 +154,13 @@ public class HibernateDaoTest extends SpringTxTestCase {
 		assertTrue(StringUtils.contains(users.get(0).getEmail(), "springside.org.cn"));
 
 		//Filter with Page
-		Page<User> page = new Page<User>(5);
-		dao.findPage(page, filters);
+		PageRequest pageRequest = new PageRequest(1, 5);
+		Page<User> page = dao.findPage(pageRequest, filters);
 		assertEquals(5, page.getResult().size());
 		assertEquals(6L, page.getTotalItems());
 
-		page.setPageNo(2);
-		dao.findPage(page, filters);
+		pageRequest.setPageNo(2);
+		page = dao.findPage(pageRequest, filters);
 		assertEquals(1, page.getResult().size());
 
 		//Date and LT/GT filter
@@ -175,14 +177,14 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 	@Test
 	public void findPageByHqlAutoCount() {
-		Page<User> page = new Page<User>(5);
-		dao.findPage(page, "from User user");
+		PageRequest pageRequest = new PageRequest(1, 5);
+		Page<User> page = dao.findPage(pageRequest, "from User user");
 		assertEquals(6L, page.getTotalItems());
 
-		dao.findPage(page, "select user from User user");
+		page = dao.findPage(pageRequest, "select user from User user");
 		assertEquals(6L, page.getTotalItems());
 
-		dao.findPage(page, "select user from User user order by id");
+		page = dao.findPage(pageRequest, "select user from User user order by id");
 		assertEquals(6L, page.getTotalItems());
 	}
 }

@@ -26,6 +26,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.impl.CriteriaImpl;
 import org.hibernate.transform.ResultTransformer;
 import org.springside.modules.orm.Page;
+import org.springside.modules.orm.PageRequest;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.PropertyFilter.MatchType;
 import org.springside.modules.utils.AssertUtils;
@@ -61,28 +62,32 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 分页获取全部对象.
 	 */
-	public Page<T> getAll(final Page<T> page) {
-		return findPage(page);
+	public Page<T> getAll(final PageRequest pageRequest) {
+		return findPage(pageRequest);
 	}
 
 	/**
 	 * 按HQL分页查询.
 	 * 
-	 * @param page 分页参数. 注意不支持其中的orderBy参数.
+	 * @param pageRequest 分页参数. 注意不支持其中的orderBy参数.
 	 * @param hql hql语句.
 	 * @param values 数量可变的查询参数,按顺序绑定.
 	 * 
 	 * @return 分页查询结果, 附带结果列表及所有查询输入参数.
 	 */
-	public Page<T> findPage(final Page<T> page, final String hql, final Object... values) {
-		AssertUtils.notNull(page, "page不能为空");
+	public Page<T> findPage(final PageRequest pageRequest, final String hql, final Object... values) {
+		AssertUtils.notNull(pageRequest, "pageRequest不能为空");
+
+		Page<T> page = new Page<T>(pageRequest);
 
 		Query q = createQuery(hql, values);
 
-		long totalCount = countHqlResult(hql, values);
-		page.setTotalItems(totalCount);
+		if (pageRequest.isCountTotal()) {
+			long totalCount = countHqlResult(hql, values);
+			page.setTotalItems(totalCount);
+		}
 
-		setPageParameterToQuery(q, page);
+		setPageParameterToQuery(q, pageRequest);
 
 		List result = q.list();
 		page.setResult(result);
@@ -98,15 +103,17 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	 * 
 	 * @return 分页查询结果, 附带结果列表及所有查询输入参数.
 	 */
-	public Page<T> findPage(final Page<T> page, final String hql, final Map<String, ?> values) {
-		AssertUtils.notNull(page, "page不能为空");
+	public Page<T> findPage(final PageRequest pageRequest, final String hql, final Map<String, ?> values) {
+		AssertUtils.notNull(pageRequest, "page不能为空");
+
+		Page<T> page = new Page<T>(pageRequest);
 
 		Query q = createQuery(hql, values);
 
 		long totalCount = countHqlResult(hql, values);
 		page.setTotalItems(totalCount);
 
-		setPageParameterToQuery(q, page);
+		setPageParameterToQuery(q, pageRequest);
 
 		List result = q.list();
 		page.setResult(result);
@@ -121,15 +128,17 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	 * 
 	 * @return 分页查询结果.附带结果列表及所有查询输入参数.
 	 */
-	public Page<T> findPage(final Page<T> page, final Criterion... criterions) {
-		AssertUtils.notNull(page, "page不能为空");
+	public Page<T> findPage(final PageRequest pageRequest, final Criterion... criterions) {
+		AssertUtils.notNull(pageRequest, "page不能为空");
+
+		Page<T> page = new Page<T>(pageRequest);
 
 		Criteria c = createCriteria(criterions);
 
 		long totalCount = countCriteriaResult(c);
 		page.setTotalItems(totalCount);
 
-		setPageParameterToCriteria(c, page);
+		setPageParameterToCriteria(c, pageRequest);
 
 		List result = c.list();
 		page.setResult(result);
@@ -139,11 +148,11 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 设置分页参数到Query对象,辅助函数.
 	 */
-	protected Query setPageParameterToQuery(final Query q, final Page<T> page) {
-		AssertUtils.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
+	protected Query setPageParameterToQuery(final Query q, final PageRequest pageRequest) {
+		AssertUtils.isTrue(pageRequest.getPageSize() > 0, "Page Size must larger than zero");
 
-		q.setFirstResult(page.getOffset());
-		q.setMaxResults(page.getPageSize());
+		q.setFirstResult(pageRequest.getOffset());
+		q.setMaxResults(pageRequest.getPageSize());
 
 		return q;
 	}
@@ -151,20 +160,20 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 设置分页参数到Criteria对象,辅助函数.
 	 */
-	protected Criteria setPageParameterToCriteria(final Criteria c, final Page<T> page) {
-		AssertUtils.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
+	protected Criteria setPageParameterToCriteria(final Criteria c, final PageRequest pageRequest) {
+		AssertUtils.isTrue(pageRequest.getPageSize() > 0, "Page Size must larger than zero");
 
-		c.setFirstResult(page.getOffset());
-		c.setMaxResults(page.getPageSize());
+		c.setFirstResult(pageRequest.getOffset());
+		c.setMaxResults(pageRequest.getPageSize());
 
-		if (page.isOrderBySetted()) {
-			String[] orderByArray = StringUtils.split(page.getOrderBy(), ',');
-			String[] orderArray = StringUtils.split(page.getOrder(), ',');
+		if (pageRequest.isOrderBySetted()) {
+			String[] orderByArray = StringUtils.split(pageRequest.getOrderBy(), ',');
+			String[] orderArray = StringUtils.split(pageRequest.getOrderDir(), ',');
 
 			AssertUtils.isTrue(orderByArray.length == orderArray.length, "分页多重排序参数中,排序字段与排序方向的个数不相等");
 
 			for (int i = 0; i < orderByArray.length; i++) {
-				if (Page.ASC.equals(orderArray[i])) {
+				if (PageRequest.ASC.equals(orderArray[i])) {
 					c.addOrder(Order.asc(orderByArray[i]));
 				} else {
 					c.addOrder(Order.desc(orderByArray[i]));
@@ -279,9 +288,9 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	/**
 	 * 按属性过滤条件列表分页查找对象.
 	 */
-	public Page<T> findPage(final Page<T> page, final List<PropertyFilter> filters) {
+	public Page<T> findPage(final PageRequest pageRequest, final List<PropertyFilter> filters) {
 		Criterion[] criterions = buildCriterionByPropertyFilter(filters);
-		return findPage(page, criterions);
+		return findPage(pageRequest, criterions);
 	}
 
 	/**
@@ -321,8 +330,8 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 		List<Criterion> criterionList = new ArrayList<Criterion>();
 		for (PropertyFilter filter : filters) {
 			if (!filter.hasMultiProperties()) { //只有一个属性需要比较的情况.
-				Criterion criterion = buildCriterion(filter.getPropertyName(), filter.getMatchValue(),
-						filter.getMatchType());
+				Criterion criterion = buildCriterion(filter.getPropertyName(), filter.getMatchValue(), filter
+						.getMatchType());
 				criterionList.add(criterion);
 			} else {//包含多个属性需要比较的情况,进行or处理.
 				Disjunction disjunction = Restrictions.disjunction();

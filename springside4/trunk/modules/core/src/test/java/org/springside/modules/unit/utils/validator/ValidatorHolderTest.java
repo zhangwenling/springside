@@ -1,12 +1,14 @@
 package org.springside.modules.unit.utils.validator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.junit.Assert;
@@ -22,10 +24,12 @@ public class ValidatorHolderTest extends SpringContextTestCase {
 	public void validate() {
 		Customer customer = new Customer();
 		customer.setEmail("aaa");
+
 		Set<ConstraintViolation<Customer>> violations = ValidatorHolder.validate(customer);
 		assertEquals(2, violations.size());
 		String result = ValidatorHolder.convertMessage(violations, ",");
-		assertEquals("姓名不能为空,邮件地址格式不正确", result);
+		assertTrue(StringUtils.indexOf(result, "邮件地址格式不正确") != -1);
+		assertTrue(StringUtils.indexOf(result, "姓名不能为空") != -1);
 	}
 
 	@Test
@@ -38,7 +42,8 @@ public class ValidatorHolderTest extends SpringContextTestCase {
 			Assert.fail("should throw excepion");
 		} catch (ConstraintViolationException e) {
 			String result = ValidatorHolder.convertMessage(e, ",");
-			assertEquals("姓名不能为空,邮件地址格式不正确", result);
+			assertTrue(StringUtils.indexOf(result, "邮件地址格式不正确") != -1);
+			assertTrue(StringUtils.indexOf(result, "姓名不能为空") != -1);
 		}
 
 	}
