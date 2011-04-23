@@ -5,7 +5,7 @@ set MVN=mvn
 set ANT=ant
 set MAVEN_OPTS=%MAVEN_OPTS% -XX:MaxPermSize=128m
 
-if exist "tools\maven\apache-maven-3.0.2\" set MVN="%cd%\tools\maven\apache-maven-3.0.2\bin\mvn.bat"
+if exist "tools\maven\apache-maven-3.0.3\" set MVN="%cd%\tools\maven\apache-maven-3.0.3\bin\mvn.bat"
 if exist "tools\ant\apache-ant-1.8.2\" set ANT="%cd%\tools\ant\apache-ant-1.8.2\bin\ant.bat"
 echo MavenÃüÁîÎª%MVN%
 echo AntÃüÁîÎª%ANT%
