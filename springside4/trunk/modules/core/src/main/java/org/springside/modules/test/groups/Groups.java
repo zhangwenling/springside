@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
  * @author calvin
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.METHOD, ElementType.TYPE })
+@Target( { ElementType.METHOD, ElementType.TYPE })
 @Documented
 public @interface Groups {
 	/**

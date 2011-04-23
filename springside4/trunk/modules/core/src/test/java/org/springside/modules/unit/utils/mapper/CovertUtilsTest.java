@@ -1,6 +1,6 @@
 package org.springside.modules.unit.utils.mapper;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 import java.util.List;
@@ -14,7 +14,6 @@ import com.google.common.collect.Lists;
 
 public class CovertUtilsTest {
 
-	
 	@Test
 	public void convertElementPropertyToString() {
 		TestBean3 bean1 = new TestBean3();
@@ -28,8 +27,6 @@ public class CovertUtilsTest {
 	}
 
 	@Test
-	
-	
 	public void convertElementPropertyToList() {
 		TestBean3 bean1 = new TestBean3();
 		bean1.setId(1);

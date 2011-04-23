@@ -1,6 +1,7 @@
 package org.springside.modules.unit.test.groups;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -22,7 +23,6 @@ public class GroupsTestRunnerTest {
 	}
 
 	@Test
-	
 	public void groupsInit() throws InitializationError {
 		GroupsTestRunner groupsTestRunner = new GroupsTestRunner(GroupsTestRunnerTest.class);
 		//Get DAILY,NIGHTLY from system properties.

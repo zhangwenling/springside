@@ -1,6 +1,7 @@
 package org.springside.modules.unit.test.spring;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;

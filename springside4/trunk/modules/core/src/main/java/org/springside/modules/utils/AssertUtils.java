@@ -245,8 +245,8 @@ public abstract class AssertUtils {
 	 */
 	public static void noNullElements(Object[] array, String message) {
 		if (array != null) {
-			for (int i = 0; i < array.length; i++) {
-				if (array[i] == null) {
+			for (Object element : array) {
+				if (element == null) {
 					throw new IllegalArgumentException(message);
 				}
 			}
@@ -266,8 +266,8 @@ public abstract class AssertUtils {
 
 	public static void noNullElements(Object[] array, RuntimeException throwIfAssertFail) {
 		if (array != null) {
-			for (int i = 0; i < array.length; i++) {
-				if (array[i] == null) {
+			for (Object element : array) {
+				if (element == null) {
 					throw throwIfAssertFail;
 				}
 			}

@@ -1,6 +1,6 @@
 package org.springside.modules.unit.utils.web.struts2;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -52,7 +52,6 @@ public class Struts2UtilsTest {
 	}
 
 	@Test
-	
 	public void renderJson() throws IOException {
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		Struts2TestUtils.setResponseToStruts2(response);
