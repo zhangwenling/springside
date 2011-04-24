@@ -43,12 +43,13 @@ public class AccountWebServiceImpl implements AccountWebService {
 	 * @see AccountWebService#getDepartmentDetail()
 	 */
 	public DepartmentResult getDepartmentDetail(Long id) {
-
-		//获取部门
 		try {
 			Department entity = accountManager.getDepartmentDetail(id);
+
 			AssertUtils.notNull(entity, "部门不存在(id:" + id + ")");
+
 			DepartmentDTO dto = ConvertUtils.map(entity, DepartmentDTO.class);
+
 			return new DepartmentResult(dto);
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage());
@@ -62,11 +63,9 @@ public class AccountWebServiceImpl implements AccountWebService {
 	/**
 	 * @see AccountWebService#searchUser()
 	 */
-	public UserListResult searchUser(String loginName, String name, int pageNo, int pageSize) {
-
-		//获取User列表并转换为UserDTO列表.
+	public UserListResult searchUser(String loginName, String name) {
 		try {
-			List<User> entityList = accountManager.searchUser(loginName, name, pageNo, pageSize);
+			List<User> entityList = accountManager.searchUser(loginName, name);
 
 			List<UserDTO> dtoList = ConvertUtils.mapList(entityList, UserDTO.class);
 
@@ -78,20 +77,15 @@ public class AccountWebServiceImpl implements AccountWebService {
 	}
 
 	/**
-	 * @see AccountWebService#createUser(UserDTO)
+	 * @see AccountWebService#createUser()
 	 */
 	public IdResult createUser(UserDTO user) {
-
-		//保存用户
 		try {
 			User userEntity = ConvertUtils.map(user, User.class);
 
 			Long userId = accountManager.saveUser(userEntity);
 
 			return new IdResult(userId);
-		} catch (IllegalArgumentException e) {
-			logger.error(e.getMessage());
-			return new IdResult().setError(WSResult.PARAMETER_ERROR, e.getMessage());
 		} catch (ConstraintViolationException e) {
 			String message = ValidatorHolder.convertMessage(e, "\n");
 			return new IdResult().setError(WSResult.PARAMETER_ERROR, message);

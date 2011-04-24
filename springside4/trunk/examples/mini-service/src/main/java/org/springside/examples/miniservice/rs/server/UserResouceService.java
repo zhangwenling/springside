@@ -73,7 +73,7 @@ public class UserResouceService {
 	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
 	public List<UserDTO> searchUser(@QueryParam("loginName") String loginName, @QueryParam("name") String name) {
 		try {
-			List<User> entityList = accountManager.searchUser(loginName, name, 1, Integer.MAX_VALUE);
+			List<User> entityList = accountManager.searchUser(loginName, name);
 
 			return ConvertUtils.mapList(entityList, UserDTO.class);
 		} catch (RuntimeException e) {

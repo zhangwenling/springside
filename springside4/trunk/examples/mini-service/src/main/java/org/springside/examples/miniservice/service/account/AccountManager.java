@@ -45,7 +45,7 @@ public class AccountManager {
 	}
 
 	@Transactional(readOnly = true)
-	public List<User> searchUser(String loginName, String name, int pageNo, int pageSize) {
+	public List<User> searchUser(String loginName, String name) {
 		Map<String, Object> parameters = Maps.newHashMap();
 		parameters.put("loginName", loginName);
 		parameters.put("name", name);

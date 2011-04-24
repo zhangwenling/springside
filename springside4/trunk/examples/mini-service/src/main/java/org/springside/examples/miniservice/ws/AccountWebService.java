@@ -16,7 +16,6 @@ import org.springside.examples.miniservice.ws.result.base.IdResult;
  * 使用WSResult及其子类类包裹返回结果.
  * 使用DTO传输对象隔绝系统内部领域对象的修改对外系统的影响.
  * 
- * @author sky
  * @author calvin
  */
 @WebService(name = "AccountService", targetNamespace = WsConstants.NS)
@@ -29,12 +28,11 @@ public interface AccountWebService {
 	/**
 	 * 搜索用户信息.
 	 */
-	UserListResult searchUser(@WebParam(name = "loginName") String loginName,
-			@WebParam(name = "name") String name,@WebParam(name = "pageNo") int pageNo,@WebParam(name = "pageSize")int pageSize);
+	UserListResult searchUser(@WebParam(name = "loginName") String loginName, @WebParam(name = "name") String name);
 
 	/**
 	 * 新建用户.
 	 */
 	IdResult createUser(@WebParam(name = "user") UserDTO user);
-	
+
 }

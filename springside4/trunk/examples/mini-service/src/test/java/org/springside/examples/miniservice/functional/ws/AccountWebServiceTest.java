@@ -33,7 +33,7 @@ import org.springside.modules.utils.validator.ValidatorHolder;
  * @author calvin
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
+@TestExecutionListeners( { DependencyInjectionTestExecutionListener.class })
 @ContextConfiguration(locations = { "/applicationContext-ws-client.xml" })
 public class AccountWebServiceTest extends BaseFunctionalTestCase {
 
@@ -97,7 +97,7 @@ public class AccountWebServiceTest extends BaseFunctionalTestCase {
 		((BindingProvider) accountWebServiceCreated).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
 				address);
 
-		UserListResult result = accountWebServiceCreated.searchUser(null, null, 1, 100);
+		UserListResult result = accountWebServiceCreated.searchUser(null, null);
 
 		assertTrue(result.getUserList().size() >= 4);
 		assertEquals("Jack", result.getUserList().get(0).getName());
