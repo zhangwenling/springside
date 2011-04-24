@@ -80,7 +80,7 @@
 	<!-- JSR303 Validator定义 -->
 	<bean class="org.springside.modules.utils.validator.ValidatorHolder" lazy-init="false">
  	 	<property name="validator">
- 	 		<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+ 	 		<bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
  	 	</property>
  	</bean>
 	

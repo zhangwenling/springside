@@ -1,11 +1,10 @@
 package org.springside.examples.miniservice.unit.ws;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
 
-import org.dozer.DozerBeanMapper;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.junit.After;
@@ -13,10 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.Department;
-import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
-import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.impl.AccountWebServiceImpl;
 import org.springside.examples.miniservice.ws.result.DepartmentResult;
 import org.springside.examples.miniservice.ws.result.base.WSResult;
@@ -67,29 +64,6 @@ public class AccountWebServiceTest {
 		DepartmentDTO dto = result.getDepartment();
 		assertEquals(department.getName(), dto.getName());
 		assertEquals(department.getUserList().get(0).getName(), dto.getUserList().get(0).getName());
-	}
-
-	/**
-	 * 测试参数校验.
-	 */
-	@Test
-	public void validateParamter() {
-		control.replay();
-		WSResult result = accountWebService.createUser(null);
-		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
-
-		User testUser = AccountData.getRandomUser();
-		UserDTO userDTOWithoutLoginName = new DozerBeanMapper().map(testUser, UserDTO.class);
-		userDTOWithoutLoginName.setLoginName(null);
-		result = accountWebService.createUser(userDTOWithoutLoginName);
-		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
-
-		testUser = AccountData.getRandomUser();
-		UserDTO userDTOWitWrongEmail = new DozerBeanMapper().map(testUser, UserDTO.class);
-		userDTOWitWrongEmail.setEmail("abc");
-		result = accountWebService.createUser(userDTOWitWrongEmail);
-		assertEquals(WSResult.PARAMETER_ERROR, result.getCode());
-		System.out.println(result.getMessage());
 	}
 
 	/**
