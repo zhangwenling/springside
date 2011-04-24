@@ -1,15 +1,18 @@
-package org.springside.examples.miniservice.rs.dto;
+package org.springside.examples.miniservice.dto;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.springside.examples.miniservice.WsConstants;
 
 /**
  * Web Service传输User信息的DTO.
  * 
+ * 只传输外部接口需要的属性.使用JAXB 2.0的annotation标注JAVA-XML映射,尽量使用默认约定.
+ * 
  * @author calvin
  */
-@XmlRootElement(name = "User")
+@XmlType(name = "User", namespace = WsConstants.NS)
 public class UserDTO {
 
 	private Long id;

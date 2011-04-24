@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springside.examples.miniservice.WsConstants;
+import org.springside.examples.miniservice.dto.DepartmentDTO;
 import org.springside.examples.miniservice.entity.account.Department;
-import org.springside.examples.miniservice.rs.dto.DepartmentDTO;
 import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.utils.JerseyServerUtils;
 import org.springside.modules.utils.mapper.ConvertUtils;
@@ -36,7 +36,7 @@ public class DepartmentResouceService {
 	 */
 	@GET
 	@Path("{id}")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
 	public DepartmentDTO getDepartmentDetail(@PathParam("id") Long id) {
 		try {
 			Department entity = accountManager.getDepartmentDetail(id);

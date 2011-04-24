@@ -4,7 +4,7 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import org.springside.examples.miniservice.WsConstants;
-import org.springside.examples.miniservice.ws.dto.UserDTO;
+import org.springside.examples.miniservice.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.DepartmentResult;
 import org.springside.examples.miniservice.ws.result.UserListResult;
 import org.springside.examples.miniservice.ws.result.base.IdResult;

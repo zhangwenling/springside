@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
 import org.springside.examples.miniservice.WsConstants;
-import org.springside.examples.miniservice.ws.dto.UserDTO;
+import org.springside.examples.miniservice.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.base.WSResult;
 
 /**

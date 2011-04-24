@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.ws.dto;
+package org.springside.examples.miniservice.dto;
 
 import java.util.List;
 

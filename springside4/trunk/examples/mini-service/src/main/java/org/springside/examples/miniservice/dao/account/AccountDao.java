@@ -27,5 +27,4 @@ public class AccountDao extends SqlSessionDaoSupport {
 	public List<User> searchUser(Map<String, Object> parameters) {
 		return getSqlSession().selectList("Account.searchUser", parameters);
 	}
-
 }

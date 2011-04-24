@@ -3,7 +3,7 @@ package org.springside.examples.miniservice.ws.result;
 import javax.xml.bind.annotation.XmlType;
 
 import org.springside.examples.miniservice.WsConstants;
-import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
+import org.springside.examples.miniservice.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.result.base.WSResult;
 
 /**
