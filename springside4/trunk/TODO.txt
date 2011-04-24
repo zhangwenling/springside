@@ -56,7 +56,7 @@ TODO部分
        -- Jackson 1.6->1.8, HttpClient 4.0.1->4.1, Velocity 1.6.4->1.7, 
        -- Dozer 5.2.1->5.3.1,  Guava r06->r09, Joda-time 1.6.1->1.6.2
        -- Commons-lang 2.5->2.6, Commons-io 1.4->2.0,Commons pool 1.5.5->1.5.6, Commons Codec 1.4->1.5
-       -- Aspectj 1.6.9->1.6.10, mail 1.4.3->1.4.4, Asm 3.2->3.3
+       -- Aspectj 1.6.9->1.6.10, mail 1.4.3->1.4.4, Asm 3.2->3.3.1
        -- Junit 4.8.1->4.8.2, Jmockit 0.999.2->0.999.6, Perf4j 0.9.13->0.9.14, Jmemcached 0.8->1.0
    * 所有maven插件升级到最新版
    * 使用log4jdbc打印SQL及执行时间(还需要扩展到mini-web与showcase， 還要補個pom文件)
