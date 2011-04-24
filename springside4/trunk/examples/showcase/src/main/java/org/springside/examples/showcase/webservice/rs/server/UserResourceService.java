@@ -27,7 +27,7 @@ import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.examples.showcase.webservice.WsConstants;
 import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
-import org.springside.examples.showcase.webservice.rs.utils.JerseyServerUtils;
+import org.springside.modules.utils.jersey.JerseyServerUtils;
 import org.springside.modules.utils.mapper.ConvertUtils;
 
 /**

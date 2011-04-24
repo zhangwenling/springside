@@ -6,7 +6,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Required;
 import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
-import org.springside.examples.showcase.webservice.rs.utils.JerseyClientUtils;
+import org.springside.modules.utils.jersey.JerseyClientUtils;
 import org.springside.modules.utils.mapper.JsonMapper;
 import org.springside.modules.utils.web.ServletUtils;
 

@@ -83,7 +83,18 @@
 		</dependency>
 		<!-- validator end -->
 
-		<!-- utils -->
+		<!-- jersey begin -->
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+		</dependency>
+		<!-- jersey end -->
+
+		<!-- utils begin -->
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
 			<artifactId>dozer</artifactId>

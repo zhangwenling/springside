@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.webservice.rs.utils;
+package org.springside.modules.utils.jersey;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
