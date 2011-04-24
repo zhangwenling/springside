@@ -9,7 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springside.examples.miniservice.dto.DepartmentDTO;
 import org.springside.examples.miniservice.dto.UserDTO;
-import org.springside.examples.miniservice.utils.JerseyClientUtils;
+import org.springside.examples.miniservice.rs.utils.JerseyClientUtils;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;

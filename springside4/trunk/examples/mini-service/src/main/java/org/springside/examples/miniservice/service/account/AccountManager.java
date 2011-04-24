@@ -40,6 +40,7 @@ public class AccountManager {
 
 	@Transactional(readOnly = true)
 	public User getUser(Long id) {
+		AssertUtils.notNull(id, "id参数为空");
 		return accountDao.getUser(id);
 	}
 
@@ -53,9 +54,7 @@ public class AccountManager {
 
 	public Long saveUser(User user) throws ConstraintViolationException {
 		AssertUtils.notNull(user, "用户参数为空");
-		AssertUtils.isNull(user.getId(), "新建用户ID参数必须为空");
-
-		//Hibernate Validator校验请求参数
+		//使用Hibernate Validator校验请求参数
 		ValidatorHolder.validateWithException(user);
 
 		return accountDao.saveUser(user);

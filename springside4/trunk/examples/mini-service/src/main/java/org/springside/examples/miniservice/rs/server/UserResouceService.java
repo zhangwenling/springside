@@ -21,12 +21,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Component;
 import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.dto.UserDTO;
 import org.springside.examples.miniservice.entity.account.User;
+import org.springside.examples.miniservice.rs.utils.JerseyServerUtils;
 import org.springside.examples.miniservice.service.account.AccountManager;
-import org.springside.examples.miniservice.utils.JerseyServerUtils;
 import org.springside.modules.utils.mapper.ConvertUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
@@ -35,7 +34,6 @@ import org.springside.modules.utils.validator.ValidatorHolder;
  * 
  * @author calvin
  */
-@Component
 @Path("/users")
 public class UserResouceService {
 

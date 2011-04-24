@@ -10,12 +10,11 @@ import javax.ws.rs.core.Response.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.dto.DepartmentDTO;
 import org.springside.examples.miniservice.entity.account.Department;
+import org.springside.examples.miniservice.rs.utils.JerseyServerUtils;
 import org.springside.examples.miniservice.service.account.AccountManager;
-import org.springside.examples.miniservice.utils.JerseyServerUtils;
 import org.springside.modules.utils.mapper.ConvertUtils;
 
 /**
@@ -23,7 +22,6 @@ import org.springside.modules.utils.mapper.ConvertUtils;
  * 
  * @author calvin
  */
-@Component
 @Path("/departments")
 public class DepartmentResouceService {
 
