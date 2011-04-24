@@ -103,12 +103,6 @@
 		</dependency>
 		<!-- rest end -->
 		
-		<!-- jackson -->
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-xc</artifactId>
-		</dependency>
-
 		<!-- validator begin -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
