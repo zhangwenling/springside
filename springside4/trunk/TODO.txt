@@ -16,14 +16,15 @@ TODO部分
 	 --  修正Sonar报告的代碼質量问题
 
   * Wiki内容重新编写(Calvin)
+    -log4jdbc
+    -jersey+jackson
 
 2.次要改动
   * 补回LocalCache演示，使用Guava r09的新特性
   * 改名RemoteServlet, 调整Demo页面(Calvin)
-  * Review log4jdbc3使用(Calvin)
   * CXF 2.4的配置改进
   * Jackson的JSONP和Ignore
-  * 升级 Jersey 1.6，ActiveMQ5.5，Sonar 2.7， JQuery1.5.2，Quartz 1.8.4->2.0.1，Jetty 7.4.0.v20110414
+  * 升级 Jersey 1.6，ActiveMQ5.5，Sonar 2.7， JQuery1.5.2，Quartz 1.8.4->2.0.1，Jetty 7.4.0.v20110414,
 
 3.其他非代码改动
   * 发布前打包项目生成模板(Calvin)
@@ -31,7 +32,7 @@ TODO部分
 4.可放到4.0.1的
   * 补回Hibernaet Auditable的演示，及其他Hibernate的有用演示。
   * 依赖包次要版本升级	
-	-- 打包JSW 3.5.7
+	-- 打包JSW 3.5.7,JMockit 0.999.8
 ------------------------------------------------------------------------------------
 
 已完成部分
@@ -57,7 +58,9 @@ TODO部分
        -- Commons-lang 2.5->2.6, Commons-io 1.4->2.0,Commons pool 1.5.5->1.5.6, Commons Codec 1.4->1.5
        -- Aspectj 1.6.9->1.6.10, mail 1.4.3->1.4.4, Asm 3.2->3.3
        -- Junit 4.8.1->4.8.2, Jmockit 0.999.2->0.999.6, Perf4j 0.9.13->0.9.14, Jmemcached 0.8->1.0
-    * 所有maven插件升级到最新版
+   * 所有maven插件升级到最新版
+   * 使用log4jdbc打印SQL及执行时间(还需要扩展到mini-web与showcase)
+   
 	   
 3. 其他非代码改动
    * cxf wsdl2java从ant改为用maven plugin  

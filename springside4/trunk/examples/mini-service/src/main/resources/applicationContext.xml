@@ -42,26 +42,7 @@
 		<property name="timeBetweenEvictionRunsMillis" value="3600000" />
 		<property name="minEvictableIdleTimeMillis" value="3600000" />
 	</bean>
-
-	<!-- log4jdbc可以将数据源执行的sql将占位符?替换成字符,并以日志打印出来. log4j配置: log4j.logger.jdbc.sqltiming=INFO    详情请看: http://code.google.com/p/rapid-framework/wiki/log4jdbc
-	如oracle示例: 
-		原来的sql: select * from user where birth_date = ? and username = ? and age > ?
-		转换后sql: select * from user where birth_date = to_date('2010-08-13','yyyy-mm-dd') and username = 'badqiu' and age > 20
-	 -->
-	<bean id="log4jdbcInterceptor" class="net.sf.log4jdbc.DataSourceSpyInterceptor" />
-    <bean id="dataSourceLog4jdbcAutoProxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
-       <property name="interceptorNames">
-           <list>
-              <value>log4jdbcInterceptor</value>        
-           </list>
-       </property>
-       <property name="beanNames">
-           <list>
-              <value>dataSource</value>
-           </list>
-       </property>
-    </bean>
-    
+	
 	<!-- MyBatis配置 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -83,5 +64,4 @@
  	 		<bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
  	 	</property>
  	</bean>
-	
 </beans>

@@ -527,7 +527,7 @@
 			<dependency>
 				<groupId>net.sf.log4jdbc</groupId>
 				<artifactId>log4jdbc3</artifactId>
-				<version>1.2.1</version>	
+				<version>1.2beta2</version>	
 			</dependency>			
 			<!-- logging end -->
 
