@@ -62,6 +62,7 @@ public class AccountDaoTest extends SpringTxTestCase {
 	public void getUser() {
 		User user = accountDao.getUser(1L);
 		assertEquals("user1", user.getLoginName());
+		assertEquals(new Long(1L), user.getDepartment().getId());
 
 		user = accountDao.getUser(999L);
 		assertNull(user);
