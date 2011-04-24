@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.unit.dao.account;
+package org.springside.examples.miniservice.unit.dao;
 
 import static org.junit.Assert.*;
 

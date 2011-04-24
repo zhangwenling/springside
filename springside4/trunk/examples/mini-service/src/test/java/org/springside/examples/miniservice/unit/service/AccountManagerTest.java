@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.unit.service.account;
+package org.springside.examples.miniservice.unit.service;
 
 import static org.junit.Assert.*;
 
