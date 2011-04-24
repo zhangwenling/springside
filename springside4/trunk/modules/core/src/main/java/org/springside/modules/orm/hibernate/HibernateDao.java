@@ -7,9 +7,6 @@
  */
 package org.springside.modules.orm.hibernate;
 
-import static java.util.regex.Pattern.CASE_INSENSITIVE;
-import static java.util.regex.Pattern.compile;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,22 +47,6 @@ import org.springside.modules.utils.ReflectionUtils;
 public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao<T, ID> {
 
 	public static final String DEFAULT_ALIAS = "x";
-
-	private static final String IDENTIFIER = "[\\p{L}._$]+";
-	private static final String IDENTIFIER_GROUP = String.format("(%s)", IDENTIFIER);
-	private static final Pattern COUNT_MATCH;
-
-	static {
-
-		StringBuilder builder = new StringBuilder();
-		builder.append("(select\\s+((distinct )?.+?)\\s+)?(from\\s+");
-		builder.append(IDENTIFIER);
-		builder.append("(?:\\s+as)?\\s+)");
-		builder.append(IDENTIFIER_GROUP);
-		builder.append("(.*)");
-
-		COUNT_MATCH = compile(builder.toString(), CASE_INSENSITIVE);
-	}
 
 	/**
 	 * 通过子类的泛型定义取得对象类型Class.
@@ -258,8 +239,24 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	}
 
 	private String prepareCountHql(String orgHql) {
-		Matcher matcher = COUNT_MATCH.matcher(orgHql);
-		return matcher.replaceFirst("select count($3$5) $4$5$6");
+		String countHql = "select count (*) " + removeSelect(removeOrders(orgHql));
+		return countHql;
+	}
+
+	private static String removeSelect(String hql) {
+		int beginPos = hql.toLowerCase().indexOf("from");
+		return hql.substring(beginPos);
+	}
+
+	private static String removeOrders(String hql) {
+		Pattern p = Pattern.compile("order\\s*by[\\w|\\W|\\s|\\S]*", Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(hql);
+		StringBuffer sb = new StringBuffer();
+		while (m.find()) {
+			m.appendReplacement(sb, "");
+		}
+		m.appendTail(sb);
+		return sb.toString();
 	}
 
 	/**

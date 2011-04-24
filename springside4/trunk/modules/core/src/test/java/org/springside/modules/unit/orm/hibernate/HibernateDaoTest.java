@@ -1,7 +1,6 @@
 package org.springside.modules.unit.orm.hibernate;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -187,5 +186,8 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 		page = dao.findPage(pageRequest, "select user from User user order by id");
 		assertEquals(6L, page.getTotalItems());
+
+		page = dao.findPage(pageRequest, "select user from User user where user.id=1 order by id");
+		assertEquals(1L, page.getTotalItems());
 	}
 }
