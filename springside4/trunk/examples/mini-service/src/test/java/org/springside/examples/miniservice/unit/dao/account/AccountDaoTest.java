@@ -2,6 +2,7 @@ package org.springside.examples.miniservice.unit.dao.account;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -15,7 +16,6 @@ import org.springside.examples.miniservice.dao.account.AccountDao;
 import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
-import org.springside.modules.orm.Page;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DbUnitUtils;
 
@@ -73,31 +73,31 @@ public class AccountDaoTest extends SpringTxTestCase {
 
 		parameters.put("loginName", null);
 		parameters.put("name", null);
-		Page<User> page = accountDao.searchUser(new Page(1, Integer.MAX_VALUE), parameters);
-		assertEquals(4, page.getResult().size());
+		List<User> result = accountDao.searchUser(parameters);
+		assertEquals(4, result.size());
 
 		parameters.put("loginName", "user1");
 		parameters.put("name", null);
-		page = accountDao.searchUser(new Page(1, Integer.MAX_VALUE), parameters);
-		assertEquals(1, page.getResult().size());
+		result = accountDao.searchUser(parameters);
+		assertEquals(1, result.size());
 
 		parameters.clear();
 		parameters.put("name", "Jack");
 		parameters.put("loginName", null);
-		page = accountDao.searchUser(new Page(1, Integer.MAX_VALUE), parameters);
-		assertEquals(1, page.getResult().size());
+		result = accountDao.searchUser(parameters);
+		assertEquals(1, result.size());
 
 		parameters.clear();
 		parameters.put("name", "Jack");
 		parameters.put("loginName", "user1");
-		page = accountDao.searchUser(new Page(1, Integer.MAX_VALUE), parameters);
-		assertEquals(1, page.getResult().size());
+		result = accountDao.searchUser(parameters);
+		assertEquals(1, result.size());
 
 		parameters.clear();
 		parameters.put("name", "Jack");
 		parameters.put("loginName", "errorName");
-		page = accountDao.searchUser(new Page(1, Integer.MAX_VALUE), parameters);
-		assertEquals(0, page.getResult().size());
+		result = accountDao.searchUser(parameters);
+		assertEquals(0, result.size());
 	}
 
 	@Test

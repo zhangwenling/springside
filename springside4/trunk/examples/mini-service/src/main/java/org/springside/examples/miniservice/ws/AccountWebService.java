@@ -6,7 +6,7 @@ import javax.jws.WebService;
 import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.DepartmentResult;
-import org.springside.examples.miniservice.ws.result.UserPageResult;
+import org.springside.examples.miniservice.ws.result.UserListResult;
 import org.springside.examples.miniservice.ws.result.base.IdResult;
 
 /**
@@ -29,7 +29,7 @@ public interface AccountWebService {
 	/**
 	 * 搜索用户信息.
 	 */
-	UserPageResult searchUser(@WebParam(name = "loginName") String loginName,
+	UserListResult searchUser(@WebParam(name = "loginName") String loginName,
 			@WebParam(name = "name") String name,@WebParam(name = "pageNo") int pageNo,@WebParam(name = "pageSize")int pageSize);
 
 	/**

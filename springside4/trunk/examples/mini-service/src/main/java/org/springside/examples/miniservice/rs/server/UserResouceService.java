@@ -14,8 +14,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.Response.Status;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,6 @@ import org.springside.examples.miniservice.entity.account.User;
 import org.springside.examples.miniservice.rs.dto.UserDTO;
 import org.springside.examples.miniservice.service.account.AccountManager;
 import org.springside.examples.miniservice.utils.JerseyServerUtils;
-import org.springside.modules.orm.Page;
 import org.springside.modules.utils.mapper.ConvertUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
@@ -52,7 +51,7 @@ public class UserResouceService {
 	 */
 	@GET
 	@Path("{id}")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
 	public UserDTO getUser(@PathParam("id") Long id) {
 		try {
 			User entity = accountManager.getUser(id);
@@ -73,12 +72,12 @@ public class UserResouceService {
 	 */
 	@GET
 	@Path("search")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
 	public List<UserDTO> searchUser(@QueryParam("loginName") String loginName, @QueryParam("name") String name) {
 		try {
-			Page<User> entityList = accountManager.searchUser(loginName, name, 1, Integer.MAX_VALUE);
+			List<User> entityList = accountManager.searchUser(loginName, name, 1, Integer.MAX_VALUE);
 
-			return ConvertUtils.mapList(entityList.getResult(), UserDTO.class);
+			return ConvertUtils.mapList(entityList, UserDTO.class);
 		} catch (RuntimeException e) {
 			throw JerseyServerUtils.buildDefaultException(e, logger);
 		}
@@ -88,7 +87,7 @@ public class UserResouceService {
 	 * 创建用户, 请求数据为POST过来的JSON/XML格式编码的DTO, 返回表示所创建用户的URI.
 	 */
 	@POST
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
+	@Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
 	public Response createUser(UserDTO user) {
 		//转换并创建用户
 		try {

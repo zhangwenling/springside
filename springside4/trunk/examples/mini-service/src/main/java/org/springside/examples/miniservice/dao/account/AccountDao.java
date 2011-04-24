@@ -1,18 +1,22 @@
 package org.springside.examples.miniservice.dao.account;
 
+import java.util.List;
 import java.util.Map;
 
+import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Component;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
-import org.springside.modules.orm.Page;
-import org.springside.modules.orm.mybatis.MyBatisDao;
 
 @Component
-public class AccountDao extends MyBatisDao {
+public class AccountDao extends SqlSessionDaoSupport {
 
 	public Department getDepartmentDetail(Long id) {
 		return (Department) getSqlSession().selectOne("Account.getDepartmentDetail", id);
+	}
+
+	public User getUser(Long id) {
+		return (User) getSqlSession().selectOne("Account.getUser", id);
 	}
 
 	public Long saveUser(User user) {
@@ -20,12 +24,8 @@ public class AccountDao extends MyBatisDao {
 		return user.getId();
 	}
 
-	public User getUser(Long id) {
-		return (User) getSqlSession().selectOne("Account.getUser", id);
-	}
-
-	public Page<User> searchUser(Page<User> page, Map<String, Object> parameters) {
-		return selectPage(page, "Account.searchUser", parameters);
+	public List<User> searchUser(Map<String, Object> parameters) {
+		return getSqlSession().selectList("Account.searchUser", parameters);
 	}
 
 }

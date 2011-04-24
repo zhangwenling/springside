@@ -1,5 +1,6 @@
 package org.springside.examples.miniservice.service.account;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.ConstraintViolationException;
@@ -10,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniservice.dao.account.AccountDao;
 import org.springside.examples.miniservice.entity.account.Department;
 import org.springside.examples.miniservice.entity.account.User;
-import org.springside.modules.orm.Page;
 import org.springside.modules.utils.AssertUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
@@ -44,12 +44,11 @@ public class AccountManager {
 	}
 
 	@Transactional(readOnly = true)
-	public Page<User> searchUser(String loginName, String name, int pageNo, int pageSize) {
+	public List<User> searchUser(String loginName, String name, int pageNo, int pageSize) {
 		Map<String, Object> parameters = Maps.newHashMap();
 		parameters.put("loginName", loginName);
 		parameters.put("name", name);
-		Page<User> page = new Page<User>(pageNo, pageSize);
-		return accountDao.searchUser(page, parameters);
+		return accountDao.searchUser(parameters);
 	}
 
 	public Long saveUser(User user) throws ConstraintViolationException {

@@ -17,10 +17,9 @@ import org.springside.examples.miniservice.ws.AccountWebService;
 import org.springside.examples.miniservice.ws.dto.DepartmentDTO;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
 import org.springside.examples.miniservice.ws.result.DepartmentResult;
-import org.springside.examples.miniservice.ws.result.UserPageResult;
+import org.springside.examples.miniservice.ws.result.UserListResult;
 import org.springside.examples.miniservice.ws.result.base.IdResult;
 import org.springside.examples.miniservice.ws.result.base.WSResult;
-import org.springside.modules.orm.Page;
 import org.springside.modules.utils.AssertUtils;
 import org.springside.modules.utils.mapper.ConvertUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
@@ -63,18 +62,18 @@ public class AccountWebServiceImpl implements AccountWebService {
 	/**
 	 * @see AccountWebService#searchUser()
 	 */
-	public UserPageResult searchUser(String loginName, String name, int pageNo, int pageSize) {
+	public UserListResult searchUser(String loginName, String name, int pageNo, int pageSize) {
 
 		//获取User列表并转换为UserDTO列表.
 		try {
-			Page<User> page = accountManager.searchUser(loginName, name, pageNo, pageSize);
+			List<User> entityList = accountManager.searchUser(loginName, name, pageNo, pageSize);
 
-			List<UserDTO> dtoList = ConvertUtils.mapList(page.getResult(), UserDTO.class);
+			List<UserDTO> dtoList = ConvertUtils.mapList(entityList, UserDTO.class);
 
-			return new UserPageResult(page.getTotalItems(), dtoList);
+			return new UserListResult(dtoList);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			return new UserPageResult().setDefaultError();
+			return new UserListResult().setDefaultError();
 		}
 	}
 

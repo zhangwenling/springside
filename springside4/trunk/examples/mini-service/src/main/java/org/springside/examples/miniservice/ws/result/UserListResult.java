@@ -8,24 +8,23 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.ws.dto.UserDTO;
-import org.springside.examples.miniservice.ws.result.base.PageResult;
+import org.springside.examples.miniservice.ws.result.base.WSResult;
 
 /**
- * 包含User的分页result,从PageResult继承
+ * 包含User
  * 
  * @author calvin
  * @author badqiu
  */
 @XmlType(name = "UserPageResult", namespace = WsConstants.NS)
-public class UserPageResult extends PageResult {
+public class UserListResult extends WSResult {
 
 	private List<UserDTO> userList;
 
-	public UserPageResult() {
+	public UserListResult() {
 	}
 
-	public UserPageResult(long totalItems, List<UserDTO> userList) {
-		super(totalItems);
+	public UserListResult(List<UserDTO> userList) {
 		this.userList = userList;
 	}
 
