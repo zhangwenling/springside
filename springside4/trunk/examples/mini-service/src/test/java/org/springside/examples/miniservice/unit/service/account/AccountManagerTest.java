@@ -8,8 +8,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.miniservice.data.AccountData;
-import org.springside.examples.miniservice.entity.account.User;
-import org.springside.examples.miniservice.service.account.AccountManager;
+import org.springside.examples.miniservice.entity.User;
+import org.springside.examples.miniservice.service.AccountManager;
 import org.springside.modules.test.spring.SpringContextTestCase;
 import org.springside.modules.utils.validator.ValidatorHolder;
 

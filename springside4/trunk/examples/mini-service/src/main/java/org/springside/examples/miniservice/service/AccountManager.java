@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.service.account;
+package org.springside.examples.miniservice.service;
 
 import java.util.List;
 import java.util.Map;
@@ -8,9 +8,9 @@ import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springside.examples.miniservice.dao.account.AccountDao;
-import org.springside.examples.miniservice.entity.account.Department;
-import org.springside.examples.miniservice.entity.account.User;
+import org.springside.examples.miniservice.dao.AccountDao;
+import org.springside.examples.miniservice.entity.Department;
+import org.springside.examples.miniservice.entity.User;
 import org.springside.modules.utils.AssertUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
 

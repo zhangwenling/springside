@@ -3,7 +3,7 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias alias="Department" type="org.springside.examples.miniservice.entity.account.Department" />
-		<typeAlias alias="User" type="org.springside.examples.miniservice.entity.account.User" />
+		<typeAlias alias="Department" type="org.springside.examples.miniservice.entity.Department" />
+		<typeAlias alias="User" type="org.springside.examples.miniservice.entity.User" />
 	</typeAliases>
 </configuration>

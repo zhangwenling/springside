@@ -1,8 +1,7 @@
-package org.springside.examples.miniservice.entity.account;
+package org.springside.examples.miniservice.entity;
 
 import java.util.List;
 
-import org.springside.examples.miniservice.entity.IdEntity;
 
 import com.google.common.collect.Lists;
 

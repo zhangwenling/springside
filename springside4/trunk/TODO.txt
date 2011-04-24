@@ -24,6 +24,7 @@ TODO部分
   * 改名RemoteServlet, 调整Demo页面(Calvin)
   * Jackson的JSONP和Ignore
   * 升级 Jersey 1.6，ActiveMQ5.5，Sonar 2.7， JQuery1.5.2，Quartz 1.8.4->2.0.1，Jetty 7.4.0.v20110414
+  * 在showcase同步mini项目的一些更新，如validator
 
 3.其他非代码改动
   * 发布前打包项目生成模板(Calvin)

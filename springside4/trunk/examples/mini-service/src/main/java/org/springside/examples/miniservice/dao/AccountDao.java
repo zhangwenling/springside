@@ -1,12 +1,12 @@
-package org.springside.examples.miniservice.dao.account;
+package org.springside.examples.miniservice.dao;
 
 import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Component;
-import org.springside.examples.miniservice.entity.account.Department;
-import org.springside.examples.miniservice.entity.account.User;
+import org.springside.examples.miniservice.entity.Department;
+import org.springside.examples.miniservice.entity.User;
 
 @Component
 public class AccountDao extends SqlSessionDaoSupport {

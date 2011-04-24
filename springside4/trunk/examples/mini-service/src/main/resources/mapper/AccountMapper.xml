@@ -60,18 +60,6 @@
 		limit #{limit} offset #{offset}
 	</select>
 
-	<!-- 分页查询count语句 -->
-	<select id="searchUser.count" resultType="long">
-		select count(*) from acct_user
-		<where>
-			<if test="loginName != null">
-				login_name=#{loginName}
-			</if>
-			<if test="name != null">
-				and name=#{name}
-			</if>
-		</where>
-	</select>
 
 	<!-- 插入用户： 1.由数据库生成id并赋值到user对象 2.输入用对象, 嵌套属性表达式#{department.id} -->
 	<insert id="saveUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">

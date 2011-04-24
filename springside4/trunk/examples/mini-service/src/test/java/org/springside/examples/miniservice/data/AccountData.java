@@ -1,7 +1,7 @@
 package org.springside.examples.miniservice.data;
 
-import org.springside.examples.miniservice.entity.account.Department;
-import org.springside.examples.miniservice.entity.account.User;
+import org.springside.examples.miniservice.entity.Department;
+import org.springside.examples.miniservice.entity.User;
 import org.springside.modules.test.utils.DataUtils;
 
 /**

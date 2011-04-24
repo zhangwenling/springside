@@ -1,9 +1,8 @@
-package org.springside.examples.miniservice.entity.account;
+package org.springside.examples.miniservice.entity;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import org.springside.examples.miniservice.entity.IdEntity;
 
 /**
  * 用户.

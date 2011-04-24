@@ -23,9 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springside.examples.miniservice.WsConstants;
 import org.springside.examples.miniservice.dto.UserDTO;
-import org.springside.examples.miniservice.entity.account.User;
+import org.springside.examples.miniservice.entity.User;
 import org.springside.examples.miniservice.rs.utils.JerseyServerUtils;
-import org.springside.examples.miniservice.service.account.AccountManager;
+import org.springside.examples.miniservice.service.AccountManager;
 import org.springside.modules.utils.mapper.ConvertUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
 

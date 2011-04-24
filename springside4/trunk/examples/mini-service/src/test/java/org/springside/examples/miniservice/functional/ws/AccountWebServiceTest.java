@@ -2,12 +2,10 @@ package org.springside.examples.miniservice.functional.ws;
 
 import static org.junit.Assert.*;
 
-import javax.validation.Validation;
 import javax.xml.ws.BindingProvider;
 
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.dozer.DozerBeanMapper;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +15,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.dto.UserDTO;
-import org.springside.examples.miniservice.entity.account.User;
+import org.springside.examples.miniservice.entity.User;
 import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniservice.ws.AccountWebService;
 import org.springside.examples.miniservice.ws.result.UserListResult;
 import org.springside.examples.miniservice.ws.result.base.IdResult;
 import org.springside.examples.miniservice.ws.result.base.WSResult;
-import org.springside.modules.utils.validator.ValidatorHolder;
 
 /**
  * UserService Web服务的功能测试, 测试主要的接口调用.
@@ -37,14 +34,8 @@ import org.springside.modules.utils.validator.ValidatorHolder;
 @ContextConfiguration(locations = { "/applicationContext-ws-client.xml" })
 public class AccountWebServiceTest extends BaseFunctionalTestCase {
 
-	/** client类主要负责 Result对象的解包及将 error code转换为异常 */
 	@Autowired
 	private AccountWebService accountWebServiceClient;
-
-	@BeforeClass
-	public static void init() {
-		new ValidatorHolder().setValidator(Validation.buildDefaultValidatorFactory().getValidator());
-	}
 
 	/**
 	 * 测试创建用户,在Spring applicaitonContext.xml中用<jaxws:client/>创建Client.
@@ -93,7 +84,7 @@ public class AccountWebServiceTest extends BaseFunctionalTestCase {
 		proxyFactory.setServiceClass(AccountWebService.class);
 		AccountWebService accountWebServiceCreated = (AccountWebService) proxyFactory.create();
 
-		//(可选)重新设定endpoint address.
+		//(可选)演示重新设定endpoint address.
 		((BindingProvider) accountWebServiceCreated).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
 				address);
 

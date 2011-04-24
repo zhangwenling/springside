@@ -12,10 +12,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.examples.miniservice.dao.account.AccountDao;
+import org.springside.examples.miniservice.dao.AccountDao;
 import org.springside.examples.miniservice.data.AccountData;
-import org.springside.examples.miniservice.entity.account.Department;
-import org.springside.examples.miniservice.entity.account.User;
+import org.springside.examples.miniservice.entity.Department;
+import org.springside.examples.miniservice.entity.User;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DbUnitUtils;
 
