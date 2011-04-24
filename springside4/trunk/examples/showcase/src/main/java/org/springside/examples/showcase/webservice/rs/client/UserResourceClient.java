@@ -6,6 +6,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Required;
 import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
+import org.springside.examples.showcase.webservice.rs.utils.JerseyClientUtils;
 import org.springside.modules.utils.mapper.JsonMapper;
 import org.springside.modules.utils.web.ServletUtils;
 
@@ -32,9 +33,9 @@ public class UserResourceClient {
 	 */
 	public List<UserDTO> getAllUser() {
 		String authentication = ServletUtils.encodeHttpBasic("admin", "admin");
-		return client.path("/users").header(ServletUtils.AUTHENTICATION_HEADER, authentication)
-				.accept(MediaType.APPLICATION_JSON).get(new GenericType<List<UserDTO>>() {
-				});
+		return client.path("/users").header(ServletUtils.AUTHENTICATION_HEADER, authentication).accept(
+				MediaType.APPLICATION_JSON).get(new GenericType<List<UserDTO>>() {
+		});
 	}
 
 	public UserDTO getUser(Long id) {

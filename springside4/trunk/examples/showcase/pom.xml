@@ -146,10 +146,6 @@
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-transports-http</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-ws-security</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
@@ -171,6 +167,12 @@
 			<artifactId>jersey-json</artifactId>
 		</dependency>
 		<!-- rest end -->
+		
+		<!-- jackson -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-xc</artifactId>
+		</dependency>
 
 		<!-- security begin -->
 		<dependency>

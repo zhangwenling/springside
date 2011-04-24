@@ -15,19 +15,19 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.Response.Status;
 
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.hibernate.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.examples.showcase.webservice.WsConstants;
 import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
+import org.springside.examples.showcase.webservice.rs.utils.JerseyServerUtils;
 import org.springside.modules.utils.mapper.ConvertUtils;
 
 /**
@@ -36,7 +36,6 @@ import org.springside.modules.utils.mapper.ConvertUtils;
  * 
  * @author calvin
  */
-@Component
 @Path("/users")
 public class UserResourceService {
 
@@ -51,7 +50,7 @@ public class UserResourceService {
 	 */
 	@GET
 	@RequiresRoles("User")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
 	public List<UserDTO> getAllUser() {
 		try {
 			List<User> entityList = accountManager.getAllUserWithRole();
@@ -66,7 +65,7 @@ public class UserResourceService {
 	 */
 	@GET
 	@Path("{id}")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
 	public UserDTO getUser(@PathParam("id") Long id) {
 		try {
 			User entity = accountManager.getInitializedUser(id);

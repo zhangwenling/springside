@@ -1,11 +1,10 @@
-package org.springside.examples.showcase.webservice.rs.client;
-
-import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+package org.springside.examples.showcase.webservice.rs.utils;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.api.json.JSONConfiguration;
 
 public class JerseyClientUtils {
 
@@ -13,9 +12,9 @@ public class JerseyClientUtils {
 	 * 创建JerseyClient, 设定JSON字符串使用Jackson解析.
 	 */
 	public static WebResource createClient(String baseUrl) {
-		ClientConfig cc = new DefaultClientConfig();
-		cc.getClasses().add(JacksonJsonProvider.class);
-		Client jerseyClient = Client.create(cc);
-		return jerseyClient.resource(baseUrl);
+		ClientConfig clientConfig = new DefaultClientConfig();
+		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+		Client client = Client.create(clientConfig);
+		return client.resource(baseUrl);
 	}
 }

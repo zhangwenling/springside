@@ -22,9 +22,8 @@ TODO部分
 2.次要改动
   * 补回LocalCache演示，使用Guava r09的新特性
   * 改名RemoteServlet, 调整Demo页面(Calvin)
-  * CXF 2.4的配置改进
   * Jackson的JSONP和Ignore
-  * 升级 Jersey 1.6，ActiveMQ5.5，Sonar 2.7， JQuery1.5.2，Quartz 1.8.4->2.0.1，Jetty 7.4.0.v20110414,
+  * 升级 Jersey 1.6，ActiveMQ5.5，Sonar 2.7， JQuery1.5.2，Quartz 1.8.4->2.0.1，Jetty 7.4.0.v20110414
 
 3.其他非代码改动
   * 发布前打包项目生成模板(Calvin)
@@ -60,6 +59,7 @@ TODO部分
        -- Junit 4.8.1->4.8.2, Jmockit 0.999.2->0.999.6, Perf4j 0.9.13->0.9.14, Jmemcached 0.8->1.0
    * 所有maven插件升级到最新版
    * 使用log4jdbc打印SQL及执行时间(还需要扩展到mini-web与showcase)
+   * 删除已过期演示:CXF的ws-security和ws附件协议的演示
    
 	   
 3. 其他非代码改动

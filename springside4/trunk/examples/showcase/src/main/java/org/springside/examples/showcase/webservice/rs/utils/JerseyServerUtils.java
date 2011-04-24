@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.webservice.rs.server;
+package org.springside.examples.showcase.webservice.rs.utils;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
@@ -18,7 +18,7 @@ public class JerseyServerUtils {
 	}
 
 	/**
-	 * 创建WebApplicationException并打印日志, 使用自定义状态码与自定义信息.
+	 * 创建WebApplicationException并打印日志, 使用自定义状态码与自定义信息并记录错误信息.
 	 */
 	public static WebApplicationException buildException(int status, String message, Logger logger) {
 		logger.error(status + ":" + message);
