@@ -10,8 +10,8 @@ if exist "tools\ant\apache-ant-1.8.2\" set ANT="%cd%\tools\ant\apache-ant-1.8.2\
 echo Maven命令为%MVN%
 echo Ant命令为%ANT%
 
-echo [Step 1] 安装SpringSide 所有modules到本地Maven仓库, 生成Eclipse项目文件.
-call %MVN% clean install -Dmaven.test.skip=true
+echo [Step 1] 安装SpringSide 所有modules到本地Maven仓库, 为所有项目生成Eclipse项目文件.
+call %MVN% clean install --projects :springside-parent,:springside-core,:springside-extension,:mini-web-archetype -Dmaven.test.skip=true
 if errorlevel 1 goto error
 call %MVN% eclipse:clean eclipse:eclipse
 if errorlevel 1 goto error
@@ -23,8 +23,6 @@ cd ..\..\
 
 echo [Step 3] 为Mini-Service 初始化数据库, 启动Jetty.
 cd examples\mini-service
-call %MVN% eclipse:clean eclipse:eclipse
-if errorlevel 1 goto error
 call %ANT% -f bin/build.xml init-db
 if errorlevel 1 goto error
 start "Mini-Service" %MVN% jetty:run -Djetty.port=8083
@@ -32,8 +30,6 @@ cd ..\..\
 
 echo [Step 4] 为Mini-Web 初始化数据库, 启动Jetty.
 cd examples\mini-web
-call %MVN% eclipse:clean eclipse:eclipse
-if errorlevel 1 goto error
 call %ANT% -f bin/build.xml init-db 
 if errorlevel 1 goto error
 start "Mini-Web" %MVN% jetty:run -Djetty.port=8084
@@ -41,14 +37,12 @@ cd ..\..\
 
 echo [Step 5] 为Showcase 生成Eclipse项目文件, 编译, 打包, 初始化数据库, 启动Jetty.
 cd examples\showcase
-call %MVN% eclipse:clean eclipse:eclipse
-if errorlevel 1 goto error
 call %ANT% -f bin/build.xml init-db
 if errorlevel 1 goto error
 start "Showcase" %MVN% jetty:run
 cd ..\..\
 
-echo [INFO] SpringSide3.0 快速启动完毕.
+echo [INFO] SpringSide4.0 快速启动完毕.
 echo [INFO] 可访问以下演示网址:
 echo [INFO] http://localhost:8083/mini-service
 echo [INFO] http://localhost:8084/mini-web
