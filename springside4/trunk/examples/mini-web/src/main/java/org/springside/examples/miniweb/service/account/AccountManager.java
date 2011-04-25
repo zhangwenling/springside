@@ -16,6 +16,7 @@ import org.springside.examples.miniweb.entity.account.Role;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.modules.orm.Page;
+import org.springside.modules.orm.PageRequest;
 import org.springside.modules.orm.PropertyFilter;
 
 /**
@@ -67,7 +68,7 @@ public class AccountManager {
 	 * 使用属性过滤条件查询用户.
 	 */
 	@Transactional(readOnly = true)
-	public Page<User> searchUser(final Page<User> page, final List<PropertyFilter> filters) {
+	public Page<User> searchUser(final PageRequest page, final List<PropertyFilter> filters) {
 		return userDao.findPage(page, filters);
 	}
 

@@ -20,9 +20,8 @@ import com.google.common.collect.Lists;
  * @author calvin
  * @author badqiu
  */
-public class Page<T> implements Iterable<T> {
+public class Page<T> extends PageRequest implements Iterable<T> {
 
-	protected PageRequest request = null;
 	protected List<T> result = null;
 	protected long totalItems = -1;
 
@@ -30,24 +29,11 @@ public class Page<T> implements Iterable<T> {
 	}
 
 	public Page(PageRequest request) {
-		this.request = request;
-	}
-
-	public Page(PageRequest request, List<T> result, long totalItems) {
-		this.request = request;
-		this.result = result;
-		this.totalItems = totalItems;
-	}
-
-	public PageRequest getRequest() {
-		return request;
-	}
-
-	/**
-	 * 设置查询参数
-	 */
-	public void setRequest(PageRequest request) {
-		this.request = request;
+		this.pageNo = request.pageNo;
+		this.pageSize = request.pageSize;
+		this.countTotal = request.countTotal;
+		this.orderBy = request.orderBy;
+		this.orderDir = request.orderDir;
 	}
 
 	/**
@@ -85,14 +71,6 @@ public class Page<T> implements Iterable<T> {
 		return result.iterator();
 	}
 
-	public int getPageNo() {
-		return request.getPageNo();
-	}
-
-	public int getPageSize() {
-		return request.getPageSize();
-	}
-
 	/**
 	 * 根据pageSize与totalItems计算总页数.
 	 */
@@ -105,7 +83,7 @@ public class Page<T> implements Iterable<T> {
 	 * 是否还有下一页.
 	 */
 	public boolean hasNextPage() {
-		return (request.getPageNo() + 1 <= getTotalPages());
+		return (getPageNo() + 1 <= getTotalPages());
 	}
 
 	/**

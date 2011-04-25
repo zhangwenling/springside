@@ -16,6 +16,7 @@ import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
 import org.springside.modules.orm.Page;
+import org.springside.modules.orm.PageRequest;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.utils.web.struts2.Struts2Utils;
 
@@ -30,7 +31,7 @@ import org.springside.modules.utils.web.struts2.Struts2Utils;
 //定义URL映射对应/account/user.action
 @Namespace("/account")
 //定义名为reload的result重定向到user.action, 其他result则按照convention默认.
-@Results({ @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
+@Results( { @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
 public class UserAction extends CrudActionSupport<User> {
 
 	private static final long serialVersionUID = 8683878162525847072L;
@@ -40,7 +41,7 @@ public class UserAction extends CrudActionSupport<User> {
 	//-- 页面属性 --//
 	private Long id;
 	private User entity;
-	private Page<User> page = new Page<User>(5);//每页5条记录
+	private Page<User> page = new Page<User>();
 	private List<Long> checkedRoleIds; //页面中钩选的角色id列表
 
 	//-- ModelDriven 与 Preparable函数 --//
@@ -66,10 +67,12 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	public String list() throws Exception {
 		List<PropertyFilter> filters = PropertyFilter.buildFromHttpRequest(Struts2Utils.getRequest());
+
+		page.setPageSize(5);
 		//设置默认排序方式
 		if (!page.isOrderBySetted()) {
 			page.setOrderBy("id");
-			page.setOrder(Page.ASC);
+			page.setOrderDir(PageRequest.Sort.ASC);
 		}
 		page = accountManager.searchUser(page, filters);
 		return SUCCESS;

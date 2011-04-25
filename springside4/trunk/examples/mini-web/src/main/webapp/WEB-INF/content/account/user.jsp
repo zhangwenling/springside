@@ -28,7 +28,7 @@
 			<form id="mainForm" action="user.action" method="get">
 				<input type="hidden" name="page.pageNo" id="pageNo" value="${page.pageNo}"/>
 				<input type="hidden" name="page.orderBy" id="orderBy" value="${page.orderBy}"/>
-				<input type="hidden" name="page.order" id="order" value="${page.order}"/>	
+				<input type="hidden" name="page.orderDir" id="order" value="${page.orderDir}"/>	
 				你好, <shiro:principal/>.&nbsp;&nbsp;
 				登录名: <input type="text" name="filter_EQS_loginName" value="${param['filter_EQS_loginName']}" size="9"/>
 				姓名或Email: <input type="text" name="filter_LIKES_name_OR_email" value="${param['filter_LIKES_name_OR_email']}" size="9"/>
@@ -68,11 +68,11 @@
 			</table>
 		</div>
 		<div>
-			第${page.pageNo}页, 共${page.paginator.totalPages}页
+			第${page.pageNo}页, 共${page.totalPages}页
 			<a href="javascript:jumpPage(1)">首页</a>
-			<s:if test="page.paginator.hasPrePage"><a href="javascript:jumpPage(${page.paginator.prePage})">上一页</a></s:if>
-			<s:if test="page.paginator.hasNextPage"><a href="javascript:jumpPage(${page.paginator.nextPage})">下一页</a></s:if>
-			<a href="javascript:jumpPage(${page.paginator.totalPages})">末页</a>
+			<s:if test="page.paginator.hasPrePage"><a href="javascript:jumpPage(${page.prePage})">上一页</a></s:if>
+			<s:if test="page.paginator.hasNextPage"><a href="javascript:jumpPage(${page.nextPage})">下一页</a></s:if>
+			<a href="javascript:jumpPage(${page.totalPages})">末页</a>
 
 			<shiro:hasPermission name="user:manage">
 				<a href="user!input.action">增加新用户</a>
