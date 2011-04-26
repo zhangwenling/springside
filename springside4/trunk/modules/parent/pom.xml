@@ -400,30 +400,8 @@
 			</dependency>
 			<!-- rest end -->
 
+			
 			<!-- security begin -->
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-core</artifactId>
-				<version>${spring-security.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-config</artifactId>
-				<version>${spring-security.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-web</artifactId>
-				<version>${spring-security.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-taglibs</artifactId>
-				<version>${spring-security.version}</version>
-			</dependency>
-			<!-- security end -->
-
-			<!-- shiro begin -->
 			<dependency>
 				<groupId>org.apache.shiro</groupId>
 				<artifactId>shiro-core</artifactId>
@@ -439,7 +417,7 @@
 				<artifactId>shiro-web</artifactId>
 				<version>${shiro.version}</version>	
 			</dependency>
-			<!-- shiro end -->
+			<!-- security end -->
 
 			<!-- jms begin -->
 			<dependency>
