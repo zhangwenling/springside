@@ -2,15 +2,20 @@ package org.springside.examples.showcase.mapping.json;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.annotate.JsonAnyGetter;
+import org.codehaus.jackson.annotate.JsonAnySetter;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.type.TypeReference;
 import org.joda.time.DateTime;
+import org.junit.Test;
 import org.springside.modules.utils.mapper.JsonMapper;
 
 import com.google.common.collect.Lists;
@@ -136,10 +141,12 @@ public class JsonDemo {
 	/**
 	 * 测试三种不同的Binder.
 	 */
+	@Test
 	public void threeTypeBinders() {
+		TestBean bean = new TestBean("A");
+
 		//打印全部属性
 		JsonMapper normalBinder = JsonMapper.buildNormalMapper();
-		TestBean bean = new TestBean("A");
 		assertEquals("{\"nullValue\":null,\"name\":\"A\",\"defaultValue\":\"hello\"}", normalBinder.toJson(bean));
 
 		//不打印nullValue属性
@@ -173,13 +180,36 @@ public class JsonDemo {
 		assertEquals(date, binder.fromJson(tsString, Date.class));
 	}
 
-	//此annotation为了截断对象的循环引用.
-	@JsonIgnoreProperties({ "parent" })
+	/**
+	 * 可擴展Bean,會自動的把確定的屬性放入成員變量, 其他屬性放到Map裡。
+	 */
+	@Test
+	public void extensibleBean() {
+		String json = "{\"name\" : \"Foobar\",\"age\" : 37,\"occupation\" : \"coder man\"}";
+		ExtensibleBean extensibleBean = binder.fromJson(json, ExtensibleBean.class);
+		assertEquals("Foobar", extensibleBean.getName());
+		assertEquals(null, extensibleBean.getProperties().get("name"));
+		assertEquals("coder man", extensibleBean.getProperties().get("occupation"));
+	}
+
+	//從JSON裡只含有Bean中部分的屬性時，更新一個已存在Bean，只覆蓋該部分的屬性.
+	@Test
+	public void updateBean() throws JsonProcessingException, IOException {
+		String beanString = "{\"name\":\"A\"}";
+
+		TestBean bean = new TestBean();
+		bean.setDefaultValue("Foobar");
+		bean = binder.getMapper().updatingReader(bean).readValue(beanString);
+		assertEquals("A", bean.getName());
+		assertEquals("Foobar", bean.getDefaultValue());
+	}
+
 	public static class TestBean {
 
 		private String name;
 		private String defaultValue = "hello";
 		private String nullValue = null;
+
 		private TestBean parent;
 
 		public TestBean() {
@@ -213,6 +243,8 @@ public class JsonDemo {
 			this.nullValue = nullValue;
 		}
 
+		//此annotation为了截断对象的循环引用.
+		@JsonIgnore
 		public TestBean getParent() {
 			return parent;
 		}
@@ -224,6 +256,33 @@ public class JsonDemo {
 		@Override
 		public String toString() {
 			return "TestBean [defaultValue=" + defaultValue + ", name=" + name + ", nullValue=" + nullValue + "]";
+		}
+	}
+
+	public static class ExtensibleBean {
+		private String name; // we always have name
+
+		private HashMap<String, String> properties = Maps.newHashMap();
+
+		public ExtensibleBean() {
+		}
+
+		@JsonAnySetter
+		public void add(String key, String value) {
+			properties.put(key, value);
+		}
+
+		@JsonAnyGetter
+		public Map<String, String> getProperties() {
+			return properties;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
 		}
 	}
 

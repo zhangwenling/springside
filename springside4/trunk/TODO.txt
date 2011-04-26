@@ -15,7 +15,7 @@ TODO部分
 
 2.次要改动
   * 改名RemoteServlet, 调整Demo页面(Calvin)
-  * Jackson的JSONP和Ignore
+  * 升級Jackson演示，包括可擴展的對象, 對象循環引用，局部更新已存在對象。
   * 升级ActiveMQ5.5，Sonar 2.7，Quartz 1.8.4->2.0.1，Jetty 7.4.0.v20110414
   * 在showcase同步mini项目的一些更新，如validator
   * Jetty7连续跑多个功能测试时出现死锁	
@@ -35,7 +35,7 @@ TODO部分
    * springside-core与spring-extension项目的大重构
       -- 添加注释及 rename/remove等小重构. 
       -- 参考Spring-Data重构分页相关代码
-      -- 补回IdUtils，集成JDK UUID，随机Long和短URL式的Base62 Token。
+      -- 补回IdUtils，集成各種ID生成模式
       -- 升级TraceUtils和MockLog4jAppender
       -- 添加AssertUtils代替Spring的Assert  
    * Template工具引擎从Freemarker转为Velocity, 见Email演示.
