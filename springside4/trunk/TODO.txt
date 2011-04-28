@@ -11,11 +11,10 @@ TODO部分
   * 認真考慮JQuery or Dojo
    
   * Wiki内容重新编写(Calvin)
-    備忘： log4jdbc，jersey+jackson
+    備忘： log4jdbc，jersey+jackson,jackson new feature
 
 2.次要改动
   * 改名RemoteServlet, 调整Demo页面(Calvin)
-  * 升級Jackson演示，包括可擴展的對象, 對象循環引用，局部更新已存在對象。
   * 升级ActiveMQ5.5，Sonar 2.7，Quartz 1.8.4->2.0.1，Jetty 7.4.0.v20110414
   * 在showcase同步mini项目的一些更新，如validator
   * Jetty7连续跑多个功能测试时出现死锁	
@@ -39,8 +38,9 @@ TODO部分
       -- 升级TraceUtils和MockLog4jAppender
       -- 添加AssertUtils代替Spring的Assert  
    * Template工具引擎从Freemarker转为Velocity, 见Email演示.
-   * 所有maven插件升级到最新版
+   * 升級Jackson演示，包括可擴展的對象, 對象循環引用，局部更新已存在對象等等等等新特性.
    * 使用log4jdbc打印SQL及执行时间(还需要扩展到mini-web与showcase， 還要補個pom文件)
+
    * 删除已过期演示: CXF的ws-security和ws附件协议,Flash Chart, 驗證碼
    * 依赖包次要版本的升级
        -- Spring 3.0.4->3.0.5, CXF 2.2.10->2.3.3, Jersey 1.3->1.6, Activemq 5.4.0->5.4.2, Jquery 1.4->1.5, H2 1.2.142->1.3.154, Selenium 2.0a5->2.0b3,
@@ -48,7 +48,7 @@ TODO部分
        -- Commons-lang 2.5->2.6, Commons-io 1.4->2.0, Commons pool 1.5.5->1.5.6, Commons Codec 1.4->1.5
        -- Aspectj 1.6.9->1.6.10, mail 1.4.3->1.4.4, Asm 3.2->3.3.1
        -- Junit 4.8.1->4.8.2, Jmockit 0.999.2->0.999.6, Perf4j 0.9.13->0.9.14, Jmemcached 0.8->1.0
-   
+       -- 所有maven插件升级到最新版
 	   
 3. 其他非代码改动
    * cxf wsdl2java从ant改为用maven plugin  
