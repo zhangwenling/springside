@@ -28,7 +28,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
- * 测试Jackson对Object,Map,List,数组,枚举,日期类等的持久化.
+ * 演示Jackson的基本使用方式及大量的特殊Feature.
  * 
  * @author calvin
  */
@@ -341,7 +341,6 @@ public class JsonDemo {
 		newMapper.getMapper().configure(SerializationConfig.Feature.DEFAULT_VIEW_INCLUSION, false);
 		publicWriter = newMapper.getMapper().viewWriter(Views.Public.class);
 		assertEquals("{\"name\":\"Foo\"}", publicWriter.writeValueAsString(viewBean));
-
 	}
 
 	public static class Views {
@@ -393,6 +392,16 @@ public class JsonDemo {
 			this.ignoreValue = ignoreValue;
 		}
 
+	}
+
+	/**
+	 * 演示輸出jsonp格式內容
+	 */
+	@Test
+	public void jsonp() {
+		TestBean bean = new TestBean("foo");
+		String jsonpString = mapper.toJsonP("callback", bean);
+		assertEquals("callback({\"name\":\"foo\"})", jsonpString);
 	}
 
 	/**

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
-import org.codehaus.jackson.map.ObjectMapper;
+import org.springside.modules.utils.mapper.JsonMapper;
 import org.springside.modules.utils.web.ServletUtils;
 
 /**
@@ -33,7 +33,7 @@ public abstract class Struts2Utils {
 	private static final String DEFAULT_ENCODING = "UTF-8";
 	private static final boolean DEFAULT_NOCACHE = true;
 
-	private static ObjectMapper mapper = new ObjectMapper();
+	private static JsonMapper mapper = JsonMapper.buildNormalMapper();
 
 	//-- 取得Request/Response/Session的简化函数 --//
 	/**
@@ -143,7 +143,7 @@ public abstract class Struts2Utils {
 	public static void renderJson(final Object data, final String... headers) {
 		HttpServletResponse response = initResponseHeader(ServletUtils.JSON_TYPE, headers);
 		try {
-			mapper.writeValue(response.getWriter(), data);
+			mapper.getMapper().writeValue(response.getWriter(), data);
 		} catch (IOException e) {
 			throw new IllegalArgumentException(e);
 		}
@@ -156,17 +156,10 @@ public abstract class Struts2Utils {
 	 * @param object Java对象,可以是List<POJO>, POJO[], POJO ,也可以Map名值对, 将被转化为json字符串.
 	 */
 	public static void renderJsonp(final String callbackName, final Object object, final String... headers) {
-		String jsonString = null;
-		try {
-			jsonString = mapper.writeValueAsString(object);
-		} catch (IOException e) {
-			throw new IllegalArgumentException(e);
-		}
-
-		String result = new StringBuilder().append(callbackName).append("(").append(jsonString).append(");").toString();
+		String jsonPString = mapper.toJsonP(callbackName, object);
 
 		//渲染Content-Type为javascript的返回内容,输出结果为javascript语句, 如callback197("{html:'Hello World!!!'}");
-		render(ServletUtils.JS_TYPE, result, headers);
+		render(ServletUtils.JS_TYPE, jsonPString, headers);
 	}
 
 	/**

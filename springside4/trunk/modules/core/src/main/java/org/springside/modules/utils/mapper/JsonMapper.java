@@ -15,6 +15,7 @@ import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.codehaus.jackson.map.util.JSONPObject;
 import org.codehaus.jackson.type.JavaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -135,6 +136,13 @@ public class JsonMapper {
 			logger.warn("parse json string" + jsonString + " to object:" + object + " error.", e);
 		}
 		return null;
+	}
+
+	/**
+	 * 輸出JSONP格式數據.
+	 */
+	public String toJsonP(String functionName, Object object) {
+		return toJson(new JSONPObject(functionName, object));
 	}
 
 	/**
