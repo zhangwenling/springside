@@ -1,7 +1,6 @@
 package org.springside.examples.showcase.unit.common;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -39,14 +38,14 @@ public class UserHibernateDaoTest extends SpringTxTestCase {
 	@Before
 	public void loadDefaultData() throws Exception {
 		if (dataSourceHolder == null) {
-			DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+			DbUnitUtils.loadData(dataSource, "/data/sample-data.xml");
 			dataSourceHolder = dataSource;
 		}
 	}
 
 	@AfterClass
 	public static void cleanDefaultData() throws Exception {
-		DbUnitUtils.removeData(dataSourceHolder, "/data/default-data.xml");
+		DbUnitUtils.removeData(dataSourceHolder, "/data/sample-data.xml");
 	}
 
 	@Test

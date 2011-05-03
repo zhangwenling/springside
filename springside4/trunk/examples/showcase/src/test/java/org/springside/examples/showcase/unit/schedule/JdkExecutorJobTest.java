@@ -19,7 +19,7 @@ public class JdkExecutorJobTest extends SpringTxTestCase {
 
 	@Test
 	public void scheduleJob() throws Exception {
-		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+		DbUnitUtils.loadData(dataSource, "/data/sample-data.xml");
 
 		//加载测试用logger appender
 		MockLog4jAppender appender = new MockLog4jAppender();
@@ -32,7 +32,7 @@ public class JdkExecutorJobTest extends SpringTxTestCase {
 		assertEquals(1, appender.getAllLogs().size());
 		assertEquals("There are 6 user in database.", appender.getFirstMessage());
 
-		DbUnitUtils.removeData(dataSource, "/data/default-data.xml");
+		DbUnitUtils.removeData(dataSource, "/data/sample-data.xml");
 
 	}
 }

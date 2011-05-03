@@ -14,7 +14,7 @@ TODO部分
     備忘： log4jdbc，jersey+jackson,jackson new feature
 
 2.次要改动
-  * 升级Sonar 2.7，Quartz 1.8.4->2.0.1，Jetty 7.4.0.v20110414
+  * 升级Sonar 2.7，Quartz 1.8.4->2.0.1
   * 在showcase同步mini项目的一些更新，如validator
   * Jetty7连续跑多个功能测试时出现死锁	
 
@@ -27,7 +27,7 @@ TODO部分
    * DAO框架增加MyBatis的使用，与Hibernate在不同的场景各展所长
    * 演示Hibernate Validator验证
    * CSS框架从YUI转为Blueprint
-   * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6, Jetty 7, Sonar 2.6
+   * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6, Jetty 7.4, Sonar 2.6
 
 2. 次要改动
    * springside-core与spring-extension项目的大重构

@@ -37,18 +37,17 @@ public class HibernateMappingTest extends SpringTxTestCase {
 	@Before
 	public void loadDefaultData() throws Exception {
 		if (dataSourceHolder == null) {
-			DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+			DbUnitUtils.loadData(dataSource, "/data/sample-data.xml");
 			dataSourceHolder = dataSource;
 		}
 	}
 
 	@AfterClass
 	public static void cleanDefaultData() throws Exception {
-		DbUnitUtils.removeData(dataSourceHolder, "/data/default-data.xml");
+		DbUnitUtils.removeData(dataSourceHolder, "/data/sample-data.xml");
 	}
 
 	@Test
-	
 	public void allClassMapping() throws Exception {
 		Session session = sessionFactory.openSession();
 		try {

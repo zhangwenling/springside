@@ -60,13 +60,13 @@ public class BaseFunctionalTestCase {
 	 * 载入默认数据.
 	 */
 	protected static void loadDefaultData() throws Exception {
-		DbUnitUtils.loadData(dataSource, "/data/default-data.xml");
+		DbUnitUtils.loadData(dataSource, "/data/sample-data.xml");
 	}
 
 	/**
 	 * 删除默认数据.
 	 */
 	public static void cleanDefaultData() throws Exception {
-		DbUnitUtils.removeData(dataSource, "/data/default-data.xml");
+		DbUnitUtils.removeData(dataSource, "/data/sample-data.xml");
 	}
 }
