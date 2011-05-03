@@ -1,10 +1,10 @@
-package org.springside.examples.miniservice.ws.result;
+package org.springside.examples.miniservice.webservice.ws.result;
 
 import javax.xml.bind.annotation.XmlType;
 
-import org.springside.examples.miniservice.WsConstants;
-import org.springside.examples.miniservice.dto.DepartmentDTO;
-import org.springside.examples.miniservice.ws.result.base.WSResult;
+import org.springside.examples.miniservice.webservice.WsConstants;
+import org.springside.examples.miniservice.webservice.dto.DepartmentDTO;
+import org.springside.examples.miniservice.webservice.ws.result.base.WSResult;
 
 /**
  * GetDepartment方法的返回结果.

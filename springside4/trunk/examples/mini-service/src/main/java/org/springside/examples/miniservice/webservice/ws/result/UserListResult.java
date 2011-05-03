@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.ws.result;
+package org.springside.examples.miniservice.webservice.ws.result;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
-import org.springside.examples.miniservice.WsConstants;
-import org.springside.examples.miniservice.dto.UserDTO;
-import org.springside.examples.miniservice.ws.result.base.WSResult;
+import org.springside.examples.miniservice.webservice.WsConstants;
+import org.springside.examples.miniservice.webservice.dto.UserDTO;
+import org.springside.examples.miniservice.webservice.ws.result.base.WSResult;
 
 /**
  * 包含User

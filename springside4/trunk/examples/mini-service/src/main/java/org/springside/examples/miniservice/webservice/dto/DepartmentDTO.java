@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.dto;
+package org.springside.examples.miniservice.webservice.dto;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.springside.examples.miniservice.WsConstants;
+import org.springside.examples.miniservice.webservice.WsConstants;
 
 import com.google.common.collect.Lists;
 

@@ -14,13 +14,13 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springside.examples.miniservice.data.AccountData;
-import org.springside.examples.miniservice.dto.UserDTO;
 import org.springside.examples.miniservice.entity.User;
 import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
-import org.springside.examples.miniservice.ws.AccountWebService;
-import org.springside.examples.miniservice.ws.result.UserListResult;
-import org.springside.examples.miniservice.ws.result.base.IdResult;
-import org.springside.examples.miniservice.ws.result.base.WSResult;
+import org.springside.examples.miniservice.webservice.dto.UserDTO;
+import org.springside.examples.miniservice.webservice.ws.AccountWebService;
+import org.springside.examples.miniservice.webservice.ws.result.UserListResult;
+import org.springside.examples.miniservice.webservice.ws.result.base.IdResult;
+import org.springside.examples.miniservice.webservice.ws.result.base.WSResult;
 
 /**
  * UserService Web服务的功能测试, 测试主要的接口调用.

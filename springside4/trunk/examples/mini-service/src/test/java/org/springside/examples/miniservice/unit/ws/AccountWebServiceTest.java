@@ -11,12 +11,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springside.examples.miniservice.data.AccountData;
-import org.springside.examples.miniservice.dto.DepartmentDTO;
 import org.springside.examples.miniservice.entity.Department;
 import org.springside.examples.miniservice.service.AccountManager;
-import org.springside.examples.miniservice.ws.impl.AccountWebServiceImpl;
-import org.springside.examples.miniservice.ws.result.DepartmentResult;
-import org.springside.examples.miniservice.ws.result.base.WSResult;
+import org.springside.examples.miniservice.webservice.dto.DepartmentDTO;
+import org.springside.examples.miniservice.webservice.ws.impl.AccountWebServiceImpl;
+import org.springside.examples.miniservice.webservice.ws.result.DepartmentResult;
+import org.springside.examples.miniservice.webservice.ws.result.base.WSResult;
 import org.springside.modules.utils.validator.ValidatorHolder;
 
 /**

@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice;
+package org.springside.examples.miniservice.webservice;
 
 /**
  * WebService常量定义.

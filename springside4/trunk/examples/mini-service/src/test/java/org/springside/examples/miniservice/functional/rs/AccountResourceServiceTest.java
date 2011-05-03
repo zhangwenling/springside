@@ -9,11 +9,11 @@ import org.dozer.DozerBeanMapper;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springside.examples.miniservice.data.AccountData;
-import org.springside.examples.miniservice.dto.DepartmentDTO;
-import org.springside.examples.miniservice.dto.UserDTO;
 import org.springside.examples.miniservice.entity.User;
 import org.springside.examples.miniservice.functional.BaseFunctionalTestCase;
-import org.springside.examples.miniservice.rs.client.AccountResourceClient;
+import org.springside.examples.miniservice.webservice.dto.DepartmentDTO;
+import org.springside.examples.miniservice.webservice.dto.UserDTO;
+import org.springside.examples.miniservice.webservice.rs.client.AccountResourceClient;
 
 import com.sun.jersey.api.client.UniformInterfaceException;
 

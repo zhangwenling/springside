@@ -1,8 +1,8 @@
-package org.springside.examples.miniservice.ws.result.base;
+package org.springside.examples.miniservice.webservice.ws.result.base;
 
 import javax.xml.bind.annotation.XmlType;
 
-import org.springside.examples.miniservice.WsConstants;
+import org.springside.examples.miniservice.webservice.WsConstants;
 
 /**
  * WebService返回结果基类,定义所有返回码.

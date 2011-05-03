@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.rs.server;
+package org.springside.examples.miniservice.webservice.rs.server;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -10,10 +10,10 @@ import javax.ws.rs.core.Response.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springside.examples.miniservice.WsConstants;
-import org.springside.examples.miniservice.dto.DepartmentDTO;
 import org.springside.examples.miniservice.entity.Department;
 import org.springside.examples.miniservice.service.AccountManager;
+import org.springside.examples.miniservice.webservice.WsConstants;
+import org.springside.examples.miniservice.webservice.dto.DepartmentDTO;
 import org.springside.modules.utils.jersey.JerseyServerUtils;
 import org.springside.modules.utils.mapper.ConvertUtils;
 

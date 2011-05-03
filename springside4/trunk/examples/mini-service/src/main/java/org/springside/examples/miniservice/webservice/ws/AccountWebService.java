@@ -1,13 +1,13 @@
-package org.springside.examples.miniservice.ws;
+package org.springside.examples.miniservice.webservice.ws;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-import org.springside.examples.miniservice.WsConstants;
-import org.springside.examples.miniservice.dto.UserDTO;
-import org.springside.examples.miniservice.ws.result.DepartmentResult;
-import org.springside.examples.miniservice.ws.result.UserListResult;
-import org.springside.examples.miniservice.ws.result.base.IdResult;
+import org.springside.examples.miniservice.webservice.WsConstants;
+import org.springside.examples.miniservice.webservice.dto.UserDTO;
+import org.springside.examples.miniservice.webservice.ws.result.DepartmentResult;
+import org.springside.examples.miniservice.webservice.ws.result.UserListResult;
+import org.springside.examples.miniservice.webservice.ws.result.base.IdResult;
 
 /**
  * JAX-WS2.0的WebService接口定义类.

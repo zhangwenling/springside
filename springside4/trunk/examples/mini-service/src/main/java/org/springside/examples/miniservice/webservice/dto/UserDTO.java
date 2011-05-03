@@ -1,9 +1,9 @@
-package org.springside.examples.miniservice.dto;
+package org.springside.examples.miniservice.webservice.dto;
 
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.springside.examples.miniservice.WsConstants;
+import org.springside.examples.miniservice.webservice.WsConstants;
 
 /**
  * Web Service传输User信息的DTO.

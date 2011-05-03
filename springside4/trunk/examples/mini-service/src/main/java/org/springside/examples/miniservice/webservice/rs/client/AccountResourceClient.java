@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.rs.client;
+package org.springside.examples.miniservice.webservice.rs.client;
 
 import java.net.URI;
 import java.util.List;
@@ -7,8 +7,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
-import org.springside.examples.miniservice.dto.DepartmentDTO;
-import org.springside.examples.miniservice.dto.UserDTO;
+import org.springside.examples.miniservice.webservice.dto.DepartmentDTO;
+import org.springside.examples.miniservice.webservice.dto.UserDTO;
 import org.springside.modules.utils.jersey.JerseyClientUtils;
 
 import com.sun.jersey.api.client.ClientResponse;

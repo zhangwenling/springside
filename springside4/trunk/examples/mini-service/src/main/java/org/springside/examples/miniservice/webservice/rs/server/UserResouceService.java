@@ -1,4 +1,4 @@
-package org.springside.examples.miniservice.rs.server;
+package org.springside.examples.miniservice.webservice.rs.server;
 
 import java.net.URI;
 import java.util.List;
@@ -21,10 +21,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springside.examples.miniservice.WsConstants;
-import org.springside.examples.miniservice.dto.UserDTO;
 import org.springside.examples.miniservice.entity.User;
 import org.springside.examples.miniservice.service.AccountManager;
+import org.springside.examples.miniservice.webservice.WsConstants;
+import org.springside.examples.miniservice.webservice.dto.UserDTO;
 import org.springside.modules.utils.jersey.JerseyServerUtils;
 import org.springside.modules.utils.mapper.ConvertUtils;
 import org.springside.modules.utils.validator.ValidatorHolder;
