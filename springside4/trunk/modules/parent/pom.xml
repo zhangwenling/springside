@@ -5,7 +5,7 @@
 	<groupId>org.springside</groupId>
 	<artifactId>springside-parent</artifactId>
 	<packaging>pom</packaging>
-	<name>Springside Parent pom.xml</name>
+	<name>Springside :: Module :: Parent</name>
 	<version>4.0.0-SNAPSHOT</version>
 	<organization>
 		<name>SpringSide</name>
@@ -127,6 +127,7 @@
 			<!-- springside modules end -->
 
 			<!-- spring begin -->
+			<!-- spring base -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>

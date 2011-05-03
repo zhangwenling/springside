@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>springside-core</artifactId>
 	<packaging>jar</packaging>
-	<name>Springside Core Module</name>
+	<name>Springside :: Module :: Core</name>
 
 	<dependencies>
 		<!-- spring -->

@@ -9,7 +9,7 @@
 	<groupId>org.springside.examples</groupId>
 	<artifactId>mini-service</artifactId>
 	<packaging>war</packaging>
-	<name>Springside Mini-Service Example</name>
+	<name>Springside :: Example :: Mini-Service</name>
 
 	<!-- 项目属性 -->
 	<properties>

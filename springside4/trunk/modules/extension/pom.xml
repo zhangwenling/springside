@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>springside-extension</artifactId>
 	<packaging>jar</packaging>
-	<name>Springside Extension Module</name>
+	<name>Springside :: Module :: Extension</name>
 
 	<dependencies>
 		<!-- springside -->
