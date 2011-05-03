@@ -401,7 +401,6 @@
 				</exclusions>
 			</dependency>
 			<!-- rest end -->
-
 			
 			<!-- security begin -->
 			<dependency>

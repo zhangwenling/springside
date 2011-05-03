@@ -32,7 +32,7 @@ import org.springside.modules.utils.validator.ValidatorHolder;
  * @author calvin
  */
 //serviceName与portName属性指明WSDL中的名称, endpointInterface属性指向Interface定义类.
-@WebService(serviceName = "AccountService", portName = "AccountServicePort", endpointInterface = "org.springside.examples.miniservice.ws.AccountWebService", targetNamespace = WsConstants.NS)
+@WebService(serviceName = "AccountService", portName = "AccountServicePort", endpointInterface = "org.springside.examples.miniservice.webservice.ws.AccountWebService", targetNamespace = WsConstants.NS)
 public class AccountWebServiceImpl implements AccountWebService {
 
 	private static Logger logger = LoggerFactory.getLogger(AccountWebServiceImpl.class);

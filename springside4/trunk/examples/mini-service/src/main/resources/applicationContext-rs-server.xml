@@ -4,7 +4,7 @@
 	default-lazy-init="true">
 	<description>Restful Service Bean的配置文件 </description>
 
-	<bean class="org.springside.examples.miniservice.rs.server.DepartmentResouceService" />
+	<bean class="org.springside.examples.miniservice.webservice.rs.server.DepartmentResouceService" />
 
-	<bean class="org.springside.examples.miniservice.rs.server.UserResouceService" />
+	<bean class="org.springside.examples.miniservice.webservice.rs.server.UserResouceService" />
 </beans>

@@ -12,5 +12,5 @@
 	</jaxws:endpoint>
 
 	<!-- WebService的实现Bean定义 -->
-	<bean id="accountWebService" class="org.springside.examples.miniservice.ws.impl.AccountWebServiceImpl" />
+	<bean id="accountWebService" class="org.springside.examples.miniservice.webservice.ws.impl.AccountWebServiceImpl" />
 </beans>
