@@ -7,14 +7,14 @@
 	<title>Showcase 登录页</title>
 	<%@ include file="/common/meta.jsp" %>
 	
-	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
+	<link href="${ctx}/css/style-min.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/js/validate/jquery.validate.css" type="text/css" rel="stylesheet"/>
 		
 	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
 	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
 	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
 	
-	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
+	<script src="${ctx}/js/jquery-min.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/jquery.validate.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/messages_cn.js" type="text/javascript"></script>
 	<script>

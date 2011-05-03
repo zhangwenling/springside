@@ -8,7 +8,7 @@
 	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
 	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
 	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
-	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
+	<link href="${ctx}/css/style-min.css" type="text/css" rel="stylesheet"/>
 <title>Showcase 示例</title>
 </head>
 <body>

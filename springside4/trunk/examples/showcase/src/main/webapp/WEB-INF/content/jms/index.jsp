@@ -6,7 +6,7 @@
 	<title>JMS演示</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 	
-	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
+	<link href="${ctx}/css/style-min.css" type="text/css" rel="stylesheet"/>
 	
 	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
 	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>

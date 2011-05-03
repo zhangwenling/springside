@@ -15,7 +15,7 @@
 	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
 	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
 
-	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
+	<script src="${ctx}/js/jquery-min.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/jquery.validate.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/messages_cn.js" type="text/javascript"></script>
 	<script>

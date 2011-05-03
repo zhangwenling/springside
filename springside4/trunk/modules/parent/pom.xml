@@ -16,7 +16,7 @@
 		<!-- 主要依赖库的版本定义 -->
 		<springside.version>4.0.0-SNAPSHOT</springside.version>
 		<spring.version>3.0.5.RELEASE</spring.version>
-		<hibernate.version>3.6.1.Final</hibernate.version>
+		<hibernate.version>3.6.3.Final</hibernate.version>
 		<mybatis.version>3.0.4</mybatis.version>
 		<struts2.version>2.2.1</struts2.version>
 		<cxf.version>2.4.0</cxf.version>
@@ -185,14 +185,15 @@
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-ehcache</artifactId>
+				<artifactId>hibernate-entitymanager</artifactId>
 				<version>${hibernate.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-entitymanager</artifactId>
+				<artifactId>hibernate-ehcache</artifactId>
 				<version>${hibernate.version}</version>
 			</dependency>
+
 
 			<dependency>
 				<groupId>javassist</groupId>
@@ -782,14 +783,6 @@
 				<groupId>org.perf4j</groupId>
 				<artifactId>perf4j</artifactId>
 				<version>0.9.14</version>
-			</dependency>
-
-			<!-- javascript/css compress tools -->
-			<dependency>
-				<groupId>com.yahoo.platform.yui</groupId>
-				<artifactId>yuicompressor</artifactId>
-				<version>2.4.2</version>
-				<scope>provided</scope>
 			</dependency>
 
 			<!-- jsw + jetty runtime -->

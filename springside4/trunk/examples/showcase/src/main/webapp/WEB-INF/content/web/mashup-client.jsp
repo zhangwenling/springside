@@ -7,13 +7,13 @@
 	<title>跨域名Mashup演示</title>
 	<%@ include file="/common/meta.jsp" %>
 
-	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
+	<link href="${ctx}/css/style-min.css" type="text/css" rel="stylesheet"/>
 	
 	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
 	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
 	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
 	
-	<script src="${ctx}/js/jquery.js" type="text/javascript"></script>
+	<script src="${ctx}/js/jquery-min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		var remoteUrl = "http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}";
 

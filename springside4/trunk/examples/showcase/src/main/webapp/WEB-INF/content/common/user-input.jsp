@@ -6,7 +6,7 @@
 <head>
 	<title>综合演示用例</title>
 	<%@ include file="/common/meta.jsp" %>
-	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
+	<link href="${ctx}/css/style-min.css" type="text/css" rel="stylesheet"/>
 	
 	
 	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
