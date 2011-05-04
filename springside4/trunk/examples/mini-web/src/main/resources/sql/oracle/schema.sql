@@ -1,31 +1,23 @@
 
-    drop table acct_authority cascade constraints;
+    drop table acct_group cascade constraints;
 
-    drop table acct_role cascade constraints;
-
-    drop table acct_role_authority cascade constraints;
+    drop table acct_group_permission cascade constraints;
 
     drop table acct_user cascade constraints;
 
-    drop table acct_user_role cascade constraints;
+    drop table acct_user_group cascade constraints;
 
     drop sequence hibernate_sequence;
 
-    create table acct_authority (
+    create table acct_group (
         id number(19,0) not null,
         name varchar2(255 char) not null unique,
         primary key (id)
     );
 
-    create table acct_role (
-        id number(19,0) not null,
-        name varchar2(255 char) not null unique,
-        primary key (id)
-    );
-
-    create table acct_role_authority (
+    create table acct_group_permission (
         role_id number(19,0) not null,
-        authority_id number(19,0) not null
+        permission varchar2(255 char) not null
     );
 
     create table acct_user (
@@ -37,27 +29,22 @@
         primary key (id)
     );
 
-    create table acct_user_role (
+    create table acct_user_group (
         user_id number(19,0) not null,
-        role_id number(19,0) not null
+        group_id number(19,0) not null
     );
 
-    alter table acct_role_authority 
+    alter table acct_group_permission 
         add constraint FKAE243466DE3FB930 
-        foreign key (role_id) 
-        references acct_role;
+        foreign key (group_id) 
+        references acct_group;
 
-    alter table acct_role_authority 
-        add constraint FKAE2434663FE97564 
-        foreign key (authority_id) 
-        references acct_authority;
-
-    alter table acct_user_role 
+    alter table acct_user_group 
         add constraint FKFE85CB3EDE3FB930 
-        foreign key (role_id) 
-        references acct_role;
+        foreign key (group_id) 
+        references acct_group;
 
-    alter table acct_user_role 
+    alter table acct_user_group 
         add constraint FKFE85CB3E836A7D10 
         foreign key (user_id) 
         references acct_user;

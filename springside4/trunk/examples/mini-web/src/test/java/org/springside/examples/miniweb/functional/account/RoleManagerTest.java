@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springside.examples.miniweb.data.AccountData;
 import org.springside.examples.miniweb.entity.account.Authority;
-import org.springside.examples.miniweb.entity.account.Role;
+import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniweb.functional.Gui;
 import org.springside.examples.miniweb.functional.Gui.RoleColumn;
@@ -24,7 +24,7 @@ import org.springside.modules.test.utils.SeleniumUtils;
  */
 public class RoleManagerTest extends BaseFunctionalTestCase {
 
-	private static Role testRole = null;
+	private static Group testRole = null;
 
 	/**
 	 * 检验OverViewPage.
@@ -46,7 +46,7 @@ public class RoleManagerTest extends BaseFunctionalTestCase {
 		driver.findElement(By.linkText("增加新角色")).click();
 
 		//生成测试数据
-		Role role = AccountData.getRandomRoleWithAuthority();
+		Group role = AccountData.getRandomRoleWithAuthority();
 
 		//输入数据
 		SeleniumUtils.type(driver.findElement(By.id("name")), role.getName());
@@ -109,7 +109,7 @@ public class RoleManagerTest extends BaseFunctionalTestCase {
 	}
 
 	
-	private void verifyRole(Role role) {
+	private void verifyRole(Group role) {
 		driver.findElement(By.id("editLink-" + role.getName())).click();
 
 		assertEquals(role.getName(), driver.findElement(By.id("name")).getValue());

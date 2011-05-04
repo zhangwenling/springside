@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springside.examples.miniweb.data.AccountData;
-import org.springside.examples.miniweb.entity.account.Role;
+import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniweb.functional.Gui;
@@ -59,7 +59,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		driver.findElement(By.id("name")).sendKeys(user.getName());
 		driver.findElement(By.id("password")).sendKeys(user.getPassword());
 		driver.findElement(By.id("passwordConfirm")).sendKeys(user.getPassword());
-		for (Role role : user.getRoleList()) {
+		for (Group role : user.getRoleList()) {
 			driver.findElement(By.id("checkedRoleIds-" + role.getId())).setSelected();
 		}
 		driver.findElement(By.xpath(Gui.BUTTON_SUBMIT)).click();
@@ -91,13 +91,13 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		SeleniumUtils.type(driver.findElement(By.id("name")), testUser.getName());
 
 		//取消所有角色
-		for (Role role : testUser.getRoleList()) {
+		for (Group role : testUser.getRoleList()) {
 			SeleniumUtils.uncheck(driver.findElement(By.id("checkedRoleIds-" + role.getId())));
 		}
 		testUser.getRoleList().clear();
 
 		//增加一个角色
-		Role role = AccountData.getRandomDefaultRole();
+		Group role = AccountData.getRandomDefaultRole();
 		driver.findElement(By.id("checkedRoleIds-" + role.getId())).setSelected();
 		testUser.getRoleList().add(role);
 
@@ -177,12 +177,12 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		assertEquals(user.getLoginName(), driver.findElement(By.id("loginName")).getValue());
 		assertEquals(user.getName(), driver.findElement(By.id("name")).getValue());
 
-		for (Role role : user.getRoleList()) {
+		for (Group role : user.getRoleList()) {
 			assertTrue(driver.findElement(By.id("checkedRoleIds-" + role.getId())).isSelected());
 		}
 
-		List<Role> uncheckRoleList = ListUtils.subtract(AccountData.getDefaultRoleList(), user.getRoleList());
-		for (Role role : uncheckRoleList) {
+		List<Group> uncheckRoleList = ListUtils.subtract(AccountData.getDefaultRoleList(), user.getRoleList());
+		for (Group role : uncheckRoleList) {
 			assertFalse(driver.findElement(By.id("checkedRoleIds-" + role.getId())).isSelected());
 		}
 	}

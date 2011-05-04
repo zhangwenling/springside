@@ -10,7 +10,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.dao.HibernateUtils;
-import org.springside.examples.miniweb.entity.account.Role;
+import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.examples.miniweb.service.account.AccountManager;
@@ -80,14 +80,14 @@ public class UserAction extends CrudActionSupport<User> {
 
 	@Override
 	public String input() throws Exception {
-		checkedRoleIds = entity.getRoleIds();
+		checkedRoleIds = entity.getGroupIds();
 		return INPUT;
 	}
 
 	@Override
 	public String save() throws Exception {
-		//根据页面上的checkbox选择 整合User的Roles Set
-		HibernateUtils.mergeByCheckedIds(entity.getRoleList(), checkedRoleIds, Role.class);
+		//根据页面上的checkbox选择 整合User的Groups Set
+		HibernateUtils.mergeByCheckedIds(entity.getGroupList(), checkedRoleIds, Group.class);
 
 		accountManager.saveUser(entity);
 		addActionMessage("保存用户成功");
@@ -135,8 +135,8 @@ public class UserAction extends CrudActionSupport<User> {
 	/**
 	 * input页面显示所有角色列表.
 	 */
-	public List<Role> getAllRoleList() {
-		return accountManager.getAllRole();
+	public List<Group> getAllRoleList() {
+		return accountManager.getAllGroup();
 	}
 
 	/**

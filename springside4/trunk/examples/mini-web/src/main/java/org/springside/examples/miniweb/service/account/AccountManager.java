@@ -8,11 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springside.examples.miniweb.dao.account.AuthorityDao;
-import org.springside.examples.miniweb.dao.account.RoleDao;
+import org.springside.examples.miniweb.dao.account.GroupDao;
 import org.springside.examples.miniweb.dao.account.UserDao;
-import org.springside.examples.miniweb.entity.account.Authority;
-import org.springside.examples.miniweb.entity.account.Role;
+import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.modules.orm.Page;
@@ -33,8 +31,7 @@ public class AccountManager {
 	private static Logger logger = LoggerFactory.getLogger(AccountManager.class);
 
 	private UserDao userDao;
-	private RoleDao roleDao;
-	private AuthorityDao authorityDao;
+	private GroupDao groupDao;
 
 	//-- User Manager --//
 	@Transactional(readOnly = true)
@@ -87,29 +84,23 @@ public class AccountManager {
 		return userDao.isPropertyUnique("loginName", newLoginName, oldLoginName);
 	}
 
-	//-- Role Manager --//
+	//-- Group Manager --//
 	@Transactional(readOnly = true)
-	public Role getRole(Long id) {
-		return roleDao.get(id);
+	public Group getRole(Long id) {
+		return groupDao.get(id);
 	}
 
 	@Transactional(readOnly = true)
-	public List<Role> getAllRole() {
-		return roleDao.getAll("id", true);
+	public List<Group> getAllGroup() {
+		return groupDao.getAll("id", true);
 	}
 
-	public void saveRole(Role entity) {
-		roleDao.save(entity);
+	public void saveGroup(Group entity) {
+		groupDao.save(entity);
 	}
 
-	public void deleteRole(Long id) {
-		roleDao.delete(id);
-	}
-
-	//-- Authority Manager --//
-	@Transactional(readOnly = true)
-	public List<Authority> getAllAuthority() {
-		return authorityDao.getAll();
+	public void deleteGroup(Long id) {
+		groupDao.delete(id);
 	}
 
 	@Autowired
@@ -118,12 +109,7 @@ public class AccountManager {
 	}
 
 	@Autowired
-	public void setRoleDao(RoleDao roleDao) {
-		this.roleDao = roleDao;
-	}
-
-	@Autowired
-	public void setAuthorityDao(AuthorityDao authorityDao) {
-		this.authorityDao = authorityDao;
+	public void setGroupDao(GroupDao groupDao) {
+		this.groupDao = groupDao;
 	}
 }

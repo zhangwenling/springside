@@ -9,9 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.examples.miniweb.dao.account.RoleDao;
+import org.springside.examples.miniweb.dao.account.GroupDao;
 import org.springside.examples.miniweb.dao.account.UserDao;
-import org.springside.examples.miniweb.entity.account.Role;
+import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DataUtils;
@@ -28,7 +28,7 @@ public class RoleDaoTest extends SpringTxTestCase {
 	private static DataSource dataSourceHolder = null;
 
 	@Autowired
-	private RoleDao roleDao;
+	private GroupDao roleDao;
 
 	@Autowired
 	private UserDao userDao;
@@ -52,7 +52,7 @@ public class RoleDaoTest extends SpringTxTestCase {
 	@Test
 	public void deleteRole() {
 		//新增测试角色并与admin用户绑定.
-		Role role = new Role();
+		Group role = new Group();
 		role.setName(DataUtils.randomName("Role"));
 		roleDao.save(role);
 

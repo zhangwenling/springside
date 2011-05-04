@@ -31,7 +31,7 @@ import com.google.common.collect.Lists;
  */
 @Entity
 //表名与类名不相同时重新定义表名.
-@Table(name = "ACCT_USER")
+@Table(name = "acct_user")
 //默认的缓存策略.
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User extends IdEntity {
@@ -40,7 +40,7 @@ public class User extends IdEntity {
 	private String password;//为简化演示使用明文保存的密码
 	private String name;
 	private String email;
-	private List<Role> roleList = Lists.newArrayList();//有序的关联对象集合
+	private List<Group> groupList = Lists.newArrayList();//有序的关联对象集合
 
 	//字段非空且唯一, 用于提醒Entity使用者及生成DDL.
 	@Column(nullable = false, unique = true)
@@ -79,37 +79,37 @@ public class User extends IdEntity {
 	//多对多定义
 	@ManyToMany
 	//中间表定义,表名采用默认命名规则
-	@JoinTable(name = "ACCT_USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
+	@JoinTable(name = "acct_user_group", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "group_id") })
 	//Fecth策略定义
 	@Fetch(FetchMode.SUBSELECT)
 	//集合按id排序.
 	@OrderBy("id")
 	//集合中对象id的缓存.
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public List<Role> getRoleList() {
-		return roleList;
+	public List<Group> getGroupList() {
+		return groupList;
 	}
 
-	public void setRoleList(List<Role> roleList) {
-		this.roleList = roleList;
-	}
-
-	/**
-	 * 用户拥有的角色名称字符串, 多个角色名称用','分隔.
-	 */
-	//非持久化属性.
-	@Transient
-	public String getRoleNames() {
-		return ConvertUtils.extractElementPropertyToString(roleList, "name", ", ");
+	public void setGroupList(List<Group> groupList) {
+		this.groupList = groupList;
 	}
 
 	/**
-	 * 用户拥有的角色id字符串, 多个角色id用','分隔.
+	 * 用户拥有的权限组名称字符串, 多个权限组名称用','分隔.
 	 */
 	//非持久化属性.
 	@Transient
-	public List<Long> getRoleIds() {
-		return ConvertUtils.extractElementPropertyToList(roleList, "id");
+	public String getGroupNames() {
+		return ConvertUtils.extractElementPropertyToString(groupList, "name", ", ");
+	}
+
+	/**
+	 * 用户拥有的权限组id字符串, 多个权限组id用','分隔.
+	 */
+	//非持久化属性.
+	@Transient
+	public List<Long> getGroupIds() {
+		return ConvertUtils.extractElementPropertyToList(groupList, "id");
 	}
 
 	@Override

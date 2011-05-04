@@ -3,7 +3,7 @@ package org.springside.examples.miniweb.data;
 import java.util.List;
 
 import org.springside.examples.miniweb.entity.account.Authority;
-import org.springside.examples.miniweb.entity.account.Role;
+import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.modules.test.utils.DataUtils;
 
@@ -18,7 +18,7 @@ public class AccountData {
 
 	public static final String DEFAULT_PASSWORD = "123456";
 
-	private static List<Role> defaultRoleList = null;
+	private static List<Group> defaultRoleList = null;
 
 	private static List<Authority> defaultAuthorityList = null;
 
@@ -41,29 +41,29 @@ public class AccountData {
 		return user;
 	}
 
-	public static Role getRandomRole() {
-		Role role = new Role();
+	public static Group getRandomRole() {
+		Group role = new Group();
 		role.setName(DataUtils.randomName("Role"));
 
 		return role;
 	}
 
-	public static Role getRandomRoleWithAuthority() {
-		Role role = getRandomRole();
+	public static Group getRandomRoleWithAuthority() {
+		Group role = getRandomRole();
 		role.getAuthorityList().addAll(getRandomDefaultAuthorityList());
 		return role;
 	}
 
-	public static List<Role> getDefaultRoleList() {
+	public static List<Group> getDefaultRoleList() {
 		if (defaultRoleList == null) {
 			defaultRoleList = Lists.newArrayList();
-			defaultRoleList.add(new Role(1L, "管理员"));
-			defaultRoleList.add(new Role(2L, "用户"));
+			defaultRoleList.add(new Group(1L, "管理员"));
+			defaultRoleList.add(new Group(2L, "用户"));
 		}
 		return defaultRoleList;
 	}
 
-	public static Role getRandomDefaultRole() {
+	public static Group getRandomDefaultRole() {
 		return DataUtils.randomOne(getDefaultRoleList());
 	}
 

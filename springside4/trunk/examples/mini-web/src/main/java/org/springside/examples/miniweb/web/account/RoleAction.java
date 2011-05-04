@@ -8,7 +8,7 @@ import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.dao.HibernateUtils;
 import org.springside.examples.miniweb.entity.account.Authority;
-import org.springside.examples.miniweb.entity.account.Role;
+import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
 
@@ -21,7 +21,7 @@ import org.springside.examples.miniweb.web.CrudActionSupport;
  */
 @Namespace("/account")
 @Results({ @Result(name = CrudActionSupport.RELOAD, location = "role.action", type = "redirect") })
-public class RoleAction extends CrudActionSupport<Role> {
+public class RoleAction extends CrudActionSupport<Group> {
 
 	private static final long serialVersionUID = -4052047494894591406L;
 
@@ -29,13 +29,13 @@ public class RoleAction extends CrudActionSupport<Role> {
 
 	//-- 页面属性 --//
 	private Long id;
-	private Role entity;
-	private List<Role> allRoleList;//角色列表
+	private Group entity;
+	private List<Group> allRoleList;//角色列表
 	private List<Long> checkedAuthIds;//页面中钩选的权限id列表
 
 	//-- ModelDriven 与 Preparable函数 --//
 	@Override
-	public Role getModel() {
+	public Group getModel() {
 		return entity;
 	}
 
@@ -48,14 +48,14 @@ public class RoleAction extends CrudActionSupport<Role> {
 		if (id != null) {
 			entity = accountManager.getRole(id);
 		} else {
-			entity = new Role();
+			entity = new Group();
 		}
 	}
 
 	//-- CRUD Action 函数 --//
 	@Override
 	public String list() throws Exception {
-		allRoleList = accountManager.getAllRole();
+		allRoleList = accountManager.getAllGroup();
 		return SUCCESS;
 	}
 
@@ -70,14 +70,14 @@ public class RoleAction extends CrudActionSupport<Role> {
 		//根据页面上的checkbox 整合Role的Authorities Set.
 		HibernateUtils.mergeByCheckedIds(entity.getAuthorityList(), checkedAuthIds, Authority.class);
 		//保存用户并放入成功信息.
-		accountManager.saveRole(entity);
+		accountManager.saveGroup(entity);
 		addActionMessage("保存角色成功");
 		return RELOAD;
 	}
 
 	@Override
 	public String delete() throws Exception {
-		accountManager.deleteRole(id);
+		accountManager.deleteGroup(id);
 		addActionMessage("删除角色成功");
 		return RELOAD;
 	}
@@ -86,7 +86,7 @@ public class RoleAction extends CrudActionSupport<Role> {
 	/**
 	 * list页面显示所有角色列表.
 	 */
-	public List<Role> getAllRoleList() {
+	public List<Group> getAllRoleList() {
 		return allRoleList;
 	}
 
