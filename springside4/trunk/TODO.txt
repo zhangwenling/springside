@@ -14,12 +14,13 @@ TODO部分
     備忘： log4jdbc，jersey+jackson,jackson new feature
 
 2.次要改动
-  * 升级Sonar 2.7，Quartz 1.8.4->2.0.1
+  * 升级Sonar 2.7，Quartz 1.8.4->2.0.1, Jetty7.4(縮小依賴範圍))
   * 在showcase同步mini项目的一些更新，如validator
   * Jetty7连续跑多个功能测试时出现死锁	
 
 3.其他非代码改动
   * 发布前打包项目生成模板(Calvin)
+  * 閱讀如下Samples: Cloudfoundry-samples, Spring MVC samples, sshside,Shiro Sample,Java Code Geek Archetyp , Spring Roo, Play!
   
 ---------------------------------------------------------------------------------
 已完成部分
