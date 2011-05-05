@@ -9,7 +9,7 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springside.examples.miniweb.dao.HibernateUtils;
+import org.springside.examples.miniweb.entity.IdEntity;
 import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.service.ServiceException;
@@ -87,7 +87,7 @@ public class UserAction extends CrudActionSupport<User> {
 	@Override
 	public String save() throws Exception {
 		//根据页面上的checkbox选择 整合User的Groups Set
-		HibernateUtils.mergeByCheckedIds(entity.getGroupList(), checkedRoleIds, Group.class);
+		IdEntity.mergeByIds(entity.getGroupList(), checkedRoleIds, Group.class);
 
 		accountManager.saveUser(entity);
 		addActionMessage("保存用户成功");

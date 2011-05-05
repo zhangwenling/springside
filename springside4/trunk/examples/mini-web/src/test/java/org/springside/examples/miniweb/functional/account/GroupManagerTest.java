@@ -79,7 +79,7 @@ public class GroupManagerTest extends BaseFunctionalTestCase {
 		}
 		testRole.getAuthorityList().clear();
 
-		List<Authority> authorityList = AccountData.getRandomDefaultAuthorityList();
+		List<Authority> authorityList = AccountData.getRandomDefaultPermissionList();
 		for (Authority authority : authorityList) {
 			driver.findElement(By.id("checkedAuthIds-" + authority.getId())).setSelected();
 		}

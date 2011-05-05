@@ -716,12 +716,6 @@
 				<artifactId>jetty-webapp</artifactId>
 				<version>${jetty.version}</version>
 				<scope>test</scope>
-				<exclusions>
-					<exclusion>
-						<groupId>org.eclipse.jetty</groupId>
-						<artifactId>jetty-continuation</artifactId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 
 			<dependency>

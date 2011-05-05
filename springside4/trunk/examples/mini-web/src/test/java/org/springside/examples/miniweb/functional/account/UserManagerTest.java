@@ -181,7 +181,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 			assertTrue(driver.findElement(By.id("checkedRoleIds-" + role.getId())).isSelected());
 		}
 
-		List<Group> uncheckRoleList = ListUtils.subtract(AccountData.getDefaultRoleList(), user.getGroupList());
+		List<Group> uncheckRoleList = ListUtils.subtract(AccountData.getDefaultGroupList(), user.getGroupList());
 		for (Group role : uncheckRoleList) {
 			assertFalse(driver.findElement(By.id("checkedRoleIds-" + role.getId())).isSelected());
 		}

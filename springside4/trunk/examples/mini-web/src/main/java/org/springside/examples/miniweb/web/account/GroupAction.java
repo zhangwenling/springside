@@ -6,7 +6,6 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springside.examples.miniweb.dao.HibernateUtils;
 import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
@@ -19,7 +18,7 @@ import org.springside.examples.miniweb.web.CrudActionSupport;
  * @author calvin
  */
 @Namespace("/account")
-@Results( { @Result(name = CrudActionSupport.RELOAD, location = "group.action", type = "redirect") })
+@Results({ @Result(name = CrudActionSupport.RELOAD, location = "group.action", type = "redirect") })
 public class GroupAction extends CrudActionSupport<Group> {
 
 	private static final long serialVersionUID = -4052047494894591406L;
@@ -30,7 +29,7 @@ public class GroupAction extends CrudActionSupport<Group> {
 	private Long id;
 	private Group entity;
 	private List<Group> allGroupList;//角色列表
-	private List<Long> checkedAuthIds;//页面中钩选的权限id列表
+	private List<String> checkedPermissions;//页面中钩选的权限id列表
 
 	//-- ModelDriven 与 Preparable函数 --//
 	@Override
@@ -60,14 +59,13 @@ public class GroupAction extends CrudActionSupport<Group> {
 
 	@Override
 	public String input() throws Exception {
-		checkedAuthIds = entity.getAuthIds();
+		checkedPermissions = entity.getPermissionList();
 		return INPUT;
 	}
 
 	@Override
 	public String save() throws Exception {
-		//根据页面上的checkbox 整合Role的Authorities Set.
-		HibernateUtils.mergeByCheckedIds(entity.getAuthorityList(), checkedAuthIds, Authority.class);
+		entity.setPermissionList(checkedPermissions);
 		//保存用户并放入成功信息.
 		accountManager.saveGroup(entity);
 		addActionMessage("保存角色成功");
@@ -90,24 +88,17 @@ public class GroupAction extends CrudActionSupport<Group> {
 	}
 
 	/**
-	 * input页面显示所有授权列表.
-	 */
-	public List<Authority> getAllAuthorityList() {
-		return accountManager.getAllAuthority();
-	}
-
-	/**
 	 * input页面显示角色拥有的授权.
 	 */
-	public List<Long> getCheckedAuthIds() {
-		return checkedAuthIds;
+	public List<String> getCheckedPermissions() {
+		return checkedPermissions;
 	}
 
 	/**
 	 * input页面提交角色拥有的授权.
 	 */
-	public void setCheckedAuthIds(List<Long> checkedAuthIds) {
-		this.checkedAuthIds = checkedAuthIds;
+	public void setCheckedPermissions(List<String> checkedPermissions) {
+		this.checkedPermissions = checkedPermissions;
 	}
 
 	@Autowired

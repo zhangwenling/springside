@@ -11,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.examples.miniweb.dao.account.GroupDao;
 import org.springside.examples.miniweb.dao.account.UserDao;
+import org.springside.examples.miniweb.data.AccountData;
 import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.modules.test.spring.SpringTxTestCase;
-import org.springside.modules.test.utils.DataUtils;
 import org.springside.modules.test.utils.DbUnitUtils;
 
 /**
@@ -28,13 +28,13 @@ public class GroupDaoTest extends SpringTxTestCase {
 	private static DataSource dataSourceHolder = null;
 
 	@Autowired
-	private GroupDao roleDao;
+	private GroupDao groupDao;
 
 	@Autowired
 	private UserDao userDao;
 
 	@Before
-	public void loadDefaultData() throws Exception {
+	public void loadSampleData() throws Exception {
 		if (dataSourceHolder == null) {
 			DbUnitUtils.loadData(dataSource, "/data/sample-data.xml");
 			dataSourceHolder = dataSource;
@@ -42,33 +42,33 @@ public class GroupDaoTest extends SpringTxTestCase {
 	}
 
 	@AfterClass
-	public static void cleanDefaultData() throws Exception {
+	public static void cleanSampleData() throws Exception {
 		DbUnitUtils.removeData(dataSourceHolder, "/data/sample-data.xml");
+		dataSourceHolder = null;
 	}
 
 	/**
 	 * 测试删除角色时删除用户-角色的中间表.
 	 */
 	@Test
-	public void deleteRole() {
+	public void deleteGroup() {
 		//新增测试角色并与admin用户绑定.
-		Group role = new Group();
-		role.setName(DataUtils.randomName("Role"));
-		roleDao.save(role);
+		Group group = AccountData.getRandomGroup();
+		groupDao.save(group);
 
 		User user = userDao.get(1L);
-		user.getGroupList().add(role);
+		user.getGroupList().add(group);
 		userDao.save(user);
 		userDao.flush();
 
-		int oldJoinTableCount = countRowsInTable("ACCT_USER_ROLE");
+		int oldJoinTableCount = countRowsInTable("ACCT_USER_GROUP");
 		int oldUserTableCount = countRowsInTable("ACCT_USER");
 
 		//删除用户角色, 中间表将减少1条记录,而用户表应该不受影响.
-		roleDao.delete(role.getId());
-		roleDao.flush();
+		groupDao.delete(group.getId());
+		groupDao.flush();
 
-		int newJoinTableCount = countRowsInTable("ACCT_USER_ROLE");
+		int newJoinTableCount = countRowsInTable("ACCT_USER_GROUP");
 		int newUserTableCount = countRowsInTable("ACCT_USER");
 		assertEquals(1, oldJoinTableCount - newJoinTableCount);
 		assertEquals(0, oldUserTableCount - newUserTableCount);

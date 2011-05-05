@@ -3,6 +3,7 @@ package org.springside.examples.miniweb.data;
 import java.util.List;
 
 import org.springside.examples.miniweb.entity.account.Group;
+import org.springside.examples.miniweb.entity.account.Permissions;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.modules.test.utils.DataUtils;
 
@@ -36,24 +37,22 @@ public class AccountData {
 	public static User getRandomUserWithGroup() {
 		User user = getRandomUser();
 		user.getGroupList().add(getRandomDefaultGroup());
-
 		return user;
 	}
 
 	public static Group getRandomGroup() {
 		Group group = new Group();
 		group.setName(DataUtils.randomName("Group"));
-
 		return group;
 	}
 
-	public static Group getRandomRoleWithAuthority() {
+	public static Group getRandomGroupWithPermission() {
 		Group group = getRandomGroup();
-		group.getAuthorityList().addAll(getRandomDefaultAuthorityList());
+		group.getPermissionList().addAll(getRandomDefaultPermissionList());
 		return group;
 	}
 
-	public static List<Group> getDefaultRoleList() {
+	public static List<Group> getDefaultGroupList() {
 		if (defaultGroupList == null) {
 			defaultGroupList = Lists.newArrayList();
 			defaultGroupList.add(new Group(1L, "管理员"));
@@ -63,30 +62,20 @@ public class AccountData {
 	}
 
 	public static Group getRandomDefaultGroup() {
-		return DataUtils.randomOne(getDefaultRoleList());
+		return DataUtils.randomOne(getDefaultGroupList());
 	}
 
-	public static Authority getRandomAuthority() {
-		String authName = DataUtils.randomName("Authority");
-
-		Authority authority = new Authority();
-		authority.setName(authName);
-
-		return authority;
-	}
-
-	public static List<Authority> getDefaultAuthorityList() {
+	public static List<String> getDefaultPermissionList() {
 		if (defaultPermissionList == null) {
 			defaultPermissionList = Lists.newArrayList();
-			defaultPermissionList.add(new Authority(1L, "浏览用户"));
-			defaultPermissionList.add(new Authority(2L, "修改用户"));
-			defaultPermissionList.add(new Authority(3L, "浏览角色"));
-			defaultPermissionList.add(new Authority(4L, "修改角色"));
+			for (Permissions permission : Permissions.values()) {
+				defaultPermissionList.add(permission.value());
+			}
 		}
 		return defaultPermissionList;
 	}
 
-	public static List<Authority> getRandomDefaultAuthorityList() {
-		return DataUtils.randomSome(getDefaultAuthorityList());
+	public static List<String> getRandomDefaultPermissionList() {
+		return DataUtils.randomSome(getDefaultPermissionList());
 	}
 }

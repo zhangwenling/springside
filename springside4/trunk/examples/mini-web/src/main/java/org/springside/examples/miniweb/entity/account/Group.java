@@ -2,10 +2,11 @@ package org.springside.examples.miniweb.entity.account;
 
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -52,7 +53,8 @@ public class Group extends IdEntity {
 	}
 
 	@ElementCollection
-	@JoinTable(name = "acct_group_permission")
+	@CollectionTable(name = "acct_group_permission", joinColumns = { @JoinColumn(name = "group_id") })
+	@Column(name = "permission")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<String> getPermissionList() {
 		return permissionList;

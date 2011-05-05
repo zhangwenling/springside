@@ -30,7 +30,7 @@ public class UserDaoTest extends SpringTxTestCase {
 	private UserDao entityDao;
 
 	@Before
-	public void loadDefaultData() throws Exception {
+	public void loadSampleData() throws Exception {
 		if (dataSourceHolder == null) {
 			DbUnitUtils.loadData(dataSource, "/data/sample-data.xml");
 			dataSourceHolder = dataSource;
@@ -38,14 +38,15 @@ public class UserDaoTest extends SpringTxTestCase {
 	}
 
 	@AfterClass
-	public static void cleanDefaultData() throws Exception {
+	public static void cleanSampleData() throws Exception {
 		DbUnitUtils.removeData(dataSourceHolder, "/data/sample-data.xml");
+		dataSourceHolder = null;
 	}
 
 	@Test
 	//如果你需要真正插入数据库,将Rollback设为false
 	//@Rollback(false) 
-	public void crudEntityWithRole() {
+	public void crudEntityWithGroup() {
 		//新建并保存带角色的用户
 		User user = AccountData.getRandomUserWithGroup();
 		entityDao.save(user);
@@ -56,7 +57,7 @@ public class UserDaoTest extends SpringTxTestCase {
 		user = entityDao.findUniqueBy("id", user.getId());
 		assertEquals(1, user.getGroupList().size());
 
-		//删除用户的角色
+		//删除用户的权限组
 		user.getGroupList().remove(0);
 		entityDao.flush();
 		user = entityDao.findUniqueBy("id", user.getId());
