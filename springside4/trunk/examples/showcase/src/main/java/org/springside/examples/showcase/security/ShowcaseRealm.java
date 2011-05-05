@@ -44,39 +44,41 @@ import org.springside.examples.showcase.common.service.AccountManager;
  */
 public class ShowcaseRealm extends AuthorizingRealm {
 
-    protected AccountManager accountManager;
+	protected AccountManager accountManager;
 
-    public ShowcaseRealm() {
-        setName("ShowcaseRealm"); //This name must match the name in the User class's getPrincipals() method
-        setCredentialsMatcher(new HashedCredentialsMatcher("SHA-1"));
-    }
+	public ShowcaseRealm() {
+		setName("ShowcaseRealm"); //This name must match the name in the User class's getPrincipals() method
+		setCredentialsMatcher(new HashedCredentialsMatcher("SHA-1"));
+	}
 
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
-        UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-        User user = accountManager.findUserByLoginName(token.getUsername());
-        if (user != null) {
-            return new SimpleAuthenticationInfo(user.getLoginName(), user.getShaPassword(), getName());
-        } else {
-            return null;
-        }
-    }
+	@Override
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
+		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
+		User user = accountManager.findUserByLoginName(token.getUsername());
+		if (user != null) {
+			return new SimpleAuthenticationInfo(user.getLoginName(), user.getShaPassword(), getName());
+		} else {
+			return null;
+		}
+	}
 
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        String username = (String) principals.fromRealm(getName()).iterator().next();
-        User user = accountManager.findUserByLoginName(username);
-        if (user != null) {
-            SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-            for (Role role : user.getRoleList()) {
-                info.addRole(role.getName());
-            }
-            return info;
-        } else {
-            return null;
-        }
-    }
+	@Override
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+		String username = (String) principals.fromRealm(getName()).iterator().next();
+		User user = accountManager.findUserByLoginName(username);
+		if (user != null) {
+			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+			for (Role role : user.getRoleList()) {
+				info.addRole(role.getName());
+			}
+			return info;
+		} else {
+			return null;
+		}
+	}
 
-    @Autowired
-    public void setAccountManager(AccountManager accountManager) {
-        this.accountManager = accountManager;
-    }
+	@Autowired
+	public void setAccountManager(AccountManager accountManager) {
+		this.accountManager = accountManager;
+	}
 }

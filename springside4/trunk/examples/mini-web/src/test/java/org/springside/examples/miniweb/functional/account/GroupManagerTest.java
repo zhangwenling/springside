@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springside.examples.miniweb.data.AccountData;
-import org.springside.examples.miniweb.entity.account.Authority;
 import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniweb.functional.Gui;
@@ -108,7 +107,6 @@ public class GroupManagerTest extends BaseFunctionalTestCase {
 		testRole = null;
 	}
 
-	
 	private void verifyRole(Group role) {
 		driver.findElement(By.id("editLink-" + role.getName())).click();
 
@@ -118,8 +116,8 @@ public class GroupManagerTest extends BaseFunctionalTestCase {
 			assertTrue(driver.findElement(By.id("checkedAuthIds-" + authority.getId())).isSelected());
 		}
 
-		List<Authority> uncheckAuthList = ListUtils.subtract(AccountData.getDefaultAuthorityList(), role
-				.getAuthorityList());
+		List<Authority> uncheckAuthList = ListUtils.subtract(AccountData.getDefaultAuthorityList(),
+				role.getAuthorityList());
 		for (Authority authority : uncheckAuthList) {
 			assertFalse(driver.findElement(By.id("checkedAuthIds-" + authority.getId())).isSelected());
 		}

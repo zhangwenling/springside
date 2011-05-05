@@ -1,6 +1,6 @@
 package org.springside.examples.showcase.unit.common;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;

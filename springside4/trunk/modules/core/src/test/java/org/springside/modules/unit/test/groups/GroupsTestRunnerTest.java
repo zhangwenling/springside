@@ -52,11 +52,11 @@ public class GroupsTestRunnerTest {
 		ReflectionUtils.invokeMethod(groupsTestRunner, "initGroups", null, null);
 
 		assertEquals(true, GroupsTestRunner.shouldRun(TestClassBean1.class.getMethod("shouldRun", new Class[] {})));
-		assertEquals(false, GroupsTestRunner
-				.shouldRun(TestClassBean1.class.getMethod("shouldNeverRun", new Class[] {})));
+		assertEquals(false,
+				GroupsTestRunner.shouldRun(TestClassBean1.class.getMethod("shouldNeverRun", new Class[] {})));
 		assertEquals(true, GroupsTestRunner.shouldRun(TestClassBean2.class.getMethod("shouldRun", new Class[] {})));
-		assertEquals(false, GroupsTestRunner
-				.shouldRun(TestClassBean3.class.getMethod("shouldNeverRun", new Class[] {})));
+		assertEquals(false,
+				GroupsTestRunner.shouldRun(TestClassBean3.class.getMethod("shouldNeverRun", new Class[] {})));
 
 	}
 

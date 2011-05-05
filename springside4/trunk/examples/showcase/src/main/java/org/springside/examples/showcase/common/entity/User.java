@@ -27,7 +27,7 @@ import com.google.common.collect.Lists;
  */
 @Entity
 @Table(name = "SS_USER")
-public class User  extends IdEntity {
+public class User extends IdEntity {
 	private String loginName;
 	private String plainPassword;
 	private String shaPassword;

@@ -30,7 +30,7 @@ import org.springside.examples.miniservice.webservice.ws.result.base.WSResult;
  * @author calvin
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@TestExecutionListeners( { DependencyInjectionTestExecutionListener.class })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
 @ContextConfiguration(locations = { "/applicationContext-ws-client.xml" })
 public class AccountWebServiceTest extends BaseFunctionalTestCase {
 

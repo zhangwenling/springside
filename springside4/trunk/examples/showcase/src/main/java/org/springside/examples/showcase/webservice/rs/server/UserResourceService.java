@@ -15,8 +15,8 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.hibernate.ObjectNotFoundException;
@@ -50,7 +50,7 @@ public class UserResourceService {
 	 */
 	@GET
 	@RequiresRoles("User")
-	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
 	public List<UserDTO> getAllUser() {
 		try {
 			List<User> entityList = accountManager.getAllUserWithRole();
@@ -65,7 +65,7 @@ public class UserResourceService {
 	 */
 	@GET
 	@Path("{id}")
-	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML + WsConstants.CHARSET })
 	public UserDTO getUser(@PathParam("id") Long id) {
 		try {
 			User entity = accountManager.getInitializedUser(id);

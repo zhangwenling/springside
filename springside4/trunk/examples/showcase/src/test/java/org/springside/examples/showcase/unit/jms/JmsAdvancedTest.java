@@ -76,6 +76,7 @@ public class JmsAdvancedTest extends SpringContextTestCase {
 		appender.addToLogger(AdvancedNotifyMessageListener.class);
 
 		advancedJmsTemplate.send(advancedNotifyTopic, new MessageCreator() {
+			@Override
 			public Message createMessage(Session session) throws JMSException {
 
 				MapMessage message = session.createMapMessage();

@@ -67,6 +67,7 @@ public class Page<T> extends PageRequest implements Iterable<T> {
 	/** 
 	 * 实现Iterable接口, 可以for(Object item : page)遍历使用
 	 */
+	@Override
 	public Iterator<T> iterator() {
 		return result.iterator();
 	}

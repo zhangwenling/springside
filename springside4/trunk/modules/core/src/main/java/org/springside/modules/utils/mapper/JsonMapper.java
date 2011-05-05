@@ -96,7 +96,7 @@ public class JsonMapper {
 		}
 
 		try {
-			return mapper.readValue(jsonString, javaType);
+			return (T) mapper.readValue(jsonString, javaType);
 		} catch (IOException e) {
 			logger.warn("parse json string error:" + jsonString, e);
 			return null;

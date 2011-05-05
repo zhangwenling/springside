@@ -28,8 +28,8 @@ import org.hibernate.impl.CriteriaImpl;
 import org.hibernate.transform.ResultTransformer;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PageRequest;
-import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.PageRequest.Sort;
+import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.PropertyFilter.MatchType;
 import org.springside.modules.utils.AssertUtils;
 import org.springside.modules.utils.ReflectionUtils;
@@ -364,8 +364,8 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 		List<Criterion> criterionList = new ArrayList<Criterion>();
 		for (PropertyFilter filter : filters) {
 			if (!filter.hasMultiProperties()) { //只有一个属性需要比较的情况.
-				Criterion criterion = buildCriterion(filter.getPropertyName(), filter.getMatchValue(), filter
-						.getMatchType());
+				Criterion criterion = buildCriterion(filter.getPropertyName(), filter.getMatchValue(),
+						filter.getMatchType());
 				criterionList.add(criterion);
 			} else {//包含多个属性需要比较的情况,进行or处理.
 				Disjunction disjunction = Restrictions.disjunction();
