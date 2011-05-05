@@ -2,7 +2,6 @@ package org.springside.examples.miniweb.data;
 
 import java.util.List;
 
-import org.springside.examples.miniweb.entity.account.Authority;
 import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.modules.test.utils.DataUtils;
@@ -18,9 +17,9 @@ public class AccountData {
 
 	public static final String DEFAULT_PASSWORD = "123456";
 
-	private static List<Group> defaultRoleList = null;
+	private static List<Group> defaultGroupList = null;
 
-	private static List<Authority> defaultAuthorityList = null;
+	private static List<String> defaultPermissionList = null;
 
 	public static User getRandomUser() {
 		String userName = DataUtils.randomName("User");
@@ -34,36 +33,36 @@ public class AccountData {
 		return user;
 	}
 
-	public static User getRandomUserWithRole() {
+	public static User getRandomUserWithGroup() {
 		User user = getRandomUser();
-		user.getRoleList().add(getRandomDefaultRole());
+		user.getGroupList().add(getRandomDefaultGroup());
 
 		return user;
 	}
 
-	public static Group getRandomRole() {
-		Group role = new Group();
-		role.setName(DataUtils.randomName("Role"));
+	public static Group getRandomGroup() {
+		Group group = new Group();
+		group.setName(DataUtils.randomName("Group"));
 
-		return role;
+		return group;
 	}
 
 	public static Group getRandomRoleWithAuthority() {
-		Group role = getRandomRole();
-		role.getAuthorityList().addAll(getRandomDefaultAuthorityList());
-		return role;
+		Group group = getRandomGroup();
+		group.getAuthorityList().addAll(getRandomDefaultAuthorityList());
+		return group;
 	}
 
 	public static List<Group> getDefaultRoleList() {
-		if (defaultRoleList == null) {
-			defaultRoleList = Lists.newArrayList();
-			defaultRoleList.add(new Group(1L, "管理员"));
-			defaultRoleList.add(new Group(2L, "用户"));
+		if (defaultGroupList == null) {
+			defaultGroupList = Lists.newArrayList();
+			defaultGroupList.add(new Group(1L, "管理员"));
+			defaultGroupList.add(new Group(2L, "用户"));
 		}
-		return defaultRoleList;
+		return defaultGroupList;
 	}
 
-	public static Group getRandomDefaultRole() {
+	public static Group getRandomDefaultGroup() {
 		return DataUtils.randomOne(getDefaultRoleList());
 	}
 
@@ -77,14 +76,14 @@ public class AccountData {
 	}
 
 	public static List<Authority> getDefaultAuthorityList() {
-		if (defaultAuthorityList == null) {
-			defaultAuthorityList = Lists.newArrayList();
-			defaultAuthorityList.add(new Authority(1L, "浏览用户"));
-			defaultAuthorityList.add(new Authority(2L, "修改用户"));
-			defaultAuthorityList.add(new Authority(3L, "浏览角色"));
-			defaultAuthorityList.add(new Authority(4L, "修改角色"));
+		if (defaultPermissionList == null) {
+			defaultPermissionList = Lists.newArrayList();
+			defaultPermissionList.add(new Authority(1L, "浏览用户"));
+			defaultPermissionList.add(new Authority(2L, "修改用户"));
+			defaultPermissionList.add(new Authority(3L, "浏览角色"));
+			defaultPermissionList.add(new Authority(4L, "修改角色"));
 		}
-		return defaultAuthorityList;
+		return defaultPermissionList;
 	}
 
 	public static List<Authority> getRandomDefaultAuthorityList() {

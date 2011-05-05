@@ -22,7 +22,7 @@ import org.springside.modules.test.utils.SeleniumUtils;
  * 
  * @author calvin
  */
-public class RoleManagerTest extends BaseFunctionalTestCase {
+public class GroupManagerTest extends BaseFunctionalTestCase {
 
 	private static Group testRole = null;
 

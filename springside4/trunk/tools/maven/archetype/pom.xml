@@ -10,7 +10,7 @@
   <groupId>org.springside</groupId>
   <artifactId>mini-web-archetype</artifactId>
   <packaging>maven-archetype</packaging>
-  <name>SpringSide Mini-Web Archetype</name>
+  <name>SpringSide :: Archetype :: Mini-Web</name>
   <build>
     <extensions>
       <extension>

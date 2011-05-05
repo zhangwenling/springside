@@ -47,20 +47,20 @@ public class UserDaoTest extends SpringTxTestCase {
 	//@Rollback(false) 
 	public void crudEntityWithRole() {
 		//新建并保存带角色的用户
-		User user = AccountData.getRandomUserWithRole();
+		User user = AccountData.getRandomUserWithGroup();
 		entityDao.save(user);
 		//强制执行sql语句
 		entityDao.flush();
 
 		//获取用户
 		user = entityDao.findUniqueBy("id", user.getId());
-		assertEquals(1, user.getRoleList().size());
+		assertEquals(1, user.getGroupList().size());
 
 		//删除用户的角色
-		user.getRoleList().remove(0);
+		user.getGroupList().remove(0);
 		entityDao.flush();
 		user = entityDao.findUniqueBy("id", user.getId());
-		assertEquals(0, user.getRoleList().size());
+		assertEquals(0, user.getGroupList().size());
 
 		//删除用户
 		entityDao.delete(user.getId());

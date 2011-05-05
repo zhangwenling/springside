@@ -23,7 +23,7 @@ import org.springside.modules.test.utils.DbUnitUtils;
  * @author calvin
  */
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
-public class RoleDaoTest extends SpringTxTestCase {
+public class GroupDaoTest extends SpringTxTestCase {
 
 	private static DataSource dataSourceHolder = null;
 
@@ -57,7 +57,7 @@ public class RoleDaoTest extends SpringTxTestCase {
 		roleDao.save(role);
 
 		User user = userDao.get(1L);
-		user.getRoleList().add(role);
+		user.getGroupList().add(role);
 		userDao.save(user);
 		userDao.flush();
 
