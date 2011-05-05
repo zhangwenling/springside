@@ -5,6 +5,7 @@ TODO部分
   * MVC框架 从Struts2转为Spring MVC.
 
   * 安全框架从SpringSecurity转为Apache Shiro.
+	--AccountManager的UT
 
   * Memcached客戶端轉回SpyMemcached
 
@@ -20,7 +21,7 @@ TODO部分
 
 3.其他非代码改动
   * 发布前打包项目生成模板(Calvin)
-  * 閱讀如下Samples: Cloudfoundry-samples, Spring MVC samples, sshside,Shiro Sample,Java Code Geek Archetyp , Spring Roo, Play!
+  * 閱讀如下Samples: Cloudfoundry-samples, Spring MVC samples, Shiro Sample,Spring Roo, Play!
   
 ---------------------------------------------------------------------------------
 已完成部分
@@ -42,11 +43,11 @@ TODO部分
 
    * 删除已过期演示: CXF的ws-security和ws附件协议,Flash Chart, 驗證碼
    * 依赖包次要版本的升级
-       -- Spring 3.0.4->3.0.5, CXF 2.2.10->2.3.3, Jersey 1.3->1.6, Activemq 5.4.0->5.5.0, Jquery 1.4->1.5.2, H2 1.2.142->1.3.154, Selenium 2.0a5->2.0b3,
+       -- Spring 3.0.4->3.0.5, CXF 2.2.10->2.3.3, Jersey 1.3->1.6, Activemq 5.4.0->5.5.0, Jquery 1.4->1.5.2, Ehcache 1.6—>2.4.2 H2 1.2.142->1.3.154
        -- Jackson 1.6->1.8, HttpClient 4.0.1->4.1, Velocity 1.6.4->1.7, Dozer 5.2.1->5.3.1,  Guava r06->r09, Joda-time 1.6.1->1.6.2
        -- Commons-lang 2.5->2.6, Commons-io 1.4->2.0, Commons pool 1.5.5->1.5.6, Commons Codec 1.4->1.5
        -- Aspectj 1.6.9->1.6.10, mail 1.4.3->1.4.4, Asm 3.2->3.3.1
-       -- Junit 4.8.1->4.8.2, Jmockit 0.999.2->0.999.6, Perf4j 0.9.13->0.9.14, Jmemcached 0.8->1.0, yuicompressor 2.4.2->2.4.6
+       -- Selenium 2.0a5->2.0b3, Junit 4.8.1->4.8.2, Jmockit 0.999.2->0.999.6, Perf4j 0.9.13->0.9.14, Jmemcached 0.8->1.0, yuicompressor 2.4.2->2.4.6
        -- 所有maven插件升级到最新版
 	   
 3. 其他非代码改动
@@ -56,8 +57,8 @@ TODO部分
 
 -----------------------------------------------------------------------------------
 移到4.0.1的部分
-  * 补回Hibernaet Auditable的演示，及其他Hibernate的有用演示。
+  * 补回Hibernaet Auditable的演示，及其他Hibernate的有用演示,及JPA2.0新特性。
   * 补回LocalCache演示，使用Guava r09的新特性
   * iBatis的分頁
-  * 依赖包次要版本升级:JSW 3.5.7(需自行打包或參考nexus們的寫法，或放棄JSW),JMockit0.999.8(需自行打包)
+  * 依赖包次要版本升级:JSW 3.5.7(需自行打包),JMockit0.999.8(需自行打包)
   * 改名RemoteServlet, 调整Demo页面(Calvin)

@@ -6,6 +6,7 @@
 		<artifactId>springside-parent</artifactId>
 		<version>4.0.0-SNAPSHOT</version>
 	</parent>
+	
 	<groupId>org.springside.examples</groupId>
 	<artifactId>mini-web</artifactId>
 	<version>4.0.0-SNAPSHOT</version>
@@ -20,7 +21,7 @@
 		<!--
 			<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId>
 			<jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
-			<jdbc.driver.version>10.2.0.3.0</jdbc.driver.version>
+			<jdbc.driver.version>10.2.0.3</jdbc.driver.version>
 		-->
 		<!--
 			<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
@@ -181,7 +182,6 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>
-
 		<!-- utils end -->
 
 		<!-- testing begin -->
@@ -255,7 +255,7 @@
 				</configuration>
 			</plugin>
 
-			<!--  cobertura插件 ,取消不需要计算覆盖率的类  -->
+			<!--  cobertura插件, 设置不需要计算覆盖率的类  -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>

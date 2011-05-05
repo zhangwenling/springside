@@ -905,7 +905,7 @@
 					<version>2.5</version>
 				</plugin>
 
-				<!-- eclipse插件,设定下载Source并屏幕svn文件 -->
+				<!-- eclipse插件,设定下载Source并屏蔽.svn文件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-eclipse-plugin</artifactId>
