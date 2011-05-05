@@ -18,26 +18,26 @@ if errorlevel 1 goto error
 
 echo [Step 2] 启动H2数据库.
 cd tools/h2
-start "H2" %MVN% exe:java
+start "H2" %MVN% exec:java
 cd ..\..\
 
 echo [Step 3] 为Mini-Service 初始化数据库, 启动Jetty.
 cd examples\mini-service
-call %ANT% -f bin/build.xml init-db
+call %ANT% -f bin/db/build.xml init-db
 if errorlevel 1 goto error
 start "Mini-Service" %MVN% jetty:run -Djetty.port=8083
 cd ..\..\
 
 echo [Step 4] 为Mini-Web 初始化数据库, 启动Jetty.
 cd examples\mini-web
-call %ANT% -f bin/build.xml init-db 
+call %ANT% -f bin/db/build.xml init-db 
 if errorlevel 1 goto error
 start "Mini-Web" %MVN% jetty:run -Djetty.port=8084
 cd ..\..\
 
 echo [Step 5] 为Showcase 生成Eclipse项目文件, 编译, 打包, 初始化数据库, 启动Jetty.
 cd examples\showcase
-call %ANT% -f bin/build.xml init-db
+call %ANT% -f bin/db/build.xml init-db
 if errorlevel 1 goto error
 start "Showcase" %MVN% jetty:run
 cd ..\..\
