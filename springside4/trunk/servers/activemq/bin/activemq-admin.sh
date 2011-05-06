@@ -131,11 +131,11 @@ ACTIVEMQ_CLASSPATH="${ACTIVEMQ_BASE}/conf;"$ACTIVEMQ_CLASSPATH
 
 if [ $1 = "start" ] ; then
     if [ -z "$ACTIVEMQ_OPTS" ] ; then
-        ACTIVEMQ_OPTS="-Xms2048M -Xmx2048M -Xmn682M -XX:MaxPermSize=96M -Dorg.apache.activemq.UseDedicatedTaskRunner=true -Djava.util.logging.config.file=logging.properties"
+        ACTIVEMQ_OPTS="-Xms2048M -Xmx2048M -Xmn768M -XX:MaxPermSize=96M -Dorg.apache.activemq.UseDedicatedTaskRunner=true -Djava.util.logging.config.file=logging.properties"
     fi
 
     if [ -z "$SUNJMX" ] ; then
-        SUNJMX="-Dcom.sun.management.jmxremote.port=1099 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+        SUNJMX="-Dcom.sun.management.jmxremote.port=1616 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
         #SUNJMX="-Dcom.sun.management.jmxremote"
     fi
 
