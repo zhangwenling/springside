@@ -1,11 +1,11 @@
 
-    alter table acct_role_authority 
+    alter table acct_group_permission 
         drop foreign key FKAE243466DE3FB930;
 
-    alter table acct_user_role 
+    alter table acct_user_group 
         drop foreign key FKFE85CB3EDE3FB930;
 
-    alter table acct_user_role 
+    alter table acct_user_group 
         drop foreign key FKFE85CB3E836A7D10;
 
     drop table if exists acct_group;
@@ -23,8 +23,8 @@
     ) ENGINE=InnoDB;
 
     create table acct_group_permission (
-        role_id bigint not null,
-        authority_id bigint not null
+        group_id bigint not null,
+        permission varchar(255) not null
     ) ENGINE=InnoDB;
 
     create table acct_user (

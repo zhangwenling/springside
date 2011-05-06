@@ -11,7 +11,7 @@ import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
 
 /**
- * 角色管理Action.
+ * 權限組管理Action.
  * 
  * 演示不分页的简单管理界面.
  * 
@@ -28,8 +28,8 @@ public class GroupAction extends CrudActionSupport<Group> {
 	//-- 页面属性 --//
 	private Long id;
 	private Group entity;
-	private List<Group> allGroupList;//角色列表
-	private List<String> checkedPermissions;//页面中钩选的权限id列表
+	private List<Group> allGroupList;//權限列表
+	private List<String> checkedPermissions;//页面中钩选的权限列表
 
 	//-- ModelDriven 与 Preparable函数 --//
 	@Override
@@ -44,7 +44,7 @@ public class GroupAction extends CrudActionSupport<Group> {
 	@Override
 	protected void prepareModel() throws Exception {
 		if (id != null) {
-			entity = accountManager.getRole(id);
+			entity = accountManager.getGroup(id);
 		} else {
 			entity = new Group();
 		}
@@ -68,34 +68,34 @@ public class GroupAction extends CrudActionSupport<Group> {
 		entity.setPermissionList(checkedPermissions);
 		//保存用户并放入成功信息.
 		accountManager.saveGroup(entity);
-		addActionMessage("保存角色成功");
+		addActionMessage("保存權限組成功");
 		return RELOAD;
 	}
 
 	@Override
 	public String delete() throws Exception {
 		accountManager.deleteGroup(id);
-		addActionMessage("删除角色成功");
+		addActionMessage("删除權限組成功");
 		return RELOAD;
 	}
 
 	//-- 页面属性访问函数 --//
 	/**
-	 * list页面显示所有角色列表.
+	 * list页面显示所有權限組列表.
 	 */
-	public List<Group> getAllRoleList() {
+	public List<Group> getAllGroupList() {
 		return allGroupList;
 	}
 
 	/**
-	 * input页面显示角色拥有的授权.
+	 * input页面显示權限組拥有的權限.
 	 */
 	public List<String> getCheckedPermissions() {
 		return checkedPermissions;
 	}
 
 	/**
-	 * input页面提交角色拥有的授权.
+	 * input页面提交權限組拥有的權限.
 	 */
 	public void setCheckedPermissions(List<String> checkedPermissions) {
 		this.checkedPermissions = checkedPermissions;

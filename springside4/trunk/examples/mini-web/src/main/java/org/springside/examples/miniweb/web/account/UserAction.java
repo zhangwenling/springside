@@ -31,7 +31,7 @@ import org.springside.modules.utils.web.struts2.Struts2Utils;
 //定义URL映射对应/account/user.action
 @Namespace("/account")
 //定义名为reload的result重定向到user.action, 其他result则按照convention默认.
-@Results( { @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
+@Results({ @Result(name = CrudActionSupport.RELOAD, location = "user.action", type = "redirect") })
 public class UserAction extends CrudActionSupport<User> {
 
 	private static final long serialVersionUID = 8683878162525847072L;
@@ -42,7 +42,7 @@ public class UserAction extends CrudActionSupport<User> {
 	private Long id;
 	private User entity;
 	private Page<User> page = new Page<User>();
-	private List<Long> checkedRoleIds; //页面中钩选的角色id列表
+	private List<Long> checkedGroupIds; //页面中钩选的權限組id列表
 
 	//-- ModelDriven 与 Preparable函数 --//
 	public void setId(Long id) {
@@ -80,14 +80,14 @@ public class UserAction extends CrudActionSupport<User> {
 
 	@Override
 	public String input() throws Exception {
-		checkedRoleIds = entity.getGroupIds();
+		checkedGroupIds = entity.getGroupIds();
 		return INPUT;
 	}
 
 	@Override
 	public String save() throws Exception {
 		//根据页面上的checkbox选择 整合User的Groups Set
-		IdEntity.mergeByIds(entity.getGroupList(), checkedRoleIds, Group.class);
+		IdEntity.mergeByIds(entity.getGroupList(), checkedGroupIds, Group.class);
 
 		accountManager.saveUser(entity);
 		addActionMessage("保存用户成功");
@@ -133,24 +133,24 @@ public class UserAction extends CrudActionSupport<User> {
 	}
 
 	/**
-	 * input页面显示所有角色列表.
+	 * input页面显示所有權限組列表.
 	 */
-	public List<Group> getAllRoleList() {
+	public List<Group> getAllGroupList() {
 		return accountManager.getAllGroup();
 	}
 
 	/**
-	 * input页面显示用户拥有的角色.
+	 * input页面显示用户拥有的權限組.
 	 */
-	public List<Long> getCheckedRoleIds() {
-		return checkedRoleIds;
+	public List<Long> getCheckedGroupIds() {
+		return checkedGroupIds;
 	}
 
 	/**
-	 * input页面提交用户拥有的角色.
+	 * input页面提交用户拥有的權限組.
 	 */
-	public void setCheckedRoleIds(List<Long> checkedRoleIds) {
-		this.checkedRoleIds = checkedRoleIds;
+	public void setCheckedGroupIds(List<Long> checkedGroupIds) {
+		this.checkedGroupIds = checkedGroupIds;
 	}
 
 	@Autowired

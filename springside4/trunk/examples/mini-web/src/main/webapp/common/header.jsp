@@ -8,7 +8,7 @@
 	<div id="menu">
 		<ul>
 			<li><a href="${ctx}/account/user.action">帐号列表</a></li>
-			<li><a href="${ctx}/account/role.action">角色列表</a></li>
+			<li><a href="${ctx}/account/group.action">權限組列表</a></li>
 			<li><a href="${ctx}/login!logout.action">退出登录</a></li>
 		</ul>
 	</div>

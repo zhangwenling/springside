@@ -15,4 +15,8 @@ public enum Permissions {
 	public String value() {
 		return value;
 	}
+
+	public static Permissions parse(String value) {
+		return null;
+	}
 }

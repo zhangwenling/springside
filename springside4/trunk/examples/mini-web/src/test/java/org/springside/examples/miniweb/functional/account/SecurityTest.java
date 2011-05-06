@@ -34,11 +34,11 @@ public class SecurityTest extends BaseFunctionalTestCase {
 	}
 
 	/**
-	 * 只有用户角色的操作员访问系统时的受限行为.
+	 * 只有用户權限組的操作员访问系统时的受限行为.
 	 */
 	@Test
 	@Groups(BaseFunctionalTestCase.DAILY)
-	public void checkUserRole() {
+	public void checkUserPermission() {
 		//访问退出登录页面,退出之前的登录
 		driver.get(BASE_URL + "/j_spring_security_logout");
 		assertEquals("Mini-Web 登录页", driver.getTitle());
@@ -48,7 +48,7 @@ public class SecurityTest extends BaseFunctionalTestCase {
 		driver.findElement(By.name("j_password")).sendKeys("user");
 		driver.findElement(By.xpath(Gui.BUTTON_LOGIN)).click();
 
-		//校验用户角色的操作单元格为空
+		//校验用户權限組的操作单元格为空
 		driver.findElement(By.linkText(Gui.MENU_USER)).click();
 		WebElement table = driver.findElement(By.xpath("//table[@id='contentTable']"));
 		assertEquals("查看", SeleniumUtils.getTable(table, 1, UserColumn.OPERATIONS.ordinal()));

@@ -38,7 +38,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		WebElement table = driver.findElement(By.xpath("//table[@id='contentTable']"));
 		assertEquals("admin", SeleniumUtils.getTable(table, 1, UserColumn.LOGIN_NAME.ordinal()));
 		assertEquals("Admin", SeleniumUtils.getTable(table, 1, UserColumn.NAME.ordinal()));
-		assertEquals("管理员, 用户", SeleniumUtils.getTable(table, 1, UserColumn.ROLES.ordinal()));
+		assertEquals("管理员, 用户", SeleniumUtils.getTable(table, 1, UserColumn.GROUPS.ordinal()));
 	}
 
 	/**
@@ -59,8 +59,8 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		driver.findElement(By.id("name")).sendKeys(user.getName());
 		driver.findElement(By.id("password")).sendKeys(user.getPassword());
 		driver.findElement(By.id("passwordConfirm")).sendKeys(user.getPassword());
-		for (Group role : user.getGroupList()) {
-			driver.findElement(By.id("checkedRoleIds-" + role.getId())).setSelected();
+		for (Group group : user.getGroupList()) {
+			driver.findElement(By.id("checkedGroupIds-" + group.getId())).setSelected();
 		}
 		driver.findElement(By.xpath(Gui.BUTTON_SUBMIT)).click();
 
@@ -90,16 +90,16 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		testUser.setName(DataUtils.randomName("User"));
 		SeleniumUtils.type(driver.findElement(By.id("name")), testUser.getName());
 
-		//取消所有角色
-		for (Group role : testUser.getGroupList()) {
-			SeleniumUtils.uncheck(driver.findElement(By.id("checkedRoleIds-" + role.getId())));
+		//取消所有權限組
+		for (Group group : testUser.getGroupList()) {
+			SeleniumUtils.uncheck(driver.findElement(By.id("checkedGroupIds-" + group.getId())));
 		}
 		testUser.getGroupList().clear();
 
-		//增加一个角色
-		Group role = AccountData.getRandomDefaultGroup();
-		driver.findElement(By.id("checkedRoleIds-" + role.getId())).setSelected();
-		testUser.getGroupList().add(role);
+		//增加一个權限組
+		Group group = AccountData.getRandomDefaultGroup();
+		driver.findElement(By.id("checkedGroupIds-" + group.getId())).setSelected();
+		testUser.getGroupList().add(group);
 
 		driver.findElement(By.xpath(Gui.BUTTON_SUBMIT)).click();
 
@@ -177,13 +177,13 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		assertEquals(user.getLoginName(), driver.findElement(By.id("loginName")).getValue());
 		assertEquals(user.getName(), driver.findElement(By.id("name")).getValue());
 
-		for (Group role : user.getGroupList()) {
-			assertTrue(driver.findElement(By.id("checkedRoleIds-" + role.getId())).isSelected());
+		for (Group group : user.getGroupList()) {
+			assertTrue(driver.findElement(By.id("checkedGroupIds-" + group.getId())).isSelected());
 		}
 
-		List<Group> uncheckRoleList = ListUtils.subtract(AccountData.getDefaultGroupList(), user.getGroupList());
-		for (Group role : uncheckRoleList) {
-			assertFalse(driver.findElement(By.id("checkedRoleIds-" + role.getId())).isSelected());
+		List<Group> uncheckGroupList = ListUtils.subtract(AccountData.getDefaultGroupList(), user.getGroupList());
+		for (Group group : uncheckGroupList) {
+			assertFalse(driver.findElement(By.id("checkedGroupIds-" + group.getId())).isSelected());
 		}
 	}
 

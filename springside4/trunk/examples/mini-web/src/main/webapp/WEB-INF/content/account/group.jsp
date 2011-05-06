@@ -6,7 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Mini-Web 角色管理</title>
+	<title>Mini-Web 權限組管理</title>
 	<%@ include file="/common/meta.jsp" %>
 	
 	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
@@ -30,20 +30,20 @@
 				<th>操作</th>
 			</tr>
 
-			<s:iterator value="allRoleList">
+			<s:iterator value="allGroupList">
 				<tr>
 					<td>${name}</td>
 					<td>${authNames}</td>
 					<td>&nbsp;
-						<shiro:hasPermission name="role:view">
-							<shiro:lacksPermission name="role:manage">
-								<a href="role!input.action?id=${id}">查看</a>&nbsp;
+						<shiro:hasPermission name="group:view">
+							<shiro:lacksPermission name="group:manage">
+								<a href="group!input.action?id=${id}">查看</a>&nbsp;
 							</shiro:lacksPermission>
         				</shiro:hasPermission>
         					
-        				<shiro:hasPermission name="role:manage">
-							<a href="role!input.action?id=${id}" id="editLink-${name}">修改</a>&nbsp;
-							<a href="role!delete.action?id=${id}" id="deleteLink-${name}">删除</a>
+        				<shiro:hasPermission name="group:manage">
+							<a href="group!input.action?id=${id}" id="editLink-${name}">修改</a>&nbsp;
+							<a href="group!delete.action?id=${id}" id="deleteLink-${name}">删除</a>
 						</shiro:hasPermission>
 					</td>
 				</tr>
@@ -52,8 +52,8 @@
 		</div>
 
 		<div>
-			<shiro:hasPermission name="role:manage">
-				<a href="role!input.action">增加新角色</a>
+			<shiro:hasPermission name="group:manage">
+				<a href="group!input.action">增加新權限組</a>
 			</shiro:hasPermission>
 		</div>
 	</div>

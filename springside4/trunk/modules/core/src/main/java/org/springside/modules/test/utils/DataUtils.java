@@ -53,6 +53,10 @@ public abstract class DataUtils {
 	 * 从输入list中随机返回随机个对象.
 	 */
 	public static <T> List<T> randomSome(List<T> list) {
-		return randomSome(list, random.nextInt(list.size()));
+		int size = random.nextInt(list.size());
+		if (size == 0) {
+			size = 1;
+		}
+		return randomSome(list, size);
 	}
 }

@@ -38,7 +38,7 @@
 						equalTo:"#password"
 					},
 					email:"email",
-					checkedRoleIds:"required"
+					checkedGroupIds:"required"
 				},
 				messages: {
 					loginName: {
@@ -84,9 +84,9 @@
 				<td><input type="text" id="email" name="email" size="40" value="${email}"/></td>
 			</tr>
 			<tr>
-				<td>角色:</td>
+				<td>權限組:</td>
 				<td>
-					<s:checkboxlist name="checkedRoleIds" list="allRoleList" listKey="id" listValue="name" theme="custom"/>
+					<s:checkboxlist name="checkedGroupIds" list="allGroupList" listKey="id" listValue="name" theme="custom"/>
 				</td>
 			</tr>
 			<tr>

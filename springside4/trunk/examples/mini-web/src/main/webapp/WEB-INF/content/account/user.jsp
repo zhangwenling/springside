@@ -41,7 +41,7 @@
 					<th><a href="javascript:sort('loginName','asc')">登录名</a></th>
 					<th><a href="javascript:sort('name','asc')">姓名</a></th>
 					<th><a href="javascript:sort('email','asc')">电邮</a></th>
-					<th>角色</th>
+					<th>权限组</th>
 					<th>操作</th>
 				</tr>
 
@@ -50,7 +50,7 @@
 						<td>${loginName}&nbsp;</td>
 						<td>${name}&nbsp;</td>
 						<td>${email}&nbsp;</td>
-						<td>${roleNames}&nbsp;</td>
+						<td>${groupNames}&nbsp;</td>
 						<td>&nbsp;
 							<shiro:hasPermission name="user:view">
 								<shiro:lacksPermission name="user:manage">
@@ -59,7 +59,7 @@
         					</shiro:hasPermission>
         					
         					<shiro:hasPermission name="user:manage">
-									<a href="user!input.action?id=${id}">修改</a>&nbsp;
+								<a href="user!input.action?id=${id}">修改</a>&nbsp;
 								<a href="user!delete.action?id=${id}">删除</a>
 							</shiro:hasPermission>
 						</td>

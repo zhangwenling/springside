@@ -16,7 +16,7 @@
     );
 
     create table acct_group_permission (
-        role_id number(19,0) not null,
+        group_id number(19,0) not null,
         permission varchar2(255 char) not null
     );
 

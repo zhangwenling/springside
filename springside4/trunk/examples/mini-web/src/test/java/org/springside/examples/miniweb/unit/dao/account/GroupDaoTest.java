@@ -18,7 +18,7 @@ import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.test.utils.DbUnitUtils;
 
 /**
- * RoleDao的测试用例, 测试ORM映射及特殊的DAO操作.
+ * GroupDao的测试用例, 测试ORM映射及特殊的DAO操作.
  * 
  * @author calvin
  */
@@ -48,11 +48,11 @@ public class GroupDaoTest extends SpringTxTestCase {
 	}
 
 	/**
-	 * 测试删除角色时删除用户-角色的中间表.
+	 * 测试删除權限組时删除用户-權限組的中间表.
 	 */
 	@Test
 	public void deleteGroup() {
-		//新增测试角色并与admin用户绑定.
+		//新增测试權限組并与admin用户绑定.
 		Group group = AccountData.getRandomGroup();
 		groupDao.save(group);
 
@@ -64,7 +64,7 @@ public class GroupDaoTest extends SpringTxTestCase {
 		int oldJoinTableCount = countRowsInTable("ACCT_USER_GROUP");
 		int oldUserTableCount = countRowsInTable("ACCT_USER");
 
-		//删除用户角色, 中间表将减少1条记录,而用户表应该不受影响.
+		//删除用户權限組, 中间表将减少1条记录,而用户表应该不受影响.
 		groupDao.delete(group.getId());
 		groupDao.flush();
 
@@ -72,5 +72,17 @@ public class GroupDaoTest extends SpringTxTestCase {
 		int newUserTableCount = countRowsInTable("ACCT_USER");
 		assertEquals(1, oldJoinTableCount - newJoinTableCount);
 		assertEquals(0, oldUserTableCount - newUserTableCount);
+	}
+
+	@Test
+	public void crudEntityWithGroup() {
+		//新建并保存带權限組的用户
+		Group group = AccountData.getRandomGroupWithPermissions();
+		groupDao.save(group);
+		//强制执行sql语句
+		groupDao.flush();
+		//获取用户
+		group = groupDao.findUniqueBy("id", group.getId());
+		assertTrue(group.getPermissionList().size() > 0);
 	}
 }

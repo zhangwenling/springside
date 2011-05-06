@@ -19,7 +19,7 @@ import org.springside.examples.miniweb.entity.IdEntity;
 import com.google.common.collect.Lists;
 
 /**
- * 角色.
+ * 權限組.
  * 
  * 注释见{@link User}.
  * 
@@ -35,7 +35,6 @@ public class Group extends IdEntity {
 	private List<String> permissionList = Lists.newArrayList();
 
 	public Group() {
-
 	}
 
 	public Group(Long id, String name) {

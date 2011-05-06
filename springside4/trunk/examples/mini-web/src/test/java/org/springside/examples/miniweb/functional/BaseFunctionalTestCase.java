@@ -109,7 +109,7 @@ public class BaseFunctionalTestCase {
 	}
 
 	/**
-	 * 登录管理员角色.
+	 * 登录管理员權限組.
 	 */
 	protected static void loginAsAdmin() {
 		driver.get(BASE_URL + "/j_spring_security_logout");

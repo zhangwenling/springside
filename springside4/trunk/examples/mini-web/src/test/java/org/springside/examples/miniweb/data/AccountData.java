@@ -46,7 +46,7 @@ public class AccountData {
 		return group;
 	}
 
-	public static Group getRandomGroupWithPermission() {
+	public static Group getRandomGroupWithPermissions() {
 		Group group = getRandomGroup();
 		group.getPermissionList().addAll(getRandomDefaultPermissionList());
 		return group;

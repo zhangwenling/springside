@@ -53,8 +53,8 @@ public class ShiroRealm extends AuthorizingRealm {
 	 * 授权查询回调函数.
 	 */
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		String username = (String) principals.fromRealm(getName()).iterator().next();
-		User user = accountManager.findUserByLoginName(username);
+		String loginName = (String) principals.fromRealm(getName()).iterator().next();
+		User user = accountManager.findUserByLoginName(loginName);
 		if (user != null) {
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 			for (Group group : user.getGroupList()) {

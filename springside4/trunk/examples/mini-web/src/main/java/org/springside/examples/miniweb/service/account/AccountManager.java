@@ -18,7 +18,7 @@ import org.springside.modules.orm.PageRequest;
 import org.springside.modules.orm.PropertyFilter;
 
 /**
- * 安全相关实体的管理类, 包括用户,角色,资源与授权类.
+ * 安全相关实体的管理类,包括用户和權限組.
  * 
  * @author calvin
  */
@@ -86,7 +86,7 @@ public class AccountManager {
 
 	//-- Group Manager --//
 	@Transactional(readOnly = true)
-	public Group getRole(Long id) {
+	public Group getGroup(Long id) {
 		return groupDao.get(id);
 	}
 
