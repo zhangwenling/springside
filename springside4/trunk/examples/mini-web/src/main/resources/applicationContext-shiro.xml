@@ -9,12 +9,12 @@
 
 	<!-- Shiro's main business-tier object for web-enabled applications -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="shiroRealm" />
+		<property name="realm" ref="databaseRealm" />
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
 
 	<!-- 項目自定义Realm -->
-	<bean id="shiroRealm" class="org.springside.examples.miniweb.service.account.ShiroRealm" />
+	<bean id="databaseRealm" class="org.springside.examples.miniweb.service.account.DatabaseRealm" />
 
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">

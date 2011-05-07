@@ -13,7 +13,7 @@
 		<property name="realm" ref="shiroRealm" />
 	</bean>
 
-	<bean id="shiroRealm" class="org.springside.examples.showcase.security.ShiroRealm" />
+	<bean id="shiroRealm" class="org.springside.examples.showcase.security.DatabaseRealm" />
 
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />

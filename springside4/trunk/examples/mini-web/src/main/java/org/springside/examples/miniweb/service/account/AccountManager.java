@@ -32,7 +32,7 @@ public class AccountManager {
 
 	private UserDao userDao;
 	private GroupDao groupDao;
-	private ShiroRealm shiroRealm;
+	private DatabaseRealm shiroRealm;
 
 	//-- User Manager --//
 	@Transactional(readOnly = true)
@@ -116,7 +116,7 @@ public class AccountManager {
 	}
 
 	@Autowired
-	public void setShiroRealm(ShiroRealm shiroRealm) {
+	public void setShiroRealm(DatabaseRealm shiroRealm) {
 		this.shiroRealm = shiroRealm;
 	}
 

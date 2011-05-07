@@ -16,34 +16,41 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.springside.examples.miniweb.service.account;
+package org.springside.examples.showcase.security;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springside.examples.miniweb.entity.account.Group;
-import org.springside.examples.miniweb.entity.account.User;
+import org.springside.examples.showcase.common.entity.Role;
+import org.springside.examples.showcase.common.entity.User;
+import org.springside.examples.showcase.common.service.AccountManager;
 
-public class ShiroRealm extends AuthorizingRealm {
+public class DatabaseRealm extends AuthorizingRealm {
 
-	private AccountManager accountManager;
+	protected AccountManager accountManager;
+
+	public DatabaseRealm() {
+		setCredentialsMatcher(new HashedCredentialsMatcher("SHA-1"));
+	}
 
 	/**
 	 * 认证回调函数,登录时调用.
 	 */
+	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 		User user = accountManager.findUserByLoginName(token.getUsername());
 		if (user != null) {
-			return new SimpleAuthenticationInfo(user.getLoginName(), user.getPassword(), getName());
+			return new SimpleAuthenticationInfo(user.getLoginName(), user.getShaPassword(), getName());
 		} else {
 			return null;
 		}
@@ -52,13 +59,14 @@ public class ShiroRealm extends AuthorizingRealm {
 	/**
 	 * 授权查询回调函数, 进行鉴权但缓存中无用户的授权信息时调用.
 	 */
+	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		String loginName = (String) principals.fromRealm(getName()).iterator().next();
-		User user = accountManager.findUserByLoginName(loginName);
+		String username = (String) principals.fromRealm(getName()).iterator().next();
+		User user = accountManager.findUserByLoginName(username);
 		if (user != null) {
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-			for (Group group : user.getGroupList()) {
-				info.addStringPermissions(group.getPermissionList());
+			for (Role role : user.getRoleList()) {
+				info.addRole(role.getName());
 			}
 			return info;
 		} else {

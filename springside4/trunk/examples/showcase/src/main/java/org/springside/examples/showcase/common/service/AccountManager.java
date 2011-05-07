@@ -13,7 +13,7 @@ import org.springside.examples.showcase.common.dao.UserHibernateDao;
 import org.springside.examples.showcase.common.dao.UserMyBatisDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
-import org.springside.examples.showcase.security.ShiroRealm;
+import org.springside.examples.showcase.security.DatabaseRealm;
 import org.springside.modules.memcached.XMemcachedClientWrapper;
 import org.springside.modules.utils.mapper.JsonMapper;
 import org.springside.modules.utils.security.DigestUtils;
@@ -38,7 +38,7 @@ public class AccountManager {
 
 	private NotifyMessageProducer notifyProducer; //JMS消息发送
 
-	private ShiroRealm shiroRealm;
+	private DatabaseRealm shiroRealm;
 
 	/**
 	 * 在保存用户时,发送用户修改通知消息, 由消息接收者异步进行较为耗时的通知邮件发送.
@@ -192,7 +192,7 @@ public class AccountManager {
 	}
 
 	@Autowired(required = false)
-	public void setShiroRealm(ShiroRealm shiroRealm) {
+	public void setShiroRealm(DatabaseRealm shiroRealm) {
 		this.shiroRealm = shiroRealm;
 	}
 }
