@@ -25,6 +25,7 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.Cache;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
@@ -72,6 +73,18 @@ public class DatabaseRealm extends AuthorizingRealm {
 	public void clearCachedAuthorizationInfo(String principal) {
 		SimplePrincipalCollection principals = new SimplePrincipalCollection(principal, getName());
 		clearCachedAuthorizationInfo(principals);
+	}
+
+	/**
+	 * 清除所有用户授权信息缓存.
+	 */
+	public void clearAllCachedAuthorizationInfo() {
+		Cache<Object, AuthorizationInfo> cache = getAuthorizationCache();
+		if (cache != null) {
+			for (Object key : cache.keys()) {
+				cache.remove(key);
+			}
+		}
 	}
 
 	@Autowired

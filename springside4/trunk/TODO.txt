@@ -4,11 +4,6 @@ TODO部分
 
   * MVC框架 从Struts2转为Spring MVC.
 
-  * 安全框架从SpringSecurity转为Apache Shiro.
-	--AccountManager的UT
-        --修改User與Group後清除緩存
-        --自動登錄及其他
-
   * Memcached客戶端轉回新版的SpyMemcached
 
   * 認真考慮JQuery or Dojo
@@ -21,7 +16,6 @@ TODO部分
   * Jetty7连续跑多个功能测试时出现死锁
   * selenium remote-control，selenium.support的作用， 
   * 让mini-web的ft case跑起来。
-  * validator有木有更新？
 
 3.其他非代码改动
   * 发布前打包项目生成模板(Calvin)
@@ -31,6 +25,7 @@ TODO部分
 已完成部分
 1.  主要改动
    * DAO框架增加MyBatis的使用，与Hibernate在不同的场景各展所长
+   * 安全框架从SpringSecurity转为Apache Shiro.
    * 演示Hibernate Validator验证
    * CSS框架从YUI转为Blueprint
    * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6, Jetty 7.4, Sonar 2.6

@@ -99,10 +99,12 @@ public class AccountManager {
 
 	public void saveGroup(Group entity) {
 		groupDao.save(entity);
+		shiroRealm.clearAllCachedAuthorizationInfo();
 	}
 
 	public void deleteGroup(Long id) {
 		groupDao.delete(id);
+		shiroRealm.clearAllCachedAuthorizationInfo();
 	}
 
 	@Autowired
@@ -119,5 +121,4 @@ public class AccountManager {
 	public void setShiroRealm(DatabaseRealm shiroRealm) {
 		this.shiroRealm = shiroRealm;
 	}
-
 }
