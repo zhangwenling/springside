@@ -7,7 +7,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.slf4j.Logger;
 
-public class JerseyServerUtils {
+public class WebExceptionUtils {
 
 	/**
 	 * 创建WebApplicationException并记打印日志, 使用标准状态码与自定义信息并记录错误信息.
