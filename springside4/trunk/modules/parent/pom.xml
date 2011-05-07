@@ -699,7 +699,7 @@
 			<dependency>
 				<groupId>mockit</groupId>
 				<artifactId>jmockit</artifactId>
-				<version>0.999.6</version>
+				<version>0.999.8</version>
 				<scope>test</scope>
 			</dependency>
 

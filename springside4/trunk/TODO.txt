@@ -7,11 +7,9 @@ TODO部分
     備忘： log4jdbc，jersey+jackson,jackson new feature
 
 2.次要改动
-  * 升级Sonar 2.7，CXF 2.3.3->2.4
+  * 升级Sonar 2.7
   * Jetty7连续跑多个功能测试时出现死锁
-  * selenium remote-control，selenium.support的作用， 
-  * 让mini-web的ft case跑起来
-  * 精简selenium的case
+  * 让mini-web的ft case跑起来, 精简selenium的case，使用Selenium 2.0的新功能
 
 3.其他非代码改动
   * 发布前打包项目生成模板(Calvin)
@@ -39,11 +37,11 @@ TODO部分
 
    * 删除已过期演示: CXF的ws-security和ws附件协议,Flash Chart, 驗證碼
    * 依赖包次要版本的升级
-       -- Spring 3.0.4->3.0.5, CXF 2.2.10->2.3.3, Jersey 1.3->1.6, Activemq 5.4.0->5.5.0, Jquery 1.4->1.5.2, Ehcache 1.6—>2.4.2 H2 1.2.142->1.3.154
+       -- Spring 3.0.4->3.0.5, CXF 2.2.10->2.4.0, Jersey 1.3->1.6, Activemq 5.4.0->5.5.0, Jquery 1.4->1.5.2, Ehcache 1.6—>2.4.2 H2 1.2.142->1.3.154
        -- HttpClient 4.0.1->4.1, Velocity 1.6.4->1.7, Dozer 5.2.1->5.3.1,  Guava r06->r09, Joda-time 1.6.1->1.6.2
        -- Commons-lang 2.5->2.6, Commons-io 1.4->2.0, Commons pool 1.5.5->1.5.6, Commons Codec 1.4->1.5
        -- Aspectj 1.6.9->1.6.10, mail 1.4.3->1.4.4, Asm 3.2->3.3.1
-       -- Selenium 2.0a5->2.0b3, Junit 4.8.1->4.8.2, Jmockit 0.999.2->0.999.6, Perf4j 0.9.13->0.9.14, Jmemcached 0.8->1.0, yuicompressor 2.4.2->2.4.6
+       -- Selenium 2.0a5->2.0b3, Junit 4.8.1->4.8.2, Jmockit 0.999.2->0.999.8, Perf4j 0.9.13->0.9.14, Jmemcached 0.8->1.0, yuicompressor 2.4.2->2.4.6
        -- 所有maven插件升级到最新版
 	   
 3. 其他非代码改动
@@ -59,5 +57,7 @@ TODO部分
   * 使用ehcache 2.4.2新特性
   * 升级Quartz 2.0.1 (Spring的Quartz模块不兼容)
   * iBatis的分頁
-  * 依赖包次要版本升级:JSW 3.5.7(需自行打包),JMockit0.999.8(需自行打包)
+  * 依赖包次要版本升级:JSW 3.5.7(需自行打包),(需自行打包)
   * 改名RemoteServlet, 调整Demo页面(Calvin)
+  * review perf4j的使用
+  * Shiro Restful
