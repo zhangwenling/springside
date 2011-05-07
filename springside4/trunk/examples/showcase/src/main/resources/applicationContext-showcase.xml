@@ -7,7 +7,7 @@
 	<description>导入ShowCase中的applicationContext文件列表</description>
 
 	<import resource="cache/applicationContext-ehcache.xml" />
-<!-- 	<import resource="cache/applicationContext-memcached.xml" /> -->
+	<import resource="cache/applicationContext-memcached.xml" />
 	<import resource="email/applicationContext-email.xml" />
 	<import resource="jms/applicationContext-jms-simple.xml" />
 	<import resource="jms/applicationContext-jms-advanced.xml" />

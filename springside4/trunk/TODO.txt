@@ -3,11 +3,6 @@ TODO部分
 1.主要改动
 
   * MVC框架 从Struts2转为Spring MVC.
-
-  * Memcached客戶端轉回新版的SpyMemcached
-
-  * 認真考慮JQuery or Dojo
-   
   * Wiki内容重新编写(Calvin)
     備忘： log4jdbc，jersey+jackson,jackson new feature
 
@@ -15,7 +10,8 @@ TODO部分
   * 升级Sonar 2.7，CXF 2.3.3->2.4
   * Jetty7连续跑多个功能测试时出现死锁
   * selenium remote-control，selenium.support的作用， 
-  * 让mini-web的ft case跑起来。
+  * 让mini-web的ft case跑起来
+  * 精简selenium的case
 
 3.其他非代码改动
   * 发布前打包项目生成模板(Calvin)
@@ -38,6 +34,7 @@ TODO部分
       -- 升级TraceUtils和MockLog4jAppender 
    * Template工具引擎从Freemarker转为Velocity, 见Email演示.
    * 升級Jackson1.8演示，包括可擴展的對象, 對象循環引用，局部更新已存在對象等等等等新特性.
+   * 升级SpyMemcached2.6版演示
    * 使用log4jdbc打印SQL及执行时间
 
    * 删除已过期演示: CXF的ws-security和ws附件协议,Flash Chart, 驗證碼

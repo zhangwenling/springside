@@ -14,7 +14,7 @@ import org.springside.examples.showcase.common.dao.UserMyBatisDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
 import org.springside.examples.showcase.security.DatabaseRealm;
-import org.springside.modules.memcached.XMemcachedClientWrapper;
+import org.springside.modules.memcached.SpyMemcachedClientWrapper;
 import org.springside.modules.utils.mapper.JsonMapper;
 import org.springside.modules.utils.security.DigestUtils;
 
@@ -32,7 +32,7 @@ public class AccountManager {
 
 	private UserMyBatisDao userMyBatisDao;
 
-	private XMemcachedClientWrapper xmemcachedClient;
+	private SpyMemcachedClientWrapper memcachedClient;
 
 	private JsonMapper jsonBinder = JsonMapper.buildNonDefaultMapper();
 
@@ -84,7 +84,7 @@ public class AccountManager {
 	 */
 	@Transactional(readOnly = true)
 	public User getInitializedUser(Long id) {
-		if (xmemcachedClient != null) {
+		if (memcachedClient != null) {
 			return getUserFromMemcached(id);
 		} else {
 			return userMyBatisDao.getUser(id);
@@ -99,7 +99,7 @@ public class AccountManager {
 		String key = MemcachedObjectType.USER.getPrefix() + id;
 
 		User user = null;
-		String jsonString = xmemcachedClient.get(key);
+		String jsonString = memcachedClient.get(key);
 
 		if (jsonString == null) {
 			//用户不在 memcached中,从数据库中取出并放入memcached.
@@ -107,7 +107,7 @@ public class AccountManager {
 			user = userMyBatisDao.getUser(id);
 			if (user != null) {
 				jsonString = jsonBinder.toJson(user);
-				xmemcachedClient.set(key, MemcachedObjectType.USER.getExpiredTime(), jsonString);
+				memcachedClient.set(key, MemcachedObjectType.USER.getExpiredTime(), jsonString);
 			}
 		} else {
 			user = jsonBinder.fromJson(jsonString, User.class);
@@ -187,8 +187,8 @@ public class AccountManager {
 	}
 
 	@Autowired(required = false)
-	public void setXmemcachedClient(XMemcachedClientWrapper xmemcachedClient) {
-		this.xmemcachedClient = xmemcachedClient;
+	public void setMemcachedClient(SpyMemcachedClientWrapper memcachedClient) {
+		this.memcachedClient = memcachedClient;
 	}
 
 	@Autowired(required = false)

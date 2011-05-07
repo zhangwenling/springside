@@ -7,7 +7,7 @@
  */
 package org.springside.modules.memcached;
 
-import net.rubyeye.xmemcached.utils.AddrUtil;
+import net.spy.memcached.AddrUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +33,6 @@ public class MemcachedSimulator implements InitializingBean, DisposableBean {
 	private MemCacheDaemon<LocalCacheElement> jmemcached;
 
 	private String serverUrl = "localhost:11211";
-	private boolean binary = false;
 
 	private int maxItems = 1024 * 100;
 	private long maxBytes = 1024 * 100 * 2048;
@@ -50,7 +49,6 @@ public class MemcachedSimulator implements InitializingBean, DisposableBean {
 		jmemcached.setCache(new CacheImpl(storage));
 
 		jmemcached.setAddr(AddrUtil.getAddresses(serverUrl).get(0));
-		jmemcached.setBinary(binary);
 
 		jmemcached.start();
 
@@ -66,10 +64,6 @@ public class MemcachedSimulator implements InitializingBean, DisposableBean {
 
 	public void setServerUrl(String serverUrl) {
 		this.serverUrl = serverUrl;
-	}
-
-	public void setBinary(boolean binary) {
-		this.binary = binary;
 	}
 
 	public void setMaxItems(int maxItems) {
