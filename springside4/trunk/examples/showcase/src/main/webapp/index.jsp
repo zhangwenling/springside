@@ -18,10 +18,7 @@
 		<%@ include file="/common/left.jsp"%>
 		<div class="span-18 last prepend-top">
 			<p>各式主流的、实用的、好玩的开源项目大派对。</p>
-			<p>SpringSide 4.0新张大吉,新增演示：</p>
-			<ul>
-				<li>MongoDB演示</li>
-			</ul>
+			<p>SpringSide 4.0新张大吉. </p>
 		</div>
 	</div>
 	<%@ include file="/common/footer.jsp"%>
