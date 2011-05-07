@@ -10,10 +10,10 @@
 
 
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="shiroRealm" />
+		<property name="realm" ref="databaseRealm" />
 	</bean>
 
-	<bean id="shiroRealm" class="org.springside.examples.showcase.security.DatabaseRealm" />
+	<bean id="databaseRealm" class="org.springside.examples.showcase.security.DatabaseRealm" />
 
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />

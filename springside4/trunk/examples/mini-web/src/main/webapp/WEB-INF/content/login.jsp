@@ -45,7 +45,7 @@
 			<tr>
 				<td colspan="2" align="right">
 					<input type="checkbox" id="rememberMe" name="rememberMe" value="${rememberMe}"/>
-					<label for="rememberMe">两周内记住我</label>
+					<label for="rememberMe">记住我</label>
 					<input value="登录" type="submit" class="button"/>
 				</td>
 			</tr>
