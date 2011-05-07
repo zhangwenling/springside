@@ -19,10 +19,7 @@ TODO部分
 
 2.次要改动
   * 升级Sonar 2.7，Quartz 1.8.4->2.0.1,CXF 2.3.3->2.4
-  * 在showcase同步mini项目的一些更新，如validator
   * Jetty7连续跑多个功能测试时出现死锁
-  * ValidatorHolder
-  * selenium add chrome
   * selenium remote-control，selenium.support的作用
 
 3.其他非代码改动

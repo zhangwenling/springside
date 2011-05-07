@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.validation.ConstraintViolationException;
+import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,7 @@ import org.springside.examples.miniservice.dao.AccountDao;
 import org.springside.examples.miniservice.entity.Department;
 import org.springside.examples.miniservice.entity.User;
 import org.springside.modules.utils.AssertUtils;
-import org.springside.modules.utils.validator.ValidatorHolder;
+import org.springside.modules.utils.validator.ValidatorUtils;
 
 import com.google.common.collect.Maps;
 
@@ -31,6 +32,8 @@ import com.google.common.collect.Maps;
 public class AccountManager {
 
 	private AccountDao accountDao = null;
+
+	private Validator validator = null;
 
 	@Transactional(readOnly = true)
 	public Department getDepartmentDetail(Long id) {
@@ -55,7 +58,7 @@ public class AccountManager {
 	public Long saveUser(User user) throws ConstraintViolationException {
 		AssertUtils.notNull(user, "用户参数为空");
 		//使用Hibernate Validator校验请求参数
-		ValidatorHolder.validateWithException(user);
+		ValidatorUtils.validateWithException(validator, user);
 
 		return accountDao.saveUser(user);
 	}
@@ -63,5 +66,10 @@ public class AccountManager {
 	@Autowired
 	public void setAccountDao(AccountDao accountDao) {
 		this.accountDao = accountDao;
+	}
+
+	@Autowired
+	public void setValidator(Validator validator) {
+		this.validator = validator;
 	}
 }

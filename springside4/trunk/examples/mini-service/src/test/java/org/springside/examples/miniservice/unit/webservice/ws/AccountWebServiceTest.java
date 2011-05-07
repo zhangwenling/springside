@@ -2,9 +2,6 @@ package org.springside.examples.miniservice.unit.webservice.ws;
 
 import static org.junit.Assert.*;
 
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
-
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.junit.After;
@@ -17,7 +14,6 @@ import org.springside.examples.miniservice.webservice.dto.DepartmentDTO;
 import org.springside.examples.miniservice.webservice.ws.impl.AccountWebServiceImpl;
 import org.springside.examples.miniservice.webservice.ws.result.DepartmentResult;
 import org.springside.examples.miniservice.webservice.ws.result.base.WSResult;
-import org.springside.modules.utils.validator.ValidatorHolder;
 
 /**
  * Account WebService的单元测试用例.
@@ -36,8 +32,6 @@ public class AccountWebServiceTest {
 	@Before
 	public void setUp() {
 		accountWebService = new AccountWebServiceImpl();
-		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-		new ValidatorHolder().setValidator(factory.getValidator());
 
 		//创建mock对象
 		mockAccountManager = control.createMock(AccountManager.class);

@@ -569,7 +569,7 @@
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-validator</artifactId>
-				<version>4.1.0.Final</version>
+				<version>4.2.0.Beta2</version>
 			</dependency>
 			<!-- validator end -->
 
@@ -747,12 +747,6 @@
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
 				<artifactId>selenium-ie-driver</artifactId>
-				<version>${selenium.version}</version>
-				<scope>test</scope>
-			</dependency>
-						<dependency>
-				<groupId>org.seleniumhq.selenium</groupId>
-				<artifactId>selenium-firefox-driver</artifactId>
 				<version>${selenium.version}</version>
 				<scope>test</scope>
 			</dependency>

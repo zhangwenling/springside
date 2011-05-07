@@ -27,7 +27,7 @@ import org.springside.examples.miniservice.webservice.WsConstants;
 import org.springside.examples.miniservice.webservice.dto.UserDTO;
 import org.springside.modules.utils.jersey.WebExceptionUtils;
 import org.springside.modules.utils.mapper.ConvertUtils;
-import org.springside.modules.utils.validator.ValidatorHolder;
+import org.springside.modules.utils.validator.ValidatorUtils;
 
 /**
  * User资源的REST服务.
@@ -96,7 +96,7 @@ public class UserResouceService {
 			URI createdUri = uriInfo.getAbsolutePathBuilder().path(id.toString()).build();
 			return Response.created(createdUri).build();
 		} catch (ConstraintViolationException e) {
-			String message = ValidatorHolder.convertMessage(e, "\n");
+			String message = ValidatorUtils.convertMessage(e, "\n");
 			throw WebExceptionUtils.buildException(Status.BAD_REQUEST.getStatusCode(), message, logger);
 		} catch (DataIntegrityViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";

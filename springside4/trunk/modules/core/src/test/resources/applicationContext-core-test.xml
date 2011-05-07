@@ -42,9 +42,6 @@
 	<bean id="springContextHolder" class="org.springside.modules.utils.spring.SpringContextHolder" lazy-init="false" />
 
 	<!-- JSR303 Validator定义 -->
-	<bean class="org.springside.modules.utils.validator.ValidatorHolder" lazy-init="false">
-		<property name="validator">
-			<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
-		</property>
-	</bean>
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
 </beans>
