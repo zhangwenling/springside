@@ -91,7 +91,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<shiro:hasPermission name="user:manage">
+					<shiro:hasPermission name="user:edit">
 						<input class="button" type="submit" value="提交"/>&nbsp;	
 					</shiro:hasPermission>
 					<input class="button" type="button" value="返回" onclick="history.back()"/>

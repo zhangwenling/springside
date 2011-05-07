@@ -33,15 +33,15 @@
 			<s:iterator value="allGroupList">
 				<tr>
 					<td>${name}</td>
-					<td>${authNames}</td>
+					<td>${permissionNames}</td>
 					<td>&nbsp;
 						<shiro:hasPermission name="group:view">
-							<shiro:lacksPermission name="group:manage">
+							<shiro:lacksPermission name="group:edit">
 								<a href="group!input.action?id=${id}">查看</a>&nbsp;
 							</shiro:lacksPermission>
         				</shiro:hasPermission>
         					
-        				<shiro:hasPermission name="group:manage">
+        				<shiro:hasPermission name="group:edit">
 							<a href="group!input.action?id=${id}" id="editLink-${name}">修改</a>&nbsp;
 							<a href="group!delete.action?id=${id}" id="deleteLink-${name}">删除</a>
 						</shiro:hasPermission>
@@ -52,7 +52,7 @@
 		</div>
 
 		<div>
-			<shiro:hasPermission name="group:manage">
+			<shiro:hasPermission name="group:edit">
 				<a href="group!input.action">增加新權限組</a>
 			</shiro:hasPermission>
 		</div>

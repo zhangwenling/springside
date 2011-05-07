@@ -67,7 +67,7 @@ public class Group extends IdEntity {
 	public String getPermissionNames() {
 		List<String> permissionNameList = Lists.newArrayList();
 		for (String permission : permissionList) {
-			permissionNameList.add(permission);
+			permissionNameList.add(Permission.parse(permission).displayName);
 		}
 		return StringUtils.join(permissionNameList, ",");
 	}

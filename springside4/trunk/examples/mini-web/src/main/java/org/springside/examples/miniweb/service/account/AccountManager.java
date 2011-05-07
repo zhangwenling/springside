@@ -32,6 +32,7 @@ public class AccountManager {
 
 	private UserDao userDao;
 	private GroupDao groupDao;
+	private ShiroRealm shiroRealm;
 
 	//-- User Manager --//
 	@Transactional(readOnly = true)
@@ -41,6 +42,7 @@ public class AccountManager {
 
 	public void saveUser(User entity) {
 		userDao.save(entity);
+		shiroRealm.clearCachedAuthorizationInfo(entity.getLoginName());
 	}
 
 	/**
@@ -112,4 +114,10 @@ public class AccountManager {
 	public void setGroupDao(GroupDao groupDao) {
 		this.groupDao = groupDao;
 	}
+
+	@Autowired
+	public void setShiroRealm(ShiroRealm shiroRealm) {
+		this.shiroRealm = shiroRealm;
+	}
+
 }

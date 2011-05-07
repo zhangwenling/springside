@@ -37,7 +37,7 @@ public class ShiroRealm extends AuthorizingRealm {
 	private AccountManager accountManager;
 
 	/**
-	 * 认证回调函数.
+	 * 认证回调函数,登录时调用.
 	 */
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
@@ -50,7 +50,7 @@ public class ShiroRealm extends AuthorizingRealm {
 	}
 
 	/**
-	 * 授权查询回调函数.
+	 * 授权查询回调函数, 进行鉴权但缓存中无用户的授权信息时调用.
 	 */
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		String loginName = (String) principals.fromRealm(getName()).iterator().next();
@@ -66,6 +66,9 @@ public class ShiroRealm extends AuthorizingRealm {
 		}
 	}
 
+	/**
+	 * 更新用户授权信息缓存.
+	 */
 	public void clearCachedAuthorizationInfo(String principal) {
 		SimplePrincipalCollection principals = new SimplePrincipalCollection(principal, getName());
 		clearCachedAuthorizationInfo(principals);

@@ -45,13 +45,13 @@
 			<tr>
 				<td>授权:</td>
 				<td>
-					<s:checkboxlist name="checkedAuthIds" list="allAuthorityList" listKey="id"
-										listValue="name" theme="custom"/>
+					<s:checkboxlist name="checkedPermissions" list="allPermissionList" listKey="value"
+										listValue="displayName" theme="custom"/>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<shiro:hasPermission name="group:manage">
+					<shiro:hasPermission name="group:edit">
 						<input class="button" type="submit" value="提交"/>&nbsp;
 					</shiro:hasPermission>
 					<input class="button" type="button" value="返回" onclick="history.back()"/>

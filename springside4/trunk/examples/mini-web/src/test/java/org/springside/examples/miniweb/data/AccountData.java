@@ -3,7 +3,7 @@ package org.springside.examples.miniweb.data;
 import java.util.List;
 
 import org.springside.examples.miniweb.entity.account.Group;
-import org.springside.examples.miniweb.entity.account.Permissions;
+import org.springside.examples.miniweb.entity.account.Permission;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.modules.test.utils.DataUtils;
 
@@ -68,7 +68,7 @@ public class AccountData {
 	public static List<String> getDefaultPermissionList() {
 		if (defaultPermissionList == null) {
 			defaultPermissionList = Lists.newArrayList();
-			for (Permissions permission : Permissions.values()) {
+			for (Permission permission : Permission.values()) {
 				defaultPermissionList.add(permission.value());
 			}
 		}

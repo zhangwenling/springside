@@ -53,12 +53,12 @@
 						<td>${groupNames}&nbsp;</td>
 						<td>&nbsp;
 							<shiro:hasPermission name="user:view">
-								<shiro:lacksPermission name="user:manage">
+								<shiro:lacksPermission name="user:edit">
 									<a href="user!input.action?id=${id}">查看</a>&nbsp;
 								</shiro:lacksPermission>
         					</shiro:hasPermission>
         					
-        					<shiro:hasPermission name="user:manage">
+        					<shiro:hasPermission name="user:edit">
 								<a href="user!input.action?id=${id}">修改</a>&nbsp;
 								<a href="user!delete.action?id=${id}">删除</a>
 							</shiro:hasPermission>
@@ -74,7 +74,7 @@
 			<s:if test="page.paginator.hasNextPage"><a href="javascript:jumpPage(${page.nextPage})">下一页</a></s:if>
 			<a href="javascript:jumpPage(${page.totalPages})">末页</a>
 
-			<shiro:hasPermission name="user:manage">
+			<shiro:hasPermission name="user:edit">
 				<a href="user!input.action">增加新用户</a>
 			</shiro:hasPermission>
 		</div>

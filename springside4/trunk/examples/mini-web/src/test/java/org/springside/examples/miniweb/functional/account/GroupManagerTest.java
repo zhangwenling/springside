@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springside.examples.miniweb.data.AccountData;
 import org.springside.examples.miniweb.entity.account.Group;
-import org.springside.examples.miniweb.entity.account.Permissions;
+import org.springside.examples.miniweb.entity.account.Permission;
 import org.springside.examples.miniweb.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniweb.functional.Gui;
 import org.springside.examples.miniweb.functional.Gui.GroupColumn;
@@ -51,7 +51,7 @@ public class GroupManagerTest extends BaseFunctionalTestCase {
 		//输入数据
 		SeleniumUtils.type(driver.findElement(By.id("name")), group.getName());
 		for (String permission : group.getPermissionList()) {
-			driver.findElement(By.id("checkedAuthIds-" + Permissions.parse(permission).name())).setSelected();
+			driver.findElement(By.id("checkedAuthIds-" + Permission.parse(permission).name())).setSelected();
 		}
 		driver.findElement(By.xpath(Gui.BUTTON_SUBMIT)).click();
 

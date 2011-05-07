@@ -6,8 +6,11 @@ TODO部分
 
   * 安全框架从SpringSecurity转为Apache Shiro.
 	--AccountManager的UT
+        --修改User與Group後清除緩存
+        --logout
+        --自動登錄及其他
 
-  * Memcached客戶端轉回SpyMemcached
+  * Memcached客戶端轉回新版的SpyMemcached
 
   * 認真考慮JQuery or Dojo
    
@@ -15,9 +18,10 @@ TODO部分
     備忘： log4jdbc，jersey+jackson,jackson new feature
 
 2.次要改动
-  * 升级Sonar 2.7，Quartz 1.8.4->2.0.1, Jetty7.4(縮小依賴範圍))
+  * 升级Sonar 2.7，Quartz 1.8.4->2.0.1,CXF 2.3.3->2.4
   * 在showcase同步mini项目的一些更新，如validator
-  * Jetty7连续跑多个功能测试时出现死锁	
+  * Jetty7连续跑多个功能测试时出现死锁
+  * ValidatorHolder, JerseyUtils, Showcase的IdEntity	
 
 3.其他非代码改动
   * 发布前打包项目生成模板(Calvin)
@@ -58,7 +62,9 @@ TODO部分
 -----------------------------------------------------------------------------------
 移到4.0.1的部分
   * 补回Hibernaet Auditable的演示，及其他Hibernate的有用演示,及JPA2.0新特性。
+  * Hibernate Tools新特性
   * 补回LocalCache演示，使用Guava r09的新特性
+  * 使用ehcache 2.4.2新特性
   * iBatis的分頁
   * 依赖包次要版本升级:JSW 3.5.7(需自行打包),JMockit0.999.8(需自行打包)
   * 改名RemoteServlet, 调整Demo页面(Calvin)

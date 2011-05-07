@@ -7,6 +7,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springside.examples.miniweb.entity.account.Group;
+import org.springside.examples.miniweb.entity.account.Permission;
 import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.examples.miniweb.web.CrudActionSupport;
 
@@ -87,10 +88,18 @@ public class GroupAction extends CrudActionSupport<Group> {
 		return allGroupList;
 	}
 
+	public Permission[] getAllPermissionList() {
+		return Permission.values();
+	}
+
 	/**
 	 * input页面显示權限組拥有的權限.
 	 */
 	public List<String> getCheckedPermissions() {
+		/*List<Permissions> permissions = Lists.newArrayList();
+		for (String permission : checkedPermissions) {
+			permissions.add(Permissions.parse(permission));
+		}*/
 		return checkedPermissions;
 	}
 
