@@ -80,6 +80,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<!-- validator end -->
 
@@ -87,12 +88,22 @@
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-json</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-client</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<!-- jersey end -->
+
+		<!-- shiro security begin -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- shiro security end -->
 
 		<!-- utils begin -->
 		<dependency>
@@ -121,6 +132,14 @@
 			<optional>true</optional>
 		</dependency>
 
+
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+		
 		<!-- logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -160,8 +179,6 @@
 			<optional>true</optional>
 		</dependency>
 
-
-
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-firefox-driver</artifactId>
@@ -182,7 +199,7 @@
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-remote-driver</artifactId>

@@ -10,11 +10,10 @@ import org.junit.Test;
 import org.springside.examples.miniweb.dao.account.UserDao;
 import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.examples.miniweb.service.account.AccountManager;
+import org.springside.modules.test.utils.ShiroTestUtils;
 
 /**
  * SecurityEntityManager的测试用例, 测试Service层的业务逻辑.
- * 
- * 调用实际的DAO类进行操作,亦可使用MockDAO对象将本用例改为单元测试.
  * 
  * @author calvin
  */
@@ -30,11 +29,13 @@ public class AccountManagerTest {
 		accountManager = new AccountManager();
 		mockUserDao = control.createMock(UserDao.class);
 		accountManager.setUserDao(mockUserDao);
+		ShiroTestUtils.mockSubject();
 	}
 
 	@After
 	public void tearDown() {
 		control.verify();
+		ShiroTestUtils.clearSubject();
 	}
 
 	@Test

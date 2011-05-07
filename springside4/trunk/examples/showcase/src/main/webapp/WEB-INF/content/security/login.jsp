@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
+<%@ page import="org.apache.shiro.web.filter.authc.FormAuthenticationFilter"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -32,19 +33,13 @@
 	<div class="span-18 last prepend-top">
 		<h2>Showcase登录页</h2>
 
-		<%if ("1".equals(request.getParameter("error"))) {%>
-			<div class="error"> 用户名密码错误,请重试.</div>
 		<%
-		}
-		if ("2".equals(request.getParameter("error"))) {
+			if (request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME) != null) {
 		%>
-			<div class="error"> 验证码错误,请重试.</div>
+			<div class="error">登录失败，请重试.</div>
 		<%
-		}
-		if ("3".equals(request.getParameter("error"))) {
+			}
 		%>
-			<div class="error"> 此帐号已从别处登录.</div>
-		<%}%>
 	
 		<form id="loginForm" action="login.action" method="post">
 			<table class="noborder">
