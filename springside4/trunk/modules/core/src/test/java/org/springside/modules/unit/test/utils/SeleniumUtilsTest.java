@@ -12,8 +12,8 @@ import mockit.Mockit;
 import org.junit.Test;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -54,14 +54,14 @@ public class SeleniumUtilsTest {
 	public void buildWebDriver() throws Exception {
 		Mockit.setUpMocks(MockFirefoxDriver.class, MockInternetExplorerDriver.class, MockRemoteWebDriver.class);
 
-		WebDriver driver = SeleniumUtils.buildDriver(SeleniumUtils.HTMLUNIT);
-		assertTrue(driver instanceof HtmlUnitDriver);
-
-		driver = SeleniumUtils.buildDriver(SeleniumUtils.FIREFOX);
+		WebDriver driver = SeleniumUtils.buildDriver(SeleniumUtils.FIREFOX);
 		assertTrue(driver instanceof FirefoxDriver);
 
 		driver = SeleniumUtils.buildDriver(SeleniumUtils.IE);
 		assertTrue(driver instanceof InternetExplorerDriver);
+
+		driver = SeleniumUtils.buildDriver(SeleniumUtils.CHROME);
+		assertTrue(driver instanceof ChromeDriver);
 
 		driver = SeleniumUtils.buildDriver(SeleniumUtils.REMOTE + ":localhost:3000:" + SeleniumUtils.FIREFOX);
 		assertTrue(driver instanceof RemoteWebDriver);

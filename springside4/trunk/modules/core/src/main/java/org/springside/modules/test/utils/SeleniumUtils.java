@@ -14,8 +14,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -30,7 +30,7 @@ import org.springframework.util.Assert;
  */
 public abstract class SeleniumUtils {
 
-	public static final String HTMLUNIT = "htmlunit";
+	public static final String CHROME = "chrome";
 
 	public static final String FIREFOX = "firefox";
 
@@ -49,17 +49,16 @@ public abstract class SeleniumUtils {
 	public static WebDriver buildDriver(String driverName) throws Exception {
 		WebDriver driver = null;
 
-		if (HTMLUNIT.equals(driverName)) {
-			driver = new HtmlUnitDriver();
-			((HtmlUnitDriver) driver).setJavascriptEnabled(true);
-		}
-
 		if (FIREFOX.equals(driverName)) {
 			driver = new FirefoxDriver();
 		}
 
 		if (IE.equals(driverName)) {
 			driver = new InternetExplorerDriver();
+		}
+
+		if (CHROME.equals(driverName)) {
+			driver = new ChromeDriver();
 		}
 
 		if (driverName.startsWith(REMOTE)) {
@@ -78,6 +77,10 @@ public abstract class SeleniumUtils {
 
 			if (IE.equals(driverType)) {
 				cap = DesiredCapabilities.internetExplorer();
+			}
+
+			if (CHROME.equals(driverType)) {
+				cap = DesiredCapabilities.chrome();
 			}
 
 			driver = new RemoteWebDriver(new URL("http://" + remoteHost + ":" + remotePort + "/wd"), cap);

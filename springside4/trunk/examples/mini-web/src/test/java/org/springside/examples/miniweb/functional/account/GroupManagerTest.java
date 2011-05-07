@@ -10,7 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springside.examples.miniweb.data.AccountData;
 import org.springside.examples.miniweb.entity.account.Group;
-import org.springside.examples.miniweb.entity.account.Permission;
 import org.springside.examples.miniweb.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniweb.functional.Gui;
 import org.springside.examples.miniweb.functional.Gui.GroupColumn;
@@ -51,7 +50,7 @@ public class GroupManagerTest extends BaseFunctionalTestCase {
 		//输入数据
 		SeleniumUtils.type(driver.findElement(By.id("name")), group.getName());
 		for (String permission : group.getPermissionList()) {
-			driver.findElement(By.id("checkedAuthIds-" + Permission.parse(permission).name())).setSelected();
+			driver.findElement(By.id("checkedAuthIds-" + permission)).setSelected();
 		}
 		driver.findElement(By.xpath(Gui.BUTTON_SUBMIT)).click();
 
@@ -76,13 +75,13 @@ public class GroupManagerTest extends BaseFunctionalTestCase {
 		SeleniumUtils.type(driver.findElement(By.id("name")), testGroup.getName());
 
 		for (String permission : testGroup.getPermissionList()) {
-			SeleniumUtils.uncheck(driver.findElement(By.id("checkedAuthIds-" + authority.getId())));
+			SeleniumUtils.uncheck(driver.findElement(By.id("checkedAuthIds-" + permission)));
 		}
 		testGroup.getPermissionList().clear();
 
 		List<String> permissionList = AccountData.getRandomDefaultPermissionList();
 		for (String permission : permissionList) {
-			driver.findElement(By.id("checkedAuthIds-" + authority.getId())).setSelected();
+			driver.findElement(By.id("checkedAuthIds-" + permission)).setSelected();
 		}
 		testGroup.getPermissionList().addAll(permissionList);
 
@@ -114,13 +113,13 @@ public class GroupManagerTest extends BaseFunctionalTestCase {
 		assertEquals(group.getName(), driver.findElement(By.id("name")).getValue());
 
 		for (String permission : group.getPermissionList()) {
-			assertTrue(driver.findElement(By.id("checkedAuthIds-" + authority.getId())).isSelected());
+			assertTrue(driver.findElement(By.id("checkedAuthIds-" + permission)).isSelected());
 		}
 
 		List<String> uncheckPermissionList = ListUtils.subtract(AccountData.getDefaultPermissionList(),
 				group.getPermissionList());
 		for (String permission : uncheckPermissionList) {
-			assertFalse(driver.findElement(By.id("checkedAuthIds-" + authority.getId())).isSelected());
+			assertFalse(driver.findElement(By.id("checkedAuthIds-" + permission)).isSelected());
 		}
 	}
 

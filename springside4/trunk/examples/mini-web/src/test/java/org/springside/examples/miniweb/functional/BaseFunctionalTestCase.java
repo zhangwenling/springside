@@ -112,10 +112,10 @@ public class BaseFunctionalTestCase {
 	 * 登录管理员權限組.
 	 */
 	protected static void loginAsAdmin() {
-		driver.get(BASE_URL + "/j_spring_security_logout");
+		driver.get(BASE_URL + "/login.action?logout");
 
-		driver.findElement(By.name("j_username")).sendKeys("admin");
-		driver.findElement(By.name("j_password")).sendKeys("admin");
+		driver.findElement(By.name("username")).sendKeys("admin");
+		driver.findElement(By.name("password")).sendKeys("admin");
 		driver.findElement(By.xpath(Gui.BUTTON_LOGIN)).click();
 	}
 }

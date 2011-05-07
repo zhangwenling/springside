@@ -69,7 +69,7 @@ public class AccountData {
 		if (defaultPermissionList == null) {
 			defaultPermissionList = Lists.newArrayList();
 			for (Permission permission : Permission.values()) {
-				defaultPermissionList.add(permission.value());
+				defaultPermissionList.add(permission.value);
 			}
 		}
 		return defaultPermissionList;
