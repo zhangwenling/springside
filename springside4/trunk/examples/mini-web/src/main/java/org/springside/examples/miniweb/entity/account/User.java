@@ -17,7 +17,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springside.examples.miniweb.entity.IdEntity;
-import org.springside.modules.mapper.ConvertUtils;
+import org.springside.modules.utils.CollectionUtils;
 
 import com.google.common.collect.Lists;
 
@@ -100,7 +100,7 @@ public class User extends IdEntity {
 	//非持久化属性.
 	@Transient
 	public String getGroupNames() {
-		return ConvertUtils.extractElementPropertyToString(groupList, "name", ", ");
+		return CollectionUtils.extractElementPropertyToString(groupList, "name", ", ");
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class User extends IdEntity {
 	//非持久化属性.
 	@Transient
 	public List<Long> getGroupIds() {
-		return ConvertUtils.extractElementPropertyToList(groupList, "id");
+		return CollectionUtils.extractElementPropertyToList(groupList, "id");
 	}
 
 	@Override

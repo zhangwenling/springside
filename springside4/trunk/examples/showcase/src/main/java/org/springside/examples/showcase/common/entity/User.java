@@ -16,7 +16,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springside.modules.mapper.ConvertUtils;
+import org.springside.modules.utils.CollectionUtils;
 
 import com.google.common.collect.Lists;
 
@@ -122,7 +122,7 @@ public class User extends IdEntity {
 	@Transient
 	@JsonIgnore
 	public String getRoleNames() {
-		return ConvertUtils.extractElementPropertyToString(roleList, "name", ", ");
+		return CollectionUtils.extractElementPropertyToString(roleList, "name", ", ");
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 import org.junit.Test;
 import org.springside.modules.mapper.ConvertUtils;
 import org.springside.modules.unit.utils.ReflectionUtilsTest.TestBean3;
+import org.springside.modules.utils.CollectionUtils;
 
 import com.google.common.collect.Lists;
 
@@ -23,7 +24,7 @@ public class CovertUtilsTest {
 
 		List list = Lists.newArrayList(bean1, bean2);
 
-		assertEquals("1,2", ConvertUtils.extractElementPropertyToString(list, "id", ","));
+		assertEquals("1,2", CollectionUtils.extractElementPropertyToString(list, "id", ","));
 	}
 
 	@Test
@@ -34,7 +35,7 @@ public class CovertUtilsTest {
 		bean2.setId(2);
 
 		List list = Lists.newArrayList(bean1, bean2);
-		List<String> result = ConvertUtils.extractElementPropertyToList(list, "id");
+		List<String> result = CollectionUtils.extractElementPropertyToList(list, "id");
 		assertEquals(2, result.size());
 		assertEquals(1, result.get(0));
 	}
