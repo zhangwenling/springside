@@ -182,7 +182,7 @@ public class JsonDemo {
 	}
 
 	/**
-	 * 测试对枚举与日期的序列化.
+	 * 测试对枚举的序列化,可以選擇用一個int字段而不是以Name來序列化，以減少長度.
 	 */
 	@Test
 	public void enumData() {
@@ -199,6 +199,27 @@ public class JsonDemo {
 		assertEquals(TestEnum.One, newMapper.fromJson("\"1\"", TestEnum.class));
 	}
 
+	/**
+	 * 枚舉類型的演示Bean.
+	 */
+	public static enum TestEnum {
+		One(1), Two(2), Three(3);
+
+		private int index;
+
+		TestEnum(int index) {
+			this.index = index;
+		}
+
+		@Override
+		public String toString() {
+			return new Integer(index).toString();
+		}
+	}
+
+	/**
+	 * 测试对日期的序列化.
+	 */
 	@Test
 	public void dateData() {
 		DateTime jodaDate = new DateTime();
@@ -212,6 +233,9 @@ public class JsonDemo {
 		assertEquals(date, mapper.fromJson(tsString, Date.class));
 	}
 
+	/**
+	 * 測試父子POJO間的循環引用.
+	 */
 	@Test
 	public void parentChildBean() {
 		ParentChildBean parent = new ParentChildBean("parent");
@@ -236,7 +260,7 @@ public class JsonDemo {
 	}
 
 	/**
-	 * 主要演示父子POJO間的循環引用
+	 * 父子POJO間的循環引用的演示Bean
 	 */
 	public static class ParentChildBean {
 
@@ -282,7 +306,7 @@ public class JsonDemo {
 	}
 
 	/**
-	 * 可擴展Bean,會自動的把確定的屬性放入成員變量, 其他屬性放到Map裡。
+	 * 測試可擴展Bean,會自動的把確定的屬性放入成員變量, 其他屬性放到Map裡。
 	 */
 	@Test
 	public void extensibleBean() {
@@ -293,6 +317,9 @@ public class JsonDemo {
 		assertEquals("coder man", extensibleBean.getProperties().get("occupation"));
 	}
 
+	/**
+	 * 演示用的可擴展Bean.
+	 */
 	public static class ExtensibleBean {
 		private String name; // we always have name
 
@@ -321,7 +348,7 @@ public class JsonDemo {
 	}
 
 	/**
-	 * 演示序列化Bean的不同View, 及@JsonIgnore標註的屬性.
+	 * 測試序列化Bean的不同View, 及@JsonIgnore標註的屬性.
 	 */
 	@Test
 	public void viewBean() throws JsonGenerationException, JsonMappingException, IOException {
@@ -351,6 +378,9 @@ public class JsonDemo {
 		}
 	}
 
+	/**
+	 * 演示序列化不同View的Bean.
+	 */
 	public static class ViewBean {
 		private String name;
 		private int age;
@@ -395,7 +425,7 @@ public class JsonDemo {
 	}
 
 	/**
-	 * 演示輸出jsonp格式內容
+	 * 測試輸出jsonp格式內容.
 	 */
 	@Test
 	public void jsonp() {
@@ -447,24 +477,6 @@ public class JsonDemo {
 		@Override
 		public String toString() {
 			return "TestBean [defaultValue=" + defaultValue + ", name=" + name + ", nullValue=" + nullValue + "]";
-		}
-	}
-
-	/**
-	 * 枚舉類型，可以選擇用一個int字段而不是以Name來序列化，以減少長度。
-	 */
-	public static enum TestEnum {
-		One(1), Two(2), Three(3);
-
-		private int index;
-
-		TestEnum(int index) {
-			this.index = index;
-		}
-
-		@Override
-		public String toString() {
-			return new Integer(index).toString();
 		}
 	}
 }
