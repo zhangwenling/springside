@@ -10,6 +10,7 @@ TODO部分
   * 升级Sonar 2.7
   * Jetty7连续跑多个功能测试时出现死锁
   * 让mini-web的ft case跑起来, 精简selenium的case，使用Selenium 2.0的新功能
+  * 參考Play改進測試時的數據準備部分
 
 3.其他非代码改动
   * 发布前打包项目生成模板(Calvin)
@@ -51,13 +52,14 @@ TODO部分
 
 -----------------------------------------------------------------------------------
 移到4.0.1的部分
-  * 补回Hibernaet Auditable的演示，及其他Hibernate的有用演示,及JPA2.0新特性。
+  * 补回Hibernaet Auditable的演示，及其他Hibernate的有用演示,及JPA2.0新特性，及Play中的使用
   * Hibernate Tools新特性
   * 补回LocalCache演示，使用Guava r09的新特性
   * 使用ehcache 2.4.2新特性
   * 升级Quartz 2.0.1 (Spring的Quartz模块不兼容)
   * iBatis的分頁
-  * 依赖包次要版本升级:JSW 3.5.7(需自行打包),(需自行打包)
-  * 改名RemoteServlet, 调整Demo页面(Calvin)
+  * 依赖包次要版本升级:JSW 3.5.7(需自行打包)
+  * 改名RemoteServlet, 调整Demo页面, HttpClient使用Review(Calvin)
   * review perf4j的使用
-  * Shiro Restful
+  * Shiro Restful驗證演示
+  * Mini-Web 演示首頁 Html + Json的方式
