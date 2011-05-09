@@ -23,9 +23,9 @@ public class BaseFunctionalTestCase {
 
 	protected static final String BASE_URL = Start.BASE_URL;
 
-	private static Server server;
+	protected static Server server;
 
-	private static DataSource dataSource;
+	protected static DataSource dataSource;
 
 	@BeforeClass
 	public static void startAll() throws Exception {
@@ -36,24 +36,17 @@ public class BaseFunctionalTestCase {
 	@AfterClass
 	public static void stopAll() throws Exception {
 		cleanDefaultData();
-		stopJetty();
 	}
 
 	/**
-	 * 启动Jetty服务器.
+	 * 启动Jetty服务器, 仅启动一次.
 	 */
 	protected static void startJetty() throws Exception {
-		server = JettyUtils.buildTestServer(Start.PORT, Start.CONTEXT);
-		server.start();
-		dataSource = SpringContextHolder.getBean("dataSource");
-	}
-
-	/**
-	 * 关闭Jetty服务器.
-	 */
-	protected static void stopJetty() throws Exception {
-		server.stop();
-		dataSource = null;
+		if (server == null) {
+			server = JettyUtils.buildTestServer(Start.PORT, Start.CONTEXT);
+			server.start();
+			dataSource = SpringContextHolder.getBean("dataSource");
+		}
 	}
 
 	/**

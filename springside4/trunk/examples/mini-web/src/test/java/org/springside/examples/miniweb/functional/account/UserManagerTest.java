@@ -32,7 +32,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 	 * 检验OverViewPage.
 	 */
 	@Test
-	@Groups(BaseFunctionalTestCase.DAILY)
+	@Groups(DAILY)
 	public void overviewPage() {
 		driver.findElement(By.linkText(Gui.MENU_USER)).click();
 		WebElement table = driver.findElement(By.xpath("//table[@id='contentTable']"));
@@ -45,7 +45,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 	 * 创建公共测试用户.
 	 */
 	@Test
-	@Groups(BaseFunctionalTestCase.DAILY)
+	@Groups(DAILY)
 	public void createUser() {
 		//打开新增用户页面
 		driver.findElement(By.linkText(Gui.MENU_USER)).click();
@@ -76,7 +76,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 	 * 修改公共测试用户.
 	 */
 	@Test
-	@Groups(BaseFunctionalTestCase.DAILY)
+	@Groups(DAILY)
 	public void editUser() {
 		//确保已创建公共测试用户.
 		ensureTestUserExist();
@@ -112,7 +112,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 	 * 删除公共用户.
 	 */
 	@Test
-	@Groups(BaseFunctionalTestCase.NIGHTLY)
+	@Groups(NIGHTLY)
 	public void deleteUser() {
 		//确保已创建公共测试用户.
 		ensureTestUserExist();
@@ -137,7 +137,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 	 * 创建用户时的输入校验测试. 
 	 */
 	@Test
-	@Groups(BaseFunctionalTestCase.NIGHTLY)
+	@Groups(NIGHTLY)
 	public void inputValidateUser() {
 		driver.findElement(By.linkText(Gui.MENU_USER)).click();
 		driver.findElement(By.linkText("增加新用户")).click();

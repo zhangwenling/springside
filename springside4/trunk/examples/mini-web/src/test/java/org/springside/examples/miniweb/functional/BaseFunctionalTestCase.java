@@ -30,13 +30,13 @@ import org.springside.modules.utils.spring.SpringContextHolder;
 @RunWith(GroupsTestRunner.class)
 public class BaseFunctionalTestCase {
 
+	//Test Groups define
+	public final static String DAILY = "DAILY";
+	public final static String NIGHTLY = "NIGHTLY";
+
 	protected final static String BASE_URL = Start.BASE_URL;
 
-	//Test Groups define
-	protected final static String DAILY = "DAILY";
-	protected final static String NIGHTLY = "NIGHTLY";
-
-	protected static Server server;
+	protected static Server jettyServer;
 
 	protected static DataSource dataSource;
 
@@ -45,11 +45,8 @@ public class BaseFunctionalTestCase {
 	@BeforeClass
 	public static void startAll() throws Exception {
 		startJetty();
-
 		loadDefaultData();
-
 		createWebDriver();
-
 		loginAsAdmin();
 	}
 
@@ -57,24 +54,17 @@ public class BaseFunctionalTestCase {
 	public static void stopAll() throws Exception {
 		stopWebDriver();
 		cleanDefaultData();
-		stopJetty();
 	}
 
 	/**
-	 * 启动Jetty服务器
+	 * 启动Jetty服务器, 仅启动一次.
 	 */
 	protected static void startJetty() throws Exception {
-		server = JettyUtils.buildTestServer(Start.PORT, Start.CONTEXT);
-		server.start();
-		dataSource = SpringContextHolder.getBean("dataSource");
-	}
-
-	/**
-	 * 关闭Jetty服务器.
-	 */
-	protected static void stopJetty() throws Exception {
-		server.stop();
-		dataSource = null;
+		if (jettyServer == null) {
+			jettyServer = JettyUtils.buildTestServer(Start.PORT, Start.CONTEXT);
+			jettyServer.start();
+			dataSource = SpringContextHolder.getBean("dataSource");
+		}
 	}
 
 	/**

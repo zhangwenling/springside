@@ -22,7 +22,7 @@ public class SecurityTest extends BaseFunctionalTestCase {
 	 * 测试匿名用户访问系统时的行为.
 	 */
 	@Test
-	@Groups(BaseFunctionalTestCase.DAILY)
+	@Groups(DAILY)
 	public void checkAnonymous() {
 		//访问退出登录页面,退出之前的登录
 		driver.get(BASE_URL + "/j_spring_security_logout");
@@ -37,7 +37,7 @@ public class SecurityTest extends BaseFunctionalTestCase {
 	 * 只有用户權限組的操作员访问系统时的受限行为.
 	 */
 	@Test
-	@Groups(BaseFunctionalTestCase.DAILY)
+	@Groups(DAILY)
 	public void checkUserPermission() {
 		//访问退出登录页面,退出之前的登录
 		driver.get(BASE_URL + "/j_spring_security_logout");
