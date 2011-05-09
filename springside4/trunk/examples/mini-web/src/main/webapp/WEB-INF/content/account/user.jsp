@@ -28,7 +28,7 @@
 			<form id="mainForm" action="user.action" method="get">
 				<input type="hidden" name="page.pageNo" id="pageNo" value="${page.pageNo}"/>
 				<input type="hidden" name="page.orderBy" id="orderBy" value="${page.orderBy}"/>
-				<input type="hidden" name="page.orderDir" id="order" value="${page.orderDir}"/>	
+				<input type="hidden" name="page.orderDir" id="orderDir" value="${page.orderDir}"/>	
 				你好, <shiro:principal/>.&nbsp;&nbsp;
 				登录名: <input type="text" name="filter_EQS_loginName" value="${param['filter_EQS_loginName']}" size="9"/>
 				姓名或Email: <input type="text" name="filter_LIKES_name_OR_email" value="${param['filter_LIKES_name_OR_email']}" size="9"/>

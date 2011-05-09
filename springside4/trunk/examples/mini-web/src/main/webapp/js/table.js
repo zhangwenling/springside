@@ -5,26 +5,26 @@ function jumpPage(pageNo) {
 
 function sort(orderBy, defaultOrder) {
 	if ($("#orderBy").val() == orderBy) {
-		if ($("#order").val() == "") {
-			$("#order").val(defaultOrder);
+		if ($("#orderDir").val() == "") {
+			$("#orderDir").val(defaultOrder);
 		}
-		else if ($("#order").val() == "desc") {
-			$("#order").val("asc");
+		else if ($("#orderDir").val() == "desc") {
+			$("#orderDir").val("asc");
 		}
-		else if ($("#order").val() == "asc") {
-			$("#order").val("desc");
+		else if ($("#orderDir").val() == "asc") {
+			$("#orderDir").val("desc");
 		}
 	}
 	else {
 		$("#orderBy").val(orderBy);
-		$("#order").val(defaultOrder);
+		$("#orderDir").val(defaultOrder);
 	}
 
 	$("#mainForm").submit();
 }
 
 function search() {
-	$("#order").val("");
+	$("#orderDir").val("");
 	$("#orderBy").val("");
 	$("#pageNo").val("1");
 

@@ -18,6 +18,7 @@ import org.springside.examples.miniweb.functional.Gui.UserColumn;
 import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.utils.DataUtils;
 import org.springside.modules.test.utils.SeleniumUtils;
+import org.springside.modules.utils.ThreadUtils;
 
 /**
  * 用户管理的功能测试, 测试页面JavaScript及主要用户故事流程.
@@ -65,6 +66,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		driver.findElement(By.xpath(Gui.BUTTON_SUBMIT)).click();
 
 		//校验结果
+		SeleniumUtils.waitForDisplay(driver.findElement(By.id("message")), 3000);
 		assertTrue(SeleniumUtils.isTextPresent(driver, "保存用户成功"));
 		verifyUser(user);
 
@@ -104,6 +106,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		driver.findElement(By.xpath(Gui.BUTTON_SUBMIT)).click();
 
 		//校验结果
+		SeleniumUtils.waitForDisplay(driver.findElement(By.id("message")), 3000);
 		assertTrue(SeleniumUtils.isTextPresent(driver, "保存用户成功"));
 		verifyUser(testUser);
 	}
@@ -125,6 +128,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		driver.findElement(By.linkText("删除")).click();
 
 		//校验结果
+		SeleniumUtils.waitForDisplay(driver.findElement(By.id("message")), 3000);
 		assertTrue(SeleniumUtils.isTextPresent(driver, "删除用户成功"));
 		searchUser(testUser.getLoginName());
 		assertFalse(StringUtils.contains(driver.findElement(By.id("contentTable")).getText(), testUser.getLoginName()));
@@ -150,7 +154,9 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 
 		driver.findElement(By.xpath(Gui.BUTTON_SUBMIT)).click();
 
-		WebElement table = driver.findElement(By.xpath("//form[@id='inputForm']/table"));
+		ThreadUtils.sleep(1000);
+
+		WebElement table = driver.findElement(By.xpath("//form/table"));
 		assertEquals("用户登录名已存在", SeleniumUtils.getTable(table, 0, 1));
 		assertEquals("必选字段", SeleniumUtils.getTable(table, 1, 1));
 		assertEquals("请输入一个长度最少是 3 的字符串", SeleniumUtils.getTable(table, 2, 1));
@@ -169,7 +175,6 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 	/**
 	 * 校验用户数据的工具函数.
 	 */
-
 	private void verifyUser(User user) {
 		searchUser(user.getLoginName());
 		driver.findElement(By.linkText("修改")).click();
