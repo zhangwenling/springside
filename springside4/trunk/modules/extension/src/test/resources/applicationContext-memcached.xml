@@ -4,22 +4,21 @@
 	default-lazy-init="true">
 
 	<!-- SpyMemcached客户端 -->
-	<bean id="memcachedClient" class="net.spy.memcached.spring.MemcachedClientFactoryBean">
-		<property name="servers" value="localhost:11511" />
-		<!-- 默认是TEXT -->
-		<property name="protocol" value="TEXT"/>
-		<!-- 默认是ARRAY_MOD -->
-		<property name="locatorType" value="CONSISTENT"/>
-		<!-- 默认是2500毫秒 -->
-		<property name="opTimeout" value="1000"/>
+	<bean id="spyMemcachedClient" class="org.springside.modules.memcached.SpyMemcachedClient">
+		<property name="memcachedClient">
+			<bean class="net.spy.memcached.spring.MemcachedClientFactoryBean">
+				<property name="servers" value="localhost:11511" />
+				<!-- 默认是TEXT -->
+				<property name="protocol" value="TEXT" />
+				<!-- 默认是ARRAY_MOD -->
+				<property name="locatorType" value="CONSISTENT" />
+				<!-- 默认是2500毫秒 -->
+				<property name="opTimeout" value="1000" />
+			</bean>
+		</property>
 	</bean>
 
-	<!-- SpyMemcached客户端的Wrapper -->
-	<bean name="memcachedClientWrapper" class="org.springside.modules.memcached.SpyMemcachedClientWrapper">
-		<property name="memcachedClient" ref="memcachedClient"/>
-	</bean>
-
-	<!-- 演示用的Jmemcached, 模拟Memcached服务器 -->
+	<!-- 演示用的JMemcached, 模拟Memcached服务器 -->
 	<bean id="memcachedSimulator" class="org.springside.modules.memcached.MemcachedSimulator" lazy-init="false">
 		<property name="serverUrl" value="localhost:11511" />
 	</bean>

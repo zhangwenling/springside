@@ -14,7 +14,7 @@ TODO部分
 
 3.其他非代码改动
   * 发布前打包项目生成模板(Calvin)
-  * 閱讀如下Samples: Cloudfoundry-samples, Spring MVC samples, Shiro Sample,Spring Roo, Play!
+  * 閱讀如下Samples: Play!, Spring Roo, Spring MVC samples
   
 ---------------------------------------------------------------------------------
 已完成部分
@@ -23,16 +23,15 @@ TODO部分
    * 安全框架从SpringSecurity转为Apache Shiro.
    * 演示Hibernate Validator验证
    * CSS框架从YUI转为Blueprint
+   * 升級Jackson1.8演示，包括可擴展的對象, 對象循環引用，局部更新已存在對象等等等等新特性.
    * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6, Jetty 7.4, Sonar 2.6
 
 2. 次要改动
    * springside-core与spring-extension项目的大重构
-      -- 添加注释及 rename/remove等小重构. 
+      -- 添加注释及重构
       -- 参考Spring-Data重构分页相关代码
-      -- 补回IdUtils，集成各種ID生成模式
-      -- 升级TraceUtils和MockLog4jAppender 
+      -- 其他改动无数
    * Template工具引擎从Freemarker转为Velocity, 见Email演示.
-   * 升級Jackson1.8演示，包括可擴展的對象, 對象循環引用，局部更新已存在對象等等等等新特性.
    * 升级SpyMemcached2.6版演示
    * 使用log4jdbc打印SQL及执行时间
 
@@ -58,8 +57,9 @@ TODO部分
   * 使用ehcache 2.4.2新特性
   * 升级Quartz 2.0.1 (Spring的Quartz模块不兼容)
   * iBatis的分頁
-  * 依赖包次要版本升级:JSW 3.5.7(需自行打包)
-  * 改名RemoteServlet, 调整Demo页面, HttpClient使用Review(Calvin)
+  * 改名RemoteServlet, 调整Demo页面, HttpClient使用Review
   * review perf4j的使用
   * Shiro Restful驗證演示
-  * Mini-Web 演示首頁 Html + Json的方式
+  * 依赖包次要版本升级:JSW 3.5.7(需自行打包)
+
+

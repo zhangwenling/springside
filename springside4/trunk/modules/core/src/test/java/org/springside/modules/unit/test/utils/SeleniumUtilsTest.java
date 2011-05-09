@@ -25,8 +25,8 @@ public class SeleniumUtilsTest {
 	public static class MockRemoteWebDriver {
 
 		@Mock
-		public MockRemoteWebDriver(URL remoteAddress, Capabilities desiredCapabilities) {
-
+		public void $init(URL remoteAddress, Capabilities desiredCapabilities) {
+			System.out.println("RemoteWebDriver");
 			try {
 				assertEquals(new URL("http://localhost:3000/wd"), remoteAddress);
 			} catch (MalformedURLException e) {
@@ -39,31 +39,42 @@ public class SeleniumUtilsTest {
 	@MockClass(realClass = FirefoxDriver.class)
 	public static class MockFirefoxDriver {
 		@Mock
-		public MockFirefoxDriver() {
+		public void $init() {
+			System.out.println("FirefoxDriver");
 		}
 	}
 
 	@MockClass(realClass = InternetExplorerDriver.class)
 	public static class MockInternetExplorerDriver {
 		@Mock
-		public MockInternetExplorerDriver() {
+		public void $init() {
+			System.out.println("InternetExplorerDriver");
+		}
+	}
+
+	@MockClass(realClass = ChromeDriver.class)
+	public static class MockChromeDriver {
+		@Mock
+		public void $init() {
+			System.out.println("ChromeDriver");
 		}
 	}
 
 	@Test
 	public void buildWebDriver() throws Exception {
-		Mockit.setUpMocks(MockFirefoxDriver.class, MockInternetExplorerDriver.class, MockRemoteWebDriver.class);
+		Mockit.setUpMocks(MockFirefoxDriver.class, MockInternetExplorerDriver.class, MockChromeDriver.class,
+				MockRemoteWebDriver.class);
 
-		WebDriver driver = SeleniumUtils.buildDriver(SeleniumUtils.FIREFOX);
+		WebDriver driver = SeleniumUtils.buildDriver("firefox");
 		assertTrue(driver instanceof FirefoxDriver);
 
-		driver = SeleniumUtils.buildDriver(SeleniumUtils.IE);
+		driver = SeleniumUtils.buildDriver("ie");
 		assertTrue(driver instanceof InternetExplorerDriver);
 
-		driver = SeleniumUtils.buildDriver(SeleniumUtils.CHROME);
+		driver = SeleniumUtils.buildDriver("chrome");
 		assertTrue(driver instanceof ChromeDriver);
 
-		driver = SeleniumUtils.buildDriver(SeleniumUtils.REMOTE + ":localhost:3000:" + SeleniumUtils.FIREFOX);
+		driver = SeleniumUtils.buildDriver("remote:localhost:3000:firefox");
 		assertTrue(driver instanceof RemoteWebDriver);
 
 		Mockit.tearDownMocks();

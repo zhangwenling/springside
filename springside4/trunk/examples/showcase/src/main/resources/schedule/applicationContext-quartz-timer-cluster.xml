@@ -32,7 +32,7 @@
 	</bean>
 
 	<!-- Timer JobDetail, 基于JobDetailBean实例化Job Class,可持久化到数据库实现集群 -->
-	<bean name="timerJobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
+	<bean id="timerJobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
 		<property name="jobClass" value="org.springside.examples.showcase.schedule.QuartzClusterableJob" />
 		<!-- fail-over节点重新执行之前所有失败或未执行的任务, 默认为false. -->
 		<property name="requestsRecovery" value="true" />

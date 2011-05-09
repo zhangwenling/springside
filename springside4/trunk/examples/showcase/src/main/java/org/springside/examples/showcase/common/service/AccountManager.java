@@ -14,7 +14,7 @@ import org.springside.examples.showcase.common.dao.UserMyBatisDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
 import org.springside.examples.showcase.security.DatabaseRealm;
-import org.springside.modules.memcached.SpyMemcachedClientWrapper;
+import org.springside.modules.memcached.SpyMemcachedClient;
 import org.springside.modules.utils.mapper.JsonMapper;
 import org.springside.modules.utils.security.DigestUtils;
 
@@ -32,7 +32,7 @@ public class AccountManager {
 
 	private UserMyBatisDao userMyBatisDao;
 
-	private SpyMemcachedClientWrapper memcachedClient;
+	private SpyMemcachedClient memcachedClient;
 
 	private JsonMapper jsonBinder = JsonMapper.buildNonDefaultMapper();
 
@@ -187,7 +187,7 @@ public class AccountManager {
 	}
 
 	@Autowired(required = false)
-	public void setMemcachedClient(SpyMemcachedClientWrapper memcachedClient) {
+	public void setMemcachedClient(SpyMemcachedClient memcachedClient) {
 		this.memcachedClient = memcachedClient;
 	}
 

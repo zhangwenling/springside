@@ -26,9 +26,9 @@ import org.springframework.beans.factory.DisposableBean;
  * 
  * @author calvin
  */
-public class SpyMemcachedClientWrapper implements DisposableBean {
+public class SpyMemcachedClient implements DisposableBean {
 
-	private static Logger logger = LoggerFactory.getLogger(SpyMemcachedClientWrapper.class);
+	private static Logger logger = LoggerFactory.getLogger(SpyMemcachedClient.class);
 
 	private MemcachedClient memcachedClient;
 
@@ -59,17 +59,43 @@ public class SpyMemcachedClientWrapper implements DisposableBean {
 	}
 
 	/**
-	 * Set方法.
+	 * 异步Set方法, 不考虑执行结果.
 	 */
-	public Future<Boolean> set(String key, int expiredTime, Object value) {
-		return memcachedClient.set(key, expiredTime, value);
+	public void set(String key, int expiredTime, Object value) {
+		memcachedClient.set(key, expiredTime, value);
 	}
 
 	/**
-	 * Delete方法.
+	 * 安全的Set方法,在1秒内返回结果, 否则返回false并取消操作.
 	 */
-	public Future<Boolean> delete(String key) {
-		return memcachedClient.delete(key);
+	public boolean safeSet(String key, Object value, int expiration) {
+		Future<Boolean> future = memcachedClient.set(key, expiration, value);
+		try {
+			return future.get(1, TimeUnit.SECONDS);
+		} catch (Exception e) {
+			future.cancel(false);
+		}
+		return false;
+	}
+
+	/**
+	 * 异步 Delete方法, 不考虑执行结果.
+	 */
+	public void delete(String key) {
+		memcachedClient.delete(key);
+	}
+
+	/**
+	 * 安全的Set方法,在1秒内返回结果, 否则返回false并取消操作.
+	 */
+	public boolean safeDelete(String key) {
+		Future<Boolean> future = memcachedClient.delete(key);
+		try {
+			return future.get(1, TimeUnit.SECONDS);
+		} catch (Exception e) {
+			future.cancel(false);
+		}
+		return false;
 	}
 
 	/**

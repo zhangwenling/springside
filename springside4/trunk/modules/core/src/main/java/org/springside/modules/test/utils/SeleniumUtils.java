@@ -29,14 +29,9 @@ import org.springframework.util.Assert;
  * @author calvin
  */
 public abstract class SeleniumUtils {
-
-	public static final String CHROME = "chrome";
-
-	public static final String FIREFOX = "firefox";
-
-	public static final String IE = "ie";
-
-	public static final String REMOTE = "remote";
+	public enum BrowserType {
+		firefox, ie, chrome, remote
+	}
 
 	private static Logger logger = LoggerFactory.getLogger(SeleniumUtils.class);
 
@@ -49,19 +44,13 @@ public abstract class SeleniumUtils {
 	public static WebDriver buildDriver(String driverName) throws Exception {
 		WebDriver driver = null;
 
-		if (FIREFOX.equals(driverName)) {
+		if (BrowserType.firefox.name().equals(driverName)) {
 			driver = new FirefoxDriver();
-		}
-
-		if (IE.equals(driverName)) {
+		} else if (BrowserType.ie.name().equals(driverName)) {
 			driver = new InternetExplorerDriver();
-		}
-
-		if (CHROME.equals(driverName)) {
+		} else if (BrowserType.chrome.name().equals(driverName)) {
 			driver = new ChromeDriver();
-		}
-
-		if (driverName.startsWith(REMOTE)) {
+		} else if (driverName.startsWith(BrowserType.remote.name())) {
 			String[] params = driverName.split(":");
 			Assert.isTrue(params.length == 4,
 					"Remote driver is not right, accept format is \"remote:localhost:3000:firefox\", but the input is\""
@@ -71,15 +60,12 @@ public abstract class SeleniumUtils {
 			String remotePort = params[2];
 			String driverType = params[3];
 			DesiredCapabilities cap = null;
-			if (FIREFOX.equals(driverType)) {
+
+			if (BrowserType.firefox.name().equals(driverType)) {
 				cap = DesiredCapabilities.firefox();
-			}
-
-			if (IE.equals(driverType)) {
+			} else if (BrowserType.ie.name().equals(driverType)) {
 				cap = DesiredCapabilities.internetExplorer();
-			}
-
-			if (CHROME.equals(driverType)) {
+			} else if (BrowserType.chrome.name().equals(driverType)) {
 				cap = DesiredCapabilities.chrome();
 			}
 
