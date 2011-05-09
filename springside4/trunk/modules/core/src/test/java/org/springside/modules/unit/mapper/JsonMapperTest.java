@@ -1,4 +1,4 @@
-package org.springside.modules.unit.utils.mapper;
+package org.springside.modules.unit.mapper;
 
 import static org.junit.Assert.*;
 
@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 
 import org.codehaus.jackson.type.TypeReference;
 import org.junit.Test;
-import org.springside.modules.utils.mapper.JsonMapper;
+import org.springside.modules.mapper.JsonMapper;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

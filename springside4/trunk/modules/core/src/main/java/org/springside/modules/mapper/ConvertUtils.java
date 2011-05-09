@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.utils.mapper;
+package org.springside.modules.mapper;
 
 import java.util.ArrayList;
 import java.util.Collection;

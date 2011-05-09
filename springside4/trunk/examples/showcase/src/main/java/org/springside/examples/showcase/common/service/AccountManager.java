@@ -14,8 +14,8 @@ import org.springside.examples.showcase.common.dao.UserMyBatisDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
 import org.springside.examples.showcase.security.DatabaseRealm;
+import org.springside.modules.mapper.JsonMapper;
 import org.springside.modules.memcached.SpyMemcachedClient;
-import org.springside.modules.utils.mapper.JsonMapper;
 import org.springside.modules.utils.security.DigestUtils;
 
 /**

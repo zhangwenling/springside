@@ -25,8 +25,8 @@ import org.springside.examples.miniservice.entity.User;
 import org.springside.examples.miniservice.service.AccountManager;
 import org.springside.examples.miniservice.webservice.WsConstants;
 import org.springside.examples.miniservice.webservice.dto.UserDTO;
+import org.springside.modules.mapper.ConvertUtils;
 import org.springside.modules.utils.jersey.WebExceptionUtils;
-import org.springside.modules.utils.mapper.ConvertUtils;
 import org.springside.modules.utils.validator.ValidatorUtils;
 
 /**

@@ -20,8 +20,8 @@ import org.springside.examples.miniservice.webservice.ws.result.DepartmentResult
 import org.springside.examples.miniservice.webservice.ws.result.UserListResult;
 import org.springside.examples.miniservice.webservice.ws.result.base.IdResult;
 import org.springside.examples.miniservice.webservice.ws.result.base.WSResult;
+import org.springside.modules.mapper.ConvertUtils;
 import org.springside.modules.utils.AssertUtils;
-import org.springside.modules.utils.mapper.ConvertUtils;
 import org.springside.modules.utils.validator.ValidatorUtils;
 
 /**

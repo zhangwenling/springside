@@ -22,7 +22,7 @@ import org.codehaus.jackson.map.annotate.JsonView;
 import org.codehaus.jackson.type.JavaType;
 import org.joda.time.DateTime;
 import org.junit.Test;
-import org.springside.modules.utils.mapper.JsonMapper;
+import org.springside.modules.mapper.JsonMapper;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

@@ -1,4 +1,4 @@
-package org.springside.modules.unit.utils.mapper;
+package org.springside.modules.unit.mapper;
 
 import static org.junit.Assert.*;
 
@@ -18,8 +18,8 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springside.modules.utils.mapper.JaxbMapper;
-import org.springside.modules.utils.mapper.JaxbMapper.CollectionWrapper;
+import org.springside.modules.mapper.JaxbMapper;
+import org.springside.modules.mapper.JaxbMapper.CollectionWrapper;
 
 import com.google.common.collect.Lists;
 
