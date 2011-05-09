@@ -6,6 +6,7 @@
 		<groupId>org.springside</groupId>
 		<artifactId>springside-parent</artifactId>
 		<version>4.0.0-SNAPSHOT</version>
+		<relativePath>../../../../modules/parent</relativePath>
 	</parent>
   <groupId>org.springside</groupId>
   <artifactId>mini-web-archetype</artifactId>
@@ -27,17 +28,4 @@
       </plugin>
     </plugins>
   </build>
-  <distributionManagement>
-    <repository>
-      <id>nexus</id>
-      <name>Team Nexus Release Repository</name>
-      <url>http://localhost:8081/nexus/content/repositories/releases</url>
-    </repository>
-    <snapshotRepository>
-      <uniqueVersion>false</uniqueVersion>
-      <id>nexus-snapshot</id>
-      <name>Team Nexus Snapshot Repository</name>
-      <url>http://localhost:8081/nexus/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
 </project>
