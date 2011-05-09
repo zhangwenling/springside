@@ -23,7 +23,7 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/security/* = authc
-				/common/** = authc
+				/common/user!input.action* = authc
 			</value>
 		</property>
 	</bean>

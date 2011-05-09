@@ -55,7 +55,7 @@ public class GroupManagerTest extends BaseFunctionalTestCase {
 		driver.findElement(By.xpath(Gui.BUTTON_SUBMIT)).click();
 
 		//校验结果
-		SeleniumUtils.waitForDisplay(driver.findElement(By.id("message")), 3000);
+		SeleniumUtils.waitForDisplay(driver.findElement(By.id("message")), 5000);
 		assertTrue(SeleniumUtils.isTextPresent(driver, "保存权限组成功"));
 		verifyGroup(group);
 

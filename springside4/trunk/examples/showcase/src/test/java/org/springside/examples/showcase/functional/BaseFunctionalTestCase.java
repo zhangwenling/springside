@@ -44,11 +44,14 @@ public class BaseFunctionalTestCase {
 	public static void startAll() throws Exception {
 		startJetty();
 		loadDefaultData();
+		createWebDriver();
 	}
 
 	@AfterClass
 	public static void stopAll() throws Exception {
+		stopWebDriver();
 		cleanDefaultData();
+
 	}
 
 	/**
@@ -72,7 +75,7 @@ public class BaseFunctionalTestCase {
 	/**
 	 * 删除默认数据.
 	 */
-	public static void cleanDefaultData() throws Exception {
+	protected static void cleanDefaultData() throws Exception {
 		DbUnitUtils.removeData(dataSourceHolder, "/data/sample-data.xml");
 	}
 
@@ -84,5 +87,10 @@ public class BaseFunctionalTestCase {
 				"classpath:/application.test-local.properties");
 
 		driver = SeleniumUtils.buildDriver(props.getProperty("selenium.driver"));
+	}
+
+	protected static void stopWebDriver() {
+		driver.close();
+		driver.quit();
 	}
 }

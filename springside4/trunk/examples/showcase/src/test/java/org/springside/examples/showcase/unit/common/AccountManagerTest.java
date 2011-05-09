@@ -35,8 +35,10 @@ public class AccountManagerTest {
 	public void saveUser() {
 		User admin = new User();
 		admin.setId(1L);
+
 		User user = new User();
 		user.setId(2L);
+		user.setPlainPassword("123");
 
 		mockUserDao.save(user);
 		control.replay();

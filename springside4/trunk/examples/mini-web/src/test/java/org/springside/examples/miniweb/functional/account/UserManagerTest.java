@@ -154,7 +154,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 
 		driver.findElement(By.xpath(Gui.BUTTON_SUBMIT)).click();
 
-		ThreadUtils.sleep(1000);
+		ThreadUtils.sleep(2000);
 
 		WebElement table = driver.findElement(By.xpath("//form/table"));
 		assertEquals("用户登录名已存在", SeleniumUtils.getTable(table, 0, 1));

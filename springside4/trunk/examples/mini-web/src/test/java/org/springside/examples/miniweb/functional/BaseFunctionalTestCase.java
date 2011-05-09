@@ -96,6 +96,7 @@ public class BaseFunctionalTestCase {
 	 */
 	protected static void stopWebDriver() {
 		driver.close();
+		driver.quit();
 	}
 
 	/**

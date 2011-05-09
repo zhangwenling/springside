@@ -2,8 +2,6 @@ package org.springside.examples.showcase.functional.common;
 
 import static org.junit.Assert.*;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.springside.examples.showcase.functional.BaseFunctionalTestCase;
@@ -16,16 +14,6 @@ import org.springside.modules.test.utils.SeleniumUtils;
  */
 public class UserManagerTest extends BaseFunctionalTestCase {
 
-	@BeforeClass
-	public static void startWebDriver() throws Exception {
-		createWebDriver();
-	}
-
-	@AfterClass
-	public static void stopWebDriver() {
-		driver.close();
-	}
-
 	@Test
 	public void editUser() {
 		driver.get(BASE_URL);
@@ -33,8 +21,8 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		driver.findElement(By.id("editLink-2")).click();
 
 		//修改用户需要登录管理员权限
-		SeleniumUtils.type(driver.findElement(By.name("j_username")), "admin");
-		SeleniumUtils.type(driver.findElement(By.name("j_password")), "admin");
+		SeleniumUtils.type(driver.findElement(By.name("username")), "admin");
+		SeleniumUtils.type(driver.findElement(By.name("password")), "admin");
 		driver.findElement(By.xpath("//input[@value='登录']")).click();
 		//点击提交按钮
 		SeleniumUtils.type(driver.findElement(By.name("name")), "user_foo");
