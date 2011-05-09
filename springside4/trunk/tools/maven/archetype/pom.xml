@@ -9,7 +9,7 @@
 		<relativePath>../../../../modules/parent</relativePath>
 	</parent>
   <groupId>org.springside</groupId>
-  <artifactId>mini-web-archetype</artifactId>
+  <artifactId>springside-mini-web-archetype</artifactId>
   <packaging>maven-archetype</packaging>
   <name>SpringSide :: Archetype :: Mini-Web</name>
   <build>

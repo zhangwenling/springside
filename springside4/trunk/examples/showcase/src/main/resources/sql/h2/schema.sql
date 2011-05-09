@@ -1,12 +1,13 @@
-    drop table if exists ss_post;
+    drop table if exists ss_user_role;
 
     drop table if exists ss_role;
 
     drop table if exists ss_user;
-
-    drop table if exists ss_user_role;
+	
+	drop table if exists ss_post;
     
     drop table if exists ss_log;
+
 
     create table ss_post (
         id varchar(16),
