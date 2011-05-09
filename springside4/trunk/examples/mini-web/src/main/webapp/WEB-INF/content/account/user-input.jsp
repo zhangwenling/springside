@@ -84,7 +84,7 @@
 				<td><input type="text" id="email" name="email" size="40" value="${email}"/></td>
 			</tr>
 			<tr>
-				<td>權限組:</td>
+				<td>权限组:</td>
 				<td>
 					<s:checkboxlist name="checkedGroupIds" list="allGroupList" listKey="id" listValue="name" theme="custom"/>
 				</td>

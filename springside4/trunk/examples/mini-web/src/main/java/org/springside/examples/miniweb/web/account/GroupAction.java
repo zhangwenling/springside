@@ -95,10 +95,6 @@ public class GroupAction extends CrudActionSupport<Group> {
 	 * input页面显示权限组拥有的权限.
 	 */
 	public List<String> getCheckedPermissions() {
-		/*List<Permissions> permissions = Lists.newArrayList();
-		for (String permission : checkedPermissions) {
-			permissions.add(Permissions.parse(permission));
-		}*/
 		return checkedPermissions;
 	}
 
