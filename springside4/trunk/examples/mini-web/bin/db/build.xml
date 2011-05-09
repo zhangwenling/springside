@@ -25,9 +25,6 @@
 	<taskdef name="dbunit" classname="org.dbunit.ant.DbUnitTask" classpathref="project.lib" />
 
 	<target name="init-db">
-		<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" src="${sql.dir}/migration.sql" onerror="continue">
-			<classpath refid="project.lib" />
-		</sql>
 		<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" src="${sql.dir}/schema.sql" onerror="continue">
 			<classpath refid="project.lib" />
 		</sql>

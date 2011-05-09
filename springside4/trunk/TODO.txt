@@ -11,7 +11,6 @@ TODO部分
   * Jetty7连续跑多个功能测试时出现死锁
   * 让mini-web的ft case跑起来, 精简selenium的case，使用Selenium 2.0的新功能
   * 參考Play改進測試時的數據準備部分
-  * 數據庫改名以避免與Springside3的衝突
 
 3.其他非代码改动
   * 发布前打包项目生成模板(Calvin)
