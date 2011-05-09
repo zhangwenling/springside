@@ -90,13 +90,13 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		testUser.setName(DataUtils.randomName("User"));
 		SeleniumUtils.type(driver.findElement(By.id("name")), testUser.getName());
 
-		//取消所有權限組
+		//取消所有权限组
 		for (Group group : testUser.getGroupList()) {
 			SeleniumUtils.uncheck(driver.findElement(By.id("checkedGroupIds-" + group.getId())));
 		}
 		testUser.getGroupList().clear();
 
-		//增加一个權限組
+		//增加一个权限组
 		Group group = AccountData.getRandomDefaultGroup();
 		driver.findElement(By.id("checkedGroupIds-" + group.getId())).setSelected();
 		testUser.getGroupList().add(group);

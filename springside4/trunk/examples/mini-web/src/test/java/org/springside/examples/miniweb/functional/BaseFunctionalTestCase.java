@@ -99,7 +99,7 @@ public class BaseFunctionalTestCase {
 	}
 
 	/**
-	 * 登录管理员權限組.
+	 * 登录管理员权限组.
 	 */
 	protected static void loginAsAdmin() {
 		driver.get(BASE_URL + "/login.action?logout");

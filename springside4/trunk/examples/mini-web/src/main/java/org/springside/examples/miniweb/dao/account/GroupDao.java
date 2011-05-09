@@ -8,7 +8,7 @@ import org.springside.examples.miniweb.entity.account.User;
 import org.springside.modules.orm.hibernate.HibernateDao;
 
 /**
- * 權限組对象的泛型DAO.
+ * 权限组对象的泛型DAO.
  * 
  * @author calvin
  */
@@ -23,7 +23,7 @@ public class GroupDao extends HibernateDao<Group, Long> {
 	@Override
 	public void delete(Long id) {
 		Group group = get(id);
-		//查询出拥有该權限組的用户,并删除该用户的權限組.
+		//查询出拥有该权限组的用户,并删除该用户的权限组.
 		List<User> users = createQuery(QUERY_USER_BY_GROUPID, group.getId()).list();
 		for (User u : users) {
 			u.getGroupList().remove(group);

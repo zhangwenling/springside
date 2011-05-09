@@ -19,7 +19,7 @@ import org.springside.examples.miniweb.entity.IdEntity;
 import com.google.common.collect.Lists;
 
 /**
- * 權限組.
+ * 权限组.
  * 
  * 注释见{@link User}.
  * 

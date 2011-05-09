@@ -6,9 +6,9 @@ import com.google.common.collect.Maps;
 
 public enum Permission {
 
-	USER_VIEW("user:view", "查看用戶"), USER_EDIT("user:edit", "修改用戶"),
+	USER_VIEW("user:view", "查看用戶"), USER_EDIT("user:edit", "修改用户"),
 
-	GROUP_VIEW("group:view", "查看權限組"), GROUP_EDIT("group:edit", "修改權限組");
+	GROUP_VIEW("group:view", "查看权限组"), GROUP_EDIT("group:edit", "修改权限组");
 
 	public String value;
 	public String displayName;

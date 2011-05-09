@@ -34,7 +34,7 @@ public class SecurityTest extends BaseFunctionalTestCase {
 	}
 
 	/**
-	 * 只有用户權限組的操作员访问系统时的受限行为.
+	 * 只有用户权限组的操作员访问系统时的受限行为.
 	 */
 	@Test
 	@Groups(DAILY)
@@ -48,7 +48,7 @@ public class SecurityTest extends BaseFunctionalTestCase {
 		driver.findElement(By.name("j_password")).sendKeys("user");
 		driver.findElement(By.xpath(Gui.BUTTON_LOGIN)).click();
 
-		//校验用户權限組的操作单元格为空
+		//校验用户权限组的操作单元格为空
 		driver.findElement(By.linkText(Gui.MENU_USER)).click();
 		WebElement table = driver.findElement(By.xpath("//table[@id='contentTable']"));
 		assertEquals("查看", SeleniumUtils.getTable(table, 1, UserColumn.OPERATIONS.ordinal()));

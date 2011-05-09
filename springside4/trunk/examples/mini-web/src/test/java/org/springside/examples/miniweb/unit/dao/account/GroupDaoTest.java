@@ -48,11 +48,11 @@ public class GroupDaoTest extends SpringTxTestCase {
 	}
 
 	/**
-	 * 测试删除權限組时删除用户-權限組的中间表.
+	 * 测试删除权限组时删除用户-权限组的中间表.
 	 */
 	@Test
 	public void deleteGroup() {
-		//新增测试權限組并与admin用户绑定.
+		//新增测试权限组并与admin用户绑定.
 		Group group = AccountData.getRandomGroup();
 		groupDao.save(group);
 
@@ -64,7 +64,7 @@ public class GroupDaoTest extends SpringTxTestCase {
 		int oldJoinTableCount = countRowsInTable("ACCT_USER_GROUP");
 		int oldUserTableCount = countRowsInTable("ACCT_USER");
 
-		//删除用户權限組, 中间表将减少1条记录,而用户表应该不受影响.
+		//删除用户权限组, 中间表将减少1条记录,而用户表应该不受影响.
 		groupDao.delete(group.getId());
 		groupDao.flush();
 
@@ -76,7 +76,7 @@ public class GroupDaoTest extends SpringTxTestCase {
 
 	@Test
 	public void crudEntityWithGroup() {
-		//新建并保存带權限組的用户
+		//新建并保存带权限组的用户
 		Group group = AccountData.getRandomGroupWithPermissions();
 		groupDao.save(group);
 		//强制执行sql语句

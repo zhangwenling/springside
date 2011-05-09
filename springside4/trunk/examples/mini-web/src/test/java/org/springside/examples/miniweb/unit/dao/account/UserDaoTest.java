@@ -47,7 +47,7 @@ public class UserDaoTest extends SpringTxTestCase {
 	//如果你需要真正插入数据库,将Rollback设为false
 	//@Rollback(false) 
 	public void crudEntityWithGroup() {
-		//新建并保存带權限組的用户
+		//新建并保存带权限组的用户
 		User user = AccountData.getRandomUserWithGroup();
 		entityDao.save(user);
 		//强制执行sql语句

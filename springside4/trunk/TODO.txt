@@ -8,7 +8,6 @@ TODO部分
 
 2.次要改动
   * 升级Sonar 2.7
-  * Jetty7连续跑多个功能测试时出现死锁
   * 让mini-web的ft case跑起来, 精简selenium的case，使用Selenium 2.0的新功能
   * 參考Play改進測試時的數據準備部分
 

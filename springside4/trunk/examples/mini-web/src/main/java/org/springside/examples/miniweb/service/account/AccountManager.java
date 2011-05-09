@@ -18,7 +18,7 @@ import org.springside.modules.orm.PageRequest;
 import org.springside.modules.orm.PropertyFilter;
 
 /**
- * 安全相关实体的管理类,包括用户和權限組.
+ * 安全相关实体的管理类,包括用户和权限组.
  * 
  * @author calvin
  */

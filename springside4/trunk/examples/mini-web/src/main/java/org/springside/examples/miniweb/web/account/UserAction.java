@@ -41,7 +41,7 @@ public class UserAction extends CrudActionSupport<User> {
 	private Long id;
 	private User entity;
 	private Page<User> page = new Page<User>();
-	private List<Long> checkedGroupIds; //页面中钩选的權限組id列表
+	private List<Long> checkedGroupIds; //页面中钩选的权限组id列表
 
 	//-- ModelDriven 与 Preparable函数 --//
 	public void setId(Long id) {
@@ -132,21 +132,21 @@ public class UserAction extends CrudActionSupport<User> {
 	}
 
 	/**
-	 * input页面显示所有權限組列表.
+	 * input页面显示所有权限组列表.
 	 */
 	public List<Group> getAllGroupList() {
 		return accountManager.getAllGroup();
 	}
 
 	/**
-	 * input页面显示用户拥有的權限組.
+	 * input页面显示用户拥有的权限组.
 	 */
 	public List<Long> getCheckedGroupIds() {
 		return checkedGroupIds;
 	}
 
 	/**
-	 * input页面提交用户拥有的權限組.
+	 * input页面提交用户拥有的权限组.
 	 */
 	public void setCheckedGroupIds(List<Long> checkedGroupIds) {
 		this.checkedGroupIds = checkedGroupIds;
