@@ -11,9 +11,9 @@ echo Maven命令为%MVN%
 echo Ant命令为%ANT%
 
 echo [Step 1] 安装SpringSide 所有modules到本地Maven仓库, 为所有项目生成Eclipse项目文件.
-call %MVN% clean install --projects :springside-parent,:springside-core,:springside-extension,:mini-web-archetype -Dmaven.test.skip=true
+call %MVN% clean install -Pmodules -Dmaven.test.skip=true
 if errorlevel 1 goto error
-call %MVN% eclipse:clean eclipse:eclipse
+call %MVN% -Pall eclipse:clean eclipse:eclipse
 if errorlevel 1 goto error
 
 echo [Step 2] 启动H2数据库.

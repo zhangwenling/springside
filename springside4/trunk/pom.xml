@@ -4,16 +4,31 @@
 	<groupId>org.springside</groupId>
 	<artifactId>springside</artifactId>
 	<version>4.0.0-SNAPSHOT</version>
-	<name>Springside Project</name>
+	<name>Springside</name>
 	<packaging>pom</packaging>
 	
-	<modules>
-		<module>modules/parent</module>
-		<module>modules/core</module>
-		<module>modules/extension</module>
-		<module>examples/mini-service</module>
-		<module>examples/mini-web</module>
-		<module>examples/showcase</module>
-		<module>tools/maven/archetype</module>
-  </modules>
+	<profiles>
+  	<profile>
+    	<id>all</id>
+    	<modules>
+				<module>modules/parent</module>
+				<module>modules/core</module>
+				<module>modules/extension</module>
+				<module>examples/mini-service</module>
+				<module>examples/mini-web</module>
+				<module>examples/showcase</module>
+				<module>tools/maven/archetype</module>
+	  	</modules>
+	  </profile>
+	  
+	  <profile>
+    	<id>modules</id>
+    	<modules>
+				<module>modules/parent</module>
+				<module>modules/core</module>
+				<module>modules/extension</module>
+				<module>tools/maven/archetype</module>
+	  	</modules>
+	  </profile>
+</profiles>
 </project>
