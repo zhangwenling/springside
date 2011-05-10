@@ -7,8 +7,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.springside.examples.miniservice.tools.Start;
-import org.springside.modules.test.utils.DbUnitUtils;
-import org.springside.modules.test.utils.JettyUtils;
+import org.springside.modules.test.data.DbUnitUtils;
+import org.springside.modules.test.functional.JettyUtils;
 import org.springside.modules.utils.spring.SpringContextHolder;
 
 /**

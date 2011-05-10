@@ -10,12 +10,11 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.springside.examples.miniweb.tools.Start;
+import org.springside.modules.test.data.DbUnitUtils;
+import org.springside.modules.test.functional.JettyUtils;
+import org.springside.modules.test.functional.SeleniumHolder;
 import org.springside.modules.test.groups.GroupsTestRunner;
-import org.springside.modules.test.utils.DbUnitUtils;
-import org.springside.modules.test.utils.JettyUtils;
-import org.springside.modules.test.utils.SeleniumUtils;
 import org.springside.modules.utils.PropertiesUtils;
 import org.springside.modules.utils.spring.SpringContextHolder;
 
@@ -40,19 +39,19 @@ public class BaseFunctionalTestCase {
 
 	protected static DataSource dataSource;
 
-	protected static WebDriver driver;
+	protected static SeleniumHolder selenium;
 
 	@BeforeClass
 	public static void startAll() throws Exception {
 		startJetty();
 		loadDefaultData();
-		createWebDriver();
-		loginAsAdmin();
+		createSelenium();
+		loginAsAdminIfNecessary();
 	}
 
 	@AfterClass
 	public static void stopAll() throws Exception {
-		stopWebDriver();
+		quitSelenium();
 		cleanDefaultData();
 	}
 
@@ -84,29 +83,27 @@ public class BaseFunctionalTestCase {
 	/**
 	 * 创建WebDriver.
 	 */
-	protected static void createWebDriver() throws Exception {
+	protected static void createSelenium() throws Exception {
 		Properties props = PropertiesUtils.loadProperties("classpath:/application.test.properties",
 				"classpath:/application.test-local.properties");
 
-		driver = SeleniumUtils.buildDriver(props.getProperty("selenium.driver"));
+		selenium = new SeleniumHolder(props.getProperty("selenium.driver"));
 	}
 
-	/**
-	 * 关闭WebDriver
-	 */
-	protected static void stopWebDriver() {
-		driver.close();
-		driver.quit();
+	protected static void quitSelenium() {
+		selenium.quit();
 	}
 
 	/**
 	 * 登录管理员权限组.
 	 */
-	protected static void loginAsAdmin() {
-		driver.get(BASE_URL + "/login.action?logout");
+	protected static void loginAsAdminIfNecessary() {
+		selenium.open(BASE_URL + "/account/user.action");
 
-		driver.findElement(By.name("username")).sendKeys("admin");
-		driver.findElement(By.name("password")).sendKeys("admin");
-		driver.findElement(By.xpath(Gui.BUTTON_LOGIN)).click();
+		if ("Mini-Web 登录页".equals(selenium.getTitle())) {
+			selenium.type(By.name("username"), "admin");
+			selenium.type(By.name("password"), "admin");
+			selenium.clickTo(By.xpath(Gui.BUTTON_LOGIN));
+		}
 	}
 }

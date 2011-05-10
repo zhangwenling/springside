@@ -2,7 +2,7 @@ package org.springside.examples.miniservice.data;
 
 import org.springside.examples.miniservice.entity.Department;
 import org.springside.examples.miniservice.entity.User;
-import org.springside.modules.test.utils.DataUtils;
+import org.springside.modules.test.data.DataUtils;
 
 /**
  * 用户测试数据生成.

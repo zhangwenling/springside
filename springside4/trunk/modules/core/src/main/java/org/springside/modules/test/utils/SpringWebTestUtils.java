@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.test.spring;
+package org.springside.modules.test.utils;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.ApplicationContext;

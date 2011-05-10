@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.test.utils;
+package org.springside.modules.test.data;
 
 import java.util.Collections;
 import java.util.List;

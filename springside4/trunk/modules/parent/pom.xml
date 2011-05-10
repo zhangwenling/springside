@@ -79,8 +79,8 @@
 		</repository>
 	</repositories>
   
-  <!--  设定插件仓库 
-        如有Nexus私服, 取消注释并指向正确的服务器地址.
+  	<!--  设定插件仓库 
+       	     如有Nexus私服, 取消注释并指向正确的服务器地址.
 	<pluginRepositories>
 		<pluginRepository>
 			<id>nexus</id>
@@ -91,10 +91,10 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-  -->
+  	-->
   
 	<!-- 设定使用Release插件发布的仓库服务器
-	     如有Nexus私服, 取消注释并指向正确的服务器地址.
+	             如有Nexus私服, 取消注释并指向正确的服务器地址.
 	<distributionManagement>
 		<repository>
 			<id>nexus</id>
@@ -738,23 +738,27 @@
 			</dependency>
 
 			<!-- selenium 2.0 -->
+
+			<!-- selenium 2.0 -->
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
-				<artifactId>selenium-firefox-driver</artifactId>
+				<artifactId>selenium-remote-control</artifactId>
 				<version>${selenium.version}</version>
 				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.seleniumhq.selenium</groupId>
-				<artifactId>selenium-ie-driver</artifactId>
-				<version>${selenium.version}</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.seleniumhq.selenium</groupId>
-				<artifactId>selenium-chrome-driver</artifactId>
-				<version>${selenium.version}</version>
-				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>org.seleniumhq.selenium</groupId>
+						<artifactId>selenium-htmlunit-driver</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.seleniumhq.selenium</groupId>
+						<artifactId>selenium-chrome-driver</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.seleniumhq.selenium</groupId>
+						<artifactId>selenium-iphone-driver</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>

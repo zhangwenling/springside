@@ -9,12 +9,11 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 import org.springside.examples.showcase.tools.Start;
+import org.springside.modules.test.data.DbUnitUtils;
+import org.springside.modules.test.functional.JettyUtils;
+import org.springside.modules.test.functional.SeleniumHolder;
 import org.springside.modules.test.groups.GroupsTestRunner;
-import org.springside.modules.test.utils.DbUnitUtils;
-import org.springside.modules.test.utils.JettyUtils;
-import org.springside.modules.test.utils.SeleniumUtils;
 import org.springside.modules.utils.PropertiesUtils;
 import org.springside.modules.utils.spring.SpringContextHolder;
 
@@ -38,18 +37,18 @@ public class BaseFunctionalTestCase {
 
 	protected static DataSource dataSourceHolder;
 
-	protected static WebDriver driver;
+	protected static SeleniumHolder selenium;
 
 	@BeforeClass
 	public static void startAll() throws Exception {
 		startJetty();
 		loadDefaultData();
-		createWebDriver();
+		createSelenium();
 	}
 
 	@AfterClass
 	public static void stopAll() throws Exception {
-		stopWebDriver();
+		quitSelenium();
 		cleanDefaultData();
 
 	}
@@ -80,17 +79,19 @@ public class BaseFunctionalTestCase {
 	}
 
 	/**
-	 * 创建WebDriver.
+	 * 创建Selenium.
 	 */
-	protected static void createWebDriver() throws Exception {
+	protected static void createSelenium() throws Exception {
 		Properties props = PropertiesUtils.loadProperties("classpath:/application.test.properties",
 				"classpath:/application.test-local.properties");
 
-		driver = SeleniumUtils.buildDriver(props.getProperty("selenium.driver"));
+		selenium = new SeleniumHolder(props.getProperty("selenium.driver"));
 	}
 
-	protected static void stopWebDriver() {
-		driver.close();
-		driver.quit();
+	/**
+	 * 关闭Selenium.
+	 */
+	protected static void quitSelenium() {
+		selenium.quit();
 	}
 }

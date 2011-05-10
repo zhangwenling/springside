@@ -16,8 +16,8 @@ import org.springside.examples.miniservice.dao.AccountDao;
 import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.Department;
 import org.springside.examples.miniservice.entity.User;
+import org.springside.modules.test.data.DbUnitUtils;
 import org.springside.modules.test.spring.SpringTxTestCase;
-import org.springside.modules.test.utils.DbUnitUtils;
 
 import com.google.common.collect.Maps;
 

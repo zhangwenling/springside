@@ -46,10 +46,9 @@
 						<tr>
 							<td><label for="username">用户名:</label>
 							</td>
-							<td><input type='text' id='username' name='username'
-								class="required" value="${username}"
-								<s:if test="not empty param.error">
-						value=''</s:if> /></td>
+							<td><input type='text' id='username' name='username' class="required" value="${username}"
+								<s:if test="not empty param.error">value=''</s:if> />
+							</td>
 						</tr>
 						<tr>
 							<td><label for="password">密码:</label>
@@ -59,10 +58,10 @@
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2" align="right"><input type="checkbox"
-								id="rememberMe" name="rememberMe" value="${rememberMe}" /> <label
-								for="rememberMe">记住我</label> <input value="登录" type="submit"
-								class="button" /></td>
+							<td colspan="2" align="right">
+								<input type="checkbox" id="rememberMe" name="rememberMe" value="${rememberMe}" /> 
+								<label for="rememberMe">记住我</label> <input value="登录" type="submit" class="button" />
+							</td>
 						</tr>
 					</table>
 				</form>

@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springside.modules.test.spring.SpringWebTestUtils;
+import org.springside.modules.test.utils.SpringWebTestUtils;
 
 public class SpringWebTestUtilsTest {
 

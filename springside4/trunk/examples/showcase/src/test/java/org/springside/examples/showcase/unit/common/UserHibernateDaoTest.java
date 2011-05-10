@@ -15,8 +15,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springside.examples.showcase.common.dao.UserHibernateDao;
 import org.springside.examples.showcase.common.entity.User;
+import org.springside.modules.test.data.DbUnitUtils;
 import org.springside.modules.test.spring.SpringTxTestCase;
-import org.springside.modules.test.utils.DbUnitUtils;
 
 import com.google.common.collect.Lists;
 

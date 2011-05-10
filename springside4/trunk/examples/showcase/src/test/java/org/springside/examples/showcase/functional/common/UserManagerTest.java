@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.springside.examples.showcase.functional.BaseFunctionalTestCase;
-import org.springside.modules.test.utils.SeleniumUtils;
 
 /**
  * 用户管理的功能测试.
@@ -16,20 +15,20 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 
 	@Test
 	public void editUser() {
-		driver.get(BASE_URL);
-		driver.findElement(By.linkText("综合演示")).click();
-		driver.findElement(By.id("editLink-2")).click();
+		selenium.open(BASE_URL);
+		selenium.clickTo(By.linkText("综合演示"));
+		selenium.clickTo(By.id("editLink-2"));
 
 		//修改用户需要登录管理员权限
-		SeleniumUtils.type(driver.findElement(By.name("username")), "admin");
-		SeleniumUtils.type(driver.findElement(By.name("password")), "admin");
-		driver.findElement(By.xpath("//input[@value='登录']")).click();
+		selenium.type(By.name("username"), "admin");
+		selenium.type(By.name("password"), "admin");
+		selenium.clickTo(By.xpath("//input[@value='登录']"));
+
 		//点击提交按钮
-		SeleniumUtils.type(driver.findElement(By.name("name")), "user_foo");
-		driver.findElement(By.xpath("//input[@value='提交']")).click();
+		selenium.type(By.name("name"), "user_foo");
+		selenium.clickTo(By.xpath("//input[@value='提交']"));
 		//重新进入用户修改页面, 检查最后修改者
-		driver.findElement(By.id("editLink-2")).click();
-		System.out.println(driver.findElement(By.tagName("body")).getText());
-		assertTrue(SeleniumUtils.isTextPresent(driver, "最后修改:admin"));
+		selenium.clickTo(By.id("editLink-2"));
+		assertEquals("user_foo", selenium.getValue(By.name("name")));
 	}
 }
