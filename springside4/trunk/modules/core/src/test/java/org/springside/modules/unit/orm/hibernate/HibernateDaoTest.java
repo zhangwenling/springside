@@ -22,8 +22,8 @@ import org.springside.modules.orm.PageRequest;
 import org.springside.modules.orm.PageRequest.Sort;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateDao;
+import org.springside.modules.test.data.DbUnitUtils;
 import org.springside.modules.test.spring.SpringTxTestCase;
-import org.springside.modules.test.utils.DbUnitUtils;
 import org.springside.modules.unit.orm.hibernate.data.User;
 
 import com.google.common.collect.Lists;

@@ -14,7 +14,6 @@ import org.springside.examples.miniweb.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniweb.functional.Gui;
 import org.springside.examples.miniweb.functional.Gui.GroupColumn;
 import org.springside.modules.test.groups.Groups;
-import org.springside.modules.test.utils.SeleniumUtils;
 
 /**
  * 权限组管理的功能测试,测 试页面JavaScript及主要用户故事流程.
@@ -24,15 +23,15 @@ import org.springside.modules.test.utils.SeleniumUtils;
 public class GroupManagerTest extends BaseFunctionalTestCase {
 
 	/**
-	 * 检验OverViewPage.
+	 * 检验ListPage.
 	 */
 	@Groups(DAILY)
 	@Test
-	public void overviewPage() {
-		driver.findElement(By.linkText(Gui.MENU_GROUP)).click();
-		WebElement table = driver.findElement(By.xpath("//table[@id='contentTable']"));
-		assertEquals("管理员", SeleniumUtils.getTable(table, 1, GroupColumn.NAME.ordinal()));
-		assertEquals("查看用戶,修改用户,查看权限组,修改权限组", SeleniumUtils.getTable(table, 1, GroupColumn.PERMISSIONS.ordinal()));
+	public void listPage() {
+		selenium.clickTo(By.linkText(Gui.MENU_GROUP));
+		WebElement table = selenium.findElement(By.xpath("//table[@id='contentTable']"));
+		assertEquals("管理员", selenium.getTable(table, 1, GroupColumn.NAME.ordinal()));
+		assertEquals("查看用戶,修改用户,查看权限组,修改权限组", selenium.getTable(table, 1, GroupColumn.PERMISSIONS.ordinal()));
 	}
 
 	/**
@@ -41,40 +40,38 @@ public class GroupManagerTest extends BaseFunctionalTestCase {
 	@Groups(DAILY)
 	@Test
 	public void createGroup() {
-		driver.findElement(By.linkText(Gui.MENU_GROUP)).click();
-		driver.findElement(By.linkText("增加新权限组")).click();
+		selenium.clickTo(By.linkText(Gui.MENU_GROUP));
+		selenium.clickTo(By.linkText("增加新权限组"));
 
 		//生成测试数据
 		Group group = AccountData.getRandomGroupWithPermissions();
 
 		//输入数据
-		SeleniumUtils.type(driver.findElement(By.id("name")), group.getName());
+		selenium.type(By.id("name"), group.getName());
 		for (String permission : group.getPermissionList()) {
-			driver.findElement(By.id("checkedPermissions-" + permission)).setSelected();
+			selenium.check(By.id("checkedPermissions-" + permission));
 		}
-		driver.findElement(By.xpath(Gui.BUTTON_SUBMIT)).click();
+		selenium.clickTo(By.xpath(Gui.BUTTON_SUBMIT));
 
 		//校验结果
-		SeleniumUtils.waitForDisplay(driver.findElement(By.id("message")), 5000);
-		assertTrue(SeleniumUtils.isTextPresent(driver, "保存权限组成功"));
+		assertTrue(selenium.isTextPresent("保存权限组成功"));
 		verifyGroup(group);
-
 	}
 
 	private void verifyGroup(Group group) {
-		driver.findElement(By.id("editLink-" + group.getName())).click();
+		selenium.clickTo(By.linkText(Gui.MENU_GROUP));
+		selenium.clickTo(By.id("editLink-" + group.getName()));
 
-		assertEquals(group.getName(), driver.findElement(By.id("name")).getValue());
+		assertEquals(group.getName(), selenium.getValue(By.id("name")));
 
 		for (String permission : group.getPermissionList()) {
-			assertTrue(driver.findElement(By.id("checkedPermissions-" + permission)).isSelected());
+			assertTrue(selenium.isChecked(By.id("checkedPermissions-" + permission)));
 		}
 
 		List<String> uncheckPermissionList = ListUtils.subtract(AccountData.getDefaultPermissionList(),
 				group.getPermissionList());
 		for (String permission : uncheckPermissionList) {
-			assertFalse(driver.findElement(By.id("checkedPermissions-" + permission)).isSelected());
+			assertFalse(selenium.isChecked(By.id("checkedPermissions-" + permission)));
 		}
 	}
-
 }

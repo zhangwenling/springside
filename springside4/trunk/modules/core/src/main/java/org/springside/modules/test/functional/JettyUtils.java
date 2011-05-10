@@ -5,7 +5,7 @@
  * 
  * $Id$
  */
-package org.springside.modules.test.utils;
+package org.springside.modules.test.functional;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;

@@ -1,7 +1,7 @@
 package org.springside.examples.miniweb.tools;
 
 import org.eclipse.jetty.server.Server;
-import org.springside.modules.test.utils.JettyUtils;
+import org.springside.modules.test.functional.JettyUtils;
 
 /**
  * 使用Jetty运行调试Web应用, 在Console输入回车停止服务.

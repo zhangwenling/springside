@@ -1,4 +1,4 @@
-package org.springside.modules.unit.test.utils;
+package org.springside.modules.unit.test.functional;
 
 import static org.junit.Assert.*;
 
@@ -12,14 +12,13 @@ import mockit.Mockit;
 import org.junit.Test;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.springside.modules.test.utils.SeleniumUtils;
+import org.springside.modules.test.functional.WebDriverFactory;
 
-public class SeleniumUtilsTest {
+public class WebDriverFactoryTest {
 
 	@MockClass(realClass = RemoteWebDriver.class)
 	public static class MockRemoteWebDriver {
@@ -52,29 +51,17 @@ public class SeleniumUtilsTest {
 		}
 	}
 
-	@MockClass(realClass = ChromeDriver.class)
-	public static class MockChromeDriver {
-		@Mock
-		public void $init() {
-			System.out.println("ChromeDriver");
-		}
-	}
-
 	@Test
 	public void buildWebDriver() throws Exception {
-		Mockit.setUpMocks(MockFirefoxDriver.class, MockInternetExplorerDriver.class, MockChromeDriver.class,
-				MockRemoteWebDriver.class);
+		Mockit.setUpMocks(MockFirefoxDriver.class, MockInternetExplorerDriver.class, MockRemoteWebDriver.class);
 
-		WebDriver driver = SeleniumUtils.buildDriver("firefox");
+		WebDriver driver = WebDriverFactory.createDriver("firefox");
 		assertTrue(driver instanceof FirefoxDriver);
 
-		driver = SeleniumUtils.buildDriver("ie");
+		driver = WebDriverFactory.createDriver("ie");
 		assertTrue(driver instanceof InternetExplorerDriver);
 
-		driver = SeleniumUtils.buildDriver("chrome");
-		assertTrue(driver instanceof ChromeDriver);
-
-		driver = SeleniumUtils.buildDriver("remote:localhost:3000:firefox");
+		driver = WebDriverFactory.createDriver("remote:localhost:3000:firefox");
 		assertTrue(driver instanceof RemoteWebDriver);
 
 		Mockit.tearDownMocks();

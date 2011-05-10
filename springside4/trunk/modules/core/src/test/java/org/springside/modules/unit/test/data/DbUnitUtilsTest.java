@@ -1,4 +1,4 @@
-package org.springside.modules.unit.test.utils;
+package org.springside.modules.unit.test.data;
 
 import static org.junit.Assert.*;
 
@@ -7,8 +7,8 @@ import javax.sql.DataSource;
 import org.junit.Test;
 import org.springframework.beans.BeansException;
 import org.springframework.test.context.ContextConfiguration;
+import org.springside.modules.test.data.DbUnitUtils;
 import org.springside.modules.test.spring.SpringTxTestCase;
-import org.springside.modules.test.utils.DbUnitUtils;
 
 @ContextConfiguration(locations = { "/applicationContext-core-test.xml" })
 public class DbUnitUtilsTest extends SpringTxTestCase {

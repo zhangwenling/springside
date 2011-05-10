@@ -5,7 +5,7 @@ import java.util.List;
 import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.entity.account.Permission;
 import org.springside.examples.miniweb.entity.account.User;
-import org.springside.modules.test.utils.DataUtils;
+import org.springside.modules.test.data.DataUtils;
 
 import com.google.common.collect.Lists;
 

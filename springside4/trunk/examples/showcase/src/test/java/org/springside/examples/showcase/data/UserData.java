@@ -2,7 +2,7 @@ package org.springside.examples.showcase.data;
 
 import org.springside.examples.showcase.common.entity.Role;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.modules.test.utils.DataUtils;
+import org.springside.modules.test.data.DataUtils;
 
 /**
  * 用户测试数据生成.

@@ -14,8 +14,8 @@ import org.springside.examples.miniweb.dao.account.UserDao;
 import org.springside.examples.miniweb.data.AccountData;
 import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.entity.account.User;
+import org.springside.modules.test.data.DbUnitUtils;
 import org.springside.modules.test.spring.SpringTxTestCase;
-import org.springside.modules.test.utils.DbUnitUtils;
 
 /**
  * GroupDao的测试用例, 测试ORM映射及特殊的DAO操作.
