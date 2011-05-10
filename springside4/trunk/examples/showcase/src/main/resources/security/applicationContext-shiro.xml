@@ -25,7 +25,7 @@
 				/security/* = authc
 				/common/user!input.action* = authc
 				/rs/** = authcBasic
-				/webservice/rs/** = authcBasic, rest[user]
+				/webservice/rs/** = authcBasic
 			</value>
 		</property>
 	</bean>
