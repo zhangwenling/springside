@@ -111,7 +111,7 @@ public abstract class EncodeUtils {
 		try {
 			return URLEncoder.encode(input, DEFAULT_URL_ENCODING);
 		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException("Unsupported Encoding Exception", e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 
@@ -123,7 +123,7 @@ public abstract class EncodeUtils {
 		try {
 			return URLDecoder.decode(input, DEFAULT_URL_ENCODING);
 		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException("Unsupported Encoding Exception", e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 

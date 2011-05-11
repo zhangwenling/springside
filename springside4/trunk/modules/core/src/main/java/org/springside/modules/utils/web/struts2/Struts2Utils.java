@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springside.modules.mapper.JsonMapper;
+import org.springside.modules.utils.ExceptionUtils;
 import org.springside.modules.utils.web.ServletUtils;
 
 /**
@@ -96,7 +97,7 @@ public abstract class Struts2Utils {
 			response.getWriter().write(content);
 			response.getWriter().flush();
 		} catch (IOException e) {
-			throw new RuntimeException(e.getMessage(), e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 

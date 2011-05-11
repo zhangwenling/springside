@@ -19,6 +19,7 @@ import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.springside.modules.utils.EncodeUtils;
+import org.springside.modules.utils.ExceptionUtils;
 
 /**
  * 支持HMAC-SHA1消息签名 及 DES/AES对称加密的工具类.
@@ -50,7 +51,7 @@ public abstract class CryptoUtils {
 			mac.init(secretKey);
 			return mac.doFinal(input.getBytes());
 		} catch (GeneralSecurityException e) {
-			throw convertRuntimeException(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 
@@ -123,7 +124,7 @@ public abstract class CryptoUtils {
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
 		} catch (GeneralSecurityException e) {
-			throw convertRuntimeException(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 
@@ -197,7 +198,7 @@ public abstract class CryptoUtils {
 			cipher.init(mode, secretKey);
 			return cipher.doFinal(inputBytes);
 		} catch (GeneralSecurityException e) {
-			throw convertRuntimeException(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 
@@ -210,7 +211,7 @@ public abstract class CryptoUtils {
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
 		} catch (GeneralSecurityException e) {
-			throw convertRuntimeException(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 
@@ -280,7 +281,7 @@ public abstract class CryptoUtils {
 			cipher.init(mode, secretKey);
 			return cipher.doFinal(inputBytes);
 		} catch (GeneralSecurityException e) {
-			throw convertRuntimeException(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 
@@ -294,7 +295,7 @@ public abstract class CryptoUtils {
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
 		} catch (GeneralSecurityException e) {
-			throw convertRuntimeException(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 
@@ -304,9 +305,5 @@ public abstract class CryptoUtils {
 	 */
 	public static String generateAesHexKey() {
 		return EncodeUtils.hexEncode(generateAesKey());
-	}
-
-	private static RuntimeException convertRuntimeException(GeneralSecurityException e) {
-		return new RuntimeException("Crypto exception", e);
 	}
 }

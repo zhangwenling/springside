@@ -50,7 +50,7 @@ public class WebDriverFactory {
 			try {
 				driver = new RemoteWebDriver(new URL("http://" + remoteHost + ":" + remotePort + "/wd"), cap);
 			} catch (MalformedURLException e) {
-				ExceptionUtils.throwUnchecked(e);
+				throw ExceptionUtils.unchecked(e);
 			}
 		}
 
