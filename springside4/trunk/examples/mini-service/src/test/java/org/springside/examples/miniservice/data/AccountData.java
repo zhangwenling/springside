@@ -2,7 +2,7 @@ package org.springside.examples.miniservice.data;
 
 import org.springside.examples.miniservice.entity.Department;
 import org.springside.examples.miniservice.entity.User;
-import org.springside.modules.test.data.DataUtils;
+import org.springside.modules.test.data.RandomData;
 
 /**
  * 用户测试数据生成.
@@ -12,7 +12,7 @@ import org.springside.modules.test.data.DataUtils;
 public class AccountData {
 
 	public static Department getRandomDepartment() {
-		String departmentName = DataUtils.randomName("Department");
+		String departmentName = RandomData.randomName("Department");
 		User manager = getRandomUser();
 
 		Department department = new Department();
@@ -25,7 +25,7 @@ public class AccountData {
 	}
 
 	public static User getRandomUser() {
-		String userName = DataUtils.randomName("User");
+		String userName = RandomData.randomName("User");
 		Department department = getDefaultDepartment();
 
 		User user = new User();

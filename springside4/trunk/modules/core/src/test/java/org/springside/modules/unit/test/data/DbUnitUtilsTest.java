@@ -7,7 +7,7 @@ import javax.sql.DataSource;
 import org.junit.Test;
 import org.springframework.beans.BeansException;
 import org.springframework.test.context.ContextConfiguration;
-import org.springside.modules.test.data.DbUnitUtils;
+import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 @ContextConfiguration(locations = { "/applicationContext-core-test.xml" })
@@ -19,13 +19,13 @@ public class DbUnitUtilsTest extends SpringTxTestCase {
 
 		executeSqlScript("classpath:/schema.sql", false);
 
-		DbUnitUtils.appendData((DataSource) applicationContext.getBean("dataSource"), "classpath:/test-data.xml");
+		Fixtures.appendData((DataSource) applicationContext.getBean("dataSource"), "classpath:/test-data.xml");
 		assertEquals(6, countRowsInTable("SS_USER"));
 
-		DbUnitUtils.loadData((DataSource) applicationContext.getBean("dataSource"), "classpath:/test-data.xml");
+		Fixtures.loadData((DataSource) applicationContext.getBean("dataSource"), "classpath:/test-data.xml");
 		assertEquals(6, countRowsInTable("SS_USER"));
 
-		DbUnitUtils.removeData((DataSource) applicationContext.getBean("dataSource"), "classpath:/test-data.xml");
+		Fixtures.removeData((DataSource) applicationContext.getBean("dataSource"), "classpath:/test-data.xml");
 		assertEquals(0, countRowsInTable("SS_USER"));
 	}
 }

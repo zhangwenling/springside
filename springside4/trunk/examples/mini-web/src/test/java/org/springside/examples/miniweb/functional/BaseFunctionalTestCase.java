@@ -11,7 +11,7 @@ import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.springside.examples.miniweb.tools.Start;
-import org.springside.modules.test.data.DbUnitUtils;
+import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.functional.JettyFactory;
 import org.springside.modules.test.functional.Selenium2;
 import org.springside.modules.test.groups.GroupsTestRunner;
@@ -68,14 +68,14 @@ public class BaseFunctionalTestCase {
 	 * 载入默认数据.
 	 */
 	protected static void loadDefaultData() throws Exception {
-		DbUnitUtils.loadData(dataSource, "/data/sample-data.xml");
+		Fixtures.loadData(dataSource, "/data/sample-data.xml");
 	}
 
 	/**
 	 * 删除默认数据.
 	 */
 	protected static void cleanDefaultData() throws Exception {
-		DbUnitUtils.removeData(dataSource, "/data/sample-data.xml");
+		Fixtures.removeData(dataSource, "/data/sample-data.xml");
 	}
 
 	/**

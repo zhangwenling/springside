@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springside.examples.showcase.tools.Start;
-import org.springside.modules.test.data.DbUnitUtils;
+import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.functional.JettyFactory;
 import org.springside.modules.test.functional.Selenium2;
 import org.springside.modules.test.groups.GroupsTestRunner;
@@ -66,14 +66,14 @@ public class BaseFunctionalTestCase {
 	 * 载入默认数据.
 	 */
 	protected static void loadDefaultData() throws Exception {
-		DbUnitUtils.loadData(dataSourceHolder, "/data/sample-data.xml");
+		Fixtures.loadData(dataSourceHolder, "/data/sample-data.xml");
 	}
 
 	/**
 	 * 删除默认数据.
 	 */
 	protected static void cleanDefaultData() throws Exception {
-		DbUnitUtils.removeData(dataSourceHolder, "/data/sample-data.xml");
+		Fixtures.removeData(dataSourceHolder, "/data/sample-data.xml");
 	}
 
 	/**

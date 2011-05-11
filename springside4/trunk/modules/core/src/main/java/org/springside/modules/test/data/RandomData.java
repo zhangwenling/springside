@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * 测试数据生成工具类.
+ * 随机测试数据生成工具类.
  * 
  * @author calvin
  */
-public abstract class DataUtils {
+public abstract class RandomData {
 
 	private static Random random = new Random();
 

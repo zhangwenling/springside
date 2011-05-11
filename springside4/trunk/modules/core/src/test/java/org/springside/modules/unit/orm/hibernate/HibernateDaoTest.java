@@ -22,7 +22,7 @@ import org.springside.modules.orm.PageRequest;
 import org.springside.modules.orm.PageRequest.Sort;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.hibernate.HibernateDao;
-import org.springside.modules.test.data.DbUnitUtils;
+import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.unit.orm.hibernate.data.User;
 
@@ -42,7 +42,7 @@ public class HibernateDaoTest extends SpringTxTestCase {
 
 		executeSqlScript("classpath:/schema.sql", false);
 
-		DbUnitUtils.loadData((DataSource) applicationContext.getBean("dataSource"), "/test-data.xml");
+		Fixtures.loadData((DataSource) applicationContext.getBean("dataSource"), "/test-data.xml");
 
 		dao = new HibernateDao<User, Long>(User.class);
 		dao.setSessionFactory(sessionFactory);

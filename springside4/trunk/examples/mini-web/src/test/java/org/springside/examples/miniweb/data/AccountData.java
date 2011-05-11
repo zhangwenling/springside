@@ -5,7 +5,7 @@ import java.util.List;
 import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.entity.account.Permission;
 import org.springside.examples.miniweb.entity.account.User;
-import org.springside.modules.test.data.DataUtils;
+import org.springside.modules.test.data.RandomData;
 
 import com.google.common.collect.Lists;
 
@@ -23,7 +23,7 @@ public class AccountData {
 	private static List<String> defaultPermissionList = null;
 
 	public static User getRandomUser() {
-		String userName = DataUtils.randomName("User");
+		String userName = RandomData.randomName("User");
 
 		User user = new User();
 		user.setLoginName(userName);
@@ -42,7 +42,7 @@ public class AccountData {
 
 	public static Group getRandomGroup() {
 		Group group = new Group();
-		group.setName(DataUtils.randomName("Group"));
+		group.setName(RandomData.randomName("Group"));
 		return group;
 	}
 
@@ -62,7 +62,7 @@ public class AccountData {
 	}
 
 	public static Group getRandomDefaultGroup() {
-		return DataUtils.randomOne(getDefaultGroupList());
+		return RandomData.randomOne(getDefaultGroupList());
 	}
 
 	public static List<String> getDefaultPermissionList() {
@@ -76,6 +76,6 @@ public class AccountData {
 	}
 
 	public static List<String> getRandomDefaultPermissionList() {
-		return DataUtils.randomSome(getDefaultPermissionList());
+		return RandomData.randomSome(getDefaultPermissionList());
 	}
 }
