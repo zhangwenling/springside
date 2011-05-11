@@ -8,7 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.springside.examples.miniservice.tools.Start;
 import org.springside.modules.test.data.DbUnitUtils;
-import org.springside.modules.test.functional.JettyUtils;
+import org.springside.modules.test.functional.JettyFactory;
 import org.springside.modules.utils.spring.SpringContextHolder;
 
 /**
@@ -43,7 +43,7 @@ public class BaseFunctionalTestCase {
 	 */
 	protected static void startJetty() throws Exception {
 		if (server == null) {
-			server = JettyUtils.buildTestServer(Start.PORT, Start.CONTEXT);
+			server = JettyFactory.buildTestServer(Start.PORT, Start.CONTEXT);
 			server.start();
 			dataSource = SpringContextHolder.getBean("dataSource");
 		}

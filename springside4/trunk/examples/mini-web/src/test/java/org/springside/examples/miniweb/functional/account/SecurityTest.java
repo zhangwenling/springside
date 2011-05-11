@@ -23,12 +23,12 @@ public class SecurityTest extends BaseFunctionalTestCase {
 	@Groups(NIGHTLY)
 	public void checkAnonymous() {
 		//访问退出登录页面,退出之前的登录
-		selenium.open(BASE_URL + "/logout.action");
-		assertEquals("Mini-Web 登录页", selenium.getTitle());
+		s.open("/logout.action");
+		assertEquals("Mini-Web 登录页", s.getTitle());
 
 		//访问任意页面会跳转到登录界面
-		selenium.open(BASE_URL + "/account/user.action");
-		assertEquals("Mini-Web 登录页", selenium.getTitle());
+		s.open("/account/user.action");
+		assertEquals("Mini-Web 登录页", s.getTitle());
 	}
 
 	/**
@@ -38,17 +38,16 @@ public class SecurityTest extends BaseFunctionalTestCase {
 	@Groups(NIGHTLY)
 	public void checkUserPermission() {
 		//访问退出登录页面,退出之前的登录
-		selenium.open(BASE_URL + "/logout.action");
-		assertEquals("Mini-Web 登录页", selenium.getTitle());
+		s.open("/logout.action");
+		assertEquals("Mini-Web 登录页", s.getTitle());
 
 		//登录普通用户
-		selenium.type(By.name("username"), "user");
-		selenium.type(By.name("password"), "user");
-		selenium.clickTo(By.xpath(Gui.BUTTON_LOGIN));
+		s.type(By.name("username"), "user");
+		s.type(By.name("password"), "user");
+		s.clickTo(By.xpath(Gui.BUTTON_LOGIN));
 
 		//校验用户权限组的操作单元格为空
-		selenium.clickTo(By.linkText(Gui.MENU_USER));
-		assertEquals("查看",
-				selenium.getTable(By.xpath("//table[@id='contentTable']"), 1, UserColumn.OPERATIONS.ordinal()));
+		s.clickTo(By.linkText(Gui.MENU_USER));
+		assertEquals("查看", s.getTable(By.xpath("//table[@id='contentTable']"), 1, UserColumn.OPERATIONS.ordinal()));
 	}
 }

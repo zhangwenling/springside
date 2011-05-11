@@ -12,8 +12,8 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.springside.examples.miniweb.tools.Start;
 import org.springside.modules.test.data.DbUnitUtils;
-import org.springside.modules.test.functional.JettyUtils;
-import org.springside.modules.test.functional.SeleniumHolder;
+import org.springside.modules.test.functional.JettyFactory;
+import org.springside.modules.test.functional.Selenium2;
 import org.springside.modules.test.groups.GroupsTestRunner;
 import org.springside.modules.utils.PropertiesUtils;
 import org.springside.modules.utils.spring.SpringContextHolder;
@@ -33,13 +33,11 @@ public class BaseFunctionalTestCase {
 	public final static String DAILY = "DAILY";
 	public final static String NIGHTLY = "NIGHTLY";
 
-	protected final static String BASE_URL = Start.BASE_URL;
-
 	protected static Server jettyServer;
 
 	protected static DataSource dataSource;
 
-	protected static SeleniumHolder selenium;
+	protected static Selenium2 s;
 
 	@BeforeClass
 	public static void startAll() throws Exception {
@@ -60,7 +58,7 @@ public class BaseFunctionalTestCase {
 	 */
 	protected static void startJetty() throws Exception {
 		if (jettyServer == null) {
-			jettyServer = JettyUtils.buildTestServer(Start.PORT, Start.CONTEXT);
+			jettyServer = JettyFactory.buildTestServer(Start.PORT, Start.CONTEXT);
 			jettyServer.start();
 			dataSource = SpringContextHolder.getBean("dataSource");
 		}
@@ -87,23 +85,23 @@ public class BaseFunctionalTestCase {
 		Properties props = PropertiesUtils.loadProperties("classpath:/application.test.properties",
 				"classpath:/application.test-local.properties");
 
-		selenium = new SeleniumHolder(props.getProperty("selenium.driver"));
+		s = new Selenium2(props.getProperty("selenium.driver"), Start.BASE_URL);
 	}
 
 	protected static void quitSelenium() {
-		selenium.quit();
+		s.quit();
 	}
 
 	/**
 	 * 登录管理员权限组.
 	 */
 	protected static void loginAsAdminIfNecessary() {
-		selenium.open(BASE_URL + "/account/user.action");
+		s.open("/account/user.action");
 
-		if ("Mini-Web 登录页".equals(selenium.getTitle())) {
-			selenium.type(By.name("username"), "admin");
-			selenium.type(By.name("password"), "admin");
-			selenium.clickTo(By.xpath(Gui.BUTTON_LOGIN));
+		if ("Mini-Web 登录页".equals(s.getTitle())) {
+			s.type(By.name("username"), "admin");
+			s.type(By.name("password"), "admin");
+			s.clickTo(By.xpath(Gui.BUTTON_LOGIN));
 		}
 	}
 }

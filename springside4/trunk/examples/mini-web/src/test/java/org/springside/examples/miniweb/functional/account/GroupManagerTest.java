@@ -28,10 +28,10 @@ public class GroupManagerTest extends BaseFunctionalTestCase {
 	@Groups(DAILY)
 	@Test
 	public void listPage() {
-		selenium.clickTo(By.linkText(Gui.MENU_GROUP));
-		WebElement table = selenium.findElement(By.xpath("//table[@id='contentTable']"));
-		assertEquals("管理员", selenium.getTable(table, 1, GroupColumn.NAME.ordinal()));
-		assertEquals("查看用戶,修改用户,查看权限组,修改权限组", selenium.getTable(table, 1, GroupColumn.PERMISSIONS.ordinal()));
+		s.clickTo(By.linkText(Gui.MENU_GROUP));
+		WebElement table = s.findElement(By.xpath("//table[@id='contentTable']"));
+		assertEquals("管理员", s.getTable(table, 1, GroupColumn.NAME.ordinal()));
+		assertEquals("查看用戶,修改用户,查看权限组,修改权限组", s.getTable(table, 1, GroupColumn.PERMISSIONS.ordinal()));
 	}
 
 	/**
@@ -40,38 +40,38 @@ public class GroupManagerTest extends BaseFunctionalTestCase {
 	@Groups(DAILY)
 	@Test
 	public void createGroup() {
-		selenium.clickTo(By.linkText(Gui.MENU_GROUP));
-		selenium.clickTo(By.linkText("增加新权限组"));
+		s.clickTo(By.linkText(Gui.MENU_GROUP));
+		s.clickTo(By.linkText("增加新权限组"));
 
 		//生成测试数据
 		Group group = AccountData.getRandomGroupWithPermissions();
 
 		//输入数据
-		selenium.type(By.id("name"), group.getName());
+		s.type(By.id("name"), group.getName());
 		for (String permission : group.getPermissionList()) {
-			selenium.check(By.id("checkedPermissions-" + permission));
+			s.check(By.id("checkedPermissions-" + permission));
 		}
-		selenium.clickTo(By.xpath(Gui.BUTTON_SUBMIT));
+		s.clickTo(By.xpath(Gui.BUTTON_SUBMIT));
 
 		//校验结果
-		assertTrue(selenium.isTextPresent("保存权限组成功"));
+		assertTrue(s.isTextPresent("保存权限组成功"));
 		verifyGroup(group);
 	}
 
 	private void verifyGroup(Group group) {
-		selenium.clickTo(By.linkText(Gui.MENU_GROUP));
-		selenium.clickTo(By.id("editLink-" + group.getName()));
+		s.clickTo(By.linkText(Gui.MENU_GROUP));
+		s.clickTo(By.id("editLink-" + group.getName()));
 
-		assertEquals(group.getName(), selenium.getValue(By.id("name")));
+		assertEquals(group.getName(), s.getValue(By.id("name")));
 
 		for (String permission : group.getPermissionList()) {
-			assertTrue(selenium.isChecked(By.id("checkedPermissions-" + permission)));
+			assertTrue(s.isChecked(By.id("checkedPermissions-" + permission)));
 		}
 
 		List<String> uncheckPermissionList = ListUtils.subtract(AccountData.getDefaultPermissionList(),
 				group.getPermissionList());
 		for (String permission : uncheckPermissionList) {
-			assertFalse(selenium.isChecked(By.id("checkedPermissions-" + permission)));
+			assertFalse(s.isChecked(By.id("checkedPermissions-" + permission)));
 		}
 	}
 }

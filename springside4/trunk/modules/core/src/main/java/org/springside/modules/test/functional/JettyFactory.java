@@ -15,7 +15,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
  * 
  * @author calvin
  */
-public abstract class JettyUtils {
+public abstract class JettyFactory {
 
 	/**
 	 * 创建用于开发运行调试的Jetty Server, 以src/main/webapp为Web应用目录.
