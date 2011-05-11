@@ -20,6 +20,15 @@
 		<property name="loginUrl" value="/security/login.action" />
 		<property name="successUrl" value="/" />
 		<property name="unauthorizedUrl" value="/" />
+		<property name="filters">
+			<util:map>
+				<entry key="authc">
+					<bean class="org.springside.examples.showcase.security.FormAuthenticationWithLockFilter" >
+						<property name="maxLoginAttempts" value="3"/>
+					</bean>
+				</entry>
+			</util:map>
+		</property>
 		<property name="filterChainDefinitions">
 			<value>
 				/security/* = authc
