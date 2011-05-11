@@ -2,7 +2,7 @@ package org.springside.examples.showcase.data;
 
 import org.springside.examples.showcase.common.entity.Role;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.modules.test.data.DataUtils;
+import org.springside.modules.test.data.RandomData;
 
 /**
  * 用户测试数据生成.
@@ -12,7 +12,7 @@ import org.springside.modules.test.data.DataUtils;
 public class UserData {
 
 	public static User getRandomUser() {
-		String userName = DataUtils.randomName("User");
+		String userName = RandomData.randomName("User");
 
 		User user = new User();
 		user.setLoginName(userName);

@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springside.examples.showcase.schedule.JdkExecutorJob;
 import org.springside.modules.log.MockLog4jAppender;
-import org.springside.modules.test.data.DbUnitUtils;
+import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.utils.ThreadUtils;
 
@@ -19,7 +19,7 @@ public class JdkExecutorJobTest extends SpringTxTestCase {
 
 	@Test
 	public void scheduleJob() throws Exception {
-		DbUnitUtils.loadData(dataSource, "/data/sample-data.xml");
+		Fixtures.loadData(dataSource, "/data/sample-data.xml");
 
 		//加载测试用logger appender
 		MockLog4jAppender appender = new MockLog4jAppender();
@@ -32,7 +32,7 @@ public class JdkExecutorJobTest extends SpringTxTestCase {
 		assertEquals(1, appender.getAllLogs().size());
 		assertEquals("There are 6 user in database.", appender.getFirstMessage());
 
-		DbUnitUtils.removeData(dataSource, "/data/sample-data.xml");
+		Fixtures.removeData(dataSource, "/data/sample-data.xml");
 
 	}
 }

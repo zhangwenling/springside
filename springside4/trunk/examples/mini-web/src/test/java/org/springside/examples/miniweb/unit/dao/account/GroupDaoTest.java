@@ -14,7 +14,7 @@ import org.springside.examples.miniweb.dao.account.UserDao;
 import org.springside.examples.miniweb.data.AccountData;
 import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.entity.account.User;
-import org.springside.modules.test.data.DbUnitUtils;
+import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
@@ -36,14 +36,14 @@ public class GroupDaoTest extends SpringTxTestCase {
 	@Before
 	public void loadSampleData() throws Exception {
 		if (dataSourceHolder == null) {
-			DbUnitUtils.loadData(dataSource, "/data/sample-data.xml");
+			Fixtures.loadData(dataSource, "/data/sample-data.xml");
 			dataSourceHolder = dataSource;
 		}
 	}
 
 	@AfterClass
 	public static void cleanSampleData() throws Exception {
-		DbUnitUtils.removeData(dataSourceHolder, "/data/sample-data.xml");
+		Fixtures.removeData(dataSourceHolder, "/data/sample-data.xml");
 		dataSourceHolder = null;
 	}
 

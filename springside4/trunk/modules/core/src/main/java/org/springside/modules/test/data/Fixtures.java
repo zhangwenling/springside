@@ -28,13 +28,13 @@ import org.springside.modules.utils.PropertiesUtils;
 /**
  * 使用DBUnit初始化测试用H2嵌入式数据库数据的工具类.
  */
-public abstract class DbUnitUtils {
+public abstract class Fixtures {
 
 	private static Logger logger = LoggerFactory.getLogger(PropertiesUtils.class);
 	private static ResourceLoader resourceLoader = new DefaultResourceLoader();
 
 	/**
-	 * 清除并插入XML数据文件到H2数据库.
+	 * 清除并插入XML文件中的数据到H2数据库.
 	 * 
 	 * XML数据文件中涉及的表在插入数据前会先进行清除. 
 	 * 
@@ -45,21 +45,25 @@ public abstract class DbUnitUtils {
 	}
 
 	/**
-	 * 插入XML数据文件到H2数据库. 
+	 * 插入XML文件中的数据到H2数据库.
+	 *  
+	 * @param xmlFilePaths 符合Spring Resource路径格式的文件路径列表.
 	 */
 	public static void appendData(DataSource h2DataSource, String... xmlFilePaths) throws Exception {
 		execute(DatabaseOperation.INSERT, h2DataSource, xmlFilePaths);
 	}
 
 	/**
-	 * 在H2数据库中删除XML数据文件中涉及的表的数据. 
+	 * 在H2数据库中删除XML文件中涉及的表的数据. 
+	 * 
+	 * @param xmlFilePaths 符合Spring Resource路径格式的文件路径列表.
 	 */
 	public static void removeData(DataSource h2DataSource, String... xmlFilePaths) throws Exception {
 		execute(DatabaseOperation.DELETE_ALL, h2DataSource, xmlFilePaths);
 	}
 
 	/**
-	 * 按DBUnit Operation执行XML数据文件的数据.
+	 * XML文件中的数据执行DBUnit Operation.
 	 * 
 	 * @param xmlFilePaths 符合Spring Resource路径格式的文件列表.
 	 */

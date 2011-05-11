@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springside.modules.test.data.DbUnitUtils;
+import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 /**
@@ -37,14 +37,14 @@ public class HibernateMappingTest extends SpringTxTestCase {
 	@Before
 	public void loadDefaultData() throws Exception {
 		if (dataSourceHolder == null) {
-			DbUnitUtils.loadData(dataSource, "/data/sample-data.xml");
+			Fixtures.loadData(dataSource, "/data/sample-data.xml");
 			dataSourceHolder = dataSource;
 		}
 	}
 
 	@AfterClass
 	public static void cleanDefaultData() throws Exception {
-		DbUnitUtils.removeData(dataSourceHolder, "/data/sample-data.xml");
+		Fixtures.removeData(dataSourceHolder, "/data/sample-data.xml");
 	}
 
 	@Test

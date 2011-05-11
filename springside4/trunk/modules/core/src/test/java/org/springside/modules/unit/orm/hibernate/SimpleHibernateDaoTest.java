@@ -20,7 +20,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.orm.hibernate.SimpleHibernateDao;
-import org.springside.modules.test.data.DbUnitUtils;
+import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.unit.orm.hibernate.data.User;
 import org.springside.modules.utils.ReflectionUtils;
@@ -44,7 +44,7 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 
 		executeSqlScript("classpath:/schema.sql", false);
 
-		DbUnitUtils.loadData((DataSource) applicationContext.getBean("dataSource"), "classpath:/test-data.xml");
+		Fixtures.loadData((DataSource) applicationContext.getBean("dataSource"), "classpath:/test-data.xml");
 
 		dao = new SimpleHibernateDao<User, Long>(User.class);
 		dao.setSessionFactory(sessionFactory);

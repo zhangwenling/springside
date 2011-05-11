@@ -15,7 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springside.examples.showcase.common.dao.UserHibernateDao;
 import org.springside.examples.showcase.common.entity.User;
-import org.springside.modules.test.data.DbUnitUtils;
+import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.spring.SpringTxTestCase;
 
 import com.google.common.collect.Lists;
@@ -38,14 +38,14 @@ public class UserHibernateDaoTest extends SpringTxTestCase {
 	@Before
 	public void loadDefaultData() throws Exception {
 		if (dataSourceHolder == null) {
-			DbUnitUtils.loadData(dataSource, "/data/sample-data.xml");
+			Fixtures.loadData(dataSource, "/data/sample-data.xml");
 			dataSourceHolder = dataSource;
 		}
 	}
 
 	@AfterClass
 	public static void cleanDefaultData() throws Exception {
-		DbUnitUtils.removeData(dataSourceHolder, "/data/sample-data.xml");
+		Fixtures.removeData(dataSourceHolder, "/data/sample-data.xml");
 	}
 
 	@Test

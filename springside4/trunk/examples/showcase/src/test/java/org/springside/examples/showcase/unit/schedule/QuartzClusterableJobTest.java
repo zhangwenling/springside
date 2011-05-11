@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springside.examples.showcase.schedule.QuartzClusterableJob;
 import org.springside.modules.log.MockLog4jAppender;
-import org.springside.modules.test.data.DbUnitUtils;
+import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.utils.ThreadUtils;
 
@@ -25,7 +25,7 @@ public class QuartzClusterableJobTest extends SpringTxTestCase {
 
 	@Test
 	public void scheduleJob() throws Exception {
-		DbUnitUtils.loadData(dataSource, "/data/sample-data.xml");
+		Fixtures.loadData(dataSource, "/data/sample-data.xml");
 
 		//加载测试用logger appender
 		MockLog4jAppender appender = new MockLog4jAppender();
@@ -39,6 +39,6 @@ public class QuartzClusterableJobTest extends SpringTxTestCase {
 
 		assertEquals("There are 6 user in database, print by default's job.", appender.getFirstMessage());
 
-		DbUnitUtils.removeData(dataSource, "/data/sample-data.xml");
+		Fixtures.removeData(dataSource, "/data/sample-data.xml");
 	}
 }
