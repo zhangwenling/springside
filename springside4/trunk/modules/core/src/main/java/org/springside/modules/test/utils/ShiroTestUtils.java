@@ -27,12 +27,12 @@ public class ShiroTestUtils {
 	}
 
 	/**
-	 * 用EasyMock快速創建一個已認證的, 用戶名為mockUser的用戶.
+	 * 用EasyMock快速創建一個已認證的用户.
 	 */
-	public static void mockSubject() {
+	public static void mockSubject(String principal) {
 		Subject subject = createNiceMock(Subject.class);
 		expect(subject.isAuthenticated()).andReturn(true);
-		expect(subject.getPrincipal()).andReturn("mockUser");
+		expect(subject.getPrincipal()).andReturn(principal);
 		replay(subject);
 
 		bindSubject(subject);

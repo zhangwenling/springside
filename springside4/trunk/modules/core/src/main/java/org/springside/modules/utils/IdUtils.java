@@ -37,6 +37,6 @@ public abstract class IdUtils {
 	 * 基于Base62编码的随机生成Long.
 	 */
 	public static String randomBase62() {
-		return EncodeUtils.base62Encode(random.nextLong());
+		return EncodeUtils.encodeBase62(random.nextLong());
 	}
 }

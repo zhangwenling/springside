@@ -79,7 +79,7 @@ public abstract class ThreadUtils {
 		private final AtomicInteger threadNumber = new AtomicInteger(1);
 
 		public CustomizableThreadFactory(String poolName) {
-			namePrefix = poolName + "-";
+			namePrefix = poolName + "-pool-";
 		}
 
 		@Override

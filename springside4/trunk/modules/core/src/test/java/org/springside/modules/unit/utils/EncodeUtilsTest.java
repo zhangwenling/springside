@@ -10,31 +10,31 @@ public class EncodeUtilsTest {
 	@Test
 	public void hexEncode() {
 		String input = "haha,i am a very long message";
-		String result = EncodeUtils.hexEncode(input.getBytes());
-		assertEquals(input, new String(EncodeUtils.hexDecode(result)));
+		String result = EncodeUtils.encodeHex(input.getBytes());
+		assertEquals(input, new String(EncodeUtils.decodeHex(result)));
 	}
 
 	@Test
 	public void base64Encode() {
 		String input = "haha,i am a very long message";
-		String result = EncodeUtils.base64Encode(input.getBytes());
-		assertEquals(input, new String(EncodeUtils.base64Decode(result)));
+		String result = EncodeUtils.encodeBase64(input.getBytes());
+		assertEquals(input, new String(EncodeUtils.decodeBase64(result)));
 	}
 
 	@Test
 	public void base64UrlSafeEncode() {
 		String input = "haha,i am a very long message";
-		String result = EncodeUtils.base64UrlSafeEncode(input.getBytes());
-		assertEquals(input, new String(EncodeUtils.base64Decode(result)));
+		String result = EncodeUtils.encodeUrlSafeBase64(input.getBytes());
+		assertEquals(input, new String(EncodeUtils.decodeBase64(result)));
 	}
 
 	@Test
 	public void base62Encode() {
 		long num = 63;
 
-		String result = EncodeUtils.base62Encode(num);
+		String result = EncodeUtils.encodeBase62(num);
 		assertEquals("11", result);
-		assertEquals(num, EncodeUtils.base62Decode(result));
+		assertEquals(num, EncodeUtils.decodeBase62(result));
 	}
 
 	@Test

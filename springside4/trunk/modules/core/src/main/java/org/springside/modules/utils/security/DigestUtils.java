@@ -13,6 +13,7 @@ import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 
 import org.springside.modules.utils.EncodeUtils;
+import org.springside.modules.utils.ExceptionUtils;
 
 /**
  * 支持SHA-1/MD5消息摘要的工具类.
@@ -30,25 +31,25 @@ public abstract class DigestUtils {
 	/**
 	 * 对输入字符串进行sha1散列, 返回Hex编码的结果.
 	 */
-	public static String sha1ToHex(String input) {
+	public static String sha1Hex(String input) {
 		byte[] digestResult = digest(input, SHA1);
-		return EncodeUtils.hexEncode(digestResult);
+		return EncodeUtils.encodeHex(digestResult);
 	}
 
 	/**
 	 * 对输入字符串进行sha1散列, 返回Base64编码的结果.
 	 */
-	public static String sha1ToBase64(String input) {
+	public static String sha1Base64(String input) {
 		byte[] digestResult = digest(input, SHA1);
-		return EncodeUtils.base64Encode(digestResult);
+		return EncodeUtils.encodeBase64(digestResult);
 	}
 
 	/**
 	 * 对输入字符串进行sha1散列, 返回Base64编码的URL安全的结果.
 	 */
-	public static String sha1ToBase64UrlSafe(String input) {
+	public static String sha1Base64UrlSafe(String input) {
 		byte[] digestResult = digest(input, SHA1);
-		return EncodeUtils.base64UrlSafeEncode(digestResult);
+		return EncodeUtils.encodeUrlSafeBase64(digestResult);
 	}
 
 	/**
@@ -59,7 +60,7 @@ public abstract class DigestUtils {
 			MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
 			return messageDigest.digest(input.getBytes());
 		} catch (GeneralSecurityException e) {
-			throw convertRuntimeException(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 
@@ -67,14 +68,14 @@ public abstract class DigestUtils {
 	/**
 	 * 对文件进行md5散列, 返回Hex编码结果.
 	 */
-	public static String md5ToHex(InputStream input) throws IOException {
+	public static String md5Hex(InputStream input) throws IOException {
 		return digest(input, MD5);
 	}
 
 	/**
 	 * 对文件进行sha1散列, 返回Hex编码结果.
 	 */
-	public static String sha1ToHex(InputStream input) throws IOException {
+	public static String sha1Hex(InputStream input) throws IOException {
 		return digest(input, SHA1);
 	}
 
@@ -90,14 +91,11 @@ public abstract class DigestUtils {
 				read = input.read(buffer, 0, bufferLength);
 			}
 
-			return EncodeUtils.hexEncode(messageDigest.digest());
+			return EncodeUtils.encodeHex(messageDigest.digest());
 
 		} catch (GeneralSecurityException e) {
-			throw convertRuntimeException(e);
+			throw ExceptionUtils.unchecked(e);
 		}
 	}
 
-	private static RuntimeException convertRuntimeException(GeneralSecurityException e) {
-		return new RuntimeException("Digest exception", e);
-	}
 }

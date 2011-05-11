@@ -33,14 +33,14 @@ public abstract class EncodeUtils {
 	/**
 	 * Hex编码, byte[]->String.
 	 */
-	public static String hexEncode(byte[] input) {
+	public static String encodeHex(byte[] input) {
 		return Hex.encodeHexString(input);
 	}
 
 	/**
 	 * Hex解码, String->byte[].
 	 */
-	public static byte[] hexDecode(String input) {
+	public static byte[] decodeHex(String input) {
 		try {
 			return Hex.decodeHex(input.toCharArray());
 		} catch (DecoderException e) {
@@ -51,35 +51,35 @@ public abstract class EncodeUtils {
 	/**
 	 * Base64编码, byte[]->String.
 	 */
-	public static String base64Encode(byte[] input) {
+	public static String encodeBase64(byte[] input) {
 		return Base64.encodeBase64String(input);
 	}
 
 	/**
 	 * Base64编码, URL安全(将Base64中的URL非法字符'+'和'/'转为'-'和'_', 见RFC3548).
 	 */
-	public static String base64UrlSafeEncode(byte[] input) {
+	public static String encodeUrlSafeBase64(byte[] input) {
 		return Base64.encodeBase64URLSafeString(input);
 	}
 
 	/**
 	 * Base64解码, String->byte[].
 	 */
-	public static byte[] base64Decode(String input) {
+	public static byte[] decodeBase64(String input) {
 		return Base64.decodeBase64(input);
 	}
 
 	/**
-	 * Base62(0_9A_Za_z)编码, long->String.
+	 * Base62(0_9A_Za_z)编码数字, long->String.
 	 */
-	public static String base62Encode(long num) {
+	public static String encodeBase62(long num) {
 		return alphabetEncode(num, 62);
 	}
 
 	/**
-	 * Base62(0_9A_Za_z)解码, String->long.
+	 * Base62(0_9A_Za_z)解码数字, String->long.
 	 */
-	public static long base62Decode(String str) {
+	public static long decodeBase62(String str) {
 		return alphabetDecode(str, 62);
 	}
 
@@ -107,9 +107,9 @@ public abstract class EncodeUtils {
 	/**
 	 * URL 编码, Encode默认为UTF-8. 
 	 */
-	public static String urlEncode(String input) {
+	public static String urlEncode(String part) {
 		try {
-			return URLEncoder.encode(input, DEFAULT_URL_ENCODING);
+			return URLEncoder.encode(part, DEFAULT_URL_ENCODING);
 		} catch (UnsupportedEncodingException e) {
 			throw ExceptionUtils.unchecked(e);
 		}
@@ -118,10 +118,10 @@ public abstract class EncodeUtils {
 	/**
 	 * URL 解码, Encode默认为UTF-8. 
 	 */
-	public static String urlDecode(String input) {
+	public static String urlDecode(String part) {
 
 		try {
-			return URLDecoder.decode(input, DEFAULT_URL_ENCODING);
+			return URLDecoder.decode(part, DEFAULT_URL_ENCODING);
 		} catch (UnsupportedEncodingException e) {
 			throw ExceptionUtils.unchecked(e);
 		}

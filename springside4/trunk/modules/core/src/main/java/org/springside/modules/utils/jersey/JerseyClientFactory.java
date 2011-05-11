@@ -13,7 +13,7 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 
-public class JerseyClientUtils {
+public class JerseyClientFactory {
 
 	/**
 	 * 创建JerseyClient, 设定JSON字符串使用Jackson解析.

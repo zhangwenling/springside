@@ -15,7 +15,7 @@ import org.springside.examples.miniservice.service.AccountManager;
 import org.springside.examples.miniservice.webservice.WsConstants;
 import org.springside.examples.miniservice.webservice.dto.DepartmentDTO;
 import org.springside.modules.mapper.ConvertUtils;
-import org.springside.modules.utils.jersey.WebExceptionUtils;
+import org.springside.modules.utils.jersey.WebExceptionFactory;
 
 /**
  * Department资源的REST服务.
@@ -41,12 +41,12 @@ public class DepartmentResouceService {
 
 			if (entity == null) {
 				String message = "部门不存在(id:" + id + ")";
-				throw WebExceptionUtils.buildException(Status.NOT_FOUND, message, logger);
+				throw WebExceptionFactory.buildException(Status.NOT_FOUND, message, logger);
 			}
 
 			return ConvertUtils.map(entity, DepartmentDTO.class);
 		} catch (RuntimeException e) {
-			throw WebExceptionUtils.buildDefaultException(e, logger);
+			throw WebExceptionFactory.buildDefaultException(e, logger);
 		}
 	}
 

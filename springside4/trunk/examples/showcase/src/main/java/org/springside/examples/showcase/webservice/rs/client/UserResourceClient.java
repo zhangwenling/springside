@@ -7,7 +7,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Required;
 import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
 import org.springside.modules.mapper.JsonMapper;
-import org.springside.modules.utils.jersey.JerseyClientUtils;
+import org.springside.modules.utils.jersey.JerseyClientFactory;
 import org.springside.modules.utils.web.ServletUtils;
 
 import com.sun.jersey.api.client.GenericType;
@@ -25,7 +25,7 @@ public class UserResourceClient {
 
 	@Required
 	public void setBaseUrl(String baseUrl) {
-		client = JerseyClientUtils.createClient(baseUrl);
+		client = JerseyClientFactory.createClient(baseUrl);
 	}
 
 	/**
