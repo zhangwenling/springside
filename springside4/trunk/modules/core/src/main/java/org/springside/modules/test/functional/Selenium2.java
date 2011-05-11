@@ -7,7 +7,10 @@
  */
 package org.springside.modules.test.functional;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverBackedSelenium;
@@ -55,10 +58,17 @@ public class Selenium2 {
 	}
 
 	/**
-	 * 获取页面Title.
+	 * 获取页面标题.
 	 */
 	public String getTitle() {
 		return driver.getTitle();
+	}
+
+	/**
+	 * 获取页面地址.
+	 */
+	public String getLocation() {
+		return driver.getCurrentUrl();
 	}
 
 	/**
@@ -66,6 +76,39 @@ public class Selenium2 {
 	 */
 	public WebElement findElement(By by) {
 		return driver.findElement(by);
+	}
+
+	/**
+	 * 查找所有符合条件的Element.
+	 */
+	public List<WebElement> findElements(By by) {
+		return driver.findElements(by);
+	}
+
+	/**
+	 * 判断页面内是否存在文本内容.
+	 */
+	public boolean isTextPresent(String text) {
+		return selenium.isTextPresent(text);
+	}
+
+	/**
+	 * 判断页面内是否存在Element.
+	 */
+	public boolean isElementPresent(By by) {
+		try {
+			driver.findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+
+	/**
+	 * 判断Element是否可见.
+	 */
+	public boolean isVisible(By by) {
+		return ((RenderedWebElement) driver.findElement(by)).isDisplayed();
 	}
 
 	/**
@@ -93,7 +136,7 @@ public class Selenium2 {
 	}
 
 	/**
-	 * 选择Element.
+	 * 选中Element.
 	 */
 	public void check(By by) {
 		WebElement element = driver.findElement(by);
@@ -101,7 +144,7 @@ public class Selenium2 {
 	}
 
 	/**
-	 * 取消Element的选择.
+	 * 取消Element的选中.
 	 */
 	public void uncheck(By by) {
 		WebElement element = driver.findElement(by);
@@ -133,13 +176,6 @@ public class Selenium2 {
 	}
 
 	/**
-	 * 判断页面内是否存在文本内容.
-	 */
-	public boolean isTextPresent(String text) {
-		return selenium.isTextPresent(text);
-	}
-
-	/**
 	 * 取得单元格的内容, 序列从0开始, Selnium1.0的常用函数.
 	 */
 	public String getTable(WebElement table, int rowIndex, int columnIndex) {
@@ -168,18 +204,17 @@ public class Selenium2 {
 	}
 
 	/**
-	 * 等待element的内容展现, timeout单位为毫秒.
+	 * 等待Element的内容展现, timeout单位为毫秒.
 	 */
-	public void waitForDisplay(By by, int timeout) {
+	public void waitForVisible(By by, int timeout) {
 		long timeoutTime = System.currentTimeMillis() + timeout;
 		while (System.currentTimeMillis() < timeoutTime) {
-			RenderedWebElement element = (RenderedWebElement) driver.findElement(by);
-			if (element.isDisplayed()) {
+			if (isVisible(by)) {
 				return;
 			}
 			ThreadUtils.sleep(DEFAULT_PAUSE_TIME);
 		}
-		logger.warn("waitForDisplay timeout");
+		throw new RuntimeException("waitForVisible timeout");
 	}
 
 	/**
@@ -210,5 +245,4 @@ public class Selenium2 {
 	public void setDefaultTimeout(int defaultTimeout) {
 		this.defaultTimeout = defaultTimeout;
 	}
-
 }

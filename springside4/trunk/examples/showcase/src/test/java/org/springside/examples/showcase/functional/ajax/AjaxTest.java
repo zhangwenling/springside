@@ -20,7 +20,7 @@ public class AjaxTest extends BaseFunctionalTestCase {
 		s.clickTo(By.linkText("跨域名Mashup演示"));
 
 		s.clickTo(By.xpath("//input[@value='获取内容']"));
-		s.waitForDisplay(By.id("mashupContent"), 5000);
+		s.waitForVisible(By.id("mashupContent"), 5000);
 		assertEquals("Hello World!", s.getText(By.id("mashupContent")));
 	}
 }
