@@ -29,7 +29,7 @@ public class AccountManagerTest {
 		accountManager = new AccountManager();
 		mockUserDao = control.createMock(UserDao.class);
 		accountManager.setUserDao(mockUserDao);
-		ShiroTestUtils.mockSubject();
+		ShiroTestUtils.mockSubject("foo");
 	}
 
 	@After

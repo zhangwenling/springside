@@ -28,7 +28,7 @@ import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.examples.showcase.webservice.WsConstants;
 import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
 import org.springside.modules.mapper.ConvertUtils;
-import org.springside.modules.utils.jersey.WebExceptionUtils;
+import org.springside.modules.utils.jersey.WebExceptionFactory;
 
 /**
  * 用户资源 REST服务演示.
@@ -56,7 +56,7 @@ public class UserResourceService {
 			List<User> entityList = accountManager.getAllUserWithRole();
 			return ConvertUtils.mapList(entityList, UserDTO.class);
 		} catch (RuntimeException e) {
-			throw WebExceptionUtils.buildDefaultException(e, logger);
+			throw WebExceptionFactory.buildDefaultException(e, logger);
 		}
 	}
 
@@ -72,7 +72,7 @@ public class UserResourceService {
 			return ConvertUtils.map(entity, UserDTO.class);
 		} catch (ObjectNotFoundException e) {
 			String message = "用户不存在(id:" + id + ")";
-			throw WebExceptionUtils.buildException(Status.NOT_FOUND, message, logger);
+			throw WebExceptionFactory.buildException(Status.NOT_FOUND, message, logger);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			throw new WebApplicationException();
@@ -101,7 +101,7 @@ public class UserResourceService {
 			}
 		} catch (ObjectNotFoundException e) {
 			String message = "用户不存在(name:" + name + ")";
-			throw WebExceptionUtils.buildException(Status.NOT_FOUND, message, logger);
+			throw WebExceptionFactory.buildException(Status.NOT_FOUND, message, logger);
 		} catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
 			throw new WebApplicationException();
@@ -126,7 +126,7 @@ public class UserResourceService {
 		}
 
 		if (userName == null) {
-			throw WebExceptionUtils.buildException(450, "用戶名既不在Http Header也不在URL参数中", logger);
+			throw WebExceptionFactory.buildException(450, "用戶名既不在Http Header也不在URL参数中", logger);
 		}
 
 		return userName;

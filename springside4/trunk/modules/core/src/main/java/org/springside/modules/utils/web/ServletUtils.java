@@ -170,10 +170,10 @@ public abstract class ServletUtils {
 	}
 
 	/**
-	 * 对Http Basic验证的 Header进行编码.
+	 * 客户端对Http Basic验证的 Header进行编码.
 	 */
 	public static String encodeHttpBasic(String userName, String password) {
 		String encode = userName + ":" + password;
-		return "Basic " + EncodeUtils.base64Encode(encode.getBytes());
+		return "Basic " + EncodeUtils.encodeBase64(encode.getBytes());
 	}
 }

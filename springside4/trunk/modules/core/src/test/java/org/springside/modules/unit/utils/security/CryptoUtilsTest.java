@@ -19,7 +19,7 @@ public class CryptoUtilsTest {
 		String macHexResult = CryptoUtils.hmacSha1ToHex(input, key);
 		String macBase64Result = CryptoUtils.hmacSha1ToBase64(input, key);
 		String macBase64UrlResult = CryptoUtils.hmacSha1ToBase64UrlSafe(input, key);
-		System.out.println("hmac-sha1 key in hex            :" + EncodeUtils.hexEncode(key));
+		System.out.println("hmac-sha1 key in hex            :" + EncodeUtils.encodeHex(key));
 		System.out.println("hmac-sha1 in hex result         :" + macHexResult);
 		System.out.print("hmac-sha1 in base64 result      :" + macBase64Result);
 		System.out.println("hmac-sha1 in base64 url result  :" + macBase64UrlResult);
@@ -40,7 +40,7 @@ public class CryptoUtilsTest {
 		String encryptBase64Result = CryptoUtils.desEncryptToBase64(input, key);
 		String descryptBase64Result = CryptoUtils.desDecryptFromBase64(encryptBase64Result, key);
 
-		System.out.println("des key in hex                  :" + EncodeUtils.hexEncode(key));
+		System.out.println("des key in hex                  :" + EncodeUtils.encodeHex(key));
 		System.out.println("des encrypt in hex result       :" + encryptHexResult);
 		System.out.print("des encrypt in base64 result    :" + encryptBase64Result);
 
@@ -60,7 +60,7 @@ public class CryptoUtilsTest {
 		String encryptBase64Result = CryptoUtils.aesEncryptToBase64(input, key);
 		String descryptBase64Result = CryptoUtils.aesDecryptFromBase64(encryptBase64Result, key);
 
-		System.out.println("aes key in hex                  :" + EncodeUtils.hexEncode(key));
+		System.out.println("aes key in hex                  :" + EncodeUtils.encodeHex(key));
 		System.out.println("aes encrypt in hex result       :" + encryptHexResult);
 		System.out.print("aes encrypt in base64 result    :" + encryptBase64Result);
 

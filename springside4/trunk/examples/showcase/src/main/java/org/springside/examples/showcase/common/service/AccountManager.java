@@ -55,7 +55,7 @@ public class AccountManager {
 			throw new ServiceException("不能修改超级管理员用户");
 		}
 
-		String shaPassword = DigestUtils.sha1ToHex(user.getPlainPassword());
+		String shaPassword = DigestUtils.sha1Hex(user.getPlainPassword());
 		user.setShaPassword(shaPassword);
 
 		userHibernateDao.save(user);

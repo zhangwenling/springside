@@ -26,7 +26,7 @@ import org.springside.examples.miniservice.service.AccountManager;
 import org.springside.examples.miniservice.webservice.WsConstants;
 import org.springside.examples.miniservice.webservice.dto.UserDTO;
 import org.springside.modules.mapper.ConvertUtils;
-import org.springside.modules.utils.jersey.WebExceptionUtils;
+import org.springside.modules.utils.jersey.WebExceptionFactory;
 import org.springside.modules.utils.validator.ValidatorUtils;
 
 /**
@@ -56,12 +56,12 @@ public class UserResouceService {
 
 			if (entity == null) {
 				String message = "用户不存在(id:" + id + ")";
-				throw WebExceptionUtils.buildException(Status.NOT_FOUND, message, logger);
+				throw WebExceptionFactory.buildException(Status.NOT_FOUND, message, logger);
 			}
 
 			return ConvertUtils.map(entity, UserDTO.class);
 		} catch (RuntimeException e) {
-			throw WebExceptionUtils.buildDefaultException(e, logger);
+			throw WebExceptionFactory.buildDefaultException(e, logger);
 		}
 	}
 
@@ -77,7 +77,7 @@ public class UserResouceService {
 
 			return ConvertUtils.mapList(entityList, UserDTO.class);
 		} catch (RuntimeException e) {
-			throw WebExceptionUtils.buildDefaultException(e, logger);
+			throw WebExceptionFactory.buildDefaultException(e, logger);
 		}
 	}
 
@@ -97,12 +97,12 @@ public class UserResouceService {
 			return Response.created(createdUri).build();
 		} catch (ConstraintViolationException e) {
 			String message = ValidatorUtils.convertMessage(e, "\n");
-			throw WebExceptionUtils.buildException(Status.BAD_REQUEST.getStatusCode(), message, logger);
+			throw WebExceptionFactory.buildException(Status.BAD_REQUEST.getStatusCode(), message, logger);
 		} catch (DataIntegrityViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";
-			throw WebExceptionUtils.buildException(Status.BAD_REQUEST.getStatusCode(), message, logger);
+			throw WebExceptionFactory.buildException(Status.BAD_REQUEST.getStatusCode(), message, logger);
 		} catch (RuntimeException e) {
-			throw WebExceptionUtils.buildDefaultException(e, logger);
+			throw WebExceptionFactory.buildDefaultException(e, logger);
 		}
 	}
 
