@@ -42,7 +42,7 @@ public class BaseFunctionalTestCase {
 	@BeforeClass
 	public static void startAll() throws Exception {
 		startJetty();
-		loadDefaultData();
+		reloadSampleData();
 		createSelenium();
 		loginAsAdminIfNecessary();
 	}
@@ -50,7 +50,6 @@ public class BaseFunctionalTestCase {
 	@AfterClass
 	public static void stopAll() throws Exception {
 		quitSelenium();
-		cleanDefaultData();
 	}
 
 	/**
@@ -60,22 +59,16 @@ public class BaseFunctionalTestCase {
 		if (jettyServer == null) {
 			jettyServer = JettyFactory.buildTestServer(Start.PORT, Start.CONTEXT);
 			jettyServer.start();
+
 			dataSource = SpringContextHolder.getBean("dataSource");
 		}
 	}
 
 	/**
-	 * 载入默认数据.
+	 * 载入测试数据.
 	 */
-	protected static void loadDefaultData() throws Exception {
-		Fixtures.loadData(dataSource, "/data/sample-data.xml");
-	}
-
-	/**
-	 * 删除默认数据.
-	 */
-	protected static void cleanDefaultData() throws Exception {
-		Fixtures.removeData(dataSource, "/data/sample-data.xml");
+	protected static void reloadSampleData() throws Exception {
+		Fixtures.reloadAllTable(dataSource, "/data/sample-data.xml");
 	}
 
 	/**
@@ -96,7 +89,7 @@ public class BaseFunctionalTestCase {
 	}
 
 	/**
-	 * 登录管理员权限组.
+	 * 登录管理员,如果用户还没有登录.
 	 */
 	protected static void loginAsAdminIfNecessary() {
 		s.open("/account/user.action");

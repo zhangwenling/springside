@@ -2,9 +2,6 @@ package org.springside.examples.miniweb.unit.dao.account;
 
 import static org.junit.Assert.*;
 
-import javax.sql.DataSource;
-
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,26 +22,18 @@ import org.springside.modules.test.spring.SpringTxTestCase;
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
 public class GroupDaoTest extends SpringTxTestCase {
 
-	private static DataSource dataSourceHolder = null;
-
 	@Autowired
 	private GroupDao groupDao;
 
 	@Autowired
 	private UserDao userDao;
 
+	/**
+	 * 载入测试数据.
+	 */
 	@Before
-	public void loadSampleData() throws Exception {
-		if (dataSourceHolder == null) {
-			Fixtures.loadData(dataSource, "/data/sample-data.xml");
-			dataSourceHolder = dataSource;
-		}
-	}
-
-	@AfterClass
-	public static void cleanSampleData() throws Exception {
-		Fixtures.removeData(dataSourceHolder, "/data/sample-data.xml");
-		dataSourceHolder = null;
+	public void reloadSampleData() throws Exception {
+		Fixtures.reloadAllTable(dataSource, "/data/sample-data.xml");
 	}
 
 	/**

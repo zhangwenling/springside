@@ -5,9 +5,6 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,22 +28,15 @@ import com.google.common.collect.Maps;
 @ContextConfiguration(locations = { "/applicationContext-test.xml" })
 public class AccountDaoTest extends SpringTxTestCase {
 
-	private static DataSource dataSourceHolder = null;
-
 	@Autowired
 	private AccountDao accountDao;
 
+	/**
+	 * 载入测试数据, 数据在所有测试方法间共享.
+	 */
 	@Before
-	public void loadDefaultData() throws Exception {
-		if (dataSourceHolder == null) {
-			Fixtures.loadData(dataSource, "/data/sample-data.xml");
-			dataSourceHolder = dataSource;
-		}
-	}
-
-	@AfterClass
-	public static void cleanDefaultData() throws Exception {
-		Fixtures.removeData(dataSourceHolder, "/data/sample-data.xml");
+	public void reloadSampleData() throws Exception {
+		Fixtures.reloadAllTable(dataSource, "/data/sample-data.xml");
 	}
 
 	@Test
