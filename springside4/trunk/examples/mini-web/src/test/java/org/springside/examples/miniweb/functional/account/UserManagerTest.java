@@ -25,11 +25,11 @@ import org.springside.modules.utils.ThreadUtils;
 public class UserManagerTest extends BaseFunctionalTestCase {
 
 	/**
-	 * 检验ListPage.
+	 * 查看用户列表.
 	 */
 	@Test
 	@Groups(DAILY)
-	public void listPage() {
+	public void viewUserList() {
 		s.clickTo(By.linkText(Gui.MENU_USER));
 		WebElement table = s.findElement(By.xpath("//table[@id='contentTable']"));
 		assertEquals("admin", s.getTable(table, 1, UserColumn.LOGIN_NAME.ordinal()));

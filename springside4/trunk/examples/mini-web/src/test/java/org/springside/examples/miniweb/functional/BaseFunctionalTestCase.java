@@ -79,7 +79,7 @@ public class BaseFunctionalTestCase {
 	}
 
 	/**
-	 * 创建WebDriver.
+	 * 创建Selenium.
 	 */
 	protected static void createSelenium() throws Exception {
 		Properties props = PropertiesUtils.loadProperties("classpath:/application.test.properties",
@@ -88,6 +88,9 @@ public class BaseFunctionalTestCase {
 		s = new Selenium2(props.getProperty("selenium.driver"), Start.BASE_URL);
 	}
 
+	/**
+	 * 退出Selenium.
+	 */
 	protected static void quitSelenium() {
 		s.quit();
 	}

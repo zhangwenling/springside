@@ -14,5 +14,5 @@
 		<a href="${ctx}/log/index.action">日志高级演示</a>
 		<a href="${ctx}/web/index.action">Web高级演示</a>
 		<a href="${ctx}/webservice/index.action">Web服务高级演示</a>
-		<a href="${ctx}/security/logout.action">退出登录</a>
+		<a href="${ctx}/security/login!logout.action">退出登录</a>
 </div>

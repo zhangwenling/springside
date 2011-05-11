@@ -23,11 +23,11 @@ import org.springside.modules.test.groups.Groups;
 public class GroupManagerTest extends BaseFunctionalTestCase {
 
 	/**
-	 * 检验ListPage.
+	 * 查看权限组列表.
 	 */
 	@Groups(DAILY)
 	@Test
-	public void listPage() {
+	public void viewGroupList() {
 		s.clickTo(By.linkText(Gui.MENU_GROUP));
 		WebElement table = s.findElement(By.xpath("//table[@id='contentTable']"));
 		assertEquals("管理员", s.getTable(table, 1, GroupColumn.NAME.ordinal()));
@@ -35,7 +35,7 @@ public class GroupManagerTest extends BaseFunctionalTestCase {
 	}
 
 	/**
-	 * 创建公共测试权限组.
+	 * 创建权限组.
 	 */
 	@Groups(DAILY)
 	@Test
