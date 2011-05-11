@@ -16,13 +16,17 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author eortwyz
  */
 @Namespace("/security")
-public class LogoutAction extends ActionSupport {
+public class LoginAction extends ActionSupport {
 
 	private static final long serialVersionUID = 7392913081177740732L;
 
 	@Override
 	public String execute() throws Exception {
+		return SUCCESS;
+	}
+
+	public String logout() throws Exception {
 		SecurityUtils.getSubject().logout();
-		return "login";
+		return SUCCESS;
 	}
 }
