@@ -19,32 +19,51 @@ import org.springside.modules.utils.ThreadUtils;
 import com.thoughtworks.selenium.Selenium;
 
 /**
- * Selenium工具类.
+ * 融合了Selenium 1.0 API与Selenium 2.0的By选择器的API.
  *
  * @author calvin
  */
-public class SeleniumHolder {
+public class Selenium2 {
 
 	public static final int DEFAULT_TIMEOUT = 5000;
+	public static final int DEFAULT_PAUSE_TIME = 250;
 
-	private static Logger logger = LoggerFactory.getLogger(SeleniumHolder.class);
+	private static Logger logger = LoggerFactory.getLogger(Selenium2.class);
 	private WebDriver driver;
 	private Selenium selenium;
+	private int defaultTimeout = DEFAULT_TIMEOUT;
 
-	public SeleniumHolder(String driverName) {
+	public Selenium2(String driverName, String baseUrl) {
 		this.driver = WebDriverFactory.createDriver(driverName);
-		this.selenium = new WebDriverBackedSelenium(driver, "");
+		this.selenium = new WebDriverBackedSelenium(driver, baseUrl);
 	}
 
+	/**
+	 * 不设置baseUrl的构造函数, 调用open函数时必须使用绝对路径. 
+	 */
+	public Selenium2(String driverName) {
+		this(driverName, "");
+	}
+
+	/**
+	 * 打开地址,如果url为相对地址, 自动添加baseUrl.
+	 * @param url
+	 */
 	public void open(String url) {
-		driver.get(url);
+		selenium.open(url);
 		waitForPageToLoad();
 	}
 
+	/**
+	 * 获取页面Title.
+	 */
 	public String getTitle() {
 		return driver.getTitle();
 	}
 
+	/**
+	 * 查找Element.
+	 */
 	public WebElement findElement(By by) {
 		return driver.findElement(by);
 	}
@@ -66,7 +85,7 @@ public class SeleniumHolder {
 	}
 
 	/**
-	 * 点击Element,跳转到新页面.
+	 * 点击Element, 跳转到新页面.
 	 */
 	public void clickTo(By by) {
 		driver.findElement(by).click();
@@ -74,7 +93,7 @@ public class SeleniumHolder {
 	}
 
 	/**
-	 * 选择Element
+	 * 选择Element.
 	 */
 	public void check(By by) {
 		WebElement element = driver.findElement(by);
@@ -99,10 +118,16 @@ public class SeleniumHolder {
 		return element.isSelected();
 	}
 
+	/**
+	 * 获取Element的值.
+	 */
 	public String getValue(By by) {
 		return driver.findElement(by).getValue();
 	}
 
+	/**
+	 * 获取Element的文本.
+	 */
 	public String getText(By by) {
 		return driver.findElement(by).getText();
 	}
@@ -129,10 +154,10 @@ public class SeleniumHolder {
 	}
 
 	/**
-	 * 等待页面载入完成.
+	 * 等待页面载入完成, timeout时间为defaultTimeout的值.
 	 */
 	public void waitForPageToLoad() {
-		waitForPageToLoad(DEFAULT_TIMEOUT);
+		waitForPageToLoad(defaultTimeout);
 	}
 
 	/**
@@ -152,13 +177,38 @@ public class SeleniumHolder {
 			if (element.isDisplayed()) {
 				return;
 			}
-			ThreadUtils.sleep(250);
+			ThreadUtils.sleep(DEFAULT_PAUSE_TIME);
 		}
 		logger.warn("waitForDisplay timeout");
 	}
 
+	/**
+	 * 退出Selenium.
+	 */
 	public void quit() {
 		driver.close();
 		driver.quit();
 	}
+
+	/**
+	 * 获取WebDriver实例, 调用未封装的函数.
+	 */
+	public WebDriver getDriver() {
+		return driver;
+	}
+
+	/**
+	 * 获取Selenium实例,调用未封装的函数.
+	 */
+	public Selenium getSelenium() {
+		return selenium;
+	}
+
+	/**
+	 * 设置默认页面超时.
+	 */
+	public void setDefaultTimeout(int defaultTimeout) {
+		this.defaultTimeout = defaultTimeout;
+	}
+
 }

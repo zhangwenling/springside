@@ -30,11 +30,11 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 	@Test
 	@Groups(DAILY)
 	public void listPage() {
-		selenium.clickTo(By.linkText(Gui.MENU_USER));
-		WebElement table = selenium.findElement(By.xpath("//table[@id='contentTable']"));
-		assertEquals("admin", selenium.getTable(table, 1, UserColumn.LOGIN_NAME.ordinal()));
-		assertEquals("Admin", selenium.getTable(table, 1, UserColumn.NAME.ordinal()));
-		assertEquals("管理员, 用户", selenium.getTable(table, 1, UserColumn.GROUPS.ordinal()));
+		s.clickTo(By.linkText(Gui.MENU_USER));
+		WebElement table = s.findElement(By.xpath("//table[@id='contentTable']"));
+		assertEquals("admin", s.getTable(table, 1, UserColumn.LOGIN_NAME.ordinal()));
+		assertEquals("Admin", s.getTable(table, 1, UserColumn.NAME.ordinal()));
+		assertEquals("管理员, 用户", s.getTable(table, 1, UserColumn.GROUPS.ordinal()));
 	}
 
 	/**
@@ -44,24 +44,24 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 	@Groups(DAILY)
 	public void createUser() {
 		//打开新增用户页面
-		selenium.clickTo(By.linkText(Gui.MENU_USER));
-		selenium.clickTo(By.linkText("增加新用户"));
+		s.clickTo(By.linkText(Gui.MENU_USER));
+		s.clickTo(By.linkText("增加新用户"));
 
 		//生成待输入的测试用户数据
 		User user = AccountData.getRandomUserWithGroup();
 
 		//输入数据
-		selenium.type(By.id("loginName"), user.getLoginName());
-		selenium.type(By.id("name"), user.getName());
-		selenium.type(By.id("password"), user.getPassword());
-		selenium.type(By.id("passwordConfirm"), user.getPassword());
+		s.type(By.id("loginName"), user.getLoginName());
+		s.type(By.id("name"), user.getName());
+		s.type(By.id("password"), user.getPassword());
+		s.type(By.id("passwordConfirm"), user.getPassword());
 		for (Group group : user.getGroupList()) {
-			selenium.check(By.id("checkedGroupIds-" + group.getId()));
+			s.check(By.id("checkedGroupIds-" + group.getId()));
 		}
-		selenium.clickTo(By.xpath(Gui.BUTTON_SUBMIT));
+		s.clickTo(By.xpath(Gui.BUTTON_SUBMIT));
 
 		//校验结果
-		assertTrue(selenium.isTextPresent("保存用户成功"));
+		assertTrue(s.isTextPresent("保存用户成功"));
 		verifyUser(user);
 	}
 
@@ -69,20 +69,20 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 	 * 校验用户数据的工具函数.
 	 */
 	private void verifyUser(User user) {
-		selenium.type(By.name("filter_EQS_loginName"), user.getLoginName());
-		selenium.clickTo(By.xpath(Gui.BUTTON_SEARCH));
-		selenium.clickTo(By.linkText("修改"));
+		s.type(By.name("filter_EQS_loginName"), user.getLoginName());
+		s.clickTo(By.xpath(Gui.BUTTON_SEARCH));
+		s.clickTo(By.linkText("修改"));
 
-		assertEquals(user.getLoginName(), selenium.getValue(By.id("loginName")));
-		assertEquals(user.getName(), selenium.getValue(By.id("name")));
+		assertEquals(user.getLoginName(), s.getValue(By.id("loginName")));
+		assertEquals(user.getName(), s.getValue(By.id("name")));
 
 		for (Group group : user.getGroupList()) {
-			assertTrue(selenium.isChecked(By.id("checkedGroupIds-" + group.getId())));
+			assertTrue(s.isChecked(By.id("checkedGroupIds-" + group.getId())));
 		}
 
 		List<Group> uncheckGroupList = ListUtils.subtract(AccountData.getDefaultGroupList(), user.getGroupList());
 		for (Group group : uncheckGroupList) {
-			assertFalse(selenium.isChecked(By.id("checkedGroupIds-" + group.getId())));
+			assertFalse(s.isChecked(By.id("checkedGroupIds-" + group.getId())));
 		}
 	}
 
@@ -92,25 +92,25 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 	@Test
 	@Groups(NIGHTLY)
 	public void inputValidateUser() {
-		selenium.clickTo(By.linkText(Gui.MENU_USER));
-		selenium.clickTo(By.linkText("增加新用户"));
+		s.clickTo(By.linkText(Gui.MENU_USER));
+		s.clickTo(By.linkText("增加新用户"));
 
-		selenium.type(By.id("loginName"), "admin");
-		selenium.type(By.id("name"), "");
-		selenium.type(By.id("password"), "a");
-		selenium.type(By.id("passwordConfirm"), "abc");
-		selenium.type(By.id("email"), "abc");
+		s.type(By.id("loginName"), "admin");
+		s.type(By.id("name"), "");
+		s.type(By.id("password"), "a");
+		s.type(By.id("passwordConfirm"), "abc");
+		s.type(By.id("email"), "abc");
 
-		selenium.clickTo(By.xpath(Gui.BUTTON_SUBMIT));
+		s.clickTo(By.xpath(Gui.BUTTON_SUBMIT));
 
 		ThreadUtils.sleep(2000);
 
-		WebElement table = selenium.findElement(By.xpath("//form/table"));
-		assertEquals("用户登录名已存在", selenium.getTable(table, 0, 1));
-		assertEquals("必选字段", selenium.getTable(table, 1, 1));
-		assertEquals("请输入一个长度最少是 3 的字符串", selenium.getTable(table, 2, 1));
-		assertEquals("输入与上面相同的密码", selenium.getTable(table, 3, 1));
-		assertEquals("请输入正确格式的电子邮件", selenium.getTable(table, 4, 1));
+		WebElement table = s.findElement(By.xpath("//form/table"));
+		assertEquals("用户登录名已存在", s.getTable(table, 0, 1));
+		assertEquals("必选字段", s.getTable(table, 1, 1));
+		assertEquals("请输入一个长度最少是 3 的字符串", s.getTable(table, 2, 1));
+		assertEquals("输入与上面相同的密码", s.getTable(table, 3, 1));
+		assertEquals("请输入正确格式的电子邮件", s.getTable(table, 4, 1));
 	}
 
 }

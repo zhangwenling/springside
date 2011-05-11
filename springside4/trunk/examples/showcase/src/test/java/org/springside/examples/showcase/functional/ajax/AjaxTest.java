@@ -15,12 +15,12 @@ public class AjaxTest extends BaseFunctionalTestCase {
 
 	@Test
 	public void mashup() {
-		selenium.open(BASE_URL);
-		selenium.clickTo(By.linkText("Web高级演示"));
-		selenium.clickTo(By.linkText("跨域名Mashup演示"));
+		s.open("/");
+		s.clickTo(By.linkText("Web高级演示"));
+		s.clickTo(By.linkText("跨域名Mashup演示"));
 
-		selenium.clickTo(By.xpath("//input[@value='获取内容']"));
-		selenium.waitForDisplay(By.id("mashupContent"), 5000);
-		assertEquals("Hello World!", selenium.getText(By.id("mashupContent")));
+		s.clickTo(By.xpath("//input[@value='获取内容']"));
+		s.waitForDisplay(By.id("mashupContent"), 5000);
+		assertEquals("Hello World!", s.getText(By.id("mashupContent")));
 	}
 }

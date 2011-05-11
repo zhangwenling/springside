@@ -1,7 +1,7 @@
 package org.springside.examples.miniservice.tools;
 
 import org.eclipse.jetty.server.Server;
-import org.springside.modules.test.functional.JettyUtils;
+import org.springside.modules.test.functional.JettyFactory;
 
 /**
  * 使用Jetty运行调试Web应用,在Console输入回车停止服务器.
@@ -15,7 +15,7 @@ public class Start {
 	public static final String BASE_URL = "http://localhost:8080/mini-service";
 
 	public static void main(String[] args) throws Exception {
-		Server server = JettyUtils.buildNormalServer(PORT, CONTEXT);
+		Server server = JettyFactory.buildNormalServer(PORT, CONTEXT);
 		server.start();
 
 		System.out.println("Hit Enter in console to stop server");

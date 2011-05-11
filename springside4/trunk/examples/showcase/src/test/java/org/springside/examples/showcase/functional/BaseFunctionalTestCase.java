@@ -11,8 +11,8 @@ import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springside.examples.showcase.tools.Start;
 import org.springside.modules.test.data.DbUnitUtils;
-import org.springside.modules.test.functional.JettyUtils;
-import org.springside.modules.test.functional.SeleniumHolder;
+import org.springside.modules.test.functional.JettyFactory;
+import org.springside.modules.test.functional.Selenium2;
 import org.springside.modules.test.groups.GroupsTestRunner;
 import org.springside.modules.utils.PropertiesUtils;
 import org.springside.modules.utils.spring.SpringContextHolder;
@@ -31,13 +31,11 @@ public class BaseFunctionalTestCase {
 	public final static String DAILY = "DAILY";
 	public final static String NIGHTLY = "NIGHTLY";
 
-	protected static final String BASE_URL = Start.BASE_URL;
-
 	protected static Server jettyServer;
 
 	protected static DataSource dataSourceHolder;
 
-	protected static SeleniumHolder selenium;
+	protected static Selenium2 s;
 
 	@BeforeClass
 	public static void startAll() throws Exception {
@@ -58,7 +56,7 @@ public class BaseFunctionalTestCase {
 	 */
 	protected static void startJetty() throws Exception {
 		if (jettyServer == null) {
-			jettyServer = JettyUtils.buildTestServer(Start.PORT, Start.CONTEXT);
+			jettyServer = JettyFactory.buildTestServer(Start.PORT, Start.CONTEXT);
 			jettyServer.start();
 			dataSourceHolder = SpringContextHolder.getBean("dataSource");
 		}
@@ -85,13 +83,13 @@ public class BaseFunctionalTestCase {
 		Properties props = PropertiesUtils.loadProperties("classpath:/application.test.properties",
 				"classpath:/application.test-local.properties");
 
-		selenium = new SeleniumHolder(props.getProperty("selenium.driver"));
+		s = new Selenium2(props.getProperty("selenium.driver"), Start.BASE_URL);
 	}
 
 	/**
 	 * 关闭Selenium.
 	 */
 	protected static void quitSelenium() {
-		selenium.quit();
+		s.quit();
 	}
 }

@@ -5,13 +5,13 @@ import static org.junit.Assert.*;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.Test;
-import org.springside.modules.test.functional.JettyUtils;
+import org.springside.modules.test.functional.JettyFactory;
 
 public class JettyUtilsTest {
 
 	@Test
 	public void buildNormalServer() {
-		Server server = JettyUtils.buildNormalServer(1978, "core");
+		Server server = JettyFactory.buildNormalServer(1978, "core");
 
 		assertEquals(1978, server.getConnectors()[0].getPort());
 		assertEquals("core", ((WebAppContext) server.getHandler()).getContextPath());
@@ -20,7 +20,7 @@ public class JettyUtilsTest {
 
 	@Test
 	public void buildTestServer() {
-		Server server = JettyUtils.buildTestServer(1978, "core");
+		Server server = JettyFactory.buildTestServer(1978, "core");
 
 		assertEquals(1978, server.getConnectors()[0].getPort());
 		assertEquals("core", ((WebAppContext) server.getHandler()).getContextPath());
