@@ -3,7 +3,6 @@ package org.springside.examples.miniservice.functional;
 import javax.sql.DataSource;
 
 import org.eclipse.jetty.server.Server;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.springside.examples.miniservice.tools.Start;
@@ -14,7 +13,8 @@ import org.springside.modules.utils.spring.SpringContextHolder;
 /**
  * 功能测试基类.
  * 
- * 在整个测试期间启动一次Jetty Server, 并在每个TestCase执行前重新载入默认数据.
+ * 在整个测试期间启动一次Jetty Server.
+ * 在每个TestCase执行前重新载入默认数据
  * 
  * @author calvin
  */
@@ -23,43 +23,32 @@ public class BaseFunctionalTestCase {
 
 	protected static final String BASE_URL = Start.BASE_URL;
 
-	protected static Server server;
+	protected static Server jettyServer;
 
 	protected static DataSource dataSource;
 
 	@BeforeClass
 	public static void startAll() throws Exception {
 		startJetty();
-		loadDefaultData();
-	}
-
-	@AfterClass
-	public static void stopAll() throws Exception {
-		cleanDefaultData();
+		reloadSampleData();
 	}
 
 	/**
-	 * 启动Jetty服务器, 仅启动一次.
+	 * 启动Jetty服务器, 在整个功能测试期间仅启动一次.
 	 */
 	protected static void startJetty() throws Exception {
-		if (server == null) {
-			server = JettyFactory.buildTestServer(Start.PORT, Start.CONTEXT);
-			server.start();
+		if (jettyServer == null) {
+			jettyServer = JettyFactory.buildTestServer(Start.PORT, Start.CONTEXT);
+			jettyServer.start();
+
 			dataSource = SpringContextHolder.getBean("dataSource");
 		}
 	}
 
 	/**
-	 * 载入默认数据.
+	 * 载入测试数据.
 	 */
-	protected static void loadDefaultData() throws Exception {
-		Fixtures.loadData(dataSource, "/data/sample-data.xml");
-	}
-
-	/**
-	 * 删除默认数据.
-	 */
-	public static void cleanDefaultData() throws Exception {
-		Fixtures.removeData(dataSource, "/data/sample-data.xml");
+	protected static void reloadSampleData() throws Exception {
+		Fixtures.reloadAllTable(dataSource, "/data/sample-data.xml");
 	}
 }

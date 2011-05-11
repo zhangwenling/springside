@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2005-2010 springside.org.cn
+ * Copyright (c) 2005-2011 springside.org.cn
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
@@ -11,7 +11,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 /**
- * 创建Jetty Server的工具类.
+ * 创建Jetty Server的工厂类.
  * 
  * @author calvin
  */

@@ -33,22 +33,20 @@ public class BaseFunctionalTestCase {
 
 	protected static Server jettyServer;
 
-	protected static DataSource dataSourceHolder;
+	protected static DataSource dataSource;
 
 	protected static Selenium2 s;
 
 	@BeforeClass
 	public static void startAll() throws Exception {
 		startJetty();
-		loadDefaultData();
+		reloadSampleData();
 		createSelenium();
 	}
 
 	@AfterClass
 	public static void stopAll() throws Exception {
 		quitSelenium();
-		cleanDefaultData();
-
 	}
 
 	/**
@@ -58,22 +56,15 @@ public class BaseFunctionalTestCase {
 		if (jettyServer == null) {
 			jettyServer = JettyFactory.buildTestServer(Start.PORT, Start.CONTEXT);
 			jettyServer.start();
-			dataSourceHolder = SpringContextHolder.getBean("dataSource");
+			dataSource = SpringContextHolder.getBean("dataSource");
 		}
 	}
 
 	/**
 	 * 载入默认数据.
 	 */
-	protected static void loadDefaultData() throws Exception {
-		Fixtures.loadData(dataSourceHolder, "/data/sample-data.xml");
-	}
-
-	/**
-	 * 删除默认数据.
-	 */
-	protected static void cleanDefaultData() throws Exception {
-		Fixtures.removeData(dataSourceHolder, "/data/sample-data.xml");
+	protected static void reloadSampleData() throws Exception {
+		Fixtures.reloadAllTable(dataSource, "/data/sample-data.xml");
 	}
 
 	/**

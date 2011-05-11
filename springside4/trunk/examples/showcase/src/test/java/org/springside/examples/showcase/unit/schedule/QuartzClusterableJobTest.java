@@ -25,7 +25,7 @@ public class QuartzClusterableJobTest extends SpringTxTestCase {
 
 	@Test
 	public void scheduleJob() throws Exception {
-		Fixtures.loadData(dataSource, "/data/sample-data.xml");
+		Fixtures.reloadAllTable(dataSource, "/data/sample-data.xml");
 
 		//加载测试用logger appender
 		MockLog4jAppender appender = new MockLog4jAppender();
@@ -38,7 +38,5 @@ public class QuartzClusterableJobTest extends SpringTxTestCase {
 		assertEquals(1, appender.getAllLogs().size());
 
 		assertEquals("There are 6 user in database, print by default's job.", appender.getFirstMessage());
-
-		Fixtures.removeData(dataSource, "/data/sample-data.xml");
 	}
 }

@@ -4,10 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.hibernate.Hibernate;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,22 +27,12 @@ import com.google.common.collect.Lists;
 @TransactionConfiguration(transactionManager = "defaultTransactionManager")
 public class UserHibernateDaoTest extends SpringTxTestCase {
 
-	private static DataSource dataSourceHolder = null;
-
 	@Autowired
 	private UserHibernateDao userDao;
 
 	@Before
-	public void loadDefaultData() throws Exception {
-		if (dataSourceHolder == null) {
-			Fixtures.loadData(dataSource, "/data/sample-data.xml");
-			dataSourceHolder = dataSource;
-		}
-	}
-
-	@AfterClass
-	public static void cleanDefaultData() throws Exception {
-		Fixtures.removeData(dataSourceHolder, "/data/sample-data.xml");
+	public void reloadSampleData() throws Exception {
+		Fixtures.reloadAllTable(dataSource, "/data/sample-data.xml");
 	}
 
 	@Test
