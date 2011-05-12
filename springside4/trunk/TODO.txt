@@ -3,17 +3,19 @@ TODO部分
 1.主要改动
 
   * MVC框架 从Struts2转为Spring MVC.
-  * Wiki内容重新编写
-    備忘： log4jdbc，jersey+jackson,jackson new feature
+  * Restful框架从Jersey转为Spring MVC.
+  * SOAP WebService框架转为Spring的简单实现.
+
 
 2.次要改动
   * 升级Sonar 2.7
   * 修正mini-web的ft case
-  * 參考Play改進測試時的數據準備部分
 
 
 3.其他非代码改动
-  * 发布前打包项目生成模板(Calvin)
+  * 发布前打包项目生成模板
+  * Wiki内容重新编写
+    備忘： log4jdbc，jersey+jackson,jackson new feature
   * 閱讀如下Samples: Play!, Spring Roo, Spring MVC samples
   
 ---------------------------------------------------------------------------------
@@ -21,12 +23,12 @@ TODO部分
 1.  主要改动
    * DAO框架增加MyBatis的使用，与Hibernate在不同的场景各展所长
    * 安全框架从SpringSecurity转为Apache Shiro.
-   * Springside Core的大重构
+   * Springside Modules的大重构
    * 演示Hibernate Validator验证
    * CSS框架从YUI转为Blueprint
    * 融合Selenium 1.0与2.0的API
-   * 升級Jackson1.8演示，包括可擴展的對象, 對象循環引用，局部更新已存在對象等等等新特性.
-   * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6, Jetty 7.4, Sonar 2.6
+   * 升級Jackson1.8演示，包括可擴展的對象, 對象循環引用，局部更新已存在對象等新特性.
+   * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6, Jetty 7.4, Sonar 2.7
 
 2. 次要改动
    * Template工具引擎从Freemarker转为Velocity, 见Email演示.
