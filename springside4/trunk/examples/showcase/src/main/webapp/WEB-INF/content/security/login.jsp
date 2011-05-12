@@ -1,10 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <%@ page import="org.apache.shiro.web.filter.authc.FormAuthenticationFilter"%>
+<%@ page import="org.apache.shiro.authc.ExcessiveAttemptsException"%>
+<%@ page import="org.apache.shiro.authc.IncorrectCredentialsException"%>
+<%@ page import="java.util.concurrent.atomic.AtomicLong"%>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<%@page import="org.springside.examples.showcase.security.FormAuthenticationWithLockFilter"%><html xmlns="http://www.w3.org/1999/xhtml">
+<%@page import="org.springside.examples.showcase.security.FormAuthenticationWithLockFilter"%>
+<%@page import="org.apache.commons.lang.StringUtils"%><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Showcase 登录页</title>
 	<%@ include file="/common/meta.jsp" %>
@@ -35,19 +40,22 @@
 		<h2>Showcase登录页</h2>
 		
 		<%
-			if (request.getAttribute(FormAuthenticationWithLockFilter.ACCOUNT_LOCK_KEY_ATTRIBUTE_NAME) != null) {
+		String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
+		if(error != null){
+		    if (error.equals(ExcessiveAttemptsException.class.getName())) {
 		%>
 			<div class="error">账户已被锁，请联系管理员.</div>
 		<%
-			}else if(request.getAttribute(FormAuthenticationWithLockFilter.REMAIN_LOGIN_ATTEMPTS_KEY_ATTRIBUTE_NAME) != null) {
+			}else if(error.equals(IncorrectCredentialsException.class.getName())) {
 		%>
-			<div class="error">密码错误，还有<%=request.getAttribute(FormAuthenticationWithLockFilter.REMAIN_LOGIN_ATTEMPTS_KEY_ATTRIBUTE_NAME)%>次重试机会</div>
+			<div class="error">密码错误，还有<%=FormAuthenticationWithLockFilter.accountLockMap.get(request.getParameter(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM)).get() %>次重试机会</div>
 		<%
-			}else if(request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME) != null) {
+			}else{
 		%>
 			<div class="error">登录失败，请重试.</div>
 		<%
 			}
+		}
 		%>
 	
 		<form id="loginForm" action="login.action" method="post">

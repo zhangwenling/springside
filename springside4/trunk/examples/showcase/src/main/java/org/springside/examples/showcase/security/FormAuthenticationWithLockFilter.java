@@ -15,13 +15,9 @@ import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 
 public class FormAuthenticationWithLockFilter extends FormAuthenticationFilter {
 
-    public static final String                    ACCOUNT_LOCK_KEY_ATTRIBUTE_NAME          = "accountLock";
+    private long                                        maxLoginAttempts = 10;
 
-    public static final String                    REMAIN_LOGIN_ATTEMPTS_KEY_ATTRIBUTE_NAME = "remainLoginAttempts";
-
-    private long                                  maxLoginAttempts                         = 10;
-
-    private ConcurrentHashMap<String, AtomicLong> userLockMap                              = new ConcurrentHashMap<String, AtomicLong>();
+    public static ConcurrentHashMap<String, AtomicLong> accountLockMap   = new ConcurrentHashMap<String, AtomicLong>();
 
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
@@ -46,11 +42,9 @@ public class FormAuthenticationWithLockFilter extends FormAuthenticationFilter {
 
     private boolean checkIfAccountLocked(ServletRequest request) {
         String username = getUsername(request);
-        if (userLockMap.get((String) username) != null) {
-            long loginAttempts = userLockMap.get((String) username).get();
-            request.setAttribute(REMAIN_LOGIN_ATTEMPTS_KEY_ATTRIBUTE_NAME, maxLoginAttempts - loginAttempts);
-
-            if (loginAttempts >= maxLoginAttempts) {
+        if (accountLockMap.get((String) username) != null) {
+            long remainLoginAttempts = accountLockMap.get((String) username).get();
+            if (remainLoginAttempts <= 0) {
                 return true;
             }
         }
@@ -65,7 +59,7 @@ public class FormAuthenticationWithLockFilter extends FormAuthenticationFilter {
 
             return onLoginSuccess(token, subject, request, response);
         } catch (IncorrectCredentialsException e) {
-            increaseAccountLockAttempts(request);
+            decreaseAccountLoginAttempts(request);
             checkIfAccountLocked(request);
 
             return onLoginFailure(token, e, request, response);
@@ -74,22 +68,18 @@ public class FormAuthenticationWithLockFilter extends FormAuthenticationFilter {
         }
     }
 
-    private void increaseAccountLockAttempts(ServletRequest request) {
-        AtomicLong initValue = new AtomicLong(0);
-        AtomicLong lockNums = userLockMap.putIfAbsent(getUsername(request), new AtomicLong(0));
-        if (lockNums == null) {
-            lockNums = initValue;
+    private void decreaseAccountLoginAttempts(ServletRequest request) {
+        AtomicLong initValue = new AtomicLong(maxLoginAttempts);
+        AtomicLong remainLoginAttempts = accountLockMap.putIfAbsent(getUsername(request), new AtomicLong(maxLoginAttempts));
+        if (remainLoginAttempts == null) {
+            remainLoginAttempts = initValue;
         }
-        lockNums.getAndIncrement();
-        userLockMap.put(getUsername(request), lockNums);
+        remainLoginAttempts.getAndDecrement();
+        accountLockMap.put(getUsername(request), remainLoginAttempts);
     }
 
     private void resetAccountLock(String username) {
-        userLockMap.put(username, new AtomicLong(0));
-    }
-
-    public ConcurrentHashMap<String, AtomicLong> getUserLockMap() {
-        return userLockMap;
+        accountLockMap.put(username, new AtomicLong(maxLoginAttempts));
     }
 
     public void setMaxLoginAttempts(long maxLoginAttempts) {
