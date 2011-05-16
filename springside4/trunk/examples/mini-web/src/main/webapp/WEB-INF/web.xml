@@ -9,8 +9,11 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath*:/applicationContext.xml
-			classpath*:/applicationContext-shiro.xml
 		</param-value>
+		<!-- <param-value>
+			classpath*:/applicationContext.xml
+			classpath*:/applicationContext-shiro.xml
+		</param-value> -->
 	</context-param>
 
 	<!-- Filter 定义  -->
@@ -35,20 +38,10 @@
 	</filter>
 
 	<!-- Shiro filter-->
-	<filter>
+	<!-- <filter>
         <filter-name>shiroFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-
-	<!-- Struts2 filter -->
-	<filter>
-		<filter-name>struts2CleanupFilter</filter-name>
-		<filter-class>org.apache.struts2.dispatcher.ActionContextCleanUp</filter-class>
-	</filter>
-	<filter>
-		<filter-name>struts2Filter</filter-name>
-		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
-	</filter>
+    </filter> -->
 
 	<!-- Filter 映射 -->
 	<filter-mapping>
@@ -58,35 +51,16 @@
 
 	<filter-mapping>
 		<filter-name>hibernateOpenSessionInViewFilter</filter-name>
-		<url-pattern>*.action</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
+		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-	<filter-mapping>
-        <filter-name>hibernateOpenSessionInViewFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
 
-    <filter-mapping>
+  <!--   <filter-mapping>
         <filter-name>shiroFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping> -->
 
-	<filter-mapping>
-		<filter-name>struts2CleanupFilter</filter-name>
-		<url-pattern>*.action</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-	</filter-mapping>
 
-	<filter-mapping>
-		<filter-name>struts2Filter</filter-name>
-		<url-pattern>*.action</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-	</filter-mapping>
-	
+
 	<servlet>
 		<servlet-name>springServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -96,21 +70,15 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		
+
 	<servlet-mapping>
 		<servlet-name>springServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-
 	<!--Spring的ApplicationContext 载入 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-
-	<!-- Spring 刷新Introspector防止内存泄露 -->
-	<listener>
-		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
 
 	<!-- session超时定义,单位为分钟 -->
