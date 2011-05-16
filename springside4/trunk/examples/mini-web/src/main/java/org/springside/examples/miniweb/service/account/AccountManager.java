@@ -6,7 +6,7 @@ import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.dao.account.GroupDao;
 import org.springside.examples.miniweb.dao.account.UserDao;
@@ -23,7 +23,7 @@ import org.springside.modules.orm.PropertyFilter;
  * @author calvin
  */
 //Spring Bean的标识.
-@Component
+@Service
 //默认将类中的所有函数纳入事务管理.
 @Transactional
 public class AccountManager {
@@ -32,7 +32,7 @@ public class AccountManager {
 
 	private UserDao userDao;
 	private GroupDao groupDao;
-	private DatabaseRealm shiroRealm;
+	private ShiroDbRealm shiroRealm;
 
 	//-- User Manager --//
 	@Transactional(readOnly = true)
@@ -117,8 +117,8 @@ public class AccountManager {
 		this.groupDao = groupDao;
 	}
 
-	@Autowired
-	public void setShiroRealm(DatabaseRealm shiroRealm) {
+	@Autowired(required = false)
+	public void setShiroRealm(ShiroDbRealm shiroRealm) {
 		this.shiroRealm = shiroRealm;
 	}
 }
