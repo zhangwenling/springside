@@ -60,14 +60,13 @@
     <a name="SVN" id="SVN" class="arch"></a>
     SpringSide使用Subversion管理源码，代码托管于Google Code。<br>
        <ul type="square">
-        <li>3.0版 URL: <a href="http://springside.googlecode.com/svn/springside3/trunk/" target="_blank">http://springside.googlecode.com/svn/springside3/trunk/</a>
-		<li>4.0版 URL: <a href="http://springside.googlecode.com/svn/springside3/trunk/" target="_blank">http://springside.googlecode.com/svn/springside4/trunk/</a>
+       	<li>4.0版 URL: <a href="http://springside.googlecode.com/svn/springside4/trunk/" target="_blank">http://springside.googlecode.com/svn/springside4/trunk/</a>
+        <li>3.0版 URL: <a href="http://springside.googlecode.com/svn/springside3/tags/" target="_blank">http://springside.googlecode.com/svn/springside3/tags/</a>
       </li>
   </ul>
         &nbsp;&nbsp;&nbsp;&nbsp;推荐SVN工具--绿毛小海龟<a href="http://www.tortoisesvn.org/" target="_blank">TortoiseSVN</a>。<br>
          <br>
-         &nbsp;&nbsp;&nbsp;&nbsp;在你希望保存的目录点右键，选SVN Checkout，填入上面的地址即可。<br/>
-         &nbsp;&nbsp;&nbsp;&nbsp;另请注意关闭卡巴司基等防火墙；如果check out过程中断可选update继续下载。
+         &nbsp;&nbsp;&nbsp;&nbsp;在你希望保存的目录点右键，选SVN Checkout，填入上面的地址即可。(注意可能需要关闭卡巴司基等防火墙)。
 
 </div>
 
