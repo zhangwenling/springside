@@ -9,7 +9,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
-import org.springside.examples.showcase.tools.Start;
+import org.springside.examples.showcase.Start;
 import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.functional.JettyFactory;
 import org.springside.modules.test.functional.Selenium2;
