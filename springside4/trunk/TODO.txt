@@ -29,7 +29,7 @@ TODO部分
    * CSS框架从YUI转为Blueprint
    * 融合Selenium 1.0与2.0的API
    * 升級Jackson1.8.1演示，包括可擴展的對象, 對象循環引用，局部更新已存在對象等新特性.
-   * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6, Jetty 7.4, Sonar 2.7
+   * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6.4, Jetty 7.4.1, Sonar 2.7
 
 2. 次要改动
    * Template工具引擎从Freemarker转为Velocity, 见Email演示.
