@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.springside.examples.miniweb.tools.Start;
+import org.springside.examples.miniweb.Start;
 import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.functional.JettyFactory;
 import org.springside.modules.test.functional.Selenium2;

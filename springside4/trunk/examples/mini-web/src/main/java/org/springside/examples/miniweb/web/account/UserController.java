@@ -25,7 +25,7 @@ public class UserController {
 		}
 
 		model.addAttribute(user);
-		return "account/user-input";
+		return "account/user-form";
 	}
 
 	@Autowired

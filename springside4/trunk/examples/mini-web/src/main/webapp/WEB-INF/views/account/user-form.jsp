@@ -6,18 +6,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Mini-Web 帐号管理</title>
-	<%@ include file="/common/meta.jsp" %>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<meta http-equiv="Cache-Control" content="no-store"/>
+	<meta http-equiv="Pragma" content="no-cache"/>
+	<meta http-equiv="Expires" content="0"/>
 
-	<link href="${ctx}/css/style.css" type="text/css" rel="stylesheet"/>
-	<link href="${ctx}/js/validate/jquery.validate.css" type="text/css" rel="stylesheet"/>
-	
-	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
-	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
-	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
+	<link href="${ctx}/static/mini-web.css" type="text/css" rel="stylesheet"/>
+	<link href="${ctx}/static/jquery/jquery-validation/1.8.0/milk.css" type="text/css" rel="stylesheet"/>
+	<link href="${ctx}/static/blueprint/1.0.1/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
+	<link href="${ctx}/static/blueprint/1.0.1/print.css" type="text/css" rel="stylesheet" media="print"/>
+	<!--[if lt IE 8]><link href="${ctx}/static/blueprint/1.0.1/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
 
-	<script src="${ctx}/js/jquery-min.js" type="text/javascript"></script>
-	<script src="${ctx}/js/validate/jquery.validate.js" type="text/javascript"></script>
-	<script src="${ctx}/js/validate/messages_cn.js" type="text/javascript"></script>
+	<script src="${ctx}/static/jquery/jquery-1.5.2.min.js" type="text/javascript"></script>
+	<script src="${ctx}/static/jquery/jquery-validation/1.8.0/jquery.validate.min.js" type="text/javascript"></script>
+	<script src="${ctx}/static/jquery/jquery-validation/1.8.0/messages_cn.js" type="text/javascript"></script>
 	<script>
 		$(document).ready(function() {
 			//聚焦第一个输入框
