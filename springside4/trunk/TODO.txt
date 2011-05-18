@@ -3,6 +3,7 @@ TODO部分
 1.主要改动
 
   * MVC框架 从Struts2转为Spring MVC.
+  * 使用SiteMesh3实现Layout
   * Restful框架从Jersey转为Spring MVC.
   * SOAP WebService框架转为Spring的简单实现.
 
@@ -16,7 +17,7 @@ TODO部分
   * 发布前打包项目生成模板
   * Wiki内容重新编写
     備忘： log4jdbc，jersey+jackson,jackson new feature
-  * 閱讀如下Samples: Play!, Spring MVC samples, SpringFuse, Spring GreenHouse
+  * 閱讀如下Samples: SpringFuse, Spring Roo, Spring GreenHouse, Spring samples
   
 ---------------------------------------------------------------------------------
 已完成部分
@@ -56,10 +57,9 @@ TODO部分
   * 补回LocalCache演示，使用Guava r09的新特性
   * 使用ehcache 2.4.2新特性
   * 升级Quartz 2.0.1 (Spring的Quartz模块不兼容)
-  * iBatis的分頁
   * 改名RemoteServlet, 调整Demo页面, HttpClient使用Review
   * review perf4j的使用
-  * Shiro Restful驗證演示
   * 依赖包次要版本升级:JSW 3.5.7(需自行打包)
+  * Spring简化异步处理与Timer.
 
 

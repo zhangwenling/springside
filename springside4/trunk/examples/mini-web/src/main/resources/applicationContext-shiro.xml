@@ -23,18 +23,9 @@
 		<property name="successUrl" value="/account/user.action" />
 		<property name="unauthorizedUrl" value="/login.action" />
 		<property name="filterChainDefinitions">
-			<value>
-				
-				/* = authc
-				/account/user.action*= perms[user:view]
-				/account/user!input* = perms[user:view]
-				/account/user!save* = perms[user:edit]
-				/account/user!delete* = perms[user:edit]
-				/account/group.action*= perms[group:view]
-				/account/group!input* = perms[group:view]
-				/account/group!save* = perms[group:edit]
-				/account/group!delete* = perms[group:edit]
-		    </value>
+		    <value>
+		    /abc = authc			
+		 </value>
 		</property>
 	</bean>
 

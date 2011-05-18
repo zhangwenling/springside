@@ -1,4 +1,4 @@
-package org.springside.examples.miniweb.tools;
+package org.springside.examples.miniweb;
 
 import org.eclipse.jetty.server.Server;
 import org.springside.modules.test.functional.JettyFactory;
