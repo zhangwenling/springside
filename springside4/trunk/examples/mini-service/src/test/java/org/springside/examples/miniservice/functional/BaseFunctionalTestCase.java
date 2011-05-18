@@ -5,7 +5,7 @@ import javax.sql.DataSource;
 import org.eclipse.jetty.server.Server;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
-import org.springside.examples.miniservice.tools.Start;
+import org.springside.examples.miniservice.Start;
 import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.functional.JettyFactory;
 import org.springside.modules.utils.spring.SpringContextHolder;
