@@ -1,25 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Mini-Web 帐号管理</title>
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-	<meta http-equiv="Cache-Control" content="no-store"/>
-	<meta http-equiv="Pragma" content="no-cache"/>
-	<meta http-equiv="Expires" content="0"/>
-
-	<link href="${ctx}/static/mini-web.css" type="text/css" rel="stylesheet"/>
-	<link href="${ctx}/static/jquery/jquery-validation/1.8.0/milk.css" type="text/css" rel="stylesheet"/>
-	<link href="${ctx}/static/blueprint/1.0.1/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
-	<link href="${ctx}/static/blueprint/1.0.1/print.css" type="text/css" rel="stylesheet" media="print"/>
-	<!--[if lt IE 8]><link href="${ctx}/static/blueprint/1.0.1/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
-
-	<script src="${ctx}/static/jquery/jquery-1.5.2.min.js" type="text/javascript"></script>
-	<script src="${ctx}/static/jquery/jquery-validation/1.8.0/jquery.validate.min.js" type="text/javascript"></script>
-	<script src="${ctx}/static/jquery/jquery-validation/1.8.0/messages_cn.js" type="text/javascript"></script>
+	
 	<script>
 		$(document).ready(function() {
 			//聚焦第一个输入框
@@ -56,10 +40,6 @@
 </head>
 
 <body>
-<div class="container">
-<%@ include file="/common/header.jsp" %>
-<div id="content">
-	<div class="span-24 last">
 	<h3><s:if test="id == null">创建</s:if><s:else>修改</s:else>用户</h3>
 	<form:form id="inputForm" modelAttribute="user" action="${user.id}" method="post">
 		<input type="hidden" name="id" value="${id}"/>
@@ -98,10 +78,6 @@
 				</td>
 			</tr>
 		</table>
-	</form:form> 
-	</div>
-</div>
-<%@ include file="/common/footer.jsp" %>
-</div>
+	</form:form>
 </body>
 </html>
