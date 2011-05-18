@@ -17,7 +17,6 @@ import org.springside.examples.miniweb.web.CrudActionSupport;
 import org.springside.modules.orm.Page;
 import org.springside.modules.orm.PageRequest;
 import org.springside.modules.orm.PropertyFilter;
-import org.springside.modules.utils.web.struts2.Struts2Utils;
 
 /**
  * 用户管理Action.
@@ -65,7 +64,7 @@ public class UserAction extends CrudActionSupport<User> {
 	//-- CRUD Action 函数 --//
 	@Override
 	public String list() throws Exception {
-		List<PropertyFilter> filters = PropertyFilter.buildFromHttpRequest(Struts2Utils.getRequest());
+		List<PropertyFilter> filters = null;//PropertyFilter.buildFromHttpRequest(Struts2Utils.getRequest());
 
 		page.setPageSize(5);
 		//设置默认排序方式
@@ -113,12 +112,13 @@ public class UserAction extends CrudActionSupport<User> {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String newLoginName = request.getParameter("loginName");
 		String oldLoginName = request.getParameter("oldLoginName");
-
-		if (accountManager.isLoginNameUnique(newLoginName, oldLoginName)) {
-			Struts2Utils.renderText("true");
-		} else {
-			Struts2Utils.renderText("false");
-		}
+		/*
+				if (accountManager.isLoginNameUnique(newLoginName, oldLoginName)) {
+					Struts2Utils.renderText("true");
+				} else {
+					Struts2Utils.renderText("false");
+				}
+			*/
 		//因为直接输出内容而不经过jsp,因此返回null.
 		return null;
 	}
