@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ include file="/common/taglibs.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,12 +25,12 @@
   
   <body>
     <div class="container">
-		<%@ include file="/common/header.jsp" %>
+		<%@ include file="/WEB-INF/layouts/header.jsp" %>
 		<div id="content">
 			<div class="span-24 last">
 	    		<sitemesh:write property='body'/>
 	    	</div>
-			<%@ include file="/common/footer.jsp" %>
+			<%@ include file="/WEB-INF/layouts/footer.jsp" %>
 		</div>
   	</div>	
   </body>

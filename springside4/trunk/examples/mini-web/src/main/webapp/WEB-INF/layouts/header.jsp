@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
-<%@ include file="/common/taglibs.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <div id="header" class="span-24 last">
 	<div id="title">
 		<h2>Mini-Web示例</h2>
