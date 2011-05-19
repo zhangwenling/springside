@@ -11,7 +11,7 @@
 	<meta http-equiv="Pragma" content="no-cache"/>
 	<meta http-equiv="Expires" content="0"/>
     <link href="${ctx}/static/mini-web.css" type="text/css" rel="stylesheet"/>
-	<link href="${ctx}/static/jquery/jquery-validation/1.8.0/milk.css" type="text/css" rel="stylesheet"/>
+	<link href="${ctx}/static/jquery-validation/1.8.0/milk.css" type="text/css" rel="stylesheet"/>
 	<link href="${ctx}/static/blueprint/1.0.1/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
 	<link href="${ctx}/static/blueprint/1.0.1/print.css" type="text/css" rel="stylesheet" media="print"/>
 	<!--[if lt IE 8]><link href="${ctx}/static/blueprint/1.0.1/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
