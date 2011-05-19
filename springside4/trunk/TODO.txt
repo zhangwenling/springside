@@ -10,6 +10,8 @@ TODO部分
 
 2.次要改动
   * 升级Sonar 2.7
+  * 升级Sonar 2.6正式版
+  * 清理BluePrint CSS中过度的css，以及JQuery Validation的milk css的变形
   * 修正mini-web的ft case
 
 

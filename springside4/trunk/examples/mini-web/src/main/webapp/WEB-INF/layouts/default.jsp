@@ -15,9 +15,9 @@
 	<link href="${ctx}/static/blueprint/1.0.1/print.css" type="text/css" rel="stylesheet" media="print"/>
 	<!--[if lt IE 8]><link href="${ctx}/static/blueprint/1.0.1/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
 
-	<script src="${ctx}/static/jquery/jquery-1.5.2.min.js" type="text/javascript"></script>
-	<script src="${ctx}/static/jquery/jquery-validation/1.8.0/jquery.validate.min.js" type="text/javascript"></script>
-	<script src="${ctx}/static/jquery/jquery-validation/1.8.0/messages_cn.js" type="text/javascript"></script>
+	<script src="${ctx}/static/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
+	<script src="${ctx}/static/jquery-validation/1.8.0/jquery.validate.min.js" type="text/javascript"></script>
+	<script src="${ctx}/static/jquery-validation/1.8.0/messages_cn.js" type="text/javascript"></script>
     
     <sitemesh:write property='head'/>
   </head>
