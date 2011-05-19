@@ -9,8 +9,8 @@ TODO部分
 
 
 2.次要改动
-  * 升级Sonar 2.7
-  * 升级Sonar 2.6正式版
+  * 升级Sonar 2.8
+  * 升级SpyMemcached 2.6正式版,JMockit 0.99.9
   * 清理BluePrint CSS中过度的css，以及JQuery Validation的milk css的变形
   * 修正mini-web的ft case
 

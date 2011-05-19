@@ -16,9 +16,9 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.joda.time.DateTime;
+import org.springside.examples.showcase.Struts2Utils;
 import org.springside.examples.showcase.excel.DummyDataGenerator.TemperatureAnomaly;
 import org.springside.modules.utils.web.ServletUtils;
-import org.springside.modules.utils.web.struts2.Struts2Utils;
 
 import com.google.common.collect.Maps;
 import com.opensymphony.xwork2.ActionSupport;
