@@ -4,23 +4,11 @@
 <%@ page import="org.apache.shiro.authc.ExcessiveAttemptsException"%>
 <%@ page import="org.apache.shiro.authc.IncorrectCredentialsException"%>
 <%@ page import="java.util.concurrent.atomic.AtomicLong"%>
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <%@page import="org.springside.examples.showcase.security.FormAuthenticationWithLockFilter"%>
 <%@page import="org.apache.commons.lang.StringUtils"%><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Showcase 登录页</title>
-	<%@ include file="/common/meta.jsp" %>
-	
-	<link href="${ctx}/css/style-min.css" type="text/css" rel="stylesheet"/>
-	<link href="${ctx}/js/validate/jquery.validate.css" type="text/css" rel="stylesheet"/>
-		
-	<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection"/>
-	<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print"/>
-	<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
-	
+	<link href="${ctx}/js/validate/jquery.validate.css" type="text/css" rel="stylesheet"/>		
 	<script src="${ctx}/js/jquery-min.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/jquery.validate.js" type="text/javascript"></script>
 	<script src="${ctx}/js/validate/messages_cn.js" type="text/javascript"></script>
@@ -32,11 +20,6 @@
 </head>
 
 <body>
-<div class="container">
-<%@ include file="/common/header.jsp" %>
-<div id="content">
-	<%@ include file="/common/left.jsp" %>
-	<div class="span-18 last prepend-top">
 		<h2>Showcase登录页</h2>
 		
 		<%
@@ -81,10 +64,6 @@
 			</table>
 		</form>
 		<div>（管理员<b>admin/admin</b> ,普通用户<b>user/user</b>）<a href="logout.action">退出登录</a></div>
-	</div>
-</div>
-<%@ include file="/common/footer.jsp" %>
-</div>
 </body>
 </html>
 

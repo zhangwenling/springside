@@ -102,6 +102,11 @@
 		<filter-class>org.springside.examples.showcase.web.CacheControlHeaderFilter</filter-class>
 	</filter>
 
+	<filter>
+		<filter-name>sitemeshFilter</filter-name>
+		<filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+	</filter>
+
 	<!-- Filter 映射 -->
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
@@ -140,6 +145,11 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>sitemeshFilter</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
 
 	<filter-mapping>
 		<filter-name>struts2Filter</filter-name>
@@ -150,15 +160,7 @@
 
 	<filter-mapping>
 		<filter-name>cacheControlHeaderFilter</filter-name>
-		<url-pattern>/img/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>cacheControlHeaderFilter</filter-name>
-		<url-pattern>/css/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>cacheControlHeaderFilter</filter-name>
-		<url-pattern>/js/*</url-pattern>
+		<url-pattern>/static/*</url-pattern>
 	</filter-mapping>
 
 	<!--Spring ApplicationContext 载入 -->
@@ -166,10 +168,6 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<!-- Spring 刷新Introspector防止内存泄露 -->
-	<listener>
-		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
-	</listener>
 
 	<!-- 出错页面定义 -->
 	<error-page>
