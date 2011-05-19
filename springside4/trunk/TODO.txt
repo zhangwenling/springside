@@ -10,7 +10,6 @@ TODO部分
 
 2.次要改动
   * 升级Sonar 2.8
-  * 升级SpyMemcached 2.6正式版,JMockit 0.99.9
   * 清理BluePrint CSS中过度的css，以及JQuery Validation的milk css的变形
   * 修正mini-web的ft case
 
@@ -61,7 +60,7 @@ TODO部分
   * 升级Quartz 2.0.1 (Spring的Quartz模块不兼容)
   * 改名RemoteServlet, 调整Demo页面, HttpClient使用Review
   * review perf4j的使用
-  * 依赖包次要版本升级:JSW 3.5.7(需自行打包)
+  * 依赖包次要版本升级:JSW 3.5.7,JMockit 0.99.9(需自行打包)
   * Spring简化异步处理与Timer.
-
+  
 
