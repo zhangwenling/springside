@@ -12,24 +12,24 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
 
-<link href="${ctx}/css/style-min.css" type="text/css" rel="stylesheet" />
-<link href="${ctx}/css/blueprint/screen.css" type="text/css" rel="stylesheet" media="screen, projection" />
-<link href="${ctx}/css/blueprint/print.css" type="text/css" rel="stylesheet" media="print" />
-<!--[if lt IE 8]><link href="${ctx}/css/blueprint/blueprint/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
+<link href="${ctx}/static/showcase.min.css" type="text/css" rel="stylesheet" />
+<link href="${ctx}/static/blueprint/1.0.1/screen.css" type="text/css" rel="stylesheet" media="screen, projection" />
+<link href="${ctx}/static/blueprint/1.0.1/print.css" type="text/css" rel="stylesheet" media="print" />
+<!--[if lt IE 8]><link href="${ctx}/static/blueprint/1.0.1/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
 
 <sitemesh:write property='head' />
 </head>
 
 <body>
 	<div class="container">
-		<%@ include file="/common/header.jsp"%>
+		<%@ include file="/WEB-INF/layouts/header.jsp"%>
 		<div id="content">
-			<%@ include file="/common/left.jsp"%>
+			<%@ include file="/WEB-INF/layouts/left.jsp"%>
 			<div class="span-18 last prepend-top">
 				<sitemesh:write property='body' />
 			</div>
 		</div>
-		<%@ include file="/common/footer.jsp"%>
+		<%@ include file="/WEB-INF/layouts/footer.jsp"%>
 	</div>
 </body>
 </html>
