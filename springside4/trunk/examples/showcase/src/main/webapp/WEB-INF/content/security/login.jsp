@@ -8,10 +8,8 @@
 <%@page import="org.apache.commons.lang.StringUtils"%><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Showcase 登录页</title>
-	<link href="${ctx}/js/validate/jquery.validate.css" type="text/css" rel="stylesheet"/>		
-	<script src="${ctx}/js/jquery-min.js" type="text/javascript"></script>
-	<script src="${ctx}/js/validate/jquery.validate.js" type="text/javascript"></script>
-	<script src="${ctx}/js/validate/messages_cn.js" type="text/javascript"></script>
+	<script src="${ctx}/static/jquery-validation/1.8.0/jquery.validate.min.js" type="text/javascript"></script>
+	<script src="${ctx}/static/jquery-validation/1.8.0/messages_cn.js" type="text/javascript"></script>
 	<script>
 		$(document).ready(function() {
 			$("#loginForm").validate();
