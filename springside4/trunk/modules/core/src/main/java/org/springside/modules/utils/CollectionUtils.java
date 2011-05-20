@@ -9,12 +9,37 @@ package org.springside.modules.utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
 
 public class CollectionUtils {
+
+	/**
+	 * 提取集合中的对象的属性(通过Getter函数), 组合成Map.
+	 * 
+	 * @param collection 来源集合.
+	 * @param keyPropertyName 要提取为Map中的Key值的属性名.
+	 * @param valuePropertyName 要提取为Map中的Value值的属性名.
+	 */
+	public static Map extractElementPropertyToMap(final Collection collection, final String keyPropertyName,
+			final String valuePropertyName) {
+		Map map = new HashMap();
+
+		try {
+			for (Object obj : collection) {
+				map.put(PropertyUtils.getProperty(obj, keyPropertyName),
+						PropertyUtils.getProperty(obj, valuePropertyName));
+			}
+		} catch (Exception e) {
+			throw ReflectionUtils.convertReflectionExceptionToUnchecked(e);
+		}
+
+		return map;
+	}
 
 	/**
 	 * 提取集合中的对象的属性(通过Getter函数), 组合成List.
@@ -48,5 +73,4 @@ public class CollectionUtils {
 		List list = extractElementPropertyToList(collection, propertyName);
 		return StringUtils.join(list, separator);
 	}
-
 }
