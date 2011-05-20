@@ -15,8 +15,6 @@ import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverBackedSelenium;
 import org.openqa.selenium.WebElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springside.modules.utils.ThreadUtils;
 
 import com.thoughtworks.selenium.Selenium;
@@ -31,7 +29,6 @@ public class Selenium2 {
 	public static final int DEFAULT_TIMEOUT = 5000;
 	public static final int DEFAULT_PAUSE_TIME = 250;
 
-	private static Logger logger = LoggerFactory.getLogger(Selenium2.class);
 	private WebDriver driver;
 	private Selenium selenium;
 	private int defaultTimeout = DEFAULT_TIMEOUT;
