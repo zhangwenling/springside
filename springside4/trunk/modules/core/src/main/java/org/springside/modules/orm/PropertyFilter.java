@@ -15,7 +15,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
-import org.springside.modules.mapper.ConvertUtils;
+import org.springside.modules.mapper.ObjectMapper;
 import org.springside.modules.utils.AssertUtils;
 import org.springside.modules.utils.web.ServletUtils;
 
@@ -85,7 +85,7 @@ public class PropertyFilter {
 		AssertUtils.isTrue(StringUtils.isNotBlank(propertyNameStr), "filter名称" + filterName + "没有按规则编写,无法得到属性名称.");
 		propertyNames = StringUtils.splitByWholeSeparator(propertyNameStr, PropertyFilter.OR_SEPARATOR);
 
-		this.matchValue = ConvertUtils.convertStringToObject(value, propertyClass);
+		this.matchValue = ObjectMapper.convertToObject(value, propertyClass);
 	}
 
 	/**

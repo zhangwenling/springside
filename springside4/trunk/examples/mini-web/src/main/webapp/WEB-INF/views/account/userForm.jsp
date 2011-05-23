@@ -44,33 +44,34 @@
 
 <body>
 	<h3><s:if test="id == null">创建</s:if><s:else>修改</s:else>用户</h3>
-	<form:form id="inputForm" modelAttribute="user" action="${user.id}" method="post">
-		<input type="hidden" name="id" value="${id}"/>
+	<form:form id="inputForm" modelAttribute="user" action="save" method="post">
+		<input type="hidden" name="id" value="${user.id}"/>
 		<table class="noborder">
 			<tr>
 				<td>登录名:</td>
-				<td><input type="text" name="loginName" size="40" id="loginName" value="${loginName}"/></td>
+				<td><input type="text" name="loginName" size="40" id="loginName" value="${user.loginName}"/></td>
 			</tr>
 			<tr>
 				<td>用户名:</td>
-				<td><input type="text" id="name" name="name" size="40" value="${name}"/></td>
+				<td><input type="text" id="name" name="name" size="40" value="${user.name}"/></td>
 			</tr>
 			<tr>
 				<td>密码:</td>
-				<td><input type="password" id="password" name="password" size="40" value="${password}"/></td>
+				<td><input type="password" id="password" name="password" size="40" value="${user.password}"/></td>
 			</tr>
 			<tr>
 				<td>确认密码:</td>
-				<td><input type="password" id="passwordConfirm" name="passwordConfirm" size="40" value="${password}"/>
+				<td><input type="password" id="passwordConfirm" name="passwordConfirm" size="40" value="${user.password}"/>
 				</td>
 			</tr>
 			<tr>
 				<td>邮箱:</td>
-				<td><input type="text" id="email" name="email" size="40" value="${email}"/></td>
+				<td><input type="text" id="email" name="email" size="40" value="${user.email}"/></td>
 			</tr>
 			<tr>
 				<td>权限组:</td>
 				<td>
+				<form:checkboxes path="groupIds" items="${groups}"/>
 				</td>
 			</tr>
 			<tr>

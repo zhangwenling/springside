@@ -5,7 +5,7 @@
  * 
  * $Id: Fixtures.java 1593 2011-05-11 10:37:12Z calvinxiu $
  */
-package org.springside.modules.utils;
+package org.springside.modules.mapper;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,8 +15,14 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
+import org.springside.modules.utils.ReflectionUtils;
 
-public class CollectionUtils {
+/**
+ * 提出集合中的元素对象的属性(通过Getter函数),组合成新的集合.
+ * 
+ * @author calvin
+ */
+public class CollectionMapper {
 
 	/**
 	 * 提取集合中的对象的属性(通过Getter函数), 组合成Map.
@@ -25,7 +31,7 @@ public class CollectionUtils {
 	 * @param keyPropertyName 要提取为Map中的Key值的属性名.
 	 * @param valuePropertyName 要提取为Map中的Value值的属性名.
 	 */
-	public static Map extractElementPropertyToMap(final Collection collection, final String keyPropertyName,
+	public static Map extractToMap(final Collection collection, final String keyPropertyName,
 			final String valuePropertyName) {
 		Map map = new HashMap();
 
@@ -47,7 +53,7 @@ public class CollectionUtils {
 	 * @param collection 来源集合.
 	 * @param propertyName 要提取的属性名.
 	 */
-	public static List extractElementPropertyToList(final Collection collection, final String propertyName) {
+	public static List extractToList(final Collection collection, final String propertyName) {
 		List list = new ArrayList();
 
 		try {
@@ -68,9 +74,8 @@ public class CollectionUtils {
 	 * @param propertyName 要提取的属性名.
 	 * @param separator 分隔符.
 	 */
-	public static String extractElementPropertyToString(final Collection collection, final String propertyName,
-			final String separator) {
-		List list = extractElementPropertyToList(collection, propertyName);
+	public static String extractToString(final Collection collection, final String propertyName, final String separator) {
+		List list = extractToList(collection, propertyName);
 		return StringUtils.join(list, separator);
 	}
 }

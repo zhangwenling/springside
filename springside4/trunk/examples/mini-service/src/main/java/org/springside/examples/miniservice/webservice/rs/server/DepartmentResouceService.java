@@ -14,7 +14,7 @@ import org.springside.examples.miniservice.entity.Department;
 import org.springside.examples.miniservice.service.AccountManager;
 import org.springside.examples.miniservice.webservice.WsConstants;
 import org.springside.examples.miniservice.webservice.dto.DepartmentDTO;
-import org.springside.modules.mapper.ConvertUtils;
+import org.springside.modules.mapper.ObjectMapper;
 import org.springside.modules.utils.jersey.WebExceptionFactory;
 
 /**
@@ -44,7 +44,7 @@ public class DepartmentResouceService {
 				throw WebExceptionFactory.buildException(Status.NOT_FOUND, message, logger);
 			}
 
-			return ConvertUtils.map(entity, DepartmentDTO.class);
+			return ObjectMapper.map(entity, DepartmentDTO.class);
 		} catch (RuntimeException e) {
 			throw WebExceptionFactory.buildDefaultException(e, logger);
 		}
