@@ -25,7 +25,7 @@ import org.springside.examples.miniservice.entity.User;
 import org.springside.examples.miniservice.service.AccountManager;
 import org.springside.examples.miniservice.webservice.WsConstants;
 import org.springside.examples.miniservice.webservice.dto.UserDTO;
-import org.springside.modules.mapper.ConvertUtils;
+import org.springside.modules.mapper.ObjectMapper;
 import org.springside.modules.utils.jersey.WebExceptionFactory;
 import org.springside.modules.utils.validator.ValidatorUtils;
 
@@ -59,7 +59,7 @@ public class UserResouceService {
 				throw WebExceptionFactory.buildException(Status.NOT_FOUND, message, logger);
 			}
 
-			return ConvertUtils.map(entity, UserDTO.class);
+			return ObjectMapper.map(entity, UserDTO.class);
 		} catch (RuntimeException e) {
 			throw WebExceptionFactory.buildDefaultException(e, logger);
 		}
@@ -75,7 +75,7 @@ public class UserResouceService {
 		try {
 			List<User> entityList = accountManager.searchUser(loginName, name);
 
-			return ConvertUtils.mapList(entityList, UserDTO.class);
+			return ObjectMapper.mapList(entityList, UserDTO.class);
 		} catch (RuntimeException e) {
 			throw WebExceptionFactory.buildDefaultException(e, logger);
 		}
@@ -89,7 +89,7 @@ public class UserResouceService {
 	public Response createUser(UserDTO user) {
 		//转换并创建用户
 		try {
-			User userEntity = ConvertUtils.map(user, User.class);
+			User userEntity = ObjectMapper.map(user, User.class);
 
 			Long id = accountManager.saveUser(userEntity);
 

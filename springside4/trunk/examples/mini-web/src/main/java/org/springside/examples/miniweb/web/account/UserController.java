@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.service.account.AccountManager;
+import org.springside.modules.mapper.CollectionMapper;
 
 @Controller
 @RequestMapping(value = "/account/user")
@@ -39,8 +40,8 @@ public class UserController {
 
 	@ModelAttribute("groups")
 	public Map<Long, String> getGroups() {
-		List<Group> allRoles = accountManager.getAllGroup();
-		return null;
+		List<Group> groupList = accountManager.getAllGroup();
+		return CollectionMapper.extractToMap(groupList, "id", "name");
 	}
 
 	@Autowired
