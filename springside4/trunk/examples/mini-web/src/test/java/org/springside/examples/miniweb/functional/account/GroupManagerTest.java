@@ -1,6 +1,8 @@
 package org.springside.examples.miniweb.functional.account;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -62,7 +64,7 @@ public class GroupManagerTest extends BaseFunctionalTestCase {
 		s.clickTo(By.linkText(Gui.MENU_GROUP));
 		s.clickTo(By.id("editLink-" + group.getName()));
 
-		assertEquals(group.getName(), s.getValue(By.id("name")));
+		assertEquals(group.getName(), s.getText(By.id("name")));
 
 		for (String permission : group.getPermissionList()) {
 			assertTrue(s.isChecked(By.id("checkedPermissions-" + permission)));
