@@ -9,10 +9,12 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 import org.springside.examples.showcase.Start;
 import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.functional.JettyFactory;
 import org.springside.modules.test.functional.Selenium2;
+import org.springside.modules.test.functional.WebDriverFactory;
 import org.springside.modules.test.groups.GroupsTestRunner;
 import org.springside.modules.utils.PropertiesUtils;
 import org.springside.modules.utils.spring.SpringContextHolder;
@@ -74,7 +76,8 @@ public class BaseFunctionalTestCase {
 		Properties props = PropertiesUtils.loadProperties("classpath:/application.test.properties",
 				"classpath:/application.test-local.properties");
 
-		s = new Selenium2(props.getProperty("selenium.driver"), Start.BASE_URL);
+		WebDriver driver = WebDriverFactory.createDriver(props.getProperty("selenium.driver"));
+		s = new Selenium2(driver, Start.BASE_URL);
 	}
 
 	/**

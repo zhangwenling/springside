@@ -13,6 +13,8 @@ import org.springside.modules.utils.web.ServletUtils;
 
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.multipart.BodyPart;
+import com.sun.jersey.multipart.MultiPart;
 
 /**
  * 使用Jersey Client的User REST客户端.
@@ -58,9 +60,17 @@ public class UserResourceClient {
 		return JsonMapper.buildNormalMapper().fromJson(jsonString, UserDTO.class);
 	}
 
-	public List<Object> multipartDemo(Long id) {
+	/**
+	 * Multi-Part 演示。
+	 */
+	public String multipart(String userName, String descriptionText) {
 		User user = new User();
+		user.setName(userName);
 
-		return null;
+		MultiPart multiPart = new MultiPart().bodyPart(new BodyPart(user, MediaType.APPLICATION_JSON_TYPE)).bodyPart(
+				new BodyPart(descriptionText, MediaType.TEXT_PLAIN_TYPE));
+
+		String result = client.path("/users/multipart").type("multipart/mixed").post(String.class, multiPart);
+		return result;
 	}
 }

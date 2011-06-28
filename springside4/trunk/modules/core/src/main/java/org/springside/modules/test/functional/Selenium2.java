@@ -32,16 +32,16 @@ public class Selenium2 {
 	private Selenium selenium;
 	private int defaultTimeout = DEFAULT_TIMEOUT;
 
-	public Selenium2(String driverName, String baseUrl) {
-		this.driver = WebDriverFactory.createDriver(driverName);
+	public Selenium2(WebDriver driver, String baseUrl) {
+		this.driver = driver;
 		this.selenium = new WebDriverBackedSelenium(driver, baseUrl);
 	}
 
 	/**
 	 * 不设置baseUrl的构造函数, 调用open函数时必须使用绝对路径. 
 	 */
-	public Selenium2(String driverName) {
-		this(driverName, "");
+	public Selenium2(WebDriver driver) {
+		this(driver, "");
 	}
 
 	/**
