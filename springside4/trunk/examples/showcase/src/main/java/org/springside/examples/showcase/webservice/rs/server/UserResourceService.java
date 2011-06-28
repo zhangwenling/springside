@@ -3,8 +3,10 @@ package org.springside.examples.showcase.webservice.rs.server;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -29,6 +31,8 @@ import org.springside.examples.showcase.webservice.WsConstants;
 import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
 import org.springside.modules.mapper.ObjectMapper;
 import org.springside.modules.utils.jersey.WebExceptionFactory;
+
+import com.sun.jersey.multipart.MultiPart;
 
 /**
  * 用户资源 REST服务演示.
@@ -130,5 +134,17 @@ public class UserResourceService {
 		}
 
 		return userName;
+	}
+
+	/**
+	 * 演示接收Multi-Part的请求内容.
+	 */
+	@Path("/multipart")
+	@POST
+	@Consumes("multipart/mixed")
+	public String multiPart(MultiPart multiPart) {
+		User user = multiPart.getBodyParts().get(0).getEntityAs(User.class);
+		String text = multiPart.getBodyParts().get(1).getEntityAs(String.class);
+		return user.getName() + ":" + text;
 	}
 }

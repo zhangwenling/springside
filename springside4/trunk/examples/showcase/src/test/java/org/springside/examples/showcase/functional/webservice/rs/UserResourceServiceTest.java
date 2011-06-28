@@ -1,6 +1,7 @@
 package org.springside.examples.showcase.functional.webservice.rs;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -39,5 +40,11 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 	public void searchUserJson() throws Exception {
 		UserDTO admin = client.searchUserReturnJson("Admin");
 		assertEquals("admin", admin.getLoginName());
+	}
+
+	@Test
+	public void multiPart() {
+		String result = client.multipart("foo", "a good guy");
+		assertEquals("foo:a good guy", result);
 	}
 }
