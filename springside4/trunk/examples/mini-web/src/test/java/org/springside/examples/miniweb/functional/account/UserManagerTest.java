@@ -1,6 +1,8 @@
 package org.springside.examples.miniweb.functional.account;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -73,8 +75,8 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 		s.clickTo(By.xpath(Gui.BUTTON_SEARCH));
 		s.clickTo(By.linkText("修改"));
 
-		assertEquals(user.getLoginName(), s.getValue(By.id("loginName")));
-		assertEquals(user.getName(), s.getValue(By.id("name")));
+		assertEquals(user.getLoginName(), s.getText(By.id("loginName")));
+		assertEquals(user.getName(), s.getText(By.id("name")));
 
 		for (Group group : user.getGroupList()) {
 			assertTrue(s.isChecked(By.id("checkedGroupIds-" + group.getId())));

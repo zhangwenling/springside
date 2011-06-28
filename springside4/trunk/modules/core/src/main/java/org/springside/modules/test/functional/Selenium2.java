@@ -11,7 +11,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.RenderedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverBackedSelenium;
 import org.openqa.selenium.WebElement;
@@ -104,8 +103,8 @@ public class Selenium2 {
 	/**
 	 * 判断Element是否可见.
 	 */
-	public boolean isVisible(By by) {
-		return ((RenderedWebElement) driver.findElement(by)).isDisplayed();
+	public boolean isDisplayed(By by) {
+		return driver.findElement(by).isDisplayed();
 	}
 
 	/**
@@ -137,7 +136,7 @@ public class Selenium2 {
 	 */
 	public void check(By by) {
 		WebElement element = driver.findElement(by);
-		element.setSelected();
+		element.click();
 	}
 
 	/**
@@ -146,7 +145,7 @@ public class Selenium2 {
 	public void uncheck(By by) {
 		WebElement element = driver.findElement(by);
 		if (element.isSelected()) {
-			element.toggle();
+			element.click();
 		}
 	}
 
@@ -156,13 +155,6 @@ public class Selenium2 {
 	public boolean isChecked(By by) {
 		WebElement element = driver.findElement(by);
 		return element.isSelected();
-	}
-
-	/**
-	 * 获取Element的值.
-	 */
-	public String getValue(By by) {
-		return driver.findElement(by).getValue();
 	}
 
 	/**
@@ -206,7 +198,7 @@ public class Selenium2 {
 	public void waitForVisible(By by, int timeout) {
 		long timeoutTime = System.currentTimeMillis() + timeout;
 		while (System.currentTimeMillis() < timeoutTime) {
-			if (isVisible(by)) {
+			if (isDisplayed(by)) {
 				return;
 			}
 			ThreadUtils.sleep(DEFAULT_PAUSE_TIME);

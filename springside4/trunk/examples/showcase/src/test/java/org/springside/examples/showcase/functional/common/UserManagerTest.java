@@ -1,6 +1,6 @@
 package org.springside.examples.showcase.functional.common;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -30,6 +30,6 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 
 		//重新进入用户修改页面, 检查最后修改者
 		s.clickTo(By.id("editLink-2"));
-		assertEquals("user_foo", s.getValue(By.name("name")));
+		assertEquals("user_foo", s.getText(By.name("name")));
 	}
 }

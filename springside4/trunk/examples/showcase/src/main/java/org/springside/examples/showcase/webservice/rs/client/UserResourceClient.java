@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Required;
+import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
 import org.springside.modules.mapper.JsonMapper;
 import org.springside.modules.utils.jersey.JerseyClientFactory;
@@ -55,5 +56,11 @@ public class UserResourceClient {
 	public UserDTO searchUserReturnJson(String name) {
 		String jsonString = client.path("/users/search").queryParam("name", name).get(String.class);
 		return JsonMapper.buildNormalMapper().fromJson(jsonString, UserDTO.class);
+	}
+
+	public List<Object> multipartDemo(Long id) {
+		User user = new User();
+
+		return null;
 	}
 }
