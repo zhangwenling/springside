@@ -45,6 +45,6 @@ public class UserResourceServiceTest extends BaseFunctionalTestCase {
 	@Test
 	public void multiPart() {
 		String result = client.multipart("foo", "a good guy");
-		assertEquals("foo:a good guy", result);
+		assertEquals("foo ok:a good guy ok", result);
 	}
 }
