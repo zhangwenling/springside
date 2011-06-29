@@ -32,6 +32,7 @@ import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
 import org.springside.modules.mapper.ObjectMapper;
 import org.springside.modules.utils.jersey.WebExceptionFactory;
 
+import com.sun.jersey.multipart.BodyPart;
 import com.sun.jersey.multipart.MultiPart;
 
 /**
@@ -142,9 +143,14 @@ public class UserResourceService {
 	@Path("/multipart")
 	@POST
 	@Consumes("multipart/mixed")
-	public String multiPart(MultiPart multiPart) {
+	@Produces("multipart/mixed")
+	public MultiPart multiPart(MultiPart multiPart) {
 		User user = multiPart.getBodyParts().get(0).getEntityAs(User.class);
 		String text = multiPart.getBodyParts().get(1).getEntityAs(String.class);
-		return user.getName() + ":" + text;
+
+		MultiPart output = new MultiPart().bodyPart(new BodyPart(user.getName() + " ok", MediaType.TEXT_PLAIN_TYPE))
+				.bodyPart(new BodyPart(text + " ok", MediaType.TEXT_PLAIN_TYPE));
+
+		return output;
 	}
 }

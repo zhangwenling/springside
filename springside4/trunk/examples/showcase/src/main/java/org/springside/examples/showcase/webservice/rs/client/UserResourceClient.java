@@ -67,10 +67,15 @@ public class UserResourceClient {
 		User user = new User();
 		user.setName(userName);
 
-		MultiPart multiPart = new MultiPart().bodyPart(new BodyPart(user, MediaType.APPLICATION_JSON_TYPE)).bodyPart(
-				new BodyPart(descriptionText, MediaType.TEXT_PLAIN_TYPE));
+		MultiPart inputMultiPart = new MultiPart().bodyPart(new BodyPart(user, MediaType.APPLICATION_JSON_TYPE))
+				.bodyPart(new BodyPart(descriptionText, MediaType.TEXT_PLAIN_TYPE));
 
-		String result = client.path("/users/multipart").type("multipart/mixed").post(String.class, multiPart);
-		return result;
+		MultiPart outputMultiPart = client.path("/users/multipart").type("multipart/mixed")
+				.post(MultiPart.class, inputMultiPart);
+
+		String resultString = outputMultiPart.getBodyParts().get(0).getEntityAs(String.class) + ":"
+				+ outputMultiPart.getBodyParts().get(1).getEntityAs(String.class);
+		;
+		return resultString;
 	}
 }
