@@ -7,11 +7,10 @@ TODO部分
 
 
 2.次要改动
-  * 升级Sonar 2.7->2.8
+    升级Sonar 2.7->2.8
   * 清理BluePrint CSS中过度的css，以及JQuery Validation的milk css的变形
   * 修正mini-web的ft case
-
-
+  
 3.其他非代码改动
   * 发布前打包项目生成模板
   * Wiki内容重新编写
@@ -27,15 +26,16 @@ TODO部分
    * 演示Hibernate Validator验证
    * CSS框架从YUI转为Blueprint
    * 融合Selenium 1.0与2.0的API
+
    * 升級Jackson1.8.1演示，包括可擴展的對象, 對象循環引用，局部更新已存在對象等新特性.
    * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6.7, Jetty 7.5.0, Sonar 2.7
+
 
 2. 次要改动
    * Template工具引擎从Freemarker转为Velocity, 见Email演示.
    * 升级SpyMemcached2.6版演示
    * 使用log4jdbc打印SQL及执行时间
-   * Jersey Multi-Part演示
-
+   * 演示Jersey的Multi-Part
    * 删除已过期演示: CXF的ws-security和ws附件协议,Flash Chart, 驗證碼,JMX客户端
    * 依赖包次要版本的升级
        -- Spring 3.0.4->3.0.6, CXF 2.2.10->2.4.2, Jersey 1.3->1.9, Activemq 5.4.0->5.5.0, Jquery 1.4->1.5.2, Ehcache 1.6—>2.4.2 H2 1.2.142->1.3.160
@@ -57,6 +57,7 @@ TODO部分
   * 使用Spring 3.0 M2的profile属性
   * 使用ehcache 2.4.2新特性
   * Guava的Cache Builder做的简单缓存
+  * 升级Commons-Lang 3.0,考虑Validate,参考重写 or 直接使用， ThreadFactory直接重用。
   * 改名RemoteServlet, 调整Demo页面, Review HttpClient的使用
   * Hibernate Tools新特性
   * Review perf4j的使用
