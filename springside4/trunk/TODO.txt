@@ -27,8 +27,8 @@ TODO部分
    * CSS框架从YUI转为Blueprint
    * 融合Selenium 1.0与2.0的API
 
-   * 升級Jackson1.8.1演示，包括可擴展的對象, 對象循環引用，局部更新已存在對象等新特性.
-   * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6.7, Jetty 7.5.0, Sonar 2.7
+   * 升級Jackson1.9.0 演示，包括可擴展的對象, 對象循環引用，局部更新已存在對象等新特性.
+   * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6.7, Jetty 7.5.3, Sonar 2.7
 
 
 2. 次要改动
@@ -38,11 +38,11 @@ TODO部分
    * 演示Jersey的Multi-Part
    * 删除已过期演示: CXF的ws-security和ws附件协议,Flash Chart, 驗證碼,JMX客户端
    * 依赖包次要版本的升级
-       -- Spring 3.0.4->3.0.6, CXF 2.2.10->2.4.2, Jersey 1.3->1.9, Activemq 5.4.0->5.5.0, Jquery 1.4->1.5.2, Ehcache 1.6—>2.4.2 H2 1.2.142->1.3.160
-       -- HttpClient 4.0.1->4.1.2, Velocity 1.6.4->1.7, Dozer 5.2.1->5.3.1,  Guava r06->10-rc1, Joda-time 1.6.1->2.0
-       -- Commons-lang 2.5->2.6, Commons-io 1.4->2.0, Commons pool 1.5.5->1.5.6, Commons Codec 1.4->1.5
-       -- Aspectj 1.6.9->1.6.10, mail 1.4.3->1.4.4, Asm 3.2->3.3.1
-       -- Selenium 2.0a5->2.5, Junit 4.8.1->4.9, Jmockit 0.999.2->0.999.8, Perf4j 0.9.13->0.9.14, Jmemcached 0.8->1.0, yuicompressor 2.4.2->2.4.6
+       -- Spring 3.0.4->3.0.6, CXF 2.2.10->2.4.2, Jersey 1.3->1.9, Activemq 5.4.0->5.5.1, Jquery 1.4->1.5.2, Ehcache 1.6—>2.4.6 H2 1.2.142->1.3.160
+       -- HttpClient 4.0.1->4.1.2, Velocity 1.6.4->1.7, Dozer 5.2.1->5.3.1,  Guava r06->10.0.1, Joda-time 1.6.1->2.0
+       -- Commons-lang 2.5->2.6, Commons-io 1.4->2.1, Commons pool 1.5.5->1.5.6, Commons Codec 1.4->1.5
+       -- Aspectj 1.6.9->1.6.10, mail 1.4.3->1.4.4, Asm 3.2->3.3.1, Slf4j 1.6.2->1.6.3
+       -- Selenium 2.0a5->2.9, Junit 4.8.1->4.10, Jmockit 0.999.2->0.999.8, Perf4j 0.9.13->0.9.14, Jmemcached 0.8->1.0, yuicompressor 2.4.2->2.4.6
        -- 所有maven插件升级到最新版
 	   
 3. 其他非代码改动
@@ -55,7 +55,7 @@ TODO部分
   * 补回Hibernaet Auditable的演示，及其他Hibernate的有用演示,及JPA2.0新特性，及Play中的使用
   * 补回WS-Security演示
   * 使用Spring 3.0 M2的profile属性
-  * 使用ehcache 2.4.2新特性
+  * 使用ehcache 2.4.x新特性
   * Guava的Cache Builder做的简单缓存
   * 升级Commons-Lang 3.0,考虑Validate,参考重写 or 直接使用， ThreadFactory直接重用。
   * 改名RemoteServlet, 调整Demo页面, Review HttpClient的使用
