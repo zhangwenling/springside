@@ -5,13 +5,13 @@
   * 使用SiteMesh3实现Layout
   
 2.次要改动
-  * Jquery与Jquery-validation升级到最新版
+  * 升级Jquery与Jquery-validation到最新版
   * 清理BluePrint CSS中过度的css，以及JQuery Validation的milk css的变形
   * 修正mini-web的Selenium Test case
-  * Selenium升级到最新版, 修正Deprecated方法
+  * 升级Selenium到最新版, 修正Deprecated方法，使用自带的Wait类()
   * Review Shiro的Resource Base Access Control使用
-  * 加强Jackson演示，自定义类型的持久化，修正Deprecated方法
-  * JodaTime的进一步演示，如日期加减，时间min，max值等
+  * 升级Jackson演示，自定义类型的持久化，修正Deprecated方法
+  * 升级JodaTime演示，如日期加减，每日/每月时间的min，max值等
 
 3.其他非代码改动
   * 发布前打包Maven-Archetype的项目生成模板
@@ -28,15 +28,15 @@
    * 演示Hibernate Validator验证
    * CSS框架从YUI转为Blueprint
    * 升级Selenium2.0演示 ，融合Selenium 1.0与2.0的API
-   * 升級Jackson1.9.1 演示，包括可擴展的對象, 對象循環引用，局部更新已存在對象等新特性.
+   * 升級Jackson1.9.2 演示，包括可擴展的對象, 對象循環引用，局部更新已存在對象等新特性.
    * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6.8, Jetty 7.5.3, Sonar 2.7
 
 2. 次要改动
    * Template工具引擎从Freemarker转为Velocity, 见Email演示.
    * 升级SpyMemcached2.6版演示
    * 使用log4jdbc打印SQL及执行时间
-   * 演示Jersey(REST)的Multi-Part
-   * 删除已过期演示: CXF的ws-security和ws附件协议,Flash Chart, 驗證碼,JMX客户端
+   * 演示RESTful库Jersey的Multi-Part客户端与服务端
+   * 删除已过期演示: CXF的ws-security和ws附件协议,Flash Chart, 驗證碼, JMX客户端
    * 依赖包次要版本的升级
        -- Spring 3.0.4->3.0.6, CXF 2.2.10->2.5.0, Jersey 1.3->1.9, Activemq 5.4.0->5.5.1, Jquery 1.4->1.5.2, Ehcache 1.6—>2.4.6 H2 1.2.142->1.3.161
        -- HttpClient 4.0.1->4.1.2, Velocity 1.6.4->1.7, Dozer 5.2.1->5.3.1,  Guava r06->10.0.1, Joda-time 1.6.1->2.0
@@ -53,23 +53,21 @@
 -----------------------------------------------------------------------------------
 4.0 正式版
   * 补回Hibernaet Auditable的演示，及其他Hibernate的有用演示,及JPA2.0新特性，及Play中的使用
-  * 改名RemoteServlet, 调整Demo页面, Review HttpClient的使用
+  * 改名RemoteServlet, 调整其Demo页面, Review HttpClient的使用
   * Review perf4j的使用
   * OpenCSV演示
   * Guava的Cache Builder做的简单缓存
   * PowerMock替换JMockit，与EasyMock配合更好，专职Mock static,final与private的方法。
+  * 升级HibernateVilidator演示，加载自定义Validator
   * 依赖包次要版本升级:JSW 3.5.7(需自行打包)
   
 4.1 版
-  * 升级Spring3.1
-  * 升级Hibernate4.0
-  * 升级Quartz 2.x  
-  * 演示ehcache 2.4.x新特性
-  * Spring简化异步处理与Timer.
-  
-远期可选计划
-  * Restful框架从Jersey转为Spring MVC.
+1.主要改动
+  * 见RoadMap
+
+2. 次要改动
   * 升级Commons-Lang 3.0,考虑Validate部分参考重写 or 直接使用,ThreadFactory直接重用。
+  
   
 需自行时常检查版本的依赖包
 1.Blueprint,jquery,yuicompressor,SpyMemcached,log4jdbc,jsw

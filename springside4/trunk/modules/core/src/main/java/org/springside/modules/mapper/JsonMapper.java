@@ -36,7 +36,7 @@ public class JsonMapper {
 	public JsonMapper(Inclusion inclusion) {
 		mapper = new ObjectMapper();
 		//设置输出时包含属性的风格
-		mapper.getSerializationConfig().setSerializationInclusion(inclusion);
+		mapper.setSerializationInclusion(inclusion);
 		//设置输入时忽略在JSON字符串中存在但Java对象实际没有的属性
 		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		//禁止使用int代表Enum的order()來反序列化Enum,非常危險
@@ -65,10 +65,25 @@ public class JsonMapper {
 	}
 
 	/**
+	 * 如果对象为Null, 返回"null".
+	 * 如果集合为空集合, 返回"[]".
+	 */
+	public String toJson(Object object) {
+
+		try {
+			return mapper.writeValueAsString(object);
+		} catch (IOException e) {
+			logger.warn("write to json string error:" + object, e);
+			return null;
+		}
+	}
+
+	/**
 	 * 如果JSON字符串为Null或"null"字符串, 返回Null.
 	 * 如果JSON字符串为"[]", 返回空集合.
 	 * 
-	 * 如需读取集合如List/Map, 且不是List<String>这种简单类型时使用如下语句,使用後面的函數.
+	 * 如需读取集合如List/Map, 且不是List<String>这种简单类型时,先使用函數constructParametricType构造类型.
+	 * @see #constructParametricType(Class, Class...)
 	 */
 	public <T> T fromJson(String jsonString, Class<T> clazz) {
 		if (StringUtils.isEmpty(jsonString)) {
@@ -87,8 +102,8 @@ public class JsonMapper {
 	 * 如果JSON字符串为Null或"null"字符串, 返回Null.
 	 * 如果JSON字符串为"[]", 返回空集合.
 	 * 
-	 * 如需读取集合如List/Map, 且不是List<String>時,
-	 * 先用constructParametricType(List.class,MyBean.class)構造出JavaTeype,再調用本函數.
+	 * 如需读取集合如List/Map, 且不是List<String>这种简单类型时,先使用函數constructParametricType构造类型.
+	 * @see #constructParametricType(Class, Class...)
 	 */
 	public <T> T fromJson(String jsonString, JavaType javaType) {
 		if (StringUtils.isEmpty(jsonString)) {
@@ -104,24 +119,11 @@ public class JsonMapper {
 	}
 
 	/**
-	 * 構造泛型的Type如List<MyBean>, Map<String,MyBean>
+	 * 構造泛型的Type如List<MyBean>, 则调用constructParametricType(ArrayList.class,MyBean.class)
+	 *             Map<String,MyBean>则调用(HashMap.class,String.class, MyBean.class)
 	 */
 	public JavaType constructParametricType(Class<?> parametrized, Class<?>... parameterClasses) {
 		return mapper.getTypeFactory().constructParametricType(parametrized, parameterClasses);
-	}
-
-	/**
-	 * 如果对象为Null, 返回"null".
-	 * 如果集合为空集合, 返回"[]".
-	 */
-	public String toJson(Object object) {
-
-		try {
-			return mapper.writeValueAsString(object);
-		} catch (IOException e) {
-			logger.warn("write to json string error:" + object, e);
-			return null;
-		}
 	}
 
 	/**
@@ -129,11 +131,11 @@ public class JsonMapper {
 	 */
 	public <T> T update(T object, String jsonString) {
 		try {
-			return (T) mapper.updatingReader(object).readValue(jsonString);
+			return (T) mapper.readerForUpdating(object).readValue(jsonString);
 		} catch (JsonProcessingException e) {
-			logger.warn("parse json string" + jsonString + " to object:" + object + " error.", e);
+			logger.warn("update json string:" + jsonString + " to object:" + object + " error.", e);
 		} catch (IOException e) {
-			logger.warn("parse json string" + jsonString + " to object:" + object + " error.", e);
+			logger.warn("update json string:" + jsonString + " to object:" + object + " error.", e);
 		}
 		return null;
 	}
@@ -151,8 +153,8 @@ public class JsonMapper {
 	 * 注意本函數一定要在Mapper創建後, 所有的讀寫動作之前調用.
 	 */
 	public void setEnumUseToString(boolean value) {
-		mapper.getSerializationConfig().set(SerializationConfig.Feature.WRITE_ENUMS_USING_TO_STRING, value);
-		mapper.getDeserializationConfig().set(DeserializationConfig.Feature.READ_ENUMS_USING_TO_STRING, value);
+		mapper.configure(SerializationConfig.Feature.WRITE_ENUMS_USING_TO_STRING, value);
+		mapper.configure(DeserializationConfig.Feature.READ_ENUMS_USING_TO_STRING, value);
 	}
 
 	/**
