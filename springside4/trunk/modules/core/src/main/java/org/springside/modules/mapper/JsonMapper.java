@@ -38,7 +38,7 @@ public class JsonMapper {
 		//设置输出时包含属性的风格
 		mapper.setSerializationInclusion(inclusion);
 		//设置输入时忽略在JSON字符串中存在但Java对象实际没有的属性
-		mapper.configure(org.codehaus.jackson.map.DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		//禁止使用int代表Enum的order()來反序列化Enum,非常危險
 		mapper.configure(DeserializationConfig.Feature.FAIL_ON_NUMBERS_FOR_ENUMS, true);
 	}
@@ -62,6 +62,13 @@ public class JsonMapper {
 	 */
 	public static JsonMapper buildNonDefaultMapper() {
 		return new JsonMapper(Inclusion.NON_DEFAULT);
+	}
+
+	/**
+	 * 创建只输出非Null且非Empty(如List.isEmpty)的属性到Json字符串的Mapper.
+	 */
+	public static JsonMapper buildNonEmptyMapper() {
+		return new JsonMapper(Inclusion.NON_EMPTY);
 	}
 
 	/**
