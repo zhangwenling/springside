@@ -1,6 +1,7 @@
 package org.springside.examples.showcase.mapping.json;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.io.IOException;
 import java.util.Date;
@@ -348,7 +349,7 @@ public class JsonDemo {
 	}
 
 	/**
-	 * 測試序列化Bean的不同View, 及@JsonIgnore標註的屬性.
+	 * 測試序列化Bean时使用不同的View序列化不同的属性组, 及@JsonIgnore標註的屬性.
 	 */
 	@Test
 	public void viewBean() throws JsonGenerationException, JsonMappingException, IOException {
@@ -358,15 +359,15 @@ public class JsonDemo {
 		viewBean.setOtherValue("others");
 		viewBean.setIgnoreValue("ignored");
 
-		ObjectWriter publicWriter = mapper.getMapper().viewWriter(Views.Public.class);
+		ObjectWriter publicWriter = mapper.getMapper().writerWithView(Views.Public.class);
 		assertEquals("{\"otherValue\":\"others\",\"name\":\"Foo\"}", publicWriter.writeValueAsString(viewBean));
-		ObjectWriter internalWriter = mapper.getMapper().viewWriter(Views.Internal.class);
+		ObjectWriter internalWriter = mapper.getMapper().writerWithView(Views.Internal.class);
 		assertEquals("{\"age\":16,\"otherValue\":\"others\"}", internalWriter.writeValueAsString(viewBean));
 
 		//設置默認是否顯示沒有用@Json定義的屬性
 		JsonMapper newMapper = JsonMapper.buildNormalMapper();
 		newMapper.getMapper().configure(SerializationConfig.Feature.DEFAULT_VIEW_INCLUSION, false);
-		publicWriter = newMapper.getMapper().viewWriter(Views.Public.class);
+		publicWriter = newMapper.getMapper().writerWithView(Views.Public.class);
 		assertEquals("{\"name\":\"Foo\"}", publicWriter.writeValueAsString(viewBean));
 	}
 

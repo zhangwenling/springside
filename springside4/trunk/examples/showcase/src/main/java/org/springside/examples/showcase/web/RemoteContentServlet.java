@@ -16,7 +16,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.slf4j.Logger;
@@ -97,7 +97,7 @@ public class RemoteContentServlet extends HttpServlet {
 	 */
 	@Override
 	public void init() throws ServletException {
-		ThreadSafeClientConnManager cm = new ThreadSafeClientConnManager();
+		PoolingClientConnectionManager cm = new PoolingClientConnectionManager();
 		cm.setMaxTotal(100);
 		httpClient = new DefaultHttpClient(cm);
 	}
