@@ -11,15 +11,27 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.JsonParser;
+import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.Version;
 import org.codehaus.jackson.annotate.JsonAnyGetter;
 import org.codehaus.jackson.annotate.JsonAnySetter;
 import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.MapperConfig;
 import org.codehaus.jackson.map.ObjectWriter;
+import org.codehaus.jackson.map.PropertyNamingStrategy;
 import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.SerializerProvider;
 import org.codehaus.jackson.map.annotate.JsonView;
+import org.codehaus.jackson.map.deser.std.StdDeserializer;
+import org.codehaus.jackson.map.introspect.AnnotatedMethod;
+import org.codehaus.jackson.map.module.SimpleModule;
+import org.codehaus.jackson.map.ser.std.SerializerBase;
 import org.codehaus.jackson.type.JavaType;
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -109,20 +121,6 @@ public class JsonDemo {
 		for (TestBean element : beanList) {
 			System.out.println(element);
 		}
-	}
-
-	/**
-	 * 從JSON裡只含有Bean中部分的屬性時，更新一個已存在Bean，只覆蓋該部分的屬性.
-	 */
-	@Test
-	public void updateBean() {
-		String jsonString = "{\"name\":\"A\"}";
-
-		TestBean bean = new TestBean();
-		bean.setDefaultValue("Foobar");
-		bean = mapper.update(bean, jsonString);
-		assertEquals("A", bean.getName());
-		assertEquals("Foobar", bean.getDefaultValue());
 	}
 
 	/**
@@ -235,10 +233,25 @@ public class JsonDemo {
 	}
 
 	/**
+	 * JSON字符串裡只含有Bean中部分的屬性時，更新一個已存在Bean，只覆蓋部分的屬性.
+	 */
+	@Test
+	public void updateBean() {
+		String jsonString = "{\"name\":\"A\"}";
+
+		TestBean bean = new TestBean();
+		bean.setDefaultValue("Foobar");
+		bean = mapper.update(bean, jsonString);
+		assertEquals("A", bean.getName());
+		assertEquals("Foobar", bean.getDefaultValue());
+	}
+
+	/**
 	 * 測試父子POJO間的循環引用.
 	 */
 	@Test
 	public void parentChildBean() {
+		//初始化对象关系，parent的Childs里含有 child1,child2, child1/child2的parent均指向parent.
 		ParentChildBean parent = new ParentChildBean("parent");
 
 		ParentChildBean child1 = new ParentChildBean("child1");
@@ -250,18 +263,19 @@ public class JsonDemo {
 		parent.getChilds().add(child2);
 
 		String jsonString = "{\"childs\":[{\"name\":\"child1\"},{\"name\":\"child2\"}],\"name\":\"parent\"}";
-		//打印parent，json字符串裡所有child都不包含到parent的屬性
+		//打印parent的json输出，json字符串裡childs中的child1/child2都不包含到parent的屬性
 		assertEquals(jsonString, mapper.toJson(parent));
 
 		//注意此時如果單獨打印child1，也不會打印parent，信息將丟失。
 		assertEquals("{\"name\":\"child1\"}", mapper.toJson(child1));
 
+		//反向序列化时，Json已很聪明的把parent填入child1/child2中.
 		ParentChildBean parentResult = mapper.fromJson(jsonString, ParentChildBean.class);
 		assertEquals("parent", parentResult.getChilds().get(0).getParent().getName());
 	}
 
 	/**
-	 * 父子POJO間的循環引用的演示Bean
+	 * 父子POJO間的循環引用的演示Bean,@JsonBackReference 与 @JsonManagedReference 是关键.
 	 */
 	public static class ParentChildBean {
 
@@ -307,10 +321,11 @@ public class JsonDemo {
 	}
 
 	/**
-	 * 測試可擴展Bean,會自動的把確定的屬性放入成員變量, 其他屬性放到Map裡。
+	 * 測試可擴展Bean,會自動的把確定的屬性放入固定的成員變量, 其他屬性放到一个类型为Map的成员变量裡,能很好的支持Bean版本升级时固定属性的变动.
 	 */
 	@Test
 	public void extensibleBean() {
+		//一个没有区分是变量还是Map的普通JSON字符串.
 		String jsonString = "{\"name\" : \"Foobar\",\"age\" : 37,\"occupation\" : \"coder man\"}";
 		ExtensibleBean extensibleBean = mapper.fromJson(jsonString, ExtensibleBean.class);
 		assertEquals("Foobar", extensibleBean.getName());
@@ -319,7 +334,7 @@ public class JsonDemo {
 	}
 
 	/**
-	 * 演示用的可擴展Bean.
+	 * 演示用的可擴展Bean.@JsonAnySetter与@JsonAnyGetter是关键.
 	 */
 	public static class ExtensibleBean {
 		private String name; // we always have name
@@ -380,7 +395,7 @@ public class JsonDemo {
 	}
 
 	/**
-	 * 演示序列化不同View的Bean.
+	 * 演示序列化不同View不同属性的Bean.
 	 */
 	public static class ViewBean {
 		private String name;
@@ -426,6 +441,94 @@ public class JsonDemo {
 	}
 
 	/**
+	 * 测试自定义转换器
+	 */
+	@Test
+	public void customConverter() {
+
+		JsonMapper newMapper = JsonMapper.buildNonNullMapper();
+		SimpleModule testModule = new SimpleModule("MyModule", new Version(1, 0, 0, null));
+		testModule.addSerializer(new MoneySerializer()); // assuming serializer declares correct class to bind to
+		testModule.addDeserializer(Money.class, new MoneyDeserializer());
+		newMapper.getMapper().registerModule(testModule);
+
+		Money money = new Money(1.2);
+
+		String jsonString = newMapper.toJson(money);
+
+		assertEquals("\"1.2\"", jsonString);
+
+		Money resultMoney = newMapper.fromJson(jsonString, Money.class);
+
+		assertEquals(new Double(1.2), resultMoney.value);
+
+	}
+
+	public class MoneySerializer extends SerializerBase<Money> {
+		public MoneySerializer() {
+			super(Money.class);
+		}
+
+		public void serialize(Money value, JsonGenerator jgen, SerializerProvider provider) throws IOException,
+				JsonProcessingException {
+
+			jgen.writeString(value.toString());
+		}
+	}
+
+	public class MoneyDeserializer extends StdDeserializer<Money> {
+		public MoneyDeserializer() {
+			super(Money.class);
+		}
+
+		@Override
+		public Money deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException,
+				JsonProcessingException {
+			return Money.valueOf(jp.getText());
+		}
+
+	}
+
+	public static class Money {
+		private Double value;
+
+		public Money(Double value) {
+			this.value = value;
+		}
+
+		public static Money valueOf(String value) {
+			Double srcValue = Double.valueOf(value);
+			return new Money(srcValue);
+		}
+
+		public String toString() {
+			return value.toString();
+		}
+	}
+
+	/**
+	 * 测试修改属性名策略
+	 * @throws JsonMappingException 
+	 */
+	@Test
+	public void customPropertyNameing() throws JsonMappingException {
+
+		TestBean bean = new TestBean("foo");
+		bean.setDefaultValue("bar");
+		JsonMapper newMapper = JsonMapper.buildNonNullMapper();
+		newMapper.getMapper().setPropertyNamingStrategy(new LowerCaseNaming());
+		String jsonpString = newMapper.toJson(bean);
+		assertEquals("{\"name\":\"foo\",\"defaultvalue\":\"bar\"}", jsonpString);
+	}
+
+	public static class LowerCaseNaming extends PropertyNamingStrategy {
+		@Override
+		public String nameForGetterMethod(MapperConfig<?> config, AnnotatedMethod method, String defaultName) {
+			return defaultName.toLowerCase();
+		}
+	}
+
+	/**
 	 * 測試輸出jsonp格式內容.
 	 */
 	@Test
@@ -441,8 +544,8 @@ public class JsonDemo {
 	public static class TestBean {
 
 		private String name;
-		private String defaultValue = "hello";
-		private String nullValue = null;
+		private String defaultValue = "hello"; //默认值没被修改过的属性，可能会不序列化
+		private String nullValue = null; //空值的据行，可能会不序列化
 
 		public TestBean() {
 		}

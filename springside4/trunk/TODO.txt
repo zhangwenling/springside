@@ -8,9 +8,7 @@
   * 升级Jquery与Jquery-validation到最新版
   * 清理BluePrint CSS中过度的css，以及JQuery Validation的milk css的变形
   * 修正mini-web的Selenium Test case
-  * 升级Selenium到最新版, 修正Deprecated方法，使用自带的Wait类()
-  * Review Shiro的Resource Base Access Control使用
-  * 升级Jackson演示，自定义类型的持久化，修正Deprecated方法
+  * 升级Selenium到最新版, 使用自带的Wait类
   * 升级JodaTime演示，如日期加减，每日/每月时间的min，max值等
 
 3.其他非代码改动
@@ -28,7 +26,7 @@
    * 演示Hibernate Validator验证
    * CSS框架从YUI转为Blueprint
    * 升级Selenium2.0演示 ，融合Selenium 1.0与2.0的API
-   * 升級Jackson1.9.2 演示，包括可擴展的對象, 對象循環引用，局部更新已存在對象等新特性.
+   * 升級Jackson1.9.2 演示，包括可擴展的對象, 對象循環引用，局部更新，自定义类型的持久化，自定义Naming策略，已存在對象等新特性.
    * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6.8, Jetty 7.5.3, Sonar 2.7
 
 2. 次要改动
@@ -54,6 +52,7 @@
 4.0 正式版
   * 补回Hibernaet Auditable的演示，及其他Hibernate的有用演示,及JPA2.0新特性，及Play中的使用
   * 改名RemoteServlet, 调整其Demo页面, Review HttpClient的使用
+  * Review Shiro的Resource Base Access Control使用
   * Review perf4j的使用
   * OpenCSV演示
   * Guava的Cache Builder做的简单缓存
