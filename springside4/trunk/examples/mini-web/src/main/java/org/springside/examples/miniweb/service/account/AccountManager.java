@@ -6,7 +6,7 @@ import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.examples.miniweb.dao.account.GroupDao;
 import org.springside.examples.miniweb.dao.account.UserDao;
@@ -23,8 +23,8 @@ import org.springside.modules.orm.PropertyFilter;
  * @author calvin
  */
 //Spring Bean的标识.
-@Service
-//默认将类中的所有函数纳入事务管理.
+@Component
+//默认将类中的所有public函数纳入事务管理.
 @Transactional
 public class AccountManager {
 
@@ -79,7 +79,7 @@ public class AccountManager {
 	/**
 	 * 检查用户名是否唯一.
 	 *
-	 * @return loginName在数据库中唯一或等于oldLoginName时返回true.
+	 * @return newLoginName在数据库中唯一或等于oldLoginName时返回true.
 	 */
 	@Transactional(readOnly = true)
 	public boolean isLoginNameUnique(String newLoginName, String oldLoginName) {
