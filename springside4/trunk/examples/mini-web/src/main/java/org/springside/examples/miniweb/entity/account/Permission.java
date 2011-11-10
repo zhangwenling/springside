@@ -4,6 +4,11 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 
+/**
+ * Resource Base Access Control中的资源定义.
+ * 
+ * @author calvin
+ */
 public enum Permission {
 
 	USER_VIEW("user:view", "查看用戶"), USER_EDIT("user:edit", "修改用户"),
@@ -21,8 +26,8 @@ public enum Permission {
 	}
 
 	Permission(String value, String displayName) {
-		this.displayName = displayName;
 		this.value = value;
+		this.displayName = displayName;
 	}
 
 	public static Permission parse(String value) {

@@ -24,7 +24,7 @@ public class GroupDao extends HibernateDao<Group, Long> {
 	public void delete(Long id) {
 		Group group = get(id);
 		//查询出拥有该权限组的用户,并删除该用户的权限组.
-		List<User> users = createQuery(QUERY_USER_BY_GROUPID, group.getId()).list();
+		List<User> users = find(QUERY_USER_BY_GROUPID, group.getId());
 		for (User u : users) {
 			u.getGroupList().remove(group);
 		}
