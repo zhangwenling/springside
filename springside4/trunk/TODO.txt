@@ -1,73 +1,73 @@
-4.0 RC1 TODO²¿·Ö
+ï»¿4.0 RC1 TODOéƒ¨åˆ†
 
-1.Ö÷Òª¸Ä¶¯
-  * MVC¿ò¼Ü´ÓStruts2×ªÎªSpring MVC.
-  * Ê¹ÓÃSiteMesh3ÊµÏÖLayout
+1.ä¸»è¦æ”¹åŠ¨
+  * MVCæ¡†æ¶ä»Struts2è½¬ä¸ºSpring MVC.
+  * ä½¿ç”¨SiteMesh3å®ç°Layout
   
-2.´ÎÒª¸Ä¶¯
-  * Éı¼¶JqueryÓëJquery-validationµ½×îĞÂ°æ
-  * ÇåÀíBluePrint CSSÖĞ¹ı¶ÈµÄcss£¬ÒÔ¼°JQuery ValidationµÄmilk cssµÄ±äĞÎ
-  * ĞŞÕımini-webµÄSelenium Test case
-  * Éı¼¶Seleniumµ½×îĞÂ°æ, Ê¹ÓÃ×Ô´øµÄWaitÀà
-  * Éı¼¶JodaTimeÑİÊ¾£¬ÈçÈÕÆÚ¼Ó¼õ£¬Ã¿ÈÕ/Ã¿ÔÂÊ±¼äµÄmin£¬maxÖµµÈ
+2.æ¬¡è¦æ”¹åŠ¨
+  * å‡çº§Jqueryä¸Jquery-validationåˆ°æœ€æ–°ç‰ˆ
+  * æ¸…ç†BluePrint CSSä¸­è¿‡åº¦çš„cssï¼Œä»¥åŠJQuery Validationçš„milk cssçš„å˜å½¢
+  * ä¿®æ­£mini-webçš„Selenium Test case
+  * å‡çº§Seleniumåˆ°æœ€æ–°ç‰ˆ, ä½¿ç”¨è‡ªå¸¦çš„Waitç±»
+  * å‡çº§JodaTimeæ¼”ç¤ºï¼Œå¦‚æ—¥æœŸåŠ å‡ï¼Œæ¯æ—¥/æ¯æœˆæ—¶é—´çš„minï¼Œmaxå€¼ç­‰
 
-3.ÆäËû·Ç´úÂë¸Ä¶¯
-  * ·¢²¼Ç°´ò°üMaven-ArchetypeµÄÏîÄ¿Éú³ÉÄ£°å
-  * WikiÄÚÈİÖØĞÂ±àĞ´
-    ‚äÍü£º log4jdbc£¬jersey+jackson,jackson new feature
-  * é†×xÈçÏÂSamples: SpringFuse, Spring Roo, Spring GreenHouse
+3.å…¶ä»–éä»£ç æ”¹åŠ¨
+  * å‘å¸ƒå‰æ‰“åŒ…Maven-Archetypeçš„é¡¹ç›®ç”Ÿæˆæ¨¡æ¿
+  * Wikiå†…å®¹é‡æ–°ç¼–å†™
+    å‚™å¿˜ï¼š log4jdbcï¼Œjersey+jackson,jackson new feature
+  * é–±è®€å¦‚ä¸‹Samples: SpringFuse, Spring Roo, Spring GreenHouse
   
 ---------------------------------------------------------------------------------
-4.0 RC1 ÒÑÍê³É²¿·Ö
-1.  Ö÷Òª¸Ä¶¯
-   * DAO¿ò¼ÜÔö¼ÓMyBatisµÄÊ¹ÓÃ£¬ÓëHibernateÔÚ²»Í¬µÄ³¡¾°¸÷Õ¹Ëù³¤
-   * °²È«¿ò¼Ü´ÓSpringSecurity×ªÎªApache Shiro.
-   * SpringSide ModulesµÄ´óÖØ¹¹
-   * ÑİÊ¾Hibernate ValidatorÑéÖ¤
-   * CSS¿ò¼Ü´ÓYUI×ªÎªBlueprint
-   * Éı¼¶Selenium2.0ÑİÊ¾ £¬ÈÚºÏSelenium 1.0Óë2.0µÄAPI
-   * Éı¼‰Jackson1.9.2 ÑİÊ¾£¬°üÀ¨¿É”UÕ¹µÄŒ¦Ïó, Œ¦ÏóÑ­­hÒıÓÃ£¬¾Ö²¿¸üĞÂ£¬×Ô¶¨ÒåÀàĞÍµÄ³Ö¾Ã»¯£¬×Ô¶¨ÒåNaming²ßÂÔ£¬ÒÑ´æÔÚŒ¦ÏóµÈĞÂÌØĞÔ.
-   * ÒÀÀµ°üÖØÒª°æ±¾Éı¼¶Èç£ºMaven 3.0, Hibernate 3.6.8, Jetty 7.5.3, Sonar 2.7
+4.0 RC1 å·²å®Œæˆéƒ¨åˆ†
+1.  ä¸»è¦æ”¹åŠ¨
+   * DAOæ¡†æ¶å¢åŠ MyBatisçš„ä½¿ç”¨ï¼Œä¸Hibernateåœ¨ä¸åŒçš„åœºæ™¯å„å±•æ‰€é•¿
+   * å®‰å…¨æ¡†æ¶ä»SpringSecurityè½¬ä¸ºApache Shiro.
+   * SpringSide Modulesçš„å¤§é‡æ„
+   * æ¼”ç¤ºHibernate ValidatoréªŒè¯
+   * CSSæ¡†æ¶ä»YUIè½¬ä¸ºBlueprint
+   * å‡çº§Selenium2.0æ¼”ç¤º ï¼ŒèåˆSelenium 1.0ä¸2.0çš„API
+   * å‡ç´šJackson1.9.2 æ¼”ç¤ºï¼ŒåŒ…æ‹¬å¯æ“´å±•çš„å°è±¡, å°è±¡å¾ªç’°å¼•ç”¨ï¼Œå±€éƒ¨æ›´æ–°ï¼Œè‡ªå®šä¹‰ç±»å‹çš„æŒä¹…åŒ–ï¼Œè‡ªå®šä¹‰Namingç­–ç•¥ï¼Œå·²å­˜åœ¨å°è±¡ç­‰æ–°ç‰¹æ€§.
+   * ä¾èµ–åŒ…é‡è¦ç‰ˆæœ¬å‡çº§å¦‚ï¼šMaven 3.0, Hibernate 3.6.8, Jetty 7.5.3, Sonar 2.7
 
-2. ´ÎÒª¸Ä¶¯
-   * Template¹¤¾ßÒıÇæ´ÓFreemarker×ªÎªVelocity, ¼ûEmailÑİÊ¾.
-   * Éı¼¶SpyMemcached2.6°æÑİÊ¾
-   * Ê¹ÓÃlog4jdbc´òÓ¡SQL¼°Ö´ĞĞÊ±¼ä
-   * ÑİÊ¾RESTful¿âJerseyµÄMulti-Part¿Í»§¶ËÓë·şÎñ¶Ë
-   * É¾³ıÒÑ¹ıÆÚÑİÊ¾: CXFµÄws-securityºÍws¸½¼şĞ­Òé,Flash Chart, ò×C´a, JMX¿Í»§¶Ë
-   * ÒÀÀµ°ü´ÎÒª°æ±¾µÄÉı¼¶
-       -- Spring 3.0.4->3.0.6, CXF 2.2.10->2.5.0, Jersey 1.3->1.9, Activemq 5.4.0->5.5.1, Jquery 1.4->1.5.2, Ehcache 1.6¡ª>2.4.6 H2 1.2.142->1.3.161
+2. æ¬¡è¦æ”¹åŠ¨
+   * Templateå·¥å…·å¼•æ“ä»Freemarkerè½¬ä¸ºVelocity, è§Emailæ¼”ç¤º.
+   * å‡çº§SpyMemcached2.6ç‰ˆæ¼”ç¤º
+   * ä½¿ç”¨log4jdbcæ‰“å°SQLåŠæ‰§è¡Œæ—¶é—´
+   * æ¼”ç¤ºRESTfulåº“Jerseyçš„Multi-Partå®¢æˆ·ç«¯ä¸æœåŠ¡ç«¯
+   * åˆ é™¤å·²è¿‡æœŸæ¼”ç¤º: CXFçš„ws-securityå’Œwsé™„ä»¶åè®®,Flash Chart, é©—è­‰ç¢¼, JMXå®¢æˆ·ç«¯
+   * ä¾èµ–åŒ…æ¬¡è¦ç‰ˆæœ¬çš„å‡çº§
+       -- Spring 3.0.4->3.0.6, CXF 2.2.10->2.5.0, Jersey 1.3->1.9, Activemq 5.4.0->5.5.1, Jquery 1.4->1.5.2, Ehcache 1.6â€”>2.4.6 H2 1.2.142->1.3.161
        -- HttpClient 4.0.1->4.1.2, Velocity 1.6.4->1.7, Dozer 5.2.1->5.3.1,  Guava r06->10.0.1, Joda-time 1.6.1->2.0
        -- Commons-lang 2.5->2.6, Commons-io 1.4->2.1, Commons pool 1.5.5->1.5.6, Commons Codec 1.4->1.5
        -- Aspectj 1.6.9->1.6.10, mail 1.4.3->1.4.4, Asm 3.2->3.3.1, Slf4j 1.6.2->1.6.3
        -- Selenium 2.0a5->2.9, Junit 4.8.1->4.10, Jmockit 0.999.2->0.999.8, Perf4j 0.9.13->0.9.14, Jmemcached 0.8->1.0, yuicompressor 2.4.2->2.4.6
-       -- ËùÓĞmaven²å¼şÉı¼¶µ½×îĞÂ°æ
+       -- æ‰€æœ‰mavenæ’ä»¶å‡çº§åˆ°æœ€æ–°ç‰ˆ
 	   
-3. ÆäËû·Ç´úÂë¸Ä¶¯
-   * cxf wsdl2java´Óant¸ÄÎªÓÃmaven plugin
-   * hibernate´úÂëÉú³É´Óant¸ÄÎªÓÃEclipse²å¼ş
-   * ·¢²¼°üÖĞ²»ÔÙ°üº¬ËùÓĞÒÀÀµjar£¬Ö»°üº¬Ô´Âë,mavenºÍantÃüÁî.
+3. å…¶ä»–éä»£ç æ”¹åŠ¨
+   * cxf wsdl2javaä»antæ”¹ä¸ºç”¨maven plugin
+   * hibernateä»£ç ç”Ÿæˆä»antæ”¹ä¸ºç”¨Eclipseæ’ä»¶
+   * å‘å¸ƒåŒ…ä¸­ä¸å†åŒ…å«æ‰€æœ‰ä¾èµ–jarï¼ŒåªåŒ…å«æºç ,mavenå’Œantå‘½ä»¤.
 
 -----------------------------------------------------------------------------------
-4.0 ÕıÊ½°æ
-  * ²¹»ØHibernaet AuditableµÄÑİÊ¾£¬¼°ÆäËûHibernateµÄÓĞÓÃÑİÊ¾,¼°JPA2.0ĞÂÌØĞÔ£¬¼°PlayÖĞµÄÊ¹ÓÃ
-  * ¸ÄÃûRemoteServlet, µ÷ÕûÆäDemoÒ³Ãæ, Review HttpClientµÄÊ¹ÓÃ
-  * Review ShiroµÄResource Base Access ControlÊ¹ÓÃ
-  * Review perf4jµÄÊ¹ÓÃ
-  * OpenCSVÑİÊ¾
-  * GuavaµÄCache Builder×öµÄ¼òµ¥»º´æ
-  * PowerMockÌæ»»JMockit£¬ÓëEasyMockÅäºÏ¸üºÃ£¬×¨Ö°Mock static,finalÓëprivateµÄ·½·¨¡£
-  * Éı¼¶HibernateVilidatorÑİÊ¾£¬¼ÓÔØ×Ô¶¨ÒåValidator
-  * ÒÀÀµ°ü´ÎÒª°æ±¾Éı¼¶:JSW 3.5.7(Ğè×ÔĞĞ´ò°ü)
+4.0 æ­£å¼ç‰ˆ
+  * è¡¥å›Hibernaet Auditableçš„æ¼”ç¤ºï¼ŒåŠå…¶ä»–Hibernateçš„æœ‰ç”¨æ¼”ç¤º,åŠJPA2.0æ–°ç‰¹æ€§ï¼ŒåŠPlayä¸­çš„ä½¿ç”¨
+  * æ”¹åRemoteServlet, è°ƒæ•´å…¶Demoé¡µé¢, Review HttpClientçš„ä½¿ç”¨
+  * Review Shiroçš„Resource Base Access Controlä½¿ç”¨
+  * Review perf4jçš„ä½¿ç”¨
+  * OpenCSVæ¼”ç¤º
+  * Guavaçš„Cache Builderåšçš„ç®€å•ç¼“å­˜
+  * PowerMockæ›¿æ¢JMockitï¼Œä¸EasyMocké…åˆæ›´å¥½ï¼Œä¸“èŒMock static,finalä¸privateçš„æ–¹æ³•ã€‚
+  * å‡çº§HibernateVilidatoræ¼”ç¤ºï¼ŒåŠ è½½è‡ªå®šä¹‰Validator
+  * ä¾èµ–åŒ…æ¬¡è¦ç‰ˆæœ¬å‡çº§:JSW 3.5.7(éœ€è‡ªè¡Œæ‰“åŒ…)
   
-4.1 °æ
-1.Ö÷Òª¸Ä¶¯
-  * ¼ûRoadMap
+4.1 ç‰ˆ
+1.ä¸»è¦æ”¹åŠ¨
+  * è§RoadMap
 
-2. ´ÎÒª¸Ä¶¯
-  * Éı¼¶Commons-Lang 3.0,¿¼ÂÇValidate²¿·Ö²Î¿¼ÖØĞ´ or Ö±½ÓÊ¹ÓÃ,ThreadFactoryÖ±½ÓÖØÓÃ¡£
+2. æ¬¡è¦æ”¹åŠ¨
+  * å‡çº§Commons-Lang 3.0,è€ƒè™‘Validateéƒ¨åˆ†å‚è€ƒé‡å†™ or ç›´æ¥ä½¿ç”¨,ThreadFactoryç›´æ¥é‡ç”¨ã€‚
   
   
-Ğè×ÔĞĞÊ±³£¼ì²é°æ±¾µÄÒÀÀµ°ü
+éœ€è‡ªè¡Œæ—¶å¸¸æ£€æŸ¥ç‰ˆæœ¬çš„ä¾èµ–åŒ…
 1.Blueprint,jquery,yuicompressor,SpyMemcached,log4jdbc,jsw
  
