@@ -1,6 +1,10 @@
-/* table */
+/* general */
 th, td {border-color: #999;}
-table.noborder th, table.noborder td {border: none;}
+
+form label {
+	width:100px;
+	display:inline-block;
+}
 
 /* header */
 #title h2 {

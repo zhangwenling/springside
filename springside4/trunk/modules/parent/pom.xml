@@ -15,7 +15,7 @@
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
 		<springside.version>4.0.0-SNAPSHOT</springside.version>
-		<spring.version>3.0.6.RELEASE</spring.version>
+		<spring.version>3.1.0.RC1</spring.version>
 		<hibernate.version>3.6.8.Final</hibernate.version>
 		<mybatis.version>3.0.6</mybatis.version>
 		<struts2.version>2.2.1</struts2.version>
@@ -46,6 +46,15 @@
 			<id>offical</id>
 			<name>Maven Official Repository</name>
 			<url>http://repo1.maven.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		
+		<repository>
+			<id>org.springframework.maven.milestone</id>
+			<name>Spring Maven Milestone Repository</name>
+			<url>http://maven.springframework.org/milestone</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>

@@ -24,7 +24,7 @@
 		<property name="unauthorizedUrl" value="/login.action" />
 		<property name="filterChainDefinitions">
 		    <value>
-		    /abc = authc			
+		    /account = authc			
 		 </value>
 		</property>
 	</bean>

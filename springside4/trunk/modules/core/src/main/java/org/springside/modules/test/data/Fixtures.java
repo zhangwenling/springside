@@ -86,13 +86,13 @@ public abstract class Fixtures {
 	private static void execute(DatabaseOperation operation, DataSource h2DataSource, String... xmlFilePaths)
 			throws DatabaseUnitException, SQLException {
 		//注意这里HardCode了使用H2的Connetion
-		IDatabaseConnection connection = new H2Connection(h2DataSource.getConnection(), null);
+		IDatabaseConnection h2Connection = new H2Connection(h2DataSource.getConnection(), null);
 
 		for (String xmlPath : xmlFilePaths) {
 			try {
 				InputStream input = resourceLoader.getResource(xmlPath).getInputStream();
 				IDataSet dataSet = new FlatXmlDataSetBuilder().setColumnSensing(true).build(input);
-				operation.execute(connection, dataSet);
+				operation.execute(h2Connection, dataSet);
 			} catch (IOException e) {
 				logger.warn(xmlPath + " file not found", e);
 			}
