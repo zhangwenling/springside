@@ -1,1 +1,1 @@
-<% response.sendRedirect("account/user.action"); %>
+<% response.sendRedirect("account/user/1"); %>

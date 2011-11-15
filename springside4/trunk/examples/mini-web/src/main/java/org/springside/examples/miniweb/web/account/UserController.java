@@ -33,6 +33,12 @@ public class UserController {
 		return "account/userForm";
 	}
 
+	@RequestMapping(method = RequestMethod.POST)
+	public String save(User user) {
+		//TODO: save it
+		return "redirect:/";
+	}
+
 	@RequestMapping(value = "create", method = RequestMethod.GET)
 	public String createForm(Model model) {
 		return "account/userForm";
