@@ -15,7 +15,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springside.modules.utils.template.Velocitys;
+import org.springside.modules.utils.velocity.Velocitys;
 
 /**
  * MIME邮件服务类.
