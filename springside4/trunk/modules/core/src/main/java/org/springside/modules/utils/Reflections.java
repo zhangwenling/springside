@@ -24,11 +24,14 @@ import org.slf4j.LoggerFactory;
  * 
  * @author calvin
  */
-public abstract class Reflections {
+public class Reflections {
 
 	public static final String CGLIB_CLASS_SEPARATOR = "$$";
 
 	private static Logger logger = LoggerFactory.getLogger(Reflections.class);
+
+	private Reflections() {
+	}
 
 	/**
 	 * 调用Getter方法.

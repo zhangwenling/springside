@@ -17,11 +17,14 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * 提出集合中的元素对象的属性(通过Getter函数),组合成新的集合.
+ * Collections工具集
  * 
  * @author calvin
  */
 public class Collections3 {
+
+	private Collections3() {
+	}
 
 	/**
 	 * 提取集合中的对象的属性(通过Getter函数), 组合成Map.

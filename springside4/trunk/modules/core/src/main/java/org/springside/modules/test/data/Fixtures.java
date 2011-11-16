@@ -34,10 +34,13 @@ import org.springside.modules.utils.PropertiesLoader;
 /**
  * 基于DBUnit初始化测试数据到H2数据库的工具类.
  */
-public abstract class Fixtures {
+public class Fixtures {
 
 	private static Logger logger = LoggerFactory.getLogger(PropertiesLoader.class);
 	private static ResourceLoader resourceLoader = new DefaultResourceLoader();
+
+	private Fixtures() {
+	}
 
 	/**
 	 * 插入XML文件中的数据到H2数据库.

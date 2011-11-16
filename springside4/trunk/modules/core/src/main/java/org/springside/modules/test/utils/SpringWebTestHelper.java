@@ -20,7 +20,10 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  * 
  * @author calvin
  */
-public abstract class SpringWebTestUtils {
+public class SpringWebTestHelper {
+
+	private SpringWebTestHelper() {
+	}
 
 	/**
 	 * 在ServletContext里初始化Spring WebApplicationContext.

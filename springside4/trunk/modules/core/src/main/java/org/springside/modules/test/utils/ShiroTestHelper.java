@@ -7,15 +7,20 @@
  */
 package org.springside.modules.test.utils;
 
-import static org.easymock.EasyMock.*;
+import static org.easymock.EasyMock.createNiceMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
 
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.support.SubjectThreadState;
 import org.apache.shiro.util.ThreadState;
 
-public class ShiroTestUtils {
+public class ShiroTestHelper {
 
 	private static ThreadState threadState;
+
+	private ShiroTestHelper() {
+	}
 
 	/**
 	 * 綁定Subject到當前線程.
