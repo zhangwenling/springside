@@ -19,7 +19,7 @@ import org.springside.modules.test.spring.SpringContextTestCase;
 import org.springside.modules.utils.validator.Validators;
 
 @ContextConfiguration(locations = { "/applicationContext-core-test.xml" })
-public class ValidatorUtilsTest extends SpringContextTestCase {
+public class ValidatorsTest extends SpringContextTestCase {
 
 	@Autowired
 	Validator validator;

@@ -8,7 +8,7 @@ import java.util.Properties;
 import org.junit.Test;
 import org.springside.modules.utils.PropertiesLoader;
 
-public class PropertiesUtilsTest {
+public class PropertiesLoaderTest {
 
 	@Test
 	public void multiPropertiy() throws IOException {

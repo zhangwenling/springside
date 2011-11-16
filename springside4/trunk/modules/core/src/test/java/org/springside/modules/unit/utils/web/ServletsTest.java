@@ -10,7 +10,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springside.modules.utils.web.Servlets;
 
-public class ServletUtilsTest {
+public class ServletsTest {
 
 	@Test
 	public void checkIfModified() {
