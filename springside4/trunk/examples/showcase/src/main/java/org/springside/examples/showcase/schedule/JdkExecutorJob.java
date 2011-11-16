@@ -15,7 +15,8 @@ import org.springframework.scheduling.support.TaskUtils;
 import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.modules.utils.Asserts;
 import org.springside.modules.utils.Threads;
-import org.springside.modules.utils.Threads.CustomizableThreadFactory;
+
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
  * 被ScheduledThreadPoolExecutor定时执行的任务类.
@@ -41,8 +42,8 @@ public class JdkExecutorJob implements Runnable {
 		//任何异常不会中断schedule执行
 		Runnable task = new DelegatingErrorHandlingRunnable(this, TaskUtils.LOG_AND_SUPPRESS_ERROR_HANDLER);
 
-		scheduledExecutorService = Executors.newSingleThreadScheduledExecutor(new CustomizableThreadFactory(
-				"JdkExecutorJob"));
+		scheduledExecutorService = Executors.newSingleThreadScheduledExecutor(new ThreadFactoryBuilder().setNameFormat(
+				"JdkExecutorJob-%1$d").build());
 
 		//scheduleAtFixedRatefixRate() 固定任务两次启动之间的时间间隔.
 		//scheduleAtFixedDelay()      固定任务结束后到下一次启动间的时间间隔.

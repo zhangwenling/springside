@@ -8,9 +8,7 @@
 package org.springside.modules.utils;
 
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 线程相关工具类.
@@ -73,22 +71,4 @@ public class Threads {
 		}
 	}
 
-	/**
-	 * 自定义ThreadFactory, 可定制线程池的名称.
-	 */
-	@Deprecated
-	public static class CustomizableThreadFactory implements ThreadFactory {
-
-		private final String namePrefix;
-		private final AtomicInteger threadNumber = new AtomicInteger(1);
-
-		public CustomizableThreadFactory(String poolName) {
-			namePrefix = poolName + "-pool-";
-		}
-
-		@Override
-		public Thread newThread(Runnable runable) {
-			return new Thread(runable, namePrefix + threadNumber.getAndIncrement());
-		}
-	}
 }

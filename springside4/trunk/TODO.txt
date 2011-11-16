@@ -5,7 +5,7 @@
   * 使用SiteMesh3实现Layout
   * 全面应用Guava,包括：
             替换Commons-IO(同时演示Stream,Files), 替换Commons-Collection(同时演示Ordering,Table,MultiMap),部分替换掉StringUtils
-			添加Guava的演示
+			添加Guava的演示： ThreadFactoryBuilder, Throwbles
             Throwable(Done)，CASEFormat，stopwatch，ThreadBuilder,ShutdownDelay
 			包括Guava的Cache Builder做的简单缓存，
  
