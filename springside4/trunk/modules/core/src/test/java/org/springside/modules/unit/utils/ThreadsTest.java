@@ -6,7 +6,9 @@
 
 package org.springside.modules.unit.utils;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -18,25 +20,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springside.modules.log.MockLog4jAppender;
 import org.springside.modules.utils.Threads;
-import org.springside.modules.utils.Threads.CustomizableThreadFactory;
 
 public class ThreadsTest {
-
-	@Test
-	public void customizableThreadFactory() {
-		Runnable runnable = new Runnable() {
-			@Override
-			public void run() {
-			}
-		};
-		CustomizableThreadFactory factory = new CustomizableThreadFactory("foo");
-
-		Thread thread = factory.newThread(runnable);
-		assertEquals("foo-1", thread.getName());
-
-		Thread thread2 = factory.newThread(runnable);
-		assertEquals("foo-2", thread2.getName());
-	}
 
 	@Test
 	public void gracefulShutdown() throws InterruptedException {
