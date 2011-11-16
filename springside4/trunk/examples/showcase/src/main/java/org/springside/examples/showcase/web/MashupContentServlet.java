@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,21 +21,24 @@ import org.apache.http.protocol.HttpContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.io.ByteStreams;
+import com.google.common.io.Closeables;
+
 /**
  * 获取远程静态内容并进行展示的Servlet.
  * 
  * 演示使用多线程安全的Apache HttpClient获取远程静态内容.
  * 
  * 演示访问地址如下(contentUrl已经过URL编码):
- * remote-content?contentUrl=http%3A%2F%2Flocalhost%3A8080%2Fshowcase%2Fimg%2Flogo.jpg
+ * mashup-content?contentUrl=http%3A%2F%2Flocalhost%3A8080%2Fshowcase%2Fimg%2Flogo.jpg
  * 
  * @author calvin
  */
-public class RemoteContentServlet extends HttpServlet {
+public class MashupContentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -8483811141908827663L;
 
-	private static Logger logger = LoggerFactory.getLogger(RemoteContentServlet.class);
+	private static Logger logger = LoggerFactory.getLogger(MashupContentServlet.class);
 
 	private HttpClient httpClient = null;
 
@@ -67,12 +69,11 @@ public class RemoteContentServlet extends HttpServlet {
 
 		try {
 			//基于byte数组读取InputStream并直接写入OutputStream, 数组默认大小为4k.
-			IOUtils.copy(input, output);
+			ByteStreams.copy(input, output);
 			output.flush();
 		} finally {
 			//保证Input/Output Stream的关闭.
-			IOUtils.closeQuietly(input);
-			IOUtils.closeQuietly(output);
+			Closeables.closeQuietly(input);
 		}
 	}
 

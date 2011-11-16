@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
-<%@ page import="org.springside.modules.utils.EncodeUtils" %>
+<%@ page import="org.springside.modules.utils.Encodes" %>
 
 <%
    String remoteImageUrl = "http://"+request.getServerName()+":"+request.getServerPort()+"/showcase/img/logo.jpg";
-   String encodedImageUrl = EncodeUtils.urlEncode(remoteImageUrl);
+   String encodedImageUrl = Encodes.urlEncode(remoteImageUrl);
 %>
 <html>
 <head>
