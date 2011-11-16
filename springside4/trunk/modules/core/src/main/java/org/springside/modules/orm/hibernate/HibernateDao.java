@@ -331,7 +331,7 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	 * 按属性条件参数创建Criterion,辅助函数.
 	 */
 	protected Criterion buildCriterion(final String propertyName, final Object propertyValue, final MatchType matchType) {
-		Asserts.hasText(propertyName, "propertyName不能为空");
+		Asserts.hasText(propertyName, "propertyName can't be null");
 		Criterion criterion = null;
 		//根据MatchType构造criterion
 		switch (matchType) {
