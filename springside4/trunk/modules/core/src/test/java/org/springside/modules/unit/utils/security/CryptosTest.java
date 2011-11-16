@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.springside.modules.utils.Encodes;
 import org.springside.modules.utils.security.Cryptos;
 
-public class CryptoUtilsTest {
+public class CryptosTest {
 	@Test
 	public void mac() {
 		String input = "foo message";

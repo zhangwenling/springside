@@ -11,7 +11,7 @@ import org.springside.modules.utils.template.Velocitys;
 
 import com.google.common.collect.Maps;
 
-public class VelocityUtilsTest {
+public class VelocitysTest {
 	private String TEMPLATE = "hello $userName";
 	private String ERROR_TEMPLATE = "hello $";
 

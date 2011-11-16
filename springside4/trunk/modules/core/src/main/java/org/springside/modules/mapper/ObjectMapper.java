@@ -52,6 +52,20 @@ public abstract class ObjectMapper {
 		return destinationList;
 	}
 
+	/**
+	 * 基于Apache BeanUtils转换字符串到相应类型.
+	 * 
+	 * @param value 待转换的字符串.
+	 * @param toType 转换目标类型.
+	 */
+	public static Object convertToObject(String value, Class<?> toType) {
+		try {
+			return ConvertUtils.convert(value, toType);
+		} catch (Exception e) {
+			throw Reflections.convertReflectionExceptionToUnchecked(e);
+		}
+	}
+
 	static {
 		//初始化日期格式为yyyy-MM-dd 或 yyyy-MM-dd HH:mm:ss
 		registerDateConverter("yyyy-MM-dd,yyyy-MM-dd HH:mm:ss");
@@ -65,19 +79,5 @@ public abstract class ObjectMapper {
 		dc.setUseLocaleFormat(true);
 		dc.setPatterns(StringUtils.split(patterns, ","));
 		ConvertUtils.register(dc, Date.class);
-	}
-
-	/**
-	 * 基于Apache BeanUtils转换字符串到相应类型.
-	 * 
-	 * @param value 待转换的字符串.
-	 * @param toType 转换目标类型.
-	 */
-	public static Object convertToObject(String value, Class<?> toType) {
-		try {
-			return ConvertUtils.convert(value, toType);
-		} catch (Exception e) {
-			throw Reflections.convertReflectionExceptionToUnchecked(e);
-		}
 	}
 }

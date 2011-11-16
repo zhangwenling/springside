@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.springside.modules.utils.Encodes;
 
-public class EncodeUtilsTest {
+public class EncodesTest {
 
 	@Test
 	public void hexEncode() {

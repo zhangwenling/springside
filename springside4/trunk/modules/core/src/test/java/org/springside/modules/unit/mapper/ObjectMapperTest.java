@@ -8,7 +8,7 @@ import org.joda.time.DateTime;
 import org.junit.Test;
 import org.springside.modules.mapper.ObjectMapper;
 
-public class CovertUtilsTest {
+public class ObjectMapperTest {
 
 	@Test
 	public void convertStringToObject() {

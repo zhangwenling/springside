@@ -7,7 +7,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springside.modules.utils.security.Digests;
 
-public class DigestUtilsTest {
+public class DigestsTest {
 
 	@Test
 	public void digestString() {

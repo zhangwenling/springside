@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.junit.Test;
 import org.springside.modules.utils.Reflections;
 
-public class ReflectionUtilsTest {
+public class ReflectionsTest {
 
 	@Test
 	public void getAndSetFieldValue() {

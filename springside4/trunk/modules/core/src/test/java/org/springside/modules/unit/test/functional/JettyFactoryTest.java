@@ -7,7 +7,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.Test;
 import org.springside.modules.test.functional.JettyFactory;
 
-public class JettyUtilsTest {
+public class JettyFactoryTest {
 
 	@Test
 	public void buildNormalServer() {

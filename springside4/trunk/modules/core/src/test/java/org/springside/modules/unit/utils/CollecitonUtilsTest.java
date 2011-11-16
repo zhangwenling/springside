@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.junit.Test;
-import org.springside.modules.unit.utils.ReflectionUtilsTest.TestBean3;
+import org.springside.modules.unit.utils.ReflectionsTest.TestBean3;
 import org.springside.modules.utils.Collections3;
 
 import com.google.common.collect.Lists;

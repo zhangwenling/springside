@@ -20,7 +20,7 @@ import org.springside.modules.log.MockLog4jAppender;
 import org.springside.modules.utils.Threads;
 import org.springside.modules.utils.Threads.CustomizableThreadFactory;
 
-public class ThreadUtilsTest {
+public class ThreadsTest {
 
 	@Test
 	public void customizableThreadFactory() {
