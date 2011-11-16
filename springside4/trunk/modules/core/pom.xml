@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springside</groupId>
@@ -12,7 +13,7 @@
 	<name>Springside :: Module :: Core</name>
 
 	<dependencies>
-		<!-- spring -->
+		<!-- spring begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
@@ -23,8 +24,9 @@
 			<artifactId>spring-jdbc</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<!-- spring end -->
 
-		<!-- hibernate -->
+		<!-- hibernate begin -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -35,20 +37,9 @@
 			<artifactId>javassist</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- hibernate end -->
 
-		<!-- mybatis -->
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<!-- web -->
+		<!-- web begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -64,13 +55,15 @@
 			<artifactId>servlet-api</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<!-- web end -->
 
-		<!-- template engine -->
+		<!-- template engine begin -->
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<!-- template engine end -->
 
 		<!-- validator begin -->
 		<dependency>
@@ -127,16 +120,9 @@
 			<artifactId>guava</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<!-- utils end -->
 
-
-		<dependency>
-			<groupId>org.easymock</groupId>
-			<artifactId>easymock</artifactId>
-			<scope>compile</scope>
-			<optional>true</optional>
-		</dependency>
-		
-		<!-- logging -->
+		<!-- logging begin -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -152,15 +138,21 @@
 			<artifactId>log4j</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<!-- logging end -->
 
-		<!-- test -->
+		<!-- test begin -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
-
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
@@ -186,14 +178,15 @@
 			<artifactId>selenium-remote-driver</artifactId>
 			<scope>compile</scope>
 			<optional>true</optional>
-		</dependency>		
-	
+		</dependency>
+
 		<dependency>
 			<groupId>org.dbunit</groupId>
 			<artifactId>dbunit</artifactId>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
+		<!-- test end -->
 
 		<!-- testing -->
 		<dependency>

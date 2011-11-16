@@ -1,7 +1,6 @@
 package org.springside.examples.showcase.web;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.zip.GZIPOutputStream;
@@ -12,12 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springside.modules.utils.web.Servlets;
+
+import com.google.common.io.Files;
 
 /**
  * 本地静态内容展示与下载的Servlet.
@@ -88,17 +88,9 @@ public class StaticContentServlet extends HttpServlet {
 			output = response.getOutputStream();
 		}
 
-		//高效读取文件内容并输出.
-		FileInputStream input = new FileInputStream(contentInfo.file);
-		try {
-			//基于byte数组读取文件并直接写入OutputStream, 数组默认大小为4k.
-			IOUtils.copy(input, output);
-			output.flush();
-		} finally {
-			//保证Input/Output Stream的关闭.
-			IOUtils.closeQuietly(input);
-			IOUtils.closeQuietly(output);
-		}
+		//高效读取文件内容并输出,然后关闭input file
+		Files.copy(contentInfo.file, output);
+		output.flush();
 	}
 
 	/**

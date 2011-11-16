@@ -68,7 +68,7 @@
 2.次要改动
   * Review perf4j的使用
   * 补回Hibernaet Auditable的演示，及其他Hibernate的有用演示,及JPA2.0新特性，及Play中的使用
-  * 改名RemoteServlet, 调整其Demo页面, Review HttpClient的使用
+  * MashupServlet, 调整其Demo页面, Review HttpClient的使用
   * 依赖包次要版本升级:JSW 3.5.7(需自行打包)
 
 4.1 长远版
