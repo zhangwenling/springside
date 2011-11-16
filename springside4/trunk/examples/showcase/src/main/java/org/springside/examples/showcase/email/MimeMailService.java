@@ -15,7 +15,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springside.modules.utils.template.VelocityUtils;
+import org.springside.modules.utils.template.Velocitys;
 
 /**
  * MIME邮件服务类.
@@ -70,7 +70,7 @@ public class MimeMailService {
 	private String generateContent(String userName) throws MessagingException {
 
 		Map context = Collections.singletonMap("userName", userName);
-		return VelocityUtils.renderFile(templateFileName, velocityEngine, DEFAULT_ENCODING, context);
+		return Velocitys.renderFile(templateFileName, velocityEngine, DEFAULT_ENCODING, context);
 	}
 
 	/**

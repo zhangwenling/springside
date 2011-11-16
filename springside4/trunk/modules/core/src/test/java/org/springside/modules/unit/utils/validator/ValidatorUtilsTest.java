@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springside.modules.test.spring.SpringContextTestCase;
-import org.springside.modules.utils.validator.ValidatorUtils;
+import org.springside.modules.utils.validator.Validators;
 
 @ContextConfiguration(locations = { "/applicationContext-core-test.xml" })
 public class ValidatorUtilsTest extends SpringContextTestCase {
@@ -31,7 +31,7 @@ public class ValidatorUtilsTest extends SpringContextTestCase {
 
 		Set<ConstraintViolation<Customer>> violations = validator.validate(customer);
 		assertEquals(2, violations.size());
-		String result = ValidatorUtils.convertMessage(violations, ",");
+		String result = Validators.convertMessage(violations, ",");
 		assertTrue(StringUtils.indexOf(result, "邮件地址格式不正确") != -1);
 		assertTrue(StringUtils.indexOf(result, "姓名不能为空") != -1);
 	}
@@ -42,10 +42,10 @@ public class ValidatorUtilsTest extends SpringContextTestCase {
 		customer.setEmail("aaa");
 
 		try {
-			ValidatorUtils.validateWithException(validator, customer);
+			Validators.validateWithException(validator, customer);
 			Assert.fail("should throw excepion");
 		} catch (ConstraintViolationException e) {
-			String result = ValidatorUtils.convertMessage(e, ",");
+			String result = Validators.convertMessage(e, ",");
 			assertTrue(StringUtils.indexOf(result, "邮件地址格式不正确") != -1);
 			assertTrue(StringUtils.indexOf(result, "姓名不能为空") != -1);
 		}

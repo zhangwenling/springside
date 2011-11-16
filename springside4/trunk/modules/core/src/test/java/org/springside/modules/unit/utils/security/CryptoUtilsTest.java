@@ -3,8 +3,8 @@ package org.springside.modules.unit.utils.security;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.springside.modules.utils.EncodeUtils;
-import org.springside.modules.utils.security.CryptoUtils;
+import org.springside.modules.utils.Encodes;
+import org.springside.modules.utils.security.Cryptos;
 
 public class CryptoUtilsTest {
 	@Test
@@ -13,34 +13,34 @@ public class CryptoUtilsTest {
 
 		//key可为任意字符串
 		//byte[] key = "a foo key".getBytes();
-		byte[] key = CryptoUtils.generateMacSha1Key();
+		byte[] key = Cryptos.generateMacSha1Key();
 		assertEquals(20, key.length);
 
-		String macHexResult = CryptoUtils.hmacSha1ToHex(input, key);
-		String macBase64Result = CryptoUtils.hmacSha1ToBase64(input, key);
-		String macBase64UrlResult = CryptoUtils.hmacSha1ToBase64UrlSafe(input, key);
-		System.out.println("hmac-sha1 key in hex            :" + EncodeUtils.encodeHex(key));
+		String macHexResult = Cryptos.hmacSha1ToHex(input, key);
+		String macBase64Result = Cryptos.hmacSha1ToBase64(input, key);
+		String macBase64UrlResult = Cryptos.hmacSha1ToBase64UrlSafe(input, key);
+		System.out.println("hmac-sha1 key in hex            :" + Encodes.encodeHex(key));
 		System.out.println("hmac-sha1 in hex result         :" + macHexResult);
 		System.out.print("hmac-sha1 in base64 result      :" + macBase64Result);
 		System.out.println("hmac-sha1 in base64 url result  :" + macBase64UrlResult);
 
-		assertTrue(CryptoUtils.isHexMacValid(macHexResult, input, key));
-		assertTrue(CryptoUtils.isBase64MacValid(macBase64Result, input, key));
+		assertTrue(Cryptos.isHexMacValid(macHexResult, input, key));
+		assertTrue(Cryptos.isBase64MacValid(macBase64Result, input, key));
 	}
 
 	@Test
 	public void des() {
-		byte[] key = CryptoUtils.generateDesKey();
+		byte[] key = Cryptos.generateDesKey();
 		assertEquals(8, key.length);
 		String input = "foo message";
 
-		String encryptHexResult = CryptoUtils.desEncryptToHex(input, key);
-		String descryptHexResult = CryptoUtils.desDecryptFromHex(encryptHexResult, key);
+		String encryptHexResult = Cryptos.desEncryptToHex(input, key);
+		String descryptHexResult = Cryptos.desDecryptFromHex(encryptHexResult, key);
 
-		String encryptBase64Result = CryptoUtils.desEncryptToBase64(input, key);
-		String descryptBase64Result = CryptoUtils.desDecryptFromBase64(encryptBase64Result, key);
+		String encryptBase64Result = Cryptos.desEncryptToBase64(input, key);
+		String descryptBase64Result = Cryptos.desDecryptFromBase64(encryptBase64Result, key);
 
-		System.out.println("des key in hex                  :" + EncodeUtils.encodeHex(key));
+		System.out.println("des key in hex                  :" + Encodes.encodeHex(key));
 		System.out.println("des encrypt in hex result       :" + encryptHexResult);
 		System.out.print("des encrypt in base64 result    :" + encryptBase64Result);
 
@@ -50,17 +50,17 @@ public class CryptoUtilsTest {
 
 	@Test
 	public void aes() {
-		byte[] key = CryptoUtils.generateAesKey();
+		byte[] key = Cryptos.generateAesKey();
 		assertEquals(16, key.length);
 		String input = "foo message";
 
-		String encryptHexResult = CryptoUtils.aesEncryptToHex(input, key);
-		String descryptHexResult = CryptoUtils.aesDecryptFromHex(encryptHexResult, key);
+		String encryptHexResult = Cryptos.aesEncryptToHex(input, key);
+		String descryptHexResult = Cryptos.aesDecryptFromHex(encryptHexResult, key);
 
-		String encryptBase64Result = CryptoUtils.aesEncryptToBase64(input, key);
-		String descryptBase64Result = CryptoUtils.aesDecryptFromBase64(encryptBase64Result, key);
+		String encryptBase64Result = Cryptos.aesEncryptToBase64(input, key);
+		String descryptBase64Result = Cryptos.aesDecryptFromBase64(encryptBase64Result, key);
 
-		System.out.println("aes key in hex                  :" + EncodeUtils.encodeHex(key));
+		System.out.println("aes key in hex                  :" + Encodes.encodeHex(key));
 		System.out.println("aes encrypt in hex result       :" + encryptHexResult);
 		System.out.print("aes encrypt in base64 result    :" + encryptBase64Result);
 

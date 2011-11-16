@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springside.modules.utils.web.ServletUtils;
+import org.springside.modules.utils.web.Servlets;
 
 /**
  * Struts2工具类.
@@ -105,7 +105,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderText(final String text, final String... headers) {
-		render(ServletUtils.TEXT_TYPE, text, headers);
+		render(Servlets.TEXT_TYPE, text, headers);
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderHtml(final String html, final String... headers) {
-		render(ServletUtils.HTML_TYPE, html, headers);
+		render(Servlets.HTML_TYPE, html, headers);
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderXml(final String xml, final String... headers) {
-		render(ServletUtils.XML_TYPE, xml, headers);
+		render(Servlets.XML_TYPE, xml, headers);
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderJson(final String jsonString, final String... headers) {
-		render(ServletUtils.JSON_TYPE, jsonString, headers);
+		render(Servlets.JSON_TYPE, jsonString, headers);
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class Struts2Utils {
 	 * @see #render(String, String, String...)
 	 */
 	public static void renderJson(final Object data, final String... headers) {
-		HttpServletResponse response = initResponseHeader(ServletUtils.JSON_TYPE, headers);
+		HttpServletResponse response = initResponseHeader(Servlets.JSON_TYPE, headers);
 		try {
 			mapper.writeValue(response.getWriter(), data);
 		} catch (IOException e) {
@@ -166,7 +166,7 @@ public class Struts2Utils {
 		String result = new StringBuilder().append(callbackName).append("(").append(jsonString).append(");").toString();
 
 		//渲染Content-Type为javascript的返回内容,输出结果为javascript语句, 如callback197("{html:'Hello World!!!'}");
-		render(ServletUtils.JS_TYPE, result, headers);
+		render(Servlets.JS_TYPE, result, headers);
 	}
 
 	/**
@@ -195,7 +195,7 @@ public class Struts2Utils {
 		String fullContentType = contentType + ";charset=" + encoding;
 		response.setContentType(fullContentType);
 		if (noCache) {
-			ServletUtils.setDisableCacheHeader(response);
+			Servlets.setDisableCacheHeader(response);
 		}
 
 		return response;

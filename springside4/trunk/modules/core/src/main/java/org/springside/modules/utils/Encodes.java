@@ -25,7 +25,7 @@ import org.apache.commons.lang.StringEscapeUtils;
  * 
  * @author calvin
  */
-public abstract class EncodeUtils {
+public abstract class Encodes {
 	private static final String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 	private static final String DEFAULT_URL_ENCODING = "UTF-8";
@@ -94,7 +94,7 @@ public abstract class EncodeUtils {
 	}
 
 	private static long alphabetDecode(String str, int base) {
-		AssertUtils.hasText(str);
+		Asserts.hasText(str);
 
 		long result = 0;
 		for (int i = 0; i < str.length(); i++) {
@@ -111,7 +111,7 @@ public abstract class EncodeUtils {
 		try {
 			return URLEncoder.encode(part, DEFAULT_URL_ENCODING);
 		} catch (UnsupportedEncodingException e) {
-			throw ExceptionUtils.unchecked(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
@@ -123,7 +123,7 @@ public abstract class EncodeUtils {
 		try {
 			return URLDecoder.decode(part, DEFAULT_URL_ENCODING);
 		} catch (UnsupportedEncodingException e) {
-			throw ExceptionUtils.unchecked(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 

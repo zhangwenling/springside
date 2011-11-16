@@ -5,10 +5,10 @@
  * 
  * $Id$ 
  */
-package org.springside.modules.log;
+package org.springside.examples.showcase.log.trace;
 
 import org.apache.log4j.MDC;
-import org.springside.modules.utils.IdUtils;
+import org.springside.modules.utils.Ids;
 
 /**
  * 系统运行时打印方便调试与追踪信息的工具类.
@@ -29,7 +29,7 @@ public abstract class TraceUtils {
 	 * 开始Trace, 默认生成本次Trace的ID(8字符长)并放入MDC.
 	 */
 	public static void beginTrace() {
-		String traceId = IdUtils.randomBase62();
+		String traceId = Ids.randomBase62();
 		MDC.put(TRACE_ID_KEY, traceId);
 	}
 

@@ -16,7 +16,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.util.Assert;
-import org.springside.modules.utils.ExceptionUtils;
+import org.springside.modules.utils.Exceptions;
 
 /**
  * 创建WebDriver的工厂类, 支持主要的firefox,ie和remote三种driver.
@@ -62,7 +62,7 @@ public class WebDriverFactory {
 			try {
 				driver = new RemoteWebDriver(new URL("http://" + remoteHost + ":" + remotePort + "/wd"), cap);
 			} catch (MalformedURLException e) {
-				throw ExceptionUtils.unchecked(e);
+				throw Exceptions.unchecked(e);
 			}
 		}
 

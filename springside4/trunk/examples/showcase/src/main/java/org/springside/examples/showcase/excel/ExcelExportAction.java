@@ -18,7 +18,7 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.joda.time.DateTime;
 import org.springside.examples.showcase.Struts2Utils;
 import org.springside.examples.showcase.excel.DummyDataGenerator.TemperatureAnomaly;
-import org.springside.modules.utils.web.ServletUtils;
+import org.springside.modules.utils.web.Servlets;
 
 import com.google.common.collect.Maps;
 import com.opensymphony.xwork2.ActionSupport;
@@ -46,8 +46,8 @@ public class ExcelExportAction extends ActionSupport {
 
 		//输出Excel文件.
 		HttpServletResponse response = Struts2Utils.getResponse();
-		response.setContentType(ServletUtils.EXCEL_TYPE);
-		ServletUtils.setFileDownloadHeader(response, "温度年表.xls");
+		response.setContentType(Servlets.EXCEL_TYPE);
+		Servlets.setFileDownloadHeader(response, "温度年表.xls");
 
 		wb.write(response.getOutputStream());
 		response.getOutputStream().flush();

@@ -9,7 +9,7 @@ import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
 import org.springside.modules.mapper.JsonMapper;
 import org.springside.modules.utils.jersey.JerseyClientFactory;
-import org.springside.modules.utils.web.ServletUtils;
+import org.springside.modules.utils.web.Servlets;
 
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
@@ -35,8 +35,8 @@ public class UserResourceClient {
 	 * 访问有SpringSecurity安全控制的页面, 进行HttpBasic的登录.
 	 */
 	public List<UserDTO> getAllUser() {
-		String authentication = ServletUtils.encodeHttpBasic("admin", "admin");
-		return client.path("/users").header(ServletUtils.AUTHENTICATION_HEADER, authentication)
+		String authentication = Servlets.encodeHttpBasic("admin", "admin");
+		return client.path("/users").header(Servlets.AUTHENTICATION_HEADER, authentication)
 				.accept(MediaType.APPLICATION_JSON).get(new GenericType<List<UserDTO>>() {
 				});
 	}

@@ -15,7 +15,7 @@ import java.util.UUID;
  * 
  * @author calvin
  */
-public abstract class IdUtils {
+public abstract class Ids {
 
 	private static SecureRandom random = new SecureRandom();
 
@@ -37,6 +37,6 @@ public abstract class IdUtils {
 	 * 基于Base62编码的随机生成Long.
 	 */
 	public static String randomBase62() {
-		return EncodeUtils.encodeBase62(random.nextLong());
+		return Encodes.encodeBase62(random.nextLong());
 	}
 }

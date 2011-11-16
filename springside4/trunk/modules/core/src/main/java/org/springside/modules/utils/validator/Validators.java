@@ -24,7 +24,7 @@ import com.google.common.collect.Lists;
  * @author badqiu
  * @author calvin
  */
-public class ValidatorUtils {
+public class Validators {
 
 	/**
 	 * 调用JSR303的validate方法, 验证失败时抛出ConstraintViolationException.

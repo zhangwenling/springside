@@ -21,8 +21,8 @@ import org.springside.examples.miniservice.webservice.ws.result.UserListResult;
 import org.springside.examples.miniservice.webservice.ws.result.base.IdResult;
 import org.springside.examples.miniservice.webservice.ws.result.base.WSResult;
 import org.springside.modules.mapper.ObjectMapper;
-import org.springside.modules.utils.AssertUtils;
-import org.springside.modules.utils.validator.ValidatorUtils;
+import org.springside.modules.utils.Asserts;
+import org.springside.modules.utils.validator.Validators;
 
 /**
  * WebService服务端实现类.
@@ -46,7 +46,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 		try {
 			Department entity = accountManager.getDepartmentDetail(id);
 
-			AssertUtils.notNull(entity, "部门不存在(id:" + id + ")");
+			Asserts.notNull(entity, "部门不存在(id:" + id + ")");
 
 			DepartmentDTO dto = ObjectMapper.map(entity, DepartmentDTO.class);
 
@@ -87,7 +87,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 
 			return new IdResult(userId);
 		} catch (ConstraintViolationException e) {
-			String message = ValidatorUtils.convertMessage(e, "\n");
+			String message = Validators.convertMessage(e, "\n");
 			return new IdResult().setError(WSResult.PARAMETER_ERROR, message);
 		} catch (DataIntegrityViolationException e) {
 			String message = "新建用户参数存在唯一性冲突(用户:" + user + ")";

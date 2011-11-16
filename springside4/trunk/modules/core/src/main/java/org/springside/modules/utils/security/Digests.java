@@ -12,8 +12,8 @@ import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 
-import org.springside.modules.utils.EncodeUtils;
-import org.springside.modules.utils.ExceptionUtils;
+import org.springside.modules.utils.Encodes;
+import org.springside.modules.utils.Exceptions;
 
 /**
  * 支持SHA-1/MD5消息摘要的工具类.
@@ -22,7 +22,7 @@ import org.springside.modules.utils.ExceptionUtils;
  * 
  * @author calvin
  */
-public abstract class DigestUtils {
+public abstract class Digests {
 
 	private static final String SHA1 = "SHA-1";
 	private static final String MD5 = "MD5";
@@ -33,7 +33,7 @@ public abstract class DigestUtils {
 	 */
 	public static String sha1Hex(String input) {
 		byte[] digestResult = digest(input, SHA1);
-		return EncodeUtils.encodeHex(digestResult);
+		return Encodes.encodeHex(digestResult);
 	}
 
 	/**
@@ -41,7 +41,7 @@ public abstract class DigestUtils {
 	 */
 	public static String sha1Base64(String input) {
 		byte[] digestResult = digest(input, SHA1);
-		return EncodeUtils.encodeBase64(digestResult);
+		return Encodes.encodeBase64(digestResult);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public abstract class DigestUtils {
 	 */
 	public static String sha1Base64UrlSafe(String input) {
 		byte[] digestResult = digest(input, SHA1);
-		return EncodeUtils.encodeUrlSafeBase64(digestResult);
+		return Encodes.encodeUrlSafeBase64(digestResult);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public abstract class DigestUtils {
 			MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
 			return messageDigest.digest(input.getBytes());
 		} catch (GeneralSecurityException e) {
-			throw ExceptionUtils.unchecked(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
@@ -91,10 +91,10 @@ public abstract class DigestUtils {
 				read = input.read(buffer, 0, bufferLength);
 			}
 
-			return EncodeUtils.encodeHex(messageDigest.digest());
+			return Encodes.encodeHex(messageDigest.digest());
 
 		} catch (GeneralSecurityException e) {
-			throw ExceptionUtils.unchecked(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 

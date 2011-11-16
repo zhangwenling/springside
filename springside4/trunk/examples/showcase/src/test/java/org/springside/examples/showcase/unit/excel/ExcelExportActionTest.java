@@ -8,7 +8,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellReference;
 import org.junit.Test;
 import org.springside.examples.showcase.excel.ExcelExportAction;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.Reflections;
 
 /**
  * 测试ExcelExportAction测试,演示Excel的读取.
@@ -20,7 +20,7 @@ public class ExcelExportActionTest {
 	@Test
 	public void test() throws Exception {
 		ExcelExportAction action = new ExcelExportAction();
-		Workbook wb = (Workbook) ReflectionUtils.invokeMethod(action, "exportExcelWorkbook", null, null);
+		Workbook wb = (Workbook) Reflections.invokeMethod(action, "exportExcelWorkbook", null, null);
 
 		//按照Cell名称取得Cell,读取Cell的数值
 		CellReference cr = new CellReference("B3");

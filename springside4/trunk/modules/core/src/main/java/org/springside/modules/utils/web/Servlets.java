@@ -17,15 +17,15 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springside.modules.utils.AssertUtils;
-import org.springside.modules.utils.EncodeUtils;
+import org.springside.modules.utils.Asserts;
+import org.springside.modules.utils.Encodes;
 
 /**
  * Http与Servlet工具类.
  * 
  * @author calvin
  */
-public abstract class ServletUtils {
+public abstract class Servlets {
 
 	//-- Content Type 定义 --//
 	public static final String EXCEL_TYPE = "application/vnd.ms-excel";
@@ -146,7 +146,7 @@ public abstract class ServletUtils {
 	 * 返回的结果的Parameter名已去除前缀.
 	 */
 	public static Map<String, Object> getParametersStartingWith(ServletRequest request, String prefix) {
-		AssertUtils.notNull(request, "Request must not be null");
+		Asserts.notNull(request, "Request must not be null");
 		Enumeration paramNames = request.getParameterNames();
 		Map<String, Object> params = new TreeMap<String, Object>();
 		if (prefix == null) {
@@ -174,6 +174,6 @@ public abstract class ServletUtils {
 	 */
 	public static String encodeHttpBasic(String userName, String password) {
 		String encode = userName + ":" + password;
-		return "Basic " + EncodeUtils.encodeBase64(encode.getBytes());
+		return "Basic " + Encodes.encodeBase64(encode.getBytes());
 	}
 }

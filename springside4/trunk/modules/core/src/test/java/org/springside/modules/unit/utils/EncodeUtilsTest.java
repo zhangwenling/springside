@@ -3,62 +3,62 @@ package org.springside.modules.unit.utils;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.springside.modules.utils.EncodeUtils;
+import org.springside.modules.utils.Encodes;
 
 public class EncodeUtilsTest {
 
 	@Test
 	public void hexEncode() {
 		String input = "haha,i am a very long message";
-		String result = EncodeUtils.encodeHex(input.getBytes());
-		assertEquals(input, new String(EncodeUtils.decodeHex(result)));
+		String result = Encodes.encodeHex(input.getBytes());
+		assertEquals(input, new String(Encodes.decodeHex(result)));
 	}
 
 	@Test
 	public void base64Encode() {
 		String input = "haha,i am a very long message";
-		String result = EncodeUtils.encodeBase64(input.getBytes());
-		assertEquals(input, new String(EncodeUtils.decodeBase64(result)));
+		String result = Encodes.encodeBase64(input.getBytes());
+		assertEquals(input, new String(Encodes.decodeBase64(result)));
 	}
 
 	@Test
 	public void base64UrlSafeEncode() {
 		String input = "haha,i am a very long message";
-		String result = EncodeUtils.encodeUrlSafeBase64(input.getBytes());
-		assertEquals(input, new String(EncodeUtils.decodeBase64(result)));
+		String result = Encodes.encodeUrlSafeBase64(input.getBytes());
+		assertEquals(input, new String(Encodes.decodeBase64(result)));
 	}
 
 	@Test
 	public void base62Encode() {
 		long num = 63;
 
-		String result = EncodeUtils.encodeBase62(num);
+		String result = Encodes.encodeBase62(num);
 		assertEquals("11", result);
-		assertEquals(num, EncodeUtils.decodeBase62(result));
+		assertEquals(num, Encodes.decodeBase62(result));
 	}
 
 	@Test
 	public void urlEncode() {
 		String input = "http://locahost/?q=中文&t=1";
-		String result = EncodeUtils.urlEncode(input);
+		String result = Encodes.urlEncode(input);
 		System.out.println(result);
 
-		assertEquals(input, EncodeUtils.urlDecode(result));
+		assertEquals(input, Encodes.urlDecode(result));
 	}
 
 	@Test
 	public void xmlEncode() {
 		String input = "1>2";
-		String result = EncodeUtils.xmlEscape(input);
+		String result = Encodes.xmlEscape(input);
 		assertEquals("1&gt;2", result);
-		assertEquals(input, EncodeUtils.xmlUnescape(result));
+		assertEquals(input, Encodes.xmlUnescape(result));
 	}
 
 	@Test
 	public void html() {
 		String input = "1>2";
-		String result = EncodeUtils.htmlEscape(input);
+		String result = Encodes.htmlEscape(input);
 		assertEquals("1&gt;2", result);
-		assertEquals(input, EncodeUtils.htmlUnescape(result));
+		assertEquals(input, Encodes.htmlUnescape(result));
 	}
 }

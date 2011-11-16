@@ -10,7 +10,7 @@ import org.springside.examples.showcase.schedule.QuartzClusterableJob;
 import org.springside.modules.log.MockLog4jAppender;
 import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.spring.SpringTxTestCase;
-import org.springside.modules.utils.ThreadUtils;
+import org.springside.modules.utils.Threads;
 
 /**
  * Quartz可集群Timer Job测试.
@@ -32,7 +32,7 @@ public class QuartzClusterableJobTest extends SpringTxTestCase {
 		appender.addToLogger(QuartzClusterableJob.class);
 
 		//等待任务启动
-		ThreadUtils.sleep(3000);
+		Threads.sleep(3000);
 
 		//验证任务已执行
 		assertEquals(1, appender.getAllLogs().size());

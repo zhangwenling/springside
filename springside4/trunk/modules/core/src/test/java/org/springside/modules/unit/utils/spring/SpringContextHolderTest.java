@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.Reflections;
 import org.springside.modules.utils.spring.SpringContextHolder;
 
 public class SpringContextHolderTest {
@@ -32,7 +32,7 @@ public class SpringContextHolderTest {
 		assertEquals(SpringContextHolder.class, holderByClass.getClass());
 
 		context.close();
-		assertNull(ReflectionUtils.getFieldValue(holderByName, "applicationContext"));
+		assertNull(Reflections.getFieldValue(holderByName, "applicationContext"));
 
 	}
 }

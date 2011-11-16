@@ -17,8 +17,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springside.modules.log.MockLog4jAppender;
-import org.springside.modules.utils.ThreadUtils;
-import org.springside.modules.utils.ThreadUtils.CustomizableThreadFactory;
+import org.springside.modules.utils.Threads;
+import org.springside.modules.utils.Threads.CustomizableThreadFactory;
 
 public class ThreadUtilsTest {
 
@@ -49,7 +49,7 @@ public class ThreadUtilsTest {
 		ExecutorService pool = Executors.newSingleThreadExecutor();
 		Runnable task = new Task(logger, 500, 0);
 		pool.execute(task);
-		ThreadUtils.gracefulShutdown(pool, 1000, 1000, TimeUnit.MILLISECONDS);
+		Threads.gracefulShutdown(pool, 1000, 1000, TimeUnit.MILLISECONDS);
 		assertTrue(pool.isTerminated());
 		assertNull(appender.getFirstLog());
 
@@ -58,7 +58,7 @@ public class ThreadUtilsTest {
 		pool = Executors.newSingleThreadExecutor();
 		task = new Task(logger, 1000, 0);
 		pool.execute(task);
-		ThreadUtils.gracefulShutdown(pool, 500, 1000, TimeUnit.MILLISECONDS);
+		Threads.gracefulShutdown(pool, 500, 1000, TimeUnit.MILLISECONDS);
 		assertTrue(pool.isTerminated());
 		assertEquals("InterruptedException", appender.getFirstLog().getMessage());
 
@@ -75,13 +75,13 @@ public class ThreadUtilsTest {
 			@Override
 			public void run() {
 				lock.countDown();
-				ThreadUtils.gracefulShutdown(self, 200000, 200000, TimeUnit.MILLISECONDS);
+				Threads.gracefulShutdown(self, 200000, 200000, TimeUnit.MILLISECONDS);
 			}
 		});
 		thread.start();
 		lock.await();
 		thread.interrupt();
-		ThreadUtils.sleep(500);
+		Threads.sleep(500);
 		assertEquals("InterruptedException", appender.getFirstLog().getMessage());
 	}
 
@@ -97,7 +97,7 @@ public class ThreadUtilsTest {
 		ExecutorService pool = Executors.newSingleThreadExecutor();
 		Runnable task = new Task(logger, 1000, 0);
 		pool.execute(task);
-		ThreadUtils.normalShutdown(pool, 500, TimeUnit.MILLISECONDS);
+		Threads.normalShutdown(pool, 500, TimeUnit.MILLISECONDS);
 		assertTrue(pool.isTerminated());
 		assertEquals("InterruptedException", appender.getFirstMessage());
 	}

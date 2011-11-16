@@ -16,7 +16,7 @@ import org.springside.examples.showcase.jms.simple.NotifyMessageProducer;
 import org.springside.examples.showcase.security.ShiroDbRealm;
 import org.springside.modules.mapper.JsonMapper;
 import org.springside.modules.memcached.SpyMemcachedClient;
-import org.springside.modules.utils.security.DigestUtils;
+import org.springside.modules.utils.security.Digests;
 
 /**
  * 用户管理类.
@@ -55,7 +55,7 @@ public class AccountManager {
 			throw new ServiceException("不能修改超级管理员用户");
 		}
 
-		String shaPassword = DigestUtils.sha1Hex(user.getPlainPassword());
+		String shaPassword = Digests.sha1Hex(user.getPlainPassword());
 		user.setShaPassword(shaPassword);
 
 		userHibernateDao.save(user);
