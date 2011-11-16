@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.apache.commons.collections.ListUtils;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -16,6 +15,7 @@ import org.springside.examples.miniweb.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniweb.functional.Gui;
 import org.springside.examples.miniweb.functional.Gui.GroupColumn;
 import org.springside.modules.test.groups.Groups;
+import org.springside.modules.utils.Collections3;
 
 /**
  * 权限组管理的功能测试,测 试页面JavaScript及主要用户故事流程.
@@ -70,7 +70,7 @@ public class GroupManagerTest extends BaseFunctionalTestCase {
 			assertTrue(s.isChecked(By.id("checkedPermissions-" + permission)));
 		}
 
-		List<String> uncheckPermissionList = ListUtils.subtract(AccountData.getDefaultPermissionList(),
+		List<String> uncheckPermissionList = Collections3.subtract(AccountData.getDefaultPermissionList(),
 				group.getPermissionList());
 		for (String permission : uncheckPermissionList) {
 			assertFalse(s.isChecked(By.id("checkedPermissions-" + permission)));

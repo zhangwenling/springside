@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.apache.commons.collections.ListUtils;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -17,6 +16,7 @@ import org.springside.examples.miniweb.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniweb.functional.Gui;
 import org.springside.examples.miniweb.functional.Gui.UserColumn;
 import org.springside.modules.test.groups.Groups;
+import org.springside.modules.utils.Collections3;
 import org.springside.modules.utils.Threads;
 
 /**
@@ -82,7 +82,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 			assertTrue(s.isChecked(By.id("checkedGroupIds-" + group.getId())));
 		}
 
-		List<Group> uncheckGroupList = ListUtils.subtract(AccountData.getDefaultGroupList(), user.getGroupList());
+		List<Group> uncheckGroupList = Collections3.subtract(AccountData.getDefaultGroupList(), user.getGroupList());
 		for (Group group : uncheckGroupList) {
 			assertFalse(s.isChecked(By.id("checkedGroupIds-" + group.getId())));
 		}
