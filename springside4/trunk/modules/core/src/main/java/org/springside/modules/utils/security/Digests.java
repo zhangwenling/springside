@@ -22,10 +22,13 @@ import org.springside.modules.utils.Exceptions;
  * 
  * @author calvin
  */
-public abstract class Digests {
+public class Digests {
 
 	private static final String SHA1 = "SHA-1";
 	private static final String MD5 = "MD5";
+
+	private Digests() {
+	}
 
 	//-- String Hash function --//
 	/**

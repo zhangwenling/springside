@@ -10,7 +10,7 @@ import org.springside.modules.utils.Collections3;
 
 import com.google.common.collect.Lists;
 
-public class CollecitonUtilsTest {
+public class Collecitons3Test {
 
 	@Test
 	public void convertElementPropertyToString() {

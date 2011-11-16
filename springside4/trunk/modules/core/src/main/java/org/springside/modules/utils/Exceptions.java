@@ -9,6 +9,9 @@ package org.springside.modules.utils;
 
 public class Exceptions {
 
+	private Exceptions() {
+	}
+
 	/**
 	 * 将CheckedException转换为UnCheckedException.
 	 */

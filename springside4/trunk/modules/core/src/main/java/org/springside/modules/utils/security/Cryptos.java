@@ -28,7 +28,7 @@ import org.springside.modules.utils.Exceptions;
  * 
  * @author calvin
  */
-public abstract class Cryptos {
+public class Cryptos {
 
 	private static final String DES = "DES";
 	private static final String AES = "AES";
@@ -36,6 +36,9 @@ public abstract class Cryptos {
 
 	private static final int DEFAULT_HMACSHA1_KEYSIZE = 160;//RFC2401
 	private static final int DEFAULT_AES_KEYSIZE = 128;
+
+	private Cryptos() {
+	}
 
 	//-- HMAC-SHA1 funciton --//
 	/**

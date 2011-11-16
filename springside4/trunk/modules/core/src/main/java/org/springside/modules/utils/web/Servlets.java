@@ -25,7 +25,7 @@ import org.springside.modules.utils.Encodes;
  * 
  * @author calvin
  */
-public abstract class Servlets {
+public class Servlets {
 
 	//-- Content Type 定义 --//
 	public static final String EXCEL_TYPE = "application/vnd.ms-excel";
@@ -40,6 +40,9 @@ public abstract class Servlets {
 
 	//-- 常用数值定义 --//
 	public static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
+
+	private Servlets() {
+	}
 
 	/**
 	 * 设置客户端缓存过期时间 的Header.

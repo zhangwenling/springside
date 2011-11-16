@@ -24,8 +24,8 @@ import org.springside.modules.utils.Exceptions;
  * @author calvin
  */
 public class WebDriverFactory {
-	public enum BrowserType {
-		firefox, ie, remote
+
+	private WebDriverFactory() {
 	}
 
 	/**
@@ -69,5 +69,9 @@ public class WebDriverFactory {
 		Assert.notNull(driver, "Driver could be found by name:" + driverName);
 
 		return driver;
+	}
+
+	public enum BrowserType {
+		firefox, ie, remote
 	}
 }

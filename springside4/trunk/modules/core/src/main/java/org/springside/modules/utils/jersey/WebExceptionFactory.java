@@ -16,6 +16,9 @@ import org.slf4j.Logger;
 
 public class WebExceptionFactory {
 
+	private WebExceptionFactory() {
+	}
+
 	/**
 	 * 创建WebApplicationException并记打印日志, 使用标准状态码与自定义信息并记录错误信息.
 	 */

@@ -15,6 +15,9 @@ import com.sun.jersey.api.json.JSONConfiguration;
 
 public class JerseyClientFactory {
 
+	private JerseyClientFactory() {
+	}
+
 	/**
 	 * 创建JerseyClient, 设定JSON字符串使用Jackson解析.
 	 */

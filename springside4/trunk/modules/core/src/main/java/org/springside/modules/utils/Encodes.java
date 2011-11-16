@@ -25,10 +25,13 @@ import org.apache.commons.lang.StringEscapeUtils;
  * 
  * @author calvin
  */
-public abstract class Encodes {
+public class Encodes {
 	private static final String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 	private static final String DEFAULT_URL_ENCODING = "UTF-8";
+
+	private Encodes() {
+	}
 
 	/**
 	 * Hex编码, byte[]->String.

@@ -25,7 +25,7 @@ import org.springframework.util.PropertiesPersister;
  * 
  * @author calvin
  */
-public abstract class PropertiesLoader {
+public class PropertiesLoader {
 
 	private static final String DEFAULT_ENCODING = "UTF-8";
 
@@ -33,6 +33,9 @@ public abstract class PropertiesLoader {
 
 	private static PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
 	private static ResourceLoader resourceLoader = new DefaultResourceLoader();
+
+	private PropertiesLoader() {
+	}
 
 	/**
 	 * 载入多个properties文件, 相同的属性在最后载入的文件中的值将会覆盖之前的载入.
