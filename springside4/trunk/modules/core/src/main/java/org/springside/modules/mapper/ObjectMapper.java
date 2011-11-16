@@ -15,7 +15,7 @@ import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.velocity.util.StringUtils;
 import org.dozer.DozerBeanMapper;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.Reflections;
 
 import com.google.common.collect.Lists;
 
@@ -77,7 +77,7 @@ public abstract class ObjectMapper {
 		try {
 			return ConvertUtils.convert(value, toType);
 		} catch (Exception e) {
-			throw ReflectionUtils.convertReflectionExceptionToUnchecked(e);
+			throw Reflections.convertReflectionExceptionToUnchecked(e);
 		}
 	}
 }

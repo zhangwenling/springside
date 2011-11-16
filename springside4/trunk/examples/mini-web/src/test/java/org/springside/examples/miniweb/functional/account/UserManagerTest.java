@@ -17,7 +17,7 @@ import org.springside.examples.miniweb.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniweb.functional.Gui;
 import org.springside.examples.miniweb.functional.Gui.UserColumn;
 import org.springside.modules.test.groups.Groups;
-import org.springside.modules.utils.ThreadUtils;
+import org.springside.modules.utils.Threads;
 
 /**
  * 用户管理的功能测试, 测试页面JavaScript及主要用户故事流程.
@@ -105,7 +105,7 @@ public class UserManagerTest extends BaseFunctionalTestCase {
 
 		s.clickTo(By.xpath(Gui.BUTTON_SUBMIT));
 
-		ThreadUtils.sleep(2000);
+		Threads.sleep(2000);
 
 		WebElement table = s.findElement(By.xpath("//form/table"));
 		assertEquals("用户登录名已存在", s.getTable(table, 0, 1));

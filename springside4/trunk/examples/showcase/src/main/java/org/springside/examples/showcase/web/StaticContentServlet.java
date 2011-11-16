@@ -17,7 +17,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springside.modules.utils.web.ServletUtils;
+import org.springside.modules.utils.web.Servlets;
 
 /**
  * 本地静态内容展示与下载的Servlet.
@@ -59,22 +59,22 @@ public class StaticContentServlet extends HttpServlet {
 		ContentInfo contentInfo = getContentInfo(contentPath);
 
 		//根据Etag或ModifiedSince Header判断客户端的缓存文件是否有效, 如仍有效则设置返回码为304,直接返回.
-		if (!ServletUtils.checkIfModifiedSince(request, response, contentInfo.lastModified)
-				|| !ServletUtils.checkIfNoneMatchEtag(request, response, contentInfo.etag)) {
+		if (!Servlets.checkIfModifiedSince(request, response, contentInfo.lastModified)
+				|| !Servlets.checkIfNoneMatchEtag(request, response, contentInfo.etag)) {
 			return;
 		}
 
 		//设置Etag/过期时间
-		ServletUtils.setExpiresHeader(response, ServletUtils.ONE_YEAR_SECONDS);
-		ServletUtils.setLastModifiedHeader(response, contentInfo.lastModified);
-		ServletUtils.setEtag(response, contentInfo.etag);
+		Servlets.setExpiresHeader(response, Servlets.ONE_YEAR_SECONDS);
+		Servlets.setLastModifiedHeader(response, contentInfo.lastModified);
+		Servlets.setEtag(response, contentInfo.etag);
 
 		//设置MIME类型
 		response.setContentType(contentInfo.mimeType);
 
 		//设置弹出下载文件请求窗口的Header
 		if (request.getParameter("download") != null) {
-			ServletUtils.setFileDownloadHeader(response, contentInfo.fileName);
+			Servlets.setFileDownloadHeader(response, contentInfo.fileName);
 		}
 
 		//构造OutputStream

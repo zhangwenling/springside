@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.lang.reflect.InvocationTargetException;
 
 import org.junit.Test;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.Reflections;
 
 public class ReflectionUtilsTest {
 
@@ -13,71 +13,71 @@ public class ReflectionUtilsTest {
 	public void getAndSetFieldValue() {
 		TestBean bean = new TestBean();
 		//无需getter函数, 直接读取privateField
-		assertEquals(1, ReflectionUtils.getFieldValue(bean, "privateField"));
+		assertEquals(1, Reflections.getFieldValue(bean, "privateField"));
 		//绕过将publicField+1的getter函数,直接读取publicField的原始值
-		assertEquals(1, ReflectionUtils.getFieldValue(bean, "publicField"));
+		assertEquals(1, Reflections.getFieldValue(bean, "publicField"));
 
 		bean = new TestBean();
 		//无需setter函数, 直接设置privateField
-		ReflectionUtils.setFieldValue(bean, "privateField", 2);
+		Reflections.setFieldValue(bean, "privateField", 2);
 		assertEquals(2, bean.inspectPrivateField());
 
 		//绕过将publicField+1的setter函数,直接设置publicField的原始值
-		ReflectionUtils.setFieldValue(bean, "publicField", 2);
+		Reflections.setFieldValue(bean, "publicField", 2);
 		assertEquals(2, bean.inspectPublicField());
 	}
 
 	@Test
 	public void invokeGetterAndSetter() {
 		TestBean bean = new TestBean();
-		assertEquals(bean.inspectPublicField() + 1, ReflectionUtils.invokeGetterMethod(bean, "publicField"));
+		assertEquals(bean.inspectPublicField() + 1, Reflections.invokeGetterMethod(bean, "publicField"));
 
 		bean = new TestBean();
-		ReflectionUtils.invokeSetterMethod(bean, "publicField", 10, int.class);
+		Reflections.invokeSetterMethod(bean, "publicField", 10, int.class);
 		assertEquals(10 + 1, bean.inspectPublicField());
 	}
 
 	@Test
 	public void invokeMethod() {
 		TestBean bean = new TestBean();
-		assertEquals("hello calvin", ReflectionUtils.invokeMethod(bean, "privateMethod", new Class[] { String.class },
+		assertEquals("hello calvin", Reflections.invokeMethod(bean, "privateMethod", new Class[] { String.class },
 				new Object[] { "calvin" }));
 	}
 
 	@Test
 	public void getSuperClassGenricType() {
 		//获取第1，2个泛型类型
-		assertEquals(String.class, ReflectionUtils.getSuperClassGenricType(TestBean.class));
-		assertEquals(Long.class, ReflectionUtils.getSuperClassGenricType(TestBean.class, 1));
+		assertEquals(String.class, Reflections.getSuperClassGenricType(TestBean.class));
+		assertEquals(Long.class, Reflections.getSuperClassGenricType(TestBean.class, 1));
 
 		//定义父类时无泛型定义
-		assertEquals(Object.class, ReflectionUtils.getSuperClassGenricType(TestBean2.class));
+		assertEquals(Object.class, Reflections.getSuperClassGenricType(TestBean2.class));
 
 		//无父类定义
-		assertEquals(Object.class, ReflectionUtils.getSuperClassGenricType(TestBean3.class));
+		assertEquals(Object.class, Reflections.getSuperClassGenricType(TestBean3.class));
 	}
 
 	@Test
 	public void convertReflectionExceptionToUnchecked() {
 		IllegalArgumentException iae = new IllegalArgumentException();
 		//ReflectionException,normal
-		RuntimeException e = ReflectionUtils.convertReflectionExceptionToUnchecked(iae);
+		RuntimeException e = Reflections.convertReflectionExceptionToUnchecked(iae);
 		assertEquals(iae, e.getCause());
 		assertEquals("Reflection Exception.", e.getMessage());
 
 		//InvocationTargetException,extract it's target exception.
 		Exception ex = new Exception();
-		e = ReflectionUtils.convertReflectionExceptionToUnchecked(new InvocationTargetException(ex));
+		e = Reflections.convertReflectionExceptionToUnchecked(new InvocationTargetException(ex));
 		assertEquals(ex, e.getCause());
 		assertEquals("Reflection Exception.", e.getMessage());
 
 		//UncheckedException, ignore it.
 		RuntimeException re = new RuntimeException("abc");
-		e = ReflectionUtils.convertReflectionExceptionToUnchecked(re);
+		e = Reflections.convertReflectionExceptionToUnchecked(re);
 		assertEquals("abc", e.getMessage());
 
 		//Unexcepted Checked exception.
-		e = ReflectionUtils.convertReflectionExceptionToUnchecked(ex);
+		e = Reflections.convertReflectionExceptionToUnchecked(ex);
 		assertEquals("Unexpected Checked Exception.", e.getMessage());
 
 	}

@@ -25,11 +25,11 @@ import org.springframework.util.PropertiesPersister;
  * 
  * @author calvin
  */
-public abstract class PropertiesUtils {
+public abstract class PropertiesLoader {
 
 	private static final String DEFAULT_ENCODING = "UTF-8";
 
-	private static Logger logger = LoggerFactory.getLogger(PropertiesUtils.class);
+	private static Logger logger = LoggerFactory.getLogger(PropertiesLoader.class);
 
 	private static PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
 	private static ResourceLoader resourceLoader = new DefaultResourceLoader();

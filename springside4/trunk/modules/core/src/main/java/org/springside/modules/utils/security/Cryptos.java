@@ -18,8 +18,8 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.springside.modules.utils.EncodeUtils;
-import org.springside.modules.utils.ExceptionUtils;
+import org.springside.modules.utils.Encodes;
+import org.springside.modules.utils.Exceptions;
 
 /**
  * 支持HMAC-SHA1消息签名 及 DES/AES对称加密的工具类.
@@ -28,7 +28,7 @@ import org.springside.modules.utils.ExceptionUtils;
  * 
  * @author calvin
  */
-public abstract class CryptoUtils {
+public abstract class Cryptos {
 
 	private static final String DES = "DES";
 	private static final String AES = "AES";
@@ -51,7 +51,7 @@ public abstract class CryptoUtils {
 			mac.init(secretKey);
 			return mac.doFinal(input.getBytes());
 		} catch (GeneralSecurityException e) {
-			throw ExceptionUtils.unchecked(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
@@ -62,7 +62,7 @@ public abstract class CryptoUtils {
 	 */
 	public static String hmacSha1ToHex(String input, byte[] keyBytes) {
 		byte[] macResult = hmacSha1(input, keyBytes);
-		return EncodeUtils.encodeHex(macResult);
+		return Encodes.encodeHex(macResult);
 	}
 
 	/**
@@ -72,7 +72,7 @@ public abstract class CryptoUtils {
 	 */
 	public static String hmacSha1ToBase64(String input, byte[] keyBytes) {
 		byte[] macResult = hmacSha1(input, keyBytes);
-		return EncodeUtils.encodeBase64(macResult);
+		return Encodes.encodeBase64(macResult);
 	}
 
 	/**
@@ -82,7 +82,7 @@ public abstract class CryptoUtils {
 	 */
 	public static String hmacSha1ToBase64UrlSafe(String input, byte[] keyBytes) {
 		byte[] macResult = hmacSha1(input, keyBytes);
-		return EncodeUtils.encodeUrlSafeBase64(macResult);
+		return Encodes.encodeUrlSafeBase64(macResult);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public abstract class CryptoUtils {
 	 * @param keyBytes 密钥
 	 */
 	public static boolean isHexMacValid(String hexMac, String input, byte[] keyBytes) {
-		byte[] expected = EncodeUtils.decodeHex(hexMac);
+		byte[] expected = Encodes.decodeHex(hexMac);
 		byte[] actual = hmacSha1(input, keyBytes);
 
 		return Arrays.equals(expected, actual);
@@ -107,7 +107,7 @@ public abstract class CryptoUtils {
 	 * @param keyBytes 密钥
 	 */
 	public static boolean isBase64MacValid(String base64Mac, String input, byte[] keyBytes) {
-		byte[] expected = EncodeUtils.decodeBase64(base64Mac);
+		byte[] expected = Encodes.decodeBase64(base64Mac);
 		byte[] actual = hmacSha1(input, keyBytes);
 
 		return Arrays.equals(expected, actual);
@@ -124,7 +124,7 @@ public abstract class CryptoUtils {
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
 		} catch (GeneralSecurityException e) {
-			throw ExceptionUtils.unchecked(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
@@ -133,7 +133,7 @@ public abstract class CryptoUtils {
 	 * @see #generateMacSha1Key()
 	 */
 	public static String generateMacSha1HexKey() {
-		return EncodeUtils.encodeHex(generateMacSha1Key());
+		return Encodes.encodeHex(generateMacSha1Key());
 	}
 
 	//-- DES function --//
@@ -145,7 +145,7 @@ public abstract class CryptoUtils {
 	 */
 	public static String desEncryptToHex(String input, byte[] keyBytes) {
 		byte[] encryptResult = des(input.getBytes(), keyBytes, Cipher.ENCRYPT_MODE);
-		return EncodeUtils.encodeHex(encryptResult);
+		return Encodes.encodeHex(encryptResult);
 	}
 
 	/**
@@ -156,7 +156,7 @@ public abstract class CryptoUtils {
 	 */
 	public static String desEncryptToBase64(String input, byte[] keyBytes) {
 		byte[] encryptResult = des(input.getBytes(), keyBytes, Cipher.ENCRYPT_MODE);
-		return EncodeUtils.encodeBase64(encryptResult);
+		return Encodes.encodeBase64(encryptResult);
 	}
 
 	/**
@@ -166,7 +166,7 @@ public abstract class CryptoUtils {
 	 * @param keyBytes 符合DES要求的密钥
 	 */
 	public static String desDecryptFromHex(String input, byte[] keyBytes) {
-		byte[] decryptResult = des(EncodeUtils.decodeHex(input), keyBytes, Cipher.DECRYPT_MODE);
+		byte[] decryptResult = des(Encodes.decodeHex(input), keyBytes, Cipher.DECRYPT_MODE);
 		return new String(decryptResult);
 	}
 
@@ -177,7 +177,7 @@ public abstract class CryptoUtils {
 	 * @param keyBytes 符合DES要求的密钥
 	 */
 	public static String desDecryptFromBase64(String input, byte[] keyBytes) {
-		byte[] decryptResult = des(EncodeUtils.decodeBase64(input), keyBytes, Cipher.DECRYPT_MODE);
+		byte[] decryptResult = des(Encodes.decodeBase64(input), keyBytes, Cipher.DECRYPT_MODE);
 		return new String(decryptResult);
 	}
 
@@ -198,7 +198,7 @@ public abstract class CryptoUtils {
 			cipher.init(mode, secretKey);
 			return cipher.doFinal(inputBytes);
 		} catch (GeneralSecurityException e) {
-			throw ExceptionUtils.unchecked(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
@@ -211,7 +211,7 @@ public abstract class CryptoUtils {
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
 		} catch (GeneralSecurityException e) {
-			throw ExceptionUtils.unchecked(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
@@ -219,7 +219,7 @@ public abstract class CryptoUtils {
 	 * 生成符合DES要求的Hex编码密钥, 长度为16字符.
 	 */
 	public static String generateDesHexKey() {
-		return EncodeUtils.encodeHex(generateDesKey());
+		return Encodes.encodeHex(generateDesKey());
 	}
 
 	//-- AES funciton --//
@@ -231,7 +231,7 @@ public abstract class CryptoUtils {
 	 */
 	public static String aesEncryptToHex(String input, byte[] keyBytes) {
 		byte[] encryptResult = aes(input.getBytes(), keyBytes, Cipher.ENCRYPT_MODE);
-		return EncodeUtils.encodeHex(encryptResult);
+		return Encodes.encodeHex(encryptResult);
 	}
 
 	/**
@@ -242,7 +242,7 @@ public abstract class CryptoUtils {
 	 */
 	public static String aesEncryptToBase64(String input, byte[] keyBytes) {
 		byte[] encryptResult = aes(input.getBytes(), keyBytes, Cipher.ENCRYPT_MODE);
-		return EncodeUtils.encodeBase64(encryptResult);
+		return Encodes.encodeBase64(encryptResult);
 	}
 
 	/**
@@ -252,7 +252,7 @@ public abstract class CryptoUtils {
 	 * @param keyBytes 符合AES要求的密钥
 	 */
 	public static String aesDecryptFromHex(String input, byte[] keyBytes) {
-		byte[] decryptResult = aes(EncodeUtils.decodeHex(input), keyBytes, Cipher.DECRYPT_MODE);
+		byte[] decryptResult = aes(Encodes.decodeHex(input), keyBytes, Cipher.DECRYPT_MODE);
 		return new String(decryptResult);
 	}
 
@@ -263,7 +263,7 @@ public abstract class CryptoUtils {
 	 * @param keyBytes 符合AES要求的密钥
 	 */
 	public static String aesDecryptFromBase64(String input, byte[] keyBytes) {
-		byte[] decryptResult = aes(EncodeUtils.decodeBase64(input), keyBytes, Cipher.DECRYPT_MODE);
+		byte[] decryptResult = aes(Encodes.decodeBase64(input), keyBytes, Cipher.DECRYPT_MODE);
 		return new String(decryptResult);
 	}
 
@@ -281,7 +281,7 @@ public abstract class CryptoUtils {
 			cipher.init(mode, secretKey);
 			return cipher.doFinal(inputBytes);
 		} catch (GeneralSecurityException e) {
-			throw ExceptionUtils.unchecked(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
@@ -295,7 +295,7 @@ public abstract class CryptoUtils {
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
 		} catch (GeneralSecurityException e) {
-			throw ExceptionUtils.unchecked(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
@@ -304,6 +304,6 @@ public abstract class CryptoUtils {
 	 * @see #generateMacSha1Key()
 	 */
 	public static String generateAesHexKey() {
-		return EncodeUtils.encodeHex(generateAesKey());
+		return Encodes.encodeHex(generateAesKey());
 	}
 }

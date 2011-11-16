@@ -26,7 +26,8 @@ import org.springframework.util.StringUtils;
  * @author badqiu
  * @author calvin
  */
-public abstract class AssertUtils {
+@Deprecated
+public abstract class Asserts {
 
 	/**
 	 * Assert a boolean expression, throwing <code>IllegalArgumentException</code>

@@ -18,7 +18,7 @@ import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedOperationParameter;
 import org.springframework.jmx.export.annotation.ManagedOperationParameters;
 import org.springframework.jmx.export.annotation.ManagedResource;
-import org.springside.modules.utils.AssertUtils;
+import org.springside.modules.utils.Asserts;
 
 /**
  * 基于JMX动态配置Log4J日志级别，并控制Trace开关的MBean.
@@ -90,7 +90,7 @@ public class Log4jMBean {
 	 */
 	@ManagedOperation(description = "Start trace")
 	public void startTrace() {
-		AssertUtils.hasText(traceAppenderName);
+		Asserts.hasText(traceAppenderName);
 		Logger logger = Logger.getLogger(projectLoggerName);
 		projectLoggerOrgLevel = logger.getLevel();
 		logger.setLevel(Level.DEBUG);
@@ -105,7 +105,7 @@ public class Log4jMBean {
 	 */
 	@ManagedOperation(description = "Stop trace")
 	public void stopTrace() {
-		AssertUtils.hasText(traceAppenderName);
+		Asserts.hasText(traceAppenderName);
 		Logger logger = Logger.getLogger(projectLoggerName);
 		logger.setLevel(projectLoggerOrgLevel);
 		setTraceAppenderThreshold(logger, Level.OFF);

@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runners.model.InitializationError;
 import org.springside.modules.test.groups.Groups;
 import org.springside.modules.test.groups.GroupsTestRunner;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.Reflections;
 
 public class GroupsTestRunnerTest {
 
@@ -25,20 +25,20 @@ public class GroupsTestRunnerTest {
 	public void groupsInit() throws InitializationError {
 		GroupsTestRunner groupsTestRunner = new GroupsTestRunner(GroupsTestRunnerTest.class);
 		//Get DAILY,NIGHTLY from system properties.
-		ReflectionUtils.invokeMethod(groupsTestRunner, "initGroups", null, null);
-		assertEquals("DAILY", ((List<String>) ReflectionUtils.getFieldValue(groupsTestRunner, "groups")).get(0));
-		assertEquals("NIGHTLY", ((List<String>) ReflectionUtils.getFieldValue(groupsTestRunner, "groups")).get(1));
+		Reflections.invokeMethod(groupsTestRunner, "initGroups", null, null);
+		assertEquals("DAILY", ((List<String>) Reflections.getFieldValue(groupsTestRunner, "groups")).get(0));
+		assertEquals("NIGHTLY", ((List<String>) Reflections.getFieldValue(groupsTestRunner, "groups")).get(1));
 
 		//Get all while system property is ""
 		System.setProperty(GroupsTestRunner.PROPERTY_NAME, "");
-		ReflectionUtils.invokeMethod(groupsTestRunner, "initGroups", null, null);
-		assertEquals("all", ((List<String>) ReflectionUtils.getFieldValue(groupsTestRunner, "groups")).get(0));
+		Reflections.invokeMethod(groupsTestRunner, "initGroups", null, null);
+		assertEquals("all", ((List<String>) Reflections.getFieldValue(groupsTestRunner, "groups")).get(0));
 	}
 
 	@Test
 	public void isTestClassShouldRun() throws InitializationError {
 		GroupsTestRunner groupsTestRunner = new GroupsTestRunner(GroupsTestRunnerTest.class);
-		ReflectionUtils.invokeMethod(groupsTestRunner, "initGroups", null, null);
+		Reflections.invokeMethod(groupsTestRunner, "initGroups", null, null);
 
 		assertEquals(true, GroupsTestRunner.shouldRun(TestClassBean1.class));
 		assertEquals(true, GroupsTestRunner.shouldRun(TestClassBean2.class));
@@ -49,7 +49,7 @@ public class GroupsTestRunnerTest {
 	@Test
 	public void isTestMethodShouldRun() throws InitializationError, SecurityException, NoSuchMethodException {
 		GroupsTestRunner groupsTestRunner = new GroupsTestRunner(GroupsTestRunnerTest.class);
-		ReflectionUtils.invokeMethod(groupsTestRunner, "initGroups", null, null);
+		Reflections.invokeMethod(groupsTestRunner, "initGroups", null, null);
 
 		assertEquals(true, GroupsTestRunner.shouldRun(TestClassBean1.class.getMethod("shouldRun", new Class[] {})));
 		assertEquals(false,

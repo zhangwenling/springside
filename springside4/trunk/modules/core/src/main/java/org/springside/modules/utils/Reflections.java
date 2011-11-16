@@ -24,11 +24,11 @@ import org.slf4j.LoggerFactory;
  * 
  * @author calvin
  */
-public abstract class ReflectionUtils {
+public abstract class Reflections {
 
 	public static final String CGLIB_CLASS_SEPARATOR = "$$";
 
-	private static Logger logger = LoggerFactory.getLogger(ReflectionUtils.class);
+	private static Logger logger = LoggerFactory.getLogger(Reflections.class);
 
 	/**
 	 * 调用Getter方法.
@@ -98,8 +98,8 @@ public abstract class ReflectionUtils {
 	 * 如向上转型到Object仍无法找到, 返回null.
 	 */
 	public static Field getAccessibleField(final Object obj, final String fieldName) {
-		AssertUtils.notNull(obj, "object不能为空");
-		AssertUtils.hasText(fieldName, "fieldName");
+		Asserts.notNull(obj, "object不能为空");
+		Asserts.hasText(fieldName, "fieldName");
 		for (Class<?> superClass = obj.getClass(); superClass != Object.class; superClass = superClass.getSuperclass()) {
 			try {
 				Field field = superClass.getDeclaredField(fieldName);
@@ -151,7 +151,7 @@ public abstract class ReflectionUtils {
 	 */
 	public static Method getAccessibleMethod(final Object obj, final String methodName,
 			final Class<?>... parameterTypes) {
-		AssertUtils.notNull(obj, "object不能为空");
+		Asserts.notNull(obj, "object不能为空");
 
 		for (Class<?> superClass = obj.getClass(); superClass != Object.class; superClass = superClass.getSuperclass()) {
 			try {

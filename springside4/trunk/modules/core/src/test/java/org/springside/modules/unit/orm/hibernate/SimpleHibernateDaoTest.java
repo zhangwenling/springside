@@ -23,7 +23,7 @@ import org.springside.modules.orm.hibernate.SimpleHibernateDao;
 import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.spring.SpringTxTestCase;
 import org.springside.modules.unit.orm.hibernate.data.User;
-import org.springside.modules.utils.ReflectionUtils;
+import org.springside.modules.utils.Reflections;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -180,7 +180,7 @@ public class SimpleHibernateDaoTest extends SpringTxTestCase {
 
 	public void constructor() {
 		MyUserDao myDao = new MyUserDao();
-		Class entityClazz = (Class) ReflectionUtils.getFieldValue(myDao, "entityClass");
+		Class entityClazz = (Class) Reflections.getFieldValue(myDao, "entityClass");
 		assertEquals(User.class, entityClazz);
 	}
 

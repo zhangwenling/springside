@@ -5,7 +5,7 @@
  * 
  * $Id: Fixtures.java 1593 2011-05-11 10:37:12Z calvinxiu $
  */
-package org.springside.modules.mapper;
+package org.springside.modules.utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,14 +15,13 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
-import org.springside.modules.utils.ReflectionUtils;
 
 /**
  * 提出集合中的元素对象的属性(通过Getter函数),组合成新的集合.
  * 
  * @author calvin
  */
-public class CollectionMapper {
+public class Collections3 {
 
 	/**
 	 * 提取集合中的对象的属性(通过Getter函数), 组合成Map.
@@ -41,7 +40,7 @@ public class CollectionMapper {
 						PropertyUtils.getProperty(obj, valuePropertyName));
 			}
 		} catch (Exception e) {
-			throw ReflectionUtils.convertReflectionExceptionToUnchecked(e);
+			throw Reflections.convertReflectionExceptionToUnchecked(e);
 		}
 
 		return map;
@@ -61,7 +60,7 @@ public class CollectionMapper {
 				list.add(PropertyUtils.getProperty(obj, propertyName));
 			}
 		} catch (Exception e) {
-			throw ReflectionUtils.convertReflectionExceptionToUnchecked(e);
+			throw Reflections.convertReflectionExceptionToUnchecked(e);
 		}
 
 		return list;

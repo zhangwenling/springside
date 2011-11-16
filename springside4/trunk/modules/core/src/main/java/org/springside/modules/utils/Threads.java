@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 
  * @author calvin
  */
-public abstract class ThreadUtils {
+public abstract class Threads {
 
 	/**
 	 * sleep等待,单位毫秒,忽略InterruptedException.
@@ -73,6 +73,7 @@ public abstract class ThreadUtils {
 	/**
 	 * 自定义ThreadFactory, 可定制线程池的名称.
 	 */
+	@Deprecated
 	public static class CustomizableThreadFactory implements ThreadFactory {
 
 		private final String namePrefix;

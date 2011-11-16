@@ -7,7 +7,8 @@
  */
 package org.springside.modules.utils;
 
-public class ExceptionUtils {
+@Deprecated
+public class Exceptions {
 
 	/**
 	 * 将CheckedException转换为UnCheckedException.

@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springside.modules.utils.web.ServletUtils;
+import org.springside.modules.utils.web.Servlets;
 
 /**
  * 为Response设置客户端缓存控制Header的Filter.
@@ -39,7 +39,7 @@ public class CacheControlHeaderFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
 			ServletException {
-		ServletUtils.setExpiresHeader((HttpServletResponse) res, expiresSeconds);
+		Servlets.setExpiresHeader((HttpServletResponse) res, expiresSeconds);
 		chain.doFilter(req, res);
 	}
 
@@ -52,7 +52,7 @@ public class CacheControlHeaderFilter implements Filter {
 		if (expiresSecondsParam != null) {
 			expiresSeconds = Long.valueOf(expiresSecondsParam);
 		} else {
-			expiresSeconds = ServletUtils.ONE_YEAR_SECONDS;
+			expiresSeconds = Servlets.ONE_YEAR_SECONDS;
 		}
 	}
 

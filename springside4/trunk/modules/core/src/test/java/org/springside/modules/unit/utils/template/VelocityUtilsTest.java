@@ -7,7 +7,7 @@ import java.util.Map;
 import org.apache.velocity.app.VelocityEngine;
 import org.junit.Test;
 import org.springframework.ui.velocity.VelocityEngineFactory;
-import org.springside.modules.utils.template.VelocityUtils;
+import org.springside.modules.utils.template.Velocitys;
 
 import com.google.common.collect.Maps;
 
@@ -19,7 +19,7 @@ public class VelocityUtilsTest {
 	public void renderContent() {
 		Map<String, String> model = Maps.newHashMap();
 		model.put("userName", "calvin");
-		String result = VelocityUtils.renderTemplateContent(TEMPLATE, model);
+		String result = Velocitys.renderTemplateContent(TEMPLATE, model);
 		assertEquals("hello calvin", result);
 	}
 
@@ -27,7 +27,7 @@ public class VelocityUtilsTest {
 	public void renderContentWithErrorTemplate() {
 		Map<String, String> model = Maps.newHashMap();
 		model.put("userName", "calvin");
-		VelocityUtils.renderTemplateContent(ERROR_TEMPLATE, model);
+		Velocitys.renderTemplateContent(ERROR_TEMPLATE, model);
 	}
 
 	@Test
@@ -38,7 +38,7 @@ public class VelocityUtilsTest {
 
 		Map<String, String> model = Maps.newHashMap();
 		model.put("userName", "calvin");
-		String result = VelocityUtils.renderFile("testTemplate.vm", engine, "UTF-8", model);
+		String result = Velocitys.renderFile("testTemplate.vm", engine, "UTF-8", model);
 		assertEquals("hello calvin", result);
 	}
 }

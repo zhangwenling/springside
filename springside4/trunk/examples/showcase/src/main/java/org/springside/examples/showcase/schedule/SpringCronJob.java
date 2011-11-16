@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springside.examples.showcase.common.service.AccountManager;
-import org.springside.modules.utils.AssertUtils;
-import org.springside.modules.utils.ThreadUtils;
+import org.springside.modules.utils.Asserts;
+import org.springside.modules.utils.Threads;
 
 /**
  * 使用Spring的ThreadPoolTaskScheduler执行Cron式任务的类.
@@ -32,7 +32,7 @@ public class SpringCronJob implements Runnable {
 
 	@PostConstruct
 	public void start() {
-		AssertUtils.hasText(cronExpression);
+		Asserts.hasText(cronExpression);
 
 		threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
 		threadPoolTaskScheduler.setThreadNamePrefix("SpringCronJob");
@@ -45,7 +45,7 @@ public class SpringCronJob implements Runnable {
 	public void stop() {
 		ScheduledExecutorService scheduledExecutorService = threadPoolTaskScheduler.getScheduledExecutor();
 
-		ThreadUtils.normalShutdown(scheduledExecutorService, shutdownTimeout, TimeUnit.SECONDS);
+		Threads.normalShutdown(scheduledExecutorService, shutdownTimeout, TimeUnit.SECONDS);
 
 	}
 

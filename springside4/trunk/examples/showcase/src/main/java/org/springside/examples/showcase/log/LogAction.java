@@ -3,8 +3,8 @@ package org.springside.examples.showcase.log;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springside.examples.showcase.log.trace.TraceUtils;
 import org.springside.examples.showcase.log.trace.Traced;
-import org.springside.modules.log.TraceUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
 
