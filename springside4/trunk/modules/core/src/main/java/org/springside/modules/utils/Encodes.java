@@ -16,6 +16,8 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang.StringEscapeUtils;
 
+import com.google.common.base.Throwables;
+
 /**
  * 封装各种格式的编码解码工具类.
  * 
@@ -114,7 +116,7 @@ public class Encodes {
 		try {
 			return URLEncoder.encode(part, DEFAULT_URL_ENCODING);
 		} catch (UnsupportedEncodingException e) {
-			throw Exceptions.unchecked(e);
+			throw Throwables.propagate(e);
 		}
 	}
 
@@ -126,7 +128,7 @@ public class Encodes {
 		try {
 			return URLDecoder.decode(part, DEFAULT_URL_ENCODING);
 		} catch (UnsupportedEncodingException e) {
-			throw Exceptions.unchecked(e);
+			throw Throwables.propagate(e);
 		}
 	}
 

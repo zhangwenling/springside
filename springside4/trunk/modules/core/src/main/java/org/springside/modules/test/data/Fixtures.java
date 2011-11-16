@@ -28,8 +28,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
-import org.springside.modules.utils.Exceptions;
 import org.springside.modules.utils.PropertiesLoader;
+
+import com.google.common.base.Throwables;
 
 /**
  * 基于DBUnit初始化测试数据到H2数据库的工具类.
@@ -120,7 +121,7 @@ public class Fixtures {
 
 			deleteTable(h2DataSource, tableNames.toArray(new String[tableNames.size()]));
 		} catch (SQLException e) {
-			throw Exceptions.unchecked(e);
+			Throwables.propagate(e);
 		}
 
 	}
