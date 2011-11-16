@@ -41,7 +41,7 @@ public class Validators {
 	}
 
 	/**
-	 * 辅助方法, 转换Set<ConstraintViolation>为字符串, 以separator分割.
+	 * 辅助方法, 转换Set<ConstraintViolation>中的所有message为字符串, 以separator分割.
 	 */
 	public static String convertMessage(Set<? extends ConstraintViolation> constraintViolations, String separator) {
 		List<String> errorMessages = Lists.newArrayList();
@@ -52,7 +52,7 @@ public class Validators {
 	}
 
 	/**
-	 * 辅助方法, 转换ConstraintViolationException中的Set<ConstraintViolations>为字符串, 以separator分割.
+	 * 辅助方法, 转换ConstraintViolationException中的Set<ConstraintViolations>中的所有message为字符串, 以separator分割.
 	 */
 	public static String convertMessage(ConstraintViolationException e, String separator) {
 		return convertMessage(e.getConstraintViolations(), separator);
