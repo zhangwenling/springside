@@ -20,7 +20,8 @@ import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.namespace.QName;
 
 import org.apache.commons.lang.StringUtils;
-import org.springside.modules.utils.Exceptions;
+
+import com.google.common.base.Throwables;
 
 /**
  * 使用Jaxb2.0实现XML<->Java Object的Mapper.
@@ -41,7 +42,7 @@ public class JaxbMapper {
 		try {
 			jaxbContext = JAXBContext.newInstance(rootTypes);
 		} catch (JAXBException e) {
-			throw Exceptions.unchecked(e);
+			Throwables.propagate(e);
 		}
 	}
 
@@ -61,7 +62,7 @@ public class JaxbMapper {
 			createMarshaller(encoding).marshal(root, writer);
 			return writer.toString();
 		} catch (JAXBException e) {
-			throw Exceptions.unchecked(e);
+			throw Throwables.propagate(e);
 		}
 	}
 
@@ -88,7 +89,7 @@ public class JaxbMapper {
 
 			return writer.toString();
 		} catch (JAXBException e) {
-			throw Exceptions.unchecked(e);
+			throw Throwables.propagate(e);
 		}
 	}
 
@@ -100,7 +101,7 @@ public class JaxbMapper {
 			StringReader reader = new StringReader(xml);
 			return (T) createUnmarshaller().unmarshal(reader);
 		} catch (JAXBException e) {
-			throw Exceptions.unchecked(e);
+			throw Throwables.propagate(e);
 		}
 	}
 
@@ -119,7 +120,7 @@ public class JaxbMapper {
 
 			return marshaller;
 		} catch (JAXBException e) {
-			throw Exceptions.unchecked(e);
+			throw Throwables.propagate(e);
 		}
 	}
 
@@ -130,7 +131,7 @@ public class JaxbMapper {
 		try {
 			return jaxbContext.createUnmarshaller();
 		} catch (JAXBException e) {
-			throw Exceptions.unchecked(e);
+			throw Throwables.propagate(e);
 		}
 	}
 
