@@ -30,10 +30,10 @@ public class ReflectionsTest {
 	@Test
 	public void invokeGetterAndSetter() {
 		TestBean bean = new TestBean();
-		assertEquals(bean.inspectPublicField() + 1, Reflections.invokeGetterMethod(bean, "publicField"));
+		assertEquals(bean.inspectPublicField() + 1, Reflections.invokeGetter(bean, "publicField"));
 
 		bean = new TestBean();
-		Reflections.invokeSetterMethod(bean, "publicField", 10, int.class);
+		Reflections.invokeSetter(bean, "publicField", 10, int.class);
 		assertEquals(10 + 1, bean.inspectPublicField());
 	}
 

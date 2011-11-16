@@ -36,7 +36,7 @@ public class Reflections {
 	/**
 	 * 调用Getter方法.
 	 */
-	public static Object invokeGetterMethod(Object obj, String propertyName) {
+	public static Object invokeGetter(Object obj, String propertyName) {
 		String getterMethodName = "get" + StringUtils.capitalize(propertyName);
 		return invokeMethod(obj, getterMethodName, new Class[] {}, new Object[] {});
 	}
@@ -44,8 +44,8 @@ public class Reflections {
 	/**
 	 * 调用Setter方法.使用value的Class来查找Setter方法.
 	 */
-	public static void invokeSetterMethod(Object obj, String propertyName, Object value) {
-		invokeSetterMethod(obj, propertyName, value, null);
+	public static void invokeSetter(Object obj, String propertyName, Object value) {
+		invokeSetter(obj, propertyName, value, null);
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class Reflections {
 	 * 
 	 * @param propertyType 用于查找Setter方法,为空时使用value的Class替代.
 	 */
-	public static void invokeSetterMethod(Object obj, String propertyName, Object value, Class<?> propertyType) {
+	public static void invokeSetter(Object obj, String propertyName, Object value, Class<?> propertyType) {
 		Class<?> type = propertyType != null ? propertyType : value.getClass();
 		String setterMethodName = "set" + StringUtils.capitalize(propertyName);
 		invokeMethod(obj, setterMethodName, new Class[] { type }, new Object[] { value });
@@ -224,9 +224,9 @@ public class Reflections {
 	public static RuntimeException convertReflectionExceptionToUnchecked(Exception e) {
 		if (e instanceof IllegalAccessException || e instanceof IllegalArgumentException
 				|| e instanceof NoSuchMethodException) {
-			return new IllegalArgumentException("Reflection Exception.", e);
+			return new IllegalArgumentException(e);
 		} else if (e instanceof InvocationTargetException) {
-			return new RuntimeException("Reflection Exception.", ((InvocationTargetException) e).getTargetException());
+			return new RuntimeException(((InvocationTargetException) e).getTargetException());
 		} else if (e instanceof RuntimeException) {
 			return (RuntimeException) e;
 		}
