@@ -15,7 +15,7 @@ public class AssertDemo {
 		try {
 			String parameter = "abc";
 
-			//not null后返回值
+			//not null后返回值到等式左边
 			String result = Validate.notNull(parameter);
 			assertEquals("abc", result);
 
@@ -28,19 +28,18 @@ public class AssertDemo {
 		//notBlank blank
 		try {
 			String parameter = "abc";
-			String result = Validate.notEmpty(parameter);
+			String result = Validate.notBlank(parameter);
 			assertEquals("abc", result);
 
-			Validate.notNull(null);
+			Validate.notBlank("");
 			Assert.fail();
 
-		} catch (NullPointerException e) {
+		} catch (IllegalArgumentException e) {
 
 		}
 
 		//is true
 		try {
-
 			Validate.isTrue(false);
 		} catch (IllegalArgumentException e) {
 
