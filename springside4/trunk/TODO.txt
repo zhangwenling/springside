@@ -4,7 +4,7 @@
   * MVC框架从Struts2转为Spring MVC.
   * 使用SiteMesh3实现Layout
   * 全面应用Guava,包括：
-            替换Commons-IO(Done), 取消Commons-Collection(Done),部分替换掉StringUtils
+            替换Commons-IO和Commons-Collection的使用(Done)
 			添加Guava的演示： ThreadFactoryBuilder, Throwbles, CASEFormat, stopwatch，IO的Files/ByteStreams, Collection的Ordering,Table,MultiMap
             使用Throwable，ThreadFactoryBuilder替换自写类(Done)
 			包括Guava的Cache Builder做的简单缓存

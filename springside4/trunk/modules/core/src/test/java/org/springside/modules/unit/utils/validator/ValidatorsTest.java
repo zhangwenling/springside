@@ -1,6 +1,7 @@
 package org.springside.modules.unit.utils.validator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
@@ -32,8 +33,8 @@ public class ValidatorsTest extends SpringContextTestCase {
 		Set<ConstraintViolation<Customer>> violations = validator.validate(customer);
 		assertEquals(2, violations.size());
 		String result = Validators.convertMessage(violations, ",");
-		assertTrue(StringUtils.indexOf(result, "邮件地址格式不正确") != -1);
-		assertTrue(StringUtils.indexOf(result, "姓名不能为空") != -1);
+		assertTrue(StringUtils.contains(result, "邮件地址格式不正确"));
+		assertTrue(StringUtils.contains(result, "姓名不能为空"));
 	}
 
 	@Test
@@ -46,8 +47,8 @@ public class ValidatorsTest extends SpringContextTestCase {
 			Assert.fail("should throw excepion");
 		} catch (ConstraintViolationException e) {
 			String result = Validators.convertMessage(e, ",");
-			assertTrue(StringUtils.indexOf(result, "邮件地址格式不正确") != -1);
-			assertTrue(StringUtils.indexOf(result, "姓名不能为空") != -1);
+			assertTrue(StringUtils.contains(result, "邮件地址格式不正确"));
+			assertTrue(StringUtils.contains(result, "姓名不能为空"));
 		}
 
 	}

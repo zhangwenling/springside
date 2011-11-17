@@ -21,9 +21,10 @@ import com.google.common.base.Throwables;
 /**
  * 封装各种格式的编码解码工具类.
  * 
- * 1.Commons-Codec的hex/base64 编码
- * 2.Commons-Lang的xml/html escape
- * 3.JDK提供的URLEncoder
+ * 1.Commons-Codec的 hex/base64 编码
+ * 2.自行编写的，将long进行base62编码以缩短其长度
+ * 3.Commons-Lang的xml/html escape
+ * 4.JDK提供的URLEncoder
  * 
  * @author calvin
  */
@@ -110,29 +111,6 @@ public class Encodes {
 	}
 
 	/**
-	 * URL 编码, Encode默认为UTF-8. 
-	 */
-	public static String urlEncode(String part) {
-		try {
-			return URLEncoder.encode(part, DEFAULT_URL_ENCODING);
-		} catch (UnsupportedEncodingException e) {
-			throw Throwables.propagate(e);
-		}
-	}
-
-	/**
-	 * URL 解码, Encode默认为UTF-8. 
-	 */
-	public static String urlDecode(String part) {
-
-		try {
-			return URLDecoder.decode(part, DEFAULT_URL_ENCODING);
-		} catch (UnsupportedEncodingException e) {
-			throw Throwables.propagate(e);
-		}
-	}
-
-	/**
 	 * Html 转码.
 	 */
 	public static String htmlEscape(String html) {
@@ -158,5 +136,28 @@ public class Encodes {
 	 */
 	public static String xmlUnescape(String xmlEscaped) {
 		return StringEscapeUtils.unescapeXml(xmlEscaped);
+	}
+
+	/**
+	 * URL 编码, Encode默认为UTF-8. 
+	 */
+	public static String urlEncode(String part) {
+		try {
+			return URLEncoder.encode(part, DEFAULT_URL_ENCODING);
+		} catch (UnsupportedEncodingException e) {
+			throw Throwables.propagate(e);
+		}
+	}
+
+	/**
+	 * URL 解码, Encode默认为UTF-8. 
+	 */
+	public static String urlDecode(String part) {
+
+		try {
+			return URLDecoder.decode(part, DEFAULT_URL_ENCODING);
+		} catch (UnsupportedEncodingException e) {
+			throw Throwables.propagate(e);
+		}
 	}
 }
