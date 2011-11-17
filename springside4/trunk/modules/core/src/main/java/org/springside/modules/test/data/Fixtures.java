@@ -27,7 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springside.modules.utils.PropertiesLoader;
 
 import com.google.common.base.Throwables;
@@ -130,7 +130,7 @@ public class Fixtures {
 	 * 删除指定的表, 在删除期间disable外键的检查.
 	 */
 	public static void deleteTable(DataSource h2DataSource, String... tableNames) {
-		SimpleJdbcTemplate template = new SimpleJdbcTemplate(h2DataSource);
+		JdbcTemplate template = new JdbcTemplate(h2DataSource);
 
 		template.update("SET REFERENTIAL_INTEGRITY FALSE");
 
