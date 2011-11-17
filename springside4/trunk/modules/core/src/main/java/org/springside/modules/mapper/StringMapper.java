@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
-import org.apache.velocity.util.StringUtils;
 import org.springside.modules.utils.Reflections;
 
 /**
@@ -13,6 +12,9 @@ import org.springside.modules.utils.Reflections;
  * 可转换的类型包括各种Primitives和Date。
  */
 public class StringMapper {
+
+	public static String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
+	public static String DEFAULT_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 	/**
 	 * String->Object.
@@ -42,16 +44,16 @@ public class StringMapper {
 	/**
 	 * 定义Apache BeanUtils日期Converter的格式,可注册多个格式,以','分隔
 	 */
-	public static void registerDateConverter(String patterns) {
+	public static void registerDateConverter(String... patterns) {
 		DateConverter dc = new DateConverter();
 		dc.setUseLocaleFormat(true);
-		dc.setPatterns(StringUtils.split(patterns, ","));
+		dc.setPatterns(patterns);
 		ConvertUtils.register(dc, Date.class);
 	}
 
 	static {
 		//初始化日期格式为yyyy-MM-dd 或 yyyy-MM-dd HH:mm:ss
-		StringMapper.registerDateConverter("yyyy-MM-dd,yyyy-MM-dd HH:mm:ss");
+		StringMapper.registerDateConverter(DEFAULT_DATE_FORMAT, DEFAULT_DATETIME_FORMAT);
 	}
 
 }

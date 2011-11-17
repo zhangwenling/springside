@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -20,9 +21,6 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.google.common.io.ByteStreams;
-import com.google.common.io.Closeables;
 
 /**
  * 获取远程静态内容并进行展示的Servlet.
@@ -69,11 +67,11 @@ public class MashupContentServlet extends HttpServlet {
 
 		try {
 			//基于byte数组读取InputStream并直接写入OutputStream, 数组默认大小为4k.
-			ByteStreams.copy(input, output);
+			IOUtils.copy(input, output);
 			output.flush();
 		} finally {
-			//保证Input/Output Stream的关闭.
-			Closeables.closeQuietly(input);
+			//保证InputStream的关闭.
+			IOUtils.closeQuietly(input);
 		}
 	}
 
