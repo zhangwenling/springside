@@ -4,8 +4,9 @@
   * MVC框架从Struts2转为Spring MVC.
   * 使用SiteMesh3实现Layout
   * 添加Utility的Demo,包括：
-            重新把Commons-IO拿出来，演示IO
+            演示IO
 			加入Commons-Lang3.0，取消Asserts
+			加入BeanMapper演示
 			演示Collection的,Table,MultiMap(Done)，Ordering
 			演示Commons-Lang3的StringUtils
 			添加Guava的演示： ThreadFactoryBuilder,stopwatch， 

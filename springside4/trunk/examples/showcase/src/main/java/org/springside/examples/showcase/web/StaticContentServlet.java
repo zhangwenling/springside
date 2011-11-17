@@ -11,13 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springside.modules.utils.web.Servlets;
-
-import com.google.common.io.Files;
 
 /**
  * 本地静态内容展示与下载的Servlet.
@@ -89,7 +88,7 @@ public class StaticContentServlet extends HttpServlet {
 		}
 
 		//高效读取文件内容并输出,然后关闭input file
-		Files.copy(contentInfo.file, output);
+		FileUtils.copyFile(contentInfo.file, output);
 		output.flush();
 	}
 
