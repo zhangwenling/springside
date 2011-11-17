@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.support.DelegatingErrorHandlingRunnable;
 import org.springframework.scheduling.support.TaskUtils;
 import org.springside.examples.showcase.common.service.AccountManager;
-import org.springside.modules.utils.Asserts;
+import org.apache.commons.lang3.Validate;
 import org.springside.modules.utils.Threads;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
@@ -37,7 +37,7 @@ public class JdkExecutorJob implements Runnable {
 
 	@PostConstruct
 	public void start() throws Exception {
-		Asserts.isTrue(period > 0);
+		Validate.isTrue(period > 0);
 
 		//任何异常不会中断schedule执行
 		Runnable task = new DelegatingErrorHandlingRunnable(this, TaskUtils.LOG_AND_SUPPRESS_ERROR_HANDLER);

@@ -9,8 +9,8 @@ package org.springside.modules.orm;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
-import org.springside.modules.utils.Asserts;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 
 import com.google.common.collect.Lists;
 
@@ -116,7 +116,7 @@ public class PageRequest {
 	public List<Sort> getSort() {
 		String[] orderBys = StringUtils.split(orderBy, ',');
 		String[] orderDirs = StringUtils.split(orderDir, ',');
-		Asserts.isTrue(orderBys.length == orderDirs.length, "分页多重排序参数中,排序字段与排序方向的个数不相等");
+		Validate.isTrue(orderBys.length == orderDirs.length, "分页多重排序参数中,排序字段与排序方向的个数不相等");
 
 		List<Sort> orders = Lists.newArrayList();
 		for (int i = 0; i < orderBys.length; i++) {

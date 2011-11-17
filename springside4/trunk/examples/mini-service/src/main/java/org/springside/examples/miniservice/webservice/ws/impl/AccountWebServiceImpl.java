@@ -5,6 +5,7 @@ import java.util.List;
 import javax.jws.WebService;
 import javax.validation.ConstraintViolationException;
 
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,6 @@ import org.springside.examples.miniservice.webservice.ws.result.UserListResult;
 import org.springside.examples.miniservice.webservice.ws.result.base.IdResult;
 import org.springside.examples.miniservice.webservice.ws.result.base.WSResult;
 import org.springside.modules.mapper.BeanMapper;
-import org.springside.modules.utils.Asserts;
 import org.springside.modules.utils.validator.Validators;
 
 /**
@@ -46,7 +46,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 		try {
 			Department entity = accountManager.getDepartmentDetail(id);
 
-			Asserts.notNull(entity, "部门不存在(id:" + id + ")");
+			Validate.notNull(entity, "部门不存在(id:" + id + ")");
 
 			DepartmentDTO dto = BeanMapper.map(entity, DepartmentDTO.class);
 
