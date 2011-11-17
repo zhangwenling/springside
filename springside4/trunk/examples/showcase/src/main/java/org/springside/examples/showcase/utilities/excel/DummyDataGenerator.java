@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.excel;
+package org.springside.examples.showcase.utilities.excel;
 
 /**
  * 报表演示的模拟数据提供类.

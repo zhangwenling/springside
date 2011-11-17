@@ -114,29 +114,43 @@ public class Encodes {
 	/**
 	 * Html 转码.
 	 */
-	public static String htmlEscape(String html) {
+	public static String escapeHtml(String html) {
 		return StringEscapeUtils.escapeHtml4(html);
 	}
 
 	/**
 	 * Html 解码.
 	 */
-	public static String htmlUnescape(String htmlEscaped) {
+	public static String unescapeHtml(String htmlEscaped) {
 		return StringEscapeUtils.unescapeHtml4(htmlEscaped);
 	}
 
 	/**
 	 * Xml 转码.
 	 */
-	public static String xmlEscape(String xml) {
+	public static String escapeXml(String xml) {
 		return StringEscapeUtils.escapeXml(xml);
 	}
 
 	/**
 	 * Xml 解码.
 	 */
-	public static String xmlUnescape(String xmlEscaped) {
+	public static String unescapeXml(String xmlEscaped) {
 		return StringEscapeUtils.unescapeXml(xmlEscaped);
+	}
+
+	/**
+	 * Csv 转码.
+	 */
+	public static String escapeCsv(String csv) {
+		return StringEscapeUtils.escapeCsv(csv);
+	}
+
+	/**
+	 * Csv 解码.
+	 */
+	public static String unescapeCsv(String csvEscaped) {
+		return StringEscapeUtils.unescapeCsv(csvEscaped);
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.excel;
+package org.springside.examples.showcase.utilities.excel;
 
 import java.util.Map;
 
@@ -17,7 +17,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.joda.time.DateTime;
 import org.springside.examples.showcase.Struts2Utils;
-import org.springside.examples.showcase.excel.DummyDataGenerator.TemperatureAnomaly;
+import org.springside.examples.showcase.utilities.excel.DummyDataGenerator.TemperatureAnomaly;
 import org.springside.modules.utils.web.Servlets;
 
 import com.google.common.collect.Maps;
