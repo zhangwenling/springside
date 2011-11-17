@@ -15,11 +15,11 @@ import java.util.UUID;
  * 
  * @author calvin
  */
-public class Ids {
+public class Identities {
 
 	private static SecureRandom random = new SecureRandom();
 
-	private Ids() {
+	private Identities() {
 	}
 
 	/**
@@ -27,6 +27,13 @@ public class Ids {
 	 */
 	public static String uuid() {
 		return UUID.randomUUID().toString();
+	}
+
+	/**
+	 * 封装JDK自带的UUID, 通过Random数字生成,中间无-分割
+	 */
+	public static String uuid2() {
+		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 
 	/**

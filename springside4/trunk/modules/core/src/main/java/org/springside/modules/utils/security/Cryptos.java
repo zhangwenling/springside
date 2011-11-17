@@ -19,8 +19,7 @@ import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.springside.modules.utils.Encodes;
-
-import com.google.common.base.Throwables;
+import org.springside.modules.utils.Exceptions;
 
 /**
  * 支持HMAC-SHA1消息签名 及 DES/AES对称加密的工具类.
@@ -55,7 +54,7 @@ public class Cryptos {
 			mac.init(secretKey);
 			return mac.doFinal(input.getBytes());
 		} catch (GeneralSecurityException e) {
-			throw Throwables.propagate(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
@@ -128,7 +127,7 @@ public class Cryptos {
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
 		} catch (GeneralSecurityException e) {
-			throw Throwables.propagate(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
@@ -202,7 +201,7 @@ public class Cryptos {
 			cipher.init(mode, secretKey);
 			return cipher.doFinal(inputBytes);
 		} catch (GeneralSecurityException e) {
-			throw Throwables.propagate(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
@@ -215,7 +214,7 @@ public class Cryptos {
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
 		} catch (GeneralSecurityException e) {
-			throw Throwables.propagate(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
@@ -285,7 +284,7 @@ public class Cryptos {
 			cipher.init(mode, secretKey);
 			return cipher.doFinal(inputBytes);
 		} catch (GeneralSecurityException e) {
-			throw Throwables.propagate(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
@@ -299,7 +298,7 @@ public class Cryptos {
 			SecretKey secretKey = keyGenerator.generateKey();
 			return secretKey.getEncoded();
 		} catch (GeneralSecurityException e) {
-			throw Throwables.propagate(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
