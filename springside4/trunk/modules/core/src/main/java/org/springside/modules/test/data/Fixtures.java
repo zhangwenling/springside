@@ -30,7 +30,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springside.modules.utils.PropertiesLoader;
 
-import com.google.common.base.Throwables;
+import org.springside.modules.utils.Exceptions;
 
 /**
  * 基于DBUnit初始化测试数据到H2数据库的工具类.
@@ -121,7 +121,7 @@ public class Fixtures {
 
 			deleteTable(h2DataSource, tableNames.toArray(new String[tableNames.size()]));
 		} catch (SQLException e) {
-			Throwables.propagate(e);
+			Exceptions.unchecked(e);
 		}
 
 	}

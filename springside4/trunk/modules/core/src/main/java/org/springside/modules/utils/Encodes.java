@@ -17,7 +17,7 @@ import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.Validate;
 
-import com.google.common.base.Throwables;
+import org.springside.modules.utils.Exceptions;
 
 /**
  * 封装各种格式的编码解码工具类.
@@ -160,7 +160,7 @@ public class Encodes {
 		try {
 			return URLEncoder.encode(part, DEFAULT_URL_ENCODING);
 		} catch (UnsupportedEncodingException e) {
-			throw Throwables.propagate(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
@@ -172,7 +172,7 @@ public class Encodes {
 		try {
 			return URLDecoder.decode(part, DEFAULT_URL_ENCODING);
 		} catch (UnsupportedEncodingException e) {
-			throw Throwables.propagate(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 }

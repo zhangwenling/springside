@@ -14,7 +14,7 @@ import java.security.MessageDigest;
 
 import org.springside.modules.utils.Encodes;
 
-import com.google.common.base.Throwables;
+import org.springside.modules.utils.Exceptions;
 
 /**
  * 支持SHA-1/MD5消息摘要的工具类.
@@ -64,7 +64,7 @@ public class Digests {
 			MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
 			return messageDigest.digest(input.getBytes());
 		} catch (GeneralSecurityException e) {
-			throw Throwables.propagate(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 
@@ -98,7 +98,7 @@ public class Digests {
 			return Encodes.encodeHex(messageDigest.digest());
 
 		} catch (GeneralSecurityException e) {
-			throw Throwables.propagate(e);
+			throw Exceptions.unchecked(e);
 		}
 	}
 

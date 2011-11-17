@@ -15,7 +15,7 @@ import org.apache.commons.io.output.WriterOutputStream;
 import org.junit.Test;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Throwables;
+import org.springside.modules.utils.Exceptions;
 
 public class IODemo {
 
@@ -41,7 +41,7 @@ public class IODemo {
 				System.out.println(string);
 			}
 		} catch (IOException e) {
-			Throwables.propagate(e);
+			Exceptions.unchecked(e);
 		}
 	}
 
@@ -86,7 +86,7 @@ public class IODemo {
 			System.out.println(sw.toString());
 
 		} catch (IOException e) {
-			Throwables.propagate(e);
+			Exceptions.unchecked(e);
 		} finally {
 			//安静的关闭Stream
 			IOUtils.closeQuietly(in);
