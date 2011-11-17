@@ -20,7 +20,7 @@ import org.springside.examples.miniservice.webservice.ws.result.DepartmentResult
 import org.springside.examples.miniservice.webservice.ws.result.UserListResult;
 import org.springside.examples.miniservice.webservice.ws.result.base.IdResult;
 import org.springside.examples.miniservice.webservice.ws.result.base.WSResult;
-import org.springside.modules.mapper.ObjectMapper;
+import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.utils.Asserts;
 import org.springside.modules.utils.validator.Validators;
 
@@ -48,7 +48,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 
 			Asserts.notNull(entity, "部门不存在(id:" + id + ")");
 
-			DepartmentDTO dto = ObjectMapper.map(entity, DepartmentDTO.class);
+			DepartmentDTO dto = BeanMapper.map(entity, DepartmentDTO.class);
 
 			return new DepartmentResult(dto);
 		} catch (IllegalArgumentException e) {
@@ -67,7 +67,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 		try {
 			List<User> entityList = accountManager.searchUser(loginName, name);
 
-			List<UserDTO> dtoList = ObjectMapper.mapList(entityList, UserDTO.class);
+			List<UserDTO> dtoList = BeanMapper.mapList(entityList, UserDTO.class);
 
 			return new UserListResult(dtoList);
 		} catch (RuntimeException e) {
@@ -81,7 +81,7 @@ public class AccountWebServiceImpl implements AccountWebService {
 	 */
 	public IdResult createUser(UserDTO user) {
 		try {
-			User userEntity = ObjectMapper.map(user, User.class);
+			User userEntity = BeanMapper.map(user, User.class);
 
 			Long userId = accountManager.saveUser(userEntity);
 

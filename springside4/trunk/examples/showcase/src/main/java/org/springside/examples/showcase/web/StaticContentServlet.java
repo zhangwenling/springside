@@ -117,7 +117,7 @@ public class StaticContentServlet extends HttpServlet {
 	 */
 	@Override
 	public void init() throws ServletException {
-		//保存applicationContext以备后用.
+		//保存applicationContext以备后用，纯演示.
 		applicationContext = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 
 		//初始化mimeTypes, 默认缺少css的定义,添加之.
