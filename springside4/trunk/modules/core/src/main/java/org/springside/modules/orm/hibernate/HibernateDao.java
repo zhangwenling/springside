@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.Validate;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -31,7 +32,6 @@ import org.springside.modules.orm.PageRequest;
 import org.springside.modules.orm.PageRequest.Sort;
 import org.springside.modules.orm.PropertyFilter;
 import org.springside.modules.orm.PropertyFilter.MatchType;
-import org.springside.modules.utils.Asserts;
 import org.springside.modules.utils.Reflections;
 
 /**
@@ -81,7 +81,7 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	 * @return 分页查询结果, 附带结果列表及所有查询输入参数.
 	 */
 	public Page<T> findPage(final PageRequest pageRequest, String hql, final Object... values) {
-		Asserts.notNull(pageRequest, "pageRequest不能为空");
+		Validate.notNull(pageRequest, "pageRequest不能为空");
 
 		Page<T> page = new Page<T>(pageRequest);
 
@@ -112,7 +112,7 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	 * @return 分页查询结果, 附带结果列表及所有查询输入参数.
 	 */
 	public Page<T> findPage(final PageRequest pageRequest, String hql, final Map<String, ?> values) {
-		Asserts.notNull(pageRequest, "page不能为空");
+		Validate.notNull(pageRequest, "page不能为空");
 
 		Page<T> page = new Page<T>(pageRequest);
 
@@ -142,7 +142,7 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	 * @return 分页查询结果.附带结果列表及所有查询输入参数.
 	 */
 	public Page<T> findPage(final PageRequest pageRequest, final Criterion... criterions) {
-		Asserts.notNull(pageRequest, "page不能为空");
+		Validate.notNull(pageRequest, "page不能为空");
 
 		Page<T> page = new Page<T>(pageRequest);
 
@@ -189,7 +189,7 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	 * 设置分页参数到Criteria对象,辅助函数.
 	 */
 	protected Criteria setPageRequestToCriteria(final Criteria c, final PageRequest pageRequest) {
-		Asserts.isTrue(pageRequest.getPageSize() > 0, "Page Size must larger than zero");
+		Validate.isTrue(pageRequest.getPageSize() > 0, "Page Size must larger than zero");
 
 		c.setFirstResult(pageRequest.getOffset());
 		c.setMaxResults(pageRequest.getPageSize());
@@ -331,7 +331,7 @@ public class HibernateDao<T, ID extends Serializable> extends SimpleHibernateDao
 	 * 按属性条件参数创建Criterion,辅助函数.
 	 */
 	protected Criterion buildCriterion(final String propertyName, final Object propertyValue, final MatchType matchType) {
-		Asserts.hasText(propertyName, "propertyName can't be null");
+		Validate.notBlank(propertyName, "propertyName can't be null");
 		Criterion criterion = null;
 		//根据MatchType构造criterion
 		switch (matchType) {

@@ -2,7 +2,7 @@ package org.springside.examples.showcase.mapping.xml;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * 使用JAXB2.0标注的待转换Java Bean.
