@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
- * $Id: Fixtures.java 1593 2011-05-11 10:37:12Z calvinxiu $
+ * $Id$
  */
 package org.springside.modules.orm;
 

@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
- * $Id: GroupsUtils.java 516 2009-10-02 13:55:33Z calvinxiu $
+ * $Id$
  */
 package org.springside.modules.test.groups;
 

@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
- * $Id: CryptoUtils.java 764 2009-12-27 19:13:59Z calvinxiu $
+ * $Id$
  */
 package org.springside.modules.utils.security;
 

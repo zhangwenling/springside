@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
- * $Id: Fixtures.java 1593 2011-05-11 10:37:12Z calvinxiu $
+ * $Id$
  */
 package org.springside.modules.utils.validator;
 
@@ -41,7 +41,7 @@ public class Validators {
 	}
 
 	/**
-	 * 辅助方法, 转换Set<ConstraintViolation>中的所有message为字符串, 以separator分割.
+	 * 辅助方法, 转换Set<ConstraintViolation>中所有的message为字符串, 以separator分隔.
 	 */
 	public static String convertMessage(Set<? extends ConstraintViolation> constraintViolations, String separator) {
 		List<String> errorMessages = Lists.newArrayList();
@@ -52,10 +52,9 @@ public class Validators {
 	}
 
 	/**
-	 * 辅助方法, 转换ConstraintViolationException中的Set<ConstraintViolations>中的所有message为字符串, 以separator分割.
+	 * 辅助方法, 转换ConstraintViolationException中的Set<ConstraintViolations>中的所有message为字符串, 以separator分隔.
 	 */
 	public static String convertMessage(ConstraintViolationException e, String separator) {
 		return convertMessage(e.getConstraintViolations(), separator);
 	}
-
 }
