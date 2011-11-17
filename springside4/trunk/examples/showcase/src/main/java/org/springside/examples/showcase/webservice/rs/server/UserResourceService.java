@@ -29,7 +29,7 @@ import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.examples.showcase.webservice.WsConstants;
 import org.springside.examples.showcase.webservice.rs.dto.UserDTO;
-import org.springside.modules.mapper.ObjectMapper;
+import org.springside.modules.mapper.BeanMapper;
 import org.springside.modules.utils.jersey.WebExceptionFactory;
 
 import com.sun.jersey.multipart.BodyPart;
@@ -59,7 +59,7 @@ public class UserResourceService {
 	public List<UserDTO> getAllUser() {
 		try {
 			List<User> entityList = accountManager.getAllUserWithRole();
-			return ObjectMapper.mapList(entityList, UserDTO.class);
+			return BeanMapper.mapList(entityList, UserDTO.class);
 		} catch (RuntimeException e) {
 			throw WebExceptionFactory.buildDefaultException(e, logger);
 		}
@@ -74,7 +74,7 @@ public class UserResourceService {
 	public UserDTO getUser(@PathParam("id") Long id) {
 		try {
 			User entity = accountManager.getInitializedUser(id);
-			return ObjectMapper.map(entity, UserDTO.class);
+			return BeanMapper.map(entity, UserDTO.class);
 		} catch (ObjectNotFoundException e) {
 			String message = "用户不存在(id:" + id + ")";
 			throw WebExceptionFactory.buildException(Status.NOT_FOUND, message, logger);
@@ -101,7 +101,7 @@ public class UserResourceService {
 				return Response.ok(html, MediaType.TEXT_HTML + WsConstants.CHARSET).build();
 			} else {
 				//返回JSON格式的对象.
-				UserDTO dto = ObjectMapper.map(entity, UserDTO.class);
+				UserDTO dto = BeanMapper.map(entity, UserDTO.class);
 				return Response.ok(dto, MediaType.APPLICATION_JSON).build();
 			}
 		} catch (ObjectNotFoundException e) {

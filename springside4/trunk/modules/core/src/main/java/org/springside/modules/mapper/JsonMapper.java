@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 简单封装Jackson实现JSON<->Java Object的Mapper.
+ * 简单封装Jackson，实现JSON String<->Java Object的Mapper.
  * 
  * 封装不同的输出风格, 使用不同的builder函数创建实例.
  * 
