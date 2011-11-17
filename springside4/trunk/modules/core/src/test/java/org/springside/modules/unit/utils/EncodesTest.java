@@ -1,6 +1,6 @@
 package org.springside.modules.unit.utils;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.springside.modules.utils.Encodes;
@@ -49,16 +49,29 @@ public class EncodesTest {
 	@Test
 	public void xmlEncode() {
 		String input = "1>2";
-		String result = Encodes.xmlEscape(input);
+		String result = Encodes.escapeXml(input);
 		assertEquals("1&gt;2", result);
-		assertEquals(input, Encodes.xmlUnescape(result));
+		assertEquals(input, Encodes.unescapeXml(result));
 	}
 
 	@Test
 	public void html() {
 		String input = "1>2";
-		String result = Encodes.htmlEscape(input);
+		String result = Encodes.escapeHtml(input);
 		assertEquals("1&gt;2", result);
-		assertEquals(input, Encodes.htmlUnescape(result));
+		assertEquals(input, Encodes.unescapeHtml(result));
+	}
+
+	@Test
+	public void csv() {
+		String input = "haha,kaka";
+		String result = Encodes.escapeCsv(input);
+		System.out.println(result);
+		assertEquals(input, Encodes.unescapeCsv(result));
+		//
+		input = "\"ha\"ka";
+		result = Encodes.escapeCsv(input);
+		System.out.println(result);
+		assertEquals(input, Encodes.unescapeCsv(result));
 	}
 }

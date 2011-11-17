@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.mapping.json;
+package org.springside.examples.showcase.utilities.json;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
