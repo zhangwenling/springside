@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.time;
+package org.springside.examples.showcase.utilities.time;
 
 import static org.junit.Assert.assertEquals;
 

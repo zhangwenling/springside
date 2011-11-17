@@ -2,11 +2,11 @@ package org.springside.examples.showcase.email;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.util.StringUtils;
 
 /**
  * 纯文本邮件服务类.
@@ -34,7 +34,9 @@ public class SimpleMailService {
 
 		try {
 			mailSender.send(msg);
-			logger.info("纯文本邮件已发送至{}", StringUtils.arrayToCommaDelimitedString(msg.getTo()));
+			if (logger.isInfoEnabled()) {
+				logger.info("纯文本邮件已发送至{}", StringUtils.join(msg.getTo(), ","));
+			}
 		} catch (Exception e) {
 			logger.error("发送邮件失败", e);
 		}

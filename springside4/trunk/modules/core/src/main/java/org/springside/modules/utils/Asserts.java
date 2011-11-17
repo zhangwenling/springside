@@ -17,12 +17,10 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 
 /**
- * Copy from commons-lang3.0 Validate.java 
- *   
- * @author badqiu
+ * Copy from apache commons-lang 3.0 Validate.java 
+ *  
  * @author calvin
  */
-
 public class Asserts {
 
 	private Asserts() {
