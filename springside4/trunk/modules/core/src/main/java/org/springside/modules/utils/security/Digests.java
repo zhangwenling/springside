@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * 
- * $Id: DigestUtils.java 799 2009-12-31 15:34:10Z calvinxiu $
+ * $Id$
  */
 package org.springside.modules.utils.security;
 
