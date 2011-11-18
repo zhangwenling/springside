@@ -48,4 +48,10 @@ public class BeanMapper {
 		return destinationList;
 	}
 
+	/**
+	 * 基于Dozer将对象A的值拷贝到对象B中.
+	 */
+	public static void copy(Object source, Object destinationObject) {
+		dozer.map(source, destinationObject);
+	}
 }
