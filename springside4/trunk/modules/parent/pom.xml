@@ -20,7 +20,7 @@
 		<mybatis.version>3.0.6</mybatis.version>
 		<struts2.version>2.2.1</struts2.version>
 		<cxf.version>2.5.0</cxf.version>
-		<jersey.version>1.9</jersey.version>
+		<jersey.version>1.10</jersey.version>
 		<shiro.version>1.1.0</shiro.version>
 		<activemq.version>5.5.1</activemq.version>
 		<jetty.version>7.5.4.v20111024</jetty.version>
