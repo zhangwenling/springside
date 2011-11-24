@@ -2,11 +2,11 @@ package org.springside.examples.miniweb.unit.service.account;
 
 import static org.junit.Assert.*;
 
-import org.easymock.EasyMock;
-import org.easymock.IMocksControl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springside.examples.miniweb.dao.account.UserDao;
 import org.springside.examples.miniweb.service.ServiceException;
 import org.springside.examples.miniweb.service.account.AccountManager;
@@ -19,30 +19,26 @@ import org.springside.modules.test.utils.ShiroTestHelper;
  */
 public class AccountManagerTest {
 
-	private IMocksControl control = EasyMock.createControl();
-
 	private AccountManager accountManager;
+	@Mock
 	private UserDao mockUserDao;
 
 	@Before
 	public void setUp() {
-		accountManager = new AccountManager();
-		mockUserDao = control.createMock(UserDao.class);
-		accountManager.setUserDao(mockUserDao);
+		MockitoAnnotations.initMocks(this);
 		ShiroTestHelper.mockSubject("foo");
+
+		accountManager = new AccountManager();
+		accountManager.setUserDao(mockUserDao);
 	}
 
 	@After
 	public void tearDown() {
-		control.verify();
 		ShiroTestHelper.clearSubject();
 	}
 
 	@Test
 	public void deleteUser() {
-		mockUserDao.delete(2L);
-		control.replay();
-
 		//正常删除用户.
 		accountManager.deleteUser(2L);
 
