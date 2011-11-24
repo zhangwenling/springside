@@ -2,11 +2,11 @@ package org.springside.examples.miniservice.unit.webservice.ws;
 
 import static org.junit.Assert.*;
 
-import org.easymock.EasyMock;
-import org.easymock.IMocksControl;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springside.examples.miniservice.data.AccountData;
 import org.springside.examples.miniservice.entity.Department;
 import org.springside.examples.miniservice.service.AccountManager;
@@ -24,24 +24,17 @@ import org.springside.examples.miniservice.webservice.ws.result.base.WSResult;
  */
 public class AccountWebServiceTest {
 
-	private IMocksControl control = EasyMock.createControl();
-
 	private AccountWebServiceImpl accountWebService;
+
+	@Mock
 	private AccountManager mockAccountManager;
 
 	@Before
 	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+
 		accountWebService = new AccountWebServiceImpl();
-
-		//创建mock对象
-		mockAccountManager = control.createMock(AccountManager.class);
 		accountWebService.setAccountManager(mockAccountManager);
-	}
-
-	@After
-	public void tearDown() {
-		//确认的脚本都已执行
-		control.verify();
 	}
 
 	/**
@@ -50,8 +43,7 @@ public class AccountWebServiceTest {
 	@Test
 	public void dozerBinding() {
 		Department department = AccountData.getRandomDepartment();
-		EasyMock.expect(mockAccountManager.getDepartmentDetail(1L)).andReturn(department);
-		control.replay();
+		Mockito.when(mockAccountManager.getDepartmentDetail(Mockito.anyLong())).thenReturn(department);
 
 		DepartmentResult result = accountWebService.getDepartmentDetail(1L);
 		assertEquals(WSResult.SUCCESS, result.getCode());
@@ -65,9 +57,8 @@ public class AccountWebServiceTest {
 	 */
 	@Test
 	public void handleException() {
-		EasyMock.expect(mockAccountManager.getDepartmentDetail(1L)).andThrow(
+		Mockito.when(mockAccountManager.getDepartmentDetail(Mockito.anyLong())).thenThrow(
 				new RuntimeException("Expected exception."));
-		control.replay();
 
 		DepartmentResult result = accountWebService.getDepartmentDetail(1L);
 		assertEquals(WSResult.SYSTEM_ERROR, result.getCode());

@@ -7,13 +7,10 @@
  */
 package org.springside.modules.test.utils;
 
-import static org.easymock.EasyMock.createNiceMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.support.SubjectThreadState;
 import org.apache.shiro.util.ThreadState;
+import org.mockito.Mockito;
 
 public class ShiroTestHelper {
 
@@ -32,13 +29,12 @@ public class ShiroTestHelper {
 	}
 
 	/**
-	 * 用EasyMock快速創建一個已認證的用户.
+	 * 用Mockito快速創建一個已認證的用户.
 	 */
 	public static void mockSubject(String principal) {
-		Subject subject = createNiceMock(Subject.class);
-		expect(subject.isAuthenticated()).andReturn(true);
-		expect(subject.getPrincipal()).andReturn(principal);
-		replay(subject);
+		Subject subject = Mockito.mock(Subject.class);
+		Mockito.when(subject.isAuthenticated()).thenReturn(true);
+		Mockito.when(subject.getPrincipal()).thenReturn(principal);
 
 		bindSubject(subject);
 	}

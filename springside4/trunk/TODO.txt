@@ -1,10 +1,13 @@
 ﻿4.0 RC1 TODO部分
 
 1.主要改动
+  * Mock框架从EasyMock+JMock换成Mockito + PowerMock
   * MVC框架从Struts2转为Spring MVC.
   * 使用SiteMesh3实现Layout
   * 添加各种常用Utility的Demo, 升级Guava和Commons-Lang3.0.
             Guava演示的Ordering 
+			Assert打信息
+			StringUtils演示Splitter
  
   
 2.次要改动
@@ -13,7 +16,8 @@
   * Form用table对齐改为用Label
   * Review Shiro的Resource Base Access Control使用
   * 修正mini-web的Selenium Test case
-  * 升级Selenium到最新版, 使用自带的Wait类
+  * 升级Selenium到最新版, 使用自带的Wait类，Selenium Server的服务端
+  * Jersey的Jackson JSON绑定看有没有简化
 
 3.其他非代码改动
   * 发布前打包Maven-Archetype的项目生成模板
