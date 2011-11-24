@@ -2,33 +2,35 @@ package org.springside.examples.showcase.unit.common;
 
 import static org.junit.Assert.*;
 
-import org.easymock.EasyMock;
-import org.easymock.IMocksControl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springside.examples.showcase.common.dao.UserHibernateDao;
 import org.springside.examples.showcase.common.entity.User;
 import org.springside.examples.showcase.common.service.AccountManager;
 import org.springside.examples.showcase.common.service.ServiceException;
+import org.springside.modules.test.utils.ShiroTestHelper;
 
 public class AccountManagerTest {
 
-	private IMocksControl control = EasyMock.createControl();
-
 	private AccountManager accountManager;
+	@Mock
 	private UserHibernateDao mockUserDao;
 
 	@Before
 	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+		ShiroTestHelper.mockSubject("foo");
+
 		accountManager = new AccountManager();
-		mockUserDao = control.createMock(UserHibernateDao.class);
 		accountManager.setUserHibernateDao(mockUserDao);
 	}
 
 	@After
 	public void tearDown() {
-		control.verify();
+		ShiroTestHelper.clearSubject();
 	}
 
 	@Test
@@ -39,9 +41,6 @@ public class AccountManagerTest {
 		User user = new User();
 		user.setId(2L);
 		user.setPlainPassword("123");
-
-		mockUserDao.save(user);
-		control.replay();
 
 		//正常保存用户.
 		accountManager.saveUser(user);
