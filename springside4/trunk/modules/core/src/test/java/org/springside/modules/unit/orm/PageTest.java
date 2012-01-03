@@ -39,10 +39,10 @@ public class PageTest {
 		page.setTotalItems(11);
 		assertEquals(true, page.hasNextPage());
 
-		request.setPageNo(1);
+		page.setPageNo(1);
 		assertEquals(false, page.hasPrePage());
 
-		request.setPageNo(2);
+		page.setPageNo(2);
 		assertEquals(true, page.hasPrePage());
 	}
 
