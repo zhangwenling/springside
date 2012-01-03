@@ -142,7 +142,7 @@ public class JsonMapperTest {
 		//打印全部属性
 		JsonMapper normalBinder = JsonMapper.buildNormalMapper();
 		TestBean bean = new TestBean("A");
-		assertEquals("{\"nullValue\":null,\"name\":\"A\",\"defaultValue\":\"hello\"}", normalBinder.toJson(bean));
+		assertEquals("{\"name\":\"A\",\"defaultValue\":\"hello\",\"nullValue\":null}", normalBinder.toJson(bean));
 
 		//不打印nullValue属性
 		JsonMapper nonNullBinder = JsonMapper.buildNonNullMapper();

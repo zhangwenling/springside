@@ -63,13 +63,11 @@ public class ReflectionsTest {
 		//ReflectionException,normal
 		RuntimeException e = Reflections.convertReflectionExceptionToUnchecked(iae);
 		assertEquals(iae, e.getCause());
-		assertEquals("Reflection Exception.", e.getMessage());
 
 		//InvocationTargetException,extract it's target exception.
 		Exception ex = new Exception();
 		e = Reflections.convertReflectionExceptionToUnchecked(new InvocationTargetException(ex));
 		assertEquals(ex, e.getCause());
-		assertEquals("Reflection Exception.", e.getMessage());
 
 		//UncheckedException, ignore it.
 		RuntimeException re = new RuntimeException("abc");
