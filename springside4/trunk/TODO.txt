@@ -71,7 +71,7 @@
 
 4.1 长远版
 * OpenCSV演示
-* Ehcache新功能演示
+* Ehcache新功能演示,JSR107演示
   
 需自行时常检查版本的依赖包
 1.Blueprint,jquery,yuicompressor,SpyMemcached,log4jdbc,jsw
