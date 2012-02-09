@@ -19,15 +19,15 @@
 		<hibernate.version>3.6.9.Final</hibernate.version>
 		<mybatis.version>3.0.6</mybatis.version>
 		<struts2.version>2.2.1</struts2.version>
-		<cxf.version>2.5.1</cxf.version>
+		<cxf.version>2.5.2</cxf.version>
 		<jersey.version>1.11</jersey.version>
-		<shiro.version>1.1.0</shiro.version>
+		<shiro.version>1.2.0</shiro.version>
 		<activemq.version>5.5.1</activemq.version>
 		<jetty.version>7.5.4.v20111024</jetty.version>
-		<h2.version>1.3.163</h2.version>
-		<jackson.version>1.9.3</jackson.version>
+		<h2.version>1.3.164</h2.version>
+		<jackson.version>1.9.4</jackson.version>
 		<slf4j.version>1.6.4</slf4j.version>
-		<selenium.version>2.15.0</selenium.version>
+		<selenium.version>2.19.0</selenium.version>
 
 		<!-- Plugin的属性定义 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -192,7 +192,7 @@
 			<dependency>
 				<groupId>commons-pool</groupId>
 				<artifactId>commons-pool</artifactId>
-				<version>1.5.6</version>
+				<version>1.6</version>
 			</dependency>
 			<!-- database access end -->
 
@@ -567,7 +567,7 @@
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
-				<version>11.0</version>
+				<version>11.0.1</version>
 			</dependency>
 
 			<!-- joda -->
@@ -594,7 +594,7 @@
 			<dependency>
 				<groupId>ognl</groupId>
 				<artifactId>ognl</artifactId>
-				<version>3.0.3</version>
+				<version>3.0.4</version>
 			</dependency>
 
 			<!-- jaxb -->
@@ -620,7 +620,7 @@
 			<dependency>
 				<groupId>net.sf.ehcache</groupId>
 				<artifactId>ehcache-core</artifactId>
-				<version>2.5.0</version>
+				<version>2.5.1</version>
 			</dependency>
 
 			<!-- pojo copy -->
@@ -661,13 +661,13 @@
 			<dependency>
 				<groupId>org.powermock</groupId>
 				<artifactId>powermock-module-junit4</artifactId>
-				<version>1.4.10</version>
+				<version>1.4.11</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.powermock</groupId>
 				<artifactId>powermock-api-mockito</artifactId>
-				<version>1.4.10</version>
+				<version>1.4.11</version>
 				<scope>test</scope>
 				<exclusions>
 					<exclusion>
@@ -827,7 +827,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
-					<version>2.1.1</version>
+					<version>2.2</version>
 					<configuration>
 						<warName>${project.artifactId}</warName>
 					</configuration>
@@ -847,7 +847,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.3.2</version>
+					<version>2.4</version>
 					<configuration>
 						<archive>
 							<manifest>
@@ -926,7 +926,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-assembly-plugin</artifactId>
-					<version>2.2.2</version>
+					<version>2.3</version>
 				</plugin>
 
 				<!-- sonar插件 -->
