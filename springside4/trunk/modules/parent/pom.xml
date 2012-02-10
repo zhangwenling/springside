@@ -6,7 +6,7 @@
 	<artifactId>springside-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>Springside :: Module :: Parent</name>
-	<version>4.0.0-SNAPSHOT</version>
+	<version>4.0.0.RC1-SNAPSHOT</version>
 	<organization>
 		<name>SpringSide</name>
 		<url>http://www.springside.org.cn</url>
@@ -14,7 +14,7 @@
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<springside.version>4.0.0-SNAPSHOT</springside.version>
+		<springside.version>4.0.0.RC1-SNAPSHOT</springside.version>
 		<spring.version>3.1.0.RELEASE</spring.version>
 		<hibernate.version>3.6.9.Final</hibernate.version>
 		<mybatis.version>3.0.6</mybatis.version>
@@ -35,9 +35,13 @@
 
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
 	<repositories>
-		<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. <repository> <id>nexus</id> <name>Team 
-			Nexus Repository</name> <url>http://localhost:8081/nexus/content/groups/public</url> 
-			</repository> -->
+		<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址.
+		<repository>
+			<id>nexus</id>
+			<name>Team Nexus Repository</name>
+			<url>http://localhost:8081/nexus/content/groups/public</url> 
+		</repository>
+		 -->
 		<repository>
 			<id>offical</id>
 			<name>Maven Official Repository</name>
@@ -57,15 +61,34 @@
 		</repository>
 	</repositories>
 
-	<!-- 设定插件仓库 如有Nexus私服, 取消注释并指向正确的服务器地址. <pluginRepositories> <pluginRepository> 
-		<id>nexus</id> <name>Team Nexus Repository</name> <url>http://localhost:8081/nexus/content/groups/public</url> 
-		<snapshots> <enabled>false</enabled> </snapshots> </pluginRepository> </pluginRepositories> -->
+	<!-- 设定插件仓库 如有Nexus私服, 取消注释并指向正确的服务器地址. 
+	<pluginRepositories> 
+		<pluginRepository> 
+			<id>nexus</id>
+			<name>Team Nexus Repository</name>
+			<url>http://localhost:8081/nexus/content/groups/public</url> 
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	-->
 
-	<!-- 设定使用Release插件发布的仓库服务器 如有Nexus私服, 取消注释并指向正确的服务器地址. <distributionManagement> 
-		<repository> <id>nexus</id> <name>Team Nexus Release Repository</name> <url>http://localhost:8081/nexus/content/repositories/releases</url> 
-		</repository> <snapshotRepository> <id>nexus-snapshot</id> <name>Team Nexus 
-		Snapshot Repository</name> <url>http://localhost:8081/nexus/content/repositories/snapshots</url> 
-		<uniqueVersion>false</uniqueVersion> </snapshotRepository> </distributionManagement> -->
+	<!-- 设定使用Release插件发布的仓库服务器 如有Nexus私服, 取消注释并指向正确的服务器地址.
+	<distributionManagement>
+		<repository>
+			<id>nexus</id>
+			<name>Team Nexus Release Repository</name>
+			<url>http://localhost:8081/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus-snapshot</id>
+			<name>Team Nexus Snapshot Repository</name>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
+	-->
 
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
 	<dependencyManagement>
@@ -89,6 +112,12 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>
 				<version>${spring.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -561,6 +590,12 @@
 				<groupId>commons-beanutils</groupId>
 				<artifactId>commons-beanutils</artifactId>
 				<version>1.8.3</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>commons-codec</groupId>
@@ -586,13 +621,7 @@
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
-				<version>4.2-alpha1</version>
-			</dependency>
-			<!-- java concurrency in practie -->
-			<dependency>
-				<groupId>net.jcip</groupId>
-				<artifactId>jcip-annotations</artifactId>
-				<version>1.0</version>
+				<version>4.2-beta1</version>
 			</dependency>
 
 			<!-- ognl -->
