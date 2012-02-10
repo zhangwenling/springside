@@ -65,7 +65,7 @@
 			<artifactId>hibernate-ehcache</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>javassist</groupId>
+			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
 		</dependency>
 
@@ -222,14 +222,6 @@
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-webapp</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-jsp-2.1</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.mortbay.jetty</groupId>
-			<artifactId>jsp-2.1-glassfish</artifactId>
 		</dependency>
 		<!-- testing end -->
 	</dependencies>

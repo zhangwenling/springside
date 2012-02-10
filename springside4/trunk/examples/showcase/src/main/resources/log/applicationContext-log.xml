@@ -8,13 +8,6 @@
 	<!-- 动态配置log4j日志级别的JMX MBean -->
 	<bean id="log4jMBean" class="org.springside.modules.log.Log4jMBean" />
 
-	<!-- 使用annotation定义Aspect -->
-	<aop:aspectj-autoproxy proxy-target-class="true" />
-
-	<!-- 配置执行TraceUtils的Aspect -->
-	<bean class="org.springside.examples.showcase.log.trace.TraceAspect" />
-
-
 	<!-- 配置实用perf4j的log4j.xml,仅在性能调试时打开 -->
 	<!-- 
 	<bean id="log4jConfigurer" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
