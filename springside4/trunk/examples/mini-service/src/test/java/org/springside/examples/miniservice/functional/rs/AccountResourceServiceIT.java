@@ -17,7 +17,7 @@ import org.springside.examples.miniservice.webservice.rs.client.AccountResourceC
 
 import com.sun.jersey.api.client.UniformInterfaceException;
 
-public class AccountResourceServiceTest extends BaseFunctionalTestCase {
+public class AccountResourceServiceIT extends BaseFunctionalTestCase {
 
 	private static AccountResourceClient client;
 
