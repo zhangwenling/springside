@@ -148,6 +148,10 @@
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 		</dependency>
@@ -228,11 +232,12 @@
 
 	<build>
 		<plugins>
-			<!-- test插件, 设置ClassLoader -->
+			<!-- test插件, 设置內存/ClassLoader -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
+					<argLine>-Xmx256M</argLine>
 					<useSystemClassLoader>false</useSystemClassLoader>
 				</configuration>
 			</plugin>

@@ -32,7 +32,7 @@ import org.springside.examples.miniservice.webservice.ws.result.base.WSResult;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
 @ContextConfiguration(locations = { "/applicationContext-ws-client.xml" })
-public class AccountWebServiceTest extends BaseFunctionalTestCase {
+public class AccountWebServiceIT extends BaseFunctionalTestCase {
 
 	@Autowired
 	private AccountWebService accountWebServiceClient;
