@@ -424,7 +424,11 @@
 					<useSystemClassLoader>false</useSystemClassLoader>
 				</configuration>
 			</plugin>
-
+			<!-- 运行integration-test的插件 -->
+			<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+			</plugin>
 			<!-- cobertura插件 ,取消不需要计算覆盖率的类 -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
