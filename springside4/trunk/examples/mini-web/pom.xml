@@ -33,13 +33,13 @@
 
 	<!-- 依赖项定义 -->
 	<dependencies>
-		<!-- springside -->
+		<!-- SPRINGSIDE -->
 		<dependency>
 			<groupId>org.springside</groupId>
 			<artifactId>springside-core</artifactId>
 		</dependency>
 
-		<!-- spring begin -->
+		<!-- SPRING begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
@@ -54,7 +54,7 @@
 		</dependency>
 		<!-- spring end -->
 
-		<!-- database begin -->
+		<!-- PERSISTENCE begin -->
 		<!-- hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -92,9 +92,9 @@
 			<version>${jdbc.driver.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- database end -->
+		<!-- PERSISTENCE end -->
 
-		<!-- web begin -->
+		<!-- WEB begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -122,9 +122,15 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 		</dependency>
-		<!-- web end -->
+		<!-- WEB end -->
 
-		<!-- shiro security-->
+		<!-- CACHE -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+		</dependency>
+		
+		<!-- SECURITY begin-->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
@@ -137,8 +143,9 @@
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-web</artifactId>
 		</dependency>
+		<!-- SECURITY end -->
 
-		<!-- logging begin -->
+		<!-- LOGGING begin -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -159,14 +166,9 @@
 			<groupId>net.sf.log4jdbc</groupId>
 			<artifactId>log4jdbc3</artifactId>	
 		</dependency>	
-		<!-- logging end -->
-
-		<!-- utils begin-->
-		<dependency>
-			<groupId>net.sf.ehcache</groupId>
-			<artifactId>ehcache-core</artifactId>
-		</dependency>
+		<!-- LOGGING end -->
 		
+		<!-- GENERAL UTILS begin-->
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
@@ -184,9 +186,9 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>
-		<!-- utils end -->
+		<!-- GENERAL UTILS end -->
 
-		<!-- testing begin -->
+		<!-- TEST begin -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -227,7 +229,7 @@
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-webapp</artifactId>
 		</dependency>
-		<!-- testing end -->
+		<!-- TEST end -->
 	</dependencies>
 
 	<build>

@@ -12,13 +12,13 @@
 	<name>Springside :: Module :: Extension</name>
 
 	<dependencies>
-		<!-- springside -->
+		<!-- SPRINGSIDE -->
 		<dependency>
 			<groupId>org.springside</groupId>
 			<artifactId>springside-core</artifactId>
 		</dependency>
 
-		<!-- spring -->
+		<!-- SPRING -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
@@ -30,29 +30,27 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- memcached begin -->
+		<!-- CACHE -->
 		<dependency>
 			<groupId>spy</groupId>
 			<artifactId>spymemcached</artifactId>
 			<optional>true</optional>
 		</dependency>
-
 		<dependency>
 			<groupId>com.thimbleware.jmemcached</groupId>
 			<artifactId>jmemcached-core</artifactId>
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
-		<!-- memcached end -->
 
-		<!-- jackson -->
+		<!-- JSON -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<optional>true</optional>
 		</dependency>
 
-		<!-- utils -->
+		<!-- UTILS -->
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
@@ -84,7 +82,7 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- test -->
+		<!-- TEST -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
