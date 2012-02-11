@@ -73,12 +73,11 @@
 		</pluginRepository>
 	</pluginRepositories>
 	-->
-
 	
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
 	<dependencyManagement>
 		<dependencies>
-			<!-- springside modules begin -->
+			<!-- SPRINGSIDE MODULES begin -->
 			<dependency>
 				<groupId>org.springside</groupId>
 				<artifactId>springside-core</artifactId>
@@ -89,10 +88,10 @@
 				<artifactId>springside-extension</artifactId>
 				<version>${springside.version}</version>
 			</dependency>
-			<!-- springside modules end -->
+			<!-- SPRINGSIDE MODULES end -->
 
-			<!-- spring begin -->
-			<!-- spring base -->
+			<!-- SPRING begin -->
+			<!-- spring basic -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>
@@ -120,7 +119,7 @@
 				<version>${spring.version}</version>
 			</dependency>
 
-			<!-- spring aop -->
+			<!-- spring tx -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-aop</artifactId>
@@ -146,9 +145,15 @@
 				<artifactId>cglib-nodep</artifactId>
 				<version>2.2.2</version>
 			</dependency>
-			<!-- spring end -->
+			<!-- asm -->
+			<dependency>
+				<groupId>asm</groupId>
+				<artifactId>asm</artifactId>
+				<version>3.3.1</version>
+			</dependency>
+			<!-- SPRING end -->
 
-			<!-- database access begin -->
+			<!-- PERSISTENCE begin -->
 			<!-- hibernate -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -165,13 +170,12 @@
 				<artifactId>hibernate-ehcache</artifactId>
 				<version>${hibernate.version}</version>
 			</dependency>
-
-
 			<dependency>
 				<groupId>org.javassist</groupId>
 				<artifactId>javassist</artifactId>
 				<version>3.15.0-GA</version>
 			</dependency>
+			
 			<!-- mybatis -->
 			<dependency>
 				<groupId>org.mybatis</groupId>
@@ -190,7 +194,6 @@
 				<artifactId>spring-orm</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-jdbc</artifactId>
@@ -208,9 +211,9 @@
 				<artifactId>commons-pool</artifactId>
 				<version>1.6</version>
 			</dependency>
-			<!-- database access end -->
+			<!-- PERSISTENCE end -->
 
-			<!-- web begin -->
+			<!-- WEB begin -->
 			<!-- spring mvc -->
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -230,28 +233,6 @@
 				<version>3.0-alpha-2</version>
 			</dependency>
 
-			<!-- json -->
-			<dependency>
-				<groupId>org.codehaus.jackson</groupId>
-				<artifactId>jackson-core-asl</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.codehaus.jackson</groupId>
-				<artifactId>jackson-mapper-asl</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.codehaus.jackson</groupId>
-				<artifactId>jackson-jaxrs</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.codehaus.jackson</groupId>
-				<artifactId>jackson-xc</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-
 			<!-- j2ee web spec -->
 			<dependency>
 				<groupId>javax.servlet</groupId>
@@ -269,10 +250,9 @@
 				<artifactId>standard</artifactId>
 				<version>1.1.2</version>
 			</dependency>
-			<!-- web end -->
+			<!-- WEB end -->
 
-			<!-- webservice begin -->
-			<!-- cxf -->
+			<!-- SOAP begin -->
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-core</artifactId>
@@ -311,9 +291,9 @@
 				<artifactId>cxf-rt-transports-http</artifactId>
 				<version>${cxf.version}</version>
 			</dependency>
-			<!-- webservice end -->
+			<!-- SOAP end -->
 
-			<!-- rest begin -->
+			<!-- REST begin -->
 			<dependency>
 				<groupId>com.sun.jersey</groupId>
 				<artifactId>jersey-server</artifactId>
@@ -364,9 +344,9 @@
 				<artifactId>jersey-multipart</artifactId>
 				<version>${jersey.version}</version>
 			</dependency>
-			<!-- rest end -->
+			<!-- REST end -->
 
-			<!-- security begin -->
+			<!-- SECURITY begin -->
 			<dependency>
 				<groupId>org.apache.shiro</groupId>
 				<artifactId>shiro-core</artifactId>
@@ -382,9 +362,9 @@
 				<artifactId>shiro-web</artifactId>
 				<version>${shiro.version}</version>
 			</dependency>
-			<!-- security end -->
+			<!-- SECURITY end -->
 
-			<!-- jms begin -->
+			<!-- JMS begin -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-jms</artifactId>
@@ -410,16 +390,17 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
-			<!-- jms end -->
+			<!-- JMS end -->
 
-			<!-- quartz -->
+			<!-- TIMER -->
 			<dependency>
 				<groupId>org.quartz-scheduler</groupId>
 				<artifactId>quartz</artifactId>
 				<version>1.8.5</version>
 			</dependency>
 
-			<!-- memcached begin -->
+			<!-- CACHE begin -->
+			<!-- memcached -->
 			<dependency>
 				<groupId>spy</groupId>
 				<artifactId>spymemcached</artifactId>
@@ -432,9 +413,16 @@
 				<version>1.0.0</version>
 				<scope>test</scope>
 			</dependency>
-			<!-- memcached end -->
+			
+			<!-- ehcache -->
+			<dependency>
+				<groupId>net.sf.ehcache</groupId>
+				<artifactId>ehcache-core</artifactId>
+				<version>2.5.1</version>
+			</dependency>
+			<!-- CACHE end -->
 
-			<!-- logging begin -->
+			<!-- LOGGING begin -->
 			<!-- slf4j -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -463,27 +451,15 @@
 				<version>1.2.16</version>
 			</dependency>
 
+			<!-- log4jdbc -->
 			<dependency>
 				<groupId>net.sf.log4jdbc</groupId>
 				<artifactId>log4jdbc3</artifactId>
 				<version>1.2beta2</version>
 			</dependency>
-			<!-- logging end -->
+			<!-- LOGGING end -->
 
-			<!-- email begin -->
-			<dependency>
-				<groupId>javax.mail</groupId>
-				<artifactId>mail</artifactId>
-				<version>1.4.4</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.activation</groupId>
-				<artifactId>activation</artifactId>
-				<version>1.1.1</version>
-			</dependency>
-			<!-- email end -->
-
-			<!-- xml begin -->
+			<!-- XML begin -->
 			<dependency>
 				<groupId>dom4j</groupId>
 				<artifactId>dom4j</artifactId>
@@ -532,26 +508,44 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
-			<!-- xml end -->
-
-			<!-- excel begin -->
+			
+			<!-- jaxb -->
 			<dependency>
-				<groupId>org.apache.poi</groupId>
-				<artifactId>poi</artifactId>
-				<version>3.7</version>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>2.2.5</version>
 			</dependency>
-			<!-- excel end -->
-
-			<!-- validator begin -->
 			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-validator</artifactId>
-				<version>4.2.0.Final</version>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-impl</artifactId>
+				<version>2.2.5-b09</version>
 			</dependency>
-			<!-- validator end -->
+			<!-- XML end -->
 
-			<!-- utils begin -->
+			<!-- JSON begin -->
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-core-asl</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-jaxrs</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-xc</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<!-- JSON end -->
 
+			<!-- GENERAL UTILS begin -->
 			<dependency>
 				<groupId>commons-lang</groupId>
 				<artifactId>commons-lang</artifactId>
@@ -602,31 +596,35 @@
 				<artifactId>joda-time</artifactId>
 				<version>2.0</version>
 			</dependency>
+			<!-- GENERAL UTILS end -->
 
+			<!-- OTHER UTILS begin -->
+			<!-- pojo copy -->
+			<dependency>
+				<groupId>net.sf.dozer</groupId>
+				<artifactId>dozer</artifactId>
+				<version>5.3.2</version>
+			</dependency>
+
+			<!-- excel -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>3.7</version>
+			</dependency>
+
+			<!-- validator -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>4.2.0.Final</version>
+			</dependency>
+			
 			<!-- httpclient -->
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
 				<version>4.2-beta1</version>
-			</dependency>
-
-			<!-- ognl -->
-			<dependency>
-				<groupId>ognl</groupId>
-				<artifactId>ognl</artifactId>
-				<version>3.0.4</version>
-			</dependency>
-
-			<!-- jaxb -->
-			<dependency>
-				<groupId>javax.xml.bind</groupId>
-				<artifactId>jaxb-api</artifactId>
-				<version>2.2.5</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.xml.bind</groupId>
-				<artifactId>jaxb-impl</artifactId>
-				<version>2.2.5-b09</version>
 			</dependency>
 
 			<!-- template engine -->
@@ -636,24 +634,16 @@
 				<version>1.7</version>
 			</dependency>
 
-			<!-- cache -->
+			<!-- email -->
 			<dependency>
-				<groupId>net.sf.ehcache</groupId>
-				<artifactId>ehcache-core</artifactId>
-				<version>2.5.1</version>
+				<groupId>javax.mail</groupId>
+				<artifactId>mail</artifactId>
+				<version>1.4.4</version>
 			</dependency>
-
-			<!-- pojo copy -->
 			<dependency>
-				<groupId>net.sf.dozer</groupId>
-				<artifactId>dozer</artifactId>
-				<version>5.3.2</version>
-			</dependency>
-
-			<dependency>
-				<groupId>asm</groupId>
-				<artifactId>asm</artifactId>
-				<version>3.3.1</version>
+				<groupId>javax.activation</groupId>
+				<artifactId>activation</artifactId>
+				<version>1.1.1</version>
 			</dependency>
 
 			<!-- international component for Unicode -->
@@ -662,9 +652,9 @@
 				<artifactId>icu4j</artifactId>
 				<version>4.8.1.1</version>
 			</dependency>
-			<!-- utils end -->
-
-			<!-- test begin -->
+			<!-- OTHER UTILS end -->
+	
+			<!-- TEST begin -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
@@ -757,7 +747,7 @@
 				<version>${h2.version}</version>
 				<scope>test</scope>
 			</dependency>
-			<!-- test end -->
+			<!-- TEST end -->
 
 			<!-- perf4j -->
 			<dependency>

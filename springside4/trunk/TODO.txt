@@ -7,7 +7,6 @@
   * 用Spring Data JPA代替BaseDao基类
 
 2.次要改动
-  * Maven FailSafe插件分开单元测试和集成测试
   * 升级Jquery-validation用法
   * 精简BluePrint CSS，将JQuery Validation中的milk css替换为message.css，jquery validate input框的.error替换为将替换为hightlight
   * Form用table对齐改为用Label
@@ -42,6 +41,7 @@
    * 升级JodaTime2.0版演示
    * 使用log4jdbc打印SQL及执行时间
    * 演示RESTful库Jersey的Multi-Part客户端与服务端
+   * Maven FailSafe插件分开单元测试和集成测试
    * 删除已过期演示: CXF的ws-security和ws附件协议,Flash Chart, 驗證碼, JMX客户端
    * 依赖包版本的升级
        -- Spring 3.0.4->3.1.0, CXF 2.2.10->2.5.2, Jersey 1.3->1.11, Activemq 5.4.0->5.5.1, Jquery 1.4->1.7.0, Ehcache 1.6—>2.5.1, H2 1.2.142->1.3.164

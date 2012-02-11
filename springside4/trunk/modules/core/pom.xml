@@ -13,7 +13,7 @@
 	<name>Springside :: Module :: Core</name>
 
 	<dependencies>
-		<!-- spring begin -->
+		<!-- SPRING begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
@@ -24,9 +24,9 @@
 			<artifactId>spring-jdbc</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!-- spring end -->
+		<!-- SPRING end -->
 
-		<!-- hibernate begin -->
+		<!-- PERSISTENCE begin -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -37,9 +37,9 @@
 			<artifactId>javassist</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- hibernate end -->
+		<!-- PERSISTENCE end -->
 
-		<!-- web begin -->
+		<!-- WEB begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -55,25 +55,9 @@
 			<artifactId>servlet-api</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!-- web end -->
+		<!-- WEB end -->
 
-		<!-- template engine begin -->
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<!-- template engine end -->
-
-		<!-- validator begin -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<!-- validator end -->
-
-		<!-- jersey begin -->
+		<!-- REST begin -->
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-json</artifactId>
@@ -84,17 +68,17 @@
 			<artifactId>jersey-client</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!-- jersey end -->
+		<!-- REST end -->
 
-		<!-- shiro security begin -->
+		<!-- SECURITY begin -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!-- shiro security end -->
+		<!-- SECURITY end -->
 
-		<!-- utils begin -->
+		<!-- UTILS begin -->
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
 			<artifactId>dozer</artifactId>
@@ -125,9 +109,19 @@
 			<artifactId>guava</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!-- utils end -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- UTILS end -->
 
-		<!-- logging begin -->
+		<!-- LOGGING begin -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -143,9 +137,9 @@
 			<artifactId>log4j</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!-- logging end -->
+		<!-- LOGGING end -->
 
-		<!-- test begin -->
+		<!-- TEST MODULE begin -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -191,9 +185,9 @@
 			<scope>compile</scope>
 			<optional>true</optional>
 		</dependency>
-		<!-- test end -->
+		<!-- TEST MODULE end -->
 
-		<!-- testing -->
+		<!-- TEST begin -->
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-module-junit4</artifactId>
@@ -218,18 +212,17 @@
 			<scope>test</scope>
 		</dependency>
 
-
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- TEST end -->
 	</dependencies>
 
 	<build>

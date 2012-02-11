@@ -21,13 +21,13 @@
 
 	<!-- 依赖项定义 -->
 	<dependencies>
-		<!-- springside -->
+		<!-- SPRINGSIDE -->
 		<dependency>
 			<groupId>org.springside</groupId>
 			<artifactId>springside-core</artifactId>
 		</dependency>
 
-		<!-- spring begin -->
+		<!-- SPRING begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
@@ -40,9 +40,9 @@
 			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
 		</dependency>
-		<!-- spring end -->
+		<!-- SPRING end -->
 
-		<!-- database begin -->
+		<!-- PERSISTENCE begin -->
 		<!-- mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -72,9 +72,9 @@
 			<version>${jdbc.driver.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- database end -->
+		<!-- PERSISTENCE end -->
 
-		<!-- soap begin -->
+		<!-- SOAP begin -->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxws</artifactId>
@@ -87,9 +87,9 @@
 			<groupId>javax.activation</groupId>
 			<artifactId>activation</artifactId>
 		</dependency>
-		<!-- soap end -->
+		<!-- SOAP end -->
 
-		<!-- rest begin -->
+		<!-- REST begin -->
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
@@ -110,16 +110,15 @@
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-client</artifactId>
 		</dependency>
-		<!-- rest end -->
+		<!-- REST end -->
 		
-		<!-- validator begin -->
+		<!-- VALIDATOR -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 		</dependency>
-		<!-- validator end -->
-
-		<!-- logging begin -->
+		
+		<!-- LOGGING begin -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -140,13 +139,9 @@
 			<groupId>net.sf.log4jdbc</groupId>
 			<artifactId>log4jdbc3</artifactId>	
 		</dependency>		
-		<!-- logging end -->
+		<!-- LOGGING end -->
 
-		<!-- utils begin -->
-		<dependency>
-			<groupId>net.sf.dozer</groupId>
-			<artifactId>dozer</artifactId>
-		</dependency>
+		<!-- GENERAL UTILS begin -->
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
@@ -159,9 +154,13 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>
-		<!-- utils end -->
-
-		<!-- test begin -->
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+		</dependency>
+		<!-- GENERAL UTILS end -->
+		
+		<!-- TEST begin -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -188,7 +187,7 @@
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-webapp</artifactId>
 		</dependency>
-		<!-- test end -->
+		<!-- TEST end -->
 	</dependencies>
 
 	<build>
