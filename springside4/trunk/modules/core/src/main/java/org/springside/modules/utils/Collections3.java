@@ -18,8 +18,8 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Collections工具集。
- * 在JDK的Colllections和Guava的Collections2后，命名为Collections3.
+ * Collections工具集.
+ * 在JDK的Colllections和Guava的Collections2后, 命名为Collections3.
  * 
  * @author calvin
  */

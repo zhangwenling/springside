@@ -44,7 +44,7 @@ public class Identities {
 	}
 
 	/**
-	 * 基于Base62编码的随机生成Long.
+	 * 基于Base62编码的SecureRandom随机生成Long.
 	 */
 	public static String randomBase62() {
 		return Encodes.encodeBase62(random.nextLong());
