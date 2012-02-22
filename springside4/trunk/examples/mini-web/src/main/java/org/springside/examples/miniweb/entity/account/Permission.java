@@ -33,4 +33,12 @@ public enum Permission {
 	public static Permission parse(String value) {
 		return valueMap.get(value);
 	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public String getDisplayName() {
+		return displayName;
+	}
 }

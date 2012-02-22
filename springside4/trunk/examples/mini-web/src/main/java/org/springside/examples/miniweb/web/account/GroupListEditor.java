@@ -11,6 +11,11 @@ import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.service.account.AccountManager;
 import org.springside.modules.utils.Collections3;
 
+/**
+ * 用于转换用户表单中复杂对象Group的checkbox的关联。
+ * 
+ * @author calvin
+ */
 @Component
 public class GroupListEditor extends PropertyEditorSupport {
 	private AccountManager accountManager;

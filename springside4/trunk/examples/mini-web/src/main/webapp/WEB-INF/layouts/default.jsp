@@ -27,12 +27,10 @@
 <body>
 	<div class="container">
 		<%@ include file="/WEB-INF/layouts/header.jsp"%>
-		<div id="content">
-			<div class="span-24 last">
+		<div id="content" class="span-24 last">
 				<sitemesh:write property='body' />
-			</div>
-			<%@ include file="/WEB-INF/layouts/footer.jsp"%>
 		</div>
+		<%@ include file="/WEB-INF/layouts/footer.jsp"%>
 	</div>
 </body>
 </html>
