@@ -8,23 +8,21 @@
 </head>
 
 <body>
-	<h3>用户列表</h3>
+	<h3>权限组列表</h3>
 	<c:if test="${not empty message}">
 		<div id="message" class="success">${message}</div>	
 	</c:if>
 	
 	<table>
-	<tr><th>登录名</th><th>用户名</th><th>邮箱</th><th>权限组<th>操作</th></tr>
-	<c:forEach items="${users}" var="user">
+	<tr><th>名称</th><th>授权</th><th>操作</th></tr>
+	<c:forEach items="${groups}" var="group">
 		<tr>
-			<td>${user.loginName}</td>
-			<td>${user.name}</td>
-			<td>${user.email}</td>
-			<td>${user.groupNames}</td>
-			<td><a href="update/${user.id}">修改</a> <a href="delete/${user.id}">删除</a></td>
+			<td>${group.name}</td>
+			<td>${group.permissionNames}</td>
+			<td><a href="update/${group.id}">修改</a> <a href="delete/${group.id}">删除</a></td>
 		</tr>
 	</c:forEach>
 	</table>
-	<a href="create">新建用户</a>
+	<a href="create">新建权限组</a>
 </body>
 </html>

@@ -52,7 +52,7 @@ public class UserController {
 	@RequestMapping(value = "create", method = RequestMethod.GET)
 	public String createForm(Model model) {
 		model.addAttribute("user", new User());
-		model.addAttribute("groups", accountManager.getAllGroup());
+		model.addAttribute("allgroups", accountManager.getAllGroup());
 		return "account/userForm";
 	}
 
@@ -64,8 +64,9 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
-	public String delete(@PathVariable("id") Long id) {
+	public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
 		accountManager.deleteUser(id);
+		redirectAttributes.addFlashAttribute("message", "删除用户成功");
 		return "redirect:/account/user/";
 	}
 
