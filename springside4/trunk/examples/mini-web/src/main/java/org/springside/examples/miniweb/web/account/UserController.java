@@ -21,13 +21,13 @@ import org.springside.modules.orm.PropertyFilter;
 
 /**
  * Urls:
- * list   page        : GET  /account/user/ or /account/user/list
- * create page        : GET  /account/user/create
- * create action      : POST /account/user/save
- * update page        : GET  /account/user/update/{id}
- * update action      : POST /account/user/save/{id}
- * delete action      : POST /account/user/delete/{id}
- * checkLoginName ajax: GET  /account/user/checkLoginName?oldLoginName=a&loginName=b
+ * List   page        : GET  /account/user/
+ * Create page        : GET  /account/user/create
+ * Create action      : POST /account/user/save
+ * Update page        : GET  /account/user/update/{id}
+ * Update action      : POST /account/user/save/{id}
+ * Delete action      : POST /account/user/delete/{id}
+ * CheckLoginName ajax: GET  /account/user/checkLoginName?oldLoginName=a&loginName=b
  * 
  * @author calvin
  *
