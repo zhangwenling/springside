@@ -1,9 +1,15 @@
-﻿4.0 RC1 TODO部分
+﻿4.0 RC1版 
+
+目标：体现主体选型.
+
+TODO部分:
 
 1.主要改动
 
   * MVC框架从Struts2转为Spring MVC. (尚余 flash attribute,validator,search能力，Group页面，showcase页面)
+  * 重做Login及其他安全页面
   * 使用SiteMesh3实现Layout (showcas页面?)
+  * 用Spring Data JPA代替BaseDao基类
 
 2.次要改动
   * 用JUnit自带的Catetory替换DIY的
@@ -22,7 +28,7 @@
   * 閱讀如下Samples: SpringFuse, Spring Roo, Spring GreenHouse
   
 ---------------------------------------------------------------------------------
-4.0 RC1 已完成部分
+已完成部分:
 1.  主要改动
    * DAO框架增加MyBatis的使用，与Hibernate在不同的场景各展所长
    * 安全框架从SpringSecurity转为Apache Shiro.
@@ -57,8 +63,11 @@
 
 -----------------------------------------------------------------------------------
 4.0 正式版
-1.主要改动 
-  * 升级Hibernate 4.0，用Spring Data JPA代替BaseDao基类
+
+目标：细节修正
+
+1.主要改动
+  * 升级Hibernate 4.0
   * 升级Quartz2.x
   
 2.次要改动

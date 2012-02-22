@@ -18,7 +18,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 /**
- * Properties文件载入工具类, 可载入多个properties文件, 相同的属性在最后载入的文件中的值将会覆盖之前的载入.
+ * Properties文件载入工具类. 可载入多个properties文件, 相同的属性在最后载入的文件中的值将会覆盖之前的值.
  * 
  * @author calvin
  */
@@ -32,8 +32,7 @@ public class PropertiesLoader {
 	}
 
 	/**
-	 * 载入多个文件.
-	 * 文件路径使用Spring Resource格式.
+	 * 载入多个文件, 文件路径使用Spring Resource格式.
 	 */
 	public static Properties loadProperties(String... resourcesPaths) throws IOException {
 		Properties props = new Properties();

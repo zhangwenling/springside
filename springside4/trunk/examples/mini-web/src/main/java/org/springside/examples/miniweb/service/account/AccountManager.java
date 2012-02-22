@@ -13,9 +13,6 @@ import org.springside.examples.miniweb.dao.account.UserDao;
 import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.service.ServiceException;
-import org.springside.modules.orm.Page;
-import org.springside.modules.orm.PageRequest;
-import org.springside.modules.orm.PropertyFilter;
 
 /**
  * 安全相关实体的管理类,包括用户和权限组.
@@ -63,12 +60,9 @@ public class AccountManager {
 		return id == 1;
 	}
 
-	/**
-	 * 使用属性过滤条件查询用户.
-	 */
 	@Transactional(readOnly = true)
-	public Page<User> searchUser(final PageRequest page, final List<PropertyFilter> filters) {
-		return userDao.findPage(page, filters);
+	public List<User> getAllUser() {
+		return userDao.getAll("id", true);
 	}
 
 	@Transactional(readOnly = true)
