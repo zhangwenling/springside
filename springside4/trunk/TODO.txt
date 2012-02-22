@@ -2,8 +2,8 @@
 
 1.主要改动
 
-  * MVC框架从Struts2转为Spring MVC.
-  * 使用SiteMesh3实现Layout
+  * MVC框架从Struts2转为Spring MVC. (尚余 binding group的bug,flash attribute,validator,search能力，Group页面，showcase页面)
+  * 使用SiteMesh3实现Layout (showcas页面?)
 
 2.次要改动
   * 用JUnit自带的Catetory替换DIY的
