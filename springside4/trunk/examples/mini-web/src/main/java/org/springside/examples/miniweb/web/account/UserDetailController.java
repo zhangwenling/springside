@@ -23,7 +23,7 @@ import org.springside.examples.miniweb.service.account.AccountManager;
  */
 @Controller
 @RequestMapping(value = "/account/user/")
-public class UserUpdateController {
+public class UserDetailController {
 
 	private AccountManager accountManager;
 
