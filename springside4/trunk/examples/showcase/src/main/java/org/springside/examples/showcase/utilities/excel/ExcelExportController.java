@@ -14,24 +14,21 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.struts2.convention.annotation.Namespace;
 import org.joda.time.DateTime;
-import org.springside.examples.showcase.Struts2Utils;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springside.examples.showcase.utilities.excel.DummyDataGenerator.TemperatureAnomaly;
 import org.springside.modules.utils.web.Servlets;
 
 import com.google.common.collect.Maps;
-import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * 基于POI导出Excel文件的Action.
  * 
  * @author calvin
  */
-@Namespace("/report/excel")
-public class ExcelExportAction extends ActionSupport {
-
-	private static final long serialVersionUID = 2445469348258130369L;
+@Controller
+public class ExcelExportController {
 
 	private Map<String, CellStyle> styles;
 	private int rowIndex = 0;
@@ -39,19 +36,17 @@ public class ExcelExportAction extends ActionSupport {
 	/**
 	 * 生成Excel格式的内容.
 	 */
-	@Override
-	public String execute() throws Exception {
+	@RequestMapping(value = "/excel/export")
+	public void export(HttpServletResponse response) throws Exception {
 		//生成Excel文件.
 		Workbook wb = exportExcelWorkbook();
 
 		//输出Excel文件.
-		HttpServletResponse response = Struts2Utils.getResponse();
 		response.setContentType(Servlets.EXCEL_TYPE);
 		Servlets.setFileDownloadHeader(response, "温度年表.xls");
 
 		wb.write(response.getOutputStream());
 		response.getOutputStream().flush();
-		return null;
 	}
 
 	private Workbook exportExcelWorkbook() {

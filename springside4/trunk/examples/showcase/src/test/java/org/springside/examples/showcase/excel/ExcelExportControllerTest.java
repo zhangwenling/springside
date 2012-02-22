@@ -7,7 +7,7 @@ import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellReference;
 import org.junit.Test;
-import org.springside.examples.showcase.utilities.excel.ExcelExportAction;
+import org.springside.examples.showcase.utilities.excel.ExcelExportController;
 import org.springside.modules.utils.Reflections;
 
 /**
@@ -15,12 +15,12 @@ import org.springside.modules.utils.Reflections;
  * 
  * @author calvin
  */
-public class ExcelExportActionTest {
+public class ExcelExportControllerTest {
 
 	@Test
 	public void test() throws Exception {
-		ExcelExportAction action = new ExcelExportAction();
-		Workbook wb = (Workbook) Reflections.invokeMethod(action, "exportExcelWorkbook", null, null);
+		ExcelExportController controller = new ExcelExportController();
+		Workbook wb = (Workbook) Reflections.invokeMethod(controller, "exportExcelWorkbook", null, null);
 
 		//按照Cell名称取得Cell,读取Cell的数值
 		CellReference cr = new CellReference("B3");
