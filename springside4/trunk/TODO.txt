@@ -6,9 +6,8 @@ TODO部分:
 
 1.主要改动
 
-  * MVC框架从Struts2转为Spring MVC. (尚余showcase common页面)
+  * MVC框架从Struts2转为Spring MVC. (尚余showcase common页面，及可能存在的冲突处理)
   * 重做Login及其他安全页面
-  *  (showcas页面?)
   * 用Spring Data JPA代替BaseDao基类
 
 2.次要改动
@@ -41,7 +40,7 @@ TODO部分:
    * Mock框架从EasyMock+JMock换成Mockito + PowerMock
    * 升級Jackson1.9 演示，包括可擴展的對象, 對象循環引用，局部更新，自定义类型的持久化，自定义Naming策略，已存在對象等新特性.
    * 添加各种常用Utility的Demo, 升级Guava和Commons-Lang3.0.
-   * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6.9, Jetty 7.6.1
+   * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6.9, Jetty 7.6.3
 
 2. 次要改动
    * Template工具引擎从Freemarker转为Velocity, 见Email演示.
