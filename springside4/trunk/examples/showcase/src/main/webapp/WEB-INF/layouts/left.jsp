@@ -3,17 +3,18 @@
 <div id="leftbar" class="span-6">
 		<a href="${ctx}/">首页</a>
 		<a href="${ctx}/common/user.action">综合演示</a>
-		<a href="${ctx}/web/jms/index">JMS演示</a>
-		<a href="${ctx}/web/cache/index">Cache演示</a>
-		<a href="${ctx}/web/schedule/index">定时任务演示</a>
-		<a href="${ctx}/web/security/index">安全高级演示</a>
-		<a href="${ctx}/web/web/index">Web高级演示</a>
-		<a href="${ctx}/web/rs/index">Restful高级演示</a>
-		<a href="${ctx}/web/log/index">日志高级演示</a>
-		<a href="${ctx}/web/mapping/index">XML/JSON操作演示</a>
-		<a href="${ctx}/web/jmx/index">JMX演示</a>
-		<a href="${ctx}/web/email/index">邮件演示</a>
-		<a href="${ctx}/web/excel/index">Excel演示</a>
+		<a href="${ctx}/common/user/">综合演示</a>
+		<a href="${ctx}/story/jms/index">JMS演示</a>
+		<a href="${ctx}/story/cache/index">Cache演示</a>
+		<a href="${ctx}/story/schedule/index">定时任务演示</a>
+		<a href="${ctx}/story/security/index">安全高级演示</a>
+		<a href="${ctx}/story/web/index">Web高级演示</a>
+		<a href="${ctx}/story/rs/index">Restful高级演示</a>
+		<a href="${ctx}/story/log/index">日志高级演示</a>
+		<a href="${ctx}/story/mapping/index">XML/JSON操作演示</a>
+		<a href="${ctx}/story/jmx/index">JMX演示</a>
+		<a href="${ctx}/story/email/index">邮件演示</a>
+		<a href="${ctx}/story/excel/index">Excel演示</a>
 		
 
 		<a href="${ctx}/security/login!logout.action">退出登录</a>
