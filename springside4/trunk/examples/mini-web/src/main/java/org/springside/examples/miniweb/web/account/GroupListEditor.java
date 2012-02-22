@@ -19,7 +19,8 @@ public class GroupListEditor extends PropertyEditorSupport {
 		String[] ids = StringUtils.split(text, ",");
 		List<Group> groups = new ArrayList<Group>();
 		for (String id : ids) {
-			groups.add(accountManager.getGroup(Long.valueOf(id)));
+			Group group = accountManager.getGroup(Long.valueOf(id));
+			groups.add(group);
 		}
 		setValue(groups);
 	}
