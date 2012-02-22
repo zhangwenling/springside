@@ -16,7 +16,7 @@
 				rules: {
 					loginName: {
 						required: true,
-						remote: "user!checkLoginName.action?oldLoginName=" + encodeURIComponent('${loginName}')
+						remote: "checkLoginName?oldLoginName=" + encodeURIComponent('${user.loginName}')
 					},
 					name: "required",
 					password: {
@@ -44,7 +44,7 @@
 
 <body>
 	<h3>管理用户</h3>
-	<form:form id="inputForm" modelAttribute="user" action="save" method="post">
+	<form:form id="inputForm" modelAttribute="user" action="${ctx}/account/user/save/${user.id}" method="post">
 		<input type="hidden" name="id" value="${user.id}"/>
 		<fieldset>
 			<p>
@@ -69,7 +69,7 @@
 			</p>
 			<p>
 			<label for="loginName">权限组:</label>
-			<form:checkboxes path="groupIds" items="${groups}"/>
+			<form:checkboxes path="groupList" items="${groups}" itemLabel="name" itemValue="id" />
 			</p>	
 		</fieldset>
 		<p>
