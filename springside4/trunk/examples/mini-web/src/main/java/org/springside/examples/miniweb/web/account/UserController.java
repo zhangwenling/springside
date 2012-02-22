@@ -65,7 +65,7 @@ public class UserController {
 		return "redirect:/account/user/";
 	}
 
-	@RequestMapping(value = "delete/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable("id") Long id) {
 		accountManager.deleteUser(id);
 		return "redirect:/account/user/";

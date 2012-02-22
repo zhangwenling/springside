@@ -27,9 +27,11 @@ public class UserUpdateController {
 
 	private AccountManager accountManager;
 
+	private GroupListEditor groupListEditor;
+
 	@InitBinder
 	public void initBinder(WebDataBinder b) {
-		b.registerCustomEditor(List.class, "groupList", new GroupListEditor());
+		b.registerCustomEditor(List.class, "groupList", groupListEditor);
 	}
 
 	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
@@ -52,6 +54,11 @@ public class UserUpdateController {
 	@Autowired
 	public void setAccountManager(AccountManager accountManager) {
 		this.accountManager = accountManager;
+	}
+
+	@Autowired
+	public void setGroupListEditor(GroupListEditor groupListEditor) {
+		this.groupListEditor = groupListEditor;
 	}
 
 }
