@@ -21,7 +21,7 @@ import org.springside.modules.utils.velocity.Velocitys;
  * MIME邮件服务类.
  * 
  * 演示由Velocity引擎生成的的html格式邮件, 并带有附件.
- * TODO 改为Velocity引擎
+ 
  * @author calvin
  */
 public class MimeMailService {
