@@ -59,7 +59,7 @@ public class UserController {
 	@RequestMapping(value = "save", method = RequestMethod.POST)
 	public String save(User user, RedirectAttributes redirectAttributes) {
 		accountManager.saveUser(user);
-		redirectAttributes.addAttribute("message", "创建用户" + user.getLoginName() + "成功");
+		redirectAttributes.addFlashAttribute("message", "创建用户" + user.getLoginName() + "成功");
 		return "redirect:/account/user/";
 	}
 
