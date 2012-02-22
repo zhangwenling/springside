@@ -18,7 +18,7 @@ if errorlevel 1 goto error
 
 echo [Step 2] 启动H2数据库.
 cd tools/h2
-start "H2" %MVN% exec:java
+start "H2" %MVN% exec:java -PwithoutBrowser
 cd ..\..\
 
 echo [Step 3] 为Mini-Service 初始化数据库, 启动Jetty.

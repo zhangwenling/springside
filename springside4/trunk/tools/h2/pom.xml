@@ -36,11 +36,42 @@
 				<configuration>
 					<mainClass>org.h2.tools.Server</mainClass>
 					<arguments>
-						<argument>-tcp</argument>
-						<argument>-web</argument>
-					</arguments>
+							<argument>-tcp</argument>
+							<argument>-web</argument>
+							<argument>-webPort</argument>
+							<argument>8090</argument>
+							<argument>-browser</argument>
+						</arguments>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+		<id>withoutBrowser</id>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>1.2</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>java</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<mainClass>org.h2.tools.Server</mainClass>
+						<arguments>
+							<argument>-tcp</argument>
+							<argument>-web</argument>
+						</arguments>
+					</configuration>
+			</plugin>
+		</plugins>
+	</build>
+		</profile>
+	</profiles>	
 </project>

@@ -103,15 +103,6 @@ public class User extends IdEntity {
 		return Collections3.extractToString(groupList, "name", ", ");
 	}
 
-	/**
-	 * 用户拥有的权限组id字符串, 多个权限组id用','分隔.
-	 */
-	//非持久化属性.
-	@Transient
-	public List<Long> getGroupIds() {
-		return Collections3.extractToList(groupList, "id");
-	}
-
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

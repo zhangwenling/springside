@@ -15,7 +15,7 @@
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
 		<springside.version>4.0.0.RC1-SNAPSHOT</springside.version>
-		<spring.version>3.1.1.RELEASE</spring.version>
+		<spring.version>3.1.0.RELEASE</spring.version>
 		<hibernate.version>3.6.9.Final</hibernate.version>
 		<mybatis.version>3.0.6</mybatis.version>
 		<struts2.version>2.2.1</struts2.version>
@@ -31,6 +31,7 @@
 
 		<!-- Plugin的属性定义 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdk.version>1.6</jdk.version>
 	</properties>
 
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
@@ -696,12 +697,18 @@
 
 			<!-- jetty -->
 			<dependency>
-				<groupId>org.eclipse.jetty</groupId>
+				<groupId>org.eclipse.jetty.aggregate</groupId>
 				<artifactId>jetty-webapp</artifactId>
 				<version>${jetty.version}</version>
 				<scope>test</scope>
 			</dependency>
-
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-jsp</artifactId>
+				<version>${jetty.version}</version>
+				<scope>test</scope>
+			</dependency>
+			
 			<!-- selenium 2.0 -->
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
@@ -789,8 +796,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>2.3.2</version>
 					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
+						<source>${jdk.version}</source>
+						<target>${jdk.version}</target>
 						<showWarnings>true</showWarnings>
 					</configuration>
 				</plugin>

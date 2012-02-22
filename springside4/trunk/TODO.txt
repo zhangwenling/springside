@@ -6,6 +6,7 @@
   * 使用SiteMesh3实现Layout
 
 2.次要改动
+  * 用JUnit自带的Catetory替换DIY的
   * 升级Jquery-validation用法
   * 精简BluePrint CSS，将JQuery Validation中的milk css替换为message.css，jquery validate input框的.error替换为将替换为hightlight
   * Form用table对齐改为用Label
@@ -71,6 +72,7 @@
 * Data Migration工具Flyway演示
 * CoffeScript演示
 * LessCSS演示
+* Table控件演示
 * 升级Ehcache
   
 需自行时常检查版本的依赖包
