@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,9 +20,11 @@ public class UserController {
 
 	private AccountManager accountManager;
 
+	private GroupListEditor groupListEditor;
+
 	@InitBinder
 	public void initBinder(WebDataBinder b) {
-		b.registerCustomEditor(List.class, "groupList", new GroupListEditor());
+		b.registerCustomEditor(List.class, "groupList", groupListEditor);
 	}
 
 	@RequestMapping(value = { "list", "" })
@@ -32,7 +33,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "create", method = RequestMethod.GET)
-	public String createForm(@ModelAttribute User user, Model model) {
+	public String createForm(Model model) {
+		model.addAttribute("user", new User());
 		model.addAttribute("groups", accountManager.getAllGroup());
 		return "account/userForm";
 	}
@@ -60,6 +62,11 @@ public class UserController {
 	@Autowired
 	public void setAccountManager(AccountManager accountManager) {
 		this.accountManager = accountManager;
+	}
+
+	@Autowired
+	public void setGroupListEditor(GroupListEditor groupListEditor) {
+		this.groupListEditor = groupListEditor;
 	}
 
 }
