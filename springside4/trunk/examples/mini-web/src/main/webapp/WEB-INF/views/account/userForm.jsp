@@ -16,7 +16,7 @@
 				rules: {
 					loginName: {
 						required: true,
-						remote: "checkLoginName?oldLoginName=" + encodeURIComponent('${user.loginName}')
+						remote: "${ctx}/account/user/checkLoginName?oldLoginName=" + encodeURIComponent('${user.loginName}')
 					},
 					name: "required",
 					password: {
@@ -48,28 +48,28 @@
 		<input type="hidden" name="id" value="${user.id}"/>
 		<fieldset>
 			<p>
-			<label for="loginName">登录名:</label>
-			<input type="text" id="loginName" name="loginName" size="40" value="${user.loginName}"/>
+				<label for="loginName">登录名:</label>
+				<input type="text" id="loginName" name="loginName" size="40" value="${user.loginName}"/>
 			</p>
 			<p>
-			<label for="name">用户名:</label>
-			<input type="text" id="name" name="name" size="40" value="${user.name}"/>
+				<label for="name">用户名:</label>
+				<input type="text" id="name" name="name" size="40" value="${user.name}"/>
 			</p>
 			<p>
-			<label for="password">密码:</label>
-			<input type="password" id="password" name="password" size="40" value="${user.password}"/>
+				<label for="password">密码:</label>
+				<input type="password" id="password" name="password" size="40" value="${user.password}"/>
 			</p>
 			<p>
-			<label for="passwordConfirm">确认密码:</label>
-			<input type="password" id="passwordConfirm" name="passwordConfirm" size="40" value="${user.password}"/>
+				<label for="passwordConfirm">确认密码:</label>
+				<input type="password" id="passwordConfirm" name="passwordConfirm" size="40" value="${user.password}"/>
 			</p>
 			<p>
-			<label for="loginName">邮箱:</label>
-			<input type="text" id="email" name="email" size="40" value="${user.email}"/>
+				<label for="loginName">邮箱:</label>
+				<input type="text" id="email" name="email" size="40" value="${user.email}"/>
 			</p>
 			<p>
-			<label for="loginName">权限组:</label>
-			<form:checkboxes path="groupList" items="${groups}" itemLabel="name" itemValue="id" />
+				<label for="loginName">权限组:</label>
+				<form:checkboxes path="groupList" items="${groups}" itemLabel="name" itemValue="id" />
 			</p>	
 		</fieldset>
 		<p>
