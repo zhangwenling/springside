@@ -1,6 +1,5 @@
 package org.springside.examples.miniweb.web.account;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.service.account.AccountManager;
-import org.springside.modules.orm.Page;
-import org.springside.modules.orm.PageRequest;
-import org.springside.modules.orm.PropertyFilter;
 
 /**
  * Urls:
@@ -47,8 +44,8 @@ public class UserController {
 
 	@RequestMapping(value = { "list", "" })
 	public String list(Model model) {
-		Page<User> users = accountManager.searchUser(new PageRequest(1, 100), new ArrayList<PropertyFilter>());
-		model.addAttribute("users", users.getResult());
+		List<User> users = accountManager.getAllUser();
+		model.addAttribute("users", users);
 		return "account/userList";
 	}
 
@@ -60,8 +57,9 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "save", method = RequestMethod.POST)
-	public String create(User user) {
+	public String save(User user, RedirectAttributes redirectAttributes) {
 		accountManager.saveUser(user);
+		redirectAttributes.addAttribute("message", "创建用户" + user.getLoginName() + "成功");
 		return "redirect:/account/user/";
 	}
 
