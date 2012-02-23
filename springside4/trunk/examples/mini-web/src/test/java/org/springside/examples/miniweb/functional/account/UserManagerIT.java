@@ -1,8 +1,6 @@
 package org.springside.examples.miniweb.functional.account;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -15,7 +13,6 @@ import org.springside.examples.miniweb.entity.account.User;
 import org.springside.examples.miniweb.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniweb.functional.Gui;
 import org.springside.examples.miniweb.functional.Gui.UserColumn;
-import org.springside.modules.test.groups.Groups;
 import org.springside.modules.utils.Collections3;
 import org.springside.modules.utils.Threads;
 
@@ -30,7 +27,6 @@ public class UserManagerIT extends BaseFunctionalTestCase {
 	 * 查看用户列表.
 	 */
 	@Test
-	@Groups(DAILY)
 	public void viewUserList() {
 		s.clickTo(By.linkText(Gui.MENU_USER));
 		WebElement table = s.findElement(By.xpath("//table[@id='contentTable']"));
@@ -43,7 +39,6 @@ public class UserManagerIT extends BaseFunctionalTestCase {
 	 * 创建用户.
 	 */
 	@Test
-	@Groups(DAILY)
 	public void createUser() {
 		//打开新增用户页面
 		s.clickTo(By.linkText(Gui.MENU_USER));
@@ -92,7 +87,6 @@ public class UserManagerIT extends BaseFunctionalTestCase {
 	 * 创建用户时的输入校验测试. 
 	 */
 	@Test
-	@Groups(NIGHTLY)
 	public void inputValidateUser() {
 		s.clickTo(By.linkText(Gui.MENU_USER));
 		s.clickTo(By.linkText("增加新用户"));

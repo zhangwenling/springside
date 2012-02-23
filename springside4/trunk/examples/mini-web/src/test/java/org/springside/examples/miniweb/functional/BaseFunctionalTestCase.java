@@ -8,7 +8,6 @@ import org.eclipse.jetty.server.Server;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.springside.examples.miniweb.Start;
@@ -16,7 +15,6 @@ import org.springside.modules.test.data.Fixtures;
 import org.springside.modules.test.functional.JettyFactory;
 import org.springside.modules.test.functional.Selenium2;
 import org.springside.modules.test.functional.WebDriverFactory;
-import org.springside.modules.test.groups.GroupsTestRunner;
 import org.springside.modules.utils.PropertiesLoader;
 import org.springside.modules.utils.spring.SpringContextHolder;
 
@@ -28,7 +26,6 @@ import org.springside.modules.utils.spring.SpringContextHolder;
  * @author calvin
  */
 @Ignore
-@RunWith(GroupsTestRunner.class)
 public class BaseFunctionalTestCase {
 
 	//Test Groups define

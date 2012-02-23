@@ -5,12 +5,13 @@
 TODO部分:
 
 1.主要改动
-  * MVC框架从Struts2转为Spring MVC. (尚余showcase mashup controller部分，首页问题，及可能存在的冲突处理, Struts2清理，目录清理，filter清理)
+  * MVC框架从Struts2转为Spring MVC. (尚余showcase mashup controller部分，及可能存在的冲突处理,static content jetty报错, remote servlet报错)
   * 重做Login及其他安全页面，Review Shiro的Resource Base Access Control使用,Logout Filter
   * 用Spring Data JPA代替BaseDao基类,清理Hibernate基类及相关
+  
 2.次要改动
   * 继续清理，如core中的Test
-  * 清理Showcase的描述与组织
+  * 清理Showcase的utilize描述
   * 升级Jquery-validation用法
   * 精简BluePrint CSS，将JQuery Validation中的milk css替换为message.css，jquery validate input框的.error替换为将替换为hightlight
   * Form用table对齐改为用Label
