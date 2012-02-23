@@ -6,7 +6,13 @@ import org.apache.commons.lang3.Validate;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class AssertDemo {
+/**
+ * 演示用Apache Commons3的Validate，在代码中进行防御性校验.
+ * 
+ * @author calvin
+ *
+ */
+public class ValidateDemo {
 
 	@Test
 	public void asserts() {

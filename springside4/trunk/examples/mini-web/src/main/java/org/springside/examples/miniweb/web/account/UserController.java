@@ -52,7 +52,7 @@ public class UserController {
 	@RequestMapping(value = "create", method = RequestMethod.GET)
 	public String createForm(Model model) {
 		model.addAttribute("user", new User());
-		model.addAttribute("allgroups", accountManager.getAllGroup());
+		model.addAttribute("allGroups", accountManager.getAllGroup());
 		return "account/userForm";
 	}
 

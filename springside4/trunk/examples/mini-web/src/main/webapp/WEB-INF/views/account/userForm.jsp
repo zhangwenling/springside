@@ -69,7 +69,7 @@
 			</p>
 			<p>
 				<label for="loginName">权限组:</label>
-				<form:checkboxes path="groupList" items="${allgroups}" itemLabel="name" itemValue="id" />
+				<form:checkboxes path="groupList" items="${allGroups}" itemLabel="name" itemValue="id" />
 			</p>	
 		</fieldset>
 		<p>

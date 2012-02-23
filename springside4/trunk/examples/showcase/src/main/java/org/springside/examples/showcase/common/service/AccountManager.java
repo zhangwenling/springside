@@ -149,13 +149,6 @@ public class AccountManager {
 	}
 
 	/**
-	 * 批量修改用户状态.
-	 */
-	public void disableUsers(List<Long> ids) {
-		userHibernateDao.disableUsers(ids);
-	}
-
-	/**
 	 * 发送用户变更消息.
 	 * 
 	 * 同时发送只有一个消费者的Queue消息与发布订阅模式有多个消费者的Topic消息.

@@ -2,6 +2,11 @@
 th, td {border-color: #999;}
 table.noborder th, table.noborder td {border: none;}
 
+form label {
+	width:100px;
+	display:inline-block;
+}
+
 /* header */
 #header {
 	border-bottom: 2px solid #658A16;

@@ -29,7 +29,7 @@ public class GroupController {
 	@RequestMapping(value = "create", method = RequestMethod.GET)
 	public String createForm(Model model) {
 		model.addAttribute("group", new Group());
-		model.addAttribute("allpermissions", Permission.values());
+		model.addAttribute("allPermissions", Permission.values());
 		return "account/groupForm";
 	}
 
