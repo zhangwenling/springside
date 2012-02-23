@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.utilities.asserts;
+package org.springside.examples.showcase.utilities.validate;
 
 import static org.junit.Assert.*;
 

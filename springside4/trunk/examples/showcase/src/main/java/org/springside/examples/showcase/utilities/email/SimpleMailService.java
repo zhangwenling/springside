@@ -1,4 +1,4 @@
-package org.springside.examples.showcase.email;
+package org.springside.examples.showcase.utilities.email;
 
 import java.util.Date;
 

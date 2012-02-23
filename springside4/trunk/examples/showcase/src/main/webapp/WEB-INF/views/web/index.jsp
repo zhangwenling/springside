@@ -4,7 +4,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
 <%
-   String remoteImageUrl = "http://"+request.getServerName()+":"+request.getServerPort()+"/showcase/img/logo.jpg";
+   String remoteImageUrl = "http://"+request.getServerName()+":"+request.getServerPort()+"/showcase/static/img/logo.jpg";
    String encodedImageUrl = Encodes.urlEncode(remoteImageUrl);
 %>
 <html>
@@ -27,8 +27,8 @@
 		
 		<h3>用户故事：</h3>
 		<ul>
-			<li>静态内容Servlet:<img src="${ctx}/static-content?contentPath=img/logo.jpg"/> <a href="${ctx}/static-content?contentPath=img/logo.jpg&download=true">图片下载链接</a></li>
-			<li>远程内容Servlet:<img src="${ctx}/remote-content?contentUrl=<%=encodedImageUrl%>"/></li>
+			<li>静态内容Servlet:<img src="${ctx}/static-content?contentPath=static/img/logo.jpg"/> <a href="${ctx}/static-content?contentPath=img/logo.jpg&download=true">图片下载链接</a></li>
+			<li>远程内容Servlet:<img src="${ctx}/mashup-content?contentUrl=<%=encodedImageUrl%>"/></li>
 			<li>CacheControlHeaderFilter使用见webapp中的web.xml</li>
 			<li>YUI Compressor见bin/yuicompressor.bat命令及webapp中两个版本的js/css文件.</li>
 		</ul>

@@ -16,7 +16,7 @@
 <link href="${ctx}/static/blueprint/1.0.1/print.css" type="text/css" rel="stylesheet" media="print" />
 <!--[if lt IE 8]><link href="${ctx}/static/blueprint/1.0.1/ie.css" type="text/css" rel="stylesheet" media="screen, projection"><![endif]-->
 
-<script src="${ctx}/static/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 <sitemesh:write property='head' />
 </head>

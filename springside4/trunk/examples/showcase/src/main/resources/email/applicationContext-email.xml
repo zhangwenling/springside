@@ -20,7 +20,7 @@
 	</bean>
 
 	<!-- 文本邮件服务类 -->
-	<bean id="simpleMailService" class="org.springside.examples.showcase.email.SimpleMailService">
+	<bean id="simpleMailService" class="org.springside.examples.showcase.utilities.email.SimpleMailService">
 		<property name="mailSender" ref="mailSender" />
 		<property name="textTemplate">
 			<value><![CDATA[
@@ -31,7 +31,7 @@
 	</bean>
 
 	<!-- MIME邮件服务类 -->
-	<bean id="mimeMailService" class="org.springside.examples.showcase.email.MimeMailService">
+	<bean id="mimeMailService" class="org.springside.examples.showcase.utilities.email.MimeMailService">
 		<property name="mailSender" ref="mailSender" />
 		<property name="velocityEngine" ref="mailVelocityEngine" />
 		<property name="templateFileName" value="mailTemplate.vm" />
@@ -41,5 +41,4 @@
 	<bean id="mailVelocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
 		<property name="resourceLoaderPath" value="classpath:/email/" />
 	</bean>
-
 </beans>
