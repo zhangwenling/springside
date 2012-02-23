@@ -19,7 +19,7 @@
 		<%} %>
 		<div>
 		
-				<table id="contentTable">
+				<table>
 					<tr>
 						<th>登录名</th>
 						<th>姓名</th>
