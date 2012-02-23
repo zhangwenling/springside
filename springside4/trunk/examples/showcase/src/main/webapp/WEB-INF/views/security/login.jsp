@@ -44,26 +44,27 @@
 		%>
 	
 		<form id="loginForm" action="login.action" method="post">
-			<table class="noborder">
-				<tr>
-					<td><label for="username">用户名:</label></td>
-					<td>
+			<fieldset>
+				<p>
+					<label for="username">用户名:</label>
+					
 						<input type='text' name='username' size='10' class="required"
 						<s:if test="not empty param.error">
 							value=''</s:if> />
-					</td>
-				</tr>
-				<tr>
-					<td><label for="password">密码:</label></td>
-					<td><input type='password' size='10' name='password' class="required"/></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="checkbox" id="remember_me" name="remember_me"/>
+					
+				</p>
+				<p>
+					<label for="password">密码:</label>
+					<input type='password' size='10' name='password' class="required"/>
+				</p>
+				<p>
+					<input type="checkbox" id="remember_me" name="remember_me"/>
 						<label for="remember_me">两周内记住我</label>
-						<input value="登录" type="submit"/>
-					</td>
-				</tr>
-			</table>
+						
+					
+				</p>
+				<p><input value="登录" type="submit"/></p>
+			</fieldset>
 		</form>
 		<div>（管理员<b>admin/admin</b> ,普通用户<b>user/user</b>）<a href="logout.action">退出登录</a></div>
 </body>
