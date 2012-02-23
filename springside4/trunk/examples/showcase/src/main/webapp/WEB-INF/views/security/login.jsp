@@ -1,11 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ include file="/common/taglibs.jsp" %>
 <%@ page import="org.apache.shiro.web.filter.authc.FormAuthenticationFilter"%>
 <%@ page import="org.apache.shiro.authc.ExcessiveAttemptsException"%>
 <%@ page import="org.apache.shiro.authc.IncorrectCredentialsException"%>
 <%@ page import="java.util.concurrent.atomic.AtomicLong"%>
 <%@page import="org.springside.examples.showcase.security.FormAuthenticationWithLockFilter"%>
-<%@page import="org.apache.commons.lang.StringUtils"%><html xmlns="http://www.w3.org/1999/xhtml">
+<%@page import="org.apache.commons.lang.StringUtils"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+
+<html>
 <head>
 	<title>Showcase 登录页</title>
 	<script src="${ctx}/static/jquery-validation/1.8.0/jquery.validate.min.js" type="text/javascript"></script>

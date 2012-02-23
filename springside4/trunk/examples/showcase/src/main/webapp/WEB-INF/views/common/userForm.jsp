@@ -27,8 +27,8 @@
 				<input type="password" id="plainPassword" name="password" size="40" value="${user.plainPassword}"/>
 			</p>
 			<p>
-				<label for="shaPassword">密码散列:</label>
-				<input type="text" id="shaPassword" name="shaPassword" value="${user.shaPassword}" readonly="readonly"/>
+				<label>密码散列:</label>
+				<span>${user.shaPassword}</span>
 			</p>
 		</fieldset>
 		<p>

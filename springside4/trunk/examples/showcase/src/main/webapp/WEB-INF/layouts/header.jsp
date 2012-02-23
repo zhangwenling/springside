@@ -1,5 +1,4 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
-<%@ include file="/common/taglibs.jsp" %>
 <div id="header" class="span-24 last">
 	<h2>Showcase示例</h2>
 

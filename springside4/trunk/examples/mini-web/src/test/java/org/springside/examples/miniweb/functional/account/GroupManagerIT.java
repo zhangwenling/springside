@@ -1,8 +1,6 @@
 package org.springside.examples.miniweb.functional.account;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -14,7 +12,6 @@ import org.springside.examples.miniweb.entity.account.Group;
 import org.springside.examples.miniweb.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniweb.functional.Gui;
 import org.springside.examples.miniweb.functional.Gui.GroupColumn;
-import org.springside.modules.test.groups.Groups;
 import org.springside.modules.utils.Collections3;
 
 /**
@@ -27,7 +24,6 @@ public class GroupManagerIT extends BaseFunctionalTestCase {
 	/**
 	 * 查看权限组列表.
 	 */
-	@Groups(DAILY)
 	@Test
 	public void viewGroupList() {
 		s.clickTo(By.linkText(Gui.MENU_GROUP));
@@ -39,7 +35,6 @@ public class GroupManagerIT extends BaseFunctionalTestCase {
 	/**
 	 * 创建权限组.
 	 */
-	@Groups(DAILY)
 	@Test
 	public void createGroup() {
 		s.clickTo(By.linkText(Gui.MENU_GROUP));

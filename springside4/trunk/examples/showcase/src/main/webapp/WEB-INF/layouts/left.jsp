@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
-<%@ include file="/common/taglibs.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <div id="leftbar" class="span-6">
 		<a href="${ctx}/">首页</a>
 		<a href="${ctx}/common/user/">综合演示</a>

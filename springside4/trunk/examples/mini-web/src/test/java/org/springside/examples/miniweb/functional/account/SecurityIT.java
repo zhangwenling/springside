@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.springside.examples.miniweb.functional.BaseFunctionalTestCase;
 import org.springside.examples.miniweb.functional.Gui;
 import org.springside.examples.miniweb.functional.Gui.UserColumn;
-import org.springside.modules.test.groups.Groups;
 
 /**
  * 系统安全控制的功能测试, 测试主要用户故事.
@@ -20,7 +19,6 @@ public class SecurityIT extends BaseFunctionalTestCase {
 	 * 测试匿名用户访问系统时的行为.
 	 */
 	@Test
-	@Groups(NIGHTLY)
 	public void checkAnonymous() {
 		//访问退出登录页面,退出之前的登录
 		s.open("/login!logout.action");
@@ -35,7 +33,6 @@ public class SecurityIT extends BaseFunctionalTestCase {
 	 * 只有用户权限组的操作员访问系统时的受限行为.
 	 */
 	@Test
-	@Groups(NIGHTLY)
 	public void checkUserPermission() {
 		//访问退出登录页面,退出之前的登录
 		s.open("/login!logout.action");
