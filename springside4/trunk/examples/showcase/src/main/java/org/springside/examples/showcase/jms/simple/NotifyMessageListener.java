@@ -7,7 +7,7 @@ import javax.jms.MessageListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springside.examples.showcase.email.SimpleMailService;
+import org.springside.examples.showcase.utilities.email.SimpleMailService;
 
 /**
  * 消息的异步被动接收者.

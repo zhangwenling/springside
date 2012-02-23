@@ -11,7 +11,6 @@ public class StoryController {
 
 	@RequestMapping(value = "{domain}/{page}", method = RequestMethod.GET)
 	public String delete(@PathVariable("domain") String domain, @PathVariable("page") String page) {
-		System.out.println(domain + " / " + page);
 		return domain + "/" + page;
 	}
 
