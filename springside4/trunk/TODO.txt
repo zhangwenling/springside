@@ -1,31 +1,24 @@
 ﻿4.0 RC1版 
 
-目标：体现主体选型.
+目标：体现Spring4.0的主体框架与选型.
 
 TODO部分:
 
 1.主要改动
-
-  * MVC框架从Struts2转为Spring MVC. (尚余showcase common页面，及可能存在的冲突处理)
-  * 重做Login及其他安全页面
-  * 用Spring Data JPA代替BaseDao基类
-
+  * MVC框架从Struts2转为Spring MVC. (尚余showcase mashup controller部分，首页问题，及可能存在的冲突处理, Struts2清理，目录清理，filter清理)
+  * 重做Login及其他安全页面，Review Shiro的Resource Base Access Control使用,Logout Filter
+  * 用Spring Data JPA代替BaseDao基类,清理Hibernate基类及相关
 2.次要改动
-  * MashupServlet, 调整其Demo页面, Review HttpClient的使用
-  * 用JUnit自带的Catetory替换DIY的
+  * 继续清理，如core中的Test
+  * 清理Showcase的描述与组织
   * 升级Jquery-validation用法
   * 精简BluePrint CSS，将JQuery Validation中的milk css替换为message.css，jquery validate input框的.error替换为将替换为hightlight
   * Form用table对齐改为用Label
-  * Review Shiro的Resource Base Access Control使用,Logout Filter
   * 修正mini-web的Selenium Test case
   * 升级Selenium到最新版, 使用自带的Wait类
-  * Jersey的Jackson JSON绑定看有没有简化
-
+ 
 3.其他非代码改动
   * 发布前打包Maven-Archetype的项目生成模板
-  * Wiki内容重新编写
-    備忘： log4jdbc，jersey+jackson,jackson new feature
-  * 閱讀如下Samples: SpringFuse, Spring Roo, Spring GreenHouse
   
 ---------------------------------------------------------------------------------
 已完成部分:
@@ -33,13 +26,13 @@ TODO部分:
    * DAO框架增加MyBatis的使用，与Hibernate在不同的场景各展所长
    * 安全框架从SpringSecurity转为Apache Shiro.
    * SpringSide Modules的重构
-   * 演示Hibernate Validator
    * 使用SiteMesh3实现Layout
    * CSS框架从YUI转为Blueprint
-   * 升级Selenium2.0演示，融合Selenium 1.0与2.0的API
-   * Mock框架从EasyMock+JMock换成Mockito + PowerMock
+   * 演示Hibernate Validator
    * 升級Jackson1.9 演示，包括可擴展的對象, 對象循環引用，局部更新，自定义类型的持久化，自定义Naming策略，已存在對象等新特性.
    * 添加各种常用Utility的Demo, 升级Guava和Commons-Lang3.0.
+   * 升级Selenium2.0演示，融合Selenium 1.0与2.0的API
+   * Mock框架从EasyMock+JMock换成Mockito + PowerMock
    * 依赖包重要版本升级如：Maven 3.0, Hibernate 3.6.9, Jetty 7.6.3
 
 2. 次要改动
@@ -53,7 +46,7 @@ TODO部分:
        -- Spring 3.0.4->3.1.1, CXF 2.2.10->2.5.2, Jersey 1.3->1.11, Activemq 5.4.0->5.5.1, Jquery 1.4->1.7.0, Ehcache 1.6—>2.5.1
        -- Guava r06->11, Commons-lang 2.5->3.1, HttpClient 4.0.1->4.2.0 Beta1, Velocity 1.6.4->1.7, Dozer 5.2.1->5.3.2
        -- Commons-io 1.4->2.1, Commons pool 1.5.5->1.6, Commons Codec 1.4->1.6, Slf4j 1.6.2->1.6.4
-       -- Junit 4.8.1->4.10, EasyMock 3.0->3.1, Perf4j 0.9.13->0.9.14, Jmemcached 0.8->1.0, yuicompressor 2.4.2->2.4.6, H2 1.2.142->1.3.164
+       -- Junit 4.8.1->4.10, EasyMock 3.0->3.1, Perf4j 0.9.13->0.9.14, Jmemcached 0.8->1.0, yuicompressor 2.4.2->2.4.7, H2 1.2.142->1.3.164
        -- 所有maven插件升级到最新版
 	   
 3. 其他非代码改动
@@ -73,8 +66,13 @@ TODO部分:
   
 2.次要改动
   * 包括Guava的Cache Builder做的简单缓存
+  * MashupServlet, 调整其Demo页面, Review HttpClient的使用
   * Review perf4j的使用
   * 依赖包次要版本升级:JSW 3.5.7(需自行打包)
+  * Jersey的Jackson JSON绑定看有没有简化
+  * 用JUnit自带的Catetory的演示
+  
+
 
 
 4.1 长远版

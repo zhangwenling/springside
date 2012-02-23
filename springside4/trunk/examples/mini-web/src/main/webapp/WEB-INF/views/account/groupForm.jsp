@@ -19,7 +19,7 @@
 			</p>
 			<p>
 				<label for="loginName">权限列表:</label>
-				<form:checkboxes path="permissionList" items="${allpermissions}" itemLabel="displayName" itemValue="value" />
+				<form:checkboxes path="permissionList" items="${allPermissions}" itemLabel="displayName" itemValue="value" />
 			</p>	
 		</fieldset>
 		<p>

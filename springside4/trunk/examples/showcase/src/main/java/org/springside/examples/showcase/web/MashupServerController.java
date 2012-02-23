@@ -3,31 +3,25 @@ package org.springside.examples.showcase.web;
 import java.util.Collections;
 import java.util.Map;
 
-import org.apache.struts2.convention.annotation.Namespace;
-import org.springside.examples.showcase.Struts2Utils;
-
-import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * JSONP Mashup 服务端.
  * 
  * @author calvin
  */
-@Namespace("/web/mashup")
-public class MashupServerAction extends ActionSupport {
+@RequestMapping(value = "/mashup")
+public class MashupServerController {
 
-	private static final long serialVersionUID = 668305397469726147L;
-
-	@Override
 	public String execute() {
 		//获取JQuery客户端动态生成的callback函数名.
-		String callbackName = Struts2Utils.getParameter("callback");
+		//String callbackName = Struts2Utils.getParameter("callback");
 
 		//设置需要被格式化为JSON字符串的内容.
 		Map<String, String> map = Collections.singletonMap("html", "<p>Hello World!</p>");
 
 		//渲染返回结果.
-		Struts2Utils.renderJsonp(callbackName, map);
+		//	Struts2Utils.renderJsonp(callbackName, map);
 		return null;
 	}
 }

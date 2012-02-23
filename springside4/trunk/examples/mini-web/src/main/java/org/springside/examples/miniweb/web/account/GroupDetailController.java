@@ -20,7 +20,7 @@ public class GroupDetailController {
 
 	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
 	public String updateForm(Model model) {
-		model.addAttribute("allpermissions", Permission.values());
+		model.addAttribute("allPermissions", Permission.values());
 		return "account/groupForm";
 	}
 
