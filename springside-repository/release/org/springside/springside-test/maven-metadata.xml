@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.springside</groupId>
+  <artifactId>springside-test</artifactId>
+  <versioning>
+    <latest>4.0.1.GA</latest>
+    <release>4.0.1.GA</release>
+    <versions>
+      <version>4.0.0.GA</version>
+      <version>4.0.1.GA</version>
+    </versions>
+    <lastUpdated>20121216164641</lastUpdated>
+  </versioning>
+</metadata>
